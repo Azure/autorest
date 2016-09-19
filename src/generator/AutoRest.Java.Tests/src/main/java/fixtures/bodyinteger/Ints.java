@@ -13,8 +13,6 @@ package fixtures.bodyinteger;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodyinteger.models.ErrorException;
-import java.io.IOException;
 import org.joda.time.DateTime;
 import rx.Observable;
 
@@ -26,11 +24,9 @@ public interface Ints {
     /**
      * Get null Int value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the int object if successful.
      */
-    int getNull() throws ErrorException, IOException;
+    int getNull();
 
     /**
      * Get null Int value.
@@ -57,11 +53,9 @@ public interface Ints {
     /**
      * Get invalid Int value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the int object if successful.
      */
-    int getInvalid() throws ErrorException, IOException;
+    int getInvalid();
 
     /**
      * Get invalid Int value.
@@ -88,11 +82,9 @@ public interface Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the int object if successful.
      */
-    int getOverflowInt32() throws ErrorException, IOException;
+    int getOverflowInt32();
 
     /**
      * Get overflow Int32 value.
@@ -119,11 +111,9 @@ public interface Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the int object if successful.
      */
-    int getUnderflowInt32() throws ErrorException, IOException;
+    int getUnderflowInt32();
 
     /**
      * Get underflow Int32 value.
@@ -150,11 +140,9 @@ public interface Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the long object if successful.
      */
-    long getOverflowInt64() throws ErrorException, IOException;
+    long getOverflowInt64();
 
     /**
      * Get overflow Int64 value.
@@ -181,11 +169,9 @@ public interface Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the long object if successful.
      */
-    long getUnderflowInt64() throws ErrorException, IOException;
+    long getUnderflowInt64();
 
     /**
      * Get underflow Int64 value.
@@ -213,10 +199,8 @@ public interface Ints {
      * Put max int32 value.
      *
      * @param intBody the int value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putMax32(int intBody) throws ErrorException, IOException;
+    void putMax32(int intBody);
 
     /**
      * Put max int32 value.
@@ -247,10 +231,8 @@ public interface Ints {
      * Put max int64 value.
      *
      * @param intBody the long value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putMax64(long intBody) throws ErrorException, IOException;
+    void putMax64(long intBody);
 
     /**
      * Put max int64 value.
@@ -281,10 +263,8 @@ public interface Ints {
      * Put min int32 value.
      *
      * @param intBody the int value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putMin32(int intBody) throws ErrorException, IOException;
+    void putMin32(int intBody);
 
     /**
      * Put min int32 value.
@@ -315,10 +295,8 @@ public interface Ints {
      * Put min int64 value.
      *
      * @param intBody the long value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putMin64(long intBody) throws ErrorException, IOException;
+    void putMin64(long intBody);
 
     /**
      * Put min int64 value.
@@ -348,11 +326,9 @@ public interface Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getUnixTime() throws ErrorException, IOException;
+    DateTime getUnixTime();
 
     /**
      * Get datetime encoded as Unix time value.
@@ -380,10 +356,8 @@ public interface Ints {
      * Put datetime encoded as Unix time.
      *
      * @param intBody the long value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putUnixTimeDate(DateTime intBody) throws ErrorException, IOException;
+    void putUnixTimeDate(DateTime intBody);
 
     /**
      * Put datetime encoded as Unix time.
@@ -413,11 +387,9 @@ public interface Ints {
     /**
      * Get invalid Unix time value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getInvalidUnixTime() throws ErrorException, IOException;
+    DateTime getInvalidUnixTime();
 
     /**
      * Get invalid Unix time value.
@@ -444,11 +416,9 @@ public interface Ints {
     /**
      * Get null Unix time value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getNullUnixTime() throws ErrorException, IOException;
+    DateTime getNullUnixTime();
 
     /**
      * Get null Unix time value.

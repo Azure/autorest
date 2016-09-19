@@ -95,10 +95,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 408 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void head408() throws ErrorException, IOException {
+    public void head408() {
         head408WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -156,10 +154,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put500() throws ErrorException, IOException {
+    public void put500() {
         put500WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -212,10 +208,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put500(Boolean booleanValue) throws ErrorException, IOException {
+    public void put500(Boolean booleanValue) {
         put500WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -276,10 +270,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void patch500() throws ErrorException, IOException {
+    public void patch500() {
         patch500WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -332,10 +324,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void patch500(Boolean booleanValue) throws ErrorException, IOException {
+    public void patch500(Boolean booleanValue) {
         patch500WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -396,10 +386,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 502 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void get502() throws ErrorException, IOException {
+    public void get502() {
         get502WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -457,10 +445,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void post503() throws ErrorException, IOException {
+    public void post503() {
         post503WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -513,10 +499,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void post503(Boolean booleanValue) throws ErrorException, IOException {
+    public void post503(Boolean booleanValue) {
         post503WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -577,10 +561,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void delete503() throws ErrorException, IOException {
+    public void delete503() {
         delete503WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -633,10 +615,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void delete503(Boolean booleanValue) throws ErrorException, IOException {
+    public void delete503(Boolean booleanValue) {
         delete503WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -697,10 +677,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put504() throws ErrorException, IOException {
+    public void put504() {
         put504WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -753,10 +731,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put504(Boolean booleanValue) throws ErrorException, IOException {
+    public void put504(Boolean booleanValue) {
         put504WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -817,10 +793,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void patch504() throws ErrorException, IOException {
+    public void patch504() {
         patch504WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -873,10 +847,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void patch504(Boolean booleanValue) throws ErrorException, IOException {
+    public void patch504(Boolean booleanValue) {
         patch504WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 

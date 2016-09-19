@@ -74,10 +74,8 @@ public final class ApiVersionLocalsInner {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getMethodLocalValid() throws ErrorException, IOException {
+    public void getMethodLocalValid() {
         getMethodLocalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -136,10 +134,8 @@ public final class ApiVersionLocalsInner {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getMethodLocalNull() throws ErrorException, IOException {
+    public void getMethodLocalNull() {
         getMethodLocalNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -192,10 +188,8 @@ public final class ApiVersionLocalsInner {
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getMethodLocalNull(String apiVersion) throws ErrorException, IOException {
+    public void getMethodLocalNull(String apiVersion) {
         getMethodLocalNullWithServiceResponseAsync(apiVersion).toBlocking().single().getBody();
     }
 
@@ -256,10 +250,8 @@ public final class ApiVersionLocalsInner {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getPathLocalValid() throws ErrorException, IOException {
+    public void getPathLocalValid() {
         getPathLocalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -318,10 +310,8 @@ public final class ApiVersionLocalsInner {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getSwaggerLocalValid() throws ErrorException, IOException {
+    public void getSwaggerLocalValid() {
         getSwaggerLocalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

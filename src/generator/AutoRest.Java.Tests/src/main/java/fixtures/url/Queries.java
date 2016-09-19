@@ -13,9 +13,7 @@ package fixtures.url;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
-import java.io.IOException;
 import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -29,10 +27,8 @@ public interface Queries {
     /**
      * Get true Boolean value on path.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getBooleanTrue() throws ErrorException, IOException;
+    void getBooleanTrue();
 
     /**
      * Get true Boolean value on path.
@@ -59,10 +55,8 @@ public interface Queries {
     /**
      * Get false Boolean value on path.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getBooleanFalse() throws ErrorException, IOException;
+    void getBooleanFalse();
 
     /**
      * Get false Boolean value on path.
@@ -89,10 +83,8 @@ public interface Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getBooleanNull() throws ErrorException, IOException;
+    void getBooleanNull();
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -119,10 +111,8 @@ public interface Queries {
      * Get null Boolean value on query (query string should be absent).
      *
      * @param boolQuery null boolean value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getBooleanNull(Boolean boolQuery) throws ErrorException, IOException;
+    void getBooleanNull(Boolean boolQuery);
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -152,10 +142,8 @@ public interface Queries {
     /**
      * Get '1000000' integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getIntOneMillion() throws ErrorException, IOException;
+    void getIntOneMillion();
 
     /**
      * Get '1000000' integer value.
@@ -182,10 +170,8 @@ public interface Queries {
     /**
      * Get '-1000000' integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getIntNegativeOneMillion() throws ErrorException, IOException;
+    void getIntNegativeOneMillion();
 
     /**
      * Get '-1000000' integer value.
@@ -212,10 +198,8 @@ public interface Queries {
     /**
      * Get null integer value (no query parameter).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getIntNull() throws ErrorException, IOException;
+    void getIntNull();
 
     /**
      * Get null integer value (no query parameter).
@@ -242,10 +226,8 @@ public interface Queries {
      * Get null integer value (no query parameter).
      *
      * @param intQuery null integer value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getIntNull(Integer intQuery) throws ErrorException, IOException;
+    void getIntNull(Integer intQuery);
 
     /**
      * Get null integer value (no query parameter).
@@ -275,10 +257,8 @@ public interface Queries {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getTenBillion() throws ErrorException, IOException;
+    void getTenBillion();
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -305,10 +285,8 @@ public interface Queries {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getNegativeTenBillion() throws ErrorException, IOException;
+    void getNegativeTenBillion();
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -335,10 +313,8 @@ public interface Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getLongNull() throws ErrorException, IOException;
+    void getLongNull();
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -365,10 +341,8 @@ public interface Queries {
      * Get 'null 64 bit integer value (no query param in uri).
      *
      * @param longQuery null 64 bit integer value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getLongNull(Long longQuery) throws ErrorException, IOException;
+    void getLongNull(Long longQuery);
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -398,10 +372,8 @@ public interface Queries {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void floatScientificPositive() throws ErrorException, IOException;
+    void floatScientificPositive();
 
     /**
      * Get '1.034E+20' numeric value.
@@ -428,10 +400,8 @@ public interface Queries {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void floatScientificNegative() throws ErrorException, IOException;
+    void floatScientificNegative();
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -458,10 +428,8 @@ public interface Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void floatNull() throws ErrorException, IOException;
+    void floatNull();
 
     /**
      * Get null numeric value (no query parameter).
@@ -488,10 +456,8 @@ public interface Queries {
      * Get null numeric value (no query parameter).
      *
      * @param floatQuery null numeric value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void floatNull(Double floatQuery) throws ErrorException, IOException;
+    void floatNull(Double floatQuery);
 
     /**
      * Get null numeric value (no query parameter).
@@ -521,10 +487,8 @@ public interface Queries {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void doubleDecimalPositive() throws ErrorException, IOException;
+    void doubleDecimalPositive();
 
     /**
      * Get '9999999.999' numeric value.
@@ -551,10 +515,8 @@ public interface Queries {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void doubleDecimalNegative() throws ErrorException, IOException;
+    void doubleDecimalNegative();
 
     /**
      * Get '-9999999.999' numeric value.
@@ -581,10 +543,8 @@ public interface Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void doubleNull() throws ErrorException, IOException;
+    void doubleNull();
 
     /**
      * Get null numeric value (no query parameter).
@@ -611,10 +571,8 @@ public interface Queries {
      * Get null numeric value (no query parameter).
      *
      * @param doubleQuery null numeric value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void doubleNull(Double doubleQuery) throws ErrorException, IOException;
+    void doubleNull(Double doubleQuery);
 
     /**
      * Get null numeric value (no query parameter).
@@ -644,10 +602,8 @@ public interface Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void stringUnicode() throws ErrorException, IOException;
+    void stringUnicode();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -674,10 +630,8 @@ public interface Queries {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void stringUrlEncoded() throws ErrorException, IOException;
+    void stringUrlEncoded();
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -704,10 +658,8 @@ public interface Queries {
     /**
      * Get ''.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void stringEmpty() throws ErrorException, IOException;
+    void stringEmpty();
 
     /**
      * Get ''.
@@ -734,10 +686,8 @@ public interface Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void stringNull() throws ErrorException, IOException;
+    void stringNull();
 
     /**
      * Get null (no query parameter in url).
@@ -764,10 +714,8 @@ public interface Queries {
      * Get null (no query parameter in url).
      *
      * @param stringQuery null string value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void stringNull(String stringQuery) throws ErrorException, IOException;
+    void stringNull(String stringQuery);
 
     /**
      * Get null (no query parameter in url).
@@ -797,10 +745,8 @@ public interface Queries {
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void enumValid() throws ErrorException, IOException;
+    void enumValid();
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -827,10 +773,8 @@ public interface Queries {
      * Get using uri with query parameter 'green color'.
      *
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void enumValid(UriColor enumQuery) throws ErrorException, IOException;
+    void enumValid(UriColor enumQuery);
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -860,10 +804,8 @@ public interface Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void enumNull() throws ErrorException, IOException;
+    void enumNull();
 
     /**
      * Get null (no query parameter in url).
@@ -890,10 +832,8 @@ public interface Queries {
      * Get null (no query parameter in url).
      *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void enumNull(UriColor enumQuery) throws ErrorException, IOException;
+    void enumNull(UriColor enumQuery);
 
     /**
      * Get null (no query parameter in url).
@@ -923,10 +863,8 @@ public interface Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void byteMultiByte() throws ErrorException, IOException;
+    void byteMultiByte();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -953,10 +891,8 @@ public interface Queries {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void byteMultiByte(byte[] byteQuery) throws ErrorException, IOException;
+    void byteMultiByte(byte[] byteQuery);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -986,10 +922,8 @@ public interface Queries {
     /**
      * Get '' as byte array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void byteEmpty() throws ErrorException, IOException;
+    void byteEmpty();
 
     /**
      * Get '' as byte array.
@@ -1016,10 +950,8 @@ public interface Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void byteNull() throws ErrorException, IOException;
+    void byteNull();
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -1046,10 +978,8 @@ public interface Queries {
      * Get null as byte array (no query parameters in uri).
      *
      * @param byteQuery null as byte array (no query parameters in uri)
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void byteNull(byte[] byteQuery) throws ErrorException, IOException;
+    void byteNull(byte[] byteQuery);
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -1079,10 +1009,8 @@ public interface Queries {
     /**
      * Get '2012-01-01' as date.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void dateValid() throws ErrorException, IOException;
+    void dateValid();
 
     /**
      * Get '2012-01-01' as date.
@@ -1109,10 +1037,8 @@ public interface Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void dateNull() throws ErrorException, IOException;
+    void dateNull();
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -1139,10 +1065,8 @@ public interface Queries {
      * Get null as date - this should result in no query parameters in uri.
      *
      * @param dateQuery null as date (no query parameters in uri)
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void dateNull(LocalDate dateQuery) throws ErrorException, IOException;
+    void dateNull(LocalDate dateQuery);
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -1172,10 +1096,8 @@ public interface Queries {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void dateTimeValid() throws ErrorException, IOException;
+    void dateTimeValid();
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -1202,10 +1124,8 @@ public interface Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void dateTimeNull() throws ErrorException, IOException;
+    void dateTimeNull();
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1232,10 +1152,8 @@ public interface Queries {
      * Get null as date-time, should result in no query parameters in uri.
      *
      * @param dateTimeQuery null as date-time (no query parameters)
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void dateTimeNull(DateTime dateTimeQuery) throws ErrorException, IOException;
+    void dateTimeNull(DateTime dateTimeQuery);
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1265,10 +1183,8 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void arrayStringCsvValid() throws ErrorException, IOException;
+    void arrayStringCsvValid();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -1295,10 +1211,8 @@ public interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void arrayStringCsvValid(List<String> arrayQuery) throws ErrorException, IOException;
+    void arrayStringCsvValid(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -1328,10 +1242,8 @@ public interface Queries {
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void arrayStringCsvNull() throws ErrorException, IOException;
+    void arrayStringCsvNull();
 
     /**
      * Get a null array of string using the csv-array format.
@@ -1358,10 +1270,8 @@ public interface Queries {
      * Get a null array of string using the csv-array format.
      *
      * @param arrayQuery a null array of string using the csv-array format
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void arrayStringCsvNull(List<String> arrayQuery) throws ErrorException, IOException;
+    void arrayStringCsvNull(List<String> arrayQuery);
 
     /**
      * Get a null array of string using the csv-array format.
@@ -1391,10 +1301,8 @@ public interface Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void arrayStringCsvEmpty() throws ErrorException, IOException;
+    void arrayStringCsvEmpty();
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1421,10 +1329,8 @@ public interface Queries {
      * Get an empty array [] of string using the csv-array format.
      *
      * @param arrayQuery an empty array [] of string using the csv-array format
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void arrayStringCsvEmpty(List<String> arrayQuery) throws ErrorException, IOException;
+    void arrayStringCsvEmpty(List<String> arrayQuery);
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1454,10 +1360,8 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void arrayStringSsvValid() throws ErrorException, IOException;
+    void arrayStringSsvValid();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1484,10 +1388,8 @@ public interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void arrayStringSsvValid(List<String> arrayQuery) throws ErrorException, IOException;
+    void arrayStringSsvValid(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1517,10 +1419,8 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void arrayStringTsvValid() throws ErrorException, IOException;
+    void arrayStringTsvValid();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1547,10 +1447,8 @@ public interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void arrayStringTsvValid(List<String> arrayQuery) throws ErrorException, IOException;
+    void arrayStringTsvValid(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1580,10 +1478,8 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void arrayStringPipesValid() throws ErrorException, IOException;
+    void arrayStringPipesValid();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -1610,10 +1506,8 @@ public interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void arrayStringPipesValid(List<String> arrayQuery) throws ErrorException, IOException;
+    void arrayStringPipesValid(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.

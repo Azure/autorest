@@ -21,16 +21,12 @@
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
 }
-@foreach (var exception in Model.ExceptionStatements)
-{
-@: * @@throws @exception
-}
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object if successful.
 }
  */
-public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString {
+public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodRequiredParameterDeclaration) {
 @if (@Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name == "void")
 {
 @:    @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single().getBody();
@@ -177,16 +173,12 @@ public Observable<@Model.ReturnTypeModel.ClientResponseTypeString> @(Model.Name)
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
 }
-@foreach (var exception in Model.ExceptionStatements)
-{
-@: * @@throws @exception
-}
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object if successful.
 }
  */
-public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
+public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodParameterDeclaration) {
 @if (@Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name == "void")
 {
 @:    @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().single().getBody();

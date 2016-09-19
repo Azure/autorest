@@ -100,11 +100,9 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
     /**
      * Get test coverage report.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
-    public Map<String, Integer> getReport() throws ErrorException, IOException {
+    public Map<String, Integer> getReport() {
         return getReportWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

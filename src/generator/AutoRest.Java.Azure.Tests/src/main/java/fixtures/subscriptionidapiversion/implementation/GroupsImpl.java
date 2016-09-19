@@ -66,12 +66,9 @@ public final class GroupsImpl implements Groups {
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the SampleResourceGroup object if successful.
      */
-    public SampleResourceGroup getSampleResourceGroup(String resourceGroupName) throws ErrorException, IOException, IllegalArgumentException {
+    public SampleResourceGroup getSampleResourceGroup(String resourceGroupName) {
         return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).toBlocking().single().getBody();
     }
 

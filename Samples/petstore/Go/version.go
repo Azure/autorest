@@ -6,8 +6,8 @@ import (
 )
 
 const (
-    major = "3"
-    minor = "1"
+    major = "4"
+    minor = "0"
     patch = "0"
     // Always begin a "tag" with a dash (as per http://semver.org)
     tag   = "-beta"

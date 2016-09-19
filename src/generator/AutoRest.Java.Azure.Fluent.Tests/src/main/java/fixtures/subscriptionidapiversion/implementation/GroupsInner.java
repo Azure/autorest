@@ -64,12 +64,9 @@ public final class GroupsInner {
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the SampleResourceGroupInner object if successful.
      */
-    public SampleResourceGroupInner getSampleResourceGroup(String resourceGroupName) throws ErrorException, IOException, IllegalArgumentException {
+    public SampleResourceGroupInner getSampleResourceGroup(String resourceGroupName) {
         return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).toBlocking().single().getBody();
     }
 

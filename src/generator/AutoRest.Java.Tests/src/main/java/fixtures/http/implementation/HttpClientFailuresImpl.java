@@ -155,11 +155,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error head400() throws ErrorException, IOException {
+    public Error head400() {
         return head400WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -216,11 +214,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error get400() throws ErrorException, IOException {
+    public Error get400() {
         return get400WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -277,11 +273,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error put400() throws ErrorException, IOException {
+    public Error put400() {
         return put400WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -334,11 +328,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error put400(Boolean booleanValue) throws ErrorException, IOException {
+    public Error put400(Boolean booleanValue) {
         return put400WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -398,11 +390,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error patch400() throws ErrorException, IOException {
+    public Error patch400() {
         return patch400WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -455,11 +445,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error patch400(Boolean booleanValue) throws ErrorException, IOException {
+    public Error patch400(Boolean booleanValue) {
         return patch400WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -519,11 +507,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error post400() throws ErrorException, IOException {
+    public Error post400() {
         return post400WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -576,11 +562,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error post400(Boolean booleanValue) throws ErrorException, IOException {
+    public Error post400(Boolean booleanValue) {
         return post400WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -640,11 +624,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error delete400() throws ErrorException, IOException {
+    public Error delete400() {
         return delete400WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -697,11 +679,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error delete400(Boolean booleanValue) throws ErrorException, IOException {
+    public Error delete400(Boolean booleanValue) {
         return delete400WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -761,11 +741,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error head401() throws ErrorException, IOException {
+    public Error head401() {
         return head401WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -822,11 +800,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error get402() throws ErrorException, IOException {
+    public Error get402() {
         return get402WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -883,11 +859,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error get403() throws ErrorException, IOException {
+    public Error get403() {
         return get403WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -944,11 +918,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error put404() throws ErrorException, IOException {
+    public Error put404() {
         return put404WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1001,11 +973,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 404 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error put404(Boolean booleanValue) throws ErrorException, IOException {
+    public Error put404(Boolean booleanValue) {
         return put404WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1065,11 +1035,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error patch405() throws ErrorException, IOException {
+    public Error patch405() {
         return patch405WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1122,11 +1090,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 405 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error patch405(Boolean booleanValue) throws ErrorException, IOException {
+    public Error patch405(Boolean booleanValue) {
         return patch405WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1186,11 +1152,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error post406() throws ErrorException, IOException {
+    public Error post406() {
         return post406WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1243,11 +1207,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 406 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error post406(Boolean booleanValue) throws ErrorException, IOException {
+    public Error post406(Boolean booleanValue) {
         return post406WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1307,11 +1269,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error delete407() throws ErrorException, IOException {
+    public Error delete407() {
         return delete407WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1364,11 +1324,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 407 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error delete407(Boolean booleanValue) throws ErrorException, IOException {
+    public Error delete407(Boolean booleanValue) {
         return delete407WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1428,11 +1386,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error put409() throws ErrorException, IOException {
+    public Error put409() {
         return put409WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1485,11 +1441,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 409 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error put409(Boolean booleanValue) throws ErrorException, IOException {
+    public Error put409(Boolean booleanValue) {
         return put409WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1549,11 +1503,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error head410() throws ErrorException, IOException {
+    public Error head410() {
         return head410WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1610,11 +1562,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error get411() throws ErrorException, IOException {
+    public Error get411() {
         return get411WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1671,11 +1621,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error get412() throws ErrorException, IOException {
+    public Error get412() {
         return get412WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1732,11 +1680,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error put413() throws ErrorException, IOException {
+    public Error put413() {
         return put413WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1789,11 +1735,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 413 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error put413(Boolean booleanValue) throws ErrorException, IOException {
+    public Error put413(Boolean booleanValue) {
         return put413WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1853,11 +1797,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error patch414() throws ErrorException, IOException {
+    public Error patch414() {
         return patch414WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1910,11 +1852,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 414 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error patch414(Boolean booleanValue) throws ErrorException, IOException {
+    public Error patch414(Boolean booleanValue) {
         return patch414WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1974,11 +1914,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error post415() throws ErrorException, IOException {
+    public Error post415() {
         return post415WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2031,11 +1969,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 415 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error post415(Boolean booleanValue) throws ErrorException, IOException {
+    public Error post415(Boolean booleanValue) {
         return post415WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -2095,11 +2031,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error get416() throws ErrorException, IOException {
+    public Error get416() {
         return get416WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2156,11 +2090,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error delete417() throws ErrorException, IOException {
+    public Error delete417() {
         return delete417WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2213,11 +2145,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 417 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error delete417(Boolean booleanValue) throws ErrorException, IOException {
+    public Error delete417(Boolean booleanValue) {
         return delete417WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -2277,11 +2207,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error head429() throws ErrorException, IOException {
+    public Error head429() {
         return head429WithServiceResponseAsync().toBlocking().single().getBody();
     }
 

@@ -171,10 +171,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get true Boolean value on path.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getBooleanTrue() throws ErrorException, IOException {
+    public void getBooleanTrue() {
         getBooleanTrueWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -233,10 +231,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get false Boolean value on path.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getBooleanFalse() throws ErrorException, IOException {
+    public void getBooleanFalse() {
         getBooleanFalseWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -295,10 +291,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get '1000000' integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getIntOneMillion() throws ErrorException, IOException {
+    public void getIntOneMillion() {
         getIntOneMillionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -357,10 +351,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-1000000' integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getIntNegativeOneMillion() throws ErrorException, IOException {
+    public void getIntNegativeOneMillion() {
         getIntNegativeOneMillionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -419,10 +411,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getTenBillion() throws ErrorException, IOException {
+    public void getTenBillion() {
         getTenBillionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -481,10 +471,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getNegativeTenBillion() throws ErrorException, IOException {
+    public void getNegativeTenBillion() {
         getNegativeTenBillionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -543,10 +531,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void floatScientificPositive() throws ErrorException, IOException {
+    public void floatScientificPositive() {
         floatScientificPositiveWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -605,10 +591,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void floatScientificNegative() throws ErrorException, IOException {
+    public void floatScientificNegative() {
         floatScientificNegativeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -667,10 +651,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void doubleDecimalPositive() throws ErrorException, IOException {
+    public void doubleDecimalPositive() {
         doubleDecimalPositiveWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -729,10 +711,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void doubleDecimalNegative() throws ErrorException, IOException {
+    public void doubleDecimalNegative() {
         doubleDecimalNegativeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -791,10 +771,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void stringUnicode() throws ErrorException, IOException {
+    public void stringUnicode() {
         stringUnicodeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -853,10 +831,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void stringUrlEncoded() throws ErrorException, IOException {
+    public void stringUrlEncoded() {
         stringUrlEncodedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -915,10 +891,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get ''.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void stringEmpty() throws ErrorException, IOException {
+    public void stringEmpty() {
         stringEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -978,11 +952,8 @@ public final class PathsImpl implements Paths {
      * Get null (should throw).
      *
      * @param stringPath null string value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void stringNull(String stringPath) throws ErrorException, IOException, IllegalArgumentException {
+    public void stringNull(String stringPath) {
         stringNullWithServiceResponseAsync(stringPath).toBlocking().single().getBody();
     }
 
@@ -1047,11 +1018,8 @@ public final class PathsImpl implements Paths {
      * Get using uri with 'green color' in path parameter.
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void enumValid(UriColor enumPath) throws ErrorException, IOException, IllegalArgumentException {
+    public void enumValid(UriColor enumPath) {
         enumValidWithServiceResponseAsync(enumPath).toBlocking().single().getBody();
     }
 
@@ -1116,11 +1084,8 @@ public final class PathsImpl implements Paths {
      * Get null (should throw on the client before the request is sent on wire).
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void enumNull(UriColor enumPath) throws ErrorException, IOException, IllegalArgumentException {
+    public void enumNull(UriColor enumPath) {
         enumNullWithServiceResponseAsync(enumPath).toBlocking().single().getBody();
     }
 
@@ -1185,11 +1150,8 @@ public final class PathsImpl implements Paths {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void byteMultiByte(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException {
+    public void byteMultiByte(byte[] bytePath) {
         byteMultiByteWithServiceResponseAsync(bytePath).toBlocking().single().getBody();
     }
 
@@ -1254,10 +1216,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get '' as byte array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void byteEmpty() throws ErrorException, IOException {
+    public void byteEmpty() {
         byteEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1318,11 +1278,8 @@ public final class PathsImpl implements Paths {
      * Get null as byte array (should throw).
      *
      * @param bytePath null as byte array (should throw)
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void byteNull(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException {
+    public void byteNull(byte[] bytePath) {
         byteNullWithServiceResponseAsync(bytePath).toBlocking().single().getBody();
     }
 
@@ -1387,10 +1344,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get '2012-01-01' as date.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void dateValid() throws ErrorException, IOException {
+    public void dateValid() {
         dateValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1450,11 +1405,8 @@ public final class PathsImpl implements Paths {
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
      *
      * @param datePath null as date (should throw)
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void dateNull(LocalDate datePath) throws ErrorException, IOException, IllegalArgumentException {
+    public void dateNull(LocalDate datePath) {
         dateNullWithServiceResponseAsync(datePath).toBlocking().single().getBody();
     }
 
@@ -1518,10 +1470,8 @@ public final class PathsImpl implements Paths {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void dateTimeValid() throws ErrorException, IOException {
+    public void dateTimeValid() {
         dateTimeValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1581,11 +1531,8 @@ public final class PathsImpl implements Paths {
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
      *
      * @param dateTimePath null as date-time
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void dateTimeNull(DateTime dateTimePath) throws ErrorException, IOException, IllegalArgumentException {
+    public void dateTimeNull(DateTime dateTimePath) {
         dateTimeNullWithServiceResponseAsync(dateTimePath).toBlocking().single().getBody();
     }
 
@@ -1650,11 +1597,8 @@ public final class PathsImpl implements Paths {
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
      *
      * @param base64UrlPath base64url encoded value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void base64Url(byte[] base64UrlPath) throws ErrorException, IOException, IllegalArgumentException {
+    public void base64Url(byte[] base64UrlPath) {
         base64UrlWithServiceResponseAsync(base64UrlPath).toBlocking().single().getBody();
     }
 
@@ -1720,11 +1664,8 @@ public final class PathsImpl implements Paths {
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void arrayCsvInPath(List<String> arrayPath) throws ErrorException, IOException, IllegalArgumentException {
+    public void arrayCsvInPath(List<String> arrayPath) {
         arrayCsvInPathWithServiceResponseAsync(arrayPath).toBlocking().single().getBody();
     }
 
@@ -1791,10 +1732,8 @@ public final class PathsImpl implements Paths {
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
      *
      * @param unixTimeUrlPath Unix time encoded value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void unixTimeUrl(DateTime unixTimeUrlPath) throws ErrorException, IOException {
+    public void unixTimeUrl(DateTime unixTimeUrlPath) {
         unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath).toBlocking().single().getBody();
     }
 

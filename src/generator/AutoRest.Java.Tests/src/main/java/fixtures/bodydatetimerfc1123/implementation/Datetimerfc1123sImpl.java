@@ -97,11 +97,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get null datetime value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getNull() throws ErrorException, IOException {
+    public DateTime getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -164,11 +162,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get invalid datetime value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getInvalid() throws ErrorException, IOException {
+    public DateTime getInvalid() {
         return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -231,11 +227,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get overflow datetime value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getOverflow() throws ErrorException, IOException {
+    public DateTime getOverflow() {
         return getOverflowWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -298,11 +292,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get underflow datetime value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getUnderflow() throws ErrorException, IOException {
+    public DateTime getUnderflow() {
         return getUnderflowWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -366,11 +358,8 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
      * @param datetimeBody the DateTimeRfc1123 value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putUtcMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putUtcMaxDateTime(DateTime datetimeBody) {
         putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
     }
 
@@ -435,11 +424,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getUtcLowercaseMaxDateTime() throws ErrorException, IOException {
+    public DateTime getUtcLowercaseMaxDateTime() {
         return getUtcLowercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -502,11 +489,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getUtcUppercaseMaxDateTime() throws ErrorException, IOException {
+    public DateTime getUtcUppercaseMaxDateTime() {
         return getUtcUppercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -570,11 +555,8 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @param datetimeBody the DateTimeRfc1123 value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putUtcMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putUtcMinDateTime(DateTime datetimeBody) {
         putUtcMinDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
     }
 
@@ -639,11 +621,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getUtcMinDateTime() throws ErrorException, IOException {
+    public DateTime getUtcMinDateTime() {
         return getUtcMinDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

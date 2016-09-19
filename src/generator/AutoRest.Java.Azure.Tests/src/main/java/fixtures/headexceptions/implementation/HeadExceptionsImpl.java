@@ -69,10 +69,8 @@ public final class HeadExceptionsImpl implements HeadExceptions {
     /**
      * Return 200 status code if successful.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void head200() throws CloudException, IOException {
+    public void head200() {
         head200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -129,10 +127,8 @@ public final class HeadExceptionsImpl implements HeadExceptions {
     /**
      * Return 204 status code if successful.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void head204() throws CloudException, IOException {
+    public void head204() {
         head204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -189,10 +185,8 @@ public final class HeadExceptionsImpl implements HeadExceptions {
     /**
      * Return 404 status code if successful.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void head404() throws CloudException, IOException {
+    public void head404() {
         head404WithServiceResponseAsync().toBlocking().single().getBody();
     }
 

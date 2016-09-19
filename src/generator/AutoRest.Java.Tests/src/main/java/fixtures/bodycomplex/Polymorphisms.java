@@ -13,9 +13,7 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -26,11 +24,9 @@ public interface Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Fish object if successful.
      */
-    Fish getValid() throws ErrorException, IOException;
+    Fish getValid();
 
     /**
      * Get complex types that are polymorphic.
@@ -90,11 +86,8 @@ public interface Polymorphisms {
                }
              ]
            };
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putValid(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putValid(Fish complexBody);
 
     /**
      * Put complex types that are polymorphic.
@@ -246,11 +239,8 @@ public interface Polymorphisms {
              }
          ]
      }
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putValidMissingRequired(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putValidMissingRequired(Fish complexBody);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.

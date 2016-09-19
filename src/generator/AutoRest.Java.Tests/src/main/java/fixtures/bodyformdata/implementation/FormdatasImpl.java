@@ -77,12 +77,9 @@ public final class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the InputStream object if successful.
      */
-    public InputStream uploadFile(byte[] fileContent, String fileName) throws ErrorException, IOException, IllegalArgumentException {
+    public InputStream uploadFile(byte[] fileContent, String fileName) {
         return uploadFileWithServiceResponseAsync(fileContent, fileName).toBlocking().single().getBody();
     }
 
@@ -154,12 +151,9 @@ public final class FormdatasImpl implements Formdatas {
      * Upload file.
      *
      * @param fileContent File to upload.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the InputStream object if successful.
      */
-    public InputStream uploadFileViaBody(byte[] fileContent) throws ErrorException, IOException, IllegalArgumentException {
+    public InputStream uploadFileViaBody(byte[] fileContent) {
         return uploadFileViaBodyWithServiceResponseAsync(fileContent).toBlocking().single().getBody();
     }
 

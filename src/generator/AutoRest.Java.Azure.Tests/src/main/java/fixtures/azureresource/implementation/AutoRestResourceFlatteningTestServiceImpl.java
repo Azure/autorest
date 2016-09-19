@@ -214,10 +214,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as an Array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putArray() throws ErrorException, IOException {
+    public void putArray() {
         putArrayWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -270,10 +268,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putArray(List<Resource> resourceArray) throws ErrorException, IOException {
+    public void putArray(List<Resource> resourceArray) {
         putArrayWithServiceResponseAsync(resourceArray).toBlocking().single().getBody();
     }
 
@@ -335,11 +331,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Get External Resource as an Array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
-    public List<FlattenedProduct> getArray() throws ErrorException, IOException {
+    public List<FlattenedProduct> getArray() {
         return getArrayWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -397,10 +391,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as a Dictionary.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putDictionary() throws ErrorException, IOException {
+    public void putDictionary() {
         putDictionaryWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -453,10 +445,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ErrorException, IOException {
+    public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) {
         putDictionaryWithServiceResponseAsync(resourceDictionary).toBlocking().single().getBody();
     }
 
@@ -518,11 +508,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Get External Resource as a Dictionary.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
-    public Map<String, FlattenedProduct> getDictionary() throws ErrorException, IOException {
+    public Map<String, FlattenedProduct> getDictionary() {
         return getDictionaryWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -580,10 +568,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putResourceCollection() throws ErrorException, IOException {
+    public void putResourceCollection() {
         putResourceCollectionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -636,10 +622,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putResourceCollection(ResourceCollection resourceComplexObject) throws ErrorException, IOException {
+    public void putResourceCollection(ResourceCollection resourceComplexObject) {
         putResourceCollectionWithServiceResponseAsync(resourceComplexObject).toBlocking().single().getBody();
     }
 
@@ -701,11 +685,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the ResourceCollection object if successful.
      */
-    public ResourceCollection getResourceCollection() throws ErrorException, IOException {
+    public ResourceCollection getResourceCollection() {
         return getResourceCollectionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

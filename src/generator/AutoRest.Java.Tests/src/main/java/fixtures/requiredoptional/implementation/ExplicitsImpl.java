@@ -161,11 +161,9 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the int value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error postRequiredIntegerParameter(int bodyParameter) throws ErrorException, IOException {
+    public Error postRequiredIntegerParameter(int bodyParameter) {
         return postRequiredIntegerParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -225,10 +223,8 @@ public final class ExplicitsImpl implements Explicits {
     /**
      * Test explicitly optional integer. Please put null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalIntegerParameter() throws ErrorException, IOException {
+    public void postOptionalIntegerParameter() {
         postOptionalIntegerParameterWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -281,10 +277,8 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly optional integer. Please put null.
      *
      * @param bodyParameter the Integer value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalIntegerParameter(Integer bodyParameter) throws ErrorException, IOException {
+    public void postOptionalIntegerParameter(Integer bodyParameter) {
         postOptionalIntegerParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -346,12 +340,9 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the IntWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    public Error postRequiredIntegerProperty(IntWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException {
+    public Error postRequiredIntegerProperty(IntWrapper bodyParameter) {
         return postRequiredIntegerPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -415,10 +406,8 @@ public final class ExplicitsImpl implements Explicits {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalIntegerProperty() throws ErrorException, IOException {
+    public void postOptionalIntegerProperty() {
         postOptionalIntegerPropertyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -471,10 +460,8 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter the IntOptionalWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ErrorException, IOException {
+    public void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) {
         postOptionalIntegerPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -537,11 +524,9 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the int value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error postRequiredIntegerHeader(int headerParameter) throws ErrorException, IOException {
+    public Error postRequiredIntegerHeader(int headerParameter) {
         return postRequiredIntegerHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().getBody();
     }
 
@@ -601,10 +586,8 @@ public final class ExplicitsImpl implements Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalIntegerHeader() throws ErrorException, IOException {
+    public void postOptionalIntegerHeader() {
         postOptionalIntegerHeaderWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -657,10 +640,8 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the Integer value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalIntegerHeader(Integer headerParameter) throws ErrorException, IOException {
+    public void postOptionalIntegerHeader(Integer headerParameter) {
         postOptionalIntegerHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().getBody();
     }
 
@@ -722,12 +703,9 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    public Error postRequiredStringParameter(String bodyParameter) throws ErrorException, IOException, IllegalArgumentException {
+    public Error postRequiredStringParameter(String bodyParameter) {
         return postRequiredStringParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -790,10 +768,8 @@ public final class ExplicitsImpl implements Explicits {
     /**
      * Test explicitly optional string. Please put null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalStringParameter() throws ErrorException, IOException {
+    public void postOptionalStringParameter() {
         postOptionalStringParameterWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -846,10 +822,8 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly optional string. Please put null.
      *
      * @param bodyParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalStringParameter(String bodyParameter) throws ErrorException, IOException {
+    public void postOptionalStringParameter(String bodyParameter) {
         postOptionalStringParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -911,12 +885,9 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the StringWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    public Error postRequiredStringProperty(StringWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException {
+    public Error postRequiredStringProperty(StringWrapper bodyParameter) {
         return postRequiredStringPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -980,10 +951,8 @@ public final class ExplicitsImpl implements Explicits {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalStringProperty() throws ErrorException, IOException {
+    public void postOptionalStringProperty() {
         postOptionalStringPropertyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1036,10 +1005,8 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter the StringOptionalWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ErrorException, IOException {
+    public void postOptionalStringProperty(StringOptionalWrapper bodyParameter) {
         postOptionalStringPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -1102,12 +1069,9 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    public Error postRequiredStringHeader(String headerParameter) throws ErrorException, IOException, IllegalArgumentException {
+    public Error postRequiredStringHeader(String headerParameter) {
         return postRequiredStringHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().getBody();
     }
 
@@ -1170,10 +1134,8 @@ public final class ExplicitsImpl implements Explicits {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalStringHeader() throws ErrorException, IOException {
+    public void postOptionalStringHeader() {
         postOptionalStringHeaderWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1226,10 +1188,8 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalStringHeader(String bodyParameter) throws ErrorException, IOException {
+    public void postOptionalStringHeader(String bodyParameter) {
         postOptionalStringHeaderWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -1291,12 +1251,9 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the Product value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    public Error postRequiredClassParameter(Product bodyParameter) throws ErrorException, IOException, IllegalArgumentException {
+    public Error postRequiredClassParameter(Product bodyParameter) {
         return postRequiredClassParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -1360,10 +1317,8 @@ public final class ExplicitsImpl implements Explicits {
     /**
      * Test explicitly optional complex object. Please put null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalClassParameter() throws ErrorException, IOException {
+    public void postOptionalClassParameter() {
         postOptionalClassParameterWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1416,10 +1371,8 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly optional complex object. Please put null.
      *
      * @param bodyParameter the Product value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalClassParameter(Product bodyParameter) throws ErrorException, IOException {
+    public void postOptionalClassParameter(Product bodyParameter) {
         postOptionalClassParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -1482,12 +1435,9 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ClassWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    public Error postRequiredClassProperty(ClassWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException {
+    public Error postRequiredClassProperty(ClassWrapper bodyParameter) {
         return postRequiredClassPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -1551,10 +1501,8 @@ public final class ExplicitsImpl implements Explicits {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalClassProperty() throws ErrorException, IOException {
+    public void postOptionalClassProperty() {
         postOptionalClassPropertyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1607,10 +1555,8 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter the ClassOptionalWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ErrorException, IOException {
+    public void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) {
         postOptionalClassPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -1673,12 +1619,9 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the List&lt;String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    public Error postRequiredArrayParameter(List<String> bodyParameter) throws ErrorException, IOException, IllegalArgumentException {
+    public Error postRequiredArrayParameter(List<String> bodyParameter) {
         return postRequiredArrayParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -1742,10 +1685,8 @@ public final class ExplicitsImpl implements Explicits {
     /**
      * Test explicitly optional array. Please put null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalArrayParameter() throws ErrorException, IOException {
+    public void postOptionalArrayParameter() {
         postOptionalArrayParameterWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1798,10 +1739,8 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly optional array. Please put null.
      *
      * @param bodyParameter the List&lt;String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalArrayParameter(List<String> bodyParameter) throws ErrorException, IOException {
+    public void postOptionalArrayParameter(List<String> bodyParameter) {
         postOptionalArrayParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -1864,12 +1803,9 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ArrayWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    public Error postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException {
+    public Error postRequiredArrayProperty(ArrayWrapper bodyParameter) {
         return postRequiredArrayPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -1933,10 +1869,8 @@ public final class ExplicitsImpl implements Explicits {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalArrayProperty() throws ErrorException, IOException {
+    public void postOptionalArrayProperty() {
         postOptionalArrayPropertyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1989,10 +1923,8 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter the ArrayOptionalWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ErrorException, IOException {
+    public void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) {
         postOptionalArrayPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -2055,12 +1987,9 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the List&lt;String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    public Error postRequiredArrayHeader(List<String> headerParameter) throws ErrorException, IOException, IllegalArgumentException {
+    public Error postRequiredArrayHeader(List<String> headerParameter) {
         return postRequiredArrayHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().getBody();
     }
 
@@ -2125,10 +2054,8 @@ public final class ExplicitsImpl implements Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalArrayHeader() throws ErrorException, IOException {
+    public void postOptionalArrayHeader() {
         postOptionalArrayHeaderWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2182,10 +2109,8 @@ public final class ExplicitsImpl implements Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the List&lt;String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptionalArrayHeader(List<String> headerParameter) throws ErrorException, IOException {
+    public void postOptionalArrayHeader(List<String> headerParameter) {
         postOptionalArrayHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().getBody();
     }
 
