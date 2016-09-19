@@ -48,13 +48,13 @@
           "200": {
             "description": "A list of caches",
             "schema": {
-              "$ref": "./Swagger/swagger-external-def.json#/definitions/Product"
+              "$ref": "./swagger-external-def.json#/definitions/Product"
             }
           },
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "./Swagger/swagger-external-def.json#/definitions/Error"
+              "$ref": "./swagger-external-def.json#/definitions/Error"
             }
           }
         }
@@ -96,7 +96,7 @@
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "./Swagger/swagger-external-def.json#/definitions/Error"
+              "$ref": "./swagger-external-def.json#/definitions/Error"
             }
           }
         }
