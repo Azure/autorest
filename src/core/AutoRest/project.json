@@ -58,6 +58,7 @@
     "AutoRest.NodeJS": { "target": "project", "type": "build" },
     "AutoRest.Python": { "target": "project", "type": "build" },
     "AutoRest.Ruby": { "target": "project", "type": "build" },
-    "AutoRest.Go": { "target": "project", "type": "build" }
+    "AutoRest.Go": { "target": "project", "type": "build" },
+    "AutoRest.CSharp.Azure.Fluent": "0.17.0-*"
   }
 }

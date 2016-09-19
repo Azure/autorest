@@ -8,6 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generators", "Generators", "{EF9E346D-70C6-45F5-8FF9-9B734F4A1298}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest", "src\core\AutoRest\AutoRest.xproj", "{F589D8B7-1B0F-4182-842B-09866A4A2CEB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8464A22C-0C8D-4C84-85A8-0ACE787BDC75} = {8464A22C-0C8D-4C84-85A8-0ACE787BDC75}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modelers", "Modelers", "{02144BF6-4489-4AFC-9B2D-0306C3DD3C19}"
 EndProject
@@ -127,6 +130,13 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Tooling.CSharp.Compiler", "src\dev\AutoRest.Tooling.CSharp.Compiler\AutoRest.Tooling.CSharp.Compiler.xproj", "{42DC6C97-6E79-4D0A-9A1D-DD34C99248E2}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Go", "src\generator\AutoRest.Go\AutoRest.Go.xproj", "{BEDCF556-6CEA-4EAE-ACE3-8B9EFE0818E5}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CSharp.Azure.Fluent", "src\generator\AutoRest.CSharp.Azure.Fluent\AutoRest.CSharp.Azure.Fluent.xproj", "{8464A22C-0C8D-4C84-85A8-0ACE787BDC75}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CSharp.Azure.Fluent.Tests", "src\generator\AutoRest.CSharp.Azure.Fluent.Tests\AutoRest.CSharp.Azure.Fluent.Tests.xproj", "{947EA2A0-1730-4CC2-B042-C5471DAB78F1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4899B527-6815-4E89-84B3-DD5A507B205A} = {4899B527-6815-4E89-84B3-DD5A507B205A}
+		{8464A22C-0C8D-4C84-85A8-0ACE787BDC75} = {8464A22C-0C8D-4C84-85A8-0ACE787BDC75}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -270,6 +280,14 @@ Global
 		{BEDCF556-6CEA-4EAE-ACE3-8B9EFE0818E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEDCF556-6CEA-4EAE-ACE3-8B9EFE0818E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEDCF556-6CEA-4EAE-ACE3-8B9EFE0818E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8464A22C-0C8D-4C84-85A8-0ACE787BDC75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8464A22C-0C8D-4C84-85A8-0ACE787BDC75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8464A22C-0C8D-4C84-85A8-0ACE787BDC75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8464A22C-0C8D-4C84-85A8-0ACE787BDC75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{947EA2A0-1730-4CC2-B042-C5471DAB78F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{947EA2A0-1730-4CC2-B042-C5471DAB78F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{947EA2A0-1730-4CC2-B042-C5471DAB78F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{947EA2A0-1730-4CC2-B042-C5471DAB78F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -314,5 +332,7 @@ Global
 		{784D4B45-F12A-4B8F-A86C-35A080814A19} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 		{43DFEF27-2FD7-4827-A669-DFD2DD1CBBCC} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 		{8192BAA3-C606-4D44-B0D7-46BE7AFA4096} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
+		{8464A22C-0C8D-4C84-85A8-0ACE787BDC75} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
+		{947EA2A0-1730-4CC2-B042-C5471DAB78F1} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 	EndGlobalSection
 EndGlobal
