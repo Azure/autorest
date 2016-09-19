@@ -92,12 +92,9 @@ public final class ImplicitsImpl implements Implicits {
      * Test implicitly required path parameter.
      *
      * @param pathParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    public Error getRequiredPath(String pathParameter) throws ErrorException, IOException, IllegalArgumentException {
+    public Error getRequiredPath(String pathParameter) {
         return getRequiredPathWithServiceResponseAsync(pathParameter).toBlocking().single().getBody();
     }
 
@@ -160,10 +157,8 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putOptionalQuery() throws ErrorException, IOException {
+    public void putOptionalQuery() {
         putOptionalQueryWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -216,10 +211,8 @@ public final class ImplicitsImpl implements Implicits {
      * Test implicitly optional query parameter.
      *
      * @param queryParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putOptionalQuery(String queryParameter) throws ErrorException, IOException {
+    public void putOptionalQuery(String queryParameter) {
         putOptionalQueryWithServiceResponseAsync(queryParameter).toBlocking().single().getBody();
     }
 
@@ -280,10 +273,8 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional header parameter.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putOptionalHeader() throws ErrorException, IOException {
+    public void putOptionalHeader() {
         putOptionalHeaderWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -336,10 +327,8 @@ public final class ImplicitsImpl implements Implicits {
      * Test implicitly optional header parameter.
      *
      * @param queryParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putOptionalHeader(String queryParameter) throws ErrorException, IOException {
+    public void putOptionalHeader(String queryParameter) {
         putOptionalHeaderWithServiceResponseAsync(queryParameter).toBlocking().single().getBody();
     }
 
@@ -400,10 +389,8 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional body parameter.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putOptionalBody() throws ErrorException, IOException {
+    public void putOptionalBody() {
         putOptionalBodyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -456,10 +443,8 @@ public final class ImplicitsImpl implements Implicits {
      * Test implicitly optional body parameter.
      *
      * @param bodyParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putOptionalBody(String bodyParameter) throws ErrorException, IOException {
+    public void putOptionalBody(String bodyParameter) {
         putOptionalBodyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
     }
 
@@ -520,12 +505,9 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required path parameter.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    public Error getRequiredGlobalPath() throws ErrorException, IOException, IllegalArgumentException {
+    public Error getRequiredGlobalPath() {
         return getRequiredGlobalPathWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -585,12 +567,9 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required query parameter.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    public Error getRequiredGlobalQuery() throws ErrorException, IOException, IllegalArgumentException {
+    public Error getRequiredGlobalQuery() {
         return getRequiredGlobalQueryWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -650,11 +629,9 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error getOptionalGlobalQuery() throws ErrorException, IOException {
+    public Error getOptionalGlobalQuery() {
         return getOptionalGlobalQueryWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

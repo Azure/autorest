@@ -22,20 +22,16 @@
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
 }
-@foreach (var exception in Model.ExceptionStatements)
-{
-@: * @@throws @exception
-}
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object if successful.
 }
  */
-public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString {
+public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodRequiredParameterDeclaration) {
     @Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped response = @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single();
     return new @(Model.ReturnTypeModel.GenericBodyClientTypeString)(response.getBody()) {
         @@Override
-        public @Model.ReturnTypeModel.ServiceResponseGenericParameterString nextPage(String @Model.PagingNextPageLinkParameterName) throws RestException, IOException {
+        public @Model.ReturnTypeModel.ServiceResponseGenericParameterString nextPage(String @Model.PagingNextPageLinkParameterName) {
             @Model.PagingGroupedParameterTransformation(true)
             return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation(true)).toBlocking().single().getBody();
         }
@@ -226,20 +222,16 @@ public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWr
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
 }
-@foreach (var exception in Model.ExceptionStatements)
-{
-@: * @@throws @exception
-}
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object if successful.
 }
  */
-public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
+public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodParameterDeclaration) {
     @Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped response = @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation).toBlocking().single();
     return new @(Model.ReturnTypeModel.GenericBodyClientTypeString)(response.getBody()) {
         @@Override
-        public @Model.ReturnTypeModel.ServiceResponseGenericParameterString nextPage(String @Model.PagingNextPageLinkParameterName) throws RestException, IOException {
+        public @Model.ReturnTypeModel.ServiceResponseGenericParameterString nextPage(String @Model.PagingNextPageLinkParameterName) {
             @Model.PagingGroupedParameterTransformation()
             return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation()).toBlocking().single().getBody();
         }

@@ -92,11 +92,9 @@ public final class DatesImpl implements Dates {
     /**
      * Get null date value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
      */
-    public LocalDate getNull() throws ErrorException, IOException {
+    public LocalDate getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -154,11 +152,9 @@ public final class DatesImpl implements Dates {
     /**
      * Get invalid date value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
      */
-    public LocalDate getInvalidDate() throws ErrorException, IOException {
+    public LocalDate getInvalidDate() {
         return getInvalidDateWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -216,11 +212,9 @@ public final class DatesImpl implements Dates {
     /**
      * Get overflow date value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
      */
-    public LocalDate getOverflowDate() throws ErrorException, IOException {
+    public LocalDate getOverflowDate() {
         return getOverflowDateWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -278,11 +272,9 @@ public final class DatesImpl implements Dates {
     /**
      * Get underflow date value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
      */
-    public LocalDate getUnderflowDate() throws ErrorException, IOException {
+    public LocalDate getUnderflowDate() {
         return getUnderflowDateWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -341,11 +333,8 @@ public final class DatesImpl implements Dates {
      * Put max date value 9999-12-31.
      *
      * @param dateBody the LocalDate value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putMaxDate(LocalDate dateBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putMaxDate(LocalDate dateBody) {
         putMaxDateWithServiceResponseAsync(dateBody).toBlocking().single().getBody();
     }
 
@@ -409,11 +398,9 @@ public final class DatesImpl implements Dates {
     /**
      * Get max date value 9999-12-31.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
      */
-    public LocalDate getMaxDate() throws ErrorException, IOException {
+    public LocalDate getMaxDate() {
         return getMaxDateWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -472,11 +459,8 @@ public final class DatesImpl implements Dates {
      * Put min date value 0000-01-01.
      *
      * @param dateBody the LocalDate value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putMinDate(LocalDate dateBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putMinDate(LocalDate dateBody) {
         putMinDateWithServiceResponseAsync(dateBody).toBlocking().single().getBody();
     }
 
@@ -540,11 +524,9 @@ public final class DatesImpl implements Dates {
     /**
      * Get min date value 0000-01-01.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
      */
-    public LocalDate getMinDate() throws ErrorException, IOException {
+    public LocalDate getMinDate() {
         return getMinDateWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

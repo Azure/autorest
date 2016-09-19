@@ -13,8 +13,6 @@ package fixtures.http;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.http.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -25,10 +23,8 @@ public interface HttpRetrys {
     /**
      * Return 408 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void head408() throws ErrorException, IOException;
+    void head408();
 
     /**
      * Return 408 status code, then 200 after retry.
@@ -55,10 +51,8 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put500() throws ErrorException, IOException;
+    void put500();
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -85,10 +79,8 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put500(Boolean booleanValue) throws ErrorException, IOException;
+    void put500(Boolean booleanValue);
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -118,10 +110,8 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void patch500() throws ErrorException, IOException;
+    void patch500();
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -148,10 +138,8 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void patch500(Boolean booleanValue) throws ErrorException, IOException;
+    void patch500(Boolean booleanValue);
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -181,10 +169,8 @@ public interface HttpRetrys {
     /**
      * Return 502 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void get502() throws ErrorException, IOException;
+    void get502();
 
     /**
      * Return 502 status code, then 200 after retry.
@@ -211,10 +197,8 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void post503() throws ErrorException, IOException;
+    void post503();
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -241,10 +225,8 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void post503(Boolean booleanValue) throws ErrorException, IOException;
+    void post503(Boolean booleanValue);
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -274,10 +256,8 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void delete503() throws ErrorException, IOException;
+    void delete503();
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -304,10 +284,8 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void delete503(Boolean booleanValue) throws ErrorException, IOException;
+    void delete503(Boolean booleanValue);
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -337,10 +315,8 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put504() throws ErrorException, IOException;
+    void put504();
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -367,10 +343,8 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put504(Boolean booleanValue) throws ErrorException, IOException;
+    void put504(Boolean booleanValue);
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -400,10 +374,8 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void patch504() throws ErrorException, IOException;
+    void patch504();
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -430,10 +402,8 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void patch504(Boolean booleanValue) throws ErrorException, IOException;
+    void patch504(Boolean booleanValue);
 
     /**
      * Return 504 status code, then 200 after retry.

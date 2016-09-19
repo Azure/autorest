@@ -88,11 +88,8 @@ public final class SkipUrlEncodingsInner {
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void getMethodPathValid(String unencodedPathParam) throws ErrorException, IOException, IllegalArgumentException {
+    public void getMethodPathValid(String unencodedPathParam) {
         getMethodPathValidWithServiceResponseAsync(unencodedPathParam).toBlocking().single().getBody();
     }
 
@@ -157,11 +154,8 @@ public final class SkipUrlEncodingsInner {
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void getPathPathValid(String unencodedPathParam) throws ErrorException, IOException, IllegalArgumentException {
+    public void getPathPathValid(String unencodedPathParam) {
         getPathPathValidWithServiceResponseAsync(unencodedPathParam).toBlocking().single().getBody();
     }
 
@@ -225,10 +219,8 @@ public final class SkipUrlEncodingsInner {
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getSwaggerPathValid() throws ErrorException, IOException {
+    public void getSwaggerPathValid() {
         getSwaggerPathValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -288,11 +280,8 @@ public final class SkipUrlEncodingsInner {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void getMethodQueryValid(String q1) throws ErrorException, IOException, IllegalArgumentException {
+    public void getMethodQueryValid(String q1) {
         getMethodQueryValidWithServiceResponseAsync(q1).toBlocking().single().getBody();
     }
 
@@ -356,10 +345,8 @@ public final class SkipUrlEncodingsInner {
     /**
      * Get method with unencoded query parameter with value null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getMethodQueryNull() throws ErrorException, IOException {
+    public void getMethodQueryNull() {
         getMethodQueryNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -412,10 +399,8 @@ public final class SkipUrlEncodingsInner {
      * Get method with unencoded query parameter with value null.
      *
      * @param q1 Unencoded query parameter with value null
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getMethodQueryNull(String q1) throws ErrorException, IOException {
+    public void getMethodQueryNull(String q1) {
         getMethodQueryNullWithServiceResponseAsync(q1).toBlocking().single().getBody();
     }
 
@@ -477,11 +462,8 @@ public final class SkipUrlEncodingsInner {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void getPathQueryValid(String q1) throws ErrorException, IOException, IllegalArgumentException {
+    public void getPathQueryValid(String q1) {
         getPathQueryValidWithServiceResponseAsync(q1).toBlocking().single().getBody();
     }
 
@@ -545,10 +527,8 @@ public final class SkipUrlEncodingsInner {
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getSwaggerQueryValid() throws ErrorException, IOException {
+    public void getSwaggerQueryValid() {
         getSwaggerQueryValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

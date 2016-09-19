@@ -30,7 +30,7 @@
     "tslint": "^2.5.1",
     "typescript": "^1.6.2"
   },
-  "homepage": "https://github.com/Azure/AutoRest",
+  "homepage": "https://github.com/Azure/AutoRest/src/generator/AutoRest.NodeJS.Tests",
   "repository": {
     "type": "git",
     "url": "git@github.com:Azure/AutoRest.git"

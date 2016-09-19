@@ -64,11 +64,8 @@ public final class PathsImpl implements Paths {
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void getEmpty(String accountName) throws ErrorException, IOException, IllegalArgumentException {
+    public void getEmpty(String accountName) {
         getEmptyWithServiceResponseAsync(accountName).toBlocking().single().getBody();
     }
 

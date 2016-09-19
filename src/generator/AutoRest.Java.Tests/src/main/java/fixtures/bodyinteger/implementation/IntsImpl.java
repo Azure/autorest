@@ -117,11 +117,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the int object if successful.
      */
-    public int getNull() throws ErrorException, IOException {
+    public int getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -179,11 +177,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the int object if successful.
      */
-    public int getInvalid() throws ErrorException, IOException {
+    public int getInvalid() {
         return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -241,11 +237,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the int object if successful.
      */
-    public int getOverflowInt32() throws ErrorException, IOException {
+    public int getOverflowInt32() {
         return getOverflowInt32WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -303,11 +297,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the int object if successful.
      */
-    public int getUnderflowInt32() throws ErrorException, IOException {
+    public int getUnderflowInt32() {
         return getUnderflowInt32WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -365,11 +357,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the long object if successful.
      */
-    public long getOverflowInt64() throws ErrorException, IOException {
+    public long getOverflowInt64() {
         return getOverflowInt64WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -427,11 +417,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the long object if successful.
      */
-    public long getUnderflowInt64() throws ErrorException, IOException {
+    public long getUnderflowInt64() {
         return getUnderflowInt64WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -490,10 +478,8 @@ public final class IntsImpl implements Ints {
      * Put max int32 value.
      *
      * @param intBody the int value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putMax32(int intBody) throws ErrorException, IOException {
+    public void putMax32(int intBody) {
         putMax32WithServiceResponseAsync(intBody).toBlocking().single().getBody();
     }
 
@@ -555,10 +541,8 @@ public final class IntsImpl implements Ints {
      * Put max int64 value.
      *
      * @param intBody the long value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putMax64(long intBody) throws ErrorException, IOException {
+    public void putMax64(long intBody) {
         putMax64WithServiceResponseAsync(intBody).toBlocking().single().getBody();
     }
 
@@ -620,10 +604,8 @@ public final class IntsImpl implements Ints {
      * Put min int32 value.
      *
      * @param intBody the int value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putMin32(int intBody) throws ErrorException, IOException {
+    public void putMin32(int intBody) {
         putMin32WithServiceResponseAsync(intBody).toBlocking().single().getBody();
     }
 
@@ -685,10 +667,8 @@ public final class IntsImpl implements Ints {
      * Put min int64 value.
      *
      * @param intBody the long value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putMin64(long intBody) throws ErrorException, IOException {
+    public void putMin64(long intBody) {
         putMin64WithServiceResponseAsync(intBody).toBlocking().single().getBody();
     }
 
@@ -749,11 +729,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getUnixTime() throws ErrorException, IOException {
+    public DateTime getUnixTime() {
         return getUnixTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -817,10 +795,8 @@ public final class IntsImpl implements Ints {
      * Put datetime encoded as Unix time.
      *
      * @param intBody the long value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putUnixTimeDate(DateTime intBody) throws ErrorException, IOException {
+    public void putUnixTimeDate(DateTime intBody) {
         putUnixTimeDateWithServiceResponseAsync(intBody).toBlocking().single().getBody();
     }
 
@@ -882,11 +858,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get invalid Unix time value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getInvalidUnixTime() throws ErrorException, IOException {
+    public DateTime getInvalidUnixTime() {
         return getInvalidUnixTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -949,11 +923,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get null Unix time value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getNullUnixTime() throws ErrorException, IOException {
+    public DateTime getNullUnixTime() {
         return getNullUnixTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

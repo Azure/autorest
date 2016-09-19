@@ -73,11 +73,9 @@ public final class PolymorphismsImpl implements Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Fish object if successful.
      */
-    public Fish getValid() throws ErrorException, IOException {
+    public Fish getValid() {
         return getValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -168,11 +166,8 @@ public final class PolymorphismsImpl implements Polymorphisms {
                }
              ]
            };
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putValid(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putValid(Fish complexBody) {
         putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
@@ -359,11 +354,8 @@ public final class PolymorphismsImpl implements Polymorphisms {
              }
          ]
      }
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putValidMissingRequired(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putValidMissingRequired(Fish complexBody) {
         putValidMissingRequiredWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 

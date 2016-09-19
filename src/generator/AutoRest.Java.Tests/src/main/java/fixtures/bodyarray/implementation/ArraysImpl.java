@@ -330,11 +330,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get null array value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
      */
-    public List<Integer> getNull() throws ErrorException, IOException {
+    public List<Integer> getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -392,11 +390,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
      */
-    public List<Integer> getInvalid() throws ErrorException, IOException {
+    public List<Integer> getInvalid() {
         return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -454,11 +450,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get empty array value [].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
      */
-    public List<Integer> getEmpty() throws ErrorException, IOException {
+    public List<Integer> getEmpty() {
         return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -517,11 +511,8 @@ public final class ArraysImpl implements Arrays {
      * Set array value empty [].
      *
      * @param arrayBody the List&lt;String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putEmpty(List<String> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putEmpty(List<String> arrayBody) {
         putEmptyWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -586,11 +577,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Boolean&gt; object if successful.
      */
-    public List<Boolean> getBooleanTfft() throws ErrorException, IOException {
+    public List<Boolean> getBooleanTfft() {
         return getBooleanTfftWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -649,11 +638,8 @@ public final class ArraysImpl implements Arrays {
      * Set array value empty [true, false, false, true].
      *
      * @param arrayBody the List&lt;Boolean&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putBooleanTfft(List<Boolean> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putBooleanTfft(List<Boolean> arrayBody) {
         putBooleanTfftWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -718,11 +704,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Boolean&gt; object if successful.
      */
-    public List<Boolean> getBooleanInvalidNull() throws ErrorException, IOException {
+    public List<Boolean> getBooleanInvalidNull() {
         return getBooleanInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -780,11 +764,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Boolean&gt; object if successful.
      */
-    public List<Boolean> getBooleanInvalidString() throws ErrorException, IOException {
+    public List<Boolean> getBooleanInvalidString() {
         return getBooleanInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -842,11 +824,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
      */
-    public List<Integer> getIntegerValid() throws ErrorException, IOException {
+    public List<Integer> getIntegerValid() {
         return getIntegerValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -905,11 +885,8 @@ public final class ArraysImpl implements Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Integer&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putIntegerValid(List<Integer> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putIntegerValid(List<Integer> arrayBody) {
         putIntegerValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -974,11 +951,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
      */
-    public List<Integer> getIntInvalidNull() throws ErrorException, IOException {
+    public List<Integer> getIntInvalidNull() {
         return getIntInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1036,11 +1011,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
      */
-    public List<Integer> getIntInvalidString() throws ErrorException, IOException {
+    public List<Integer> getIntInvalidString() {
         return getIntInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1098,11 +1071,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Long&gt; object if successful.
      */
-    public List<Long> getLongValid() throws ErrorException, IOException {
+    public List<Long> getLongValid() {
         return getLongValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1161,11 +1132,8 @@ public final class ArraysImpl implements Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Long&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putLongValid(List<Long> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putLongValid(List<Long> arrayBody) {
         putLongValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -1230,11 +1198,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, null, 0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Long&gt; object if successful.
      */
-    public List<Long> getLongInvalidNull() throws ErrorException, IOException {
+    public List<Long> getLongInvalidNull() {
         return getLongInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1292,11 +1258,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Long&gt; object if successful.
      */
-    public List<Long> getLongInvalidString() throws ErrorException, IOException {
+    public List<Long> getLongInvalidString() {
         return getLongInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1354,11 +1318,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
      */
-    public List<Double> getFloatValid() throws ErrorException, IOException {
+    public List<Double> getFloatValid() {
         return getFloatValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1417,11 +1379,8 @@ public final class ArraysImpl implements Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putFloatValid(List<Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putFloatValid(List<Double> arrayBody) {
         putFloatValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -1486,11 +1445,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
      */
-    public List<Double> getFloatInvalidNull() throws ErrorException, IOException {
+    public List<Double> getFloatInvalidNull() {
         return getFloatInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1548,11 +1505,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
      */
-    public List<Double> getFloatInvalidString() throws ErrorException, IOException {
+    public List<Double> getFloatInvalidString() {
         return getFloatInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1610,11 +1565,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
      */
-    public List<Double> getDoubleValid() throws ErrorException, IOException {
+    public List<Double> getDoubleValid() {
         return getDoubleValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1673,11 +1626,8 @@ public final class ArraysImpl implements Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putDoubleValid(List<Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putDoubleValid(List<Double> arrayBody) {
         putDoubleValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -1742,11 +1692,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
      */
-    public List<Double> getDoubleInvalidNull() throws ErrorException, IOException {
+    public List<Double> getDoubleInvalidNull() {
         return getDoubleInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1804,11 +1752,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
      */
-    public List<Double> getDoubleInvalidString() throws ErrorException, IOException {
+    public List<Double> getDoubleInvalidString() {
         return getDoubleInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1866,11 +1812,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object if successful.
      */
-    public List<String> getStringValid() throws ErrorException, IOException {
+    public List<String> getStringValid() {
         return getStringValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1929,11 +1873,8 @@ public final class ArraysImpl implements Arrays {
      * Set array value ['foo1', 'foo2', 'foo3'].
      *
      * @param arrayBody the List&lt;String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putStringValid(List<String> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putStringValid(List<String> arrayBody) {
         putStringValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -1998,11 +1939,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object if successful.
      */
-    public List<String> getStringWithNull() throws ErrorException, IOException {
+    public List<String> getStringWithNull() {
         return getStringWithNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2060,11 +1999,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object if successful.
      */
-    public List<String> getStringWithInvalid() throws ErrorException, IOException {
+    public List<String> getStringWithInvalid() {
         return getStringWithInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2122,11 +2059,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;UUID&gt; object if successful.
      */
-    public List<UUID> getUuidValid() throws ErrorException, IOException {
+    public List<UUID> getUuidValid() {
         return getUuidValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2185,11 +2120,8 @@ public final class ArraysImpl implements Arrays {
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
      * @param arrayBody the List&lt;UUID&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putUuidValid(List<UUID> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putUuidValid(List<UUID> arrayBody) {
         putUuidValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -2254,11 +2186,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;UUID&gt; object if successful.
      */
-    public List<UUID> getUuidInvalidChars() throws ErrorException, IOException {
+    public List<UUID> getUuidInvalidChars() {
         return getUuidInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2316,11 +2246,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;LocalDate&gt; object if successful.
      */
-    public List<LocalDate> getDateValid() throws ErrorException, IOException {
+    public List<LocalDate> getDateValid() {
         return getDateValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2379,11 +2307,8 @@ public final class ArraysImpl implements Arrays {
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putDateValid(List<LocalDate> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putDateValid(List<LocalDate> arrayBody) {
         putDateValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -2448,11 +2373,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;LocalDate&gt; object if successful.
      */
-    public List<LocalDate> getDateInvalidNull() throws ErrorException, IOException {
+    public List<LocalDate> getDateInvalidNull() {
         return getDateInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2510,11 +2433,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;LocalDate&gt; object if successful.
      */
-    public List<LocalDate> getDateInvalidChars() throws ErrorException, IOException {
+    public List<LocalDate> getDateInvalidChars() {
         return getDateInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2572,11 +2493,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object if successful.
      */
-    public List<DateTime> getDateTimeValid() throws ErrorException, IOException {
+    public List<DateTime> getDateTimeValid() {
         return getDateTimeValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2635,11 +2554,8 @@ public final class ArraysImpl implements Arrays {
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @param arrayBody the List&lt;DateTime&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putDateTimeValid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putDateTimeValid(List<DateTime> arrayBody) {
         putDateTimeValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -2704,11 +2620,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object if successful.
      */
-    public List<DateTime> getDateTimeInvalidNull() throws ErrorException, IOException {
+    public List<DateTime> getDateTimeInvalidNull() {
         return getDateTimeInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2766,11 +2680,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object if successful.
      */
-    public List<DateTime> getDateTimeInvalidChars() throws ErrorException, IOException {
+    public List<DateTime> getDateTimeInvalidChars() {
         return getDateTimeInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2828,11 +2740,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object if successful.
      */
-    public List<DateTime> getDateTimeRfc1123Valid() throws ErrorException, IOException {
+    public List<DateTime> getDateTimeRfc1123Valid() {
         return getDateTimeRfc1123ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2901,11 +2811,8 @@ public final class ArraysImpl implements Arrays {
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putDateTimeRfc1123Valid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putDateTimeRfc1123Valid(List<DateTime> arrayBody) {
         putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -2975,11 +2882,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Period&gt; object if successful.
      */
-    public List<Period> getDurationValid() throws ErrorException, IOException {
+    public List<Period> getDurationValid() {
         return getDurationValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3038,11 +2943,8 @@ public final class ArraysImpl implements Arrays {
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param arrayBody the List&lt;Period&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putDurationValid(List<Period> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putDurationValid(List<Period> arrayBody) {
         putDurationValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -3107,11 +3009,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;byte[]&gt; object if successful.
      */
-    public List<byte[]> getByteValid() throws ErrorException, IOException {
+    public List<byte[]> getByteValid() {
         return getByteValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3170,11 +3070,8 @@ public final class ArraysImpl implements Arrays {
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
      *
      * @param arrayBody the List&lt;byte[]&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putByteValid(List<byte[]> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putByteValid(List<byte[]> arrayBody) {
         putByteValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -3239,11 +3136,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;byte[]&gt; object if successful.
      */
-    public List<byte[]> getByteInvalidNull() throws ErrorException, IOException {
+    public List<byte[]> getByteInvalidNull() {
         return getByteInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3301,11 +3196,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;byte[]&gt; object if successful.
      */
-    public List<byte[]> getBase64Url() throws ErrorException, IOException {
+    public List<byte[]> getBase64Url() {
         return getBase64UrlWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3373,11 +3266,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type null value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object if successful.
      */
-    public List<Product> getComplexNull() throws ErrorException, IOException {
+    public List<Product> getComplexNull() {
         return getComplexNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3435,11 +3326,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get empty array of complex type [].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object if successful.
      */
-    public List<Product> getComplexEmpty() throws ErrorException, IOException {
+    public List<Product> getComplexEmpty() {
         return getComplexEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3497,11 +3386,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object if successful.
      */
-    public List<Product> getComplexItemNull() throws ErrorException, IOException {
+    public List<Product> getComplexItemNull() {
         return getComplexItemNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3559,11 +3446,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object if successful.
      */
-    public List<Product> getComplexItemEmpty() throws ErrorException, IOException {
+    public List<Product> getComplexItemEmpty() {
         return getComplexItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3621,11 +3506,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object if successful.
      */
-    public List<Product> getComplexValid() throws ErrorException, IOException {
+    public List<Product> getComplexValid() {
         return getComplexValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3684,11 +3567,8 @@ public final class ArraysImpl implements Arrays {
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @param arrayBody the List&lt;Product&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putComplexValid(List<Product> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putComplexValid(List<Product> arrayBody) {
         putComplexValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -3753,11 +3633,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get a null array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    public List<List<String>> getArrayNull() throws ErrorException, IOException {
+    public List<List<String>> getArrayNull() {
         return getArrayNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3815,11 +3693,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an empty array [].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    public List<List<String>> getArrayEmpty() throws ErrorException, IOException {
+    public List<List<String>> getArrayEmpty() {
         return getArrayEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3877,11 +3753,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    public List<List<String>> getArrayItemNull() throws ErrorException, IOException {
+    public List<List<String>> getArrayItemNull() {
         return getArrayItemNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3939,11 +3813,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    public List<List<String>> getArrayItemEmpty() throws ErrorException, IOException {
+    public List<List<String>> getArrayItemEmpty() {
         return getArrayItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4001,11 +3873,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    public List<List<String>> getArrayValid() throws ErrorException, IOException {
+    public List<List<String>> getArrayValid() {
         return getArrayValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4064,11 +3934,8 @@ public final class ArraysImpl implements Arrays {
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putArrayValid(List<List<String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putArrayValid(List<List<String>> arrayBody) {
         putArrayValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -4133,11 +4000,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    public List<Map<String, String>> getDictionaryNull() throws ErrorException, IOException {
+    public List<Map<String, String>> getDictionaryNull() {
         return getDictionaryNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4195,11 +4060,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    public List<Map<String, String>> getDictionaryEmpty() throws ErrorException, IOException {
+    public List<Map<String, String>> getDictionaryEmpty() {
         return getDictionaryEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4257,11 +4120,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    public List<Map<String, String>> getDictionaryItemNull() throws ErrorException, IOException {
+    public List<Map<String, String>> getDictionaryItemNull() {
         return getDictionaryItemNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4319,11 +4180,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    public List<Map<String, String>> getDictionaryItemEmpty() throws ErrorException, IOException {
+    public List<Map<String, String>> getDictionaryItemEmpty() {
         return getDictionaryItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4381,11 +4240,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    public List<Map<String, String>> getDictionaryValid() throws ErrorException, IOException {
+    public List<Map<String, String>> getDictionaryValid() {
         return getDictionaryValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4444,11 +4301,8 @@ public final class ArraysImpl implements Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putDictionaryValid(List<Map<String, String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putDictionaryValid(List<Map<String, String>> arrayBody) {
         putDictionaryValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 

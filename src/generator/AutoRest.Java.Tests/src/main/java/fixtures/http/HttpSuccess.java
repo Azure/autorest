@@ -13,8 +13,6 @@ package fixtures.http;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.http.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -25,10 +23,8 @@ public interface HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void head200() throws ErrorException, IOException;
+    void head200();
 
     /**
      * Return 200 status code if successful.
@@ -55,11 +51,9 @@ public interface HttpSuccess {
     /**
      * Get 200 success.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    boolean get200() throws ErrorException, IOException;
+    boolean get200();
 
     /**
      * Get 200 success.
@@ -86,10 +80,8 @@ public interface HttpSuccess {
     /**
      * Put boolean value true returning 200 success.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put200() throws ErrorException, IOException;
+    void put200();
 
     /**
      * Put boolean value true returning 200 success.
@@ -116,10 +108,8 @@ public interface HttpSuccess {
      * Put boolean value true returning 200 success.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put200(Boolean booleanValue) throws ErrorException, IOException;
+    void put200(Boolean booleanValue);
 
     /**
      * Put boolean value true returning 200 success.
@@ -149,10 +139,8 @@ public interface HttpSuccess {
     /**
      * Patch true Boolean value in request returning 200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void patch200() throws ErrorException, IOException;
+    void patch200();
 
     /**
      * Patch true Boolean value in request returning 200.
@@ -179,10 +167,8 @@ public interface HttpSuccess {
      * Patch true Boolean value in request returning 200.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void patch200(Boolean booleanValue) throws ErrorException, IOException;
+    void patch200(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returning 200.
@@ -212,10 +198,8 @@ public interface HttpSuccess {
     /**
      * Post bollean value true in request that returns a 200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void post200() throws ErrorException, IOException;
+    void post200();
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -242,10 +226,8 @@ public interface HttpSuccess {
      * Post bollean value true in request that returns a 200.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void post200(Boolean booleanValue) throws ErrorException, IOException;
+    void post200(Boolean booleanValue);
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -275,10 +257,8 @@ public interface HttpSuccess {
     /**
      * Delete simple boolean value true returns 200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void delete200() throws ErrorException, IOException;
+    void delete200();
 
     /**
      * Delete simple boolean value true returns 200.
@@ -305,10 +285,8 @@ public interface HttpSuccess {
      * Delete simple boolean value true returns 200.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void delete200(Boolean booleanValue) throws ErrorException, IOException;
+    void delete200(Boolean booleanValue);
 
     /**
      * Delete simple boolean value true returns 200.
@@ -338,10 +316,8 @@ public interface HttpSuccess {
     /**
      * Put true Boolean value in request returns 201.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put201() throws ErrorException, IOException;
+    void put201();
 
     /**
      * Put true Boolean value in request returns 201.
@@ -368,10 +344,8 @@ public interface HttpSuccess {
      * Put true Boolean value in request returns 201.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put201(Boolean booleanValue) throws ErrorException, IOException;
+    void put201(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 201.
@@ -401,10 +375,8 @@ public interface HttpSuccess {
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void post201() throws ErrorException, IOException;
+    void post201();
 
     /**
      * Post true Boolean value in request returns 201 (Created).
@@ -431,10 +403,8 @@ public interface HttpSuccess {
      * Post true Boolean value in request returns 201 (Created).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void post201(Boolean booleanValue) throws ErrorException, IOException;
+    void post201(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 201 (Created).
@@ -464,10 +434,8 @@ public interface HttpSuccess {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put202() throws ErrorException, IOException;
+    void put202();
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -494,10 +462,8 @@ public interface HttpSuccess {
      * Put true Boolean value in request returns 202 (Accepted).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put202(Boolean booleanValue) throws ErrorException, IOException;
+    void put202(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -527,10 +493,8 @@ public interface HttpSuccess {
     /**
      * Patch true Boolean value in request returns 202.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void patch202() throws ErrorException, IOException;
+    void patch202();
 
     /**
      * Patch true Boolean value in request returns 202.
@@ -557,10 +521,8 @@ public interface HttpSuccess {
      * Patch true Boolean value in request returns 202.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void patch202(Boolean booleanValue) throws ErrorException, IOException;
+    void patch202(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returns 202.
@@ -590,10 +552,8 @@ public interface HttpSuccess {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void post202() throws ErrorException, IOException;
+    void post202();
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -620,10 +580,8 @@ public interface HttpSuccess {
      * Post true Boolean value in request returns 202 (Accepted).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void post202(Boolean booleanValue) throws ErrorException, IOException;
+    void post202(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -653,10 +611,8 @@ public interface HttpSuccess {
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void delete202() throws ErrorException, IOException;
+    void delete202();
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
@@ -683,10 +639,8 @@ public interface HttpSuccess {
      * Delete true Boolean value in request returns 202 (accepted).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void delete202(Boolean booleanValue) throws ErrorException, IOException;
+    void delete202(Boolean booleanValue);
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
@@ -716,10 +670,8 @@ public interface HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void head204() throws ErrorException, IOException;
+    void head204();
 
     /**
      * Return 204 status code if successful.
@@ -746,10 +698,8 @@ public interface HttpSuccess {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put204() throws ErrorException, IOException;
+    void put204();
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -776,10 +726,8 @@ public interface HttpSuccess {
      * Put true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put204(Boolean booleanValue) throws ErrorException, IOException;
+    void put204(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -809,10 +757,8 @@ public interface HttpSuccess {
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void patch204() throws ErrorException, IOException;
+    void patch204();
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
@@ -839,10 +785,8 @@ public interface HttpSuccess {
      * Patch true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void patch204(Boolean booleanValue) throws ErrorException, IOException;
+    void patch204(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
@@ -872,10 +816,8 @@ public interface HttpSuccess {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void post204() throws ErrorException, IOException;
+    void post204();
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -902,10 +844,8 @@ public interface HttpSuccess {
      * Post true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void post204(Boolean booleanValue) throws ErrorException, IOException;
+    void post204(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -935,10 +875,8 @@ public interface HttpSuccess {
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void delete204() throws ErrorException, IOException;
+    void delete204();
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
@@ -965,10 +903,8 @@ public interface HttpSuccess {
      * Delete true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void delete204(Boolean booleanValue) throws ErrorException, IOException;
+    void delete204(Boolean booleanValue);
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
@@ -998,10 +934,8 @@ public interface HttpSuccess {
     /**
      * Return 404 status code.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void head404() throws ErrorException, IOException;
+    void head404();
 
     /**
      * Return 404 status code.

@@ -86,7 +86,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();
             if (_queryParameters.Count > 0)
             {
-                _url += "?" + string.Join("&", _queryParameters);
+                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
             System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
@@ -229,7 +229,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();
             if (_queryParameters.Count > 0)
             {
-                _url += "?" + string.Join("&", _queryParameters);
+                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
             System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
@@ -363,7 +363,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();
             if (_queryParameters.Count > 0)
             {
-                _url += "?" + string.Join("&", _queryParameters);
+                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
             System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
@@ -510,7 +510,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             if (_queryParameters.Count > 0)
             {
-                _url += "?" + string.Join("&", _queryParameters);
+                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
             System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
@@ -649,7 +649,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             if (_queryParameters.Count > 0)
             {
-                _url += "?" + string.Join("&", _queryParameters);
+                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
             System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
@@ -796,7 +796,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             if (_queryParameters.Count > 0)
             {
-                _url += "?" + string.Join("&", _queryParameters);
+                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
             System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
@@ -934,7 +934,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             if (_queryParameters.Count > 0)
             {
-                _url += "?" + string.Join("&", _queryParameters);
+                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
             System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();

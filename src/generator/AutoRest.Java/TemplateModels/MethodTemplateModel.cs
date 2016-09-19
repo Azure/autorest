@@ -741,12 +741,6 @@ namespace AutoRest.Java.TemplateModels
                 this.ParameterModels.ForEach(p => imports.AddRange(p.InterfaceImports));
                 // return type
                 imports.AddRange(this.ReturnTypeModel.InterfaceImports);
-                // exceptions
-                this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
-                    .ForEach(ex => {
-                        string exceptionImport = JavaCodeNamer.GetJavaException(ex, ServiceClient);
-                        if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex, ServiceClient));
-                    });
                 return imports.ToList();
             }
         }

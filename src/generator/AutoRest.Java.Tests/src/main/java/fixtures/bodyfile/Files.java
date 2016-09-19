@@ -13,9 +13,7 @@ package fixtures.bodyfile;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodyfile.models.ErrorException;
 import java.io.InputStream;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -26,11 +24,9 @@ public interface Files {
     /**
      * Get file.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the InputStream object if successful.
      */
-    InputStream getFile() throws ErrorException, IOException;
+    InputStream getFile();
 
     /**
      * Get file.
@@ -57,11 +53,9 @@ public interface Files {
     /**
      * Get a large file.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the InputStream object if successful.
      */
-    InputStream getFileLarge() throws ErrorException, IOException;
+    InputStream getFileLarge();
 
     /**
      * Get a large file.
@@ -88,11 +82,9 @@ public interface Files {
     /**
      * Get empty file.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the InputStream object if successful.
      */
-    InputStream getEmptyFile() throws ErrorException, IOException;
+    InputStream getEmptyFile();
 
     /**
      * Get empty file.

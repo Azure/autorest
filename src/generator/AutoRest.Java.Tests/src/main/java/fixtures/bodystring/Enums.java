@@ -14,9 +14,7 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodystring.models.Colors;
-import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -27,11 +25,9 @@ public interface Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Colors object if successful.
      */
-    Colors getNotExpandable() throws ErrorException, IOException;
+    Colors getNotExpandable();
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -59,11 +55,8 @@ public interface Enums {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putNotExpandable(Colors stringBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putNotExpandable(Colors stringBody);
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -93,11 +86,9 @@ public interface Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Colors object if successful.
      */
-    Colors getReferenced() throws ErrorException, IOException;
+    Colors getReferenced();
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -125,11 +116,8 @@ public interface Enums {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putReferenced(Colors enumStringBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putReferenced(Colors enumStringBody);
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -159,11 +147,9 @@ public interface Enums {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the RefColorConstant object if successful.
      */
-    RefColorConstant getReferencedConstant() throws ErrorException, IOException;
+    RefColorConstant getReferencedConstant();
 
     /**
      * Get value 'green-color' from the constant.
@@ -191,11 +177,8 @@ public interface Enums {
      * Sends value 'green-color' from a constant.
      *
      * @param enumStringBody the RefColorConstant value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putReferencedConstant(RefColorConstant enumStringBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putReferencedConstant(RefColorConstant enumStringBody);
 
     /**
      * Sends value 'green-color' from a constant.

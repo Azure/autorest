@@ -13,8 +13,6 @@ package fixtures.azurespecials;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.azurespecials.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -26,11 +24,8 @@ public interface SkipUrlEncodings {
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void getMethodPathValid(String unencodedPathParam) throws ErrorException, IOException, IllegalArgumentException;
+    void getMethodPathValid(String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -61,11 +56,8 @@ public interface SkipUrlEncodings {
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void getPathPathValid(String unencodedPathParam) throws ErrorException, IOException, IllegalArgumentException;
+    void getPathPathValid(String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -95,10 +87,8 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getSwaggerPathValid() throws ErrorException, IOException;
+    void getSwaggerPathValid();
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -126,11 +116,8 @@ public interface SkipUrlEncodings {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void getMethodQueryValid(String q1) throws ErrorException, IOException, IllegalArgumentException;
+    void getMethodQueryValid(String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -160,10 +147,8 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getMethodQueryNull() throws ErrorException, IOException;
+    void getMethodQueryNull();
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -190,10 +175,8 @@ public interface SkipUrlEncodings {
      * Get method with unencoded query parameter with value null.
      *
      * @param q1 Unencoded query parameter with value null
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getMethodQueryNull(String q1) throws ErrorException, IOException;
+    void getMethodQueryNull(String q1);
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -224,11 +207,8 @@ public interface SkipUrlEncodings {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void getPathQueryValid(String q1) throws ErrorException, IOException, IllegalArgumentException;
+    void getPathQueryValid(String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -258,10 +238,8 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getSwaggerQueryValid() throws ErrorException, IOException;
+    void getSwaggerQueryValid();
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.

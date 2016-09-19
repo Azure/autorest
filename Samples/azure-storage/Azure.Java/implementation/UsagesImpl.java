@@ -60,13 +60,10 @@ public final class UsagesImpl implements Usages {
     /**
      * Gets the current usage count and the limit for the resources under the subscription.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Usage&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Usage&gt; object if successful.
      */
-    public ServiceResponse<List<Usage>> list() throws CloudException, IOException, IllegalArgumentException {
-        return listAsync().toBlocking().single();
+    public List<Usage> list() {
+        return listWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -76,7 +73,7 @@ public final class UsagesImpl implements Usages {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Usage>> listAsync(final ServiceCallback<List<Usage>> serviceCallback) {
-        return ServiceCall.create(listAsync(), serviceCallback);
+        return ServiceCall.create(listWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -84,7 +81,21 @@ public final class UsagesImpl implements Usages {
      *
      * @return the observable to the List&lt;Usage&gt; object
      */
-    public Observable<ServiceResponse<List<Usage>>> listAsync() {
+    public Observable<List<Usage>> listAsync() {
+        return listWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Usage>>, List<Usage>>() {
+            @Override
+            public List<Usage> call(ServiceResponse<List<Usage>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Gets the current usage count and the limit for the resources under the subscription.
+     *
+     * @return the observable to the List&lt;Usage&gt; object
+     */
+    public Observable<ServiceResponse<List<Usage>>> listWithServiceResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }

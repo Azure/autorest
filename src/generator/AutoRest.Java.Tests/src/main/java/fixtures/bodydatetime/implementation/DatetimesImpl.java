@@ -136,11 +136,9 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get null datetime value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getNull() throws ErrorException, IOException {
+    public DateTime getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -198,11 +196,9 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get invalid datetime value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getInvalid() throws ErrorException, IOException {
+    public DateTime getInvalid() {
         return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -260,11 +256,9 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get overflow datetime value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getOverflow() throws ErrorException, IOException {
+    public DateTime getOverflow() {
         return getOverflowWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -322,11 +316,9 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get underflow datetime value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getUnderflow() throws ErrorException, IOException {
+    public DateTime getUnderflow() {
         return getUnderflowWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -385,11 +377,8 @@ public final class DatetimesImpl implements Datetimes {
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
      *
      * @param datetimeBody the DateTime value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putUtcMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putUtcMaxDateTime(DateTime datetimeBody) {
         putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
     }
 
@@ -453,11 +442,9 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getUtcLowercaseMaxDateTime() throws ErrorException, IOException {
+    public DateTime getUtcLowercaseMaxDateTime() {
         return getUtcLowercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -515,11 +502,9 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getUtcUppercaseMaxDateTime() throws ErrorException, IOException {
+    public DateTime getUtcUppercaseMaxDateTime() {
         return getUtcUppercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -578,11 +563,8 @@ public final class DatetimesImpl implements Datetimes {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
      *
      * @param datetimeBody the DateTime value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) {
         putLocalPositiveOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
     }
 
@@ -646,11 +628,9 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getLocalPositiveOffsetLowercaseMaxDateTime() throws ErrorException, IOException {
+    public DateTime getLocalPositiveOffsetLowercaseMaxDateTime() {
         return getLocalPositiveOffsetLowercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -708,11 +688,9 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getLocalPositiveOffsetUppercaseMaxDateTime() throws ErrorException, IOException {
+    public DateTime getLocalPositiveOffsetUppercaseMaxDateTime() {
         return getLocalPositiveOffsetUppercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -771,11 +749,8 @@ public final class DatetimesImpl implements Datetimes {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
      *
      * @param datetimeBody the DateTime value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) {
         putLocalNegativeOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
     }
 
@@ -839,11 +814,9 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getLocalNegativeOffsetUppercaseMaxDateTime() throws ErrorException, IOException {
+    public DateTime getLocalNegativeOffsetUppercaseMaxDateTime() {
         return getLocalNegativeOffsetUppercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -901,11 +874,9 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getLocalNegativeOffsetLowercaseMaxDateTime() throws ErrorException, IOException {
+    public DateTime getLocalNegativeOffsetLowercaseMaxDateTime() {
         return getLocalNegativeOffsetLowercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -964,11 +935,8 @@ public final class DatetimesImpl implements Datetimes {
      * Put min datetime value 0001-01-01T00:00:00Z.
      *
      * @param datetimeBody the DateTime value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putUtcMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putUtcMinDateTime(DateTime datetimeBody) {
         putUtcMinDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
     }
 
@@ -1032,11 +1000,9 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getUtcMinDateTime() throws ErrorException, IOException {
+    public DateTime getUtcMinDateTime() {
         return getUtcMinDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1095,11 +1061,8 @@ public final class DatetimesImpl implements Datetimes {
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      *
      * @param datetimeBody the DateTime value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) {
         putLocalPositiveOffsetMinDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
     }
 
@@ -1163,11 +1126,9 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getLocalPositiveOffsetMinDateTime() throws ErrorException, IOException {
+    public DateTime getLocalPositiveOffsetMinDateTime() {
         return getLocalPositiveOffsetMinDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1226,11 +1187,8 @@ public final class DatetimesImpl implements Datetimes {
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      *
      * @param datetimeBody the DateTime value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) {
         putLocalNegativeOffsetMinDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
     }
 
@@ -1294,11 +1252,9 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    public DateTime getLocalNegativeOffsetMinDateTime() throws ErrorException, IOException {
+    public DateTime getLocalNegativeOffsetMinDateTime() {
         return getLocalNegativeOffsetMinDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

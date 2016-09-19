@@ -69,11 +69,9 @@ public final class InheritancesImpl implements Inheritances {
     /**
      * Get complex types that extend others.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Siamese object if successful.
      */
-    public Siamese getValid() throws ErrorException, IOException {
+    public Siamese getValid() {
         return getValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -132,11 +130,8 @@ public final class InheritancesImpl implements Inheritances {
      * Put complex types that extend others.
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putValid(Siamese complexBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putValid(Siamese complexBody) {
         putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 

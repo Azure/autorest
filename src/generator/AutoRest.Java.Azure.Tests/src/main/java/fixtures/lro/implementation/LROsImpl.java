@@ -377,12 +377,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product put200Succeeded() throws CloudException, IOException, InterruptedException {
+    public Product put200Succeeded() {
         return put200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -424,12 +421,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product put200Succeeded(Product product) throws CloudException, IOException, InterruptedException {
+    public Product put200Succeeded(Product product) {
         return put200SucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -474,11 +468,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut200Succeeded() throws CloudException, IOException {
+    public Product beginPut200Succeeded() {
         return beginPut200SucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -531,11 +523,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut200Succeeded(Product product) throws CloudException, IOException {
+    public Product beginPut200Succeeded(Product product) {
         return beginPut200SucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -598,12 +588,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product put200SucceededNoState() throws CloudException, IOException, InterruptedException {
+    public Product put200SucceededNoState() {
         return put200SucceededNoStateWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -645,12 +632,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product put200SucceededNoState(Product product) throws CloudException, IOException, InterruptedException {
+    public Product put200SucceededNoState(Product product) {
         return put200SucceededNoStateWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -695,11 +679,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut200SucceededNoState() throws CloudException, IOException {
+    public Product beginPut200SucceededNoState() {
         return beginPut200SucceededNoStateWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -752,11 +734,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut200SucceededNoState(Product product) throws CloudException, IOException {
+    public Product beginPut200SucceededNoState(Product product) {
         return beginPut200SucceededNoStateWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -818,12 +798,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product put202Retry200() throws CloudException, IOException, InterruptedException {
+    public Product put202Retry200() {
         return put202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -865,12 +842,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product put202Retry200(Product product) throws CloudException, IOException, InterruptedException {
+    public Product put202Retry200(Product product) {
         return put202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -915,11 +889,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut202Retry200() throws CloudException, IOException {
+    public Product beginPut202Retry200() {
         return beginPut202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -972,11 +944,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut202Retry200(Product product) throws CloudException, IOException {
+    public Product beginPut202Retry200(Product product) {
         return beginPut202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -1038,12 +1008,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product put201CreatingSucceeded200() throws CloudException, IOException, InterruptedException {
+    public Product put201CreatingSucceeded200() {
         return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -1085,12 +1052,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product put201CreatingSucceeded200(Product product) throws CloudException, IOException, InterruptedException {
+    public Product put201CreatingSucceeded200(Product product) {
         return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -1135,11 +1099,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut201CreatingSucceeded200() throws CloudException, IOException {
+    public Product beginPut201CreatingSucceeded200() {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1192,11 +1154,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut201CreatingSucceeded200(Product product) throws CloudException, IOException {
+    public Product beginPut201CreatingSucceeded200(Product product) {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -1259,12 +1219,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product put200UpdatingSucceeded204() throws CloudException, IOException, InterruptedException {
+    public Product put200UpdatingSucceeded204() {
         return put200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -1306,12 +1263,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product put200UpdatingSucceeded204(Product product) throws CloudException, IOException, InterruptedException {
+    public Product put200UpdatingSucceeded204(Product product) {
         return put200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -1356,11 +1310,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut200UpdatingSucceeded204() throws CloudException, IOException {
+    public Product beginPut200UpdatingSucceeded204() {
         return beginPut200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1413,11 +1365,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut200UpdatingSucceeded204(Product product) throws CloudException, IOException {
+    public Product beginPut200UpdatingSucceeded204(Product product) {
         return beginPut200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -1479,12 +1429,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product put201CreatingFailed200() throws CloudException, IOException, InterruptedException {
+    public Product put201CreatingFailed200() {
         return put201CreatingFailed200WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -1526,12 +1473,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product put201CreatingFailed200(Product product) throws CloudException, IOException, InterruptedException {
+    public Product put201CreatingFailed200(Product product) {
         return put201CreatingFailed200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -1576,11 +1520,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut201CreatingFailed200() throws CloudException, IOException {
+    public Product beginPut201CreatingFailed200() {
         return beginPut201CreatingFailed200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1633,11 +1575,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut201CreatingFailed200(Product product) throws CloudException, IOException {
+    public Product beginPut201CreatingFailed200(Product product) {
         return beginPut201CreatingFailed200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -1700,12 +1640,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product put200Acceptedcanceled200() throws CloudException, IOException, InterruptedException {
+    public Product put200Acceptedcanceled200() {
         return put200Acceptedcanceled200WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -1747,12 +1684,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product put200Acceptedcanceled200(Product product) throws CloudException, IOException, InterruptedException {
+    public Product put200Acceptedcanceled200(Product product) {
         return put200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -1797,11 +1731,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut200Acceptedcanceled200() throws CloudException, IOException {
+    public Product beginPut200Acceptedcanceled200() {
         return beginPut200Acceptedcanceled200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1854,11 +1786,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut200Acceptedcanceled200(Product product) throws CloudException, IOException {
+    public Product beginPut200Acceptedcanceled200(Product product) {
         return beginPut200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -1920,12 +1850,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product putNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
+    public Product putNoHeaderInRetry() {
         return putNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -1967,12 +1894,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product putNoHeaderInRetry(Product product) throws CloudException, IOException, InterruptedException {
+    public Product putNoHeaderInRetry(Product product) {
         return putNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -2017,11 +1941,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPutNoHeaderInRetry() throws CloudException, IOException {
+    public Product beginPutNoHeaderInRetry() {
         return beginPutNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2074,11 +1996,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPutNoHeaderInRetry(Product product) throws CloudException, IOException {
+    public Product beginPutNoHeaderInRetry(Product product) {
         return beginPutNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -2140,12 +2060,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product putAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
+    public Product putAsyncRetrySucceeded() {
         return putAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -2187,12 +2104,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product putAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
+    public Product putAsyncRetrySucceeded(Product product) {
         return putAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -2237,11 +2151,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPutAsyncRetrySucceeded() throws CloudException, IOException {
+    public Product beginPutAsyncRetrySucceeded() {
         return beginPutAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2294,11 +2206,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPutAsyncRetrySucceeded(Product product) throws CloudException, IOException {
+    public Product beginPutAsyncRetrySucceeded(Product product) {
         return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -2360,12 +2270,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product putAsyncNoRetrySucceeded() throws CloudException, IOException, InterruptedException {
+    public Product putAsyncNoRetrySucceeded() {
         return putAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -2407,12 +2314,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product putAsyncNoRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
+    public Product putAsyncNoRetrySucceeded(Product product) {
         return putAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -2457,11 +2361,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPutAsyncNoRetrySucceeded() throws CloudException, IOException {
+    public Product beginPutAsyncNoRetrySucceeded() {
         return beginPutAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2514,11 +2416,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPutAsyncNoRetrySucceeded(Product product) throws CloudException, IOException {
+    public Product beginPutAsyncNoRetrySucceeded(Product product) {
         return beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -2580,12 +2480,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product putAsyncRetryFailed() throws CloudException, IOException, InterruptedException {
+    public Product putAsyncRetryFailed() {
         return putAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -2627,12 +2524,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product putAsyncRetryFailed(Product product) throws CloudException, IOException, InterruptedException {
+    public Product putAsyncRetryFailed(Product product) {
         return putAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -2677,11 +2571,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPutAsyncRetryFailed() throws CloudException, IOException {
+    public Product beginPutAsyncRetryFailed() {
         return beginPutAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2734,11 +2626,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPutAsyncRetryFailed(Product product) throws CloudException, IOException {
+    public Product beginPutAsyncRetryFailed(Product product) {
         return beginPutAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -2800,12 +2690,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product putAsyncNoRetrycanceled() throws CloudException, IOException, InterruptedException {
+    public Product putAsyncNoRetrycanceled() {
         return putAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -2847,12 +2734,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product putAsyncNoRetrycanceled(Product product) throws CloudException, IOException, InterruptedException {
+    public Product putAsyncNoRetrycanceled(Product product) {
         return putAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -2897,11 +2781,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPutAsyncNoRetrycanceled() throws CloudException, IOException {
+    public Product beginPutAsyncNoRetrycanceled() {
         return beginPutAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2954,11 +2836,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPutAsyncNoRetrycanceled(Product product) throws CloudException, IOException {
+    public Product beginPutAsyncNoRetrycanceled(Product product) {
         return beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -3020,12 +2900,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product putAsyncNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
+    public Product putAsyncNoHeaderInRetry() {
         return putAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -3067,12 +2944,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product putAsyncNoHeaderInRetry(Product product) throws CloudException, IOException, InterruptedException {
+    public Product putAsyncNoHeaderInRetry(Product product) {
         return putAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -3117,11 +2991,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPutAsyncNoHeaderInRetry() throws CloudException, IOException {
+    public Product beginPutAsyncNoHeaderInRetry() {
         return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3174,11 +3046,9 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPutAsyncNoHeaderInRetry(Product product) throws CloudException, IOException {
+    public Product beginPutAsyncNoHeaderInRetry(Product product) {
         return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -3240,12 +3110,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Sku object  if successful.
      */
-    public Sku putNonResource() throws CloudException, IOException, InterruptedException {
+    public Sku putNonResource() {
         return putNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -3287,12 +3154,9 @@ public final class LROsImpl implements LROs {
      * Long running put request with non resource.
      *
      * @param sku sku to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Sku object if successful.
      */
-    public Sku putNonResource(Sku sku) throws CloudException, IOException, InterruptedException {
+    public Sku putNonResource(Sku sku) {
         return putNonResourceWithServiceResponseAsync(sku).toBlocking().last().getBody();
     }
 
@@ -3337,11 +3201,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Sku object if successful.
      */
-    public Sku beginPutNonResource() throws CloudException, IOException {
+    public Sku beginPutNonResource() {
         return beginPutNonResourceWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3394,11 +3256,9 @@ public final class LROsImpl implements LROs {
      * Long running put request with non resource.
      *
      * @param sku sku to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Sku object if successful.
      */
-    public Sku beginPutNonResource(Sku sku) throws CloudException, IOException {
+    public Sku beginPutNonResource(Sku sku) {
         return beginPutNonResourceWithServiceResponseAsync(sku).toBlocking().single().getBody();
     }
 
@@ -3460,12 +3320,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Sku object  if successful.
      */
-    public Sku putAsyncNonResource() throws CloudException, IOException, InterruptedException {
+    public Sku putAsyncNonResource() {
         return putAsyncNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -3507,12 +3364,9 @@ public final class LROsImpl implements LROs {
      * Long running put request with non resource.
      *
      * @param sku Sku to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Sku object if successful.
      */
-    public Sku putAsyncNonResource(Sku sku) throws CloudException, IOException, InterruptedException {
+    public Sku putAsyncNonResource(Sku sku) {
         return putAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().last().getBody();
     }
 
@@ -3557,11 +3411,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Sku object if successful.
      */
-    public Sku beginPutAsyncNonResource() throws CloudException, IOException {
+    public Sku beginPutAsyncNonResource() {
         return beginPutAsyncNonResourceWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3614,11 +3466,9 @@ public final class LROsImpl implements LROs {
      * Long running put request with non resource.
      *
      * @param sku Sku to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Sku object if successful.
      */
-    public Sku beginPutAsyncNonResource(Sku sku) throws CloudException, IOException {
+    public Sku beginPutAsyncNonResource(Sku sku) {
         return beginPutAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().single().getBody();
     }
 
@@ -3680,12 +3530,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the SubProduct object  if successful.
      */
-    public SubProduct putSubResource() throws CloudException, IOException, InterruptedException {
+    public SubProduct putSubResource() {
         return putSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -3727,12 +3574,9 @@ public final class LROsImpl implements LROs {
      * Long running put request with sub resource.
      *
      * @param product Sub Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the SubProduct object if successful.
      */
-    public SubProduct putSubResource(SubProduct product) throws CloudException, IOException, InterruptedException {
+    public SubProduct putSubResource(SubProduct product) {
         return putSubResourceWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -3777,11 +3621,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the SubProduct object if successful.
      */
-    public SubProduct beginPutSubResource() throws CloudException, IOException {
+    public SubProduct beginPutSubResource() {
         return beginPutSubResourceWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3834,11 +3676,9 @@ public final class LROsImpl implements LROs {
      * Long running put request with sub resource.
      *
      * @param product Sub Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the SubProduct object if successful.
      */
-    public SubProduct beginPutSubResource(SubProduct product) throws CloudException, IOException {
+    public SubProduct beginPutSubResource(SubProduct product) {
         return beginPutSubResourceWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -3900,12 +3740,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the SubProduct object  if successful.
      */
-    public SubProduct putAsyncSubResource() throws CloudException, IOException, InterruptedException {
+    public SubProduct putAsyncSubResource() {
         return putAsyncSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -3947,12 +3784,9 @@ public final class LROsImpl implements LROs {
      * Long running put request with sub resource.
      *
      * @param product Sub Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the SubProduct object if successful.
      */
-    public SubProduct putAsyncSubResource(SubProduct product) throws CloudException, IOException, InterruptedException {
+    public SubProduct putAsyncSubResource(SubProduct product) {
         return putAsyncSubResourceWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -3997,11 +3831,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the SubProduct object if successful.
      */
-    public SubProduct beginPutAsyncSubResource() throws CloudException, IOException {
+    public SubProduct beginPutAsyncSubResource() {
         return beginPutAsyncSubResourceWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4054,11 +3886,9 @@ public final class LROsImpl implements LROs {
      * Long running put request with sub resource.
      *
      * @param product Sub Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the SubProduct object if successful.
      */
-    public SubProduct beginPutAsyncSubResource(SubProduct product) throws CloudException, IOException {
+    public SubProduct beginPutAsyncSubResource(SubProduct product) {
         return beginPutAsyncSubResourceWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -4120,12 +3950,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException {
+    public Product deleteProvisioning202Accepted200Succeeded() {
         return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -4166,11 +3993,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginDeleteProvisioning202Accepted200Succeeded() throws CloudException, IOException {
+    public Product beginDeleteProvisioning202Accepted200Succeeded() {
         return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4229,12 +4054,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product deleteProvisioning202DeletingFailed200() throws CloudException, IOException, InterruptedException {
+    public Product deleteProvisioning202DeletingFailed200() {
         return deleteProvisioning202DeletingFailed200WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -4275,11 +4097,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginDeleteProvisioning202DeletingFailed200() throws CloudException, IOException {
+    public Product beginDeleteProvisioning202DeletingFailed200() {
         return beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4338,12 +4158,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product deleteProvisioning202Deletingcanceled200() throws CloudException, IOException, InterruptedException {
+    public Product deleteProvisioning202Deletingcanceled200() {
         return deleteProvisioning202Deletingcanceled200WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -4384,11 +4201,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginDeleteProvisioning202Deletingcanceled200() throws CloudException, IOException {
+    public Product beginDeleteProvisioning202Deletingcanceled200() {
         return beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4447,11 +4262,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete succeeds and returns right away.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void delete204Succeeded() throws CloudException, IOException, InterruptedException {
+    public void delete204Succeeded() {
         delete204SucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -4492,10 +4304,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete succeeds and returns right away.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginDelete204Succeeded() throws CloudException, IOException {
+    public void beginDelete204Succeeded() {
         beginDelete204SucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4553,12 +4363,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product delete202Retry200() throws CloudException, IOException, InterruptedException {
+    public Product delete202Retry200() {
         return delete202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -4599,11 +4406,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginDelete202Retry200() throws CloudException, IOException {
+    public Product beginDelete202Retry200() {
         return beginDelete202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4662,12 +4467,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product delete202NoRetry204() throws CloudException, IOException, InterruptedException {
+    public Product delete202NoRetry204() {
         return delete202NoRetry204WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -4708,11 +4510,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginDelete202NoRetry204() throws CloudException, IOException {
+    public Product beginDelete202NoRetry204() {
         return beginDelete202NoRetry204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4771,11 +4571,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void deleteNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
+    public void deleteNoHeaderInRetry() {
         deleteNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -4816,10 +4613,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginDeleteNoHeaderInRetry() throws CloudException, IOException {
+    public void beginDeleteNoHeaderInRetry() {
         beginDeleteNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4878,11 +4673,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void deleteAsyncNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
+    public void deleteAsyncNoHeaderInRetry() {
         deleteAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -4923,10 +4715,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginDeleteAsyncNoHeaderInRetry() throws CloudException, IOException {
+    public void beginDeleteAsyncNoHeaderInRetry() {
         beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4985,11 +4775,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void deleteAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
+    public void deleteAsyncRetrySucceeded() {
         deleteAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -5030,10 +4817,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginDeleteAsyncRetrySucceeded() throws CloudException, IOException {
+    public void beginDeleteAsyncRetrySucceeded() {
         beginDeleteAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -5091,11 +4876,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void deleteAsyncNoRetrySucceeded() throws CloudException, IOException, InterruptedException {
+    public void deleteAsyncNoRetrySucceeded() {
         deleteAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -5136,10 +4918,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginDeleteAsyncNoRetrySucceeded() throws CloudException, IOException {
+    public void beginDeleteAsyncNoRetrySucceeded() {
         beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -5197,11 +4977,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void deleteAsyncRetryFailed() throws CloudException, IOException, InterruptedException {
+    public void deleteAsyncRetryFailed() {
         deleteAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -5242,10 +5019,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginDeleteAsyncRetryFailed() throws CloudException, IOException {
+    public void beginDeleteAsyncRetryFailed() {
         beginDeleteAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -5303,11 +5078,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void deleteAsyncRetrycanceled() throws CloudException, IOException, InterruptedException {
+    public void deleteAsyncRetrycanceled() {
         deleteAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -5348,10 +5120,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginDeleteAsyncRetrycanceled() throws CloudException, IOException {
+    public void beginDeleteAsyncRetrycanceled() {
         beginDeleteAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -5409,12 +5179,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Sku object if successful.
      */
-    public Sku post200WithPayload() throws CloudException, IOException, InterruptedException {
+    public Sku post200WithPayload() {
         return post200WithPayloadWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -5455,11 +5222,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Sku object if successful.
      */
-    public Sku beginPost200WithPayload() throws CloudException, IOException {
+    public Sku beginPost200WithPayload() {
         return beginPost200WithPayloadWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -5518,11 +5283,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void post202Retry200() throws CloudException, IOException, InterruptedException {
+    public void post202Retry200() {
         post202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -5564,11 +5326,8 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void post202Retry200(Product product) throws CloudException, IOException, InterruptedException {
+    public void post202Retry200(Product product) {
         post202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -5613,10 +5372,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginPost202Retry200() throws CloudException, IOException {
+    public void beginPost202Retry200() {
         beginPost202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -5669,10 +5426,8 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginPost202Retry200(Product product) throws CloudException, IOException {
+    public void beginPost202Retry200(Product product) {
         beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -5734,12 +5489,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product post202NoRetry204() throws CloudException, IOException, InterruptedException {
+    public Product post202NoRetry204() {
         return post202NoRetry204WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -5781,12 +5533,9 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product post202NoRetry204(Product product) throws CloudException, IOException, InterruptedException {
+    public Product post202NoRetry204(Product product) {
         return post202NoRetry204WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -5831,11 +5580,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPost202NoRetry204() throws CloudException, IOException {
+    public Product beginPost202NoRetry204() {
         return beginPost202NoRetry204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -5888,11 +5635,9 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPost202NoRetry204(Product product) throws CloudException, IOException {
+    public Product beginPost202NoRetry204(Product product) {
         return beginPost202NoRetry204WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -5954,12 +5699,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product postAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
+    public Product postAsyncRetrySucceeded() {
         return postAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -6001,12 +5743,9 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product postAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
+    public Product postAsyncRetrySucceeded(Product product) {
         return postAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -6051,11 +5790,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPostAsyncRetrySucceeded() throws CloudException, IOException {
+    public Product beginPostAsyncRetrySucceeded() {
         return beginPostAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -6108,11 +5845,9 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPostAsyncRetrySucceeded(Product product) throws CloudException, IOException {
+    public Product beginPostAsyncRetrySucceeded(Product product) {
         return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -6175,12 +5910,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product postAsyncNoRetrySucceeded() throws CloudException, IOException, InterruptedException {
+    public Product postAsyncNoRetrySucceeded() {
         return postAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -6222,12 +5954,9 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product postAsyncNoRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
+    public Product postAsyncNoRetrySucceeded(Product product) {
         return postAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -6272,11 +6001,9 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPostAsyncNoRetrySucceeded() throws CloudException, IOException {
+    public Product beginPostAsyncNoRetrySucceeded() {
         return beginPostAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -6329,11 +6056,9 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPostAsyncNoRetrySucceeded(Product product) throws CloudException, IOException {
+    public Product beginPostAsyncNoRetrySucceeded(Product product) {
         return beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -6396,11 +6121,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void postAsyncRetryFailed() throws CloudException, IOException, InterruptedException {
+    public void postAsyncRetryFailed() {
         postAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -6442,11 +6164,8 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void postAsyncRetryFailed(Product product) throws CloudException, IOException, InterruptedException {
+    public void postAsyncRetryFailed(Product product) {
         postAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -6491,10 +6210,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginPostAsyncRetryFailed() throws CloudException, IOException {
+    public void beginPostAsyncRetryFailed() {
         beginPostAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -6547,10 +6264,8 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginPostAsyncRetryFailed(Product product) throws CloudException, IOException {
+    public void beginPostAsyncRetryFailed(Product product) {
         beginPostAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -6612,11 +6327,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void postAsyncRetrycanceled() throws CloudException, IOException, InterruptedException {
+    public void postAsyncRetrycanceled() {
         postAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -6658,11 +6370,8 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void postAsyncRetrycanceled(Product product) throws CloudException, IOException, InterruptedException {
+    public void postAsyncRetrycanceled(Product product) {
         postAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -6707,10 +6416,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginPostAsyncRetrycanceled() throws CloudException, IOException {
+    public void beginPostAsyncRetrycanceled() {
         beginPostAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -6763,10 +6470,8 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginPostAsyncRetrycanceled(Product product) throws CloudException, IOException {
+    public void beginPostAsyncRetrycanceled(Product product) {
         beginPostAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 

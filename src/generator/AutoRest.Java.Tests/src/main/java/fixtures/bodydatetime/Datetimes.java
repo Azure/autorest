@@ -13,8 +13,6 @@ package fixtures.bodydatetime;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodydatetime.models.ErrorException;
-import java.io.IOException;
 import org.joda.time.DateTime;
 import rx.Observable;
 
@@ -26,11 +24,9 @@ public interface Datetimes {
     /**
      * Get null datetime value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getNull() throws ErrorException, IOException;
+    DateTime getNull();
 
     /**
      * Get null datetime value.
@@ -57,11 +53,9 @@ public interface Datetimes {
     /**
      * Get invalid datetime value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getInvalid() throws ErrorException, IOException;
+    DateTime getInvalid();
 
     /**
      * Get invalid datetime value.
@@ -88,11 +82,9 @@ public interface Datetimes {
     /**
      * Get overflow datetime value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getOverflow() throws ErrorException, IOException;
+    DateTime getOverflow();
 
     /**
      * Get overflow datetime value.
@@ -119,11 +111,9 @@ public interface Datetimes {
     /**
      * Get underflow datetime value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getUnderflow() throws ErrorException, IOException;
+    DateTime getUnderflow();
 
     /**
      * Get underflow datetime value.
@@ -151,11 +141,8 @@ public interface Datetimes {
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
      *
      * @param datetimeBody the DateTime value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putUtcMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putUtcMaxDateTime(DateTime datetimeBody);
 
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -185,11 +172,9 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getUtcLowercaseMaxDateTime() throws ErrorException, IOException;
+    DateTime getUtcLowercaseMaxDateTime();
 
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
@@ -216,11 +201,9 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getUtcUppercaseMaxDateTime() throws ErrorException, IOException;
+    DateTime getUtcUppercaseMaxDateTime();
 
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -248,11 +231,8 @@ public interface Datetimes {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
      *
      * @param datetimeBody the DateTime value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody);
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
@@ -282,11 +262,9 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getLocalPositiveOffsetLowercaseMaxDateTime() throws ErrorException, IOException;
+    DateTime getLocalPositiveOffsetLowercaseMaxDateTime();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
@@ -313,11 +291,9 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getLocalPositiveOffsetUppercaseMaxDateTime() throws ErrorException, IOException;
+    DateTime getLocalPositiveOffsetUppercaseMaxDateTime();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
@@ -345,11 +321,8 @@ public interface Datetimes {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
      *
      * @param datetimeBody the DateTime value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody);
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
@@ -379,11 +352,9 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getLocalNegativeOffsetUppercaseMaxDateTime() throws ErrorException, IOException;
+    DateTime getLocalNegativeOffsetUppercaseMaxDateTime();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
@@ -410,11 +381,9 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getLocalNegativeOffsetLowercaseMaxDateTime() throws ErrorException, IOException;
+    DateTime getLocalNegativeOffsetLowercaseMaxDateTime();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
@@ -442,11 +411,8 @@ public interface Datetimes {
      * Put min datetime value 0001-01-01T00:00:00Z.
      *
      * @param datetimeBody the DateTime value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putUtcMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putUtcMinDateTime(DateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
@@ -476,11 +442,9 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getUtcMinDateTime() throws ErrorException, IOException;
+    DateTime getUtcMinDateTime();
 
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
@@ -508,11 +472,8 @@ public interface Datetimes {
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      *
      * @param datetimeBody the DateTime value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putLocalPositiveOffsetMinDateTime(DateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
@@ -542,11 +503,9 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getLocalPositiveOffsetMinDateTime() throws ErrorException, IOException;
+    DateTime getLocalPositiveOffsetMinDateTime();
 
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
@@ -574,11 +533,8 @@ public interface Datetimes {
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      *
      * @param datetimeBody the DateTime value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putLocalNegativeOffsetMinDateTime(DateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
@@ -608,11 +564,9 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
      */
-    DateTime getLocalNegativeOffsetMinDateTime() throws ErrorException, IOException;
+    DateTime getLocalNegativeOffsetMinDateTime();
 
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.

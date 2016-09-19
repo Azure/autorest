@@ -156,11 +156,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get null Number value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    public double getNull() throws ErrorException, IOException {
+    public double getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -218,11 +216,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid float Number value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    public double getInvalidFloat() throws ErrorException, IOException {
+    public double getInvalidFloat() {
         return getInvalidFloatWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -280,11 +276,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid double Number value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    public double getInvalidDouble() throws ErrorException, IOException {
+    public double getInvalidDouble() {
         return getInvalidDoubleWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -342,11 +336,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid decimal Number value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object if successful.
      */
-    public BigDecimal getInvalidDecimal() throws ErrorException, IOException {
+    public BigDecimal getInvalidDecimal() {
         return getInvalidDecimalWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -405,10 +397,8 @@ public final class NumbersImpl implements Numbers {
      * Put big float value 3.402823e+20.
      *
      * @param numberBody the double value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putBigFloat(double numberBody) throws ErrorException, IOException {
+    public void putBigFloat(double numberBody) {
         putBigFloatWithServiceResponseAsync(numberBody).toBlocking().single().getBody();
     }
 
@@ -469,11 +459,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    public double getBigFloat() throws ErrorException, IOException {
+    public double getBigFloat() {
         return getBigFloatWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -532,10 +520,8 @@ public final class NumbersImpl implements Numbers {
      * Put big double value 2.5976931e+101.
      *
      * @param numberBody the double value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putBigDouble(double numberBody) throws ErrorException, IOException {
+    public void putBigDouble(double numberBody) {
         putBigDoubleWithServiceResponseAsync(numberBody).toBlocking().single().getBody();
     }
 
@@ -596,11 +582,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    public double getBigDouble() throws ErrorException, IOException {
+    public double getBigDouble() {
         return getBigDoubleWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -659,10 +643,8 @@ public final class NumbersImpl implements Numbers {
      * Put big double value 99999999.99.
      *
      * @param numberBody the double value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putBigDoublePositiveDecimal(double numberBody) throws ErrorException, IOException {
+    public void putBigDoublePositiveDecimal(double numberBody) {
         putBigDoublePositiveDecimalWithServiceResponseAsync(numberBody).toBlocking().single().getBody();
     }
 
@@ -723,11 +705,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 99999999.99.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    public double getBigDoublePositiveDecimal() throws ErrorException, IOException {
+    public double getBigDoublePositiveDecimal() {
         return getBigDoublePositiveDecimalWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -786,10 +766,8 @@ public final class NumbersImpl implements Numbers {
      * Put big double value -99999999.99.
      *
      * @param numberBody the double value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putBigDoubleNegativeDecimal(double numberBody) throws ErrorException, IOException {
+    public void putBigDoubleNegativeDecimal(double numberBody) {
         putBigDoubleNegativeDecimalWithServiceResponseAsync(numberBody).toBlocking().single().getBody();
     }
 
@@ -850,11 +828,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value -99999999.99.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    public double getBigDoubleNegativeDecimal() throws ErrorException, IOException {
+    public double getBigDoubleNegativeDecimal() {
         return getBigDoubleNegativeDecimalWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -913,11 +889,8 @@ public final class NumbersImpl implements Numbers {
      * Put big decimal value 2.5976931e+101.
      *
      * @param numberBody the BigDecimal value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putBigDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putBigDecimal(BigDecimal numberBody) {
         putBigDecimalWithServiceResponseAsync(numberBody).toBlocking().single().getBody();
     }
 
@@ -981,11 +954,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big decimal value 2.5976931e+101.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object if successful.
      */
-    public BigDecimal getBigDecimal() throws ErrorException, IOException {
+    public BigDecimal getBigDecimal() {
         return getBigDecimalWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1044,11 +1015,8 @@ public final class NumbersImpl implements Numbers {
      * Put big decimal value 99999999.99.
      *
      * @param numberBody the BigDecimal value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putBigDecimalPositiveDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putBigDecimalPositiveDecimal(BigDecimal numberBody) {
         putBigDecimalPositiveDecimalWithServiceResponseAsync(numberBody).toBlocking().single().getBody();
     }
 
@@ -1112,11 +1080,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big decimal value 99999999.99.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object if successful.
      */
-    public BigDecimal getBigDecimalPositiveDecimal() throws ErrorException, IOException {
+    public BigDecimal getBigDecimalPositiveDecimal() {
         return getBigDecimalPositiveDecimalWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1175,11 +1141,8 @@ public final class NumbersImpl implements Numbers {
      * Put big decimal value -99999999.99.
      *
      * @param numberBody the BigDecimal value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putBigDecimalNegativeDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putBigDecimalNegativeDecimal(BigDecimal numberBody) {
         putBigDecimalNegativeDecimalWithServiceResponseAsync(numberBody).toBlocking().single().getBody();
     }
 
@@ -1243,11 +1206,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big decimal value -99999999.99.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object if successful.
      */
-    public BigDecimal getBigDecimalNegativeDecimal() throws ErrorException, IOException {
+    public BigDecimal getBigDecimalNegativeDecimal() {
         return getBigDecimalNegativeDecimalWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1306,10 +1267,8 @@ public final class NumbersImpl implements Numbers {
      * Put small float value 3.402823e-20.
      *
      * @param numberBody the double value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putSmallFloat(double numberBody) throws ErrorException, IOException {
+    public void putSmallFloat(double numberBody) {
         putSmallFloatWithServiceResponseAsync(numberBody).toBlocking().single().getBody();
     }
 
@@ -1370,11 +1329,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    public double getSmallFloat() throws ErrorException, IOException {
+    public double getSmallFloat() {
         return getSmallFloatWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1433,10 +1390,8 @@ public final class NumbersImpl implements Numbers {
      * Put small double value 2.5976931e-101.
      *
      * @param numberBody the double value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putSmallDouble(double numberBody) throws ErrorException, IOException {
+    public void putSmallDouble(double numberBody) {
         putSmallDoubleWithServiceResponseAsync(numberBody).toBlocking().single().getBody();
     }
 
@@ -1497,11 +1452,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    public double getSmallDouble() throws ErrorException, IOException {
+    public double getSmallDouble() {
         return getSmallDoubleWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1560,11 +1513,8 @@ public final class NumbersImpl implements Numbers {
      * Put small decimal value 2.5976931e-101.
      *
      * @param numberBody the BigDecimal value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putSmallDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putSmallDecimal(BigDecimal numberBody) {
         putSmallDecimalWithServiceResponseAsync(numberBody).toBlocking().single().getBody();
     }
 
@@ -1628,11 +1578,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get small decimal value 2.5976931e-101.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object if successful.
      */
-    public BigDecimal getSmallDecimal() throws ErrorException, IOException {
+    public BigDecimal getSmallDecimal() {
         return getSmallDecimalWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

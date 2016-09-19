@@ -70,11 +70,9 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    public boolean getEmptyError() throws ErrorException, IOException {
+    public boolean getEmptyError() {
         return getEmptyErrorWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -132,11 +130,9 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws ServiceException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    public boolean getNoModelError() throws ServiceException, IOException {
+    public boolean getNoModelError() {
         return getNoModelErrorWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -193,11 +189,9 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @throws ServiceException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    public boolean getNoModelEmpty() throws ServiceException, IOException {
+    public boolean getNoModelEmpty() {
         return getNoModelEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

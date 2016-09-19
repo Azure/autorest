@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
-// 
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Validation;
@@ -12,13 +11,17 @@ namespace AutoRest.Swagger.Validation
     {
         /// <summary>
         /// A <paramref name="propertyName" /> passes this rule if the <paramref name="propertyName"/> appears in the list of properties
+        /// or the properties of its ancestors
         /// </summary>
-        /// <param name="propertyName"></param>
+        /// <param name="propertyName">The name of the property that should be required</param>
         /// <returns></returns>
         public override bool IsValid(string propertyName, RuleContext context, out object[] formatParameters)
         {
-            var properties = (context.Parent?.Parent?.Value as Schema)?.Properties;
-            if (properties == null || !properties.ContainsKey(propertyName))
+            // Get the schema that this required property constraint belongs to
+            var schema = context.GetFirstAncestor<Schema>();
+            var serviceDefinition = context.GetServiceDefinition();
+            // Try to find the property in this schema or its ancestors
+            if (schema.FindPropertyInChain(serviceDefinition, propertyName) == null)
             {
                 formatParameters = new string[] { propertyName };
                 return false;
@@ -28,15 +31,15 @@ namespace AutoRest.Swagger.Validation
         }
 
         /// <summary>
-        ///     The template message for this Rule.
+        /// The template message for this Rule.
         /// </summary>
         /// <remarks>
-        ///     This may contain placeholders '{0}' for parameterized messages.
+        /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
         public override string MessageTemplate => "Required property '{0}' does not appear in the list of properties";
 
         /// <summary>
-        ///     The severity of this message (ie, debug/info/warning/error/fatal, etc)
+        /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
         public override LogEntrySeverity Severity => LogEntrySeverity.Warning;
     }

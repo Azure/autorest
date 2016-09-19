@@ -259,6 +259,12 @@ namespace AutoRest.Swagger
                 string[] splitReference = reference.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
                 Debug.Assert(splitReference.Length == 2);
                 string filePath = splitReference[0];
+                // Make sure the filePath is either an absolute uri, or a rooted path
+                if (!FileSystem.IsCompletePath(filePath))
+                {
+                    // Otherwise, root it from the current path
+                    filePath = FileSystem.MakePathRooted(Settings.InputFolder, filePath);
+                }
                 string externalDefinition = Settings.FileSystem.ReadFileAsText(filePath);
                 ServiceDefinition external = SwaggerParser.Parse(externalDefinition);
                 external.Definitions.ForEach(d => ServiceDefinition.Definitions[d.Key] = d.Value);
