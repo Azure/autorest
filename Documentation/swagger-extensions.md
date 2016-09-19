@@ -37,7 +37,7 @@ Field Name | Type | Description
 .*| `string` or `bool` | **Required**. Field name should be a valid autorest.exe parameter. Value should be a valid string value or boolean for flag parameters
 
 **Example**:
-```js
+```json5
 "info": {
    "x-ms-code-generation-settings": {
       "header": "MIT",
@@ -56,7 +56,7 @@ By default, `path` parameters will be URL-encoded automatically. This is a good 
 `true|false`
 
 **Example**:
-```js
+```json5
 "parameters": [
   {
     "name": "databaseName",
@@ -83,7 +83,7 @@ name | `string` | **Required**. Specifies the name for the Enum.
 modelAsString | `boolean` | **Default: false** When set to `true` the enum will be modeled as a string. No validation will happen. When set to `false`, it will be modeled as an enum if that language supports enums. Validation will happen, irrespective of support of enums in that language.
 
 **Example**:
-```js
+```json5
   "accountType": {
     "type": "string",
     "enum": [
@@ -120,7 +120,7 @@ postfix | `string` | Alternative to `name` parameter. If specified the name of t
 If none of the parameters are set the name of the composite type is generated as follows `{MethodGroup}{Method}Parameters`.
 
 **Example**:
-```js
+```json5
 "/some/{pathParam1}/{pathParam2}": {
   "operationId": "Update",
   "post": {
@@ -167,7 +167,7 @@ Note:
 - **This extension can only be applied on global parameters. If this is applied on any parameter in an operation then it will be ignored.**
 
 **Example:**
-```
+```json5
 {
   "swagger": "2.0",
   "host": "management.azure.com",
@@ -251,7 +251,7 @@ To overcome this limitation an "x-ms-paths" extension was introduced parallel to
 The `x-ms-paths` extension has the same schema as [Paths Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#pathsObject) with exception that [Path Item Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#pathItemObject) can have query parameters.
 
 **Example**:
-```js
+```json5
 "paths":{
    "/pets": {
         "get": {
@@ -280,7 +280,7 @@ By using the 'x-ms-client-name' extension, a name can be defined for use specifi
 It can be used for query parameters and header parameters, as well as properties of schemas.  
 
 **Parameter Example**:
-```js
+```json5
   "parameters": {
     "ApiVersionParameter": {
       "name": "x-ms-version",
@@ -305,7 +305,7 @@ It can be used for query parameters and header parameters, as well as properties
 ```
 
 **Property Example**:
-```js
+```json5
 {
   "definitions": {
     "Product": {
@@ -328,7 +328,7 @@ To allow generated clients to share models via shared libraries an `x-ms-externa
 `true|false`
 
 **Example**:
-```js
+```json5
 {
   "definitions": {
     "Product": {
@@ -351,7 +351,7 @@ Swagger 2.0 specification requires that when used, the value of `discriminator` 
 **Parent element**:  [Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject)
 
 **Example**:
-```js
+```json5
 "definitions": {
   "SqlDefinition": {
       "x-ms-discriminator-value": "USql",
@@ -365,7 +365,7 @@ Swagger 2.0 specification requires that when used, the value of `discriminator` 
 ```
 ##x-ms-client-flatten
 This extension allows to flatten deeply nested payloads into a more user friendly object. For example a payload that looks like this on the wire:
-```js
+```json5
 {
   "template": {
     "name": "some name",
@@ -390,7 +390,7 @@ public class Template
 }
 ```
 by using the following swagger definition:
-```js
+```json5
 "definitions": {
   "template": {
     "properties": {
@@ -410,7 +410,7 @@ It's also possible to flatten body parameters so that the method will look like 
 client.DeployTemplate("some name", "value1", "value2", "http://myurl");
 ```
 by using the following swagger definition:
-```js
+```json5
 "post": {
   "operationId": "DeployTemplate",        
   "parameters": [
@@ -432,7 +432,7 @@ by using the following swagger definition:
 `true|false`
 
 **Example**:
-```js
+```json5
 "definitions": {
   "template": {
     "properties": {
@@ -448,7 +448,7 @@ by using the following swagger definition:
 }
 ```
 and
-```js
+```json5
 "post": {
   "operationId": "DeployTemplate",        
   "parameters": [
@@ -483,7 +483,7 @@ parameters | [Array of Parameter Objects](https://github.com/OAI/OpenAPI-Specifi
    - Since "useSchemePrefix" is not specified, it's default value true will be applied. The user is expected to provide only the value of accountName. The generated code will fit it as a part of the url.
    - Since "positionInOperation" with value "last" is specified, "accountName" will be the last required parameter in every method. "adlaJobDnsSuffixInPath" will be a property on the client as it is defined in the global parameters section and is referenced here.
 
-```js
+```json5
 "x-ms-parameterized-host": {
     "hostTemplate": "{accountName}.{adlaJobDnsSuffix}",
     "positionInOperation": "last",
@@ -514,7 +514,7 @@ parameters | [Array of Parameter Objects](https://github.com/OAI/OpenAPI-Specifi
 ```
 - Using explicit parameters and specifying the positionInOperation and schemePrefix. 
    - This means that accountName will be the first required parameter in all the methods and the user is expected to provide a url (protocol + accountName), since "useSchemePrfix" is set to false.
-```js
+```json5
 "x-ms-parameterized-host": {
     "hostTemplate": "{accountName}.mystaticsuffix.com",
     "useSchemePrefix": false,
@@ -554,8 +554,9 @@ Field Name | Description
   - applying the extension with anyother **permissible valid combination** should be fine.
 - When this extension is applied on a collection (array, dictionary) then this will have effects on the mutability (adding/removing elements) of the collection. Mutabiility of the collection cannot be applied on its elements. The mutability of the element will be governed based on the mutability defined in the element's definition.
 
-An example:
-```json
+Examples:
+- Mutability on a model definition
+```json5
 "definitions": {
   "Resource": {
     "description": "The Resource Model definition.",
@@ -596,6 +597,29 @@ An example:
   }
 }
 ```
+- Mutability of the object property; which is a collection of items
+```json5
+"definitions": {
+  "ResounceCollection": {
+    "description": "Collection of Resource objects. Resource is defined in the above example.",
+    "properties": {
+      "value": {
+        "type": "array",
+        "description": "Array of Resource objects.",
+        "x-ms-mutability": ["create", "read", "update"], //This means that the array is mutable
+        "items": {
+          "type": object,
+          "x-ms-mutability": ["create", "read"] // X - Applying mutability on the itemType of the array or vauleType of the dictionary is not allowed.
+          "schema": {
+            "$ref": "#/definitions/Resource" // The mutability of the properties of the Resource object is governed by the mutability defined in it's model definition.
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 
 ##x-ms-odata
 When present the `x-ms-odata` extensions indicates the operation includes one or more [OData](http://www.odata.org/) query parameters. These parameters inlude `$filter`, `$top`, `$orderby`,  `$skip`,  and `$expand`. In some languages the generated method will expose these parameters as strongly types OData type.
@@ -606,7 +630,7 @@ When present the `x-ms-odata` extensions indicates the operation includes one or
 **Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
 
 **Example**:
-```js
+```json5
 "paths": {    
   "/subscriptions/resource": {
     "get": {
@@ -631,7 +655,7 @@ operationName | `string` | Specifies the name of the Next operation. Default val
 
 **Example**:
 x-ms-pageable operation definition
-```js
+```json5
 "paths": {
   "/products": {
     "get": {
@@ -652,7 +676,7 @@ x-ms-pageable operation definition
 }
 ```
 x-ms-pageable model definition
-```js
+```json5
 "ProductListResult": {
   "properties": {
     "value": {
@@ -677,7 +701,7 @@ Some requests like creating/deleting a resource cannot be carried out immediatel
 `true|false`
 
 **Example**:
-```js
+```json5
 "paths": {
   "/products/{name}": {
     "put": {
@@ -698,7 +722,7 @@ Resource types as defined by the [Resource Managemer API](https://msdn.microsoft
 `true|false`
 
 **Example**:
-```js
+```json5
 "Resource": {
   "x-ms-azure-resource": true,
   "properties": {
@@ -720,7 +744,7 @@ When set, allows to overwrite the `x-ms-request-id` response header (default is 
 `string` - the name of the request id header to use when setting Response.RequestId property.
 
 **Example**:
-```js
+```json5
 "paths": {
   "/products/{name}": {
     "get": {
@@ -740,7 +764,7 @@ When set, specifies the header parameter to be used instead of `x-ms-client-requ
 `string` - the name of the client request id header to use when setting sending request.
 
 **Example**:
-```js
+```json5
 "paths": {
   "/products/{name}": {
     "get": {
