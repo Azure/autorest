@@ -5,85 +5,88 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.NodeJS.TemplateModels
+namespace AutoRest.NodeJS.Model
 {
-    public class ModelTemplateModel : CompositeType
+    public class CompositeTypeJs : CompositeType
     {
-        private readonly IScopeProvider _scope = new ScopeProvider();
-        private ModelTemplateModel _parent = null;
-        
-        public ModelTemplateModel(CompositeType source, ServiceClient serviceClient)
+        public CompositeTypeJs()
         {
-            if (!string.IsNullOrEmpty(source.PolymorphicDiscriminator))
+            
+        }
+        public CompositeTypeJs(string name) : base(name)
+        {
+
+        }
+
+        public override Core.Model.Property Add(Core.Model.Property item)
+        {
+            var result = base.Add(item);
+            if (result != null)
             {
-                if (!source.Properties.Any(p => p.Name == source.PolymorphicDiscriminator))
+                AddPolymorphicPropertyIfNecessary();
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Gets or sets the discriminator property for polymorphic types.
+        /// </summary>
+        public override string PolymorphicDiscriminator
+        {
+            get { return base.PolymorphicDiscriminator; }
+            set
+            {
+                base.PolymorphicDiscriminator = value;
+                AddPolymorphicPropertyIfNecessary();
+            }
+        }
+
+        /// <summary>
+        /// If PolymorphicDiscriminator is set, makes sure we have a PolymorphicDiscriminator property.
+        /// </summary>
+        private void AddPolymorphicPropertyIfNecessary()
+        {
+            if (!string.IsNullOrEmpty(PolymorphicDiscriminator) &&
+                Properties.All(p => p.Name != PolymorphicDiscriminator))
+            {
+                base.Add(New<Core.Model.Property>(new
                 {
-                    var polymorphicProperty = new Property
-                    {
-                        IsRequired = true,
-                        Name = source.PolymorphicDiscriminator,
-                        SerializedName = source.PolymorphicDiscriminator,
-                        Documentation = "Polymorhpic Discriminator",
-                        Type = new PrimaryType(KnownPrimaryType.String)
-                    };
-                    source.Properties.Add(polymorphicProperty);
-                }
-            }
-            this.LoadFrom(source);
-            ServiceClient = serviceClient;
-            if (source.BaseModelType != null)
-            {
-                _parent = new ModelTemplateModel(source.BaseModelType, serviceClient);
+                    IsRequired = true,
+                    Name = this.PolymorphicDiscriminator,
+                    SerializedName = this.PolymorphicDiscriminator,
+                    Documentation = "Polymorhpic Discriminator",
+                    ModelType = new PrimaryTypeJs(KnownPrimaryType.String)
+                }));
             }
         }
 
-        public IScopeProvider Scope
-        {
-            get { return _scope; }
-        }
-
-        public ServiceClient ServiceClient { get; set; }
-
-        public IEnumerable<Property> SerializableProperties
+        public IEnumerable<Core.Model.Property> SerializableProperties
         {
             get { return this.Properties.Where(p => !string.IsNullOrEmpty(p.SerializedName)); }
         }
 
-        public bool IsPolymorphic
-        {
-            get
-            {
-                if(!string.IsNullOrEmpty(this.PolymorphicDiscriminator))
-                {
-                    return true;
-                }
-                else if(this._parent != null)
-                {
-                    return _parent.IsPolymorphic;
-                }
-
-                return false;
-            }
-        }
+        public bool IsPolymorphic => !string.IsNullOrEmpty(PolymorphicDiscriminator) ||
+                                     true == (BaseModelType as CompositeTypeJs)?.IsPolymorphic;
 
         private class PropertyWrapper
         {
-            public Property Property { get; set; }
+            public Core.Model.Property Property { get; set; }
             public List<string> RecursiveTypes { get; set; }
 
             public PropertyWrapper() { RecursiveTypes = new List<string>(); }
         }
 
-        public IEnumerable<Property> DocumentationPropertyList
+        public IEnumerable<Core.Model.Property> DocumentationPropertyList
         {
             get
             {
                 var traversalStack = new Stack<PropertyWrapper>();
                 var visitedHash = new Dictionary<string, PropertyWrapper>();
-                var retValue = new Stack<Property>();
+                var retValue = new Stack<Core.Model.Property>();
 
                 foreach (var property in Properties.Where(p => !p.IsConstant))
                 {
@@ -98,30 +101,31 @@ namespace AutoRest.NodeJS.TemplateModels
                 while (traversalStack.Count() != 0)
                 {
                     var wrapper = traversalStack.Pop();
-                    if (wrapper.Property.Type is CompositeType)
+                    if (wrapper.Property.ModelType is CompositeType)
                     {
                         if (!visitedHash.ContainsKey(wrapper.Property.Name))
                         {
-                            if (wrapper.RecursiveTypes.Contains(wrapper.Property.Type.Name))
+                            if (wrapper.RecursiveTypes.Contains(wrapper.Property.ModelType.Name))
                             {
                                 retValue.Push(wrapper.Property);
                             }
                             else
                             {
                                 traversalStack.Push(wrapper);
-                                foreach (var subProperty in ((CompositeType)wrapper.Property.Type).Properties)
+                                foreach (var subProperty in ((CompositeType)wrapper.Property.ModelType).Properties)
                                 {
                                     if (subProperty.IsConstant)
                                     {
                                         continue;
                                     }
-                                    var individualProperty = new Property();
-                                    individualProperty.Name = wrapper.Property.Name + "." + subProperty.Name;
-                                    individualProperty.Type = subProperty.Type;
+                                    var individualProperty = New<Core.Model.Property>();
+                                    // used FixedValue to force the string
+                                    individualProperty.Name.FixedValue = wrapper.Property.Name + "." + subProperty.Name;
+                                    individualProperty.ModelType = subProperty.ModelType;
                                     individualProperty.Documentation = subProperty.Documentation;
                                     //Adding the parent type to recursive list
-                                    var recursiveList = new List<string>() { wrapper.Property.Type.Name };
-                                    if (subProperty.Type is CompositeType)
+                                    var recursiveList = new List<string>() { wrapper.Property.ModelType.Name };
+                                    if (subProperty.ModelType is CompositeType)
                                     {
                                         //Adding parent's recursive types to the list as well
                                         recursiveList.AddRange(wrapper.RecursiveTypes);
@@ -163,44 +167,44 @@ namespace AutoRest.NodeJS.TemplateModels
         public bool ContainsPropertiesInSequenceType()
         {
             var sample = ComposedProperties.FirstOrDefault(p => 
-            p.Type is SequenceType ||
-            p.Type is DictionaryType && (p.Type as DictionaryType).ValueType is SequenceType);
+            p.ModelType is Core.Model.SequenceType ||
+            p.ModelType is Core.Model.DictionaryType && (p.ModelType as Core.Model.DictionaryType).ValueType is Core.Model.SequenceType);
             return sample != null;
         }
 
         public bool ContainsPropertiesInCompositeType()
         {
-            var sample = ComposedProperties.FirstOrDefault(p => ContainsCompositeType(p.Type));
+            var sample = ComposedProperties.FirstOrDefault(p => ContainsCompositeType(p.ModelType));
             return sample != null;
         }
 
-        private bool ContainsCompositeType(IType type)
+        private bool ContainsCompositeType(IModelType type)
         {
             bool result = false;
             //base condition
             if (type is CompositeType || 
-                type is SequenceType && (type as SequenceType).ElementType is CompositeType || 
-                type is DictionaryType && (type as DictionaryType).ValueType is CompositeType)
+                type is Core.Model.SequenceType && (type as Core.Model.SequenceType).ElementType is CompositeType || 
+                type is Core.Model.DictionaryType && (type as Core.Model.DictionaryType).ValueType is CompositeType)
             {
                 result = true;
             }
-            else if (type is SequenceType)
+            else if (type is Core.Model.SequenceType)
             {
-                result = ContainsCompositeType((type as SequenceType).ElementType);
+                result = ContainsCompositeType((type as Core.Model.SequenceType).ElementType);
             }
-            else if (type is DictionaryType)
+            else if (type is Core.Model.DictionaryType)
             {
-                result = ContainsCompositeType((type as DictionaryType).ValueType);
+                result = ContainsCompositeType((type as Core.Model.DictionaryType).ValueType);
             }
             return result;
         }
 
         public bool ContainsDurationProperty()
         {
-            Property prop = ComposedProperties.FirstOrDefault(p =>
-                (p.Type is PrimaryType && (p.Type as PrimaryType).Type == KnownPrimaryType.TimeSpan) ||
-                (p.Type is SequenceType && (p.Type as SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
-                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.TimeSpan)));
+            Core.Model.Property prop = ComposedProperties.FirstOrDefault(p =>
+                (p.ModelType is PrimaryTypeJs && (p.ModelType as PrimaryTypeJs).KnownPrimaryType == KnownPrimaryType.TimeSpan) ||
+                (p.ModelType is Core.Model.SequenceType && (p.ModelType as Core.Model.SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
+                (p.ModelType is Core.Model.DictionaryType && (p.ModelType as Core.Model.DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.TimeSpan)));
             return prop != null;
         }
 
@@ -210,14 +214,14 @@ namespace AutoRest.NodeJS.TemplateModels
         /// <param name="property">Model property to query</param>
         /// <param name="inModelsModule">Pass true if generating the code for the models module, thus model types don't need a "models." prefix</param>
         /// <returns>TypeScript property definition</returns>
-        public static string PropertyTS(Property property, bool inModelsModule) 
+        public static string PropertyTS(Core.Model.Property property, bool inModelsModule) 
         {
             if (property == null) 
             {
                 throw new ArgumentNullException("property");
             }
 
-            string typeString = property.Type.TSType(inModelsModule);
+            string typeString = property.ModelType.TSType(inModelsModule);
 
             if (! property.IsRequired)
                 return property.Name + "?: " + typeString;
@@ -238,14 +242,19 @@ namespace AutoRest.NodeJS.TemplateModels
         /// </summary>
         /// <param name="property">Parameter to be documented</param>
         /// <returns>Parameter name in the correct jsdoc notation</returns>
-        public static string GetPropertyDocumentationName(Property property)
+        public static string GetPropertyDocumentationName(Core.Model.Property property)
         {
             if (property == null)
             {
                 throw new ArgumentNullException("property");
             }
+
+            // todo gs/az : this implicitly trims out the dot. sometimes that's not what we want.
+            // how do we fix this.
+
             if (property.IsRequired)
             {
+                
                 return property.Name;
             }
             else
@@ -260,32 +269,33 @@ namespace AutoRest.NodeJS.TemplateModels
         /// <param name="property">Parameter to be documented</param>
         /// <returns>Parameter documentation string along with default value if any 
         /// in correct jsdoc notation</returns>
-        public static string GetPropertyDocumentationString(Property property)
+        public static string GetPropertyDocumentationString(Core.Model.Property property)
         {
             if (property == null)
             {
                 throw new ArgumentNullException("property");
             }
 
-            string summary = property.Summary;
+            return property.DefaultValue.IsNullOrEmpty() ?
+                $"{property.Summary.EnsureEndsWith(".")} {property.Documentation}".Trim() : 
+                $"{property.Summary.EnsureEndsWith(".")} {property.Documentation.EnsureEndsWith(".")} Default value: {property.DefaultValue} .".Trim();
 
-            if (!string.IsNullOrWhiteSpace(summary) && !summary.EndsWith(".", StringComparison.OrdinalIgnoreCase))
-            {
-                summary += ".";
-            }
+            /*
 
+            string summary = property.Summary.EnsureEndsWith(".");
+
+            
+            
             string documentation = property.Documentation;
-            if (!string.IsNullOrWhiteSpace(property.DefaultValue))
+            if (!property.DefaultValue.IsNullOrEmpty())
             {
-                if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))
-                {
-                    documentation += ".";
-                }
+                documentation = documentation.EnsureEndsWith(".");
                 documentation += " Default value: " + property.DefaultValue + " .";
             }
 
-            string docString = string.Join(" ", (new[] {summary, documentation}).Where(s => !string.IsNullOrEmpty(s)));
+            string docString = string.Join(" ", (new[] {summary, documentation}).Where(s => !string.IsNullOrWhiteSpace(s)));
             return docString;
+            */
         }
 
         /// <summary>
@@ -294,22 +304,22 @@ namespace AutoRest.NodeJS.TemplateModels
         /// <param name="property">Parameter to be documented</param>
         /// <returns>Parameter name in the correct jsdoc notation</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        public static string GetPropertyDocumentationType(Property property)
+        public static string GetPropertyDocumentationType(Core.Model.Property property)
         {
             if (property == null)
             {
                 throw new ArgumentNullException("property");
             }
             string typeName = "object";
-            if (property.Type is PrimaryType)
+            if (property.ModelType is PrimaryTypeJs)
             {
-                typeName = property.Type.Name;
+                typeName = property.ModelType.Name;
             }
-            else if (property.Type is SequenceType)
+            else if (property.ModelType is Core.Model.SequenceType)
             {
                 typeName = "array";
             }
-            else if (property.Type is EnumType)
+            else if (property.ModelType is EnumType)
             {
                 typeName = "string";
             }

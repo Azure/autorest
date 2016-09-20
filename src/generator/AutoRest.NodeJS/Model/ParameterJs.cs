@@ -1,33 +1,42 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
+// 
 
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.Core.ClientModel;
-using AutoRest.Core.Utilities;
+using AutoRest.Core;
+using AutoRest.Core.Model;
+using Newtonsoft.Json;
 
-namespace AutoRest.NodeJS.TemplateModels
+namespace AutoRest.NodeJS.Model
 {
-    public class ParameterTemplateModel : Parameter
+    public class ParameterJs : Parameter
     {
-        public ParameterTemplateModel(Parameter source)
+        public ParameterJs()
         {
-            this.LoadFrom(source);
+            // if this is a client property, the name should be prefixed.
+            Name.OnGet += value =>
+                IsClientProperty
+                    ? false == Method?.MethodGroup?.IsCodeModelMethodGroup
+                        ? $"this.client.{ClientProperty.Name}"
+                        : $"this.{ClientProperty.Name}"
+                    : CodeNamer.Instance.GetParameterName(value);
         }
 
-        public IEnumerable<Property> ComposedProperties
+        [JsonIgnore]
+        public IEnumerable<Core.Model.Property> ComposedProperties
         {
             get
             {
-                CompositeType composite = this.Type as CompositeType;
-                IEnumerable<Property> result = null;
+                var composite = ModelType as CompositeType;
+                IEnumerable<Core.Model.Property> result = null;
                 if (composite != null)
                 {
                     result = composite.Properties;
                     if (composite.BaseModelType != null)
                     {
                         result = composite.Properties;
-                        IEnumerable<Property> baseModelProperties =
+                        var baseModelProperties =
                             composite.BaseModelType.Properties.Where(p => !p.IsReadOnly);
                         result = result.Union(baseModelProperties);
                     }
@@ -35,5 +44,8 @@ namespace AutoRest.NodeJS.TemplateModels
                 return result;
             }
         }
+
+        [JsonIgnore]
+        public bool IsLocal => (ClientProperty == null) && !string.IsNullOrWhiteSpace(Name) && !IsConstant;
     }
 }

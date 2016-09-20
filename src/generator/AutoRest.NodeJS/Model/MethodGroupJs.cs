@@ -1,50 +1,55 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using Newtonsoft.Json;
 
-namespace AutoRest.NodeJS.TemplateModels
+namespace AutoRest.NodeJS.Model
 {
-    public class MethodGroupTemplateModel : ServiceClient
+    public class MethodGroupJs : MethodGroup
     {
-        public MethodGroupTemplateModel(ServiceClient serviceClient, string methodGroupName)
+        protected MethodGroupJs() : base()
         {
-            this.LoadFrom(serviceClient);
-            MethodTemplateModels = new List<MethodTemplateModel>();
-            // MethodGroup name and type are always the same but can be 
-            // changed in derived classes
-            MethodGroupName = methodGroupName;
-            MethodGroupType = methodGroupName.ToPascalCase();
-            Methods.Where(m => m.Group == MethodGroupName)
-                .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
+            InitializeProperties();
         }
-        public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
-        public string MethodGroupName { get; set; }
+        protected MethodGroupJs(string name): base(name)
+        {
+            // MethodGroupType = methodGroupName.ToPascalCase();
+            InitializeProperties();
+        }
 
-        public string MethodGroupType { get; set; }
+        protected void InitializeProperties()
+        {
+            NameForProperty.OnGet += value => CodeNamer.Instance.GetPropertyName(TypeName);
+        }
+        [JsonIgnore]
+        public IEnumerable<MethodJs> MethodTemplateModels => Methods.Cast<MethodJs>();
 
+        [JsonIgnore]
         public bool ContainsTimeSpan
         {
             get
             {
                 Method method = this.MethodTemplateModels.FirstOrDefault(m => m.Parameters.FirstOrDefault(p =>
-                    p.Type.IsPrimaryType(KnownPrimaryType.TimeSpan) ||
-                    (p.Type is SequenceType && (p.Type as SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
-                    (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
-                    (p.Type is CompositeType && (p.Type as CompositeType).ContainsTimeSpan())) != null);
+                    p.ModelType.IsPrimaryType(KnownPrimaryType.TimeSpan) ||
+                    (p.ModelType is Core.Model.SequenceType && (p.ModelType as Core.Model.SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
+                    (p.ModelType is Core.Model.DictionaryType && (p.ModelType as Core.Model.DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
+                    (p.ModelType is CompositeType && (p.ModelType as CompositeType).ContainsTimeSpan())) != null);
                 
                 return  method != null;
             }
         }
 
+        [JsonIgnore]
         public bool ContainsStream
         {
             get {
-                return this.Methods.Any(m => m.Parameters.FirstOrDefault(p => p.Type.IsPrimaryType(KnownPrimaryType.Stream)) != null ||
+                return this.Methods.Any(m => m.Parameters.FirstOrDefault(p => p.ModelType.IsPrimaryType(KnownPrimaryType.Stream)) != null ||
                         m.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream)); }
         }
     }

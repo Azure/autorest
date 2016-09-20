@@ -6,42 +6,56 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
+using Newtonsoft.Json;
 
-namespace AutoRest.NodeJS.TemplateModels
+namespace AutoRest.NodeJS.Model
 {
-    public class ServiceClientTemplateModel : ServiceClient
+   public class CodeModelJs : CodeModel
     {
-        public ServiceClientTemplateModel(ServiceClient serviceClient)
+        public CodeModelJs()
         {
-            this.LoadFrom(serviceClient);
-            MethodTemplateModels = new List<MethodTemplateModel>();
-            ModelTemplateModels = new List<ModelTemplateModel>();
-            Methods.Where(m => m.Group == null)
-                .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
-
-            ModelTypes.ForEach(m => ModelTemplateModels.Add(new ModelTemplateModel(m, serviceClient)));
-            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
         }
 
-        public bool IsCustomBaseUri { get; private set; }
+        public bool IsCustomBaseUri => Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
 
-        public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
+        [JsonIgnore]
+        public IEnumerable<MethodJs> MethodTemplateModels => Methods.Cast<MethodJs>().Where( each => each.MethodGroup.IsCodeModelMethodGroup);
 
-        public List<ModelTemplateModel> ModelTemplateModels { get; private set; }
+        [JsonIgnore]
+        public virtual IEnumerable<CompositeTypeJs> ModelTemplateModels => ModelTypes.Cast<CompositeTypeJs>();
+
+        [JsonIgnore]
+        public virtual IEnumerable<MethodGroupJs> MethodGroupModels => Operations.Cast<MethodGroupJs>().Where( each => !each.IsCodeModelMethodGroup );
+
+        [JsonIgnore]
+        public bool ContainsTimeSpan
+        {
+            get
+            {
+                Method method = this.MethodTemplateModels.FirstOrDefault(m => m.Parameters.FirstOrDefault(p =>
+                    p.ModelType.IsPrimaryType(KnownPrimaryType.TimeSpan) ||
+                    (p.ModelType is SequenceTypeJs && (p.ModelType as SequenceTypeJs).ElementType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
+                    (p.ModelType is DictionaryTypeJs && (p.ModelType as DictionaryTypeJs).ValueType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
+                    (p.ModelType is CompositeType && (p.ModelType as CompositeType).ContainsTimeSpan())) != null);
+
+                return method != null;
+            }
+        }
 
         /// <summary>
         /// Provides an ordered ModelTemplateModel list such that the parent 
         /// type comes before in the list than its child. This helps when 
         /// requiring models in index.js
         /// </summary>
-        public List<ModelTemplateModel> OrderedModelTemplateModels 
+        [JsonIgnore]
+        public virtual IEnumerable<CompositeTypeJs> OrderedModelTemplateModels 
         {
             get
             {
-                List<ModelTemplateModel> orderedList = new List<ModelTemplateModel>();
+                List<CompositeTypeJs> orderedList = new List<CompositeTypeJs>();
                 foreach (var model in ModelTemplateModels)
                 {
                     constructOrderedList(model, orderedList);
@@ -52,14 +66,14 @@ namespace AutoRest.NodeJS.TemplateModels
 
         public bool ContainsDurationProperty()
         {
-            Property prop = Properties.FirstOrDefault(p =>
-                (p.Type is PrimaryType && (p.Type as PrimaryType).Type == KnownPrimaryType.TimeSpan) ||
-                (p.Type is SequenceType && (p.Type as SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
-                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.TimeSpan)));
+            Core.Model.Property prop = Properties.FirstOrDefault(p =>
+                (p.ModelType is PrimaryTypeJs && (p.ModelType as PrimaryTypeJs).KnownPrimaryType == KnownPrimaryType.TimeSpan) ||
+                (p.ModelType is Core.Model.SequenceType && (p.ModelType as Core.Model.SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
+                (p.ModelType is Core.Model.DictionaryType && (p.ModelType as Core.Model.DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.TimeSpan)));
             return prop != null;
         }
 
-        private void constructOrderedList(ModelTemplateModel model, List<ModelTemplateModel> orderedList)
+        private void constructOrderedList(CompositeTypeJs model, List<CompositeTypeJs> orderedList)
         {
             if (model == null)
             {
@@ -90,14 +104,6 @@ namespace AutoRest.NodeJS.TemplateModels
             if (!orderedList.Contains(model))
             {
                 orderedList.Add(model);
-            }
-        }
-
-        public virtual IEnumerable<MethodGroupTemplateModel> MethodGroupModels
-        {
-            get
-            {
-                return MethodGroups.Select(mg => new MethodGroupTemplateModel(this, mg));
             }
         }
 
@@ -187,7 +193,7 @@ namespace AutoRest.NodeJS.TemplateModels
 
                     requiredParams.Append(p.Name);
                     requiredParams.Append(": ");
-                    requiredParams.Append(p.Type.TSType(false));
+                    requiredParams.Append(p.ModelType.TSType(false));
 
                     first = false;
                 }
@@ -201,15 +207,6 @@ namespace AutoRest.NodeJS.TemplateModels
                 }
 
                 return requiredParams.ToString();
-            }
-        }
-
-        public bool ContainsTimeSpan
-        {
-            get
-            {
-                return this.Methods.FirstOrDefault(
-                    m => m.Parameters.FirstOrDefault(p => p.Type.IsPrimaryType(KnownPrimaryType.TimeSpan)) != null) != null;
             }
         }
     }

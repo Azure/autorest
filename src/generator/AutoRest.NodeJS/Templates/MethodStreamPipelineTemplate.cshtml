@@ -1,5 +1,5 @@
 ﻿@using System.Linq;
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.MethodTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Model.MethodJs>
 // Send Request
 httpRequest.streamedResponse = true;
 return client.pipeline(httpRequest, function (err, response, responseBody) {

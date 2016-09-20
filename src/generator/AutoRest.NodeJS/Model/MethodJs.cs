@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
@@ -8,93 +8,94 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using Newtonsoft.Json;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.NodeJS.TemplateModels
+namespace AutoRest.NodeJS.Model
 {
-    public class MethodTemplateModel : Method
+    public class MethodJs : Method
     {
-        public MethodTemplateModel(Method source, ServiceClient serviceClient)
+        public MethodJs()
         {
-            this.LoadFrom(source);
-            ParameterTemplateModels = new List<ParameterTemplateModel>();
-            GroupedParameterTemplateModels = new List<ParameterTemplateModel>();
-            source.Parameters.ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
-
-            ServiceClient = serviceClient;
-            if (source.Group != null)
+            // methods that have no group name get the client name as their name
+            Group.OnGet += groupName =>
             {
-                OperationName = source.Group.ToPascalCase();
-            }
-            else
-            {
-                OperationName = serviceClient.Name;
-            }
-
-            BuildOptionsParameterTemplateModel();
-        }
-
-        private void BuildOptionsParameterTemplateModel()
-        {
-            CompositeType optionsType;
-            optionsType = new CompositeType
-            {
-                Name = "options",
-                SerializedName = "options",
-                Documentation = "Optional Parameters."
+                return groupName.IsNullOrEmpty() ? CodeModel?.Name : groupName;
             };
-            var optionsParmeter = new Parameter
+
+            OptionsParameterTemplateModel = (ParameterJs)New<Parameter>(new
             {
                 Name = "options",
                 SerializedName = "options",
                 IsRequired = false,
                 Documentation = "Optional Parameters.",
                 Location = ParameterLocation.None,
-                Type = optionsType
-            };
+                ModelType = New<CompositeType>(new
+                {
+                    Name = "options",
+                    SerializedName = "options",
+                    Documentation = "Optional Parameters."
+                })
+            });
 
-            IEnumerable<ParameterTemplateModel> optionalParameters = LocalParameters.Where(p => !p.IsRequired);
-            foreach (ParameterTemplateModel parameter in optionalParameters)
+            OptionsParameterModelType.Add(New<Core.Model.Property>(new
             {
-                Property optionalProperty = new Property
+                IsReadOnly = false,
+                Name = "customHeaders",
+                IsRequired = false,
+                Documentation = "Headers that will be added to the request",
+                ModelType = New<PrimaryType>(KnownPrimaryType.Object),
+                SerializedName = "customHeaders"
+            }));
+        }
+
+        public override void Remove(Parameter item)
+        {
+            base.Remove(item);
+            // find a Property in OptionsParameterModelType with the same name and remove it.
+
+            OptionsParameterModelType.Remove(prop => prop.Name == item.Name);
+        }
+
+        public override Parameter Add(Parameter item)
+        {
+          //  if (item.Name.EqualsIgnoreCase("pagingGetOdataMultiplePagesOptions"))
+            {
+//                Debugger.Break();
+            }
+
+            var parameter = base.Add(item) as ParameterJs;
+
+            if (parameter.IsLocal && !parameter.IsRequired)
+            {
+                OptionsParameterModelType.Add(New<Core.Model.Property>(new
                 {
                     IsReadOnly = false,
                     Name = parameter.Name,
                     IsRequired = parameter.IsRequired,
                     DefaultValue = parameter.DefaultValue,
                     Documentation = parameter.Documentation,
-                    Type = parameter.Type,
-                    SerializedName = parameter.SerializedName   
-                };
-                parameter.Constraints.ToList().ForEach(x => optionalProperty.Constraints.Add(x.Key, x.Value));
-                parameter.Extensions.ToList().ForEach(x => optionalProperty.Extensions.Add(x.Key, x.Value));
-                ((CompositeType)optionsParmeter.Type).Properties.Add(optionalProperty);
+                    ModelType = parameter.ModelType,
+                    SerializedName = parameter.SerializedName,
+                    Constraints = parameter.Constraints,
+                    // optionalProperty.Constraints.AddRange(parameter.Constraints);
+                    Extensions = parameter.Extensions // optionalProperty.Extensions.AddRange(parameter.Extensions);
+                }));
             }
-
-            //Adding customHeaders to the options object
-            Property customHeaders = new Property
-            {
-                IsReadOnly = false,
-                Name = "customHeaders",
-                IsRequired = false,
-                Documentation = "Headers that will be added to the request",
-                Type = new PrimaryType(KnownPrimaryType.Object),
-                SerializedName = "customHeaders"
-            };
-            ((CompositeType)optionsParmeter.Type).Properties.Add(customHeaders);
-            OptionsParameterTemplateModel = new ParameterTemplateModel(optionsParmeter);
+            
+            return parameter;
         }
 
-        public string OperationName { get; set; }
+        [JsonIgnore]
+        private CompositeType OptionsParameterModelType => ((CompositeType) OptionsParameterTemplateModel.ModelType);
 
-        public ServiceClient ServiceClient { get; set; }
+        [JsonIgnore]
+        public IEnumerable<ParameterJs> ParameterTemplateModels => Parameters.Cast<ParameterJs>();
 
-        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
-
-        public ParameterTemplateModel OptionsParameterTemplateModel { get; private set; }
-
-        protected List<ParameterTemplateModel> GroupedParameterTemplateModels { get; private set; }
+        [JsonIgnore]
+        public ParameterJs OptionsParameterTemplateModel { get; }
 
         /// <summary>
         /// Get the predicate to determine of the http operation status code indicates success
@@ -147,7 +148,7 @@ namespace AutoRest.NodeJS.TemplateModels
             StringBuilder declarations = new StringBuilder();
 
             bool first = true;
-            IEnumerable<ParameterTemplateModel> requiredParameters = LocalParameters.Where(p => p.IsRequired);
+            IEnumerable<ParameterJs> requiredParameters = LocalParameters.Where(p => p.IsRequired);
             foreach (var parameter in requiredParameters)
             {
                 if (!first)
@@ -157,7 +158,7 @@ namespace AutoRest.NodeJS.TemplateModels
                 declarations.Append(": ");
 
                 // For date/datetime parameters, use a union type to reflect that they can be passed as a JS Date or a string.
-                var type = parameter.Type;
+                var type = parameter.ModelType;
                 if (type.IsPrimaryType(KnownPrimaryType.Date) || type.IsPrimaryType(KnownPrimaryType.DateTime))
                     declarations.Append("Date|string");
                 else declarations.Append(type.TSType(false));
@@ -170,8 +171,8 @@ namespace AutoRest.NodeJS.TemplateModels
                 if (!first)
                     declarations.Append(", ");
                 declarations.Append("options: { ");
-                var optionalParameters = ((CompositeType)OptionsParameterTemplateModel.Type).Properties;
-                for(int i = 0; i < optionalParameters.Count; i++)
+                var optionalParameters = ((CompositeType)OptionsParameterTemplateModel.ModelType).Properties.OrderBy(each => each.Name == "customHeaders" ? 1 : 0).ToArray();
+                for(int i = 0; i < optionalParameters.Length; i++)
                 {
                     if (i != 0)
                     {
@@ -179,13 +180,13 @@ namespace AutoRest.NodeJS.TemplateModels
                     }
                     declarations.Append(optionalParameters[i].Name);
                     declarations.Append("? : ");
-                    if (optionalParameters[i].Name.Equals("customHeaders", StringComparison.OrdinalIgnoreCase))
+                    if (optionalParameters[i].Name.EqualsIgnoreCase("customHeaders"))
                     {
                         declarations.Append("{ [headerName: string]: string; }");
                     }
                     else
                     {
-                        declarations.Append(optionalParameters[i].Type.TSType(false));
+                        declarations.Append(optionalParameters[i].ModelType.TSType(false));
                     }
                 }
                 declarations.Append(" }");
@@ -230,7 +231,7 @@ namespace AutoRest.NodeJS.TemplateModels
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters and constants.
         /// </summary>
-        internal IEnumerable<ParameterTemplateModel> LocalParameters
+        internal IEnumerable<ParameterJs> LocalParameters
         {
             get
             {
@@ -244,13 +245,14 @@ namespace AutoRest.NodeJS.TemplateModels
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters. All the optional parameters are pushed into the second last "options" parameter.
         /// </summary>
-        public IEnumerable<ParameterTemplateModel> LocalParametersWithOptions
+        [JsonIgnore]
+        public IEnumerable<ParameterJs> LocalParametersWithOptions
         {
             get
             {
-                List<ParameterTemplateModel> requiredParamsWithOptionsList = LocalParameters.Where(p => p.IsRequired).ToList();
+                List<ParameterJs> requiredParamsWithOptionsList = LocalParameters.Where(p => p.IsRequired).ToList();
                 requiredParamsWithOptionsList.Add(OptionsParameterTemplateModel);
-                return requiredParamsWithOptionsList as IEnumerable<ParameterTemplateModel>;
+                return requiredParamsWithOptionsList as IEnumerable<ParameterJs>;
             }
         }
 
@@ -258,13 +260,14 @@ namespace AutoRest.NodeJS.TemplateModels
         /// Returns list of parameters and their properties in (alphabetical order) that needs to be documented over a method.
         /// This property does simple tree traversal using stack and hashtable for already visited complex types.
         /// </summary>
-        public IEnumerable<ParameterTemplateModel> DocumentationParameters
+        [JsonIgnore]
+        public IEnumerable<ParameterJs> DocumentationParameters
         {
             get
             {
-                var traversalStack = new Stack<ParameterTemplateModel>();
-                var visitedHash = new Dictionary<string, ParameterTemplateModel>();
-                var retValue = new Stack<ParameterTemplateModel>();
+                var traversalStack = new Stack<ParameterJs>();
+                var visitedHash = new HashSet<string>();
+                var retValue = new Stack<ParameterJs>();
 
                 foreach (var param in LocalParametersWithOptions)
                 {
@@ -274,33 +277,33 @@ namespace AutoRest.NodeJS.TemplateModels
                 while (traversalStack.Count() != 0)
                 {
                     var param = traversalStack.Pop();
-                    if (!(param.Type is CompositeType))
+                    if (!(param.ModelType is CompositeType))
                     {
                         retValue.Push(param);
                     }
 
-                    if (param.Type is CompositeType)
+                    if (param.ModelType is CompositeType)
                     {
-                        if (!visitedHash.ContainsKey(param.Type.Name))
+                        if (!visitedHash.Contains(param.ModelType.Name))
                         {
                             traversalStack.Push(param);
-                            foreach (var property in param.ComposedProperties)
+                            foreach (var property in param.ComposedProperties.OrderBy( each => each.Name == "customHeaders"? 1:0)) //.OrderBy( each => each.Name.Else("")))
                             {
                                 if (property.IsReadOnly || property.IsConstant)
                                 {
                                     continue;
                                 }
 
-                                var propertyParameter = new Parameter();
-                                propertyParameter.Type = property.Type;
+                                var propertyParameter = New<Parameter>() as ParameterJs;
+                                propertyParameter.ModelType = property.ModelType;
                                 propertyParameter.IsRequired = property.IsRequired;
-                                propertyParameter.Name = param.Name + "." + property.Name;
+                                propertyParameter.Name.FixedValue = param.Name + "." + property.Name;
                                 string documentationString = string.Join(" ", (new[] { property.Summary, property.Documentation}).Where(s => !string.IsNullOrEmpty(s)));
                                 propertyParameter.Documentation = documentationString;
-                                traversalStack.Push(new ParameterTemplateModel(propertyParameter));
+                                traversalStack.Push(propertyParameter);
                             }
 
-                            visitedHash.Add(param.Type.Name, new ParameterTemplateModel(param));
+                            visitedHash.Add(param.ModelType.Name);
                         }
                         else
                         {
@@ -323,6 +326,7 @@ namespace AutoRest.NodeJS.TemplateModels
         /// <summary>
         /// Get the type name for the method's return type
         /// </summary>
+        [JsonIgnore]
         public string ReturnTypeString
         {
             get
@@ -343,12 +347,13 @@ namespace AutoRest.NodeJS.TemplateModels
         /// message when exceptions occur in deserialization along with the request 
         /// and response object
         /// </summary>
+        [JsonIgnore]
         public string DeserializationError
         {
             get
             {
                 var builder = new IndentedStringBuilder("  ");
-                var errorVariable = this.Scope.GetUniqueName("deserializationError");
+                var errorVariable = this.GetUniqueName("deserializationError");
                 return builder.AppendLine("var {0} = new Error(util.format('Error \"%s\" occurred in " +
                     "deserializing the responseBody - \"%s\"', error, responseBody));", errorVariable)
                     .AppendLine("{0}.request = msRest.stripRequest(httpRequest);", errorVariable)
@@ -387,15 +392,15 @@ namespace AutoRest.NodeJS.TemplateModels
                 throw new ArgumentNullException("parameter");
             }
             string typeName = "object";
-            if (parameter.Type is PrimaryType)
+            if (parameter.ModelType is PrimaryTypeJs)
             {
-                typeName = parameter.Type.Name;
+                typeName = parameter.ModelType.Name;
             }
-            else if (parameter.Type is SequenceType)
+            else if (parameter.ModelType is Core.Model.SequenceType)
             {
                 typeName = "array";
             }
-            else if (parameter.Type is EnumType)
+            else if (parameter.ModelType is EnumType)
             {
                 typeName = "string";
             }
@@ -403,7 +408,7 @@ namespace AutoRest.NodeJS.TemplateModels
             return typeName.ToLower(CultureInfo.InvariantCulture);
         }
 
-        public string GetDeserializationString(IType type, string valueReference = "result", string responseVariable = "parsedResponse")
+        public string GetDeserializationString(IModelType type, string valueReference = "result", string responseVariable = "parsedResponse")
         {
             var builder = new IndentedStringBuilder("  ");
             if (type is CompositeType)
@@ -418,6 +423,7 @@ namespace AutoRest.NodeJS.TemplateModels
             return builder.ToString();
         }
 
+        [JsonIgnore]
         public string ValidationString
         {
             get
@@ -425,7 +431,7 @@ namespace AutoRest.NodeJS.TemplateModels
                 var builder = new IndentedStringBuilder("  ");
                 foreach (var parameter in ParameterTemplateModels.Where(p => !p.IsConstant))
                 {
-                    if ((HttpMethod == HttpMethod.Patch && parameter.Type is CompositeType))
+                    if ((HttpMethod == HttpMethod.Patch && parameter.ModelType is CompositeType))
                     {
                         if (parameter.IsRequired)
                         {
@@ -438,11 +444,11 @@ namespace AutoRest.NodeJS.TemplateModels
                     }
                     else
                     {
-                        builder.AppendLine(parameter.Type.ValidateType(Scope, parameter.Name, parameter.IsRequired));
+                        builder.AppendLine(parameter.ModelType.ValidateType(this, parameter.Name, parameter.IsRequired));
                         if (parameter.Constraints != null && parameter.Constraints.Count > 0 && parameter.Location != ParameterLocation.Body)
                         {
                             builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", parameter.Name).Indent();
-                            builder = parameter.Type.AppendConstraintValidations(parameter.Name, parameter.Constraints, builder);
+                            builder = parameter.ModelType.AppendConstraintValidations(parameter.Name, parameter.Constraints, builder);
                             builder.Outdent().AppendLine("}");
                         }        
                     }
@@ -451,7 +457,7 @@ namespace AutoRest.NodeJS.TemplateModels
             }
         }
 
-        public string DeserializeResponse(IType type, string valueReference = "result", string responseVariable = "parsedResponse")
+        public string DeserializeResponse(IModelType type, string valueReference = "result", string responseVariable = "parsedResponse")
         {
             if (type == null)
             {
@@ -486,21 +492,13 @@ namespace AutoRest.NodeJS.TemplateModels
         /// <summary>
         /// Get the method's request body (or null if there is no request body)
         /// </summary>
-        public ParameterTemplateModel RequestBody
-        {
-            get
-            {
-                return this.Body != null ? new ParameterTemplateModel(this.Body) : null;
-            }
-        }        
+        public ParameterJs RequestBody => Body as ParameterJs;
 
         /// <summary>
         /// Generate a reference to the ServiceClient
         /// </summary>
-        public string ClientReference
-        {
-            get { return Group == null ? "this" : "this.client"; }
-        }
+        [JsonIgnore]
+        public string ClientReference => MethodGroup.IsCodeModelMethodGroup ? "this" : "this.client";
 
         public static string GetStatusCodeReference(HttpStatusCode code)
         {
@@ -621,7 +619,7 @@ namespace AutoRest.NodeJS.TemplateModels
                     urlPathName += m.Groups[1].Value;
                 }
                 builder.AppendLine(pathReplaceFormat, variableName, urlPathName,
-                    pathParameter.Type.ToString(pathParameter.Name));
+                    pathParameter.ModelType.ToString(pathParameter.Name));
             }
         }
 
@@ -650,24 +648,25 @@ namespace AutoRest.NodeJS.TemplateModels
             }
         }
 
+        [JsonIgnore]
         public string ConstructRequestBodyMapper
         {
             get
             {
                 var builder = new IndentedStringBuilder("  ");
-                if (RequestBody.Type is CompositeType)
+                if (RequestBody.ModelType is CompositeType)
                 {
-                    builder.AppendLine("var requestModelMapper = new client.models['{0}']().mapper();", RequestBody.Type.Name);
+                    builder.AppendLine("var requestModelMapper = new client.models['{0}']().mapper();", RequestBody.ModelType.Name);
                 }
                 else
                 {
                     builder.AppendLine("var requestModelMapper = {{{0}}};",
-                        RequestBody.Type.ConstructMapper(RequestBody.SerializedName, RequestBody, false, false));
+                        RequestBody.ModelType.ConstructMapper(RequestBody.SerializedName, RequestBody, false, false));
                 }
                 return builder.ToString();
             }
         }
-
+        [JsonIgnore]
         public virtual string InitializeResult
         {
             get
@@ -675,7 +674,7 @@ namespace AutoRest.NodeJS.TemplateModels
                 return string.Empty;
             }
         }
-
+        [JsonIgnore]
         public string ReturnTypeInfo
         {
             get
@@ -685,21 +684,23 @@ namespace AutoRest.NodeJS.TemplateModels
                 if (ReturnType.Body is EnumType)
                 {
                     var returnBodyType = ReturnType.Body as EnumType;
-
-                    string enumValues = "";
-                    for (var i = 0; i < returnBodyType.Values.Count; i++)
+                    if (!returnBodyType.ModelAsString)
                     {
-                        if (i == returnBodyType.Values.Count - 1)
+                        string enumValues = "";
+                        for (var i = 0; i < returnBodyType.Values.Count; i++)
                         {
-                            enumValues += returnBodyType.Values[i].SerializedName;
+                            if (i == returnBodyType.Values.Count - 1)
+                            {
+                                enumValues += returnBodyType.Values[i].SerializedName;
+                            }
+                            else
+                            {
+                                enumValues += returnBodyType.Values[i].SerializedName + ", ";
+                            }
                         }
-                        else
-                        {
-                            enumValues += returnBodyType.Values[i].SerializedName + ", ";
-                        }
+                        result = string.Format(CultureInfo.InvariantCulture,
+                            "Possible values for result are - {0}.", enumValues);
                     }
-                    result = string.Format(CultureInfo.InvariantCulture,
-                        "Possible values for result are - {0}.", enumValues);
                 }
                 else if (ReturnType.Body is CompositeType)
                 {
@@ -712,22 +713,23 @@ namespace AutoRest.NodeJS.TemplateModels
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        [JsonIgnore]
         public string DocumentReturnTypeString
         {
             get
             {
                 string typeName = "object";
-                IType returnBodyType = ReturnType.Body;
+                IModelType returnBodyType = ReturnType.Body;
 
                 if (returnBodyType == null)
                 {
                     typeName = "null";
                 }
-                else if (returnBodyType is PrimaryType)
+                else if (returnBodyType is PrimaryTypeJs)
                 {
                     typeName = returnBodyType.Name;
                 }
-                else if (returnBodyType is SequenceType)
+                else if (returnBodyType is Core.Model.SequenceType)
                 {
                     typeName = "array";
                 }
@@ -766,7 +768,7 @@ namespace AutoRest.NodeJS.TemplateModels
             bool result = true;
             foreach(var transformation in InputParameterTransformation)
             {
-                var compositeOutputParameter = transformation.OutputParameter.Type as CompositeType;
+                var compositeOutputParameter = transformation.OutputParameter.ModelType as CompositeType;
                 if (compositeOutputParameter == null)
                 {
                     result = false;
@@ -801,11 +803,11 @@ namespace AutoRest.NodeJS.TemplateModels
                        .Indent();
 
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
-                    transformation.OutputParameter.Type is CompositeType)
+                    transformation.OutputParameter.ModelType is CompositeType)
                 {
                     builder.AppendLine("{0} = new client.models['{1}']();",
                         transformation.OutputParameter.Name,
-                        transformation.OutputParameter.Type.Name);
+                        transformation.OutputParameter.ModelType.Name);
                 }
 
                 foreach (var mapping in transformation.ParameterMappings)
@@ -830,12 +832,12 @@ namespace AutoRest.NodeJS.TemplateModels
                 // Declare all the output paramaters outside the try block
                 foreach (var transformation in InputParameterTransformation)
                 {
-                    if (transformation.OutputParameter.Type is CompositeType && 
+                    if (transformation.OutputParameter.ModelType is CompositeType && 
                         transformation.OutputParameter.IsRequired)
                     {
                         builder.AppendLine("var {0} = new client.models['{1}']();",
                             transformation.OutputParameter.Name,
-                            transformation.OutputParameter.Type.Name);
+                            transformation.OutputParameter.ModelType.Name);
                     }
                     else
                     {
@@ -851,14 +853,14 @@ namespace AutoRest.NodeJS.TemplateModels
                     var outputParameter = transformation.OutputParameter;
                     bool noCompositeTypeInitialized = true;
                     if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
-                        transformation.OutputParameter.Type is CompositeType)
+                        transformation.OutputParameter.ModelType is CompositeType)
                     {
                         //required outputParameter is initialized at the time of declaration
                         if (!transformation.OutputParameter.IsRequired)
                         {
                             builder.AppendLine("{0} = new client.models['{1}']();",
                                 transformation.OutputParameter.Name,
-                                transformation.OutputParameter.Type.Name);
+                                transformation.OutputParameter.ModelType.Name);
                         }
                         
                         noCompositeTypeInitialized = false;
@@ -872,7 +874,7 @@ namespace AutoRest.NodeJS.TemplateModels
                         if (noCompositeTypeInitialized)
                         {
                             // If composite type is initialized based on the above logic then it should not be validated.
-                            builder.AppendLine(outputParameter.Type.ValidateType(Scope, outputParameter.Name, outputParameter.IsRequired));
+                            builder.AppendLine(outputParameter.ModelType.ValidateType(this, outputParameter.Name, outputParameter.IsRequired));
                         }
                     }
 
@@ -912,8 +914,8 @@ namespace AutoRest.NodeJS.TemplateModels
 
         public string  BuildOptionalMappings()
         {
-            IEnumerable<Property> optionalParameters = 
-                ((CompositeType)OptionsParameterTemplateModel.Type)
+            IEnumerable<Core.Model.Property> optionalParameters = 
+                ((CompositeType)OptionsParameterTemplateModel.ModelType)
                 .Properties.Where(p => p.Name != "customHeaders");
             var builder = new IndentedStringBuilder("  ");
             foreach (var optionalParam in optionalParameters)
