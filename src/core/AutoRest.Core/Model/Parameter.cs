@@ -3,101 +3,63 @@
 
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Utilities.Collections;
 using AutoRest.Core.Validation;
+using Newtonsoft.Json;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.Core.ClientModel
+namespace AutoRest.Core.Model
 {
     /// <summary>
     /// Defines an HTTP method parameter.
     /// </summary>
-    public class Parameter : IParameter
+    public class Parameter : IVariable
     {
-        private string _documentation;
-
         /// <summary>
         /// Creates a new instance of Parameter class.
         /// </summary>
-        public Parameter()
+        protected Parameter()
         {
-            Constraints = new Dictionary<Constraint, string>();
-            Extensions = new Dictionary<string, object>();
+            // Name should be unique 
+            // Name.OnSet += value => Method?.GetUniqueName(value) ?? value;
+
+            // Name can be overriden by x-ms-client-name
+            Name.OnGet += v =>
+            {
+                object clientName = null;
+                if (Extensions.TryGetValue("x-ms-client-name", out clientName))
+                {
+                    return CodeNamer.Instance.GetParameterName(clientName as string);
+                }
+                return CodeNamer.Instance.GetParameterName(v);
+            };
+            
         }
 
         /// <summary>
-        /// Gets or sets the parameter name.
+        /// The method that this parameter belongs to.
         /// </summary>
-        [Rule(typeof(IsIdentifier))]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the parameter name on the wire.
-        /// </summary>
-        public string SerializedName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the default value.
-        /// </summary>
-        public string DefaultValue { get; set; }
-        
-        // TODO: disambiguate Type and System.Type, rename IType to IModelType and Type to ModelType
-        /// <summary>
-        /// Gets or sets the model type.
-        /// </summary>
-        public IType Type { get; set; }
-
-        /// <summary>
-        /// Indicates whether the parameter is required.
-        /// </summary>
-        public bool IsRequired { get; set; }
-
-        /// <summary>
-        /// Indicates whether the parameter value is constant. If true, default value can not be null.
-        /// </summary>
-        public bool IsConstant { get; set; }
+        [JsonIgnore]
+        [NoCopy]
+        public Method Method { get; set; }
 
         /// <summary>
         /// Indicates whether the parameter should be set via a property on the client instance 
         /// instead of being passed to each API method that needs it.
         /// </summary>
-        public bool IsClientProperty
-        {
-            get { return ClientProperty != null; }
-        }
+        public virtual bool IsClientProperty => ClientProperty != null;
         
         /// <summary>
         /// Reference to the global Property that provides value for the parameter.
         /// </summary>
-        public Property ClientProperty { get; set; }
-
-        /// <summary>
-        /// Gets or sets the constraints.
-        /// </summary>
-        public Dictionary<Constraint, string> Constraints { get; private set; }
-
-        /// <summary>
-        /// Gets or sets collection format for array parameters.
-        /// </summary>
-        public CollectionFormat CollectionFormat { get; set; }
+        public virtual Property ClientProperty { get; set; }
 
         /// <summary>
         /// Gets or sets parameter location.
         /// </summary>
-        public ParameterLocation Location { get; set; }
-
-        /// <summary>
-        /// Gets or sets the documentation.
-        /// </summary>
-        public string Documentation
-        {
-            get { return _documentation; }
-            set { _documentation = value.StripControlCharacters(); }
-        }
-
-        /// <summary>
-        /// Gets vendor extensions dictionary.
-        /// </summary>
-        public Dictionary<string, object> Extensions { get; private set; }
+        public virtual ParameterLocation Location { get; set; }
 
         /// <summary>
         /// Returns a string representation of the Parameter object.
@@ -105,20 +67,16 @@ namespace AutoRest.Core.ClientModel
         /// <returns>
         /// A string representation of the Parameter object.
         /// </returns>
-        public override string ToString()
+        public override string ToString() => $"{ModelType} {Name}";
+
+        [JsonIgnore]
+        public override IParent Parent
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0} {1}", Type, Name);
+            get { return Method; }
+            set { Method = value as Method; }
         }
 
-        /// <summary>
-        /// Performs a deep clone of a parameter.
-        /// </summary>
-        /// <returns>A deep clone of current object.</returns>
-        public object Clone()
-        {
-            Parameter param = new Parameter();
-            param.LoadFrom(this);
-            return param;
-        }
+        [JsonIgnore]
+        public override string Qualifier => "Parameter";
     }
 }

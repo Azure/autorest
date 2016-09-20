@@ -3,7 +3,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-namespace AutoRest.Core.ClientModel
+namespace AutoRest.Core.Model
 {
     /// <summary>
     /// Defines collection formats.

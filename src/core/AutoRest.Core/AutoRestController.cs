@@ -3,7 +3,7 @@
 
 using System;
 using System.Diagnostics;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
@@ -16,7 +16,7 @@ namespace AutoRest.Core
     /// <summary>
     /// Entry point for invoking code generation.
     /// </summary>
-    public static class AutoRest
+    public static class AutoRestController
     {
         /// <summary>
         /// Returns the version of this instance of AutoRest.
@@ -34,47 +34,79 @@ namespace AutoRest.Core
         /// Generates client using provided settings.
         /// </summary>
         /// <param name="settings">Code generator settings.</param>
-        public static void Generate(Settings settings)
+        public static void Generate()
         {
-            if (settings == null)
+            if (Settings.Instance == null)
             {
                 throw new ArgumentNullException("settings");
             }
             Logger.Entries.Clear();
             Logger.LogInfo(Resources.AutoRestCore, Version);
-            Modeler modeler = ExtensionsLoader.GetModeler(settings);
-            ServiceClient serviceClient = null;
+            
+            CodeModel codeModel = null;
+            
+            var modeler = ExtensionsLoader.GetModeler();
 
-            IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
             try
             {
-                serviceClient = modeler.Build(out messages);
+                IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
+
+                // generate model from swagger 
+                codeModel = modeler.Build(out messages);
+
+                // After swagger Parser
+                codeModel = RunExtensions(Trigger.AfterModelCreation, codeModel);
+
+                // After swagger Parser
+                codeModel = RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
+
+                foreach (var message in messages)
+                {
+                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
+                }
+
+                if (messages.Any(entry => entry.Severity >= Settings.Instance.ValidationLevel))
+                {
+                    throw ErrorManager.CreateError(null, Resources.ErrorGeneratingClientModel, "Errors found during Swagger validation");
+                }
             }
             catch (Exception exception)
             {
                 throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
             }
-            finally
-            {
-                // Make sure to log any validation messages
-                foreach (var message in messages)
-                {
-                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
-                }
-                if (messages.Any(entry => entry.Severity >= settings.ValidationLevel))
-                {
-                    throw ErrorManager.CreateError(null, Resources.ErrorGeneratingClientModel, Resources.CodeGenerationError);
-                }
-            }
 
-            CodeGenerator codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
+            var codeGenerator = ExtensionsLoader.GetCodeGenerator();
+
             Logger.WriteOutput(codeGenerator.UsageInstructions);
 
-            settings.Validate();
+            Settings.Instance.Validate();
             try
             {
-                codeGenerator.NormalizeClientModel(serviceClient);
-                codeGenerator.Generate(serviceClient).GetAwaiter().GetResult();
+                // load model into language-specific code model
+                codeModel = codeGenerator.ModelTransformer.Load(codeModel);
+
+                // ensure once we're doing language-specific work, that we're working
+                // in context provided by the language-specific transformer. 
+
+                using (codeGenerator.ModelTransformer.Activate())
+                {
+                    // we've loaded the model, run the extensions for after it's loaded
+                    codeModel = RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
+     
+                    // apply language-specific tranformation (more than just language-specific types)
+                    // used to be called "NormalizeClientModel" . 
+                    codeModel = codeGenerator.ModelTransformer.TransformCodeModel(codeModel);
+
+                    // next set of extensions
+                    codeModel = RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
+
+
+                    // next set of extensions
+                    codeModel = RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
+
+                    // Generate code from CodeModel.
+                    codeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+                }
             }
             catch (Exception exception)
             {
@@ -82,19 +114,29 @@ namespace AutoRest.Core
             }
         }
 
+        public static CodeModel RunExtensions(Trigger trigger, CodeModel codeModel)
+        {
+            /*
+             foreach (var extension in extensions.Where(each => each.trigger == trugger).SortBy(each => each.Priority))
+                 codeModel = extension.Transform(codeModel);
+            */
+
+            return codeModel;
+        }
+
         /// <summary>
         /// Compares two specifications.
         /// </summary>
         /// <param name="settings">Code generator settings.</param>
-        public static void Compare(Settings settings)
+        public static void Compare()
         {
-            if (settings == null)
+            if (Settings.Instance == null)
             {
                 throw new ArgumentNullException("settings");
             }
             Logger.Entries.Clear();
             Logger.LogInfo(Resources.AutoRestCore, Version);
-            Modeler modeler = ExtensionsLoader.GetModeler(settings);
+            Modeler modeler = ExtensionsLoader.GetModeler();
 
             try
             {

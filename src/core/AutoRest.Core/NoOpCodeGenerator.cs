@@ -1,56 +1,25 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using System.Threading.Tasks;
 
 namespace AutoRest.Core
 {
     public class NoOpCodeGenerator: CodeGenerator
     {
-        public NoOpCodeGenerator(Settings settings) : base(settings)
+        public NoOpCodeGenerator() : base( new CodeModelTransformer())
         {
         }
 
-        public override string Description
-        {
-            get
-            {
-                return "No op code generator";
-            }
-        }
+        public override string Description => "No op code generator";
 
-        public override string ImplementationFileExtension
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+        public override string ImplementationFileExtension => string.Empty;
 
-        public override string Name
-        {
-            get
-            {
-                return "No op code generator";
-            }
-        }
+        public override string Name => "No op code generator";
 
-        public override string UsageInstructions
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+        public override string UsageInstructions => string.Empty;
 
-        public override Task Generate(ServiceClient serviceClient)
-        {
-            return Task.FromResult(0);
-        }
-
-        public override void NormalizeClientModel(ServiceClient serviceClient)
-        {
-        }
+        public override Task Generate(CodeModel codeModel) => Task.FromResult(0);
     }
 }

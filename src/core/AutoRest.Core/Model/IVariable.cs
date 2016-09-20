@@ -2,23 +2,205 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
+using System.Globalization;
+using AutoRest.Core.Utilities;
+using AutoRest.Core.Utilities.Collections;
 using AutoRest.Core.Validation;
+using Newtonsoft.Json;
 
-namespace AutoRest.Core.ClientModel
+namespace AutoRest.Core.Model
 {
-    public interface IParameter : ICloneable
+
+    public interface IIdentifier
     {
-        CollectionFormat CollectionFormat { get; set; }
-        Dictionary<Constraint, string> Constraints { get; }
-        string DefaultValue { get; set; }
-        string Documentation { get; set; }
-        Dictionary<string, object> Extensions { get; }
-        bool IsConstant { get; set; }
-        bool IsRequired { get; set; }
+        /// <summary>
+        /// The text to use for the type of this identifier when qualifying it further
+        /// (ie, 'Model', 'Property', 'Operations' ...)
+        /// </summary>
+        [JsonIgnore]
+        string Qualifier {get;}
+
+        /// <summary>
+        /// The natural language type of this Identifier
+        /// (ie "Client Name" , "Client Operation" ...etc)
+        /// </summary>
+        [JsonIgnore]
+        string QualifierType { get; }
+
+        /// <summary>
+        /// Returns the list of names that this element is reserving
+        /// (most of the time, this is just 'this.Name' )
+        /// </summary>
+        [JsonIgnore]
+        IEnumerable<string> MyReservedNames { get; }
+
+        [JsonIgnore]
+        HashSet<string> LocallyUsedNames { get; }
+    }
+
+    public interface IParent
+    {
+        /// <summary>
+        /// Reference to the container of this type.
+        /// </summary>
+        [JsonIgnore][NoCopy]
+        CodeModel CodeModel { get; }
+
+        /// <summary>
+        /// Returns the list of IIdentifiers that are used in this scope 
+        /// and in any parent's scope.
+        /// </summary>
+        [JsonIgnore][NoCopy]
+        IEnumerable<IIdentifier> IdentifiersInScope { get; }
+
+        [JsonIgnore][NoCopy]
+        IEnumerable<IChild> Children { get; }
+
+    }
+    public interface IChild : IIdentifier
+    {
+        [JsonIgnore]
+        IParent Parent { get; }
+
+        void Disambiguate();
+
+    }
+
+    [JsonObject(IsReference = true)]
+    public abstract class IVariable : IChild
+    {
+        private IModelType _modelType;
+        private bool? _isConstant;
+
+        // Fixable<T> properties should always be readonly, 
+        // since they are set via the property accessor
+
+        private readonly Fixable<string> _defaultValue = new Fixable<string>();
+        private readonly Fixable<string> _documentation = new Fixable<string>();
+        private readonly Fixable<string> _name = new Fixable<string>();
+
+        protected IVariable()
+        {
+            // DefaultValue 'OnGet'
+            DefaultValue.OnGet += v => CodeNamer.Instance.EscapeDefaultValue(v ?? ModelType.DefaultValue , ModelType);
+            
+            // Documentation 'OnGet' 
+            Documentation.OnGet += result =>
+            {
+                var extendedDocs = ModelType?.ExtendedDocumentation ?? string.Empty;
+                if (string.IsNullOrWhiteSpace(result))
+                {
+                    return extendedDocs;
+                }
+                if (string.IsNullOrWhiteSpace(extendedDocs))
+                {
+                    return result;
+                }
+                if (result.IndexOf(extendedDocs, StringComparison.Ordinal) > -1)
+                {
+                    return result;
+                }
+                return $"{result.TrimEnd(' ', '.')}. {extendedDocs}";
+            };
+
+            // when the documentation is set strip out superflous characters.
+            _documentation.OnSet += value => value.StripControlCharacters();
+        }
+
+        /// <summary>
+        /// Gets or sets collection format for array parameters.
+        /// </summary>
+        public virtual CollectionFormat CollectionFormat { get; set; }
+
+        /// <summary>
+        /// Gets or sets the constraints.
+        /// </summary>
+        public virtual Dictionary<Constraint, string> Constraints { get; } = new Dictionary<Constraint, string>();
+
+        
+        [JsonProperty]
+        public Fixable<string> DefaultValue
+        {
+            get { return _defaultValue; }
+            set { _defaultValue.CopyFrom(value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the documentation.
+        /// </summary>
+        public Fixable<string> Documentation
+        {
+            get { return _documentation; }
+            set { _documentation.CopyFrom(value); }
+        }
+
+        /// <summary>
+        /// Gets vendor extensions dictionary.
+        /// </summary>
+        public virtual Dictionary<string, object> Extensions { get; } = new Dictionary<string, object>();
+
+        /// <summary>
+        /// Indicates whether this property/parameter is required.
+        /// </summary>
+        public virtual bool IsRequired { get; set; }
+
+        /// <summary>
+        /// Indicates whether the parameter value is constant. If true, default value can not be null.
+        /// </summary>
+        public virtual bool IsConstant
+        {
+            get { return true == (_isConstant ?? ModelType?.IsConstant); }
+            set { _isConstant = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
         [Rule(typeof(IsIdentifier))]
-        string Name { get; set; }
-        string SerializedName { get; set; }
-        IType Type { get; set; }
+        public Fixable<string> Name
+        {
+            get { return _name; }
+            set { _name.CopyFrom(value); }
+        }
+
+        public virtual string ModelTypeName => ModelType.Name;
+
+        /// <summary>
+        /// Gets or sets the name on the wire.
+        /// </summary>
+        public virtual string SerializedName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the model type.
+        /// </summary>
+        public virtual IModelType ModelType
+        {
+            get { return _modelType; }
+            set { _modelType = value; }
+        }
+
+        public virtual HashSet<string> LocallyUsedNames => null;
+
+        public virtual void Disambiguate()
+        {
+            // basic behavior : ask the parent for a unique name for this variable.
+            var originalName = Name;
+            var name = CodeNamer.Instance.GetUnique(originalName, this, Parent.IdentifiersInScope, Parent.Children.Except(this.SingleItemAsEnumerable()));
+            if (name != originalName)
+            {
+                Name = name;
+            }
+        }
+        [JsonIgnore]
+        public abstract IParent Parent { get; set; }
+        [JsonIgnore]
+        public abstract string Qualifier { get; }
+        [JsonIgnore]
+        public virtual string QualifierType => Qualifier;
+        [JsonIgnore]
+        public virtual IEnumerable<string> MyReservedNames  { get { if (!string.IsNullOrEmpty(Name)) { yield return Name; } }}
     }
 }
+  

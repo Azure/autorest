@@ -3,8 +3,9 @@
 
 using System;
 using System.Globalization;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.Core.ClientModel
+namespace AutoRest.Core.Model
 {
     /// <summary>
     /// Defines a parameter mapping.
@@ -53,11 +54,12 @@ namespace AutoRest.Core.ClientModel
         /// <returns>A deep clone of current object.</returns>
         public object Clone()
         {
-            ParameterMapping mapping = new ParameterMapping();
-            mapping.InputParameter = (Parameter)this.InputParameter.Clone();
-            mapping.InputParameterProperty = this.InputParameterProperty;
-            mapping.OutputParameterProperty = this.OutputParameterProperty;
-            return mapping;
+            return  new ParameterMapping
+            {
+                InputParameter = Duplicate(InputParameter),
+                InputParameterProperty = InputParameterProperty,
+                OutputParameterProperty = OutputParameterProperty
+            };
         }
     }
 }

@@ -3,32 +3,31 @@
 
 using System.Globalization;
 
-namespace AutoRest.Core.ClientModel
+namespace AutoRest.Core.Model
 {
     /// <summary>
     /// Defines a collection data type.
     /// </summary>
-    public class SequenceType : IType
+    public class SequenceType : ModelType
     {
-        public SequenceType()
+        protected SequenceType()
         {
-            NameFormat = "IList<{0}>";
+            Name.OnGet+= v=> $"IList<{ElementType}>";
+        }
+
+        public override string Qualifier => "Dictionary";
+        public override string RefName => $"AutoRest.Core.Model.SequenceType, AutoRest.Core";
+        public override void Disambiguate()
+        {
+            // not needed, right?
         }
 
         /// <summary>
         /// Gets or sets the element type of the collection.
         /// </summary>
-        public IType ElementType { get; set; }
+        public virtual IModelType ElementType { get; set; }
 
-        /// <summary>
-        /// Gets or sets the sequence type name format. Defaults to C# list
-        /// </summary>
-        public string NameFormat { get; set; }
-
-        /// <summary>
-        /// Gets the type name
-        /// </summary>
-        public string Name { get { return string.Format(CultureInfo.InvariantCulture, NameFormat, ElementType.Name); } }
+       
 
         /// <summary>
         /// Returns a string representation of the SequenceType object.

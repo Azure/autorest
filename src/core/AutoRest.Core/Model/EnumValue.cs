@@ -2,18 +2,25 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace AutoRest.Core.ClientModel
+namespace AutoRest.Core.Model
 {
     /// <summary>
     /// Defines enumeration values.
     /// </summary>
-    public class EnumValue : IComparable
+    public class EnumValue : IComparable, IChild
     {
         /// <summary>
-        /// Gets or sets the enum value name.
+        /// Gets or sets the literal enum value name.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// The member name to generate for this value.
+        /// </summary>
+        public string MemberName => CodeNamer.Instance.GetEnumMemberName(Name);
 
         /// <summary>
         /// Gets or sets the enum value serialized name.
@@ -57,6 +64,26 @@ namespace AutoRest.Core.ClientModel
             }
 
             return -1;
+        }
+
+        public virtual string Qualifier => "EnumValue";
+        public virtual string QualifierType => "Enum Value";
+
+        public virtual IEnumerable<string> MyReservedNames
+        {
+            get
+            {
+                if( !string.IsNullOrEmpty(Name) ) { yield return Name;}
+            }
+        }
+
+        public virtual HashSet<string> LocallyUsedNames => null;
+
+        public IParent Parent => null;
+
+        public virtual void Disambiguate()
+        {
+            // not needed, right?
         }
     }
 }

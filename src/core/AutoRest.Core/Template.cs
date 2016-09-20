@@ -47,7 +47,10 @@ namespace AutoRest.Core
         /// <summary>
         /// Execute an individual request.
         /// </summary>
-        public abstract Task ExecuteAsync();
+        public virtual Task ExecuteAsync()
+        {
+            return null;
+        }
 
         /// <summary>
         /// Write the attribute string directly to the output

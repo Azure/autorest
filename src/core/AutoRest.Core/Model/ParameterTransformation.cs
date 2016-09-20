@@ -5,8 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.Core.ClientModel
+namespace AutoRest.Core.Model
 {
     /// <summary>
     /// Defines a parameter transformation.
@@ -56,10 +57,12 @@ namespace AutoRest.Core.ClientModel
             //ParameterTransformation paramTransformation = (ParameterTransformation)this.MemberwiseClone();
             //return paramTransformation;
 
-            var transformation = new ParameterTransformation();
-            transformation.OutputParameter = (Parameter) this.OutputParameter.Clone();
-            this.ParameterMappings.ToList().ForEach(pm => transformation.ParameterMappings.Add((ParameterMapping) pm.Clone()));
-            return transformation;
+            var result = new ParameterTransformation
+            {
+                OutputParameter = Duplicate(OutputParameter)
+            };
+            result.ParameterMappings.AddRange( ParameterMappings.Select( each => (ParameterMapping)each.Clone()));
+            return result;
         }
     }
 }

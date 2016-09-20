@@ -1,20 +1,30 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.Core.ClientModel
+namespace AutoRest.Core.Model
 {
     /// <summary>
     /// Defines a model type for enumerations.
     /// </summary>
-    public class EnumType : IType
+    public class EnumType : ModelType
     {
+        protected virtual string ModelAsStringType => New<PrimaryType>(KnownPrimaryType.String).Name;
+
+        public override string RefName => "AutoRest.Core.Model.EnumType, AutoRest.Core";
+        public override string Qualifier => "Enum";
+        public override string QualifierType => "EnumType";
+        public override IEnumerable<IChild> Children => Values;
+
         /// <summary>
         /// Creates a new instance of EnumType object.
         /// </summary>
-        public EnumType()
+        protected EnumType()
         {
             Values = new List<EnumValue>();
         }
@@ -29,15 +39,17 @@ namespace AutoRest.Core.ClientModel
         /// </summary>
         public string SerializedName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the model type name.
-        /// </summary>
-        public string Name { get; set; }
+        public void SetName(string name)
+        {
+            Name = name;
+        }
 
         /// <summary>
         /// Indicates whether the set of enum values will be generated as string constants.
         /// </summary>
         public bool ModelAsString { get; set; }
+
+        public override string DeclarationName => ModelAsString ? ModelAsStringType : base.DeclarationName;
 
         /// <summary>
         /// Returns a string representation of the PrimaryType object.
@@ -51,7 +63,7 @@ namespace AutoRest.Core.ClientModel
             {
                 return "enum";
             }
-            
+
             return Name;
         }
 
@@ -66,7 +78,7 @@ namespace AutoRest.Core.ClientModel
 
             if (enumType != null)
             {
-                return enumType.Name == Name &&
+                return enumType.Name.FixedValue == Name.FixedValue &&
                     enumType.Values.OrderBy(t => t).SequenceEqual(Values.OrderBy(t => t));
             }
             return false;
@@ -82,5 +94,8 @@ namespace AutoRest.Core.ClientModel
         {
             return Values.Count;
         }
+
+        public override string ExtendedDocumentation
+            => $"Possible values include: {string.Join(", ", Values.Select(v => $"'{v.Name}'"))}";
     }
 }

@@ -7,36 +7,92 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using System.Text.RegularExpressions;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Utilities.Collections;
+using AutoRest.Core.Validation;
+using Newtonsoft.Json;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.Core.ClientModel
+namespace AutoRest.Core.Model
 {
     /// <summary>
     /// Defines a method for the client model.
     /// </summary>
-    public class Method : ICloneable
+    public partial class Method : IChild
     {
         private string _description;
         private string _summary;
+        private readonly Fixable<string> _name = new Fixable<string>();
+        private readonly Fixable<string> _group = new Fixable<string>();
+        private MethodGroup _parent;
 
-        /// <summary>
-        /// Initializes a new instance of the Method class.
-        /// </summary>
-        public Method()
+        public string Qualifier => "Method";
+        public string QualifierType => "Method";
+
+        [JsonIgnore]
+        [NoCopy]
+        public MethodGroup MethodGroup
         {
-            Extensions = new Dictionary<string, object>();
-            Parameters = new List<Parameter>();
-            RequestHeaders = new Dictionary<string, string>();
-            Responses = new Dictionary<HttpStatusCode, Response>();
-            InputParameterTransformation = new List<ParameterTransformation>();
-            Scope = new ScopeProvider();
+            get { return _parent; }
+            set
+            {
+                // when the reference to the parent is set
+                // we should disambiguate the name 
+                // it is imporant that this reference gets set before 
+                // the item is actually added to the containing collection.
+
+                if (!ReferenceEquals(_parent, value))
+                {
+                    _parent = value;
+                    // only perform disambiguation if this item is not already 
+                    // referencing the parent 
+
+                    // (which implies that it's in the collection, but I can't prove that.)
+                    Disambiguate();
+
+                    // and if we're adding ourselves to a new parent, better make sure 
+                    // our children are disambiguated too.
+                    Children.Disambiguate();
+                }
+            }
         }
+
+        [JsonIgnore]
+        [NoCopy]
+        public IParent Parent => MethodGroup;
 
         /// <summary>
         /// Gets or sets the method name.
         /// </summary>
-        public string Name { get; set; }
+        [Rule(typeof(IsIdentifier))]
+        public Fixable<string> Name { get { return _name; } set { _name.CopyFrom(value); } }
+
+        /// <summary>
+        /// Gets or sets the group name.
+        /// </summary>
+        public Fixable<string> Group { get { return _group; } set { _group.CopyFrom(value); } }
+
+        partial void InitializeCollections();
+        /// <summary>
+        /// Initializes a new instance of the Method class.
+        /// </summary>
+        protected Method()
+        {
+            InitializeCollections();
+            Name.OnGet += n => CodeNamer.Instance.GetMethodName(n);
+            Group.OnGet += groupName => CodeNamer.Instance.GetMethodGroupName(groupName);
+        }
+
+        public virtual void Disambiguate()
+        {
+            // basic behavior : get a unique name for this method.
+            var originalName = Name;
+            var name = CodeNamer.Instance.GetUnique(originalName, this, Parent.IdentifiersInScope, Parent.Children.Except(this.SingleItemAsEnumerable()));
+            if (name != originalName)
+            {
+                Name = name;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the name defined in the spec (OperationId).
@@ -44,15 +100,10 @@ namespace AutoRest.Core.ClientModel
         public string SerializedName { get; set; }
 
         /// <summary>
-        /// Gets or sets the group name.
-        /// </summary>
-        public string Group { get; set; }
-
-        /// <summary>
         /// Gets or sets the HTTP url.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
-            Justification= "Url might be used as a template, thus making it invalid url in certain scenarios.")]
+            Justification = "Url might be used as a template, thus making it invalid url in certain scenarios.")]
         public string Url { get; set; }
 
         /// <summary>
@@ -65,14 +116,13 @@ namespace AutoRest.Core.ClientModel
         /// </summary>
         public HttpMethod HttpMethod { get; set; }
 
-        /// <summary>
-        /// Gets or sets the method parameters.
-        /// </summary>
-        public List<Parameter> Parameters { get; private set; }
+        [JsonIgnore]
+        public CodeModel CodeModel => Parent?.CodeModel;
 
         /// <summary>
         /// Gets or sets the logical parameter.
         /// </summary>
+        [JsonIgnore]
         public IEnumerable<Parameter> LogicalParameters
         {
             get
@@ -85,23 +135,18 @@ namespace AutoRest.Core.ClientModel
         /// <summary>
         /// Gets or sets the body parameter.
         /// </summary>
-        public Parameter Body
-        {
-            get
-            {
-                return LogicalParameters.FirstOrDefault(p => p.Location == ParameterLocation.Body);
-            }
-        }
+        [JsonIgnore]
+        public Parameter Body => LogicalParameters.FirstOrDefault(p => p.Location == ParameterLocation.Body);
 
         /// <summary>
         /// Gets the list of input Parameter transformations
         /// </summary>
-        public List<ParameterTransformation> InputParameterTransformation { get; private set; }
+        public List<ParameterTransformation> InputParameterTransformation { get; private set; } = new List<ParameterTransformation>();
 
         /// <summary>
         /// Gets or sets request headers.
         /// </summary>
-        public Dictionary<string, string> RequestHeaders { get; private set; }
+        public Dictionary<string, string> RequestHeaders { get; private set; } = new Dictionary<string, string>();
 
         /// <summary>
         /// Gets or sets the request format.
@@ -117,7 +162,7 @@ namespace AutoRest.Core.ClientModel
         /// Gets or sets response bodies by HttpStatusCode.
         /// and headers.
         /// </summary>
-        public Dictionary<HttpStatusCode, Response> Responses { get; private set; }
+        public Dictionary<HttpStatusCode, Response> Responses { get; private set; } = new Dictionary<HttpStatusCode, Response>();
 
         /// <summary>
         /// Gets or sets the default response.
@@ -163,17 +208,12 @@ namespace AutoRest.Core.ClientModel
         /// <summary>
         /// Gets vendor extensions dictionary.
         /// </summary>
-        public Dictionary<string, object> Extensions { get; private set; }
+        public Dictionary<string, object> Extensions { get; private set; } = new Dictionary<string, object>();
 
         /// <summary>
         /// Indicates if the method is deprecated.
         /// </summary>
         public bool Deprecated { get; set; }
-
-        /// <summary>
-        /// Gets 
-        /// </summary>
-        public IScopeProvider Scope { get; private set; }
 
         /// <summary>
         /// Returns a string representation of the Method object.
@@ -187,26 +227,18 @@ namespace AutoRest.Core.ClientModel
                 string.Join(",", Parameters.Select(p => p.ToString())));
         }
 
-        /// <summary>
-        /// Performs a deep clone of a method.
-        /// </summary>
-        /// <returns></returns>
-        public object Clone()
-        {
-            Method newMethod = new Method();
-            newMethod.LoadFrom(this);
-            newMethod.Extensions = new Dictionary<string, object>();
-            newMethod.Parameters = new List<Parameter>();
-            newMethod.RequestHeaders = new Dictionary<string, string>();
-            newMethod.Responses = new Dictionary<HttpStatusCode, Response>();
-            newMethod.InputParameterTransformation = new List<ParameterTransformation>();
-            newMethod.Scope = new ScopeProvider();
-            this.Extensions.ForEach(e => newMethod.Extensions[e.Key] = e.Value);
-            this.Parameters.ForEach(p => newMethod.Parameters.Add((Parameter)p.Clone()));
-            this.InputParameterTransformation.ForEach(m => newMethod.InputParameterTransformation.Add((ParameterTransformation)m.Clone()));
-            this.RequestHeaders.ForEach(r => newMethod.RequestHeaders[r.Key] = r.Value);
-            this.Responses.ForEach(r => newMethod.Responses[r.Key] = r.Value);
-            return newMethod;
-        }
+        [JsonIgnore]
+        public IEnumerable<string> MyReservedNames => Name.Value.SingleItemAsEnumerable();
+
+        [JsonIgnore]
+        public virtual IEnumerable<IIdentifier> IdentifiersInScope => this.SingleItemConcat(Parent?.IdentifiersInScope);
+
+        [JsonIgnore]
+        public IEnumerable<IChild> Children => Parameters;
+
+
+        [JsonIgnore]
+        public virtual HashSet<string> LocallyUsedNames { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
     }
 }

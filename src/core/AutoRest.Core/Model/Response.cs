@@ -3,7 +3,7 @@
 
 using System.Globalization;
 
-namespace AutoRest.Core.ClientModel
+namespace AutoRest.Core.Model
 {
     /// <summary>
     /// Defines a structure for operation response.
@@ -15,7 +15,7 @@ namespace AutoRest.Core.ClientModel
         /// </summary>
         /// <param name="body">Body type.</param>
         /// <param name="headers">Headers type.</param>
-        public Response(IType body, IType headers) : this()
+        public Response(IModelType body, IModelType headers) : this()
         {
             Body = body;
             Headers = headers;
@@ -24,12 +24,12 @@ namespace AutoRest.Core.ClientModel
         /// <summary>
         /// Gets or sets the body type.
         /// </summary>
-        public IType Body{ get; set; }
+        public IModelType Body{ get; set; }
 
         /// <summary>
         /// Gets or sets the headers type.
         /// </summary>
-        public IType Headers { get; set; }
+        public IModelType Headers { get; set; }
 
         /// <summary>
         /// Overrides default Equals method comparing Body and Header properties.

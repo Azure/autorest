@@ -4,7 +4,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-namespace AutoRest.Core.ClientModel
+namespace AutoRest.Core.Model
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public enum KnownFormat
@@ -27,6 +27,7 @@ namespace AutoRest.Core.ClientModel
         uuid,
         base64url,
         @decimal,
-        unixtime
+        unixtime,
+        file
     }
 }

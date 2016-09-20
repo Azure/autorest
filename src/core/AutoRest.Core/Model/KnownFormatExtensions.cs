@@ -4,7 +4,7 @@
 
 using System;
 
-namespace AutoRest.Core.ClientModel
+namespace AutoRest.Core.Model
 {
     public static class KnownFormatExtensions
     {
