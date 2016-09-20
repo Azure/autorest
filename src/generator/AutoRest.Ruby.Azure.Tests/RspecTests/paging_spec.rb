@@ -129,6 +129,21 @@ describe 'Paging' do
     expect(items.count).to eq(10)
   end
 
+  it 'should get multiple pages with fragmented next link' do
+    page = @client.paging.get_multiple_pages_fragment_next_link_as_lazy('1.6', 'test_user')
+    expect(page.is_a? PagingModule::Models::ProductResult)
+    expect(page.odatanext_link).not_to be_nil
+
+    all_item = page.get_all_items
+    expect(all_item.count).to eq(10)
+
+    # Get all items at once
+    all_item = @client.paging.get_multiple_pages_fragment_next_link('1.6', 'test_user')
+    expect(all_item[0].is_a? PagingModule::Models::ProductResult)
+    expect(page.odatanext_link).to be_nil
+    expect(all_item.count).to eq(10)
+  end
+
   # Paging sad path tests
   it 'should get single pages failure' do
     expect { @client.paging.get_single_pages_failure_as_lazy }.to raise_exception(MsRest::HttpOperationError)
