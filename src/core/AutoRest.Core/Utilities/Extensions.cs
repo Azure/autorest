@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
@@ -481,5 +482,12 @@ namespace AutoRest.Core.Utilities
                 child.Disambiguate();
             }
         }
+        public static Task<T> AsResultTask<T>(this T result)
+        {
+            var x = new TaskCompletionSource<T>(TaskCreationOptions.AttachedToParent);
+            x.SetResult(result);
+            return x.Task;
+        }
+
     }
 }

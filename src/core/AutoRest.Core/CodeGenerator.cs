@@ -81,9 +81,12 @@ namespace AutoRest.Core
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public virtual async Task Generate(CodeModel codeModel)
+        public virtual /* async */ Task Generate(CodeModel codeModel)
         {
             ResetFileList();
+            
+            // since we're not actually async, return a completed task.
+            return "".AsResultTask();
         }
 
         /// <summary>
@@ -94,8 +97,9 @@ namespace AutoRest.Core
         /// <returns></returns>
         public async Task Write(ITemplate template, string fileName)
         {
+#if DEBUG_WRITING
             Console.WriteLine($"[WRITING] {template.GetType().Name} => {fileName}");
-
+#endif 
             template.Settings = Settings.Instance;
             var stringBuilder = new StringBuilder();
             using (template.TextWriter = new StringWriter(stringBuilder))
