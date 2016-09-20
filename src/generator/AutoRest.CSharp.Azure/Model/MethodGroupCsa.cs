@@ -3,24 +3,30 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
-using AutoRest.CSharp.TemplateModels;
+using AutoRest.CSharp.Model;
 using AutoRest.Extensions.Azure;
 
-namespace AutoRest.CSharp.Azure.TemplateModels
+namespace AutoRest.CSharp.Azure.Model
 {
-    public class AzureMethodGroupTemplateModel : MethodGroupTemplateModel
+    public class MethodGroupCsa : MethodGroupCs
     {
-        public AzureMethodGroupTemplateModel(ServiceClient serviceClient, string methodGroupName)
-            : base(serviceClient, methodGroupName)
+
+        protected MethodGroupCsa() : base()
         {
-            MethodGroupType = MethodGroupName + "Operations";
-            // Clear base initialized MethodTemplateModels and re-populate with
-            // AzureMethodTemplateModel
-            MethodTemplateModels.Clear();
-            Methods.Where(m => m.Group == methodGroupName)
-                .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient, SyncMethodsGenerationMode.None)));
+            TypeName.OnGet += value =>
+            {
+                if (IsCodeModelMethodGroup)
+                {
+                    return value;
+                }
+                return value.Else("").Contains("Operations") ? value : value + "Operations";
+            };
+        }
+
+        public MethodGroupCsa(string name)
+            : base(name)
+        {
         }
 
         /// <summary>
@@ -32,9 +38,9 @@ namespace AutoRest.CSharp.Azure.TemplateModels
             {
                 yield return "Microsoft.Rest.Azure";
 
-                if (this.ModelTypes.Any(m => !m.Extensions.ContainsKey(AzureExtensions.ExternalExtension)) || this.HeaderTypes.Any())
+                if (CodeModel.ModelTypes.Any(m => !m.Extensions.ContainsKey(AzureExtensions.ExternalExtension)) || CodeModel.HeaderTypes.Any())
                 {
-                    yield return this.ModelsName;
+                    yield return CodeModel.ModelsName;
                 }
             }
         }

@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-namespace AutoRest.CSharp.Azure.TemplateModels
+namespace AutoRest.CSharp.Azure.Model
 {
-    public class PageTemplateModel
+    public class Page
     {
-        public PageTemplateModel(string typeDefinitionName, string nextLinkName, string itemName)
+        public Page(string typeDefinitionName, string nextLinkName, string itemName)
         {
             this.TypeDefinitionName = typeDefinitionName;
             this.NextLinkName = nextLinkName;

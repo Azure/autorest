@@ -1,201 +1,127 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
+// 
 
-using System.Collections.Generic;
+using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.Core;
-using AutoRest.Core.ClientModel;
-using AutoRest.CSharp.Azure.TemplateModels;
+using AutoRest.Core.Model;
+using AutoRest.CSharp.Azure.Model;
 using AutoRest.CSharp.Azure.Templates;
-using AutoRest.CSharp.TemplateModels;
+using AutoRest.CSharp.Model;
 using AutoRest.CSharp.Templates;
 using AutoRest.Extensions.Azure;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Azure
 {
     public class AzureCSharpCodeGenerator : CSharpCodeGenerator
     {
-        private readonly AzureCSharpCodeNamer _namer;
-
         private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.3.2.0";
 
-        // page extensions class dictionary.
-        private IDictionary<KeyValuePair<string, string>, string> pageClasses;
-
-        public IDictionary<KeyValuePair<string, string>, string> PageClasses
+        public AzureCSharpCodeGenerator() : this(new AzureCSharpModelTransformer())
         {
-            get
-            {
-                return pageClasses;
-            }
         }
 
-        public AzureCSharpCodeGenerator(Settings settings) : base(settings)
+        protected AzureCSharpCodeGenerator(AzureCSharpModelTransformer transformer) : base(transformer)
         {
-            _namer = new AzureCSharpCodeNamer(settings);
-            IsSingleFileGenerationSupported = true;
-            pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
+            transformer.AzureCodeGenerator = this;
         }
 
-        public override string Name
-        {
-            get { return "Azure.CSharp"; }
-        }
+        public override string Description => "Azure specific C# code generator.";
 
-        public override string Description
-        {
-            get { return "Azure specific C# code generator."; }
-        }
+        public override string Name => "Azure.CSharp";
 
-        public override string UsageInstructions
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    Properties.Resources.UsageInformation, ClientRuntimePackage);
-            }
-        }
+        public override string UsageInstructions => string.Format(CultureInfo.InvariantCulture,
+            Properties.Resources.UsageInformation, ClientRuntimePackage);
 
-        public override string ImplementationFileExtension
-        {
-            get { return ".cs"; }
-        }
 
         /// <summary>
-        /// Normalizes client model by updating names and types to be language specific.
+        ///     Generates C# code for service client.
         /// </summary>
-        /// <param name="serviceClient"></param>
-        public override void NormalizeClientModel(ServiceClient serviceClient)
-        {
-            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings, _namer);
-            _namer.NormalizeClientModel(serviceClient);
-            _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
-                Settings.Namespace + "." + Settings.ModelsName);
-            _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
-            _namer.NormalizeODataMethods(serviceClient);
-
-            if (serviceClient != null)
-            {
-                foreach (var model in serviceClient.ModelTypes)
-                {
-                    if (model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) && 
-                        (bool)model.Extensions[AzureExtensions.AzureResourceExtension])
-                    {
-                        model.BaseModelType = new CompositeType { Name = "Microsoft.Rest.Azure.IResource", SerializedName = "Microsoft.Rest.Azure.IResource" };
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Generates C# code for service client.
-        /// </summary>
-        /// <param name="serviceClient"></param>
+        /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override async Task Generate(ServiceClient serviceClient)
+        public override async Task Generate(CodeModel cm)
         {
-            // Service client
-            var serviceClientTemplate = new AzureServiceClientTemplate
+            var codeModel = cm as CodeModelCsa;
+            if (codeModel == null)
             {
-                Model = new AzureServiceClientTemplateModel(serviceClient, InternalConstructors),
-            };
-            await Write(serviceClientTemplate, serviceClient.Name + ".cs");
-
-            // Service client extensions
-            if (serviceClient.Methods.Any(m => m.Group == null))
-            {
-                var extensionsTemplate = new ExtensionsTemplate
-                {
-                    Model = new AzureExtensionsTemplateModel(serviceClient, null, SyncMethods),
-                };
-                await Write(extensionsTemplate, serviceClient.Name + "Extensions.cs");
+                throw new InvalidCastException("CodeModel is not a Azure c# CodeModel");
             }
+
+            // Service client
+            var serviceClientTemplate = new AzureServiceClientTemplate {Model = codeModel};
+            await Write(serviceClientTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
 
             // Service client interface
-            var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate
-            {
-                Model = new AzureServiceClientTemplateModel(serviceClient, InternalConstructors),
-            };
-            await Write(serviceClientInterfaceTemplate, "I" + serviceClient.Name + ".cs");
+            var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate {Model = codeModel};
+            await Write(serviceClientInterfaceTemplate, "I" + codeModel.Name + ImplementationFileExtension);
 
             // Operations
-            foreach (var group in serviceClient.MethodGroups)
+            foreach (MethodGroupCs group in codeModel.Operations)
             {
-                // Operation
-                var operationsTemplate = new AzureMethodGroupTemplate
+                if (!group.IsCodeModelMethodGroup)
                 {
-                    Model = new AzureMethodGroupTemplateModel(serviceClient, group),
-                };
-                await Write(operationsTemplate, operationsTemplate.Model.MethodGroupType + ".cs");
+                    // Operation
+                    var operationsTemplate = new AzureMethodGroupTemplate {Model = group};
+                    await Write(operationsTemplate, operationsTemplate.Model.TypeName + ImplementationFileExtension);
 
-                // Service client extensions
-                var operationExtensionsTemplate = new ExtensionsTemplate
-                {
-                    Model = new AzureExtensionsTemplateModel(serviceClient, group, SyncMethods),
-                };
-                await Write(operationExtensionsTemplate, operationExtensionsTemplate.Model.ExtensionName + "Extensions.cs");
-
-                // Operation interface
-                var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate
-                {
-                    Model = new AzureMethodGroupTemplateModel(serviceClient, group),
-                };
-                await Write(operationsInterfaceTemplate, "I" + operationsInterfaceTemplate.Model.MethodGroupType + ".cs");
+                    // Operation interface
+                    var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate {Model = group};
+                    await Write(operationsInterfaceTemplate,
+                        $"I{operationsInterfaceTemplate.Model.TypeName}{ImplementationFileExtension}");
+                }
+                var operationExtensionsTemplate = new ExtensionsTemplate {Model = group};
+                await Write(operationExtensionsTemplate,
+                    $"{group.ExtensionTypeName}Extensions{ImplementationFileExtension}");
             }
 
             // Models
-            foreach (var model in serviceClient.ModelTypes.Concat(serviceClient.HeaderTypes))
+            foreach (CompositeTypeCs model in codeModel.ModelTypes.Concat(codeModel.HeaderTypes))
             {
-                if (model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) && 
+                if (model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
                     (bool) model.Extensions[AzureExtensions.ExternalExtension])
                 {
                     continue;
                 }
 
-                var modelTemplate = new ModelTemplate
-                {
-                    Model = new AzureModelTemplateModel(model),
-                };
-
-                await Write(modelTemplate, Path.Combine(Settings.ModelsName, model.Name + ".cs"));
+                var modelTemplate = new ModelTemplate {Model = model};
+                await Write(modelTemplate,Path.Combine(Singleton<Settings>.Instance.ModelsName,
+                    $"{model.Name}{ImplementationFileExtension}"));
             }
 
             // Enums
-            foreach (var enumType in serviceClient.EnumTypes)
+            foreach (EnumTypeCs enumType in codeModel.EnumTypes)
             {
-                var enumTemplate = new EnumTemplate
-                {
-                    Model = new EnumTemplateModel(enumType),
-                };
-                await Write(enumTemplate, Path.Combine(Settings.ModelsName, enumTemplate.Model.TypeDefinitionName + ".cs"));
+                var enumTemplate = new EnumTemplate {Model = enumType};
+                await Write(enumTemplate,Path.Combine(Settings.Instance.ModelsName,
+                    $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
             }
 
             // Page class
-            foreach (var pageClass in pageClasses)
+            foreach (var pageClass in codeModel.pageClasses)
             {
                 var pageTemplate = new PageTemplate
                 {
-                    Model = new PageTemplateModel(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
+                    Model = new Page(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value)
                 };
-                await Write(pageTemplate, Path.Combine(Settings.ModelsName, pageTemplate.Model.TypeDefinitionName + ".cs"));
+                await Write(pageTemplate, Path.Combine(Settings.Instance.ModelsName,
+                    $"{pageTemplate.Model.TypeDefinitionName}{ImplementationFileExtension}"));
             }
-
             // Exceptions
-            foreach (var exceptionType in serviceClient.ErrorTypes)
+            foreach (CompositeTypeCs exceptionType in codeModel.ErrorTypes)
             {
                 if (exceptionType.Name == "CloudError")
                 {
                     continue;
                 }
 
-                var exceptionTemplate = new ExceptionTemplate
-                {
-                    Model = new ModelTemplateModel(exceptionType),
-                };
-                await Write(exceptionTemplate, Path.Combine(Settings.ModelsName, exceptionTemplate.Model.ExceptionTypeDefinitionName + ".cs"));
+                var exceptionTemplate = new ExceptionTemplate {Model = exceptionType};
+                await Write(exceptionTemplate, Path.Combine(Settings.Instance.ModelsName,
+                     $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
             }
         }
     }

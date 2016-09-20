@@ -2,14 +2,17 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using AutoRest.Core.ClientModel;
-using AutoRest.CSharp.TemplateModels;
+using AutoRest.CSharp.Model;
 
-namespace AutoRest.CSharp.Azure.TemplateModels
+namespace AutoRest.CSharp.Azure.Model
 {
-    public class AzureModelTemplateModel : ModelTemplateModel
+    public class CompositeTypeCsa : CompositeTypeCs
     {
-        public AzureModelTemplateModel(CompositeType source) : base(source)
+        public CompositeTypeCsa() 
+        {
+        }
+
+        public CompositeTypeCsa(string name ) : base(name)
         {
         }
 

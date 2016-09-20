@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
@@ -6,47 +6,34 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Azure.Properties;
-using AutoRest.CSharp.TemplateModels;
+using AutoRest.CSharp.Model;
 using AutoRest.Extensions.Azure;
+using Newtonsoft.Json;
 using IndentedStringBuilder = AutoRest.Core.Utilities.IndentedStringBuilder;
 
-namespace AutoRest.CSharp.Azure.TemplateModels
+namespace AutoRest.CSharp.Azure.Model
 {
-    public class AzureMethodTemplateModel : MethodTemplateModel
+    public class MethodCsa : MethodCs
     {
-        public AzureMethodTemplateModel(Method source, ServiceClient serviceClient, SyncMethodsGenerationMode syncWrappers)
-            : base(source, serviceClient, syncWrappers)
+        public MethodCsa()
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
-
-            ParameterTemplateModels.Clear();
-            LogicalParameterTemplateModels.Clear();
-            source.Parameters.ForEach(p => ParameterTemplateModels.Add(new AzureParameterTemplateModel(p)));
-            source.LogicalParameters.ForEach(p => LogicalParameterTemplateModels.Add(new AzureParameterTemplateModel(p)));
-            if (MethodGroupName != ServiceClient.Name)
-            {
-                MethodGroupName = MethodGroupName + "Operations";
-            }
-
-            this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
-            this.RequestIdString = AzureExtensions.GetRequestIdString(source);
         }
+        
+        [JsonIgnore]
+        public string ClientRequestIdString => AzureExtensions.GetClientRequestIdString(this);
 
-        public string ClientRequestIdString { get; private set; }
+        [JsonIgnore]
+        public string RequestIdString => AzureExtensions.GetRequestIdString(this);
 
-        public string RequestIdString { get; private set; }
-
-        public AzureMethodTemplateModel GetMethod
+        [JsonIgnore]
+        public MethodCsa GetMethod
         {
             get
             {
-                var getMethod = ServiceClient.Methods.FirstOrDefault(m => m.Url == Url
+                var getMethod = CodeModel.Methods.FirstOrDefault(m => m.Url == Url
                                                                           && m.HttpMethod == HttpMethod.Get &&
                                                                           m.Group == Group);
                 if (getMethod == null)
@@ -56,7 +43,9 @@ namespace AutoRest.CSharp.Azure.TemplateModels
                         Resources.InvalidLongRunningOperationForCreateOrUpdate,
                             Name, Group));
                 }
-                return new AzureMethodTemplateModel(getMethod, ServiceClient, SyncMethods);
+                MethodCsa method = getMethod as MethodCsa;
+                method.SyncMethods = SyncMethods;
+                return method;
             }
         }
 
@@ -99,10 +88,7 @@ namespace AutoRest.CSharp.Azure.TemplateModels
         /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.
         /// </summary>
-        public bool IsLongRunningOperation
-        {
-            get { return Extensions.ContainsKey(AzureExtensions.LongRunningExtension); }
-        }
+        public bool IsLongRunningOperation => Extensions.ContainsKey(AzureExtensions.LongRunningExtension);
 
         private string ReturnTypePageInterfaceName
         {
@@ -130,26 +116,22 @@ namespace AutoRest.CSharp.Azure.TemplateModels
             {
                 if (ReturnType.Body != null)
                 {
-                    string bodyName = ReturnType.Body.Name;
-                    if (!string.IsNullOrEmpty(ReturnTypePageInterfaceName))
-                    {
-                        bodyName = ReturnTypePageInterfaceName;
-                    }
+                   
                     if (ReturnType.Headers != null)
                     {
                         return string.Format(CultureInfo.InvariantCulture,
-                                    "Microsoft.Rest.Azure.AzureOperationResponse<{0},{1}>", bodyName, ReturnType.Headers.Name);
+                                    "Microsoft.Rest.Azure.AzureOperationResponse<{0},{1}>", ReturnTypeString, ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head));
                     }
                     else
                     {
                         return string.Format(CultureInfo.InvariantCulture,
-                                    "Microsoft.Rest.Azure.AzureOperationResponse<{0}>", bodyName);
+                                    "Microsoft.Rest.Azure.AzureOperationResponse<{0}>", ReturnTypeString);
                     }
                 }
                 else if (ReturnType.Headers != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                                    "Microsoft.Rest.Azure.AzureOperationHeaderResponse<{0}>", ReturnType.Headers.Name);
+                                    "Microsoft.Rest.Azure.AzureOperationHeaderResponse<{0}>", ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head));
                 }
                 else
                 {
@@ -161,13 +143,7 @@ namespace AutoRest.CSharp.Azure.TemplateModels
         /// <summary>
         /// Get the type name for the method's return type
         /// </summary>
-        public override string ReturnTypeString
-        {
-            get
-            {
-                return ReturnTypePageInterfaceName ?? base.ReturnTypeString;
-            }
-        }
+        public override string ReturnTypeString => ReturnTypePageInterfaceName ?? base.ReturnTypeString;
 
         /// <summary>
         /// Get the return type for the async extension method
@@ -227,6 +203,7 @@ namespace AutoRest.CSharp.Azure.TemplateModels
         /// <summary>
         /// Gets the expression for default header setting. 
         /// </summary>
+        [JsonIgnore]
         public override string SetDefaultHeaders
         {
             get
@@ -279,10 +256,10 @@ namespace AutoRest.CSharp.Azure.TemplateModels
         private void AddQueryParametersToUri(string variableName, IndentedStringBuilder builder)
         {
             builder.AppendLine("System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();");
-            if (LogicalParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
+            if (LogicalParameters.Any(p => p.Location == ParameterLocation.Query))
             {
-                foreach (var queryParameter in LogicalParameterTemplateModels
-                    .Where(p => p.Location == ParameterLocation.Query).Select(p => p as AzureParameterTemplateModel))
+                foreach (var queryParameter in LogicalParameters
+                    .Where(p => p.Location == ParameterLocation.Query).Select(p => p as ParameterCsa))
                 {
                     string queryParametersAddString =
                         "_queryParameters.Add(string.Format(\"{0}={{0}}\", System.Uri.EscapeDataString({1})));";
@@ -335,7 +312,7 @@ namespace AutoRest.CSharp.Azure.TemplateModels
 
         private void ReplacePathParametersInUri(string variableName, IndentedStringBuilder builder)
         {
-            foreach (var pathParameter in LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
+            foreach (var pathParameter in LogicalParameters.Where(p => p.Location == ParameterLocation.Path))
             {
                 string replaceString = "{0} = {0}.Replace(\"{{{1}}}\", System.Uri.EscapeDataString({2}));";
                 if (pathParameter.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension))
@@ -346,7 +323,7 @@ namespace AutoRest.CSharp.Azure.TemplateModels
                 builder.AppendLine(replaceString,
                     variableName,
                     pathParameter.SerializedName,
-                    pathParameter.Type.ToString(ClientReference, pathParameter.Name));
+                    pathParameter.ModelType.ToString(ClientReference, pathParameter.Name));
             }
         }
     }
