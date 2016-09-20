@@ -15,7 +15,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
     /// </summary>
     public partial interface IAutoRestSwaggerBATFileService : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

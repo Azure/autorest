@@ -39,7 +39,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// Gets the IBasicOperations.
         /// </summary>
-        public virtual IBasicOperations BasicOperations { get; private set; }
+        public virtual IBasicOperations Basic { get; private set; }
 
         /// <summary>
         /// Gets the IPrimitive.
@@ -155,7 +155,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// </summary>
         private void Initialize()
         {
-            this.BasicOperations = new BasicOperations(this);
+            this.Basic = new BasicOperations(this);
             this.Primitive = new Primitive(this);
             this.Array = new Array(this);
             this.Dictionary = new Dictionary(this);

@@ -16,7 +16,7 @@ var util = require('util');
  * @class
  * Initializes a new instance of the ArrayWrapper class.
  * @constructor
- * @member {array} [array]
+ * @member {array} [arrayProperty]
  * 
  */
 function ArrayWrapper() {
@@ -36,7 +36,7 @@ ArrayWrapper.prototype.mapper = function () {
       name: 'Composite',
       className: 'ArrayWrapper',
       modelProperties: {
-        array: {
+        arrayProperty: {
           required: false,
           serializedName: 'array',
           type: {

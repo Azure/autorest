@@ -17,7 +17,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
     /// </summary>
     public partial interface IAutoRestParameterGroupingTestService : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

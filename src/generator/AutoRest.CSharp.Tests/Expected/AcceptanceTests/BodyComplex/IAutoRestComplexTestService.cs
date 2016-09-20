@@ -15,7 +15,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
     /// </summary>
     public partial interface IAutoRestComplexTestService : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }
@@ -39,7 +39,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// Gets the IBasicOperations.
         /// </summary>
-        IBasicOperations BasicOperations { get; }
+        IBasicOperations Basic { get; }
 
         /// <summary>
         /// Gets the IPrimitive.

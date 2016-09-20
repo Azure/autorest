@@ -15,7 +15,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
     /// </summary>
     public partial interface IAutoRestDateTimeTestService : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

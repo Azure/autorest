@@ -36,7 +36,7 @@ namespace @Settings.Namespace
         {
         @foreach (var operation in Model.AllOperations) 
         {
-            @:this.@(operation.TypeName) = new @(operation.TypeName)(this);
+            @:this.@(operation.NameForProperty) = new @(operation.TypeName)(this);
         }
 
         @if (Model.IsCustomBaseUri)

@@ -117,7 +117,7 @@ namespace AutoRest.NodeJS
             {
                 foreach (var parameter in method.Parameters)
                 {
-                    if (parameter.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
+                    if (parameter.SerializedName.EqualsIgnoreCase("$filter") &&
                         (parameter.Location == ParameterLocation.Query) &&
                         parameter.ModelType is CompositeType)
                     {

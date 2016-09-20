@@ -11,6 +11,20 @@
 
 /**
  * @class
+ * Initializes a new instance of the ProductResult class.
+ * @constructor
+ * @member {array} [values]
+ * 
+ * @member {string} [nextLink]
+ * 
+ */
+export interface ProductResult {
+  values?: Product[];
+  nextLink?: string;
+}
+
+/**
+ * @class
  * Initializes a new instance of the Product class.
  * @constructor
  * @member {object} [properties]
@@ -36,6 +50,20 @@ export interface Product {
 export interface ProductProperties {
   id?: number;
   name?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the OdataProductResult class.
+ * @constructor
+ * @member {array} [values]
+ * 
+ * @member {string} [odatanextLink]
+ * 
+ */
+export interface OdataProductResult {
+  values?: Product[];
+  odatanextLink?: string;
 }
 
 /**

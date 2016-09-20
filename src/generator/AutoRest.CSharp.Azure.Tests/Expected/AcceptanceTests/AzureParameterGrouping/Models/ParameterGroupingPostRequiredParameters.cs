@@ -11,7 +11,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
     using System.Linq;
 
     /// <summary>
-    /// Additional parameters for the parameterGrouping_postRequired operation.
+    /// Additional parameters for the ParameterGrouping_PostRequired operation.
     /// </summary>
     public partial class ParameterGroupingPostRequiredParameters
     {

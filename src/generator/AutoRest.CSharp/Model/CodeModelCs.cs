@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using Newtonsoft.Json;
 
@@ -56,5 +57,12 @@ namespace AutoRest.CSharp.Model
 
         [JsonIgnore]
         public bool NeedsTransformationConverter => ModelTypes.Any(m => m.Properties.Any(p => p.WasFlattened()));
+
+        /// <summary>
+        /// Returns the list of names that this element is reserving
+        /// (most of the time, this is just 'this.Name' )
+        /// </summary>
+        public override IEnumerable<string> MyReservedNames
+            => base.MyReservedNames.ConcatSingleItem(Namespace.Else("").Substring(Namespace.Else("").LastIndexOf('.') + 1)).Where( each => !each.IsNullOrEmpty());
     }
 }

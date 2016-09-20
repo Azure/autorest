@@ -27,7 +27,7 @@ export interface ErrorModel {
  * @class
  * Initializes a new instance of the ParameterGroupingPostRequiredParameters class.
  * @constructor
- * Additional parameters for the parameterGrouping_postRequired operation.
+ * Additional parameters for the ParameterGrouping_postRequired operation.
  *
  * @member {number} body
  * 
@@ -49,7 +49,7 @@ export interface ParameterGroupingPostRequiredParameters {
  * @class
  * Initializes a new instance of the ParameterGroupingPostOptionalParameters class.
  * @constructor
- * Additional parameters for the parameterGrouping_postOptional operation.
+ * Additional parameters for the ParameterGrouping_postOptional operation.
  *
  * @member {string} [customHeader]
  * 
@@ -66,8 +66,8 @@ export interface ParameterGroupingPostOptionalParameters {
  * Initializes a new instance of the FirstParameterGroup class.
  * @constructor
  * Additional parameters for a set of operations, such as:
- * parameterGrouping_postMultiParamGroups,
- * parameterGrouping_postSharedParameterGroupObject.
+ * ParameterGrouping_postMultiParamGroups,
+ * ParameterGrouping_postSharedParameterGroupObject.
  *
  * @member {string} [headerOne]
  * 
@@ -84,7 +84,7 @@ export interface FirstParameterGroup {
  * @class
  * Initializes a new instance of the ParameterGroupingPostMultiParamGroupsSecondParamGroup class.
  * @constructor
- * Additional parameters for the parameterGrouping_postMultiParamGroups
+ * Additional parameters for the ParameterGrouping_postMultiParamGroups
  * operation.
  *
  * @member {string} [headerTwo]

@@ -17,7 +17,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
     /// </summary>
     public partial interface IAutoRestReportServiceForAzure : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }
@@ -55,7 +55,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         bool? GenerateClientRequestId { get; set; }
 
 
-            /// <summary>
+        /// <summary>
         /// Get test coverage report
         /// </summary>
         /// <param name='customHeaders'>

@@ -15,7 +15,7 @@ namespace Fixtures.AcceptanceTestsUrl
     /// </summary>
     public partial interface IAutoRestUrlTestService : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

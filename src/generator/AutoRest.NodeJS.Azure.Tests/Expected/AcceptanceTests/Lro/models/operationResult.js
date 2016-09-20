@@ -20,11 +20,12 @@ var models = require('./index');
  * include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
  * 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  * 
- * @member {object} [error]
+ * @member {object} [errorProperty]
  * 
- * @member {number} [error.code] The error code for an operation failure
+ * @member {number} [errorProperty.code] The error code for an operation
+ * failure
  * 
- * @member {string} [error.message] The detailed arror message
+ * @member {string} [errorProperty.message] The detailed arror message
  * 
  */
 function OperationResult() {
@@ -51,7 +52,7 @@ OperationResult.prototype.mapper = function () {
             name: 'String'
           }
         },
-        error: {
+        errorProperty: {
           required: false,
           serializedName: 'error',
           type: {

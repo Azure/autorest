@@ -15,7 +15,7 @@ namespace Fixtures.AcceptanceTestsHeader
     /// </summary>
     public partial interface IAutoRestSwaggerBATHeaderService : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }
