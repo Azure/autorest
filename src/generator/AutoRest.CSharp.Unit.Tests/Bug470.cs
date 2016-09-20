@@ -29,61 +29,62 @@ namespace AutoRest.CSharp.Unit.Tests
         {
             using (NewContext)
             {
-            string modelsName = "MyModels";
+                string modelsName = "MyModels";
 
-            MemoryFileSystem fileSystem = CreateMockFilesystem();
+                MemoryFileSystem fileSystem = CreateMockFilesystem();
 
-            var settings = new Settings
-            {
-                Modeler = "Swagger",
-                CodeGenerator = "CSharp",
-                FileSystem = fileSystem,
-                OutputDirectory = "GeneratedCode",
-                Namespace = "Test",
-                ModelsName = modelsName
-            };
+                var settings = new Settings
+                {
+                    Modeler = "Swagger",
+                    CodeGenerator = "CSharp",
+                    FileSystem = fileSystem,
+                    OutputDirectory = "GeneratedCode",
+                    Namespace = "Test",
+                    ModelsName = modelsName
+                };
 
-            using (fileSystem = $"{GetType().Name}.yaml".GenerateCodeInto(fileSystem, settings))
-            {
-                // Expected Files
-                Assert.True(fileSystem.FileExists($@"{settings.OutputDirectory}\{modelsName}\ResultObject.cs"));
+                using (fileSystem = $"{GetType().Name}.yaml".GenerateCodeInto(fileSystem, settings))
+                {
+                    // Expected Files
+                    Assert.True(fileSystem.FileExists($@"{settings.OutputDirectory}\{modelsName}\ResultObject.cs"));
 
-                var result = await Compile(fileSystem);
+                    var result = await Compile(fileSystem);
 
-                // filter the warnings
-                var warnings = result.Messages.Where(
-                    each => each.Severity == DiagnosticSeverity.Warning
-                            && !SuppressWarnings.Contains(each.Id)).ToArray();
+                    // filter the warnings
+                    var warnings = result.Messages.Where(
+                        each => each.Severity == DiagnosticSeverity.Warning
+                                && !SuppressWarnings.Contains(each.Id)).ToArray();
 
-                // use this to dump the files to disk for examination
-                // fileSystem.SaveFilesToTemp($"{GetType().Name}");
+                    // use this to dump the files to disk for examination
+                    // fileSystem.SaveFilesToTemp($"{GetType().Name}");
 
-                // filter the errors
-                var errors = result.Messages.Where(each => each.Severity == DiagnosticSeverity.Error).ToArray();
+                    // filter the errors
+                    var errors = result.Messages.Where(each => each.Severity == DiagnosticSeverity.Error).ToArray();
 
-                Write(warnings, fileSystem);
-                Write(errors, fileSystem);
+                    Write(warnings, fileSystem);
+                    Write(errors, fileSystem);
 
-                // use this to write out all the messages, even hidden ones.
-                // Write(result.Messages, fileSystem);
+                    // use this to write out all the messages, even hidden ones.
+                    // Write(result.Messages, fileSystem);
 
-                // Don't proceed unless we have zero Warnings.
-                Assert.Empty(warnings);
+                    // Don't proceed unless we have zero Warnings.
+                    Assert.Empty(warnings);
 
-                // Don't proceed unless we have zero Errors.
-                Assert.Empty(errors);
+                    // Don't proceed unless we have zero Errors.
+                    Assert.Empty(errors);
 
-                // Should also succeed.
-                Assert.True(result.Succeeded);
+                    // Should also succeed.
+                    Assert.True(result.Succeeded);
 
-                // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
-                Assert.NotNull(asm);
+                    // try to load the assembly
+                    var asm = Assembly.Load(result.Output.GetBuffer());
+                    Assert.NotNull(asm);
 
-                // verify that we have the class we expected
-                var resultObject =
-                    asm.ExportedTypes.FirstOrDefault(each => each.FullName == $"Test.{modelsName}.ResultObject");
-                Assert.NotNull(resultObject);
+                    // verify that we have the class we expected
+                    var resultObject =
+                        asm.ExportedTypes.FirstOrDefault(each => each.FullName == $"Test.{modelsName}.ResultObject");
+                    Assert.NotNull(resultObject);
+                }
             }
         }
     }

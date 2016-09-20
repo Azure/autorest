@@ -81,9 +81,7 @@ namespace AutoRest.CSharp.Unit.Tests
             var codeGenerator = new CSharpCodeGenerator();
             var modeler = ExtensionsLoader.GetModeler();
             var codeModel = modeler.Build();
-#if gws_remove
-            codeGenerator.NormalizeClientModel(sc);
-#endif
+
             // After swagger Parser
             codeModel = AutoRestController.RunExtensions(Trigger.AfterModelCreation, codeModel);
 
