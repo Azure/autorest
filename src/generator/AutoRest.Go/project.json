@@ -22,7 +22,7 @@
   "frameworks": {
     "net451": {
       "frameworkAssemblies": {
-        "System.Data.Entity.Design": "4.0.0.0"
+        "System.Data.Entity.Design": ""
       }
     }
   },
