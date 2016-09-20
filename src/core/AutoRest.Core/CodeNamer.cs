@@ -526,8 +526,9 @@ namespace AutoRest.Core
             while ((conflict = IsNameLegal(desiredName)) != null)
             {
                 desiredName += whoIsAsking.Qualifier;
-                Singleton<Log>.Instance?.Add(new Message {Text = $"todo:{conflict}"});
                 // todo: gws: log the name change because it conflicted with a reserved word.
+                // Singleton<Log>.Instance?.Add(new Message {Text = $"todo:{conflict}"});
+
             }
 
             // does it conflict with a type name locally? (add a Qualifier Suffix)
@@ -536,9 +537,10 @@ namespace AutoRest.Core
             while (null != (confl = IsNameAvailable(desiredName, names)))
             {
                 desiredName += whoIsAsking.Qualifier;
-                Singleton<Log>.Instance?.Add(new Message {Text = $"todo:{confl}"});
-
                 // todo: gws: log the name change because there was something else named that.
+                // Singleton<Log>.Instance?.Add(new Message {Text = $"todo:{confl}"});
+
+                
                 // reason = string.Format(CultureInfo.InvariantCulture, Resources.NamespaceConflictReasonMessage,desiredName, ...?
             }
 

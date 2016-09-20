@@ -5,7 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;

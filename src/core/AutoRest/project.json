@@ -50,8 +50,9 @@
     "AutoRest.CSharp.Azure": { "target": "project", "type": "build" },
     "AutoRest.NodeJS": { "target": "project", "type": "build" },
     "AutoRest.NodeJS.Azure": { "target": "project", "type": "build" }
-  },"disabled_dependencies": {
-  "AutoRest.AzureResourceSchema": { "target": "project", "type": "build" },
+  },
+    
+  "disabled_dependencies": {
     "AutoRest.Java.Azure": { "target": "project", "type": "build" },
     "AutoRest.Python.Azure": { "target": "project", "type": "build" },
     "AutoRest.Ruby.Azure": { "target": "project", "type": "build" },
@@ -61,6 +62,6 @@
     "AutoRest.Python": { "target": "project", "type": "build" },
     "AutoRest.Ruby": { "target": "project", "type": "build" },
     "AutoRest.Go": { "target": "project", "type": "build" },
-    "AutoRest.CSharp.Azure.Fluent": "0.17.0-*"
+    "AutoRest.CSharp.Azure.Fluent": { "target": "project", "type": "build" }
   }
 }

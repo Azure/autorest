@@ -5,7 +5,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using Newtonsoft.Json;
 using YamlDotNet.Serialization;
 

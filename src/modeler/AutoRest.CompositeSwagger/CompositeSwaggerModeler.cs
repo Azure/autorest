@@ -8,7 +8,7 @@ using System.Linq;
 using AutoRest.CompositeSwagger.Model;
 using AutoRest.CompositeSwagger.Properties;
 using AutoRest.Core;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger;
@@ -16,17 +16,14 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CompositeSwagger
 {
     public class CompositeSwaggerModeler : Modeler
     {
-        public CompositeSwaggerModeler(Settings settings) : base(settings)
+        public CompositeSwaggerModeler()
         {
-            if (settings == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
         }
 
         public override string Name
@@ -34,7 +31,7 @@ namespace AutoRest.CompositeSwagger
             get { return "CompositeSwagger"; }
         }
 
-        public override ServiceClient Build()
+        public override CodeModel Build()
         {
             var compositeSwaggerModel = Parse(Settings.Input);
             if (compositeSwaggerModel == null)
@@ -64,20 +61,24 @@ namespace AutoRest.CompositeSwagger
                 }
             }
 
-            ServiceClient compositeClient = InitializeServiceClient(compositeSwaggerModel);
+            CodeModel compositeClient = InitializeServiceClient(compositeSwaggerModel);
+            using (NewContext)
+            {
+               
             foreach (var childSwaggerPath in compositeSwaggerModel.Documents)
             {
                 Settings.Input = childSwaggerPath;
-                var swaggerModeler = new SwaggerModeler(Settings);
+                    var swaggerModeler = new SwaggerModeler();
                 var serviceClient = swaggerModeler.Build();
                 compositeClient = Merge(compositeClient, serviceClient);
+            }
             }
             return compositeClient;
         }
 
-        private ServiceClient InitializeServiceClient(CompositeServiceDefinition compositeSwaggerModel)
+        private CodeModel InitializeServiceClient(CompositeServiceDefinition compositeSwaggerModel)
         {
-            ServiceClient compositeClient = new ServiceClient();
+            CodeModel compositeClient = New<CodeModel>();
 
             if (string.IsNullOrWhiteSpace(Settings.ClientName))
             {
@@ -118,7 +119,7 @@ namespace AutoRest.CompositeSwagger
             }
         }
 
-        private static ServiceClient Merge(ServiceClient compositeClient, ServiceClient subClient)
+        private static CodeModel Merge(CodeModel compositeClient, CodeModel subClient)
         {
             if (compositeClient == null)
             {
@@ -151,7 +152,7 @@ namespace AutoRest.CompositeSwagger
                 var compositeClientProperty = compositeClient.Properties.FirstOrDefault(p => p.Name == subClientProperty.Name);
                 if (compositeClientProperty == null)
                 {
-                    compositeClient.Properties.Add(subClientProperty);
+                    compositeClient.Add( subClientProperty);
                 }
                 else
                 {
@@ -165,7 +166,7 @@ namespace AutoRest.CompositeSwagger
                 var compositeClientModel = compositeClient.ModelTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
                 if (compositeClientModel == null)
                 {
-                    compositeClient.ModelTypes.Add(subClientModel);
+                    compositeClient.Add(subClientModel);
                 }
                 else
                 {
@@ -179,7 +180,7 @@ namespace AutoRest.CompositeSwagger
                 var compositeClientModel = compositeClient.EnumTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
                 if (compositeClientModel == null)
                 {
-                    compositeClient.EnumTypes.Add(subClientModel);
+                    compositeClient.Add(subClientModel);
                 }
                 else
                 {
@@ -193,7 +194,7 @@ namespace AutoRest.CompositeSwagger
                 var compositeClientModel = compositeClient.ErrorTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
                 if (compositeClientModel == null)
                 {
-                    compositeClient.ErrorTypes.Add(subClientModel);
+                    compositeClient.AddError(subClientModel);
                 }
                 else
                 {
@@ -207,7 +208,7 @@ namespace AutoRest.CompositeSwagger
                 var compositeClientModel = compositeClient.HeaderTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
                 if (compositeClientModel == null)
                 {
-                    compositeClient.HeaderTypes.Add(subClientModel);
+                    compositeClient.AddHeader(subClientModel);
                 }
                 else
                 {
@@ -241,7 +242,8 @@ namespace AutoRest.CompositeSwagger
                             parameter.ClientProperty = clientProperty;
                         }
                     }
-                    compositeClient.Methods.Add(subClientMethod);
+                    compositeClient.Add(subClientMethod);
+                    
                 }
             }
 
@@ -286,7 +288,7 @@ namespace AutoRest.CompositeSwagger
             }
         }
 
-        public override ServiceClient Build(out IEnumerable<ValidationMessage> messages)
+        public override CodeModel Build(out IEnumerable<ValidationMessage> messages)
         {
             // No composite modeler validation messages yet
             messages = new List<ValidationMessage>();
