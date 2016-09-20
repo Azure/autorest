@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -34,10 +35,25 @@ namespace AutoRest.Core.Model
         /// </summary>
         public List<EnumValue> Values { get; private set; }
 
-        /// <summary>
-        /// Gets or sets the model type name on the wire.
-        /// </summary>
-        public string SerializedName { get; set; }
+        /// <Summary>
+        /// Backing field for <code>SerializedName</code> property. 
+        /// </Summary>
+        /// <remarks>This field should be marked as 'readonly' as write access to it's value is controlled thru Fixable[T].</remarks>
+        private readonly Fixable<string> _serializedName = new Fixable<string>();
+
+        /// <Summary>
+        /// The name on the wire for the Enum.
+        /// </Summary>
+        /// <remarks>
+        /// The Get and Set operations for this accessor may be overridden by using the 
+        /// <code>SerializedName.OnGet</code> and <code>SerializedName.OnSet</code> events in this class' constructor.
+        /// (ie <code> SerializedName.OnGet += serializedName => serializedName.ToUpper();</code> )
+        /// </remarks>
+        public Fixable<string> SerializedName
+        {
+            get { return _serializedName; }
+            set { _serializedName.CopyFrom(value); }
+        }
 
         public void SetName(string name)
         {

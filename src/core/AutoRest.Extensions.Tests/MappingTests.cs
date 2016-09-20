@@ -12,7 +12,7 @@ namespace AutoRest.Extensions.Tests
 {
     public class MappingExtensionsTests
     {
-        [Fact(Skip = "gws - disabled, because normaliztion not done anymore")]
+        [Fact(Skip = "ToDo - turn this into a test in C# Tests")]
         public void TestInputMapping()
         {
             using (NewContext)
@@ -32,9 +32,7 @@ namespace AutoRest.Extensions.Tests
                 var modeler = new SwaggerModeler();
                 var clientModel = modeler.Build();
                 CSharpCodeGenerator generator = new CSharpCodeGenerator();
-#if gws_remove
-            generator.NormalizeClientModel(clientModel);
-#endif
+
                 generator.Generate(clientModel).GetAwaiter().GetResult();
                 string body = settings.FileSystem.ReadFileAsText(Path.Combine(settings.OutputDirectory, "Payload.cs"));
                 Assert.True(body.ContainsMultiline(@"

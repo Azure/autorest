@@ -15,7 +15,6 @@ using Newtonsoft.Json.Converters;
 
 namespace AutoRest.Core
 {
-    // todo: gws - why jsonobject here?
     [JsonObject(MemberSerialization.OptIn)]
     public abstract class CodeGenerator
     {

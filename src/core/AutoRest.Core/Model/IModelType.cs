@@ -119,7 +119,7 @@ namespace AutoRest.Core.Model
         {
             // basic behavior : ensure that my name is unique.
             var originalName = Name;
-            var name = CodeNamer.Instance.GetUnique(originalName, this, Parent.IdentifiersInScope, Parent.Children.Except(this.SingleItemAsEnumerable()));
+            var name = CodeNamer.Instance.GetUnique(originalName, this, Parent.IdentifiersInScope.Except(this.SingleItemAsEnumerable()), Parent.Children.Except(this.SingleItemAsEnumerable()));
             if (name != originalName)
             {
                 Name = name;

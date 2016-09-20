@@ -148,7 +148,7 @@ namespace AutoRest.Core.Utilities
             {
                 return ReferenceEquals(null,x.Value);
             }
-            return Equals(x.Value, y.Value);
+            return x.Value.Equals(y.Value);
         }
 
         public static bool operator !=(Fixable<T> x, Fixable<T> y)

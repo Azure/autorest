@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -12,6 +13,28 @@ namespace AutoRest.Core.Utilities
         public void WriteFile(string path, string contents)
         {
             File.WriteAllText(path, contents, Encoding.UTF8);
+        }
+
+        /// <summary>
+        /// Returns whether or not that <paramref name="path"/> is an absolute URI or rooted path
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static bool IsCompletePath(string path)
+            => Path.IsPathRooted(path) || Uri.IsWellFormedUriString(path, UriKind.Absolute);
+
+        /// <summary>
+        /// Roots the <paramref name="relativePath"/> using the <paramref name="rootPath"/>
+        /// Works whether the <paramref name="rootPath"/> is an absolute URI (e.g. https://contoso.com/swaggers)
+        /// or a rooted local URI (e.g. C:/swaggers/)
+        /// </summary>
+        /// <param name="rootPath"></param>
+        /// <param name="relativePath"></param>
+        /// <returns></returns>
+        public static string MakePathRooted(Uri rootPath, string relativePath)
+        {
+            var combined = new Uri(rootPath, relativePath);
+            return combined.IsAbsoluteUri ? combined.AbsoluteUri : combined.LocalPath;
         }
 
         public string ReadFileAsText(string path)

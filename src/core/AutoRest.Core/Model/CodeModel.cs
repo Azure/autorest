@@ -76,7 +76,11 @@ namespace AutoRest.Core.Model
             {
                 if (string.IsNullOrWhiteSpace(_name))
                 {
-                    _name = CodeNamer.Instance.GetClientName(value);
+                    if (value != _name)
+                    {
+                        _name = CodeNamer.Instance.GetClientName(value);
+                        Children.Disambiguate();
+                    }
                 }
             }
         }
@@ -91,7 +95,11 @@ namespace AutoRest.Core.Model
             {
                 if (string.IsNullOrWhiteSpace(_namespace))
                 {
-                    _namespace = CodeNamer.Instance.GetNamespaceName(value);
+                    if (value != _namespace)
+                    {
+                        _namespace = CodeNamer.Instance.GetNamespaceName(value);
+                        Children.Disambiguate();
+                    }
                 }
             }
         }
@@ -188,7 +196,7 @@ namespace AutoRest.Core.Model
         public string QualifierType => "Service Client";
 
         [JsonIgnore]
-        public IEnumerable<string> MyReservedNames
+        public virtual IEnumerable<string> MyReservedNames
         {
             get
             {

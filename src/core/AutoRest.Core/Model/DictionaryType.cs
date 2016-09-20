@@ -14,7 +14,7 @@ namespace AutoRest.Core.Model
     {
         protected DictionaryType()
         {
-            Name.OnGet += value => $"Dictionary<string,{ValueType}";
+            Name.OnGet += value => $"Dictionary<string,{ValueType}>";
         }
 
         /// <summary>
