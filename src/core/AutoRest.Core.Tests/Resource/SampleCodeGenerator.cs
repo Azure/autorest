@@ -3,18 +3,21 @@
 
 using System.IO;
 using System.Threading.Tasks;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Tests.Templates;
 
 namespace AutoRest.Core.Tests.Resource
 {
     public class SampleCodeGenerator : CodeGenerator
     {
-        public SampleCodeGenerator(Settings settings)
-            : base(settings)
+        public SampleCodeGenerator()
+            : base(new CodeModelTransformer())
         {
-            IsSingleFileGenerationSupported = true;
+            
         }
+
+        public override bool IsSingleFileGenerationSupported => true;
+
 
         public override string Name
         {
@@ -36,16 +39,12 @@ namespace AutoRest.Core.Tests.Resource
             get { return ".cs"; }
         }
 
-        public override async Task Generate(ServiceClient serviceClient)
+        public override async Task Generate(CodeModel codeModel)
         {
             var viewModel = new SampleViewModel();
             var model = new SampleModel();
             model.Model = viewModel;
-            await Write(model, Path.Combine(Settings.ModelsName, "Pet.cs"));
-        }
-
-        public override void NormalizeClientModel(ServiceClient serviceClient)
-        {
+            await Write(model, Path.Combine(Settings.Instance.ModelsName, "Pet.cs"));
         }
     }
 }
