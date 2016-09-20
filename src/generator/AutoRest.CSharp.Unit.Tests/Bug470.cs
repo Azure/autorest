@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Xunit;
 using Xunit.Abstractions;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Unit.Tests
 {
@@ -26,6 +27,8 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task SupportModelsNameOverride()
         {
+            using (NewContext)
+            {
             string modelsName = "MyModels";
 
             MemoryFileSystem fileSystem = CreateMockFilesystem();
@@ -78,7 +81,8 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.NotNull(asm);
 
                 // verify that we have the class we expected
-                var resultObject = asm.ExportedTypes.FirstOrDefault(each => each.FullName == $"Test.{modelsName}.ResultObject");
+                var resultObject =
+                    asm.ExportedTypes.FirstOrDefault(each => each.FullName == $"Test.{modelsName}.ResultObject");
                 Assert.NotNull(resultObject);
             }
         }
