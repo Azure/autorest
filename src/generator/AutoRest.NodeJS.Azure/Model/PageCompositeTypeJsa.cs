@@ -1,40 +1,38 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.NodeJS.TemplateModels;
 using AutoRest.NodeJS.Azure.Properties;
-using System.Globalization;
 using System;
+using AutoRest.NodeJS.Model;
 
-namespace AutoRest.NodeJS.Azure.TemplateModels
+namespace AutoRest.NodeJS.Azure.Model
 {
-    public class PageTemplateModel : ModelTemplateModel
+    public class PageCompositeTypeJsa : CompositeTypeJs
     {
-        public PageTemplateModel(CompositeType source, ServiceClient serviceClient, string nextLinkName, string itemName) 
-            : base(source, serviceClient)
+        public PageCompositeTypeJsa(string nextLinkName, string itemName) 
         {
-            this.NextLinkName = nextLinkName;
-            this.ItemName = itemName;
+            NextLinkName = nextLinkName;
+            ItemName = itemName;
         }
 
         public string NextLinkName { get; private set; }
 
         public string ItemName { get; private set; }
 
-        public IType ItemType { 
+        public IModelType ItemType { 
             get 
             {
                 if (Properties == null)
                 {
                     return null;
                 }
-                var property = Properties.FirstOrDefault(p => p.Type is SequenceType);
+                var property = Properties.FirstOrDefault(p => p.ModelType is SequenceTypeJs);
                 if (property != null)
                 {
-                    return ((SequenceType)property.Type).ElementType;
+                    return ((SequenceTypeJs)property.ModelType).ElementType;
                 }
                 else
                 {

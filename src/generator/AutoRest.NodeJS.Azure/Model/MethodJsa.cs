@@ -1,41 +1,35 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
 using System.Linq;
 using System.Net;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions.Azure;
-using AutoRest.NodeJS.TemplateModels;
+using AutoRest.NodeJS.Model;
+using Newtonsoft.Json;
 
-namespace AutoRest.NodeJS.Azure.TemplateModels
+namespace AutoRest.NodeJS.Azure.Model
 {
-    public class AzureMethodTemplateModel : MethodTemplateModel
+    public class MethodJsa : MethodJs
     {
-        public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
-            : base(source, serviceClient)
+        protected MethodJsa()
+            : base()
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
-            
-            this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
-            this.RequestIdString = AzureExtensions.GetRequestIdString(source);
         }
-        
-        public string ClientRequestIdString { get; private set; }
 
-        public string RequestIdString { get; private set; }
+        [JsonIgnore]
+        public string ClientRequestIdString => AzureExtensions.GetClientRequestIdString(this);
+
+        [JsonIgnore]
+        public string RequestIdString => AzureExtensions.GetRequestIdString(this);
 
         /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.
         /// </summary>
-        public bool IsLongRunningOperation
-        {
-            get { return Extensions.ContainsKey(AzureExtensions.LongRunningExtension); }
-        }
+        [JsonIgnore]
+        public bool IsLongRunningOperation => Extensions.ContainsKey(AzureExtensions.LongRunningExtension);
 
         /// <summary>
         /// If this is a relative uri, we will add api-version query, so add this condition to the check
@@ -47,6 +41,7 @@ namespace AutoRest.NodeJS.Azure.TemplateModels
         }
 
 
+        [JsonIgnore]
         public override string InitializeResult
         {
             get
@@ -66,6 +61,7 @@ namespace AutoRest.NodeJS.Azure.TemplateModels
         /// <summary>
         /// Gets the expression for default header setting. 
         /// </summary>
+        [JsonIgnore]
         public override string SetDefaultHeaders
         {
             get
@@ -80,6 +76,7 @@ namespace AutoRest.NodeJS.Azure.TemplateModels
             }
         }
 
+        [JsonIgnore]
         public string LongRunningOperationMethodNameInRuntime
         {
             get

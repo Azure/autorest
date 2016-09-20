@@ -3,35 +3,42 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.Core.ClientModel;
-using AutoRest.Core.Utilities;
+using AutoRest.Core.Model;
 using AutoRest.Extensions.Azure;
-using AutoRest.NodeJS.TemplateModels;
+using AutoRest.NodeJS.Model;
+using Newtonsoft.Json;
 
-namespace AutoRest.NodeJS.Azure.TemplateModels
+namespace AutoRest.NodeJS.Azure.Model
 {
-    public class AzureServiceClientTemplateModel : ServiceClientTemplateModel
+    
+    public class CodeModelJsa : CodeModelJs
     {
-        public AzureServiceClientTemplateModel(ServiceClient serviceClient)
-            : base(serviceClient)
+        public CodeModelJsa()
+            : base()
         {
-            MethodTemplateModels.Clear();
-            Methods.Where(m => m.Group == null)
-                .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
-            // Removing all models that contain the extension "x-ms-external", as they will be 
+        }
+        [JsonIgnore]
+        public override bool IsAzure => true;
+
+
+        [JsonIgnore]
+        public override IEnumerable<CompositeTypeJs> ModelTemplateModels => ModelTypes.Cast<CompositeTypeJs>().Concat(PageTemplateModels);
+
+
+
+        public override CompositeType Add(CompositeType item)
+        {
+            // Removing all models that contain the extension "x-ms-external", as they will be
             // generated in nodejs client runtime for azure - "ms-rest-azure".
-            ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension));
-            ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.ExternalExtension));
-            PageTemplateModels = new List<PageTemplateModel>();
+            if (item.Extensions.ContainsKey(AzureExtensions.PageableExtension) ||
+                item.Extensions.ContainsKey(AzureExtensions.ExternalExtension))
+            {
+                return null;
+            }
+
+            return base.Add(item);
         }
 
-        public IList<PageTemplateModel> PageTemplateModels { get; set; }
-        public override IEnumerable<MethodGroupTemplateModel> MethodGroupModels
-        {
-            get
-            {
-                return MethodGroups.Select(mg => new AzureMethodGroupTemplateModel(this, mg));
-            }
-        }
+        public IList<PageCompositeTypeJsa> PageTemplateModels { get; set; } = new List<PageCompositeTypeJsa>();
     }
 }
