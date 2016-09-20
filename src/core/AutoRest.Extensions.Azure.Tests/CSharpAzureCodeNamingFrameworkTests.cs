@@ -28,9 +28,8 @@ namespace AutoRest.Extensions.Azure.Tests
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
                 var codeGen = new AzureCSharpCodeGenerator();
-#if gws_disable_normalize
-                codeGen.NormalizeClientModel(codeModel);
-#endif
+                codeModel = codeGen.ModelTransformer.Load(codeModel);
+                codeModel = codeGen.ModelTransformer.TransformCodeModel(codeModel);
 
                 Assert.Equal(7, codeModel.Methods.Count);
                 Assert.Equal(1, codeModel.Methods.Count(m => m.Name == "GetSinglePage"));

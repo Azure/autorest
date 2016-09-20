@@ -515,7 +515,7 @@ namespace AutoRest.Extensions.Azure
                             bool? extensionObject = parameter.Extensions[ClientRequestIdExtension] as bool?;
                             if (extensionObject != null && extensionObject.Value)
                             {
-                                return parameter.SerializedName;
+                                return parameter.SerializedName.Value;
                             }
                             return null;
                         })
