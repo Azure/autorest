@@ -23,7 +23,7 @@ namespace AutoRest.Swagger
     {
         private const string BaseUriParameterName = "BaseUri";
 
-        internal Dictionary<string, string> ExtendedTypes = new Dictionary<string, string>();
+        internal Dictionary<string, string> ExtendedTypes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         internal Dictionary<string, CompositeType> GeneratedTypes = new Dictionary<string, CompositeType>();
 
         public SwaggerModeler() 

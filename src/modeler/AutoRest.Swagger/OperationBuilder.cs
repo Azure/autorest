@@ -246,9 +246,9 @@ namespace AutoRest.Swagger
                 IModelType type = typeStack.Peek();
                 while (!Equals(type, baseType))
                 {
-                    if (type is CompositeType && _swaggerModeler.ExtendedTypes.ContainsKey(type.Name))
+                    if (type is CompositeType && _swaggerModeler.ExtendedTypes.ContainsKey(type.Name.Value))
                     {
-                        type = _swaggerModeler.GeneratedTypes[_swaggerModeler.ExtendedTypes[type.Name]];
+                        type = _swaggerModeler.GeneratedTypes[_swaggerModeler.ExtendedTypes[type.Name.Value]];
                     }
                     else
                     {
