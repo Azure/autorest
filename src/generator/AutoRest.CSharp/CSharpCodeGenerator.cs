@@ -1,35 +1,41 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.Core;
-using AutoRest.Core.ClientModel;
-using AutoRest.CSharp.TemplateModels;
+using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
+using AutoRest.CSharp.Model;
 using AutoRest.CSharp.Templates;
-using AutoRest.Extensions;
-using AutoRest = AutoRest.Core.AutoRest;
 
 namespace AutoRest.CSharp
 {
-    public class CSharpCodeGenerator : CodeGenerator
+    public class CSharpCodeGenerator : CodeGenerator, ICSharpGeneratorSettings
     {
-        private readonly CSharpCodeNamer _namer;
         private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.2.2.0";
 
-        public CSharpCodeGenerator(Settings settings) : base(settings)
+        protected CSharpCodeGenerator(CSharpModelTransformer transformer) :base(transformer)
         {
-            _namer = new CSharpCodeNamer();
-            IsSingleFileGenerationSupported = true;
+            transformer.CodeGenerator = this;
         }
+
+        public CSharpCodeGenerator() : this(new CSharpModelTransformer())
+        {
+        }
+
+        #region ICSharpGeneratorSettings 
+        [SettingsInfo("Indicates whether to use DateTimeOffset instead of DateTime to model date-time types")]
+        public bool UseDateTimeOffset { get; set; }
 
         /// <summary>
         /// Indicates whether ctor needs to be generated with internal protection level.
         /// </summary>
-        [SettingsInfo("The namespace to use for generated code.")]
+        [SettingsInfo("Indicates whether ctor needs to be generated with internal protection level.")]
         [SettingsAlias("internal")]
         public bool InternalConstructors { get; set; }
 
@@ -39,149 +45,77 @@ namespace AutoRest.CSharp
         [SettingsInfo("Specifies mode for generating sync wrappers.")]
         [SettingsAlias("syncMethods")]
         public SyncMethodsGenerationMode SyncMethods { get; set; }
+        #endregion
 
-        public override string Name
-        {
-            get { return "CSharp"; }
-        }
+        public override bool IsSingleFileGenerationSupported => true;
 
-        public override string Description
-        {
-            // TODO resource string.
-            get { return "Generic C# code generator."; }
-        }
+        public override string Name => "CSharp";
 
-        public override string UsageInstructions
-        {
-            get {
-                return string.Format(CultureInfo.InvariantCulture,
-                    Properties.Resources.UsageInformation, ClientRuntimePackage);
-            }
-        }
+        public override string Description => "Generic C# code generator.";
 
-        public override string ImplementationFileExtension
-        {
-            get { return ".cs"; }
-        }
+        public override string UsageInstructions => string.Format(CultureInfo.InvariantCulture,
+            Properties.Resources.UsageInformation, ClientRuntimePackage);
 
-        public override void PopulateSettings(IDictionary<string, object> settings)
-        {
-            base.PopulateSettings(settings);
-            Settings.PopulateSettings(_namer, settings);
-        }
-
-        /// <summary>
-        /// Normalizes client model by updating names and types to be language specific.
-        /// </summary>
-        /// <param name="serviceClient"></param>
-        public override void NormalizeClientModel(ServiceClient serviceClient)
-        {
-            PopulateAdditionalProperties(serviceClient);
-            SwaggerExtensions.NormalizeClientModel(serviceClient, Settings);
-            _namer.NormalizeClientModel(serviceClient);
-            _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
-                Settings.Namespace + "." + Settings.ModelsName);
-        }
-
-        private void PopulateAdditionalProperties(ServiceClient serviceClient)
-        {
-            if (Settings.AddCredentials)
-            {
-                serviceClient.Properties.Add(new Property
-                {
-                    Name = "Credentials",
-                    Type = new PrimaryType(KnownPrimaryType.Credentials),
-                    IsRequired = true,
-                    IsReadOnly = true,
-                    Documentation = "Subscription credentials which uniquely identify client subscription."
-                });
-            }
-        }
-
+        public override string ImplementationFileExtension => ".cs";
+        
         /// <summary>
         /// Generates C# code for service client.
         /// </summary>
-        /// <param name="serviceClient"></param>
+        /// <param name="cm"></param>
         /// <returns></returns>
-        public override async Task Generate(ServiceClient serviceClient)
+        public override async Task Generate(CodeModel cm)
         {
-            // Service client
-            var serviceClientTemplate = new ServiceClientTemplate
+            // get c# specific codeModel
+            var codeModel = cm as CodeModelCs;
+            if (codeModel == null)
             {
-                Model = new ServiceClientTemplateModel(serviceClient, InternalConstructors),
-            };
-            await Write(serviceClientTemplate, serviceClient.Name + ".cs");
-
-            // Service client extensions
-            if (serviceClient.Methods.Any(m => m.Group == null))
-            {
-                var extensionsTemplate = new ExtensionsTemplate
-                {
-                    Model = new ExtensionsTemplateModel(serviceClient, null, SyncMethods),
-                };
-                await Write(extensionsTemplate, serviceClient.Name + "Extensions.cs");
+                throw new InvalidCastException("CodeModel is not a c# CodeModel");
             }
 
+            // Service client
+            var serviceClientTemplate = new ServiceClientTemplate{ Model = codeModel };
+            await Write(serviceClientTemplate, $"{codeModel.Name}{ImplementationFileExtension}" );
+
             // Service client interface
-            var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate
+            var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = codeModel };
+            await Write(serviceClientInterfaceTemplate, $"I{codeModel.Name}{ImplementationFileExtension}");
+
+            // operations
+            foreach (MethodGroupCs methodGroup in codeModel.Operations)
             {
-                Model = new ServiceClientTemplateModel(serviceClient, InternalConstructors),
-            };
-            await Write(serviceClientInterfaceTemplate, "I" + serviceClient.Name + ".cs");
+                if(!methodGroup.Name.IsNullOrEmpty()) { 
+                    // Operation
+                    var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
+                    await Write(operationsTemplate, $"{operationsTemplate.Model.TypeName}{ImplementationFileExtension}");
 
-            // Operations
-            foreach (var group in serviceClient.MethodGroups)
-            {
-                // Operation
-                var operationsTemplate = new MethodGroupTemplate
-                {
-                    Model = new MethodGroupTemplateModel(serviceClient, group),
-                };
-                await Write(operationsTemplate, operationsTemplate.Model.MethodGroupType + ".cs");
+                    // Operation interface
+                    var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
+                    await Write(operationsInterfaceTemplate, $"I{operationsInterfaceTemplate.Model.TypeName}{ImplementationFileExtension}");
+                }
 
-                // Service client extensions
-                var operationExtensionsTemplate = new ExtensionsTemplate
-                {
-                    Model = new ExtensionsTemplateModel(serviceClient, group, SyncMethods),
-                };
-                await Write(operationExtensionsTemplate, group + "Extensions.cs");
-
-                // Operation interface
-                var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate
-                {
-                    Model = new MethodGroupTemplateModel(serviceClient, group),
-                };
-                await Write(operationsInterfaceTemplate, "I" + operationsInterfaceTemplate.Model.MethodGroupType + ".cs");
+                var operationExtensionsTemplate = new ExtensionsTemplate { Model = methodGroup };
+                await Write(operationExtensionsTemplate, $"{methodGroup.ExtensionTypeName}Extensions{ImplementationFileExtension}");
             }
 
             // Models
-            foreach (var model in serviceClient.ModelTypes.Concat(serviceClient.HeaderTypes))
+            foreach (CompositeTypeCs model in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
             {
-                var modelTemplate = new ModelTemplate
-                {
-                    Model = new ModelTemplateModel(model),
-                };
-                await Write(modelTemplate, Path.Combine(Settings.ModelsName, model.Name + ".cs"));
+                var modelTemplate = new ModelTemplate{ Model = model };
+                await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}"));
             }
 
             // Enums
-            foreach (var enumType in serviceClient.EnumTypes)
+            foreach (EnumTypeCs enumType in codeModel.EnumTypes)
             {
-                var enumTemplate = new EnumTemplate
-                {
-                    Model = new EnumTemplateModel(enumType),
-                };
-                await Write(enumTemplate, Path.Combine(Settings.ModelsName, enumTemplate.Model.TypeDefinitionName + ".cs"));
+                var enumTemplate = new EnumTemplate { Model = enumType };
+                await Write(enumTemplate, Path.Combine(Settings.Instance.ModelsName, $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
             }
 
-            // Exception
-            foreach (var exceptionType in serviceClient.ErrorTypes)
+            // Exceptions
+            foreach (CompositeTypeCs exceptionType in codeModel.ErrorTypes)
             {
-                var exceptionTemplate = new ExceptionTemplate
-                {
-                    Model = new ModelTemplateModel(exceptionType),
-                };
-                await Write(exceptionTemplate, Path.Combine(Settings.ModelsName, exceptionTemplate.Model.ExceptionTypeDefinitionName + ".cs"));
+                var exceptionTemplate = new ExceptionTemplate { Model = exceptionType, };
+                await Write(exceptionTemplate, Path.Combine(Settings.Instance.ModelsName, $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
             }
         }
     }

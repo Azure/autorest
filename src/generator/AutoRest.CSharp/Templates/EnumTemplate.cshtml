@@ -1,34 +1,35 @@
 ﻿@using System.Linq
-@inherits AutoRest.Core.Template<AutoRest.CSharp.TemplateModels.EnumTemplateModel>
+@using AutoRest.Core.Model
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.EnumTypeCs>
 @Header("// ")
 @EmptyLine
 namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
 @EmptyLine
     /// <summary>
-    @WrapComment("/// ", "Defines values for " + Model.TypeDefinitionName + ".")
+    @WrapComment("/// ", "Defines values for " + Model.Name + ".")
     /// </summary>
     @if (!Model.ModelAsString)
     {
     @:[Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-    @:public enum @Model.TypeDefinitionName
+    @:public enum @Model.ClassName
     @:{
         for (int i = 0; i < Model.Values.Count - 1; i++)
         {
 @:        [System.Runtime.Serialization.EnumMember(Value = "@Model.Values[i].SerializedName")]
-@:        @(Model.Values[i].Name),
+@:        @(Model.Values[i].MemberName),
         }
 @:        [System.Runtime.Serialization.EnumMember(Value = "@Model.Values.Last().SerializedName")]
-@:        @(Model.Values.Last().Name)
+@:        @(Model.Values.Last().MemberName)
     @:}
     }
     else
     {
-    @:public static class @Model.TypeDefinitionName
+    @:public static class @Model.ClassName
     @:{
-        for (int i = 0; i < Model.Values.Count; i++)
+        foreach (var t in Model.Values)
         {
-@:        public const string @Model.Values[i].Name = "@(Model.Values[i].SerializedName)";
+@:        public const string @t.MemberName = "@t.SerializedName";
         }
     @:}
     }

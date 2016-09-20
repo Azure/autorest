@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
@@ -7,38 +7,24 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
+using Newtonsoft.Json;
 
-namespace AutoRest.CSharp.TemplateModels
+namespace AutoRest.CSharp.Model
 {
-    public class MethodTemplateModel : Method
+    public class MethodCs : Method
     {
-        public MethodTemplateModel(Method source, ServiceClient serviceClient, SyncMethodsGenerationMode syncWrappers)
+        public MethodCs()
         {
-            this.LoadFrom(source);
-            SyncMethods = syncWrappers;
-            ParameterTemplateModels = new List<ParameterTemplateModel>();
-            LogicalParameterTemplateModels = new List<ParameterTemplateModel>();
-            source.Parameters.ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
-            source.LogicalParameters.ForEach(p => LogicalParameterTemplateModels.Add(new ParameterTemplateModel(p)));
-            ServiceClient = serviceClient;
-            MethodGroupName = source.Group ?? serviceClient.Name;
-            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
+
         }
+        
+        public bool IsCustomBaseUri
+            => CodeModel.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
 
-        public string MethodGroupName { get; set; }
-
-        public bool IsCustomBaseUri { get; private set; }
-
-        public SyncMethodsGenerationMode SyncMethods { get; private set; }
-
-        public ServiceClient ServiceClient { get; set; }
-
-        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
-
-        public List<ParameterTemplateModel> LogicalParameterTemplateModels { get; private set; }
+        public SyncMethodsGenerationMode SyncMethods { get; set; }
 
         /// <summary>
         /// Get the predicate to determine of the http operation status code indicates failure
@@ -60,8 +46,8 @@ namespace AutoRest.CSharp.TemplateModels
                 }
                 return "!_httpResponse.IsSuccessStatusCode";
             }
-        }      
-        
+        }
+
         /// <summary>
         /// Generate the method parameter declaration for async methods and extensions
         /// </summary>
@@ -81,13 +67,14 @@ namespace AutoRest.CSharp.TemplateModels
             foreach (var parameter in LocalParameters)
             {
                 string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = {2}");
-                string defaultValue = string.Format(CultureInfo.InvariantCulture, "default({0})", parameter.DeclarationExpression);
-                if (parameter.DefaultValue != null && parameter.Type is PrimaryType)
+
+                string defaultValue = $"default({parameter.ModelTypeName})";
+                if (!string.IsNullOrEmpty(parameter.DefaultValue) && parameter.ModelType is PrimaryType)
                 {
                     defaultValue = parameter.DefaultValue;
                 }
                 declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                    format, parameter.DeclarationExpression, parameter.Name, defaultValue));
+                    format, parameter.ModelTypeName, parameter.Name, defaultValue));
             }
 
             if (addCustomHeaderParameters)
@@ -110,7 +97,7 @@ namespace AutoRest.CSharp.TemplateModels
             if (!string.IsNullOrEmpty(declarations))
             {
                 declarations += ", ";
-            }            
+            }
             declarations += "System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)";
 
             return declarations;
@@ -119,40 +106,29 @@ namespace AutoRest.CSharp.TemplateModels
         /// <summary>
         /// Arguments for invoking the method from a synchronous extension method
         /// </summary>
-        public string SyncMethodInvocationArgs
-        {
-            get
-            {
-                List<string> invocationParams = new List<string>();
-                LocalParameters.ForEach(p => invocationParams.Add(p.Name));
-                return string.Join(", ", invocationParams);
-            }
-        }
+        public string SyncMethodInvocationArgs => string.Join(", ", LocalParameters.Select(each => each.Name));
 
         /// <summary>
         /// Get the invocation args for an invocation with an async method
         /// </summary>
-        public string GetAsyncMethodInvocationArgs (string customHeaderReference, string cancellationTokenReference = "cancellationToken")
-        {
-            List<string> invocationParams = new List<string>();
-            LocalParameters.ForEach(p => invocationParams.Add(p.Name));
-            invocationParams.Add(customHeaderReference);
-            invocationParams.Add(cancellationTokenReference);
-            return string.Join(", ", invocationParams);
-        }
+        public string GetAsyncMethodInvocationArgs(string customHeaderReference, string cancellationTokenReference = "cancellationToken") => string.Join(", ", LocalParameters.Select(each => (string)each.Name).Concat(new[] { customHeaderReference, cancellationTokenReference }));
 
         /// <summary>
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters
         /// </summary>
-        public IEnumerable<ParameterTemplateModel> LocalParameters
+        [JsonIgnore]
+        public IEnumerable<ParameterTemplateCs> LocalParameters
         {
             get
             {
                 return
-                    ParameterTemplateModels.Where(
-                        p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name) && !p.IsConstant)
-                        .OrderBy(item => !item.IsRequired);
+                    Parameters.Where(parameter =>
+                        parameter != null &&
+                        !parameter.IsClientProperty &&
+                        !string.IsNullOrWhiteSpace(parameter.Name) &&
+                        !parameter.IsConstant)
+                        .OrderBy(item => !item.IsRequired).Cast<ParameterTemplateCs>();
             }
         }
 
@@ -165,23 +141,19 @@ namespace AutoRest.CSharp.TemplateModels
             {
                 if (ReturnType.Body != null && ReturnType.Headers != null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture,
-                            "Microsoft.Rest.HttpOperationResponse<{0},{1}>", ReturnType.Body.Name, ReturnType.Headers.Name);
+                    return $"Microsoft.Rest.HttpOperationResponse<{ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head)},{ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head)}>";
                 }
-                else if (ReturnType.Body != null)
+                if (ReturnType.Body != null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "Microsoft.Rest.HttpOperationResponse<{0}>", ReturnType.Body.Name);
+                    return $"Microsoft.Rest.HttpOperationResponse<{ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head)}>";
                 }
-                else if (ReturnType.Headers != null)
+                if (ReturnType.Headers != null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "Microsoft.Rest.HttpOperationHeaderResponse<{0}>", ReturnType.Headers.Name);
+                    return $"Microsoft.Rest.HttpOperationHeaderResponse<{ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head)}>";
                 }
-                else
-                {
-                    return "Microsoft.Rest.HttpOperationResponse";
-                }
+
+                return "Microsoft.Rest.HttpOperationResponse";
+
             }
         }
 
@@ -195,12 +167,12 @@ namespace AutoRest.CSharp.TemplateModels
                 if (ReturnType.Body != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "System.Threading.Tasks.Task<{0}>", ReturnType.Body.Name);
+                        "System.Threading.Tasks.Task<{0}>", ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head));
                 }
-                else if(ReturnType.Headers != null)
+                else if (ReturnType.Headers != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "System.Threading.Tasks.Task<{0}>", ReturnType.Headers.Name);
+                        "System.Threading.Tasks.Task<{0}>", ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head));
                 }
                 else
                 {
@@ -289,11 +261,11 @@ namespace AutoRest.CSharp.TemplateModels
             {
                 if (ReturnType.Body != null)
                 {
-                    return ReturnType.Body.Name;
+                    return ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head);
                 }
                 if (ReturnType.Headers != null)
                 {
-                    return ReturnType.Headers.Name;
+                    return ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head);
                 }
                 else
                 {
@@ -305,28 +277,21 @@ namespace AutoRest.CSharp.TemplateModels
         /// <summary>
         /// Get the method's request body (or null if there is no request body)
         /// </summary>
-        public ParameterTemplateModel RequestBody
-        {
-            get
-            {
-                return this.Body != null ? new ParameterTemplateModel(this.Body) : null;                
-            }
-        }
+        [JsonIgnore]
+        public ParameterTemplateCs RequestBody => Body as ParameterTemplateCs;
 
         /// <summary>
         /// Generate a reference to the ServiceClient
         /// </summary>
-        public string ClientReference
-        {
-            get { return Group == null ? "this" : "this.Client"; }
-        }
+        [JsonIgnore]
+        public string ClientReference => Group.IsNullOrEmpty() ? "this" : "this.Client";
 
         /// <summary>
         /// Returns serialization settings reference.
         /// </summary>
         /// <param name="serializationType"></param>
         /// <returns></returns>
-        public string GetSerializationSettingsReference(IType serializationType)
+        public string GetSerializationSettingsReference(IModelType serializationType)
         {
             if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.Date))
             {
@@ -352,7 +317,7 @@ namespace AutoRest.CSharp.TemplateModels
         /// </summary>
         /// <param name="deserializationType"></param>
         /// <returns></returns>
-        public string GetDeserializationSettingsReference(IType deserializationType)
+        public string GetDeserializationSettingsReference(IModelType deserializationType)
         {
             if (deserializationType.IsOrContainsPrimaryType(KnownPrimaryType.Date))
             {
@@ -371,7 +336,7 @@ namespace AutoRest.CSharp.TemplateModels
 
         public string GetExtensionParameters(string methodParameters)
         {
-            string operationsParameter = "this I" + MethodGroupName + " operations";
+            string operationsParameter = "this I" + MethodGroup.TypeName + " operations";
             return string.IsNullOrWhiteSpace(methodParameters)
                 ? operationsParameter
                 : operationsParameter + ", " + methodParameters;
@@ -391,7 +356,7 @@ namespace AutoRest.CSharp.TemplateModels
         {
             var builder = new IndentedStringBuilder();
 
-            foreach (var pathParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
+            foreach (var pathParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Path))
             {
                 string replaceString = "{0} = {0}.Replace(\"{{{1}}}\", System.Uri.EscapeDataString({2}));";
                 if (pathParameter.SkipUrlEncoding())
@@ -407,7 +372,7 @@ namespace AutoRest.CSharp.TemplateModels
                 {
                     urlPathName += m.Groups[1].Value;
                 }
-                if (pathParameter.Type is SequenceType)
+                if (pathParameter.ModelType is SequenceType)
                 {
                     builder.AppendLine(replaceString,
                     variableName,
@@ -419,22 +384,22 @@ namespace AutoRest.CSharp.TemplateModels
                     builder.AppendLine(replaceString,
                     variableName,
                     urlPathName,
-                    pathParameter.Type.ToString(ClientReference, pathParameter.Name));
-                }  
+                    pathParameter.ModelType.ToString(ClientReference, pathParameter.Name));
+                }
             }
-            if (this.LogicalParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
+            if (this.LogicalParameters.Any(p => p.Location == ParameterLocation.Query))
             {
                 builder.AppendLine("System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();");
-                foreach (var queryParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query))
+                foreach (var queryParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Query))
                 {
                     var replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", System.Uri.EscapeDataString({1})));";
-                    if (queryParameter.CanBeNull())
+                    if ((queryParameter as ParameterTemplateCs).IsNullable)
                     {
                         builder.AppendLine("if ({0} != null)", queryParameter.Name)
                             .AppendLine("{").Indent();
                     }
 
-                    if(queryParameter.SkipUrlEncoding())
+                    if (queryParameter.SkipUrlEncoding())
                     {
                         replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", {1}));";
                     }
@@ -459,7 +424,7 @@ namespace AutoRest.CSharp.TemplateModels
                                 queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference));
                     }
 
-                    if (queryParameter.CanBeNull())
+                    if ((queryParameter as ParameterTemplateCs).IsNullable)
                     {
                         builder.Outdent()
                             .AppendLine("}");
@@ -492,17 +457,17 @@ namespace AutoRest.CSharp.TemplateModels
             var builder = new IndentedStringBuilder();
             foreach (var transformation in InputParameterTransformation)
             {
-                var compositeOutputParameter = transformation.OutputParameter.Type as CompositeType;
+                var compositeOutputParameter = transformation.OutputParameter.ModelType as CompositeType;
                 if (transformation.OutputParameter.IsRequired && compositeOutputParameter != null)
                 {
                     builder.AppendLine("{0} {1} = new {0}();",
-                        transformation.OutputParameter.Type.Name,
+                        transformation.OutputParameter.ModelTypeName,
                         transformation.OutputParameter.Name);
                 }
                 else
                 {
                     builder.AppendLine("{0} {1} = default({0});",
-                        transformation.OutputParameter.Type.Name,
+                        transformation.OutputParameter.ModelTypeName,
                         transformation.OutputParameter.Name);
                 }
                 var nullCheck = BuildNullCheckExpression(transformation);
@@ -511,16 +476,16 @@ namespace AutoRest.CSharp.TemplateModels
                     builder.AppendLine("if ({0})", nullCheck)
                        .AppendLine("{").Indent();
                 }
-                
+
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     compositeOutputParameter != null && !transformation.OutputParameter.IsRequired)
                 {
                     builder.AppendLine("{0} = new {1}();",
                         transformation.OutputParameter.Name,
-                        transformation.OutputParameter.Type.Name);
+                        transformation.OutputParameter.ModelType.Name);
                 }
 
-                foreach(var mapping in transformation.ParameterMappings)
+                foreach (var mapping in transformation.ParameterMappings)
                 {
                     builder.AppendLine("{0}{1};",
                         transformation.OutputParameter.Name,
@@ -546,7 +511,7 @@ namespace AutoRest.CSharp.TemplateModels
 
             return string.Join(" || ",
                 transformation.ParameterMappings
-                    .Where(m => !m.InputParameter.Type.IsValueType())
+                    .Where(m => !m.InputParameter.ModelType.IsValueType())
                     .Select(m => m.InputParameter.Name + " != null"));
         }
     }

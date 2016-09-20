@@ -4,77 +4,57 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
+using Newtonsoft.Json;
 
-namespace AutoRest.CSharp.TemplateModels
+namespace AutoRest.CSharp.Model
 {
-    public class ServiceClientTemplateModel : ServiceClient
+    public class CodeModelCs : Core.Model.CodeModel
     {
-        public ServiceClientTemplateModel(ServiceClient serviceClient, bool internalConstructors)
+        public CodeModelCs( bool internalConstructors)
         {
-            this.LoadFrom(serviceClient);
-            MethodTemplateModels = new List<MethodTemplateModel>();
-            Methods.Where(m => m.Group == null)
-                .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient, SyncMethodsGenerationMode.None)));
             ConstructorVisibility = internalConstructors ? "internal" : "public";
-            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
         }
+        
+        [JsonIgnore]
+        public IEnumerable<MethodGroupCs> AllOperations => Operations.Where( operation => !operation.Name.IsNullOrEmpty()).Cast<MethodGroupCs>();
 
-        public bool IsCustomBaseUri { get; private set; }
-
-        public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
-
-        public virtual IEnumerable<MethodGroupTemplateModel> Operations
-        {
-            get
-            {
-                return MethodGroups.Select(mg => new MethodGroupTemplateModel(this, mg));
-            }
-        }
-
+        public bool IsCustomBaseUri => Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
+      
         public virtual IEnumerable<string> Usings
         {
             get
             {
-                if (this.ModelTypes.Any() || this.HeaderTypes.Any())
+                if (ModelTypes.Any() || HeaderTypes.Any())
                 {
-                    yield return this.ModelsName;
+                    yield return ModelsName;
                 }
             }
         }
 
-        public bool ContainsCredentials
-        {
-            get
-            {
-                return Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials));
-            }
-        }
+        [JsonIgnore]
+        public bool ContainsCredentials => Properties.Any(p => p.ModelType.IsPrimaryType(KnownPrimaryType.Credentials));
 
         public string ConstructorVisibility { get; set; }        
 
+        [JsonIgnore]
         public string RequiredConstructorParameters
         {
             get
             {
                 var requireParams = new List<string>();
-                this.Properties.Where(p => p.IsRequired && p.IsReadOnly)
+                Properties.Where(p => p.IsRequired && p.IsReadOnly)
                     .ForEach(p => requireParams.Add(string.Format(CultureInfo.InvariantCulture, 
                         "{0} {1}", 
-                        p.Type.Name, 
+                        p.ModelType.Name, 
                         p.Name.ToCamelCase())));
                 return string.Join(", ", requireParams);
             }
         }
 
-        public bool NeedsTransformationConverter
-        {
-            get
-            {
-                return this.ModelTypes.Any(m => m.Properties.Any(p => p.WasFlattened()));
-            }
-        }
+        [JsonIgnore]
+        public bool NeedsTransformationConverter => ModelTypes.Any(m => m.Properties.Any(p => p.WasFlattened()));
     }
 }

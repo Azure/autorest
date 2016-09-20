@@ -1,42 +1,62 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
-using System.Collections.Generic;
-using System.Linq;
-using AutoRest.Core.ClientModel;
+using System;
+using AutoRest.Core;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.CSharp.TemplateModels
+namespace AutoRest.CSharp.Model
 {
-    public class MethodGroupTemplateModel : ServiceClient
+    public partial class MethodGroupCs : Core.Model.MethodGroup
     {
-        public MethodGroupTemplateModel(ServiceClient serviceClient, string methodGroupName)
+        protected MethodGroupCs() : base()
         {
-            this.LoadFrom(serviceClient);
-            MethodTemplateModels = new List<MethodTemplateModel>();
-            // MethodGroup name and type are always the same but can be 
-            // changed in derived classes
-            MethodGroupName = methodGroupName;
-            MethodGroupType = methodGroupName;
-            Methods.Where(m => m.Group == MethodGroupName)
-                .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient, SyncMethodsGenerationMode.None)));
+            InitProperties();
+        }
+        protected MethodGroupCs(string name) : base(name)
+        {
+            InitProperties();
         }
 
-        public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
-
-        public string MethodGroupName { get; set; }
-
-        public string MethodGroupType { get; set; }
-
-        public virtual IEnumerable<string> Usings
+        public override Method Add(Method method)
         {
-            get
+            (method as MethodCs).SyncMethods = Singleton<ICSharpGeneratorSettings>.Instance.SyncMethods;
+            return base.Add(method);
+        }
+        private void InitProperties()
+        {
+            ExtensionTypeName.OnGet += value =>
             {
-                if (this.ModelTypes.Any() || this.HeaderTypes.Any())
+                if (IsCodeModelMethodGroup)
                 {
-                    yield return this.ModelsName;
+                    return (CodeModel?.Name).Else(string.Empty);
                 }
-            }
+                
+                return
+                    CodeNamer.Instance.GetTypeName(
+                        value.Else(TypeName.Else(CodeModel?.Name.Else(NameForProperty.Else(String.Empty)))));
+            };
+        }
+
+        
+
+        /// <Summary>
+        /// Backing field for <code>ExtensionTypeName</code> property. 
+        /// </Summary>
+        /// <remarks>This field should be marked as 'readonly' as write access to it's value is controlled thru Fixable[T].</remarks>
+        private readonly Fixable<string> _extensionTypeName = new Fixable<string>();
+
+        /// <Summary>
+        /// Accessor for <code>ExtensionTypeName</code>
+        /// </Summary>
+        /// <remarks>
+        /// The Get and Set operations for this accessor may be overridden by using the 
+        /// <code>ExtensionTypeName.OnGet</code> and <code>ExtensionTypeName.OnSet</code> events in this class' constructor.
+        /// (ie <code> ExtensionTypeName.OnGet += extensionTypeName => extensionTypeName.ToUpper();</code> )
+        /// </remarks>
+        public Fixable<string> ExtensionTypeName
+        {
+            get { return _extensionTypeName; }
+            set { _extensionTypeName.CopyFrom(value); }
         }
     }
 }

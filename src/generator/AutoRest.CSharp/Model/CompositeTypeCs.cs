@@ -1,107 +1,68 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using AutoRest.Core;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
+using Newtonsoft.Json;
 
-namespace AutoRest.CSharp.TemplateModels
+namespace AutoRest.CSharp.Model
 {
-    public class ModelTemplateModel : CompositeType
+    public class CompositeTypeCs : CompositeType, IExtendedModelType
     {
-        private readonly IScopeProvider _scope = new ScopeProvider();
-        private readonly ModelTemplateModel _baseModel = null;
         private readonly ConstructorModel _constructorModel = null;
 
-        public ModelTemplateModel(CompositeType source)
+        public CompositeTypeCs()
         {
-            this.LoadFrom(source);
-            PropertyTemplateModels = new List<PropertyTemplateModel>();
-            source.Properties.ForEach(p => PropertyTemplateModels.Add(new PropertyTemplateModel(p)));
-            if (source.BaseModelType != null)
-            {
-                this._baseModel = new ModelTemplateModel(source.BaseModelType);
-            }
-
-            this._constructorModel = new ConstructorModel(this);
+            _constructorModel = new ConstructorModel(this);
         }
 
-        public IScopeProvider Scope
+        public CompositeTypeCs(string name ) : base(name)
         {
-            get { return _scope; }
+            _constructorModel = new ConstructorModel(this);
         }
 
-        public string MethodQualifier
-        {
-            get { return (BaseModelType.ShouldValidateChain()) ? "override" : "virtual"; }
-        }
+        [JsonIgnore]
+        public string MethodQualifier => (BaseModelType.ShouldValidateChain()) ? "override" : "virtual";
 
-        public List<PropertyTemplateModel> PropertyTemplateModels { get; private set; }
+        [JsonIgnore]
+        public bool NeedsPolymorphicConverter => IsPolymorphicType && Name != SerializedName;
 
-        public bool NeedsPolymorphicConverter
-        {
-            get
-            {
-                return this.IsPolymorphicType && Name != SerializedName;
-            }
-        }
+        [JsonIgnore]
+        public bool NeedsTransformationConverter => Properties.Any(p => p.WasFlattened());
 
-        public bool NeedsTransformationConverter
-        {
-            get
-            {
-                return this.Properties.Any(p => p.WasFlattened());
-            }
-        }
+        [JsonIgnore]
+        public string ConstructorParameters => _constructorModel.Signature;
 
-        public string ConstructorParameters
-        {
-            get
-            {
-                return this._constructorModel.Signature;
-            }
-        }
+        [JsonIgnore]
+        public IEnumerable<string> ConstructorParametersDocumentation => _constructorModel.SignatureDocumentation;
 
-        public IEnumerable<string> ConstructorParametersDocumentation
-        {
-            get
-            {
-                return this._constructorModel.SignatureDocumentation;
-            }
-        }
+        [JsonIgnore]
+        public string BaseConstructorCall => _constructorModel.BaseCall;
 
-        public string BaseConstructorCall
-        {
-            get
-            {
-                return this._constructorModel.BaseCall;
-            }
-        }
-
+        [JsonIgnore]
         public virtual string ExceptionTypeDefinitionName
         {
             get
             {
-                if (this.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+                if (Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                 {
-                    var ext = this.Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
+                    var ext = Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
                     if (ext != null && ext["name"] != null)
                     {
                         return ext["name"].ToString();
                     }
                 }
-                return this.Name + "Exception";
+                return Name + "Exception";
             }
         }
 
-        public virtual IEnumerable<string> Usings
-        {
-            get { return Enumerable.Empty<string>(); }
-        }
+        public virtual IEnumerable<string> Usings => Enumerable.Empty<string>();
 
         /// <summary>
         /// Returns properties for this type and all ancestor types, including information on which level of ancestry
@@ -112,14 +73,11 @@ namespace AutoRest.CSharp.TemplateModels
         {
             get
             {
-                IEnumerable<InheritedPropertyInfo> baseProperties =
-                    this._baseModel != null ? 
-                        this._baseModel.AllPropertyTemplateModels : 
-                        Enumerable.Empty<InheritedPropertyInfo>();
+                var baseProperties =((BaseModelType as CompositeTypeCs)?.AllPropertyTemplateModels ??
+                    Enumerable.Empty<InheritedPropertyInfo>()).ReEnumerable();
 
                 int depth = baseProperties.Any() ? baseProperties.Max(p => p.Depth) : 0;
-                return baseProperties.Concat(
-                    this.PropertyTemplateModels.Select(p => new InheritedPropertyInfo(p, depth)));
+                return baseProperties.Concat(Properties.Select(p => new InheritedPropertyInfo(p, depth)));
             }
         }
 
@@ -128,63 +86,52 @@ namespace AutoRest.CSharp.TemplateModels
             get
             {
                 return !string.IsNullOrEmpty(PolymorphicDiscriminator) ||
-                    (_baseModel != null && _baseModel.IsPolymorphicType);
+                    (BaseModelType != null && (BaseModelType as CompositeTypeCs).IsPolymorphicType);
             }
         }
 
         private class InheritedPropertyInfo
         {
-            public InheritedPropertyInfo(PropertyTemplateModel property, int depth)
+            public InheritedPropertyInfo(Property property, int depth)
             {
                 Property = property;
                 Depth = depth;
             }
 
-            public PropertyTemplateModel Property { get; private set; }
+            public Property Property { get; private set; }
 
             public int Depth { get; private set; }
         }
 
         private class ConstructorParameterModel
         {
-            public ConstructorParameterModel(PropertyTemplateModel underlyingProperty)
+            public ConstructorParameterModel(Property underlyingProperty)
             {
                 UnderlyingProperty = underlyingProperty;
             }
 
-            public PropertyTemplateModel UnderlyingProperty { get; private set; }
+            public Property UnderlyingProperty { get; private set; }
 
-            public string Name
-            {
-                get
-                {
-                    return CodeNamer.CamelCase(UnderlyingProperty.Name);
-                }
-            }
+            public string Name => CodeNamer.Instance.CamelCase(UnderlyingProperty.Name);
         }
 
         private class ConstructorModel
         {
-            public ConstructorModel(ModelTemplateModel model)
+            private readonly CompositeTypeCs _model;
+            public ConstructorModel(CompositeTypeCs model)
             {
-                // TODO: this could just be the "required" parameters instead of required and all the optional ones
-                // with defaults if we wanted a bit cleaner constructors
-                IEnumerable<InheritedPropertyInfo> allProperties =
-                   model.AllPropertyTemplateModels.OrderBy(p => !p.Property.IsRequired).ThenBy(p => p.Depth);
-
-                Parameters = allProperties.Select(p => new ConstructorParameterModel(p.Property));
-                Signature = CreateSignature(Parameters);
-                SignatureDocumentation = CreateSignatureDocumentation(Parameters);
-                BaseCall = CreateBaseCall(model);
+                _model = model;
             }
 
-            public IEnumerable<ConstructorParameterModel> Parameters { get; private set; }
+                // TODO: this could just be the "required" parameters instead of required and all the optional ones
+                // with defaults if we wanted a bit cleaner constructors
+            public IEnumerable<ConstructorParameterModel> Parameters => _model.AllPropertyTemplateModels.OrderBy(p => !p.Property.IsRequired).ThenBy(p => p.Depth).Select(p => new ConstructorParameterModel(p.Property));
 
-            public IEnumerable<string> SignatureDocumentation { get; private set; }
+            public IEnumerable<string> SignatureDocumentation => CreateSignatureDocumentation(Parameters);
 
-            public string Signature { get; private set; }
+            public string Signature => CreateSignature(Parameters);
 
-            public string BaseCall { get; private set; }
+            public string BaseCall => CreateBaseCall(_model);
 
             private static string CreateSignature(IEnumerable<ConstructorParameterModel> parameters)
             {
@@ -193,7 +140,7 @@ namespace AutoRest.CSharp.TemplateModels
                 {
                     string format = (property.IsRequired ? "{0} {1}" : "{0} {1} = default({0})");
                     declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                        format, property.Type, CodeNamer.CamelCase(property.Name)));
+                        format, property.ModelTypeName, CodeNamer.Instance.CamelCase(property.Name)));
                 }
 
                 return string.Join(", ", declarations);
@@ -210,12 +157,12 @@ namespace AutoRest.CSharp.TemplateModels
 
                 foreach (var property in parametersWithDocumentation)
                 {
-                    var documentationInnerText = property.Summary ?? property.Documentation;
+                    var documentationInnerText = string.IsNullOrEmpty(property.Summary) ? property.Documentation : property.Summary;
 
                     var documentation = string.Format(
                         CultureInfo.InvariantCulture,
                         "<param name=\"{0}\">{1}</param>",
-                        char.ToLower(property.Name[0], CultureInfo.InvariantCulture) + property.Name.Substring(1),
+                        char.ToLower(property.Name.CharAt(0), CultureInfo.InvariantCulture) + property.Name.Substring(1),
                         documentationInnerText);
 
                     declarations.Add(documentation);
@@ -224,22 +171,23 @@ namespace AutoRest.CSharp.TemplateModels
                 return declarations;
             }
 
-            private static string CreateBaseCall(ModelTemplateModel model)
+            private static string CreateBaseCall(CompositeTypeCs model)
             {
-                if (model._baseModel != null)
+                if (model.BaseModelType != null)
                 {
-                    IEnumerable<ConstructorParameterModel> parameters = model._baseModel._constructorModel.Parameters;
+                    IEnumerable<ConstructorParameterModel> parameters = (model.BaseModelType as CompositeTypeCs)._constructorModel.Parameters;
                     if (parameters.Any())
                     {
-                        return string.Format(
-                            CultureInfo.InvariantCulture, 
-                            ": base({0})", 
-                            string.Join(", ", parameters.Select(p => p.Name)));
+                        return $": base({string.Join(", ", parameters.Select(p => p.Name))})";
                     }
                 }
 
                 return string.Empty;
             }
         }
+
+        public bool CanBeMadeNullable => false;
+        public bool IsValueType => false;
+        public bool IsForcedNullable => false;
     }
 }

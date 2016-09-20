@@ -1,27 +1,22 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.Core.ClientModel;
-using AutoRest.Core.Utilities;
+using System.Collections.Generic;
+using AutoRest.Core;
+using AutoRest.Core.Model;
 
-namespace AutoRest.CSharp.TemplateModels
+namespace AutoRest.CSharp.Model
 {
-    public class EnumTemplateModel : EnumType
+    public class EnumTypeCs : EnumType, IExtendedModelType
     {
-        public EnumTemplateModel(EnumType source)
-        {
-            this.LoadFrom(source);
-        }
-        /// <summary>
-        /// Trim the Trailing '?' from the Type Name so that it 
-        /// does not occur in the type definition
-        /// </summary>
-        public string TypeDefinitionName
-        {
-            get
-            {
-                return this.Name.TrimEnd('?');
-            }
-        }
+        protected override string ModelAsStringType => "string";
+
+        internal static HashSet<EnumType> EnumTypesThatWereUsedNullable { get; } = new HashSet<EnumType>();
+
+        public bool IsForcedNullable => Settings.Instance.QuirksMode && EnumTypesThatWereUsedNullable.Contains(this);
+
+        public bool CanBeMadeNullable => !ModelAsString;
+
+        public bool IsValueType => !ModelAsString; 
     }
 }
