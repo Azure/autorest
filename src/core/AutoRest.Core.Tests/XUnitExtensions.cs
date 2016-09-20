@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.Core.Utilities;
 using Xunit;
 
 namespace AutoRest.Core.Tests
@@ -13,6 +14,11 @@ namespace AutoRest.Core.Tests
         public static void Fail(string text = null)
         {
             throw new ApplicationException(text);
+        }
+
+        public static void Null(Fixable<string> str)
+        {
+            Assert.Null(str.Value);
         }
 
         public static void Equal<T>(T expectedValue, T actualValue, string text)
