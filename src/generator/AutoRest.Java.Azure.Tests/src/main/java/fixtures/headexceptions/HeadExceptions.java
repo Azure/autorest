@@ -10,11 +10,9 @@
 
 package fixtures.headexceptions;
 
-import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -25,10 +23,8 @@ public interface HeadExceptions {
     /**
      * Return 200 status code if successful.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void head200() throws CloudException, IOException;
+    void head200();
 
     /**
      * Return 200 status code if successful.
@@ -55,10 +51,8 @@ public interface HeadExceptions {
     /**
      * Return 204 status code if successful.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void head204() throws CloudException, IOException;
+    void head204();
 
     /**
      * Return 204 status code if successful.
@@ -85,10 +79,8 @@ public interface HeadExceptions {
     /**
      * Return 404 status code if successful.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void head404() throws CloudException, IOException;
+    void head404();
 
     /**
      * Return 404 status code if successful.

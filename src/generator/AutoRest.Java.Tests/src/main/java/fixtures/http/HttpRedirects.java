@@ -13,7 +13,6 @@ package fixtures.http;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
-import fixtures.http.models.ErrorException;
 import fixtures.http.models.HttpRedirectsDelete307Headers;
 import fixtures.http.models.HttpRedirectsGet300Headers;
 import fixtures.http.models.HttpRedirectsGet301Headers;
@@ -29,7 +28,6 @@ import fixtures.http.models.HttpRedirectsPost303Headers;
 import fixtures.http.models.HttpRedirectsPost307Headers;
 import fixtures.http.models.HttpRedirectsPut301Headers;
 import fixtures.http.models.HttpRedirectsPut307Headers;
-import java.io.IOException;
 import java.util.List;
 import rx.Observable;
 
@@ -41,10 +39,8 @@ public interface HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void head300() throws ErrorException, IOException;
+    void head300();
 
     /**
      * Return 300 status code and redirect to /http/success/200.
@@ -71,11 +67,9 @@ public interface HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object if successful.
      */
-    List<String> get300() throws ErrorException, IOException;
+    List<String> get300();
 
     /**
      * Return 300 status code and redirect to /http/success/200.
@@ -102,10 +96,8 @@ public interface HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void head301() throws ErrorException, IOException;
+    void head301();
 
     /**
      * Return 301 status code and redirect to /http/success/200.
@@ -132,10 +124,8 @@ public interface HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void get301() throws ErrorException, IOException;
+    void get301();
 
     /**
      * Return 301 status code and redirect to /http/success/200.
@@ -162,10 +152,8 @@ public interface HttpRedirects {
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put301() throws ErrorException, IOException;
+    void put301();
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
@@ -192,10 +180,8 @@ public interface HttpRedirects {
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put301(Boolean booleanValue) throws ErrorException, IOException;
+    void put301(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
@@ -225,10 +211,8 @@ public interface HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void head302() throws ErrorException, IOException;
+    void head302();
 
     /**
      * Return 302 status code and redirect to /http/success/200.
@@ -255,10 +239,8 @@ public interface HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void get302() throws ErrorException, IOException;
+    void get302();
 
     /**
      * Return 302 status code and redirect to /http/success/200.
@@ -285,10 +267,8 @@ public interface HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void patch302() throws ErrorException, IOException;
+    void patch302();
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
@@ -315,10 +295,8 @@ public interface HttpRedirects {
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void patch302(Boolean booleanValue) throws ErrorException, IOException;
+    void patch302(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
@@ -348,10 +326,8 @@ public interface HttpRedirects {
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void post303() throws ErrorException, IOException;
+    void post303();
 
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
@@ -378,10 +354,8 @@ public interface HttpRedirects {
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void post303(Boolean booleanValue) throws ErrorException, IOException;
+    void post303(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
@@ -411,10 +385,8 @@ public interface HttpRedirects {
     /**
      * Redirect with 307, resulting in a 200 success.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void head307() throws ErrorException, IOException;
+    void head307();
 
     /**
      * Redirect with 307, resulting in a 200 success.
@@ -441,10 +413,8 @@ public interface HttpRedirects {
     /**
      * Redirect get with 307, resulting in a 200 success.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void get307() throws ErrorException, IOException;
+    void get307();
 
     /**
      * Redirect get with 307, resulting in a 200 success.
@@ -471,10 +441,8 @@ public interface HttpRedirects {
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put307() throws ErrorException, IOException;
+    void put307();
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
@@ -501,10 +469,8 @@ public interface HttpRedirects {
      * Put redirected with 307, resulting in a 200 after redirect.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void put307(Boolean booleanValue) throws ErrorException, IOException;
+    void put307(Boolean booleanValue);
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
@@ -534,10 +500,8 @@ public interface HttpRedirects {
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void patch307() throws ErrorException, IOException;
+    void patch307();
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
@@ -564,10 +528,8 @@ public interface HttpRedirects {
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void patch307(Boolean booleanValue) throws ErrorException, IOException;
+    void patch307(Boolean booleanValue);
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
@@ -597,10 +559,8 @@ public interface HttpRedirects {
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void post307() throws ErrorException, IOException;
+    void post307();
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
@@ -627,10 +587,8 @@ public interface HttpRedirects {
      * Post redirected with 307, resulting in a 200 after redirect.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void post307(Boolean booleanValue) throws ErrorException, IOException;
+    void post307(Boolean booleanValue);
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
@@ -660,10 +618,8 @@ public interface HttpRedirects {
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void delete307() throws ErrorException, IOException;
+    void delete307();
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
@@ -690,10 +646,8 @@ public interface HttpRedirects {
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void delete307(Boolean booleanValue) throws ErrorException, IOException;
+    void delete307(Boolean booleanValue);
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.

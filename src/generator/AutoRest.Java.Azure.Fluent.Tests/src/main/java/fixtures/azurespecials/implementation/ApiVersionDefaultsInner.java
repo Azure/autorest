@@ -74,11 +74,8 @@ public final class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void getMethodGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
+    public void getMethodGlobalValid() {
         getMethodGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -139,11 +136,8 @@ public final class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void getMethodGlobalNotProvidedValid() throws ErrorException, IOException, IllegalArgumentException {
+    public void getMethodGlobalNotProvidedValid() {
         getMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -204,11 +198,8 @@ public final class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void getPathGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
+    public void getPathGlobalValid() {
         getPathGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -269,11 +260,8 @@ public final class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void getSwaggerGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
+    public void getSwaggerGlobalValid() {
         getSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

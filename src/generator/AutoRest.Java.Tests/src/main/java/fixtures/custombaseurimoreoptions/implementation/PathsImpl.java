@@ -68,11 +68,8 @@ public final class PathsImpl implements Paths {
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void getEmpty(String vault, String secret, String keyName) throws ErrorException, IOException, IllegalArgumentException {
+    public void getEmpty(String vault, String secret, String keyName) {
         getEmptyWithServiceResponseAsync(vault, secret, keyName).toBlocking().single().getBody();
     }
 
@@ -153,11 +150,8 @@ public final class PathsImpl implements Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void getEmpty(String vault, String secret, String keyName, String keyVersion) throws ErrorException, IOException, IllegalArgumentException {
+    public void getEmpty(String vault, String secret, String keyName, String keyVersion) {
         getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion).toBlocking().single().getBody();
     }
 

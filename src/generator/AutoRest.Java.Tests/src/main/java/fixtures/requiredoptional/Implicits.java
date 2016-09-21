@@ -14,8 +14,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.requiredoptional.models.Error;
-import fixtures.requiredoptional.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -27,12 +25,9 @@ public interface Implicits {
      * Test implicitly required path parameter.
      *
      * @param pathParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    Error getRequiredPath(String pathParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error getRequiredPath(String pathParameter);
 
     /**
      * Test implicitly required path parameter.
@@ -62,10 +57,8 @@ public interface Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putOptionalQuery() throws ErrorException, IOException;
+    void putOptionalQuery();
 
     /**
      * Test implicitly optional query parameter.
@@ -92,10 +85,8 @@ public interface Implicits {
      * Test implicitly optional query parameter.
      *
      * @param queryParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putOptionalQuery(String queryParameter) throws ErrorException, IOException;
+    void putOptionalQuery(String queryParameter);
 
     /**
      * Test implicitly optional query parameter.
@@ -125,10 +116,8 @@ public interface Implicits {
     /**
      * Test implicitly optional header parameter.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putOptionalHeader() throws ErrorException, IOException;
+    void putOptionalHeader();
 
     /**
      * Test implicitly optional header parameter.
@@ -155,10 +144,8 @@ public interface Implicits {
      * Test implicitly optional header parameter.
      *
      * @param queryParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putOptionalHeader(String queryParameter) throws ErrorException, IOException;
+    void putOptionalHeader(String queryParameter);
 
     /**
      * Test implicitly optional header parameter.
@@ -188,10 +175,8 @@ public interface Implicits {
     /**
      * Test implicitly optional body parameter.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putOptionalBody() throws ErrorException, IOException;
+    void putOptionalBody();
 
     /**
      * Test implicitly optional body parameter.
@@ -218,10 +203,8 @@ public interface Implicits {
      * Test implicitly optional body parameter.
      *
      * @param bodyParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putOptionalBody(String bodyParameter) throws ErrorException, IOException;
+    void putOptionalBody(String bodyParameter);
 
     /**
      * Test implicitly optional body parameter.
@@ -251,12 +234,9 @@ public interface Implicits {
     /**
      * Test implicitly required path parameter.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    Error getRequiredGlobalPath() throws ErrorException, IOException, IllegalArgumentException;
+    Error getRequiredGlobalPath();
 
     /**
      * Test implicitly required path parameter.
@@ -283,12 +263,9 @@ public interface Implicits {
     /**
      * Test implicitly required query parameter.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    Error getRequiredGlobalQuery() throws ErrorException, IOException, IllegalArgumentException;
+    Error getRequiredGlobalQuery();
 
     /**
      * Test implicitly required query parameter.
@@ -315,11 +292,9 @@ public interface Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error getOptionalGlobalQuery() throws ErrorException, IOException;
+    Error getOptionalGlobalQuery();
 
     /**
      * Test implicitly optional query parameter.

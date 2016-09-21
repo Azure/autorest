@@ -19,7 +19,6 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
-import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
@@ -153,15 +152,13 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getSinglePages() throws CloudException, IOException {
+    public PagedList<Product> getSinglePages() {
         ServiceResponse<Page<Product>> response = getSinglePagesSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getSinglePagesNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
@@ -249,15 +246,13 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePages() throws CloudException, IOException {
+    public PagedList<Product> getMultiplePages() {
         ServiceResponse<Page<Product>> response = getMultiplePagesSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
             }
         };
@@ -344,15 +339,13 @@ public final class PagingsImpl implements Pagings {
      *
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePages(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException {
+    public PagedList<Product> getMultiplePages(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         ServiceResponse<Page<Product>> response = getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single().getBody();
             }
         };
@@ -457,15 +450,13 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getOdataMultiplePages() throws CloudException, IOException {
+    public PagedList<Product> getOdataMultiplePages() {
         ServiceResponse<Page<Product>> response = getOdataMultiplePagesSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
             }
         };
@@ -552,15 +543,13 @@ public final class PagingsImpl implements Pagings {
      *
      * @param clientRequestId the String value
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getOdataMultiplePages(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) throws CloudException, IOException {
+    public PagedList<Product> getOdataMultiplePages(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
         ServiceResponse<Page<Product>> response = getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single().getBody();
             }
         };
@@ -666,16 +655,13 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions) {
         ServiceResponse<Page<Product>> response = getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
                 pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
                 pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
@@ -779,16 +765,13 @@ public final class PagingsImpl implements Pagings {
      *
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
      * @param clientRequestId the String value
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) {
         ServiceResponse<Page<Product>> response = getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
                 pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
                 pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
@@ -900,15 +883,13 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePagesRetryFirst() throws CloudException, IOException {
+    public PagedList<Product> getMultiplePagesRetryFirst() {
         ServiceResponse<Page<Product>> response = getMultiplePagesRetryFirstSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
@@ -996,15 +977,13 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePagesRetrySecond() throws CloudException, IOException {
+    public PagedList<Product> getMultiplePagesRetrySecond() {
         ServiceResponse<Page<Product>> response = getMultiplePagesRetrySecondSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
@@ -1092,15 +1071,13 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that receives a 400 on the first call.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getSinglePagesFailure() throws CloudException, IOException {
+    public PagedList<Product> getSinglePagesFailure() {
         ServiceResponse<Page<Product>> response = getSinglePagesFailureSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getSinglePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
@@ -1188,15 +1165,13 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that receives a 400 on the second call.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePagesFailure() throws CloudException, IOException {
+    public PagedList<Product> getMultiplePagesFailure() {
         ServiceResponse<Page<Product>> response = getMultiplePagesFailureSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getMultiplePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
@@ -1284,15 +1259,13 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that receives an invalid nextLink.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePagesFailureUri() throws CloudException, IOException {
+    public PagedList<Product> getMultiplePagesFailureUri() {
         ServiceResponse<Page<Product>> response = getMultiplePagesFailureUriSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
@@ -1382,16 +1355,13 @@ public final class PagingsImpl implements Pagings {
      *
      * @param tenant Sets the tenant to use.
      * @param apiVersion Sets the api version to use.
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePagesFragmentNextLink(final String tenant, final String apiVersion) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesFragmentNextLink(final String tenant, final String apiVersion) {
         ServiceResponse<Page<Product>> response = getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, apiVersion).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextLink) {
                 return nextFragmentSinglePageAsync(tenant, nextLink, apiVersion).toBlocking().single().getBody();
             }
         };
@@ -1496,16 +1466,13 @@ public final class PagingsImpl implements Pagings {
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      * @param apiVersion Sets the api version to use.
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> nextFragment(final String tenant, final String nextLink, final String apiVersion) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> nextFragment(final String tenant, final String nextLink, final String apiVersion) {
         ServiceResponse<Page<Product>> response = nextFragmentSinglePageAsync(tenant, nextLink, apiVersion).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextLink) {
                 return nextFragmentSinglePageAsync(tenant, nextLink, apiVersion).toBlocking().single().getBody();
             }
         };
@@ -1616,16 +1583,13 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that finishes on the first call without a nextlink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getSinglePagesNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getSinglePagesNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getSinglePagesNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getSinglePagesNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
@@ -1722,16 +1686,13 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePagesNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getMultiplePagesNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
             }
         };
@@ -1827,16 +1788,13 @@ public final class PagingsImpl implements Pagings {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         ServiceResponse<Page<Product>> response = getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single().getBody();
             }
         };
@@ -1950,16 +1908,13 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getOdataMultiplePagesNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getOdataMultiplePagesNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getOdataMultiplePagesNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
             }
         };
@@ -2055,16 +2010,13 @@ public final class PagingsImpl implements Pagings {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getOdataMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getOdataMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
         ServiceResponse<Page<Product>> response = getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single().getBody();
             }
         };
@@ -2178,16 +2130,13 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePagesWithOffsetNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesWithOffsetNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
             }
         };
@@ -2283,16 +2232,13 @@ public final class PagingsImpl implements Pagings {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePagesWithOffsetNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesWithOffsetNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions) {
         ServiceResponse<Page<Product>> response = getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single().getBody();
             }
         };
@@ -2406,16 +2352,13 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePagesRetryFirstNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesRetryFirstNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
@@ -2512,16 +2455,13 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePagesRetrySecondNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesRetrySecondNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
@@ -2618,16 +2558,13 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that receives a 400 on the first call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getSinglePagesFailureNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getSinglePagesFailureNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getSinglePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getSinglePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
@@ -2724,16 +2661,13 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that receives a 400 on the second call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePagesFailureNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesFailureNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getMultiplePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getMultiplePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
@@ -2830,16 +2764,13 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that receives an invalid nextLink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public PagedList<Product> getMultiplePagesFailureUriNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesFailureUriNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> nextPage(String nextPageLink) throws RestException, IOException {
+            public Page<Product> nextPage(String nextPageLink) {
                 return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };

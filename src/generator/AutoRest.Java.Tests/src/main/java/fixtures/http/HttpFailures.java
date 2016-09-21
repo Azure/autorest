@@ -12,10 +12,7 @@ package fixtures.http;
 
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.http.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -26,11 +23,9 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    boolean getEmptyError() throws ErrorException, IOException;
+    boolean getEmptyError();
 
     /**
      * Get empty error form server.
@@ -57,11 +52,9 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @throws ServiceException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    boolean getNoModelError() throws ServiceException, IOException;
+    boolean getNoModelError();
 
     /**
      * Get empty error form server.
@@ -88,11 +81,9 @@ public interface HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @throws ServiceException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    boolean getNoModelEmpty() throws ServiceException, IOException;
+    boolean getNoModelEmpty();
 
     /**
      * Get empty response from server.

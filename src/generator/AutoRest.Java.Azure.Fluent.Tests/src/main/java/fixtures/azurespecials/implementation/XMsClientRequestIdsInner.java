@@ -66,10 +66,8 @@ public final class XMsClientRequestIdsInner {
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void get() throws CloudException, IOException {
+    public void get() {
         getWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -127,11 +125,8 @@ public final class XMsClientRequestIdsInner {
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramGet(String xMsClientRequestId) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramGet(String xMsClientRequestId) {
         paramGetWithServiceResponseAsync(xMsClientRequestId).toBlocking().single().getBody();
     }
 

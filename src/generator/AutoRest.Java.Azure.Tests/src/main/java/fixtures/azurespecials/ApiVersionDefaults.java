@@ -13,8 +13,6 @@ package fixtures.azurespecials;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.azurespecials.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -25,11 +23,8 @@ public interface ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void getMethodGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
+    void getMethodGlobalValid();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -56,11 +51,8 @@ public interface ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void getMethodGlobalNotProvidedValid() throws ErrorException, IOException, IllegalArgumentException;
+    void getMethodGlobalNotProvidedValid();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -87,11 +79,8 @@ public interface ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void getPathGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
+    void getPathGlobalValid();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -118,11 +107,8 @@ public interface ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void getSwaggerGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
+    void getSwaggerGlobalValid();
 
     /**
      * GET method with api-version modeled in global settings.

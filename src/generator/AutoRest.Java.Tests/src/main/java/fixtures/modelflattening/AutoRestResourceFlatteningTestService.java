@@ -13,13 +13,11 @@ package fixtures.modelflattening;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.modelflattening.models.ErrorException;
 import fixtures.modelflattening.models.FlattenedProduct;
 import fixtures.modelflattening.models.FlattenParameterGroup;
 import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
 import fixtures.modelflattening.models.SimpleProduct;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import rx.Observable;
@@ -36,10 +34,8 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as an Array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putArray() throws ErrorException, IOException;
+    void putArray();
 
     /**
      * Put External Resource as an Array.
@@ -66,10 +62,8 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putArray(List<Resource> resourceArray) throws ErrorException, IOException;
+    void putArray(List<Resource> resourceArray);
 
     /**
      * Put External Resource as an Array.
@@ -99,11 +93,9 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as an Array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
-    List<FlattenedProduct> getArray() throws ErrorException, IOException;
+    List<FlattenedProduct> getArray();
 
     /**
      * Get External Resource as an Array.
@@ -130,10 +122,8 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a Dictionary.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putDictionary() throws ErrorException, IOException;
+    void putDictionary();
 
     /**
      * Put External Resource as a Dictionary.
@@ -160,10 +150,8 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ErrorException, IOException;
+    void putDictionary(Map<String, FlattenedProduct> resourceDictionary);
 
     /**
      * Put External Resource as a Dictionary.
@@ -193,11 +181,9 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a Dictionary.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
-    Map<String, FlattenedProduct> getDictionary() throws ErrorException, IOException;
+    Map<String, FlattenedProduct> getDictionary();
 
     /**
      * Get External Resource as a Dictionary.
@@ -224,10 +210,8 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putResourceCollection() throws ErrorException, IOException;
+    void putResourceCollection();
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -254,10 +238,8 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putResourceCollection(ResourceCollection resourceComplexObject) throws ErrorException, IOException;
+    void putResourceCollection(ResourceCollection resourceComplexObject);
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -287,11 +269,9 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the ResourceCollection object if successful.
      */
-    ResourceCollection getResourceCollection() throws ErrorException, IOException;
+    ResourceCollection getResourceCollection();
 
     /**
      * Get External Resource as a ResourceCollection.
@@ -318,11 +298,9 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the SimpleProduct object if successful.
      */
-    SimpleProduct putSimpleProduct() throws ErrorException, IOException;
+    SimpleProduct putSimpleProduct();
 
     /**
      * Put Simple Product with client flattening true on the model.
@@ -349,11 +327,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Put Simple Product with client flattening true on the model.
      *
      * @param simpleBodyProduct Simple body product to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the SimpleProduct object if successful.
      */
-    SimpleProduct putSimpleProduct(SimpleProduct simpleBodyProduct) throws ErrorException, IOException;
+    SimpleProduct putSimpleProduct(SimpleProduct simpleBodyProduct);
 
     /**
      * Put Simple Product with client flattening true on the model.
@@ -385,12 +361,9 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the SimpleProduct object if successful.
      */
-    SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName) throws ErrorException, IOException, IllegalArgumentException;
+    SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName);
 
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
@@ -427,12 +400,9 @@ public interface AutoRestResourceFlatteningTestService {
      * @param description Description of product.
      * @param genericValue Generic URL value.
      * @param odatavalue URL value.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the SimpleProduct object if successful.
      */
-    SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) throws ErrorException, IOException, IllegalArgumentException;
+    SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue);
 
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
@@ -475,12 +445,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Put Simple Product with client flattening true on the model.
      *
      * @param flattenParameterGroup Additional parameters for the operation
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the SimpleProduct object if successful.
      */
-    SimpleProduct putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup) throws ErrorException, IOException, IllegalArgumentException;
+    SimpleProduct putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup);
 
     /**
      * Put Simple Product with client flattening true on the model.

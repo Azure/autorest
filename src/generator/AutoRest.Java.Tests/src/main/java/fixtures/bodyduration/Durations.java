@@ -13,8 +13,6 @@ package fixtures.bodyduration;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodyduration.models.ErrorException;
-import java.io.IOException;
 import org.joda.time.Period;
 import rx.Observable;
 
@@ -26,11 +24,9 @@ public interface Durations {
     /**
      * Get null duration value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Period object if successful.
      */
-    Period getNull() throws ErrorException, IOException;
+    Period getNull();
 
     /**
      * Get null duration value.
@@ -58,11 +54,8 @@ public interface Durations {
      * Put a positive duration value.
      *
      * @param durationBody the Period value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putPositiveDuration(Period durationBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putPositiveDuration(Period durationBody);
 
     /**
      * Put a positive duration value.
@@ -92,11 +85,9 @@ public interface Durations {
     /**
      * Get a positive duration value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Period object if successful.
      */
-    Period getPositiveDuration() throws ErrorException, IOException;
+    Period getPositiveDuration();
 
     /**
      * Get a positive duration value.
@@ -123,11 +114,9 @@ public interface Durations {
     /**
      * Get an invalid duration value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Period object if successful.
      */
-    Period getInvalid() throws ErrorException, IOException;
+    Period getInvalid();
 
     /**
      * Get an invalid duration value.

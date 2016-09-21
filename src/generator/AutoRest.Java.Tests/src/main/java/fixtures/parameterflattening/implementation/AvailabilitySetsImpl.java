@@ -69,11 +69,8 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @param resourceGroupName The name of the resource group.
      * @param avset The name of the storage availability set.
      * @param tags A set of tags. A description about the set of tags.
-     * @throws ServiceException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void update(String resourceGroupName, String avset, Map<String, String> tags) throws ServiceException, IOException, IllegalArgumentException {
+    public void update(String resourceGroupName, String avset, Map<String, String> tags) {
         updateWithServiceResponseAsync(resourceGroupName, avset, tags).toBlocking().single().getBody();
     }
 

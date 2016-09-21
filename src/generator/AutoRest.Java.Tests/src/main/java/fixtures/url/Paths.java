@@ -13,9 +13,7 @@ package fixtures.url;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
-import java.io.IOException;
 import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -29,10 +27,8 @@ public interface Paths {
     /**
      * Get true Boolean value on path.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getBooleanTrue() throws ErrorException, IOException;
+    void getBooleanTrue();
 
     /**
      * Get true Boolean value on path.
@@ -59,10 +55,8 @@ public interface Paths {
     /**
      * Get false Boolean value on path.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getBooleanFalse() throws ErrorException, IOException;
+    void getBooleanFalse();
 
     /**
      * Get false Boolean value on path.
@@ -89,10 +83,8 @@ public interface Paths {
     /**
      * Get '1000000' integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getIntOneMillion() throws ErrorException, IOException;
+    void getIntOneMillion();
 
     /**
      * Get '1000000' integer value.
@@ -119,10 +111,8 @@ public interface Paths {
     /**
      * Get '-1000000' integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getIntNegativeOneMillion() throws ErrorException, IOException;
+    void getIntNegativeOneMillion();
 
     /**
      * Get '-1000000' integer value.
@@ -149,10 +139,8 @@ public interface Paths {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getTenBillion() throws ErrorException, IOException;
+    void getTenBillion();
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -179,10 +167,8 @@ public interface Paths {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getNegativeTenBillion() throws ErrorException, IOException;
+    void getNegativeTenBillion();
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -209,10 +195,8 @@ public interface Paths {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void floatScientificPositive() throws ErrorException, IOException;
+    void floatScientificPositive();
 
     /**
      * Get '1.034E+20' numeric value.
@@ -239,10 +223,8 @@ public interface Paths {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void floatScientificNegative() throws ErrorException, IOException;
+    void floatScientificNegative();
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -269,10 +251,8 @@ public interface Paths {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void doubleDecimalPositive() throws ErrorException, IOException;
+    void doubleDecimalPositive();
 
     /**
      * Get '9999999.999' numeric value.
@@ -299,10 +279,8 @@ public interface Paths {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void doubleDecimalNegative() throws ErrorException, IOException;
+    void doubleDecimalNegative();
 
     /**
      * Get '-9999999.999' numeric value.
@@ -329,10 +307,8 @@ public interface Paths {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void stringUnicode() throws ErrorException, IOException;
+    void stringUnicode();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -359,10 +335,8 @@ public interface Paths {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void stringUrlEncoded() throws ErrorException, IOException;
+    void stringUrlEncoded();
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -389,10 +363,8 @@ public interface Paths {
     /**
      * Get ''.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void stringEmpty() throws ErrorException, IOException;
+    void stringEmpty();
 
     /**
      * Get ''.
@@ -420,11 +392,8 @@ public interface Paths {
      * Get null (should throw).
      *
      * @param stringPath null string value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void stringNull(String stringPath) throws ErrorException, IOException, IllegalArgumentException;
+    void stringNull(String stringPath);
 
     /**
      * Get null (should throw).
@@ -455,11 +424,8 @@ public interface Paths {
      * Get using uri with 'green color' in path parameter.
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void enumValid(UriColor enumPath) throws ErrorException, IOException, IllegalArgumentException;
+    void enumValid(UriColor enumPath);
 
     /**
      * Get using uri with 'green color' in path parameter.
@@ -490,11 +456,8 @@ public interface Paths {
      * Get null (should throw on the client before the request is sent on wire).
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void enumNull(UriColor enumPath) throws ErrorException, IOException, IllegalArgumentException;
+    void enumNull(UriColor enumPath);
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
@@ -525,11 +488,8 @@ public interface Paths {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void byteMultiByte(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException;
+    void byteMultiByte(byte[] bytePath);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -559,10 +519,8 @@ public interface Paths {
     /**
      * Get '' as byte array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void byteEmpty() throws ErrorException, IOException;
+    void byteEmpty();
 
     /**
      * Get '' as byte array.
@@ -590,11 +548,8 @@ public interface Paths {
      * Get null as byte array (should throw).
      *
      * @param bytePath null as byte array (should throw)
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void byteNull(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException;
+    void byteNull(byte[] bytePath);
 
     /**
      * Get null as byte array (should throw).
@@ -624,10 +579,8 @@ public interface Paths {
     /**
      * Get '2012-01-01' as date.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void dateValid() throws ErrorException, IOException;
+    void dateValid();
 
     /**
      * Get '2012-01-01' as date.
@@ -655,11 +608,8 @@ public interface Paths {
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
      *
      * @param datePath null as date (should throw)
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void dateNull(LocalDate datePath) throws ErrorException, IOException, IllegalArgumentException;
+    void dateNull(LocalDate datePath);
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
@@ -689,10 +639,8 @@ public interface Paths {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void dateTimeValid() throws ErrorException, IOException;
+    void dateTimeValid();
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -720,11 +668,8 @@ public interface Paths {
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
      *
      * @param dateTimePath null as date-time
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void dateTimeNull(DateTime dateTimePath) throws ErrorException, IOException, IllegalArgumentException;
+    void dateTimeNull(DateTime dateTimePath);
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
@@ -755,11 +700,8 @@ public interface Paths {
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
      *
      * @param base64UrlPath base64url encoded value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void base64Url(byte[] base64UrlPath) throws ErrorException, IOException, IllegalArgumentException;
+    void base64Url(byte[] base64UrlPath);
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
@@ -790,11 +732,8 @@ public interface Paths {
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void arrayCsvInPath(List<String> arrayPath) throws ErrorException, IOException, IllegalArgumentException;
+    void arrayCsvInPath(List<String> arrayPath);
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -825,10 +764,8 @@ public interface Paths {
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
      *
      * @param unixTimeUrlPath Unix time encoded value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void unixTimeUrl(DateTime unixTimeUrlPath) throws ErrorException, IOException;
+    void unixTimeUrl(DateTime unixTimeUrlPath);
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).

@@ -756,7 +756,6 @@ namespace AutoRest.Java.Azure.TemplateModels
                 {
                     imports.Remove("java.util.ArrayList");
                     imports.Remove("com.microsoft.rest.ServiceCallback");
-                    imports.Add("com.microsoft.rest.RestException");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");

@@ -48,7 +48,7 @@
           "200": {
             "description": "A list of caches",
             "schema": {
-              "$ref": "./Swagger/swagger-external-def.json#/definitions/Product"
+              "$ref": "./swagger-external-def.json#/definitions/Product"
             }
           },
           "201": {
@@ -60,7 +60,7 @@
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "./Swagger/swagger-external-def.json#/definitions/Error"
+              "$ref": "./swagger-external-def.json#/definitions/Error"
             }
           }
         }
@@ -97,12 +97,12 @@
         ],
         "responses": {
           "204": {
-            "description": "A list of caches",
+            "description": "A list of caches"
           },
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "./Swagger/swagger-external-def.json#/definitions/Error"
+              "$ref": "./swagger-external-def.json#/definitions/Error"
             }
           }
         }
@@ -111,14 +111,14 @@
   },
   "definitions": {
     "ChildProduct": {
-      "AllOf": [ { "$ref": "./Swagger/swagger-external-def.json#/definitions/Product" } ],
+      "AllOf": [ { "$ref": "./swagger-external-def.json#/definitions/Product" } ],
       "properties": {
         "size": {
           "type": "integer",
           "description": "product size"
         },
         "parentProduct": {
-          "$ref": "./Swagger/swagger-external-def.json#/definitions/Product"
+          "$ref": "./swagger-external-def.json#/definitions/Product"
         }
       }
     }

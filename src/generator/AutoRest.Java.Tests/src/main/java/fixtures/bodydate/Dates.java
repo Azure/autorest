@@ -13,8 +13,6 @@ package fixtures.bodydate;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodydate.models.ErrorException;
-import java.io.IOException;
 import org.joda.time.LocalDate;
 import rx.Observable;
 
@@ -26,11 +24,9 @@ public interface Dates {
     /**
      * Get null date value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
      */
-    LocalDate getNull() throws ErrorException, IOException;
+    LocalDate getNull();
 
     /**
      * Get null date value.
@@ -57,11 +53,9 @@ public interface Dates {
     /**
      * Get invalid date value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
      */
-    LocalDate getInvalidDate() throws ErrorException, IOException;
+    LocalDate getInvalidDate();
 
     /**
      * Get invalid date value.
@@ -88,11 +82,9 @@ public interface Dates {
     /**
      * Get overflow date value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
      */
-    LocalDate getOverflowDate() throws ErrorException, IOException;
+    LocalDate getOverflowDate();
 
     /**
      * Get overflow date value.
@@ -119,11 +111,9 @@ public interface Dates {
     /**
      * Get underflow date value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
      */
-    LocalDate getUnderflowDate() throws ErrorException, IOException;
+    LocalDate getUnderflowDate();
 
     /**
      * Get underflow date value.
@@ -151,11 +141,8 @@ public interface Dates {
      * Put max date value 9999-12-31.
      *
      * @param dateBody the LocalDate value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putMaxDate(LocalDate dateBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putMaxDate(LocalDate dateBody);
 
     /**
      * Put max date value 9999-12-31.
@@ -185,11 +172,9 @@ public interface Dates {
     /**
      * Get max date value 9999-12-31.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
      */
-    LocalDate getMaxDate() throws ErrorException, IOException;
+    LocalDate getMaxDate();
 
     /**
      * Get max date value 9999-12-31.
@@ -217,11 +202,8 @@ public interface Dates {
      * Put min date value 0000-01-01.
      *
      * @param dateBody the LocalDate value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putMinDate(LocalDate dateBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putMinDate(LocalDate dateBody);
 
     /**
      * Put min date value 0000-01-01.
@@ -251,11 +233,9 @@ public interface Dates {
     /**
      * Get min date value 0000-01-01.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
      */
-    LocalDate getMinDate() throws ErrorException, IOException;
+    LocalDate getMinDate();
 
     /**
      * Get min date value 0000-01-01.
