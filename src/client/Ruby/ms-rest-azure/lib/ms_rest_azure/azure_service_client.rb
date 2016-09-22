@@ -14,6 +14,23 @@ module MsRestAzure
     # @return [String] api version of the Azure in string format.
     attr_accessor :api_version
 
+    # @return [Hash{String=>String}] default request headers for Azure requests
+    REQUEST_HEADERS = {
+        'x-ms-client-request-id': SecureRandom.uuid,
+        'Content-Type': 'application/json;charset=utf-8'
+    }
+
+    #
+    # Retrieves a new instance of the AzureOperationResponse class.
+    # @param [MsRest::HttpOperationRequest] request the HTTP request object.
+    # @param [Faraday::Response] response the HTTP response object.
+    # @param [String] body the HTTP response body.
+    # @return [MsRestAzure::AzureOperationResponse] the operation response.
+    #
+    def create_response(request, http_response, body = nil)
+      AzureOperationResponse.new(request, http_response, body)
+    end
+
     #
     # Retrieves the result of 'POST','DELETE','PUT' or 'PATCH' operation. Performs polling of required.
     # @param azure_response [MsRestAzure::AzureOperationResponse] response from Azure service.
