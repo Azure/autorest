@@ -984,11 +984,17 @@ namespace AutoRest.Go
         public static bool NextMethodExists(this Method method, List<Method> methods) {
             string next = "next";
             if (method.Name.Length > next.Length) {
-                if (method.Name.Substring(method.Name.Length - next.Length).Equals(next, StringComparison.OrdinalIgnoreCase)) { 
+                if (method.Name.Substring(method.Name.Length - next.Length).Equals(next, StringComparison.OrdinalIgnoreCase)
+                    && methods.Any(m => m.ReturnValue().Body == method.ReturnValue().Body)){
+                    // && method.Name.Equals(m.Name + next, StringComparison.OrdinalIgnoreCase))) { 
                     return true;
                 }
             }
-            return methods.Any(m => m.Name.Equals(method.Name + next, StringComparison.OrdinalIgnoreCase));
+            // return methods.Any(m => m.Name.Equals(method.Name + next, StringComparison.OrdinalIgnoreCase)
+            //     && m.ReturnValue().Body == method.ReturnValue().Body);
+            return methods.Any(m => m.Name.Length > next.Length
+                && m.Name.Substring(m.Name.Length - next.Length).Equals(next, StringComparison.OrdinalIgnoreCase)
+                && m.ReturnValue().Body == method.ReturnValue().Body);
         }
 
         /// <summary>

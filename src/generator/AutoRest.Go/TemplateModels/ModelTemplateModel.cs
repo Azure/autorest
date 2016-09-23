@@ -21,12 +21,16 @@ namespace AutoRest.Go.TemplateModels
         // (null or empty if the model is not paged).
         public string NextLink;
 
+        public bool PreparerNeeded;
+
         public ModelTemplateModel(CompositeType source)
         {
             this.LoadFrom(source);
 
             PropertyTemplateModels = new List<PropertyTemplateModel>();
             source.Properties.ForEach(p => PropertyTemplateModels.Add(new PropertyTemplateModel(p)));
+
+            // PreparerNeeded = false;
         }
 
         public IScopeProvider Scope

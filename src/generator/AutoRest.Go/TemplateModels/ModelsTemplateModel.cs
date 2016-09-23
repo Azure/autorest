@@ -15,6 +15,8 @@ namespace AutoRest.Go.TemplateModels
         public List<ModelTemplateModel> ModelTemplateModels { get; set; }
         public string PackageName { get; set; }
         public Dictionary<IType, string> PagedTypes { get; set; }
+
+        public List<IType> NextMethodDefined { get; set; }
         
         public ModelsTemplateModel(ServiceClient serviceClient, string packageName)
         {
@@ -92,6 +94,7 @@ namespace AutoRest.Go.TemplateModels
 
             // Find all methods that returned paged results
             PagedTypes = new Dictionary<IType, string>();
+            NextMethodDefined = new List<IType>();
             serviceClient.Methods
                 .Where(m => m.IsPageable()) //is m.NextLink not empty nor nil? NextLink is not an attribute, it is a function that returns a string, BTW
                 .ForEach(m =>
@@ -100,10 +103,12 @@ namespace AutoRest.Go.TemplateModels
                     {
                         PagedTypes.Add(m.ReturnValue().Body, m.NextLink());
                     }
+                    if (m.NextMethodExists(serviceClient.Methods)) {
+                        NextMethodDefined.Add(m.ReturnValue().Body);
+                    }
                 });
 
             // Mark all models returned by one or more methods and note any "next link" fields used with paged data
-            //The duplicating next link problem could be here!
             ModelTemplateModels
                 .Where(mtm =>
                 {
@@ -116,6 +121,11 @@ namespace AutoRest.Go.TemplateModels
                     {
                         mtm.NextLink = GoCodeNamer.NormalizeWithChar(PagedTypes[mtm]); //this next link is an attribute!
                         // Marking is used for some weird methods in model file
+                        if (NextMethodDefined.Contains(mtm)) {
+                            mtm.PreparerNeeded = false;
+                        } else {
+                            mtm.PreparerNeeded = true;
+                        }
                     }
                 });
 
@@ -136,7 +146,7 @@ namespace AutoRest.Go.TemplateModels
                     .ForEach(mt =>
                     {
                         (mt as CompositeType).AddImports(imports);
-                        if (PagedTypes.ContainsKey(mt))
+                        if (PagedTypes.ContainsKey(mt) && PagedTypes.Count > NextMethodDefined.Count)
                         {
                             imports.UnionWith(GoCodeNamer.PageableImports);
                         }
