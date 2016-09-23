@@ -2,7 +2,7 @@
 
 # <img align="center" src="https://raw.githubusercontent.com/Azure/autorest/master/Documentation/images/autorest-small-flat.png">  AutoRest
 
-The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Swagger](http://github.com/swagger-api/swagger-spec) format.
+The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Open API Initiative](https://github.com/OAI/OpenAPI-Specification) format.
 
 ##Getting AutoRest
 The AutoRest tools can be installed with Nuget for use in a Visual Studio project:
