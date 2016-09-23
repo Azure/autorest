@@ -16,8 +16,8 @@ module MsRestAzure
 
     # @return [Hash{String=>String}] default request headers for Azure requests
     REQUEST_HEADERS = {
-        'x-ms-client-request-id': SecureRandom.uuid,
-        'Content-Type': 'application/json;charset=utf-8'
+        'x-ms-client-request-id' => SecureRandom.uuid,
+        'Content-Type'=> 'application/json;charset=utf-8'
     }
 
     #
