@@ -291,16 +291,13 @@ class LongRunningOperation(object):
 
         :param requests.Response response: initial REST call response.
         """
+        self._deserialize(response)
         self._check_status(response)
         if response.status_code in [200, 202, 204]:
             self._process_status(response)
         status = self._get_body_status(response)
         if status:
             self.status = status
-        try:
-            self._deserialize(response)
-        except CloudError:
-            pass
 
     def get_status_from_location(self, response):
         """Process the latest status update retrieved from a 'location'
