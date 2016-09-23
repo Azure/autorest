@@ -43,7 +43,7 @@ module MsRest
         response_content = http_response.body.to_s.empty? ? nil : http_response.body
         # Create Result
         result = create_response(request, http_response)
-        result.body = response_content #parsed_response
+        result.body = response_content
         result
       end
       promise.execute

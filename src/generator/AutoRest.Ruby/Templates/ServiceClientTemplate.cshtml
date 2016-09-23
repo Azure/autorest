@@ -90,7 +90,7 @@ module @Settings.Namespace
       result = make_request_async(method, path, options).value!
       result.response.body.to_s.empty? ? nil : JSON.load(result.response.body)
     end
-@EmptyLine
+    @EmptyLine
 
     #
     # Makes a request asynchronously
@@ -114,8 +114,6 @@ module @Settings.Namespace
       options=options.merge({
         headers: request_headers.merge(options[:headers] || {})
       })
-
-      @EmptyLine
       options.merge!({credentials: @@credentials}) unless @@credentials.nil?
 
       @EmptyLine
@@ -143,18 +141,5 @@ module @Settings.Namespace
     @EmptyLine
     @:
     }
-  end
-
-    #
-    # Makes a request asynchronously
-    # @@param method [Symbol] with any of the following values :get, :put, :post, :patch, :delete
-    # @@param url [String] url to use for the request
-    # @@param options [Hash{String=>String}] specifying any request options like :body
-    # @@return [@(Model.OperationResponseString)] Operation response containing the request, response and status 
-    #
-  def make_request_with_http_info(method, url, options = {})
-    result = make_request_async(method, url, options).value!
-    result.body = result.response.body.to_s.empty? ? nil : JSON.load(result.response.body)
-    result
   end
 end
