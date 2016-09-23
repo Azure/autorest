@@ -64,7 +64,8 @@ namespace AutoRest.Ruby.Azure.TemplateModels
         }
 
         /// <summary>
-        /// Returns string for next method assigned to the Page.
+        /// Returns Ruby code as string which sets `next_method` property of the page with the respective next paging method
+        /// and performs parameter re-assignment when required (ex. parameter grouping cases)
         /// </summary>
         public string AssignNextMethodToPage()
         {

@@ -129,18 +129,27 @@ describe 'Paging' do
     expect(items.count).to eq(10)
   end
 
-  it 'should get multiple pages with fragmented next link' do
+  it 'should get multiple pages with fragmented next link - lazy' do
     page = @client.paging.get_multiple_pages_fragment_next_link_as_lazy('1.6', 'test_user')
     expect(page.is_a? PagingModule::Models::ProductResult)
     expect(page.odatanext_link).not_to be_nil
 
     all_item = page.get_all_items
     expect(all_item.count).to eq(10)
+  end
 
-    # Get all items at once
+  it 'should get multiple pages with fragmented next link' do
     all_item = @client.paging.get_multiple_pages_fragment_next_link('1.6', 'test_user')
     expect(all_item[0].is_a? PagingModule::Models::ProductResult)
-    expect(page.odatanext_link).to be_nil
+    expect(all_item.count).to eq(10)
+  end
+
+  it 'should get multiple pages with fragmented grouped next link' do
+    grouped_param = PagingModule::Models::CustomParameterGroup.new
+    grouped_param.api_version = '1.6'
+    grouped_param.tenant = 'test_user'
+    all_item = @client.paging.get_multiple_pages_fragment_with_grouping_next_link(grouped_param)
+    expect(all_item[0].is_a? PagingModule::Models::ProductResult)
     expect(all_item.count).to eq(10)
   end
 
