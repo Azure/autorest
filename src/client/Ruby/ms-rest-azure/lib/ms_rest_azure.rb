@@ -16,6 +16,7 @@ require 'ms_rest_azure/resource.rb'
 require 'ms_rest_azure/serialization.rb'
 require 'ms_rest_azure/sub_resource.rb'
 require 'ms_rest_azure/version'
+require 'ms_rest_azure/connection'
 
 module MsRestAzure end
 module MsRestAzure::Serialization end
