@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Globalization;
-using System.Data.Entity.Design.PluralizationServices;
 
 using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
@@ -26,6 +24,11 @@ namespace AutoRest.Go
         public const string SkipUrlEncoding = "x-ms-skip-url-encoding";
         
         private static readonly Regex SplitPattern = new Regex(@"(\p{Lu}\p{Ll}+)");
+
+        private static Dictionary<string, string> plural = new Dictionary<string, string>()
+        {
+            { "eventhub", "eventhubs" }
+        };
 
         /////////////////////////////////////////////////////////////////////////////////////////
         //
@@ -100,8 +103,7 @@ namespace AutoRest.Go
         /// <returns></returns>
         public static bool IsNamePlural(this string value, string packageName)
         {
-            PluralizationService ps = PluralizationService.CreateService(CultureInfo.GetCultureInfo("en-us"));
-            return (ps.IsPlural(value) && ps.Singularize(value).ToLower() == packageName.ToLower());
+            return plural.ContainsKey(packageName) && plural[packageName] == value.ToLower();
         }
 
         /// <summary>
