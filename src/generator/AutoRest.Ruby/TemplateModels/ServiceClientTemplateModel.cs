@@ -83,5 +83,13 @@ namespace AutoRest.Ruby.TemplateModels
                 return "MsRest::HttpOperationResponse";
             }
         }
+
+        public virtual string MergeClientDefaultHeaders
+        {
+            get
+            {
+                return "";
+            }
+        }
     }
 }

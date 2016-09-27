@@ -149,7 +149,7 @@ def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
       @:body: request_content,
 }
       headers: request_headers.merge(custom_headers || {}),
-      api_endpoint: request_url
+      base_url: request_url
   }
   
 promise = @(Model.ClientReference).make_request_async(:@Model.HttpMethod.ToString().ToLower(), path_template, options)

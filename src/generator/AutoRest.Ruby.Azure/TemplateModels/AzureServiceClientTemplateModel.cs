@@ -72,5 +72,13 @@ namespace AutoRest.Ruby.Azure.TemplateModels
                 return "MsRestAzure::AzureOperationResponse";
             }
         }
+
+        public override string MergeClientDefaultHeaders
+        {
+            get
+            {
+                return "request_headers.merge!({'accept-language' => @accept_language}) unless @accept_language.nil?";
+            }
+        }
     }
 }

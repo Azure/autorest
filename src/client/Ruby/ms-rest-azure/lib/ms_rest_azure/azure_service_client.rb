@@ -14,12 +14,15 @@ module MsRestAzure
     # @return [String] api version of the Azure in string format.
     attr_accessor :api_version
 
-    # @return [Hash{String=>String}] default request headers for Azure requests
-    REQUEST_HEADERS = {
-        'x-ms-client-request-id' => SecureRandom.uuid,
-        'Content-Type' => 'application/json;charset=utf-8'
-    }
+    # @return [Hash{String=>String}] default request headers for Azure requests.
+    attr_accessor :request_headers
 
+    def initialize(credentials, options = nil)
+      super(credentials, options)
+      @request_headers =  {
+          'Content-Type' => 'application/json;charset=utf-8' # This is the current default for Azure services, and content-type supported by Autorest
+      }
+    end
     #
     # Retrieves a new instance of the AzureOperationResponse class.
     # @param [MsRest::HttpOperationRequest] request the HTTP request object.
