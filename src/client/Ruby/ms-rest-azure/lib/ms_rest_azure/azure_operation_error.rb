@@ -8,18 +8,33 @@ module MsRestAzure
   #
   class AzureOperationError < MsRest::HttpOperationError
 
-    def to_s
-      # Try to parse @body to find error message and set @msg
+    # @return [String] the error message.
+    attr_accessor :error_message
+
+    # @return [String] the error code.
+    attr_accessor :error_code
+
+    #
+    # Creates and initialize new instance of the AzureOperationError class.
+    # @param [Hash] the HTTP request data (uri, body, headers).
+    # @param [Faraday::Response] the HTTP response object.
+    # @param [String] body the HTTP response body.
+    # @param [String] error message.
+    #
+    def initialize(*args)
+      super(*args)
+
+      # Try to parse @body to find useful error message and code
+      # Body should meet the error condition response requirements for Microsoft REST API Guidelines
+      # https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#7102-error-condition-responses
       begin
         unless @body.nil?
-          # Body should meet the error condition response requirements for Microsoft REST API Guidelines
-          # https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md#7102-error-condition-responses
-          @msg = @body['error']['message']
+          @error_message = @body['error']['message']
+          @error_code = @body['error']['code']
+          @msg = "#{@msg}: #{@error_message}"
         end
       rescue
       end
-
-      super
     end
   end
 end
