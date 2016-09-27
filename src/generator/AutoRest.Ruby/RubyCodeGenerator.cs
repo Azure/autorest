@@ -2,9 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using AutoRest.Ruby.TemplateModels;
 using AutoRest.Ruby.Templates;
@@ -140,13 +142,16 @@ namespace AutoRest.Ruby
         {
             if (Settings.AddCredentials)
             {
-                serviceClient.Properties.Add(new Property
+                if (!serviceClient.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)))
                 {
-                    Name = "Credentials",
-                    Type = new PrimaryType(KnownPrimaryType.Credentials),
-                    IsRequired = true,
-                    Documentation = "Subscription credentials which uniquely identify client subscription."
-                });
+                    serviceClient.Properties.Add(new Property
+                    {
+                        Name = "Credentials",
+                        Type = new PrimaryType(KnownPrimaryType.Credentials),
+                        IsRequired = true,
+                        Documentation = "Subscription credentials which uniquely identify client subscription."
+                    });
+                }
             }
         }
 
