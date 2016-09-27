@@ -95,12 +95,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 408 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> head408() throws ErrorException, IOException {
-        return head408Async().toBlocking().single();
+    public void head408() {
+        head408WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -110,7 +107,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head408Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head408Async(), serviceCallback);
+        return ServiceCall.create(head408WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -118,7 +115,21 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> head408Async() {
+    public Observable<Void> head408Async() {
+        return head408WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 408 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> head408WithServiceResponseAsync() {
         return service.head408()
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -143,12 +154,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> put500() throws ErrorException, IOException {
-        return put500Async().toBlocking().single();
+    public void put500() {
+        put500WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -158,7 +166,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put500Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put500Async(), serviceCallback);
+        return ServiceCall.create(put500WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -166,7 +174,21 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> put500Async() {
+    public Observable<Void> put500Async() {
+        return put500WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> put500WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.put500(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -186,12 +208,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> put500(Boolean booleanValue) throws ErrorException, IOException {
-        return put500Async(booleanValue).toBlocking().single();
+    public void put500(Boolean booleanValue) {
+        put500WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -202,7 +221,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put500Async(booleanValue), serviceCallback);
+        return ServiceCall.create(put500WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -211,7 +230,22 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> put500Async(Boolean booleanValue) {
+    public Observable<Void> put500Async(Boolean booleanValue) {
+        return put500WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> put500WithServiceResponseAsync(Boolean booleanValue) {
         return service.put500(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -236,12 +270,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> patch500() throws ErrorException, IOException {
-        return patch500Async().toBlocking().single();
+    public void patch500() {
+        patch500WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -251,7 +282,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch500Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch500Async(), serviceCallback);
+        return ServiceCall.create(patch500WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -259,7 +290,21 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> patch500Async() {
+    public Observable<Void> patch500Async() {
+        return patch500WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> patch500WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch500(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -279,12 +324,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> patch500(Boolean booleanValue) throws ErrorException, IOException {
-        return patch500Async(booleanValue).toBlocking().single();
+    public void patch500(Boolean booleanValue) {
+        patch500WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -295,7 +337,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch500Async(booleanValue), serviceCallback);
+        return ServiceCall.create(patch500WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -304,7 +346,22 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> patch500Async(Boolean booleanValue) {
+    public Observable<Void> patch500Async(Boolean booleanValue) {
+        return patch500WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> patch500WithServiceResponseAsync(Boolean booleanValue) {
         return service.patch500(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -329,12 +386,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 502 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> get502() throws ErrorException, IOException {
-        return get502Async().toBlocking().single();
+    public void get502() {
+        get502WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -344,7 +398,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get502Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get502Async(), serviceCallback);
+        return ServiceCall.create(get502WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -352,7 +406,21 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> get502Async() {
+    public Observable<Void> get502Async() {
+        return get502WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 502 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> get502WithServiceResponseAsync() {
         return service.get502()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -377,12 +445,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> post503() throws ErrorException, IOException {
-        return post503Async().toBlocking().single();
+    public void post503() {
+        post503WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -392,7 +457,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post503Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post503Async(), serviceCallback);
+        return ServiceCall.create(post503WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -400,7 +465,21 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> post503Async() {
+    public Observable<Void> post503Async() {
+        return post503WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> post503WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.post503(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -420,12 +499,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> post503(Boolean booleanValue) throws ErrorException, IOException {
-        return post503Async(booleanValue).toBlocking().single();
+    public void post503(Boolean booleanValue) {
+        post503WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -436,7 +512,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post503Async(booleanValue), serviceCallback);
+        return ServiceCall.create(post503WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -445,7 +521,22 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> post503Async(Boolean booleanValue) {
+    public Observable<Void> post503Async(Boolean booleanValue) {
+        return post503WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> post503WithServiceResponseAsync(Boolean booleanValue) {
         return service.post503(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -470,12 +561,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> delete503() throws ErrorException, IOException {
-        return delete503Async().toBlocking().single();
+    public void delete503() {
+        delete503WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -485,7 +573,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete503Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete503Async(), serviceCallback);
+        return ServiceCall.create(delete503WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -493,7 +581,21 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> delete503Async() {
+    public Observable<Void> delete503Async() {
+        return delete503WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> delete503WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete503(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -513,12 +615,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> delete503(Boolean booleanValue) throws ErrorException, IOException {
-        return delete503Async(booleanValue).toBlocking().single();
+    public void delete503(Boolean booleanValue) {
+        delete503WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -529,7 +628,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete503Async(booleanValue), serviceCallback);
+        return ServiceCall.create(delete503WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -538,7 +637,22 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> delete503Async(Boolean booleanValue) {
+    public Observable<Void> delete503Async(Boolean booleanValue) {
+        return delete503WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> delete503WithServiceResponseAsync(Boolean booleanValue) {
         return service.delete503(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -563,12 +677,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> put504() throws ErrorException, IOException {
-        return put504Async().toBlocking().single();
+    public void put504() {
+        put504WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -578,7 +689,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put504Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put504Async(), serviceCallback);
+        return ServiceCall.create(put504WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -586,7 +697,21 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> put504Async() {
+    public Observable<Void> put504Async() {
+        return put504WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> put504WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.put504(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -606,12 +731,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> put504(Boolean booleanValue) throws ErrorException, IOException {
-        return put504Async(booleanValue).toBlocking().single();
+    public void put504(Boolean booleanValue) {
+        put504WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -622,7 +744,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put504Async(booleanValue), serviceCallback);
+        return ServiceCall.create(put504WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -631,7 +753,22 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> put504Async(Boolean booleanValue) {
+    public Observable<Void> put504Async(Boolean booleanValue) {
+        return put504WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> put504WithServiceResponseAsync(Boolean booleanValue) {
         return service.put504(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -656,12 +793,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> patch504() throws ErrorException, IOException {
-        return patch504Async().toBlocking().single();
+    public void patch504() {
+        patch504WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -671,7 +805,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch504Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch504Async(), serviceCallback);
+        return ServiceCall.create(patch504WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -679,7 +813,21 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> patch504Async() {
+    public Observable<Void> patch504Async() {
+        return patch504WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> patch504WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch504(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -699,12 +847,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> patch504(Boolean booleanValue) throws ErrorException, IOException {
-        return patch504Async(booleanValue).toBlocking().single();
+    public void patch504(Boolean booleanValue) {
+        patch504WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -715,7 +860,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch504Async(booleanValue), serviceCallback);
+        return ServiceCall.create(patch504WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -724,7 +869,22 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> patch504Async(Boolean booleanValue) {
+    public Observable<Void> patch504Async(Boolean booleanValue) {
+        return patch504WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> patch504WithServiceResponseAsync(Boolean booleanValue) {
         return service.patch504(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override

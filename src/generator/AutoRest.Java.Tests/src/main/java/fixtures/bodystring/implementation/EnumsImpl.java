@@ -86,12 +86,10 @@ public final class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the Colors object wrapped in {@link ServiceResponse} if successful.
+     * @return the Colors object if successful.
      */
-    public ServiceResponse<Colors> getNotExpandable() throws ErrorException, IOException {
-        return getNotExpandableAsync().toBlocking().single();
+    public Colors getNotExpandable() {
+        return getNotExpandableWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -101,7 +99,7 @@ public final class EnumsImpl implements Enums {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Colors> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
-        return ServiceCall.create(getNotExpandableAsync(), serviceCallback);
+        return ServiceCall.create(getNotExpandableWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -109,7 +107,21 @@ public final class EnumsImpl implements Enums {
      *
      * @return the observable to the Colors object
      */
-    public Observable<ServiceResponse<Colors>> getNotExpandableAsync() {
+    public Observable<Colors> getNotExpandableAsync() {
+        return getNotExpandableWithServiceResponseAsync().map(new Func1<ServiceResponse<Colors>, Colors>() {
+            @Override
+            public Colors call(ServiceResponse<Colors> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @return the observable to the Colors object
+     */
+    public Observable<ServiceResponse<Colors>> getNotExpandableWithServiceResponseAsync() {
         return service.getNotExpandable()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Colors>>>() {
                 @Override
@@ -135,13 +147,9 @@ public final class EnumsImpl implements Enums {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putNotExpandable(Colors stringBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putNotExpandableAsync(stringBody).toBlocking().single();
+    public void putNotExpandable(Colors stringBody) {
+        putNotExpandableWithServiceResponseAsync(stringBody).toBlocking().single().getBody();
     }
 
     /**
@@ -152,7 +160,7 @@ public final class EnumsImpl implements Enums {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putNotExpandableAsync(stringBody), serviceCallback);
+        return ServiceCall.create(putNotExpandableWithServiceResponseAsync(stringBody), serviceCallback);
     }
 
     /**
@@ -161,7 +169,22 @@ public final class EnumsImpl implements Enums {
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putNotExpandableAsync(Colors stringBody) {
+    public Observable<Void> putNotExpandableAsync(Colors stringBody) {
+        return putNotExpandableWithServiceResponseAsync(stringBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putNotExpandableWithServiceResponseAsync(Colors stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
@@ -189,12 +212,10 @@ public final class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the Colors object wrapped in {@link ServiceResponse} if successful.
+     * @return the Colors object if successful.
      */
-    public ServiceResponse<Colors> getReferenced() throws ErrorException, IOException {
-        return getReferencedAsync().toBlocking().single();
+    public Colors getReferenced() {
+        return getReferencedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -204,7 +225,7 @@ public final class EnumsImpl implements Enums {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Colors> getReferencedAsync(final ServiceCallback<Colors> serviceCallback) {
-        return ServiceCall.create(getReferencedAsync(), serviceCallback);
+        return ServiceCall.create(getReferencedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -212,7 +233,21 @@ public final class EnumsImpl implements Enums {
      *
      * @return the observable to the Colors object
      */
-    public Observable<ServiceResponse<Colors>> getReferencedAsync() {
+    public Observable<Colors> getReferencedAsync() {
+        return getReferencedWithServiceResponseAsync().map(new Func1<ServiceResponse<Colors>, Colors>() {
+            @Override
+            public Colors call(ServiceResponse<Colors> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @return the observable to the Colors object
+     */
+    public Observable<ServiceResponse<Colors>> getReferencedWithServiceResponseAsync() {
         return service.getReferenced()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Colors>>>() {
                 @Override
@@ -238,13 +273,9 @@ public final class EnumsImpl implements Enums {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putReferenced(Colors enumStringBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putReferencedAsync(enumStringBody).toBlocking().single();
+    public void putReferenced(Colors enumStringBody) {
+        putReferencedWithServiceResponseAsync(enumStringBody).toBlocking().single().getBody();
     }
 
     /**
@@ -255,7 +286,7 @@ public final class EnumsImpl implements Enums {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putReferencedAsync(Colors enumStringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putReferencedAsync(enumStringBody), serviceCallback);
+        return ServiceCall.create(putReferencedWithServiceResponseAsync(enumStringBody), serviceCallback);
     }
 
     /**
@@ -264,7 +295,22 @@ public final class EnumsImpl implements Enums {
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putReferencedAsync(Colors enumStringBody) {
+    public Observable<Void> putReferencedAsync(Colors enumStringBody) {
+        return putReferencedWithServiceResponseAsync(enumStringBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putReferencedWithServiceResponseAsync(Colors enumStringBody) {
         if (enumStringBody == null) {
             throw new IllegalArgumentException("Parameter enumStringBody is required and cannot be null.");
         }
@@ -292,12 +338,10 @@ public final class EnumsImpl implements Enums {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the RefColorConstant object wrapped in {@link ServiceResponse} if successful.
+     * @return the RefColorConstant object if successful.
      */
-    public ServiceResponse<RefColorConstant> getReferencedConstant() throws ErrorException, IOException {
-        return getReferencedConstantAsync().toBlocking().single();
+    public RefColorConstant getReferencedConstant() {
+        return getReferencedConstantWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -307,7 +351,7 @@ public final class EnumsImpl implements Enums {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<RefColorConstant> getReferencedConstantAsync(final ServiceCallback<RefColorConstant> serviceCallback) {
-        return ServiceCall.create(getReferencedConstantAsync(), serviceCallback);
+        return ServiceCall.create(getReferencedConstantWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -315,7 +359,21 @@ public final class EnumsImpl implements Enums {
      *
      * @return the observable to the RefColorConstant object
      */
-    public Observable<ServiceResponse<RefColorConstant>> getReferencedConstantAsync() {
+    public Observable<RefColorConstant> getReferencedConstantAsync() {
+        return getReferencedConstantWithServiceResponseAsync().map(new Func1<ServiceResponse<RefColorConstant>, RefColorConstant>() {
+            @Override
+            public RefColorConstant call(ServiceResponse<RefColorConstant> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get value 'green-color' from the constant.
+     *
+     * @return the observable to the RefColorConstant object
+     */
+    public Observable<ServiceResponse<RefColorConstant>> getReferencedConstantWithServiceResponseAsync() {
         return service.getReferencedConstant()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<RefColorConstant>>>() {
                 @Override
@@ -341,13 +399,9 @@ public final class EnumsImpl implements Enums {
      * Sends value 'green-color' from a constant.
      *
      * @param enumStringBody the RefColorConstant value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putReferencedConstant(RefColorConstant enumStringBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putReferencedConstantAsync(enumStringBody).toBlocking().single();
+    public void putReferencedConstant(RefColorConstant enumStringBody) {
+        putReferencedConstantWithServiceResponseAsync(enumStringBody).toBlocking().single().getBody();
     }
 
     /**
@@ -358,7 +412,7 @@ public final class EnumsImpl implements Enums {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putReferencedConstantAsync(RefColorConstant enumStringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putReferencedConstantAsync(enumStringBody), serviceCallback);
+        return ServiceCall.create(putReferencedConstantWithServiceResponseAsync(enumStringBody), serviceCallback);
     }
 
     /**
@@ -367,7 +421,22 @@ public final class EnumsImpl implements Enums {
      * @param enumStringBody the RefColorConstant value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putReferencedConstantAsync(RefColorConstant enumStringBody) {
+    public Observable<Void> putReferencedConstantAsync(RefColorConstant enumStringBody) {
+        return putReferencedConstantWithServiceResponseAsync(enumStringBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Sends value 'green-color' from a constant.
+     *
+     * @param enumStringBody the RefColorConstant value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putReferencedConstantWithServiceResponseAsync(RefColorConstant enumStringBody) {
         if (enumStringBody == null) {
             throw new IllegalArgumentException("Parameter enumStringBody is required and cannot be null.");
         }

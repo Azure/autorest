@@ -13,9 +13,7 @@ package fixtures.bodyfile;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodyfile.models.ErrorException;
 import java.io.InputStream;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -26,11 +24,9 @@ public interface Files {
     /**
      * Get file.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
-    ServiceResponse<InputStream> getFile() throws ErrorException, IOException;
+    InputStream getFile();
 
     /**
      * Get file.
@@ -45,16 +41,21 @@ public interface Files {
      *
      * @return the observable to the InputStream object
      */
-    Observable<ServiceResponse<InputStream>> getFileAsync();
+    Observable<InputStream> getFileAsync();
+
+    /**
+     * Get file.
+     *
+     * @return the observable to the InputStream object
+     */
+    Observable<ServiceResponse<InputStream>> getFileWithServiceResponseAsync();
 
     /**
      * Get a large file.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
-    ServiceResponse<InputStream> getFileLarge() throws ErrorException, IOException;
+    InputStream getFileLarge();
 
     /**
      * Get a large file.
@@ -69,16 +70,21 @@ public interface Files {
      *
      * @return the observable to the InputStream object
      */
-    Observable<ServiceResponse<InputStream>> getFileLargeAsync();
+    Observable<InputStream> getFileLargeAsync();
+
+    /**
+     * Get a large file.
+     *
+     * @return the observable to the InputStream object
+     */
+    Observable<ServiceResponse<InputStream>> getFileLargeWithServiceResponseAsync();
 
     /**
      * Get empty file.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
-    ServiceResponse<InputStream> getEmptyFile() throws ErrorException, IOException;
+    InputStream getEmptyFile();
 
     /**
      * Get empty file.
@@ -93,6 +99,13 @@ public interface Files {
      *
      * @return the observable to the InputStream object
      */
-    Observable<ServiceResponse<InputStream>> getEmptyFileAsync();
+    Observable<InputStream> getEmptyFileAsync();
+
+    /**
+     * Get empty file.
+     *
+     * @return the observable to the InputStream object
+     */
+    Observable<ServiceResponse<InputStream>> getEmptyFileWithServiceResponseAsync();
 
 }

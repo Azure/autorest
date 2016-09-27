@@ -16,10 +16,8 @@ import com.microsoft.azure.RestClient;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
 import fixtures.azureresource.models.ResourceCollection;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import rx.Observable;
@@ -96,11 +94,8 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as an Array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putArray() throws ErrorException, IOException;
+    void putArray();
 
     /**
      * Put External Resource as an Array.
@@ -109,15 +104,26 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putArrayAsync();
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync();
     /**
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putArray(List<Resource> resourceArray) throws ErrorException, IOException;
+    void putArray(List<Resource> resourceArray);
 
     /**
      * Put External Resource as an Array.
@@ -134,16 +140,22 @@ public interface AutoRestResourceFlatteningTestService {
      * @param resourceArray External Resource as an Array to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putArrayAsync(List<Resource> resourceArray);
+    Observable<Void> putArrayAsync(List<Resource> resourceArray);
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param resourceArray External Resource as an Array to put
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(List<Resource> resourceArray);
 
     /**
      * Get External Resource as an Array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;FlattenedProduct&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
-    ServiceResponse<List<FlattenedProduct>> getArray() throws ErrorException, IOException;
+    List<FlattenedProduct> getArray();
 
     /**
      * Get External Resource as an Array.
@@ -158,16 +170,20 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
-    Observable<ServiceResponse<List<FlattenedProduct>>> getArrayAsync();
+    Observable<List<FlattenedProduct>> getArrayAsync();
+
+    /**
+     * Get External Resource as an Array.
+     *
+     * @return the observable to the List&lt;FlattenedProduct&gt; object
+     */
+    Observable<ServiceResponse<List<FlattenedProduct>>> getArrayWithServiceResponseAsync();
 
     /**
      * Put External Resource as a Dictionary.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDictionary() throws ErrorException, IOException;
+    void putDictionary();
 
     /**
      * Put External Resource as a Dictionary.
@@ -176,15 +192,26 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putDictionaryAsync();
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync();
     /**
      * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ErrorException, IOException;
+    void putDictionary(Map<String, FlattenedProduct> resourceDictionary);
 
     /**
      * Put External Resource as a Dictionary.
@@ -201,16 +228,22 @@ public interface AutoRestResourceFlatteningTestService {
      * @param resourceDictionary External Resource as a Dictionary to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
+    Observable<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @param resourceDictionary External Resource as a Dictionary to put
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync(Map<String, FlattenedProduct> resourceDictionary);
 
     /**
      * Get External Resource as a Dictionary.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, FlattenedProduct&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
-    ServiceResponse<Map<String, FlattenedProduct>> getDictionary() throws ErrorException, IOException;
+    Map<String, FlattenedProduct> getDictionary();
 
     /**
      * Get External Resource as a Dictionary.
@@ -225,16 +258,20 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
      */
-    Observable<ServiceResponse<Map<String, FlattenedProduct>>> getDictionaryAsync();
+    Observable<Map<String, FlattenedProduct>> getDictionaryAsync();
+
+    /**
+     * Get External Resource as a Dictionary.
+     *
+     * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
+     */
+    Observable<ServiceResponse<Map<String, FlattenedProduct>>> getDictionaryWithServiceResponseAsync();
 
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putResourceCollection() throws ErrorException, IOException;
+    void putResourceCollection();
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -243,15 +280,26 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putResourceCollectionAsync();
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync();
     /**
      * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putResourceCollection(ResourceCollection resourceComplexObject) throws ErrorException, IOException;
+    void putResourceCollection(ResourceCollection resourceComplexObject);
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -268,16 +316,22 @@ public interface AutoRestResourceFlatteningTestService {
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
+    Observable<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @param resourceComplexObject External Resource as a ResourceCollection to put
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync(ResourceCollection resourceComplexObject);
 
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the ResourceCollection object wrapped in {@link ServiceResponse} if successful.
+     * @return the ResourceCollection object if successful.
      */
-    ServiceResponse<ResourceCollection> getResourceCollection() throws ErrorException, IOException;
+    ResourceCollection getResourceCollection();
 
     /**
      * Get External Resource as a ResourceCollection.
@@ -292,6 +346,13 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return the observable to the ResourceCollection object
      */
-    Observable<ServiceResponse<ResourceCollection>> getResourceCollectionAsync();
+    Observable<ResourceCollection> getResourceCollectionAsync();
+
+    /**
+     * Get External Resource as a ResourceCollection.
+     *
+     * @return the observable to the ResourceCollection object
+     */
+    Observable<ServiceResponse<ResourceCollection>> getResourceCollectionWithServiceResponseAsync();
 
 }

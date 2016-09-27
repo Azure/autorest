@@ -61,6 +61,30 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// </summary>
         public IFileSystem FileSystem { get; set; }
 
+        private Uri _inputFolder = null;
+        /// <summary>
+        /// Gets the Uri for the path to the folder that contains the input specification file.
+        /// </summary>
+        public Uri InputFolder
+        {
+            get
+            {
+                if (_inputFolder == null)
+                {
+                    var isBasePathUri = Uri.IsWellFormedUriString(Input, UriKind.Absolute);
+                    if (isBasePathUri)
+                    {
+                        _inputFolder = new Uri(new Uri(Input), ".");
+                    }
+                    else
+                    {
+                        _inputFolder = new Uri(Path.Combine(Directory.GetParent(Input).FullName, "."));
+                    }
+                }
+                return _inputFolder;
+            }
+        }
+
         /// <summary>
         /// Custom provider specific settings.
         /// </summary>
@@ -241,7 +265,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         [SettingsAlias("cgs")]
         [SettingsInfo("The path for a json file containing code generation settings.")]
         public string CodeGenSettings { get; set; }
-        
+
         /// <summary>
         /// The input validation severity level that will prevent code generation
         /// </summary>
@@ -369,14 +393,14 @@ Licensed under the MIT License. See License.txt in the project root for license 
                                 var elementType = property.PropertyType.GetElementType();
                                 if (elementType == typeof(string))
                                 {
-                                    var stringArray = ((JArray) setting.Value).Children().
+                                    var stringArray = ((JArray)setting.Value).Children().
                                     Select(
                                         c => c.ToString())
                                     .ToArray();
-  
+
                                     property.SetValue(entityToPopulate, stringArray);
                                 }
-                                else if (elementType == typeof (int))
+                                else if (elementType == typeof(int))
                                 {
                                     var intValues = ((JArray)setting.Value).Children().
                                          Select(c => (int)Convert.ChangeType(c, elementType, CultureInfo.InvariantCulture))
@@ -404,7 +428,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
         public void Validate()
         {
-            foreach (PropertyInfo property in (typeof (Settings)).GetProperties())
+            foreach (PropertyInfo property in (typeof(Settings)).GetProperties())
             {
                 // If property value is not set - throw exception.
                 var doc = property.GetCustomAttributes<SettingsInfoAttribute>().FirstOrDefault();

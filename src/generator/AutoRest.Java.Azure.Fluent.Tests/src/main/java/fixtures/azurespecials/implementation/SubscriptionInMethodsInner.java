@@ -75,13 +75,9 @@ public final class SubscriptionInMethodsInner {
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postMethodLocalValid(String subscriptionId) throws ErrorException, IOException, IllegalArgumentException {
-        return postMethodLocalValidAsync(subscriptionId).toBlocking().single();
+    public void postMethodLocalValid(String subscriptionId) {
+        postMethodLocalValidWithServiceResponseAsync(subscriptionId).toBlocking().single().getBody();
     }
 
     /**
@@ -92,7 +88,7 @@ public final class SubscriptionInMethodsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMethodLocalValidAsync(subscriptionId), serviceCallback);
+        return ServiceCall.create(postMethodLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**
@@ -101,7 +97,22 @@ public final class SubscriptionInMethodsInner {
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postMethodLocalValidAsync(String subscriptionId) {
+    public Observable<Void> postMethodLocalValidAsync(String subscriptionId) {
+        return postMethodLocalValidWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
+     *
+     * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postMethodLocalValidWithServiceResponseAsync(String subscriptionId) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
@@ -130,13 +141,9 @@ public final class SubscriptionInMethodsInner {
      * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postMethodLocalNull(String subscriptionId) throws ErrorException, IOException, IllegalArgumentException {
-        return postMethodLocalNullAsync(subscriptionId).toBlocking().single();
+    public void postMethodLocalNull(String subscriptionId) {
+        postMethodLocalNullWithServiceResponseAsync(subscriptionId).toBlocking().single().getBody();
     }
 
     /**
@@ -147,7 +154,7 @@ public final class SubscriptionInMethodsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMethodLocalNullAsync(subscriptionId), serviceCallback);
+        return ServiceCall.create(postMethodLocalNullWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**
@@ -156,7 +163,22 @@ public final class SubscriptionInMethodsInner {
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postMethodLocalNullAsync(String subscriptionId) {
+    public Observable<Void> postMethodLocalNullAsync(String subscriptionId) {
+        return postMethodLocalNullWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
+     *
+     * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postMethodLocalNullWithServiceResponseAsync(String subscriptionId) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
@@ -185,13 +207,9 @@ public final class SubscriptionInMethodsInner {
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postPathLocalValid(String subscriptionId) throws ErrorException, IOException, IllegalArgumentException {
-        return postPathLocalValidAsync(subscriptionId).toBlocking().single();
+    public void postPathLocalValid(String subscriptionId) {
+        postPathLocalValidWithServiceResponseAsync(subscriptionId).toBlocking().single().getBody();
     }
 
     /**
@@ -202,7 +220,7 @@ public final class SubscriptionInMethodsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postPathLocalValidAsync(subscriptionId), serviceCallback);
+        return ServiceCall.create(postPathLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**
@@ -211,7 +229,22 @@ public final class SubscriptionInMethodsInner {
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postPathLocalValidAsync(String subscriptionId) {
+    public Observable<Void> postPathLocalValidAsync(String subscriptionId) {
+        return postPathLocalValidWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
+     *
+     * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postPathLocalValidWithServiceResponseAsync(String subscriptionId) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
@@ -240,13 +273,9 @@ public final class SubscriptionInMethodsInner {
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postSwaggerLocalValid(String subscriptionId) throws ErrorException, IOException, IllegalArgumentException {
-        return postSwaggerLocalValidAsync(subscriptionId).toBlocking().single();
+    public void postSwaggerLocalValid(String subscriptionId) {
+        postSwaggerLocalValidWithServiceResponseAsync(subscriptionId).toBlocking().single().getBody();
     }
 
     /**
@@ -257,7 +286,7 @@ public final class SubscriptionInMethodsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postSwaggerLocalValidAsync(subscriptionId), serviceCallback);
+        return ServiceCall.create(postSwaggerLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**
@@ -266,7 +295,22 @@ public final class SubscriptionInMethodsInner {
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postSwaggerLocalValidAsync(String subscriptionId) {
+    public Observable<Void> postSwaggerLocalValidAsync(String subscriptionId) {
+        return postSwaggerLocalValidWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
+     *
+     * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postSwaggerLocalValidWithServiceResponseAsync(String subscriptionId) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }

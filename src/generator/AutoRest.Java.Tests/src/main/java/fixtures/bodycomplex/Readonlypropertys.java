@@ -13,9 +13,7 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -26,11 +24,9 @@ public interface Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the ReadonlyObj object wrapped in {@link ServiceResponse} if successful.
+     * @return the ReadonlyObj object if successful.
      */
-    ServiceResponse<ReadonlyObj> getValid() throws ErrorException, IOException;
+    ReadonlyObj getValid();
 
     /**
      * Get complex types that have readonly properties.
@@ -45,18 +41,21 @@ public interface Readonlypropertys {
      *
      * @return the observable to the ReadonlyObj object
      */
-    Observable<ServiceResponse<ReadonlyObj>> getValidAsync();
+    Observable<ReadonlyObj> getValidAsync();
+
+    /**
+     * Get complex types that have readonly properties.
+     *
+     * @return the observable to the ReadonlyObj object
+     */
+    Observable<ServiceResponse<ReadonlyObj>> getValidWithServiceResponseAsync();
 
     /**
      * Put complex types that have readonly properties.
      *
      * @param complexBody the ReadonlyObj value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putValid(ReadonlyObj complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putValid(ReadonlyObj complexBody);
 
     /**
      * Put complex types that have readonly properties.
@@ -73,6 +72,14 @@ public interface Readonlypropertys {
      * @param complexBody the ReadonlyObj value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putValidAsync(ReadonlyObj complexBody);
+    Observable<Void> putValidAsync(ReadonlyObj complexBody);
+
+    /**
+     * Put complex types that have readonly properties.
+     *
+     * @param complexBody the ReadonlyObj value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(ReadonlyObj complexBody);
 
 }

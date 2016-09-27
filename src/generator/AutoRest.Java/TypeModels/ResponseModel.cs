@@ -51,7 +51,7 @@ namespace AutoRest.Java.TypeModels
             }
         }
 
-        public ITypeModel BodyClientType
+        public virtual ITypeModel BodyClientType
         {
             get
             {

@@ -69,12 +69,10 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the ReadonlyObj object wrapped in {@link ServiceResponse} if successful.
+     * @return the ReadonlyObj object if successful.
      */
-    public ServiceResponse<ReadonlyObj> getValid() throws ErrorException, IOException {
-        return getValidAsync().toBlocking().single();
+    public ReadonlyObj getValid() {
+        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -84,7 +82,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) {
-        return ServiceCall.create(getValidAsync(), serviceCallback);
+        return ServiceCall.create(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -92,7 +90,21 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      *
      * @return the observable to the ReadonlyObj object
      */
-    public Observable<ServiceResponse<ReadonlyObj>> getValidAsync() {
+    public Observable<ReadonlyObj> getValidAsync() {
+        return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<ReadonlyObj>, ReadonlyObj>() {
+            @Override
+            public ReadonlyObj call(ServiceResponse<ReadonlyObj> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get complex types that have readonly properties.
+     *
+     * @return the observable to the ReadonlyObj object
+     */
+    public Observable<ServiceResponse<ReadonlyObj>> getValidWithServiceResponseAsync() {
         return service.getValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ReadonlyObj>>>() {
                 @Override
@@ -118,13 +130,9 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * Put complex types that have readonly properties.
      *
      * @param complexBody the ReadonlyObj value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putValid(ReadonlyObj complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putValidAsync(complexBody).toBlocking().single();
+    public void putValid(ReadonlyObj complexBody) {
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -135,7 +143,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidAsync(complexBody), serviceCallback);
+        return ServiceCall.create(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -144,7 +152,22 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @param complexBody the ReadonlyObj value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putValidAsync(ReadonlyObj complexBody) {
+    public Observable<Void> putValidAsync(ReadonlyObj complexBody) {
+        return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put complex types that have readonly properties.
+     *
+     * @param complexBody the ReadonlyObj value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(ReadonlyObj complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }

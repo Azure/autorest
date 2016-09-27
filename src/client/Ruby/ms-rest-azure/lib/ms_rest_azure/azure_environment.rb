@@ -93,7 +93,7 @@ module MsRestAzure
                                                         :sql_management_endpoint_url => 'https://management.core.windows.net:8443/',
                                                         :sql_server_hostname_suffix => '.database.windows.net',
                                                         :gallery_endpoint_url => 'https://gallery.azure.com/',
-                                                        :active_directory_endpoint_url => 'https://login.windows.net/',
+                                                        :active_directory_endpoint_url => 'https://login.microsoftonline.com/',
                                                         :active_directory_resource_id => 'https://management.core.windows.net/',
                                                         :active_directory_graph_resource_id => 'https://graph.windows.net/',
                                                         :active_directory_graph_api_version => '2013-04-05',

@@ -1163,6 +1163,9 @@
         },
         "x-ms-client-name": {
           "type": "string"
+        },
+        "x-ms-mutability": {
+          "$ref": "#/definitions/xmsMutability"
         }
       },
       "additionalProperties": false
@@ -1578,6 +1581,14 @@
     "xmsParameterLocation": {
       "type": "string",
       "enum": ["client", "method"]
+    },
+    "xmsMutability": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["create", "read", "update"]
+      },
+      "uniqueItems": true
     }
   }
 }

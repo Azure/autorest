@@ -182,8 +182,9 @@ var goAzureMappings = {
 gulp.task('regenerate:expected', function(cb){
   runSequence('regenerate:delete',
     [
-      'regenerate:expected:csazure',
       'regenerate:expected:cs',
+      'regenerate:expected:csazure',
+      'regenerate:expected:csazurefluent',
       'regenerate:expected:node',
       'regenerate:expected:nodeazure',
       'regenerate:expected:ruby',
@@ -382,6 +383,22 @@ gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite'
   }, cb);
 });
 
+gulp.task('regenerate:expected:csazurefluent', ['regenerate:expected:csazurefluentcomposite','regenerate:expected:csazurefluentallsync', 'regenerate:expected:csazurefluentnosync'], function (cb) {
+  mappings = mergeOptions({
+    'AcceptanceTests/AzureBodyDuration': '../../dev/TestServer/swagger/body-duration.json'
+  }, defaultAzureMappings);
+
+  regenExpected({
+    'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
+    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'Azure.CSharp.Fluent',
+    'nsPrefix': 'Fixtures.Azure',
+    'flatteningThreshold': '1'
+  }, cb);
+});
+
 gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds', 'regenerate:expected:cscomposite', 'regenerate:expected:csallsync', 'regenerate:expected:csnosync'], function (cb) {
   mappings = mergeOptions({
     'Mirror.RecursiveTypes': 'Swagger/swagger-mirror-recursive-type.json',
@@ -477,6 +494,24 @@ gulp.task('regenerate:expected:csazureallsync', function(cb){
   }, cb);
 });
 
+gulp.task('regenerate:expected:csazurefluentallsync', function(cb){    
+  mappings = mergeOptions(
+  {
+    'AcceptanceTests/AzureBodyDurationAllSync': '../../dev/TestServer/swagger/body-duration.json'
+  });
+
+  regenExpected({
+    'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
+    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'Azure.CSharp.Fluent',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'syncMethods': 'all'
+  }, cb);
+});
+
 gulp.task('regenerate:expected:csazurenosync', function(cb){  
   mappings = mergeOptions(
   {
@@ -489,6 +524,24 @@ gulp.task('regenerate:expected:csazurenosync', function(cb){
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'syncMethods': 'none'
+  }, cb);
+});
+
+gulp.task('regenerate:expected:csazurefluentnosync', function(cb){  
+  mappings = mergeOptions(
+  {
+    'AcceptanceTests/AzureBodyDurationNoSync': '../../dev/TestServer/swagger/body-duration.json'
+  });
+
+  regenExpected({
+    'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
+    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'Azure.CSharp.Fluent',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'none'
@@ -543,6 +596,19 @@ gulp.task('regenerate:expected:goazure', function(cb){
   }, cb);
   process.env.GOPATH = __dirname + '/src/generator/AutoRest.Go.Azure.Tests';
 })
+
+gulp.task('regenerate:expected:csazurefluentcomposite', function (cb) {
+  regenExpected({
+    'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
+    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
+    'mappings': azureCompositeMappings,
+    'modeler': 'CompositeSwagger',
+    'outputDir': 'Expected',
+    'codeGenerator': 'Azure.CSharp.Fluent',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1'
+  }, cb);
+});
 
 gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], function(){
   var autorestConfigPath = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.json');

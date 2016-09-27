@@ -570,11 +570,16 @@ namespace AutoRest.Java.Azure.TemplateModels
             return base.SuccessCallback();
         }
 
-        private AzureMethodTemplateModel GetPagingNextMethodWithInvocation(out string invocation, bool async = false)
+        private AzureMethodTemplateModel GetPagingNextMethodWithInvocation(out string invocation, bool async = false, bool singlePage = true)
         {
+            String methodSuffixString = "WithServiceResponse";
+            if (singlePage)
+            {
+                methodSuffixString = "SinglePage";
+            }
             if (IsPagingNextOperation)
             {
-                invocation = Name + "SinglePage" + (async ? "Async" : "");
+                invocation = Name + methodSuffixString + (async ? "Async" : "");
                 return this;
             }
             string name = ((string)this.Extensions["nextMethodName"]).ToCamelCase();
@@ -584,7 +589,7 @@ namespace AutoRest.Java.Azure.TemplateModels
                     (group == null ? m.Group == null : group.Equals(m.Group, StringComparison.OrdinalIgnoreCase))
                     && m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)), ServiceClient);
             group = group.ToPascalCase();
-            name = name + "SinglePage";
+            name = name + methodSuffixString;
             if (async)
             {
                 name = name + "Async";
@@ -600,10 +605,10 @@ namespace AutoRest.Java.Azure.TemplateModels
             return methodModel;
         }
 
-        public string GetPagingNextMethodInvocation(bool async = false)
+        public string GetPagingNextMethodInvocation(bool async = false, bool singlePage = true)
         {
             string invocation;
-            GetPagingNextMethodWithInvocation(out invocation, async);
+            GetPagingNextMethodWithInvocation(out invocation, async, singlePage);
             return invocation;
         }
 
@@ -749,8 +754,8 @@ namespace AutoRest.Java.Azure.TemplateModels
                 }
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
+                    imports.Remove("java.util.ArrayList");
                     imports.Remove("com.microsoft.rest.ServiceCallback");
-                    imports.Add("com.microsoft.rest.RestException");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");

@@ -100,12 +100,10 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
     /**
      * Get test coverage report.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Integer&gt; object if successful.
      */
-    public ServiceResponse<Map<String, Integer>> getReport() throws ErrorException, IOException {
-        return getReportAsync().toBlocking().single();
+    public Map<String, Integer> getReport() {
+        return getReportWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -115,7 +113,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.create(getReportAsync(), serviceCallback);
+        return ServiceCall.create(getReportWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -123,7 +121,21 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      *
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Integer>>> getReportAsync() {
+    public Observable<Map<String, Integer>> getReportAsync() {
+        return getReportWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
+            @Override
+            public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get test coverage report.
+     *
+     * @return the observable to the Map&lt;String, Integer&gt; object
+     */
+    public Observable<ServiceResponse<Map<String, Integer>>> getReportWithServiceResponseAsync() {
         return service.getReport()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
                 @Override

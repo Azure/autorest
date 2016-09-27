@@ -79,13 +79,9 @@ public final class SubscriptionInCredentialsInner {
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postMethodGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
-        return postMethodGlobalValidAsync().toBlocking().single();
+    public void postMethodGlobalValid() {
+        postMethodGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -95,7 +91,7 @@ public final class SubscriptionInCredentialsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMethodGlobalValidAsync(), serviceCallback);
+        return ServiceCall.create(postMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -103,7 +99,21 @@ public final class SubscriptionInCredentialsInner {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postMethodGlobalValidAsync() {
+    public Observable<Void> postMethodGlobalValidAsync() {
+        return postMethodGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postMethodGlobalValidWithServiceResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -131,13 +141,9 @@ public final class SubscriptionInCredentialsInner {
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postMethodGlobalNull() throws ErrorException, IOException, IllegalArgumentException {
-        return postMethodGlobalNullAsync().toBlocking().single();
+    public void postMethodGlobalNull() {
+        postMethodGlobalNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -147,7 +153,7 @@ public final class SubscriptionInCredentialsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMethodGlobalNullAsync(), serviceCallback);
+        return ServiceCall.create(postMethodGlobalNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -155,7 +161,21 @@ public final class SubscriptionInCredentialsInner {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postMethodGlobalNullAsync() {
+    public Observable<Void> postMethodGlobalNullAsync() {
+        return postMethodGlobalNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postMethodGlobalNullWithServiceResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -183,13 +203,9 @@ public final class SubscriptionInCredentialsInner {
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postMethodGlobalNotProvidedValid() throws ErrorException, IOException, IllegalArgumentException {
-        return postMethodGlobalNotProvidedValidAsync().toBlocking().single();
+    public void postMethodGlobalNotProvidedValid() {
+        postMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -199,7 +215,7 @@ public final class SubscriptionInCredentialsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMethodGlobalNotProvidedValidAsync(), serviceCallback);
+        return ServiceCall.create(postMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -207,7 +223,21 @@ public final class SubscriptionInCredentialsInner {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postMethodGlobalNotProvidedValidAsync() {
+    public Observable<Void> postMethodGlobalNotProvidedValidAsync() {
+        return postMethodGlobalNotProvidedValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postMethodGlobalNotProvidedValidWithServiceResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -238,13 +268,9 @@ public final class SubscriptionInCredentialsInner {
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postPathGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
-        return postPathGlobalValidAsync().toBlocking().single();
+    public void postPathGlobalValid() {
+        postPathGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -254,7 +280,7 @@ public final class SubscriptionInCredentialsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postPathGlobalValidAsync(), serviceCallback);
+        return ServiceCall.create(postPathGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -262,7 +288,21 @@ public final class SubscriptionInCredentialsInner {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postPathGlobalValidAsync() {
+    public Observable<Void> postPathGlobalValidAsync() {
+        return postPathGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postPathGlobalValidWithServiceResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -290,13 +330,9 @@ public final class SubscriptionInCredentialsInner {
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postSwaggerGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
-        return postSwaggerGlobalValidAsync().toBlocking().single();
+    public void postSwaggerGlobalValid() {
+        postSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -306,7 +342,7 @@ public final class SubscriptionInCredentialsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postSwaggerGlobalValidAsync(), serviceCallback);
+        return ServiceCall.create(postSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -314,7 +350,21 @@ public final class SubscriptionInCredentialsInner {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postSwaggerGlobalValidAsync() {
+    public Observable<Void> postSwaggerGlobalValidAsync() {
+        return postSwaggerGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postSwaggerGlobalValidWithServiceResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }

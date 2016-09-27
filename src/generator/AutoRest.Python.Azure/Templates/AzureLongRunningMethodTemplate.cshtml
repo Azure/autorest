@@ -41,11 +41,11 @@
 }
         # Construct URL
         url = '@(Model.Url)'
-        @(Model.BuildUrlPath("url"))
+        @(Model.BuildUrlPath("url", Model.LogicalParameters))
 @EmptyLine
         # Construct parameters
         query_parameters = {}
-        @(Model.BuildUrlQuery("query_parameters"))
+        @(Model.BuildUrlQuery("query_parameters", Model.LogicalParameters))
 @EmptyLine
         # Construct headers
         header_parameters = {}

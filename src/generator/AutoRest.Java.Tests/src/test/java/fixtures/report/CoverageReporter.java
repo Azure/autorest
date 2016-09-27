@@ -12,7 +12,7 @@ public final class CoverageReporter {
     private CoverageReporter() { }
 
     public static void main(String[] args) throws Exception {
-        Map<String, Integer> report = client.getReport().getBody();
+        Map<String, Integer> report = client.getReport();
 
         // Body cannot be null
         report.put("putStringNull", 1);

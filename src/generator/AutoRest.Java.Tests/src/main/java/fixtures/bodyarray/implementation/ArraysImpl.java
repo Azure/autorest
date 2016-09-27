@@ -330,12 +330,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get null array value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Integer&gt; object if successful.
      */
-    public ServiceResponse<List<Integer>> getNull() throws ErrorException, IOException {
-        return getNullAsync().toBlocking().single();
+    public List<Integer> getNull() {
+        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -345,7 +343,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getNullAsync(), serviceCallback);
+        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -353,7 +351,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Integer&gt; object
      */
-    public Observable<ServiceResponse<List<Integer>>> getNullAsync() {
+    public Observable<List<Integer>> getNullAsync() {
+        return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
+            @Override
+            public List<Integer> call(ServiceResponse<List<Integer>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get null array value.
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    public Observable<ServiceResponse<List<Integer>>> getNullWithServiceResponseAsync() {
         return service.getNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Integer>>>>() {
                 @Override
@@ -378,12 +390,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Integer&gt; object if successful.
      */
-    public ServiceResponse<List<Integer>> getInvalid() throws ErrorException, IOException {
-        return getInvalidAsync().toBlocking().single();
+    public List<Integer> getInvalid() {
+        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -393,7 +403,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getInvalidAsync(), serviceCallback);
+        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -401,7 +411,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Integer&gt; object
      */
-    public Observable<ServiceResponse<List<Integer>>> getInvalidAsync() {
+    public Observable<List<Integer>> getInvalidAsync() {
+        return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
+            @Override
+            public List<Integer> call(ServiceResponse<List<Integer>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get invalid array [1, 2, 3.
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    public Observable<ServiceResponse<List<Integer>>> getInvalidWithServiceResponseAsync() {
         return service.getInvalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Integer>>>>() {
                 @Override
@@ -426,12 +450,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get empty array value [].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Integer&gt; object if successful.
      */
-    public ServiceResponse<List<Integer>> getEmpty() throws ErrorException, IOException {
-        return getEmptyAsync().toBlocking().single();
+    public List<Integer> getEmpty() {
+        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -441,7 +463,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getEmptyAsync(), serviceCallback);
+        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -449,7 +471,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Integer&gt; object
      */
-    public Observable<ServiceResponse<List<Integer>>> getEmptyAsync() {
+    public Observable<List<Integer>> getEmptyAsync() {
+        return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
+            @Override
+            public List<Integer> call(ServiceResponse<List<Integer>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get empty array value [].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    public Observable<ServiceResponse<List<Integer>>> getEmptyWithServiceResponseAsync() {
         return service.getEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Integer>>>>() {
                 @Override
@@ -475,13 +511,9 @@ public final class ArraysImpl implements Arrays {
      * Set array value empty [].
      *
      * @param arrayBody the List&lt;String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putEmpty(List<String> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putEmptyAsync(arrayBody).toBlocking().single();
+    public void putEmpty(List<String> arrayBody) {
+        putEmptyWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -492,7 +524,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putEmptyAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putEmptyWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -501,7 +533,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;String&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putEmptyAsync(List<String> arrayBody) {
+    public Observable<Void> putEmptyAsync(List<String> arrayBody) {
+        return putEmptyWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Set array value empty [].
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(List<String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -530,12 +577,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Boolean&gt; object if successful.
      */
-    public ServiceResponse<List<Boolean>> getBooleanTfft() throws ErrorException, IOException {
-        return getBooleanTfftAsync().toBlocking().single();
+    public List<Boolean> getBooleanTfft() {
+        return getBooleanTfftWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -545,7 +590,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Boolean>> getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
-        return ServiceCall.create(getBooleanTfftAsync(), serviceCallback);
+        return ServiceCall.create(getBooleanTfftWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -553,7 +598,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Boolean&gt; object
      */
-    public Observable<ServiceResponse<List<Boolean>>> getBooleanTfftAsync() {
+    public Observable<List<Boolean>> getBooleanTfftAsync() {
+        return getBooleanTfftWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Boolean>>, List<Boolean>>() {
+            @Override
+            public List<Boolean> call(ServiceResponse<List<Boolean>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get boolean array value [true, false, false, true].
+     *
+     * @return the observable to the List&lt;Boolean&gt; object
+     */
+    public Observable<ServiceResponse<List<Boolean>>> getBooleanTfftWithServiceResponseAsync() {
         return service.getBooleanTfft()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Boolean>>>>() {
                 @Override
@@ -579,13 +638,9 @@ public final class ArraysImpl implements Arrays {
      * Set array value empty [true, false, false, true].
      *
      * @param arrayBody the List&lt;Boolean&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putBooleanTfft(List<Boolean> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putBooleanTfftAsync(arrayBody).toBlocking().single();
+    public void putBooleanTfft(List<Boolean> arrayBody) {
+        putBooleanTfftWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -596,7 +651,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putBooleanTfftAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putBooleanTfftWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -605,7 +660,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Boolean&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putBooleanTfftAsync(List<Boolean> arrayBody) {
+    public Observable<Void> putBooleanTfftAsync(List<Boolean> arrayBody) {
+        return putBooleanTfftWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Set array value empty [true, false, false, true].
+     *
+     * @param arrayBody the List&lt;Boolean&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putBooleanTfftWithServiceResponseAsync(List<Boolean> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -634,12 +704,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Boolean&gt; object if successful.
      */
-    public ServiceResponse<List<Boolean>> getBooleanInvalidNull() throws ErrorException, IOException {
-        return getBooleanInvalidNullAsync().toBlocking().single();
+    public List<Boolean> getBooleanInvalidNull() {
+        return getBooleanInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -649,7 +717,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Boolean>> getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
-        return ServiceCall.create(getBooleanInvalidNullAsync(), serviceCallback);
+        return ServiceCall.create(getBooleanInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -657,7 +725,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Boolean&gt; object
      */
-    public Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidNullAsync() {
+    public Observable<List<Boolean>> getBooleanInvalidNullAsync() {
+        return getBooleanInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Boolean>>, List<Boolean>>() {
+            @Override
+            public List<Boolean> call(ServiceResponse<List<Boolean>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get boolean array value [true, null, false].
+     *
+     * @return the observable to the List&lt;Boolean&gt; object
+     */
+    public Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidNullWithServiceResponseAsync() {
         return service.getBooleanInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Boolean>>>>() {
                 @Override
@@ -682,12 +764,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Boolean&gt; object if successful.
      */
-    public ServiceResponse<List<Boolean>> getBooleanInvalidString() throws ErrorException, IOException {
-        return getBooleanInvalidStringAsync().toBlocking().single();
+    public List<Boolean> getBooleanInvalidString() {
+        return getBooleanInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -697,7 +777,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Boolean>> getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
-        return ServiceCall.create(getBooleanInvalidStringAsync(), serviceCallback);
+        return ServiceCall.create(getBooleanInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -705,7 +785,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Boolean&gt; object
      */
-    public Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidStringAsync() {
+    public Observable<List<Boolean>> getBooleanInvalidStringAsync() {
+        return getBooleanInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Boolean>>, List<Boolean>>() {
+            @Override
+            public List<Boolean> call(ServiceResponse<List<Boolean>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get boolean array value [true, 'boolean', false].
+     *
+     * @return the observable to the List&lt;Boolean&gt; object
+     */
+    public Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidStringWithServiceResponseAsync() {
         return service.getBooleanInvalidString()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Boolean>>>>() {
                 @Override
@@ -730,12 +824,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Integer&gt; object if successful.
      */
-    public ServiceResponse<List<Integer>> getIntegerValid() throws ErrorException, IOException {
-        return getIntegerValidAsync().toBlocking().single();
+    public List<Integer> getIntegerValid() {
+        return getIntegerValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -745,7 +837,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getIntegerValidAsync(), serviceCallback);
+        return ServiceCall.create(getIntegerValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -753,7 +845,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Integer&gt; object
      */
-    public Observable<ServiceResponse<List<Integer>>> getIntegerValidAsync() {
+    public Observable<List<Integer>> getIntegerValidAsync() {
+        return getIntegerValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
+            @Override
+            public List<Integer> call(ServiceResponse<List<Integer>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get integer array value [1, -1, 3, 300].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    public Observable<ServiceResponse<List<Integer>>> getIntegerValidWithServiceResponseAsync() {
         return service.getIntegerValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Integer>>>>() {
                 @Override
@@ -779,13 +885,9 @@ public final class ArraysImpl implements Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Integer&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putIntegerValid(List<Integer> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putIntegerValidAsync(arrayBody).toBlocking().single();
+    public void putIntegerValid(List<Integer> arrayBody) {
+        putIntegerValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -796,7 +898,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putIntegerValidAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putIntegerValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -805,7 +907,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Integer&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putIntegerValidAsync(List<Integer> arrayBody) {
+    public Observable<Void> putIntegerValidAsync(List<Integer> arrayBody) {
+        return putIntegerValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Set array value empty [1, -1, 3, 300].
+     *
+     * @param arrayBody the List&lt;Integer&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putIntegerValidWithServiceResponseAsync(List<Integer> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -834,12 +951,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Integer&gt; object if successful.
      */
-    public ServiceResponse<List<Integer>> getIntInvalidNull() throws ErrorException, IOException {
-        return getIntInvalidNullAsync().toBlocking().single();
+    public List<Integer> getIntInvalidNull() {
+        return getIntInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -849,7 +964,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getIntInvalidNullAsync(), serviceCallback);
+        return ServiceCall.create(getIntInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -857,7 +972,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Integer&gt; object
      */
-    public Observable<ServiceResponse<List<Integer>>> getIntInvalidNullAsync() {
+    public Observable<List<Integer>> getIntInvalidNullAsync() {
+        return getIntInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
+            @Override
+            public List<Integer> call(ServiceResponse<List<Integer>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get integer array value [1, null, 0].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    public Observable<ServiceResponse<List<Integer>>> getIntInvalidNullWithServiceResponseAsync() {
         return service.getIntInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Integer>>>>() {
                 @Override
@@ -882,12 +1011,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Integer&gt; object if successful.
      */
-    public ServiceResponse<List<Integer>> getIntInvalidString() throws ErrorException, IOException {
-        return getIntInvalidStringAsync().toBlocking().single();
+    public List<Integer> getIntInvalidString() {
+        return getIntInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -897,7 +1024,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getIntInvalidStringAsync(), serviceCallback);
+        return ServiceCall.create(getIntInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -905,7 +1032,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Integer&gt; object
      */
-    public Observable<ServiceResponse<List<Integer>>> getIntInvalidStringAsync() {
+    public Observable<List<Integer>> getIntInvalidStringAsync() {
+        return getIntInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
+            @Override
+            public List<Integer> call(ServiceResponse<List<Integer>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get integer array value [1, 'integer', 0].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    public Observable<ServiceResponse<List<Integer>>> getIntInvalidStringWithServiceResponseAsync() {
         return service.getIntInvalidString()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Integer>>>>() {
                 @Override
@@ -930,12 +1071,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Long&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Long&gt; object if successful.
      */
-    public ServiceResponse<List<Long>> getLongValid() throws ErrorException, IOException {
-        return getLongValidAsync().toBlocking().single();
+    public List<Long> getLongValid() {
+        return getLongValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -945,7 +1084,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Long>> getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback) {
-        return ServiceCall.create(getLongValidAsync(), serviceCallback);
+        return ServiceCall.create(getLongValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -953,7 +1092,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Long&gt; object
      */
-    public Observable<ServiceResponse<List<Long>>> getLongValidAsync() {
+    public Observable<List<Long>> getLongValidAsync() {
+        return getLongValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Long>>, List<Long>>() {
+            @Override
+            public List<Long> call(ServiceResponse<List<Long>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get integer array value [1, -1, 3, 300].
+     *
+     * @return the observable to the List&lt;Long&gt; object
+     */
+    public Observable<ServiceResponse<List<Long>>> getLongValidWithServiceResponseAsync() {
         return service.getLongValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Long>>>>() {
                 @Override
@@ -979,13 +1132,9 @@ public final class ArraysImpl implements Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Long&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putLongValid(List<Long> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putLongValidAsync(arrayBody).toBlocking().single();
+    public void putLongValid(List<Long> arrayBody) {
+        putLongValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -996,7 +1145,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLongValidAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putLongValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1005,7 +1154,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Long&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putLongValidAsync(List<Long> arrayBody) {
+    public Observable<Void> putLongValidAsync(List<Long> arrayBody) {
+        return putLongValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Set array value empty [1, -1, 3, 300].
+     *
+     * @param arrayBody the List&lt;Long&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putLongValidWithServiceResponseAsync(List<Long> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1034,12 +1198,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, null, 0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Long&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Long&gt; object if successful.
      */
-    public ServiceResponse<List<Long>> getLongInvalidNull() throws ErrorException, IOException {
-        return getLongInvalidNullAsync().toBlocking().single();
+    public List<Long> getLongInvalidNull() {
+        return getLongInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1049,7 +1211,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Long>> getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback) {
-        return ServiceCall.create(getLongInvalidNullAsync(), serviceCallback);
+        return ServiceCall.create(getLongInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1057,7 +1219,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Long&gt; object
      */
-    public Observable<ServiceResponse<List<Long>>> getLongInvalidNullAsync() {
+    public Observable<List<Long>> getLongInvalidNullAsync() {
+        return getLongInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Long>>, List<Long>>() {
+            @Override
+            public List<Long> call(ServiceResponse<List<Long>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get long array value [1, null, 0].
+     *
+     * @return the observable to the List&lt;Long&gt; object
+     */
+    public Observable<ServiceResponse<List<Long>>> getLongInvalidNullWithServiceResponseAsync() {
         return service.getLongInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Long>>>>() {
                 @Override
@@ -1082,12 +1258,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Long&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Long&gt; object if successful.
      */
-    public ServiceResponse<List<Long>> getLongInvalidString() throws ErrorException, IOException {
-        return getLongInvalidStringAsync().toBlocking().single();
+    public List<Long> getLongInvalidString() {
+        return getLongInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1097,7 +1271,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Long>> getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback) {
-        return ServiceCall.create(getLongInvalidStringAsync(), serviceCallback);
+        return ServiceCall.create(getLongInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1105,7 +1279,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Long&gt; object
      */
-    public Observable<ServiceResponse<List<Long>>> getLongInvalidStringAsync() {
+    public Observable<List<Long>> getLongInvalidStringAsync() {
+        return getLongInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Long>>, List<Long>>() {
+            @Override
+            public List<Long> call(ServiceResponse<List<Long>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get long array value [1, 'integer', 0].
+     *
+     * @return the observable to the List&lt;Long&gt; object
+     */
+    public Observable<ServiceResponse<List<Long>>> getLongInvalidStringWithServiceResponseAsync() {
         return service.getLongInvalidString()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Long>>>>() {
                 @Override
@@ -1130,12 +1318,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Double&gt; object if successful.
      */
-    public ServiceResponse<List<Double>> getFloatValid() throws ErrorException, IOException {
-        return getFloatValidAsync().toBlocking().single();
+    public List<Double> getFloatValid() {
+        return getFloatValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1145,7 +1331,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getFloatValidAsync(), serviceCallback);
+        return ServiceCall.create(getFloatValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1153,7 +1339,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Double&gt; object
      */
-    public Observable<ServiceResponse<List<Double>>> getFloatValidAsync() {
+    public Observable<List<Double>> getFloatValidAsync() {
+        return getFloatValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
+            @Override
+            public List<Double> call(ServiceResponse<List<Double>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get float array value [0, -0.01, 1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    public Observable<ServiceResponse<List<Double>>> getFloatValidWithServiceResponseAsync() {
         return service.getFloatValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Double>>>>() {
                 @Override
@@ -1179,13 +1379,9 @@ public final class ArraysImpl implements Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putFloatValid(List<Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putFloatValidAsync(arrayBody).toBlocking().single();
+    public void putFloatValid(List<Double> arrayBody) {
+        putFloatValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -1196,7 +1392,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putFloatValidAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putFloatValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1205,7 +1401,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Double&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putFloatValidAsync(List<Double> arrayBody) {
+    public Observable<Void> putFloatValidAsync(List<Double> arrayBody) {
+        return putFloatValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Set array value [0, -0.01, 1.2e20].
+     *
+     * @param arrayBody the List&lt;Double&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putFloatValidWithServiceResponseAsync(List<Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1234,12 +1445,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Double&gt; object if successful.
      */
-    public ServiceResponse<List<Double>> getFloatInvalidNull() throws ErrorException, IOException {
-        return getFloatInvalidNullAsync().toBlocking().single();
+    public List<Double> getFloatInvalidNull() {
+        return getFloatInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1249,7 +1458,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getFloatInvalidNullAsync(), serviceCallback);
+        return ServiceCall.create(getFloatInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1257,7 +1466,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Double&gt; object
      */
-    public Observable<ServiceResponse<List<Double>>> getFloatInvalidNullAsync() {
+    public Observable<List<Double>> getFloatInvalidNullAsync() {
+        return getFloatInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
+            @Override
+            public List<Double> call(ServiceResponse<List<Double>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get float array value [0.0, null, -1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    public Observable<ServiceResponse<List<Double>>> getFloatInvalidNullWithServiceResponseAsync() {
         return service.getFloatInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Double>>>>() {
                 @Override
@@ -1282,12 +1505,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Double&gt; object if successful.
      */
-    public ServiceResponse<List<Double>> getFloatInvalidString() throws ErrorException, IOException {
-        return getFloatInvalidStringAsync().toBlocking().single();
+    public List<Double> getFloatInvalidString() {
+        return getFloatInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1297,7 +1518,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getFloatInvalidStringAsync(), serviceCallback);
+        return ServiceCall.create(getFloatInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1305,7 +1526,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Double&gt; object
      */
-    public Observable<ServiceResponse<List<Double>>> getFloatInvalidStringAsync() {
+    public Observable<List<Double>> getFloatInvalidStringAsync() {
+        return getFloatInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
+            @Override
+            public List<Double> call(ServiceResponse<List<Double>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get boolean array value [1.0, 'number', 0.0].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    public Observable<ServiceResponse<List<Double>>> getFloatInvalidStringWithServiceResponseAsync() {
         return service.getFloatInvalidString()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Double>>>>() {
                 @Override
@@ -1330,12 +1565,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Double&gt; object if successful.
      */
-    public ServiceResponse<List<Double>> getDoubleValid() throws ErrorException, IOException {
-        return getDoubleValidAsync().toBlocking().single();
+    public List<Double> getDoubleValid() {
+        return getDoubleValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1345,7 +1578,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getDoubleValidAsync(), serviceCallback);
+        return ServiceCall.create(getDoubleValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1353,7 +1586,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Double&gt; object
      */
-    public Observable<ServiceResponse<List<Double>>> getDoubleValidAsync() {
+    public Observable<List<Double>> getDoubleValidAsync() {
+        return getDoubleValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
+            @Override
+            public List<Double> call(ServiceResponse<List<Double>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get float array value [0, -0.01, 1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    public Observable<ServiceResponse<List<Double>>> getDoubleValidWithServiceResponseAsync() {
         return service.getDoubleValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Double>>>>() {
                 @Override
@@ -1379,13 +1626,9 @@ public final class ArraysImpl implements Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDoubleValid(List<Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putDoubleValidAsync(arrayBody).toBlocking().single();
+    public void putDoubleValid(List<Double> arrayBody) {
+        putDoubleValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -1396,7 +1639,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDoubleValidAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putDoubleValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1405,7 +1648,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Double&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDoubleValidAsync(List<Double> arrayBody) {
+    public Observable<Void> putDoubleValidAsync(List<Double> arrayBody) {
+        return putDoubleValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Set array value [0, -0.01, 1.2e20].
+     *
+     * @param arrayBody the List&lt;Double&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putDoubleValidWithServiceResponseAsync(List<Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1434,12 +1692,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Double&gt; object if successful.
      */
-    public ServiceResponse<List<Double>> getDoubleInvalidNull() throws ErrorException, IOException {
-        return getDoubleInvalidNullAsync().toBlocking().single();
+    public List<Double> getDoubleInvalidNull() {
+        return getDoubleInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1449,7 +1705,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getDoubleInvalidNullAsync(), serviceCallback);
+        return ServiceCall.create(getDoubleInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1457,7 +1713,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Double&gt; object
      */
-    public Observable<ServiceResponse<List<Double>>> getDoubleInvalidNullAsync() {
+    public Observable<List<Double>> getDoubleInvalidNullAsync() {
+        return getDoubleInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
+            @Override
+            public List<Double> call(ServiceResponse<List<Double>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get float array value [0.0, null, -1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    public Observable<ServiceResponse<List<Double>>> getDoubleInvalidNullWithServiceResponseAsync() {
         return service.getDoubleInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Double>>>>() {
                 @Override
@@ -1482,12 +1752,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Double&gt; object if successful.
      */
-    public ServiceResponse<List<Double>> getDoubleInvalidString() throws ErrorException, IOException {
-        return getDoubleInvalidStringAsync().toBlocking().single();
+    public List<Double> getDoubleInvalidString() {
+        return getDoubleInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1497,7 +1765,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getDoubleInvalidStringAsync(), serviceCallback);
+        return ServiceCall.create(getDoubleInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1505,7 +1773,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Double&gt; object
      */
-    public Observable<ServiceResponse<List<Double>>> getDoubleInvalidStringAsync() {
+    public Observable<List<Double>> getDoubleInvalidStringAsync() {
+        return getDoubleInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
+            @Override
+            public List<Double> call(ServiceResponse<List<Double>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get boolean array value [1.0, 'number', 0.0].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    public Observable<ServiceResponse<List<Double>>> getDoubleInvalidStringWithServiceResponseAsync() {
         return service.getDoubleInvalidString()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Double>>>>() {
                 @Override
@@ -1530,12 +1812,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;String&gt; object if successful.
      */
-    public ServiceResponse<List<String>> getStringValid() throws ErrorException, IOException {
-        return getStringValidAsync().toBlocking().single();
+    public List<String> getStringValid() {
+        return getStringValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1545,7 +1825,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<String>> getStringValidAsync(final ServiceCallback<List<String>> serviceCallback) {
-        return ServiceCall.create(getStringValidAsync(), serviceCallback);
+        return ServiceCall.create(getStringValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1553,7 +1833,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;String&gt; object
      */
-    public Observable<ServiceResponse<List<String>>> getStringValidAsync() {
+    public Observable<List<String>> getStringValidAsync() {
+        return getStringValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<String>>, List<String>>() {
+            @Override
+            public List<String> call(ServiceResponse<List<String>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get string array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @return the observable to the List&lt;String&gt; object
+     */
+    public Observable<ServiceResponse<List<String>>> getStringValidWithServiceResponseAsync() {
         return service.getStringValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<String>>>>() {
                 @Override
@@ -1579,13 +1873,9 @@ public final class ArraysImpl implements Arrays {
      * Set array value ['foo1', 'foo2', 'foo3'].
      *
      * @param arrayBody the List&lt;String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putStringValid(List<String> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putStringValidAsync(arrayBody).toBlocking().single();
+    public void putStringValid(List<String> arrayBody) {
+        putStringValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -1596,7 +1886,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putStringValidAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putStringValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1605,7 +1895,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;String&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putStringValidAsync(List<String> arrayBody) {
+    public Observable<Void> putStringValidAsync(List<String> arrayBody) {
+        return putStringValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putStringValidWithServiceResponseAsync(List<String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1634,12 +1939,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;String&gt; object if successful.
      */
-    public ServiceResponse<List<String>> getStringWithNull() throws ErrorException, IOException {
-        return getStringWithNullAsync().toBlocking().single();
+    public List<String> getStringWithNull() {
+        return getStringWithNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1649,7 +1952,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<String>> getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback) {
-        return ServiceCall.create(getStringWithNullAsync(), serviceCallback);
+        return ServiceCall.create(getStringWithNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1657,7 +1960,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;String&gt; object
      */
-    public Observable<ServiceResponse<List<String>>> getStringWithNullAsync() {
+    public Observable<List<String>> getStringWithNullAsync() {
+        return getStringWithNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<String>>, List<String>>() {
+            @Override
+            public List<String> call(ServiceResponse<List<String>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get string array value ['foo', null, 'foo2'].
+     *
+     * @return the observable to the List&lt;String&gt; object
+     */
+    public Observable<ServiceResponse<List<String>>> getStringWithNullWithServiceResponseAsync() {
         return service.getStringWithNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<String>>>>() {
                 @Override
@@ -1682,12 +1999,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;String&gt; object if successful.
      */
-    public ServiceResponse<List<String>> getStringWithInvalid() throws ErrorException, IOException {
-        return getStringWithInvalidAsync().toBlocking().single();
+    public List<String> getStringWithInvalid() {
+        return getStringWithInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1697,7 +2012,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<String>> getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) {
-        return ServiceCall.create(getStringWithInvalidAsync(), serviceCallback);
+        return ServiceCall.create(getStringWithInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1705,7 +2020,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;String&gt; object
      */
-    public Observable<ServiceResponse<List<String>>> getStringWithInvalidAsync() {
+    public Observable<List<String>> getStringWithInvalidAsync() {
+        return getStringWithInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<String>>, List<String>>() {
+            @Override
+            public List<String> call(ServiceResponse<List<String>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get string array value ['foo', 123, 'foo2'].
+     *
+     * @return the observable to the List&lt;String&gt; object
+     */
+    public Observable<ServiceResponse<List<String>>> getStringWithInvalidWithServiceResponseAsync() {
         return service.getStringWithInvalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<String>>>>() {
                 @Override
@@ -1730,12 +2059,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;UUID&gt; object if successful.
      */
-    public ServiceResponse<List<UUID>> getUuidValid() throws ErrorException, IOException {
-        return getUuidValidAsync().toBlocking().single();
+    public List<UUID> getUuidValid() {
+        return getUuidValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1745,7 +2072,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<UUID>> getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback) {
-        return ServiceCall.create(getUuidValidAsync(), serviceCallback);
+        return ServiceCall.create(getUuidValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1753,7 +2080,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;UUID&gt; object
      */
-    public Observable<ServiceResponse<List<UUID>>> getUuidValidAsync() {
+    public Observable<List<UUID>> getUuidValidAsync() {
+        return getUuidValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<UUID>>, List<UUID>>() {
+            @Override
+            public List<UUID> call(ServiceResponse<List<UUID>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @return the observable to the List&lt;UUID&gt; object
+     */
+    public Observable<ServiceResponse<List<UUID>>> getUuidValidWithServiceResponseAsync() {
         return service.getUuidValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<UUID>>>>() {
                 @Override
@@ -1779,13 +2120,9 @@ public final class ArraysImpl implements Arrays {
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
      * @param arrayBody the List&lt;UUID&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putUuidValid(List<UUID> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putUuidValidAsync(arrayBody).toBlocking().single();
+    public void putUuidValid(List<UUID> arrayBody) {
+        putUuidValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -1796,7 +2133,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putUuidValidAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putUuidValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1805,7 +2142,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;UUID&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putUuidValidAsync(List<UUID> arrayBody) {
+    public Observable<Void> putUuidValidAsync(List<UUID> arrayBody) {
+        return putUuidValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param arrayBody the List&lt;UUID&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putUuidValidWithServiceResponseAsync(List<UUID> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1834,12 +2186,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;UUID&gt; object if successful.
      */
-    public ServiceResponse<List<UUID>> getUuidInvalidChars() throws ErrorException, IOException {
-        return getUuidInvalidCharsAsync().toBlocking().single();
+    public List<UUID> getUuidInvalidChars() {
+        return getUuidInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1849,7 +2199,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<UUID>> getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback) {
-        return ServiceCall.create(getUuidInvalidCharsAsync(), serviceCallback);
+        return ServiceCall.create(getUuidInvalidCharsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1857,7 +2207,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;UUID&gt; object
      */
-    public Observable<ServiceResponse<List<UUID>>> getUuidInvalidCharsAsync() {
+    public Observable<List<UUID>> getUuidInvalidCharsAsync() {
+        return getUuidInvalidCharsWithServiceResponseAsync().map(new Func1<ServiceResponse<List<UUID>>, List<UUID>>() {
+            @Override
+            public List<UUID> call(ServiceResponse<List<UUID>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
+     *
+     * @return the observable to the List&lt;UUID&gt; object
+     */
+    public Observable<ServiceResponse<List<UUID>>> getUuidInvalidCharsWithServiceResponseAsync() {
         return service.getUuidInvalidChars()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<UUID>>>>() {
                 @Override
@@ -1882,12 +2246,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;LocalDate&gt; object if successful.
      */
-    public ServiceResponse<List<LocalDate>> getDateValid() throws ErrorException, IOException {
-        return getDateValidAsync().toBlocking().single();
+    public List<LocalDate> getDateValid() {
+        return getDateValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1897,7 +2259,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<LocalDate>> getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
-        return ServiceCall.create(getDateValidAsync(), serviceCallback);
+        return ServiceCall.create(getDateValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1905,7 +2267,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;LocalDate&gt; object
      */
-    public Observable<ServiceResponse<List<LocalDate>>> getDateValidAsync() {
+    public Observable<List<LocalDate>> getDateValidAsync() {
+        return getDateValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<LocalDate>>, List<LocalDate>>() {
+            @Override
+            public List<LocalDate> call(ServiceResponse<List<LocalDate>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
+     *
+     * @return the observable to the List&lt;LocalDate&gt; object
+     */
+    public Observable<ServiceResponse<List<LocalDate>>> getDateValidWithServiceResponseAsync() {
         return service.getDateValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<LocalDate>>>>() {
                 @Override
@@ -1931,13 +2307,9 @@ public final class ArraysImpl implements Arrays {
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDateValid(List<LocalDate> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putDateValidAsync(arrayBody).toBlocking().single();
+    public void putDateValid(List<LocalDate> arrayBody) {
+        putDateValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -1948,7 +2320,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateValidAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putDateValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1957,7 +2329,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDateValidAsync(List<LocalDate> arrayBody) {
+    public Observable<Void> putDateValidAsync(List<LocalDate> arrayBody) {
+        return putDateValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
+     *
+     * @param arrayBody the List&lt;LocalDate&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putDateValidWithServiceResponseAsync(List<LocalDate> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1986,12 +2373,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;LocalDate&gt; object if successful.
      */
-    public ServiceResponse<List<LocalDate>> getDateInvalidNull() throws ErrorException, IOException {
-        return getDateInvalidNullAsync().toBlocking().single();
+    public List<LocalDate> getDateInvalidNull() {
+        return getDateInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2001,7 +2386,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<LocalDate>> getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
-        return ServiceCall.create(getDateInvalidNullAsync(), serviceCallback);
+        return ServiceCall.create(getDateInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2009,7 +2394,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;LocalDate&gt; object
      */
-    public Observable<ServiceResponse<List<LocalDate>>> getDateInvalidNullAsync() {
+    public Observable<List<LocalDate>> getDateInvalidNullAsync() {
+        return getDateInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<LocalDate>>, List<LocalDate>>() {
+            @Override
+            public List<LocalDate> call(ServiceResponse<List<LocalDate>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get date array value ['2012-01-01', null, '1776-07-04'].
+     *
+     * @return the observable to the List&lt;LocalDate&gt; object
+     */
+    public Observable<ServiceResponse<List<LocalDate>>> getDateInvalidNullWithServiceResponseAsync() {
         return service.getDateInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<LocalDate>>>>() {
                 @Override
@@ -2034,12 +2433,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;LocalDate&gt; object if successful.
      */
-    public ServiceResponse<List<LocalDate>> getDateInvalidChars() throws ErrorException, IOException {
-        return getDateInvalidCharsAsync().toBlocking().single();
+    public List<LocalDate> getDateInvalidChars() {
+        return getDateInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2049,7 +2446,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<LocalDate>> getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
-        return ServiceCall.create(getDateInvalidCharsAsync(), serviceCallback);
+        return ServiceCall.create(getDateInvalidCharsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2057,7 +2454,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;LocalDate&gt; object
      */
-    public Observable<ServiceResponse<List<LocalDate>>> getDateInvalidCharsAsync() {
+    public Observable<List<LocalDate>> getDateInvalidCharsAsync() {
+        return getDateInvalidCharsWithServiceResponseAsync().map(new Func1<ServiceResponse<List<LocalDate>>, List<LocalDate>>() {
+            @Override
+            public List<LocalDate> call(ServiceResponse<List<LocalDate>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get date array value ['2011-03-22', 'date'].
+     *
+     * @return the observable to the List&lt;LocalDate&gt; object
+     */
+    public Observable<ServiceResponse<List<LocalDate>>> getDateInvalidCharsWithServiceResponseAsync() {
         return service.getDateInvalidChars()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<LocalDate>>>>() {
                 @Override
@@ -2082,12 +2493,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;DateTime&gt; object if successful.
      */
-    public ServiceResponse<List<DateTime>> getDateTimeValid() throws ErrorException, IOException {
-        return getDateTimeValidAsync().toBlocking().single();
+    public List<DateTime> getDateTimeValid() {
+        return getDateTimeValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2097,7 +2506,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeValidAsync(), serviceCallback);
+        return ServiceCall.create(getDateTimeValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2105,7 +2514,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;DateTime&gt; object
      */
-    public Observable<ServiceResponse<List<DateTime>>> getDateTimeValidAsync() {
+    public Observable<List<DateTime>> getDateTimeValidAsync() {
+        return getDateTimeValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<DateTime>>, List<DateTime>>() {
+            @Override
+            public List<DateTime> call(ServiceResponse<List<DateTime>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    public Observable<ServiceResponse<List<DateTime>>> getDateTimeValidWithServiceResponseAsync() {
         return service.getDateTimeValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<DateTime>>>>() {
                 @Override
@@ -2131,13 +2554,9 @@ public final class ArraysImpl implements Arrays {
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @param arrayBody the List&lt;DateTime&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDateTimeValid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putDateTimeValidAsync(arrayBody).toBlocking().single();
+    public void putDateTimeValid(List<DateTime> arrayBody) {
+        putDateTimeValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -2148,7 +2567,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateTimeValidAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putDateTimeValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2157,7 +2576,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;DateTime&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDateTimeValidAsync(List<DateTime> arrayBody) {
+    public Observable<Void> putDateTimeValidAsync(List<DateTime> arrayBody) {
+        return putDateTimeValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
+     *
+     * @param arrayBody the List&lt;DateTime&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putDateTimeValidWithServiceResponseAsync(List<DateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2186,12 +2620,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;DateTime&gt; object if successful.
      */
-    public ServiceResponse<List<DateTime>> getDateTimeInvalidNull() throws ErrorException, IOException {
-        return getDateTimeInvalidNullAsync().toBlocking().single();
+    public List<DateTime> getDateTimeInvalidNull() {
+        return getDateTimeInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2201,7 +2633,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeInvalidNullAsync(), serviceCallback);
+        return ServiceCall.create(getDateTimeInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2209,7 +2641,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;DateTime&gt; object
      */
-    public Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidNullAsync() {
+    public Observable<List<DateTime>> getDateTimeInvalidNullAsync() {
+        return getDateTimeInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<DateTime>>, List<DateTime>>() {
+            @Override
+            public List<DateTime> call(ServiceResponse<List<DateTime>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', null].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    public Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidNullWithServiceResponseAsync() {
         return service.getDateTimeInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<DateTime>>>>() {
                 @Override
@@ -2234,12 +2680,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;DateTime&gt; object if successful.
      */
-    public ServiceResponse<List<DateTime>> getDateTimeInvalidChars() throws ErrorException, IOException {
-        return getDateTimeInvalidCharsAsync().toBlocking().single();
+    public List<DateTime> getDateTimeInvalidChars() {
+        return getDateTimeInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2249,7 +2693,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeInvalidCharsAsync(), serviceCallback);
+        return ServiceCall.create(getDateTimeInvalidCharsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2257,7 +2701,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;DateTime&gt; object
      */
-    public Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidCharsAsync() {
+    public Observable<List<DateTime>> getDateTimeInvalidCharsAsync() {
+        return getDateTimeInvalidCharsWithServiceResponseAsync().map(new Func1<ServiceResponse<List<DateTime>>, List<DateTime>>() {
+            @Override
+            public List<DateTime> call(ServiceResponse<List<DateTime>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    public Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidCharsWithServiceResponseAsync() {
         return service.getDateTimeInvalidChars()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<DateTime>>>>() {
                 @Override
@@ -2282,12 +2740,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;DateTime&gt; object if successful.
      */
-    public ServiceResponse<List<DateTime>> getDateTimeRfc1123Valid() throws ErrorException, IOException {
-        return getDateTimeRfc1123ValidAsync().toBlocking().single();
+    public List<DateTime> getDateTimeRfc1123Valid() {
+        return getDateTimeRfc1123ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2297,7 +2753,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeRfc1123ValidAsync(), serviceCallback);
+        return ServiceCall.create(getDateTimeRfc1123ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2305,7 +2761,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;DateTime&gt; object
      */
-    public Observable<ServiceResponse<List<DateTime>>> getDateTimeRfc1123ValidAsync() {
+    public Observable<List<DateTime>> getDateTimeRfc1123ValidAsync() {
+        return getDateTimeRfc1123ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<DateTime>>, List<DateTime>>() {
+            @Override
+            public List<DateTime> call(ServiceResponse<List<DateTime>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    public Observable<ServiceResponse<List<DateTime>>> getDateTimeRfc1123ValidWithServiceResponseAsync() {
         return service.getDateTimeRfc1123Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<DateTime>>>>() {
                 @Override
@@ -2341,13 +2811,9 @@ public final class ArraysImpl implements Arrays {
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDateTimeRfc1123Valid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putDateTimeRfc1123ValidAsync(arrayBody).toBlocking().single();
+    public void putDateTimeRfc1123Valid(List<DateTime> arrayBody) {
+        putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -2358,7 +2824,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateTimeRfc1123ValidAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2367,7 +2833,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody) {
+    public Observable<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody) {
+        return putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
+     *
+     * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putDateTimeRfc1123ValidWithServiceResponseAsync(List<DateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2401,12 +2882,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Period&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Period&gt; object if successful.
      */
-    public ServiceResponse<List<Period>> getDurationValid() throws ErrorException, IOException {
-        return getDurationValidAsync().toBlocking().single();
+    public List<Period> getDurationValid() {
+        return getDurationValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2416,7 +2895,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Period>> getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback) {
-        return ServiceCall.create(getDurationValidAsync(), serviceCallback);
+        return ServiceCall.create(getDurationValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2424,7 +2903,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Period&gt; object
      */
-    public Observable<ServiceResponse<List<Period>>> getDurationValidAsync() {
+    public Observable<List<Period>> getDurationValidAsync() {
+        return getDurationValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Period>>, List<Period>>() {
+            @Override
+            public List<Period> call(ServiceResponse<List<Period>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     *
+     * @return the observable to the List&lt;Period&gt; object
+     */
+    public Observable<ServiceResponse<List<Period>>> getDurationValidWithServiceResponseAsync() {
         return service.getDurationValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Period>>>>() {
                 @Override
@@ -2450,13 +2943,9 @@ public final class ArraysImpl implements Arrays {
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param arrayBody the List&lt;Period&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDurationValid(List<Period> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putDurationValidAsync(arrayBody).toBlocking().single();
+    public void putDurationValid(List<Period> arrayBody) {
+        putDurationValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -2467,7 +2956,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDurationValidAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putDurationValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2476,7 +2965,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Period&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDurationValidAsync(List<Period> arrayBody) {
+    public Observable<Void> putDurationValidAsync(List<Period> arrayBody) {
+        return putDurationValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     *
+     * @param arrayBody the List&lt;Period&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putDurationValidWithServiceResponseAsync(List<Period> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2505,12 +3009,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;byte[]&gt; object if successful.
      */
-    public ServiceResponse<List<byte[]>> getByteValid() throws ErrorException, IOException {
-        return getByteValidAsync().toBlocking().single();
+    public List<byte[]> getByteValid() {
+        return getByteValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2520,7 +3022,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<byte[]>> getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
-        return ServiceCall.create(getByteValidAsync(), serviceCallback);
+        return ServiceCall.create(getByteValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2528,7 +3030,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;byte[]&gt; object
      */
-    public Observable<ServiceResponse<List<byte[]>>> getByteValidAsync() {
+    public Observable<List<byte[]>> getByteValidAsync() {
+        return getByteValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<byte[]>>, List<byte[]>>() {
+            @Override
+            public List<byte[]> call(ServiceResponse<List<byte[]>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
+     *
+     * @return the observable to the List&lt;byte[]&gt; object
+     */
+    public Observable<ServiceResponse<List<byte[]>>> getByteValidWithServiceResponseAsync() {
         return service.getByteValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<byte[]>>>>() {
                 @Override
@@ -2554,13 +3070,9 @@ public final class ArraysImpl implements Arrays {
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
      *
      * @param arrayBody the List&lt;byte[]&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putByteValid(List<byte[]> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putByteValidAsync(arrayBody).toBlocking().single();
+    public void putByteValid(List<byte[]> arrayBody) {
+        putByteValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -2571,7 +3083,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putByteValidAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putByteValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2580,7 +3092,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;byte[]&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putByteValidAsync(List<byte[]> arrayBody) {
+    public Observable<Void> putByteValidAsync(List<byte[]> arrayBody) {
+        return putByteValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
+     *
+     * @param arrayBody the List&lt;byte[]&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putByteValidWithServiceResponseAsync(List<byte[]> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2609,12 +3136,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;byte[]&gt; object if successful.
      */
-    public ServiceResponse<List<byte[]>> getByteInvalidNull() throws ErrorException, IOException {
-        return getByteInvalidNullAsync().toBlocking().single();
+    public List<byte[]> getByteInvalidNull() {
+        return getByteInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2624,7 +3149,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<byte[]>> getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
-        return ServiceCall.create(getByteInvalidNullAsync(), serviceCallback);
+        return ServiceCall.create(getByteInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2632,7 +3157,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;byte[]&gt; object
      */
-    public Observable<ServiceResponse<List<byte[]>>> getByteInvalidNullAsync() {
+    public Observable<List<byte[]>> getByteInvalidNullAsync() {
+        return getByteInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<byte[]>>, List<byte[]>>() {
+            @Override
+            public List<byte[]> call(ServiceResponse<List<byte[]>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
+     *
+     * @return the observable to the List&lt;byte[]&gt; object
+     */
+    public Observable<ServiceResponse<List<byte[]>>> getByteInvalidNullWithServiceResponseAsync() {
         return service.getByteInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<byte[]>>>>() {
                 @Override
@@ -2657,12 +3196,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;byte[]&gt; object if successful.
      */
-    public ServiceResponse<List<byte[]>> getBase64Url() throws ErrorException, IOException {
-        return getBase64UrlAsync().toBlocking().single();
+    public List<byte[]> getBase64Url() {
+        return getBase64UrlWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2672,7 +3209,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<byte[]>> getBase64UrlAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
-        return ServiceCall.create(getBase64UrlAsync(), serviceCallback);
+        return ServiceCall.create(getBase64UrlWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2680,7 +3217,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;byte[]&gt; object
      */
-    public Observable<ServiceResponse<List<byte[]>>> getBase64UrlAsync() {
+    public Observable<List<byte[]>> getBase64UrlAsync() {
+        return getBase64UrlWithServiceResponseAsync().map(new Func1<ServiceResponse<List<byte[]>>, List<byte[]>>() {
+            @Override
+            public List<byte[]> call(ServiceResponse<List<byte[]>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
+     *
+     * @return the observable to the List&lt;byte[]&gt; object
+     */
+    public Observable<ServiceResponse<List<byte[]>>> getBase64UrlWithServiceResponseAsync() {
         return service.getBase64Url()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<byte[]>>>>() {
                 @Override
@@ -2715,12 +3266,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type null value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object if successful.
      */
-    public ServiceResponse<List<Product>> getComplexNull() throws ErrorException, IOException {
-        return getComplexNullAsync().toBlocking().single();
+    public List<Product> getComplexNull() {
+        return getComplexNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2730,7 +3279,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        return ServiceCall.create(getComplexNullAsync(), serviceCallback);
+        return ServiceCall.create(getComplexNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2738,7 +3287,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Product&gt; object
      */
-    public Observable<ServiceResponse<List<Product>>> getComplexNullAsync() {
+    public Observable<List<Product>> getComplexNullAsync() {
+        return getComplexNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Product>>, List<Product>>() {
+            @Override
+            public List<Product> call(ServiceResponse<List<Product>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get array of complex type null value.
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    public Observable<ServiceResponse<List<Product>>> getComplexNullWithServiceResponseAsync() {
         return service.getComplexNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Product>>>>() {
                 @Override
@@ -2763,12 +3326,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get empty array of complex type [].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object if successful.
      */
-    public ServiceResponse<List<Product>> getComplexEmpty() throws ErrorException, IOException {
-        return getComplexEmptyAsync().toBlocking().single();
+    public List<Product> getComplexEmpty() {
+        return getComplexEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2778,7 +3339,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        return ServiceCall.create(getComplexEmptyAsync(), serviceCallback);
+        return ServiceCall.create(getComplexEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2786,7 +3347,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Product&gt; object
      */
-    public Observable<ServiceResponse<List<Product>>> getComplexEmptyAsync() {
+    public Observable<List<Product>> getComplexEmptyAsync() {
+        return getComplexEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Product>>, List<Product>>() {
+            @Override
+            public List<Product> call(ServiceResponse<List<Product>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get empty array of complex type [].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    public Observable<ServiceResponse<List<Product>>> getComplexEmptyWithServiceResponseAsync() {
         return service.getComplexEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Product>>>>() {
                 @Override
@@ -2811,12 +3386,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object if successful.
      */
-    public ServiceResponse<List<Product>> getComplexItemNull() throws ErrorException, IOException {
-        return getComplexItemNullAsync().toBlocking().single();
+    public List<Product> getComplexItemNull() {
+        return getComplexItemNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2826,7 +3399,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        return ServiceCall.create(getComplexItemNullAsync(), serviceCallback);
+        return ServiceCall.create(getComplexItemNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2834,7 +3407,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Product&gt; object
      */
-    public Observable<ServiceResponse<List<Product>>> getComplexItemNullAsync() {
+    public Observable<List<Product>> getComplexItemNullAsync() {
+        return getComplexItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Product>>, List<Product>>() {
+            @Override
+            public List<Product> call(ServiceResponse<List<Product>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    public Observable<ServiceResponse<List<Product>>> getComplexItemNullWithServiceResponseAsync() {
         return service.getComplexItemNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Product>>>>() {
                 @Override
@@ -2859,12 +3446,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object if successful.
      */
-    public ServiceResponse<List<Product>> getComplexItemEmpty() throws ErrorException, IOException {
-        return getComplexItemEmptyAsync().toBlocking().single();
+    public List<Product> getComplexItemEmpty() {
+        return getComplexItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2874,7 +3459,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        return ServiceCall.create(getComplexItemEmptyAsync(), serviceCallback);
+        return ServiceCall.create(getComplexItemEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2882,7 +3467,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Product&gt; object
      */
-    public Observable<ServiceResponse<List<Product>>> getComplexItemEmptyAsync() {
+    public Observable<List<Product>> getComplexItemEmptyAsync() {
+        return getComplexItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Product>>, List<Product>>() {
+            @Override
+            public List<Product> call(ServiceResponse<List<Product>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    public Observable<ServiceResponse<List<Product>>> getComplexItemEmptyWithServiceResponseAsync() {
         return service.getComplexItemEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Product>>>>() {
                 @Override
@@ -2907,12 +3506,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object if successful.
      */
-    public ServiceResponse<List<Product>> getComplexValid() throws ErrorException, IOException {
-        return getComplexValidAsync().toBlocking().single();
+    public List<Product> getComplexValid() {
+        return getComplexValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2922,7 +3519,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        return ServiceCall.create(getComplexValidAsync(), serviceCallback);
+        return ServiceCall.create(getComplexValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2930,7 +3527,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Product&gt; object
      */
-    public Observable<ServiceResponse<List<Product>>> getComplexValidAsync() {
+    public Observable<List<Product>> getComplexValidAsync() {
+        return getComplexValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Product>>, List<Product>>() {
+            @Override
+            public List<Product> call(ServiceResponse<List<Product>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    public Observable<ServiceResponse<List<Product>>> getComplexValidWithServiceResponseAsync() {
         return service.getComplexValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Product>>>>() {
                 @Override
@@ -2956,13 +3567,9 @@ public final class ArraysImpl implements Arrays {
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @param arrayBody the List&lt;Product&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putComplexValid(List<Product> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putComplexValidAsync(arrayBody).toBlocking().single();
+    public void putComplexValid(List<Product> arrayBody) {
+        putComplexValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -2973,7 +3580,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putComplexValidAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putComplexValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2982,7 +3589,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Product&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putComplexValidAsync(List<Product> arrayBody) {
+    public Observable<Void> putComplexValidAsync(List<Product> arrayBody) {
+        return putComplexValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
+     *
+     * @param arrayBody the List&lt;Product&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putComplexValidWithServiceResponseAsync(List<Product> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3011,12 +3633,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get a null array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    public ServiceResponse<List<List<String>>> getArrayNull() throws ErrorException, IOException {
-        return getArrayNullAsync().toBlocking().single();
+    public List<List<String>> getArrayNull() {
+        return getArrayNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3026,7 +3646,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayNullAsync(), serviceCallback);
+        return ServiceCall.create(getArrayNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3034,7 +3654,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
-    public Observable<ServiceResponse<List<List<String>>>> getArrayNullAsync() {
+    public Observable<List<List<String>>> getArrayNullAsync() {
+        return getArrayNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<List<String>>>, List<List<String>>>() {
+            @Override
+            public List<List<String>> call(ServiceResponse<List<List<String>>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get a null array.
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    public Observable<ServiceResponse<List<List<String>>>> getArrayNullWithServiceResponseAsync() {
         return service.getArrayNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<List<String>>>>>() {
                 @Override
@@ -3059,12 +3693,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an empty array [].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    public ServiceResponse<List<List<String>>> getArrayEmpty() throws ErrorException, IOException {
-        return getArrayEmptyAsync().toBlocking().single();
+    public List<List<String>> getArrayEmpty() {
+        return getArrayEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3074,7 +3706,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayEmptyAsync(), serviceCallback);
+        return ServiceCall.create(getArrayEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3082,7 +3714,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
-    public Observable<ServiceResponse<List<List<String>>>> getArrayEmptyAsync() {
+    public Observable<List<List<String>>> getArrayEmptyAsync() {
+        return getArrayEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<List<String>>>, List<List<String>>>() {
+            @Override
+            public List<List<String>> call(ServiceResponse<List<List<String>>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get an empty array [].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    public Observable<ServiceResponse<List<List<String>>>> getArrayEmptyWithServiceResponseAsync() {
         return service.getArrayEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<List<String>>>>>() {
                 @Override
@@ -3107,12 +3753,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    public ServiceResponse<List<List<String>>> getArrayItemNull() throws ErrorException, IOException {
-        return getArrayItemNullAsync().toBlocking().single();
+    public List<List<String>> getArrayItemNull() {
+        return getArrayItemNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3122,7 +3766,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayItemNullAsync(), serviceCallback);
+        return ServiceCall.create(getArrayItemNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3130,7 +3774,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
-    public Observable<ServiceResponse<List<List<String>>>> getArrayItemNullAsync() {
+    public Observable<List<List<String>>> getArrayItemNullAsync() {
+        return getArrayItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<List<String>>>, List<List<String>>>() {
+            @Override
+            public List<List<String>> call(ServiceResponse<List<List<String>>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    public Observable<ServiceResponse<List<List<String>>>> getArrayItemNullWithServiceResponseAsync() {
         return service.getArrayItemNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<List<String>>>>>() {
                 @Override
@@ -3155,12 +3813,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    public ServiceResponse<List<List<String>>> getArrayItemEmpty() throws ErrorException, IOException {
-        return getArrayItemEmptyAsync().toBlocking().single();
+    public List<List<String>> getArrayItemEmpty() {
+        return getArrayItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3170,7 +3826,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayItemEmptyAsync(), serviceCallback);
+        return ServiceCall.create(getArrayItemEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3178,7 +3834,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
-    public Observable<ServiceResponse<List<List<String>>>> getArrayItemEmptyAsync() {
+    public Observable<List<List<String>>> getArrayItemEmptyAsync() {
+        return getArrayItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<List<String>>>, List<List<String>>>() {
+            @Override
+            public List<List<String>> call(ServiceResponse<List<List<String>>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    public Observable<ServiceResponse<List<List<String>>>> getArrayItemEmptyWithServiceResponseAsync() {
         return service.getArrayItemEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<List<String>>>>>() {
                 @Override
@@ -3203,12 +3873,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    public ServiceResponse<List<List<String>>> getArrayValid() throws ErrorException, IOException {
-        return getArrayValidAsync().toBlocking().single();
+    public List<List<String>> getArrayValid() {
+        return getArrayValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3218,7 +3886,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayValidAsync(), serviceCallback);
+        return ServiceCall.create(getArrayValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3226,7 +3894,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
-    public Observable<ServiceResponse<List<List<String>>>> getArrayValidAsync() {
+    public Observable<List<List<String>>> getArrayValidAsync() {
+        return getArrayValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<List<String>>>, List<List<String>>>() {
+            @Override
+            public List<List<String>> call(ServiceResponse<List<List<String>>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    public Observable<ServiceResponse<List<List<String>>>> getArrayValidWithServiceResponseAsync() {
         return service.getArrayValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<List<String>>>>>() {
                 @Override
@@ -3252,13 +3934,9 @@ public final class ArraysImpl implements Arrays {
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putArrayValid(List<List<String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putArrayValidAsync(arrayBody).toBlocking().single();
+    public void putArrayValid(List<List<String>> arrayBody) {
+        putArrayValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -3269,7 +3947,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putArrayValidAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putArrayValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3278,7 +3956,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putArrayValidAsync(List<List<String>> arrayBody) {
+    public Observable<Void> putArrayValidAsync(List<List<String>> arrayBody) {
+        return putArrayValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     *
+     * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putArrayValidWithServiceResponseAsync(List<List<String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3307,12 +4000,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    public ServiceResponse<List<Map<String, String>>> getDictionaryNull() throws ErrorException, IOException {
-        return getDictionaryNullAsync().toBlocking().single();
+    public List<Map<String, String>> getDictionaryNull() {
+        return getDictionaryNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3322,7 +4013,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryNullAsync(), serviceCallback);
+        return ServiceCall.create(getDictionaryNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3330,7 +4021,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
-    public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryNullAsync() {
+    public Observable<List<Map<String, String>>> getDictionaryNullAsync() {
+        return getDictionaryNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Map<String, String>>>, List<Map<String, String>>>() {
+            @Override
+            public List<Map<String, String>> call(ServiceResponse<List<Map<String, String>>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get an array of Dictionaries with value null.
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryNullWithServiceResponseAsync() {
         return service.getDictionaryNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Map<String, String>>>>>() {
                 @Override
@@ -3355,12 +4060,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    public ServiceResponse<List<Map<String, String>>> getDictionaryEmpty() throws ErrorException, IOException {
-        return getDictionaryEmptyAsync().toBlocking().single();
+    public List<Map<String, String>> getDictionaryEmpty() {
+        return getDictionaryEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3370,7 +4073,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryEmptyAsync(), serviceCallback);
+        return ServiceCall.create(getDictionaryEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3378,7 +4081,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
-    public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryEmptyAsync() {
+    public Observable<List<Map<String, String>>> getDictionaryEmptyAsync() {
+        return getDictionaryEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Map<String, String>>>, List<Map<String, String>>>() {
+            @Override
+            public List<Map<String, String>> call(ServiceResponse<List<Map<String, String>>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryEmptyWithServiceResponseAsync() {
         return service.getDictionaryEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Map<String, String>>>>>() {
                 @Override
@@ -3403,12 +4120,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    public ServiceResponse<List<Map<String, String>>> getDictionaryItemNull() throws ErrorException, IOException {
-        return getDictionaryItemNullAsync().toBlocking().single();
+    public List<Map<String, String>> getDictionaryItemNull() {
+        return getDictionaryItemNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3418,7 +4133,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryItemNullAsync(), serviceCallback);
+        return ServiceCall.create(getDictionaryItemNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3426,7 +4141,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
-    public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemNullAsync() {
+    public Observable<List<Map<String, String>>> getDictionaryItemNullAsync() {
+        return getDictionaryItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Map<String, String>>>, List<Map<String, String>>>() {
+            @Override
+            public List<Map<String, String>> call(ServiceResponse<List<Map<String, String>>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemNullWithServiceResponseAsync() {
         return service.getDictionaryItemNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Map<String, String>>>>>() {
                 @Override
@@ -3451,12 +4180,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    public ServiceResponse<List<Map<String, String>>> getDictionaryItemEmpty() throws ErrorException, IOException {
-        return getDictionaryItemEmptyAsync().toBlocking().single();
+    public List<Map<String, String>> getDictionaryItemEmpty() {
+        return getDictionaryItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3466,7 +4193,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryItemEmptyAsync(), serviceCallback);
+        return ServiceCall.create(getDictionaryItemEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3474,7 +4201,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
-    public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemEmptyAsync() {
+    public Observable<List<Map<String, String>>> getDictionaryItemEmptyAsync() {
+        return getDictionaryItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Map<String, String>>>, List<Map<String, String>>>() {
+            @Override
+            public List<Map<String, String>> call(ServiceResponse<List<Map<String, String>>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemEmptyWithServiceResponseAsync() {
         return service.getDictionaryItemEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Map<String, String>>>>>() {
                 @Override
@@ -3499,12 +4240,10 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    public ServiceResponse<List<Map<String, String>>> getDictionaryValid() throws ErrorException, IOException {
-        return getDictionaryValidAsync().toBlocking().single();
+    public List<Map<String, String>> getDictionaryValid() {
+        return getDictionaryValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3514,7 +4253,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryValidAsync(), serviceCallback);
+        return ServiceCall.create(getDictionaryValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3522,7 +4261,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
-    public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryValidAsync() {
+    public Observable<List<Map<String, String>>> getDictionaryValidAsync() {
+        return getDictionaryValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Map<String, String>>>, List<Map<String, String>>>() {
+            @Override
+            public List<Map<String, String>> call(ServiceResponse<List<Map<String, String>>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryValidWithServiceResponseAsync() {
         return service.getDictionaryValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<Map<String, String>>>>>() {
                 @Override
@@ -3548,13 +4301,9 @@ public final class ArraysImpl implements Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDictionaryValid(List<Map<String, String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putDictionaryValidAsync(arrayBody).toBlocking().single();
+    public void putDictionaryValid(List<Map<String, String>> arrayBody) {
+        putDictionaryValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -3565,7 +4314,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDictionaryValidAsync(arrayBody), serviceCallback);
+        return ServiceCall.create(putDictionaryValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3574,7 +4323,22 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDictionaryValidAsync(List<Map<String, String>> arrayBody) {
+    public Observable<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody) {
+        return putDictionaryValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putDictionaryValidWithServiceResponseAsync(List<Map<String, String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }

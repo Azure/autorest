@@ -64,13 +64,9 @@ public final class PathsImpl implements Paths {
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getEmpty(String accountName) throws ErrorException, IOException, IllegalArgumentException {
-        return getEmptyAsync(accountName).toBlocking().single();
+    public void getEmpty(String accountName) {
+        getEmptyWithServiceResponseAsync(accountName).toBlocking().single().getBody();
     }
 
     /**
@@ -81,7 +77,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getEmptyAsync(accountName), serviceCallback);
+        return ServiceCall.create(getEmptyWithServiceResponseAsync(accountName), serviceCallback);
     }
 
     /**
@@ -90,7 +86,22 @@ public final class PathsImpl implements Paths {
      * @param accountName Account Name
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getEmptyAsync(String accountName) {
+    public Observable<Void> getEmptyAsync(String accountName) {
+        return getEmptyWithServiceResponseAsync(accountName).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param accountName Account Name
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String accountName) {
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }

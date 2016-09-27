@@ -13,8 +13,6 @@ package fixtures.bodyduration;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodyduration.models.ErrorException;
-import java.io.IOException;
 import org.joda.time.Period;
 import rx.Observable;
 
@@ -26,11 +24,9 @@ public interface Durations {
     /**
      * Get null duration value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the Period object wrapped in {@link ServiceResponse} if successful.
+     * @return the Period object if successful.
      */
-    ServiceResponse<Period> getNull() throws ErrorException, IOException;
+    Period getNull();
 
     /**
      * Get null duration value.
@@ -45,18 +41,21 @@ public interface Durations {
      *
      * @return the observable to the Period object
      */
-    Observable<ServiceResponse<Period>> getNullAsync();
+    Observable<Period> getNullAsync();
+
+    /**
+     * Get null duration value.
+     *
+     * @return the observable to the Period object
+     */
+    Observable<ServiceResponse<Period>> getNullWithServiceResponseAsync();
 
     /**
      * Put a positive duration value.
      *
      * @param durationBody the Period value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putPositiveDuration(Period durationBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putPositiveDuration(Period durationBody);
 
     /**
      * Put a positive duration value.
@@ -73,16 +72,22 @@ public interface Durations {
      * @param durationBody the Period value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putPositiveDurationAsync(Period durationBody);
+    Observable<Void> putPositiveDurationAsync(Period durationBody);
+
+    /**
+     * Put a positive duration value.
+     *
+     * @param durationBody the Period value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putPositiveDurationWithServiceResponseAsync(Period durationBody);
 
     /**
      * Get a positive duration value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the Period object wrapped in {@link ServiceResponse} if successful.
+     * @return the Period object if successful.
      */
-    ServiceResponse<Period> getPositiveDuration() throws ErrorException, IOException;
+    Period getPositiveDuration();
 
     /**
      * Get a positive duration value.
@@ -97,16 +102,21 @@ public interface Durations {
      *
      * @return the observable to the Period object
      */
-    Observable<ServiceResponse<Period>> getPositiveDurationAsync();
+    Observable<Period> getPositiveDurationAsync();
+
+    /**
+     * Get a positive duration value.
+     *
+     * @return the observable to the Period object
+     */
+    Observable<ServiceResponse<Period>> getPositiveDurationWithServiceResponseAsync();
 
     /**
      * Get an invalid duration value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the Period object wrapped in {@link ServiceResponse} if successful.
+     * @return the Period object if successful.
      */
-    ServiceResponse<Period> getInvalid() throws ErrorException, IOException;
+    Period getInvalid();
 
     /**
      * Get an invalid duration value.
@@ -121,6 +131,13 @@ public interface Durations {
      *
      * @return the observable to the Period object
      */
-    Observable<ServiceResponse<Period>> getInvalidAsync();
+    Observable<Period> getInvalidAsync();
+
+    /**
+     * Get an invalid duration value.
+     *
+     * @return the observable to the Period object
+     */
+    Observable<ServiceResponse<Period>> getInvalidWithServiceResponseAsync();
 
 }

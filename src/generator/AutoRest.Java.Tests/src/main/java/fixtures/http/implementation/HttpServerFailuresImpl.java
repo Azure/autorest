@@ -77,12 +77,10 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
-    public ServiceResponse<Error> head501() throws ErrorException, IOException {
-        return head501Async().toBlocking().single();
+    public Error head501() {
+        return head501WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -92,7 +90,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> head501Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(head501Async(), serviceCallback);
+        return ServiceCall.create(head501WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -100,7 +98,21 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> head501Async() {
+    public Observable<Error> head501Async() {
+        return head501WithServiceResponseAsync().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 501 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> head501WithServiceResponseAsync() {
         return service.head501()
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -124,12 +136,10 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
-    public ServiceResponse<Error> get501() throws ErrorException, IOException {
-        return get501Async().toBlocking().single();
+    public Error get501() {
+        return get501WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -139,7 +149,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get501Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(get501Async(), serviceCallback);
+        return ServiceCall.create(get501WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -147,7 +157,21 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> get501Async() {
+    public Observable<Error> get501Async() {
+        return get501WithServiceResponseAsync().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 501 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> get501WithServiceResponseAsync() {
         return service.get501()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -171,12 +195,10 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
-    public ServiceResponse<Error> post505() throws ErrorException, IOException {
-        return post505Async().toBlocking().single();
+    public Error post505() {
+        return post505WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -186,7 +208,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post505Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post505Async(), serviceCallback);
+        return ServiceCall.create(post505WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -194,7 +216,21 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> post505Async() {
+    public Observable<Error> post505Async() {
+        return post505WithServiceResponseAsync().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> post505WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.post505(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
@@ -214,12 +250,10 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
-    public ServiceResponse<Error> post505(Boolean booleanValue) throws ErrorException, IOException {
-        return post505Async(booleanValue).toBlocking().single();
+    public Error post505(Boolean booleanValue) {
+        return post505WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -230,7 +264,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post505Async(booleanValue), serviceCallback);
+        return ServiceCall.create(post505WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -239,7 +273,22 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> post505Async(Boolean booleanValue) {
+    public Observable<Error> post505Async(Boolean booleanValue) {
+        return post505WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> post505WithServiceResponseAsync(Boolean booleanValue) {
         return service.post505(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -263,12 +312,10 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
-    public ServiceResponse<Error> delete505() throws ErrorException, IOException {
-        return delete505Async().toBlocking().single();
+    public Error delete505() {
+        return delete505WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -278,7 +325,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete505Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete505Async(), serviceCallback);
+        return ServiceCall.create(delete505WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -286,7 +333,21 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> delete505Async() {
+    public Observable<Error> delete505Async() {
+        return delete505WithServiceResponseAsync().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> delete505WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete505(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
@@ -306,12 +367,10 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
-    public ServiceResponse<Error> delete505(Boolean booleanValue) throws ErrorException, IOException {
-        return delete505Async(booleanValue).toBlocking().single();
+    public Error delete505(Boolean booleanValue) {
+        return delete505WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -322,7 +381,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete505Async(booleanValue), serviceCallback);
+        return ServiceCall.create(delete505WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -331,7 +390,22 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> delete505Async(Boolean booleanValue) {
+    public Observable<Error> delete505Async(Boolean booleanValue) {
+        return delete505WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> delete505WithServiceResponseAsync(Boolean booleanValue) {
         return service.delete505(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override

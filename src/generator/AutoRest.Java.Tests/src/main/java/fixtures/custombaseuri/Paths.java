@@ -13,8 +13,6 @@ package fixtures.custombaseuri;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.custombaseuri.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -26,12 +24,8 @@ public interface Paths {
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getEmpty(String accountName) throws ErrorException, IOException, IllegalArgumentException;
+    void getEmpty(String accountName);
 
     /**
      * Get a 200 to test a valid base uri.
@@ -48,6 +42,14 @@ public interface Paths {
      * @param accountName Account Name
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getEmptyAsync(String accountName);
+    Observable<Void> getEmptyAsync(String accountName);
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param accountName Account Name
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String accountName);
 
 }

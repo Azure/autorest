@@ -1,7 +1,5 @@
 package fixtures.azureparametergrouping;
 
-import com.microsoft.rest.ServiceResponse;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -27,7 +25,7 @@ public class ParameterGroupingTests {
         params.withPath("path");
         params.withQuery(21);
         params.withCustomHeader("header");
-        ServiceResponse<Void> group = client.parameterGroupings().postRequired(params);
+        client.parameterGroupings().postRequired(params);
     }
 
     @Test
@@ -35,7 +33,7 @@ public class ParameterGroupingTests {
         ParameterGroupingPostOptionalParametersInner params = new ParameterGroupingPostOptionalParametersInner();
         params.withQuery(21);
         params.withCustomHeader("header");
-        ServiceResponse<Void> group = client.parameterGroupings().postOptional(params);
+        client.parameterGroupings().postOptional(params);
     }
 
     @Test
@@ -46,7 +44,7 @@ public class ParameterGroupingTests {
         ParameterGroupingPostMultiParamGroupsSecondParamGroupInner second = new ParameterGroupingPostMultiParamGroupsSecondParamGroupInner();
         second.withHeaderTwo("header2");
         second.withQueryTwo(42);
-        ServiceResponse<Void> group = client.parameterGroupings().postMultiParamGroups(first, second);
+        client.parameterGroupings().postMultiParamGroups(first, second);
     }
 
     @Test
@@ -54,6 +52,6 @@ public class ParameterGroupingTests {
         FirstParameterGroupInner first = new FirstParameterGroupInner();
         first.withQueryOne(21);
         first.withHeaderOne("header");
-        ServiceResponse<Void> group = client.parameterGroupings().postSharedParameterGroupObject(first);
+        client.parameterGroupings().postSharedParameterGroupObject(first);
     }
 }

@@ -38,7 +38,7 @@ To start working on the gem the only additional dev dependecy is required - rspe
 Reference it in the gemfile and also add this line to your client's gemspec file:
 
 ```ruby
-spec.add_runtime_dependency 'ms_rest_azure', '~> 0.4.0'
+spec.add_runtime_dependency 'ms_rest_azure', '~> 0.5.0'
 ```
 
 Don't forget to correct the version.

@@ -88,13 +88,9 @@ public final class SkipUrlEncodingsInner {
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getMethodPathValid(String unencodedPathParam) throws ErrorException, IOException, IllegalArgumentException {
-        return getMethodPathValidAsync(unencodedPathParam).toBlocking().single();
+    public void getMethodPathValid(String unencodedPathParam) {
+        getMethodPathValidWithServiceResponseAsync(unencodedPathParam).toBlocking().single().getBody();
     }
 
     /**
@@ -105,7 +101,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodPathValidAsync(unencodedPathParam), serviceCallback);
+        return ServiceCall.create(getMethodPathValidWithServiceResponseAsync(unencodedPathParam), serviceCallback);
     }
 
     /**
@@ -114,7 +110,22 @@ public final class SkipUrlEncodingsInner {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getMethodPathValidAsync(String unencodedPathParam) {
+    public Observable<Void> getMethodPathValidAsync(String unencodedPathParam) {
+        return getMethodPathValidWithServiceResponseAsync(unencodedPathParam).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getMethodPathValidWithServiceResponseAsync(String unencodedPathParam) {
         if (unencodedPathParam == null) {
             throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
@@ -143,13 +154,9 @@ public final class SkipUrlEncodingsInner {
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getPathPathValid(String unencodedPathParam) throws ErrorException, IOException, IllegalArgumentException {
-        return getPathPathValidAsync(unencodedPathParam).toBlocking().single();
+    public void getPathPathValid(String unencodedPathParam) {
+        getPathPathValidWithServiceResponseAsync(unencodedPathParam).toBlocking().single().getBody();
     }
 
     /**
@@ -160,7 +167,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getPathPathValidAsync(unencodedPathParam), serviceCallback);
+        return ServiceCall.create(getPathPathValidWithServiceResponseAsync(unencodedPathParam), serviceCallback);
     }
 
     /**
@@ -169,7 +176,22 @@ public final class SkipUrlEncodingsInner {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getPathPathValidAsync(String unencodedPathParam) {
+    public Observable<Void> getPathPathValidAsync(String unencodedPathParam) {
+        return getPathPathValidWithServiceResponseAsync(unencodedPathParam).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getPathPathValidWithServiceResponseAsync(String unencodedPathParam) {
         if (unencodedPathParam == null) {
             throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
@@ -197,12 +219,9 @@ public final class SkipUrlEncodingsInner {
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getSwaggerPathValid() throws ErrorException, IOException {
-        return getSwaggerPathValidAsync().toBlocking().single();
+    public void getSwaggerPathValid() {
+        getSwaggerPathValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -212,7 +231,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerPathValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getSwaggerPathValidAsync(), serviceCallback);
+        return ServiceCall.create(getSwaggerPathValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -220,7 +239,21 @@ public final class SkipUrlEncodingsInner {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getSwaggerPathValidAsync() {
+    public Observable<Void> getSwaggerPathValidAsync() {
+        return getSwaggerPathValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getSwaggerPathValidWithServiceResponseAsync() {
         final String unencodedPathParam = "path1/path2/path3";
         return service.getSwaggerPathValid(unencodedPathParam, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -247,13 +280,9 @@ public final class SkipUrlEncodingsInner {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getMethodQueryValid(String q1) throws ErrorException, IOException, IllegalArgumentException {
-        return getMethodQueryValidAsync(q1).toBlocking().single();
+    public void getMethodQueryValid(String q1) {
+        getMethodQueryValidWithServiceResponseAsync(q1).toBlocking().single().getBody();
     }
 
     /**
@@ -264,7 +293,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodQueryValidAsync(q1), serviceCallback);
+        return ServiceCall.create(getMethodQueryValidWithServiceResponseAsync(q1), serviceCallback);
     }
 
     /**
@@ -273,7 +302,22 @@ public final class SkipUrlEncodingsInner {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getMethodQueryValidAsync(String q1) {
+    public Observable<Void> getMethodQueryValidAsync(String q1) {
+        return getMethodQueryValidWithServiceResponseAsync(q1).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getMethodQueryValidWithServiceResponseAsync(String q1) {
         if (q1 == null) {
             throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
@@ -301,12 +345,9 @@ public final class SkipUrlEncodingsInner {
     /**
      * Get method with unencoded query parameter with value null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getMethodQueryNull() throws ErrorException, IOException {
-        return getMethodQueryNullAsync().toBlocking().single();
+    public void getMethodQueryNull() {
+        getMethodQueryNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -316,7 +357,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodQueryNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodQueryNullAsync(), serviceCallback);
+        return ServiceCall.create(getMethodQueryNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -324,7 +365,21 @@ public final class SkipUrlEncodingsInner {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getMethodQueryNullAsync() {
+    public Observable<Void> getMethodQueryNullAsync() {
+        return getMethodQueryNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get method with unencoded query parameter with value null.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getMethodQueryNullWithServiceResponseAsync() {
         final String q1 = null;
         return service.getMethodQueryNull(q1, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -344,12 +399,9 @@ public final class SkipUrlEncodingsInner {
      * Get method with unencoded query parameter with value null.
      *
      * @param q1 Unencoded query parameter with value null
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getMethodQueryNull(String q1) throws ErrorException, IOException {
-        return getMethodQueryNullAsync(q1).toBlocking().single();
+    public void getMethodQueryNull(String q1) {
+        getMethodQueryNullWithServiceResponseAsync(q1).toBlocking().single().getBody();
     }
 
     /**
@@ -360,7 +412,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodQueryNullAsync(q1), serviceCallback);
+        return ServiceCall.create(getMethodQueryNullWithServiceResponseAsync(q1), serviceCallback);
     }
 
     /**
@@ -369,7 +421,22 @@ public final class SkipUrlEncodingsInner {
      * @param q1 Unencoded query parameter with value null
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getMethodQueryNullAsync(String q1) {
+    public Observable<Void> getMethodQueryNullAsync(String q1) {
+        return getMethodQueryNullWithServiceResponseAsync(q1).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get method with unencoded query parameter with value null.
+     *
+     * @param q1 Unencoded query parameter with value null
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getMethodQueryNullWithServiceResponseAsync(String q1) {
         return service.getMethodQueryNull(q1, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -395,13 +462,9 @@ public final class SkipUrlEncodingsInner {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getPathQueryValid(String q1) throws ErrorException, IOException, IllegalArgumentException {
-        return getPathQueryValidAsync(q1).toBlocking().single();
+    public void getPathQueryValid(String q1) {
+        getPathQueryValidWithServiceResponseAsync(q1).toBlocking().single().getBody();
     }
 
     /**
@@ -412,7 +475,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getPathQueryValidAsync(q1), serviceCallback);
+        return ServiceCall.create(getPathQueryValidWithServiceResponseAsync(q1), serviceCallback);
     }
 
     /**
@@ -421,7 +484,22 @@ public final class SkipUrlEncodingsInner {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getPathQueryValidAsync(String q1) {
+    public Observable<Void> getPathQueryValidAsync(String q1) {
+        return getPathQueryValidWithServiceResponseAsync(q1).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getPathQueryValidWithServiceResponseAsync(String q1) {
         if (q1 == null) {
             throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
@@ -449,12 +527,9 @@ public final class SkipUrlEncodingsInner {
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getSwaggerQueryValid() throws ErrorException, IOException {
-        return getSwaggerQueryValidAsync().toBlocking().single();
+    public void getSwaggerQueryValid() {
+        getSwaggerQueryValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -464,7 +539,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerQueryValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getSwaggerQueryValidAsync(), serviceCallback);
+        return ServiceCall.create(getSwaggerQueryValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -472,7 +547,21 @@ public final class SkipUrlEncodingsInner {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getSwaggerQueryValidAsync() {
+    public Observable<Void> getSwaggerQueryValidAsync() {
+        return getSwaggerQueryValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getSwaggerQueryValidWithServiceResponseAsync() {
         final String q1 = "value1&q2=value2&q3=value3";
         return service.getSwaggerQueryValid(q1, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {

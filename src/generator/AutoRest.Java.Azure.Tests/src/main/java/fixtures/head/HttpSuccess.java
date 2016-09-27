@@ -10,11 +10,9 @@
 
 package fixtures.head;
 
-import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -25,11 +23,9 @@ public interface HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
-    ServiceResponse<Boolean> head200() throws CloudException, IOException;
+    boolean head200();
 
     /**
      * Return 200 status code if successful.
@@ -44,16 +40,21 @@ public interface HttpSuccess {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> head200Async();
+    Observable<Boolean> head200Async();
+
+    /**
+     * Return 200 status code if successful.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> head200WithServiceResponseAsync();
 
     /**
      * Return 204 status code if successful.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
-    ServiceResponse<Boolean> head204() throws CloudException, IOException;
+    boolean head204();
 
     /**
      * Return 204 status code if successful.
@@ -68,16 +69,21 @@ public interface HttpSuccess {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> head204Async();
+    Observable<Boolean> head204Async();
+
+    /**
+     * Return 204 status code if successful.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> head204WithServiceResponseAsync();
 
     /**
      * Return 404 status code if successful.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
-    ServiceResponse<Boolean> head404() throws CloudException, IOException;
+    boolean head404();
 
     /**
      * Return 404 status code if successful.
@@ -92,6 +98,13 @@ public interface HttpSuccess {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> head404Async();
+    Observable<Boolean> head404Async();
+
+    /**
+     * Return 404 status code if successful.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> head404WithServiceResponseAsync();
 
 }

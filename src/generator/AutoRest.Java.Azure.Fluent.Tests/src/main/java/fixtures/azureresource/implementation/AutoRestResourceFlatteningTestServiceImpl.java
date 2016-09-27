@@ -210,12 +210,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as an Array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putArray() throws ErrorException, IOException {
-        return putArrayAsync().toBlocking().single();
+    public void putArray() {
+        putArrayWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -225,7 +222,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putArrayAsync(), serviceCallback);
+        return ServiceCall.create(putArrayWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -233,7 +230,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putArrayAsync() {
+    public Observable<Void> putArrayAsync() {
+        return putArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync() {
         final List<ResourceInner> resourceArray = null;
         return service.putArray(resourceArray, this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -253,12 +264,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putArray(List<ResourceInner> resourceArray) throws ErrorException, IOException {
-        return putArrayAsync(resourceArray).toBlocking().single();
+    public void putArray(List<ResourceInner> resourceArray) {
+        putArrayWithServiceResponseAsync(resourceArray).toBlocking().single().getBody();
     }
 
     /**
@@ -269,7 +277,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putArrayAsync(List<ResourceInner> resourceArray, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putArrayAsync(resourceArray), serviceCallback);
+        return ServiceCall.create(putArrayWithServiceResponseAsync(resourceArray), serviceCallback);
     }
 
     /**
@@ -278,7 +286,22 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param resourceArray External Resource as an Array to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putArrayAsync(List<ResourceInner> resourceArray) {
+    public Observable<Void> putArrayAsync(List<ResourceInner> resourceArray) {
+        return putArrayWithServiceResponseAsync(resourceArray).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param resourceArray External Resource as an Array to put
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(List<ResourceInner> resourceArray) {
         Validator.validate(resourceArray);
         return service.putArray(resourceArray, this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -304,12 +327,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Get External Resource as an Array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;FlattenedProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;FlattenedProductInner&gt; object if successful.
      */
-    public ServiceResponse<List<FlattenedProductInner>> getArray() throws ErrorException, IOException {
-        return getArrayAsync().toBlocking().single();
+    public List<FlattenedProductInner> getArray() {
+        return getArrayWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -319,7 +340,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<FlattenedProductInner>> getArrayAsync(final ServiceCallback<List<FlattenedProductInner>> serviceCallback) {
-        return ServiceCall.create(getArrayAsync(), serviceCallback);
+        return ServiceCall.create(getArrayWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -327,7 +348,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @return the observable to the List&lt;FlattenedProductInner&gt; object
      */
-    public Observable<ServiceResponse<List<FlattenedProductInner>>> getArrayAsync() {
+    public Observable<List<FlattenedProductInner>> getArrayAsync() {
+        return getArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<List<FlattenedProductInner>>, List<FlattenedProductInner>>() {
+            @Override
+            public List<FlattenedProductInner> call(ServiceResponse<List<FlattenedProductInner>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get External Resource as an Array.
+     *
+     * @return the observable to the List&lt;FlattenedProductInner&gt; object
+     */
+    public Observable<ServiceResponse<List<FlattenedProductInner>>> getArrayWithServiceResponseAsync() {
         return service.getArray(this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<FlattenedProductInner>>>>() {
                 @Override
@@ -352,12 +387,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as a Dictionary.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDictionary() throws ErrorException, IOException {
-        return putDictionaryAsync().toBlocking().single();
+    public void putDictionary() {
+        putDictionaryWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -367,7 +399,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDictionaryAsync(), serviceCallback);
+        return ServiceCall.create(putDictionaryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -375,7 +407,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDictionaryAsync() {
+    public Observable<Void> putDictionaryAsync() {
+        return putDictionaryWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync() {
         final Map<String, FlattenedProductInner> resourceDictionary = null;
         return service.putDictionary(resourceDictionary, this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -395,12 +441,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDictionary(Map<String, FlattenedProductInner> resourceDictionary) throws ErrorException, IOException {
-        return putDictionaryAsync(resourceDictionary).toBlocking().single();
+    public void putDictionary(Map<String, FlattenedProductInner> resourceDictionary) {
+        putDictionaryWithServiceResponseAsync(resourceDictionary).toBlocking().single().getBody();
     }
 
     /**
@@ -411,7 +454,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDictionaryAsync(resourceDictionary), serviceCallback);
+        return ServiceCall.create(putDictionaryWithServiceResponseAsync(resourceDictionary), serviceCallback);
     }
 
     /**
@@ -420,7 +463,22 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param resourceDictionary External Resource as a Dictionary to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary) {
+    public Observable<Void> putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary) {
+        return putDictionaryWithServiceResponseAsync(resourceDictionary).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @param resourceDictionary External Resource as a Dictionary to put
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync(Map<String, FlattenedProductInner> resourceDictionary) {
         Validator.validate(resourceDictionary);
         return service.putDictionary(resourceDictionary, this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -446,12 +504,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Get External Resource as a Dictionary.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, FlattenedProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, FlattenedProductInner&gt; object if successful.
      */
-    public ServiceResponse<Map<String, FlattenedProductInner>> getDictionary() throws ErrorException, IOException {
-        return getDictionaryAsync().toBlocking().single();
+    public Map<String, FlattenedProductInner> getDictionary() {
+        return getDictionaryWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -461,7 +517,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, FlattenedProductInner>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProductInner>> serviceCallback) {
-        return ServiceCall.create(getDictionaryAsync(), serviceCallback);
+        return ServiceCall.create(getDictionaryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -469,7 +525,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @return the observable to the Map&lt;String, FlattenedProductInner&gt; object
      */
-    public Observable<ServiceResponse<Map<String, FlattenedProductInner>>> getDictionaryAsync() {
+    public Observable<Map<String, FlattenedProductInner>> getDictionaryAsync() {
+        return getDictionaryWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, FlattenedProductInner>>, Map<String, FlattenedProductInner>>() {
+            @Override
+            public Map<String, FlattenedProductInner> call(ServiceResponse<Map<String, FlattenedProductInner>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get External Resource as a Dictionary.
+     *
+     * @return the observable to the Map&lt;String, FlattenedProductInner&gt; object
+     */
+    public Observable<ServiceResponse<Map<String, FlattenedProductInner>>> getDictionaryWithServiceResponseAsync() {
         return service.getDictionary(this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, FlattenedProductInner>>>>() {
                 @Override
@@ -494,12 +564,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putResourceCollection() throws ErrorException, IOException {
-        return putResourceCollectionAsync().toBlocking().single();
+    public void putResourceCollection() {
+        putResourceCollectionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -509,7 +576,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putResourceCollectionAsync(), serviceCallback);
+        return ServiceCall.create(putResourceCollectionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -517,7 +584,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putResourceCollectionAsync() {
+    public Observable<Void> putResourceCollectionAsync() {
+        return putResourceCollectionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync() {
         final ResourceCollectionInner resourceComplexObject = null;
         return service.putResourceCollection(resourceComplexObject, this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -537,12 +618,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putResourceCollection(ResourceCollectionInner resourceComplexObject) throws ErrorException, IOException {
-        return putResourceCollectionAsync(resourceComplexObject).toBlocking().single();
+    public void putResourceCollection(ResourceCollectionInner resourceComplexObject) {
+        putResourceCollectionWithServiceResponseAsync(resourceComplexObject).toBlocking().single().getBody();
     }
 
     /**
@@ -553,7 +631,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putResourceCollectionAsync(resourceComplexObject), serviceCallback);
+        return ServiceCall.create(putResourceCollectionWithServiceResponseAsync(resourceComplexObject), serviceCallback);
     }
 
     /**
@@ -562,7 +640,22 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject) {
+    public Observable<Void> putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject) {
+        return putResourceCollectionWithServiceResponseAsync(resourceComplexObject).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @param resourceComplexObject External Resource as a ResourceCollection to put
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync(ResourceCollectionInner resourceComplexObject) {
         Validator.validate(resourceComplexObject);
         return service.putResourceCollection(resourceComplexObject, this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -588,12 +681,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the ResourceCollectionInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the ResourceCollectionInner object if successful.
      */
-    public ServiceResponse<ResourceCollectionInner> getResourceCollection() throws ErrorException, IOException {
-        return getResourceCollectionAsync().toBlocking().single();
+    public ResourceCollectionInner getResourceCollection() {
+        return getResourceCollectionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -603,7 +694,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ResourceCollectionInner> getResourceCollectionAsync(final ServiceCallback<ResourceCollectionInner> serviceCallback) {
-        return ServiceCall.create(getResourceCollectionAsync(), serviceCallback);
+        return ServiceCall.create(getResourceCollectionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -611,7 +702,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @return the observable to the ResourceCollectionInner object
      */
-    public Observable<ServiceResponse<ResourceCollectionInner>> getResourceCollectionAsync() {
+    public Observable<ResourceCollectionInner> getResourceCollectionAsync() {
+        return getResourceCollectionWithServiceResponseAsync().map(new Func1<ServiceResponse<ResourceCollectionInner>, ResourceCollectionInner>() {
+            @Override
+            public ResourceCollectionInner call(ServiceResponse<ResourceCollectionInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get External Resource as a ResourceCollection.
+     *
+     * @return the observable to the ResourceCollectionInner object
+     */
+    public Observable<ServiceResponse<ResourceCollectionInner>> getResourceCollectionWithServiceResponseAsync() {
         return service.getResourceCollection(this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ResourceCollectionInner>>>() {
                 @Override
