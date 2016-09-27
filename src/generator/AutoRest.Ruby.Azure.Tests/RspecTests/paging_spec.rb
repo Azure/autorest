@@ -15,6 +15,9 @@ describe 'Paging' do
     @credentials = MsRest::TokenCredentials.new(dummyToken)
 
     @client = AutoRestPagingTestService.new(@credentials, @base_url)
+
+    @tenant = 'test_user'
+    @api_version = '1.6'
   end
 
   # Paging happy path tests
@@ -130,7 +133,7 @@ describe 'Paging' do
   end
 
   it 'should get multiple pages with fragmented next link - lazy' do
-    page = @client.paging.get_multiple_pages_fragment_next_link_as_lazy('1.6', 'test_user')
+    page = @client.paging.get_multiple_pages_fragment_next_link_as_lazy(@api_version, @tenant)
     expect(page.is_a? PagingModule::Models::ProductResult)
     expect(page.odatanext_link).not_to be_nil
 
@@ -139,7 +142,7 @@ describe 'Paging' do
   end
 
   it 'should get multiple pages with fragmented next link' do
-    all_item = @client.paging.get_multiple_pages_fragment_next_link('1.6', 'test_user')
+    all_item = @client.paging.get_multiple_pages_fragment_next_link(@api_version, @tenant)
     expect(all_item[0].is_a? PagingModule::Models::ProductResult)
     expect(all_item.count).to eq(10)
   end
