@@ -95,7 +95,8 @@ namespace AutoRest.Go
         }
 
         /// <summary>
-        /// This method checks if MethodGroupName is plural of package name.
+        /// This method checks if MethodGroupName is plural of package name. 
+        /// It returns false for packages not listed in dictionary 'plural'.
         /// Example, group EventHubs in package EventHub.
         /// </summary>
         /// <param name="value"></param>
