@@ -31,7 +31,7 @@ module MsRestAzure
         unless @body.nil?
           @error_message = @body['error']['message']
           @error_code = @body['error']['code']
-          @msg = "#{@msg}: #{@error_message}"
+          @msg = "#{@msg}: #{@error_code}: #{@error_message}"
         end
       rescue
       end
