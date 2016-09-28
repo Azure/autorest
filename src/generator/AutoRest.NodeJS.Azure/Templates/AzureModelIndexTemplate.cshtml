@@ -17,7 +17,7 @@ exports.BaseResource = msRestAzure.BaseResource;
 exports.CloudError = msRestAzure.CloudError;
 @foreach (var model in Model.OrderedModelTemplateModels)
 {
-@:exports.@model.Name = require('./@model.Name.ToCamelCase()');
+@:exports.@model.Name = require('./@model.NameAsFileName.ToCamelCase()');
 }
 @if (!string.IsNullOrWhiteSpace(Model.PolymorphicDictionary))
 {

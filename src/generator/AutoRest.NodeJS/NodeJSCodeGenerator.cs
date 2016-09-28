@@ -82,7 +82,7 @@ namespace AutoRest.NodeJS
                 foreach (var modelType in codeModel.ModelTemplateModels)
                 {
                     var modelTemplate = new ModelTemplate {Model = modelType};
-                    await Write(modelTemplate, Path.Combine("models", modelType.Name.ToCamelCase() + ".js"));
+                    await Write(modelTemplate, Path.Combine("models", modelType.NameAsFileName.ToCamelCase() + ".js"));
                 }
             }
 

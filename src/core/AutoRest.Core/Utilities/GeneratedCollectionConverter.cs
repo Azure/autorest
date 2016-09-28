@@ -70,23 +70,10 @@ namespace AutoRest.Core.Utilities
                                 each["$ref"] != null
                                     ? serializer.ResolveReference<T>(each["$ref"].Value<string>())
                                     : each.ToObject<T>(serializer)));
-                
-/*
-                foreach (var i in JArray.Load(reader))
-                {
-                    if (i["$ref"] != null)
-                    {
-                        
-                        o.AddMethod(serializer.ResolveReference<T>(i["$ref"].Value<string>()));
-                        continue;
-                    }
-                    o.AddMethod(i.ToObject<T>(serializer));
-                }
-*/
             }
             else
             {
-                Debugger.Break();
+                throw new Exception("Invalid state of deserialization. Can not continue.");
             }
             return existingValue;
         }

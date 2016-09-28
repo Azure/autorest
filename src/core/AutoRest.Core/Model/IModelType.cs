@@ -17,6 +17,7 @@ namespace AutoRest.Core.Model
     /// <summary>
     /// Defines an interface for client model types.
     /// </summary>
+    [JsonObject(IsReference = true)]
     public interface IModelType : IParent, IChild
     {
         /// <summary>
@@ -112,7 +113,8 @@ namespace AutoRest.Core.Model
                 }
             }
         }
-        public virtual HashSet<string> LocallyUsedNames => null;
+        public virtual HashSet<string> LocallyUsedNames { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
         public IParent Parent => CodeModel;
 
         public virtual void Disambiguate()

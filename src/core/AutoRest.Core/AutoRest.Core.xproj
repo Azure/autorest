@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0.25402" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
@@ -15,6 +15,9 @@
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)tools\Autorest.xproj.targets"/>
-  <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets"  Condition="Exists('$(VSToolsPath)\DotNet\Microsoft.DotNet.targets')" />
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)tools\Autorest.xproj.targets" />
+  <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets" Condition="Exists('$(VSToolsPath)\DotNet\Microsoft.DotNet.targets')" />
 </Project>

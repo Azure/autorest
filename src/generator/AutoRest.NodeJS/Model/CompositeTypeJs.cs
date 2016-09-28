@@ -15,8 +15,9 @@ namespace AutoRest.NodeJS.Model
     {
         public CompositeTypeJs()
         {
-            
+
         }
+
         public CompositeTypeJs(string name) : base(name)
         {
 
@@ -31,6 +32,8 @@ namespace AutoRest.NodeJS.Model
             }
             return result;
         }
+
+        public string NameAsFileName => Name.EqualsIgnoreCase("index") ? "IndexModelType" : (string)Name;
 
         /// <summary>
         /// Gets or sets the discriminator property for polymorphic types.
@@ -218,7 +221,7 @@ namespace AutoRest.NodeJS.Model
         {
             if (property == null) 
             {
-                throw new ArgumentNullException("property");
+                throw new ArgumentNullException(nameof(property));
             }
 
             string typeString = property.ModelType.TSType(inModelsModule);
@@ -246,21 +249,10 @@ namespace AutoRest.NodeJS.Model
         {
             if (property == null)
             {
-                throw new ArgumentNullException("property");
+                throw new ArgumentNullException(nameof(property));
             }
 
-            // todo gs/az : this implicitly trims out the dot. sometimes that's not what we want.
-            // how do we fix this.
-
-            if (property.IsRequired)
-            {
-                
-                return property.Name;
-            }
-            else
-            {
-                return string.Format(CultureInfo.InvariantCulture, "[{0}]", property.Name);
-            }
+            return property.IsRequired ? (string) property.Name : $"[{property.Name}]";
         }
 
         /// <summary>
@@ -273,7 +265,7 @@ namespace AutoRest.NodeJS.Model
         {
             if (property == null)
             {
-                throw new ArgumentNullException("property");
+                throw new ArgumentNullException(nameof(property));
             }
 
             return property.DefaultValue.IsNullOrEmpty() ?
@@ -308,7 +300,7 @@ namespace AutoRest.NodeJS.Model
         {
             if (property == null)
             {
-                throw new ArgumentNullException("property");
+                throw new ArgumentNullException(nameof(property));
             }
             string typeName = "object";
             if (property.ModelType is PrimaryTypeJs)

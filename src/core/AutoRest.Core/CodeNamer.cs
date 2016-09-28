@@ -407,7 +407,7 @@ namespace AutoRest.Core
         /// <param name="name">String to parse.</param>
         /// <param name="allowedCharacters">Allowed characters.</param>
         /// <returns>Name with invalid characters removed.</returns>
-        protected virtual string GetValidName(string name, params char[] allowedCharacters)
+        public virtual string GetValidName(string name, params char[] allowedCharacters)
         {
             var correctName = RemoveInvalidCharacters(name, allowedCharacters);
 
@@ -480,7 +480,7 @@ namespace AutoRest.Core
             return name;
         }
 
-        public virtual string IsNameLegal(string desiredName)
+        public virtual string IsNameLegal(string desiredName, IIdentifier whoIsAsking)
         {
             if (string.IsNullOrWhiteSpace(desiredName))
             {
@@ -516,14 +516,23 @@ namespace AutoRest.Core
                 return desiredName;
             }
 
+            // special case: properties can actually have the same name as a composite type 
+            // as long as that type is not the parent class of the property itself.
             if (whoIsAsking is Property)
             {
                 reservedNames = reservedNames.Where(each => !(each is CompositeType));
+
+                var parent = (whoIsAsking as IChild)?.Parent as IIdentifier;
+                if (parent != null)
+                {
+                    reservedNames = reservedNames.ConcatSingleItem(parent);
+                }
             }
-             
+            
+
             // is this a legal name? -- add a Qualifier Suffix (ie, Method/Model/Property/etc)
             string conflict;
-            while ((conflict = IsNameLegal(desiredName)) != null)
+            while ((conflict = IsNameLegal(desiredName, whoIsAsking)) != null)
             {
                 desiredName += whoIsAsking.Qualifier;
                 // todo: gws: log the name change because it conflicted with a reserved word.
@@ -539,8 +548,6 @@ namespace AutoRest.Core
                 desiredName += whoIsAsking.Qualifier;
                 // todo: gws: log the name change because there was something else named that.
                 // Singleton<Log>.Instance?.Add(new Message {Text = $"todo:{confl}"});
-
-                
                 // reason = string.Format(CultureInfo.InvariantCulture, Resources.NamespaceConflictReasonMessage,desiredName, ...?
             }
 

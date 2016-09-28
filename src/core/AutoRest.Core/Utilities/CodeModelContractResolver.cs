@@ -12,6 +12,7 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using YamlDotNet.Serialization.TypeInspectors;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core.Utilities
@@ -147,6 +148,12 @@ namespace AutoRest.Core.Utilities
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
             var property = base.CreateProperty(member, memberSerialization);
+
+            if (typeof(IModelType).IsAssignableFrom(property.PropertyType) || property.PropertyType.IsGenericOf(typeof(IEnumerableWithIndex<>)))
+            {
+                property.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
+                property.IsReference = true;
+            }
 
             // if the property is marked as a JsonObject, it should never be treated as a collection
             // and hence, doesn't need our ShouldSerialize overload.

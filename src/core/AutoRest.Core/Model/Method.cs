@@ -30,7 +30,6 @@ namespace AutoRest.Core.Model
         public string QualifierType => "Method";
 
         [JsonIgnore]
-        [NoCopy]
         public MethodGroup MethodGroup
         {
             get { return _parent; }
@@ -58,7 +57,6 @@ namespace AutoRest.Core.Model
         }
 
         [JsonIgnore]
-        [NoCopy]
         public IParent Parent => MethodGroup;
 
         /// <summary>

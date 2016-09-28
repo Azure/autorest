@@ -7,9 +7,11 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using AutoRest.Core.Model;
+using Newtonsoft.Json;
 
 namespace AutoRest.Core.Utilities.Collections
 {
+    [JsonObject(IsReference = true)]
     public class ListEx<T> : IEnumerableWithIndex<T>, ICopyFrom<IEnumerable<T>>
     {
         private readonly List<T> _list = new List<T>();

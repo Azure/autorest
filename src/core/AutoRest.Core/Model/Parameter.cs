@@ -42,7 +42,6 @@ namespace AutoRest.Core.Model
         /// The method that this parameter belongs to.
         /// </summary>
         [JsonIgnore]
-        [NoCopy]
         public Method Method { get; set; }
 
         /// <summary>

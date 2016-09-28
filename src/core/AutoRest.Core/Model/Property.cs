@@ -12,6 +12,7 @@ namespace AutoRest.Core.Model
     /// <summary>
     ///     Defines model properties.
     /// </summary>
+    [JsonObject(IsReference = true)]
     public class Property : IVariable
     {
         [JsonExtensionData]

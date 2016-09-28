@@ -178,7 +178,7 @@ namespace AutoRest.Core.Utilities
             {
                 
                 // skip items we've explicitly said not to copy.
-                if (destinationProperty.IsMarked<NoCopyAttribute>() || destinationProperty.IsMarked<JsonIgnoreAttribute>())
+                if ( destinationProperty.IsMarked<JsonIgnoreAttribute>())
                 {
                     continue;
                 }

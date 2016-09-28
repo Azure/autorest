@@ -12,62 +12,6 @@ using Newtonsoft.Json;
 
 namespace AutoRest.Core.Model
 {
-
-    public interface IIdentifier
-    {
-        /// <summary>
-        /// The text to use for the type of this identifier when qualifying it further
-        /// (ie, 'Model', 'Property', 'Operations' ...)
-        /// </summary>
-        [JsonIgnore]
-        string Qualifier {get;}
-
-        /// <summary>
-        /// The natural language type of this Identifier
-        /// (ie "Client Name" , "Client Operation" ...etc)
-        /// </summary>
-        [JsonIgnore]
-        string QualifierType { get; }
-
-        /// <summary>
-        /// Returns the list of names that this element is reserving
-        /// (most of the time, this is just 'this.Name' )
-        /// </summary>
-        [JsonIgnore]
-        IEnumerable<string> MyReservedNames { get; }
-
-        [JsonIgnore]
-        HashSet<string> LocallyUsedNames { get; }
-    }
-
-    public interface IParent
-    {
-        /// <summary>
-        /// Reference to the container of this type.
-        /// </summary>
-        [JsonIgnore][NoCopy]
-        CodeModel CodeModel { get; }
-
-        /// <summary>
-        /// Returns the list of IIdentifiers that are used in this scope 
-        /// and in any parent's scope.
-        /// </summary>
-        [JsonIgnore][NoCopy]
-        IEnumerable<IIdentifier> IdentifiersInScope { get; }
-
-        [JsonIgnore][NoCopy]
-        IEnumerable<IChild> Children { get; }
-
-    }
-    public interface IChild : IIdentifier
-    {
-        [JsonIgnore]
-        IParent Parent { get; }
-
-        void Disambiguate();
-
-    }
-
     [JsonObject(IsReference = true)]
     public abstract class IVariable : IChild
     {

@@ -48,7 +48,7 @@ namespace AutoRest.NodeJS
                 new Factory<DictionaryType, DictionaryTypeJs>(),
                 new Factory<SequenceType, SequenceTypeJs>(),
                 new Factory<MethodGroup, MethodGroupJs>(),
-                 new Factory<EnumType, EnumType>(),
+                new Factory<EnumType, EnumType>(),
                 new Factory<PrimaryType, PrimaryTypeJs>(),
 
             };
@@ -110,7 +110,7 @@ namespace AutoRest.NodeJS
         {
             if (client == null)
             {
-                throw new ArgumentNullException("client");
+                throw new ArgumentNullException(nameof(client));
             }
 
             foreach (var method in client.Methods)

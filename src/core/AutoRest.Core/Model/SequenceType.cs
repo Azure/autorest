@@ -2,12 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Globalization;
+using Newtonsoft.Json;
 
 namespace AutoRest.Core.Model
 {
     /// <summary>
     /// Defines a collection data type.
     /// </summary>
+    [JsonObject(IsReference = true)]
     public class SequenceType : ModelType
     {
         protected SequenceType()

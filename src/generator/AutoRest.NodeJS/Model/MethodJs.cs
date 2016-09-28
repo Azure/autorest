@@ -61,11 +61,6 @@ namespace AutoRest.NodeJS.Model
 
         public override Parameter Add(Parameter item)
         {
-          //  if (item.Name.EqualsIgnoreCase("pagingGetOdataMultiplePagesOptions"))
-            {
-//                Debugger.Break();
-            }
-
             var parameter = base.Add(item) as ParameterJs;
 
             if (parameter.IsLocal && !parameter.IsRequired)
@@ -372,7 +367,7 @@ namespace AutoRest.NodeJS.Model
         {
             if (parameter == null)
             {
-                throw new ArgumentNullException("parameter");
+                throw new ArgumentNullException(nameof(parameter));
             }
             if (parameter.IsRequired)
             {
@@ -389,7 +384,7 @@ namespace AutoRest.NodeJS.Model
         {
             if (parameter == null)
             {
-                throw new ArgumentNullException("parameter");
+                throw new ArgumentNullException(nameof(parameter));
             }
             string typeName = "object";
             if (parameter.ModelType is PrimaryTypeJs)
@@ -461,7 +456,7 @@ namespace AutoRest.NodeJS.Model
         {
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
             }
 
             var builder = new IndentedStringBuilder("  ");
@@ -563,7 +558,7 @@ namespace AutoRest.NodeJS.Model
         {
             if (builder == null)
             {
-                throw new ArgumentNullException("builder");
+                throw new ArgumentNullException(nameof(builder));
             }
 
             builder.AppendLine("var queryParameters = [];");
@@ -600,7 +595,7 @@ namespace AutoRest.NodeJS.Model
         {
             if (builder == null)
             {
-                throw new ArgumentNullException("builder");
+                throw new ArgumentNullException(nameof(builder));
             }
 
             foreach (var pathParameter in LogicalParameters.Where(p => p.Location == ParameterLocation.Path))
@@ -895,7 +890,7 @@ namespace AutoRest.NodeJS.Model
         {
             if (transformation == null)
             {
-                throw new ArgumentNullException("transformation");
+                throw new ArgumentNullException(nameof(transformation));
             }
             if (transformation.ParameterMappings.Count == 1)
             {

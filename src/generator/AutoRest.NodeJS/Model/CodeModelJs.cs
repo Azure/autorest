@@ -77,7 +77,7 @@ namespace AutoRest.NodeJS.Model
         {
             if (model == null)
             {
-                throw new ArgumentNullException("model");
+                throw new ArgumentNullException(nameof(model));
             }
 
             // BaseResource and CloudError are specified in the ClientRuntime. 

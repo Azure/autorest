@@ -3,14 +3,23 @@
 // 
 
 using System;
+using System.Collections.Generic;
 using AutoRest.Core;
 using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.NodeJS
 {
     public class NodeJsCodeNamer : CodeNamer
     {
+        private readonly HashSet<string> _propertyNameWhiteList = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "date",
+            "default",
+            "error",
+            "enum"
+        };
         /// <summary>
         ///     Initializes a new instance of CSharpCodeNamingFramework.
         /// </summary>
@@ -41,6 +50,16 @@ namespace AutoRest.NodeJS
 
         public override string GetEnumMemberName(string name) => CamelCase(name);
 
+        public override string IsNameLegal(string desiredName, IIdentifier whoIsAsking)
+        {
+            // error and date are ok property names. really, it's ok.
+            if (whoIsAsking is Property && _propertyNameWhiteList.Contains(desiredName)  )
+            {
+                return null;
+            }
+            return base.IsNameLegal(desiredName, whoIsAsking);
+        }
+
         /// <summary>
         /// Removes invalid characters from the name, underscore,
         /// period, and dash.
@@ -56,7 +75,16 @@ namespace AutoRest.NodeJS
         {
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            if (true == (type as EnumType)?.ModelAsString)
+            {
+                if (!defaultValue.IsNullOrEmpty())
+                {
+                    return Instance.QuoteValue(defaultValue, "'");
+                }
+                return defaultValue;
             }
 
             var primaryType = type as PrimaryType;

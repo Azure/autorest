@@ -108,7 +108,6 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets or sets the CompositeType documentation.
         /// </summary>
-        [BackingField(nameof(_documentation))]
         public string Documentation
         {
             get { return _documentation; }
@@ -204,22 +203,4 @@ namespace AutoRest.Core.Model
         [JsonIgnore]
         public override string QualifierType => "Model Type";
     }
-
-    
-    public class NoCopyAttribute : Attribute
-    {
-        public NoCopyAttribute()
-        {
-        }
-    }
-
-    public class BackingFieldAttribute : Attribute
-    {
-        public readonly string Name;
-        public BackingFieldAttribute(string propertyName)
-        {
-            Name = propertyName;
-        }
-    }
-
 }

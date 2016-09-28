@@ -1,21 +1,24 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
+// 
 
 using System.IO;
 using System.Linq;
 using AutoRest.Core;
-using AutoRest.CSharp;
 using AutoRest.Swagger;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 #if gws_uh_no_just_no
+// If we want to keep these tests, they really 
+// should be migrated to the language 
+// specific tests projects. 
+
 using AutoRest.Java;
 using AutoRest.NodeJS;
 using AutoRest.Python;
 using AutoRest.Ruby;
 #endif
-
 
 namespace AutoRest.Extensions.Tests
 {
@@ -76,10 +79,12 @@ namespace AutoRest.Extensions.Tests
                 Assert.Equal(2, clientModel.Properties.Count);
                 Assert.Equal(clientModel.Properties[0].Name, "SubscriptionId");
                 Assert.Equal(clientModel.Properties[1].Name, "ApiVersion");
-                Assert.False(clientModel.Methods[0].Parameters.First(p => p.Name == "resourceGroupName").IsClientProperty);
+                Assert.False(
+                    clientModel.Methods[0].Parameters.First(p => p.Name == "resourceGroupName").IsClientProperty);
                 Assert.True(clientModel.Methods[0].Parameters.First(p => p.Name == "subscriptionId").IsClientProperty);
                 Assert.True(clientModel.Methods[0].Parameters.First(p => p.Name == "apiVersion").IsClientProperty);
-                Assert.False(clientModel.Methods[1].Parameters.First(p => p.Name == "resourceGroupName").IsClientProperty);
+                Assert.False(
+                    clientModel.Methods[1].Parameters.First(p => p.Name == "resourceGroupName").IsClientProperty);
                 Assert.True(clientModel.Methods[1].Parameters.First(p => p.Name == "subscriptionId").IsClientProperty);
                 Assert.True(clientModel.Methods[1].Parameters.First(p => p.Name == "apiVersion").IsClientProperty);
             }
@@ -105,44 +110,48 @@ namespace AutoRest.Extensions.Tests
                 Assert.True(clientModel.ModelTypes.Any(m => m.Name == "SimpleProduct"));
                 Assert.True(clientModel.ModelTypes.Any(m => m.Name == "ConflictedProduct"));
                 Assert.True(clientModel.ModelTypes.Any(m => m.Name == "ConflictedProductProperties"));
-                    // Since it's referenced in the response
+                // Since it's referenced in the response
                 Assert.True(clientModel.ModelTypes.Any(m => m.Name == "RecursiveProduct"));
                 Assert.True(clientModel.ModelTypes.Any(m => m.Name == "Error"));
                 Assert.True(clientModel.ModelTypes.Any(m => m.Name == "ProductWithInheritance"));
                 Assert.True(clientModel.ModelTypes.Any(m => m.Name == "BaseFlattenedProduct"));
 
                 var simpleProduct = clientModel.ModelTypes.First(m => m.Name == "SimpleProduct");
-                Assert.True(simpleProduct.Properties.Any(p => p.SerializedName == "details.max_product_display_name"
-                                                              && p.Name == "MaxProductDisplayName"));
-                Assert.True(simpleProduct.Properties.Any(p => p.SerializedName == "details.max_product_capacity"
-                                                              && p.Name == "MaxProductCapacity"));
+                Assert.True(simpleProduct.Properties.Any(p => (p.SerializedName == "details.max_product_display_name")
+                                                              && (p.Name == "MaxProductDisplayName")));
+                Assert.True(simpleProduct.Properties.Any(p => (p.SerializedName == "details.max_product_capacity")
+                                                              && (p.Name == "MaxProductCapacity")));
                 Assert.Equal("@odata.value",
                     simpleProduct.Properties.FirstOrDefault(
                         p => p.SerializedName == "details.max_product_image.@odata\\\\.value").Name.FixedValue);
-                                             
+
 
                 var conflictedProduct = clientModel.ModelTypes.First(m => m.Name == "ConflictedProduct");
-                Assert.True(conflictedProduct.Properties.Any(p => p.SerializedName == "max_product_display_name"
-                                                                  && p.Name.FixedValue == "max_product_display_name"));
+                Assert.True(conflictedProduct.Properties.Any(p => (p.SerializedName == "max_product_display_name")
+                                                                  && (p.Name.FixedValue == "max_product_display_name")));
                 Assert.Equal("MaxProductDisplayName2",
                     conflictedProduct.Properties.FirstOrDefault(
                         p => p.SerializedName == "details.max_product_display_name").Name);
-                                                                  
-                                                                  
-                Assert.Equal("MaxProductDisplayName1",conflictedProduct.Properties.First(p => p.SerializedName == "simpleDetails.max_product_display_name").Name);
-                Assert.Equal("ConflictedProductBaseProductDescription",conflictedProduct.Properties.First(p => p.SerializedName == "details.base_product_description").Name);
+
+
+                Assert.Equal("MaxProductDisplayName1",
+                    conflictedProduct.Properties.First(p => p.SerializedName == "simpleDetails.max_product_display_name")
+                        .Name);
+                Assert.Equal("ConflictedProductBaseProductDescription",
+                    conflictedProduct.Properties.First(p => p.SerializedName == "details.base_product_description").Name);
 
                 var recursiveProduct = clientModel.ModelTypes.First(m => m.Name == "RecursiveProduct");
-                Assert.Equal("Name",recursiveProduct.Properties.First(p => p.SerializedName == "properties.name").Name);
-                                                                 
-                Assert.Equal("Parent",recursiveProduct.Properties.First(p => p.SerializedName == "properties.parent").Name);
-                                                                 
+                Assert.Equal("Name", recursiveProduct.Properties.First(p => p.SerializedName == "properties.name").Name);
+
+                Assert.Equal("Parent",
+                    recursiveProduct.Properties.First(p => p.SerializedName == "properties.parent").Name);
+
 
                 var error = clientModel.ModelTypes.First(m => m.Name == "Error");
                 Assert.Equal(3, error.Properties.Count);
-                Assert.Equal("Code",error.Properties.First(p => p.SerializedName == "code").Name);
-                Assert.Equal("Message",error.Properties.First(p => p.SerializedName == "message").Name);
-                Assert.Equal("ParentError",error.Properties.First(p => p.SerializedName == "parentError").Name);
+                Assert.Equal("Code", error.Properties.First(p => p.SerializedName == "code").Name);
+                Assert.Equal("Message", error.Properties.First(p => p.SerializedName == "message").Name);
+                Assert.Equal("ParentError", error.Properties.First(p => p.SerializedName == "parentError").Name);
             }
         }
 
@@ -231,6 +240,7 @@ namespace AutoRest.Extensions.Tests
                 Assert.Equal("ParentError", type.Properties[2].Name);
             }
         }
+
 #if gws_uh_no_just_no
         [Fact]
         public void TestClientNameJavaNormalization()
@@ -392,6 +402,5 @@ namespace AutoRest.Extensions.Tests
             Assert.Equal("parent_error", type.Properties[2].Name);
         }
 #endif
-
     }
 }
