@@ -152,17 +152,17 @@ def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
       base_url: request_url
   }
   
-promise = @(Model.ClientReference).make_request_async(:@Model.HttpMethod.ToString().ToLower(), path_template, options)
+  promise = @(Model.ClientReference).make_request_async(:@Model.HttpMethod.ToString().ToLower(), path_template, options)
 
-@EmptyLine
-promise = promise.then do |result|
-  http_response = result.response
-  status_code = http_response.status
-  response_content = http_response.body
-  unless @Model.SuccessStatusCodePredicate
-    error_model = JSON.load(response_content)
-    fail @(Model.OperationExceptionTypeString).new(result.request, http_response, error_model)
-  end
+  @EmptyLine
+  promise = promise.then do |result|
+    http_response = result.response
+    status_code = http_response.status
+    response_content = http_response.body
+    unless @Model.SuccessStatusCodePredicate
+      error_model = JSON.load(response_content)
+      fail @(Model.OperationExceptionTypeString).new(result.request, http_response, error_model)
+    end
 
     @EmptyLine
     @Model.InitializeResponseBody 

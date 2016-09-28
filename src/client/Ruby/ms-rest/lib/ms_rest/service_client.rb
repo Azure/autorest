@@ -16,6 +16,7 @@ module MsRest
 
     # @return [Hash{String=>String}] default request headers for requests.
     attr_accessor :request_headers
+
     #
     # Creates and initialize new instance of the ServiceClient class.
     #
@@ -45,10 +46,8 @@ module MsRest
       end
       promise = promise.then do |http_response|
         response_content = http_response.body.to_s.empty? ? nil : http_response.body
-        # Create Result
-        result = create_response(request, http_response)
-        result.body = response_content
-        result
+        # Create response
+        create_response(request, http_response, response_content)
       end
       promise.execute
     end

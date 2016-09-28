@@ -96,11 +96,25 @@ module @Settings.Namespace
     #  result  = @@client.make_request(:put, path, options)
     #    
     def make_request(method, path, options = {})
-      result = make_request_async(method, path, options).value!
-      result.response.body.to_s.empty? ? nil : JSON.load(result.response.body)
+      result = make_request_with_http_info(method, path, options)
+      result.body unless result.nil?
     end
-    @EmptyLine
 
+    @EmptyLine
+    #
+    # Makes a request and returns the operation response.
+    # @@param method [Symbol] with any of the following values :get, :put, :post, :patch, :delete.
+    # @@param path [String] the path, relative to {base_url}.
+    # @@param options [Hash{String=>String}] specifying any request options like :body.
+    # @@return [@(Model.OperationResponseString)] Operation response containing the request, response and status.
+    #
+    def make_request_with_http_info(method, path, options = {})
+      result = make_request_async(method, path, options).value!
+      result.body = result.response.body.to_s.empty? ? nil : JSON.load(result.response.body)
+      result
+    end    
+
+    @EmptyLine
     #
     # Makes a request asynchronously.
     # @@param method [Symbol] with any of the following values :get, :put, :post, :patch, :delete.
@@ -123,20 +137,6 @@ module @Settings.Namespace
 
       @EmptyLine
       super(request_url, method, path, options)
-    end
-    
-    @EmptyLine
-    #
-    # Makes a request and returns the operation response.
-    # @@param method [Symbol] with any of the following values :get, :put, :post, :patch, :delete.
-    # @@param path [String] the path, relative to {base_url}.
-    # @@param options [Hash{String=>String}] specifying any request options like :body.
-    # @@return [@(Model.OperationResponseString)] Operation response containing the request, response and status.
-    #
-    def make_request_with_http_info(method, path, options = {})
-      result = make_request_async(method, path, options).value!
-      result.body = result.response.body.to_s.empty? ? nil : JSON.load(result.response.body)
-      result
     end
 
     @EmptyLine
