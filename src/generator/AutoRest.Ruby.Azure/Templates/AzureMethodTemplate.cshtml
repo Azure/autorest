@@ -34,9 +34,7 @@ def @(Model.Name)_as_lazy(@(Model.MethodParameterDeclaration))
   response = @(Model.Name)_async(@(Model.MethodParameterInvocation)).value!
   unless response.nil?
     page = response.body
-    page.next_method = Proc.new do |next_link|
-      @(Model.InvokeNextMethodAsync())
-    end
+    @(Model.AssignNextMethodToPage())
     page
   end
 end
