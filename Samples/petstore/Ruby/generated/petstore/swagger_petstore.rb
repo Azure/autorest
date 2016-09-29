@@ -40,8 +40,8 @@ module Petstore
     #    body: request_content,
     #    query_params: {'api-version' => '2016-02-01'}
     #  }
-    #  result  = @client.make_request(:put, path, options)
-    #    
+    #  result = @client.make_request(:put, path, options)
+    #
     def make_request(method, path, options = {})
       result = make_request_with_http_info(method, path, options)
       result.body unless result.nil?
@@ -58,7 +58,7 @@ module Petstore
       result = make_request_async(method, path, options).value!
       result.body = result.response.body.to_s.empty? ? nil : JSON.load(result.response.body)
       result
-    end    
+    end
 
     #
     # Makes a request asynchronously.
@@ -71,9 +71,9 @@ module Petstore
       fail ArgumentError, 'method is nil' if method.nil?
       fail ArgumentError, 'path is nil' if path.nil?
 
-      request_url= options[:base_url] || @base_url
+      request_url = options[:base_url] || @base_url
 
-      request_headers= @request_headers
+      request_headers = @request_headers
       options.merge!({headers: request_headers.merge(options[:headers] || {})})
       options.merge!({credentials: @credentials}) unless @credentials.nil?
 
