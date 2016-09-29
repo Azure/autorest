@@ -61,5 +61,24 @@ namespace AutoRest.Ruby.Azure.TemplateModels
                 return "include MsRestAzure::Serialization";
             }
         }
+
+        ///// <summary>
+        ///// Gets the operation response type to instantiate.
+        ///// </summary>
+        public override string OperationResponseString
+        {
+            get
+            {
+                return "MsRestAzure::AzureOperationResponse";
+            }
+        }
+
+        public override string MergeClientDefaultHeaders
+        {
+            get
+            {
+                return "request_headers.merge!({'accept-language' => @accept_language}) unless @accept_language.nil?";
+            }
+        }
     }
 }
