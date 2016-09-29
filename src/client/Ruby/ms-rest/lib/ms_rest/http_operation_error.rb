@@ -24,6 +24,7 @@ module MsRest
     # @param [Faraday::Response] the HTTP response object.
     # @param [String] body the HTTP response body.
     # @param [String] error message.
+    #
     def initialize(*args)
       @msg = self.class.name
       if args.size == 1

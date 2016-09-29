@@ -6,12 +6,13 @@ require 'rspec'
 require 'ms_rest_azure'
 
 module MsRestAzure
-
   describe AzureOperationError do
     let(:http_response) { double('http_response', body: nil, headers: nil, status: 500) }
     let(:http_request) { double('http_request') }
-    let(:body) { double('body') }
-    
+    let(:error_message) { 'resource group name is invalid' }
+    let(:error_code) { 'InvalidResourceGroup' }
+    let(:body) { { 'error' => { 'code' => error_code, 'message' => error_message } } }
+
     it 'should create error with message' do
       error = AzureOperationError.new 'error_message'
       expect(error.message).to match('error_message')
@@ -22,6 +23,7 @@ module MsRestAzure
       expect(error.request).to eq(http_request)
       expect(error.response).to eq(http_response)
       expect(error.body).to eq(nil)
+      # message must not contain message from body but must contains class name
       expect(error.message).to match('MsRestAzure::AzureOperationError') # Default one
     end
 
@@ -30,7 +32,11 @@ module MsRestAzure
       expect(error.request).to eq(http_request)
       expect(error.response).to eq(http_response)
       expect(error.body).to eq(body)
-      expect(error.message).to match('MsRestAzure::AzureOperationError') # Default one
+      # message must contain message from body
+      expect(error.message).to match(error_message)
+      # message must have error_message &  error_code property
+      expect(error.error_message).to match(error_message)
+      expect(error.error_code).to match(error_code)
     end
 
     it 'should create error with request, response, body and message' do
@@ -38,8 +44,11 @@ module MsRestAzure
       expect(error.request).to eq(http_request)
       expect(error.response).to eq(http_response)
       expect(error.body).to eq(body)
-      expect(error.message).to match('error_message')
+      # message must contain message from body
+      expect(error.message).to match(error_message)
+      # message must have error_message &  error_code property
+      expect(error.error_message).to match(error_message)
+      expect(error.error_code).to match(error_code)
     end
   end
-
 end
