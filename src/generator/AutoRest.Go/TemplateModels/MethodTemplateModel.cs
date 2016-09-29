@@ -153,7 +153,7 @@ namespace AutoRest.Go.TemplateModels
         }
 
         /// <summary>
-        /// Return the parameters as they apopear in the method signature excluding global parameters.
+        /// Return the parameters as they appear in the method signature excluding global parameters.
         /// </summary>
         public IEnumerable<Parameter> LocalParameters
         {
@@ -161,8 +161,9 @@ namespace AutoRest.Go.TemplateModels
             {
                 return
                     Parameters.Where(
-                       p => p != null && p.IsMethodArgument() && !string.IsNullOrWhiteSpace(p.Name) && !p.SerializedName.IsApiVersion())
-                        .OrderBy(item => !item.IsRequired);
+                        p => p != null && p.IsMethodArgument() && !string.IsNullOrWhiteSpace(p.Name))        
+                                
+                                .OrderBy(item => !item.IsRequired);
             }
         }
         public string ParameterValidations

@@ -15,7 +15,7 @@ SWAGGER_VERSIONS = {
 	# commerce: {version: "2015-06-01-preview"},
 	# datalake_analytics: {
 	# 	account: {version: "2015-10-01-preview"},
-	# 	catalog: {version: "2015-10-01-preview"},
+	# 	catalog: {version: "2016-06-01-preview"},
 	# 	job:  {version: "2016-03-20-preview"}
 	# },
 	datalake_store: {
@@ -26,6 +26,7 @@ SWAGGER_VERSIONS = {
 	dns: {version: "2016-04-01"},
 	# eventhub: {version: "2015-08-01", swagger: "EventHub"},
 	graphrbac: {version: "1.6"},
+	# insights (composite swagger)
 	intune: {version: "2015-01-14-preview"},
 	iothub: {version: "2016-02-03"},
 	keyvault: {version: "2015-06-01"},
@@ -33,20 +34,23 @@ SWAGGER_VERSIONS = {
 	machinelearning: {version: "2016-05-01-preview", swagger: "webservices"},
 	mediaservices: {version: "2015-10-01", swagger: "media"},
 	mobileengagement: {version: "2014-12-01", swagger: "mobile-engagement"},
-	network: {version: "2016-06-01"},
+	network: {version: "2016-09-01"},
 	notificationhubs: {version: "2016-03-01"},
 	powerbiembedded: {version: "2016-01-29"},
+	# recoveryservices
+	# recoveryservicesbackup
 	redis: {version: "2016-04-01"},
 	resources: {
 		features: {version: "2015-12-01"},
-		locks: {version: "2015-01-01"},
-		resources: {version: "2016-07-01"},
+		locks: {version: "2016-09-01"},
+		resources: {version: "2016-09-01"},
 		policy: {version: "2016-04-01"},
+		# currently suscription uses the old api, because of a bug in the generator
 		subscriptions: {version: "2015-11-01"}
 	},
 	scheduler: {version: "2016-03-01"},
 	search: {version: "2015-02-28"},
-	# servermanagement: {version: "2015-07-01-preview"},
+	# servermanagement: {version: "2016-07-01-preview"},
 	servicebus: {version: "2015-08-01"},
 	sql: {version: "2015-05-01"},
 	storage: {version: "2016-01-01"},

@@ -122,3 +122,16 @@ func (s *PagingGroupSuite) TestGetMultiplePagesFailureURI(c *chk.C) {
 	c.Assert(err, chk.NotNil)
 	c.Assert(err, chk.ErrorMatches, ".*No scheme detected in URL.*")
 }
+
+func (s *PagingGroupSuite) TestGetMultiplePagesFragmentNextLink(c *chk.C) {
+	res, err := pagingClient.GetMultiplePagesFragmentNextLink("1.6", "test_user")
+	c.Assert(err, chk.IsNil)
+	count := 1
+	for res.OdataNextLink != nil {
+		count++
+		resNext, err := pagingClient.NextFragment("1.6", "test_user", *res.OdataNextLink)
+		c.Assert(err, chk.IsNil)
+		res = resNext
+	}
+	c.Assert(count, chk.Equals, 10)
+}

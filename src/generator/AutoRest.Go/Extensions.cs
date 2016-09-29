@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
 using AutoRest.Go.TemplateModels;
 using AutoRest.Extensions.Azure;
+using AutoRest.Extensions.Azure.Model;
 
 namespace AutoRest.Go
 {
@@ -362,7 +364,7 @@ namespace AutoRest.Go
 
         public static bool IsClientProperty(this Parameter parameter)
         {
-            return parameter.ClientProperty != null;
+            return parameter.ClientProperty != null || parameter.SerializedName.IsApiVersion();
         }
 
         public static string GetParameterName(this Parameter parameter)
@@ -379,7 +381,7 @@ namespace AutoRest.Go
 
         public static bool IsApiVersion(this string name)
         {
-            string rgx = @"^api[^a-zA-Z0-9]?version";
+            string rgx = @"^api[^a-zA-Z0-9_]?version";
             return Regex.IsMatch(name, rgx, RegexOptions.IgnoreCase);
         }
 
@@ -547,7 +549,7 @@ namespace AutoRest.Go
             {
                 var nextLinkField = (compositeType as ModelTemplateModel).NextLink;
                 foreach (Property p in properties) {
-                    p.Name = GoCodeNamer.NormalizeWithChar(p.Name);
+                    p.Name = GoCodeNamer.NormalizeWithoutChar(p.Name, '.');
                     if (p.Name.Equals(nextLinkField, StringComparison.OrdinalIgnoreCase)) {
                         p.Name = nextLinkField;
                     }
@@ -986,15 +988,29 @@ namespace AutoRest.Go
             if (method.Name.Length > next.Length) {
                 if (method.Name.Substring(method.Name.Length - next.Length).Equals(next, StringComparison.OrdinalIgnoreCase)
                     && methods.Any(m => m.ReturnValue().Body == method.ReturnValue().Body)){
-                    // && method.Name.Equals(m.Name + next, StringComparison.OrdinalIgnoreCase))) { 
                     return true;
                 }
             }
-            // return methods.Any(m => m.Name.Equals(method.Name + next, StringComparison.OrdinalIgnoreCase)
-            //     && m.ReturnValue().Body == method.ReturnValue().Body);
             return methods.Any(m => m.Name.Length > next.Length
                 && m.Name.Substring(m.Name.Length - next.Length).Equals(next, StringComparison.OrdinalIgnoreCase)
                 && m.ReturnValue().Body == method.ReturnValue().Body);
+            
+            // For this method to be a bit more elegant, it should work with something similar to these commented lines...
+            // if (method.Extensions.ContainsKey(AzureExtensions.PageableExtension)){
+            // var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(method.Extensions[AzureExtensions.PageableExtension].ToString());
+            // // var pagealeExtension = method.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+            //     if (pageableExtension != null)
+            //     {  
+            //         // var nextOperation = (string)pageableExtension["operationName"];
+            //         if (!string.IsNullOrEmpty(pageableExtension.OperationName))
+            //         {
+            //             return methods.Any(m => m.SerializedName.Equals(pageableExtension.OperationName, StringComparison.OrdinalIgnoreCase));
+            //         }
+            //         return false;
+            //     }
+            //     return false;
+            // }
+            // return false;
         }
 
         /// <summary>
@@ -1036,7 +1052,7 @@ namespace AutoRest.Go
                     var nextLinkName = (string)pageableExtension["nextLinkName"];
                     if (!string.IsNullOrEmpty(nextLinkName))
                     {
-                        nextLink = GoCodeNamer.NormalizeWithChar(nextLinkName);
+                        nextLink = GoCodeNamer.NormalizeWithoutChar(nextLinkName, '.');
                     }
                 }
             }

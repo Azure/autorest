@@ -15,7 +15,6 @@ namespace AutoRest.Go.TemplateModels
         public List<ModelTemplateModel> ModelTemplateModels { get; set; }
         public string PackageName { get; set; }
         public Dictionary<IType, string> PagedTypes { get; set; }
-
         public List<IType> NextMethodDefined { get; set; }
         
         public ModelsTemplateModel(ServiceClient serviceClient, string packageName)
@@ -96,7 +95,7 @@ namespace AutoRest.Go.TemplateModels
             PagedTypes = new Dictionary<IType, string>();
             NextMethodDefined = new List<IType>();
             serviceClient.Methods
-                .Where(m => m.IsPageable()) //is m.NextLink not empty nor nil? NextLink is not an attribute, it is a function that returns a string, BTW
+                .Where(m => m.IsPageable())
                 .ForEach(m =>
                 {
                     if (!PagedTypes.ContainsKey(m.ReturnValue().Body))
@@ -119,8 +118,7 @@ namespace AutoRest.Go.TemplateModels
                     mtm.IsResponseType = true;
                     if (PagedTypes.ContainsKey(mtm))
                     {
-                        mtm.NextLink = GoCodeNamer.NormalizeWithChar(PagedTypes[mtm]); //this next link is an attribute!
-                        // Marking is used for some weird methods in model file
+                        mtm.NextLink = GoCodeNamer.NormalizeWithChar(PagedTypes[mtm], '.');
                         if (NextMethodDefined.Contains(mtm)) {
                             mtm.PreparerNeeded = false;
                         } else {

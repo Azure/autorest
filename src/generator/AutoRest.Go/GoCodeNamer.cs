@@ -520,7 +520,7 @@ namespace AutoRest.Go
             return new MapType(NormalizeTypeReference(dictionaryType.ValueType));
         }
 
-        public static string NormalizeWithChar(string name)
+        public static string NormalizeWithoutChar(string name, char splitter)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -528,7 +528,7 @@ namespace AutoRest.Go
             }
 
             return
-                name.Split('.')
+                name.Split(splitter)
                     .Where(s => !string.IsNullOrEmpty(s))
                     .Select(s => char.ToUpperInvariant(s[0]) + s.Substring(1, s.Length - 1))
                     .DefaultIfEmpty("")

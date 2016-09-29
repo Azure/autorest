@@ -29,8 +29,6 @@ namespace AutoRest.Go.TemplateModels
 
             PropertyTemplateModels = new List<PropertyTemplateModel>();
             source.Properties.ForEach(p => PropertyTemplateModels.Add(new PropertyTemplateModel(p)));
-
-            // PreparerNeeded = false;
         }
 
         public IScopeProvider Scope
