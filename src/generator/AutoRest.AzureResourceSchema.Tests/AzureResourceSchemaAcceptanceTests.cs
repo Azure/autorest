@@ -89,6 +89,12 @@ namespace AutoRest.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void MobileEngagement_2014_12_01()
+        {
+            RunSwaggerTest("MobileEngagement", "2014-12-01", "mobile-engagement.json");
+        }
+
+        [Fact]
         public static void Network_2015_05_01_preview()
         {
             RunSwaggerTest("Network", "2015-05-01-preview", "network.json");
