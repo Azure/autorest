@@ -35,7 +35,7 @@ namespace @Settings.Namespace
         @:@WrapComment("/// ", method.Description.EscapeXmlComment())
         @:/// </remarks>
         }
-        foreach (ParameterTemplateCs parameter in method.LocalParameters)
+        foreach (ParameterCs parameter in method.LocalParameters)
         {
         @:/// <param name='@parameter.Name'>
         @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
@@ -56,7 +56,7 @@ namespace @Settings.Namespace
         @:/// Thrown when unable to deserialize the response
         @:/// </exception>
         }
-        @if (method.Parameters.Any(p => !p.IsConstant && p.IsRequired && !p.ModelType.IsValueType()))
+        @if (method.Parameters.Any(p => p.IsRequired && p.IsNullable()))
         {
         @:/// <exception cref="Microsoft.Rest.ValidationException">
         @:/// Thrown when a required parameter is null

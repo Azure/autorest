@@ -7,6 +7,6 @@ namespace AutoRest.CSharp.Model
 {
     public class PropertyCs : Property
     {
-        public override string ModelTypeName => ModelType.IsForcedNullable() || !IsRequired ? ModelType.AsNullableType() : ModelType.DeclarationName;
+        public override string ModelTypeName => ModelType.AsNullableType(this.IsNullable());
     }
 }

@@ -9,9 +9,7 @@ namespace AutoRest.CSharp.Model
 {
     public interface IExtendedModelType
     {
-        bool CanBeMadeNullable { get; }
         bool IsValueType { get; }
-        bool IsForcedNullable { get; }
     }
 
     public class PrimaryTypeCs : PrimaryType, IExtendedModelType
@@ -126,8 +124,5 @@ namespace AutoRest.CSharp.Model
                 }
             }
         }
-
-        public bool CanBeMadeNullable => IsValueType;
-        public bool IsForcedNullable => false;
     }
 }

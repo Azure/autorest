@@ -44,7 +44,7 @@
 @:/// Thrown when unable to deserialize the response
 @:/// </exception>
 }
-@if (Model.Parameters.Where(p => !p.IsConstant && p.IsRequired && !p.ModelType.IsValueType()).Any())
+@if (Model.Parameters.Cast<ParameterCs>().Any(p => !p.IsConstant && p.IsRequired &&p.IsNullable()))
 {
 @:/// <exception cref="Microsoft.Rest.ValidationException">
 @:/// Thrown when a required parameter is null
@@ -55,9 +55,9 @@
 /// </return>
 public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
-    @foreach (ParameterTemplateCs parameter in Model.Parameters.Where(p => !p.IsConstant))
+    @foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
     {
-        if (parameter.IsRequired && parameter.IsNullable)
+        if (parameter.IsRequired && parameter.IsNullable())
         {
     @:if (@(parameter.Name) == null)
     @:{
@@ -65,13 +65,13 @@ public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeStri
     @:}
 @:
         }
-        if(parameter.CanBeValidated == true && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
+        if(parameter.CanBeValidated  && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
         {
     @:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
         }
     }
 
-    @foreach (ParameterTemplateCs parameter in Model.Parameters)
+    @foreach (ParameterCs parameter in Model.Parameters)
     {
         if (parameter.IsConstant && parameter.ClientProperty == null)
         {
@@ -134,9 +134,9 @@ else
     _httpRequest.RequestUri = new System.Uri(_url);
     // Set Headers
     @(Model.SetDefaultHeaders)
-    @foreach (ParameterTemplateCs parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.Header))
+    @foreach (ParameterCs parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.Header))
     {
-        if (!parameter.IsNullable)
+        if (!parameter.IsNullable())
         {
     @:if (_httpRequest.Headers.Contains("@(parameter.SerializedName)"))
     @:{
@@ -183,7 +183,7 @@ else
         }
         else
         {
-            if (!Model.RequestBody.IsNullable)
+            if (!Model.RequestBody.IsNullable())
             {
     @:_requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.ModelType)));
     @:_httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
@@ -205,7 +205,7 @@ else
         <text>
     System.Net.Http.MultipartFormDataContent _multiPartContent = new System.Net.Http.MultipartFormDataContent();
         </text>
-        foreach (ParameterTemplateCs parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData))
+        foreach (ParameterCs parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData))
         {
     @:if (@(parameter.Name) != null)
     @:{

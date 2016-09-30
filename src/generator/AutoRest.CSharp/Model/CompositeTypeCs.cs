@@ -186,8 +186,7 @@ namespace AutoRest.CSharp.Model
             }
         }
 
-        public bool CanBeMadeNullable => false;
         public bool IsValueType => false;
-        public bool IsForcedNullable => false;
+
     }
 }

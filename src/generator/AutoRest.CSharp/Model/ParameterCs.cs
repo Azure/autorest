@@ -7,9 +7,9 @@ using AutoRest.Core.Utilities;
 
 namespace AutoRest.CSharp.Model
 {
-    public class ParameterTemplateCs : Parameter
+    public class ParameterCs : Parameter
     {
-        public ParameterTemplateCs()
+        public ParameterCs()
         {
             Name.OnGet += value => IsClientProperty ? true== Method?.Group.IsNullOrEmpty() ? $"this.{ClientProperty.Name}" : $"this.Client.{ClientProperty.Name}" : CodeNamer.Instance.GetParameterName(value);
         }
@@ -18,9 +18,7 @@ namespace AutoRest.CSharp.Model
         /// </summary>
         public virtual bool CanBeValidated => true;
 
-        public virtual bool IsNullable => !IsRequired || !ModelType.IsValueType();
-
-        public override string ModelTypeName => ModelType.IsForcedNullable() || !IsRequired ? ModelType.AsNullableType() : ModelType.DeclarationName;
+        public override string ModelTypeName => ModelType.AsNullableType(this.IsNullable());
 
     }
 }

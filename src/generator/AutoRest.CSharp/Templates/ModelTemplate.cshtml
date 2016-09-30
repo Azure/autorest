@@ -3,6 +3,7 @@
 @using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp
+@using AutoRest.CSharp.Model
 @inherits Template<global::AutoRest.CSharp.Model.CompositeTypeCs>
 @Header("// ")
 @EmptyLine
@@ -196,7 +197,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             @:base.Validate();
             }
 
-            foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly && !p.IsConstant && !p.ModelType.IsValueType()))
+            foreach (PropertyCs property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly && !p.IsConstant && p.IsNullable() ))
             {
                 anythingToValidate = true;
             @:if (@property.Name == null)
@@ -209,7 +210,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 && (p.Constraints.Any() || !(p.ModelType is PrimaryType))))
             {
                 anythingToValidate = true;
-            @:@property.ModelType.ValidateType(Model, string.Format("this.{0}", property.Name), property.Constraints)
+            @:@property.ModelType.ValidateType(Model, $"this.{property.Name}", property.Constraints)
             @:
             }
             if (!anythingToValidate)

@@ -42,7 +42,7 @@ namespace AutoRest.CSharp
                 new Factory<EnumType, EnumTypeCs>(),
                 new Factory<Method, MethodCs>(),
                 new Factory<CompositeType, CompositeTypeCs>(),
-                new Factory<Parameter, ParameterTemplateCs>(),
+                new Factory<Parameter, ParameterCs>(),
                 new Factory<Property, PropertyCs>(),
                 new Factory<PrimaryType, PrimaryTypeCs>(),
                 new Factory<DictionaryType, DictionaryTypeCs>(),

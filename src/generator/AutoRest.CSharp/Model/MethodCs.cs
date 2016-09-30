@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Model
         /// exclude global parameters
         /// </summary>
         [JsonIgnore]
-        public IEnumerable<ParameterTemplateCs> LocalParameters
+        public IEnumerable<ParameterCs> LocalParameters
         {
             get
             {
@@ -128,7 +128,7 @@ namespace AutoRest.CSharp.Model
                         !parameter.IsClientProperty &&
                         !string.IsNullOrWhiteSpace(parameter.Name) &&
                         !parameter.IsConstant)
-                        .OrderBy(item => !item.IsRequired).Cast<ParameterTemplateCs>();
+                        .OrderBy(item => !item.IsRequired).Cast<ParameterCs>();
             }
         }
 
@@ -278,7 +278,7 @@ namespace AutoRest.CSharp.Model
         /// Get the method's request body (or null if there is no request body)
         /// </summary>
         [JsonIgnore]
-        public ParameterTemplateCs RequestBody => Body as ParameterTemplateCs;
+        public ParameterCs RequestBody => Body as ParameterCs;
 
         /// <summary>
         /// Generate a reference to the ServiceClient
@@ -393,7 +393,7 @@ namespace AutoRest.CSharp.Model
                 foreach (var queryParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Query))
                 {
                     var replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", System.Uri.EscapeDataString({1})));";
-                    if ((queryParameter as ParameterTemplateCs).IsNullable)
+                    if ((queryParameter as ParameterCs).IsNullable())
                     {
                         builder.AppendLine("if ({0} != null)", queryParameter.Name)
                             .AppendLine("{").Indent();
@@ -424,7 +424,7 @@ namespace AutoRest.CSharp.Model
                                 queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference));
                     }
 
-                    if ((queryParameter as ParameterTemplateCs).IsNullable)
+                    if ((queryParameter as ParameterCs).IsNullable())
                     {
                         builder.Outdent()
                             .AppendLine("}");
@@ -511,7 +511,7 @@ namespace AutoRest.CSharp.Model
 
             return string.Join(" || ",
                 transformation.ParameterMappings
-                    .Where(m => !m.InputParameter.ModelType.IsValueType())
+                    .Where(m => m.InputParameter.IsNullable())
                     .Select(m => m.InputParameter.Name + " != null"));
         }
     }

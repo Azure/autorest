@@ -11,12 +11,6 @@ namespace AutoRest.CSharp.Model
     {
         protected override string ModelAsStringType => "string";
 
-        internal static HashSet<EnumType> EnumTypesThatWereUsedNullable { get; } = new HashSet<EnumType>();
-
-        public bool IsForcedNullable => Settings.Instance.QuirksMode && EnumTypesThatWereUsedNullable.Contains(this);
-
-        public bool CanBeMadeNullable => !ModelAsString;
-
         public bool IsValueType => !ModelAsString; 
     }
 }

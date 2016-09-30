@@ -286,11 +286,8 @@ namespace AutoRest.CSharp
         /// </summary>
         /// <param name="modelType">The type to check</param>
         /// <returns>True if the type maps to a C# value type, otherwise false</returns>
-        public static bool IsValueType(this IModelType modelType)
-        {
-            return true == (modelType as IExtendedModelType)?.IsValueType;
-        }
-
+        public static bool IsValueType(this IModelType modelType) => true == (modelType as IExtendedModelType)?.IsValueType;
+        //gws01
         public static string CheckNull(string valueReference, string executionBlock)
         {
             var sb = new IndentedStringBuilder();
@@ -317,9 +314,9 @@ namespace AutoRest.CSharp
                 throw new ArgumentNullException("scope");
             }
 
-            CompositeType model = type as CompositeType;
-            SequenceType sequence = type as SequenceType;
-            DictionaryType dictionary = type as DictionaryType;
+            var model = type as CompositeTypeCs;
+            var sequence = type as SequenceTypeCs;
+            var dictionary = type as DictionaryTypeCs;
 
             var sb = new IndentedStringBuilder();
 
@@ -448,12 +445,35 @@ namespace AutoRest.CSharp
             }
         }
 
-        public static bool CanBeMadeNullable(this IModelType modelType) => true == (modelType as IExtendedModelType)?.CanBeMadeNullable;
+        /// <summary>
+        /// Returns the ModelType name expressed as a nullable type (for classes, nothing different, for value types, append a '?'
+        /// </summary>
+        /// <param name="modelType">The ModelType to return as nullable</param>
+        /// <returns>The ModelType name expressed as a nullable type</returns>
+        public static string AsNullableType(this IModelType modelType) => modelType.IsValueType() ? $"{modelType.Name}?" : modelType.DeclarationName;
 
-        public static bool IsForcedNullable(this IModelType modelType) => true == (modelType as IExtendedModelType)?.IsForcedNullable;
+        /// <summary>
+        /// Conditiallaly returns the ModelType name expressed as a nullable type (for classes, nothing different, for value types, append a '?'
+        /// </summary>
+        /// <param name="modelType">The ModelType to return as nullable</param>
+        /// <param name="predicate">An expression indicating whether to make the type nullable</param>
+        /// <returns>The ModelType name expressed as a nullable type</returns>
+        public static string AsNullableType(this IModelType modelType, Func<bool> predicate ) => predicate() && modelType.IsValueType() ? $"{modelType.Name}?" : modelType.DeclarationName;
+        /// <summary>
+        /// Conditionally returns the ModelType name expressed as a nullable type (for classes, nothing different, for value types, append a '?'
+        /// </summary>
+        /// <param name="modelType">The ModelType to return as nullable</param>
+        /// <param name="predicate">An boolean indicating whether to make the type nullable</param>
+        /// <returns>The ModelType name expressed as a nullable type</returns>
+        public static string AsNullableType(this IModelType modelType, bool predicate) => predicate && modelType.IsValueType() ? $"{modelType.Name}?" : modelType.DeclarationName;
 
-        public static string AsNullableType(this IModelType modelType) => modelType.CanBeMadeNullable() ? $"{modelType.Name}?" : modelType.DeclarationName;
-        public static string AsNullableType(this IModelType modelType, Func<bool> predicate ) => predicate() && modelType.CanBeMadeNullable() ? $"{modelType.Name}?" : modelType.DeclarationName;
-        public static string AsNullableType(this IModelType modelType, bool predicate) => predicate && modelType.CanBeMadeNullable() ? $"{modelType.Name}?" : modelType.DeclarationName;
+        /// <summary>
+        /// This returns true if the parameter or property should be expressed as a nullable type.
+        /// 
+        /// Note: do not confuse this with "Can this be null" or "Can this be made nullable" 
+        /// </summary>
+        /// <param name="variable">The property or parameter to check </param>
+        /// <returns>True when the property or parameter can be assigned to null.</returns>
+        public static bool IsNullable(this IVariable variable) => variable.IsXNullable || !variable.IsRequired || !variable.ModelType.IsValueType();
     }
 }

@@ -6,7 +6,7 @@ using AutoRest.Extensions.Azure;
 
 namespace AutoRest.CSharp.Azure.Model
 {
-    public class ParameterCsa : ParameterTemplateCs
+    public class ParameterCsa : ParameterCs
     {
         public ParameterCsa()
         { }        
