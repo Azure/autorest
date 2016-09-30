@@ -37,8 +37,7 @@
   },
 
   "frameworks": {
-    "net451": {
-    }
+    "net451": {}
   },
 
   "dependencies": {
