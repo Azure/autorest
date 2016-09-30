@@ -4,7 +4,6 @@ MsRest is a library which supports the clients (SDKs) generated with Autorest to
 
 # Supported Ruby Versions
 
-* Ruby 1.9.3
 * Ruby 2.0
 * Ruby 2.1
 * Ruby 2.2
