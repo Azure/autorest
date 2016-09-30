@@ -107,6 +107,12 @@ namespace AutoRest.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void NotificationHubs_2016_03_01()
+        {
+            RunSwaggerTest("NotificationHubs", "2016-03-01", "notificationhubs.json");
+        }
+
+        [Fact]
         public static void PowerBIEmbedded_2016_01_29()
         {
             RunSwaggerTest("PowerBIEmbedded", "2016-01-29", "powerbiembedded.json");
