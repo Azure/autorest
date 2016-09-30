@@ -107,6 +107,12 @@ namespace AutoRest.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void Network_2016_09_01()
+        {
+            RunSwaggerTest("Network", "2016-09-01", "network.json");
+        }
+
+        [Fact]
         public static void PowerBIEmbedded_2016_01_29()
         {
             RunSwaggerTest("PowerBIEmbedded", "2016-01-29", "powerbiembedded.json");
