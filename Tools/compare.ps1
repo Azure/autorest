@@ -143,3 +143,39 @@ Get-Job |% {
   receive-job $_ 
   remove-job $_ 
 }
+
+try {
+  $app = New-Object -ComObject "Merge70.Application"
+  if( $app )  { 
+  
+    $fc = $app.FolderComparison
+    $completed = $false;
+
+    $fc.Compare("$baseFolder\Last", "$baseFolder\New");
+
+    write-host -nonewline "`nComparing files..."
+    while ($fc.Busy)
+    {
+        sleep -milliseconds 250 
+        write-host -nonewline "."
+    }
+
+    write-host -fore green "`nWriting report: $baseFolder\report.html "
+
+    $fc.Report("html", 0, "$baseFolder\report.html");
+
+    while ($fc.Busy)
+    {
+        sleep -milliseconds 250 
+        write-host -nonewline "."
+    }
+
+    $fc.Close()
+    $app.Close()
+
+    $app = $null
+    $fc = $null
+  }
+} catch { 
+  write-host -fore red "Araxis Merge not installed (report skipped)"
+}
