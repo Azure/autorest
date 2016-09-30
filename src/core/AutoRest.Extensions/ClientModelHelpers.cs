@@ -4,6 +4,7 @@
 
 using System;
 using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Extensions
 {
@@ -53,12 +54,7 @@ namespace AutoRest.Extensions
                 throw new ArgumentNullException("parameter");
             }
 
-            object clientName = null;
-            if (parameter.Extensions.TryGetValue("x-ms-client-name", out clientName))
-            {
-                return clientName as string;
-            }
-            return parameter.Name;
+            return parameter.Extensions.GetValue<string>("x-ms-client-name").Else(parameter.Name);
         }
     }
 }

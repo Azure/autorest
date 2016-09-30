@@ -63,7 +63,8 @@ namespace AutoRest.Core.Model
         /// </summary>
         public virtual Dictionary<Constraint, string> Constraints { get; } = new Dictionary<Constraint, string>();
 
-        
+        public virtual bool IsXNullable => true == Extensions.GetValue<bool?>("x-nullable");
+
         [JsonProperty]
         public Fixable<string> DefaultValue
         {

@@ -261,6 +261,19 @@ namespace AutoRest.Core.Utilities
             return destination;
         }
 
+        public static T GetValue<T>(this IDictionary<string, object> dictionary, string key)
+        {
+            object value;
+            if (dictionary.TryGetValue(key, out value))
+            {
+                if (value is T)
+                {
+                    return (T) value;
+                }
+            }
+            return default(T);
+        }
+
         private const BindingFlags AnyPropertyFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy | BindingFlags.GetProperty | BindingFlags.Instance;
 
         private static PropertyInfo GetReadableProperty(this Type type, string propertyName)

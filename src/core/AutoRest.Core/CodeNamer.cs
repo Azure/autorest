@@ -551,6 +551,17 @@ namespace AutoRest.Core
                 // reason = string.Format(CultureInfo.InvariantCulture, Resources.NamespaceConflictReasonMessage,desiredName, ...?
             }
 
+
+            // special case (corolary): a compositeType  can actually have the same name as a property  
+            if (whoIsAsking is CompositeType)
+            {
+                siblingNames= siblingNames.Where(each => !(each is Property));
+            }
+            if (whoIsAsking is Property)
+            {
+                siblingNames = siblingNames.Where(each => !(each is CompositeType));
+            }
+
             // does it have a sibling collision?
             names = new HashSet<IIdentifier>(siblingNames);
             var baseName = desiredName;

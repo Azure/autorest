@@ -22,20 +22,8 @@ namespace AutoRest.Core.Model
         /// </summary>
         protected Parameter()
         {
-            // Name should be unique 
-            // Name.OnSet += value => Method?.GetUniqueName(value) ?? value;
-
             // Name can be overriden by x-ms-client-name
-            Name.OnGet += v =>
-            {
-                object clientName = null;
-                if (Extensions.TryGetValue("x-ms-client-name", out clientName))
-                {
-                    return CodeNamer.Instance.GetParameterName(clientName as string);
-                }
-                return CodeNamer.Instance.GetParameterName(v);
-            };
-            
+            Name.OnGet += v => CodeNamer.Instance.GetParameterName(Extensions.GetValue<string>("x-ms-client-name").Else(v));
         }
 
         /// <summary>

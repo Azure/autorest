@@ -224,6 +224,8 @@ namespace AutoRest.Core.Utilities
             }
         }
 
+        public T RawValue => _value;
+
         public T FixedValue
         {
             get { return _value; }

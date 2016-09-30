@@ -39,15 +39,7 @@ namespace AutoRest.Core.Model
             _summary.OnSet += value => value.StripControlCharacters();
 
             // Name can be overriden by x-ms-client-name
-            Name.OnGet += v =>
-            {
-                object clientName = null;
-                if (Extensions.TryGetValue("x-ms-client-name", out clientName))
-                {
-                    return CodeNamer.Instance.GetPropertyName(clientName as string);
-                }
-                return CodeNamer.Instance.GetPropertyName(v);
-            };
+            Name.OnGet += v => CodeNamer.Instance.GetPropertyName(Extensions.GetValue<string>("x-ms-client-name").Else(v));
         }
 
         [JsonIgnore]
