@@ -11,7 +11,13 @@ namespace AutoRest.AzureResourceSchema.Tests
     public static class AzureResourceSchemaAcceptanceTests
     {
         [Fact]
-        public static void Batch()
+        public static void Authorization_2015_07_01()
+        {
+            RunSwaggerTest("Authorization", "2015-07-01", "authorization.json");
+        }
+
+        [Fact]
+        public static void Batch_2015_12_01()
         {
             RunSwaggerTest("Batch", "2015-12-01", "BatchManagement.json");
         }
@@ -167,13 +173,13 @@ namespace AutoRest.AzureResourceSchema.Tests
         }
 
         [Fact]
-        public static void Web()
+        public static void Web_2015_08_01()
         {
             RunSwaggerTest("Web", "2015-08-01", "web.json");
         }
 
         [Fact]
-        public static void WebYaml()
+        public static void WebYaml_2015_08_01()
         {
             // same test as Web(), but converted to YAML
             RunSwaggerTest("Web", "2015-08-01", "web.yaml");
