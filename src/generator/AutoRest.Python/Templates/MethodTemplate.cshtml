@@ -25,6 +25,7 @@
         @ParameterWrapComment(string.Empty, ":param operation_config: :ref:`Operation configuration overrides<msrest:optionsforoperations>`.")
         @ParameterWrapComment(string.Empty, string.Format(":rtype: {0}", Model.GetDocumentationType(Model.ReturnType.Body)))
         @ParameterWrapComment(string.Empty, ":rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if raw=true")
+        @ParameterWrapComment(string.Empty, string.Format(":raises: {0}", Model.ExceptionDocumentation))
         """
         @Model.BuildInputMappings()
 @if (Model.InputParameterTransformation.Any())
