@@ -797,7 +797,7 @@ namespace AutoRest.NodeJS
                          .AppendLine("name: 'Sequence',")
                          .AppendLine("element: {")
                            .Indent()
-                           .AppendLine("{0}", sequence.ElementType.ConstructMapper(sequence.ElementType.Name + "ElementType", null, false, false))
+                           .AppendLine("{0}", sequence.ElementType.ConstructMapper(sequence.ElementType.DeclarationName + "ElementType", null, false, false))
                          .Outdent().AppendLine("}").Outdent().AppendLine("}");
             }
             else if (dictionary != null)
@@ -807,7 +807,7 @@ namespace AutoRest.NodeJS
                          .AppendLine("name: 'Dictionary',")
                          .AppendLine("value: {")
                            .Indent()
-                           .AppendLine("{0}", dictionary.ValueType.ConstructMapper(dictionary.ValueType.Name + "ElementType", null, false, false))
+                           .AppendLine("{0}", dictionary.ValueType.ConstructMapper(dictionary.ValueType.DeclarationName + "ElementType", null, false, false))
                          .Outdent().AppendLine("}").Outdent().AppendLine("}");
             }
             else if (composite != null)

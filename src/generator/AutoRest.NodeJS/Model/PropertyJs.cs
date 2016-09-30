@@ -3,6 +3,7 @@
 // 
 
 using AutoRest.Core;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 
 namespace AutoRest.NodeJS.Model
@@ -17,16 +18,11 @@ namespace AutoRest.NodeJS.Model
             {
                 // completely replacing base behavior.
 
-                object clientName = null;
-                if (Extensions.TryGetValue("x-ms-client-name", out clientName))
-                {
-                    return CodeNamer.Instance.GetPropertyName(clientName as string);
-                }
+                // use either the overriden client name or the raw value
+                name = Extensions.GetValue<string>("x-ms-client-name").Else(Name.RawValue);
 
-                // start with raw value, clean it and camelcase it.
-                name = CodeNamer.Instance.CamelCase(CodeNamer.Instance.GetValidName( Name.FixedValue, '.', '_'));
+                return CodeNamer.Instance.GetPropertyName(name);
 
-                return name.Contains(".") && !name.StartsWith("'") ? $"'{name}'" : name;
             };
 
             SerializedName.OnGet += serializedName => (this.WasFlattened() ? serializedName : serializedName?.Replace(".", "\\\\."))?.Replace("\\\\\\\\","\\\\");

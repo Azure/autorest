@@ -241,6 +241,18 @@ namespace AutoRest.CSharp
         }
 
         /// <summary>
+        /// Returns true if the IModelType is a kind of string (ie, string PrimaryType or an Enum that is modeled as a string)
+        /// </summary>
+        /// <param name="t">ModelType to check</param>
+        /// <returns>true if the IModelType is a kind of string</returns>
+        public static bool IsKindOfString(this IModelType t) => 
+            t is PrimaryType && 
+                ((PrimaryType) t).KnownPrimaryType == KnownPrimaryType.String && 
+                ((PrimaryType) t).KnownFormat != KnownFormat.@char ||
+            t is EnumType && 
+                ((EnumType) t).ModelAsString;
+
+        /// <summary>
         /// Simple conversion of the type to string
         /// </summary>
         /// <param name="type">The type to convert</param>
@@ -249,11 +261,12 @@ namespace AutoRest.CSharp
         /// <returns></returns>
         public static string ToString(this IModelType type, string clientReference, string reference)
         {
-            PrimaryType primaryType = type as PrimaryType;
-            if (type == null || primaryType != null && primaryType.KnownPrimaryType == KnownPrimaryType.String && primaryType.KnownFormat != KnownFormat.@char)
+            if (type == null || type.IsKindOfString() )
             {
                 return reference;
             }
+
+            PrimaryType primaryType = type as PrimaryType;
             string serializationSettings = string.Format(CultureInfo.InvariantCulture, "{0}.SerializationSettings", clientReference);
             if (primaryType != null)
             {

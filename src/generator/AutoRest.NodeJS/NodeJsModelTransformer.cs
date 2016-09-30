@@ -74,13 +74,8 @@ namespace AutoRest.NodeJS
                 foreach (var parameterTransformation in method.InputParameterTransformation)
                 {
                     parameterTransformation.OutputParameter.Name =
-
-                    parameterTransformation.OutputParameter.Name =
                         method.GetUniqueName(
                             CodeNamer.Instance.GetParameterName(parameterTransformation.OutputParameter.GetClientName()));
-                    // parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
-
-                    // QuoteParameter(parameterTransformation.OutputParameter);
 
                     foreach (var parameterMapping in parameterTransformation.ParameterMappings)
                     {
