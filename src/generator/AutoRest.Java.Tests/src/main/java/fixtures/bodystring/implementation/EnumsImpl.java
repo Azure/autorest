@@ -86,11 +86,9 @@ public final class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Colors object if successful.
      */
-    public Colors getNotExpandable() throws ErrorException, IOException {
+    public Colors getNotExpandable() {
         return getNotExpandableWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -149,11 +147,8 @@ public final class EnumsImpl implements Enums {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putNotExpandable(Colors stringBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putNotExpandable(Colors stringBody) {
         putNotExpandableWithServiceResponseAsync(stringBody).toBlocking().single().getBody();
     }
 
@@ -217,11 +212,9 @@ public final class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Colors object if successful.
      */
-    public Colors getReferenced() throws ErrorException, IOException {
+    public Colors getReferenced() {
         return getReferencedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -280,11 +273,8 @@ public final class EnumsImpl implements Enums {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putReferenced(Colors enumStringBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putReferenced(Colors enumStringBody) {
         putReferencedWithServiceResponseAsync(enumStringBody).toBlocking().single().getBody();
     }
 
@@ -348,11 +338,9 @@ public final class EnumsImpl implements Enums {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the RefColorConstant object if successful.
      */
-    public RefColorConstant getReferencedConstant() throws ErrorException, IOException {
+    public RefColorConstant getReferencedConstant() {
         return getReferencedConstantWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -411,11 +399,8 @@ public final class EnumsImpl implements Enums {
      * Sends value 'green-color' from a constant.
      *
      * @param enumStringBody the RefColorConstant value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putReferencedConstant(RefColorConstant enumStringBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putReferencedConstant(RefColorConstant enumStringBody) {
         putReferencedConstantWithServiceResponseAsync(enumStringBody).toBlocking().single().getBody();
     }
 

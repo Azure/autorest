@@ -126,12 +126,9 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product put201CreatingSucceeded200() throws CloudException, IOException, InterruptedException {
+    public Product put201CreatingSucceeded200() {
         return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -173,12 +170,9 @@ public final class LRORetrysImpl implements LRORetrys {
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product put201CreatingSucceeded200(Product product) throws CloudException, IOException, InterruptedException {
+    public Product put201CreatingSucceeded200(Product product) {
         return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -223,11 +217,9 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut201CreatingSucceeded200() throws CloudException, IOException {
+    public Product beginPut201CreatingSucceeded200() {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -280,11 +272,9 @@ public final class LRORetrysImpl implements LRORetrys {
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPut201CreatingSucceeded200(Product product) throws CloudException, IOException {
+    public Product beginPut201CreatingSucceeded200(Product product) {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -347,12 +337,9 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object  if successful.
      */
-    public Product putAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
+    public Product putAsyncRelativeRetrySucceeded() {
         return putAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -394,12 +381,9 @@ public final class LRORetrysImpl implements LRORetrys {
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product putAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
+    public Product putAsyncRelativeRetrySucceeded(Product product) {
         return putAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -444,11 +428,9 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPutAsyncRelativeRetrySucceeded() throws CloudException, IOException {
+    public Product beginPutAsyncRelativeRetrySucceeded() {
         return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -501,11 +483,9 @@ public final class LRORetrysImpl implements LRORetrys {
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginPutAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException {
+    public Product beginPutAsyncRelativeRetrySucceeded(Product product) {
         return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -567,12 +547,9 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object if successful.
      */
-    public Product deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException {
+    public Product deleteProvisioning202Accepted200Succeeded() {
         return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -613,11 +590,9 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product beginDeleteProvisioning202Accepted200Succeeded() throws CloudException, IOException {
+    public Product beginDeleteProvisioning202Accepted200Succeeded() {
         return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -676,11 +651,8 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void delete202Retry200() throws CloudException, IOException, InterruptedException {
+    public void delete202Retry200() {
         delete202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -721,10 +693,8 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginDelete202Retry200() throws CloudException, IOException {
+    public void beginDelete202Retry200() {
         beginDelete202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -782,11 +752,8 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void deleteAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
+    public void deleteAsyncRelativeRetrySucceeded() {
         deleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -827,10 +794,8 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginDeleteAsyncRelativeRetrySucceeded() throws CloudException, IOException {
+    public void beginDeleteAsyncRelativeRetrySucceeded() {
         beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -888,11 +853,8 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void post202Retry200() throws CloudException, IOException, InterruptedException {
+    public void post202Retry200() {
         post202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -934,11 +896,8 @@ public final class LRORetrysImpl implements LRORetrys {
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void post202Retry200(Product product) throws CloudException, IOException, InterruptedException {
+    public void post202Retry200(Product product) {
         post202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -983,10 +942,8 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginPost202Retry200() throws CloudException, IOException {
+    public void beginPost202Retry200() {
         beginPost202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1039,10 +996,8 @@ public final class LRORetrysImpl implements LRORetrys {
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginPost202Retry200(Product product) throws CloudException, IOException {
+    public void beginPost202Retry200(Product product) {
         beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
@@ -1104,11 +1059,8 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void postAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
+    public void postAsyncRelativeRetrySucceeded() {
         postAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
@@ -1150,11 +1102,8 @@ public final class LRORetrysImpl implements LRORetrys {
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws InterruptedException exception thrown when long running operation is interrupted
      */
-    public void postAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
+    public void postAsyncRelativeRetrySucceeded(Product product) {
         postAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
@@ -1199,10 +1148,8 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginPostAsyncRelativeRetrySucceeded() throws CloudException, IOException {
+    public void beginPostAsyncRelativeRetrySucceeded() {
         beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1255,10 +1202,8 @@ public final class LRORetrysImpl implements LRORetrys {
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void beginPostAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException {
+    public void beginPostAsyncRelativeRetrySucceeded(Product product) {
         beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 

@@ -112,11 +112,9 @@ public final class StringsImpl implements Strings {
     /**
      * Get null string value value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the String object if successful.
      */
-    public String getNull() throws ErrorException, IOException {
+    public String getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -174,10 +172,8 @@ public final class StringsImpl implements Strings {
     /**
      * Set string value null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putNull() throws ErrorException, IOException {
+    public void putNull() {
         putNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -230,10 +226,8 @@ public final class StringsImpl implements Strings {
      * Set string value null.
      *
      * @param stringBody Possible values include: ''
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putNull(String stringBody) throws ErrorException, IOException {
+    public void putNull(String stringBody) {
         putNullWithServiceResponseAsync(stringBody).toBlocking().single().getBody();
     }
 
@@ -294,11 +288,9 @@ public final class StringsImpl implements Strings {
     /**
      * Get empty string value value ''.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the String object if successful.
      */
-    public String getEmpty() throws ErrorException, IOException {
+    public String getEmpty() {
         return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -357,11 +349,8 @@ public final class StringsImpl implements Strings {
      * Set string value empty ''.
      *
      * @param stringBody Possible values include: ''
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putEmpty(String stringBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putEmpty(String stringBody) {
         putEmptyWithServiceResponseAsync(stringBody).toBlocking().single().getBody();
     }
 
@@ -425,11 +414,9 @@ public final class StringsImpl implements Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the String object if successful.
      */
-    public String getMbcs() throws ErrorException, IOException {
+    public String getMbcs() {
         return getMbcsWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -488,11 +475,8 @@ public final class StringsImpl implements Strings {
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putMbcs(String stringBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putMbcs(String stringBody) {
         putMbcsWithServiceResponseAsync(stringBody).toBlocking().single().getBody();
     }
 
@@ -556,11 +540,9 @@ public final class StringsImpl implements Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the String object if successful.
      */
-    public String getWhitespace() throws ErrorException, IOException {
+    public String getWhitespace() {
         return getWhitespaceWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -619,11 +601,8 @@ public final class StringsImpl implements Strings {
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putWhitespace(String stringBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putWhitespace(String stringBody) {
         putWhitespaceWithServiceResponseAsync(stringBody).toBlocking().single().getBody();
     }
 
@@ -687,11 +666,9 @@ public final class StringsImpl implements Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the String object if successful.
      */
-    public String getNotProvided() throws ErrorException, IOException {
+    public String getNotProvided() {
         return getNotProvidedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -749,11 +726,9 @@ public final class StringsImpl implements Strings {
     /**
      * Get value that is base64 encoded.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object if successful.
      */
-    public byte[] getBase64Encoded() throws ErrorException, IOException {
+    public byte[] getBase64Encoded() {
         return getBase64EncodedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -816,11 +791,9 @@ public final class StringsImpl implements Strings {
     /**
      * Get value that is base64url encoded.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object if successful.
      */
-    public byte[] getBase64UrlEncoded() throws ErrorException, IOException {
+    public byte[] getBase64UrlEncoded() {
         return getBase64UrlEncodedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -884,11 +857,8 @@ public final class StringsImpl implements Strings {
      * Put value that is base64url encoded.
      *
      * @param stringBody the Base64Url value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putBase64UrlEncoded(byte[] stringBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putBase64UrlEncoded(byte[] stringBody) {
         putBase64UrlEncodedWithServiceResponseAsync(stringBody).toBlocking().single().getBody();
     }
 
@@ -953,11 +923,9 @@ public final class StringsImpl implements Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object if successful.
      */
-    public byte[] getNullBase64UrlEncoded() throws ErrorException, IOException {
+    public byte[] getNullBase64UrlEncoded() {
         return getNullBase64UrlEncodedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

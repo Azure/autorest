@@ -19,16 +19,12 @@
 {
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
-@foreach (var exception in Model.ExceptionStatements)
-{
-@: * @@throws @exception
-}
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object if successful.
 }
  */
-@Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString;
+@Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodRequiredParameterDeclaration);
 @EmptyLine
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
@@ -114,16 +110,12 @@ Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped> 
 {
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
-@foreach (var exception in Model.ExceptionStatements)
-{
-@: * @@throws @exception
-}
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object if successful.
 }
  */
-@Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString;
+@Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodParameterDeclaration);
 @EmptyLine
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))

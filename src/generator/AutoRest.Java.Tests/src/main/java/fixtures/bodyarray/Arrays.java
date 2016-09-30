@@ -13,9 +13,7 @@ package fixtures.bodyarray;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -32,11 +30,9 @@ public interface Arrays {
     /**
      * Get null array value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
      */
-    List<Integer> getNull() throws ErrorException, IOException;
+    List<Integer> getNull();
 
     /**
      * Get null array value.
@@ -63,11 +59,9 @@ public interface Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
      */
-    List<Integer> getInvalid() throws ErrorException, IOException;
+    List<Integer> getInvalid();
 
     /**
      * Get invalid array [1, 2, 3.
@@ -94,11 +88,9 @@ public interface Arrays {
     /**
      * Get empty array value [].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
      */
-    List<Integer> getEmpty() throws ErrorException, IOException;
+    List<Integer> getEmpty();
 
     /**
      * Get empty array value [].
@@ -126,11 +118,8 @@ public interface Arrays {
      * Set array value empty [].
      *
      * @param arrayBody the List&lt;String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putEmpty(List<String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putEmpty(List<String> arrayBody);
 
     /**
      * Set array value empty [].
@@ -160,11 +149,9 @@ public interface Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Boolean&gt; object if successful.
      */
-    List<Boolean> getBooleanTfft() throws ErrorException, IOException;
+    List<Boolean> getBooleanTfft();
 
     /**
      * Get boolean array value [true, false, false, true].
@@ -192,11 +179,8 @@ public interface Arrays {
      * Set array value empty [true, false, false, true].
      *
      * @param arrayBody the List&lt;Boolean&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putBooleanTfft(List<Boolean> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putBooleanTfft(List<Boolean> arrayBody);
 
     /**
      * Set array value empty [true, false, false, true].
@@ -226,11 +210,9 @@ public interface Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Boolean&gt; object if successful.
      */
-    List<Boolean> getBooleanInvalidNull() throws ErrorException, IOException;
+    List<Boolean> getBooleanInvalidNull();
 
     /**
      * Get boolean array value [true, null, false].
@@ -257,11 +239,9 @@ public interface Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Boolean&gt; object if successful.
      */
-    List<Boolean> getBooleanInvalidString() throws ErrorException, IOException;
+    List<Boolean> getBooleanInvalidString();
 
     /**
      * Get boolean array value [true, 'boolean', false].
@@ -288,11 +268,9 @@ public interface Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
      */
-    List<Integer> getIntegerValid() throws ErrorException, IOException;
+    List<Integer> getIntegerValid();
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -320,11 +298,8 @@ public interface Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Integer&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putIntegerValid(List<Integer> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putIntegerValid(List<Integer> arrayBody);
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -354,11 +329,9 @@ public interface Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
      */
-    List<Integer> getIntInvalidNull() throws ErrorException, IOException;
+    List<Integer> getIntInvalidNull();
 
     /**
      * Get integer array value [1, null, 0].
@@ -385,11 +358,9 @@ public interface Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
      */
-    List<Integer> getIntInvalidString() throws ErrorException, IOException;
+    List<Integer> getIntInvalidString();
 
     /**
      * Get integer array value [1, 'integer', 0].
@@ -416,11 +387,9 @@ public interface Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Long&gt; object if successful.
      */
-    List<Long> getLongValid() throws ErrorException, IOException;
+    List<Long> getLongValid();
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -448,11 +417,8 @@ public interface Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Long&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putLongValid(List<Long> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putLongValid(List<Long> arrayBody);
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -482,11 +448,9 @@ public interface Arrays {
     /**
      * Get long array value [1, null, 0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Long&gt; object if successful.
      */
-    List<Long> getLongInvalidNull() throws ErrorException, IOException;
+    List<Long> getLongInvalidNull();
 
     /**
      * Get long array value [1, null, 0].
@@ -513,11 +477,9 @@ public interface Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Long&gt; object if successful.
      */
-    List<Long> getLongInvalidString() throws ErrorException, IOException;
+    List<Long> getLongInvalidString();
 
     /**
      * Get long array value [1, 'integer', 0].
@@ -544,11 +506,9 @@ public interface Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
      */
-    List<Double> getFloatValid() throws ErrorException, IOException;
+    List<Double> getFloatValid();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -576,11 +536,8 @@ public interface Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putFloatValid(List<Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putFloatValid(List<Double> arrayBody);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -610,11 +567,9 @@ public interface Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
      */
-    List<Double> getFloatInvalidNull() throws ErrorException, IOException;
+    List<Double> getFloatInvalidNull();
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -641,11 +596,9 @@ public interface Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
      */
-    List<Double> getFloatInvalidString() throws ErrorException, IOException;
+    List<Double> getFloatInvalidString();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -672,11 +625,9 @@ public interface Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
      */
-    List<Double> getDoubleValid() throws ErrorException, IOException;
+    List<Double> getDoubleValid();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -704,11 +655,8 @@ public interface Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putDoubleValid(List<Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDoubleValid(List<Double> arrayBody);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -738,11 +686,9 @@ public interface Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
      */
-    List<Double> getDoubleInvalidNull() throws ErrorException, IOException;
+    List<Double> getDoubleInvalidNull();
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -769,11 +715,9 @@ public interface Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
      */
-    List<Double> getDoubleInvalidString() throws ErrorException, IOException;
+    List<Double> getDoubleInvalidString();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -800,11 +744,9 @@ public interface Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object if successful.
      */
-    List<String> getStringValid() throws ErrorException, IOException;
+    List<String> getStringValid();
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
@@ -832,11 +774,8 @@ public interface Arrays {
      * Set array value ['foo1', 'foo2', 'foo3'].
      *
      * @param arrayBody the List&lt;String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putStringValid(List<String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putStringValid(List<String> arrayBody);
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
@@ -866,11 +805,9 @@ public interface Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object if successful.
      */
-    List<String> getStringWithNull() throws ErrorException, IOException;
+    List<String> getStringWithNull();
 
     /**
      * Get string array value ['foo', null, 'foo2'].
@@ -897,11 +834,9 @@ public interface Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object if successful.
      */
-    List<String> getStringWithInvalid() throws ErrorException, IOException;
+    List<String> getStringWithInvalid();
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
@@ -928,11 +863,9 @@ public interface Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;UUID&gt; object if successful.
      */
-    List<UUID> getUuidValid() throws ErrorException, IOException;
+    List<UUID> getUuidValid();
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -960,11 +893,8 @@ public interface Arrays {
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
      * @param arrayBody the List&lt;UUID&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putUuidValid(List<UUID> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putUuidValid(List<UUID> arrayBody);
 
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -994,11 +924,9 @@ public interface Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;UUID&gt; object if successful.
      */
-    List<UUID> getUuidInvalidChars() throws ErrorException, IOException;
+    List<UUID> getUuidInvalidChars();
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
@@ -1025,11 +953,9 @@ public interface Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;LocalDate&gt; object if successful.
      */
-    List<LocalDate> getDateValid() throws ErrorException, IOException;
+    List<LocalDate> getDateValid();
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -1057,11 +983,8 @@ public interface Arrays {
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putDateValid(List<LocalDate> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateValid(List<LocalDate> arrayBody);
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -1091,11 +1014,9 @@ public interface Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;LocalDate&gt; object if successful.
      */
-    List<LocalDate> getDateInvalidNull() throws ErrorException, IOException;
+    List<LocalDate> getDateInvalidNull();
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
@@ -1122,11 +1043,9 @@ public interface Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;LocalDate&gt; object if successful.
      */
-    List<LocalDate> getDateInvalidChars() throws ErrorException, IOException;
+    List<LocalDate> getDateInvalidChars();
 
     /**
      * Get date array value ['2011-03-22', 'date'].
@@ -1153,11 +1072,9 @@ public interface Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object if successful.
      */
-    List<DateTime> getDateTimeValid() throws ErrorException, IOException;
+    List<DateTime> getDateTimeValid();
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -1185,11 +1102,8 @@ public interface Arrays {
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @param arrayBody the List&lt;DateTime&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putDateTimeValid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateTimeValid(List<DateTime> arrayBody);
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -1219,11 +1133,9 @@ public interface Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object if successful.
      */
-    List<DateTime> getDateTimeInvalidNull() throws ErrorException, IOException;
+    List<DateTime> getDateTimeInvalidNull();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
@@ -1250,11 +1162,9 @@ public interface Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object if successful.
      */
-    List<DateTime> getDateTimeInvalidChars() throws ErrorException, IOException;
+    List<DateTime> getDateTimeInvalidChars();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
@@ -1281,11 +1191,9 @@ public interface Arrays {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object if successful.
      */
-    List<DateTime> getDateTimeRfc1123Valid() throws ErrorException, IOException;
+    List<DateTime> getDateTimeRfc1123Valid();
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1313,11 +1221,8 @@ public interface Arrays {
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putDateTimeRfc1123Valid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateTimeRfc1123Valid(List<DateTime> arrayBody);
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1347,11 +1252,9 @@ public interface Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Period&gt; object if successful.
      */
-    List<Period> getDurationValid() throws ErrorException, IOException;
+    List<Period> getDurationValid();
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1379,11 +1282,8 @@ public interface Arrays {
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param arrayBody the List&lt;Period&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putDurationValid(List<Period> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDurationValid(List<Period> arrayBody);
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1413,11 +1313,9 @@ public interface Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;byte[]&gt; object if successful.
      */
-    List<byte[]> getByteValid() throws ErrorException, IOException;
+    List<byte[]> getByteValid();
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
@@ -1445,11 +1343,8 @@ public interface Arrays {
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
      *
      * @param arrayBody the List&lt;byte[]&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putByteValid(List<byte[]> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putByteValid(List<byte[]> arrayBody);
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
@@ -1479,11 +1374,9 @@ public interface Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;byte[]&gt; object if successful.
      */
-    List<byte[]> getByteInvalidNull() throws ErrorException, IOException;
+    List<byte[]> getByteInvalidNull();
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
@@ -1510,11 +1403,9 @@ public interface Arrays {
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;byte[]&gt; object if successful.
      */
-    List<byte[]> getBase64Url() throws ErrorException, IOException;
+    List<byte[]> getBase64Url();
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
@@ -1541,11 +1432,9 @@ public interface Arrays {
     /**
      * Get array of complex type null value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object if successful.
      */
-    List<Product> getComplexNull() throws ErrorException, IOException;
+    List<Product> getComplexNull();
 
     /**
      * Get array of complex type null value.
@@ -1572,11 +1461,9 @@ public interface Arrays {
     /**
      * Get empty array of complex type [].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object if successful.
      */
-    List<Product> getComplexEmpty() throws ErrorException, IOException;
+    List<Product> getComplexEmpty();
 
     /**
      * Get empty array of complex type [].
@@ -1603,11 +1490,9 @@ public interface Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object if successful.
      */
-    List<Product> getComplexItemNull() throws ErrorException, IOException;
+    List<Product> getComplexItemNull();
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
@@ -1634,11 +1519,9 @@ public interface Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object if successful.
      */
-    List<Product> getComplexItemEmpty() throws ErrorException, IOException;
+    List<Product> getComplexItemEmpty();
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
@@ -1665,11 +1548,9 @@ public interface Arrays {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object if successful.
      */
-    List<Product> getComplexValid() throws ErrorException, IOException;
+    List<Product> getComplexValid();
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1697,11 +1578,8 @@ public interface Arrays {
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @param arrayBody the List&lt;Product&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putComplexValid(List<Product> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putComplexValid(List<Product> arrayBody);
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1731,11 +1609,9 @@ public interface Arrays {
     /**
      * Get a null array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    List<List<String>> getArrayNull() throws ErrorException, IOException;
+    List<List<String>> getArrayNull();
 
     /**
      * Get a null array.
@@ -1762,11 +1638,9 @@ public interface Arrays {
     /**
      * Get an empty array [].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    List<List<String>> getArrayEmpty() throws ErrorException, IOException;
+    List<List<String>> getArrayEmpty();
 
     /**
      * Get an empty array [].
@@ -1793,11 +1667,9 @@ public interface Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    List<List<String>> getArrayItemNull() throws ErrorException, IOException;
+    List<List<String>> getArrayItemNull();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
@@ -1824,11 +1696,9 @@ public interface Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    List<List<String>> getArrayItemEmpty() throws ErrorException, IOException;
+    List<List<String>> getArrayItemEmpty();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
@@ -1855,11 +1725,9 @@ public interface Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    List<List<String>> getArrayValid() throws ErrorException, IOException;
+    List<List<String>> getArrayValid();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -1887,11 +1755,8 @@ public interface Arrays {
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putArrayValid(List<List<String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putArrayValid(List<List<String>> arrayBody);
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -1921,11 +1786,9 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    List<Map<String, String>> getDictionaryNull() throws ErrorException, IOException;
+    List<Map<String, String>> getDictionaryNull();
 
     /**
      * Get an array of Dictionaries with value null.
@@ -1952,11 +1815,9 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    List<Map<String, String>> getDictionaryEmpty() throws ErrorException, IOException;
+    List<Map<String, String>> getDictionaryEmpty();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
@@ -1983,11 +1844,9 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    List<Map<String, String>> getDictionaryItemNull() throws ErrorException, IOException;
+    List<Map<String, String>> getDictionaryItemNull();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2014,11 +1873,9 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    List<Map<String, String>> getDictionaryItemEmpty() throws ErrorException, IOException;
+    List<Map<String, String>> getDictionaryItemEmpty();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2045,11 +1902,9 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    List<Map<String, String>> getDictionaryValid() throws ErrorException, IOException;
+    List<Map<String, String>> getDictionaryValid();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2077,11 +1932,8 @@ public interface Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putDictionaryValid(List<Map<String, String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDictionaryValid(List<Map<String, String>> arrayBody);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].

@@ -77,11 +77,9 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error head501() throws ErrorException, IOException {
+    public Error head501() {
         return head501WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -138,11 +136,9 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error get501() throws ErrorException, IOException {
+    public Error get501() {
         return get501WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -199,11 +195,9 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error post505() throws ErrorException, IOException {
+    public Error post505() {
         return post505WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -256,11 +250,9 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error post505(Boolean booleanValue) throws ErrorException, IOException {
+    public Error post505(Boolean booleanValue) {
         return post505WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -320,11 +312,9 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error delete505() throws ErrorException, IOException {
+    public Error delete505() {
         return delete505WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -377,11 +367,9 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    public Error delete505(Boolean booleanValue) throws ErrorException, IOException {
+    public Error delete505(Boolean booleanValue) {
         return delete505WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 

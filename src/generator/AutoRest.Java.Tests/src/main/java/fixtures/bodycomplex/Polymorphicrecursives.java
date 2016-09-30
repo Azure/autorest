@@ -13,9 +13,7 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -26,11 +24,9 @@ public interface Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Fish object if successful.
      */
-    Fish getValid() throws ErrorException, IOException;
+    Fish getValid();
 
     /**
      * Get complex types that are polymorphic and have recursive references.
@@ -110,11 +106,8 @@ public interface Polymorphicrecursives {
              }
          ]
      }
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putValid(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putValid(Fish complexBody);
 
     /**
      * Put complex types that are polymorphic and have recursive references.

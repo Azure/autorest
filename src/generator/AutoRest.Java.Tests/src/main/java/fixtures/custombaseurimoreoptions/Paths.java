@@ -13,8 +13,6 @@ package fixtures.custombaseurimoreoptions;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.custombaseurimoreoptions.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -28,11 +26,8 @@ public interface Paths {
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void getEmpty(String vault, String secret, String keyName) throws ErrorException, IOException, IllegalArgumentException;
+    void getEmpty(String vault, String secret, String keyName);
 
     /**
      * Get a 200 to test a valid base uri.
@@ -71,11 +66,8 @@ public interface Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void getEmpty(String vault, String secret, String keyName, String keyVersion) throws ErrorException, IOException, IllegalArgumentException;
+    void getEmpty(String vault, String secret, String keyName, String keyVersion);
 
     /**
      * Get a 200 to test a valid base uri.

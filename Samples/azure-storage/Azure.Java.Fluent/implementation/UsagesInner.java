@@ -57,13 +57,10 @@ public final class UsagesInner {
     /**
      * Gets the current usage count and the limit for the resources under the subscription.
      *
-     * @throws CloudException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;UsageInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;UsageInner&gt; object if successful.
      */
-    public ServiceResponse<List<UsageInner>> list() throws CloudException, IOException, IllegalArgumentException {
-        return listAsync().toBlocking().single();
+    public List<UsageInner> list() {
+        return listWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -73,7 +70,7 @@ public final class UsagesInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<UsageInner>> listAsync(final ServiceCallback<List<UsageInner>> serviceCallback) {
-        return ServiceCall.create(listAsync(), serviceCallback);
+        return ServiceCall.create(listWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -81,7 +78,21 @@ public final class UsagesInner {
      *
      * @return the observable to the List&lt;UsageInner&gt; object
      */
-    public Observable<ServiceResponse<List<UsageInner>>> listAsync() {
+    public Observable<List<UsageInner>> listAsync() {
+        return listWithServiceResponseAsync().map(new Func1<ServiceResponse<List<UsageInner>>, List<UsageInner>>() {
+            @Override
+            public List<UsageInner> call(ServiceResponse<List<UsageInner>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Gets the current usage count and the limit for the resources under the subscription.
+     *
+     * @return the observable to the List&lt;UsageInner&gt; object
+     */
+    public Observable<ServiceResponse<List<UsageInner>>> listWithServiceResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }

@@ -14,8 +14,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.Error;
-import fixtures.http.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -26,11 +24,9 @@ public interface HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error head501() throws ErrorException, IOException;
+    Error head501();
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -57,11 +53,9 @@ public interface HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error get501() throws ErrorException, IOException;
+    Error get501();
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -88,11 +82,9 @@ public interface HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error post505() throws ErrorException, IOException;
+    Error post505();
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -119,11 +111,9 @@ public interface HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error post505(Boolean booleanValue) throws ErrorException, IOException;
+    Error post505(Boolean booleanValue);
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -153,11 +143,9 @@ public interface HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error delete505() throws ErrorException, IOException;
+    Error delete505();
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -184,11 +172,9 @@ public interface HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error delete505(Boolean booleanValue) throws ErrorException, IOException;
+    Error delete505(Boolean booleanValue);
 
     /**
      * Return 505 status code - should be represented in the client as an error.

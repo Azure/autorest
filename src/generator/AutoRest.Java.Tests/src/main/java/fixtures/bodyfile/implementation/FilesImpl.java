@@ -74,11 +74,9 @@ public final class FilesImpl implements Files {
     /**
      * Get file.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the InputStream object if successful.
      */
-    public InputStream getFile() throws ErrorException, IOException {
+    public InputStream getFile() {
         return getFileWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -136,11 +134,9 @@ public final class FilesImpl implements Files {
     /**
      * Get a large file.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the InputStream object if successful.
      */
-    public InputStream getFileLarge() throws ErrorException, IOException {
+    public InputStream getFileLarge() {
         return getFileLargeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -198,11 +194,9 @@ public final class FilesImpl implements Files {
     /**
      * Get empty file.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the InputStream object if successful.
      */
-    public InputStream getEmptyFile() throws ErrorException, IOException {
+    public InputStream getEmptyFile() {
         return getEmptyFileWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

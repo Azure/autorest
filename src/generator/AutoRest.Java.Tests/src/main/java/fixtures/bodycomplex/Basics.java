@@ -14,8 +14,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.Basic;
-import fixtures.bodycomplex.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -26,11 +24,9 @@ public interface Basics {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object if successful.
      */
-    Basic getValid() throws ErrorException, IOException;
+    Basic getValid();
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
@@ -58,11 +54,8 @@ public interface Basics {
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putValid(Basic complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putValid(Basic complexBody);
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
@@ -92,11 +85,9 @@ public interface Basics {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object if successful.
      */
-    Basic getInvalid() throws ErrorException, IOException;
+    Basic getInvalid();
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
@@ -123,11 +114,9 @@ public interface Basics {
     /**
      * Get a basic complex type that is empty.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object if successful.
      */
-    Basic getEmpty() throws ErrorException, IOException;
+    Basic getEmpty();
 
     /**
      * Get a basic complex type that is empty.
@@ -154,11 +143,9 @@ public interface Basics {
     /**
      * Get a basic complex type whose properties are null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object if successful.
      */
-    Basic getNull() throws ErrorException, IOException;
+    Basic getNull();
 
     /**
      * Get a basic complex type whose properties are null.
@@ -185,11 +172,9 @@ public interface Basics {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object if successful.
      */
-    Basic getNotProvided() throws ErrorException, IOException;
+    Basic getNotProvided();
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.

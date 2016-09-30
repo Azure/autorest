@@ -64,30 +64,40 @@ namespace AutoRest.Ruby.Azure.TemplateModels
         }
 
         /// <summary>
-        /// Returns invocation string for next method async.
+        /// Returns Ruby code as string which sets `next_method` property of the page with the respective next paging method
+        /// and performs parameter re-assignment when required (ex. parameter grouping cases)
         /// </summary>
-        public string InvokeNextMethodAsync()
+        public string AssignNextMethodToPage()
         {
-            StringBuilder builder = new StringBuilder();
             string nextMethodName;
+            Method nextMethod = null;
             PageableExtension pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(Extensions[AzureExtensions.PageableExtension].ToString());
 
-            Method nextMethod = null;
-            if (pageableExtension != null && !string.IsNullOrEmpty(pageableExtension.OperationName))
+            // When pageable extension have operation name
+            if (pageableExtension != null && !string.IsNullOrWhiteSpace(pageableExtension.OperationName))
             {
                 nextMethod = ServiceClient.Methods.FirstOrDefault(m =>
                     pageableExtension.OperationName.Equals(m.SerializedName, StringComparison.OrdinalIgnoreCase));
                 nextMethodName = nextMethod.Name;
             }
+            // When pageable extension does not have operation name
             else
             {
                 nextMethodName = (string)Extensions["nextMethodName"];
                 nextMethod = ServiceClient.Methods.Where(m => m.Name == nextMethodName).FirstOrDefault();
             }
 
+            IndentedStringBuilder builder = new IndentedStringBuilder("  ");
+
+            // As there is no distinguishable property in next link parameter, we'll check to see whether any parameter contains "next" in the parameter name
+            Parameter nextLinkParameter = nextMethod.Parameters.Where(p => p.Name.IndexOf("next", StringComparison.OrdinalIgnoreCase) >= 0).FirstOrDefault();
+            builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "page.next_method = Proc.new do |{0}|", nextLinkParameter.Name));
+
+            // In case of parmeter grouping, next methods parameter needs to be mapped with the origin methods parameter
             IEnumerable<Parameter> origMethodGroupedParameters = Parameters.Where(p => p.Name.Contains(Name));
             if (origMethodGroupedParameters.Count() > 0)
             {
+                builder.Indent();
                 foreach (Parameter param in nextMethod.Parameters)
                 {
                     if (param.Name.Contains(nextMethod.Name) && (param.Name.Length > nextMethod.Name.Length)) //parameter that contains the method name + postfix, it's a grouped param
@@ -97,13 +107,14 @@ namespace AutoRest.Ruby.Azure.TemplateModels
                         builder.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0} = {1}", param.Name, argumentName));
                     }
                 }
+                builder.Outdent();
             }
 
-            IList<string> headerParams = nextMethod.Parameters.Where(p => (p.Location == ParameterLocation.Header || p.Location == ParameterLocation.None) && !p.IsConstant && p.ClientProperty == null).Select(p => p.Name).ToList();
-            headerParams.Add("custom_headers");
-            string nextMethodParamaterInvocation = string.Join(", ", headerParams);
+            // Create AzureMethodTemplateModel from nextMethod to determine nextMethod's MethodParameterInvocation signature
+            AzureMethodTemplateModel nextMethodTemplateModel = new AzureMethodTemplateModel(nextMethod, ServiceClient);
+            builder.Indent().AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}_async({1})", nextMethodName, nextMethodTemplateModel.MethodParameterInvocation));
+            builder.Outdent().Append(String.Format(CultureInfo.InvariantCulture, "end"));
 
-            builder.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}_async(next_link, {1})", nextMethodName, nextMethodParamaterInvocation));
             return builder.ToString();
         }
 

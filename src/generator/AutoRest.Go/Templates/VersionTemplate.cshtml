@@ -24,9 +24,9 @@ import (
 @EmptyLine
 
 const (
-    major = "4"
-    minor = "0"
-    patch = "0"
+    major = "@(Model.Version[0])"
+    minor = "@(Model.Version[1])"
+    patch = "@(Model.Version[2])"
     // Always begin a "tag" with a dash (as per http://semver.org)
     tag   = "-beta"
 

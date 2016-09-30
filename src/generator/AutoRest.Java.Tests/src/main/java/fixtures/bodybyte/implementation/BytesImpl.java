@@ -79,11 +79,9 @@ public final class BytesImpl implements Bytes {
     /**
      * Get null byte value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object if successful.
      */
-    public byte[] getNull() throws ErrorException, IOException {
+    public byte[] getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -141,11 +139,9 @@ public final class BytesImpl implements Bytes {
     /**
      * Get empty byte value ''.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object if successful.
      */
-    public byte[] getEmpty() throws ErrorException, IOException {
+    public byte[] getEmpty() {
         return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -203,11 +199,9 @@ public final class BytesImpl implements Bytes {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object if successful.
      */
-    public byte[] getNonAscii() throws ErrorException, IOException {
+    public byte[] getNonAscii() {
         return getNonAsciiWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -266,11 +260,8 @@ public final class BytesImpl implements Bytes {
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putNonAscii(byte[] byteBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putNonAscii(byte[] byteBody) {
         putNonAsciiWithServiceResponseAsync(byteBody).toBlocking().single().getBody();
     }
 
@@ -334,11 +325,9 @@ public final class BytesImpl implements Bytes {
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object if successful.
      */
-    public byte[] getInvalid() throws ErrorException, IOException {
+    public byte[] getInvalid() {
         return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

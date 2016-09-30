@@ -13,8 +13,6 @@ package fixtures.bodyboolean;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodyboolean.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -25,11 +23,9 @@ public interface Bools {
     /**
      * Get true Boolean value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    boolean getTrue() throws ErrorException, IOException;
+    boolean getTrue();
 
     /**
      * Get true Boolean value.
@@ -57,10 +53,8 @@ public interface Bools {
      * Set Boolean value true.
      *
      * @param boolBody the boolean value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putTrue(boolean boolBody) throws ErrorException, IOException;
+    void putTrue(boolean boolBody);
 
     /**
      * Set Boolean value true.
@@ -90,11 +84,9 @@ public interface Bools {
     /**
      * Get false Boolean value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    boolean getFalse() throws ErrorException, IOException;
+    boolean getFalse();
 
     /**
      * Get false Boolean value.
@@ -122,10 +114,8 @@ public interface Bools {
      * Set Boolean value false.
      *
      * @param boolBody the boolean value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putFalse(boolean boolBody) throws ErrorException, IOException;
+    void putFalse(boolean boolBody);
 
     /**
      * Set Boolean value false.
@@ -155,11 +145,9 @@ public interface Bools {
     /**
      * Get null Boolean value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    boolean getNull() throws ErrorException, IOException;
+    boolean getNull();
 
     /**
      * Get null Boolean value.
@@ -186,11 +174,9 @@ public interface Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    boolean getInvalid() throws ErrorException, IOException;
+    boolean getInvalid();
 
     /**
      * Get invalid Boolean value.

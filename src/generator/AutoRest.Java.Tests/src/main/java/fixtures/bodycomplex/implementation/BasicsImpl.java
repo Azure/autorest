@@ -86,11 +86,9 @@ public final class BasicsImpl implements Basics {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object if successful.
      */
-    public Basic getValid() throws ErrorException, IOException {
+    public Basic getValid() {
         return getValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -149,11 +147,8 @@ public final class BasicsImpl implements Basics {
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putValid(Basic complexBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putValid(Basic complexBody) {
         putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
@@ -218,11 +213,9 @@ public final class BasicsImpl implements Basics {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object if successful.
      */
-    public Basic getInvalid() throws ErrorException, IOException {
+    public Basic getInvalid() {
         return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -280,11 +273,9 @@ public final class BasicsImpl implements Basics {
     /**
      * Get a basic complex type that is empty.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object if successful.
      */
-    public Basic getEmpty() throws ErrorException, IOException {
+    public Basic getEmpty() {
         return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -342,11 +333,9 @@ public final class BasicsImpl implements Basics {
     /**
      * Get a basic complex type whose properties are null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object if successful.
      */
-    public Basic getNull() throws ErrorException, IOException {
+    public Basic getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -404,11 +393,9 @@ public final class BasicsImpl implements Basics {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object if successful.
      */
-    public Basic getNotProvided() throws ErrorException, IOException {
+    public Basic getNotProvided() {
         return getNotProvidedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

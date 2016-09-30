@@ -14,8 +14,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.Error;
-import fixtures.http.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -26,11 +24,9 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error head400() throws ErrorException, IOException;
+    Error head400();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -57,11 +53,9 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error get400() throws ErrorException, IOException;
+    Error get400();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -88,11 +82,9 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error put400() throws ErrorException, IOException;
+    Error put400();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -119,11 +111,9 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error put400(Boolean booleanValue) throws ErrorException, IOException;
+    Error put400(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -153,11 +143,9 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error patch400() throws ErrorException, IOException;
+    Error patch400();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -184,11 +172,9 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error patch400(Boolean booleanValue) throws ErrorException, IOException;
+    Error patch400(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -218,11 +204,9 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error post400() throws ErrorException, IOException;
+    Error post400();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -249,11 +233,9 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error post400(Boolean booleanValue) throws ErrorException, IOException;
+    Error post400(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -283,11 +265,9 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error delete400() throws ErrorException, IOException;
+    Error delete400();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -314,11 +294,9 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error delete400(Boolean booleanValue) throws ErrorException, IOException;
+    Error delete400(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -348,11 +326,9 @@ public interface HttpClientFailures {
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error head401() throws ErrorException, IOException;
+    Error head401();
 
     /**
      * Return 401 status code - should be represented in the client as an error.
@@ -379,11 +355,9 @@ public interface HttpClientFailures {
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error get402() throws ErrorException, IOException;
+    Error get402();
 
     /**
      * Return 402 status code - should be represented in the client as an error.
@@ -410,11 +384,9 @@ public interface HttpClientFailures {
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error get403() throws ErrorException, IOException;
+    Error get403();
 
     /**
      * Return 403 status code - should be represented in the client as an error.
@@ -441,11 +413,9 @@ public interface HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error put404() throws ErrorException, IOException;
+    Error put404();
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -472,11 +442,9 @@ public interface HttpClientFailures {
      * Return 404 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error put404(Boolean booleanValue) throws ErrorException, IOException;
+    Error put404(Boolean booleanValue);
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -506,11 +474,9 @@ public interface HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error patch405() throws ErrorException, IOException;
+    Error patch405();
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -537,11 +503,9 @@ public interface HttpClientFailures {
      * Return 405 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error patch405(Boolean booleanValue) throws ErrorException, IOException;
+    Error patch405(Boolean booleanValue);
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -571,11 +535,9 @@ public interface HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error post406() throws ErrorException, IOException;
+    Error post406();
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -602,11 +564,9 @@ public interface HttpClientFailures {
      * Return 406 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error post406(Boolean booleanValue) throws ErrorException, IOException;
+    Error post406(Boolean booleanValue);
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -636,11 +596,9 @@ public interface HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error delete407() throws ErrorException, IOException;
+    Error delete407();
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -667,11 +625,9 @@ public interface HttpClientFailures {
      * Return 407 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error delete407(Boolean booleanValue) throws ErrorException, IOException;
+    Error delete407(Boolean booleanValue);
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -701,11 +657,9 @@ public interface HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error put409() throws ErrorException, IOException;
+    Error put409();
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -732,11 +686,9 @@ public interface HttpClientFailures {
      * Return 409 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error put409(Boolean booleanValue) throws ErrorException, IOException;
+    Error put409(Boolean booleanValue);
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -766,11 +718,9 @@ public interface HttpClientFailures {
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error head410() throws ErrorException, IOException;
+    Error head410();
 
     /**
      * Return 410 status code - should be represented in the client as an error.
@@ -797,11 +747,9 @@ public interface HttpClientFailures {
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error get411() throws ErrorException, IOException;
+    Error get411();
 
     /**
      * Return 411 status code - should be represented in the client as an error.
@@ -828,11 +776,9 @@ public interface HttpClientFailures {
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error get412() throws ErrorException, IOException;
+    Error get412();
 
     /**
      * Return 412 status code - should be represented in the client as an error.
@@ -859,11 +805,9 @@ public interface HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error put413() throws ErrorException, IOException;
+    Error put413();
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -890,11 +834,9 @@ public interface HttpClientFailures {
      * Return 413 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error put413(Boolean booleanValue) throws ErrorException, IOException;
+    Error put413(Boolean booleanValue);
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -924,11 +866,9 @@ public interface HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error patch414() throws ErrorException, IOException;
+    Error patch414();
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -955,11 +895,9 @@ public interface HttpClientFailures {
      * Return 414 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error patch414(Boolean booleanValue) throws ErrorException, IOException;
+    Error patch414(Boolean booleanValue);
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -989,11 +927,9 @@ public interface HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error post415() throws ErrorException, IOException;
+    Error post415();
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -1020,11 +956,9 @@ public interface HttpClientFailures {
      * Return 415 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error post415(Boolean booleanValue) throws ErrorException, IOException;
+    Error post415(Boolean booleanValue);
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -1054,11 +988,9 @@ public interface HttpClientFailures {
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error get416() throws ErrorException, IOException;
+    Error get416();
 
     /**
      * Return 416 status code - should be represented in the client as an error.
@@ -1085,11 +1017,9 @@ public interface HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error delete417() throws ErrorException, IOException;
+    Error delete417();
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -1116,11 +1046,9 @@ public interface HttpClientFailures {
      * Return 417 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error delete417(Boolean booleanValue) throws ErrorException, IOException;
+    Error delete417(Boolean booleanValue);
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -1150,11 +1078,9 @@ public interface HttpClientFailures {
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error head429() throws ErrorException, IOException;
+    Error head429();
 
     /**
      * Return 429 status code - should be represented in the client as an error.

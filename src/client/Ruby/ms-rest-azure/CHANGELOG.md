@@ -1,3 +1,9 @@
+##2016.09.15 ms_rest_azure version 0.5.0
+* Updating ms_rest dependecy to version 0.5.0
+* Adding known Azure Environments in ruby runtime for easy discovery
+* Default Azure active directory url is updated from `https://login.windows.net/` to `https://login.microsoftonline.com/` (Breaking Change)
+* Using bundled default ca-cert from ms_rest
+
 ##2016.08.10 ms_rest_azure version 0.4.0
 * Adding & inheriting serialization class from ms_rest generic serializer
 

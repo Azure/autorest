@@ -195,11 +195,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header value "User-Agent": "overwrite".
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramExistingKey(String userAgent) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramExistingKey(String userAgent) {
         paramExistingKeyWithServiceResponseAsync(userAgent).toBlocking().single().getBody();
     }
 
@@ -263,10 +260,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void responseExistingKey() throws ErrorException, IOException {
+    public void responseExistingKey() {
         responseExistingKeyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -325,11 +320,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header value "Content-Type": "text/html".
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramProtectedKey(String contentType) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramProtectedKey(String contentType) {
         paramProtectedKeyWithServiceResponseAsync(contentType).toBlocking().single().getBody();
     }
 
@@ -393,10 +385,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void responseProtectedKey() throws ErrorException, IOException {
+    public void responseProtectedKey() {
         responseProtectedKeyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -456,11 +446,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramInteger(String scenario, int value) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramInteger(String scenario, int value) {
         paramIntegerWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
@@ -528,11 +515,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 1 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void responseInteger(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public void responseInteger(String scenario) {
         responseIntegerWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
@@ -598,11 +582,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramLong(String scenario, long value) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramLong(String scenario, long value) {
         paramLongWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
@@ -670,11 +651,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 105 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void responseLong(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public void responseLong(String scenario) {
         responseLongWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
@@ -740,11 +718,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramFloat(String scenario, double value) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramFloat(String scenario, double value) {
         paramFloatWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
@@ -812,11 +787,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 0.07 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void responseFloat(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public void responseFloat(String scenario) {
         responseFloatWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
@@ -882,11 +854,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramDouble(String scenario, double value) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramDouble(String scenario, double value) {
         paramDoubleWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
@@ -954,11 +923,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 7e120 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void responseDouble(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public void responseDouble(String scenario) {
         responseDoubleWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
@@ -1024,11 +990,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramBool(String scenario, boolean value) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramBool(String scenario, boolean value) {
         paramBoolWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
@@ -1096,11 +1059,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": true or false.
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void responseBool(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public void responseBool(String scenario) {
         responseBoolWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
@@ -1165,11 +1125,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramString(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramString(String scenario) {
         paramStringWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
@@ -1229,11 +1186,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramString(String scenario, String value) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramString(String scenario, String value) {
         paramStringWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
@@ -1301,11 +1255,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void responseString(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public void responseString(String scenario) {
         responseStringWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
@@ -1371,11 +1322,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramDate(String scenario, LocalDate value) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramDate(String scenario, LocalDate value) {
         paramDateWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
@@ -1446,11 +1394,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void responseDate(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public void responseDate(String scenario) {
         responseDateWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
@@ -1516,11 +1461,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramDatetime(String scenario, DateTime value) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramDatetime(String scenario, DateTime value) {
         paramDatetimeWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
@@ -1591,11 +1533,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void responseDatetime(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public void responseDatetime(String scenario) {
         responseDatetimeWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
@@ -1660,11 +1599,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramDatetimeRfc1123(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramDatetimeRfc1123(String scenario) {
         paramDatetimeRfc1123WithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
@@ -1728,11 +1664,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramDatetimeRfc1123(String scenario, DateTime value) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramDatetimeRfc1123(String scenario, DateTime value) {
         paramDatetimeRfc1123WithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
@@ -1804,11 +1737,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void responseDatetimeRfc1123(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public void responseDatetimeRfc1123(String scenario) {
         responseDatetimeRfc1123WithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
@@ -1874,11 +1804,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramDuration(String scenario, Period value) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramDuration(String scenario, Period value) {
         paramDurationWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
@@ -1949,11 +1876,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "P123DT22H14M12.011S".
      *
      * @param scenario Send a post request with header values "scenario": "valid"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void responseDuration(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public void responseDuration(String scenario) {
         responseDurationWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
@@ -2019,11 +1943,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramByte(String scenario, byte[] value) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramByte(String scenario, byte[] value) {
         paramByteWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
@@ -2095,11 +2016,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
      * @param scenario Send a post request with header values "scenario": "valid"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void responseByte(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public void responseByte(String scenario) {
         responseByteWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
@@ -2164,11 +2082,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramEnum(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramEnum(String scenario) {
         paramEnumWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
@@ -2228,11 +2143,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY' . Possible values include: 'White', 'black', 'GREY'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void paramEnum(String scenario, GreyscaleColors value) throws ErrorException, IOException, IllegalArgumentException {
+    public void paramEnum(String scenario, GreyscaleColors value) {
         paramEnumWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
@@ -2300,11 +2212,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "GREY" or null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void responseEnum(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public void responseEnum(String scenario) {
         responseEnumWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
@@ -2368,10 +2277,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void customRequestId() throws ErrorException, IOException {
+    public void customRequestId() {
         customRequestIdWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

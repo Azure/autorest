@@ -76,9 +76,9 @@ module MsRest
             faraday.response :logger, nil, { :bodies => logging == 'full' }
           end
         end
-        
+
         @connection.run_request(:"#{method}", build_path, body, {'User-Agent' => user_agent}.merge(headers)) do |req|
-          req.params = query_params.reject{|_, v| v.nil?} unless query_params.nil?
+          req.params = req.params.merge(query_params.reject{|_, v| v.nil?}) unless query_params.nil?
           yield(req) if block_given?
         end
       end

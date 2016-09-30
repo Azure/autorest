@@ -81,11 +81,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the ArrayWrapper object if successful.
      */
-    public ArrayWrapper getValid() throws ErrorException, IOException {
+    public ArrayWrapper getValid() {
         return getValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -144,11 +142,8 @@ public final class ArraysImpl implements Arrays {
      * Put complex types with array property.
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putValid(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putValid(ArrayWrapper complexBody) {
         putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
@@ -213,11 +208,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property which is empty.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the ArrayWrapper object if successful.
      */
-    public ArrayWrapper getEmpty() throws ErrorException, IOException {
+    public ArrayWrapper getEmpty() {
         return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -276,11 +269,8 @@ public final class ArraysImpl implements Arrays {
      * Put complex types with array property which is empty.
      *
      * @param complexBody Please put an empty array
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putEmpty(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putEmpty(ArrayWrapper complexBody) {
         putEmptyWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
@@ -345,11 +335,9 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the ArrayWrapper object if successful.
      */
-    public ArrayWrapper getNotProvided() throws ErrorException, IOException {
+    public ArrayWrapper getNotProvided() {
         return getNotProvidedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

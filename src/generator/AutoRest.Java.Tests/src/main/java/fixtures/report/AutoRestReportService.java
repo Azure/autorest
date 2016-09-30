@@ -13,8 +13,6 @@ package fixtures.report;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.report.models.ErrorException;
-import java.io.IOException;
 import java.util.Map;
 import rx.Observable;
 
@@ -30,11 +28,9 @@ public interface AutoRestReportService {
     /**
      * Get test coverage report.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
-    Map<String, Integer> getReport() throws ErrorException, IOException;
+    Map<String, Integer> getReport();
 
     /**
      * Get test coverage report.

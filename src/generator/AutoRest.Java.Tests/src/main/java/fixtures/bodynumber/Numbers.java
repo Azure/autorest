@@ -13,8 +13,6 @@ package fixtures.bodynumber;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodynumber.models.ErrorException;
-import java.io.IOException;
 import java.math.BigDecimal;
 import rx.Observable;
 
@@ -26,11 +24,9 @@ public interface Numbers {
     /**
      * Get null Number value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    double getNull() throws ErrorException, IOException;
+    double getNull();
 
     /**
      * Get null Number value.
@@ -57,11 +53,9 @@ public interface Numbers {
     /**
      * Get invalid float Number value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    double getInvalidFloat() throws ErrorException, IOException;
+    double getInvalidFloat();
 
     /**
      * Get invalid float Number value.
@@ -88,11 +82,9 @@ public interface Numbers {
     /**
      * Get invalid double Number value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    double getInvalidDouble() throws ErrorException, IOException;
+    double getInvalidDouble();
 
     /**
      * Get invalid double Number value.
@@ -119,11 +111,9 @@ public interface Numbers {
     /**
      * Get invalid decimal Number value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object if successful.
      */
-    BigDecimal getInvalidDecimal() throws ErrorException, IOException;
+    BigDecimal getInvalidDecimal();
 
     /**
      * Get invalid decimal Number value.
@@ -151,10 +141,8 @@ public interface Numbers {
      * Put big float value 3.402823e+20.
      *
      * @param numberBody the double value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putBigFloat(double numberBody) throws ErrorException, IOException;
+    void putBigFloat(double numberBody);
 
     /**
      * Put big float value 3.402823e+20.
@@ -184,11 +172,9 @@ public interface Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    double getBigFloat() throws ErrorException, IOException;
+    double getBigFloat();
 
     /**
      * Get big float value 3.402823e+20.
@@ -216,10 +202,8 @@ public interface Numbers {
      * Put big double value 2.5976931e+101.
      *
      * @param numberBody the double value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putBigDouble(double numberBody) throws ErrorException, IOException;
+    void putBigDouble(double numberBody);
 
     /**
      * Put big double value 2.5976931e+101.
@@ -249,11 +233,9 @@ public interface Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    double getBigDouble() throws ErrorException, IOException;
+    double getBigDouble();
 
     /**
      * Get big double value 2.5976931e+101.
@@ -281,10 +263,8 @@ public interface Numbers {
      * Put big double value 99999999.99.
      *
      * @param numberBody the double value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putBigDoublePositiveDecimal(double numberBody) throws ErrorException, IOException;
+    void putBigDoublePositiveDecimal(double numberBody);
 
     /**
      * Put big double value 99999999.99.
@@ -314,11 +294,9 @@ public interface Numbers {
     /**
      * Get big double value 99999999.99.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    double getBigDoublePositiveDecimal() throws ErrorException, IOException;
+    double getBigDoublePositiveDecimal();
 
     /**
      * Get big double value 99999999.99.
@@ -346,10 +324,8 @@ public interface Numbers {
      * Put big double value -99999999.99.
      *
      * @param numberBody the double value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putBigDoubleNegativeDecimal(double numberBody) throws ErrorException, IOException;
+    void putBigDoubleNegativeDecimal(double numberBody);
 
     /**
      * Put big double value -99999999.99.
@@ -379,11 +355,9 @@ public interface Numbers {
     /**
      * Get big double value -99999999.99.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    double getBigDoubleNegativeDecimal() throws ErrorException, IOException;
+    double getBigDoubleNegativeDecimal();
 
     /**
      * Get big double value -99999999.99.
@@ -411,11 +385,8 @@ public interface Numbers {
      * Put big decimal value 2.5976931e+101.
      *
      * @param numberBody the BigDecimal value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putBigDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putBigDecimal(BigDecimal numberBody);
 
     /**
      * Put big decimal value 2.5976931e+101.
@@ -445,11 +416,9 @@ public interface Numbers {
     /**
      * Get big decimal value 2.5976931e+101.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object if successful.
      */
-    BigDecimal getBigDecimal() throws ErrorException, IOException;
+    BigDecimal getBigDecimal();
 
     /**
      * Get big decimal value 2.5976931e+101.
@@ -477,11 +446,8 @@ public interface Numbers {
      * Put big decimal value 99999999.99.
      *
      * @param numberBody the BigDecimal value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putBigDecimalPositiveDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putBigDecimalPositiveDecimal(BigDecimal numberBody);
 
     /**
      * Put big decimal value 99999999.99.
@@ -511,11 +477,9 @@ public interface Numbers {
     /**
      * Get big decimal value 99999999.99.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object if successful.
      */
-    BigDecimal getBigDecimalPositiveDecimal() throws ErrorException, IOException;
+    BigDecimal getBigDecimalPositiveDecimal();
 
     /**
      * Get big decimal value 99999999.99.
@@ -543,11 +507,8 @@ public interface Numbers {
      * Put big decimal value -99999999.99.
      *
      * @param numberBody the BigDecimal value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putBigDecimalNegativeDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putBigDecimalNegativeDecimal(BigDecimal numberBody);
 
     /**
      * Put big decimal value -99999999.99.
@@ -577,11 +538,9 @@ public interface Numbers {
     /**
      * Get big decimal value -99999999.99.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object if successful.
      */
-    BigDecimal getBigDecimalNegativeDecimal() throws ErrorException, IOException;
+    BigDecimal getBigDecimalNegativeDecimal();
 
     /**
      * Get big decimal value -99999999.99.
@@ -609,10 +568,8 @@ public interface Numbers {
      * Put small float value 3.402823e-20.
      *
      * @param numberBody the double value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putSmallFloat(double numberBody) throws ErrorException, IOException;
+    void putSmallFloat(double numberBody);
 
     /**
      * Put small float value 3.402823e-20.
@@ -642,11 +599,9 @@ public interface Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    double getSmallFloat() throws ErrorException, IOException;
+    double getSmallFloat();
 
     /**
      * Get big double value 3.402823e-20.
@@ -674,10 +629,8 @@ public interface Numbers {
      * Put small double value 2.5976931e-101.
      *
      * @param numberBody the double value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putSmallDouble(double numberBody) throws ErrorException, IOException;
+    void putSmallDouble(double numberBody);
 
     /**
      * Put small double value 2.5976931e-101.
@@ -707,11 +660,9 @@ public interface Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the double object if successful.
      */
-    double getSmallDouble() throws ErrorException, IOException;
+    double getSmallDouble();
 
     /**
      * Get big double value 2.5976931e-101.
@@ -739,11 +690,8 @@ public interface Numbers {
      * Put small decimal value 2.5976931e-101.
      *
      * @param numberBody the BigDecimal value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putSmallDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putSmallDecimal(BigDecimal numberBody);
 
     /**
      * Put small decimal value 2.5976931e-101.
@@ -773,11 +721,9 @@ public interface Numbers {
     /**
      * Get small decimal value 2.5976931e-101.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object if successful.
      */
-    BigDecimal getSmallDecimal() throws ErrorException, IOException;
+    BigDecimal getSmallDecimal();
 
     /**
      * Get small decimal value 2.5976931e-101.
