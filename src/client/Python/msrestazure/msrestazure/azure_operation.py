@@ -379,11 +379,14 @@ class AzureOperationPoller(object):
         of the operation.
     :param int timeout: Time in seconds to wait between status calls,
         default is 30.
+    :param bool daemon: Whether the operation polling thread is a daemon
+        thread. Default is True.
     :param callable func: Callback function that takes at least one
         argument, a completed LongRunningOperation (optional).
     """
 
-    def __init__(self, send_cmd, output_cmd, update_cmd, timeout=30):
+    def __init__(self, send_cmd, output_cmd, update_cmd,
+                 timeout=30, daemon=True):
         self._timeout = timeout
         self._response = None
         self._operation = None
@@ -392,7 +395,7 @@ class AzureOperationPoller(object):
         self._done = threading.Event()
         self._thread = threading.Thread(
             target=self._start, args=(send_cmd, update_cmd, output_cmd))
-        self._thread.daemon = True
+        self._thread.daemon = daemon
         self._thread.start()
 
     def _start(self, send_cmd, update_cmd, output_cmd):
