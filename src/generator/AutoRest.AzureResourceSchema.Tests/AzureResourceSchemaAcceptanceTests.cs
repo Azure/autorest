@@ -83,6 +83,12 @@ namespace AutoRest.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void Logic_2016_06_01()
+        {
+            RunSwaggerTest("Logic", "2016-06-01", "logic.json");
+        }
+
+        [Fact]
         public static void MachineLearning_2016_05_01_preview()
         {
             RunSwaggerTest("MachineLearning", "2016-05-01-preview", "webservices.json");
