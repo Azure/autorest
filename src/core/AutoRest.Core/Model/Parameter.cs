@@ -36,8 +36,10 @@ namespace AutoRest.Core.Model
         /// Indicates whether the parameter should be set via a property on the client instance 
         /// instead of being passed to each API method that needs it.
         /// </summary>
-        public virtual bool IsClientProperty => ClientProperty != null;
-        
+        public virtual bool IsClientProperty => ClientProperty != null && XmsExtensions.ParameterLocation.Location.Method != ParameterLocation;
+
+        [JsonIgnore]
+        public XmsExtensions.ParameterLocation.Location? ParameterLocation => Extensions.Get<XmsExtensions.ParameterLocation.Location>(XmsExtensions.ParameterLocation.Name);
         /// <summary>
         /// Reference to the global Property that provides value for the parameter.
         /// </summary>

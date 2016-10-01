@@ -261,7 +261,35 @@ namespace AutoRest.Core.Utilities
             return destination;
         }
 
-        public static T GetValue<T>(this IDictionary<string, object> dictionary, string key)
+        public static T? Get<T>(this IDictionary<string, object> dictionary, string key) where T : struct, IComparable, IConvertible
+        {
+            object value;
+
+            if (dictionary.TryGetValue(key, out value))
+            {
+                if (typeof(T).IsEnum)
+                {
+                    return (T)Enum.Parse(typeof(T), value.ToString(), true);
+                }
+
+                if (value is T)
+                {
+                    return (T) value;
+                }
+
+                try
+                {
+                    return (T) Convert.ChangeType(value, typeof(T));
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        public static T GetValue<T>(this IDictionary<string, object> dictionary, string key) where T:class
         {
             object value;
             if (dictionary.TryGetValue(key, out value))
@@ -270,8 +298,16 @@ namespace AutoRest.Core.Utilities
                 {
                     return (T) value;
                 }
+                try
+                {
+                    return (T)Convert.ChangeType(value, typeof(T));
+                }
+                catch
+                {
+                    return null;
+                }
             }
-            return default(T);
+            return null;
         }
 
         private const BindingFlags AnyPropertyFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy | BindingFlags.GetProperty | BindingFlags.Instance;

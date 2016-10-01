@@ -231,7 +231,7 @@ namespace AutoRest.NodeJS.Model
             get
             {
                 return ParameterTemplateModels.Where(
-                    p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name) && !p.IsConstant)
+                    p => p != null && !p.IsClientProperty && !string.IsNullOrWhiteSpace(p.Name) && !p.IsConstant)
                     .OrderBy(item => !item.IsRequired);
             }
         }

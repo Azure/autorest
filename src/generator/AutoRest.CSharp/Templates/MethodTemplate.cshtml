@@ -73,7 +73,7 @@ public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeStri
 
     @foreach (ParameterCs parameter in Model.Parameters)
     {
-        if (parameter.IsConstant && parameter.ClientProperty == null)
+        if (parameter.IsConstant && !parameter.IsClientProperty)
         {
     @:@(parameter.ModelTypeName) @(parameter.Name) = @(parameter.DefaultValue);
         }
@@ -81,7 +81,7 @@ public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeStri
         if (parameter.ModelType is CompositeType
             && !parameter.IsConstant
             && parameter.IsRequired
-            && parameter.ClientProperty == null
+            && !parameter.IsClientProperty
             && ((CompositeType)parameter.ModelType).ContainsConstantProperties)
         {
     @:if (@(parameter.Name) == null)
@@ -99,7 +99,7 @@ public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeStri
     {
         _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
         System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
-    @foreach (var parameter in Model.LogicalParameters.Where(p => p.ClientProperty == null))
+    @foreach (var parameter in Model.LogicalParameters.Where(p => !p.IsClientProperty))
     {
         @:tracingParameters.Add("@(parameter.Name)", @(parameter.Name));
     }

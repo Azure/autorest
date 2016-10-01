@@ -57,7 +57,7 @@
 
   @foreach(var parameter in Model.ParameterTemplateModels)
   {
-    if (parameter.IsConstant && parameter.ClientProperty == null)
+    if (parameter.IsConstant && !parameter.IsClientProperty)
     {
   @:var @(parameter.Name) = @(parameter.DefaultValue);
     }
@@ -65,7 +65,7 @@
     if (parameter.ModelType is CompositeType
       && !parameter.IsConstant
       && parameter.IsRequired
-      && parameter.ClientProperty == null
+      && !parameter.IsClientProperty
       && ((CompositeType)parameter.ModelType).ContainsConstantProperties)
     {
   @:if (@(parameter.Name) === null || @(parameter.Name) === undefined)

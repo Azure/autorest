@@ -46,6 +46,6 @@ namespace AutoRest.NodeJS.Model
         }
 
         [JsonIgnore]
-        public bool IsLocal => (ClientProperty == null) && !string.IsNullOrWhiteSpace(Name) && !IsConstant;
+        public bool IsLocal => (!IsClientProperty) && !string.IsNullOrWhiteSpace(Name) && !IsConstant;
     }
 }

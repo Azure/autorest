@@ -1,8 +1,16 @@
 param( $lastAutorest, $newAutoRest , [switch]$noclean , $swagger, [switch]$notrim) 
 
-$baseFolder = "$PSScriptRoot\..\compare-results"
-$lastRoot = "$baseFolder\Last"
-$newRoot = "$baseFolder\New"
+function get-fullpath( $path ) {
+   $result = resolve-path $path -ea 0 -ErrorVariable e
+   if( $e ) {
+    return $e.TargetPath
+   }
+   return $result
+}
+
+$baseFolder = get-fullpath "$PSScriptRoot\..\compare-results"
+$lastRoot = get-fullpath "$baseFolder\Last"
+$newRoot = get-fullpath "$baseFolder\New"
 
 if( !$noclean ) {
   # remove last run and create folders
@@ -57,9 +65,12 @@ function ProcessBackgroundJobs() {
 
 $scrp = { 
   param($lastexe, $newexe, $commonFolder,$uniqueName ,$spec, $gen, $modeler, $notrim)
-  $output = &$lastexe -Namespace Test.NameSpace -OutputDirectory  "$commonFolder\Last\$uniqueName\$gen" -input $spec -CodeGenerator $gen -verbose -modeler $modeler
+  $output = "$lastexe `n-Namespace Test.NameSpace -OutputDirectory  ""$commonFolder\Last\$uniqueName\$gen"" -input $spec -CodeGenerator $gen -verbose -modeler $modeler`n"
+  $output += &$lastexe -Namespace Test.NameSpace -OutputDirectory  "$commonFolder\Last\$uniqueName\$gen" -input $spec -CodeGenerator $gen -verbose -modeler $modeler
   set-content -value $output -path "$commonFolder\last\$uniqueName\output-$gen.txt"
-  $output = &$newexe -Namespace Test.NameSpace -OutputDirectory  "$commonFolder\New\$uniqueName\$gen" -input $spec -CodeGenerator $gen -verbose -modeler $modeler
+  
+  $output = "$newexe `n-Namespace Test.NameSpace -OutputDirectory  ""$commonFolder\New\$uniqueName\$gen"" -input $spec -CodeGenerator $gen -verbose -modeler $modeler`n"
+  $output += &$newexe -Namespace Test.NameSpace -OutputDirectory  "$commonFolder\New\$uniqueName\$gen" -input $spec -CodeGenerator $gen -verbose -modeler $modeler
   set-content -value $output -path "$commonFolder\new\$uniqueName\output-$gen.txt"
 
   if( !$notrim ) {
