@@ -1,0 +1,2302 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "LogicManagementClient",
+    "version": "2016-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Logic/workflows": {
+      "get": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_ListBySubscription",
+        "description": "Gets a list of workflows by subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter to apply on the operation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/WorkflowFilter"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows": {
+      "get": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_ListByResourceGroup",
+        "description": "Gets a list of workflows by resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter to apply on the operation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/WorkflowFilter"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}": {
+      "get": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_Get",
+        "description": "Gets a workflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_CreateOrUpdate",
+        "description": "Creates or updates a workflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "workflow",
+            "description": "The workflow.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_Update",
+        "description": "Updates a workflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "workflow",
+            "description": "The workflow.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_Delete",
+        "description": "Deletes a workflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/disable": {
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_Disable",
+        "description": "Disables a workflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/enable": {
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_Enable",
+        "description": "Enables a workflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/generateUpgradedDefinition": {
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_GenerateUpgradedDefinition",
+        "description": "Generates the upgraded definition for a workflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "description": "Parameters for generating an upgraded definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateUpgradedDefinitionParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/versions": {
+      "get": {
+        "tags": [
+          "WorkflowVersions"
+        ],
+        "operationId": "WorkflowVersions_List",
+        "description": "Gets a list of workflow versions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowVersionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/versions/{versionId}": {
+      "get": {
+        "tags": [
+          "WorkflowVersions"
+        ],
+        "operationId": "WorkflowVersions_Get",
+        "description": "Gets a workflow version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "description": "The workflow versionId.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowVersion"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/": {
+      "get": {
+        "tags": [
+          "WorkflowTriggers"
+        ],
+        "operationId": "WorkflowTriggers_List",
+        "description": "Gets a list of workflow triggers.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter to apply on the operation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTriggerListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/WorkflowTriggerFilter"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}": {
+      "get": {
+        "tags": [
+          "WorkflowTriggers"
+        ],
+        "operationId": "WorkflowTriggers_Get",
+        "description": "Gets a workflow trigger.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerName",
+            "description": "The workflow trigger name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTrigger"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/run": {
+      "post": {
+        "tags": [
+          "WorkflowTriggers"
+        ],
+        "operationId": "WorkflowTriggers_Run",
+        "description": "Runs a workflow trigger.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerName",
+            "description": "The workflow trigger name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "All status codes are acceptable.",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/listCallbackUrl": {
+      "post": {
+        "tags": [
+          "WorkflowTriggers"
+        ],
+        "operationId": "WorkflowTriggers_ListCallbackUrl",
+        "description": "Gets the callback URL for a workflow trigger.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerName",
+            "description": "The workflow trigger name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTriggerCallbackUrl"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/histories": {
+      "get": {
+        "tags": [
+          "WorkflowTriggerHistories"
+        ],
+        "operationId": "WorkflowTriggerHistories_List",
+        "description": "Gets a list of workflow trigger histories.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerName",
+            "description": "The workflow trigger name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter to apply on the operation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTriggerHistoryListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/WorkflowTriggerHistoryFilter"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/histories/{historyName}": {
+      "get": {
+        "tags": [
+          "WorkflowTriggerHistories"
+        ],
+        "operationId": "WorkflowTriggerHistories_Get",
+        "description": "Gets a workflow trigger history.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerName",
+            "description": "The workflow trigger name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "historyName",
+            "description": "The workflow trigger history name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTriggerHistory"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs": {
+      "get": {
+        "tags": [
+          "WorkflowRuns"
+        ],
+        "operationId": "WorkflowRuns_List",
+        "description": "Gets a list of workflow runs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter to apply on the operation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRunListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/WorkflowRunFilter"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}": {
+      "get": {
+        "tags": [
+          "WorkflowRuns"
+        ],
+        "operationId": "WorkflowRuns_Get",
+        "description": "Gets a workflow run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRun"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/cancel": {
+      "post": {
+        "tags": [
+          "WorkflowRuns"
+        ],
+        "operationId": "WorkflowRuns_Cancel",
+        "description": "Cancels a workflow run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions": {
+      "get": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActions_List",
+        "description": "Gets a list of workflow run actions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$filter",
+            "description": "The filter to apply on the operation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRunActionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/WorkflowRunActionFilter"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}": {
+      "get": {
+        "tags": [
+          "WorkflowRunActions"
+        ],
+        "operationId": "WorkflowRunActions_Get",
+        "description": "Gets a workflow run action.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runName",
+            "description": "The workflow run name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionName",
+            "description": "The workflow action name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRunAction"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/locations/{location}/workflows/{workflowName}/validate": {
+      "post": {
+        "tags": [
+          "Workflows"
+        ],
+        "operationId": "Workflows_Validate",
+        "description": "Validates the workflow definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "location",
+            "description": "The workflow location.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "workflow",
+            "description": "The workflow definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets the resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets the resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource id."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Object": {
+      "type": "object",
+      "properties": {}
+    },
+    "ResourceReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource id."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource type."
+        }
+      }
+    },
+    "Workflow": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkflowProperties",
+          "description": "The workflow properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "WorkflowProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/WorkflowProvisioningState",
+          "readOnly": true,
+          "description": "Gets the provisioning state."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the created time."
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the changed time."
+        },
+        "state": {
+          "$ref": "#/definitions/WorkflowState",
+          "description": "The state."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the version."
+        },
+        "accessEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the access endpoint."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku."
+        },
+        "integrationAccount": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The integration account."
+        },
+        "definition": {
+          "$ref": "#/definitions/Object",
+          "description": "The definition."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/WorkflowParameter"
+          },
+          "description": "The parameters."
+        }
+      }
+    },
+    "WorkflowFilter": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/WorkflowState",
+          "description": "The state of workflows."
+        }
+      }
+    },
+    "WorkflowListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workflow"
+          },
+          "description": "The list of workflows."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "WorkflowVersion": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkflowVersionProperties",
+          "description": "The workflow version properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "WorkflowVersionProperties": {
+      "type": "object",
+      "properties": {
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the created time."
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the changed time."
+        },
+        "state": {
+          "$ref": "#/definitions/WorkflowState",
+          "description": "The state."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the version."
+        },
+        "accessEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the access endpoint."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku."
+        },
+        "integrationAccount": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The integration account."
+        },
+        "definition": {
+          "$ref": "#/definitions/Object",
+          "description": "The definition."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/WorkflowParameter"
+          },
+          "description": "The parameters."
+        }
+      }
+    },
+    "WorkflowVersionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowVersion"
+          },
+          "description": "A list of workflow versions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "WorkflowTrigger": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkflowTriggerProperties",
+          "description": "The workflow trigger properties."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ]
+    },
+    "WorkflowTriggerProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/WorkflowTriggerProvisioningState",
+          "readOnly": true,
+          "description": "Gets the provisioning state."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the created time."
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the changed time."
+        },
+        "state": {
+          "$ref": "#/definitions/WorkflowState",
+          "readOnly": true,
+          "description": "Gets the state."
+        },
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "readOnly": true,
+          "description": "Gets the status."
+        },
+        "lastExecutionTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the last execution time."
+        },
+        "nextExecutionTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the next execution time."
+        },
+        "recurrence": {
+          "$ref": "#/definitions/WorkflowTriggerRecurrence",
+          "readOnly": true,
+          "description": "Gets the workflow trigger recurrence."
+        },
+        "workflow": {
+          "$ref": "#/definitions/ResourceReference",
+          "readOnly": true,
+          "description": "Gets the reference to workflow."
+        }
+      }
+    },
+    "WorkflowTriggerFilter": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/WorkflowState",
+          "description": "The state of workflow trigger."
+        }
+      }
+    },
+    "WorkflowTriggerListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowTrigger"
+          },
+          "description": "A list of workflow triggers."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "WorkflowTriggerCallbackUrl": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL."
+        }
+      }
+    },
+    "WorkflowTriggerHistory": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkflowTriggerHistoryProperties",
+          "description": "Gets the workflow trigger history properties."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger history name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger history type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ]
+    },
+    "WorkflowTriggerHistoryProperties": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the end time."
+        },
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "readOnly": true,
+          "description": "Gets the status."
+        },
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the code."
+        },
+        "error": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the error."
+        },
+        "trackingId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the tracking id."
+        },
+        "correlation": {
+          "$ref": "#/definitions/Correlation",
+          "description": "The run correlation."
+        },
+        "inputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to input parameters."
+        },
+        "outputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to output parameters."
+        },
+        "fired": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Gets a value indicating whether trigger was fired."
+        },
+        "run": {
+          "$ref": "#/definitions/ResourceReference",
+          "readOnly": true,
+          "description": "Gets the reference to workflow run."
+        }
+      }
+    },
+    "WorkflowTriggerHistoryListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowTriggerHistory"
+          },
+          "description": "A list of workflow trigger histories."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "WorkflowTriggerHistoryFilter": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "description": "The status of workflow trigger history."
+        }
+      }
+    },
+    "WorkflowRun": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkflowRunProperties",
+          "description": "The workflow run properties."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow run name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow run type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ]
+    },
+    "WorkflowRunProperties": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the end time."
+        },
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "readOnly": true,
+          "description": "Gets the status."
+        },
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the code."
+        },
+        "error": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the error."
+        },
+        "correlationId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the correlation id."
+        },
+        "correlation": {
+          "$ref": "#/definitions/Correlation",
+          "description": "The run correlation."
+        },
+        "workflow": {
+          "$ref": "#/definitions/ResourceReference",
+          "readOnly": true,
+          "description": "Gets the reference to workflow version."
+        },
+        "trigger": {
+          "$ref": "#/definitions/WorkflowRunTrigger",
+          "readOnly": true,
+          "description": "Gets the fired trigger."
+        },
+        "outputs": {
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/WorkflowOutputParameter"
+          },
+          "description": "Gets the outputs."
+        },
+        "response": {
+          "$ref": "#/definitions/WorkflowRunTrigger",
+          "readOnly": true,
+          "description": "Gets the response of the flow run."
+        }
+      }
+    },
+    "WorkflowRunFilter": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "description": "The status of workflow run."
+        }
+      }
+    },
+    "WorkflowRunListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowRun"
+          },
+          "description": "A list of workflow runs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "WorkflowRunAction": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkflowRunActionProperties",
+          "description": "The workflow run action properties."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow run action name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow run action type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ]
+    },
+    "WorkflowRunActionProperties": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the end time."
+        },
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "readOnly": true,
+          "description": "Gets the status."
+        },
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the code."
+        },
+        "error": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the error."
+        },
+        "trackingId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the tracking id."
+        },
+        "correlation": {
+          "$ref": "#/definitions/Correlation",
+          "description": "The correlation properties."
+        },
+        "inputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to inputs."
+        },
+        "outputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to outputs."
+        },
+        "trackedProperties": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the tracked properties."
+        }
+      }
+    },
+    "WorkflowRunActionFilter": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "description": "The status of workflow run action."
+        }
+      }
+    },
+    "WorkflowRunActionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowRunAction"
+          },
+          "description": "A list of workflow run actions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "SkuName": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Free",
+        "Shared",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": false
+      }
+    },
+    "WorkflowState": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Completed",
+        "Enabled",
+        "Disabled",
+        "Deleted",
+        "Suspended"
+      ],
+      "x-ms-enum": {
+        "name": "WorkflowState",
+        "modelAsString": false
+      }
+    },
+    "WorkflowStatus": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Paused",
+        "Running",
+        "Waiting",
+        "Succeeded",
+        "Skipped",
+        "Suspended",
+        "Cancelled",
+        "Failed",
+        "Faulted",
+        "TimedOut",
+        "Aborted",
+        "Ignored"
+      ],
+      "x-ms-enum": {
+        "name": "WorkflowStatus",
+        "modelAsString": false
+      }
+    },
+    "ParameterType": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "String",
+        "SecureString",
+        "Int",
+        "Float",
+        "Bool",
+        "Array",
+        "Object",
+        "SecureObject"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterType",
+        "modelAsString": false
+      }
+    },
+    "KeyType": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Primary",
+        "Secondary"
+      ],
+      "x-ms-enum": {
+        "name": "KeyType",
+        "modelAsString": false
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/SkuName",
+          "description": "The name."
+        },
+        "plan": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The reference to plan."
+        }
+      }
+    },
+    "ContentLink": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The content link URI."
+        },
+        "contentVersion": {
+          "type": "string",
+          "description": "The content version."
+        },
+        "contentSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The content size."
+        },
+        "contentHash": {
+          "$ref": "#/definitions/ContentHash",
+          "description": "The content hash."
+        },
+        "metadata": {
+          "$ref": "#/definitions/Object",
+          "description": "The metadata."
+        }
+      }
+    },
+    "ContentHash": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "description": "The algorithm."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value."
+        }
+      }
+    },
+    "Correlation": {
+      "type": "object",
+      "properties": {
+        "clientTrackingId": {
+          "type": "string",
+          "description": "The client tracking id."
+        }
+      }
+    },
+    "WorkflowParameter": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ParameterType",
+          "description": "The type."
+        },
+        "value": {
+          "$ref": "#/definitions/Object",
+          "description": "The value."
+        },
+        "metadata": {
+          "$ref": "#/definitions/Object",
+          "description": "The metadata."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description."
+        }
+      }
+    },
+    "WorkflowOutputParameter": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the error."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowParameter"
+        }
+      ]
+    },
+    "RecurrenceFrequency": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Second",
+        "Minute",
+        "Hour",
+        "Day",
+        "Week",
+        "Month",
+        "Year"
+      ],
+      "x-ms-enum": {
+        "name": "RecurrenceFrequency",
+        "modelAsString": false
+      }
+    },
+    "RecurrenceSchedule": {
+      "type": "object",
+      "properties": {
+        "minutes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The minutes."
+        },
+        "hours": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The hours."
+        },
+        "weekDays": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "x-ms-enum": {
+              "name": "DaysOfWeek",
+              "modelAsString": false
+            }
+          },
+          "description": "The days of the week."
+        },
+        "monthDays": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The month days."
+        },
+        "monthlyOccurrences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecurrenceScheduleOccurrence"
+          },
+          "description": "The monthly occurrences."
+        }
+      }
+    },
+    "RecurrenceScheduleOccurrence": {
+      "type": "object",
+      "properties": {
+        "day": {
+          "$ref": "#/definitions/DayOfWeek",
+          "description": "The day of the week."
+        },
+        "occurrence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The occurrence."
+        }
+      }
+    },
+    "WorkflowTriggerRecurrence": {
+      "type": "object",
+      "properties": {
+        "frequency": {
+          "$ref": "#/definitions/RecurrenceFrequency",
+          "description": "The frequency."
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone."
+        },
+        "schedule": {
+          "$ref": "#/definitions/RecurrenceSchedule",
+          "description": "The recurrence schedule."
+        }
+      }
+    },
+    "WorkflowRunTrigger": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the name."
+        },
+        "inputs": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the inputs."
+        },
+        "inputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to inputs."
+        },
+        "outputs": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the outputs."
+        },
+        "outputsLink": {
+          "$ref": "#/definitions/ContentLink",
+          "readOnly": true,
+          "description": "Gets the link to outputs."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the end time."
+        },
+        "trackingId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the tracking id."
+        },
+        "correlation": {
+          "$ref": "#/definitions/Correlation",
+          "description": "The run correlation."
+        },
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the code."
+        },
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "readOnly": true,
+          "description": "Gets the status."
+        },
+        "error": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the error."
+        },
+        "trackedProperties": {
+          "$ref": "#/definitions/Object",
+          "readOnly": true,
+          "description": "Gets the tracked properties."
+        }
+      }
+    },
+    "WorkflowTriggerProvisioningState": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Accepted",
+        "Running",
+        "Ready",
+        "Creating",
+        "Created",
+        "Deleting",
+        "Deleted",
+        "Canceled",
+        "Failed",
+        "Succeeded",
+        "Moving",
+        "Updating",
+        "Registering",
+        "Registered",
+        "Unregistering",
+        "Unregistered",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "WorkflowTriggerProvisioningState",
+        "modelAsString": false
+      }
+    },
+    "WorkflowProvisioningState": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Accepted",
+        "Running",
+        "Ready",
+        "Creating",
+        "Created",
+        "Deleting",
+        "Deleted",
+        "Canceled",
+        "Failed",
+        "Succeeded",
+        "Moving",
+        "Updating",
+        "Registering",
+        "Registered",
+        "Unregistering",
+        "Unregistered",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "WorkflowProvisioningState",
+        "modelAsString": false
+      }
+    },
+    "DayOfWeek": {
+      "type": "string",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "x-ms-enum": {
+        "name": "DayOfWeek",
+        "modelAsString": false
+      }
+    },
+    "GenerateUpgradedDefinitionParameters": {
+      "type": "object",
+      "properties": {
+        "targetSchemaVersion": {
+          "type": "string",
+          "description": "The target schema version."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "description": "The subscription id.",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "api-version": {
+      "name": "api-version",
+      "description": "The API version.",
+      "in": "query",
+      "required": true,
+      "type": "string"
+    }
+  }
+}
