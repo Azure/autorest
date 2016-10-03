@@ -11,7 +11,13 @@ namespace AutoRest.AzureResourceSchema.Tests
     public static class AzureResourceSchemaAcceptanceTests
     {
         [Fact]
-        public static void Batch()
+        public static void Authorization_2015_07_01()
+        {
+            RunSwaggerTest("Authorization", "2015-07-01", "authorization.json");
+        }
+
+        [Fact]
+        public static void Batch_2015_12_01()
         {
             RunSwaggerTest("Batch", "2015-12-01", "BatchManagement.json");
         }
@@ -44,6 +50,12 @@ namespace AutoRest.AzureResourceSchema.Tests
         public static void Compute_2016_03_30()
         {
             RunSwaggerTest("Compute", "2016-03-30", "compute.json");
+        }
+
+        [Fact]
+        public static void ContainerService_2016_03_30()
+        {
+            RunSwaggerTest("ContainerService", "2016-03-30", "containerService.json");
         }
 
         [Fact]
@@ -83,9 +95,21 @@ namespace AutoRest.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void Logic_2016_06_01()
+        {
+            RunSwaggerTest("Logic", "2016-06-01", "logic.json");
+        }
+
+        [Fact]
         public static void MachineLearning_2016_05_01_preview()
         {
             RunSwaggerTest("MachineLearning", "2016-05-01-preview", "webservices.json");
+        }
+
+        [Fact]
+        public static void MobileEngagement_2014_12_01()
+        {
+            RunSwaggerTest("MobileEngagement", "2014-12-01", "mobile-engagement.json");
         }
 
         [Fact]
@@ -104,6 +128,11 @@ namespace AutoRest.AzureResourceSchema.Tests
         public static void Network_2016_03_30()
         {
             RunSwaggerTest("Network", "2016-03-30", "network.json");
+        }
+        
+        public static void Network_2016_09_01()
+        {
+            RunSwaggerTest("Network", "2016-09-01", "network.json");
         }
 
         [Fact]
@@ -173,13 +202,13 @@ namespace AutoRest.AzureResourceSchema.Tests
         }
 
         [Fact]
-        public static void Web()
+        public static void Web_2015_08_01()
         {
             RunSwaggerTest("Web", "2015-08-01", "web.json");
         }
 
         [Fact]
-        public static void WebYaml()
+        public static void WebYaml_2015_08_01()
         {
             // same test as Web(), but converted to YAML
             RunSwaggerTest("Web", "2015-08-01", "web.yaml");
