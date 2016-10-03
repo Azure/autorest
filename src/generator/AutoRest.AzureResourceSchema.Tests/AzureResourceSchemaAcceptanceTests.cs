@@ -113,6 +113,12 @@ namespace AutoRest.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void RecoveryServices_2016_06_01()
+        {
+            RunSwaggerTest("RecoveryServices", "2016-06-01", "recoveryservices.json");
+        }
+
+        [Fact]
         public static void Redis_2016_04_01()
         {
             RunSwaggerTest("Redis", "2016-04-01", "redis.json");
