@@ -130,6 +130,7 @@ namespace AutoRest.AzureResourceSchema.Tests
             RunSwaggerTest("Network", "2016-03-30", "network.json");
         }
         
+        [Fact]
         public static void Network_2016_09_01()
         {
             RunSwaggerTest("Network", "2016-09-01", "network.json");
