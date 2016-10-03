@@ -194,11 +194,14 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "200": {
             "description": "Namespace delete successful"
           },
           "202": {
-            "description": "Namespace delete accepted"
+            "description": "Namespace delete request has been accepted"
           }
         },
         "x-ms-long-running-operation": true
@@ -385,6 +388,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "200": {
             "description": "Namespace Authorization rule deleted"
           }
@@ -686,6 +692,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "200": {
             "description": "Queue deleted."
           }
@@ -898,6 +907,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "200": {
             "description": "Queue authorizationRule deleted"
           }
@@ -1220,11 +1232,13 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "200": {
             "description": "Topic delete successful"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "get": {
         "tags": [
@@ -1490,6 +1504,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "200": {
             "description": "Topics AuthorizationRule deleted"
           }
@@ -1779,6 +1796,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "200": {
             "description": "Subscription deleted."
           }
@@ -1870,6 +1890,9 @@
           "description": "Resource tags"
         }
       },
+      "required": [
+        "location"
+      ],
       "x-ms-azure-resource": true
     },
     "NamespaceCreateOrUpdateParameters": {
@@ -1993,7 +2016,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The resource type that this object applies to. Eg: NamespaceType",
+          "description": "Name of this Sku",
           "enum": [
             "Basic",
             "Standard",
@@ -2020,11 +2043,11 @@
         "capacity": {
           "format": "int32",
           "type": "integer",
-          "description": "The messaging units or eventhub throughput units"
+          "description": "The messaging units for the tier specified"
         }
       },
       "required": [
-        "Tier"
+        "tier"
       ],
       "description": "Sku of the Namespace."
     },
@@ -2043,9 +2066,6 @@
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
         }
       },
-      "required": [
-        "properties"
-      ],
       "description": "Parameters supplied to the CreateOrUpdate  AuthorizationRules."
     },
     "SharedAccessAuthorizationRuleListResult": {
@@ -2097,6 +2117,9 @@
           "description": "The rights associated with the rule."
         }
       },
+      "required": [
+        "rights"
+      ],
       "description": "SharedAccessAuthorizationRule properties."
     },
     "ResourceListKeys": {
@@ -2195,7 +2218,6 @@
       "properties": {
         "lockDuration ": {
           "type": "string",
-          "format": "duration",
           "description": "the duration of a peek lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute."
         },
         "accessedAt": {
@@ -2205,7 +2227,6 @@
         },
         "autoDeleteOnIdle": {
           "type": "string",
-          "format": "duration",
           "description": "the TimeSpan idle interval after which the queue is automatically deleted. The minimum duration is 5 minutes."
         },
         "entityAvailabilityStatus ": {
@@ -2219,12 +2240,10 @@
         },
         "defaultMessageTimeToLive": {
           "type": "string",
-          "format": "duration",
           "description": "the default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
         "duplicateDetectionHistoryTimeWindow ": {
           "type": "string",
-          "format": "duration",
           "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.."
         },
         "enableBatchedOperations": {
@@ -2383,7 +2402,6 @@
         },
         "autoDeleteOnIdle": {
           "type": "string",
-          "format": "duration",
           "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
         },
         "entityAvailabilityStatus ": {
@@ -2400,12 +2418,10 @@
         },
         "defaultMessageTimeToLive": {
           "type": "string",
-          "format": "duration",
           "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
         "duplicateDetectionHistoryTimeWindow ": {
           "type": "string",
-          "format": "duration",
           "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.."
         },
         "enableBatchedOperations": {
@@ -2529,7 +2545,6 @@
         },
         "autoDeleteOnIdle": {
           "type": "string",
-          "format": "duration",
           "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
         },
         "countDetails": {
@@ -2542,7 +2557,6 @@
         },
         "defaultMessageTimeToLive": {
           "type": "string",
-          "format": "duration",
           "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
         },
         "deadLetteringOnFilterEvaluationExceptions": {
@@ -2567,7 +2581,6 @@
         },
         "lockDuration": {
           "type": "string",
-          "format": "duration",
           "description": "The lock duration time span for the subscription."
         },
         "maxDeliveryCount": {
