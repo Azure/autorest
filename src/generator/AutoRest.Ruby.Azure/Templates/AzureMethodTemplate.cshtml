@@ -22,7 +22,7 @@
   @WrapComment("# ", Model.Description)@:
 @:#
 }
-@foreach (var parameter in Model.LocalParameters)
+@foreach (var parameter in Model.MethodParameters)
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
 }
@@ -54,7 +54,7 @@ end
   @WrapComment("# ", Model.Description)@:
 @:#
 }
-@foreach (var parameter in Model.LocalParameters)
+@foreach (var parameter in Model.MethodParameters)
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
 }
@@ -70,7 +70,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
 end
 @EmptyLine
 #
-@foreach (var parameter in Model.LocalParameters)
+@foreach (var parameter in Model.MethodParameters)
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
 }
