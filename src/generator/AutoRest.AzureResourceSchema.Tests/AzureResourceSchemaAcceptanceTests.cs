@@ -173,6 +173,12 @@ namespace AutoRest.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void ServerManagement_2016_07_01()
+        {
+            RunSwaggerTest("ServerManagement", "2016-07-01-preview", "servermanagement.json");
+        }
+
+        [Fact]
         public static void Storage_2015_05_01_preview()
         {
             RunSwaggerTest("Storage", "2015-05-01-preview", "storage.json");
