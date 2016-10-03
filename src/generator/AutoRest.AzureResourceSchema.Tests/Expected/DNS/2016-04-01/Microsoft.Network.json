@@ -19,6 +19,24 @@
             "2016-04-01"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the zone that is being updated, as received from a Get operation."
@@ -72,6 +90,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones"

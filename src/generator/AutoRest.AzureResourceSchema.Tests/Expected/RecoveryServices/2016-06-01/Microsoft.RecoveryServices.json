@@ -19,6 +19,34 @@
             "2016-06-01"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource Tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -39,6 +67,30 @@
     }
   },
   "definitions": {
+    "Sku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Standard",
+                "RS0"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The Sku name."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Identifies the unique system identifier for each Azure resource."
+    },
     "VaultProperties": {
       "type": "object",
       "description": "Properties of the vault."
