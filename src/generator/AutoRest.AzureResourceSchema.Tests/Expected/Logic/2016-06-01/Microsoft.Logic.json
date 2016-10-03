@@ -19,6 +19,32 @@
             "2016-06-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "The resource id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets the resource name."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The resource tags."
+        },
         "properties": {
           "oneOf": [
             {
