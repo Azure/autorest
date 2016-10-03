@@ -66,7 +66,7 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(((MemoryFileSystem)settings.FileSystem).VirtualStore);
 
             var actualFiles = settings.FileSystem.GetFiles("X:\\Output", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
-            var expectedFiles = Directory.GetFiles(resultFolder, "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
+            var expectedFiles = Directory.Exists(resultFolder) ? Directory.GetFiles(resultFolder, "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray() : new string[0];
             Assert.Equal(expectedFiles.Length, actualFiles.Length);
 
             for (int i = 0; i < expectedFiles.Length; i++)
