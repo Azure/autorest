@@ -209,6 +209,12 @@ namespace AutoRest.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void ServiceFabric_2016_01_28()
+        {
+            RunSwaggerTest("ServiceFabric", "2016-01-28", "servicefabric.json");
+        }
+
+        [Fact]
         public static void Storage_2015_05_01_preview()
         {
             RunSwaggerTest("Storage", "2015-05-01-preview", "storage.json");
