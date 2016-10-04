@@ -1,61 +1,72 @@
 # This file is use to generate Azure SDK from swagger. 
 # Swaggers specs are located in git repo: https://github.com/Azure/azure-rest-api-specs
+# Command to run rake file: 
+# 				rake SDK_VERSION=<major>.<minor>.<patch>
+# 				where SDK_VERSION is SDK version.
 
 require 'fileutils'
 
 AUTOREST     = "../../core/AutoRest/bin/Debug/net451/win7-x64/AutoRest.exe"
 
 SWAGGER_VERSIONS = {
+	# asazure: {version: "2016-05-06"},
 	authorization: {version: "2015-07-01"},
 	batch: {version: "2015-12-01", swagger: "BatchManagement"},
 	cdn: {version: "2016-04-02"},
 	cognitiveservices: {version: "2016-02-01-preview"},
-	compute: {version: "2016-03-30"},
+	compute: {version: "2016-03-30"}, #composite swagger (includes container service)
 	# containerservice: {version: "2016-03-30", swagger: "containerservice"},
 	# commerce: {version: "2015-06-01-preview"},
-	# datalake_analytics: {
-	# 	account: {version: "2015-10-01-preview"},
-	# 	catalog: {version: "2016-06-01-preview"},
-	# 	job:  {version: "2016-03-20-preview"}
-	# },
+	datalake_analytics: {
+		account: {version: "2015-10-01-preview"},
+		# catalog: {version: "2016-06-01-preview"},
+		# job:  {version: "2016-03-20-preview"}
+	},
 	datalake_store: {
 		account: {version: "2015-10-01-preview"},
 		filesystem: {version: "2015-10-01-preview"}
 	},
 	devtestlabs: {version: "2016-05-15", swagger: "DTL"},
 	dns: {version: "2016-04-01"},
-	# eventhub: {version: "2015-08-01", swagger: "EventHub"},
-	graphrbac: {version: "1.6"},
+	eventhub: {version: "2015-08-01", swagger: "EventHub"},
+	graphrbac: {version: "1.6"}, # composite swagger
 	# insights (composite swagger)
 	intune: {version: "2015-01-14-preview"},
 	iothub: {version: "2016-02-03"},
 	keyvault: {version: "2015-06-01"},
-	logic: {version: "2016-06-01"},
-	machinelearning: {version: "2016-05-01-preview", swagger: "webservices"},
+	logic: {version: "2016-06-01"}, #composite swagger
+	# machine learning has two swaggers, but not a composite swagger
+	# this service should follow the same structure as the resources service and clients 
+	# machinelearning: {version: "2016-05-01-preview", swagger: "webservices"},
+	machinelearning: {
+		webservices: {version: "2016-05-01-preview", swagger: "webservices"},
+		commitmentplans: {version: "2016-05-01-preview", swagger: "commitmentPlans"}
+	},
 	mediaservices: {version: "2015-10-01", swagger: "media"},
 	mobileengagement: {version: "2014-12-01", swagger: "mobile-engagement"},
 	network: {version: "2016-09-01"},
 	notificationhubs: {version: "2016-03-01"},
 	powerbiembedded: {version: "2016-01-29"},
-	# recoveryservices
-	# recoveryservicesbackup
+	# recoveryservices: {version: "2016-06-01"},
+	# recoveryservicesbackup: {version: "2016-06-01"},
 	redis: {version: "2016-04-01"},
 	resources: {
 		features: {version: "2015-12-01"},
 		locks: {version: "2016-09-01"},
-		resources: {version: "2016-09-01"},
 		policy: {version: "2016-04-01"},
-		# currently suscription uses the old api, because of a bug in the generator
+		resources: {version: "2016-09-01"},
+		# generator has a bug and generates an ugly SDK for subscription newest API version
+		# subscriptions: {version: "2016-06-01"}
 		subscriptions: {version: "2015-11-01"}
 	},
 	scheduler: {version: "2016-03-01"},
 	search: {version: "2015-02-28"},
-	# servermanagement: {version: "2016-07-01-preview"},
+	servermanagement: {version: "2016-07-01-preview"},
 	servicebus: {version: "2015-08-01"},
 	sql: {version: "2015-05-01"},
 	storage: {version: "2016-01-01"},
 	trafficmanager: {version: "2015-11-01"},
-	web: {version: "2015-08-01", swagger: "service"}
+	web: {version: "2015-08-01", swagger: "service"} # composite swagger
 }
 
 class Service
@@ -201,7 +212,7 @@ def generate(service)
 	s = "Generating #{service.fullname}.#{service.version} "
 	puts "#{s} #{"=" * (80 - s.length)}"
 	delete(service)
-	s = `#{AUTOREST} -AddCredentials -CodeGenerator Go -Header MICROSOFT_APACHE -Input #{service.input_path} -Namespace #{service.namespace} -OutputDirectory #{service.output_path} -Modeler Swagger`
+	s = `#{AUTOREST} -AddCredentials -CodeGenerator Go -Header MICROSOFT_APACHE -Input #{service.input_path} -Namespace #{service.namespace} -OutputDirectory #{service.output_path} -Modeler Swagger  -pv #{ENV['SDK_VERSION']}`
 	raise "Failed generating #{service.fullname}.#{service.inspect}" if s =~ /.*FATAL.*/
 	puts s
 

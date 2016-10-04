@@ -984,33 +984,15 @@ namespace AutoRest.Go
         /// <param name="methods"></param>
         /// <returns></returns>
         public static bool NextMethodExists(this Method method, List<Method> methods) {
-            string next = "next";
-            if (method.Name.Length > next.Length) {
-                if (method.Name.Substring(method.Name.Length - next.Length).Equals(next, StringComparison.OrdinalIgnoreCase)
-                    && methods.Any(m => m.ReturnValue().Body == method.ReturnValue().Body)){
-                    return true;
+            if (method.Extensions.ContainsKey(AzureExtensions.PageableExtension))
+            {
+                var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(method.Extensions[AzureExtensions.PageableExtension].ToString());
+                if (pageableExtension != null && !string.IsNullOrEmpty(pageableExtension.OperationName))
+                {
+                    return methods.Any(m => m.SerializedName.Equals(pageableExtension.OperationName, StringComparison.OrdinalIgnoreCase));
                 }
             }
-            return methods.Any(m => m.Name.Length > next.Length
-                && m.Name.Substring(m.Name.Length - next.Length).Equals(next, StringComparison.OrdinalIgnoreCase)
-                && m.ReturnValue().Body == method.ReturnValue().Body);
-            
-            // For this method to be a bit more elegant, it should work with something similar to these commented lines...
-            // if (method.Extensions.ContainsKey(AzureExtensions.PageableExtension)){
-            // var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(method.Extensions[AzureExtensions.PageableExtension].ToString());
-            // // var pagealeExtension = method.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
-            //     if (pageableExtension != null)
-            //     {  
-            //         // var nextOperation = (string)pageableExtension["operationName"];
-            //         if (!string.IsNullOrEmpty(pageableExtension.OperationName))
-            //         {
-            //             return methods.Any(m => m.SerializedName.Equals(pageableExtension.OperationName, StringComparison.OrdinalIgnoreCase));
-            //         }
-            //         return false;
-            //     }
-            //     return false;
-            // }
-            // return false;
+            return false;
         }
 
         /// <summary>

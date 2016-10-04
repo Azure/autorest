@@ -24,6 +24,7 @@ namespace AutoRest.Go
         // CommonInitialisms are those "words" within a name that Golint expects to be uppercase.
         // See https://github.com/golang/lint/blob/master/lint.go for detail.
         private static readonly List<String> CommonInitialisms = new List<String>() {
+                                                                            "Acl",
 	                                                                        "Api",
 	                                                                        "Ascii",
 	                                                                        "Cpu",
@@ -203,7 +204,7 @@ namespace AutoRest.Go
                 "unsafe",
 
                 // Other reserved names and packages (defined by the base libraries this code uses)
-                "autorest", "client", "date", "err", "req", "resp", "result", "sender"
+                "autorest", "client", "date", "err", "req", "resp", "result", "sender", "new", "to", "validation"
 
             }.ToList().ForEach(s => ReservedWords.Add(s));
 
