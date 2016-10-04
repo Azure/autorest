@@ -69,7 +69,7 @@ namespace AutoRest.Go.TemplateModels
             EnumTemplateModels
                 .ForEach(em => 
                 {
-                    if (em.Values.Where(v => topLevelNames.Contains(v.Name)).Count() > 0)
+                    if (em.Values.Where(v => topLevelNames.Contains(v.Name) || GoCodeNamer.UserDefinedNames.Contains(v.Name)).Count() > 0)
                     {
                         em.HasUniqueNames = false;
                     }

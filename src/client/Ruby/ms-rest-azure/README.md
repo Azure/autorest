@@ -4,7 +4,6 @@ MsRestAzure is a library which supports the Azure clients (SDKs) generated with 
 
 # Supported Ruby Versions
 
-* Ruby 1.9.3
 * Ruby 2.0
 * Ruby 2.1
 * Ruby 2.2

@@ -1171,7 +1171,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2035,7 +2035,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Deallocate",
-        "description": "Allows you to deallocate a virtual machine virtual machine scale set.Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.",
+        "description": "Allows you to deallocate a virtual machine scale set virtual machine. Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2415,11 +2415,11 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets the status Code."
+          "description": "the status Code."
         },
         "level": {
           "type": "string",
-          "description": "Gets or sets the level Code.",
+          "description": "the level Code.",
           "enum": [
             "Info",
             "Warning",
@@ -2432,16 +2432,16 @@
         },
         "displayStatus": {
           "type": "string",
-          "description": "Gets or sets the short localizable label for the status."
+          "description": "the short localizable label for the status."
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the detailed Message, including for alerts and error messages."
+          "description": "the detailed Message, including for alerts and error messages."
         },
         "time": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the time of the status."
+          "description": "the time of the status."
         }
       },
       "description": "Instance view status."
@@ -2451,26 +2451,26 @@
         "platformUpdateDomainCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets Update Domain count."
+          "description": "Update Domain count."
         },
         "platformFaultDomainCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets Fault Domain count."
+          "description": "Fault Domain count."
         },
         "virtualMachines": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Gets or sets a list containing reference to all Virtual Machines created under this Availability Set."
+          "description": "a list containing reference to all Virtual Machines created under this Availability Set."
         },
         "statuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "the resource status information."
         }
       },
       "description": "The instance view of a resource."
@@ -2496,7 +2496,7 @@
           "items": {
             "$ref": "#/definitions/AvailabilitySet"
           },
-          "description": "Gets or sets the list of availability sets"
+          "description": "the list of availability sets"
         }
       },
       "description": "The List Availability Set operation response."
@@ -2505,32 +2505,32 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the VM size name."
+          "description": "the VM size name."
         },
         "numberOfCores": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Number of cores supported by a VM size."
+          "description": "the Number of cores supported by a VM size."
         },
         "osDiskSizeInMB": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the OS disk size allowed by a VM size."
+          "description": "the OS disk size allowed by a VM size."
         },
         "resourceDiskSizeInMB": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Resource disk size allowed by a VM size."
+          "description": "the Resource disk size allowed by a VM size."
         },
         "memoryInMB": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Memory size supported by a VM size."
+          "description": "the Memory size supported by a VM size."
         },
         "maxDataDiskCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Maximum number of data disks allowed by a VM size."
+          "description": "the Maximum number of data disks allowed by a VM size."
         }
       },
       "description": "Describes the properties of a VM size."
@@ -2542,7 +2542,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineSize"
           },
-          "description": "Gets or sets the list of virtual machine sizes."
+          "description": "the list of virtual machine sizes."
         }
       },
       "description": "The List Virtual Machine operation response."
@@ -2551,23 +2551,23 @@
       "properties": {
         "operatingSystem": {
           "type": "string",
-          "description": "Gets or sets the operating system this extension supports."
+          "description": "the operating system this extension supports."
         },
         "computeRole": {
           "type": "string",
-          "description": "Gets or sets the type of role (IaaS or PaaS) this extension supports."
+          "description": "the type of role (IaaS or PaaS) this extension supports."
         },
         "handlerSchema": {
           "type": "string",
-          "description": "Gets or sets the schema defined by publisher, where extension consumers should provide settings in a matching schema."
+          "description": "the schema defined by publisher, where extension consumers should provide settings in a matching schema."
         },
         "vmScaleSetEnabled": {
           "type": "boolean",
-          "description": "Gets or sets whether the extension can be used on xRP VMScaleSets.By default existing extensions are usable on scalesets, but there might be cases where a publisher wants to explicitly indicate the extension is only enabled for CRP VMs but not VMSS."
+          "description": "whether the extension can be used on xRP VMScaleSets.By default existing extensions are usable on scalesets, but there might be cases where a publisher wants to explicitly indicate the extension is only enabled for CRP VMs but not VMSS."
         },
         "supportsMultipleExtensions": {
           "type": "boolean",
-          "description": "Gets or sets whether the handler can support multiple extensions."
+          "description": "whether the handler can support multiple extensions."
         }
       },
       "required": [
@@ -2599,18 +2599,18 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the resource."
+          "description": "the name of the resource."
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the location of the resource."
+          "description": "the location of the resource."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the tags attached to the resource."
+          "description": "the tags attached to the resource."
         }
       },
       "required": [
@@ -2628,29 +2628,29 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the virtual machine extension name."
+          "description": "the virtual machine extension name."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the full type of the extension handler which includes both publisher and type."
+          "description": "the full type of the extension handler which includes both publisher and type."
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Gets or sets the type version of the extension handler."
+          "description": "the type version of the extension handler."
         },
         "substatuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "the resource status information."
         },
         "statuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "the resource status information."
         }
       },
       "description": "The instance view of a virtual machine extension."
@@ -2659,39 +2659,40 @@
       "properties": {
         "forceUpdateTag": {
           "type": "string",
-          "description": "Gets or sets how the extension handler should be forced to update even if the extension configuration has not changed."
+          "description": "how the extension handler should be forced to update even if the extension configuration has not changed."
         },
         "publisher": {
           "type": "string",
-          "description": "Gets or sets the name of the extension handler publisher."
+          "description": "the name of the extension handler publisher."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the type of the extension handler."
+          "description": "the type of the extension handler."
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Gets or sets the type version of the extension handler."
+          "description": "the type version of the extension handler."
         },
         "autoUpgradeMinorVersion": {
           "type": "boolean",
-          "description": "Gets or sets whether the extension handler should be automatically upgraded across minor versions."
+          "description": "whether the extension handler should be automatically upgraded across minor versions."
         },
         "settings": {
           "type": "object",
-          "description": "Gets or sets Json formatted public settings for the extension."
+          "description": "Json formatted public settings for the extension."
         },
         "protectedSettings": {
           "type": "object",
-          "description": "Gets or sets Json formatted protected settings for the extension."
+          "description": "Json formatted protected settings for the extension."
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the provisioning state, which only appears in the response."
+          "description": "the provisioning state, which only appears in the response."
         },
         "instanceView": {
           "$ref": "#/definitions/VirtualMachineExtensionInstanceView",
-          "description": "Gets or sets the virtual machine extension instance view."
+          "description": "the virtual machine extension instance view."
         }
       },
       "description": "Describes the properties of a Virtual Machine Extension."
@@ -2714,15 +2715,15 @@
       "properties": {
         "publisher": {
           "type": "string",
-          "description": "Gets or sets the publisher ID."
+          "description": "the publisher ID."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the plan ID."
+          "description": "the plan ID."
         },
         "product": {
           "type": "string",
-          "description": "Gets or sets the product ID."
+          "description": "the product ID."
         }
       },
       "required": [
@@ -2736,7 +2737,7 @@
       "properties": {
         "operatingSystem": {
           "type": "string",
-          "description": "Gets or sets the operating system of the osDiskImage.",
+          "description": "the operating system of the osDiskImage.",
           "enum": [
             "Windows",
             "Linux"
@@ -2758,7 +2759,7 @@
           "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "description": "Gets the LUN number for a data disk.This value is used to identify data disk image inside the VMImage therefore it must be unique for each data disk.The allowed character for the value is digit."
+          "description": "the LUN number for a data disk.This value is used to identify data disk image inside the VMImage therefore it must be unique for each data disk.The allowed character for the value is digit."
         }
       },
       "description": "Contains the data disk images information."
@@ -2802,11 +2803,11 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "Gets or sets a string describing the resource name."
+          "description": "a string describing the resource name."
         },
         "localizedValue": {
           "type": "string",
-          "description": "Gets or sets a localized string describing the resource name."
+          "description": "a localized string describing the resource name."
         }
       },
       "description": "The Usage Names."
@@ -2815,7 +2816,7 @@
       "properties": {
         "unit": {
           "type": "string",
-          "description": "Gets or sets an enum describing the unit of measurement.",
+          "description": "an enum describing the unit of measurement.",
           "enum": [
             "Count"
           ],
@@ -2827,16 +2828,16 @@
         "currentValue": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the current value of the usage."
+          "description": "the current value of the usage."
         },
         "limit": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the limit of usage."
+          "description": "the limit of usage."
         },
         "name": {
           "$ref": "#/definitions/UsageName",
-          "description": "Gets or sets the name of the type of usage."
+          "description": "the name of the type of usage."
         }
       },
       "required": [
@@ -2854,7 +2855,11 @@
           "items": {
             "$ref": "#/definitions/Usage"
           },
-          "description": "Gets or sets the list Compute Resource Usages."
+          "description": "the list Compute Resource Usages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "the uri to fetch the next page of Compute Resource Usages. Call ListNext() with this to fetch the next page of Compute Resource Usages."
         }
       },
       "description": "The List Usages operation response."
@@ -2863,15 +2868,15 @@
       "properties": {
         "vhdPrefix": {
           "type": "string",
-          "description": "Gets or sets the captured VirtualHardDisk's name prefix."
+          "description": "the captured VirtualHardDisk's name prefix."
         },
         "destinationContainerName": {
           "type": "string",
-          "description": "Gets or sets the destination container name."
+          "description": "the destination container name."
         },
         "overwriteVhds": {
           "type": "boolean",
-          "description": "Gets or sets whether it overwrites destination VirtualHardDisk if true, in case of conflict."
+          "description": "whether it overwrites destination VirtualHardDisk if true, in case of conflict."
         }
       },
       "required": [
@@ -2908,19 +2913,19 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the plan ID."
+          "description": "the plan ID."
         },
         "publisher": {
           "type": "string",
-          "description": "Gets or sets the publisher ID."
+          "description": "the publisher ID."
         },
         "product": {
           "type": "string",
-          "description": "Gets or sets the offer ID."
+          "description": "the offer ID."
         },
         "promotionCode": {
           "type": "string",
-          "description": "Gets or sets the promotion code."
+          "description": "the promotion code."
         }
       },
       "description": "Plan for the resource."
@@ -3007,19 +3012,19 @@
       "properties": {
         "publisher": {
           "type": "string",
-          "description": "Gets or sets the image publisher."
+          "description": "the image publisher."
         },
         "offer": {
           "type": "string",
-          "description": "Gets or sets the image offer."
+          "description": "the image offer."
         },
         "sku": {
           "type": "string",
-          "description": "Gets or sets the image sku."
+          "description": "the image sku."
         },
         "version": {
           "type": "string",
-          "description": "Gets or sets the image version. The allowed formats are Major.Minor.Build or 'latest'. Major, Minor and Build being decimal numbers. Specify 'latest' to use the latest version of image."
+          "description": "the image version. The allowed formats are Major.Minor.Build or 'latest'. Major, Minor and Build being decimal numbers. Specify 'latest' to use the latest version of image."
         }
       },
       "description": "The image reference."
@@ -3028,11 +3033,11 @@
       "properties": {
         "secretUrl": {
           "type": "string",
-          "description": "Gets or sets the URL referencing a secret in a Key Vault."
+          "description": "the URL referencing a secret in a Key Vault."
         },
         "sourceVault": {
           "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the Relative URL of the Key Vault containing the secret."
+          "description": "the Relative URL of the Key Vault containing the secret."
         }
       },
       "required": [
@@ -3045,11 +3050,11 @@
       "properties": {
         "keyUrl": {
           "type": "string",
-          "description": "Gets or sets the URL referencing a key in a Key Vault."
+          "description": "the URL referencing a key in a Key Vault."
         },
         "sourceVault": {
           "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the Relative URL of the Key Vault containing the key"
+          "description": "the Relative URL of the Key Vault containing the key"
         }
       },
       "required": [
@@ -3062,15 +3067,15 @@
       "properties": {
         "diskEncryptionKey": {
           "$ref": "#/definitions/KeyVaultSecretReference",
-          "description": "Gets or sets the disk encryption key which is a KeyVault Secret."
+          "description": "the disk encryption key which is a KeyVault Secret."
         },
         "keyEncryptionKey": {
           "$ref": "#/definitions/KeyVaultKeyReference",
-          "description": "Gets or sets the key encryption key which is KeyVault Key."
+          "description": "the key encryption key which is KeyVault Key."
         },
         "enabled": {
           "type": "boolean",
-          "description": "Gets or sets whether disk encryption should be enabled on the Virtual Machine."
+          "description": "whether disk encryption should be enabled on the Virtual Machine."
         }
       },
       "description": "Describes a Encryption Settings for a Disk"
@@ -3079,7 +3084,7 @@
       "properties": {
         "uri": {
           "type": "string",
-          "description": "Gets or sets the virtual hard disk's uri. It should be a valid Uri to a virtual hard disk."
+          "description": "the virtual hard disk's uri. It should be a valid Uri to a virtual hard disk."
         }
       },
       "description": "Describes the uri of a disk."
@@ -3088,7 +3093,7 @@
       "properties": {
         "osType": {
           "type": "string",
-          "description": "Gets or sets the Operating System type.",
+          "description": "the Operating System type.",
           "enum": [
             "Windows",
             "Linux"
@@ -3100,23 +3105,23 @@
         },
         "encryptionSettings": {
           "$ref": "#/definitions/DiskEncryptionSettings",
-          "description": "Gets or sets the disk encryption settings."
+          "description": "the disk encryption settings."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the disk name."
+          "description": "the disk name."
         },
         "vhd": {
           "$ref": "#/definitions/VirtualHardDisk",
-          "description": "Gets or sets the Virtual Hard Disk."
+          "description": "the Virtual Hard Disk."
         },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
-          "description": "Gets or sets the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
+          "description": "the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
         },
         "caching": {
           "type": "string",
-          "description": "Gets or sets the caching type.",
+          "description": "the caching type.",
           "enum": [
             "None",
             "ReadOnly",
@@ -3129,7 +3134,7 @@
         },
         "createOption": {
           "type": "string",
-          "description": "Gets or sets the create option.",
+          "description": "the create option.",
           "enum": [
             "fromImage",
             "empty",
@@ -3143,7 +3148,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
+          "description": "the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
         }
       },
       "required": [
@@ -3158,23 +3163,23 @@
         "lun": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the logical unit number."
+          "description": "the logical unit number."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the disk name."
+          "description": "the disk name."
         },
         "vhd": {
           "$ref": "#/definitions/VirtualHardDisk",
-          "description": "Gets or sets the Virtual Hard Disk."
+          "description": "the Virtual Hard Disk."
         },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
-          "description": "Gets or sets the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
+          "description": "the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
         },
         "caching": {
           "type": "string",
-          "description": "Gets or sets the caching type.",
+          "description": "the caching type.",
           "enum": [
             "None",
             "ReadOnly",
@@ -3187,7 +3192,7 @@
         },
         "createOption": {
           "type": "string",
-          "description": "Gets or sets the create option.",
+          "description": "the create option.",
           "enum": [
             "fromImage",
             "empty",
@@ -3201,7 +3206,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
+          "description": "the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
         }
       },
       "required": [
@@ -3216,18 +3221,18 @@
       "properties": {
         "imageReference": {
           "$ref": "#/definitions/ImageReference",
-          "description": "Gets or sets the image reference."
+          "description": "the image reference."
         },
         "osDisk": {
           "$ref": "#/definitions/OSDisk",
-          "description": "Gets or sets the OS disk."
+          "description": "the OS disk."
         },
         "dataDisks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataDisk"
           },
-          "description": "Gets or sets the data disks."
+          "description": "the data disks."
         }
       },
       "description": "Describes a storage profile."
@@ -3236,7 +3241,7 @@
       "properties": {
         "passName": {
           "type": "string",
-          "description": "Gets or sets the pass name. Currently, the only allowable value is oobeSystem.",
+          "description": "the pass name. Currently, the only allowable value is oobeSystem.",
           "enum": [
             "oobeSystem"
           ],
@@ -3247,7 +3252,7 @@
         },
         "componentName": {
           "type": "string",
-          "description": "Gets or sets the component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.",
+          "description": "the component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.",
           "enum": [
             "Microsoft-Windows-Shell-Setup"
           ],
@@ -3258,7 +3263,7 @@
         },
         "settingName": {
           "type": "string",
-          "description": "Gets or sets setting name (e.g. FirstLogonCommands, AutoLogon )",
+          "description": "setting name (e.g. FirstLogonCommands, AutoLogon )",
           "enum": [
             "AutoLogon",
             "FirstLogonCommands"
@@ -3270,16 +3275,16 @@
         },
         "content": {
           "type": "string",
-          "description": "Gets or sets XML formatted content that is added to the unattend.xml file in the specified pass and component.The XML must be less than 4 KB and must include the root element for the setting or feature that is being inserted."
+          "description": "XML formatted content that is added to the unattend.xml file in the specified pass and component.The XML must be less than 4 KB and must include the root element for the setting or feature that is being inserted."
         }
       },
-      "description": "Gets or sets additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is a applied."
+      "description": "additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is a applied."
     },
     "WinRMListener": {
       "properties": {
         "protocol": {
           "type": "string",
-          "description": "Gets or sets the Protocol used by WinRM listener. Currently only Http and Https are supported.",
+          "description": "the Protocol used by WinRM listener. Currently only Http and Https are supported.",
           "enum": [
             "Http",
             "Https"
@@ -3291,7 +3296,7 @@
         },
         "certificateUrl": {
           "type": "string",
-          "description": "Gets or sets the Certificate URL in KMS for Https listeners. Should be null for Http listeners."
+          "description": "the Certificate URL in KMS for Https listeners. Should be null for Http listeners."
         }
       },
       "description": "Describes Protocol and thumbprint of Windows Remote Management listener"
@@ -3303,7 +3308,7 @@
           "items": {
             "$ref": "#/definitions/WinRMListener"
           },
-          "description": "Gets or sets the list of Windows Remote Management listeners"
+          "description": "the list of Windows Remote Management listeners"
         }
       },
       "description": "Describes Windows Remote Management configuration of the VM"
@@ -3312,26 +3317,26 @@
       "properties": {
         "provisionVMAgent": {
           "type": "boolean",
-          "description": "Gets or sets whether VM Agent should be provisioned on the Virtual Machine."
+          "description": "whether VM Agent should be provisioned on the Virtual Machine."
         },
         "enableAutomaticUpdates": {
           "type": "boolean",
-          "description": "Gets or sets whether Windows updates are automatically installed on the VM"
+          "description": "whether Windows updates are automatically installed on the VM"
         },
         "timeZone": {
           "type": "string",
-          "description": "Gets or sets the Time Zone of the VM"
+          "description": "the Time Zone of the VM"
         },
         "additionalUnattendContent": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AdditionalUnattendContent"
           },
-          "description": "Gets or sets the additional base-64 encoded XML formatted information that can be included in the Unattend.xml file."
+          "description": "the additional base-64 encoded XML formatted information that can be included in the Unattend.xml file."
         },
         "winRM": {
           "$ref": "#/definitions/WinRMConfiguration",
-          "description": "Gets or sets the Windows Remote Management configuration of the VM"
+          "description": "the Windows Remote Management configuration of the VM"
         }
       },
       "description": "Describes Windows Configuration of the OS Profile."
@@ -3340,11 +3345,11 @@
       "properties": {
         "path": {
           "type": "string",
-          "description": "Gets or sets the full path on the created VM where SSH public key is stored. If the file already exists, the specified key is appended to the file."
+          "description": "the full path on the created VM where SSH public key is stored. If the file already exists, the specified key is appended to the file."
         },
         "keyData": {
           "type": "string",
-          "description": "Gets or sets Certificate public key used to authenticate with VM through SSH.The certificate must be in Pem format with or without headers."
+          "description": "Certificate public key used to authenticate with VM through SSH.The certificate must be in Pem format with or without headers."
         }
       },
       "description": "Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed."
@@ -3356,7 +3361,7 @@
           "items": {
             "$ref": "#/definitions/SshPublicKey"
           },
-          "description": "Gets or sets the list of SSH public keys used to authenticate with linux based VMs"
+          "description": "the list of SSH public keys used to authenticate with linux based VMs"
         }
       },
       "description": "SSH configuration for Linux based VMs running on Azure"
@@ -3365,11 +3370,11 @@
       "properties": {
         "disablePasswordAuthentication": {
           "type": "boolean",
-          "description": "Gets or sets whether Authentication using user name and password is allowed or not"
+          "description": "whether Authentication using user name and password is allowed or not"
         },
         "ssh": {
           "$ref": "#/definitions/SshConfiguration",
-          "description": "Gets or sets the SSH configuration for linux VMs"
+          "description": "the SSH configuration for linux VMs"
         }
       },
       "description": "Describes Windows Configuration of the OS Profile."
@@ -3378,11 +3383,11 @@
       "properties": {
         "certificateUrl": {
           "type": "string",
-          "description": "Gets or sets the URL referencing a secret in a Key Vault which contains a properly formatted certificate."
+          "description": "the URL referencing a secret in a Key Vault which contains a properly formatted certificate."
         },
         "certificateStore": {
           "type": "string",
-          "description": "Gets or sets the Certificate store in LocalMachine to add the certificate to on Windows, leave empty on Linux."
+          "description": "the Certificate store in LocalMachine to add the certificate to on Windows, leave empty on Linux."
         }
       },
       "description": "Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM."
@@ -3391,14 +3396,14 @@
       "properties": {
         "sourceVault": {
           "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the Relative URL of the Key Vault containing all of the certificates in VaultCertificates."
+          "description": "the Relative URL of the Key Vault containing all of the certificates in VaultCertificates."
         },
         "vaultCertificates": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VaultCertificate"
           },
-          "description": "Gets or sets the list of key vault references in SourceVault which contain certificates"
+          "description": "the list of key vault references in SourceVault which contain certificates"
         }
       },
       "description": "Describes a set of certificates which are all in the same Key Vault."
@@ -3407,34 +3412,34 @@
       "properties": {
         "computerName": {
           "type": "string",
-          "description": "Gets or sets the computer name."
+          "description": "the computer name."
         },
         "adminUsername": {
           "type": "string",
-          "description": "Gets or sets the admin user name."
+          "description": "the admin user name."
         },
         "adminPassword": {
           "type": "string",
-          "description": "Gets or sets the admin user password."
+          "description": "the admin user password."
         },
         "customData": {
           "type": "string",
-          "description": "Gets or sets a base-64 encoded string of custom data."
+          "description": "a base-64 encoded string of custom data."
         },
         "windowsConfiguration": {
           "$ref": "#/definitions/WindowsConfiguration",
-          "description": "Gets or sets the Windows Configuration of the OS profile."
+          "description": "the Windows Configuration of the OS profile."
         },
         "linuxConfiguration": {
           "$ref": "#/definitions/LinuxConfiguration",
-          "description": "Gets or sets the Linux Configuration of the OS profile."
+          "description": "the Linux Configuration of the OS profile."
         },
         "secrets": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VaultSecretGroup"
           },
-          "description": "Gets or sets the List of certificates for addition to the VM."
+          "description": "the List of certificates for addition to the VM."
         }
       },
       "description": "Describes an OS profile."
@@ -3443,7 +3448,7 @@
       "properties": {
         "primary": {
           "type": "boolean",
-          "description": "Gets or sets whether this is a primary NIC on a virtual machine"
+          "description": "whether this is a primary NIC on a virtual machine"
         }
       },
       "description": "Describes a network interface reference properties."
@@ -3469,7 +3474,7 @@
           "items": {
             "$ref": "#/definitions/NetworkInterfaceReference"
           },
-          "description": "Gets or sets the network interfaces."
+          "description": "the network interfaces."
         }
       },
       "description": "Describes a network profile."
@@ -3478,11 +3483,11 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Gets or sets whether boot diagnostics should be enabled on the Virtual Machine."
+          "description": "whether boot diagnostics should be enabled on the Virtual Machine."
         },
         "storageUri": {
           "type": "string",
-          "description": "Gets or sets the boot diagnostics storage Uri. It should be a valid Uri"
+          "description": "the boot diagnostics storage Uri. It should be a valid Uri"
         }
       },
       "description": "Describes Boot Diagnostics."
@@ -3491,7 +3496,7 @@
       "properties": {
         "bootDiagnostics": {
           "$ref": "#/definitions/BootDiagnostics",
-          "description": "Gets or sets the boot diagnostics."
+          "description": "the boot diagnostics."
         }
       },
       "description": "Describes a diagnostics profile."
@@ -3500,15 +3505,15 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "Gets or sets full type of the extension handler which includes both publisher and type."
+          "description": "full type of the extension handler which includes both publisher and type."
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Gets or sets the type version of the extension handler."
+          "description": "the type version of the extension handler."
         },
         "status": {
           "$ref": "#/definitions/InstanceViewStatus",
-          "description": "Gets or sets the extension handler status."
+          "description": "the extension handler status."
         }
       },
       "description": "The instance view of a virtual machine extension handler."
@@ -3517,21 +3522,21 @@
       "properties": {
         "vmAgentVersion": {
           "type": "string",
-          "description": "Gets or sets the VM Agent full version."
+          "description": "the VM Agent full version."
         },
         "extensionHandlers": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineExtensionHandlerInstanceView"
           },
-          "description": "Gets or sets the virtual machine extension handler instance view."
+          "description": "the virtual machine extension handler instance view."
         },
         "statuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "the resource status information."
         }
       },
       "description": "The instance view of the VM Agent running on the virtual machine."
@@ -3540,14 +3545,14 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the disk name."
+          "description": "the disk name."
         },
         "statuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "the resource status information."
         }
       },
       "description": "The instance view of the disk."
@@ -3556,11 +3561,11 @@
       "properties": {
         "consoleScreenshotBlobUri": {
           "type": "string",
-          "description": "Gets or sets the console screenshot blob Uri."
+          "description": "the console screenshot blob Uri."
         },
         "serialConsoleLogBlobUri": {
           "type": "string",
-          "description": "Gets or sets the Linux serial console log blob Uri."
+          "description": "the Linux serial console log blob Uri."
         }
       },
       "description": "The instance view of a virtual machine boot diagnostics."
@@ -3570,45 +3575,45 @@
         "platformUpdateDomain": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Update Domain count."
+          "description": "the Update Domain count."
         },
         "platformFaultDomain": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Fault Domain count."
+          "description": "the Fault Domain count."
         },
         "rdpThumbPrint": {
           "type": "string",
-          "description": "Gets or sets the Remote desktop certificate thumbprint."
+          "description": "the Remote desktop certificate thumbprint."
         },
         "vmAgent": {
           "$ref": "#/definitions/VirtualMachineAgentInstanceView",
-          "description": "Gets or sets the VM Agent running on the virtual machine."
+          "description": "the VM Agent running on the virtual machine."
         },
         "disks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiskInstanceView"
           },
-          "description": "Gets or sets the disks information."
+          "description": "the disks information."
         },
         "extensions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineExtensionInstanceView"
           },
-          "description": "Gets or sets the extensions information."
+          "description": "the extensions information."
         },
         "bootDiagnostics": {
           "$ref": "#/definitions/BootDiagnosticsInstanceView",
-          "description": "Gets or sets the boot diagnostics."
+          "description": "the boot diagnostics."
         },
         "statuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "the resource status information."
         }
       },
       "description": "The instance view of a virtual machine."
@@ -3617,44 +3622,46 @@
       "properties": {
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
-          "description": "Gets or sets the hardware profile."
+          "description": "the hardware profile."
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
-          "description": "Gets or sets the storage profile."
+          "description": "the storage profile."
         },
         "osProfile": {
           "$ref": "#/definitions/OSProfile",
-          "description": "Gets or sets the OS profile."
+          "description": "the OS profile."
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
-          "description": "Gets or sets the network profile."
+          "description": "the network profile."
         },
         "diagnosticsProfile": {
           "$ref": "#/definitions/DiagnosticsProfile",
-          "description": "Gets or sets the diagnostics profile."
+          "description": "the diagnostics profile."
         },
         "availabilitySet": {
           "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the reference Id of the availability set to which this virtual machine belongs."
+          "description": "the reference Id of the availability set to which this virtual machine belongs."
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the provisioning state, which only appears in the response."
+          "description": "the provisioning state, which only appears in the response."
         },
         "instanceView": {
           "$ref": "#/definitions/VirtualMachineInstanceView",
           "readOnly": true,
-          "description": "Gets the virtual machine instance view."
+          "description": "the virtual machine instance view."
         },
         "licenseType": {
           "type": "string",
-          "description": "Gets or sets the license type, which is for bring your own license scenario."
+          "description": "the license type, which is for bring your own license scenario."
         },
         "vmId": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets the virtual machine unique id."  
+          "description": "the virtual machine unique id."
         }
       },
       "description": "Describes the properties of a Virtual Machine."
@@ -3663,7 +3670,7 @@
       "properties": {
         "plan": {
           "$ref": "#/definitions/Plan",
-          "description": "Gets or sets the purchase plan when deploying virtual machine from VM Marketplace images."
+          "description": "the purchase plan when deploying virtual machine from VM Marketplace images."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -3675,7 +3682,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineExtension"
           },
-          "description": "Gets the virtual machine child extension resources."
+          "description": "the virtual machine child extension resources."
         }
       },
       "allOf": [
@@ -3692,11 +3699,11 @@
           "items": {
             "$ref": "#/definitions/VirtualMachine"
           },
-          "description": "Gets or sets the list of virtual machines."
+          "description": "the list of virtual machines."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the uri to fetch the next page of VMs. Call ListNext() with this to fetch the next page of Virtual Machines."
+          "description": "the uri to fetch the next page of VMs. Call ListNext() with this to fetch the next page of Virtual Machines."
         }
       },
       "description": "The List Virtual Machine operation response."
@@ -3705,16 +3712,16 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the sku name."
+          "description": "the sku name."
         },
         "tier": {
           "type": "string",
-          "description": "Gets or sets the sku tier."
+          "description": "the sku tier."
         },
         "capacity": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the sku capacity."
+          "description": "the sku capacity."
         }
       },
       "description": "Describes a virtual machine scale set sku."
@@ -3723,7 +3730,7 @@
       "properties": {
         "mode": {
           "type": "string",
-          "description": "Gets or sets the upgrade mode.",
+          "description": "the upgrade mode.",
           "enum": [
             "Automatic",
             "Manual"
@@ -3740,34 +3747,34 @@
       "properties": {
         "computerNamePrefix": {
           "type": "string",
-          "description": "Gets or sets the computer name prefix."
+          "description": "the computer name prefix."
         },
         "adminUsername": {
           "type": "string",
-          "description": "Gets or sets the admin user name."
+          "description": "the admin user name."
         },
         "adminPassword": {
           "type": "string",
-          "description": "Gets or sets the admin user password."
+          "description": "the admin user password."
         },
         "customData": {
           "type": "string",
-          "description": "Gets or sets a base-64 encoded string of custom data."
+          "description": "a base-64 encoded string of custom data."
         },
         "windowsConfiguration": {
           "$ref": "#/definitions/WindowsConfiguration",
-          "description": "Gets or sets the Windows Configuration of the OS profile."
+          "description": "the Windows Configuration of the OS profile."
         },
         "linuxConfiguration": {
           "$ref": "#/definitions/LinuxConfiguration",
-          "description": "Gets or sets the Linux Configuration of the OS profile."
+          "description": "the Linux Configuration of the OS profile."
         },
         "secrets": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VaultSecretGroup"
           },
-          "description": "Gets or sets the List of certificates for addition to the VM."
+          "description": "the List of certificates for addition to the VM."
         }
       },
       "description": "Describes a virtual machine scale set OS profile."
@@ -3776,11 +3783,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the disk name."
+          "description": "the disk name."
         },
         "caching": {
           "type": "string",
-          "description": "Gets or sets the caching type.",
+          "description": "the caching type.",
           "enum": [
             "None",
             "ReadOnly",
@@ -3793,7 +3800,7 @@
         },
         "createOption": {
           "type": "string",
-          "description": "Gets or sets the create option.",
+          "description": "the create option.",
           "enum": [
             "fromImage",
             "empty",
@@ -3806,7 +3813,7 @@
         },
         "osType": {
           "type": "string",
-          "description": "Gets or sets the Operating System type.",
+          "description": "the Operating System type.",
           "enum": [
             "Windows",
             "Linux"
@@ -3818,14 +3825,14 @@
         },
         "image": {
           "$ref": "#/definitions/VirtualHardDisk",
-          "description": "Gets or sets the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
+          "description": "the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
         },
         "vhdContainers": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the list of virtual hard disk container uris."
+          "description": "the list of virtual hard disk container uris."
         }
       },
       "required": [
@@ -3838,11 +3845,11 @@
       "properties": {
         "imageReference": {
           "$ref": "#/definitions/ImageReference",
-          "description": "Gets or sets the image reference."
+          "description": "the image reference."
         },
         "osDisk": {
           "$ref": "#/definitions/VirtualMachineScaleSetOSDisk",
-          "description": "Gets or sets the OS disk."
+          "description": "the OS disk."
         }
       },
       "description": "Describes a virtual machine scale set storage profile."
@@ -3851,7 +3858,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/..."
+          "description": "the ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/..."
         }
       },
       "description": "The API entity reference."
@@ -3860,28 +3867,28 @@
       "properties": {
         "subnet": {
           "$ref": "#/definitions/ApiEntityReference",
-          "description": "Gets or sets the subnet."
+          "description": "the subnet."
         },
         "applicationGatewayBackendAddressPools": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Gets or sets the application gateway backend address pools."
-        },        
+          "description": "the application gateway backend address pools."
+        },
         "loadBalancerBackendAddressPools": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Gets or sets the load balancer backend address pools."
+          "description": "the load balancer backend address pools."
         },
         "loadBalancerInboundNatPools": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/SubResource"
           },
-          "description": "Gets or sets the load balancer inbound nat pools."
+          "description": "the load balancer inbound nat pools."
         }
       },
       "required": [
@@ -3893,7 +3900,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the IP configuration name."
+          "description": "the IP configuration name."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -3914,14 +3921,14 @@
       "properties": {
         "primary": {
           "type": "boolean",
-          "description": "Gets or sets whether this is a primary NIC on a virtual machine."
+          "description": "whether this is a primary NIC on a virtual machine."
         },
         "ipConfigurations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetIPConfiguration"
           },
-          "description": "Gets or sets the virtual machine scale set IP Configuration."
+          "description": "the virtual machine scale set IP Configuration."
         }
       },
       "required": [
@@ -3933,7 +3940,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the network configuration name."
+          "description": "the network configuration name."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -3957,7 +3964,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfiguration"
           },
-          "description": "Gets or sets the list of network configurations."
+          "description": "the list of network configurations."
         }
       },
       "description": "Describes a virtual machine scale set network profile."
@@ -3966,32 +3973,32 @@
       "properties": {
         "publisher": {
           "type": "string",
-          "description": "Gets or sets the name of the extension handler publisher."
+          "description": "the name of the extension handler publisher."
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the type of the extension handler."
+          "description": "the type of the extension handler."
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Gets or sets the type version of the extension handler."
+          "description": "the type version of the extension handler."
         },
         "autoUpgradeMinorVersion": {
           "type": "boolean",
-          "description": "Gets or sets whether the extension handler should be automatically upgraded across minor versions."
+          "description": "whether the extension handler should be automatically upgraded across minor versions."
         },
         "settings": {
           "type": "object",
-          "description": "Gets or sets Json formatted public settings for the extension."
+          "description": "Json formatted public settings for the extension."
         },
         "protectedSettings": {
           "type": "object",
-          "description": "Gets or sets Json formatted protected settings for the extension."
+          "description": "Json formatted protected settings for the extension."
         },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the provisioning state, which only appears in the response."
+          "description": "the provisioning state, which only appears in the response."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set Extension."
@@ -4000,7 +4007,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the extension."
+          "description": "the name of the extension."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -4021,7 +4028,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetExtension"
           },
-          "description": "Gets the virtual machine scale set child extension resources."
+          "description": "the virtual machine scale set child extension resources."
         }
       },
       "description": "Describes a virtual machine scale set extension profile."
@@ -4030,19 +4037,19 @@
       "properties": {
         "osProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetOSProfile",
-          "description": "Gets or sets the virtual machine scale set OS profile."
+          "description": "the virtual machine scale set OS profile."
         },
         "storageProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetStorageProfile",
-          "description": "Gets or sets the virtual machine scale set storage profile."
+          "description": "the virtual machine scale set storage profile."
         },
         "networkProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetNetworkProfile",
-          "description": "Gets or sets the virtual machine scale set network profile."
+          "description": "the virtual machine scale set network profile."
         },
         "extensionProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetExtensionProfile",
-          "description": "Gets the virtual machine scale set extension profile."
+          "description": "the virtual machine scale set extension profile."
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -4051,15 +4058,16 @@
       "properties": {
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicy",
-          "description": "Gets or sets the upgrade policy."
+          "description": "the upgrade policy."
         },
         "virtualMachineProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetVMProfile",
-          "description": "Gets or sets the virtual machine profile."
+          "description": "the virtual machine profile."
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the provisioning state, which only appears in the response."
+          "description": "the provisioning state, which only appears in the response."
         },
         "overProvision": {
           "type": "boolean",
@@ -4072,7 +4080,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Gets or sets the virtual machine scale set sku."
+          "description": "the virtual machine scale set sku."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -4093,7 +4101,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the virtual machine scale set instance ids."
+          "description": "the virtual machine scale set instance ids."
         }
       },
       "description": "Specifies the list of virtual machine scale set instance IDs."
@@ -4105,7 +4113,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the virtual machine scale set instance ids."
+          "description": "the virtual machine scale set instance ids."
         }
       },
       "required": [
@@ -4118,13 +4126,13 @@
         "code": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the instance view status code."
+          "description": "the instance view status code."
         },
         "count": {
           "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "description": "Gets the number of instances having a particular status code."
+          "description": "the number of instances having a particular status code."
         }
       },
       "description": "The status code and count of the virtual machine scale set instance view status summary."
@@ -4137,7 +4145,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineStatusCodeCount"
           },
-          "description": "Gets the extensions information."
+          "description": "the extensions information."
         }
       },
       "description": "Instance view statuses summary for virtual machines of a virtual machine scale set."
@@ -4147,7 +4155,7 @@
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the extension name."
+          "description": "the extension name."
         },
         "statusesSummary": {
           "readOnly": true,
@@ -4155,7 +4163,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineStatusCodeCount"
           },
-          "description": "Gets the extensions information."
+          "description": "the extensions information."
         }
       },
       "description": "Extensions summary for virtual machines of a virtual machine scale set."
@@ -4165,7 +4173,7 @@
         "virtualMachine": {
           "$ref": "#/definitions/VirtualMachineScaleSetInstanceViewStatusesSummary",
           "readOnly": true,
-          "description": "Gets the instance view status summary for the virtual machine scale set."
+          "description": "the instance view status summary for the virtual machine scale set."
         },
         "extensions": {
           "readOnly": true,
@@ -4173,14 +4181,14 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetVMExtensionsSummary"
           },
-          "description": "Gets the extensions information."
+          "description": "the extensions information."
         },
         "statuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "the resource status information."
         }
       },
       "description": "The instance view of a virtual machine scale set."
@@ -4192,7 +4200,11 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSet"
           },
-          "description": "Gets or sets the list of virtual machine scale sets."
+          "description": "the list of virtual machine scale sets."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "the uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
         }
       },
       "description": "The List Virtual Machine operation response."
@@ -4204,11 +4216,11 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSet"
           },
-          "description": "Gets or sets the list of virtual machine scale sets."
+          "description": "the list of virtual machine scale sets."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets."
+          "description": "the uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets."
         }
       },
       "description": "The List Virtual Machine operation response."
@@ -4219,24 +4231,24 @@
           "readOnly": true,
           "type": "integer",
           "format": "int64",
-          "description": "Gets the minimum capacity."
+          "description": "the minimum capacity."
         },
         "maximum": {
           "readOnly": true,
           "type": "integer",
           "format": "int64",
-          "description": "Gets the maximum capacity that can be set."
+          "description": "the maximum capacity that can be set."
         },
         "defaultCapacity": {
           "readOnly": true,
           "type": "integer",
           "format": "int64",
-          "description": "Gets the default capacity."
+          "description": "the default capacity."
         },
         "scaleType": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the scale type applicable to the sku.",
+          "description": "the scale type applicable to the sku.",
           "enum": [
             "Automatic",
             "None"
@@ -4254,17 +4266,17 @@
         "resourceType": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the type of resource the sku applies to."
+          "description": "the type of resource the sku applies to."
         },
         "sku": {
           "$ref": "#/definitions/Sku",
           "readOnly": true,
-          "description": "Gets the Sku."
+          "description": "the Sku."
         },
         "capacity": {
           "$ref": "#/definitions/VirtualMachineScaleSetSkuCapacity",
           "readOnly": true,
-          "description": "Gets available scaling information."
+          "description": "available scaling information."
         }
       },
       "description": "Describes an available virtual machine scale set sku."
@@ -4277,7 +4289,11 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetSku"
           },
-          "description": "Gets the list of skus available for the virtual machine scale set."
+          "description": "the list of skus available for the virtual machine scale set."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "the uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
         }
       },
       "description": "The Virtual Machine Scale Set List Skus operation response."
@@ -4292,39 +4308,40 @@
         "instanceView": {
           "$ref": "#/definitions/VirtualMachineInstanceView",
           "readOnly": true,
-          "description": "Gets the virtual machine instance view."
+          "description": "the virtual machine instance view."
         },
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
-          "description": "Gets or sets the hardware profile."
+          "description": "the hardware profile."
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
-          "description": "Gets or sets the storage profile."
+          "description": "the storage profile."
         },
         "osProfile": {
           "$ref": "#/definitions/OSProfile",
-          "description": "Gets or sets the OS profile."
+          "description": "the OS profile."
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
-          "description": "Gets or sets the network profile."
+          "description": "the network profile."
         },
         "diagnosticsProfile": {
           "$ref": "#/definitions/DiagnosticsProfile",
-          "description": "Gets or sets the diagnostics profile."
+          "description": "the diagnostics profile."
         },
         "availabilitySet": {
           "$ref": "#/definitions/SubResource",
-          "description": "Gets or sets the reference Id of the availability set to which this virtual machine belongs."
+          "description": "the reference Id of the availability set to which this virtual machine belongs."
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the provisioning state, which only appears in the response."
+          "description": "the provisioning state, which only appears in the response."
         },
         "licenseType": {
           "type": "string",
-          "description": "Gets or sets the license type, which is for bring your own license scenario."
+          "description": "the license type, which is for bring your own license scenario."
         }
       },
       "description": "Describes the properties of a virtual machine scale set virtual machine."
@@ -4334,12 +4351,12 @@
         "instanceId": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the virtual machine instance id."
+          "description": "the virtual machine instance id."
         },
         "sku": {
           "$ref": "#/definitions/Sku",
           "readOnly": true,
-          "description": "Gets the virtual machine sku."
+          "description": "the virtual machine sku."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -4347,7 +4364,7 @@
         },
         "plan": {
           "$ref": "#/definitions/Plan",
-          "description": "Gets or sets the purchase plan when deploying virtual machine from VM Marketplace images."
+          "description": "the purchase plan when deploying virtual machine from VM Marketplace images."
         },
         "resources": {
           "readOnly": true,
@@ -4355,7 +4372,7 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineExtension"
           },
-          "description": "Gets the virtual machine child extension resources."
+          "description": "the virtual machine child extension resources."
         }
       },
       "allOf": [
@@ -4370,45 +4387,45 @@
         "platformUpdateDomain": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Update Domain count."
+          "description": "the Update Domain count."
         },
         "platformFaultDomain": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Fault Domain count."
+          "description": "the Fault Domain count."
         },
         "rdpThumbPrint": {
           "type": "string",
-          "description": "Gets or sets the Remote desktop certificate thumbprint."
+          "description": "the Remote desktop certificate thumbprint."
         },
         "vmAgent": {
           "$ref": "#/definitions/VirtualMachineAgentInstanceView",
-          "description": "Gets or sets the VM Agent running on the virtual machine."
+          "description": "the VM Agent running on the virtual machine."
         },
         "disks": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DiskInstanceView"
           },
-          "description": "Gets or sets the disks information."
+          "description": "the disks information."
         },
         "extensions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualMachineExtensionInstanceView"
           },
-          "description": "Gets or sets the extensions information."
+          "description": "the extensions information."
         },
         "bootDiagnostics": {
           "$ref": "#/definitions/BootDiagnosticsInstanceView",
-          "description": "Gets or sets the boot diagnostics."
+          "description": "the boot diagnostics."
         },
         "statuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "description": "Gets or sets the resource status information."
+          "description": "the resource status information."
         }
       },
       "description": "The instance view of a virtual machine scale set VM."
@@ -4420,7 +4437,11 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetVM"
           },
-          "description": "Gets or sets the list of virtual machine scale sets VMs."
+          "description": "the list of virtual machine scale sets VMs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "the uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs"
         }
       },
       "description": "The List Virtual Machine Scale Set VMs operation response."
@@ -4429,15 +4450,15 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets or sets the error code."
+          "description": "the error code."
         },
         "target": {
           "type": "string",
-          "description": "Gets or sets the target of the particular error."
+          "description": "the target of the particular error."
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the error message."
+          "description": "the error message."
         }
       },
       "description": "Api error base."
@@ -4446,11 +4467,11 @@
       "properties": {
         "exceptiontype": {
           "type": "string",
-          "description": "Gets or sets the exception type."
+          "description": "the exception type."
         },
         "errordetail": {
           "type": "string",
-          "description": "Gets or sets the internal error message or exception dump."
+          "description": "the internal error message or exception dump."
         }
       },
       "description": "Inner error details."
@@ -4462,23 +4483,23 @@
           "items": {
             "$ref": "#/definitions/ApiErrorBase"
           },
-          "description": "Gets or sets the Api error details"
+          "description": "the Api error details"
         },
         "innererror": {
           "$ref": "#/definitions/InnerError",
-          "description": "Gets or sets the Api inner error"
+          "description": "the Api inner error"
         },
         "code": {
           "type": "string",
-          "description": "Gets or sets the error code."
+          "description": "the error code."
         },
         "target": {
           "type": "string",
-          "description": "Gets or sets the target of the particular error."
+          "description": "the target of the particular error."
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the error message."
+          "description": "the error message."
         }
       },
       "description": "Api error."
@@ -4542,7 +4563,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
       "name": "api-version",

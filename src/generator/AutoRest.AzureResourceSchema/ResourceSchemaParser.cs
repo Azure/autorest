@@ -93,7 +93,7 @@ namespace AutoRest.AzureResourceSchema
                         Debug.Assert(body != null, "The create resource method's body must be a CompositeType and cannot be null.");
                         if (body != null)
                         {
-                            foreach (Property property in body.Properties)
+                            foreach (Property property in body.ComposedProperties)
                             {
                                 if (!resourceDefinition.Properties.Keys.Contains(property.Name))
                                 {

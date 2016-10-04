@@ -31,8 +31,8 @@ setup(
     version='0.4.3',
     author='Microsoft Corporation',
     packages=['msrestazure'],
-    url=('https://github.com/xingwu1/autorest/tree/python/'
-         'ClientRuntimes/Python/msrestazure'),
+    url=('https://github.com/Azure/autorest/tree/master/'
+         'src/client/Python/msrestazure'),
     license='MIT License',
     description=('AutoRest swagger generator Python client runtime. '
                  'Azure-specific module.'),

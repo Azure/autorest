@@ -60,7 +60,12 @@ namespace AutoRest.Go
         public override async Task Generate(ServiceClient serviceClient)
         {
             string packageName = GoCodeNamer.PackageNameFromNamespace(Settings.Namespace);
-            
+
+            // If version is passed in command line then pick that, else keep it 0.0.0(to make it optional for testing).
+            string[] version = GoCodeNamer.SDKVersionFromPackageVersion(
+                                            !string.IsNullOrEmpty(Settings.PackageVersion)
+                                                    ? Settings.PackageVersion
+                                                    : "0.0.0");
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate
             {
@@ -87,7 +92,7 @@ namespace AutoRest.Go
             // Version
             var versionTemplate = new VersionTemplate
             {
-                Model = new VersionTemplateModel(serviceClient, packageName),
+                Model = new VersionTemplateModel(serviceClient, packageName, version),
             };
             await Write(versionTemplate, GoCodeNamer.FormatFileName("version"));
         }
