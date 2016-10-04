@@ -1,0 +1,2250 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServerManagement",
+    "description": "REST API for Azure Server Management Service",
+    "version": "2016-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/gateways/{gatewayName}": {
+      "put": {
+        "tags": [
+          "Gateways"
+        ],
+        "operationId": "Gateway_Create",
+        "description": "Creates or updates a ManagementService gateway.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The gateway name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "GatewayParameters",
+            "x-ms-client-flatten": true,
+            "description": "Parameters supplied to the CreateOrUpdate operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the operation completed successfully",
+            "schema": {
+              "$ref": "#/definitions/GatewayResource"
+            }
+          },
+          "201": {
+            "description": "the operation completed successfully",
+            "schema": {
+              "$ref": "#/definitions/GatewayResource"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Gateway_Update",
+        "description": "Updates a gateway belonging to a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The gateway name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "GatewayParameters",
+            "x-ms-client-flatten": true,
+            "description": "Parameters supplied to the Update operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GatewayResource"
+            }
+          },
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Gateways"
+        ],
+        "operationId": "Gateway_Delete",
+        "description": "Deletes a gateway from a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The gateway name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the object exists and was deleted successfully."
+          },
+          "204": {
+            "description": "the resource does not exist and the request is well formed"
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Gateways"
+        ],
+        "operationId": "Gateway_Get",
+        "description": "Returns a gateway",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The gateway name (256 characters maximum)",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "status"
+            ],
+            "x-ms-enum": {
+              "name": "GatewayExpandOption",
+              "modelAsString": false
+            },
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GatewayResource"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServerManagement/gateways": {
+      "get": {
+        "tags": [
+          "Gateways"
+        ],
+        "operationId": "Gateway_List",
+        "description": "Returns gateways in a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GatewayResources"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/gateways": {
+      "get": {
+        "tags": [
+          "Gateways"
+        ],
+        "operationId": "Gateway_ListForResourceGroup",
+        "description": "Returns gateways in a resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GatewayResources"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/gateways/{gatewayName}/upgradetolatest": {
+      "post": {
+        "tags": [
+          "Gateways"
+        ],
+        "operationId": "Gateway_Upgrade",
+        "description": "Upgrade a gateway",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The gateway name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the operation completed successfully."
+          },
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/gateways/{gatewayName}/regenerateprofile": {
+      "post": {
+        "tags": [
+          "Gateways"
+        ],
+        "operationId": "Gateway_RegenerateProfile",
+        "description": "Regenerate a gateway's profile",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The gateway name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the operation completed successfully."
+          },
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/gateways/{gatewayName}/profile": {
+      "post": {
+        "tags": [
+          "Gateways"
+        ],
+        "operationId": "Gateway_GetProfile",
+        "description": "Gets a gateway profile",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The gateway name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GatewayProfile"
+            }
+          },
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}": {
+      "put": {
+        "tags": [
+          "Nodes"
+        ],
+        "operationId": "Node_Create",
+        "description": "Creates or updates a management node",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The node name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "GatewayParameters",
+            "x-ms-client-flatten": true,
+            "description": "Parameters supplied to the CreateOrUpdate operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully",
+            "schema": {
+              "$ref": "#/definitions/NodeResource"
+            }
+          },
+          "201": {
+            "description": "The operation completed successfully",
+            "schema": {
+              "$ref": "#/definitions/NodeResource"
+            }
+          },
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Nodes"
+        ],
+        "operationId": "Node_Update",
+        "description": "Updates a management node",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The node name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "NodeParameters",
+            "x-ms-client-flatten": true,
+            "description": "Parameters supplied to the CreateOrUpdate operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeResource"
+            }
+          },
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Nodes"
+        ],
+        "operationId": "Node_Delete",
+        "description": "deletes a management node",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The node name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the object exists and was deleted successfully."
+          },
+          "204": {
+            "description": "the resource does not exist and the request is well formed"
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Nodes"
+        ],
+        "operationId": "Node_Get",
+        "description": "gets a management node",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The node name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the object exists and was deleted successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeResource"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServerManagement/nodes": {
+      "get": {
+        "tags": [
+          "Nodes"
+        ],
+        "operationId": "Node_List",
+        "description": "Returns nodes in a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeResources"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes": {
+      "get": {
+        "tags": [
+          "Nodes"
+        ],
+        "operationId": "Node_ListForResourceGroup",
+        "description": "Returns nodes in a resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeResources"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}/sessions/{session}": {
+      "put": {
+        "tags": [
+          "Sessions"
+        ],
+        "operationId": "Session_Create",
+        "description": "Creates a session for a node",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The node name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "session",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The sessionId from the user"
+          },
+          {
+            "name": "SessionParameters",
+            "in": "body",
+            "x-ms-client-flatten": true,
+            "description": "Parameters supplied to the CreateOrUpdate operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully",
+            "schema": {
+              "$ref": "#/definitions/SessionResource"
+            }
+          },
+          "201": {
+            "description": "Created: the session has been created",
+            "schema": {
+              "$ref": "#/definitions/SessionResource"
+            }
+          },
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Sessions"
+        ],
+        "operationId": "Session_Delete",
+        "description": "Deletes a session for a node",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The node name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "session",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The sessionId from the user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully."
+          },
+          "204": {
+            "description": "the resource does not exist and the request is well formed"
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Sessions"
+        ],
+        "operationId": "Session_Get",
+        "description": "Gets a session for a node",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The node name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "session",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The sessionId from the user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SessionResource"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}/sessions/{session}/features/powerShellConsole/pssessions": {
+      "get": {
+        "tags": [
+          "PowerShell"
+        ],
+        "operationId": "PowerShell_ListSession",
+        "description": "Gets a list of the active sessions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The node name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "session",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The sessionId from the user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PowerShellSessionResources"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}/sessions/{session}/features/powerShellConsole/pssessions/{pssession}": {
+      "put": {
+        "tags": [
+          "PowerShell"
+        ],
+        "operationId": "PowerShell_CreateSession",
+        "description": "Creates a PowerShell session",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The node name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "session",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The sessionId from the user"
+          },
+          {
+            "name": "pssession",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The PowerShell sessionId from the user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed succesfully.",
+            "schema": {
+              "$ref": "#/definitions/PowerShellSessionResource"
+            }
+          },
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "PowerShell"
+        ],
+        "operationId": "PowerShell_GetCommandStatus",
+        "description": "Gets the status of a command.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The node name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "session",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The sessionId from the user"
+          },
+          {
+            "name": "pssession",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The PowerShell sessionId from the user"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "output"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false,
+              "name": "PowerShellExpandOption"
+            },
+            "description": "Gets current output from an ongoing call."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PowerShellCommandStatus"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PowerShell"
+        ],
+        "operationId": "PowerShell_UpdateCommand",
+        "description": "updates a running PowerShell command with more data.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The node name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "session",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The sessionId from the user"
+          },
+          {
+            "name": "pssession",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The PowerShell sessionId from the user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PowerShellCommandResults"
+            }
+          },
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}/sessions/{session}/features/powerShellConsole/pssessions/{pssession}/invokeCommand": {
+      "post": {
+        "tags": [
+          "PowerShell"
+        ],
+        "operationId": "PowerShell_InvokeCommand",
+        "description": "Creates a PowerShell script and invokes it.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The node name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "session",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The sessionId from the user"
+          },
+          {
+            "name": "pssession",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The PowerShell sessionId from the user"
+          },
+          {
+            "name": "PowerShellCommandParameters",
+            "x-ms-client-flatten": true,
+            "description": "Parameters supplied to the Invoke PowerShell Command operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PowerShellCommandParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PowerShellCommandResults"
+            }
+          },
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}/sessions/{session}/features/powerShellConsole/pssessions/{pssession}/cancel": {
+      "post": {
+        "tags": [
+          "PowerShell"
+        ],
+        "operationId": "PowerShell_CancelCommand",
+        "description": "Cancels a PowerShell command.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The node name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "session",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The sessionId from the user"
+          },
+          {
+            "name": "pssession",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The PowerShell sessionId from the user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The cancellation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PowerShellCommandResults"
+            }
+          },
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}/sessions/{session}/features/powerShellConsole/pssessions/{pssession}/tab": {
+      "post": {
+        "tags": [
+          "PowerShell"
+        ],
+        "operationId": "PowerShell_TabCompletion",
+        "description": "gets tab completion values for a command.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name uniquely identifies the resource group within the user subscriptionId.",
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The node name (256 characters maximum).",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "session",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The sessionId from the user"
+          },
+          {
+            "name": "pssession",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The PowerShell sessionId from the user"
+          },
+          {
+            "name": "PowerShellTabCompletionParamters",
+            "x-ms-client-flatten": true,
+            "description": "Parameters supplied to the tab completion call.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PowerShellTabCompletionParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was succesfully completed.",
+            "schema": {
+              "$ref": "#/definitions/PowerShellTabCompletionResults"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "x-ms-azure-resource": true,
+      "description": "ARM Resource Information",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "ARM Resource ID"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "ARM Resource Type"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "ARM Resource Name"
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "ARM Resource Location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "ARM Resource Tags"
+        },
+        "etag": {
+          "type": "string"
+        }
+      }
+    },
+    "GatewayResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "data model for an arm gateway resource",
+      "properties": {
+        "properties": {
+          "description": "collection of properties",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "created": {
+              "type": "string",
+              "format": "date-time",
+              "description": "UTC date and time when gateway was first added to management service"
+            },
+            "updated": {
+              "type": "string",
+              "format": "date-time",
+              "description": "UTC date and time when node was last updated"
+            },
+            "upgradeMode": {
+              "type": "string",
+              "description": "The upgradeMode property gives the flexibility to gateway to auto upgrade itself. If properties value not specified, then we assume upgradeMode = Automatic.",
+              "enum": [
+                "Manual",
+                "Automatic"
+              ],
+              "x-ms-enum": {
+                "name": "upgradeMode",
+                "modelAsString": false
+              }
+            },
+            "desiredVersion": {
+              "type": "string",
+              "description": "latest available msi version"
+            },
+            "instances": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GatewayStatus"
+              },
+              "description": "names of the nodes in the gateway"
+            },
+            "activeMessageCount": {
+              "type": "integer",
+              "description": "number of active messages"
+            },
+            "latestPublishedMsiVersion": {
+              "type": "string",
+              "description": "last published msi version"
+            },
+            "publishedTimeUtc": {
+              "type": "string",
+              "format": "date-time",
+              "description": "the date/time of the last published gateway"
+            }
+          }
+        }
+      }
+    },
+    "GatewayResources": {
+      "type": "object",
+      "description": "collection of Gateway Resources",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayResource"
+          },
+          "description": "collection of Gateway Resources"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "the URL to the next set of resources"
+        }
+      }
+    },
+    "GatewayStatus": {
+      "description": "Expanded gateway status information",
+      "properties": {
+        "availableMemoryMByte": {
+          "type": "number",
+          "description": "The available memory on the gateway host machine in megabytes."
+        },
+        "gatewayCpuUtilizationPercent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "format": "float",
+          "description": "The CPU utilization of the gateway process (numeric value between 0 and 100)."
+        },
+        "totalCpuUtilizationPercent": {
+          "type": "number",
+          "description": "CPU Utilization of the whole system."
+        },
+        "gatewayVersion": {
+          "type": "string",
+          "description": "The version of the gateway that is installed on the system."
+        },
+        "friendlyOsName": {
+          "type": "string",
+          "description": "The Plaintext description of the OS on the gateway."
+        },
+        "installedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date the gateway was installed"
+        },
+        "logicalProcessorCount": {
+          "type": "integer",
+          "description": "Number of logical processors in the gateway system."
+        },
+        "name": {
+          "type": "string",
+          "description": "The computer name of the gateway system."
+        },
+        "gatewayId": {
+          "type": "string",
+          "description": "The gateway resource id."
+        },
+        "gatewayWorkingSetMByte": {
+          "type": "number",
+          "description": "The working set size of the gateway process in megabytes."
+        },
+        "statusUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC date and time when gateway status was last updated"
+        },
+        "groupPolicyError": {
+          "type": "string",
+          "description": "The group policy error"
+        },
+        "allowGatewayGroupPolicyStatus": {
+          "type": "boolean",
+          "description": "Status of the allowGatewayGroupPolicy setting"
+        },
+        "requireMfaGroupPolicyStatus": {
+          "type": "boolean",
+          "description": "Status of the requireMfaGroupPolicy setting"
+        },
+        "encryptionCertificateThumbprint": {
+          "type": "string",
+          "description": "Thumbprint of the encryption certificate"
+        },
+        "secondaryEncryptionCertificateThumbprint": {
+          "type": "string",
+          "description": "Secondary thumbprint of the encryption certificate"
+        },
+        "encryptionJwk": {
+          "$ref": "#/definitions/EncryptionJwkResource",
+          "description": "The encryption cerfiticate key"
+        },
+        "secondaryEncryptionJwk": {
+          "$ref": "#/definitions/EncryptionJwkResource",
+          "description": "The secondary encryption cerfiticate key"
+        },
+        "activeMessageCount": {
+          "type": "integer",
+          "description": "active message count"
+        },
+        "latestPublishedMsiVersion": {
+          "type": "string",
+          "description": "latest published version of the gateway install msi"
+        },
+        "publishedTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "gateway install msi published time"
+        }
+      }
+    },
+    "GatewayProfile": {
+      "description": "JSON properties that the gateway service uses know how to communicate with the resource.",
+      "properties": {
+        "dataPlaneServiceBaseAddress": {
+          "type": "string",
+          "description": "the Dataplane connection URL"
+        },
+        "gatewayId": {
+          "type": "string",
+          "description": "the ID of the gateway"
+        },
+        "environment": {
+          "type": "string",
+          "description": "the environment for the gateway (DEV, DogFood, or Production)"
+        },
+        "upgradeManifestUrl": {
+          "type": "string",
+          "description": "Gateway upgrade manifest URL"
+        },
+        "messagingNamespace": {
+          "type": "string",
+          "description": "Messaging namespace"
+        },
+        "messagingAccount": {
+          "type": "string",
+          "description": "Messaging Account"
+        },
+        "messagingKey": {
+          "type": "string",
+          "description": "Messaging Key"
+        },
+        "requestQueue": {
+          "type": "string",
+          "description": "Request queue name"
+        },
+        "responseTopic": {
+          "type": "string",
+          "description": "Response topic name"
+        },
+        "statusBlobSignature": {
+          "type": "string",
+          "description": "The gateway status blob SAS url"
+        }
+      }
+    },
+    "GatewayParameters": {
+      "description": "collection of parameters for operations on a gateway resource",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "location of the resource"
+        },
+        "tags": {
+          "type": "object",
+          "description": "resource tags"
+        },
+        "properties": {
+          "description": "collection of properties",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "upgradeMode": {
+              "type": "string",
+              "description": "The upgradeMode property gives the flexibility to gateway to auto upgrade itself. If properties value not specified, then we assume upgradeMode = Automatic.",
+              "enum": [
+                "Manual",
+                "Automatic"
+              ],
+              "x-ms-enum": {
+                "name": "upgradeMode",
+                "modelAsString": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "NodeResource": {
+      "description": "A Node Resource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "collection of properties",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "gatewayId": {
+              "type": "string",
+              "description": "Id of the gateway"
+            },
+            "connectionName": {
+              "type": "string",
+              "description": "myhost.domain.com"
+            },
+            "created": {
+              "type": "string",
+              "format": "date-time",
+              "description": "UTC date and time when node was first added to management service"
+            },
+            "updated": {
+              "type": "string",
+              "format": "date-time",
+              "description": "UTC date and time when node was last updated."
+            }
+          }
+        }
+      }
+    },
+    "NodeResources": {
+      "type": "object",
+      "description": "a collection of node resource objects",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeResource"
+          },
+          "description": "Collection of Node Resources"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "the URL to the next set of resources"
+        }
+      }
+    },
+    "NodeParameters": {
+      "description": "parameter collection for operations on arm node resource",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "location of the resource?"
+        },
+        "tags": {
+          "type": "object",
+          "description": "resource tags"
+        },
+        "properties": {
+          "description": "collection of properties",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "gatewayId": {
+              "type": "string",
+              "description": "Gateway id which will manage this node"
+            },
+            "connectionName": {
+              "type": "string",
+              "description": "myhost.domain.com"
+            },
+            "userName": {
+              "type": "string",
+              "description": "User name to be used to connect to node"
+            },
+            "password": {
+              "type": "string",
+              "format": "password",
+              "description": "Password associated with user name"
+            }
+          }
+        }
+      }
+    },
+    "SessionResource": {
+      "description": "the session object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "collection of properties",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "userName": {
+              "type": "string",
+              "description": "the username connecting to the session"
+            },
+            "created": {
+              "type": "string",
+              "format": "date-time",
+              "description": "UTC date and time when node was first added to management service"
+            },
+            "updated": {
+              "type": "string",
+              "format": "date-time",
+              "description": "UTC date and time when node was last updated."
+            }
+          }
+        }
+      }
+    },
+    "SessionParameters": {
+      "description": "parameter collection for creation and other operations on sessions",
+      "properties": {
+        "properties": {
+          "description": "collection of properties",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "userName": {
+              "type": "string",
+              "description": "encrypted User name to be used to connect to node"
+            },
+            "password": {
+              "type": "string",
+              "description": "encrypted Password associated with user name"
+            },
+            "retentionPeriod": {
+              "type": "string",
+              "description": "session retention period",
+              "enum": [
+                "Session",
+                "Persistent"
+              ],
+              "x-ms-enum": {
+                "name": "retentionPeriod",
+                "modelAsString": false
+              }
+            },
+            "credentialDataFormat": {
+              "type": "string",
+              "description": "credential data format",
+              "enum": [
+                "RsaEncrypted"
+              ],
+              "x-ms-enum": {
+                "name": "credentialDataFormat",
+                "modelAsString": false
+              }
+            },
+            "EncryptionCertificateThumbprint": {
+              "type": "string",
+              "description": "encryption certificate thumbprint"
+            }
+          }
+        }
+      }
+    },
+    "PowerShellSessionResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "A powershell session resource (practically equivalent to a runspace instance)",
+      "properties": {
+        "properties": {
+          "description": "collection of properties",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "sessionId": {
+              "type": "string",
+              "description": "the PowerShell Session Id."
+            },
+            "state": {
+              "type": "string",
+              "description": "The runspace state."
+            },
+            "runspaceAvailability": {
+              "type": "string",
+              "description": "The availability of the runspace."
+            },
+            "disconnectedOn": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp of last time the service disconnected from the runspace."
+            },
+            "expiresOn": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the runspace expires."
+            },
+            "version": {
+              "$ref": "#/definitions/Version"
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the runspace"
+            }
+          }
+        }
+      }
+    },
+    "PowerShellCommandStatus": {
+      "description": "result status from invoking a powershell command",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PowerShellCommandResults"
+        }
+      }
+    },
+    "Version": {
+      "description": "A multipart-numeric version number",
+      "properties": {
+        "major": {
+          "type": "integer",
+          "description": "the leftmost number of the version"
+        },
+        "minor": {
+          "type": "integer",
+          "description": "the second leftmost number of the version"
+        },
+        "build": {
+          "type": "integer",
+          "description": "the third number of the version"
+        },
+        "revision": {
+          "type": "integer",
+          "description": "the fourth number of the version"
+        },
+        "majorRevision": {
+          "type": "integer",
+          "description": "the MSW of the fourth part"
+        },
+        "minorRevision": {
+          "type": "integer",
+          "description": "the LSW of the fourth part"
+        }
+      }
+    },
+    "PowerShellSessionResources": {
+      "description": "a collaction of powershell session resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PowerShellSessionResource"
+          },
+          "description": "Colleciton of powershell session resources"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "the URL to the next set of resources"
+        }
+      }
+    },
+    "PowerShellCommandParameters": {
+      "description": "the parameters to a powershell script execution command",
+      "properties": {
+        "properties": {
+          "description": "collection of properties",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string",
+              "description": "Script to execute"
+            }
+          }
+        }
+      }
+    },
+    "PowerShellCommandResults": {
+      "description": "a collection of results from a powershell command",
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PowerShellCommandResult"
+          }
+        },
+        "pssession": {
+          "type": "string"
+        },
+        "command": {
+          "type": "string"
+        },
+        "completed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PowerShellCommandResult": {
+      "description": "results from invoking a powershell command",
+      "properties": {
+        "messageType": {
+          "description": "the type of message",
+          "type": "integer"
+        },
+        "foregroundColor": {
+          "description": "the HTML color string representing the foreground color.",
+          "type": "string"
+        },
+        "backgroundColor": {
+          "description": "the HTML color string representing the background color.",
+          "type": "string"
+        },
+        "value": {
+          "description": "actual result text from the PowerShell Command",
+          "type": "string"
+        },
+        "prompt": {
+          "description": "The interactive prompt message",
+          "type": "string"
+        },
+        "exitCode": {
+          "description": "the exit code from a executable that was called from powershell.",
+          "type": "integer"
+        },
+        "id": {
+          "type": "integer",
+          "description": "ID of the prompt message"
+        },
+        "caption": {
+          "type": "string",
+          "description": "text that precedes the prompt."
+        },
+        "message": {
+          "type": "string",
+          "description": "text of the prompt."
+        },
+        "descriptions": {
+          "type": "array",
+          "description": "collection of PromptFieldDescription objects that contains the user input",
+          "items": {
+            "$ref": "#/definitions/PromptFieldDescription"
+          }
+        }
+      }
+    },
+    "PromptFieldDescription": {
+      "description": "Field description for the implementation of PSHostUserInterface.Prompt",
+      "properties": {
+        "name": {
+          "description": "the name of the prompt",
+          "type": "string"
+        },
+        "label": {
+          "description": "the label text of the prompt",
+          "type": "string"
+        },
+        "helpMessage": {
+          "description": "the help message of the prompt",
+          "type": "string"
+        },
+        "promptFieldTypeIsList": {
+          "description": "when set to 'true' the prompt field type is a list of values",
+          "type": "boolean"
+        },
+        "promptFieldType": {
+          "type": "string",
+          "enum": [
+            "String",
+            "SecureString",
+            "Credential"
+          ],
+          "x-ms-enum": {
+            "name": "PromptFieldType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "PromptMessageResponse": {
+      "description": "the response to a prompt message",
+      "properties": {
+        "response": {
+          "description": "the list of responses a cmdlet expects",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PowerShellTabCompletionParameters": {
+      "description": "collection of parameters for powershell tab completion",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "Command to get tab completion for."
+        }
+      }
+    },
+    "PowerShellTabCompletionResults": {
+      "description": "an array of strings representing the different values that can be tabbed thru",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Error": {
+      "description": "Error message",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "string"
+        }
+      }
+    },
+    "EncryptionJwkResource": {
+      "description": "the public key of the gateway",
+      "type": "object",
+      "properties": {
+        "kty": {
+          "type": "string"
+        },
+        "alg": {
+          "type": "string"
+        },
+        "e": {
+          "type": "string"
+        },
+        "n": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}
