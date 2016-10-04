@@ -24,6 +24,7 @@ namespace AutoRest.Go
         // CommonInitialisms are those "words" within a name that Golint expects to be uppercase.
         // See https://github.com/golang/lint/blob/master/lint.go for detail.
         private static readonly List<String> CommonInitialisms = new List<String>() {
+                                                                            "Acl",
                                                                             "Api",
                                                                             "Ascii",
                                                                             "Cpu",
