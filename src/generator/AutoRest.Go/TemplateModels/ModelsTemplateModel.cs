@@ -119,7 +119,7 @@ namespace AutoRest.Go.TemplateModels
                     mtm.IsResponseType = true;
                     if (PagedTypes.ContainsKey(mtm))
                     {
-                        mtm.NextLink = GoCodeNamer.NormalizeWithoutChar(PagedTypes[mtm], '.');
+                        mtm.NextLink = GoCodeNamer.PascalCaseWithoutChar(PagedTypes[mtm], '.');
                         if (NextMethodUndefined.Contains(mtm)) {
                             mtm.PreparerNeeded = true;
                         } else {

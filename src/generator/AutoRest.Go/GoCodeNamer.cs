@@ -214,7 +214,7 @@ namespace AutoRest.Go
                 "unsafe",
 
                 // Other reserved names and packages (defined by the base libraries this code uses)
-                "autorest", "client", "date", "err", "req", "resp", "result", "sender", "new", "to", "validation"
+                "autorest", "client", "date", "err", "req", "resp", "result", "sender", "to", "validation"
 
             }.ToList().ForEach(s => ReservedWords.Add(s));
 
@@ -533,7 +533,7 @@ namespace AutoRest.Go
             return new MapType(NormalizeTypeReference(dictionaryType.ValueType));
         }
 
-        public static string NormalizeWithoutChar(string name, char splitter)
+        public static string PascalCaseWithoutChar(string name, char splitter)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
