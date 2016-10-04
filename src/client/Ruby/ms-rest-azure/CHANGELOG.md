@@ -1,3 +1,8 @@
+##2016.10.04 ms_rest version 0.6.0
+* Minimum supported Ruby version is 2.0.0 [#1463](https://github.com/Azure/autorest/pull/1463)
+* Implemented generic request method for AzureServiceClient [#1447](https://github.com/Azure/autorest/pull/1447)
+* Improved AzureOperationError class to expose error_message and error_code properties [#1450](https://github.com/Azure/autorest/pull/1450)
+
 ##2016.09.15 ms_rest_azure version 0.5.0
 * Updating ms_rest dependecy to version 0.5.0
 * Adding known Azure Environments in ruby runtime for easy discovery

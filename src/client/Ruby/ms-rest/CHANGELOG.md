@@ -1,3 +1,8 @@
+##2016.10.04 ms_rest version 0.6.0
+* Minimum supported Ruby version is 2.0.0 [#1463](https://github.com/Azure/autorest/pull/1463)
+* Implemented generic request method for ServiceClient [#1447](https://github.com/Azure/autorest/pull/1447)
+* Bug fix for merging query parameters [#1443](https://github.com/Azure/autorest/pull/1443)
+
 ##2016.09.15 ms_rest version 0.5.0
 * Bundling default ca-cert and exposing method for providing ssl options
 
