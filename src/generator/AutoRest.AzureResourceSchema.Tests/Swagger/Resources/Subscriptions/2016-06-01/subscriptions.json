@@ -1,0 +1,337 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "SubscriptionClient",
+    "version": "2016-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/locations": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_ListLocations",
+        "description": "Gets a list of the subscription locations.",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the subscription"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LocationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_Get",
+        "description": "Gets details about particular subscription.",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the subscription."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_List",
+        "description": "Gets a list of subscriptions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/tenants": {
+      "get": {
+        "tags": [
+          "Tenants"
+        ],
+        "operationId": "Tenants_List",
+        "description": "Gets a list of tenants.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TenantListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Location": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The fully qualified Id of the location. For example, /subscriptions/00000000-0000-0000-0000-000000000000/locations/westus."
+        },
+        "subscriptionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location name."
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The display name of the location."
+        },
+        "latitude": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The latitude of the location."
+        },
+        "longitude": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The longitude of the location."
+        }
+      },
+      "description": "Location information."
+    },
+    "LocationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Location"
+          },
+          "description": "The locations."
+        }
+      },
+      "description": "Location list operation response."
+    },
+    "Subscription": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The fully qualified Id. For example, /subscriptions/00000000-0000-0000-0000-000000000000."
+        },
+        "subscriptionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription Id."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant Id."
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription display name."
+        },
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription state.",
+          "enum": [
+            "Enabled",
+            "Warned",
+            "PastDue",
+            "Disabled",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionState",
+            "modelAsString": false
+          }
+        },
+        "subscriptionPolicies": {
+          "$ref": "#/definitions/SubscriptionPolicies",
+          "description": "The subscription policies."
+        },
+        "authorizationSource": {
+          "type": "string",
+          "description": "The authorization source of the request. Valid values are one or more combinations of Legacy, RoleBased, Bypassed, Direct and Management. For example, 'Legacy, RoleBased'."
+        }
+      },
+      "description": "Subscription information."
+    },
+    "SubscriptionPolicies": {
+      "properties": {
+        "locationPlacementId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription location placement Id. The Id indicates which regions are visible for a subscription. For example, a subscription with a location placement Id of Public_2014-09-01 has access to Azure public regions."
+        },
+        "quotaId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription quota Id."
+        },
+        "spendingLimit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription spending limit.",
+          "enum": [
+            "On",
+            "Off",
+            "CurrentPeriodOff"
+          ],
+          "x-ms-enum": {
+            "name": "spendingLimit",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Subscription policies."
+    },
+    "SubscriptionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subscription"
+          },
+          "description": "The subscriptions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "required": [
+        "nextLink"
+      ],
+      "description": "Subscription list operation response."
+    },
+    "TenantIdDescription": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The fully qualified Id. For example, /tenants/00000000-0000-0000-0000-000000000000."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenantId. For example, 00000000-0000-0000-0000-000000000000."
+        }
+      },
+      "description": "Tenant Id information."
+    },
+    "TenantListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TenantIdDescription"
+          },
+          "description": "The tenant Ids."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "required": [
+        "nextLink"
+      ],
+      "description": "Tenant Ids information."
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}
