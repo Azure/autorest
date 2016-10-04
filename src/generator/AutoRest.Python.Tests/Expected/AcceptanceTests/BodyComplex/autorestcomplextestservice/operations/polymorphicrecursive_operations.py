@@ -44,6 +44,8 @@ class PolymorphicrecursiveOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.Fish>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/polymorphicrecursive/valid'
@@ -142,6 +144,8 @@ class PolymorphicrecursiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/polymorphicrecursive/valid'

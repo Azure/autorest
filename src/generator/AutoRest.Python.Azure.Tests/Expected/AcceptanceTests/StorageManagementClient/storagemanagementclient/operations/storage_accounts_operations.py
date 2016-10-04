@@ -54,6 +54,7 @@ class StorageAccountsOperations(object):
          <Fixtures.AcceptanceTestsStorageManagementClient.models.CheckNameAvailabilityResult>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability'
@@ -128,6 +129,7 @@ class StorageAccountsOperations(object):
          <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -195,9 +197,11 @@ class StorageAccountsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete(
             self, resource_group_name, account_name, custom_headers=None, raw=False, **operation_config):
@@ -219,6 +223,7 @@ class StorageAccountsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -279,6 +284,7 @@ class StorageAccountsOperations(object):
          <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -357,6 +363,7 @@ class StorageAccountsOperations(object):
          <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -423,6 +430,7 @@ class StorageAccountsOperations(object):
          <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountKeys>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
@@ -480,6 +488,7 @@ class StorageAccountsOperations(object):
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountPaged
          <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -547,6 +556,7 @@ class StorageAccountsOperations(object):
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountPaged
          <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -623,6 +633,7 @@ class StorageAccountsOperations(object):
          <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountKeys>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         regenerate_key = models.StorageAccountRegenerateKeyParameters(key_name=key_name)
 

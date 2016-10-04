@@ -53,6 +53,7 @@ class LRORetrysOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/retryerror/put/201/creating/succeeded/200'
@@ -118,9 +119,11 @@ class LRORetrysOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put_async_relative_retry_succeeded(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -141,6 +144,7 @@ class LRORetrysOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/retryerror/putasync/retry/succeeded'
@@ -211,9 +215,11 @@ class LRORetrysOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete_provisioning202_accepted200_succeeded(
             self, custom_headers=None, raw=False, **operation_config):
@@ -231,6 +237,7 @@ class LRORetrysOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/retryerror/delete/provisioning/202/accepted/200/succeeded'
@@ -299,9 +306,11 @@ class LRORetrysOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete202_retry200(
             self, custom_headers=None, raw=False, **operation_config):
@@ -317,6 +326,7 @@ class LRORetrysOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/retryerror/delete/202/retry/200'
@@ -370,9 +380,11 @@ class LRORetrysOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete_async_relative_retry_succeeded(
             self, custom_headers=None, raw=False, **operation_config):
@@ -388,6 +400,7 @@ class LRORetrysOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/retryerror/deleteasync/retry/succeeded'
@@ -442,9 +455,11 @@ class LRORetrysOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def post202_retry200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -463,6 +478,7 @@ class LRORetrysOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/retryerror/post/202/retry/200'
@@ -523,9 +539,11 @@ class LRORetrysOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def post_async_relative_retry_succeeded(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -545,6 +563,7 @@ class LRORetrysOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/retryerror/postasync/retry/succeeded'
@@ -606,6 +625,8 @@ class LRORetrysOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)

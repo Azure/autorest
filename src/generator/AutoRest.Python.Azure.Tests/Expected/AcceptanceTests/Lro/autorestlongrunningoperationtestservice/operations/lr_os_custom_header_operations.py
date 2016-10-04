@@ -54,6 +54,7 @@ class LROsCustomHeaderOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/customheader/putasync/retry/succeeded'
@@ -124,9 +125,11 @@ class LROsCustomHeaderOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put201_creating_succeeded200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -148,6 +151,7 @@ class LROsCustomHeaderOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/customheader/put/201/creating/succeeded/200'
@@ -213,9 +217,11 @@ class LROsCustomHeaderOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def post202_retry200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -236,6 +242,7 @@ class LROsCustomHeaderOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/customheader/post/202/retry/200'
@@ -296,9 +303,11 @@ class LROsCustomHeaderOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def post_async_retry_succeeded(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -319,6 +328,7 @@ class LROsCustomHeaderOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/customheader/postasync/retry/succeeded'
@@ -380,6 +390,8 @@ class LROsCustomHeaderOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)

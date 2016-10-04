@@ -47,6 +47,7 @@ class UsageOperations(object):
          <Fixtures.AcceptanceTestsStorageManagementClient.models.UsageListResult>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages'

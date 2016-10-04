@@ -51,6 +51,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/put/200/succeeded'
@@ -114,9 +115,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put200_succeeded_no_state(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -136,6 +139,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/put/200/succeeded/nostate'
@@ -199,9 +203,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put202_retry200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -221,6 +227,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/put/202/retry/200'
@@ -284,9 +291,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put201_creating_succeeded200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -307,6 +316,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/put/201/creating/succeeded/200'
@@ -372,9 +382,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put200_updating_succeeded204(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -395,6 +407,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/put/200/updating/succeeded/200'
@@ -458,9 +471,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put201_creating_failed200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -481,6 +496,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/put/201/created/failed/200'
@@ -546,9 +562,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put200_acceptedcanceled200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -569,6 +587,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/put/200/accepted/canceled/200'
@@ -632,9 +651,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put_no_header_in_retry(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -654,6 +675,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/put/noheader/202/200'
@@ -722,9 +744,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put_async_retry_succeeded(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -745,6 +769,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/putasync/retry/succeeded'
@@ -815,9 +840,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put_async_no_retry_succeeded(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -838,6 +865,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/putasync/noretry/succeeded'
@@ -907,9 +935,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put_async_retry_failed(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -930,6 +960,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/putasync/retry/failed'
@@ -1000,9 +1031,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put_async_no_retrycanceled(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -1023,6 +1056,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/putasync/noretry/canceled'
@@ -1092,9 +1126,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put_async_no_header_in_retry(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -1114,6 +1150,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/putasync/noheader/201/200'
@@ -1182,9 +1219,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put_non_resource(
             self, sku=None, custom_headers=None, raw=False, **operation_config):
@@ -1201,6 +1240,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Sku>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/putnonresource/202/200'
@@ -1264,9 +1304,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put_async_non_resource(
             self, sku=None, custom_headers=None, raw=False, **operation_config):
@@ -1283,6 +1325,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Sku>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/putnonresourceasync/202/200'
@@ -1346,9 +1389,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put_sub_resource(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -1366,6 +1411,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.SubProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/putsubresource/202/200'
@@ -1429,9 +1475,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def put_async_sub_resource(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -1449,6 +1497,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.SubProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/putsubresourceasync/202/200'
@@ -1512,9 +1561,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete_provisioning202_accepted200_succeeded(
             self, custom_headers=None, raw=False, **operation_config):
@@ -1532,6 +1583,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/delete/provisioning/202/accepted/200/succeeded'
@@ -1600,9 +1652,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete_provisioning202_deleting_failed200(
             self, custom_headers=None, raw=False, **operation_config):
@@ -1620,6 +1674,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/delete/provisioning/202/deleting/200/failed'
@@ -1688,9 +1743,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete_provisioning202_deletingcanceled200(
             self, custom_headers=None, raw=False, **operation_config):
@@ -1708,6 +1765,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/delete/provisioning/202/deleting/200/canceled'
@@ -1776,9 +1834,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete204_succeeded(
             self, custom_headers=None, raw=False, **operation_config):
@@ -1792,6 +1852,7 @@ class LROsOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/delete/204/succeeded'
@@ -1841,9 +1902,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete202_retry200(
             self, custom_headers=None, raw=False, **operation_config):
@@ -1860,6 +1923,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/delete/202/retry/200'
@@ -1922,9 +1986,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete202_no_retry204(
             self, custom_headers=None, raw=False, **operation_config):
@@ -1941,6 +2007,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/delete/202/noretry/204'
@@ -2003,9 +2070,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete_no_header_in_retry(
             self, custom_headers=None, raw=False, **operation_config):
@@ -2021,6 +2090,7 @@ class LROsOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/delete/noheader'
@@ -2073,9 +2143,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete_async_no_header_in_retry(
             self, custom_headers=None, raw=False, **operation_config):
@@ -2091,6 +2163,7 @@ class LROsOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/deleteasync/noheader/202/204'
@@ -2143,9 +2216,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete_async_retry_succeeded(
             self, custom_headers=None, raw=False, **operation_config):
@@ -2161,6 +2236,7 @@ class LROsOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/deleteasync/retry/succeeded'
@@ -2215,9 +2291,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete_async_no_retry_succeeded(
             self, custom_headers=None, raw=False, **operation_config):
@@ -2233,6 +2311,7 @@ class LROsOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/deleteasync/noretry/succeeded'
@@ -2287,9 +2366,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete_async_retry_failed(
             self, custom_headers=None, raw=False, **operation_config):
@@ -2305,6 +2386,7 @@ class LROsOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/deleteasync/retry/failed'
@@ -2359,9 +2441,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def delete_async_retrycanceled(
             self, custom_headers=None, raw=False, **operation_config):
@@ -2377,6 +2461,7 @@ class LROsOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/deleteasync/retry/canceled'
@@ -2431,9 +2516,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def post200_with_payload(
             self, custom_headers=None, raw=False, **operation_config):
@@ -2450,6 +2537,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Sku>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/post/payload/200'
@@ -2508,9 +2596,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def post202_retry200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -2529,6 +2619,7 @@ class LROsOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/post/202/retry/200'
@@ -2589,9 +2680,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def post202_no_retry204(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -2611,6 +2704,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/post/202/noretry/204'
@@ -2680,9 +2774,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def post_async_retry_succeeded(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -2703,6 +2799,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/postasync/retry/succeeded'
@@ -2773,9 +2870,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def post_async_no_retry_succeeded(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -2796,6 +2895,7 @@ class LROsOperations(object):
          <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/postasync/noretry/succeeded'
@@ -2866,9 +2966,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def post_async_retry_failed(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -2888,6 +2990,7 @@ class LROsOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/postasync/retry/failed'
@@ -2949,9 +3052,11 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
 
     def post_async_retrycanceled(
             self, product=None, custom_headers=None, raw=False, **operation_config):
@@ -2971,6 +3076,7 @@ class LROsOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/postasync/retry/canceled'
@@ -3032,6 +3138,8 @@ class LROsOperations(object):
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)
