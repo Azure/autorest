@@ -118,11 +118,8 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//report/azure';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'report/azure';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');

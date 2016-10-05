@@ -74,12 +74,9 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}';
   requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -190,12 +187,9 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}';
   requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -301,12 +295,9 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}';
   requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -418,11 +409,8 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/skipUrlEncoding/method/query/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/skipUrlEncoding/method/query/valid';
   var queryParameters = [];
   queryParameters.push('q1=' + q1);
   if (queryParameters.length > 0) {
@@ -534,11 +522,8 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/skipUrlEncoding/method/query/null';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/skipUrlEncoding/method/query/null';
   var queryParameters = [];
   if (q1 !== null && q1 !== undefined) {
     queryParameters.push('q1=' + q1);
@@ -653,11 +638,8 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/skipUrlEncoding/path/query/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/skipUrlEncoding/path/query/valid';
   var queryParameters = [];
   queryParameters.push('q1=' + q1);
   if (queryParameters.length > 0) {
@@ -765,11 +747,8 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/skipUrlEncoding/swagger/query/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/skipUrlEncoding/swagger/query/valid';
   var queryParameters = [];
   queryParameters.push('q1=' + q1);
   if (queryParameters.length > 0) {

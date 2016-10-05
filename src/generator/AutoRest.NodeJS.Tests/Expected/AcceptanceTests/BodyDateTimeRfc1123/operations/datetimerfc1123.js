@@ -59,11 +59,8 @@ Datetimerfc1123.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetimerfc1123/null';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetimerfc1123/null';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -173,11 +170,8 @@ Datetimerfc1123.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetimerfc1123/invalid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetimerfc1123/invalid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -287,11 +281,8 @@ Datetimerfc1123.prototype.getOverflow = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetimerfc1123/overflow';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetimerfc1123/overflow';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -401,11 +392,8 @@ Datetimerfc1123.prototype.getUnderflow = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetimerfc1123/underflow';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetimerfc1123/underflow';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -526,11 +514,8 @@ Datetimerfc1123.prototype.putUtcMaxDateTime = function (datetimeBody, options, c
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetimerfc1123/max';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetimerfc1123/max';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -637,11 +622,8 @@ Datetimerfc1123.prototype.getUtcLowercaseMaxDateTime = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetimerfc1123/max/lowercase';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetimerfc1123/max/lowercase';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -751,11 +733,8 @@ Datetimerfc1123.prototype.getUtcUppercaseMaxDateTime = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetimerfc1123/max/uppercase';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetimerfc1123/max/uppercase';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -876,11 +855,8 @@ Datetimerfc1123.prototype.putUtcMinDateTime = function (datetimeBody, options, c
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetimerfc1123/min';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetimerfc1123/min';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -987,11 +963,8 @@ Datetimerfc1123.prototype.getUtcMinDateTime = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetimerfc1123/min';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetimerfc1123/min';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
