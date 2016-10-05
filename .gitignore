@@ -201,3 +201,6 @@ src/generator/AutoRest.Go.Tests/src/test/generated/*
 src/generator/AutoRest.Go.Tests/src/tests/generated/*
 src/generator/AutoRest.Go.Tests/src/tests/vendor/*
 src/generator/AutoRest.Go.Tests/src/tests/glide.lock
+
+#client runtime
+src/client/**/*
