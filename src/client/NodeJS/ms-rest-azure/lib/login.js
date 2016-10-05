@@ -152,7 +152,7 @@ function _crossCheckUserNameWithToken(usernameFromMethodCall, userIdFromToken) {
  *
  * @param {function} callback
  *
- * @returns {function} callback(err, credentials)
+ * @returns {function} callback(err, credentials, subscriptions)
  *
  *                      {Error}  [err]                           - The Error object if an error occurred, null otherwise.
  *                      {DeviceTokenCredentials} [credentials]   - The DeviceTokenCredentials object
@@ -318,7 +318,7 @@ exports.withUsernamePassword = function withUsernamePassword(username, password,
  * @returns {function} callback(err, credentials)
  *
  *                      {Error}  [err]                         - The Error object if an error occurred, null otherwise.
- *                      {UserTokenCredentials} [credentials]   - The UserTokenCredentials object
+ *                      {ApplicationTokenCredentials} [credentials]   - The UserTokenCredentials object
  *                      {Array}                [subscriptions] - List of associated subscriptions across all the applicable tenants.
  */
 exports.withServicePrincipalSecret = function withServicePrincipalSecret(clientId, secret, domain, options, callback) {
