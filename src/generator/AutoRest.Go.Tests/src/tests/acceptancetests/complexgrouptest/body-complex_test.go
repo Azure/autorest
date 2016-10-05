@@ -76,7 +76,7 @@ func (s *ComplexGroupSuite) TestReadOnlyComplex(c *chk.C) {
 	_, err = complexReadOnlyClient.PutValid(res)
 	c.Assert(err, chk.NotNil)
 	expected := fmt.Errorf("autorest/validation: validation failed: parameter=%s constraint=%s value=%#v details: %s",
-		"ID", "ReadOnly", "1234", "readonly parameter; must send as nil or empty in request")
+		"complexBody.ID", "ReadOnly", "1234", "readonly parameter; must send as nil or empty in request")
 	c.Assert(err, chk.ErrorMatches,
 		fmt.Sprintf("complexgroup.ReadonlypropertyClient#PutValid: Invalid input: %v", expected))
 }

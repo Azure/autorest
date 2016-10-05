@@ -14,6 +14,13 @@ module MsRestAzure
     # @return [String] api version of the Azure in string format.
     attr_accessor :api_version
 
+    def initialize(credentials, options = nil)
+      super(credentials, options)
+      @request_headers =  {
+          'Content-Type' => 'application/json;charset=utf-8' # This is the current default for Azure services, and content-type supported by Autorest
+      }
+    end
+
     #
     # Retrieves the result of 'POST','DELETE','PUT' or 'PATCH' operation. Performs polling of required.
     # @param azure_response [MsRestAzure::AzureOperationResponse] response from Azure service.
@@ -245,6 +252,19 @@ module MsRestAzure
 
       result
     end
+
+
+    private
+      #
+      # Retrieves a new instance of the AzureOperationResponse class.
+      # @param [MsRest::HttpOperationRequest] request the HTTP request object.
+      # @param [Faraday::Response] response the HTTP response object.
+      # @param [String] body the HTTP response body.
+      # @return [MsRestAzure::AzureOperationResponse] the operation response.
+      #
+      def create_response(request, http_response, body = nil)
+        AzureOperationResponse.new(request, http_response, body)
+      end
   end
 
 end

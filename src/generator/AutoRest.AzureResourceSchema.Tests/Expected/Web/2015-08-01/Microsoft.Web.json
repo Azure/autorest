@@ -19,6 +19,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -33,6 +63,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/certificates"
@@ -52,6 +83,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -66,6 +127,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/csrs"
@@ -84,6 +146,36 @@
           "enum": [
             "2015-08-01"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "properties": {
           "oneOf": [
@@ -109,6 +201,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/hostingEnvironments"
@@ -127,6 +220,36 @@
           "enum": [
             "2015-08-01"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "properties": {
           "oneOf": [
@@ -152,6 +275,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/hostingEnvironments/workerPools"
@@ -171,6 +295,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -185,6 +339,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/managedHostingEnvironments"
@@ -203,6 +358,36 @@
           "enum": [
             "2015-08-01"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "properties": {
           "oneOf": [
@@ -228,6 +413,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/serverfarms"
@@ -247,6 +433,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -261,6 +477,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/serverfarms/virtualNetworkConnections/gateways"
@@ -280,6 +497,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -294,6 +541,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/serverfarms/virtualNetworkConnections/routes"
@@ -312,6 +560,36 @@
           "enum": [
             "2015-08-01"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "properties": {
           "oneOf": [
@@ -349,6 +627,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites"
@@ -368,6 +647,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -382,6 +691,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/deployments"
@@ -401,6 +711,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -415,6 +755,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/hostNameBindings"
@@ -434,6 +775,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -448,6 +819,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/hybridconnection"
@@ -467,6 +839,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -481,6 +883,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/instances/deployments"
@@ -499,6 +902,36 @@
           "enum": [
             "2015-08-01"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "properties": {
           "oneOf": [
@@ -533,6 +966,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/slots"
@@ -552,6 +986,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -566,6 +1030,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/slots/deployments"
@@ -585,6 +1050,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -599,6 +1094,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/slots/hostNameBindings"
@@ -618,6 +1114,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -632,6 +1158,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/slots/hybridconnection"
@@ -651,6 +1178,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -665,6 +1222,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/slots/instances/deployments"
@@ -683,6 +1241,36 @@
           "enum": [
             "2015-08-01"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "properties": {
           "oneOf": [
@@ -708,6 +1296,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/slots/virtualNetworkConnections"
@@ -727,6 +1316,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -741,6 +1360,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/slots/virtualNetworkConnections/gateways"
@@ -759,6 +1379,36 @@
           "enum": [
             "2015-08-01"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "properties": {
           "oneOf": [
@@ -784,6 +1434,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/virtualNetworkConnections"
@@ -803,6 +1454,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -817,6 +1498,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/virtualNetworkConnections/gateways"
@@ -1626,6 +2308,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -1650,6 +2362,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/hostingEnvironments/workerPools"
@@ -2633,6 +3346,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -2647,6 +3390,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/deployments"
@@ -2666,6 +3410,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -2680,6 +3454,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/hostNameBindings"
@@ -2699,6 +3474,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -2713,6 +3518,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/hybridconnection"
@@ -2731,6 +3537,36 @@
           "enum": [
             "2015-08-01"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "properties": {
           "oneOf": [
@@ -2762,6 +3598,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/slots"
@@ -2781,6 +3618,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -2795,6 +3662,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/slots/deployments"
@@ -2814,6 +3682,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -2828,6 +3726,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/slots/hostNameBindings"
@@ -2847,6 +3746,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -2861,6 +3790,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/slots/hybridconnection"
@@ -2879,6 +3809,36 @@
           "enum": [
             "2015-08-01"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "properties": {
           "oneOf": [
@@ -2904,6 +3864,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/slots/virtualNetworkConnections"
@@ -2923,6 +3884,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -2937,6 +3928,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/slots/virtualNetworkConnections/gateways"
@@ -2955,6 +3947,36 @@
           "enum": [
             "2015-08-01"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "properties": {
           "oneOf": [
@@ -2980,6 +4002,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/virtualNetworkConnections"
@@ -2999,6 +4022,36 @@
             "2015-08-01"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -3013,6 +4066,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Web/sites/virtualNetworkConnections/gateways"
