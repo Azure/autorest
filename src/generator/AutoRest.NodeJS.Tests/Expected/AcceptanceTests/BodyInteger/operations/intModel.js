@@ -59,11 +59,8 @@ IntModel.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//int/null';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'int/null';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -173,11 +170,8 @@ IntModel.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//int/invalid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'int/invalid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -287,11 +281,8 @@ IntModel.prototype.getOverflowInt32 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//int/overflowint32';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'int/overflowint32';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -401,11 +392,8 @@ IntModel.prototype.getUnderflowInt32 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//int/underflowint32';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'int/underflowint32';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -515,11 +503,8 @@ IntModel.prototype.getOverflowInt64 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//int/overflowint64';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'int/overflowint64';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -629,11 +614,8 @@ IntModel.prototype.getUnderflowInt64 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//int/underflowint64';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'int/underflowint64';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -753,11 +735,8 @@ IntModel.prototype.putMax32 = function (intBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//int/max/32';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'int/max/32';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -874,11 +853,8 @@ IntModel.prototype.putMax64 = function (intBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//int/max/64';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'int/max/64';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -995,11 +971,8 @@ IntModel.prototype.putMin32 = function (intBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//int/min/32';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'int/min/32';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1116,11 +1089,8 @@ IntModel.prototype.putMin64 = function (intBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//int/min/64';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'int/min/64';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1227,11 +1197,8 @@ IntModel.prototype.getUnixTime = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//int/unixtime';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'int/unixtime';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1352,11 +1319,8 @@ IntModel.prototype.putUnixTimeDate = function (intBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//int/unixtime';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'int/unixtime';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1463,11 +1427,8 @@ IntModel.prototype.getInvalidUnixTime = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//int/invalidunixtime';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'int/invalidunixtime';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1577,11 +1538,8 @@ IntModel.prototype.getNullUnixTime = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//int/nullunixtime';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'int/nullunixtime';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

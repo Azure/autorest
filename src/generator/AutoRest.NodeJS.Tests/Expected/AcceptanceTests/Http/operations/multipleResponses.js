@@ -60,11 +60,8 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/204/none/default/Error/response/200/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/204/none/default/Error/response/200/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -169,11 +166,8 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/204/none/default/Error/response/204/none';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/204/none/default/Error/response/204/none';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -278,11 +272,8 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = functi
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/204/none/default/Error/response/201/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/204/none/default/Error/response/201/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -387,11 +378,8 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/204/none/default/Error/response/202/none';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/204/none/default/Error/response/202/none';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -497,11 +485,8 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/204/none/default/Error/response/400/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/204/none/default/Error/response/400/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -606,11 +591,8 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/201/B/default/Error/response/200/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/201/B/default/Error/response/200/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -733,11 +715,8 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/201/B/default/Error/response/201/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/201/B/default/Error/response/201/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -860,11 +839,8 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/201/B/default/Error/response/400/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/201/B/default/Error/response/400/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -985,11 +961,8 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/201/C/404/D/default/Error/response/200/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/201/C/404/D/default/Error/response/200/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1127,11 +1100,8 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/201/C/404/D/default/Error/response/201/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/201/C/404/D/default/Error/response/201/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1269,11 +1239,8 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/201/C/404/D/default/Error/response/404/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/201/C/404/D/default/Error/response/404/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1412,11 +1379,8 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/201/C/404/D/default/Error/response/400/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/201/C/404/D/default/Error/response/400/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1554,11 +1518,8 @@ MultipleResponses.prototype.get202None204NoneDefaultError202None = function (opt
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/202/none/204/none/default/Error/response/202/none';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/202/none/204/none/default/Error/response/202/none';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1645,11 +1606,8 @@ MultipleResponses.prototype.get202None204NoneDefaultError204None = function (opt
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/202/none/204/none/default/Error/response/204/none';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/202/none/204/none/default/Error/response/204/none';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1737,11 +1695,8 @@ MultipleResponses.prototype.get202None204NoneDefaultError400Valid = function (op
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/202/none/204/none/default/Error/response/400/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/202/none/204/none/default/Error/response/400/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1828,11 +1783,8 @@ MultipleResponses.prototype.get202None204NoneDefaultNone202Invalid = function (o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/202/none/204/none/default/none/response/202/invalid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/202/none/204/none/default/none/response/202/invalid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1915,11 +1867,8 @@ MultipleResponses.prototype.get202None204NoneDefaultNone204None = function (opti
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/202/none/204/none/default/none/response/204/none';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/202/none/204/none/default/none/response/204/none';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2002,11 +1951,8 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400None = function (opti
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/202/none/204/none/default/none/response/400/none';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/202/none/204/none/default/none/response/400/none';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2089,11 +2035,8 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400Invalid = function (o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/202/none/204/none/default/none/response/400/invalid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/202/none/204/none/default/none/response/400/invalid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2177,11 +2120,8 @@ MultipleResponses.prototype.getDefaultModelA200Valid = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/default/A/response/200/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/default/A/response/200/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2283,11 +2223,8 @@ MultipleResponses.prototype.getDefaultModelA200None = function (options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/default/A/response/200/none';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/default/A/response/200/none';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2389,11 +2326,8 @@ MultipleResponses.prototype.getDefaultModelA400Valid = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/default/A/response/400/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/default/A/response/400/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2495,11 +2429,8 @@ MultipleResponses.prototype.getDefaultModelA400None = function (options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/default/A/response/400/none';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/default/A/response/400/none';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2600,11 +2531,8 @@ MultipleResponses.prototype.getDefaultNone200Invalid = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/default/none/response/200/invalid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/default/none/response/200/invalid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2687,11 +2615,8 @@ MultipleResponses.prototype.getDefaultNone200None = function (options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/default/none/response/200/none';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/default/none/response/200/none';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2774,11 +2699,8 @@ MultipleResponses.prototype.getDefaultNone400Invalid = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/default/none/response/400/invalid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/default/none/response/400/invalid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2861,11 +2783,8 @@ MultipleResponses.prototype.getDefaultNone400None = function (options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/default/none/response/400/none';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/default/none/response/400/none';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2950,11 +2869,8 @@ MultipleResponses.prototype.get200ModelA200None = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/response/200/none';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/response/200/none';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3055,11 +2971,8 @@ MultipleResponses.prototype.get200ModelA200Valid = function (options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/response/200/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/response/200/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3160,11 +3073,8 @@ MultipleResponses.prototype.get200ModelA200Invalid = function (options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/response/200/invalid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/response/200/invalid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3266,11 +3176,8 @@ MultipleResponses.prototype.get200ModelA400None = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/response/400/none';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/response/400/none';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3371,11 +3278,8 @@ MultipleResponses.prototype.get200ModelA400Valid = function (options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/response/400/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/response/400/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3476,11 +3380,8 @@ MultipleResponses.prototype.get200ModelA400Invalid = function (options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/response/400/invalid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/response/400/invalid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3581,11 +3482,8 @@ MultipleResponses.prototype.get200ModelA202Valid = function (options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/payloads/200/A/response/202/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/payloads/200/A/response/202/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
