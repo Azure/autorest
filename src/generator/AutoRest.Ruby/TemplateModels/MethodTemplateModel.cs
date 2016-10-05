@@ -319,29 +319,16 @@ namespace AutoRest.Ruby.TemplateModels
 
         /// <summary>
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
-        /// exclude global parameters
-        /// </summary>
-        public IEnumerable<ParameterTemplateModel> LocalParameters
-        {
-            get
-            {
-                //Omit parameter group parameters for now since AutoRest-Ruby doesn't support them
-                return
-                    ParameterTemplateModels.Where(
-                        p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
-                        .OrderBy(item => !item.IsRequired);
-            }
-        }
-
-        /// <summary>
-        /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters and constants
         /// </summary>
         public IEnumerable<ParameterTemplateModel> MethodParameters
         {
             get
             {
-                return LocalParameters.Where(p => !p.IsConstant);
+                return
+                    ParameterTemplateModels.Where(
+                        p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name) && !p.IsConstant)
+                        .OrderBy(item => !item.IsRequired);
             }
         }
 
