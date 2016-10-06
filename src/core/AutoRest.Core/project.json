@@ -19,21 +19,7 @@
     "net451": {
     }
   },
-  "old_frameworks": {
-    "net451": {
-    },
-    "netcoreapp1.0": {
-      "buildOptions": { "define": [ "PORTABLE" ] },
-      "imports": [ "dnxcore50", "portable-net45+win8" ],
-      "dependencies": {
-        "Microsoft.NETCore.App": {
-          "type": "platform",
-          "version": "1.0.0-*"
-        }
-      }
-    }
-  },
-
+  
   "dependencies": {
     "Newtonsoft.Json": "[9.0.1,10.0)",
     "YamlDotNet.Signed": "3.8.0"

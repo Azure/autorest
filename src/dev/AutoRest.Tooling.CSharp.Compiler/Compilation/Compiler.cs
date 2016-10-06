@@ -60,7 +60,7 @@ namespace Microsoft.Rest.CSharp.Compiler.Compilation
                 cancellationTokenSource.CancelAfter(Timeout);
                 return await task.ConfigureAwait(false);
             }
-            catch (OperationCanceledException ocex)
+            catch (OperationCanceledException)
             {
                 if (cancellationTokenSource.IsCancellationRequested)
                 {
@@ -85,7 +85,7 @@ namespace Microsoft.Rest.CSharp.Compiler.Compilation
                     };
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Trace.TraceError("{0}:InnerCompile failed. Exception: {1}", GetType().Name, ex);
                 return new CompilationResult

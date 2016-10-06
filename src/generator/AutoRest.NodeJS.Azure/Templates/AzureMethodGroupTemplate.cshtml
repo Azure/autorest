@@ -1,7 +1,7 @@
 ﻿@using System.Linq
-@using AutoRest.NodeJS.Azure.TemplateModels
+@using AutoRest.NodeJS.Azure.Model
 @using AutoRest.NodeJS.Azure.Templates
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.TemplateModels.AzureMethodGroupTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Model.MethodGroupJs>
 /*
 @Header(" * ")
  */
@@ -19,23 +19,23 @@ var WebResource = msRest.WebResource;
 @EmptyLine
 /**
  * @@class
- * @Model.MethodGroupType
+ * @Model.TypeName
  * __NOTE__: An instance of this class is automatically created for an
- * instance of the @Model.Name.
- * Initializes a new instance of the @Model.MethodGroupType class.
+ * instance of the @Model.CodeModel.Name.
+ * Initializes a new instance of the @Model.TypeName class.
  * @@constructor
  *
- * @@param {@Model.Name} client Reference to the service client.
+ * @@param {@Model.CodeModel.Name} client Reference to the service client.
  */
-function @(Model.MethodGroupType)(client) {
+function @(Model.TypeName)(client) {
   this.client = client;
 }
 
 @EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
 {
-@:@(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel))
+@:@(Include(new AzureMethodTemplate(), method as MethodJsa))
 @EmptyLine
 }
 @EmptyLine
-module.exports = @(Model.MethodGroupType);
+module.exports = @(Model.TypeName);

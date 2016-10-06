@@ -1289,7 +1289,7 @@ Primitive.prototype.getString = function (options, callback) {
  * 
  * @param {string} [complexBody.empty]
  * 
- * @param {string} [complexBody.null]
+ * @param {string} [complexBody.nullProperty]
  * 
  * @param {object} [options] Optional Parameters.
  * 

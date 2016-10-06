@@ -1,15 +1,15 @@
 @using System
 @using AutoRest.CSharp.Azure.Templates
 @using System.Linq
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
-@using AutoRest.CSharp.TemplateModels
+@using AutoRest.CSharp.Model
 @using AutoRest.CSharp.Templates
-@inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.TemplateModels.AzureMethodTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.Model.MethodCsa>
 
 @if (!Model.IsLongRunningOperation)
 {
-@:@(Include(new MethodTemplate(), (MethodTemplateModel)Model))
+@:@(Include(new MethodTemplate(), (MethodCs)Model))
 }
 else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
 {

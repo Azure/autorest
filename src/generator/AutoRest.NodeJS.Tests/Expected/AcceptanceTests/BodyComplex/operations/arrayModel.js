@@ -142,7 +142,7 @@ ArrayModel.prototype.getValid = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {array} [options.arrayParameter]
+ * @param {array} [options.arrayProperty]
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -168,27 +168,23 @@ ArrayModel.prototype.putValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var arrayParameter = (options && options.arrayParameter !== undefined) ? options.arrayParameter : undefined;
+  var arrayProperty = (options && options.arrayProperty !== undefined) ? options.arrayProperty : undefined;
   // Validate
   try {
-    if (util.isArray(arrayParameter)) {
-      for (var i = 0; i < arrayParameter.length; i++) {
-        if (arrayParameter[i] !== null && arrayParameter[i] !== undefined && typeof arrayParameter[i].valueOf() !== 'string') {
-          throw new Error('arrayParameter[i] must be of type string.');
+    if (util.isArray(arrayProperty)) {
+      for (var i = 0; i < arrayProperty.length; i++) {
+        if (arrayProperty[i] !== null && arrayProperty[i] !== undefined && typeof arrayProperty[i].valueOf() !== 'string') {
+          throw new Error('arrayProperty[i] must be of type string.');
         }
       }
     }
   } catch (error) {
     return callback(error);
   }
-  var complexBody = new client.models['ArrayWrapper']();
-  try {
-    if (arrayParameter !== null && arrayParameter !== undefined)
-    {
-      complexBody.array = arrayParameter;
-    }
-  } catch (error) {
-    return callback(error);
+  var complexBody;
+  if (arrayProperty !== null && arrayProperty !== undefined) {
+      complexBody = new client.models['ArrayWrapper']();
+      complexBody.arrayProperty = arrayProperty;
   }
 
   // Construct URL
@@ -380,7 +376,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {array} [options.arrayParameter]
+ * @param {array} [options.arrayProperty]
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -406,27 +402,23 @@ ArrayModel.prototype.putEmpty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var arrayParameter = (options && options.arrayParameter !== undefined) ? options.arrayParameter : undefined;
+  var arrayProperty = (options && options.arrayProperty !== undefined) ? options.arrayProperty : undefined;
   // Validate
   try {
-    if (util.isArray(arrayParameter)) {
-      for (var i = 0; i < arrayParameter.length; i++) {
-        if (arrayParameter[i] !== null && arrayParameter[i] !== undefined && typeof arrayParameter[i].valueOf() !== 'string') {
-          throw new Error('arrayParameter[i] must be of type string.');
+    if (util.isArray(arrayProperty)) {
+      for (var i = 0; i < arrayProperty.length; i++) {
+        if (arrayProperty[i] !== null && arrayProperty[i] !== undefined && typeof arrayProperty[i].valueOf() !== 'string') {
+          throw new Error('arrayProperty[i] must be of type string.');
         }
       }
     }
   } catch (error) {
     return callback(error);
   }
-  var complexBody = new client.models['ArrayWrapper']();
-  try {
-    if (arrayParameter !== null && arrayParameter !== undefined)
-    {
-      complexBody.array = arrayParameter;
-    }
-  } catch (error) {
-    return callback(error);
+  var complexBody;
+  if (arrayProperty !== null && arrayProperty !== undefined) {
+      complexBody = new client.models['ArrayWrapper']();
+      complexBody.arrayProperty = arrayProperty;
   }
 
   // Construct URL

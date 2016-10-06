@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.Core.Model;
 
 namespace AutoRest.Core.Utilities.Collections
 {
@@ -12,7 +13,7 @@ namespace AutoRest.Core.Utilities.Collections
     ///     Permits the re-enumeration without re-running the original query.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ReEnumerable<T> : MutableEnumerable<T>
+    public class ReEnumerable<T> : MutableEnumerable<T>, IEnumerableWithIndex<T>
     {
         private readonly IEnumerable<T> _source;
         private IEnumerator<T> _sourceIterator;
@@ -89,6 +90,11 @@ namespace AutoRest.Core.Utilities.Collections
         public MutableEnumerable<T> Concat(IEnumerable<T> additionalItems)
         {
             return Enumerable.Concat(this, additionalItems).ReEnumerable();
+        }
+
+        public virtual bool CopyFrom(object source)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

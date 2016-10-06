@@ -11,6 +11,7 @@ using AutoRest.Core.Logging;
 using AutoRest.Core;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Validation;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger.Tests
 {
@@ -36,20 +37,23 @@ namespace AutoRest.Swagger.Tests
         /// <returns>A list of messages from the comparison logic.</returns>
         private IEnumerable<ComparisonMessage> CompareSwagger(string input)
         {
-            var settings = new Settings
+            using (NewContext)
             {
-                Namespace = "Test",
-                Input = Path.Combine("Swagger", "Comparison", "Modified", input),
-                Previous = Path.Combine("Swagger", "Comparison", "Original", input)
-            };
+                var settings = new Settings
+                {
+                    Namespace = "Test",
+                    Input = Path.Combine("Swagger", "Comparison", "Modified", input),
+                    Previous = Path.Combine("Swagger", "Comparison", "Original", input)
+                };
 
-            var modeler = new SwaggerModeler(settings);
-            IEnumerable<ComparisonMessage> messages = modeler.Compare();
+                var modeler = new SwaggerModeler();
+                IEnumerable<ComparisonMessage> messages = modeler.Compare();
 
-            // remove debug-level messages
-            messages = messages.Where(each => each.Severity > LogEntrySeverity.Debug);
+                // remove debug-level messages
+                messages = messages.Where(each => each.Severity > LogEntrySeverity.Debug);
 
-            return messages;
+                return messages;
+            }
         }
 
         /// <summary>

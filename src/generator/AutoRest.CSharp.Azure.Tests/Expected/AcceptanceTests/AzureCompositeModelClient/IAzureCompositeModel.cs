@@ -18,7 +18,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     /// </summary>
     public partial interface IAzureCompositeModel : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }
@@ -101,7 +101,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// </summary>
         IReadonlypropertyOperations Readonlyproperty { get; }
 
-            /// <summary>
+        /// <summary>
         /// Product Types
         /// </summary>
         /// <remarks>

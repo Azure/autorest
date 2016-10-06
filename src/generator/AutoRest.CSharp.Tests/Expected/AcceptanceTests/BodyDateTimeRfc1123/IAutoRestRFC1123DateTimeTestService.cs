@@ -15,7 +15,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
     /// </summary>
     public partial interface IAutoRestRFC1123DateTimeTestService : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

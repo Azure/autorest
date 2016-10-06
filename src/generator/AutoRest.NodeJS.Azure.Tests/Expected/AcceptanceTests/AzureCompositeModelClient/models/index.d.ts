@@ -323,13 +323,13 @@ export interface BooleanWrapper {
  * 
  * @member {string} [empty]
  * 
- * @member {string} [null]
+ * @member {string} [nullProperty]
  * 
  */
 export interface StringWrapper {
   field?: string;
   empty?: string;
-  null?: string;
+  nullProperty?: string;
 }
 
 /**
@@ -400,11 +400,11 @@ export interface ByteWrapper {
  * @class
  * Initializes a new instance of the ArrayWrapper class.
  * @constructor
- * @member {array} [array]
+ * @member {array} [arrayProperty]
  * 
  */
 export interface ArrayWrapper {
-  array?: string[];
+  arrayProperty?: string[];
 }
 
 /**

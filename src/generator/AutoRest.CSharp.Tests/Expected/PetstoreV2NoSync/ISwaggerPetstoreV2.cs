@@ -19,7 +19,7 @@ namespace Fixtures.PetstoreV2NoSync
     /// </summary>
     public partial interface ISwaggerPetstoreV2 : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }
@@ -35,7 +35,7 @@ namespace Fixtures.PetstoreV2NoSync
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Add a new pet to the store
         /// </summary>
         /// <param name='body'>

@@ -27,15 +27,15 @@ namespace AutoRest.Core.Extensibility
         /// </summary>
         /// <param name="settings">The code generation settings</param>
         /// <returns>Code generator specified in Settings.CodeGenerator</returns>
-        public static CodeGenerator GetCodeGenerator(Settings settings)
+        public static CodeGenerator GetCodeGenerator()
         {
             Logger.LogInfo(Resources.InitializingCodeGenerator);
-            if (settings == null)
+            if (Settings.Instance == null)
             {
                 throw new ArgumentNullException("settings");
             }
 
-            if (string.IsNullOrEmpty(settings.CodeGenerator))
+            if (string.IsNullOrEmpty(Settings.Instance.CodeGenerator))
             {
                 throw new ArgumentException(
                     string.Format(CultureInfo.InvariantCulture,
@@ -44,22 +44,20 @@ namespace AutoRest.Core.Extensibility
 
             CodeGenerator codeGenerator = null;
 
-            if (string.Equals("None", settings.CodeGenerator, StringComparison.OrdinalIgnoreCase))
+            if (string.Equals("None", Settings.Instance.CodeGenerator, StringComparison.OrdinalIgnoreCase))
             {
-                codeGenerator = new NoOpCodeGenerator(settings);
+                codeGenerator = new NoOpCodeGenerator();
             }
             else
             {
-                string configurationFile = GetConfigurationFileContent(settings);
+                string configurationFile = GetConfigurationFileContent(Settings.Instance);
 
                 if (configurationFile != null)
                 {
                     try
                     {
                         var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
-                        codeGenerator = LoadTypeFromAssembly<CodeGenerator>(config.CodeGenerators, settings.CodeGenerator,
-                            settings);
-                        codeGenerator.PopulateSettings(settings.CustomSettings);
+                        codeGenerator = LoadTypeFromAssembly<CodeGenerator>(config.CodeGenerators, Settings.Instance.CodeGenerator);
                     }
                     catch (Exception ex)
                     {
@@ -72,7 +70,7 @@ namespace AutoRest.Core.Extensibility
                 }
             }
             Logger.LogInfo(Resources.GeneratorInitialized,
-                settings.CodeGenerator,
+                Settings.Instance.CodeGenerator,
                 codeGenerator.GetType().Assembly.GetName().Version);
             return codeGenerator;
         }
@@ -82,15 +80,15 @@ namespace AutoRest.Core.Extensibility
         /// </summary>
         /// <param name="settings">The code generation settings</param>
         /// <returns>Modeler specified in Settings.Modeler</returns>
-        public static Modeler GetModeler(Settings settings)
+        public static Modeler GetModeler()
         {
             Logger.LogInfo(Resources.InitializingModeler);
-            if (settings == null)
+            if (Settings.Instance == null)
             {
                 throw new ArgumentNullException("settings", "settings or settings.Modeler cannot be null.");
             }
 
-            if (string.IsNullOrEmpty(settings.Modeler))
+            if (string.IsNullOrEmpty(Settings.Instance.Modeler))
             {
                 throw new ArgumentException(
                     string.Format(CultureInfo.InvariantCulture,
@@ -99,15 +97,15 @@ namespace AutoRest.Core.Extensibility
 
             Modeler modeler = null;
 
-            string configurationFile = GetConfigurationFileContent(settings);
+            string configurationFile = GetConfigurationFileContent(Settings.Instance);
 
             if (configurationFile != null)
             {
                 try
                 {
                     var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
-                    modeler = LoadTypeFromAssembly<Modeler>(config.Modelers, settings.Modeler, settings);
-                    Settings.PopulateSettings(modeler, settings.CustomSettings);
+                    modeler = LoadTypeFromAssembly<Modeler>(config.Modelers, Settings.Instance.Modeler);
+                    Settings.PopulateSettings(modeler, Settings.Instance.CustomSettings);
                 }
                 catch (Exception ex)
                 {
@@ -120,7 +118,7 @@ namespace AutoRest.Core.Extensibility
             }
 
             Logger.LogInfo(Resources.ModelerInitialized,
-                settings.Modeler,
+                Settings.Instance.Modeler,
                 modeler.GetType().Assembly.GetName().Version);
             return modeler;
         }
@@ -157,11 +155,11 @@ namespace AutoRest.Core.Extensibility
 
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFrom")]
         public static T LoadTypeFromAssembly<T>(IDictionary<string, AutoRestProviderConfiguration> section,
-            string key, Settings settings)
+            string key)
         {
             T instance = default(T);
 
-            if (settings != null && section != null && !section.IsNullOrEmpty() && section.ContainsKey(key))
+            if (Settings.Instance != null && section != null && !section.IsNullOrEmpty() && section.ContainsKey(key))
             {
                 string fullTypeName = section[key].TypeName;
                 if (string.IsNullOrEmpty(fullTypeName))
@@ -198,14 +196,13 @@ namespace AutoRest.Core.Extensibility
                                      t.Name == typeName ||
                                      t.FullName == typeName);
 
-                    instance = (T)loadedType.GetConstructor(
-                        new[] { typeof(Settings) }).Invoke(new object[] { settings });
+                    instance = (T)loadedType.GetConstructor(Type.EmptyTypes).Invoke(null);
 
                     if (!section[key].Settings.IsNullOrEmpty())
                     {
                         foreach (var settingFromFile in section[key].Settings)
                         {
-                            settings.CustomSettings[settingFromFile.Key] = settingFromFile.Value;
+                            Settings.Instance.CustomSettings[settingFromFile.Key] = settingFromFile.Value;
                         }
                     }
                 }

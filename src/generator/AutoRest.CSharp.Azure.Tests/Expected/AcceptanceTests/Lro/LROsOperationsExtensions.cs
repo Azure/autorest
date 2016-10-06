@@ -55,42 +55,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
 
             /// <summary>
             /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Succeeded’.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            public static Product BeginPut200Succeeded(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut200SucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Succeeded’.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPut200SucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.BeginPut200SucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
             /// with an entity that does not contain ProvisioningState=’Succeeded’.
             /// </summary>
             /// <param name='operations'>
@@ -120,6 +84,1245 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<Product> Put200SucceededNoStateAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Put200SucceededNoStateWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 202 to the initial request,
+            /// with a location header that points to a polling URL that returns a 200
+            /// and an entity that doesn't contains ProvisioningState
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product Put202Retry200(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put202Retry200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 202 to the initial request,
+            /// with a location header that points to a polling URL that returns a 200
+            /// and an entity that doesn't contains ProvisioningState
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> Put202Retry200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.Put202Retry200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 201 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
+            /// this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Succeeded’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product Put201CreatingSucceeded200(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put201CreatingSucceeded200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 201 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
+            /// this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Succeeded’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> Put201CreatingSucceeded200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.Put201CreatingSucceeded200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 201 to the initial request,
+            /// with an entity that contains ProvisioningState=’Updating’.  Polls return
+            /// this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Succeeded’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product Put200UpdatingSucceeded204(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put200UpdatingSucceeded204Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 201 to the initial request,
+            /// with an entity that contains ProvisioningState=’Updating’.  Polls return
+            /// this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Succeeded’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> Put200UpdatingSucceeded204Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.Put200UpdatingSucceeded204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 201 to the initial request,
+            /// with an entity that contains ProvisioningState=’Created’.  Polls return
+            /// this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Failed’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product Put201CreatingFailed200(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put201CreatingFailed200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 201 to the initial request,
+            /// with an entity that contains ProvisioningState=’Created’.  Polls return
+            /// this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Failed’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> Put201CreatingFailed200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.Put201CreatingFailed200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 201 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
+            /// this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Canceled’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product Put200Acceptedcanceled200(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put200Acceptedcanceled200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 201 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
+            /// this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Canceled’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> Put200Acceptedcanceled200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.Put200Acceptedcanceled200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 202 to the initial request
+            /// with location header. Subsequent calls to operation status do not contain
+            /// location header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product PutNoHeaderInRetry(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutNoHeaderInRetryAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 202 to the initial request
+            /// with location header. Subsequent calls to operation status do not contain
+            /// location header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> PutNoHeaderInRetryAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.PutNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 200 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product PutAsyncRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 200 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> PutAsyncRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.PutAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 200 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product PutAsyncNoRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNoRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 200 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> PutAsyncNoRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.PutAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 200 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product PutAsyncRetryFailed(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncRetryFailedAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 200 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> PutAsyncRetryFailedAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.PutAsyncRetryFailedWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 200 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product PutAsyncNoRetrycanceled(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNoRetrycanceledAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 200 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> PutAsyncNoRetrycanceledAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.PutAsyncNoRetrycanceledWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 202 to the initial request
+            /// with Azure-AsyncOperation header. Subsequent calls to operation status do
+            /// not contain Azure-AsyncOperation header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product PutAsyncNoHeaderInRetry(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNoHeaderInRetryAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 202 to the initial request
+            /// with Azure-AsyncOperation header. Subsequent calls to operation status do
+            /// not contain Azure-AsyncOperation header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> PutAsyncNoHeaderInRetryAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.PutAsyncNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request with non resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='sku'>
+            /// sku to put
+            /// </param>
+            public static Sku PutNonResource(this ILROsOperations operations, Sku sku = default(Sku))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutNonResourceAsync(sku), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request with non resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='sku'>
+            /// sku to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Sku> PutNonResourceAsync(this ILROsOperations operations, Sku sku = default(Sku), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.PutNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request with non resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='sku'>
+            /// Sku to put
+            /// </param>
+            public static Sku PutAsyncNonResource(this ILROsOperations operations, Sku sku = default(Sku))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNonResourceAsync(sku), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request with non resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='sku'>
+            /// Sku to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Sku> PutAsyncNonResourceAsync(this ILROsOperations operations, Sku sku = default(Sku), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.PutAsyncNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request with sub resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Sub Product to put
+            /// </param>
+            public static SubProduct PutSubResource(this ILROsOperations operations, SubProduct product = default(SubProduct))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutSubResourceAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request with sub resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Sub Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<SubProduct> PutSubResourceAsync(this ILROsOperations operations, SubProduct product = default(SubProduct), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.PutSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request with sub resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Sub Product to put
+            /// </param>
+            public static SubProduct PutAsyncSubResource(this ILROsOperations operations, SubProduct product = default(SubProduct))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncSubResourceAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request with sub resource.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Sub Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<SubProduct> PutAsyncSubResourceAsync(this ILROsOperations operations, SubProduct product = default(SubProduct), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.PutAsyncSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Accepted’.  Polls return
+            /// this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Succeeded’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static Product DeleteProvisioning202Accepted200Succeeded(this ILROsOperations operations)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteProvisioning202Accepted200SucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Accepted’.  Polls return
+            /// this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Succeeded’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> DeleteProvisioning202Accepted200SucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.DeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
+            /// this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Failed’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static Product DeleteProvisioning202DeletingFailed200(this ILROsOperations operations)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteProvisioning202DeletingFailed200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
+            /// this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Failed’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> DeleteProvisioning202DeletingFailed200Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.DeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
+            /// this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Canceled’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static Product DeleteProvisioning202Deletingcanceled200(this ILROsOperations operations)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteProvisioning202Deletingcanceled200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
+            /// this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Canceled’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> DeleteProvisioning202Deletingcanceled200Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.DeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running delete succeeds and returns right away
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static void Delete204Succeeded(this ILROsOperations operations)
+            {
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Delete204SucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete succeeds and returns right away
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task Delete204SucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                await operations.Delete204SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Polls return this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Succeeded’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static Product Delete202Retry200(this ILROsOperations operations)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Delete202Retry200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Polls return this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Succeeded’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> Delete202Retry200Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.Delete202Retry200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Polls return this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Succeeded’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static Product Delete202NoRetry204(this ILROsOperations operations)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Delete202NoRetry204Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Polls return this value until the last poll returns a ‘200’ with
+            /// ProvisioningState=’Succeeded’
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> Delete202NoRetry204Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.Delete202NoRetry204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a location header in the
+            /// initial request. Subsequent calls to operation status do not contain
+            /// location header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static LROsDeleteNoHeaderInRetryHeaders DeleteNoHeaderInRetry(this ILROsOperations operations)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteNoHeaderInRetryAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a location header in the
+            /// initial request. Subsequent calls to operation status do not contain
+            /// location header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<LROsDeleteNoHeaderInRetryHeaders> DeleteNoHeaderInRetryAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.DeleteNoHeaderInRetryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns an Azure-AsyncOperation
+            /// header in the initial request. Subsequent calls to operation status do
+            /// not contain Azure-AsyncOperation header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static LROsDeleteAsyncNoHeaderInRetryHeaders DeleteAsyncNoHeaderInRetry(this ILROsOperations operations)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncNoHeaderInRetryAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns an Azure-AsyncOperation
+            /// header in the initial request. Subsequent calls to operation status do
+            /// not contain Azure-AsyncOperation header.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<LROsDeleteAsyncNoHeaderInRetryHeaders> DeleteAsyncNoHeaderInRetryAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.DeleteAsyncNoHeaderInRetryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+            /// operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static LROsDeleteAsyncRetrySucceededHeaders DeleteAsyncRetrySucceeded(this ILROsOperations operations)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncRetrySucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+            /// operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<LROsDeleteAsyncRetrySucceededHeaders> DeleteAsyncRetrySucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.DeleteAsyncRetrySucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+            /// operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static LROsDeleteAsyncNoRetrySucceededHeaders DeleteAsyncNoRetrySucceeded(this ILROsOperations operations)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncNoRetrySucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+            /// operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<LROsDeleteAsyncNoRetrySucceededHeaders> DeleteAsyncNoRetrySucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.DeleteAsyncNoRetrySucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+            /// operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static LROsDeleteAsyncRetryFailedHeaders DeleteAsyncRetryFailed(this ILROsOperations operations)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncRetryFailedAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+            /// operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<LROsDeleteAsyncRetryFailedHeaders> DeleteAsyncRetryFailedAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.DeleteAsyncRetryFailedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+            /// operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static LROsDeleteAsyncRetrycanceledHeaders DeleteAsyncRetrycanceled(this ILROsOperations operations)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncRetrycanceledAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+            /// operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<LROsDeleteAsyncRetrycanceledHeaders> DeleteAsyncRetrycanceledAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.DeleteAsyncRetrycanceledWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with 'Location' header. Poll returns a 200 with a response body after
+            /// success.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static Sku Post200WithPayload(this ILROsOperations operations)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Post200WithPayloadAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with 'Location' header. Poll returns a 200 with a response body after
+            /// success.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Sku> Post200WithPayloadAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.Post200WithPayloadWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with 'Location' and 'Retry-After' headers, Polls return a 200 with a
+            /// response body after success
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static LROsPost202Retry200Headers Post202Retry200(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Post202Retry200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with 'Location' and 'Retry-After' headers, Polls return a 200 with a
+            /// response body after success
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<LROsPost202Retry200Headers> Post202Retry200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.Post202Retry200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with 'Location' header, 204 with noresponse body after success
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product Post202NoRetry204(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Post202NoRetry204Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with 'Location' header, 204 with noresponse body after success
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> Post202NoRetry204Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.Post202NoRetry204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product PostAsyncRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> PostAsyncRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.PostAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product PostAsyncNoRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncNoRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> PostAsyncNoRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.PostAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static LROsPostAsyncRetryFailedHeaders PostAsyncRetryFailed(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncRetryFailedAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<LROsPostAsyncRetryFailedHeaders> PostAsyncRetryFailedAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.PostAsyncRetryFailedWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static LROsPostAsyncRetrycanceledHeaders PostAsyncRetrycanceled(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncRetrycanceledAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<LROsPostAsyncRetrycanceledHeaders> PostAsyncRetrycanceledAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.PostAsyncRetrycanceledWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 200 to the initial request,
+            /// with an entity that contains ProvisioningState=’Succeeded’.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product BeginPut200Succeeded(this ILROsOperations operations, Product product = default(Product))
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut200SucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a 200 to the initial request,
+            /// with an entity that contains ProvisioningState=’Succeeded’.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<Product> BeginPut200SucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.BeginPut200SucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -172,44 +1375,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static Product Put202Retry200(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put202Retry200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 202 to the initial request,
-            /// with a location header that points to a polling URL that returns a 200
-            /// and an entity that doesn't contains ProvisioningState
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> Put202Retry200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.Put202Retry200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 202 to the initial request,
-            /// with a location header that points to a polling URL that returns a 200
-            /// and an entity that doesn't contains ProvisioningState
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
             public static Product BeginPut202Retry200(this ILROsOperations operations, Product product = default(Product))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut202Retry200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -232,46 +1397,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<Product> BeginPut202Retry200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.BeginPut202Retry200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 201 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
-            /// this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Succeeded’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            public static Product Put201CreatingSucceeded200(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put201CreatingSucceeded200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 201 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
-            /// this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Succeeded’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> Put201CreatingSucceeded200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.Put201CreatingSucceeded200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -329,46 +1454,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static Product Put200UpdatingSucceeded204(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put200UpdatingSucceeded204Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 201 to the initial request,
-            /// with an entity that contains ProvisioningState=’Updating’.  Polls return
-            /// this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Succeeded’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> Put200UpdatingSucceeded204Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.Put200UpdatingSucceeded204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 201 to the initial request,
-            /// with an entity that contains ProvisioningState=’Updating’.  Polls return
-            /// this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Succeeded’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
             public static Product BeginPut200UpdatingSucceeded204(this ILROsOperations operations, Product product = default(Product))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut200UpdatingSucceeded204Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -392,46 +1477,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<Product> BeginPut200UpdatingSucceeded204Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.BeginPut200UpdatingSucceeded204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 201 to the initial request,
-            /// with an entity that contains ProvisioningState=’Created’.  Polls return
-            /// this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Failed’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            public static Product Put201CreatingFailed200(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put201CreatingFailed200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 201 to the initial request,
-            /// with an entity that contains ProvisioningState=’Created’.  Polls return
-            /// this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Failed’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> Put201CreatingFailed200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.Put201CreatingFailed200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -489,46 +1534,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static Product Put200Acceptedcanceled200(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put200Acceptedcanceled200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 201 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
-            /// this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Canceled’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> Put200Acceptedcanceled200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.Put200Acceptedcanceled200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 201 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
-            /// this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Canceled’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
             public static Product BeginPut200Acceptedcanceled200(this ILROsOperations operations, Product product = default(Product))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut200Acceptedcanceled200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -552,44 +1557,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<Product> BeginPut200Acceptedcanceled200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.BeginPut200Acceptedcanceled200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 202 to the initial request
-            /// with location header. Subsequent calls to operation status do not contain
-            /// location header.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            public static Product PutNoHeaderInRetry(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutNoHeaderInRetryAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 202 to the initial request
-            /// with location header. Subsequent calls to operation status do not contain
-            /// location header.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> PutNoHeaderInRetryAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.PutNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -644,44 +1611,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static Product PutAsyncRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> PutAsyncRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.PutAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
             public static Product BeginPutAsyncRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -704,44 +1633,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<Product> BeginPutAsyncRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.BeginPutAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            public static Product PutAsyncNoRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNoRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> PutAsyncNoRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.PutAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -796,44 +1687,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static Product PutAsyncRetryFailed(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncRetryFailedAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> PutAsyncRetryFailedAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.PutAsyncRetryFailedWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
             public static Product BeginPutAsyncRetryFailed(this ILROsOperations operations, Product product = default(Product))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncRetryFailedAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -856,44 +1709,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<Product> BeginPutAsyncRetryFailedAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.BeginPutAsyncRetryFailedWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            public static Product PutAsyncNoRetrycanceled(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNoRetrycanceledAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 200 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> PutAsyncNoRetrycanceledAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.PutAsyncNoRetrycanceledWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -948,44 +1763,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static Product PutAsyncNoHeaderInRetry(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNoHeaderInRetryAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 202 to the initial request
-            /// with Azure-AsyncOperation header. Subsequent calls to operation status do
-            /// not contain Azure-AsyncOperation header.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> PutAsyncNoHeaderInRetryAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.PutAsyncNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request, service returns a 202 to the initial request
-            /// with Azure-AsyncOperation header. Subsequent calls to operation status do
-            /// not contain Azure-AsyncOperation header.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
             public static Product BeginPutAsyncNoHeaderInRetry(this ILROsOperations operations, Product product = default(Product))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncNoHeaderInRetryAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -1008,40 +1785,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<Product> BeginPutAsyncNoHeaderInRetryAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.BeginPutAsyncNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request with non resource.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='sku'>
-            /// sku to put
-            /// </param>
-            public static Sku PutNonResource(this ILROsOperations operations, Sku sku = default(Sku))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutNonResourceAsync(sku), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request with non resource.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='sku'>
-            /// sku to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Sku> PutNonResourceAsync(this ILROsOperations operations, Sku sku = default(Sku), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.PutNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -1090,40 +1833,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='sku'>
             /// Sku to put
             /// </param>
-            public static Sku PutAsyncNonResource(this ILROsOperations operations, Sku sku = default(Sku))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNonResourceAsync(sku), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request with non resource.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='sku'>
-            /// Sku to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Sku> PutAsyncNonResourceAsync(this ILROsOperations operations, Sku sku = default(Sku), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.PutAsyncNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request with non resource.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='sku'>
-            /// Sku to put
-            /// </param>
             public static Sku BeginPutAsyncNonResource(this ILROsOperations operations, Sku sku = default(Sku))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncNonResourceAsync(sku), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -1144,40 +1853,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<Sku> BeginPutAsyncNonResourceAsync(this ILROsOperations operations, Sku sku = default(Sku), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.BeginPutAsyncNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request with sub resource.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Sub Product to put
-            /// </param>
-            public static SubProduct PutSubResource(this ILROsOperations operations, SubProduct product = default(SubProduct))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutSubResourceAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request with sub resource.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Sub Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<SubProduct> PutSubResourceAsync(this ILROsOperations operations, SubProduct product = default(SubProduct), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.PutSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -1226,40 +1901,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Sub Product to put
             /// </param>
-            public static SubProduct PutAsyncSubResource(this ILROsOperations operations, SubProduct product = default(SubProduct))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncSubResourceAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running put request with sub resource.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Sub Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<SubProduct> PutAsyncSubResourceAsync(this ILROsOperations operations, SubProduct product = default(SubProduct), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.PutAsyncSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running put request with sub resource.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Sub Product to put
-            /// </param>
             public static SubProduct BeginPutAsyncSubResource(this ILROsOperations operations, SubProduct product = default(SubProduct))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncSubResourceAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -1280,40 +1921,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<SubProduct> BeginPutAsyncSubResourceAsync(this ILROsOperations operations, SubProduct product = default(SubProduct), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.BeginPutAsyncSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Accepted’.  Polls return
-            /// this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Succeeded’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product DeleteProvisioning202Accepted200Succeeded(this ILROsOperations operations)
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteProvisioning202Accepted200SucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Accepted’.  Polls return
-            /// this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Succeeded’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> DeleteProvisioning202Accepted200SucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.DeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -1362,40 +1969,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static Product DeleteProvisioning202DeletingFailed200(this ILROsOperations operations)
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteProvisioning202DeletingFailed200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
-            /// this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Failed’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> DeleteProvisioning202DeletingFailed200Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.DeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
-            /// this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Failed’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
             public static Product BeginDeleteProvisioning202DeletingFailed200(this ILROsOperations operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteProvisioning202DeletingFailed200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -1416,40 +1989,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<Product> BeginDeleteProvisioning202DeletingFailed200Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.BeginDeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
-            /// this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Canceled’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product DeleteProvisioning202Deletingcanceled200(this ILROsOperations operations)
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteProvisioning202Deletingcanceled200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’.  Polls return
-            /// this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Canceled’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> DeleteProvisioning202Deletingcanceled200Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.DeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -1495,31 +2034,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void Delete204Succeeded(this ILROsOperations operations)
-            {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Delete204SucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running delete succeeds and returns right away
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task Delete204SucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                await operations.Delete204SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-            }
-
-            /// <summary>
-            /// Long running delete succeeds and returns right away
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
             public static void BeginDelete204Succeeded(this ILROsOperations operations)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDelete204SucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -1537,38 +2051,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task BeginDelete204SucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.BeginDelete204SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// Polls return this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Succeeded’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product Delete202Retry200(this ILROsOperations operations)
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Delete202Retry200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// Polls return this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Succeeded’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> Delete202Retry200Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.Delete202Retry200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
             }
 
             /// <summary>
@@ -1598,38 +2080,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<Product> BeginDelete202Retry200Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.BeginDelete202Retry200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// Polls return this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Succeeded’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Product Delete202NoRetry204(this ILROsOperations operations)
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Delete202NoRetry204Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// Polls return this value until the last poll returns a ‘200’ with
-            /// ProvisioningState=’Succeeded’
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> Delete202NoRetry204Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.Delete202NoRetry204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -1675,38 +2125,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static LROsDeleteNoHeaderInRetryHeaders DeleteNoHeaderInRetry(this ILROsOperations operations)
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteNoHeaderInRetryAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a location header in the
-            /// initial request. Subsequent calls to operation status do not contain
-            /// location header.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteNoHeaderInRetryHeaders> DeleteNoHeaderInRetryAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.DeleteNoHeaderInRetryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Headers;
-                }
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a location header in the
-            /// initial request. Subsequent calls to operation status do not contain
-            /// location header.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
             public static LROsDeleteNoHeaderInRetryHeaders BeginDeleteNoHeaderInRetry(this ILROsOperations operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteNoHeaderInRetryAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -1726,38 +2144,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<LROsDeleteNoHeaderInRetryHeaders> BeginDeleteNoHeaderInRetryAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.BeginDeleteNoHeaderInRetryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Headers;
-                }
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns an Azure-AsyncOperation
-            /// header in the initial request. Subsequent calls to operation status do
-            /// not contain Azure-AsyncOperation header.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static LROsDeleteAsyncNoHeaderInRetryHeaders DeleteAsyncNoHeaderInRetry(this ILROsOperations operations)
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncNoHeaderInRetryAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns an Azure-AsyncOperation
-            /// header in the initial request. Subsequent calls to operation status do
-            /// not contain Azure-AsyncOperation header.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteAsyncNoHeaderInRetryHeaders> DeleteAsyncNoHeaderInRetryAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.DeleteAsyncNoHeaderInRetryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Headers;
                 }
@@ -1803,38 +2189,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static LROsDeleteAsyncRetrySucceededHeaders DeleteAsyncRetrySucceeded(this ILROsOperations operations)
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncRetrySucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
-            /// operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteAsyncRetrySucceededHeaders> DeleteAsyncRetrySucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.DeleteAsyncRetrySucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Headers;
-                }
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
-            /// operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
             public static LROsDeleteAsyncRetrySucceededHeaders BeginDeleteAsyncRetrySucceeded(this ILROsOperations operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteAsyncRetrySucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -1854,38 +2208,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<LROsDeleteAsyncRetrySucceededHeaders> BeginDeleteAsyncRetrySucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.BeginDeleteAsyncRetrySucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Headers;
-                }
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
-            /// operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static LROsDeleteAsyncNoRetrySucceededHeaders DeleteAsyncNoRetrySucceeded(this ILROsOperations operations)
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncNoRetrySucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
-            /// operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteAsyncNoRetrySucceededHeaders> DeleteAsyncNoRetrySucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.DeleteAsyncNoRetrySucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Headers;
                 }
@@ -1931,38 +2253,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static LROsDeleteAsyncRetryFailedHeaders DeleteAsyncRetryFailed(this ILROsOperations operations)
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncRetryFailedAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
-            /// operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteAsyncRetryFailedHeaders> DeleteAsyncRetryFailedAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.DeleteAsyncRetryFailedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Headers;
-                }
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
-            /// operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
             public static LROsDeleteAsyncRetryFailedHeaders BeginDeleteAsyncRetryFailed(this ILROsOperations operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteAsyncRetryFailedAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -1982,38 +2272,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<LROsDeleteAsyncRetryFailedHeaders> BeginDeleteAsyncRetryFailedAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.BeginDeleteAsyncRetryFailedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Headers;
-                }
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
-            /// operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static LROsDeleteAsyncRetrycanceledHeaders DeleteAsyncRetrycanceled(this ILROsOperations operations)
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncRetrycanceledAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
-            /// operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteAsyncRetrycanceledHeaders> DeleteAsyncRetrycanceledAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.DeleteAsyncRetrycanceledWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Headers;
                 }
@@ -2059,38 +2317,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static Sku Post200WithPayload(this ILROsOperations operations)
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Post200WithPayloadAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with 'Location' header. Poll returns a 200 with a response body after
-            /// success.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Sku> Post200WithPayloadAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.Post200WithPayloadWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with 'Location' header. Poll returns a 200 with a response body after
-            /// success.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
             public static Sku BeginPost200WithPayload(this ILROsOperations operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPost200WithPayloadAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -2112,44 +2338,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 using (var _result = await operations.BeginPost200WithPayloadWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with 'Location' and 'Retry-After' headers, Polls return a 200 with a
-            /// response body after success
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            public static LROsPost202Retry200Headers Post202Retry200(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Post202Retry200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with 'Location' and 'Retry-After' headers, Polls return a 200 with a
-            /// response body after success
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<LROsPost202Retry200Headers> Post202Retry200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.Post202Retry200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Headers;
                 }
             }
 
@@ -2201,42 +2389,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static Product Post202NoRetry204(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Post202NoRetry204Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with 'Location' header, 204 with noresponse body after success
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> Post202NoRetry204Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.Post202NoRetry204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with 'Location' header, 204 with noresponse body after success
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
             public static Product BeginPost202NoRetry204(this ILROsOperations operations, Product product = default(Product))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPost202NoRetry204Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -2258,44 +2410,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<Product> BeginPost202NoRetry204Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.BeginPost202NoRetry204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            public static Product PostAsyncRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> PostAsyncRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.PostAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -2350,44 +2464,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static Product PostAsyncNoRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncNoRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<Product> PostAsyncNoRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.PostAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
             public static Product BeginPostAsyncNoRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPostAsyncNoRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -2426,44 +2502,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static LROsPostAsyncRetryFailedHeaders PostAsyncRetryFailed(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncRetryFailedAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<LROsPostAsyncRetryFailedHeaders> PostAsyncRetryFailedAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.PostAsyncRetryFailedWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Headers;
-                }
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
             public static LROsPostAsyncRetryFailedHeaders BeginPostAsyncRetryFailed(this ILROsOperations operations, Product product = default(Product))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPostAsyncRetryFailedAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
@@ -2486,44 +2524,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             public static async System.Threading.Tasks.Task<LROsPostAsyncRetryFailedHeaders> BeginPostAsyncRetryFailedAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.BeginPostAsyncRetryFailedWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Headers;
-                }
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            public static LROsPostAsyncRetrycanceledHeaders PostAsyncRetrycanceled(this ILROsOperations operations, Product product = default(Product))
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncRetrycanceledAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<LROsPostAsyncRetrycanceledHeaders> PostAsyncRetrycanceledAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.PostAsyncRetrycanceledWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Headers;
                 }

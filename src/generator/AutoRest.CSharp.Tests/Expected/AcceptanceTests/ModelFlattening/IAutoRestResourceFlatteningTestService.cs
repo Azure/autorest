@@ -15,7 +15,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
     /// </summary>
     public partial interface IAutoRestResourceFlatteningTestService : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }
@@ -31,7 +31,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Put External Resource as an Array
         /// </summary>
         /// <param name='resourceArray'>

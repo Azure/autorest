@@ -121,7 +121,8 @@
     
   <!-- .xproj files (used for clean and razor compile tasks -->
   <ItemGroup>
-    <XProjFiles Include="src/**/*.xproj" />
+    <XProjFiles Include="src/**/*.xproj" Exclude="src/**/node_modules/**/*.xproj" Condition=" '$(OS)' == 'Windows_NT'" />
+    <XProjFiles Include="src/**/*.xproj" Condition=" '$(OS)' != 'Windows_NT'" />
   </ItemGroup>
   
   <!-- Our Custom Tasks -->

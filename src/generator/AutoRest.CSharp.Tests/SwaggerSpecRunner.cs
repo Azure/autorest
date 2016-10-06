@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using AutoRest.Core;
 using Xunit;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Tests
 {
@@ -13,17 +14,20 @@ namespace AutoRest.CSharp.Tests
     {
         public static void RunTests(string specFile, string resultFolder, string modeler = "Swagger", string generator = "CSharp")
         {
-            var settings = new Settings
+            using (NewContext)
             {
-                Input = specFile,
-                OutputDirectory = "X:\\Output",
-                Header = "MICROSOFT_MIT_NO_VERSION",
-                Modeler = modeler,
-                CodeGenerator = generator,
-                PayloadFlatteningThreshold = 1
-            };
+                var settings = new Settings
+                {
+                    Input = specFile,
+                    OutputDirectory = "X:\\Output",
+                    Header = "MICROSOFT_MIT_NO_VERSION",
+                    Modeler = modeler,
+                    CodeGenerator = generator,
+                    PayloadFlatteningThreshold = 1
+                };
 
-            RunTests(settings, resultFolder);
+                RunTests(settings, resultFolder);
+            }
         }
 
         public static void RunTests(Settings settings, string resultFolder)

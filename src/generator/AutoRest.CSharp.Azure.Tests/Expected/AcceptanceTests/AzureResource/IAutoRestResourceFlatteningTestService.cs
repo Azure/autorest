@@ -17,7 +17,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
     /// </summary>
     public partial interface IAutoRestResourceFlatteningTestService : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }
@@ -55,7 +55,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         bool? GenerateClientRequestId { get; set; }
 
 
-            /// <summary>
+        /// <summary>
         /// Put External Resource as an Array
         /// </summary>
         /// <param name='resourceArray'>

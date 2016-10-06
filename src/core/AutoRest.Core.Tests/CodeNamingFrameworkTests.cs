@@ -2,24 +2,24 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using Xunit;
 
 namespace AutoRest.Core.Tests
 {
     public class FakeCodeNamer : CodeNamer
     {
-        public override IType NormalizeTypeReference(IType type)
+        public override IModelType NormalizeTypeReference(IModelType type)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IType NormalizeTypeDeclaration(IType type)
+        public override IModelType NormalizeTypeDeclaration(IModelType type)
         {
             throw new System.NotImplementedException();
         }
 
-        public override string EscapeDefaultValue(string value, IType type)
+        public override string EscapeDefaultValue(string value, IModelType type)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +35,7 @@ namespace AutoRest.Core.Tests
         [InlineData(null, null)]
         public void PascalCase(string expected, string value)
         {
-            var result = CodeNamer.PascalCase(value);
+            var result = CodeNamer.Instance.PascalCase(value);
             Assert.Equal(expected, result);
         }
 
@@ -47,7 +47,7 @@ namespace AutoRest.Core.Tests
         [InlineData(null, null)]
         public void CamelCase(string expected, string value)
         {
-            var result = CodeNamer.CamelCase(value);
+            var result = CodeNamer.Instance.CamelCase(value);
             Assert.Equal(expected, result);
         }
 

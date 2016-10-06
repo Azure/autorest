@@ -45,29 +45,6 @@ export interface LROs {
 
     /**
      * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Succeeded’.
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    beginPut200Succeeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    beginPut200Succeeded(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 200 to the initial request,
      * with an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @param {object} [options] Optional Parameters.
@@ -88,6 +65,725 @@ export interface LROs {
      */
     put200SucceededNoState(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     put200SucceededNoState(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a 202 to the initial request,
+     * with a location header that points to a polling URL that returns a 200 and
+     * an entity that doesn't contains ProvisioningState
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    put202Retry200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    put202Retry200(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a 201 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’.  Polls return
+     * this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    put201CreatingSucceeded200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    put201CreatingSucceeded200(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a 201 to the initial request,
+     * with an entity that contains ProvisioningState=’Updating’.  Polls return
+     * this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    put200UpdatingSucceeded204(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    put200UpdatingSucceeded204(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a 201 to the initial request,
+     * with an entity that contains ProvisioningState=’Created’.  Polls return
+     * this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Failed’
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    put201CreatingFailed200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    put201CreatingFailed200(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a 201 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’.  Polls return
+     * this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Canceled’
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    put200Acceptedcanceled200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    put200Acceptedcanceled200(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with
+     * location header. Subsequent calls to operation status do not contain
+     * location header.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putNoHeaderInRetry(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    putNoHeaderInRetry(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a 200 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’. Poll the
+     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putAsyncRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    putAsyncRetrySucceeded(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a 200 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’. Poll the
+     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putAsyncNoRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    putAsyncNoRetrySucceeded(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a 200 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’. Poll the
+     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putAsyncRetryFailed(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    putAsyncRetryFailed(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a 200 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’. Poll the
+     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putAsyncNoRetrycanceled(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    putAsyncNoRetrycanceled(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with
+     * Azure-AsyncOperation header. Subsequent calls to operation status do not
+     * contain Azure-AsyncOperation header.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putAsyncNoHeaderInRetry(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    putAsyncNoHeaderInRetry(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.sku] sku to put
+     * 
+     * @param {string} [options.sku.name]
+     * 
+     * @param {string} [options.sku.id]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putNonResource(options: { sku? : models.Sku, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Sku>): void;
+    putNonResource(callback: ServiceCallback<models.Sku>): void;
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.sku] Sku to put
+     * 
+     * @param {string} [options.sku.name]
+     * 
+     * @param {string} [options.sku.id]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putAsyncNonResource(options: { sku? : models.Sku, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Sku>): void;
+    putAsyncNonResource(callback: ServiceCallback<models.Sku>): void;
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Sub Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putSubResource(options: { product? : models.SubProduct, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SubProduct>): void;
+    putSubResource(callback: ServiceCallback<models.SubProduct>): void;
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Sub Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putAsyncSubResource(options: { product? : models.SubProduct, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SubProduct>): void;
+    putAsyncSubResource(callback: ServiceCallback<models.SubProduct>): void;
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request,
+     * with an entity that contains ProvisioningState=’Accepted’.  Polls return
+     * this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    deleteProvisioning202Accepted200Succeeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    deleteProvisioning202Accepted200Succeeded(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’.  Polls return
+     * this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Failed’
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    deleteProvisioning202DeletingFailed200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    deleteProvisioning202DeletingFailed200(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’.  Polls return
+     * this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Canceled’
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    deleteProvisioning202Deletingcanceled200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    deleteProvisioning202Deletingcanceled200(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running delete succeeds and returns right away
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    delete204Succeeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    delete204Succeeded(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request.
+     * Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    delete202Retry200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    delete202Retry200(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request.
+     * Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    delete202NoRetry204(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    delete202NoRetry204(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running delete request, service returns a location header in the
+     * initial request. Subsequent calls to operation status do not contain
+     * location header.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    deleteNoHeaderInRetry(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    deleteNoHeaderInRetry(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running delete request, service returns an Azure-AsyncOperation header
+     * in the initial request. Subsequent calls to operation status do not
+     * contain Azure-AsyncOperation header.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    deleteAsyncNoHeaderInRetry(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    deleteAsyncNoHeaderInRetry(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request.
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for
+     * operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    deleteAsyncRetrySucceeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    deleteAsyncRetrySucceeded(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request.
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for
+     * operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    deleteAsyncNoRetrySucceeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    deleteAsyncNoRetrySucceeded(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request.
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for
+     * operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    deleteAsyncRetryFailed(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    deleteAsyncRetryFailed(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request.
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for
+     * operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    deleteAsyncRetrycanceled(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    deleteAsyncRetrycanceled(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running post request, service returns a 202 to the initial request,
+     * with 'Location' header. Poll returns a 200 with a response body after
+     * success.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    post200WithPayload(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Sku>): void;
+    post200WithPayload(callback: ServiceCallback<models.Sku>): void;
+
+    /**
+     * Long running post request, service returns a 202 to the initial request,
+     * with 'Location' and 'Retry-After' headers, Polls return a 200 with a
+     * response body after success
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    post202Retry200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    post202Retry200(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running post request, service returns a 202 to the initial request,
+     * with 'Location' header, 204 with noresponse body after success
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    post202NoRetry204(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    post202NoRetry204(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running post request, service returns a 202 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’. Poll the
+     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    postAsyncRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    postAsyncRetrySucceeded(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running post request, service returns a 202 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’. Poll the
+     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    postAsyncNoRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    postAsyncNoRetrySucceeded(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running post request, service returns a 202 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’. Poll the
+     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    postAsyncRetryFailed(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postAsyncRetryFailed(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running post request, service returns a 202 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’. Poll the
+     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    postAsyncRetrycanceled(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postAsyncRetrycanceled(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running put request, service returns a 200 to the initial request,
+     * with an entity that contains ProvisioningState=’Succeeded’.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginPut200Succeeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    beginPut200Succeeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -133,57 +829,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put202Retry200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    put202Retry200(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 202 to the initial request,
-     * with a location header that points to a polling URL that returns a 200 and
-     * an entity that doesn't contains ProvisioningState
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPut202Retry200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     beginPut202Retry200(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls return
-     * this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    put201CreatingSucceeded200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    put201CreatingSucceeded200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 201 to the initial request,
@@ -232,58 +879,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put200UpdatingSucceeded204(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    put200UpdatingSucceeded204(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Updating’.  Polls return
-     * this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPut200UpdatingSucceeded204(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     beginPut200UpdatingSucceeded204(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Created’.  Polls return
-     * this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    put201CreatingFailed200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    put201CreatingFailed200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 201 to the initial request,
@@ -332,57 +929,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put200Acceptedcanceled200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    put200Acceptedcanceled200(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls return
-     * this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPut200Acceptedcanceled200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     beginPut200Acceptedcanceled200(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 202 to the initial request with
-     * location header. Subsequent calls to operation status do not contain
-     * location header.
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    putNoHeaderInRetry(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    putNoHeaderInRetry(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 202 to the initial request with
@@ -429,56 +977,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    putAsyncRetrySucceeded(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPutAsyncRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     beginPutAsyncRetrySucceeded(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    putAsyncNoRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    putAsyncNoRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -525,56 +1025,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncRetryFailed(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    putAsyncRetryFailed(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPutAsyncRetryFailed(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     beginPutAsyncRetryFailed(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    putAsyncNoRetrycanceled(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    putAsyncNoRetrycanceled(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -621,52 +1073,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncNoHeaderInRetry(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    putAsyncNoHeaderInRetry(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 202 to the initial request with
-     * Azure-AsyncOperation header. Subsequent calls to operation status do not
-     * contain Azure-AsyncOperation header.
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPutAsyncNoHeaderInRetry(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     beginPutAsyncNoHeaderInRetry(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request with non resource.
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.sku] sku to put
-     * 
-     * @param {string} [options.sku.name]
-     * 
-     * @param {string} [options.sku.id]
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    putNonResource(options: { sku? : models.Sku, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Sku>): void;
-    putNonResource(callback: ServiceCallback<models.Sku>): void;
 
     /**
      * Long running put request with non resource.
@@ -705,46 +1113,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncNonResource(options: { sku? : models.Sku, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Sku>): void;
-    putAsyncNonResource(callback: ServiceCallback<models.Sku>): void;
-
-    /**
-     * Long running put request with non resource.
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.sku] Sku to put
-     * 
-     * @param {string} [options.sku.name]
-     * 
-     * @param {string} [options.sku.id]
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPutAsyncNonResource(options: { sku? : models.Sku, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Sku>): void;
     beginPutAsyncNonResource(callback: ServiceCallback<models.Sku>): void;
-
-    /**
-     * Long running put request with sub resource.
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Sub Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    putSubResource(options: { product? : models.SubProduct, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SubProduct>): void;
-    putSubResource(callback: ServiceCallback<models.SubProduct>): void;
 
     /**
      * Long running put request with sub resource.
@@ -779,43 +1149,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncSubResource(options: { product? : models.SubProduct, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SubProduct>): void;
-    putAsyncSubResource(callback: ServiceCallback<models.SubProduct>): void;
-
-    /**
-     * Long running put request with sub resource.
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Sub Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPutAsyncSubResource(options: { product? : models.SubProduct, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SubProduct>): void;
     beginPutAsyncSubResource(callback: ServiceCallback<models.SubProduct>): void;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Accepted’.  Polls return
-     * this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    deleteProvisioning202Accepted200Succeeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    deleteProvisioning202Accepted200Succeeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running delete request, service returns a 202 to the initial request,
@@ -848,42 +1183,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteProvisioning202DeletingFailed200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    deleteProvisioning202DeletingFailed200(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls return
-     * this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginDeleteProvisioning202DeletingFailed200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     beginDeleteProvisioning202DeletingFailed200(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls return
-     * this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    deleteProvisioning202Deletingcanceled200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    deleteProvisioning202Deletingcanceled200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running delete request, service returns a 202 to the initial request,
@@ -913,38 +1214,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete204Succeeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    delete204Succeeded(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete succeeds and returns right away
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginDelete204Succeeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     beginDelete204Succeeded(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request.
-     * Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    delete202Retry200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    delete202Retry200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
@@ -975,40 +1246,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete202NoRetry204(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    delete202NoRetry204(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request.
-     * Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginDelete202NoRetry204(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     beginDelete202NoRetry204(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running delete request, service returns a location header in the
-     * initial request. Subsequent calls to operation status do not contain
-     * location header.
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    deleteNoHeaderInRetry(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    deleteNoHeaderInRetry(callback: ServiceCallback<void>): void;
 
     /**
      * Long running delete request, service returns a location header in the
@@ -1039,40 +1278,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteAsyncNoHeaderInRetry(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    deleteAsyncNoHeaderInRetry(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete request, service returns an Azure-AsyncOperation header
-     * in the initial request. Subsequent calls to operation status do not
-     * contain Azure-AsyncOperation header.
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginDeleteAsyncNoHeaderInRetry(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     beginDeleteAsyncNoHeaderInRetry(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    deleteAsyncRetrySucceeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    deleteAsyncRetrySucceeded(callback: ServiceCallback<void>): void;
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
@@ -1103,40 +1310,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteAsyncNoRetrySucceeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    deleteAsyncNoRetrySucceeded(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginDeleteAsyncNoRetrySucceeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     beginDeleteAsyncNoRetrySucceeded(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    deleteAsyncRetryFailed(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    deleteAsyncRetryFailed(callback: ServiceCallback<void>): void;
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
@@ -1167,22 +1342,6 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteAsyncRetrycanceled(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    deleteAsyncRetrycanceled(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginDeleteAsyncRetrycanceled(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     beginDeleteAsyncRetrycanceled(callback: ServiceCallback<void>): void;
 
@@ -1199,48 +1358,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post200WithPayload(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Sku>): void;
-    post200WithPayload(callback: ServiceCallback<models.Sku>): void;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request,
-     * with 'Location' header. Poll returns a 200 with a response body after
-     * success.
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPost200WithPayload(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Sku>): void;
     beginPost200WithPayload(callback: ServiceCallback<models.Sku>): void;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request,
-     * with 'Location' and 'Retry-After' headers, Polls return a 200 with a
-     * response body after success
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    post202Retry200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    post202Retry200(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -1286,55 +1405,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post202NoRetry204(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    post202NoRetry204(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request,
-     * with 'Location' header, 204 with noresponse body after success
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPost202NoRetry204(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     beginPost202NoRetry204(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    postAsyncRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    postAsyncRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -1381,30 +1453,6 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postAsyncNoRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    postAsyncNoRetrySucceeded(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPostAsyncNoRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     beginPostAsyncNoRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
@@ -1429,56 +1477,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postAsyncRetryFailed(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    postAsyncRetryFailed(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPostAsyncRetryFailed(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     beginPostAsyncRetryFailed(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    postAsyncRetrycanceled(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    postAsyncRetrycanceled(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -1539,6 +1539,129 @@ export interface LRORetrys {
     put201CreatingSucceeded200(callback: ServiceCallback<models.Product>): void;
 
     /**
+     * Long running put request, service returns a 500, then a 200 to the initial
+     * request, with an entity that contains ProvisioningState=’Creating’. Poll
+     * the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putAsyncRelativeRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetrySucceeded(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running delete request, service returns a 500, then a  202 to the
+     * initial request, with an entity that contains
+     * ProvisioningState=’Accepted’.  Polls return this value until the last poll
+     * returns a ‘200’ with ProvisioningState=’Succeeded’
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    deleteProvisioning202Accepted200Succeeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    deleteProvisioning202Accepted200Succeeded(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running delete request, service returns a 500, then a 202 to the
+     * initial request. Polls return this value until the last poll returns a
+     * ‘200’ with ProvisioningState=’Succeeded’
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    delete202Retry200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    delete202Retry200(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running delete request, service returns a 500, then a 202 to the
+     * initial request. Poll the endpoint indicated in the Azure-AsyncOperation
+     * header for operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    deleteAsyncRelativeRetrySucceeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    deleteAsyncRelativeRetrySucceeded(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial
+     * request, with 'Location' and 'Retry-After' headers, Polls return a 200
+     * with a response body after success
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    post202Retry200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    post202Retry200(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial
+     * request, with an entity that contains ProvisioningState=’Creating’. Poll
+     * the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    postAsyncRelativeRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postAsyncRelativeRetrySucceeded(callback: ServiceCallback<void>): void;
+
+    /**
      * Long running put request, service returns a 500, then a 201 to the initial
      * request, with an entity that contains ProvisioningState=’Creating’.  Polls
      * return this value until the last poll returns a ‘200’ with
@@ -1585,50 +1708,8 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncRelativeRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    putAsyncRelativeRetrySucceeded(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 500, then a 200 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’. Poll
-     * the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPutAsyncRelativeRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     beginPutAsyncRelativeRetrySucceeded(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running delete request, service returns a 500, then a  202 to the
-     * initial request, with an entity that contains
-     * ProvisioningState=’Accepted’.  Polls return this value until the last poll
-     * returns a ‘200’ with ProvisioningState=’Succeeded’
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    deleteProvisioning202Accepted200Succeeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    deleteProvisioning202Accepted200Succeeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running delete request, service returns a 500, then a  202 to the
@@ -1660,40 +1741,8 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete202Retry200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    delete202Retry200(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete request, service returns a 500, then a 202 to the
-     * initial request. Polls return this value until the last poll returns a
-     * ‘200’ with ProvisioningState=’Succeeded’
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginDelete202Retry200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     beginDelete202Retry200(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete request, service returns a 500, then a 202 to the
-     * initial request. Poll the endpoint indicated in the Azure-AsyncOperation
-     * header for operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    deleteAsyncRelativeRetrySucceeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    deleteAsyncRelativeRetrySucceeded(callback: ServiceCallback<void>): void;
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the
@@ -1732,57 +1781,8 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post202Retry200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    post202Retry200(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running post request, service returns a 500, then a 202 to the initial
-     * request, with 'Location' and 'Retry-After' headers, Polls return a 200
-     * with a response body after success
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPost202Retry200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     beginPost202Retry200(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running post request, service returns a 500, then a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’. Poll
-     * the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    postAsyncRelativeRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    postAsyncRelativeRetrySucceeded(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial
@@ -1841,28 +1841,6 @@ export interface LROSADs {
     putNonRetry400(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 400 to the initial request
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    beginPutNonRetry400(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    beginPutNonRetry400(callback: ServiceCallback<models.Product>): void;
-
-    /**
      * Long running put request, service returns a Product with
      * 'ProvisioningState' = 'Creating' and 201 response code
      *
@@ -1905,54 +1883,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutNonRetry201Creating400(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    beginPutNonRetry201Creating400(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a Product with
-     * 'ProvisioningState' = 'Creating' and 201 response code
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     putNonRetry201Creating400InvalidJson(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     putNonRetry201Creating400InvalidJson(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a Product with
-     * 'ProvisioningState' = 'Creating' and 201 response code
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    beginPutNonRetry201Creating400InvalidJson(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    beginPutNonRetry201Creating400InvalidJson(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 with
@@ -1979,30 +1911,6 @@ export interface LROSADs {
     putAsyncRelativeRetry400(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 with
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    beginPutAsyncRelativeRetry400(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    beginPutAsyncRelativeRetry400(callback: ServiceCallback<models.Product>): void;
-
-    /**
      * Long running delete request, service returns a 400 with an error body
      *
      * @param {object} [options] Optional Parameters.
@@ -2015,20 +1923,6 @@ export interface LROSADs {
      */
     deleteNonRetry400(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     deleteNonRetry400(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete request, service returns a 400 with an error body
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    beginDeleteNonRetry400(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    beginDeleteNonRetry400(callback: ServiceCallback<void>): void;
 
     /**
      * Long running delete request, service returns a 202 with a location header
@@ -2045,20 +1939,6 @@ export interface LROSADs {
     delete202NonRetry400(callback: ServiceCallback<void>): void;
 
     /**
-     * Long running delete request, service returns a 202 with a location header
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    beginDelete202NonRetry400(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    beginDelete202NonRetry400(callback: ServiceCallback<void>): void;
-
-    /**
      * Long running delete request, service returns a 202 to the initial request.
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
@@ -2073,22 +1953,6 @@ export interface LROSADs {
      */
     deleteAsyncRelativeRetry400(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     deleteAsyncRelativeRetry400(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    beginDeleteAsyncRelativeRetry400(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    beginDeleteAsyncRelativeRetry400(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 400 with no error body
@@ -2113,28 +1977,6 @@ export interface LROSADs {
     postNonRetry400(callback: ServiceCallback<void>): void;
 
     /**
-     * Long running post request, service returns a 400 with no error body
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    beginPostNonRetry400(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    beginPostNonRetry400(callback: ServiceCallback<void>): void;
-
-    /**
      * Long running post request, service returns a 202 with a location header
      *
      * @param {object} [options] Optional Parameters.
@@ -2155,28 +1997,6 @@ export interface LROSADs {
      */
     post202NonRetry400(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     post202NonRetry400(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running post request, service returns a 202 with a location header
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    beginPost202NonRetry400(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    beginPost202NonRetry400(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request
@@ -2203,30 +2023,6 @@ export interface LROSADs {
     postAsyncRelativeRetry400(callback: ServiceCallback<void>): void;
 
     /**
-     * Long running post request, service returns a 202 to the initial request
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    beginPostAsyncRelativeRetry400(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    beginPostAsyncRelativeRetry400(callback: ServiceCallback<void>): void;
-
-    /**
      * Long running put request, service returns a 201 to the initial request with
      * no payload
      *
@@ -2248,29 +2044,6 @@ export interface LROSADs {
      */
     putError201NoProvisioningStatePayload(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     putError201NoProvisioningStatePayload(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 201 to the initial request with
-     * no payload
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    beginPutError201NoProvisioningStatePayload(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    beginPutError201NoProvisioningStatePayload(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -2317,8 +2090,133 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncRelativeRetryNoStatus(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    beginPutAsyncRelativeRetryNoStatus(callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetryNoStatusPayload(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetryNoStatusPayload(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running delete request, service returns a 204 to the initial request,
+     * indicating success.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    delete204Succeeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    delete204Succeeded(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request.
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for
+     * operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    deleteAsyncRelativeRetryNoStatus(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    deleteAsyncRelativeRetryNoStatus(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running post request, service returns a 202 to the initial request,
+     * without a location header.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    post202NoLocation(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    post202NoLocation(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running post request, service returns a 202 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’. Poll the
+     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    postAsyncRelativeRetryNoPayload(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postAsyncRelativeRetryNoPayload(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running put request, service returns a 200 to the initial request,
+     * with an entity that is not a valid json
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    put200InvalidJson(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    put200InvalidJson(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a 200 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’. The endpoint
+     * indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putAsyncRelativeRetryInvalidHeader(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetryInvalidHeader(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -2341,8 +2239,376 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncRelativeRetryNoStatusPayload(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    putAsyncRelativeRetryNoStatusPayload(callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetryInvalidJsonPolling(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetryInvalidJsonPolling(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request
+     * receing a reponse with an invalid 'Location' and 'Retry-After' headers
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    delete202RetryInvalidHeader(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    delete202RetryInvalidHeader(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request.
+     * The endpoint indicated in the Azure-AsyncOperation header is invalid
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    deleteAsyncRelativeRetryInvalidHeader(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    deleteAsyncRelativeRetryInvalidHeader(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request.
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for
+     * operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    deleteAsyncRelativeRetryInvalidJsonPolling(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    deleteAsyncRelativeRetryInvalidJsonPolling(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running post request, service returns a 202 to the initial request,
+     * with invalid 'Location' and 'Retry-After' headers.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    post202RetryInvalidHeader(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    post202RetryInvalidHeader(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running post request, service returns a 202 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’. The endpoint
+     * indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    postAsyncRelativeRetryInvalidHeader(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postAsyncRelativeRetryInvalidHeader(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running post request, service returns a 202 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’. Poll the
+     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    postAsyncRelativeRetryInvalidJsonPolling(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postAsyncRelativeRetryInvalidJsonPolling(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running put request, service returns a 400 to the initial request
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginPutNonRetry400(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    beginPutNonRetry400(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a Product with
+     * 'ProvisioningState' = 'Creating' and 201 response code
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginPutNonRetry201Creating400(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    beginPutNonRetry201Creating400(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a Product with
+     * 'ProvisioningState' = 'Creating' and 201 response code
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginPutNonRetry201Creating400InvalidJson(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    beginPutNonRetry201Creating400InvalidJson(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a 200 with
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginPutAsyncRelativeRetry400(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRelativeRetry400(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running delete request, service returns a 400 with an error body
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginDeleteNonRetry400(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    beginDeleteNonRetry400(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running delete request, service returns a 202 with a location header
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginDelete202NonRetry400(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    beginDelete202NonRetry400(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request.
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for
+     * operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginDeleteAsyncRelativeRetry400(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    beginDeleteAsyncRelativeRetry400(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running post request, service returns a 400 with no error body
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginPostNonRetry400(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    beginPostNonRetry400(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running post request, service returns a 202 with a location header
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginPost202NonRetry400(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    beginPost202NonRetry400(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running post request, service returns a 202 to the initial request
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for
+     * operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginPostAsyncRelativeRetry400(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    beginPostAsyncRelativeRetry400(callback: ServiceCallback<void>): void;
+
+    /**
+     * Long running put request, service returns a 201 to the initial request with
+     * no payload
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginPutError201NoProvisioningStatePayload(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    beginPutError201NoProvisioningStatePayload(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a 200 to the initial request,
+     * with an entity that contains ProvisioningState=’Creating’. Poll the
+     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginPutAsyncRelativeRetryNoStatus(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRelativeRetryNoStatus(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -2380,21 +2646,6 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete204Succeeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    delete204Succeeded(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete request, service returns a 204 to the initial request,
-     * indicating success.
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginDelete204Succeeded(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     beginDelete204Succeeded(callback: ServiceCallback<void>): void;
 
@@ -2411,47 +2662,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteAsyncRelativeRetryNoStatus(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    deleteAsyncRelativeRetryNoStatus(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginDeleteAsyncRelativeRetryNoStatus(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     beginDeleteAsyncRelativeRetryNoStatus(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request,
-     * without a location header.
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    post202NoLocation(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    post202NoLocation(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -2497,30 +2709,6 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postAsyncRelativeRetryNoPayload(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    postAsyncRelativeRetryNoPayload(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPostAsyncRelativeRetryNoPayload(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     beginPostAsyncRelativeRetryNoPayload(callback: ServiceCallback<void>): void;
 
@@ -2544,55 +2732,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put200InvalidJson(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    put200InvalidJson(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that is not a valid json
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPut200InvalidJson(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     beginPut200InvalidJson(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. The endpoint
-     * indicated in the Azure-AsyncOperation header is invalid.
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    putAsyncRelativeRetryInvalidHeader(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    putAsyncRelativeRetryInvalidHeader(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -2639,30 +2780,6 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncRelativeRetryInvalidJsonPolling(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    putAsyncRelativeRetryInvalidJsonPolling(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPutAsyncRelativeRetryInvalidJsonPolling(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     beginPutAsyncRelativeRetryInvalidJsonPolling(callback: ServiceCallback<models.Product>): void;
 
@@ -2678,38 +2795,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete202RetryInvalidHeader(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    delete202RetryInvalidHeader(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request
-     * receing a reponse with an invalid 'Location' and 'Retry-After' headers
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginDelete202RetryInvalidHeader(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     beginDelete202RetryInvalidHeader(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request.
-     * The endpoint indicated in the Azure-AsyncOperation header is invalid
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    deleteAsyncRelativeRetryInvalidHeader(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    deleteAsyncRelativeRetryInvalidHeader(callback: ServiceCallback<void>): void;
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
@@ -2739,47 +2826,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteAsyncRelativeRetryInvalidJsonPolling(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    deleteAsyncRelativeRetryInvalidJsonPolling(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginDeleteAsyncRelativeRetryInvalidJsonPolling(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     beginDeleteAsyncRelativeRetryInvalidJsonPolling(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request,
-     * with invalid 'Location' and 'Retry-After' headers.
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    post202RetryInvalidHeader(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    post202RetryInvalidHeader(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -2825,56 +2873,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postAsyncRelativeRetryInvalidHeader(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    postAsyncRelativeRetryInvalidHeader(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. The endpoint
-     * indicated in the Azure-AsyncOperation header is invalid.
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPostAsyncRelativeRetryInvalidHeader(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     beginPostAsyncRelativeRetryInvalidHeader(callback: ServiceCallback<void>): void;
-
-    /**
-     * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    postAsyncRelativeRetryInvalidJsonPolling(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    postAsyncRelativeRetryInvalidJsonPolling(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -2938,32 +2938,6 @@ export interface LROsCustomHeader {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
      * message header for all requests. Long running put request, service returns
-     * a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    beginPutAsyncRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-    beginPutAsyncRetrySucceeded(callback: ServiceCallback<models.Product>): void;
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
-     * message header for all requests. Long running put request, service returns
      * a 201 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’.  Polls return this value until the last poll
      * returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -2986,6 +2960,83 @@ export interface LROsCustomHeader {
      */
     put201CreatingSucceeded200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
     put201CreatingSucceeded200(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
+     * message header for all requests. Long running post request, service
+     * returns a 202 to the initial request, with 'Location' and 'Retry-After'
+     * headers, Polls return a 200 with a response body after success
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    post202Retry200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    post202Retry200(callback: ServiceCallback<void>): void;
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
+     * message header for all requests. Long running post request, service
+     * returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    postAsyncRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postAsyncRetrySucceeded(callback: ServiceCallback<void>): void;
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
+     * message header for all requests. Long running put request, service returns
+     * a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginPutAsyncRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
@@ -3035,59 +3086,8 @@ export interface LROsCustomHeader {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post202Retry200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    post202Retry200(callback: ServiceCallback<void>): void;
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
-     * message header for all requests. Long running post request, service
-     * returns a 202 to the initial request, with 'Location' and 'Retry-After'
-     * headers, Polls return a 200 with a response body after success
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
     beginPost202Retry200(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     beginPost202Retry200(callback: ServiceCallback<void>): void;
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
-     * message header for all requests. Long running post request, service
-     * returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status
-     *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.product] Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
-     * 
-     * @param {object} [options.product.tags]
-     * 
-     * @param {string} [options.product.location] Resource Location
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    postAsyncRetrySucceeded(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    postAsyncRetrySucceeded(callback: ServiceCallback<void>): void;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required

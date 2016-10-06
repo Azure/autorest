@@ -6,33 +6,41 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace AutoRest.Core
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public abstract class CodeGenerator
     {
         public const string EnumObject = "x-ms-enum";
         private bool firstTimeWriteSingleFile = true;
 
-        protected CodeGenerator(Settings settings)
+        protected CodeGenerator(CodeModelTransformer modelTransformer)
         {
-            Settings = settings;
+            // set the loader/transformer
+            ModelTransformer = modelTransformer;
+
+            // apply custom settings to this when it's created.
+            Settings.PopulateSettings(this, Settings.Instance.CustomSettings);
         }
+
+        public CodeModelTransformer ModelTransformer { get; private set; }
 
         public abstract string Name { get; }
 
-        // TODO: who uses the Description? It doesn't appear to have any callers?
+        /// <summary>
+        /// Brief description of the code generator.
+        /// </summary>
         public abstract string Description { get; }
 
         // TODO: header files aren't part of most target languages. Remove?
-        public virtual string HeaderFileExtension
-        {
-            get { return null; }
-        }
+        public virtual string HeaderFileExtension => null;
 
         // TODO: who uses this? It doesn't appear to have any callers?
         public abstract string ImplementationFileExtension { get; }
@@ -45,12 +53,12 @@ namespace AutoRest.Core
         /// <summary>
         /// Gets the Settings passed when invoking AutoRest.
         /// </summary>
-        public Settings Settings { get; private set; }
+        public Settings Settings => Settings.Instance;
 
         /// <summary>
         /// Gets or sets boolean value indicating if code generation language supports all the code to be generated in a single file.
         /// </summary>
-        public bool IsSingleFileGenerationSupported { get; set; }
+        public virtual bool IsSingleFileGenerationSupported => false;
 
         /// <summary>
         /// Populate settings on self and any child objects
@@ -61,19 +69,25 @@ namespace AutoRest.Core
             Settings.PopulateSettings(this, settings);
         }
 
-        /// <summary>
-        /// Normalizes service model by updating names and types to be language specific.
-        /// </summary>
-        /// <param name="serviceClient"></param>
-        /// <returns></returns>
-        public abstract void NormalizeClientModel(ServiceClient serviceClient);
+
+        private readonly List<string> FileList = new List<string>();
+        private void ResetFileList()
+        {
+            FileList.Clear();
+        }
 
         /// <summary>
         /// Generates code and outputs it in the file system.
         /// </summary>
-        /// <param name="serviceClient"></param>
+        /// <param name="codeModel"></param>
         /// <returns></returns>
-        public abstract Task Generate(ServiceClient serviceClient);
+        public virtual /* async */ Task Generate(CodeModel codeModel)
+        {
+            ResetFileList();
+            
+            // since we're not actually async, return a completed task.
+            return "".AsResultTask();
+        }
 
         /// <summary>
         /// Writes a template into the specified relative path.
@@ -83,7 +97,10 @@ namespace AutoRest.Core
         /// <returns></returns>
         public async Task Write(ITemplate template, string fileName)
         {
-            template.Settings = Settings;
+#if DEBUG_WRITING
+            Console.WriteLine($"[WRITING] {template.GetType().Name} => {fileName}");
+#endif 
+            template.Settings = Settings.Instance;
             var stringBuilder = new StringBuilder();
             using (template.TextWriter = new StringWriter(stringBuilder))
             {
@@ -102,35 +119,40 @@ namespace AutoRest.Core
         {
             string filePath = null;
 
-            if (Settings.OutputFileName != null)
+            if (Settings.Instance.OutputFileName != null)
             {
                 if(!IsSingleFileGenerationSupported)
                 {
-                    Logger.LogError(new ArgumentException(Settings.OutputFileName),
-                        Resources.LanguageDoesNotSupportSingleFileGeneration, Settings.CodeGenerator);
+                    Logger.LogError(new ArgumentException(Settings.Instance.OutputFileName),
+                        Resources.LanguageDoesNotSupportSingleFileGeneration, Settings.Instance.CodeGenerator);
                     ErrorManager.ThrowErrors();
                 }
                 
-                filePath = Path.Combine(Settings.OutputDirectory, Settings.OutputFileName);
+                filePath = Path.Combine(Settings.Instance.OutputDirectory, Settings.Instance.OutputFileName);
 
                 if (firstTimeWriteSingleFile)
                 {
                     // for SingleFileGeneration clean the file before writing only if its the first time
-                    Settings.FileSystem.DeleteFile(filePath);
+                    Settings.Instance.FileSystem.DeleteFile(filePath);
                     firstTimeWriteSingleFile = false;
                 }
             }
             else
             {
-                filePath = Path.Combine(Settings.OutputDirectory, fileName);
+                filePath = Path.Combine(Settings.Instance.OutputDirectory, fileName);
                 // cleans file before writing
-                Settings.FileSystem.DeleteFile(filePath);
+                if (FileList.Contains(filePath))
+                {
+                    throw new Exception($"Duplicate File Generation: {filePath}");
+                }
+                FileList.Add(filePath);
+                    Settings.Instance.FileSystem.DeleteFile(filePath);
             }
             // Make sure the directory exist
-            Settings.FileSystem.CreateDirectory(Path.GetDirectoryName(filePath));
+            Settings.Instance.FileSystem.CreateDirectory(Path.GetDirectoryName(filePath));
 
             using (StringReader streamReader = new StringReader(template))
-            using (TextWriter textWriter = Settings.FileSystem.GetTextWriter(filePath))
+            using (TextWriter textWriter = Settings.Instance.FileSystem.GetTextWriter(filePath))
             {
                 string line;
                 while ((line = streamReader.ReadLine()) != null)

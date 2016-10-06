@@ -15,7 +15,7 @@ namespace Fixtures.InternalCtors
     /// </summary>
     public partial interface IInternalClient : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

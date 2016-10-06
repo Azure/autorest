@@ -15,8 +15,8 @@
  * Initializes a new instance of the FirstParameterGroup class.
  * @constructor
  * Additional parameters for a set of operations, such as:
- * parameterGrouping_postMultiParamGroups,
- * parameterGrouping_postSharedParameterGroupObject.
+ * ParameterGrouping_postMultiParamGroups,
+ * ParameterGrouping_postSharedParameterGroupObject.
  *
  * @member {string} [headerOne]
  * 

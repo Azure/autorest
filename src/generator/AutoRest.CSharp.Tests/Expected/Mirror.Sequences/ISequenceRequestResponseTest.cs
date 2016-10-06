@@ -16,7 +16,7 @@ namespace Fixtures.MirrorSequences
     /// </summary>
     public partial interface ISequenceRequestResponseTest : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }
@@ -32,7 +32,7 @@ namespace Fixtures.MirrorSequences
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Creates a new pet in the store.  Duplicates are allowed
         /// </summary>
         /// <param name='pets'>

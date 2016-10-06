@@ -15,7 +15,7 @@ namespace Fixtures.MirrorRecursiveTypes
     /// </summary>
     public partial interface IRecursiveTypesAPI : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }
@@ -31,7 +31,7 @@ namespace Fixtures.MirrorRecursiveTypes
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Products
         /// </summary>
         /// <remarks>

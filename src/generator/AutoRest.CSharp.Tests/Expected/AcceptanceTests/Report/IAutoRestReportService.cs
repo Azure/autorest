@@ -15,7 +15,7 @@ namespace Fixtures.AcceptanceTestsReport
     /// </summary>
     public partial interface IAutoRestReportService : System.IDisposable
     {
-        /// <summary>
+        /// <summary>   
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }
@@ -31,7 +31,7 @@ namespace Fixtures.AcceptanceTestsReport
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Get test coverage report
         /// </summary>
         /// <param name='customHeaders'>

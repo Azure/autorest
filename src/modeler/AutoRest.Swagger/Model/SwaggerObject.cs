@@ -7,12 +7,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Diagnostics.CodeAnalysis;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Properties;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Validation;
 using Newtonsoft.Json;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger.Model
 {
@@ -146,51 +147,51 @@ namespace AutoRest.Swagger.Model
                     switch (KnownFormat)
                     {
                         case KnownFormat.date:
-                        return new PrimaryType(KnownPrimaryType.Date);
+                        return New<PrimaryType>(KnownPrimaryType.Date);
                         case KnownFormat.date_time:
-                        return new PrimaryType(KnownPrimaryType.DateTime);
+                        return New<PrimaryType>(KnownPrimaryType.DateTime);
                         case KnownFormat.date_time_rfc1123:
-                        return new PrimaryType(KnownPrimaryType.DateTimeRfc1123);
+                        return New<PrimaryType>(KnownPrimaryType.DateTimeRfc1123);
                         case KnownFormat.@byte:
-                        return new PrimaryType(KnownPrimaryType.ByteArray);
+                        return New<PrimaryType>(KnownPrimaryType.ByteArray);
                         case KnownFormat.duration:
-                        return new PrimaryType(KnownPrimaryType.TimeSpan);
+                        return New<PrimaryType>(KnownPrimaryType.TimeSpan);
                         case KnownFormat.uuid:
-                        return new PrimaryType(KnownPrimaryType.Uuid);
+                        return New<PrimaryType>(KnownPrimaryType.Uuid);
                         case KnownFormat.base64url:
-                        return new PrimaryType(KnownPrimaryType.Base64Url);
+                        return New<PrimaryType>(KnownPrimaryType.Base64Url);
                         default:
-                            return new PrimaryType(KnownPrimaryType.String);
+                            return New<PrimaryType>(KnownPrimaryType.String);
                     }
                    
                 case DataType.Number:
                     switch (KnownFormat)
                     {
                         case KnownFormat.@decimal:
-                        return new PrimaryType(KnownPrimaryType.Decimal);
+                        return New<PrimaryType>(KnownPrimaryType.Decimal);
                         default:
-                            return new PrimaryType(KnownPrimaryType.Double);
+                            return New<PrimaryType>(KnownPrimaryType.Double);
                     }
 
                 case DataType.Integer:
                     switch (KnownFormat)
                     {
                         case KnownFormat.int64:
-                        return new PrimaryType(KnownPrimaryType.Long);
+                        return New<PrimaryType>(KnownPrimaryType.Long);
                         case KnownFormat.unixtime:
-                        return new PrimaryType(KnownPrimaryType.UnixTime);
+                        return New<PrimaryType>(KnownPrimaryType.UnixTime);
                         default:
-                            return new PrimaryType(KnownPrimaryType.Int);
+                            return New<PrimaryType>(KnownPrimaryType.Int);
                     }
 
                 case DataType.Boolean:
-                    return new PrimaryType(KnownPrimaryType.Boolean);
+                    return New<PrimaryType>(KnownPrimaryType.Boolean);
                 case DataType.Object:
                 case DataType.Array:
                 case null:
-                    return new PrimaryType(KnownPrimaryType.Object);
+                    return New<PrimaryType>(KnownPrimaryType.Object);
                 case DataType.File:
-                    return new PrimaryType(KnownPrimaryType.Stream);
+                    return New<PrimaryType>(KnownPrimaryType.Stream);
                 default:
                     throw new NotImplementedException(
                         string.Format(CultureInfo.InvariantCulture,

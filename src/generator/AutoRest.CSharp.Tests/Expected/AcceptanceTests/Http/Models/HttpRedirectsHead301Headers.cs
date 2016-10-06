@@ -25,15 +25,16 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// Initializes a new instance of the HttpRedirectsHead301Headers
         /// class.
         /// </summary>
-        /// <param name="location">The redirect location for this
-        /// request</param>
+        /// <param name="location">The redirect location for this request.
+        /// Possible values include: '/http/success/head/200'</param>
         public HttpRedirectsHead301Headers(string location = default(string))
         {
             Location = location;
         }
 
         /// <summary>
-        /// Gets or sets the redirect location for this request
+        /// Gets or sets the redirect location for this request. Possible
+        /// values include: '/http/success/head/200'
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Location")]
         public string Location { get; set; }

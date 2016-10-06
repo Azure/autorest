@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Utilities;
 using Xunit;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger.Tests
 {
@@ -15,20 +16,23 @@ namespace AutoRest.Swagger.Tests
         public static void RunTests<T>(string specFile, string resultFolder, string modeler = "Swagger",
             Settings settings = null)
         {
-            if (settings == null)
+            using (NewContext)
             {
-                settings = new Settings
+                if (settings == null)
                 {
-                    Input = specFile,
-                    OutputDirectory = "X:\\Output",
-                    Header = "MICROSOFT_MIT_NO_VERSION",
-                    Modeler = modeler,
-                    PayloadFlatteningThreshold = 1
-                };
+                    settings = new Settings
+                    {
+                        Input = specFile,
+                        OutputDirectory = "X:\\Output",
+                        Header = "MICROSOFT_MIT_NO_VERSION",
+                        Modeler = modeler,
+                        PayloadFlatteningThreshold = 1
+                    };
 
+                }
+
+                RunTests<T>(settings, resultFolder);
             }
-
-            RunTests<T>(settings, resultFolder);
         }
 
         public static void RunTests<T>(Settings settings, string resultFolder)
@@ -62,7 +66,7 @@ namespace AutoRest.Swagger.Tests
                     Replace(Path.DirectorySeparatorChar.ToString(), "").Replace("-", "")
                 : settings.Namespace;
 
-            AutoRest.Core.AutoRest.Generate(settings);
+            AutoRest.Core.AutoRestController.Generate();
             Assert.NotEmpty(((MemoryFileSystem)settings.FileSystem).VirtualStore);
 
             var actualFiles = settings.FileSystem.GetFiles("X:\\Output", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();

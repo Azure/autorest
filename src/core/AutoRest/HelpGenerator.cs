@@ -162,8 +162,7 @@ namespace AutoRest
             {
                 try
                 {
-                    var codeGenerator = ExtensionsLoader.LoadTypeFromAssembly<CodeGenerator>(autorestConfig.CodeGenerators, generator,
-                       settings);
+                    var codeGenerator = ExtensionsLoader.LoadTypeFromAssembly<CodeGenerator>(autorestConfig.CodeGenerators, generator);
                     generatorsSection.AppendLine("  " + generatorsTemplate.
                         Replace("$generator$", codeGenerator.Name).
                         Replace("$generator-desc$", codeGenerator.Description));
@@ -187,7 +186,7 @@ namespace AutoRest
 
             // Process template replacing all major sections.
             template = template.
-                Replace("$version$", Core.AutoRest.Version).
+                Replace("$version$", Core.AutoRestController.Version).
                 Replace("$syntax$", syntaxSection.ToString());
 
             template = Regex.Replace(template, parametersPattern, parametersSection.ToString(), RegexOptions.Singleline);
