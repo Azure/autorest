@@ -59,11 +59,8 @@ Datetime.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/null';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/null';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -173,11 +170,8 @@ Datetime.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/invalid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/invalid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -287,11 +281,8 @@ Datetime.prototype.getOverflow = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/overflow';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/overflow';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -401,11 +392,8 @@ Datetime.prototype.getUnderflow = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/underflow';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/underflow';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -526,11 +514,8 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/max/utc';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/max/utc';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -637,11 +622,8 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/max/utc/lowercase';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/max/utc/lowercase';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -751,11 +733,8 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/max/utc/uppercase';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/max/utc/uppercase';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -877,11 +856,8 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/max/localpositiveoffset';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/max/localpositiveoffset';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -989,11 +965,8 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/max/localpositiveoffset/lowercase';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/max/localpositiveoffset/lowercase';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1104,11 +1077,8 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/max/localpositiveoffset/uppercase';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/max/localpositiveoffset/uppercase';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1230,11 +1200,8 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/max/localnegativeoffset';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/max/localnegativeoffset';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1342,11 +1309,8 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/max/localnegativeoffset/uppercase';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/max/localnegativeoffset/uppercase';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1457,11 +1421,8 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/max/localnegativeoffset/lowercase';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/max/localnegativeoffset/lowercase';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1582,11 +1543,8 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/min/utc';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/min/utc';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1693,11 +1651,8 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/min/utc';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/min/utc';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1818,11 +1773,8 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/min/localpositiveoffset';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/min/localpositiveoffset';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1929,11 +1881,8 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/min/localpositiveoffset';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/min/localpositiveoffset';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2054,11 +2003,8 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/min/localnegativeoffset';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/min/localnegativeoffset';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2165,11 +2111,8 @@ Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//datetime/min/localnegativeoffset';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'datetime/min/localnegativeoffset';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
