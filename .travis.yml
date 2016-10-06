@@ -24,7 +24,7 @@ install:
   - npm install -g npm@'>=1.4.3'
   - npm install
   # Install ruby dependencies
-  - rvm use 2.3.0 --install --binary --fuzzy
+  - rvm use 2.2.0 --install --binary --fuzzy
   - gem install bundler
   - bundle install
   - pip install --user tox
