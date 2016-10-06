@@ -270,7 +270,8 @@ function serializeCompositeType(mapper, object, objectName) {
         //serialize the property if it is present in the provided object instance
         if (((parentObject !== null && parentObject !== undefined) && (modelProps[key].defaultValue !== null && modelProps[key].defaultValue !== undefined)) || 
             (object[key] !== null && object[key] !== undefined)) {
-          var propertyObjectName = objectName + '.' + modelProps[key].serializedName;
+          var propertyObjectName = objectName;
+          if (modelProps[key].serializedName !== '') propertyObjectName = objectName + '.' + modelProps[key].serializedName;
           var propertyMapper = modelProps[key];
           var serializedValue = exports.serialize.call(this, propertyMapper, object[key], propertyObjectName);
           parentObject[propName] = serializedValue;
@@ -534,7 +535,8 @@ function deserializeCompositeType(mapper, responseBody, objectName) {
         } catch (err) {
           continue;
         }
-        var propertyObjectName = objectName + '.' + modelProps[key].serializedName;
+        var propertyObjectName = objectName;
+        if (modelProps[key].serializedName !== '') propertyObjectName = objectName + '.' + modelProps[key].serializedName;
         var propertyMapper = modelProps[key];
         var serializedValue;
         //paging

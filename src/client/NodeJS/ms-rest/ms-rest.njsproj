@@ -18,17 +18,17 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include=".npmignore" />
+    <Content Include="LICENSE" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Compile Include="lib\constants.js" />
     <Compile Include="lib\httpOperationResponse.js" />
-    <Compile Include="lib\logger.js" />
     <Compile Include="lib\msRest.js" />
     <Compile Include="lib\requestPipeline.js" />
     <Compile Include="lib\serialization.js" />
     <Compile Include="lib\serviceClient.js" />
     <Compile Include="lib\utils.js" />
-    <Compile Include="lib\validate.js" />
     <Compile Include="lib\webResource.js" />
     <Content Include="test\testlist.txt" />
     <Content Include="test\package.json" />

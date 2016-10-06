@@ -60,11 +60,8 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/failure/server/501';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/failure/server/501';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -166,11 +163,8 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/failure/server/501';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/failure/server/501';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -283,11 +277,8 @@ HttpServerFailure.prototype.post505 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/failure/server/505';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/failure/server/505';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -420,11 +411,8 @@ HttpServerFailure.prototype.delete505 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/failure/server/505';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/failure/server/505';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

@@ -85,11 +85,8 @@ AutoRestReportService.prototype.getReport = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//report';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'report';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

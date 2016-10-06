@@ -69,11 +69,8 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//complex/polymorphicrecursive/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/polymorphicrecursive/valid';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -260,11 +257,8 @@ Polymorphicrecursive.prototype.putValid = function (complexBody, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//complex/polymorphicrecursive/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/polymorphicrecursive/valid';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');

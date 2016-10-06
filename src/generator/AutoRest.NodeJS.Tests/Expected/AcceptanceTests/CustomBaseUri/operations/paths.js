@@ -72,13 +72,10 @@ Paths.prototype.getEmpty = function (accountName, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//customuri';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'customuri';
   requestUrl = requestUrl.replace('{accountName}', accountName);
   requestUrl = requestUrl.replace('{host}', this.client.host);
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

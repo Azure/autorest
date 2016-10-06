@@ -91,16 +91,13 @@ Paths.prototype.getEmpty = function (vault, secret, keyName, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//customuri/{subscriptionId}/{keyName}';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'customuri/{subscriptionId}/{keyName}';
   requestUrl = requestUrl.replace('{vault}', vault);
   requestUrl = requestUrl.replace('{secret}', secret);
   requestUrl = requestUrl.replace('{dnsSuffix}', this.client.dnsSuffix);
   requestUrl = requestUrl.replace('{keyName}', encodeURIComponent(keyName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (keyVersion !== null && keyVersion !== undefined) {
     queryParameters.push('keyVersion=' + encodeURIComponent(keyVersion));
