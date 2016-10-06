@@ -68,14 +68,11 @@ module MsRest
     # @return [URI] body the HTTP response body.
     def run_promise(&block)
       Concurrent::Promise.new do
-        @connection ||= Faraday.new(:url => base_uri, :ssl => MsRest.ssl_options) do |faraday|
-          middlewares.each{ |args| faraday.use(*args) } unless middlewares.nil?
-          faraday.adapter Faraday.default_adapter
-          logging = ENV['AZURE_HTTP_LOGGING'] || log
-          if logging
-            faraday.response :logger, nil, { :bodies => logging == 'full' }
-          end
-        end
+        options = {
+            :middlewares => middlewares,
+            :log => log
+        }
+        @connection ||= HttpOperationRequest.create_faraday_connection(base_uri, options)
 
         @connection.run_request(:"#{method}", build_path, body, {'User-Agent' => user_agent}.merge(headers)) do |req|
           req.params = req.params.merge(query_params.reject{|_, v| v.nil?}) unless query_params.nil?
@@ -83,8 +80,7 @@ module MsRest
         end
       end
     end
-    
-    
+
     # Creates a path from the path template and the path_params and skip_encoding_path_params
     # @return [URI] body the HTTP response body.
     def build_path
@@ -121,7 +117,20 @@ module MsRest
         log: log  
       }.to_json(*a)
     end
-    
+
+    def self.create_faraday_connection(base_uri, options = {})
+      Faraday.new(:url => base_uri, :ssl => MsRest.ssl_options) do |faraday|
+        unless options.empty?
+          options[:middlewares].each{ |args| faraday.use(*args) } unless options[:middlewares].nil?
+          faraday.headers = options[:headers] unless options[:headers].nil?
+          logging = ENV['AZURE_HTTP_LOGGING'] || options[:log]
+          if logging
+            faraday.response :logger, nil, { :bodies => logging == 'full' }
+          end
+        end
+        faraday.adapter Faraday.default_adapter
+      end
+    end
   end
-  
+
 end
