@@ -69,8 +69,8 @@ module MsRest
     def run_promise(&block)
       Concurrent::Promise.new do
         options = {
-            :middlewares => middlewares,
-            :log => log
+            middlewares: middlewares,
+            log: log
         }
         @connection ||= HttpOperationRequest.create_faraday_connection(base_uri, options)
 
