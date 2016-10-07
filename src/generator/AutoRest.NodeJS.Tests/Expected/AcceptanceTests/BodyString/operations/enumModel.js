@@ -62,11 +62,8 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//string/enum/notExpandable';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'string/enum/notExpandable';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -194,11 +191,8 @@ EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//string/enum/notExpandable';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'string/enum/notExpandable';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -309,11 +303,8 @@ EnumModel.prototype.getReferenced = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//string/enum/Referenced';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'string/enum/Referenced';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -441,11 +432,8 @@ EnumModel.prototype.putReferenced = function (enumStringBody, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//string/enum/Referenced';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'string/enum/Referenced';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -554,11 +542,8 @@ EnumModel.prototype.getReferencedConstant = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//string/enum/ReferencedConstant';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'string/enum/ReferencedConstant';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -682,11 +667,8 @@ EnumModel.prototype.putReferencedConstant = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//string/enum/ReferencedConstant';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'string/enum/ReferencedConstant';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

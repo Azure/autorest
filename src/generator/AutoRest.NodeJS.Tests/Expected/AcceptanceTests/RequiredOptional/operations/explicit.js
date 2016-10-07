@@ -71,11 +71,8 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/requied/integer/parameter';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/requied/integer/parameter';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -207,11 +204,8 @@ Explicit.prototype.postOptionalIntegerParameter = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/optional/integer/parameter';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/optional/integer/parameter';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -336,11 +330,8 @@ Explicit.prototype.postRequiredIntegerProperty = function (value, options, callb
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/requied/integer/property';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/requied/integer/property';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -472,11 +463,8 @@ Explicit.prototype.postOptionalIntegerProperty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/optional/integer/property';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/optional/integer/property';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -589,11 +577,8 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/requied/integer/header';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/requied/integer/header';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -709,11 +694,8 @@ Explicit.prototype.postOptionalIntegerHeader = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/optional/integer/header';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/optional/integer/header';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -815,11 +797,8 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/requied/string/parameter';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/requied/string/parameter';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -951,11 +930,8 @@ Explicit.prototype.postOptionalStringParameter = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/optional/string/parameter';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/optional/string/parameter';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1080,11 +1056,8 @@ Explicit.prototype.postRequiredStringProperty = function (value, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/requied/string/property';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/requied/string/property';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1216,11 +1189,8 @@ Explicit.prototype.postOptionalStringProperty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/optional/string/property';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/optional/string/property';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1333,11 +1303,8 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/requied/string/header';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/requied/string/header';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1453,11 +1420,8 @@ Explicit.prototype.postOptionalStringHeader = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/optional/string/header';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/optional/string/header';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1563,11 +1527,8 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/requied/class/parameter';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/requied/class/parameter';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1689,11 +1650,8 @@ Explicit.prototype.postOptionalClassParameter = function (options, callback) {
   var bodyParameter = (options && options.bodyParameter !== undefined) ? options.bodyParameter : undefined;
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/optional/class/parameter';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/optional/class/parameter';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1816,11 +1774,8 @@ Explicit.prototype.postRequiredClassProperty = function (value, options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/requied/class/property';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/requied/class/property';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1948,11 +1903,8 @@ Explicit.prototype.postOptionalClassProperty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/optional/class/property';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/optional/class/property';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2070,11 +2022,8 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/requied/array/parameter';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/requied/array/parameter';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2217,11 +2166,8 @@ Explicit.prototype.postOptionalArrayParameter = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/optional/array/parameter';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/optional/array/parameter';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2358,11 +2304,8 @@ Explicit.prototype.postRequiredArrayProperty = function (value, options, callbac
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/requied/array/property';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/requied/array/property';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2498,11 +2441,8 @@ Explicit.prototype.postOptionalArrayProperty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/optional/array/property';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/optional/array/property';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2620,11 +2560,8 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/requied/array/header';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/requied/array/header';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2744,11 +2681,8 @@ Explicit.prototype.postOptionalArrayHeader = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//reqopt/optional/array/header';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'reqopt/optional/array/header';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

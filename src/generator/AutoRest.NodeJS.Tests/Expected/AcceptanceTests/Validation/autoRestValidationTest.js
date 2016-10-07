@@ -154,14 +154,11 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//fakepath/{subscriptionId}/{resourceGroupName}/{id}';
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'fakepath/{subscriptionId}/{resourceGroupName}/{id}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{id}', encodeURIComponent(id.toString()));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('apiVersion=' + encodeURIComponent(this.apiVersion));
   if (queryParameters.length > 0) {
@@ -345,14 +342,11 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//fakepath/{subscriptionId}/{resourceGroupName}/{id}';
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'fakepath/{subscriptionId}/{resourceGroupName}/{id}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{id}', encodeURIComponent(id.toString()));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('apiVersion=' + encodeURIComponent(this.apiVersion));
   if (queryParameters.length > 0) {
@@ -474,12 +468,9 @@ AutoRestValidationTest.prototype.getWithConstantInPath = function (options, call
   var constantParam = 'constant';
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//validation/constantsInPath/{constantParam}/value';
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'validation/constantsInPath/{constantParam}/value';
   requestUrl = requestUrl.replace('{constantParam}', encodeURIComponent(constantParam));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -580,12 +571,9 @@ AutoRestValidationTest.prototype.postWithConstantInBody = function (options, cal
   var constantParam = 'constant';
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//validation/constantsInPath/{constantParam}/value';
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'validation/constantsInPath/{constantParam}/value';
   requestUrl = requestUrl.replace('{constantParam}', encodeURIComponent(constantParam));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

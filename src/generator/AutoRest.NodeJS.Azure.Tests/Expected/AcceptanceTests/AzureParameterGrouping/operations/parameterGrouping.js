@@ -119,12 +119,9 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//parameterGrouping/postRequired/{path}';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'parameterGrouping/postRequired/{path}';
   requestUrl = requestUrl.replace('{path}', encodeURIComponent(path));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (query !== null && query !== undefined) {
     queryParameters.push('query=' + encodeURIComponent(query.toString()));
@@ -285,11 +282,8 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//parameterGrouping/postOptional';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'parameterGrouping/postOptional';
   var queryParameters = [];
   if (query !== null && query !== undefined) {
     queryParameters.push('query=' + encodeURIComponent(query.toString()));
@@ -457,11 +451,8 @@ ParameterGrouping.prototype.postMultiParamGroups = function (options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//parameterGrouping/postMultipleParameterGroups';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'parameterGrouping/postMultipleParameterGroups';
   var queryParameters = [];
   if (queryOne !== null && queryOne !== undefined) {
     queryParameters.push('query-one=' + encodeURIComponent(queryOne.toString()));
@@ -607,11 +598,8 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//parameterGrouping/sharedParameterGroupObject';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'parameterGrouping/sharedParameterGroupObject';
   var queryParameters = [];
   if (queryOne !== null && queryOne !== undefined) {
     queryParameters.push('query-one=' + encodeURIComponent(queryOne.toString()));

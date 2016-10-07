@@ -139,6 +139,26 @@ describe('nodejs', function () {
         });
       });
 
+      it('should get multiple pages with fragmented nextLink', function (done) {
+        testClient.paging.getMultiplePagesFragmentNextLink('1.6', 'test_user', function (error, result) {
+          var loop = function (odatanextLink, count) {
+            if (odatanextLink !== null && odatanextLink !== undefined) {
+              testClient.paging.nextFragment('1.6', 'test_user', odatanextLink, function (err, res) {
+                should.not.exist(err);
+                loop(res.odatanextLink, count + 1);
+              });
+            } else {
+              count.should.be.exactly(10);
+              done();
+            }
+          };
+
+          should.not.exist(error);
+          should.exist(result.odatanextLink);
+          loop(result.odatanextLink, 1);
+        });
+      });
+
       it('should fail on 400 single page', function (done) {
         testClient.paging.getSinglePagesFailure(function (error, result) {
           should.exist(error);

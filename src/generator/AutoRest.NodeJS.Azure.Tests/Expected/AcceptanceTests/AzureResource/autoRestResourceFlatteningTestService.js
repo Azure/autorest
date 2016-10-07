@@ -121,11 +121,8 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//azure/resource-flatten/array';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azure/resource-flatten/array';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -258,11 +255,8 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//azure/resource-flatten/array';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azure/resource-flatten/array';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -402,11 +396,8 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//azure/resource-flatten/dictionary';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azure/resource-flatten/dictionary';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -539,11 +530,8 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//azure/resource-flatten/dictionary';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azure/resource-flatten/dictionary';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -701,11 +689,8 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//azure/resource-flatten/resourcecollection';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azure/resource-flatten/resourcecollection';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -825,11 +810,8 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//azure/resource-flatten/resourcecollection';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azure/resource-flatten/resourcecollection';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
