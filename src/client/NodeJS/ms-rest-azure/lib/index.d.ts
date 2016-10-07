@@ -28,6 +28,13 @@ export class AzureServiceClient extends msRest.ServiceClient {
   constructor(credentials: msRest.ServiceClientCredentials, options: AzureServiceClientOptions)
 }
 
+export interface CloudError extends Error {
+  code: string,
+  message: string,
+  target?: string,
+  details?: Array<CloudError>
+}
+
 export class AzureEnvironment {
   /**
   * Initializes a new instance of the AzureEnvironment class.
@@ -154,6 +161,12 @@ export interface AzureTokenCredentialsOptions {
    * The token cache. Default value is MemoryCache from adal.
    */
   tokenCache?: any;
+  /**
+   * The audience for which the token is requested. Valid value is 'graph'. If tokenAudience is provided
+   * then domain should also be provided and its value should not be the default 'common' tenant.
+   * It must be a string (preferrably in a guid format).
+   */
+  tokenAudience?: string;
 }
 
 export interface LoginWithUsernamePasswordOptions extends AzureTokenCredentialsOptions {
@@ -219,7 +232,6 @@ export class DeviceTokenCredentials extends msRest.ServiceClientCredentials {
   constructor(options?: DeviceTokenCredentialsOptions);
 }
 
-// TODO: WHAT SHOULD WE EXPOSE HERE?
 export class BaseResource {
 }
 
@@ -237,7 +249,7 @@ export class BaseResource {
  *
  *                      {DeviceTokenCredentials} [credentials]   - The DeviceTokenCredentials object
  */
-export function interactiveLogin (options?: InteractiveLoginOptions, callback);
+export function interactiveLogin(options: InteractiveLoginOptions, callback: { (err: Error, credentials: DeviceTokenCredentials): void }): void;
 
 /**
  * Provides a UserTokenCredentials object. This method is applicable only for organizational ids that are not 2FA enabled.
@@ -257,7 +269,7 @@ export function interactiveLogin (options?: InteractiveLoginOptions, callback);
  *
  *                      {UserTokenCredentials} [credentials]   - The UserTokenCredentials object
  */
-export function loginWithUsernamePassword (username: string, password: string, options?: LoginWithUsernamePasswordOptions, callback);
+export function loginWithUsernamePassword(username: string, password: string, options: LoginWithUsernamePasswordOptions, callback: { (err: Error, credentials: UserTokenCredentials): void }): void;
 
 
 /**
@@ -281,4 +293,4 @@ export function loginWithUsernamePassword (username: string, password: string, o
  *
  *                      {ApplicationTokenCredentials} [credentials]   - The ApplicationTokenCredentials object
  */
-export function loginWithServicePrincipalSecret (clientId: string, secret: string, domain: string, options?: AzureTokenCredentialsOptions, callback);
+export function loginWithServicePrincipalSecret(clientId: string, secret: string, domain: string, options: AzureTokenCredentialsOptions, callback: { (err: Error, credentials: ApplicationTokenCredentials): void }): void;

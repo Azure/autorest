@@ -60,11 +60,8 @@ Duration.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//duration/null';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'duration/null';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -184,11 +181,8 @@ Duration.prototype.putPositiveDuration = function (durationBody, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//duration/positiveduration';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'duration/positiveduration';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -295,11 +289,8 @@ Duration.prototype.getPositiveDuration = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//duration/positiveduration';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'duration/positiveduration';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -409,11 +400,8 @@ Duration.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//duration/invalid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'duration/invalid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

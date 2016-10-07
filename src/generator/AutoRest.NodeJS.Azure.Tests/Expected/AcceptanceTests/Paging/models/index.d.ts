@@ -8,6 +8,9 @@
  * regenerated.
  */
 
+import * as msRestAzure from 'ms-rest-azure';
+exports.BaseResource = msRestAzure.BaseResource;
+exports.CloudError = msRestAzure.CloudError;
 
 /**
  * @class
@@ -109,6 +112,24 @@ export interface PagingGetMultiplePagesWithOffsetOptions {
   maxresults?: number;
   offset: number;
   timeout?: number;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the CustomParameterGroup class.
+ * @constructor
+ * Additional parameters for a set of operations, such as:
+ * Paging_getMultiplePagesFragmentWithGroupingNextLink,
+ * Paging_nextFragmentWithGrouping.
+ *
+ * @member {string} apiVersion Sets the api version to use.
+ * 
+ * @member {string} tenant Sets the tenant to use.
+ * 
+ */
+export interface CustomParameterGroup {
+  apiVersion: string;
+  tenant: string;
 }
 
 /**

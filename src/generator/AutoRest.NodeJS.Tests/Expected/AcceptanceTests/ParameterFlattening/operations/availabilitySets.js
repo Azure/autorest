@@ -95,13 +95,10 @@ AvailabilitySets.prototype.update = function (resourceGroupName, avset, tags, op
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//parameterFlattening/{resourceGroupName}/{availabilitySetName}';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'parameterFlattening/{resourceGroupName}/{availabilitySetName}';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{availabilitySetName}', encodeURIComponent(avset));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

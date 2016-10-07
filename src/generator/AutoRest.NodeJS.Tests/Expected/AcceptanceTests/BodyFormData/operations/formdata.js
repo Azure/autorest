@@ -75,11 +75,8 @@ Formdata.prototype.uploadFile = function (fileContent, fileName, options, callba
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//formdata/stream/uploadfile';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'formdata/stream/uploadfile';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -185,11 +182,8 @@ Formdata.prototype.uploadFileViaBody = function (fileContent, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//formdata/stream/uploadfile';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'formdata/stream/uploadfile';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
