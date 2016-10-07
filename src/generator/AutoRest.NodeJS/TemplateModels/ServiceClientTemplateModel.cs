@@ -204,6 +204,19 @@ namespace AutoRest.NodeJS.TemplateModels
             }
         }
 
+        public string ConstructImportTS()
+        {
+            IndentedStringBuilder builder = new IndentedStringBuilder(IndentedStringBuilder.TwoSpaces);
+            builder.Append("import { ServiceClientOptions, RequestOptions, ServiceCallback");
+            if (Properties.Any(p => p.Name.Equals("credentials", StringComparison.InvariantCultureIgnoreCase)))
+            {
+                builder.Append(", ServiceClientCredentials");
+            }
+
+            builder.Append(" } from 'ms-rest';");
+            return builder.ToString();
+        }
+
         public bool ContainsTimeSpan
         {
             get

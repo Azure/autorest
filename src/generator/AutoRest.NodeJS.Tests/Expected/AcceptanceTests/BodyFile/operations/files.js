@@ -59,11 +59,8 @@ Files.prototype.getFile = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//files/stream/nonempty';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'files/stream/nonempty';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -151,11 +148,8 @@ Files.prototype.getFileLarge = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//files/stream/verylarge';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'files/stream/verylarge';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -243,11 +237,8 @@ Files.prototype.getEmptyFile = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//files/stream/empty';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'files/stream/empty';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

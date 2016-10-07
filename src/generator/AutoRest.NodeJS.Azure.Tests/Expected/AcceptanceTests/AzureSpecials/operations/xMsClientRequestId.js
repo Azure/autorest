@@ -69,11 +69,8 @@ XMsClientRequestId.prototype.get = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/overwrite/x-ms-client-request-id/method/';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/overwrite/x-ms-client-request-id/method/';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -181,11 +178,8 @@ XMsClientRequestId.prototype.paramGet = function (xMsClientRequestId, options, c
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/overwrite/x-ms-client-request-id/via-param/method/';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/overwrite/x-ms-client-request-id/via-param/method/';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');

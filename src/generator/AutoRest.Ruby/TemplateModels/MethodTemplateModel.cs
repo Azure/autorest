@@ -275,7 +275,7 @@ namespace AutoRest.Ruby.TemplateModels
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in LocalParameters.Where(p => !p.IsConstant))
+                foreach (var parameter in MethodParameters)
                 {
                     string format = "{0}";
                     if (!parameter.IsRequired)
@@ -310,7 +310,7 @@ namespace AutoRest.Ruby.TemplateModels
         {
             get
             {
-                var invocationParams = LocalParameters.Where(p => !p.IsConstant).Select(p => p.Name).ToList();
+                var invocationParams = MethodParameters.Select(p => p.Name).ToList();
                 invocationParams.Add("custom_headers");
 
                 return string.Join(", ", invocationParams);
@@ -319,16 +319,15 @@ namespace AutoRest.Ruby.TemplateModels
 
         /// <summary>
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
-        /// exclude global parameters
+        /// exclude global parameters and constants
         /// </summary>
-        public IEnumerable<ParameterTemplateModel> LocalParameters
+        public IEnumerable<ParameterTemplateModel> MethodParameters
         {
             get
             {
-                //Omit parameter group parameters for now since AutoRest-Ruby doesn't support them
                 return
                     ParameterTemplateModels.Where(
-                        p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
+                        p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name) && !p.IsConstant)
                         .OrderBy(item => !item.IsRequired);
             }
         }
