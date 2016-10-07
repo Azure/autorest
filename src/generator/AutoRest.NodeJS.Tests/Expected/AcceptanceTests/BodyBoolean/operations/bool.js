@@ -59,11 +59,8 @@ Bool.prototype.getTrue = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//bool/true';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/true';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -183,11 +180,8 @@ Bool.prototype.putTrue = function (boolBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//bool/true';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/true';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -294,11 +288,8 @@ Bool.prototype.getFalse = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//bool/false';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/false';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -418,11 +409,8 @@ Bool.prototype.putFalse = function (boolBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//bool/false';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/false';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -529,11 +517,8 @@ Bool.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//bool/null';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/null';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -643,11 +628,8 @@ Bool.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//bool/invalid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/invalid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

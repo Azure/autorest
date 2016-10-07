@@ -1,8 +1,8 @@
-{
+﻿{
   "swagger": "2.0",
   "info": {
     "title": "ResourceManagementClient",
-    "version": "2016-02-01"
+    "version": "2016-09-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -47,14 +47,19 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment to be deleted."
+            "description": "The name of the deployment to be deleted.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -65,10 +70,10 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         },
         "x-ms-long-running-operation": true
@@ -86,14 +91,19 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to check. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -104,10 +114,10 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "No Content"
           },
           "404": {
-            "description": ""
+            "description": "Not Found"
           }
         }
       },
@@ -124,14 +134,19 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "name": "parameters",
@@ -151,13 +166,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/DeploymentExtended"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/DeploymentExtended"
             }
@@ -178,14 +193,19 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to get. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -196,7 +216,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/DeploymentExtended"
             }
@@ -218,14 +238,19 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -236,7 +261,7 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         }
       }
@@ -255,14 +280,19 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "name": "parameters",
@@ -282,13 +312,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/DeploymentValidateResult"
             }
           },
           "400": {
-            "description": "",
+            "description": "Bad Request",
             "schema": {
               "$ref": "#/definitions/DeploymentValidateResult"
             }
@@ -310,14 +340,19 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -328,7 +363,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/DeploymentExportResult"
             }
@@ -349,7 +384,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group to filter by. The name is case insensitive."
+            "description": "The name of the resource group to filter by. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "$filter",
@@ -375,7 +413,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/DeploymentListResult"
             }
@@ -411,7 +449,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Provider"
             }
@@ -443,7 +481,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Provider"
             }
@@ -468,6 +506,13 @@
             "description": "Query parameters. If null is passed returns all deployments."
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand query parameter. e.g. To include property aliases in response, use $expand=resourceTypes/aliases."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -476,7 +521,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ProviderListResult"
             }
@@ -496,6 +541,13 @@
         "description": "Gets a resource provider.",
         "parameters": [
           {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand query parameter. e.g. To include property aliases in response, use $expand=resourceTypes/aliases."
+          },
+          {
             "name": "resourceProviderNamespace",
             "in": "path",
             "required": true,
@@ -511,7 +563,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Provider"
             }
@@ -532,7 +584,10 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Query parameters. If null is passed returns all resource groups."
+            "description": "Query parameters. If null is passed returns all resource groups.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "$filter",
@@ -540,6 +595,13 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply on the operation."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand query parameter"
           },
           {
             "name": "$top",
@@ -558,7 +620,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ResourceListResult"
             }
@@ -584,7 +646,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to check. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -595,10 +659,10 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "No Content"
           },
           "404": {
-            "description": ""
+            "description": "Not Found"
           }
         }
       },
@@ -615,7 +679,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to be created or updated.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "parameters",
@@ -635,13 +701,13 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/ResourceGroup"
             }
           },
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ResourceGroup"
             }
@@ -661,7 +727,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to be deleted. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -672,10 +740,10 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "200": {
-            "description": ""
+            "description": "OK"
           }
         },
         "x-ms-long-running-operation": true
@@ -693,7 +761,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to get. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -704,7 +774,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ResourceGroup"
             }
@@ -724,7 +794,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to be created or updated. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "parameters",
@@ -744,7 +816,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ResourceGroup"
             }
@@ -766,7 +838,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group to be created or updated.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "parameters",
@@ -786,7 +860,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ResourceGroupExportResult"
             }
@@ -826,7 +900,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ResourceGroupListResult"
             }
@@ -852,7 +926,9 @@
             "required": true,
             "type": "string",
             "description": "Source resource group name.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "parameters",
@@ -872,10 +948,10 @@
         ],
         "responses": {
           "202": {
-            "description": ""
+            "description": "Accepted"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         },
         "x-ms-long-running-operation": true
@@ -897,6 +973,13 @@
             "description": "The filter to apply on the operation."
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand query parameter."
+          },
+          {
             "name": "$top",
             "in": "query",
             "required": false,
@@ -913,7 +996,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ResourceListResult"
             }
@@ -939,7 +1022,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "resourceProviderNamespace",
@@ -975,7 +1060,8 @@
             "name": "api-version",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Api version to use."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -983,10 +1069,10 @@
         ],
         "responses": {
           "204": {
-            "description": ""
+            "description": "No Content"
           },
           "404": {
-            "description": ""
+            "description": "Not Found"
           }
         }
       },
@@ -995,7 +1081,7 @@
           "Resources"
         ],
         "operationId": "Resources_Delete",
-        "description": "Delete resource and all of its resources. ",
+        "description": "Deletes a resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1003,7 +1089,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "resourceProviderNamespace",
@@ -1039,7 +1127,8 @@
             "name": "api-version",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Api version to use."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1047,15 +1136,16 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           },
           "202": {
-            "description": ""
+            "description": "Accepted"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "put": {
         "tags": [
@@ -1070,7 +1160,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "resourceProviderNamespace",
@@ -1106,7 +1198,8 @@
             "name": "api-version",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Api version to use."
           },
           {
             "name": "parameters",
@@ -1123,18 +1216,22 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/GenericResource"
             }
           },
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/GenericResource"
             }
+          },
+          "202": {
+            "description": "Accepted"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -1149,7 +1246,9 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "resourceProviderNamespace",
@@ -1185,7 +1284,8 @@
             "name": "api-version",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Api version to use."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1193,7 +1293,160 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GenericResource"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceId}": {
+      "head": {
+        "tags": [
+          "Resources"
+        ],
+        "operationId": "Resources_CheckExistenceById",
+        "description": "Checks whether resource exists.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified Id of the resource, including the resource name and resource type. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Api version to use."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Resources"
+        ],
+        "operationId": "Resources_DeleteById",
+        "description": "Deletes a resource.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified Id of the resource, including the resource name and resource type. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Api version to use."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "Resources"
+        ],
+        "operationId": "Resources_CreateOrUpdateById",
+        "description": "Create a resource.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified Id of the resource, including the resource name and resource type. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Api version to use."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenericResource"
+            },
+            "description": "Create or update resource parameters."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GenericResource"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GenericResource"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Resources"
+        ],
+        "operationId": "Resources_GetById",
+        "description": "Gets a resource.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified Id of the resource, including the resource name and resource type. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Api version to use."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/GenericResource"
             }
@@ -1232,10 +1485,10 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         }
       },
@@ -1269,13 +1522,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/TagValue"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/TagValue"
             }
@@ -1307,13 +1560,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/TagDetails"
             }
           },
           "201": {
-            "description": "",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/TagDetails"
             }
@@ -1343,10 +1596,10 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
           },
           "204": {
-            "description": ""
+            "description": "No Content"
           }
         }
       }
@@ -1368,7 +1621,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/TagsListResult"
             }
@@ -1393,14 +1646,19 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "name": "operationId",
@@ -1418,7 +1676,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/DeploymentOperation"
             }
@@ -1440,14 +1698,19 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group. The name is case insensitive.",
-            "pattern": "^[-\\w\\._]+$"
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "deploymentName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the deployment."
+            "description": "The name of the deployment.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 64
           },
           {
             "name": "$top",
@@ -1466,53 +1729,9 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/DeploymentOperationsListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/{resourceProviderNamespace}/operations": {
-      "get": {
-        "tags": [
-          "ResourceProviderOperationDetails"
-        ],
-        "operationId": "ResourceProviderOperationDetails_List",
-        "description": "Gets a list of resource providers.",
-        "parameters": [
-          {
-            "name": "resourceProviderNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Resource identity."
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderOperationDetailListResult"
-            }
-          },
-          "204": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderOperationDetailListResult"
             }
           }
         },
@@ -1527,7 +1746,7 @@
       "properties": {
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets the provisioning state."
+          "description": "The provisioning state."
         }
       },
       "description": "Deployment filter."
@@ -1536,15 +1755,15 @@
       "properties": {
         "resourceType": {
           "type": "string",
-          "description": "Gets or sets the resource type."
+          "description": "The resource type."
         },
         "tagname": {
           "type": "string",
-          "description": "Gets or sets the tag name."
+          "description": "The tag name."
         },
         "tagvalue": {
           "type": "string",
-          "description": "Gets or sets the tag value."
+          "description": "The tag value."
         }
       },
       "description": "Resource filter."
@@ -1553,11 +1772,11 @@
       "properties": {
         "tagName": {
           "type": "string",
-          "description": "Gets or sets the tag name."
+          "description": "The tag name."
         },
         "tagValue": {
           "type": "string",
-          "description": "Gets or sets the tag value."
+          "description": "The tag value."
         }
       },
       "description": "Resource group filter."
@@ -1598,23 +1817,23 @@
       "properties": {
         "template": {
           "type": "object",
-          "description": "Gets or sets the template content. Use only one of Template or TemplateLink."
+          "description": "The template content. It can be a JObject or a well formed JSON string. Use only one of Template or TemplateLink."
         },
         "templateLink": {
           "$ref": "#/definitions/TemplateLink",
-          "description": "Gets or sets the URI referencing the template. Use only one of Template or TemplateLink."
+          "description": "The template URI. Use only one of Template or TemplateLink."
         },
         "parameters": {
           "type": "object",
-          "description": "Deployment parameters. Use only one of Parameters or ParametersLink."
+          "description": "Deployment parameters. It can be a JObject or a well formed JSON string. Use only one of Parameters or ParametersLink."
         },
         "parametersLink": {
           "$ref": "#/definitions/ParametersLink",
-          "description": "Gets or sets the URI referencing the parameters. Use only one of Parameters or ParametersLink."
+          "description": "The parameters URI. Use only one of Parameters or ParametersLink."
         },
         "mode": {
           "type": "string",
-          "description": "Gets or sets the deployment mode.",
+          "description": "The deployment mode.",
           "enum": [
             "Incremental",
             "Complete"
@@ -1626,9 +1845,12 @@
         },
         "debugSetting": {
           "$ref": "#/definitions/DebugSetting",
-          "description": "Gets or sets the debug setting of the deployment."
+          "description": "The debug setting of the deployment."
         }
       },
+      "required": [
+        "mode"
+      ],
       "description": "Deployment properties."
     },
     "DebugSetting": {
@@ -1636,7 +1858,7 @@
         "detailLevel": {
           "x-ms-client-flatten": true,
           "type": "string",
-          "description": "Gets or sets the debug detail level."
+          "description": "The debug detail level."
         }
       }
     },
@@ -1644,7 +1866,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeploymentProperties",
-          "description": "Gets or sets the deployment properties."
+          "description": "The deployment properties."
         }
       },
       "description": "Deployment operation parameters."
@@ -1653,63 +1875,104 @@
       "properties": {
         "template": {
           "type": "object",
-          "description": "Gets or sets the template content."
+          "description": "The template content."
         }
-      }
+      },
+      "description": "The deployment export result. "
     },
     "ResourceManagementErrorWithDetails": {
       "properties": {
         "code": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the error code returned from the server."
+          "description": "The error code returned from the server."
         },
         "message": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the error message returned from the server."
+          "description": "The error message returned from the server."
         },
         "target": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the target of the error."
+          "description": "The target of the error."
         },
         "details": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceManagementErrorWithDetails"
           },
-          "description": "Gets or sets validation error."
+          "description": "Validation error."
         }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
+      }
     },
-    "ProviderResourceType": {
+    "AliasPathType": {
       "properties": {
-        "resourceType": {
+        "path": {
           "type": "string",
-          "description": "Gets or sets the resource type."
-        },
-        "locations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Gets or sets the collection of locations where this resource type can be created in."
+          "description": "The path of an alias."
         },
         "apiVersions": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the api version."
+          "description": "The api versions."
+        }
+      },
+      "description": "The type of the paths for alias. "
+    },
+    "AliasType": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The alias name."
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AliasPathType"
+          },
+          "description": "The paths for an alias."
+        }
+      },
+      "description": "The alias type. "
+    },
+    "ProviderResourceType": {
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type."
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The collection of locations where this resource type can be created in."
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AliasType"
+          },
+          "description": "The aliases that are supported by this resource type."
+        },
+        "apiVersions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The api version."
         },
         "properties": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "description": "The additional properties. "
           },
-          "description": "Gets or sets the properties."
+          "description": "The properties."
         }
       },
       "description": "Resource type managed by the resource provider."
@@ -1717,23 +1980,26 @@
     "Provider": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the provider id."
+          "description": "The provider id."
         },
         "namespace": {
           "type": "string",
-          "description": "Gets or sets the namespace of the provider."
+          "description": "The namespace of the provider."
         },
         "registrationState": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the registration state of the provider."
+          "description": "The registration state of the provider."
         },
         "resourceTypes": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ProviderResourceType"
           },
-          "description": "Gets or sets the collection of provider resource types."
+          "description": "The collection of provider resource types."
         }
       },
       "description": "Resource provider information."
@@ -1742,15 +2008,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the ID of the dependency."
+          "description": "The ID of the dependency."
         },
         "resourceType": {
           "type": "string",
-          "description": "Gets or sets the dependency resource type."
+          "description": "The dependency resource type."
         },
         "resourceName": {
           "type": "string",
-          "description": "Gets or sets the dependency resource name."
+          "description": "The dependency resource name."
         }
       },
       "description": "Deployment dependency information."
@@ -1762,19 +2028,19 @@
           "items": {
             "$ref": "#/definitions/BasicDependency"
           },
-          "description": "Gets the list of dependencies."
+          "description": "The list of dependencies."
         },
         "id": {
           "type": "string",
-          "description": "Gets or sets the ID of the dependency."
+          "description": "The ID of the dependency."
         },
         "resourceType": {
           "type": "string",
-          "description": "Gets or sets the dependency resource type."
+          "description": "The dependency resource type."
         },
         "resourceName": {
           "type": "string",
-          "description": "Gets or sets the dependency resource name."
+          "description": "The dependency resource name."
         }
       },
       "description": "Deployment dependency information."
@@ -1782,43 +2048,46 @@
     "DeploymentPropertiesExtended": {
       "properties": {
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the state of the provisioning."
+          "description": "The state of the provisioning."
         },
         "correlationId": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the correlation ID of the deployment."
+          "description": "The correlation ID of the deployment."
         },
         "timestamp": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the timestamp of the template deployment."
+          "description": "The timestamp of the template deployment."
         },
         "outputs": {
           "type": "object",
-          "description": "Gets or sets key/value pairs that represent deploymentoutput."
+          "description": "Key/value pairs that represent deploymentoutput."
         },
         "providers": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Provider"
           },
-          "description": "Gets the list of resource providers needed for the deployment."
+          "description": "The list of resource providers needed for the deployment."
         },
         "dependencies": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Dependency"
           },
-          "description": "Gets the list of deployment dependencies."
+          "description": "The list of deployment dependencies."
         },
         "template": {
           "type": "object",
-          "description": "Gets or sets the template content. Use only one of Template or TemplateLink."
+          "description": "The template content. Use only one of Template or TemplateLink."
         },
         "templateLink": {
           "$ref": "#/definitions/TemplateLink",
-          "description": "Gets or sets the URI referencing the template. Use only one of Template or TemplateLink."
+          "description": "The URI referencing the template. Use only one of Template or TemplateLink."
         },
         "parameters": {
           "type": "object",
@@ -1826,11 +2095,11 @@
         },
         "parametersLink": {
           "$ref": "#/definitions/ParametersLink",
-          "description": "Gets or sets the URI referencing the parameters. Use only one of Parameters or ParametersLink."
+          "description": "The URI referencing the parameters. Use only one of Parameters or ParametersLink."
         },
         "mode": {
           "type": "string",
-          "description": "Gets or sets the deployment mode.",
+          "description": "The deployment mode.",
           "enum": [
             "Incremental",
             "Complete"
@@ -1842,7 +2111,7 @@
         },
         "debugSetting": {
           "$ref": "#/definitions/DebugSetting",
-          "description": "Gets or sets the debug setting of the deployment."
+          "description": "The debug setting of the deployment."
         }
       },
       "description": "Deployment properties with additional details."
@@ -1851,11 +2120,11 @@
       "properties": {
         "error": {
           "$ref": "#/definitions/ResourceManagementErrorWithDetails",
-          "description": "Gets or sets validation error."
+          "description": "Validation error."
         },
         "properties": {
           "$ref": "#/definitions/DeploymentPropertiesExtended",
-          "description": "Gets or sets the template deployment properties."
+          "description": "The template deployment properties."
         }
       },
       "description": "Information from validate template deployment response."
@@ -1864,15 +2133,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the ID of the deployment."
+          "description": "The ID of the deployment."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the deployment."
+          "description": "The name of the deployment."
         },
         "properties": {
           "$ref": "#/definitions/DeploymentPropertiesExtended",
-          "description": "Gets or sets deployment properties."
+          "description": "Deployment properties."
         }
       },
       "required": [
@@ -1887,11 +2156,12 @@
           "items": {
             "$ref": "#/definitions/DeploymentExtended"
           },
-          "description": "Gets or sets the list of deployments."
+          "description": "The list of deployments."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
       "description": "List of deployments."
@@ -1903,11 +2173,12 @@
           "items": {
             "$ref": "#/definitions/Provider"
           },
-          "description": "Gets or sets the list of resource providers."
+          "description": "The list of resource providers."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
       "description": "List of resource providers."
@@ -1916,16 +2187,33 @@
       "properties": {
         "plan": {
           "$ref": "#/definitions/Plan",
-          "description": "Gets or sets the plan of the resource."
+          "description": "The plan of the resource."
         },
         "properties": {
           "type": "object",
-          "description": "Gets or sets the resource properties."
+          "description": "The resource properties."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of the resource.",
+          "pattern": "^[-\\w\\._,\\(\\)]+$"
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "Id of the resource that manages this resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         }
       },
       "allOf": [
         {
-          "$ref": "Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Resource information."
@@ -1934,22 +2222,78 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the plan ID."
+          "description": "The plan ID."
         },
         "publisher": {
           "type": "string",
-          "description": "Gets or sets the publisher ID."
+          "description": "The publisher ID."
         },
         "product": {
           "type": "string",
-          "description": "Gets or sets the offer ID."
+          "description": "The offer ID."
         },
         "promotionCode": {
           "type": "string",
-          "description": "Gets or sets the promotion code."
+          "description": "The promotion code."
         }
       },
       "description": "Plan for the resource."
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The sku name."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The sku tier."
+        },
+        "size": {
+          "type": "string",
+          "description": "The sku size."
+        },
+        "family": {
+          "type": "string",
+          "description": "The sku family."
+        },
+        "model": {
+          "type": "string",
+          "description": "The sku model."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sku capacity."
+        }
+      },
+      "description": "Sku for the resource."
+    },
+    "Identity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Identity for the resource."
     },
     "ResourceListResult": {
       "properties": {
@@ -1958,16 +2302,14 @@
           "items": {
             "$ref": "#/definitions/GenericResource"
           },
-          "description": "Gets or sets the list of resource groups."
+          "description": "The list of resources."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
-      "required": [
-        "nextLink"
-      ],
       "description": "List of resource groups."
     },
     "ResourceGroup": {
@@ -1975,25 +2317,30 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the ID of the resource group."
+          "description": "The ID of the resource group."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the Name of the resource group."
+          "description": "The Name of the resource group."
         },
         "properties": {
           "$ref": "#/definitions/ResourceGroupProperties"
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the location of the resource group. It cannot be changed after the resource group has been created. Has to be one of the supported Azure Locations, such as West US, East US, West Europe, East Asia, etc."
+          "description": "The location of the resource group. It cannot be changed after the resource group has been created. Has to be one of the supported Azure Locations, such as West US, East US, West Europe, East Asia, etc."
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "Id of the resource that manages this resource group."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "description": "The additional properties. "
           },
-          "description": "Gets or sets the tags attached to the resource group."
+          "description": "The tags attached to the resource group."
         }
       },
       "required": [
@@ -2006,7 +2353,7 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets resource group provisioning state."
+          "description": "The provisioning state. "
         }
       },
       "description": "The resource group properties."
@@ -2018,16 +2365,14 @@
           "items": {
             "$ref": "#/definitions/ResourceGroup"
           },
-          "description": "Gets or sets the list of resource groups."
+          "description": "The list of resource groups."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
-      "required": [
-        "nextLink"
-      ],
       "description": "List of resource groups."
     },
     "ResourcesMoveInfo": {
@@ -2037,7 +2382,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the ids of the resources."
+          "description": "The ids of the resources."
         },
         "targetResourceGroup": {
           "type": "string",
@@ -2053,7 +2398,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Gets or sets the ids of the resources. The only supported string currently is '*' (all resources). Future api updates will support exporting specific resources."
+          "description": "The ids of the resources. The only supported string currently is '*' (all resources). Future api updates will support exporting specific resources."
         },
         "options": {
           "type": "string",
@@ -2079,15 +2424,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the tag ID."
+          "description": "The tag ID."
         },
         "tagValue": {
           "type": "string",
-          "description": "Gets or sets the tag value."
+          "description": "The tag value."
         },
         "count": {
           "$ref": "#/definitions/TagCount",
-          "description": "Gets or sets the tag value count."
+          "description": "The tag value count."
         }
       },
       "description": "Tag information."
@@ -2096,22 +2441,22 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the tag ID."
+          "description": "The tag ID."
         },
         "tagName": {
           "type": "string",
-          "description": "Gets or sets the tag name."
+          "description": "The tag name."
         },
         "count": {
           "$ref": "#/definitions/TagCount",
-          "description": "Gets or sets the tag count."
+          "description": "The tag count."
         },
         "values": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TagValue"
           },
-          "description": "Gets or sets the list of tag values."
+          "description": "The list of tag values."
         }
       },
       "description": "Tag details."
@@ -2123,31 +2468,29 @@
           "items": {
             "$ref": "#/definitions/TagDetails"
           },
-          "description": "Gets or sets the list of tags."
+          "description": "The list of tags."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
-      "required": [
-        "nextLink"
-      ],
       "description": "List of subscription tags."
     },
     "TargetResource": {
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the ID of the resource."
+          "description": "The ID of the resource."
         },
         "resourceName": {
           "type": "string",
-          "description": "Gets or sets the name of the resource."
+          "description": "The name of the resource."
         },
         "resourceType": {
           "type": "string",
-          "description": "Gets or sets the type of the resource."
+          "description": "The type of the resource."
         }
       },
       "description": "Target resource."
@@ -2156,44 +2499,52 @@
       "properties": {
         "content": {
           "type": "object",
-          "description": "Gets or sets HTTP message content."
+          "description": "HTTP message content."
         }
       }
     },
     "DeploymentOperationProperties": {
       "properties": {
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the state of the provisioning."
+          "description": "The state of the provisioning."
         },
         "timestamp": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the date and time of the operation."
+          "description": "The date and time of the operation."
         },
         "serviceRequestId": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets deployment operation service request id."
+          "description": "Deployment operation service request id."
         },
         "statusCode": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets operation status code."
+          "description": "Operation status code."
         },
         "statusMessage": {
+          "readOnly": true,
           "type": "object",
-          "description": "Gets or sets operation status message."
+          "description": "Operation status message."
         },
         "targetResource": {
+          "readOnly": true,
           "$ref": "#/definitions/TargetResource",
-          "description": "Gets or sets the target resource."
+          "description": "The target resource."
         },
         "request": {
+          "readOnly": true,
           "$ref": "#/definitions/HttpMessage",
-          "description": "Gets or sets the HTTP request message."
+          "description": "The HTTP request message."
         },
         "response": {
+          "readOnly": true,
           "$ref": "#/definitions/HttpMessage",
-          "description": "Gets or sets the HTTP response message."
+          "description": "The HTTP response message."
         }
       },
       "description": "Deployment operation properties."
@@ -2201,16 +2552,18 @@
     "DeploymentOperation": {
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets full deployment operation id."
+          "description": "Full deployment operation id."
         },
         "operationId": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets deployment operation id."
+          "description": "Deployment operation id."
         },
         "properties": {
           "$ref": "#/definitions/DeploymentOperationProperties",
-          "description": "Gets or sets deployment properties."
+          "description": "Deployment properties."
         }
       },
       "description": "Deployment operation information."
@@ -2222,11 +2575,12 @@
           "items": {
             "$ref": "#/definitions/DeploymentOperation"
           },
-          "description": "Gets or sets the list of deployments."
+          "description": "The list of deployments."
         },
         "nextLink": {
+          "readOnly": true,
           "type": "string",
-          "description": "Gets or sets the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
       "description": "List of deployment operations."
@@ -2235,51 +2589,26 @@
       "properties": {
         "publisher": {
           "type": "string",
-          "description": "Gets or sets operation description."
+          "description": "Operation description."
         },
         "provider": {
           "type": "string",
-          "description": "Gets or sets operation provider."
+          "description": "Operation provider."
         },
         "resource": {
           "type": "string",
-          "description": "Gets or sets operation resource."
+          "description": "Operation resource."
         },
         "operation": {
           "type": "string",
-          "description": "Gets or sets operation."
+          "description": "Operation."
         },
         "description": {
           "type": "string",
-          "description": "Gets or sets operation description."
+          "description": "Operation description."
         }
       },
       "description": "Resource provider operation's display properties."
-    },
-    "ResourceProviderOperationDefinition": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the provider operation name."
-        },
-        "display": {
-          "$ref": "#/definitions/ResourceProviderOperationDisplayProperties",
-          "description": "Gets or sets the display property of the provider operation."
-        }
-      },
-      "description": "Resource provider operation information."
-    },
-    "ResourceProviderOperationDetailListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderOperationDefinition"
-          },
-          "description": "Gets or sets the list of resource provider operations."
-        }
-      },
-      "description": "List of resource provider operations."
     },
     "Resource": {
       "properties": {
@@ -2328,11 +2657,11 @@
       "properties": {
         "template": {
           "type": "object",
-          "description": "Gets or sets the template content."
+          "description": "The template content."
         },
         "error": {
           "$ref": "#/definitions/ResourceManagementErrorWithDetails",
-          "description": "Gets or sets the error."
+          "description": "The error."
         }
       }
     }

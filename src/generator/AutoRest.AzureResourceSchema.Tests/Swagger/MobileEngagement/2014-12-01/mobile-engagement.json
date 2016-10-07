@@ -1,0 +1,4100 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Engagement.ManagementClient",
+    "description": "Microsoft Azure Mobile Engagement REST APIs.",
+    "version": "2014-12-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileEngagement/appCollections": {
+      "get": {
+        "tags": [
+          "AppCollections",
+          "List"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "operationId": "AppCollections_List",
+        "description": "Lists app collections in a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AppCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps": {
+      "get": {
+        "tags": [
+          "Apps",
+          "List"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "operationId": "Apps_List",
+        "description": "Lists apps in an appCollection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AppListResult"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileEngagement/supportedPlatforms": {
+      "get": {
+        "tags": [
+          "List"
+        ],
+        "operationId": "SupportedPlatforms_List",
+        "description": "Lists supported platforms for Engagement applications.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SupportedPlatformsListResult"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileEngagement/checkAppCollectionNameAvailability": {
+      "post": {
+        "operationId": "AppCollections_CheckNameAvailability",
+        "description": "Checks availability of an app collection name in the Engagement domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppCollectionNameAvailability"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AppCollectionNameAvailability"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/campaigns/{kind}": {
+      "get": {
+        "tags": [
+          "Campaign",
+          "List"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "operationId": "Campaigns_List",
+        "description": "Get the list of campaigns.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "announcements",
+              "polls",
+              "dataPushes",
+              "nativePushes"
+            ],
+            "x-ms-enum": {
+              "name": "CampaignKinds",
+              "modelAsString": true
+            },
+            "description": "Campaign kind."
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Control paging of campaigns, start results at the given offset, defaults to 0 (1st page of data)."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Control paging of campaigns, number of campaigns to return with each call. It returns all campaigns by default. When specifying $top parameter, the response contains a `nextLink` property describing the path to get the next page if there are more results."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Filter can be used to restrict the results to campaigns matching a specific state. The syntax is `$filter=state eq 'draft'`. Valid state values are: draft, scheduled, in-progress, and finished. Only the eq operator and the state property are supported."
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Sort results by an expression which looks like `$orderby=id asc` (this example is actually the default behavior). The syntax is orderby={property} {direction} or just orderby={property}. The available sorting properties are id, name, state, activatedDate, and finishedDate. The available directions are asc (for ascending order) and desc (for descending order). When not specified the asc direction is used. Only one property at a time can be used for sorting."
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Restrict results to campaigns matching the optional `search` expression. This currently performs the search based on the name on the campaign only, case insensitive. If the campaign contains the value of the `search` parameter anywhere in the name, it matches."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, campaigns are returned as JSON.",
+            "schema": {
+              "$ref": "#/definitions/CampaignsListResult"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Campaign",
+          "CRUD"
+        ],
+        "operationId": "Campaigns_Create",
+        "description": "Create a push campaign (announcement, poll, data push or native push).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "announcements",
+              "polls",
+              "dataPushes",
+              "nativePushes"
+            ],
+            "x-ms-enum": {
+              "name": "CampaignKinds",
+              "modelAsString": true
+            },
+            "description": "Campaign kind."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the Update Campaign operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success, campaign is returned.",
+            "schema": {
+              "$ref": "#/definitions/CampaignStateResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL path to get the created campaign."
+              }
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `409`: Another campaign with the same name already exists.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/campaigns/{kind}/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/AppCollectionParameter"
+        },
+        {
+          "$ref": "#/parameters/AppNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Campaign",
+          "CRUD"
+        ],
+        "operationId": "Campaigns_Get",
+        "description": "The Get campaign operation retrieves information about a previously created campaign.",
+        "parameters": [
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "announcements",
+              "polls",
+              "dataPushes",
+              "nativePushes"
+            ],
+            "x-ms-enum": {
+              "name": "CampaignKinds",
+              "modelAsString": true
+            },
+            "description": "Campaign kind."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Campaign identifier."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, campaign is returned.",
+            "schema": {
+              "$ref": "#/definitions/CampaignResult"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `404`: Campaign not found.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Campaign",
+          "CRUD"
+        ],
+        "operationId": "Campaigns_Update",
+        "description": "Update an existing push campaign (announcement, poll, data push or native push).",
+        "parameters": [
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "announcements",
+              "polls",
+              "dataPushes",
+              "nativePushes"
+            ],
+            "x-ms-enum": {
+              "name": "CampaignKinds",
+              "modelAsString": true
+            },
+            "description": "Campaign kind."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Campaign identifier."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the Update Campaign operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Campaign"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/CampaignStateResult"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled or campaign is not in `draft` state.\n* `401`: Authentication error.\n* `404`: Campaign not found.\n* `409`: Another campaign with the same name already exists.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Campaign",
+          "CRUD"
+        ],
+        "operationId": "Campaigns_Delete",
+        "description": "Delete a campaign previously created by a call to Create campaign.",
+        "parameters": [
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "announcements",
+              "polls",
+              "dataPushes",
+              "nativePushes"
+            ],
+            "x-ms-enum": {
+              "name": "CampaignKinds",
+              "modelAsString": true
+            },
+            "description": "Campaign kind."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Campaign identifier."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted successfully."
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled or campaign is not in `finished` state.\n* `401`: Authentication error.\n* `404`: Campaign not found.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/campaignsByName/{kind}/{name}": {
+      "get": {
+        "tags": [
+          "Campaign",
+          "CRUD"
+        ],
+        "operationId": "Campaigns_GetByName",
+        "description": "The Get campaign operation retrieves information about a previously created campaign.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "announcements",
+              "polls",
+              "dataPushes",
+              "nativePushes"
+            ],
+            "x-ms-enum": {
+              "name": "CampaignKinds",
+              "modelAsString": true
+            },
+            "description": "Campaign kind."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Campaign name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, campaign is returned.",
+            "schema": {
+              "$ref": "#/definitions/CampaignResult"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `404`: Campaign not found.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/campaigns/{kind}/{id}/test": {
+      "post": {
+        "tags": [
+          "Campaign",
+          "Test"
+        ],
+        "operationId": "Campaigns_TestSaved",
+        "description": "Test an existing campaign (created with Create campaign) on a set of devices.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "announcements",
+              "polls",
+              "dataPushes",
+              "nativePushes"
+            ],
+            "x-ms-enum": {
+              "name": "CampaignKinds",
+              "modelAsString": true
+            },
+            "description": "Campaign kind."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Campaign identifier."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the Test Campaign operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CampaignTestSavedParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Test campaign queued successfully.",
+            "schema": {
+              "$ref": "#/definitions/CampaignStateResult"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `404`: Campaign not found.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/campaigns/{kind}/test": {
+      "post": {
+        "tags": [
+          "Campaign",
+          "Test"
+        ],
+        "operationId": "Campaigns_TestNew",
+        "description": "Test a new campaign on a set of devices.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "announcements",
+              "polls",
+              "dataPushes",
+              "nativePushes"
+            ],
+            "x-ms-enum": {
+              "name": "CampaignKinds",
+              "modelAsString": true
+            },
+            "description": "Campaign kind."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the Test Campaign operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CampaignTestNewParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Test campaign queued successfully.",
+            "schema": {
+              "$ref": "#/definitions/CampaignState"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/campaigns/{kind}/{id}/activate": {
+      "post": {
+        "tags": [
+          "Campaign",
+          "Action"
+        ],
+        "operationId": "Campaigns_Activate",
+        "description": "Activate a campaign previously created by a call to Create campaign.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "announcements",
+              "polls",
+              "dataPushes",
+              "nativePushes"
+            ],
+            "x-ms-enum": {
+              "name": "CampaignKinds",
+              "modelAsString": true
+            },
+            "description": "Campaign kind."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Campaign identifier."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activated successfully.",
+            "schema": {
+              "$ref": "#/definitions/CampaignStateResult"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled or campaign not in `draft` state.\n* `401`: Authentication error.\n* `404`: Campaign not found.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/campaigns/{kind}/{id}/suspend": {
+      "post": {
+        "tags": [
+          "Campaign",
+          "Action"
+        ],
+        "operationId": "Campaigns_Suspend",
+        "description": "Suspend a push campaign previously activated by a call to Activate campaign.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "announcements",
+              "polls",
+              "dataPushes",
+              "nativePushes"
+            ],
+            "x-ms-enum": {
+              "name": "CampaignKinds",
+              "modelAsString": true
+            },
+            "description": "Campaign kind."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Campaign identifier."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Suspended successfully.",
+            "schema": {
+              "$ref": "#/definitions/CampaignStateResult"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled or campaign not in `scheduled` state.\n* `401`: Authentication error.\n* `404`: Campaign not found.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/campaigns/{kind}/{id}/push": {
+      "post": {
+        "tags": [
+          "Campaign",
+          "Action"
+        ],
+        "operationId": "Campaigns_Push",
+        "description": "Push a previously saved campaign (created with Create campaign) to a set of devices.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "announcements",
+              "polls",
+              "dataPushes",
+              "nativePushes"
+            ],
+            "x-ms-enum": {
+              "name": "CampaignKinds",
+              "modelAsString": true
+            },
+            "description": "Campaign kind."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Campaign identifier."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the Push Campaign operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CampaignPushParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, response body includes rejected devices.",
+            "schema": {
+              "$ref": "#/definitions/CampaignPushResult"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled or campaign not in `in progress` state or `pushMode` is not `manual`. * `401`: Authentication error.\n* `404`: Campaign not found.\n* `413`: Too many device identifiers (current limit is 1000), or request body too large.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/campaigns/{kind}/{id}/statistics": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/AppCollectionParameter"
+        },
+        {
+          "$ref": "#/parameters/AppNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Campaign"
+        ],
+        "operationId": "Campaigns_GetStatistics",
+        "description": "Get all the campaign statistics.",
+        "parameters": [
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "announcements",
+              "polls",
+              "dataPushes",
+              "nativePushes"
+            ],
+            "x-ms-enum": {
+              "name": "CampaignKinds",
+              "modelAsString": true
+            },
+            "description": "Campaign kind."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Campaign identifier."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, statistics are returned as JSON.",
+            "schema": {
+              "$ref": "#/definitions/CampaignStatisticsResult"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `404`: Campaign not found.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/campaigns/{kind}/{id}/finish": {
+      "post": {
+        "tags": [
+          "Campaign",
+          "Action"
+        ],
+        "operationId": "Campaigns_Finish",
+        "description": "Finish a push campaign previously activated by a call to Activate campaign.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "announcements",
+              "polls",
+              "dataPushes",
+              "nativePushes"
+            ],
+            "x-ms-enum": {
+              "name": "CampaignKinds",
+              "modelAsString": true
+            },
+            "description": "Campaign kind."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Campaign identifier."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Finished successfully.",
+            "schema": {
+              "$ref": "#/definitions/CampaignStateResult"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled or campaign not in `in progress` state.\n* `401`: Authentication error.\n* `404`: Campaign not found.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "operationId": "Devices_List",
+        "description": "Query the information associated to the devices running an application.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Number of devices to return with each call. Defaults to 100 and cannot return more. Passing a greater value is ignored. The response contains a `nextLink` property describing the URI path to get the next page of results if not all results could be returned at once."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "By default all `meta` and `appInfo` properties are returned, this property is used to restrict the output to the desired properties. It also excludes all devices from the output that have none of the selected properties. In other terms, only devices having at least one of the selected property being set is part of the results. Examples: - `$select=appInfo` : select all devices having at least 1 appInfo, return them all and don’t return any meta property. - `$select=meta` : return only meta properties in the output. - `$select=appInfo,meta/firstSeen,meta/lastSeen` : return all `appInfo`, plus meta object containing only firstSeen and lastSeen properties. The format is thus a comma separated list of properties to select. Use `appInfo` to select all appInfo properties, `meta` to select all meta properties. Use `appInfo/{key}` and `meta/{key}` to select specific appInfo and meta properties."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Filter can be used to reduce the number of results. Filter is a boolean expression that can look like the following examples: * `$filter=deviceId gt 'abcdef0123456789abcdef0123456789'` * `$filter=lastModified le 1447284263690L` * `$filter=(deviceId ge 'abcdef0123456789abcdef0123456789') and (deviceId lt 'bacdef0123456789abcdef0123456789') and (lastModified gt 1447284263690L)` The first example is used automatically for paging when returning the `nextLink` property. The filter expression is a combination of checks on some properties that can be compared to their value. The available operators are: * `gt`  : greater than * `ge`  : greater than or equals * `lt`  : less than * `le`  : less than or equals * `and` : to add multiple checks (all checks must pass), optional parentheses can be used. The properties that can be used in the expression are the following: * `deviceId {operator} '{deviceIdValue}'` : a lexicographical comparison is made on the deviceId value, use single quotes for the value. * `lastModified {operator} {number}L` : returns only meta properties or appInfo properties whose last value modification timestamp compared to the specified value is matching (value is milliseconds since January 1st, 1970 UTC). Please note the `L` character after the number of milliseconds, its required when the number of milliseconds exceeds `2^31 - 1` (which is always the case for recent timestamps). Using `lastModified` excludes all devices from the output that have no property matching the timestamp criteria, like `$select`. Please note that the internal value of `lastModified` timestamp for a given property is never part of the results."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If successful, the response has a 200 status code and a JSON object describing a collection of devices in the body.",
+            "schema": {
+              "$ref": "#/definitions/DevicesQueryResult"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/{deviceId}": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "operationId": "Devices_GetByDeviceId",
+        "description": "Get the information associated to a device running an application.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "description": "Device identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, device is returned.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `404`: Device not found.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/users/{userId}": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "operationId": "Devices_GetByUserId",
+        "description": "Get the information associated to a device running an application using the user identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, device is returned.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `404`: User not found.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/tag": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "operationId": "Devices_TagByDeviceId",
+        "description": "Update the tags registered for a set of devices running an application. Updates are performed asynchronously, meaning that a few seconds are needed before the modifications appear in the results of the Get device command.\n",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceTagsParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, invalid device identifiers are returned.",
+            "schema": {
+              "$ref": "#/definitions/DeviceTagsResult"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `413`: Can be caused by having too many device identifiers (current limit is 1000).\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/users/tag": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "operationId": "Devices_TagByUserId",
+        "description": "Update the tags registered for a set of users running an application. Updates are performed asynchronously, meaning that a few seconds are needed before the modifications appear in the results of the Get device command.\n",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceTagsParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, invalid user identifiers are returned.",
+            "schema": {
+              "$ref": "#/definitions/DeviceTagsResult"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `413`: Can be caused by having too many user identifiers (current limit is 1000).\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks": {
+      "get": {
+        "tags": [
+          "export",
+          "list"
+        ],
+        "operationId": "ExportTasks_List",
+        "description": "Get the list of export tasks.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Control paging of export tasks, start results at the given offset, defaults to 0 (1st page of data).",
+            "default": 0,
+            "minimum": 0
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Control paging of export tasks, number of export tasks to return with each call. By default, it returns all export tasks with a default paging of 20.\nThe response contains a `nextLink` property describing the path to get the next page if there are more results.\nThe maximum paging limit for $top is 40.",
+            "default": 20,
+            "maximum": 40,
+            "minimum": 1
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Sort results by an expression which looks like `$orderby=taskId asc` (default when not specified).\nThe syntax is orderby={property} {direction} or just orderby={property}.\nProperties that can be specified for sorting: taskId, errorDetails, dateCreated, taskStatus, and dateCreated.\nThe available directions are asc (for ascending order) and desc (for descending order).\nWhen not specified the asc direction is used.\nOnly one orderby property can be specified."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Returns a list of export task statuses.",
+            "schema": {
+              "$ref": "#/definitions/exportTaskListResult"
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/{id}": {
+      "get": {
+        "tags": [
+          "export",
+          "crud"
+        ],
+        "operationId": "ExportTasks_Get",
+        "description": "Retrieves information about a previously created export task.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Export task identifier."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The status of the export task is returned.",
+            "schema": {
+              "$ref": "#/definitions/exportTaskResult"
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/activities": {
+      "post": {
+        "tags": [
+          "export",
+          "crud"
+        ],
+        "operationId": "ExportTasks_CreateActivitiesTask",
+        "description": "Creates a task to export activities.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dateRangeExportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/exportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/crashes": {
+      "post": {
+        "tags": [
+          "export",
+          "crud"
+        ],
+        "operationId": "ExportTasks_CreateCrashesTask",
+        "description": "Creates a task to export crashes.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dateRangeExportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/exportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/errors": {
+      "post": {
+        "tags": [
+          "export",
+          "crud"
+        ],
+        "operationId": "ExportTasks_CreateErrorsTask",
+        "description": "Creates a task to export errors.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dateRangeExportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/exportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/events": {
+      "post": {
+        "tags": [
+          "export",
+          "crud"
+        ],
+        "operationId": "ExportTasks_CreateEventsTask",
+        "description": "Creates a task to export events.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dateRangeExportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/exportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/jobs": {
+      "post": {
+        "tags": [
+          "export",
+          "crud"
+        ],
+        "operationId": "ExportTasks_CreateJobsTask",
+        "description": "Creates a task to export jobs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dateRangeExportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/exportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/sessions": {
+      "post": {
+        "tags": [
+          "export",
+          "crud"
+        ],
+        "operationId": "ExportTasks_CreateSessionsTask",
+        "description": "Creates a task to export sessions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dateRangeExportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/exportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/tags": {
+      "post": {
+        "tags": [
+          "export",
+          "crud"
+        ],
+        "operationId": "ExportTasks_CreateTagsTask",
+        "description": "Creates a task to export tags.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/exportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/exportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/tokens": {
+      "post": {
+        "tags": [
+          "export",
+          "crud"
+        ],
+        "operationId": "ExportTasks_CreateTokensTask",
+        "description": "Creates a task to export tags.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/exportTaskParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/exportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/feedbackByDate": {
+      "post": {
+        "tags": [
+          "export",
+          "crud"
+        ],
+        "operationId": "ExportTasks_CreateFeedbackTaskByDateRange",
+        "description": "Creates a task to export push campaign data for a date range.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/feedbackByDateRangeParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/exportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/feedbackByCampaign": {
+      "post": {
+        "tags": [
+          "export",
+          "crud"
+        ],
+        "operationId": "ExportTasks_CreateFeedbackTaskByCampaign",
+        "description": "Creates a task to export push campaign data for a set of campaigns.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/feedbackByCampaignParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Returns the state of export task.",
+            "schema": {
+              "$ref": "#/definitions/exportTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the export task state."
+              }
+            }
+          },
+          "default": {
+            "description": "* `4xx`: Bad request.\n* `5xx`: Server error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/importTasks": {
+      "get": {
+        "tags": [
+          "import",
+          "list"
+        ],
+        "operationId": "ImportTasks_List",
+        "description": "Get the list of import jobs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Control paging of import jobs, start results at the given offset, defaults to 0 (1st page of data).",
+            "default": 0,
+            "minimum": 0
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Control paging of import jobs, number of import jobs to return with each call. By default, it returns all import jobs with a default paging of 20.\nThe response contains a `nextLink` property describing the path to get the next page if there are more results.\nThe maximum paging limit for $top is 40.",
+            "default": 20,
+            "maximum": 40,
+            "minimum": 1
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Sort results by an expression which looks like `$orderby=jobId asc` (default when not specified).\nThe syntax is orderby={property} {direction} or just orderby={property}.\nProperties that can be specified for sorting: jobId, errorDetails, dateCreated, jobStatus, and dateCreated.\nThe available directions are asc (for ascending order) and desc (for descending order).\nWhen not specified the asc direction is used.\nOnly one orderby property can be specified."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, import jobs are returned as JSON.",
+            "schema": {
+              "$ref": "#/definitions/importTaskListResult"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "tags": [
+          "import",
+          "crud"
+        ],
+        "operationId": "ImportTasks_Create",
+        "description": "Creates a job to import the specified data to a storageUrl.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppCollectionParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/importTask"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success, import job is returned.",
+            "schema": {
+              "$ref": "#/definitions/importTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL path to get the created import job."
+              }
+            }
+          },
+          "202": {
+            "description": "Success, import job is returned.",
+            "schema": {
+              "$ref": "#/definitions/importTaskResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL path to get the created import job."
+              }
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/importTasks/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/AppCollectionParameter"
+        },
+        {
+          "$ref": "#/parameters/AppNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "import",
+          "crud"
+        ],
+        "operationId": "ImportTasks_Get",
+        "description": "The Get import job operation retrieves information about a previously created import job.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Import job identifier."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, import job is returned.",
+            "schema": {
+              "$ref": "#/definitions/importTaskResult"
+            }
+          },
+          "default": {
+            "description": "* `400`: Invalid parameters or application is disabled. Check response body for details.\n* `401`: Authentication error.\n* `404`: Import job not found.\n",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApiError": {
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "AppListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/App"
+          },
+          "description": "The list of Apps and their properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages."
+        }
+      },
+      "description": "The list Apps operation response."
+    },
+    "App": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AppProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "The Mobile Engagement App resource."
+    },
+    "AppProperties": {
+      "properties": {
+        "backendId": {
+          "type": "string",
+          "description": "The application unique identifier."
+        },
+        "platform": {
+          "type": "string",
+          "description": "The platform of the app."
+        },
+        "appState": {
+          "type": "string",
+          "description": "The state of the application."
+        }
+      }
+    },
+    "AppCollectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppCollection"
+          },
+          "description": "The list of AppCollections and their properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages."
+        }
+      },
+      "description": "The list AppCollections operation response."
+    },
+    "AppCollection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AppCollectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "The AppCollection resource."
+    },
+    "AppCollectionProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Mobile Engagement AppCollection Properties.",
+          "enum": [
+            "Creating",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStates",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AppCollectionNameAvailability": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "available": {
+          "type": "boolean",
+          "description": "Available."
+        },
+        "unavailabilityReason": {
+          "type": "string",
+          "description": "UnavailabilityReason."
+        }
+      }
+    },
+    "SupportedPlatformsListResult": {
+      "properties": {
+        "platforms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of supported platforms."
+        }
+      }
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "CampaignTestSavedParameters": {
+      "required": [
+        "deviceId"
+      ],
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Device identifier (as returned by the SDK)."
+        },
+        "lang": {
+          "type": "string",
+          "description": "The language to test expressed using ISO 639-1 code. The default language of the campaign will be used if the parameter is not provided."
+        }
+      }
+    },
+    "CampaignTestNewParameters": {
+      "required": [
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/Campaign"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CampaignTestSavedParameters"
+        }
+      ]
+    },
+    "CampaignPushParameters": {
+      "required": [
+        "deviceIds"
+      ],
+      "properties": {
+        "deviceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Device identifiers to push as a JSON array of strings. Note that if you want to push the same campaign several times to the same device, you need to make several API calls.\n"
+        },
+        "data": {
+          "$ref": "#/definitions/Campaign",
+          "description": "Alternative campaign's content to use instead of the referenced campaign. All campaign's properties can be overridden except for the following: `name`, `manualPush`, `audience`, `startTime` and `timezone`. `endTime` can be overridden while keeping original `timezone` parameter. The effect is to change the client side expiration of the received campaign for the specific devices. If your campaign is a *poll*, the provided data should contain the same number of questions and choices that the one you created with the create command. Please note that all the push messages created using this parameter will expire after 4 weeks at maximum (`endTime` property of the campaign will be used if lower than 4 weeks in the future)."
+        }
+      }
+    },
+    "CampaignState": {
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "State of the campaign, or 'queued' when testing a campaign.",
+          "enum": [
+            "draft",
+            "scheduled",
+            "in-progress",
+            "finished",
+            "queued"
+          ],
+          "x-ms-enum": {
+            "name": "CampaignStates",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CampaignStateResult": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Campaign identifier."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CampaignState"
+        }
+      ]
+    },
+    "NotificationOptions": {
+      "properties": {
+        "bigText": {
+          "type": "string",
+          "description": "Android 4.1+ only. Multi line message shown in expanded notifications on Android 4.1+ devices. The `notificationType` property must be set to `system`.\n",
+          "maxLength": 4000
+        },
+        "bigPicture": {
+          "type": "string",
+          "description": "URL of a remote image displayed in expanded notifications on\nAndroid 4.1+ devices with the following constraints:\n* The URL length is limited to 2000 characters.\n* The image size must be less than 4 MiB.\n* The following MIME types are supported:\n** image/png\n** image/jpeg\n** image/gif\n** image/webp\n** image/bmp\n** image/x-bmp\n** image/x-ms-bmp\n* URL scheme must be HTTP or HTTPS (with valid SSL certificate).\n* Incompatible with `bigText`, only one of the fields can be set.\n* The `notificationType` property must be set to `system`.\n",
+          "maxLength": 2000
+        },
+        "sound": {
+          "type": "string",
+          "description": "iOS only. The name of a sound file in the application bundle. The sound in this file is played as an alert. If the sound file doesn’t exist or default is specified as the value, the default alert sound is played. The audio must be in one of the audio data formats that are compatible with system sounds. The `deliveryTime` property must be set to `any` or `background`.\n"
+        },
+        "actionText": {
+          "type": "string",
+          "description": "The action text is the title of the right button of the alert or the value of the unlock slider, where the value replaces 'unlock' in 'slide to unlock'. 'View' (localized to the preferred language) is used as the default value. The `deliveryTime` property must be set to `any` or `background`.\n"
+        }
+      }
+    },
+    "PollQuestionChoiceLocalization": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the choice.",
+          "maxLength": 256
+        }
+      }
+    },
+    "PollQuestionChoice": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier of the choice."
+        },
+        "localization": {
+          "type": "object",
+          "description": "Poll choices can be localized using an optional JSON object. The JSON key is a two-character language code as specified by the ISO 639-1 standard. The corresponding value is an object containing the localizable property title.\n",
+          "additionalProperties": {
+            "$ref": "#/definitions/PollQuestionChoiceLocalization"
+          }
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "A flag indicating if this choice is the default choice for the associated question. Only one choice in the array can have this value set to true.",
+          "default": false
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PollQuestionChoiceLocalization"
+        }
+      ]
+    },
+    "PollQuestionLocalization": {
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the question.",
+          "maxLength": 256
+        }
+      }
+    },
+    "PollQuestion": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier of the question."
+        },
+        "localization": {
+          "type": "object",
+          "description": "Poll questions can be localized using an optional JSON object. The JSON key is a two-character language code as specified by the ISO 639-1 standard. The corresponding value is an object containing the localizable property title.\n",
+          "additionalProperties": {
+            "$ref": "#/definitions/PollQuestionLocalization"
+          }
+        },
+        "choices": {
+          "type": "array",
+          "description": "List of possible choices for this question.",
+          "items": {
+            "$ref": "#/definitions/PollQuestionChoice"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PollQuestionLocalization"
+        }
+      ]
+    },
+    "CampaignLocalization": {
+      "properties": {
+        "notificationTitle": {
+          "type": "string",
+          "description": "Title of the notification. This field supports appInfo markers.",
+          "maxLength": 2000
+        },
+        "notificationMessage": {
+          "type": "string",
+          "description": "Message of the notification. This field supports appInfo markers.",
+          "maxLength": 4000
+        },
+        "notificationImage": {
+          "type": "string",
+          "format": "byte",
+          "description": "Optional image encoded in base 64. Usually included in the right part of in app notifications (or as a banner if there is neither text nor content icon). For Android system notifications, the image is used as the large icon (displayed only on Android 3+).\n",
+          "maxLength": 65535
+        },
+        "notificationOptions": {
+          "$ref": "#/definitions/NotificationOptions",
+          "description": "Additional platform specific options."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the announcement or poll. This field supports appInfo markers.",
+          "maxLength": 128
+        },
+        "body": {
+          "type": "string",
+          "description": "Body of the text/web announcement, poll or data push. This field supports appInfo markers.",
+          "maxLength": 65535
+        },
+        "actionButtonText": {
+          "type": "string",
+          "description": "Text of the action button for text/web announcements and polls (answer button).",
+          "maxLength": 64
+        },
+        "exitButtonText": {
+          "type": "string",
+          "description": "Text of the exit button for text/web announcements and polls.",
+          "maxLength": 64
+        },
+        "actionUrl": {
+          "type": "string",
+          "description": "URL to launch when the announcement is actioned.",
+          "maxLength": 2000
+        },
+        "payload": {
+          "type": "object",
+          "description": "Native push payload."
+        }
+      }
+    },
+    "Criterion": {
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "CarrierNameCriterion": {
+      "description": "Used to target devices based on their carrier name.",
+      "x-ms-discriminator-value": "carrier-name",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Carrier name value."
+            }
+          }
+        }
+      ]
+    },
+    "CarrierCountryCriterion": {
+      "description": "Used to target devices based on their carrier country.",
+      "x-ms-discriminator-value": "carrier-country",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Two-characters country code (ISO 3166-1)."
+            }
+          }
+        }
+      ]
+    },
+    "FirmwareVersionCriterion": {
+      "description": "Used to target devices based on their firmware version.",
+      "x-ms-discriminator-value": "firmware-version",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Firmware version."
+            }
+          }
+        }
+      ]
+    },
+    "DeviceManufacturerCriterion": {
+      "description": "Used to target devices based on the device manufacturer.",
+      "x-ms-discriminator-value": "device-manufacturer",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The device manufacturer."
+            }
+          }
+        }
+      ]
+    },
+    "DeviceModelCriterion": {
+      "description": "Used to target devices based on the device model.",
+      "x-ms-discriminator-value": "device-model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The device model."
+            }
+          }
+        }
+      ]
+    },
+    "ApplicationVersionCriterion": {
+      "description": "Used to target devices based on the version of the application they are using.",
+      "x-ms-discriminator-value": "application-version",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The application version."
+            }
+          }
+        }
+      ]
+    },
+    "NetworkTypeCriterion": {
+      "description": "Used to target devices based their network type.",
+      "x-ms-discriminator-value": "network-type",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The network type (Wifi, Mobile...)."
+            }
+          }
+        }
+      ]
+    },
+    "LanguageCriterion": {
+      "description": "Used to target devices based on the language of their device.",
+      "x-ms-discriminator-value": "language",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Two character language code (ISO 639-1)."
+            }
+          }
+        }
+      ]
+    },
+    "ScreenSizeCriterion": {
+      "description": "Used to target devices based on the screen resolution of their device.",
+      "x-ms-discriminator-value": "screen-size",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Screen size using the following format WIDTH**x**HEIGHT."
+            }
+          }
+        }
+      ]
+    },
+    "LocationCriterion": {
+      "description": "Used to target devices based on their last know area.",
+      "x-ms-discriminator-value": "location",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "country": {
+              "type": "string",
+              "description": "Two character country code where the user is located (ISO 3166-1)."
+            },
+            "region": {
+              "type": "string",
+              "description": "An administrative region of the country, such as a state or province."
+            },
+            "locality": {
+              "type": "string",
+              "description": "A locality within the administrative region, such as a town or city."
+            }
+          },
+          "required": [
+            "country"
+          ]
+        }
+      ]
+    },
+    "GeoFencingCriterion": {
+      "description": "Used to target devices based on a specific region. A center point (defined by a latitude and longitude) and a radius form the boundary for the region. This criterion will be met when the user crosses the boundaries of the region.\n",
+      "x-ms-discriminator-value": "geo-fencing",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "lat": {
+              "type": "number",
+              "description": "The latitude of the central point of the region."
+            },
+            "lon": {
+              "type": "number",
+              "description": "The longitude of the central point of the region."
+            },
+            "radius": {
+              "type": "integer",
+              "description": "The radius of the central point of the region, in meters."
+            },
+            "expiration": {
+              "type": "integer",
+              "description": "Number of minutes before device location is considered to be expired."
+            }
+          }
+        }
+      ]
+    },
+    "AnnouncementFeedbackCriterion": {
+      "description": "Used to target devices who received an announcement.",
+      "x-ms-discriminator-value": "announcement-feedback",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content-id": {
+              "type": "integer",
+              "description": "The unique identifier of the announcement."
+            },
+            "action": {
+              "type": "string",
+              "description": "Action that was performed on the announcement.",
+              "enum": [
+                "pushed",
+                "replied",
+                "actioned",
+                "exited"
+              ],
+              "x-ms-enum": {
+                "name": "CampaignFeedbacks",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "PollFeedbackCriterion": {
+      "description": "Used to target devices who received a poll.",
+      "x-ms-discriminator-value": "poll-feedback",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content-id": {
+              "type": "integer",
+              "description": "The unique identifier of the poll."
+            },
+            "action": {
+              "type": "string",
+              "description": "Action that was performed on the poll.",
+              "enum": [
+                "pushed",
+                "replied",
+                "actioned",
+                "exited"
+              ],
+              "x-ms-enum": {
+                "name": "CampaignFeedbacks",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "PollAnswerFeedbackCriterion": {
+      "description": "Used to target devices who answered X to a given question.",
+      "x-ms-discriminator-value": "poll-answer-feedback",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content-id": {
+              "type": "integer",
+              "description": "The unique identifier of the poll."
+            },
+            "choice-id": {
+              "type": "integer",
+              "description": "The unique identifier of the choice."
+            }
+          }
+        }
+      ]
+    },
+    "DatapushFeedbackCriterion": {
+      "description": "Used to target devices who received a data push.",
+      "x-ms-discriminator-value": "datapush-feedback",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "content-id": {
+              "type": "integer",
+              "description": "The unique identifier of the data push."
+            },
+            "action": {
+              "type": "string",
+              "description": "Action that was performed on the data push (action depends on the return value in the callbacks you declared in the client code).\n",
+              "enum": [
+                "pushed",
+                "replied",
+                "actioned",
+                "exited"
+              ],
+              "x-ms-enum": {
+                "name": "CampaignFeedbacks",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "SegmentCriterion": {
+      "description": "Target devices based on an existing segment.",
+      "x-ms-discriminator-value": "segment",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "Segment identifier."
+            },
+            "exclude": {
+              "type": "boolean",
+              "description": "If value is true, the criterion will target users that are NOT part of the segment."
+            }
+          }
+        }
+      ]
+    },
+    "StringTagCriterion": {
+      "description": "Target devices based on a string tag value.",
+      "x-ms-discriminator-value": "string-tag",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the custom tag."
+            },
+            "value": {
+              "type": "string",
+              "description": "A custom string to match for tag value (? and * characters can be used to perform wildcard matching)."
+            }
+          }
+        }
+      ]
+    },
+    "DateTagCriterion": {
+      "description": "Target devices based on a date tag value.",
+      "x-ms-discriminator-value": "date-tag",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the custom tag."
+            },
+            "value": {
+              "type": "string",
+              "format": "date",
+              "description": "It can be either: * an absolute date using yyyy-MM-dd format (e.g. 1969-12-07 stands for 7 Dec 1969). * an offset in days relative to the current day (`TODAY` + `value`).\n"
+            },
+            "op": {
+              "type": "string",
+              "description": "comparison operator: `EQ` (equal to), `LT` (less than), `GT` (greater than), `LE` (less than or equal to) or `GE` (greater than or equal to).",
+              "enum": [
+                "EQ",
+                "LT",
+                "GT",
+                "LE",
+                "GE"
+              ],
+              "x-ms-enum": {
+                "name": "AudienceOperators",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "IntegerTagCriterion": {
+      "description": "Target devices based on an integer tag value.",
+      "x-ms-discriminator-value": "integer-tag",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the custom tag."
+            },
+            "value": {
+              "type": "integer",
+              "description": "A custom integer value to match."
+            },
+            "op": {
+              "type": "string",
+              "description": "comparison operator: `EQ` (equal to), `LT` (less than), `GT` (greater than), `LE` (less than or equal to) or `GE` (greater than or equal to).",
+              "enum": [
+                "EQ",
+                "LT",
+                "GT",
+                "LE",
+                "GE"
+              ],
+              "x-ms-enum": {
+                "name": "AudienceOperators",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "BooleanTagCriterion": {
+      "description": "Target devices based on a boolean tag value.",
+      "x-ms-discriminator-value": "boolean-tag",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Criterion"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the custom tag."
+            },
+            "value": {
+              "type": "boolean",
+              "description": "A custom boolean value to match."
+            }
+          }
+        }
+      ]
+    },
+    "Filter": {
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "EngageSubsetFilter": {
+      "description": "Send only to a maximum of max users.",
+      "x-ms-discriminator-value": "engage-subset",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Filter"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "max": {
+              "type": "integer",
+              "description": "An integer value representing the maximum users that should be pushed."
+            }
+          }
+        }
+      ]
+    },
+    "EngageOldUsersFilter": {
+      "description": "Send only to users whose first app use is more than {threshold} days old.",
+      "x-ms-discriminator-value": "engage-old-users",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Filter"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "threshold": {
+              "type": "integer",
+              "description": "An integer value representing the threshold to apply on this filter."
+            }
+          }
+        }
+      ]
+    },
+    "EngageNewUsersFilter": {
+      "description": "Send only to users whose first app use is less than {threshold} days old.",
+      "x-ms-discriminator-value": "engage-new-users",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Filter"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "threshold": {
+              "type": "integer",
+              "description": "An integer value representing the threshold to apply on this filter."
+            }
+          }
+        }
+      ]
+    },
+    "EngageActiveUsersFilter": {
+      "description": "Send only to users who have used the app in the last {threshold} days.",
+      "x-ms-discriminator-value": "engage-active-users",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Filter"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "threshold": {
+              "type": "integer",
+              "description": "An integer value representing the threshold to apply on this filter."
+            }
+          }
+        }
+      ]
+    },
+    "EngageIdleUsersFilter": {
+      "description": "Send only to users who haven't used the app in the last {threshold} days.",
+      "x-ms-discriminator-value": "engage-idle-users",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Filter"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "threshold": {
+              "type": "integer",
+              "description": "An integer value representing the threshold to apply on this filter."
+            }
+          }
+        }
+      ]
+    },
+    "NativePushEnabledFilter": {
+      "description": "Engage only users with native push enabled.",
+      "x-ms-discriminator-value": "native-push-enabled",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Filter"
+        }
+      ]
+    },
+    "PushQuotaFilter": {
+      "description": "Engage only users for whom the push quota is not reached.",
+      "x-ms-discriminator-value": "push-quota",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Filter"
+        }
+      ]
+    },
+    "AppInfoFilter": {
+      "description": "Send only to users who have some app info set. This is a special filter that is automatically added if your campaign contains appInfo parameters. It is not intended to be public and should not be used as it could be removed or replaced by the API.\n",
+      "x-ms-discriminator-value": "app-info",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Filter"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "appInfo": {
+              "type": "array",
+              "description": "An array containing all the required appInfo.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Campaign": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique name of the campaign.",
+          "maxLength": 64
+        },
+        "audience": {
+          "type": "object",
+          "description": "Specify which users will be targeted by this campaign. By default, all users will be targeted. If you set `pushMode` property to `manual`, the only thing you can specify in the audience is the push quota filter. An audience is a boolean expression made of criteria (variables) operators (`not`, `and` or `or`) and parenthesis. Additionally, a set of filters can be added to an audience. 65535 bytes max as per JSON encoding.\n",
+          "properties": {
+            "expression": {
+              "type": "string",
+              "description": "Boolean expression made of criteria (variables) operators (`not`, `and` or `or`) and parenthesis. Criterion names in the audience expression must start with a capital letter and can only contain alphanumeric (A-Z,a-z,0-9) and underscore (_) characters.\n"
+            },
+            "criteria": {
+              "description": "Criteria by name.",
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/Criterion"
+              }
+            },
+            "filters": {
+              "type": "array",
+              "description": "Global filters applied to all devices.",
+              "items": {
+                "$ref": "#/definitions/Filter"
+              }
+            }
+          }
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the campaign. Categories can be used on the application side to customize campaigns.",
+          "maxLength": 64
+        },
+        "pushMode": {
+          "type": "string",
+          "description": "Announcements/polls only. Defines how the campaign is pushed. Valid values are: * `real-time`: Never ending campaign, the campaign will be delivered  to your existing users and also to your new users. * `one-shot`: In this mode, the campaign will be delivered only to your existing users (campaign will stop after that). * `manual`: In this mode, the campaign will not be pushed automatically to devices. You will have to use the Push campaign command to push the campaign to your end-users. Campaigns can be pushed multiple times to the same device.\n",
+          "enum": [
+            "real-time",
+            "one-shot",
+            "manual"
+          ],
+          "x-ms-enum": {
+            "name": "PushModes",
+            "modelAsString": true
+          },
+          "default": "real-time"
+        },
+        "type": {
+          "type": "string",
+          "description": "Applicable only to announcements and data pushes. Type of announcement. Valid values are: * `text/plain`: Text-only announcement: `body` property should only contain plain text. * `text/html`: HTML announcement: `body` attribute can contain HTML code. * `only_notif`: Notification-only announcement. With this kind of announcements, the `body`, `title`, `actionButtonText` and `exitButtonText` are ignored. Type of data push. Valid values are: * `text/plain`: Text only data push: `body` property must be plain text. * `text/base64`: Base 64 data push: `body` property must be encoded in base 64.\n",
+          "enum": [
+            "text/plain",
+            "text/html",
+            "only_notif",
+            "text/base64"
+          ],
+          "x-ms-enum": {
+            "name": "CampaignTypes",
+            "modelAsString": true
+          }
+        },
+        "deliveryTime": {
+          "type": "string",
+          "description": "Announcements/polls only. Defines when the campaign should be delivered. Valid values are: * `any`: Campaign will be delivered as soon as possible. * `background`: iOS only. Campaign will be only delivered when the application is in background (out of app). * `session`: Campaign will be delivered when the application is running.\n",
+          "enum": [
+            "any",
+            "background",
+            "session"
+          ],
+          "x-ms-enum": {
+            "name": "DeliveryTimes",
+            "modelAsString": true
+          }
+        },
+        "deliveryActivities": {
+          "type": "array",
+          "description": "Announcements/polls only. Array containing the list of activities in which the campaign can be delivered. deliveryTime must be set to session. If the platform is iOS, this option can also be set if deliveryTime is set to any. In that case, if the campaign is received when the application is launched, it will be delivered only in the specified list of activities.\n",
+          "items": {
+            "type": "string"
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The date at which the campaign should be started. The date shall conform to the following format: `yyyy-MM-ddTHH:mm:ssZ`. * If you set pushMode property to manual, this attribute will be ignored. * If you set pushMode property to one-shot, then the timezone attribute must be specified. Example: `2011-11-21 15:23Z`\n"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The date at which the campaign should be finished. The date shall conform to the following format: `yyyy-MM-ddTHH:mm:ssZ`. Example: `2011-11-21 15:23Z`\n"
+        },
+        "timezone": {
+          "type": "string",
+          "description": "The id of the time zone to use for the startTime and endTime dates. If not provided, the two date attributes will be expressed using the device timezone. Example: America/Los_Angeles\n"
+        },
+        "notificationType": {
+          "type": "string",
+          "description": "Android only. Defines how the notification should be displayed. Valid values are: * `system`: Display the notification using a standard system notification. * `popup`: Display the notification using a in-app banner notification.\n",
+          "enum": [
+            "system",
+            "popup"
+          ],
+          "x-ms-enum": {
+            "name": "NotificationTypes",
+            "modelAsString": true
+          },
+          "default": "popup"
+        },
+        "notificationIcon": {
+          "type": "boolean",
+          "description": "A flag indicating whether or not you want to display the resource icon in notification content.",
+          "default": true
+        },
+        "notificationCloseable": {
+          "type": "boolean",
+          "description": "A flag indicating whether or not you want the notification to be closeable.",
+          "default": true
+        },
+        "notificationVibrate": {
+          "type": "boolean",
+          "description": "Android only. A flag indicating whether or not you want the system notification to make a vibration. The notificationType property must be set to system.",
+          "default": false
+        },
+        "notificationSound": {
+          "type": "boolean",
+          "description": "* `Android`: A flag indicating whether or not you want the system notification to make a sound. The `notificationType` property must be set to `system`. * `iOS`: A flag indicating whether or not you want the native Apple Push notification to make a sound. The `deliveryTime` property must be set to `any` or `background`. This will play the 'default' sound. If you want to play a custom sound, see the `notificationOptions` property. * `Windows`: A flag indicating whether or not you want the native Windows Notification Service to make a sound. The `deliveryTime` property must be set to `any`.\n",
+          "default": false
+        },
+        "notificationBadge": {
+          "type": "boolean",
+          "description": "A flag indicating whether or not you want the native Apple Push notification to update the badge icon to the number of unread messages. The `deliveryTime` property must be set to `any` or `background`.\n",
+          "default": false
+        },
+        "localization": {
+          "type": "object",
+          "description": "Push campaigns can be localized using an optional JSON object. The JSON key is a two-character language code as specified by the ISO 639-1 standard. The corresponding value is an object containing the localizable properties.\n",
+          "additionalProperties": {
+            "$ref": "#/definitions/CampaignLocalization"
+          }
+        },
+        "questions": {
+          "type": "array",
+          "description": "Poll questions.",
+          "items": {
+            "$ref": "#/definitions/PollQuestion"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CampaignLocalization"
+        }
+      ]
+    },
+    "CampaignListResult": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the campaign."
+        },
+        "activatedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date at which the campaign was activated (Not present if not yet activated). The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "finishedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date at which the campaign was finished (Not present if not yet finished). The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date at which the campaign should be started if specified. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard. Applicable only to announcements and polls.\n"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date at which the campaign should be finished if specified. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard. Applicable only to announcements and polls.\n"
+        },
+        "timezone": {
+          "type": "string",
+          "description": "The id of the time zone to use for the `startTime` and `endTime` dates. If not provided, the two date attributes are referencing to the device timezone. Applicable only to announcements and polls.\n"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CampaignStateResult"
+        }
+      ]
+    },
+    "CampaignResult": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Campaign identifier."
+        },
+        "state": {
+          "type": "string",
+          "description": "State of the campaign, or 'queued' when testing a campaign.",
+          "enum": [
+            "draft",
+            "scheduled",
+            "in-progress",
+            "finished",
+            "queued"
+          ],
+          "x-ms-enum": {
+            "name": "CampaignStates",
+            "modelAsString": true
+          }
+        },
+        "activatedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date at which the campaign was activated (Not present if not yet activated). The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.\n"
+        },
+        "finishedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date at which the campaign was finished (Not present if not yet finished). The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.\n"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Campaign"
+        }
+      ]
+    },
+    "CampaignPushResult": {
+      "properties": {
+        "invalidDeviceIds": {
+          "type": "array",
+          "description": "A JSON array containing all identifiers that have been rejected. A device can be rejected for the following reasons: * The device hasn’t reported any session yet. * The device is over quota (if a push quota filter is applied on your campaign). Please note that if the request parameters are valid but all the specified devices are rejected, the status code is still `200` with a response including all the devices as being rejected.\n",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CampaignStatisticsResult": {
+      "properties": {
+        "queued": {
+          "type": "integer",
+          "description": "Number of times the campaign was registered to be pushed."
+        },
+        "pushed": {
+          "type": "integer",
+          "description": "Number of pushes performed."
+        },
+        "pushed-native": {
+          "type": "integer",
+          "description": "Total number of native pushes. Information only available on Android, iOS, Windows Phone and Windows applications."
+        },
+        "pushed-native-google": {
+          "type": "integer",
+          "description": "Number of C2DM/GCM pushes (available only on Android applications)."
+        },
+        "pushed-native-adm": {
+          "type": "integer",
+          "description": "Number of ADM pushes (available only on Android applications)."
+        },
+        "delivered": {
+          "type": "integer",
+          "description": "Number of times the campaign was received by the application (Not present in case of a native-push)."
+        },
+        "dropped": {
+          "type": "integer",
+          "description": "Number of times the campaign was dropped by the application. It can happen if the SDK failed to parse the campaign payload or if an error occurred while trying to notify the end-user (Not present in case of a native-push)."
+        },
+        "system-notification-displayed": {
+          "type": "integer",
+          "description": "Number of times the system notification was displayed (Not present in case of a data-push or a native-push). On Android it corresponds to a status bar notification."
+        },
+        "in-app-notification-displayed": {
+          "type": "integer",
+          "description": "Number of times the in-app notification was displayed (Not present in case of a data-push or a native-push)."
+        },
+        "content-displayed": {
+          "type": "integer",
+          "description": "Number of times the campaign’s content view was displayed (Not present in case of a notification-only announcement, a data-push or a native-push)."
+        },
+        "system-notification-actioned": {
+          "type": "integer",
+          "description": "Number of times the system notification (On Android it corresponds to a status bar notification. On iOS, it is the Apple Push notification) was actioned."
+        },
+        "system-notification-exited": {
+          "type": "integer",
+          "description": "Number of times the system notification was exited (Not present in case of a data-push or a native-push)."
+        },
+        "in-app-notification-actioned": {
+          "type": "integer",
+          "description": "Number of times the in-app notification was actioned (Not present in case of a data-push or a native-push)."
+        },
+        "in-app-notification-exited": {
+          "type": "integer",
+          "description": "Number of times the in-app notification was exited (Not present in case of a data-push or a native-push)."
+        },
+        "content-actioned": {
+          "type": "integer",
+          "description": "Number of times the campaign’s content view was actioned (Not present in case of a notification-only announcement or a native-push)."
+        },
+        "content-exited": {
+          "type": "integer",
+          "description": "Number of times the campaign’s content view was exited (Not present in case of a notification-only announcement or a native-push)."
+        },
+        "answers": {
+          "type": "object",
+          "description": "Poll specific statistics.",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "CampaignsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CampaignListResult"
+          },
+          "description": "The list of campaigns."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "When using `top` parameter and if partial results are returned, this property describes a URI path to get the next results. This property is not set when reaching the last page."
+        }
+      },
+      "description": "The campaigns list result."
+    },
+    "DevicesQueryResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeviceQueryResult"
+          },
+          "description": "The list of devices."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "If partial results are returned, this property describes a URI path to get the next result page."
+        }
+      },
+      "description": "The campaigns list result."
+    },
+    "DeviceQueryResult": {
+      "required": [
+        "deviceId"
+      ],
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "The device result."
+        },
+        "meta": {
+          "description": "Application usage data.",
+          "$ref": "#/definitions/DeviceMeta"
+        },
+        "appInfo": {
+          "type": "object",
+          "description": "Also known as tags, a key-value set as a JSON object.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeviceMeta": {
+      "properties": {
+        "firstSeen": {
+          "type": "integer",
+          "format": "int64",
+          "description": "First time the device used the application in milliseconds since January 1st, 1970 UTC."
+        },
+        "lastSeen": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Last time the device used the application in milliseconds since January 1st, 1970 UTC."
+        },
+        "lastInfo": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Timestamp corresponding to the info object in milliseconds since January 1st, 1970 UTC."
+        },
+        "lastLocation": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Timestamp corresponding to the location object in milliseconds since January 1st, 1970 UTC."
+        },
+        "nativePushEnabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if native push notifications (like Android’s GCM or Apple’s APNS) are enabled for the application. This boolean is set to true when the application registers successfully to the native push service, and set to false when the native push service reports to Mobile Engagement that the application can no longer be pushed (which means that it has been uninstalled). This report is performed a few hours after Mobile Engagement has tried to perform a native push to a device on which the application has been uninstalled."
+        }
+      }
+    },
+    "DeviceInfo": {
+      "properties": {
+        "phoneModel": {
+          "type": "string",
+          "description": "Phone model."
+        },
+        "phoneManufacturer": {
+          "type": "string",
+          "description": "Phone manufacturer"
+        },
+        "firmwareVersion": {
+          "type": "string",
+          "description": "Firmware version."
+        },
+        "firmwareName": {
+          "type": "string",
+          "description": "Firmware name."
+        },
+        "androidAPILevel": {
+          "type": "integer",
+          "description": "Android API level."
+        },
+        "carrierCountry": {
+          "type": "string",
+          "description": "Carrier country."
+        },
+        "locale": {
+          "type": "string",
+          "description": "Locale code."
+        },
+        "carrierName": {
+          "type": "string",
+          "description": "Carrier name."
+        },
+        "networkType": {
+          "type": "string",
+          "description": "Network type."
+        },
+        "networkSubtype": {
+          "type": "string",
+          "description": "Network sub-type."
+        },
+        "applicationVersionName": {
+          "type": "string",
+          "description": "Application version name."
+        },
+        "applicationVersionCode": {
+          "type": "integer",
+          "description": "Application version code."
+        },
+        "timeZoneOffset": {
+          "type": "integer",
+          "description": "The offset in minutes from UTC for the device time zone, including daylight savings time."
+        },
+        "serviceVersion": {
+          "type": "string",
+          "description": "SDK version."
+        }
+      }
+    },
+    "DeviceLocation": {
+      "properties": {
+        "countrycode": {
+          "type": "string",
+          "description": "The ISO 3166 two-letter country code."
+        },
+        "region": {
+          "type": "string",
+          "description": "An administrative region of the nation, such as a state or province."
+        },
+        "locality": {
+          "type": "string",
+          "description": "A locality within the administrative region, such as a town or city."
+        }
+      }
+    },
+    "Device": {
+      "required": [
+        "deviceId"
+      ],
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "The device result."
+        },
+        "meta": {
+          "description": "Application usage data.",
+          "$ref": "#/definitions/DeviceMeta"
+        },
+        "info": {
+          "description": "Last technical data received (concerning device, system, network and application identification).",
+          "$ref": "#/definitions/DeviceInfo"
+        },
+        "location": {
+          "description": "Last geo-location data received.",
+          "$ref": "#/definitions/DeviceLocation"
+        },
+        "appInfo": {
+          "type": "object",
+          "description": "Also known as tags, a key-value set as a JSON object.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeviceTagsParameters": {
+      "required": [
+        "tags"
+      ],
+      "properties": {
+        "tags": {
+          "description": "A JSON object describing the set of tags to record for a set of users. Each key is a device/user identifier, each value is itself a key/value set: the tags to set for the specified device/user identifier.\n",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "deleteOnNull": {
+          "type": "boolean",
+          "description": "If this parameter is `true`, tags with a null value will be deleted.",
+          "default": false
+        }
+      }
+    },
+    "DeviceTagsResult": {
+      "required": [
+        "invalidIds"
+      ],
+      "properties": {
+        "invalidIds": {
+          "type": "array",
+          "description": "A JSON array containing all identifiers that have been rejected. Please note that if the request parameters are valid but all the specified devices are rejected, the status code is still `200` with a response including all the devices as being rejected.\n",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CampaignType": {
+      "type": "string",
+      "enum": [
+        "Announcement",
+        "DataPush",
+        "NativePush",
+        "Poll"
+      ],
+      "x-ms-enum": {
+        "name": "CampaignType",
+        "modelAsString": false
+      },
+      "description": "Campaign type."
+    },
+    "exportState": {
+      "type": "string",
+      "description": "The state of an export task.",
+      "enum": [
+        "Queued",
+        "Started",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ExportState",
+        "modelAsString": false
+      }
+    },
+    "exportType": {
+      "type": "string",
+      "description": "The type of export.",
+      "enum": [
+        "Activity",
+        "Tag",
+        "Crash",
+        "Error",
+        "Event",
+        "Job",
+        "Session",
+        "Token",
+        "Push"
+      ],
+      "x-ms-enum": {
+        "name": "ExportType",
+        "modelAsString": false
+      }
+    },
+    "exportFormat": {
+      "type": "string",
+      "description": "The format of exported data.",
+      "enum": [
+        "JsonBlob",
+        "CsvBlob"
+      ],
+      "x-ms-enum": {
+        "name": "ExportFormat",
+        "modelAsString": false
+      }
+    },
+    "exportOptions": {
+      "type": "object",
+      "description": "Options to control export generation.",
+      "properties": {
+        "exportUserId": {
+          "type": "boolean"
+        }
+      }
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "A date as defined by full-date in RFC3339."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "A date time as defined by date-time in RFC3339."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "containerUrl": {
+      "$ref": "#/definitions/url",
+      "description": "A shared Access Signature (SAS) BLOB container URL to contain the exported data."
+    },
+    "dateRangeExportTaskParameter": {
+      "readOnly": false,
+      "required": [
+        "containerUrl",
+        "startDate",
+        "endDate",
+        "exportFormat"
+      ],
+      "properties": {
+        "containerUrl": {
+          "$ref": "#/definitions/containerUrl"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the export task."
+        },
+        "startDate": {
+          "$ref": "#/definitions/date",
+          "description": "The RFC3339 full-date of the start of the period for which data is exported."
+        },
+        "endDate": {
+          "$ref": "#/definitions/date",
+          "description": "The RFC3339 full-date of the end of the period for which data is exported."
+        },
+        "exportFormat": {
+          "$ref": "#/definitions/exportFormat",
+          "description": "The format of the exported data."
+        }
+      }
+    },
+    "exportTaskParameter": {
+      "readOnly": false,
+      "required": [
+        "containerUrl",
+        "exportFormat"
+      ],
+      "properties": {
+        "containerUrl": {
+          "$ref": "#/definitions/containerUrl"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the export task."
+        },
+        "exportFormat": {
+          "$ref": "#/definitions/exportFormat",
+          "description": "The format of the exported data."
+        }
+      }
+    },
+    "feedbackByCampaignParameter": {
+      "readOnly": false,
+      "required": [
+        "containerUrl",
+        "campaignType",
+        "campaignIds",
+        "exportFormat"
+      ],
+      "properties": {
+        "containerUrl": {
+          "$ref": "#/definitions/containerUrl"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the export task."
+        },
+        "campaignType": {
+          "$ref": "#/definitions/CampaignType"
+        },
+        "campaignIds": {
+          "type": "array",
+          "description": "A list of campaign identifiers.",
+          "minItems": 1,
+          "items": {
+            "type": "integer",
+            "format": "long"
+          }
+        },
+        "exportFormat": {
+          "$ref": "#/definitions/exportFormat",
+          "description": "The format of the exported data."
+        }
+      }
+    },
+    "feedbackByDateRangeParameter": {
+      "readOnly": false,
+      "required": [
+        "containerUrl",
+        "campaignType",
+        "campaignWindowStart",
+        "campaignWindowEnd",
+        "exportFormat"
+      ],
+      "properties": {
+        "containerUrl": {
+          "$ref": "#/definitions/containerUrl"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the export task."
+        },
+        "campaignType": {
+          "$ref": "#/definitions/CampaignType"
+        },
+        "campaignWindowStart": {
+          "$ref": "#/definitions/timestamp",
+          "description": "The RFC3339 date-time start of the period for inclusion of active campaigns."
+        },
+        "campaignWindowEnd": {
+          "$ref": "#/definitions/timestamp",
+          "description": "The RFC3339 date-time end of the period for inclusion of active campaigns."
+        },
+        "exportFormat": {
+          "$ref": "#/definitions/exportFormat",
+          "description": "The format of the exported data."
+        }
+      }
+    },
+    "exportTaskListResult": {
+      "readOnly": true,
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/exportTaskResult"
+          },
+          "description": "The list of export tasks."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages."
+        }
+      },
+      "description": "Gets a paged list of ExportTasks."
+    },
+    "exportTaskResult": {
+      "readOnly": true,
+      "required": [
+        "id",
+        "state",
+        "dateCreated",
+        "exportType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the export task."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the export task."
+        },
+        "state": {
+          "$ref": "#/definitions/exportState"
+        },
+        "dateCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The RFC3339 date-time the export task was created."
+        },
+        "dateCompleted": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The RFC3339 date-time the export task was completed."
+        },
+        "exportType": {
+          "$ref": "#/definitions/exportType"
+        },
+        "errorDetails": {
+          "type": "string",
+          "description": "Details of errors encountered during the export, if any."
+        }
+      }
+    },
+    "importTask": {
+      "properties": {
+        "storageUrl": {
+          "type": "string",
+          "description": "A shared Access Signature (SAS) Storage URI where the job results will be retrieved from."
+        }
+      }
+    },
+    "importTaskListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/importTaskResult"
+          },
+          "description": "The list of import task."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages."
+        }
+      },
+      "description": "Gets a paged list of import tasks."
+    },
+    "importTaskResult": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the import task."
+        },
+        "state": {
+          "type": "string",
+          "description": "The current state of the import task.",
+          "enum": [
+            "Queued",
+            "Started",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "JobStates",
+            "modelAsString": true
+          }
+        },
+        "dateCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date at which the import job was created.\nThe date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "dateCompleted": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date at which the import job completed (Not present if not yet completed).\nThe date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "errorDetails": {
+          "type": "string",
+          "description": "Details of any errors encountered during the import, if any."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/importTask"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group."
+    },
+    "AppCollectionParameter": {
+      "name": "appCollection",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Application collection."
+    },
+    "AppNameParameter": {
+      "name": "appName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Application resource name."
+    }
+  }
+}

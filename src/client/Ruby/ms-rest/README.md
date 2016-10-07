@@ -4,7 +4,6 @@ MsRest is a library which supports the clients (SDKs) generated with Autorest to
 
 # Supported Ruby Versions
 
-* Ruby 1.9.3
 * Ruby 2.0
 * Ruby 2.1
 * Ruby 2.2
@@ -49,7 +48,7 @@ To start working on the gem the only additional dev dependecy is required - rspe
 Reference it in the gemfile and also add this line to your client's gemspec file:
 
 ```ruby
-spec.add_runtime_dependency 'ms_rest', '~> 0.5.0'
+spec.add_runtime_dependency 'ms_rest', '~> 0.6.0'
 ```
 
 Don't forget to correct the version.

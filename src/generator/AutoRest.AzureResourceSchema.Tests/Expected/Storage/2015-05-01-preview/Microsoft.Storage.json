@@ -19,6 +19,24 @@
             "2015-05-01-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -33,6 +51,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Storage/storageAccounts"
