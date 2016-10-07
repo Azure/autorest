@@ -252,4 +252,7 @@
   <data name="InvalidConstraint" xml:space="preserve">
     <value>Constraint is not supported for this type and will be ignored.</value>
   </data>
+  <data name="NonAppJsonTypeNotSupported" xml:space="preserve">
+    <value>Non application json MIME type has limited support</value>
+  </data>
 </root>
