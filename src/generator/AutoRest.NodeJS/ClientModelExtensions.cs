@@ -847,13 +847,7 @@ namespace AutoRest.NodeJS
                          .AppendLine("name: 'Composite',");
                 if (composite.PolymorphicDiscriminator != null)
                 {
-                    builder.AppendLine("polymorphicDiscriminator: '{0}',", composite.PolymorphicDiscriminator);
-                    var polymorphicType = composite;
-                    while (polymorphicType.BaseModelType != null)
-                    {
-                        polymorphicType = polymorphicType.BaseModelType;
-                    }
-                    builder.AppendLine("uberParent: '{0}',", polymorphicType.Name);
+                    builder = ConstructPolymorphicDiscriminator(composite, builder);
                 }
                 if (!expandComposite)
                 {
@@ -920,6 +914,36 @@ namespace AutoRest.NodeJS
                 throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, Resources.InvalidType, type));
             }
             return builder.ToString();
+        }
+
+        public static IndentedStringBuilder ConstructPolymorphicDiscriminator(CompositeType composite, IndentedStringBuilder builder)
+        {
+            if (composite == null)
+            {
+                throw new ArgumentNullException("composite");
+            }
+            if (builder == null)
+            {
+                throw new ArgumentNullException("builder");
+            }
+            // Note: If the polymorphicDiscriminator has a dot in it's name then do not escape that dot for 
+            // it's serializedName, the way it is done for other properties. This makes it easy to find the 
+            // discriminator property from the responseBody during deserialization. Please, do not get confused  
+            // between the definition of the discriminator and the definition of the property that is  
+            // marked as the discriminator. 
+            builder.AppendLine("polymorphicDiscriminator: {")
+                     .Indent()
+                     .AppendLine("serializedName: '{0}',", composite.PolymorphicDiscriminator)
+                     .AppendLine("clientName: '{0}'", new NodeJsCodeNamer().GetPropertyName(composite.PolymorphicDiscriminator))
+                   .Outdent()
+                   .AppendLine("},");
+            var polymorphicType = composite;
+            while (polymorphicType.BaseModelType != null)
+            {
+                polymorphicType = polymorphicType.BaseModelType;
+            }
+            builder.AppendLine("uberParent: '{0}',", polymorphicType.Name);
+            return builder;
         }
 
         /// <summary>

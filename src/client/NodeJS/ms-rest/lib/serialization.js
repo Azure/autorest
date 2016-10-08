@@ -192,27 +192,29 @@ function serializeDictionaryType(mapper, object, objectName) {
 function serializeCompositeType(mapper, object, objectName) {
   /*jshint validthis: true */
   //check for polymorphic discriminator
-  if (mapper.type.polymorphicDiscriminator !== null && mapper.type.polymorphicDiscriminator !== undefined) {
+  if (mapper.type.polymorphicDiscriminator && 
+      mapper.type.polymorphicDiscriminator.clientName !== null && 
+      mapper.type.polymorphicDiscriminator.clientName !== undefined) {
     if (object === null || object === undefined) {
       throw new Error(util.format('\'%s\' cannot be null or undefined. \'%s\' is the ' + 
         'polmorphicDiscriminator and is a required property.', objectName, 
-        mapper.type.polymorphicDiscriminator));
+        mapper.type.polymorphicDiscriminator.clientName));
     }
-    if (object[mapper.type.polymorphicDiscriminator] === null || object[mapper.type.polymorphicDiscriminator] === undefined) {
+    if (object[mapper.type.polymorphicDiscriminator.clientName] === null || object[mapper.type.polymorphicDiscriminator.clientName] === undefined) {
       throw new Error(util.format('No discriminator field \'%s\' was found in \'%s\'.', 
-        mapper.type.polymorphicDiscriminator, objectName));
+        mapper.type.polymorphicDiscriminator.clientName, objectName));
     }
     var indexDiscriminator = null;
-    if (object[mapper.type.polymorphicDiscriminator] === mapper.type.uberParent) {
-      indexDiscriminator = object[mapper.type.polymorphicDiscriminator];
+    if (object[mapper.type.polymorphicDiscriminator.clientName] === mapper.type.uberParent) {
+      indexDiscriminator = object[mapper.type.polymorphicDiscriminator.clientName];
     } else {
-      indexDiscriminator = mapper.type.uberParent + '.' + object[mapper.type.polymorphicDiscriminator];
+      indexDiscriminator = mapper.type.uberParent + '.' + object[mapper.type.polymorphicDiscriminator.clientName];
     }
     if (!this.models.discriminators[indexDiscriminator]) {
       throw new Error(util.format('\'%s\': \'%s\'  in \'%s\' is not a valid ' + 
         'discriminator as a corresponding model class for the disciminator \'%s\' ' + 
         'was not found in this.models.discriminators object.', 
-        mapper.type.polymorphicDiscriminator, object[mapper.type.polymorphicDiscriminator], objectName, indexDiscriminator));
+        mapper.type.polymorphicDiscriminator.clientName, object[mapper.type.polymorphicDiscriminator.clientName], objectName, indexDiscriminator));
     }
     mapper = new this.models.discriminators[indexDiscriminator]().mapper();
   }
@@ -468,27 +470,29 @@ function deserializeDictionaryType(mapper, responseBody, objectName) {
 function deserializeCompositeType(mapper, responseBody, objectName) {
   /*jshint validthis: true */
   //check for polymorphic discriminator
-  if (mapper.type.polymorphicDiscriminator !== null && mapper.type.polymorphicDiscriminator !== undefined) {
+  if (mapper.type.polymorphicDiscriminator && 
+      mapper.type.polymorphicDiscriminator.serializedName !== null && 
+      mapper.type.polymorphicDiscriminator.serializedName !== undefined) {
     if (responseBody === null || responseBody === undefined) {
       throw new Error(util.format('\'%s\' cannot be null or undefined. \'%s\' is the ' + 
         'polmorphicDiscriminator and is a required property.', objectName, 
-        mapper.type.polymorphicDiscriminator));
+        mapper.type.polymorphicDiscriminator.serializedName));
     }
-    if (responseBody[mapper.type.polymorphicDiscriminator] === null || responseBody[mapper.type.polymorphicDiscriminator] === undefined) {
+    if (responseBody[mapper.type.polymorphicDiscriminator.serializedName] === null || responseBody[mapper.type.polymorphicDiscriminator.serializedName] === undefined) {
       throw new Error(util.format('No discriminator field \'%s\' was found in \'%s\'.', 
-        mapper.type.polymorphicDiscriminator, objectName));
+        mapper.type.polymorphicDiscriminator.serializedName, objectName));
     }
     var indexDiscriminator = null;
-    if (responseBody[mapper.type.polymorphicDiscriminator] === mapper.type.uberParent) {
-      indexDiscriminator = responseBody[mapper.type.polymorphicDiscriminator];
+    if (responseBody[mapper.type.polymorphicDiscriminator.serializedName] === mapper.type.uberParent) {
+      indexDiscriminator = responseBody[mapper.type.polymorphicDiscriminator.serializedName];
     } else {
-      indexDiscriminator = mapper.type.uberParent + '.' + responseBody[mapper.type.polymorphicDiscriminator];
+      indexDiscriminator = mapper.type.uberParent + '.' + responseBody[mapper.type.polymorphicDiscriminator.serializedName];
     }
     if (!this.models.discriminators[indexDiscriminator]) {
       throw new Error(util.format('\'%s\': \'%s\'  in \'%s\' is not a valid ' + 
         'discriminator as a corresponding model class for the disciminator \'%s\' ' + 
         'was not found in this.models.discriminators object.', 
-        mapper.type.polymorphicDiscriminator, responseBody[mapper.type.polymorphicDiscriminator], objectName, indexDiscriminator));
+        mapper.type.polymorphicDiscriminator.serializedName, responseBody[mapper.type.polymorphicDiscriminator.serializedName], objectName, indexDiscriminator));
     }
     mapper = new this.models.discriminators[indexDiscriminator]().mapper();
   }
