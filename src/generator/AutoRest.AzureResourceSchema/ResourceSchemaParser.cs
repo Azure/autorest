@@ -489,6 +489,16 @@ namespace AutoRest.AzureResourceSchema
                                 result.Pattern = entry.Value;
                                 break;
 
+                            case Constraint.MinLength:
+                                Debug.Assert(result.JsonType == "string" || result.JsonType == "array", "Expected to only find a MinLength constraint on a string or array property.");
+                                result.MinLength = Double.Parse(entry.Value, CultureInfo.CurrentCulture);
+                                break;
+
+                            case Constraint.MaxLength:
+                                Debug.Assert(result.JsonType == "string" || result.JsonType == "array", "Expected to only find a MaxLength constraint on a string or array property.");
+                                result.MaxLength = Double.Parse(entry.Value, CultureInfo.CurrentCulture);
+                                break;
+
                             default:
                                 Debug.Fail("Unrecognized property Constraint: " + entry.Key);
                                 break;
