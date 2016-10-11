@@ -152,6 +152,7 @@ namespace AutoRest.NodeJS
                     }
                 }
             }
+            ProcessPolymorphicDiscriminators(client);
             //Normalize properties with dots by surrounding them with single quotes to represent 
             //them as a single property and not as one being part of another. For example: 'odata.nextLink' 
             foreach (var modelType in client.ModelTypes)
@@ -161,6 +162,29 @@ namespace AutoRest.NodeJS
                     if (property.Name.Contains(".") && !property.Name.StartsWith("'", StringComparison.CurrentCultureIgnoreCase))
                     {
                         property.Name = string.Format(CultureInfo.InvariantCulture, "'{0}'", property.Name);
+                    }
+                }
+            }
+        }
+
+        public void ProcessPolymorphicDiscriminators(ServiceClient client)
+        {
+            foreach (var modelType in client.ModelTypes)
+            {
+                if (!string.IsNullOrEmpty(modelType.PolymorphicDiscriminator))
+                {
+                    if (!modelType.Properties.Any(p => p.Name == modelType.PolymorphicDiscriminator))
+                    {
+                        var polymorphicProperty = new Property
+                        {
+                            IsRequired = true,
+                            Name = modelType.PolymorphicDiscriminator,
+                            SerializedName = modelType.PolymorphicDiscriminator,
+                            Documentation = "Polymorhpic Discriminator",
+                            Type = new PrimaryType(KnownPrimaryType.String)
+                        };
+                        modelType.Properties.Add(polymorphicProperty);
+                        NormalizeCompositeType(modelType);
                     }
                 }
             }

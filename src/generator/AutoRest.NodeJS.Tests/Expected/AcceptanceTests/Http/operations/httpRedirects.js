@@ -59,11 +59,8 @@ HttpRedirects.prototype.head300 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/redirect/300';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/redirect/300';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -150,11 +147,8 @@ HttpRedirects.prototype.get300 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/redirect/300';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/redirect/300';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -271,11 +265,8 @@ HttpRedirects.prototype.head301 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/redirect/301';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/redirect/301';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -362,11 +353,8 @@ HttpRedirects.prototype.get301 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/redirect/301';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/redirect/301';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -466,11 +454,8 @@ HttpRedirects.prototype.put301 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/redirect/301';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/redirect/301';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -577,11 +562,8 @@ HttpRedirects.prototype.head302 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/redirect/302';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/redirect/302';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -668,11 +650,8 @@ HttpRedirects.prototype.get302 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/redirect/302';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/redirect/302';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -772,11 +751,8 @@ HttpRedirects.prototype.patch302 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/redirect/302';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/redirect/302';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -896,11 +872,8 @@ HttpRedirects.prototype.post303 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/redirect/303';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/redirect/303';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1007,11 +980,8 @@ HttpRedirects.prototype.head307 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/redirect/307';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/redirect/307';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1098,11 +1068,8 @@ HttpRedirects.prototype.get307 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/redirect/307';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/redirect/307';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1200,11 +1167,8 @@ HttpRedirects.prototype.put307 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/redirect/307';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/redirect/307';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1322,11 +1286,8 @@ HttpRedirects.prototype.patch307 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/redirect/307';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/redirect/307';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1444,11 +1405,8 @@ HttpRedirects.prototype.post307 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/redirect/307';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/redirect/307';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1566,11 +1524,8 @@ HttpRedirects.prototype.delete307 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/redirect/307';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/redirect/307';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
