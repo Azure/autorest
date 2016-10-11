@@ -41,8 +41,6 @@ namespace AutoRest.AzureResourceSchema
             foreach (Method method in serviceClient.Methods)
             {
                 if (method.HttpMethod != HttpMethod.Put ||
-                    method.ReturnType.Body == null ||
-                    !(method.ReturnType.Body is CompositeType) ||
                     string.IsNullOrWhiteSpace(method.Url) ||
                     !method.Url.StartsWith(resourceMethodPrefix, StringComparison.OrdinalIgnoreCase) ||
                     !method.Url.EndsWith("}", StringComparison.OrdinalIgnoreCase))

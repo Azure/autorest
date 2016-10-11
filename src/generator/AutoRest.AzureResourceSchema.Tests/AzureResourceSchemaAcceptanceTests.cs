@@ -17,6 +17,12 @@ namespace AutoRest.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void ApiManagement_2016_07_07b()
+        {
+            RunSwaggerTest("ApiManagement", "2016-07-07b", "apimanagement.json");
+        }
+
+        [Fact]
         public static void Authorization_2015_07_01()
         {
             RunSwaggerTest("Authorization", "2015-07-01", "authorization.json");
