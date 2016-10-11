@@ -7,7 +7,7 @@
   },
   "host": "management.azure.com",
   "schemes": [
-    "https"
+    "Https"
   ],
   "basePath": "/",
   "paths": {
