@@ -6,6 +6,7 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Model;
+using System;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -16,8 +17,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="scheme"></param>
         /// <returns></returns>
-        public override bool IsValid(TransferProtocolScheme scheme)
-            => (scheme==TransferProtocolScheme.Https);
+        public override bool IsValid(TransferProtocolScheme scheme) => (scheme==TransferProtocolScheme.Https);
 
         /// <summary>
         /// The template message for this Rule. 
