@@ -61,6 +61,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The transfer protocol of the API.
         /// </summary>
+        [CollectionRule(typeof(SupportedSchemesWarning))]
         public IList<TransferProtocolScheme> Schemes { get; set; }
 
         /// <summary>

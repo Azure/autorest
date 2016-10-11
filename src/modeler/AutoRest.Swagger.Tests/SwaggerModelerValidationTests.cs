@@ -130,6 +130,20 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void NonHttpsServiceDefinitionForScheme()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "non-https-service-def-scheme.json"));
+            messages.AssertOnlyValidationWarning(typeof(SupportedSchemesWarning));
+        }
+
+        [Fact]
+        public void NonHttpsOperationsForScheme()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "non-https-operations-scheme.json"));
+            messages.AssertOnlyValidationWarning(typeof(SupportedSchemesWarning));
+        }
+
+        [Fact]
         public void NoResponsesValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operations-no-responses.json"));
