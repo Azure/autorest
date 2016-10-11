@@ -438,6 +438,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Non-HTTPS schemes have limited Autorest support.
+        /// </summary>
+        public static string SupportedSchemesWarningMessage {
+            get {
+                return ResourceManager.GetString("SupportedSchemesWarningMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Operations can not have more than one &apos;body&apos; parameter. The following were found: &apos;{0}&apos;.
         /// </summary>
         public static string TooManyBodyParameters {

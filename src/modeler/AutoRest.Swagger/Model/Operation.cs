@@ -84,6 +84,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The transfer protocol for the operation. 
         /// </summary>
+        [CollectionRule(typeof(SupportedSchemesWarning))]
         public IList<TransferProtocolScheme> Schemes { get; set; }
 
         public bool Deprecated { get; set; }
