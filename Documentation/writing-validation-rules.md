@@ -32,6 +32,10 @@ The root Swagger spec is deserialized into a [`ServiceDefinition`](../src/modele
 - Add an incorrect Swagger file to the [`Swagger/Validation/`](../src/modeler/AutoRest.Swagger.Tests/Swagger/Validation) folder that should trigger your validation rule.
 - Add a test case to [`SwaggerModelerValidationTests.cs`](../src/modeler/AutoRest.Swagger.Tests/SwaggerModelerValidationTests.cs) that asserts that the validation message returned for the Swagger file is  
 
+### 6. Ensure your validation rule applies to `clean-complex-spec.json`  
+- `clean-complex-spec.json` is a complex json that passes each validation rule specified in [`SwaggerModelerValidationTests.cs`]
+- Upon adding your validation rule, ensure this json passes the rule by running the `CleanFileValidation` test
+
 ## Complex rules
 ### Typed rules
 The `IsValid()` method of the `Rule` class only passes an object with no type information. You can have your rule subclass work on a typed model class by inheriting from the `TypedRule<T>` class instead. By replacing `T` with a model class, your override of `IsValid()` will use `T` as the type for the `entity` parameter.
