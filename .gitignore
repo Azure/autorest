@@ -199,11 +199,3 @@ src/generator/AutoRest.Go.Tests/src/github.com/*
 src/generator/AutoRest.Go.Tests/src/tests/generated/*
 src/generator/AutoRest.Go.Tests/src/tests/vendor/*
 src/generator/AutoRest.Go.Tests/src/tests/glide.lock
-
-
-src/generator/AutoRest.Go.Azure.Tests/pkg/*
-src/generator/AutoRest.Go.Azure.Tests/bin/*
-src/generator/AutoRest.Go.Azure.Tests/src/github.com/*
-src/generator/AutoRest.Go.Azure.Tests/src/tests/generated/*
-src/generator/AutoRest.Go.Azure.Tests/src/tests/vendor/*
-src/generator/AutoRest.Go.Azure.Tests/src/tests/glide.lock

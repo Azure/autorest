@@ -21,7 +21,7 @@ namespace AutoRest.Go.TemplateModels
         // (null or empty if the model is not paged).
         public string NextLink;
 
-        public bool PreparerNeeded;
+        public bool PreparerNeeded = false;
 
         public ModelTemplateModel(CompositeType source)
         {

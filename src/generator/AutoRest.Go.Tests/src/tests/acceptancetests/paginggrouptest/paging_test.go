@@ -17,6 +17,7 @@ type PagingGroupSuite struct{}
 var _ = chk.Suite(&PagingGroupSuite{})
 
 var pagingClient = getPagingClient()
+var clientID = "client-id"
 
 func getPagingClient() PagingClient {
 	c := NewPagingClient()
@@ -25,7 +26,7 @@ func getPagingClient() PagingClient {
 }
 
 func (s *PagingGroupSuite) TestGetMultiplePages(c *chk.C) {
-	res, err := pagingClient.GetMultiplePages("client-id", nil, nil)
+	res, err := pagingClient.GetMultiplePages(clientID, nil, nil)
 	c.Assert(err, chk.IsNil)
 	c.Assert(res.NextLink, chk.NotNil)
 	count := 1
@@ -45,7 +46,7 @@ func (s *PagingGroupSuite) TestGetSinglePages(c *chk.C) {
 }
 
 func (s *PagingGroupSuite) TestGetOdataMultiplePages(c *chk.C) {
-	res, err := pagingClient.GetOdataMultiplePages("client-id", nil, nil)
+	res, err := pagingClient.GetOdataMultiplePages(clientID, nil, nil)
 	c.Assert(err, chk.IsNil)
 	c.Assert(res.OdataNextLink, chk.NotNil)
 	count := 1
@@ -59,7 +60,7 @@ func (s *PagingGroupSuite) TestGetOdataMultiplePages(c *chk.C) {
 }
 
 func (s *PagingGroupSuite) TestGetMultiplePagesWithOffset(c *chk.C) {
-	res, err := pagingClient.GetMultiplePagesWithOffset(100, "client-id", nil, nil)
+	res, err := pagingClient.GetMultiplePagesWithOffset(100, clientID, nil, nil)
 	c.Assert(err, chk.IsNil)
 	c.Assert(res.NextLink, chk.NotNil)
 	count := 1

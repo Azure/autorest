@@ -568,7 +568,7 @@ namespace AutoRest.Go
                         p.Name = nextLinkField;
                     }
                 }
-                if (!properties.Any(p => p.Name.Equals(nextLinkField, StringComparison.Ordinal)))
+                if (!properties.Any(p => p.Name.Equals(nextLinkField, StringComparison.OrdinalIgnoreCase)))
                 {
                     var property = new Property();
                     property.Name = nextLinkField;
@@ -1001,7 +1001,7 @@ namespace AutoRest.Go
             if (method.Extensions.ContainsKey(AzureExtensions.PageableExtension))
             {
                 var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(method.Extensions[AzureExtensions.PageableExtension].ToString());
-                if (pageableExtension != null && !string.IsNullOrEmpty(pageableExtension.OperationName))
+                if (pageableExtension != null && !string.IsNullOrWhiteSpace(pageableExtension.OperationName))
                 {
                     return methods.Any(m => m.SerializedName.Equals(pageableExtension.OperationName, StringComparison.OrdinalIgnoreCase));
                 }

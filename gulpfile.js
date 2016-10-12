@@ -131,6 +131,8 @@ var goMappings = {
   'required-optional':['../../dev/TestServer/swagger/required-optional.json','optionalgroup'],
   'url':['../../dev/TestServer/swagger/url.json','urlgroup'],
   'validation':['../../dev/TestServer/swagger/validation.json', 'validationgroup'],
+  'paging':['../../dev/TestServer/swagger/paging.json', 'paginggroup'],
+  'azurereport':['../../dev/TestServer/swagger/azure-report.json', 'azurereport']
 };
 
 var defaultAzureMappings = {
@@ -174,11 +176,6 @@ var rubyAzureMappings = {
   'parameter_grouping':['../../dev/TestServer/swagger/azure-parameter-grouping.json', 'ParameterGroupingModule']
 };
 
-var goAzureMappings = {
-  'paging':['../../dev/TestServer/swagger/paging.json','paginggroup'],
-  'azurereport':['../../dev/TestServer/swagger/azure-report.json', 'azurereport']
-};
-
 gulp.task('regenerate:expected', function(cb){
   runSequence('regenerate:delete',
     [
@@ -195,8 +192,7 @@ gulp.task('regenerate:expected', function(cb){
       'regenerate:expected:python',
       'regenerate:expected:pythonazure',
       'regenerate:expected:samples',
-      'regenerate:expected:go',
-      'regenerate:expected:goazure'
+      'regenerate:expected:go'
     ],
     cb);
 });
@@ -212,8 +208,7 @@ gulp.task('regenerate:delete', function(cb){
     'src/generator/AutoRest.Java.Azure.Fluent.Tests/src/main/java',
     'src/generator/AutoRest.Python.Tests/Expected',
     'src/generator/AutoRest.Python.Azure.Tests/Expected',
-    'src/generator/AutoRest.Go.Tests/src/tests/generated',    
-    'src/generator/AutoRest.Go.Azure.Tests/src/tests/generated'
+    'src/generator/AutoRest.Go.Tests/src/tests/generated'
   ], 
   cb);
 });
@@ -586,17 +581,6 @@ gulp.task('regenerate:expected:go', function(cb){
   process.env.GOPATH = __dirname + '/src/generator/AutoRest.Go.Tests';
 })
 
-gulp.task('regenerate:expected:goazure', function(cb){
-  regenExpected({    
-    'outputBaseDir': 'src/generator/AutoRest.Go.Azure.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.Go.Azure.Tests',
-    'mappings': goAzureMappings,
-    'outputDir': 'src/tests/generated',
-    'codeGenerator': 'Go'
-  }, cb);
-  process.env.GOPATH = __dirname + '/src/generator/AutoRest.Go.Azure.Tests';
-})
-
 gulp.task('regenerate:expected:csazurefluentcomposite', function (cb) {
   regenExpected({
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
@@ -792,13 +776,6 @@ gulp.task('test:go', ['regenerate:expected:go'], shell.task([
     ], {cwd: './src/generator/AutoRest.Go.Tests/src/tests', verbosity: 3})
 );
 
-gulp.task('test:go:azure', ['regenerate:expected:goazure'], shell.task([
-  'glide up',
-  'go fmt ./generated/...',
-  'go run ./runner.go'
-], {cwd: './src/generator/AutoRest.Go.Azure.Tests/src/tests', verbosity: 3})
-);
-
 var xunitTestsDlls = [
 ];
 
@@ -922,7 +899,6 @@ gulp.task('test', function(cb){
       'test:python',
       'test:python:azure',
       'test:go',
-      'test:go:azure',
       cb);
   } else {
     runSequence(
@@ -937,7 +913,6 @@ gulp.task('test', function(cb){
       'test:python',
       'test:python:azure',
       'test:go',
-      'test:go:azure',
       cb);
   }
 });
