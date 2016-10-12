@@ -33,7 +33,7 @@ The root Swagger spec is deserialized into a [`ServiceDefinition`](../src/modele
 - Add a test case to [`SwaggerModelerValidationTests.cs`](../src/modeler/AutoRest.Swagger.Tests/SwaggerModelerValidationTests.cs) that asserts that the validation message returned for the Swagger file is  
 
 ### 6. Ensure your validation rule applies to `clean-complex-spec.json`  
-- `clean-complex-spec.json` is a complex json that passes each validation rule specified in [`SwaggerModelerValidationTests.cs`]
+- `clean-complex-spec.json` is a complex json that passes each validation rule specified in `SwaggerModelerValidationTests.cs`
 - Upon adding your validation rule, ensure this json passes the rule by running the `CleanFileValidation` test
 
 ## Complex rules
