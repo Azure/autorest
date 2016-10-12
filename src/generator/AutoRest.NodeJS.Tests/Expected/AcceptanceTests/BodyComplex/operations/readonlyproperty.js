@@ -60,11 +60,8 @@ Readonlyproperty.prototype.getValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//complex/readonlyproperty/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/readonlyproperty/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -180,11 +177,8 @@ Readonlyproperty.prototype.putValid = function (complexBody, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//complex/readonlyproperty/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/readonlyproperty/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

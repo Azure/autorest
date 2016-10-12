@@ -17,21 +17,6 @@ namespace AutoRest.NodeJS.TemplateModels
         
         public ModelTemplateModel(CompositeType source, ServiceClient serviceClient)
         {
-            if (!string.IsNullOrEmpty(source.PolymorphicDiscriminator))
-            {
-                if (!source.Properties.Any(p => p.Name == source.PolymorphicDiscriminator))
-                {
-                    var polymorphicProperty = new Property
-                    {
-                        IsRequired = true,
-                        Name = source.PolymorphicDiscriminator,
-                        SerializedName = source.PolymorphicDiscriminator,
-                        Documentation = "Polymorhpic Discriminator",
-                        Type = new PrimaryType(KnownPrimaryType.String)
-                    };
-                    source.Properties.Add(polymorphicProperty);
-                }
-            }
             this.LoadFrom(source);
             ServiceClient = serviceClient;
             if (source.BaseModelType != null)

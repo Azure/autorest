@@ -60,11 +60,8 @@ Dictionary.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/null';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/null';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -181,11 +178,8 @@ Dictionary.prototype.getEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/empty';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/empty';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -317,11 +311,8 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/empty';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/empty';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -435,11 +426,8 @@ Dictionary.prototype.getNullValue = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/nullvalue';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/nullvalue';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -556,11 +544,8 @@ Dictionary.prototype.getNullKey = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/nullkey';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/nullkey';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -677,11 +662,8 @@ Dictionary.prototype.getEmptyStringKey = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/keyemptystring';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/keyemptystring';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -798,11 +780,8 @@ Dictionary.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/invalid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/invalid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -919,11 +898,8 @@ Dictionary.prototype.getBooleanTfft = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/boolean/tfft';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/boolean/tfft';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1055,11 +1031,8 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/boolean/tfft';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/boolean/tfft';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1173,11 +1146,8 @@ Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/boolean/true.null.false';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/boolean/true.null.false';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1294,11 +1264,8 @@ Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/boolean/true.boolean.false';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/boolean/true.boolean.false';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1415,11 +1382,8 @@ Dictionary.prototype.getIntegerValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/integer/1.-1.3.300';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/integer/1.-1.3.300';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1551,11 +1515,8 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/integer/1.-1.3.300';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/integer/1.-1.3.300';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1669,11 +1630,8 @@ Dictionary.prototype.getIntInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/integer/1.null.zero';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/integer/1.null.zero';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1790,11 +1748,8 @@ Dictionary.prototype.getIntInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/integer/1.integer.0';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/integer/1.integer.0';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1911,11 +1866,8 @@ Dictionary.prototype.getLongValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/long/1.-1.3.300';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/long/1.-1.3.300';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2047,11 +1999,8 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/long/1.-1.3.300';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/long/1.-1.3.300';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2165,11 +2114,8 @@ Dictionary.prototype.getLongInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/long/1.null.zero';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/long/1.null.zero';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2286,11 +2232,8 @@ Dictionary.prototype.getLongInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/long/1.integer.0';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/long/1.integer.0';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2407,11 +2350,8 @@ Dictionary.prototype.getFloatValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/float/0--0.01-1.2e20';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/float/0--0.01-1.2e20';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2543,11 +2483,8 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/float/0--0.01-1.2e20';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/float/0--0.01-1.2e20';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2661,11 +2598,8 @@ Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/float/0.0-null-1.2e20';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/float/0.0-null-1.2e20';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2782,11 +2716,8 @@ Dictionary.prototype.getFloatInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/float/1.number.0';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/float/1.number.0';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2903,11 +2834,8 @@ Dictionary.prototype.getDoubleValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/double/0--0.01-1.2e20';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/double/0--0.01-1.2e20';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3039,11 +2967,8 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/double/0--0.01-1.2e20';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/double/0--0.01-1.2e20';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3157,11 +3082,8 @@ Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/double/0.0-null-1.2e20';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/double/0.0-null-1.2e20';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3278,11 +3200,8 @@ Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/double/1.number.0';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/double/1.number.0';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3399,11 +3318,8 @@ Dictionary.prototype.getStringValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/string/foo1.foo2.foo3';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/string/foo1.foo2.foo3';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3535,11 +3451,8 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/string/foo1.foo2.foo3';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/string/foo1.foo2.foo3';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3653,11 +3566,8 @@ Dictionary.prototype.getStringWithNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/string/foo.null.foo2';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/string/foo.null.foo2';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3774,11 +3684,8 @@ Dictionary.prototype.getStringWithInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/string/foo.123.foo2';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/string/foo.123.foo2';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3896,11 +3803,8 @@ Dictionary.prototype.getDateValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/date/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -4034,11 +3938,8 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/date/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -4152,11 +4053,8 @@ Dictionary.prototype.getDateInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/date/invalidnull';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date/invalidnull';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -4273,11 +4171,8 @@ Dictionary.prototype.getDateInvalidChars = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/date/invalidchars';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date/invalidchars';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -4395,11 +4290,8 @@ Dictionary.prototype.getDateTimeValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/date-time/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -4533,11 +4425,8 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/date-time/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -4651,11 +4540,8 @@ Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/date-time/invalidnull';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time/invalidnull';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -4772,11 +4658,8 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/date-time/invalidchars';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time/invalidchars';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -4895,11 +4778,8 @@ Dictionary.prototype.getDateTimeRfc1123Valid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/date-time-rfc1123/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time-rfc1123/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -5033,11 +4913,8 @@ Dictionary.prototype.putDateTimeRfc1123Valid = function (arrayBody, options, cal
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/date-time-rfc1123/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time-rfc1123/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -5152,11 +5029,8 @@ Dictionary.prototype.getDurationValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/duration/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/duration/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -5288,11 +5162,8 @@ Dictionary.prototype.putDurationValid = function (arrayBody, options, callback) 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/duration/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/duration/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -5407,11 +5278,8 @@ Dictionary.prototype.getByteValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/byte/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/byte/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -5544,11 +5412,8 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/byte/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/byte/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -5663,11 +5528,8 @@ Dictionary.prototype.getByteInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/byte/invalidnull';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/byte/invalidnull';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -5785,11 +5647,8 @@ Dictionary.prototype.getBase64Url = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/prim/base64url/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/base64url/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -5906,11 +5765,8 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/complex/null';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/null';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -6028,11 +5884,8 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/complex/empty';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/empty';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -6151,11 +6004,8 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/complex/itemnull';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/itemnull';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -6274,11 +6124,8 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/complex/itemempty';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/itemempty';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -6397,11 +6244,8 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/complex/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -6523,11 +6367,8 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/complex/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -6642,11 +6483,8 @@ Dictionary.prototype.getArrayNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/array/null';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/null';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -6770,11 +6608,8 @@ Dictionary.prototype.getArrayEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/array/empty';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/empty';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -6899,11 +6734,8 @@ Dictionary.prototype.getArrayItemNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/array/itemnull';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/itemnull';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -7028,11 +6860,8 @@ Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/array/itemempty';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/itemempty';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -7157,11 +6986,8 @@ Dictionary.prototype.getArrayValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/array/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -7305,11 +7131,8 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/array/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -7430,11 +7253,8 @@ Dictionary.prototype.getDictionaryNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/dictionary/null';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/null';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -7558,11 +7378,8 @@ Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/dictionary/empty';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/empty';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -7688,11 +7505,8 @@ Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/dictionary/itemnull';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/itemnull';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -7818,11 +7632,8 @@ Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/dictionary/itemempty';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/itemempty';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -7948,11 +7759,8 @@ Dictionary.prototype.getDictionaryValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/dictionary/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -8097,11 +7905,8 @@ Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//dictionary/dictionary/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
