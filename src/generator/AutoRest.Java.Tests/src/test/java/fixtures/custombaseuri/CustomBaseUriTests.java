@@ -111,6 +111,6 @@ public class CustomBaseUriTests {
         });
         t1.start();
         t2.start();
-        Assert.assertTrue(latch.await(5, TimeUnit.SECONDS));
+        Assert.assertTrue(latch.await(15, TimeUnit.SECONDS));
     }
 }
