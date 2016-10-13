@@ -16,6 +16,8 @@ namespace AutoRest.Go.TemplateModels
         public List<ModelTemplateModel> ModelTemplateModels { get; set; }
         public string PackageName { get; set; }
         public Dictionary<IType, string> PagedTypes { get; set; }
+        // NextMethodUndefined is used to keep track of those models which are returned by paged methods,
+        // but the next method is not defined in the service client, so these models need a preparer.
         public List<IType> NextMethodUndefined { get; set; }
         
         public ModelsTemplateModel(ServiceClient serviceClient, string packageName)

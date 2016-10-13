@@ -533,6 +533,12 @@ namespace AutoRest.Go
             return new MapType(NormalizeTypeReference(dictionaryType.ValueType));
         }
 
+        /// <summary>
+        /// Formats a string to pascal case using a specific character as splitter
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="splitter"></param>
+        /// <returns>The formatted string</returns>
         public static string PascalCaseWithoutChar(string name, char splitter)
         {
             if (string.IsNullOrWhiteSpace(name))
