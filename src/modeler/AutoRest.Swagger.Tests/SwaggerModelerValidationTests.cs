@@ -80,6 +80,13 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void NetworkApiValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "network-interfaces-api.json"));
+            messages.AssertOnlyValidationWarning(typeof(NetworkInterfacesApiWarning));
+        }
+
+        [Fact]
         public void AnonymousSchemasDiscouragedValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "anonymous-response-type.json"));

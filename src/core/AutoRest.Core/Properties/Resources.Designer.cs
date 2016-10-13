@@ -357,6 +357,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Swagger API can reference either Microsoft.Compute or Microsoft.Network Apis and not both.
+        /// </summary>
+        public static string NetworkInterfacesApiWarningMessage {
+            get {
+                return ResourceManager.GetString("NetworkInterfacesApiWarningMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Could not find a definition for the path parameter &apos;{0}&apos;.
         /// </summary>
         public static string NoDefinitionForPathParameter {
