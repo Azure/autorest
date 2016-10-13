@@ -152,6 +152,8 @@ namespace AutoRest.AzureResourceSchema
             WriteProperty(writer, "pattern", definition.Pattern);
             WriteStringArray(writer, "enum", definition.Enum);
             WriteDefinitionArray(writer, "oneOf", definition.OneOf);
+            WriteDefinitionArray(writer, "anyOf", definition.AnyOf);
+            WriteDefinitionArray(writer, "allOf", definition.AllOf);
             WriteProperty(writer, "format", definition.Format);
             WriteProperty(writer, "$ref", definition.Ref);
             WriteDefinition(writer, "items", definition.Items);

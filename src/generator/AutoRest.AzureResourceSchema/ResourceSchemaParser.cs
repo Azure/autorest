@@ -246,7 +246,7 @@ namespace AutoRest.AzureResourceSchema
                 CompositeType compositeType = type as CompositeType;
                 if (compositeType != null)
                 {
-                    result = ParseCompositeType(property, compositeType, definitions, modelTypes);
+                    result = ParseCompositeType(property, compositeType, true, definitions, modelTypes);
                 }
                 else
                 {
@@ -296,7 +296,7 @@ namespace AutoRest.AzureResourceSchema
             return result;
         }
 
-        private static JsonSchema ParseCompositeType(Property property, CompositeType compositeType, IDictionary<string, JsonSchema> definitions, IEnumerable<CompositeType> modelTypes)
+        private static JsonSchema ParseCompositeType(Property property, CompositeType compositeType, bool includeBaseModelTypeProperties, IDictionary<string, JsonSchema> definitions, IEnumerable<CompositeType> modelTypes)
         {
             string definitionName = compositeType.Name;
 
@@ -305,7 +305,7 @@ namespace AutoRest.AzureResourceSchema
                 JsonSchema definition = new JsonSchema()
                 {
                     JsonType = "object",
-                    Description = compositeType.Documentation
+                    Description = compositeType.Documentation,
                 };
 
                 // This definition must be added to the definition map before we start parsing
@@ -313,18 +313,20 @@ namespace AutoRest.AzureResourceSchema
                 // definition.
                 definitions.Add(definitionName, definition);
 
-                foreach (Property subProperty in compositeType.ComposedProperties)
-                {
-                    JsonSchema subPropertyDefinition = ParseType(subProperty, subProperty.Type, definitions, modelTypes);
-                    if (subPropertyDefinition != null)
-                    {
-                        definition.AddProperty(subProperty.Name, subPropertyDefinition, subProperty.IsRequired);
-                    }
-                }
+                JsonSchema baseTypeDefinition;
 
                 string discriminatorPropertyName = compositeType.PolymorphicDiscriminator;
-                if (!string.IsNullOrWhiteSpace(discriminatorPropertyName))
+                if (string.IsNullOrWhiteSpace(discriminatorPropertyName))
                 {
+                    baseTypeDefinition = definition;
+                }
+                else
+                {
+                    baseTypeDefinition = new JsonSchema();
+                    definition.AddAllOf(baseTypeDefinition);
+
+                    JsonSchema derivedTypeDefinitionRefs = new JsonSchema();
+
                     CompositeType[] subTypes = modelTypes.Where(modelType => modelType.BaseModelType == compositeType).ToArray();
                     if (subTypes != null && subTypes.Length > 0)
                     {
@@ -333,19 +335,20 @@ namespace AutoRest.AzureResourceSchema
                             JsonType = "string"
                         };
 
-                        if (subTypes.Length == 1)
+                        foreach (CompositeType subType in subTypes)
                         {
-                            CompositeType subType = subTypes[0];
                             if (subType != null)
                             {
-                                foreach (Property subTypeProperty in subType.Properties)
+                                // Sub-types are never referenced directly in the Swagger
+                                // discriminator scenario, so they wouldn't be added to the
+                                // produced resource schema. By calling ParseCompositeType() on the
+                                // sub-type we add the sub-type to the resource schema.
+                                ParseCompositeType(null, subType, false, definitions, modelTypes);
+
+                                derivedTypeDefinitionRefs.AddAnyOf(new JsonSchema()
                                 {
-                                    JsonSchema subTypePropertyDefinition = ParseType(subTypeProperty, subTypeProperty.Type, definitions, modelTypes);
-                                    if (subTypePropertyDefinition != null)
-                                    {
-                                        definition.AddProperty(subTypeProperty.Name, subTypePropertyDefinition, subTypeProperty.IsRequired);
-                                    }
-                                }
+                                    Ref = "#/definitions/" + subType.Name,
+                                });
 
                                 const string discriminatorValueExtensionName = "x-ms-discriminator-value";
                                 if (subType.ComposedExtensions.ContainsKey(discriminatorValueExtensionName))
@@ -357,18 +360,21 @@ namespace AutoRest.AzureResourceSchema
                                     }
                                 }
                             }
+                        }
 
-                            definition.AddProperty(discriminatorPropertyName, discriminatorDefinition);
-                        }
-                        else
-                        {
-                            string errorMessage = string.Format(
-                                CultureInfo.CurrentCulture,
-                                "Multiple sub-types ({0}) of a polymorphic discriminated type ({1}) are not currently supported.",
-                                string.Join(", ", subTypes.Select(subType => subType.Name)),
-                                compositeType.Name);
-                            throw new NotSupportedException(errorMessage);
-                        }
+                        baseTypeDefinition.AddProperty(discriminatorPropertyName, discriminatorDefinition);
+
+                        definition.AddAllOf(derivedTypeDefinitionRefs);
+                    }
+                }
+
+                IEnumerable<Property> compositeTypeProperties = includeBaseModelTypeProperties ? compositeType.ComposedProperties : compositeType.Properties;
+                foreach (Property subProperty in compositeTypeProperties)
+                {
+                    JsonSchema subPropertyDefinition = ParseType(subProperty, subProperty.Type, definitions, modelTypes);
+                    if (subPropertyDefinition != null)
+                    {
+                        baseTypeDefinition.AddProperty(subProperty.Name, subPropertyDefinition, subProperty.IsRequired);
                     }
                 }
             }
