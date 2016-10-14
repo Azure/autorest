@@ -80,7 +80,7 @@ if( ! (Get-AndroidHomeFromRegistry) ) {
     # set the environment variable for the user.
 }
 write-host -fore darkcyan "      setting ANDROID_HOME environment key."
-([System.Environment]::SetEnvironmentVariable('ANDROID_HOME', (Get-AndroidHomeFromRegistry) ,'User'))
+([System.Environment]::SetEnvironmentVariable('ANDROID_HOME', (Get-AndroidHomeFromRegistry) ,'Machine'))
 
 # Install node.js
 if( !(get-command -ea 0 node.exe) ) { 
@@ -88,6 +88,15 @@ if( !(get-command -ea 0 node.exe) ) {
     $null = install-package -provider chocolatey nodejs -force
     ReloadPathFromRegistry
     if( !(get-command -ea 0 node.exe) ) { return write-error "No NodeJS in PATH." }
+    
+    # use system-wide locations for npm
+    npm config --global set cache "$env:ALLUSERSPROFILE\npm-cache"
+    npm config --global set prefix "$env:ALLUSERSPROFILE\npm"
+    $p = ([System.Environment]::GetEnvironmentVariable( "path", 'Machine'))
+    $p = "$env:ALLUSERSPROFILE\npm;$p"
+    ([System.Environment]::SetEnvironmentVariable( "path", $p,  'Machine'))    
+    ReloadPathFromRegistry
+   
 }
 
 # install gulp
