@@ -689,7 +689,6 @@
             "items": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Any"
               }
             }
           }
@@ -698,21 +697,9 @@
           "type": "object",
           "description": "Sample input data for the web service's global parameters",
           "additionalProperties": {
-            "$ref": "#/definitions/Any"
           }
         }
       }
-    },
-    "Any": {
-      "oneOf": [
-        { "type": "array" },
-        { "type": "boolean" },
-        { "type": "integer" },
-        { "type": "number" },
-        { "type": "null" },
-        { "type": "object" },
-        { "type": "string" }
-      ]
     },
     "AssetItem": {
       "type": "object",

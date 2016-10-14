@@ -1263,25 +1263,9 @@
           "description": "Gets or sets whether the extension handler should be automatically upgraded across minor versions."
         },
         "settings": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Gets or sets Json formatted public settings for the extension."
         },
         "protectedSettings": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Gets or sets Json formatted protected settings for the extension."
         },
         "provisioningState": {
@@ -1505,25 +1489,9 @@
           "description": "Gets or sets whether the extension handler should be automatically upgraded across minor versions."
         },
         "settings": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Gets or sets Json formatted public settings for the extension."
         },
         "protectedSettings": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Gets or sets Json formatted protected settings for the extension."
         }
       },
