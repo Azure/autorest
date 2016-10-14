@@ -308,6 +308,168 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             /// <summary>
+            /// A paging operation that doesn't return a full URL, just a fragment
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='apiVersion'>
+            /// Sets the api version to use.
+            /// </param>
+            /// <param name='tenant'>
+            /// Sets the tenant to use.
+            /// </param>
+            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesFragmentNextLink(this IPagingOperations operations, string apiVersion, string tenant)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesFragmentNextLinkAsync(apiVersion, tenant), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// A paging operation that doesn't return a full URL, just a fragment
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='apiVersion'>
+            /// Sets the api version to use.
+            /// </param>
+            /// <param name='tenant'>
+            /// Sets the tenant to use.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesFragmentNextLinkAsync(this IPagingOperations operations, string apiVersion, string tenant, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.GetMultiplePagesFragmentNextLinkWithHttpMessagesAsync(apiVersion, tenant, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// A paging operation that doesn't return a full URL, just a fragment with
+            /// parameters grouped
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='customParameterGroup'>
+            /// Additional parameters for the operation
+            /// </param>
+            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesFragmentWithGroupingNextLink(this IPagingOperations operations, CustomParameterGroupInner customParameterGroup)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesFragmentWithGroupingNextLinkAsync(customParameterGroup), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// A paging operation that doesn't return a full URL, just a fragment with
+            /// parameters grouped
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='customParameterGroup'>
+            /// Additional parameters for the operation
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesFragmentWithGroupingNextLinkAsync(this IPagingOperations operations, CustomParameterGroupInner customParameterGroup, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.GetMultiplePagesFragmentWithGroupingNextLinkWithHttpMessagesAsync(customParameterGroup, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// A paging operation that doesn't return a full URL, just a fragment
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='apiVersion'>
+            /// Sets the api version to use.
+            /// </param>
+            /// <param name='tenant'>
+            /// Sets the tenant to use.
+            /// </param>
+            /// <param name='nextLink'>
+            /// Next link for list operation.
+            /// </param>
+            public static Microsoft.Rest.Azure.IPage<Product> NextFragment(this IPagingOperations operations, string apiVersion, string tenant, string nextLink)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).NextFragmentAsync(apiVersion, tenant, nextLink), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// A paging operation that doesn't return a full URL, just a fragment
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='apiVersion'>
+            /// Sets the api version to use.
+            /// </param>
+            /// <param name='tenant'>
+            /// Sets the tenant to use.
+            /// </param>
+            /// <param name='nextLink'>
+            /// Next link for list operation.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> NextFragmentAsync(this IPagingOperations operations, string apiVersion, string tenant, string nextLink, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.NextFragmentWithHttpMessagesAsync(apiVersion, tenant, nextLink, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// A paging operation that doesn't return a full URL, just a fragment
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='nextLink'>
+            /// Next link for list operation.
+            /// </param>
+            /// <param name='customParameterGroup'>
+            /// Additional parameters for the operation
+            /// </param>
+            public static Microsoft.Rest.Azure.IPage<Product> NextFragmentWithGrouping(this IPagingOperations operations, string nextLink, CustomParameterGroupInner customParameterGroup)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).NextFragmentWithGroupingAsync(nextLink, customParameterGroup), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// A paging operation that doesn't return a full URL, just a fragment
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='nextLink'>
+            /// Next link for list operation.
+            /// </param>
+            /// <param name='customParameterGroup'>
+            /// Additional parameters for the operation
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> NextFragmentWithGroupingAsync(this IPagingOperations operations, string nextLink, CustomParameterGroupInner customParameterGroup, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.NextFragmentWithGroupingWithHttpMessagesAsync(nextLink, customParameterGroup, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// A paging operation that finishes on the first call without a nextlink
             /// </summary>
             /// <param name='operations'>
