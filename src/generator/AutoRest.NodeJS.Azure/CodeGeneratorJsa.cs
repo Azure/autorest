@@ -13,25 +13,13 @@ using AutoRest.NodeJS.Azure.Model;
 using AutoRest.NodeJS.Azure.Properties;
 using AutoRest.NodeJS.Azure.Templates;
 using AutoRest.NodeJS.Templates;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.NodeJS.Azure
 {
-    public class AzureNodeJSCodeGenerator : NodeJSCodeGenerator
+    public class CodeGeneratorJsa : NodeJS.CodeGeneratorJs
     {
         private const string ClientRuntimePackage = "ms-rest-azure version 1.15.0";
-
-        public AzureNodeJSCodeGenerator() : this(new AzureNodeJsCodeModelTransformer())
-        {
-        }
-
-        protected AzureNodeJSCodeGenerator(AzureNodeJsCodeModelTransformer transformer) : base(transformer)
-        {
-            transformer.AzureCodeGenerator = this;
-        }
-
-        public override string Name => "Azure.NodeJS";
-
-        public override string Description => "Azure specific NodeJS code generator.";
 
         public override string UsageInstructions => string.Format(CultureInfo.InvariantCulture,
             Resources.UsageInformation, ClientRuntimePackage);
@@ -46,6 +34,8 @@ namespace AutoRest.NodeJS.Azure
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
+            var disableTypeScriptGeneration = Singleton<GeneratorSettingsJs>.Instance.DisableTypeScriptGeneration;
+
             var codeModel = cm as CodeModelJsa;
             if (codeModel == null)
             {
@@ -56,7 +46,7 @@ namespace AutoRest.NodeJS.Azure
             var serviceClientTemplate = new AzureServiceClientTemplate { Model = codeModel };
             await Write(serviceClientTemplate, codeModel.Name.ToCamelCase() + ".js");
 
-            if (!DisableTypeScriptGeneration)
+            if (!disableTypeScriptGeneration)
             {
                 var serviceClientTemplateTS = new AzureServiceClientTemplateTS { Model = codeModel, };
                 await Write(serviceClientTemplateTS, codeModel.Name.ToCamelCase() + ".d.ts");
@@ -65,7 +55,7 @@ namespace AutoRest.NodeJS.Azure
             var modelIndexTemplate = new AzureModelIndexTemplate { Model = codeModel };
             await Write(modelIndexTemplate, Path.Combine("models", "index.js"));
 
-            if (!DisableTypeScriptGeneration)
+            if (!disableTypeScriptGeneration)
             {
                 var modelIndexTemplateTS = new AzureModelIndexTemplateTS { Model = codeModel };
                 await Write(modelIndexTemplateTS, Path.Combine("models", "index.d.ts"));
@@ -94,7 +84,7 @@ namespace AutoRest.NodeJS.Azure
                 var methodGroupIndexTemplate = new MethodGroupIndexTemplate { Model = codeModel };
                 await Write(methodGroupIndexTemplate, Path.Combine("operations", "index.js"));
 
-                if (!DisableTypeScriptGeneration)
+                if (!disableTypeScriptGeneration)
                 {
                     var methodGroupIndexTemplateTS = new MethodGroupIndexTemplateTS { Model = codeModel };
                     await Write(methodGroupIndexTemplateTS, Path.Combine("operations", "index.d.ts"));

@@ -3,22 +3,32 @@
 
 using AutoRest.Core.Model;
 using System.Threading.Tasks;
+using AutoRest.Core.Extensibility;
 
 namespace AutoRest.Core
 {
+    
+    public class NoOpPlugin :
+        Plugin<NoOpPlugin.NoSettings, ModelSerializer<CodeModel>, CodeModelTransformer<CodeModel>, NoOpCodeGenerator, CodeNamer, CodeModel>
+    {
+        public class NoSettings : IGeneratorSettings
+        {
+            public virtual string Name => "No op code generator";
+
+            public virtual string Description => "No op code generator";
+        }
+    }
+
     public class NoOpCodeGenerator: CodeGenerator
     {
-        public NoOpCodeGenerator() : base( new CodeModelTransformer())
+        public NoOpCodeGenerator()
         {
         }
 
-        public override string Description => "No op code generator";
+        public override string UsageInstructions => string.Empty;
 
         public override string ImplementationFileExtension => string.Empty;
 
-        public override string Name => "No op code generator";
-
-        public override string UsageInstructions => string.Empty;
 
         public override Task Generate(CodeModel codeModel) => Task.FromResult(0);
     }

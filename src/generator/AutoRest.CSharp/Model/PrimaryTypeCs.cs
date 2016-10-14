@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Model
                         return "System.DateTime";
                     
                     case KnownPrimaryType.DateTime:
-                        return Singleton<ICSharpGeneratorSettings>.Instance.UseDateTimeOffset ? "System.DateTimeOffset" : "System.DateTime";
+                        return Singleton<GeneratorSettingsCs>.Instance.UseDateTimeOffset ? "System.DateTimeOffset" : "System.DateTime";
 
                     case KnownPrimaryType.DateTimeRfc1123:
                         return "System.DateTime";

@@ -14,11 +14,6 @@ namespace AutoRest.CSharp.Azure.Model
         internal IDictionary<KeyValuePair<string, string>, string> pageClasses =
             new Dictionary<KeyValuePair<string, string>, string>();
 
-        public CodeModelCsa(bool internalConstructors)
-            : base(internalConstructors)
-        {
-        }
-
         /// <summary>
         ///     Returns the using statements 
         /// </summary>

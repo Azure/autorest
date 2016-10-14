@@ -132,6 +132,11 @@ namespace AutoRest.Core.Utilities
             }
         }
 
+        public class IsSingleton<T>
+        {
+            public static T Instance => Singleton<T>.Instance;
+        }
+
         public class Singleton<T>
         {
             public static bool HasInstanceInCurrentActivation => Activation.Current.Singletons.ContainsKey(typeof(T));
@@ -155,11 +160,24 @@ namespace AutoRest.Core.Utilities
             {
                 get
                 {
+                    // check for the exact match
                     for (var c = Activation.Current; c != null; c = c.Parent)
                     {
                         if (c.Singletons.ContainsKey(typeof(T)))
                         {
                             return (T) c.Singletons[typeof(T)];
+                        }
+                    }
+
+                    // check for anything that is inherited
+                    for (var c = Activation.Current; c != null; c = c.Parent)
+                    {
+                        foreach (var item in c.Singletons.Values)
+                        {
+                            if (item is T)
+                            {
+                                return (T)item;
+                            }
                         }
                     }
                     return default(T);
@@ -190,6 +208,14 @@ namespace AutoRest.Core.Utilities
                     _factories.AddOrSet(factory.TargetType, factory);
                 }
                 return this;
+            }
+            public Context Add(Context parent)
+            {
+                if (parent._onActivate != null)
+                {
+                    _onActivate += parent._onActivate;
+                }
+                return Add((IEnumerable<Factory>) (parent));
             }
 
             public IDisposable Activate() => new Activation(this);

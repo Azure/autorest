@@ -15,67 +15,31 @@ using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
 using Newtonsoft.Json.Linq;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using MethodGroup = AutoRest.Core.Model.MethodGroup;
 
 namespace AutoRest.CSharp.Azure
 {
-    public class AzureCSharpModelTransformer : CSharpModelTransformer
+    public class TransformerCsa : TransformerCs, ITransformer<CodeModelCsa>
     {
-        internal AzureCSharpCodeGenerator AzureCodeGenerator { get; set; }
-        protected override CodeNamer NewCodeNamer => new CSharpCodeNamer();
-
-        protected override Context InitializeContext()
+        /// <summary>
+        /// A type-specific method for code model tranformation.
+        /// Note: This is the method you want to override.
+        /// </summary>
+        /// <param name="codeModel"></param>
+        /// <returns></returns>
+        public override CodeModelCs TransformCodeModel(CodeModel codeModel)
         {
-            // our instance of the codeNamer.
-            var codeNamer = NewCodeNamer;
-
-            return new Context
-            {
-                // inherit anything from the parent class.
-                // base.InitializeContext(),
-
-                // on activation of this context, 
-                () =>
-                {
-                    // set the singleton for the code namer.
-                    Singleton<CodeNamer>.Instance = codeNamer;
-
-                    // and the c# specific settings
-                    Singleton<ICSharpGeneratorSettings>.Instance = AzureCodeGenerator;
-                },
-
-                // add/override our own implementations 
-                new Factory<CodeModel> {() => new CodeModelCsa(AzureCodeGenerator.InternalConstructors)},
-                new Factory<Method, MethodCsa>(),
-                new Factory<MethodCs, MethodCsa>(),
-                new Factory<CompositeType, CompositeTypeCsa>(),
-                new Factory<ILiteralType> {(string name) => new CompositeTypeCsa {Name = {FixedValue = name}}},
-                new Factory<Parameter, ParameterCsa>(),
-                new Factory<MethodGroup, MethodGroupCsa>(),
-                new Factory<PrimaryType, PrimaryTypeCsa>(),
-                new Factory<EnumType, EnumTypeCs>(),
-                new Factory<Property, PropertyCs>(),
-                new Factory<DictionaryType, DictionaryTypeCs>(),
-                new Factory<SequenceType, SequenceTypeCs>()
-            };
+            return ((ITransformer<CodeModelCsa>)this).TransformCodeModel(codeModel);
         }
 
-        protected override CodeModel Transform(CodeModel cm)
+        CodeModelCsa ITransformer<CodeModelCsa>.TransformCodeModel(CodeModel cs)
         {
-            var codeModel = cm as CodeModelCsa;
-            if (codeModel == null)
-            {
-                throw new InvalidCastException("CodeModel is not a Azure c# CodeModel");
-            }
+            var codeModel = cs as CodeModelCsa;
 
             // we're guaranteed to be in our language-specific context here.
             Settings.Instance.AddCredentials = true;
 
             // add the Credentials
             // PopulateAdditionalProperties(codeModel);
-
-            // todo: these should be turned into individual transformers
-            // SwaggerExtensions.NormalizeClientModel(codeModel);
 
             // Do parameter transformations
             TransformParameters(codeModel);
@@ -253,3 +217,48 @@ namespace AutoRest.CSharp.Azure
         }
     }
 }
+#if removing
+    public class AzureCSharpModelTransformer : CSharpModelTransformer
+    {
+        internal CodeGeneratorCsa AzureCodeGenerator { get; set; }
+        protected override CodeNamer NewCodeNamer => new CodeNamerCs();
+
+        protected override Context InitializeContext()
+        {
+            // our instance of the codeNamer.
+            var codeNamer = NewCodeNamer;
+
+            return new Context
+            {
+                // inherit anything from the parent class.
+                // base.InitializeContext(),
+
+                // on activation of this context, 
+                () =>
+                {
+                    // set the singleton for the code namer.
+                    Singleton<CodeNamer>.Instance = codeNamer;
+
+                    // and the c# specific settings
+                    Singleton<ICSharpGeneratorSettings>.Instance = AzureCodeGenerator;
+                },
+
+                // add/override our own implementations 
+                new Factory<CodeModel> {() => new CodeModelCsa(AzureCodeGenerator.InternalConstructors)},
+                new Factory<Method, MethodCsa>(),
+                new Factory<MethodCs, MethodCsa>(),
+                new Factory<CompositeType, CompositeTypeCsa>(),
+                new Factory<ILiteralType> {(string name) => new CompositeTypeCsa {Name = {FixedValue = name}}},
+                new Factory<Parameter, ParameterCsa>(),
+                new Factory<MethodGroup, MethodGroupCsa>(),
+                new Factory<PrimaryType, PrimaryTypeCsa>(),
+                new Factory<EnumType, EnumTypeCs>(),
+                new Factory<Property, PropertyCs>(),
+                new Factory<DictionaryType, DictionaryTypeCs>(),
+                new Factory<SequenceType, SequenceTypeCs>()
+            };
+        }
+
+     
+    }
+#endif

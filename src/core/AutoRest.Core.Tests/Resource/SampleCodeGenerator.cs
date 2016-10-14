@@ -11,14 +11,13 @@ namespace AutoRest.Core.Tests.Resource
     public class SampleCodeGenerator : CodeGenerator
     {
         public SampleCodeGenerator()
-            : base(new CodeModelTransformer())
         {
             
         }
 
         public override bool IsSingleFileGenerationSupported => true;
 
-
+#if removing
         public override string Name
         {
             get { return "CSharp"; }
@@ -28,7 +27,7 @@ namespace AutoRest.Core.Tests.Resource
         {
             get { return "C# for Http Client Libraries"; }
         }
-
+#endif 
         public override string UsageInstructions
         {
             get { return "TODO: copy"; }

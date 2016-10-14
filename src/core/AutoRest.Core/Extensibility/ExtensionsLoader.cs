@@ -12,7 +12,7 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
-
+using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 namespace AutoRest.Core.Extensibility
 {
     public static class ExtensionsLoader
@@ -22,10 +22,60 @@ namespace AutoRest.Core.Extensibility
         /// </summary>
         internal const string ConfigurationFileName = "AutoRest.json";
 
+
+        public static IAnyPlugin GetPlugin()
+        {
+            Logger.LogInfo(Resources.InitializingCodeGenerator);
+            if (Settings.Instance == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+
+            if (string.IsNullOrEmpty(Settings.Instance.CodeGenerator))
+            {
+                throw new ArgumentException(
+                    string.Format(CultureInfo.InvariantCulture,
+                        Resources.ParameterValueIsMissing, "CodeGenerator"));
+            }
+
+            IAnyPlugin plugin = null;
+
+            if (string.Equals("None", Settings.Instance.CodeGenerator, StringComparison.OrdinalIgnoreCase))
+            {
+                plugin = new NoOpPlugin();
+            }
+            else
+            {
+                string configurationFile = GetConfigurationFileContent(Settings.Instance);
+
+                if (configurationFile != null)
+                {
+                    try
+                    {
+                        var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
+                        plugin = LoadTypeFromAssembly<IAnyPlugin>(config.Plugins, Settings.Instance.CodeGenerator);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ErrorManager.CreateError(ex, Resources.ErrorParsingConfig);
+                    }
+                }
+                else
+                {
+                    throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
+                }
+            }
+            Logger.LogInfo(Resources.GeneratorInitialized,
+                Settings.Instance.CodeGenerator,
+                plugin.GetType().Assembly.GetName().Version);
+            return plugin;
+
+        }
+
+#if removing
         /// <summary>
         /// Gets the code generator specified in the provided Settings.
         /// </summary>
-        /// <param name="settings">The code generation settings</param>
         /// <returns>Code generator specified in Settings.CodeGenerator</returns>
         public static CodeGenerator GetCodeGenerator()
         {
@@ -74,7 +124,7 @@ namespace AutoRest.Core.Extensibility
                 codeGenerator.GetType().Assembly.GetName().Version);
             return codeGenerator;
         }
-
+#endif 
         /// <summary>
         /// Gets the modeler specified in the provided Settings.
         /// </summary>

@@ -13,12 +13,12 @@ using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.CSharp
 {
-    public class CSharpCodeNamer : CodeNamer
+    public class CodeNamerCs : CodeNamer
     {
         /// <summary>
         ///     Initializes a new instance of CSharpCodeNamingFramework.
         /// </summary>
-        public CSharpCodeNamer()
+        public CodeNamerCs()
         {
             ReservedWords.AddRange(
                 new[]

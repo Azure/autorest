@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -15,43 +14,12 @@ using AutoRest.CSharp.Templates;
 
 namespace AutoRest.CSharp
 {
-    public class CSharpCodeGenerator : CodeGenerator, ICSharpGeneratorSettings
+    public class CodeGeneratorCs : CodeGenerator
     {
         private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.2.2.0";
 
-        protected CSharpCodeGenerator(CSharpModelTransformer transformer) :base(transformer)
-        {
-            transformer.CodeGenerator = this;
-        }
-
-        public CSharpCodeGenerator() : this(new CSharpModelTransformer())
-        {
-        }
-
-        #region ICSharpGeneratorSettings 
-        [SettingsInfo("Indicates whether to use DateTimeOffset instead of DateTime to model date-time types")]
-        public bool UseDateTimeOffset { get; set; }
-
-        /// <summary>
-        /// Indicates whether ctor needs to be generated with internal protection level.
-        /// </summary>
-        [SettingsInfo("Indicates whether ctor needs to be generated with internal protection level.")]
-        [SettingsAlias("internal")]
-        public bool InternalConstructors { get; set; }
-
-        /// <summary>
-        /// Specifies mode for generating sync wrappers.
-        /// </summary>
-        [SettingsInfo("Specifies mode for generating sync wrappers.")]
-        [SettingsAlias("syncMethods")]
-        public SyncMethodsGenerationMode SyncMethods { get; set; }
-        #endregion
-
         public override bool IsSingleFileGenerationSupported => true;
 
-        public override string Name => "CSharp";
-
-        public override string Description => "Generic C# code generator.";
 
         public override string UsageInstructions => string.Format(CultureInfo.InvariantCulture,
             Properties.Resources.UsageInformation, ClientRuntimePackage);

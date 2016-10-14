@@ -14,4 +14,9 @@ namespace AutoRest.Core.Model.XmsExtensions
 
         public const string Name = "x-ms-parameter-location";
     }
+
+    public static class Enum
+    {
+        public const string Name = "x-ms-enum";
+    }
 }

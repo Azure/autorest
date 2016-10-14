@@ -167,15 +167,16 @@ namespace AutoRest.Core.Utilities
         }
     }
 
-    public class Factory<TType, TOverride> : Factory<TType> where TType : class
+    public class Factory<TType, TOverride> : Factory<TType> where TType : class where TOverride : TType
     {
         public Factory()
         {
+#if not_needed_used_template_constraint
             if (!typeof(TType).IsAssignableFrom(typeof(TOverride)))
             {
                 throw new Exception($"Type {typeof(TType).Name} is not assignable from type {typeof(TOverride)}");
             }
-
+#endif 
             AddConstructors<TOverride>();
         }
     }

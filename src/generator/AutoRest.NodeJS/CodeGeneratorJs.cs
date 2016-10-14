@@ -13,36 +13,20 @@ using AutoRest.Core.Utilities;
 using AutoRest.NodeJS.Model;
 using AutoRest.NodeJS.Properties;
 using AutoRest.NodeJS.Templates;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.NodeJS
 {
-    public class NodeJSCodeGenerator : CodeGenerator, INodeJsSettings
+    public class CodeGeneratorJs : CodeGenerator
     {
         private const string ClientRuntimePackage = "ms-rest version 1.15.0";
 
-        protected NodeJSCodeGenerator(NodeJsModelTransformer transformer) : base(transformer)
-        {
-            transformer.CodeGenerator = this;
-        }
-
-        public NodeJSCodeGenerator() : this(new NodeJsModelTransformer())
-        {
-        }
-
-        public override string Description => "Generic NodeJS code generator.";
 
         public override string ImplementationFileExtension => ".js";
 
-        public override string Name => "NodeJS";
 
         public override string UsageInstructions => string.Format(CultureInfo.InvariantCulture,
             Resources.UsageInformation, ClientRuntimePackage);
-
-        /// <summary>
-        ///     Change to true if you want to no longer generate the 3 d.ts files, for some reason
-        /// </summary>
-        [SettingsInfo("Disables TypeScript generation.")]
-        public bool DisableTypeScriptGeneration { get; set; }
 
         /// <summary>
         ///     Generate NodeJS client code 
@@ -51,6 +35,8 @@ namespace AutoRest.NodeJS
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
+            var disableTypeScriptGeneration = Singleton<GeneratorSettingsJs>.Instance.DisableTypeScriptGeneration;
+
             var codeModel = cm as CodeModelJs;
             if (codeModel == null)
             {
@@ -61,7 +47,7 @@ namespace AutoRest.NodeJS
             var serviceClientTemplate = new ServiceClientTemplate {Model = codeModel};
             await Write(serviceClientTemplate, codeModel.Name.ToCamelCase() + ".js");
 
-            if (!DisableTypeScriptGeneration)
+            if (!disableTypeScriptGeneration)
             {
                 var serviceClientTemplateTS = new ServiceClientTemplateTS {Model = codeModel};
                 await Write(serviceClientTemplateTS, codeModel.Name.ToCamelCase() + ".d.ts");
@@ -73,7 +59,7 @@ namespace AutoRest.NodeJS
                 var modelIndexTemplate = new ModelIndexTemplate {Model = codeModel};
                 await Write(modelIndexTemplate, Path.Combine("models", "index.js"));
 
-                if (!DisableTypeScriptGeneration)
+                if (!disableTypeScriptGeneration)
                 {
                     var modelIndexTemplateTS = new ModelIndexTemplateTS {Model = codeModel};
                     await Write(modelIndexTemplateTS, Path.Combine("models", "index.d.ts"));
@@ -92,7 +78,7 @@ namespace AutoRest.NodeJS
                 var methodGroupIndexTemplate = new MethodGroupIndexTemplate {Model = codeModel};
                 await Write(methodGroupIndexTemplate, Path.Combine("operations", "index.js"));
 
-                if (!DisableTypeScriptGeneration)
+                if (!disableTypeScriptGeneration)
                 {
                     var methodGroupIndexTemplateTS = new MethodGroupIndexTemplateTS {Model = codeModel};
                     await Write(methodGroupIndexTemplateTS, Path.Combine("operations", "index.d.ts"));

@@ -10,47 +10,15 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.NodeJS.Azure
 {
-    public class AzureNodeJsCodeModelTransformer : NodeJsModelTransformer
+    public class TransformerJsa : TransformerJs, ITransformer<CodeModelJsa>
     {
-        internal AzureNodeJSCodeGenerator AzureCodeGenerator { get; set; }
-        protected override CodeNamer NewCodeNamer => new NodeJsCodeNamer();
 
-        protected override Context InitializeContext()
+        public override CodeModelJs TransformCodeModel(CodeModel codeModel)
         {
-            // our instance of the codeNamer.
-            var codeNamer = NewCodeNamer;
-
-            return new Context
-            {
-                // inherit anything from the parent class.
-                // base.InitializeContext(),
-
-                // on activation of this context, 
-                () =>
-                {
-                    // set the singleton for the code namer.
-                    Singleton<CodeNamer>.Instance = codeNamer;
-
-                    // and the c# specific settings
-                    Singleton<INodeJsSettings>.Instance = AzureCodeGenerator;
-                },
-
-                // add/override our own implementations 
-                new Factory<CodeModel, CodeModelJsa>(),
-                new Factory<Method, MethodJsa>(),
-                new Factory<CompositeType, CompositeTypeJs>(),
-                new Factory<Property, PropertyJs>(),
-                new Factory<Parameter, ParameterJs>(),
-                new Factory<DictionaryType, DictionaryTypeJs>(),
-                new Factory<SequenceType, SequenceTypeJs>(),
-                new Factory<MethodGroup, MethodGroupJs>(),
-                new Factory<EnumType, EnumType>(),
-                new Factory<PrimaryType, PrimaryTypeJs>(),
-            };
+            return ((ITransformer<CodeModelJsa>)this).TransformCodeModel(codeModel);
         }
 
-
-        protected override CodeModel Transform(CodeModel cm)
+        CodeModelJsa ITransformer<CodeModelJsa>.TransformCodeModel(CodeModel cm)
         {
             var codeModel = cm as CodeModelJsa;
             if (codeModel == null)
@@ -65,7 +33,7 @@ namespace AutoRest.NodeJS.Azure
 
             AzureExtensions.NormalizeAzureClientModel(codeModel);
 
-            base.Transform(codeModel);
+            base.TransformCodeModel(codeModel);
 
             NormalizePaginatedMethods(codeModel);
             ExtendAllResourcesToBaseResource(codeModel);
@@ -131,3 +99,41 @@ namespace AutoRest.NodeJS.Azure
         }
     }
 }
+#if removing
+  internal CodeGeneratorJsa AzureCodeGenerator { get; set; }
+
+        protected override Context InitializeContext()
+        {
+            // our instance of the codeNamer.
+            var codeNamer = NewCodeNamer;
+
+            return new Context
+            {
+                // inherit anything from the parent class.
+                // base.InitializeContext(),
+
+                // on activation of this context, 
+                () =>
+                {
+                    // set the singleton for the code namer.
+                    Singleton<CodeNamer>.Instance = codeNamer;
+
+                    // and the c# specific settings
+                    Singleton<INodeJsSettings>.Instance = AzureCodeGenerator;
+                },
+
+                // add/override our own implementations 
+                new Factory<CodeModel, CodeModelJsa>(),
+                new Factory<Method, MethodJsa>(),
+                new Factory<CompositeType, CompositeTypeJs>(),
+                new Factory<Property, PropertyJs>(),
+                new Factory<Parameter, ParameterJs>(),
+                new Factory<DictionaryType, DictionaryTypeJs>(),
+                new Factory<SequenceType, SequenceTypeJs>(),
+                new Factory<MethodGroup, MethodGroupJs>(),
+                new Factory<EnumType, EnumType>(),
+                new Factory<PrimaryType, PrimaryTypeJs>(),
+            };
+        }
+
+#endif

@@ -18,22 +18,9 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Azure
 {
-    public class AzureCSharpCodeGenerator : CSharpCodeGenerator
+    public class CodeGeneratorCsa : CodeGeneratorCs
     {
         private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.3.2.0";
-
-        public AzureCSharpCodeGenerator() : this(new AzureCSharpModelTransformer())
-        {
-        }
-
-        protected AzureCSharpCodeGenerator(AzureCSharpModelTransformer transformer) : base(transformer)
-        {
-            transformer.AzureCodeGenerator = this;
-        }
-
-        public override string Description => "Azure specific C# code generator.";
-
-        public override string Name => "Azure.CSharp";
 
         public override string UsageInstructions => string.Format(CultureInfo.InvariantCulture,
             Properties.Resources.UsageInformation, ClientRuntimePackage);
@@ -89,7 +76,7 @@ namespace AutoRest.CSharp.Azure
                 }
 
                 var modelTemplate = new ModelTemplate {Model = model};
-                await Write(modelTemplate,Path.Combine(Singleton<Settings>.Instance.ModelsName,
+                await Write(modelTemplate,Path.Combine(Settings.Instance.ModelsName,
                     $"{model.Name}{ImplementationFileExtension}"));
             }
 

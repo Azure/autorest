@@ -12,6 +12,8 @@ using Xunit;
 using Parameter = AutoRest.Core.Model.Parameter;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
+using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
+
 namespace AutoRest.CSharp.Tests
 {
     [Collection("AutoRest Tests")]
@@ -132,10 +134,9 @@ namespace AutoRest.CSharp.Tests
                 codeModel.Add(childObject);
 
                 new Settings();
-                var codeGenerator= new CSharpCodeGenerator();
-                codeModel = codeGenerator.ModelTransformer.Load(codeModel);
-                codeModel = codeGenerator.ModelTransformer.TransformCodeModel(codeModel);
-
+                var plugin = new PluginCs();
+                codeModel = plugin.Serializer.Load(codeModel);
+                codeModel = plugin.Transformer.TransformCodeModel(codeModel);
 
                 Assert.Equal("Sample", codeModel.ModelTypes.First(m => m.Name == "Sample").Name);
                 Assert.Equal("Child", codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[0].Name);
@@ -240,9 +241,9 @@ namespace AutoRest.CSharp.Tests
                 using (NewContext)
                 {
                     new Settings();
-                    var codeGenerator = new CSharpCodeGenerator();
-                    codeModel = codeGenerator.ModelTransformer.Load(codeModel);
-                    codeModel = codeGenerator.ModelTransformer.TransformCodeModel(codeModel);
+                    var plugin = new PluginCs();
+                    codeModel = plugin.Serializer.Load(codeModel);
+                    codeModel = plugin.Transformer.TransformCodeModel(codeModel);
 
 
                     Assert.Equal("GreetingsModel", codeModel.ModelTypes[0].Name);

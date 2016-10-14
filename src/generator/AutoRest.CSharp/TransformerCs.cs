@@ -4,55 +4,17 @@
 
 using AutoRest.Core;
 using AutoRest.Core.Model;
-using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Model;
 using AutoRest.Extensions;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using MethodGroup = AutoRest.Core.Model.MethodGroup;
 
 namespace AutoRest.CSharp
 {
-    public class CSharpModelTransformer : CodeModelTransformer
+    public class TransformerCs : CodeModelTransformer<CodeModelCs>
     {
-        internal CSharpCodeGenerator CodeGenerator { get; set; }
-        protected virtual CodeNamer  NewCodeNamer => new CSharpCodeNamer();
-
-        protected override Context InitializeContext()
+        public override CodeModelCs TransformCodeModel(CodeModel cs)
         {
-            // our instance of the codeNamer.
-            var codeNamer = NewCodeNamer;
-
-            return new Context
-            {
-                // inherit anything from the parent class.
-                base.InitializeContext(),
-
-                // on activation of this context, 
-                () =>
-                {
-                    // set the singleton for the code namer.
-                    Singleton<CodeNamer>.Instance = codeNamer;
-
-                    // and the c# specific settings
-                    Singleton<ICSharpGeneratorSettings>.Instance = CodeGenerator;
-                },
-
-                // add/override our own implementations 
-                new Factory<CodeModel> {() => new CodeModelCs(CodeGenerator.InternalConstructors)},
-                new Factory<EnumType, EnumTypeCs>(),
-                new Factory<Method, MethodCs>(),
-                new Factory<CompositeType, CompositeTypeCs>(),
-                new Factory<Parameter, ParameterCs>(),
-                new Factory<Property, PropertyCs>(),
-                new Factory<PrimaryType, PrimaryTypeCs>(),
-                new Factory<DictionaryType, DictionaryTypeCs>(),
-                new Factory<SequenceType, SequenceTypeCs>(),
-                new Factory<MethodGroup, MethodGroupCs>(),
-            };
-        }
-
-        protected override CodeModel Transform(CodeModel codeModel)
-        {
+            var codeModel = cs as CodeModelCs;
             // we're guaranteed to be in our language-specific context here.
 
             // add the Credentials
@@ -105,3 +67,42 @@ namespace AutoRest.CSharp
         }
     }
 }
+#if removing
+        internal CSharpCodeGenerator CodeGenerator { get; set; }
+        protected virtual CodeNamer  NewCodeNamer => new CSharpCodeNamer();
+
+        protected override Context InitializeContext()
+        {
+            // our instance of the codeNamer.
+            var codeNamer = NewCodeNamer;
+
+            return new Context
+            {
+                // inherit anything from the parent class.
+                base.InitializeContext(),
+
+                // on activation of this context, 
+                () =>
+                {
+                    // set the singleton for the code namer.
+                    Singleton<CodeNamer>.Instance = codeNamer;
+
+                    // and the c# specific settings
+                    Singleton<ICSharpGeneratorSettings>.Instance = CodeGenerator;
+                },
+
+                // add/override our own implementations 
+                new Factory<CodeModel> {() => new CodeModelCs(CodeGenerator.InternalConstructors)},
+                new Factory<EnumType, EnumTypeCs>(),
+                new Factory<Method, MethodCs>(),
+                new Factory<CompositeType, CompositeTypeCs>(),
+                new Factory<Parameter, ParameterCs>(),
+                new Factory<Property, PropertyCs>(),
+                new Factory<PrimaryType, PrimaryTypeCs>(),
+                new Factory<DictionaryType, DictionaryTypeCs>(),
+                new Factory<SequenceType, SequenceTypeCs>(),
+                new Factory<MethodGroup, MethodGroupCs>(),
+            };
+        }
+
+#endif

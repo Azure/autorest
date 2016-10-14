@@ -31,7 +31,7 @@ namespace AutoRest.Extensions.Tests
 
                 var modeler = new SwaggerModeler();
                 var clientModel = modeler.Build();
-                CSharpCodeGenerator generator = new CSharpCodeGenerator();
+                CodeGeneratorCs generator = new CodeGeneratorCs();
 
                 generator.Generate(clientModel).GetAwaiter().GetResult();
                 string body = settings.FileSystem.ReadFileAsText(Path.Combine(settings.OutputDirectory, "Payload.cs"));

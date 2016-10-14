@@ -14,53 +14,11 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.NodeJS
 {
-    public class NodeJsModelTransformer : CodeModelTransformer
+    public class TransformerJs : CodeModelTransformer<CodeModelJs>
     {
-        protected internal NodeJSCodeGenerator CodeGenerator { get; set; }
-        protected virtual CodeNamer NewCodeNamer => new NodeJsCodeNamer();
-
-        protected override Context InitializeContext()
-        {
-            // our instance of the codeNamer.
-            var codeNamer = NewCodeNamer;
-
-            return new Context
-            {
-                // inherit anything from the parent class.
-                base.InitializeContext(),
-
-                // on activation of this context, 
-                () =>
-                {
-                    // set the singleton for the code namer.
-                    Singleton<CodeNamer>.Instance = codeNamer;
-
-                    // and the c# specific settings
-                    Singleton<INodeJsSettings>.Instance = CodeGenerator;
-                },
-
-                // add/override our own implementations 
-                new Factory<CodeModel, CodeModelJs>(),
-                new Factory<Method, MethodJs>(),
-                new Factory<CompositeType, CompositeTypeJs>(),
-                new Factory<Property, PropertyJs>(),
-                new Factory<Parameter, ParameterJs>(),
-                new Factory<DictionaryType, DictionaryTypeJs>(),
-                new Factory<SequenceType, SequenceTypeJs>(),
-                new Factory<MethodGroup, MethodGroupJs>(),
-                new Factory<EnumType, EnumType>(),
-                new Factory<PrimaryType, PrimaryTypeJs>(),
-
-            };
-        }
-
-        protected override CodeModel Transform(CodeModel cm)
+        public override CodeModelJs TransformCodeModel(CodeModel cm)
         {
             var codeModel = cm as CodeModelJs;
-            if (codeModel == null)
-            {
-                throw new InvalidCastException("Code Model is not a nodejs code model.");
-            }
 
             // we're guaranteed to be in our language-specific context here.
 
@@ -141,4 +99,52 @@ namespace AutoRest.NodeJS
             }
         }
     }
+
+#if removing
+
+          
+    }
+
+    public class NodeJsModelTransformer : CodeModelTransformer
+    {
+
+        protected internal NodeJSCodeGenerator CodeGenerator { get; set; }
+        protected virtual CodeNamer NewCodeNamer => new NodeJsCodeNamer();
+
+        protected override Context InitializeContext()
+        {
+            // our instance of the codeNamer.
+            var codeNamer = NewCodeNamer;
+
+            return new Context
+            {
+                // inherit anything from the parent class.
+                base.InitializeContext(),
+
+                // on activation of this context, 
+                () =>
+                {
+                    // set the singleton for the code namer.
+                    Singleton<CodeNamer>.Instance = codeNamer;
+
+                    // and the c# specific settings
+                    Singleton<INodeJsSettings>.Instance = CodeGenerator;
+                },
+
+                // add/override our own implementations 
+                new Factory<CodeModel, CodeModelJs>(),
+                new Factory<Method, MethodJs>(),
+                new Factory<CompositeType, CompositeTypeJs>(),
+                new Factory<Property, PropertyJs>(),
+                new Factory<Parameter, ParameterJs>(),
+                new Factory<DictionaryType, DictionaryTypeJs>(),
+                new Factory<SequenceType, SequenceTypeJs>(),
+                new Factory<MethodGroup, MethodGroupJs>(),
+                new Factory<EnumType, EnumType>(),
+                new Factory<PrimaryType, PrimaryTypeJs>(),
+
+            };
+        }
+
+#endif 
 }

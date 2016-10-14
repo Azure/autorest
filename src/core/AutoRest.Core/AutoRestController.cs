@@ -33,7 +33,6 @@ namespace AutoRest.Core
         /// <summary>
         /// Generates client using provided settings.
         /// </summary>
-        /// <param name="settings">Code generator settings.</param>
         public static void Generate()
         {
             if (Settings.Instance == null)
@@ -75,27 +74,26 @@ namespace AutoRest.Core
                 throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
             }
 
-            var codeGenerator = ExtensionsLoader.GetCodeGenerator();
+            var plugin = ExtensionsLoader.GetPlugin();
 
-            Logger.WriteOutput(codeGenerator.UsageInstructions);
+            Logger.WriteOutput(plugin.CodeGenerator.UsageInstructions);
 
             Settings.Instance.Validate();
             try
             {
-                // load model into language-specific code model
-                codeModel = codeGenerator.ModelTransformer.Load(codeModel);
-
                 // ensure once we're doing language-specific work, that we're working
                 // in context provided by the language-specific transformer. 
-
-                using (codeGenerator.ModelTransformer.Activate())
+                using (plugin.Activate())
                 {
+                    // load model into language-specific code model
+                    codeModel = plugin.Serializer.Load(codeModel);
+
                     // we've loaded the model, run the extensions for after it's loaded
                     codeModel = RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
      
                     // apply language-specific tranformation (more than just language-specific types)
                     // used to be called "NormalizeClientModel" . 
-                    codeModel = codeGenerator.ModelTransformer.TransformCodeModel(codeModel);
+                    codeModel = plugin.Transformer.TransformCodeModel(codeModel);
 
                     // next set of extensions
                     codeModel = RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
@@ -105,7 +103,7 @@ namespace AutoRest.Core
                     codeModel = RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
 
                     // Generate code from CodeModel.
-                    codeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+                    plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
                 }
             }
             catch (Exception exception)
@@ -127,7 +125,6 @@ namespace AutoRest.Core
         /// <summary>
         /// Compares two specifications.
         /// </summary>
-        /// <param name="settings">Code generator settings.</param>
         public static void Compare()
         {
             if (Settings.Instance == null)

@@ -11,7 +11,7 @@ using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.NodeJS
 {
-    public class NodeJsCodeNamer : CodeNamer
+    public class CodeNamerJs : CodeNamer
     {
         private readonly HashSet<string> _propertyNameWhiteList = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
@@ -23,7 +23,7 @@ namespace AutoRest.NodeJS
         /// <summary>
         ///     Initializes a new instance of CSharpCodeNamingFramework.
         /// </summary>
-        public NodeJsCodeNamer()
+        public CodeNamerJs()
         {
             ReservedWords.AddRange(new[]
             {

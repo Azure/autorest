@@ -18,31 +18,19 @@ namespace AutoRest.Core
     [JsonObject(MemberSerialization.OptIn)]
     public abstract class CodeGenerator
     {
-        public const string EnumObject = "x-ms-enum";
         private bool firstTimeWriteSingleFile = true;
 
-        protected CodeGenerator(CodeModelTransformer modelTransformer)
+        protected CodeGenerator()
         {
-            // set the loader/transformer
-            ModelTransformer = modelTransformer;
-
+#if removing
             // apply custom settings to this when it's created.
             Settings.PopulateSettings(this, Settings.Instance.CustomSettings);
+#endif 
         }
-
-        public CodeModelTransformer ModelTransformer { get; private set; }
-
-        public abstract string Name { get; }
-
-        /// <summary>
-        /// Brief description of the code generator.
-        /// </summary>
-        public abstract string Description { get; }
 
         // TODO: header files aren't part of most target languages. Remove?
         public virtual string HeaderFileExtension => null;
 
-        // TODO: who uses this? It doesn't appear to have any callers?
         public abstract string ImplementationFileExtension { get; }
 
         /// <summary>
