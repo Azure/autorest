@@ -72,6 +72,7 @@ namespace AutoRest.Python.Azure
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);
             CorrectFilterParameters(serviceClient);
+            AddCustomProperties(serviceClient);
 
             base.NormalizeClientModel(serviceClient);
             NormalizeApiVersion(serviceClient);
@@ -206,6 +207,22 @@ namespace AutoRest.Python.Azure
             }
 
             SwaggerExtensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name)));
+        }
+
+        /// <summary>
+        /// Add any custom Python-specific properties
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        private void AddCustomProperties(ServiceClient serviceClient)
+        {
+            serviceClient.Properties.Add(new Property
+            {
+                Name = "thread_daemon",
+                SerializedName = "threadDaemon",
+                DefaultValue = "true",
+                Type = new PrimaryType(KnownPrimaryType.Boolean),
+                Documentation = "Whether the operation polling thread is a daemon thread. Default value is true."
+            });
         }
 
         /// <summary>
