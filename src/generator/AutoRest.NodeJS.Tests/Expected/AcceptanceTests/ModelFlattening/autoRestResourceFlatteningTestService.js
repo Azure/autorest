@@ -88,11 +88,8 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
   var resourceArray = (options && options.resourceArray !== undefined) ? options.resourceArray : undefined;
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//model-flatten/array';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/array';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -207,11 +204,8 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//model-flatten/array';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/array';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -333,11 +327,8 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
   var resourceDictionary = (options && options.resourceDictionary !== undefined) ? options.resourceDictionary : undefined;
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//model-flatten/dictionary';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/dictionary';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -452,11 +443,8 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//model-flatten/dictionary';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/dictionary';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -597,11 +585,8 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   var resourceComplexObject = (options && options.resourceComplexObject !== undefined) ? options.resourceComplexObject : undefined;
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//model-flatten/resourcecollection';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/resourcecollection';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -703,11 +688,8 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//model-flatten/resourcecollection';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/resourcecollection';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -830,11 +812,8 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (opt
   var simpleBodyProduct = (options && options.simpleBodyProduct !== undefined) ? options.simpleBodyProduct : undefined;
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//model-flatten/customFlattening';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/customFlattening';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1002,11 +981,8 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//model-flatten/customFlattening';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/customFlattening';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1215,12 +1191,9 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//model-flatten/customFlattening/parametergrouping/{name}/';
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/customFlattening/parametergrouping/{name}/';
   requestUrl = requestUrl.replace('{name}', encodeURIComponent(name));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

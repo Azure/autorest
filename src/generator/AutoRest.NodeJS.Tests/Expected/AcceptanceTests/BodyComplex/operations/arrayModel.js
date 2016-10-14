@@ -60,11 +60,8 @@ ArrayModel.prototype.getValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//complex/array/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/array/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -188,11 +185,8 @@ ArrayModel.prototype.putValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//complex/array/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/array/valid';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -294,11 +288,8 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//complex/array/empty';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/array/empty';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -422,11 +413,8 @@ ArrayModel.prototype.putEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//complex/array/empty';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/array/empty';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -529,11 +517,8 @@ ArrayModel.prototype.getNotProvided = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//complex/array/notprovided';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/array/notprovided';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

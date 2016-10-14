@@ -30,8 +30,10 @@ namespace AutoRest.NodeJS.Model
         [JsonIgnore]
         public virtual IEnumerable<MethodGroupJs> MethodGroupModels => Operations.Cast<MethodGroupJs>().Where( each => !each.IsCodeModelMethodGroup );
 
+
+#if remove_this
         [JsonIgnore]
-        public bool ContainsTimeSpan
+        public bool ContainsTimeSpan_
         {
             get
             {
@@ -44,6 +46,7 @@ namespace AutoRest.NodeJS.Model
                 return method != null;
             }
         }
+#endif
 
         /// <summary>
         /// Provides an ordered ModelTemplateModel list such that the parent 
@@ -207,6 +210,28 @@ namespace AutoRest.NodeJS.Model
                 }
 
                 return requiredParams.ToString();
+            }
+        }
+
+        public string ConstructImportTS()
+        {
+            IndentedStringBuilder builder = new IndentedStringBuilder(IndentedStringBuilder.TwoSpaces);
+            builder.Append("import { ServiceClientOptions, RequestOptions, ServiceCallback");
+            if (Properties.Any(p => p.Name.EqualsIgnoreCase("credentials")))
+            {
+                builder.Append(", ServiceClientCredentials");
+            }
+
+            builder.Append(" } from 'ms-rest';");
+            return builder.ToString();
+        }
+
+        public bool ContainsTimeSpan
+        {
+            get
+            {
+                return this.Methods.FirstOrDefault(
+                    m => m.Parameters.FirstOrDefault(p => p.ModelType.IsPrimaryType(KnownPrimaryType.TimeSpan)) != null) != null;
             }
         }
     }

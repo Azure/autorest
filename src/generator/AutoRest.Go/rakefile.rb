@@ -1,5 +1,8 @@
 # This file is use to generate Azure SDK from swagger. 
 # Swaggers specs are located in git repo: https://github.com/Azure/azure-rest-api-specs
+# Command to run rake file: 
+# 				rake SDK_VERSION=<major>.<minor>.<patch>
+# 				where SDK_VERSION is SDK version.
 
 require 'fileutils'
 
@@ -13,18 +16,18 @@ SWAGGER_VERSIONS = {
 	compute: {version: "2016-03-30"},
 	# containerservice: {version: "2016-03-30", swagger: "containerservice"},
 	# commerce: {version: "2015-06-01-preview"},
-	# datalake_analytics: {
-	# 	account: {version: "2015-10-01-preview"},
-	# 	catalog: {version: "2015-10-01-preview"},
-	# 	job:  {version: "2016-03-20-preview"}
-	# },
+	datalake_analytics: {
+		account: {version: "2015-10-01-preview"},
+		# catalog: {version: "2016-06-01-preview"},
+		job:  {version: "2016-03-20-preview"}
+	},
 	datalake_store: {
 		account: {version: "2015-10-01-preview"},
 		filesystem: {version: "2015-10-01-preview"}
 	},
 	devtestlabs: {version: "2016-05-15", swagger: "DTL"},
 	dns: {version: "2016-04-01"},
-	# eventhub: {version: "2015-08-01", swagger: "EventHub"},
+	eventhub: {version: "2015-08-01", swagger: "EventHub"},
 	# graphrbac: {version: "1.6"},
 	intune: {version: "2015-01-14-preview"},
 	iothub: {version: "2016-02-03"},
@@ -33,7 +36,7 @@ SWAGGER_VERSIONS = {
 	machinelearning: {version: "2016-05-01-preview", swagger: "webservices"},
 	mediaservices: {version: "2015-10-01", swagger: "media"},
 	mobileengagement: {version: "2014-12-01", swagger: "mobile-engagement"},
-	network: {version: "2016-06-01"},
+	network: {version: "2016-09-01"},
 	notificationhubs: {version: "2016-03-01"},
 	powerbiembedded: {version: "2016-01-29"},
 	redis: {version: "2016-04-01"},
@@ -46,7 +49,7 @@ SWAGGER_VERSIONS = {
 	},
 	scheduler: {version: "2016-03-01"},
 	search: {version: "2015-02-28"},
-	# servermanagement: {version: "2015-07-01-preview"},
+	servermanagement: {version: "2015-07-01-preview"},
 	servicebus: {version: "2015-08-01"},
 	sql: {version: "2015-05-01"},
 	storage: {version: "2016-01-01"},
@@ -197,7 +200,7 @@ def generate(service)
 	s = "Generating #{service.fullname}.#{service.version} "
 	puts "#{s} #{"=" * (80 - s.length)}"
 	delete(service)
-	s = `#{AUTOREST} -AddCredentials -CodeGenerator Go -Header MICROSOFT_APACHE -Input #{service.input_path} -Namespace #{service.namespace} -OutputDirectory #{service.output_path} -Modeler Swagger`
+	s = `#{AUTOREST} -AddCredentials -CodeGenerator Go -Header MICROSOFT_APACHE -Input #{service.input_path} -Namespace #{service.namespace} -OutputDirectory #{service.output_path} -Modeler Swagger  -pv #{ENV['SDK_VERSION']}`
 	raise "Failed generating #{service.fullname}.#{service.inspect}" if s =~ /.*FATAL.*/
 	puts s
 

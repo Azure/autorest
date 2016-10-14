@@ -192,29 +192,8 @@ function serializeDictionaryType(mapper, object, objectName) {
 function serializeCompositeType(mapper, object, objectName) {
   /*jshint validthis: true */
   //check for polymorphic discriminator
-  if (mapper.type.polymorphicDiscriminator !== null && mapper.type.polymorphicDiscriminator !== undefined) {
-    if (object === null || object === undefined) {
-      throw new Error(util.format('\'%s\' cannot be null or undefined. \'%s\' is the ' + 
-        'polmorphicDiscriminator and is a required property.', objectName, 
-        mapper.type.polymorphicDiscriminator));
-    }
-    if (object[mapper.type.polymorphicDiscriminator] === null || object[mapper.type.polymorphicDiscriminator] === undefined) {
-      throw new Error(util.format('No discriminator field \'%s\' was found in \'%s\'.', 
-        mapper.type.polymorphicDiscriminator, objectName));
-    }
-    var indexDiscriminator = null;
-    if (object[mapper.type.polymorphicDiscriminator] === mapper.type.uberParent) {
-      indexDiscriminator = object[mapper.type.polymorphicDiscriminator];
-    } else {
-      indexDiscriminator = mapper.type.uberParent + '.' + object[mapper.type.polymorphicDiscriminator];
-    }
-    if (!this.models.discriminators[indexDiscriminator]) {
-      throw new Error(util.format('\'%s\': \'%s\'  in \'%s\' is not a valid ' + 
-        'discriminator as a corresponding model class for the disciminator \'%s\' ' + 
-        'was not found in this.models.discriminators object.', 
-        mapper.type.polymorphicDiscriminator, object[mapper.type.polymorphicDiscriminator], objectName, indexDiscriminator));
-    }
-    mapper = new this.models.discriminators[indexDiscriminator]().mapper();
+  if (mapper.type.polymorphicDiscriminator) {
+    mapper = getPolymorphicMapper.call(this, mapper, object, objectName, 'serialize');
   }
   
   var payload = {};
@@ -270,7 +249,8 @@ function serializeCompositeType(mapper, object, objectName) {
         //serialize the property if it is present in the provided object instance
         if (((parentObject !== null && parentObject !== undefined) && (modelProps[key].defaultValue !== null && modelProps[key].defaultValue !== undefined)) || 
             (object[key] !== null && object[key] !== undefined)) {
-          var propertyObjectName = objectName + '.' + modelProps[key].serializedName;
+          var propertyObjectName = objectName;
+          if (modelProps[key].serializedName !== '') propertyObjectName = objectName + '.' + modelProps[key].serializedName;
           var propertyMapper = modelProps[key];
           var serializedValue = exports.serialize.call(this, propertyMapper, object[key], propertyObjectName);
           parentObject[propName] = serializedValue;
@@ -467,29 +447,8 @@ function deserializeDictionaryType(mapper, responseBody, objectName) {
 function deserializeCompositeType(mapper, responseBody, objectName) {
   /*jshint validthis: true */
   //check for polymorphic discriminator
-  if (mapper.type.polymorphicDiscriminator !== null && mapper.type.polymorphicDiscriminator !== undefined) {
-    if (responseBody === null || responseBody === undefined) {
-      throw new Error(util.format('\'%s\' cannot be null or undefined. \'%s\' is the ' + 
-        'polmorphicDiscriminator and is a required property.', objectName, 
-        mapper.type.polymorphicDiscriminator));
-    }
-    if (responseBody[mapper.type.polymorphicDiscriminator] === null || responseBody[mapper.type.polymorphicDiscriminator] === undefined) {
-      throw new Error(util.format('No discriminator field \'%s\' was found in \'%s\'.', 
-        mapper.type.polymorphicDiscriminator, objectName));
-    }
-    var indexDiscriminator = null;
-    if (responseBody[mapper.type.polymorphicDiscriminator] === mapper.type.uberParent) {
-      indexDiscriminator = responseBody[mapper.type.polymorphicDiscriminator];
-    } else {
-      indexDiscriminator = mapper.type.uberParent + '.' + responseBody[mapper.type.polymorphicDiscriminator];
-    }
-    if (!this.models.discriminators[indexDiscriminator]) {
-      throw new Error(util.format('\'%s\': \'%s\'  in \'%s\' is not a valid ' + 
-        'discriminator as a corresponding model class for the disciminator \'%s\' ' + 
-        'was not found in this.models.discriminators object.', 
-        mapper.type.polymorphicDiscriminator, responseBody[mapper.type.polymorphicDiscriminator], objectName, indexDiscriminator));
-    }
-    mapper = new this.models.discriminators[indexDiscriminator]().mapper();
+  if (mapper.type.polymorphicDiscriminator) {
+    mapper = getPolymorphicMapper.call(this, mapper, responseBody, objectName, 'deserialize');
   }
   
   var instance = {};
@@ -534,7 +493,8 @@ function deserializeCompositeType(mapper, responseBody, objectName) {
         } catch (err) {
           continue;
         }
-        var propertyObjectName = objectName + '.' + modelProps[key].serializedName;
+        var propertyObjectName = objectName;
+        if (modelProps[key].serializedName !== '') propertyObjectName = objectName + '.' + modelProps[key].serializedName;
         var propertyMapper = modelProps[key];
         var serializedValue;
         //paging
@@ -568,6 +528,105 @@ function splitSerializeName(prop) {
   });
 
   return classes;
+}
+
+function getPolymorphicMapper(mapper, object, objectName, mode) {
+  /*jshint validthis: true */
+  //check for polymorphic discriminator
+  //Until version 1.15.1, 'polymorphicDiscriminator' in the mapper was a string. This method was not effective when the 
+  //polymorphicDiscriminator property had a dot in it's name. So we have comeup with a desgin where polymorphicDiscriminator  
+  //will be an object that contains the clientName (normalized property name, ex: 'odatatype') and 
+  //the serializedName (ex: 'odata.type') (We do not escape the dots with double backslash in this case as it is not required). 
+  //Thus when serializing, the user will give us an object which will contain the normalizedProperty hence we will lookup
+  //the clientName of the polmorphicDiscriminator in the mapper and during deserialization from the responseBody we will 
+  //lookup the serializedName of the polmorphicDiscriminator in the mapper. This will help us in selecting the correct mapper
+  //for the model that needs to be serializes or deserialized. 
+  //We need this routing for backwards compatibility. This will absorb the breaking change in the mapper and allow new versions
+  //of the runtime to work seamlessly with older version (>= 0.17.0-Nightly20161008) of Autorest generated node.js clients.
+  if (mapper.type.polymorphicDiscriminator) {
+    if (typeof mapper.type.polymorphicDiscriminator.valueOf() === 'string') {
+      return _getPolymorphicMapperStringVersion.call(this, mapper, object, objectName);
+    } else if (mapper.type.polymorphicDiscriminator instanceof Object) {
+      return _getPolymorphicMapperObjectVersion.call(this, mapper, object, objectName, mode);
+    } else {
+      throw new Error(util.format('The polymorphicDiscriminator for \'%s\' is neither a string nor an object.', objectName));
+    }
+  }
+  return mapper;
+}
+
+//processes new version of the polymorphicDiscriminator in the mapper.
+function _getPolymorphicMapperObjectVersion(mapper, object, objectName, mode) {
+  /*jshint validthis: true */
+  //check for polymorphic discriminator
+  var polymorphicPropertyName = '';
+  if (mode === 'serialize') {
+    polymorphicPropertyName = 'clientName';
+  } else if (mode === 'deserialize') {
+    polymorphicPropertyName = 'serializedName';
+  } else {
+    throw new Error(util.format('The given mode \'%s\' for getting the polymorphic mapper for \'%s\' is inavlid.', mode, objectName));
+  }
+
+  if (mapper.type.polymorphicDiscriminator && 
+      mapper.type.polymorphicDiscriminator[polymorphicPropertyName] !== null && 
+      mapper.type.polymorphicDiscriminator[polymorphicPropertyName] !== undefined) {
+    if (object === null || object === undefined) {
+      throw new Error(util.format('\'%s\' cannot be null or undefined. \'%s\' is the ' + 
+        'polmorphicDiscriminator and is a required property.', objectName, 
+        mapper.type.polymorphicDiscriminator[polymorphicPropertyName]));
+    }
+    if (object[mapper.type.polymorphicDiscriminator[polymorphicPropertyName]] === null || 
+        object[mapper.type.polymorphicDiscriminator[polymorphicPropertyName]] === undefined) {
+      throw new Error(util.format('No discriminator field \'%s\' was found in \'%s\'.', 
+        mapper.type.polymorphicDiscriminator[polymorphicPropertyName], objectName));
+    }
+    var indexDiscriminator = null;
+    if (object[mapper.type.polymorphicDiscriminator[polymorphicPropertyName]] === mapper.type.uberParent) {
+      indexDiscriminator = object[mapper.type.polymorphicDiscriminator[polymorphicPropertyName]];
+    } else {
+      indexDiscriminator = mapper.type.uberParent + '.' + object[mapper.type.polymorphicDiscriminator[polymorphicPropertyName]];
+    }
+    if (!this.models.discriminators[indexDiscriminator]) {
+      throw new Error(util.format('\'%s\': \'%s\' in \'%s\' is not a valid ' + 
+        'discriminator as a corresponding model class for the disciminator \'%s\' ' + 
+        'was not found in this.models.discriminators object.', 
+        mapper.type.polymorphicDiscriminator[polymorphicPropertyName], object[mapper.type.polymorphicDiscriminator[polymorphicPropertyName]], objectName, indexDiscriminator));
+    }
+    mapper = new this.models.discriminators[indexDiscriminator]().mapper();
+  }
+  return mapper;
+}
+
+//processes old version of the polymorphicDiscriminator in the mapper.
+function _getPolymorphicMapperStringVersion(mapper, object, objectName) {
+  /*jshint validthis: true */
+  //check for polymorphic discriminator
+  if (mapper.type.polymorphicDiscriminator !== null && mapper.type.polymorphicDiscriminator !== undefined) {
+    if (object === null || object === undefined) {
+      throw new Error(util.format('\'%s\' cannot be null or undefined. \'%s\' is the ' + 
+        'polmorphicDiscriminator and is a required property.', objectName, 
+        mapper.type.polymorphicDiscriminator));
+    }
+    if (object[mapper.type.polymorphicDiscriminator] === null || object[mapper.type.polymorphicDiscriminator] === undefined) {
+      throw new Error(util.format('No discriminator field \'%s\' was found in \'%s\'.', 
+        mapper.type.polymorphicDiscriminator, objectName));
+    }
+    var indexDiscriminator = null;
+    if (object[mapper.type.polymorphicDiscriminator] === mapper.type.uberParent) {
+      indexDiscriminator = object[mapper.type.polymorphicDiscriminator];
+    } else {
+      indexDiscriminator = mapper.type.uberParent + '.' + object[mapper.type.polymorphicDiscriminator];
+    }
+    if (!this.models.discriminators[indexDiscriminator]) {
+      throw new Error(util.format('\'%s\': \'%s\'  in \'%s\' is not a valid ' + 
+        'discriminator as a corresponding model class for the disciminator \'%s\' ' + 
+        'was not found in this.models.discriminators object.', 
+        mapper.type.polymorphicDiscriminator, object[mapper.type.polymorphicDiscriminator], objectName, indexDiscriminator));
+    }
+    mapper = new this.models.discriminators[indexDiscriminator]().mapper();
+  }
+  return mapper;
 }
 
 function bufferToBase64Url(buffer) {

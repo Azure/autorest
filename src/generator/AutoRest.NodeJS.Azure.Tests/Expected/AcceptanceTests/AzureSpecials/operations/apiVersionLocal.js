@@ -70,11 +70,8 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/apiVersion/method/string/none/query/local/2.0';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/apiVersion/method/string/none/query/local/2.0';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
@@ -188,11 +185,8 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/apiVersion/method/string/none/query/local/null';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/apiVersion/method/string/none/query/local/null';
   var queryParameters = [];
   if (apiVersion !== null && apiVersion !== undefined) {
     queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
@@ -302,11 +296,8 @@ ApiVersionLocal.prototype.getPathLocalValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/apiVersion/path/string/none/query/local/2.0';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/apiVersion/path/string/none/query/local/2.0';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
@@ -414,11 +405,8 @@ ApiVersionLocal.prototype.getSwaggerLocalValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/apiVersion/swagger/string/none/query/local/2.0';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/apiVersion/swagger/string/none/query/local/2.0';
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {

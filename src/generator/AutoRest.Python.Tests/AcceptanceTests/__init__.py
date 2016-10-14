@@ -34,11 +34,6 @@ from unittest import TestLoader, TextTestRunner
 
 from os.path import dirname, pardir, join, realpath
 
-cwd = dirname(realpath(__file__))
-root = realpath(join(cwd, pardir, pardir, pardir, pardir))
-runtime = join(root, "src" , "client", "Python", "msrest")
-sys.path.append(runtime)
-
 
 #Ideally this would be in a common helper library shared between the tests
 def start_server_process():

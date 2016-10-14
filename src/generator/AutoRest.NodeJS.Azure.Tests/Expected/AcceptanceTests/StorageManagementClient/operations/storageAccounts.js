@@ -87,12 +87,9 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
@@ -342,14 +339,11 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
@@ -473,14 +467,11 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
@@ -659,14 +650,11 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
@@ -821,14 +809,11 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
@@ -960,12 +945,9 @@ StorageAccounts.prototype.list = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
@@ -1104,13 +1086,10 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
@@ -1267,14 +1246,11 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
@@ -1449,14 +1425,11 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {

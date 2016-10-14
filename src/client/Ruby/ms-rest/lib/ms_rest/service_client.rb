@@ -11,6 +11,12 @@ module MsRest
     # @return [MsRest::ServiceClientCredentials] the credentials object.
     attr_accessor :credentials
 
+    # @return [Hash{String=>String}] default middlewares configuration for requests.
+    attr_accessor :middlewares
+
+    # @return [Hash{String=>String}] default request headers for requests.
+    attr_accessor :request_headers
+
     #
     # Creates and initialize new instance of the ServiceClient class.
     #
@@ -20,7 +26,43 @@ module MsRest
     #
     def initialize(credentials, options = nil)
       @credentials = credentials
+      @request_headers = {}
+      @middlewares = {middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]]}
     end
+
+    #
+    # @param base_url [String] the base url for the request.
+    # @param method [Symbol] with any of the following values :get, :put, :post, :patch, :delete.
+    # @param path [String] the path, relative to {base_url}.
+    # @param options [Hash{String=>String}] specifying any request options like :credentials, :body, etc.
+    # @return [Concurrent::Promise] Promise object which holds the HTTP response.
+    #
+    def make_request_async(base_url, method, path, options = {})
+      options = @middlewares.merge(options)
+      options[:credentials] = options[:credentials] || @credentials
+      request  = MsRest::HttpOperationRequest.new(base_url, path, method, options)
+      promise = request.run_promise do |req|
+        options[:credentials].sign_request(req) unless options[:credentials].nil?
+      end
+      promise = promise.then do |http_response|
+        response_content = http_response.body.to_s.empty? ? nil : http_response.body
+        # Create response
+        create_response(request, http_response, response_content)
+      end
+      promise.execute
+    end
+
+    private
+      #
+      # Retrieves a new instance of the HttpOperationResponse class.
+      # @param [MsRest::HttpOperationRequest] request the HTTP request object.
+      # @param [Faraday::Response] response the HTTP response object.
+      # @param [String] body the HTTP response body.
+      # @return [MsRest::HttpOperationResponse] the operation response.
+      #
+      def create_response(request, http_response, body = nil)
+        HttpOperationResponse.new(request, http_response, body)
+      end
   end
 
   #

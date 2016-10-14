@@ -19,6 +19,32 @@
             "2015-02-01-preview"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the resource id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets the resource name."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the resource location."
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the resource tags."
+        },
         "properties": {
           "oneOf": [
             {
@@ -62,6 +88,10 @@
           "enum": [
             "2015-02-01-preview"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the resource id."
         },
         "properties": {
           "oneOf": [
@@ -339,6 +369,10 @@
           "enum": [
             "2015-02-01-preview"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the resource id."
         },
         "properties": {
           "oneOf": [

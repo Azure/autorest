@@ -387,11 +387,8 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (options, call
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//lro/customheader/putasync/retry/succeeded';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'lro/customheader/putasync/retry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -541,11 +538,8 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (options, 
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//lro/customheader/put/201/creating/succeeded/200';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'lro/customheader/put/201/creating/succeeded/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -710,11 +704,8 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//lro/customheader/post/202/retry/200';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'lro/customheader/post/202/retry/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -846,11 +837,8 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (options, cal
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//lro/customheader/postasync/retry/succeeded';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'lro/customheader/postasync/retry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');

@@ -99,8 +99,8 @@
   }
   else
   {
-  @:var requestUrl = @(Model.ClientReference).baseUri +
-  @:                 '/@(Model.Url.EscapeSingleQuotes())';
+  @:var baseUrl = @(Model.ClientReference).baseUri;
+  @:var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + '@((Model.Url.StartsWith("/") ? Model.Url.TrimStart('/') : Model.Url).EscapeSingleQuotes())';
   }
   @(Model.BuildUrl("requestUrl"))
   @EmptyLine

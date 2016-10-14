@@ -19,7 +19,6 @@ namespace AutoRest.NodeJS.Model
 
         protected MethodGroupJs(string name): base(name)
         {
-            // MethodGroupType = methodGroupName.ToPascalCase();
             InitializeProperties();
         }
 

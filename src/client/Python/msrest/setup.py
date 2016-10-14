@@ -31,8 +31,8 @@ setup(
     version='0.4.4',
     author='Microsoft Corporation',
     packages=['msrest'],
-    url=("https://github.com/xingwu1/autorest/tree/python/"
-         "ClientRuntimes/Python/msrest"),
+    url=("https://github.com/Azure/autorest/tree/master/"
+         "src/client/Python/msrest"),
     license='MIT License',
     description='AutoRest swagger generator Python client runtime.',
     long_description=open('readme.rst').read(),
@@ -54,5 +54,5 @@ setup(
         "isodate>=0.5.4",
         "certifi>=2015.9.6.2",
         "chardet>=2.3.0",
-        "enum34>=1.0.4"],
+        "enum34>=1.0.4;python_version < '3.4'"],
 )

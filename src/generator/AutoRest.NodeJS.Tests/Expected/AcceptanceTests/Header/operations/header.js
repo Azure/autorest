@@ -71,11 +71,8 @@ Header.prototype.paramExistingKey = function (userAgent, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/param/existingkey';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/param/existingkey';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -165,11 +162,8 @@ Header.prototype.responseExistingKey = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/response/existingkey';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/response/existingkey';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -267,11 +261,8 @@ Header.prototype.paramProtectedKey = function (contentType, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/param/protectedkey';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/param/protectedkey';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -361,11 +352,8 @@ Header.prototype.responseProtectedKey = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/response/protectedkey';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/response/protectedkey';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -469,11 +457,8 @@ Header.prototype.paramInteger = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/param/prim/integer';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/param/prim/integer';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -577,11 +562,8 @@ Header.prototype.responseInteger = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/response/prim/integer';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/response/prim/integer';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -688,11 +670,8 @@ Header.prototype.paramLong = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/param/prim/long';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/param/prim/long';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -796,11 +775,8 @@ Header.prototype.responseLong = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/response/prim/long';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/response/prim/long';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -907,11 +883,8 @@ Header.prototype.paramFloat = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/param/prim/float';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/param/prim/float';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1015,11 +988,8 @@ Header.prototype.responseFloat = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/response/prim/float';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/response/prim/float';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1126,11 +1096,8 @@ Header.prototype.paramDouble = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/param/prim/double';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/param/prim/double';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1234,11 +1201,8 @@ Header.prototype.responseDouble = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/response/prim/double';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/response/prim/double';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1345,11 +1309,8 @@ Header.prototype.paramBool = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/param/prim/bool';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/param/prim/bool';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1453,11 +1414,8 @@ Header.prototype.responseBool = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/response/prim/bool';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/response/prim/bool';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1567,11 +1525,8 @@ Header.prototype.paramString = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/param/prim/string';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/param/prim/string';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1676,11 +1631,8 @@ Header.prototype.responseString = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/response/prim/string';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/response/prim/string';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1789,11 +1741,8 @@ Header.prototype.paramDate = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/param/prim/date';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/param/prim/date';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1897,11 +1846,8 @@ Header.prototype.responseDate = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/response/prim/date';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/response/prim/date';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2011,11 +1957,8 @@ Header.prototype.paramDatetime = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/param/prim/datetime';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/param/prim/datetime';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2120,11 +2063,8 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/response/prim/datetime';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/response/prim/datetime';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2235,11 +2175,8 @@ Header.prototype.paramDatetimeRfc1123 = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/param/prim/datetimerfc1123';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/param/prim/datetimerfc1123';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2344,11 +2281,8 @@ Header.prototype.responseDatetimeRfc1123 = function (scenario, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/response/prim/datetimerfc1123';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/response/prim/datetimerfc1123';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2456,11 +2390,8 @@ Header.prototype.paramDuration = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/param/prim/duration';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/param/prim/duration';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2564,11 +2495,8 @@ Header.prototype.responseDuration = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/response/prim/duration';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/response/prim/duration';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2675,11 +2603,8 @@ Header.prototype.paramByte = function (scenario, value, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/param/prim/byte';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/param/prim/byte';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2783,11 +2708,8 @@ Header.prototype.responseByte = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/response/prim/byte';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/response/prim/byte';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2899,11 +2821,8 @@ Header.prototype.paramEnum = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/param/prim/enum';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/param/prim/enum';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3007,11 +2926,8 @@ Header.prototype.responseEnum = function (scenario, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/response/prim/enum';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/response/prim/enum';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3102,11 +3018,8 @@ Header.prototype.customRequestId = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

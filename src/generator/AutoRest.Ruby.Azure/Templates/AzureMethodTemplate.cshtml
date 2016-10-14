@@ -22,7 +22,7 @@
   @WrapComment("# ", Model.Description)@:
 @:#
 }
-@foreach (var parameter in Model.LocalParameters)
+@foreach (var parameter in Model.MethodParameters)
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
 }
@@ -34,9 +34,7 @@ def @(Model.Name)_as_lazy(@(Model.MethodParameterDeclaration))
   response = @(Model.Name)_async(@(Model.MethodParameterInvocation)).value!
   unless response.nil?
     page = response.body
-    page.next_method = Proc.new do |next_link|
-      @(Model.InvokeNextMethodAsync())
-    end
+    @(Model.AssignNextMethodToPage())
     page
   end
 end
@@ -56,7 +54,7 @@ end
   @WrapComment("# ", Model.Description)@:
 @:#
 }
-@foreach (var parameter in Model.LocalParameters)
+@foreach (var parameter in Model.MethodParameters)
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
 }
@@ -72,7 +70,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
 end
 @EmptyLine
 #
-@foreach (var parameter in Model.LocalParameters)
+@foreach (var parameter in Model.MethodParameters)
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
 }

@@ -8,7 +8,7 @@
 @Header(" * ")
  */
 @EmptyLine
-import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+@Model.ConstructImportTS()
 @if (Model.MethodTemplateModels.Any())
 {
 @:import * as models from "./models";
