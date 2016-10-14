@@ -48,6 +48,8 @@ class GroupOperations(object):
          <Fixtures.AcceptanceTestsSubscriptionIdApiVersion.models.SampleResourceGroup>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsSubscriptionIdApiVersion.models.ErrorException>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}'

@@ -47,6 +47,8 @@ class ExplicitOperations(object):
          <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/requied/integer/parameter'
@@ -89,6 +91,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/optional/integer/parameter'
@@ -137,6 +141,8 @@ class ExplicitOperations(object):
          <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         body_parameter = models.IntWrapper(value=value)
 
@@ -182,6 +188,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         body_parameter = None
         if value is not None:
@@ -234,6 +242,8 @@ class ExplicitOperations(object):
          <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/requied/integer/header'
@@ -274,6 +284,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/optional/integer/header'
@@ -316,6 +328,8 @@ class ExplicitOperations(object):
          <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/requied/string/parameter'
@@ -358,6 +372,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/optional/string/parameter'
@@ -406,6 +422,8 @@ class ExplicitOperations(object):
          <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         body_parameter = models.StringWrapper(value=value)
 
@@ -451,6 +469,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         body_parameter = None
         if value is not None:
@@ -503,6 +523,8 @@ class ExplicitOperations(object):
          <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/requied/string/header'
@@ -543,6 +565,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/optional/string/header'
@@ -586,6 +610,8 @@ class ExplicitOperations(object):
          <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/requied/class/parameter'
@@ -629,6 +655,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/optional/class/parameter'
@@ -678,6 +706,8 @@ class ExplicitOperations(object):
          <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         body_parameter = models.ClassWrapper(value=value)
 
@@ -724,6 +754,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         body_parameter = None
         if value is not None:
@@ -775,6 +807,8 @@ class ExplicitOperations(object):
          <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/requied/array/parameter'
@@ -817,6 +851,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/optional/array/parameter'
@@ -865,6 +901,8 @@ class ExplicitOperations(object):
          <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         body_parameter = models.ArrayWrapper(value=value)
 
@@ -910,6 +948,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         body_parameter = None
         if value is not None:
@@ -962,6 +1002,8 @@ class ExplicitOperations(object):
          <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/requied/array/header'
@@ -1002,6 +1044,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/optional/array/header'
