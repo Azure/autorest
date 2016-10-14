@@ -18,6 +18,6 @@ max_redirects                  int
 proxies                        dict
 use_env_proxies                bool whether to read proxy settings from local env vars
 retries                        int  number of retries
-long_running_operation_timeout int  only used for Azure Asynchronous operations
-thread_daemon                  bool only used for Azure Asynchronous operations
+long_running_operation_timeout int  the retry timeout in seconds for Long Running Operations. Default value is 30.
+thread_daemon                  bool whether the operation polling thread is a daemon thread. Default value is true.
 ============================== ==== ====
