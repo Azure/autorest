@@ -689,3 +689,82 @@ class PagingOperations(object):
             return client_raw_response
 
         return deserialized
+
+    def get_multiple_pages_fragment_with_grouping_next_link(
+            self, custom_parameter_group, custom_headers=None, raw=False, **operation_config):
+        """A paging operation that doesn't return a full URL, just a fragment
+        with parameters grouped.
+
+        :param custom_parameter_group: Additional parameters for the operation
+        :type custom_parameter_group: :class:`CustomParameterGroup
+         <Fixtures.AcceptanceTestsPaging.models.CustomParameterGroup>`
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`ProductPaged1
+         <Fixtures.AcceptanceTestsPaging.models.ProductPaged1>`
+        """
+        api_version = None
+        if custom_parameter_group is not None:
+            api_version = custom_parameter_group.api_version
+        tenant = None
+        if custom_parameter_group is not None:
+            tenant = custom_parameter_group.tenant
+
+        def internal_paging(next_link=None, raw=False):
+
+            if not next_link:
+                # Construct URL
+                url = '/paging/multiple/fragmentwithgrouping/{tenant}'
+                path_format_arguments = {
+                    'tenant': self._serialize.url("tenant", tenant, 'str')
+                }
+                url = self._client.format_url(url, **path_format_arguments)
+
+                # Construct parameters
+                query_parameters = {}
+                query_parameters['api_version'] = self._serialize.query("api_version", api_version, 'str')
+
+            else:
+                url = '/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}'
+                path_format_arguments = {
+                    'nextLink': self._serialize.url("next_link", next_link, 'str', skip_quote=True),
+                    'tenant': self._serialize.url("tenant", tenant, 'str')
+                }
+                url = self._client.format_url(url, **path_format_arguments)
+                query_parameters = {}
+                query_parameters['api_version'] = self._serialize.query("api_version", api_version, 'str')
+
+            # Construct headers
+            header_parameters = {}
+            header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+            if self.config.generate_client_request_id:
+                header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+            if custom_headers:
+                header_parameters.update(custom_headers)
+            if self.config.accept_language is not None:
+                header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
+
+            # Construct and send request
+            request = self._client.get(url, query_parameters)
+            response = self._client.send(
+                request, header_parameters, **operation_config)
+
+            if response.status_code not in [200]:
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
+
+            return response
+
+        # Deserialize response
+        deserialized = models.ProductPaged1(internal_paging, self._deserialize.dependencies)
+
+        if raw:
+            header_dict = {}
+            client_raw_response = models.ProductPaged1(internal_paging, self._deserialize.dependencies, header_dict)
+            return client_raw_response
+
+        return deserialized
