@@ -8,27 +8,41 @@ using AutoRest.Core;
 using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
+using Newtonsoft.Json;
 
 namespace AutoRest.CSharp.TemplateModels
 {
+    public class ModelTemplateOptions
+    {
+        [JsonProperty("constructorsIncludeOnlyRequiredProperties")]
+        public bool ConstructorsIncludeOnlyRequiredProperties { get; set; }
+
+        [JsonProperty("addDataContractAttributes")]
+        public bool AddDataContractAttributes { get; set; }
+
+    }
+
     public class ModelTemplateModel : CompositeType
     {
         private readonly IScopeProvider _scope = new ScopeProvider();
         private readonly ModelTemplateModel _baseModel = null;
         private readonly ConstructorModel _constructorModel = null;
 
-        public ModelTemplateModel(CompositeType source)
+        public ModelTemplateModel(CompositeType source, ModelTemplateOptions options = null)
         {
+            this.ModelOptions = options;
             this.LoadFrom(source);
             PropertyTemplateModels = new List<PropertyTemplateModel>();
             source.Properties.ForEach(p => PropertyTemplateModels.Add(new PropertyTemplateModel(p)));
             if (source.BaseModelType != null)
             {
-                this._baseModel = new ModelTemplateModel(source.BaseModelType);
+                this._baseModel = new ModelTemplateModel(source.BaseModelType, options);
             }
 
             this._constructorModel = new ConstructorModel(this);
         }
+
+        public ModelTemplateOptions ModelOptions { get; set; }
 
         public IScopeProvider Scope
         {
@@ -167,12 +181,15 @@ namespace AutoRest.CSharp.TemplateModels
         {
             public ConstructorModel(ModelTemplateModel model)
             {
-                // TODO: this could just be the "required" parameters instead of required and all the optional ones
                 // with defaults if we wanted a bit cleaner constructors
-                IEnumerable<InheritedPropertyInfo> allProperties =
-                   model.AllPropertyTemplateModels.OrderBy(p => !p.Property.IsRequired).ThenBy(p => p.Depth);
+                var allProperties =
+                   model.AllPropertyTemplateModels;
 
-                Parameters = allProperties.Select(p => new ConstructorParameterModel(p.Property));
+                //If specified via options, suppress properties that are no required
+                if (model.ModelOptions?.ConstructorsIncludeOnlyRequiredProperties == true)
+                    allProperties = allProperties.Where(p => p.Property.IsRequired);
+
+                Parameters = allProperties.OrderBy(p => !p.Property.IsRequired).ThenBy(p => p.Depth).Select(p => new ConstructorParameterModel(p.Property)).ToList();
                 Signature = CreateSignature(Parameters);
                 SignatureDocumentation = CreateSignatureDocumentation(Parameters);
                 BaseCall = CreateBaseCall(model);

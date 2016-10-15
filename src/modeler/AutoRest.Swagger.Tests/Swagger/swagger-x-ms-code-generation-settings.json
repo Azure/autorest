@@ -4,8 +4,14 @@
     "version": "1.0.13",
     "title": "Swagger Custom Paths",
     "x-ms-code-generation-settings": {
-      "header": "MIT",
-      "internalConstructors": true
+        "header": "MIT",
+        "csharpOptions": {
+            "internalConstructors": true,
+            "modelOptions": {
+                "constructorsIncludeOnlyRequiredProperties": true,
+                "addDataContractAttributes":  true
+            }
+        }
     }    
   },
   "host": "autorestresourcesproxysite.azurewebsites.net",

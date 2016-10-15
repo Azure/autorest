@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.Azure.TemplateModels
 {
     public class AzureModelTemplateModel : ModelTemplateModel
     {
-        public AzureModelTemplateModel(CompositeType source) : base(source)
+        public AzureModelTemplateModel(CompositeType source, ModelTemplateOptions options = null) : base(source, options)
         {
         }
 

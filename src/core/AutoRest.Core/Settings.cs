@@ -408,6 +408,11 @@ Licensed under the MIT License. See License.txt in the project root for license 
                                     property.SetValue(entityToPopulate, intValues);
                                 }
                             }
+                            else if (setting.Value.GetType() == typeof (JObject) && property.PropertyType.IsClass)
+                            {
+                                var valueAsObject = ((JObject)setting.Value).ToObject(property.PropertyType);
+                                property.SetValue(entityToPopulate, valueAsObject);
+                            }
                             else
                             {
                                 property.SetValue(entityToPopulate,

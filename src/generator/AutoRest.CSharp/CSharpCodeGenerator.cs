@@ -23,22 +23,38 @@ namespace AutoRest.CSharp
         public CSharpCodeGenerator(Settings settings) : base(settings)
         {
             _namer = new CSharpCodeNamer();
+            CodeOptions = new CSharpCodeOptions();
             IsSingleFileGenerationSupported = true;
         }
+
+        /// <summary>
+        /// Options for CSharp code generation
+        /// </summary>
+        [SettingsInfo("CSharp code generation options")]
+        [SettingsAlias("csharpOptions")]
+        public CSharpCodeOptions CodeOptions { get; set; }
 
         /// <summary>
         /// Indicates whether ctor needs to be generated with internal protection level.
         /// </summary>
         [SettingsInfo("The namespace to use for generated code.")]
         [SettingsAlias("internal")]
-        public bool InternalConstructors { get; set; }
+        public bool InternalConstructors
+        {
+            get { return CodeOptions.InternalConstructors; }
+            set { CodeOptions.InternalConstructors = value; }
+        }
 
         /// <summary>
         /// Specifies mode for generating sync wrappers.
         /// </summary>
         [SettingsInfo("Specifies mode for generating sync wrappers.")]
         [SettingsAlias("syncMethods")]
-        public SyncMethodsGenerationMode SyncMethods { get; set; }
+        public SyncMethodsGenerationMode SyncMethods
+        {
+            get { return CodeOptions.SyncMethods; }
+            set { CodeOptions.SyncMethods = value; }
+        }
 
         public override string Name
         {
@@ -159,7 +175,7 @@ namespace AutoRest.CSharp
             {
                 var modelTemplate = new ModelTemplate
                 {
-                    Model = new ModelTemplateModel(model),
+                    Model = new ModelTemplateModel(model, this.CodeOptions.ModelOptions),
                 };
                 await Write(modelTemplate, Path.Combine(Settings.ModelsName, model.Name + ".cs"));
             }
@@ -179,7 +195,7 @@ namespace AutoRest.CSharp
             {
                 var exceptionTemplate = new ExceptionTemplate
                 {
-                    Model = new ModelTemplateModel(exceptionType),
+                    Model = new ModelTemplateModel(exceptionType, this.CodeOptions.ModelOptions),
                 };
                 await Write(exceptionTemplate, Path.Combine(Settings.ModelsName, exceptionTemplate.Model.ExceptionTypeDefinitionName + ".cs"));
             }

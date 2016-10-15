@@ -8,6 +8,7 @@
 namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
     using System.Linq;
+
 @EmptyLine
 
 @if (!string.IsNullOrEmpty(Model.Summary) || !string.IsNullOrWhiteSpace(Model.Documentation))
@@ -32,7 +33,12 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     @:[Newtonsoft.Json.JsonObject("@Model.SerializedName")]
     }
 
-    @if (Model.NeedsTransformationConverter)
+    @if (Model.ModelOptions.AddDataContractAttributes)
+    {
+    @:[System.Runtime.Serialization.DataContract]
+    }
+
+@if (Model.NeedsTransformationConverter)
     {
     @:[Microsoft.Rest.Serialization.JsonTransformation]
     }
@@ -147,6 +153,10 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             else
             {
         @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
+            if (Model.ModelOptions.AddDataContractAttributes)
+                {
+        @:[System.Runtime.Serialization.DataMember(Name = "@property.SerializedName", EmitDefaultValue = false)]
+                }
             }
         @:public @property.Type.Name @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
         @EmptyLine

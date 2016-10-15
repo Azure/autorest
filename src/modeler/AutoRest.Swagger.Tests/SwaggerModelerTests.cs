@@ -650,6 +650,8 @@ namespace AutoRest.Swagger.Tests
 
             Assert.Equal("MIT", settings.Header);
             Assert.Equal(true, codeGenerator.InternalConstructors);
+            Assert.Equal(true, codeGenerator.CodeOptions.ModelOptions.ConstructorsIncludeOnlyRequiredProperties);
+            Assert.Equal(true, codeGenerator.CodeOptions.ModelOptions.AddDataContractAttributes);
         }
 
         [Fact]

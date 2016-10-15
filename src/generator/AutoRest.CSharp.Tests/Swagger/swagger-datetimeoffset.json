@@ -10,7 +10,13 @@
       "url": "http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT"
     },
     "x-ms-code-generation-settings": {
-      "useDateTimeOffset": true
+        "useDateTimeOffset": true,
+        "csharpOptions": {
+            "modelOptions": {
+                "constructorsIncludeOnlyRequiredProperties": true,
+                "addDataContractAttributes":  true
+            }
+        }
     }
   },
   "host": "localhost:3000",

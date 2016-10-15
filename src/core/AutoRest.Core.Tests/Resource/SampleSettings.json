@@ -4,5 +4,13 @@
     "sampleString":  "Foo",
     "filePathArray": [ "C:\\Foo.dll", "C:\\Bar.dll" ],
     "intArray": [ 1, 2, 3 ],
-    "intFoo": 5
+    "intFoo": 5,
+    "complexObject": {
+        "objectKey1": "value1",
+        "subObject1": {
+            "subObjectKey1": "subValue1",
+            "subObjectKey2": "subValue2"
+        },
+        "objectKey2": "value2"
+    }
 }

@@ -10,6 +10,7 @@ namespace Fixtures.DateTimeOffset.Models
 {
     using System.Linq;
 
+    [System.Runtime.Serialization.DataContract]
     public partial class Error
     {
         /// <summary>
@@ -17,29 +18,23 @@ namespace Fixtures.DateTimeOffset.Models
         /// </summary>
         public Error() { }
 
-        /// <summary>
-        /// Initializes a new instance of the Error class.
-        /// </summary>
-        public Error(int? code = default(int?), string message = default(string), string fields = default(string))
-        {
-            Code = code;
-            Message = message;
-            Fields = fields;
-        }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "code")]
+        [System.Runtime.Serialization.DataMember(Name = "code", EmitDefaultValue = false)]
         public int? Code { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
+        [System.Runtime.Serialization.DataMember(Name = "message", EmitDefaultValue = false)]
         public string Message { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "fields")]
+        [System.Runtime.Serialization.DataMember(Name = "fields", EmitDefaultValue = false)]
         public string Fields { get; set; }
 
     }

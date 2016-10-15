@@ -1966,6 +1966,16 @@ namespace AutoRest.CSharp.Tests
         }
 
         [Fact]
+        public void ModelConstructorsUseRequiredPropertiesOnly()
+        {
+            var productType = typeof(Fixtures.DateTimeOffset.Models.Product);
+
+            var constructorInfo = productType.GetConstructors();
+            Assert.Equal(1, constructorInfo.Length); //there should only be 1 constructor for Product
+            Assert.Equal(0, constructorInfo[0].GetParameters().Length); //check that there are no parameters to the constructor
+        }
+
+        [Fact]
         public void FormatUuidModeledAsGuidTest()
         {
             var productType = typeof(Fixtures.MirrorPrimitives.Models.Product);
