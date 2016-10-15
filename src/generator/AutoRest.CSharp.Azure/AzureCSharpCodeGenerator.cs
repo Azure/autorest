@@ -20,7 +20,9 @@ namespace AutoRest.CSharp.Azure
     {
         private readonly AzureCSharpCodeNamer _namer;
 
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.3.2.0";
+        private const string ClientRuntimePackageVersion = "3.2.0";
+        private const string ClientRuntimePackageName = "Microsoft.Rest.ClientRuntime.Azure";
+        private const string ClientRuntimePackage = ClientRuntimePackageName + "." + ClientRuntimePackageVersion;
 
         // page extensions class dictionary.
         private IDictionary<KeyValuePair<string, string>, string> pageClasses;
@@ -196,6 +198,23 @@ namespace AutoRest.CSharp.Azure
                     Model = new ModelTemplateModel(exceptionType),
                 };
                 await Write(exceptionTemplate, Path.Combine(Settings.ModelsName, exceptionTemplate.Model.ExceptionTypeDefinitionName + ".cs"));
+            }
+
+            if (Settings.Project)
+            {
+                // Write project.json
+                var projectJsonTemplate = new AzureProjectJsonTemplate
+                {
+                    Model = new ProjectJsonModel(Settings.PackageVersion, Settings.PackageName, ClientRuntimePackageVersion)
+                };
+                await Write(projectJsonTemplate, Path.Combine(Settings.OutputDirectory, "project.json"));
+
+                // Write .xproj
+                var projectTemplate = new XProjTemplate
+                {
+                    Model = Settings.Namespace
+                };
+                await Write(projectTemplate, Path.Combine(Settings.OutputDirectory, Settings.Namespace + ".xproj"));
             }
         }
     }

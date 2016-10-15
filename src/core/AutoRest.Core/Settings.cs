@@ -54,6 +54,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             Modeler = "Swagger";
             ValidationLevel = LogEntrySeverity.Error;
             ModelsName = "Models";
+            Project = false;
         }
 
         /// <summary>
@@ -275,6 +276,14 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public LogEntrySeverity ValidationLevel { get; set; }
 
         /// <summary>
+        /// The input validation severity level that will prevent code generation
+        /// </summary>
+        [SettingsAlias("p")]
+        [SettingsAlias("project")]
+        [SettingsInfo("Whether AutoRest should generate a project for the generated files")]
+        public bool Project { get; set; }
+
+        /// <summary>
         /// Factory method to generate CodeGenerationSettings from command line arguments.
         /// Matches dictionary keys to the settings properties.
         /// </summary>
@@ -444,6 +453,18 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 foreach (var unmatchedSetting in CustomSettings.Keys)
                 {
                     Logger.LogWarning(Resources.ParameterIsNotValid, unmatchedSetting);
+                }
+            }
+
+            if (Project)
+            {
+                if (string.IsNullOrEmpty(PackageName))
+                {
+                    Logger.LogError(new ArgumentException("PackageName"), Resources.PackageInfoRequiredForProject, "PackageName");
+                }
+                if (string.IsNullOrEmpty(PackageVersion))
+                {
+                    Logger.LogError(new ArgumentException("PackageVersion"), Resources.PackageInfoRequiredForProject, "PackageVersion");
                 }
             }
             ErrorManager.ThrowErrors();

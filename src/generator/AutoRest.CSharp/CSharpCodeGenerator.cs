@@ -12,13 +12,17 @@ using AutoRest.CSharp.TemplateModels;
 using AutoRest.CSharp.Templates;
 using AutoRest.Extensions;
 using AutoRest = AutoRest.Core.AutoRest;
+using Newtonsoft.Json;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.CSharp
 {
     public class CSharpCodeGenerator : CodeGenerator
     {
         private readonly CSharpCodeNamer _namer;
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.2.2.0";
+        private const string ClientRuntimePackageVersion = "2.2.0";
+        private const string ClientRuntimePackageName = "Microsoft.Rest.ClientRuntime";
+        private const string ClientRuntimePackage = ClientRuntimePackageName + "." + ClientRuntimePackageVersion;
 
         public CSharpCodeGenerator(Settings settings) : base(settings)
         {
@@ -182,6 +186,22 @@ namespace AutoRest.CSharp
                     Model = new ModelTemplateModel(exceptionType),
                 };
                 await Write(exceptionTemplate, Path.Combine(Settings.ModelsName, exceptionTemplate.Model.ExceptionTypeDefinitionName + ".cs"));
+            }
+
+            if (Settings.Project)
+            {
+                var projectJsonTemplate = new ProjectJsonTemplate
+                {
+                    Model = new ProjectJsonModel(Settings.PackageVersion, Settings.PackageName, ClientRuntimePackageVersion)
+                };
+                await Write(projectJsonTemplate, Path.Combine(Settings.OutputDirectory, "project.json"));
+
+                // Write .xproj
+                var projectTemplate = new XProjTemplate
+                {
+                    Model = Settings.Namespace
+                };
+                await Write(projectTemplate, Path.Combine(Settings.OutputDirectory, Settings.Namespace + ".xproj"));
             }
         }
     }

@@ -402,6 +402,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to -{0} is required to use the -Project flag.
+        /// </summary>
+        public static string PackageInfoRequiredForProject {
+            get {
+                return ResourceManager.GetString("PackageInfoRequiredForProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Parameter &apos;{0}&apos; is not expected..
         /// </summary>
         public static string ParameterIsNotValid {
