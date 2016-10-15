@@ -26,7 +26,7 @@
     "mocha": "2.4.5",
     "should": "5.2.0"
   },
-  "homepage": "https://github.com/Azure/AutoRest/src/client/NodeJS/ms-rest",
+  "homepage": "https://github.com/Azure/AutoRest/tree/master/src/client/NodeJS/ms-rest",
   "repository": {
     "type": "git",
     "url": "git@github.com:Azure/AutoRest.git"
