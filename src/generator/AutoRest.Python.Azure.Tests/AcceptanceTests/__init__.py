@@ -27,17 +27,9 @@
 import glob
 import sys
 import subprocess
-import os
+import os.path
 import signal
-from os.path import dirname, realpath
 from unittest import TestLoader, TextTestRunner
-
-from os.path import dirname, pardir, join, realpath
-
-cwd = dirname(realpath(__file__))
-root = realpath(join(cwd, pardir, pardir, pardir, pardir, pardir))
-sys.path.append(join(root, "src","client", "Python", "msrest"))
-sys.path.append(join(root, "src","client", "Python", "msrestazure"))
 
 
 #Ideally this would be in a common helper library shared between the tests
@@ -57,7 +49,7 @@ def terminate_server_process(process):
     
 if __name__ == '__main__':
 
-    cwd = dirname(realpath(__file__))
+    cwd = os.path.dirname(os.path.realpath(__file__))
 
     print("Current directory is: " + cwd)
     
