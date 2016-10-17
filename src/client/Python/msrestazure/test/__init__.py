@@ -24,26 +24,8 @@
 #
 # --------------------------------------------------------------------------
 
-import sys
 import os
-
-from os.path import dirname, pardir, join, realpath
-
-cwd = dirname(realpath(__file__))
-runtime = realpath(join(cwd, pardir, pardir, 'msrest'))
-
-sys.path.append(runtime)
-
-if sys.version_info[:2] < (2, 7, ):
-    try:
-        from unittest2 import TestLoader, TextTestRunner
-
-    except ImportError:
-        raise ImportError("The Python Client Runtime test suite requires "
-                          "the unittest2 package to run on Python 2.6 and "
-                          "below.\nPlease install this package to continue.")
-else:
-    from unittest import TestLoader, TextTestRunner
+from unittest import TestLoader, TextTestRunner
 
 
 if __name__ == '__main__':
