@@ -17,6 +17,8 @@ var AzureEnvironment = require('../azureEnvironment');
 * @param {string} domain The domain or tenant id containing this application.
 * @param {string} secret The authentication secret for the application.
 * @param {object} [options] Object representing optional parameters.
+* @param {string} [options.tokenAudience] The audience for which the token is requested. Valid value is 'graph'. If tokenAudience is provided 
+* then domain should also be provided its value should not be the default 'common' tenant. It must be a string (preferrably in a guid format).
 * @param {AzureEnvironment} [options.environment] The azure environment to authenticate with.
 * @param {string} [options.authorizationScheme] The authorization scheme. Default value is 'bearer'.
 * @param {object} [options.tokenCache] The token cache. Default value is the MemoryCache object from adal.
@@ -50,8 +52,14 @@ function ApplicationTokenCredentials(clientId, domain, secret, options) {
     options.tokenCache = new adal.MemoryCache();
   }
 
-  if (options.tokenAudience && options.tokenAudience.toLowerCase() !== 'graph') {
-    throw new Error('Valid value for \'tokenAudience\' is \'graph\'.');
+  if (options.tokenAudience) {
+    if (options.tokenAudience.toLowerCase() !== 'graph') {
+      throw new Error('Valid value for \'tokenAudience\' is \'graph\'.');
+    }
+    if (domain.toLowerCase() === 'common') {
+      throw new Error('If the tokenAudience is specified as \'graph\' then \'domain\' cannot be the default \'commmon\' tenant. ' + 
+        'It must be the actual tenant (preferrably a string in a guid format).');
+    }
   }
 
   this.tokenAudience = options.tokenAudience;

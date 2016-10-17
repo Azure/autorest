@@ -25,6 +25,7 @@
 }
         @ParameterWrapComment(string.Empty, ":rtype: :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>` instance that returns " + Model.GetDocumentationType(Model.ReturnType.Body))
         @ParameterWrapComment(string.Empty, ":rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if raw=true")
+        @ParameterWrapComment(string.Empty, string.Format(":raises: {0}", Model.ExceptionDocumentation))
         """
         @Model.BuildInputMappings()
 @if (Model.InputParameterTransformation.Any())

@@ -44,6 +44,8 @@ class DictionaryOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.DictionaryWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/dictionary/typed/valid'
@@ -89,6 +91,8 @@ class DictionaryOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         complex_body = models.DictionaryWrapper(default_program=default_program)
 
@@ -132,6 +136,8 @@ class DictionaryOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.DictionaryWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/dictionary/typed/empty'
@@ -177,6 +183,8 @@ class DictionaryOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         complex_body = models.DictionaryWrapper(default_program=default_program)
 
@@ -220,6 +228,8 @@ class DictionaryOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.DictionaryWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/dictionary/typed/null'
@@ -265,6 +275,8 @@ class DictionaryOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.DictionaryWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/dictionary/typed/notprovided'
