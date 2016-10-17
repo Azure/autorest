@@ -8,6 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
 {
+    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
 

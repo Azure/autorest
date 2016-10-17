@@ -44,6 +44,8 @@ class ReadonlypropertyOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.ReadonlyObj>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/readonlyproperty/valid'
@@ -90,6 +92,8 @@ class ReadonlypropertyOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/readonlyproperty/valid'

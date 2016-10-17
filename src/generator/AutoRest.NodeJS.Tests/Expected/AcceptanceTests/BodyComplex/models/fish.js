@@ -42,7 +42,10 @@ Fish.prototype.mapper = function () {
     serializedName: 'Fish',
     type: {
       name: 'Composite',
-      polymorphicDiscriminator: 'fishtype',
+      polymorphicDiscriminator: {
+        serializedName: 'fishtype',
+        clientName: 'fishtype'
+      },
       uberParent: 'Fish',
       className: 'Fish',
       modelProperties: {
@@ -70,7 +73,10 @@ Fish.prototype.mapper = function () {
                 serializedName: 'FishElementType',
                 type: {
                   name: 'Composite',
-                  polymorphicDiscriminator: 'fishtype',
+                  polymorphicDiscriminator: {
+                    serializedName: 'fishtype',
+                    clientName: 'fishtype'
+                  },
                   uberParent: 'Fish',
                   className: 'Fish'
                 }

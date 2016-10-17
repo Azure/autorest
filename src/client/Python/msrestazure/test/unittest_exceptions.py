@@ -101,6 +101,22 @@ class TestCloudException(unittest.TestCase):
             cloud_exp.message,
             "The value for one of the HTTP headers is not in the correct format.")
 
+        message = {
+            "code": "BadArgument",
+            "message": "The provided database 'foo' has an invalid username.",
+            "target": "query",
+            "details": [
+                {
+                    "code": "301",
+                    "target": "$search",
+                    "message": "$search query option not supported",
+                }
+            ]
+        }
+        cloud_exp = self._d(CloudErrorData(), message)
+        self.assertEqual(cloud_exp.target, 'query')
+        self.assertEqual(cloud_exp.details[0].target, '$search')
+
 
 
     def test_cloud_error(self):
@@ -155,10 +171,33 @@ class TestCloudException(unittest.TestCase):
         self.assertTrue("FAILED!" in error.message)
         self.assertIsInstance(error.error, RequestException)
 
+        response.raise_for_status.side_effect = None
+
         response.content = '{\r\n  "odata.metadata":"https://account.region.batch.azure.com/$metadata#Microsoft.Azure.Batch.Protocol.Entities.Container.errors/@Element","code":"InvalidHeaderValue","message":{\r\n    "lang":"en-US","value":"The value for one of the HTTP headers is not in the correct format.\\nRequestId:5f4c1f05-603a-4495-8e80-01f776310bbd\\nTime:2016-01-04T22:12:33.9245931Z"\r\n  },"values":[\r\n    {\r\n      "key":"HeaderName","value":"Content-Type"\r\n    },{\r\n      "key":"HeaderValue","value":"application/json; odata=minimalmetadata; charset=utf-8"\r\n    }\r\n  ]\r\n}'
         error = CloudError(response)
         self.assertIsInstance(error.error, CloudErrorData)
 
+        response.content = '{"code":"Conflict","message":"The maximum number of Free ServerFarms allowed in a Subscription is 10.","target":null,"details":[{"message":"The maximum number of Free ServerFarms allowed in a Subscription is 10."},{"code":"Conflict"},{"errorentity":{"code":"Conflict","message":"The maximum number of Free ServerFarms allowed in a Subscription is 10.","extendedCode":"59301","messageTemplate":"The maximum number of {0} ServerFarms allowed in a Subscription is {1}.","parameters":["Free","10"],"innerErrors":null}}],"innererror":null}'
+        error = CloudError(response)
+        self.assertIsInstance(error.error, CloudErrorData)
+        self.assertEqual(error.error.error, "Conflict")
+
+        response.content = json.dumps({
+            "error": {
+                "code": "BadArgument",
+                "message": "The provided database 'foo' has an invalid username.",
+                "target": "query",
+                "details": [
+                    {
+                        "code": "301",
+                        "target": "$search",
+                        "message": "$search query option not supported",
+                    }
+                ]
+            }})
+        error = CloudError(response)
+        self.assertIsInstance(error.error, CloudErrorData)
+        self.assertEqual(error.error.error, "BadArgument")
 
 
 if __name__ == '__main__':

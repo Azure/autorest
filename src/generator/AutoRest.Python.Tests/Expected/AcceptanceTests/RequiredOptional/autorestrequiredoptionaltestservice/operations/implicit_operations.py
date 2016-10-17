@@ -46,6 +46,8 @@ class ImplicitOperations(object):
          <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/implicit/required/path/{pathParameter}'
@@ -88,6 +90,8 @@ class ImplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/implicit/optional/query'
@@ -128,6 +132,8 @@ class ImplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/implicit/optional/header'
@@ -168,6 +174,8 @@ class ImplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/implicit/optional/body'
@@ -212,6 +220,8 @@ class ImplicitOperations(object):
          <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/global/required/path/{required-global-path}'
@@ -253,6 +263,8 @@ class ImplicitOperations(object):
          <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/global/required/query'
@@ -291,6 +303,8 @@ class ImplicitOperations(object):
          <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/global/optional/query'

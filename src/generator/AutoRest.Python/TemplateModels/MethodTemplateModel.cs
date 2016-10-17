@@ -124,6 +124,33 @@ namespace AutoRest.Python.TemplateModels
             }
         }
 
+        public virtual string ExceptionDocumentation
+        {
+            get
+            {
+                IType body = DefaultResponse.Body;
+                if (body == null)
+                {
+                    return ":class:`HttpOperationError<msrest.exceptions.HttpOperationError>`";
+                }
+                else
+                {
+                    var modelNamespace = ServiceClient.Name.ToPythonCase();
+                    if (!ServiceClient.Namespace.IsNullOrEmpty())
+                        modelNamespace = ServiceClient.Namespace;
+                    CompositeType compType = body as CompositeType;
+                    if (compType != null)
+                    {
+                        return string.Format(CultureInfo.InvariantCulture, ":class:`{0}<{1}.models.{0}>`", compType.GetExceptionDefineType(), modelNamespace);
+                    }
+                    else
+                    {
+                        return ":class:`HttpOperationError<msrest.exceptions.HttpOperationError>`";
+                    }
+                }
+            }
+        }
+
         public virtual string RaisedException
         {
             get
