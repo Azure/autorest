@@ -44,6 +44,8 @@ class PrimitiveOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.IntWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/integer'
@@ -90,6 +92,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/integer'
@@ -131,6 +135,8 @@ class PrimitiveOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.LongWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/long'
@@ -177,6 +183,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/long'
@@ -218,6 +226,8 @@ class PrimitiveOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.FloatWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/float'
@@ -264,6 +274,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/float'
@@ -305,6 +317,8 @@ class PrimitiveOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.DoubleWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/double'
@@ -352,6 +366,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/double'
@@ -393,6 +409,8 @@ class PrimitiveOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.BooleanWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/bool'
@@ -439,6 +457,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/bool'
@@ -480,6 +500,8 @@ class PrimitiveOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.StringWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/string'
@@ -526,6 +548,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/string'
@@ -567,6 +591,8 @@ class PrimitiveOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.DateWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/date'
@@ -613,6 +639,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/date'
@@ -654,6 +682,8 @@ class PrimitiveOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.DatetimeWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/datetime'
@@ -701,6 +731,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/datetime'
@@ -742,6 +774,8 @@ class PrimitiveOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.Datetimerfc1123Wrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/datetimerfc1123'
@@ -789,6 +823,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/datetimerfc1123'
@@ -830,6 +866,8 @@ class PrimitiveOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.DurationWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/duration'
@@ -875,6 +913,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         complex_body = models.DurationWrapper(field=field)
 
@@ -918,6 +958,8 @@ class PrimitiveOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.ByteWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/byte'
@@ -963,6 +1005,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         complex_body = models.ByteWrapper(field=field)
 

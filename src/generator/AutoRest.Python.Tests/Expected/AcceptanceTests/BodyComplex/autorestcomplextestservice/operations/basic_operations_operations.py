@@ -44,6 +44,8 @@ class BasicOperationsOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/basic/valid'
@@ -90,6 +92,8 @@ class BasicOperationsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/basic/valid'
@@ -132,6 +136,8 @@ class BasicOperationsOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/basic/invalid'
@@ -176,6 +182,8 @@ class BasicOperationsOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/basic/empty'
@@ -220,6 +228,8 @@ class BasicOperationsOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/basic/null'
@@ -265,6 +275,8 @@ class BasicOperationsOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/basic/notprovided'

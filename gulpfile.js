@@ -267,10 +267,14 @@ gulp.task('regenerate:expected:node', ['regenerate:expected:nodecomposite'], fun
 })
 
 gulp.task('regenerate:expected:python', function(cb){
+  mappings = mergeOptions({
+    'AcceptanceTests/UrlMultiCollectionFormat' : '../../dev/TestServer/swagger/url-multi-collectionFormat.json'
+  }, defaultMappings);
+
   regenExpected({
     'outputBaseDir': 'src/generator/AutoRest.Python.Tests',
     'inputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
-    'mappings': defaultMappings,
+    'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Python',
     'flatteningThreshold': '1'

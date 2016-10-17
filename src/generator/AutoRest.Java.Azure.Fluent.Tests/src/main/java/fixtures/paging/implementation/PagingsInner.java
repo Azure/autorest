@@ -100,8 +100,16 @@ public final class PagingsInner {
         Observable<Response<ResponseBody>> getMultiplePagesFragmentNextLink(@Path("tenant") String tenant, @Query("api_version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paging/multiple/fragmentwithgrouping/{tenant}")
+        Observable<Response<ResponseBody>> getMultiplePagesFragmentWithGroupingNextLink(@Path("tenant") String tenant, @Header("accept-language") String acceptLanguage, @Query("api_version") String apiVersion, @Header("User-Agent") String userAgent);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paging/multiple/fragment/{tenant}/{nextLink}")
         Observable<Response<ResponseBody>> nextFragment(@Path("tenant") String tenant, @Path(value = "nextLink", encoded = true) String nextLink, @Query("api_version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}")
+        Observable<Response<ResponseBody>> nextFragmentWithGrouping(@Path(value = "nextLink", encoded = true) String nextLink, @Path("tenant") String tenant, @Header("accept-language") String acceptLanguage, @Query("api_version") String apiVersion, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("{nextLink}")
@@ -1453,6 +1461,111 @@ public final class PagingsInner {
     }
 
     /**
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
+     *
+     * @param customParameterGroup Additional parameters for the operation
+     * @return the PagedList&lt;ProductInner&gt; object if successful.
+     */
+    public PagedList<ProductInner> getMultiplePagesFragmentWithGroupingNextLink(final CustomParameterGroupInner customParameterGroup) {
+        ServiceResponse<Page<ProductInner>> response = getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(customParameterGroup).toBlocking().single();
+        return new PagedList<ProductInner>(response.getBody()) {
+            @Override
+            public Page<ProductInner> nextPage(String nextLink) {
+                return nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup).toBlocking().single().getBody();
+            }
+        };
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
+     *
+     * @param customParameterGroup Additional parameters for the operation
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link ServiceCall} object
+     */
+    public ServiceCall<List<ProductInner>> getMultiplePagesFragmentWithGroupingNextLinkAsync(final CustomParameterGroupInner customParameterGroup, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceCall.create(
+            getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(customParameterGroup),
+            new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextLink) {
+                    return nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
+     *
+     * @param customParameterGroup Additional parameters for the operation
+     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     */
+    public Observable<Page<ProductInner>> getMultiplePagesFragmentWithGroupingNextLinkAsync(final CustomParameterGroupInner customParameterGroup) {
+        return getMultiplePagesFragmentWithGroupingNextLinkWithServiceResponseAsync(customParameterGroup)
+            .map(new Func1<ServiceResponse<Page<ProductInner>>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(ServiceResponse<Page<ProductInner>> response) {
+                    return response.getBody();
+                }
+            });
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
+     *
+     * @param customParameterGroup Additional parameters for the operation
+     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesFragmentWithGroupingNextLinkWithServiceResponseAsync(final CustomParameterGroupInner customParameterGroup) {
+        return getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(customParameterGroup)
+            .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
+                    String nextLink = page.getBody().getNextPageLink();
+                    if (nextLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(nextFragmentWithGroupingWithServiceResponseAsync(nextLink, customParameterGroup));
+                }
+            });
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
+     *
+    ServiceResponse<PageImpl1<ProductInner>> * @param customParameterGroup Additional parameters for the operation
+     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(final CustomParameterGroupInner customParameterGroup) {
+        if (customParameterGroup == null) {
+            throw new IllegalArgumentException("Parameter customParameterGroup is required and cannot be null.");
+        }
+        Validator.validate(customParameterGroup);
+        String apiVersion = customParameterGroup.apiVersion();
+        String tenant = customParameterGroup.tenant();
+        return service.getMultiplePagesFragmentWithGroupingNextLink(tenant, this.client.acceptLanguage(), apiVersion, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<ProductInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<ProductInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl1<ProductInner>> result = getMultiplePagesFragmentWithGroupingNextLinkDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl1<ProductInner>> getMultiplePagesFragmentWithGroupingNextLinkDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return new AzureServiceResponseBuilder<PageImpl1<ProductInner>, CloudException>(this.client.mapperAdapter())
+                .register(200, new TypeToken<PageImpl1<ProductInner>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
      * @param tenant Sets the tenant to use.
@@ -1565,6 +1678,120 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl1<ProductInner>> nextFragmentDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return new AzureServiceResponseBuilder<PageImpl1<ProductInner>, CloudException>(this.client.mapperAdapter())
+                .register(200, new TypeToken<PageImpl1<ProductInner>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param nextLink Next link for list operation.
+     * @param customParameterGroup Additional parameters for the operation
+     * @return the PagedList&lt;ProductInner&gt; object if successful.
+     */
+    public PagedList<ProductInner> nextFragmentWithGrouping(final String nextLink, final CustomParameterGroupInner customParameterGroup) {
+        ServiceResponse<Page<ProductInner>> response = nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup).toBlocking().single();
+        return new PagedList<ProductInner>(response.getBody()) {
+            @Override
+            public Page<ProductInner> nextPage(String nextLink) {
+                return nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup).toBlocking().single().getBody();
+            }
+        };
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param nextLink Next link for list operation.
+     * @param customParameterGroup Additional parameters for the operation
+     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link ServiceCall} object
+     */
+    public ServiceCall<List<ProductInner>> nextFragmentWithGroupingAsync(final String nextLink, final CustomParameterGroupInner customParameterGroup, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceCall.create(
+            nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup),
+            new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextLink) {
+                    return nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param nextLink Next link for list operation.
+     * @param customParameterGroup Additional parameters for the operation
+     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     */
+    public Observable<Page<ProductInner>> nextFragmentWithGroupingAsync(final String nextLink, final CustomParameterGroupInner customParameterGroup) {
+        return nextFragmentWithGroupingWithServiceResponseAsync(nextLink, customParameterGroup)
+            .map(new Func1<ServiceResponse<Page<ProductInner>>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(ServiceResponse<Page<ProductInner>> response) {
+                    return response.getBody();
+                }
+            });
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param nextLink Next link for list operation.
+     * @param customParameterGroup Additional parameters for the operation
+     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<ProductInner>>> nextFragmentWithGroupingWithServiceResponseAsync(final String nextLink, final CustomParameterGroupInner customParameterGroup) {
+        return nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup)
+            .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
+                    String nextLink = page.getBody().getNextPageLink();
+                    if (nextLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(nextFragmentWithGroupingWithServiceResponseAsync(nextLink, customParameterGroup));
+                }
+            });
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+    ServiceResponse<PageImpl1<ProductInner>> * @param nextLink Next link for list operation.
+    ServiceResponse<PageImpl1<ProductInner>> * @param customParameterGroup Additional parameters for the operation
+     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<ProductInner>>> nextFragmentWithGroupingSinglePageAsync(final String nextLink, final CustomParameterGroupInner customParameterGroup) {
+        if (nextLink == null) {
+            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+        }
+        if (customParameterGroup == null) {
+            throw new IllegalArgumentException("Parameter customParameterGroup is required and cannot be null.");
+        }
+        Validator.validate(customParameterGroup);
+        String apiVersion = customParameterGroup.apiVersion();
+        String tenant = customParameterGroup.tenant();
+        return service.nextFragmentWithGrouping(nextLink, tenant, this.client.acceptLanguage(), apiVersion, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<ProductInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<ProductInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl1<ProductInner>> result = nextFragmentWithGroupingDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl1<ProductInner>> nextFragmentWithGroupingDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<PageImpl1<ProductInner>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl1<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
