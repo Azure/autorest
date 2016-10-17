@@ -8,6 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureReport
 {
+    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
 

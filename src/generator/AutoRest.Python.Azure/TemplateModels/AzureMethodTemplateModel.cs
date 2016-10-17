@@ -84,6 +84,18 @@ namespace AutoRest.Python.Azure.TemplateModels
             get { return Extensions.ContainsKey(AzureExtensions.LongRunningExtension); }
         }
 
+        public override string ExceptionDocumentation
+        {
+            get
+            {
+                if (DefaultResponse.Body == null || DefaultResponse.Body.Name == "CloudError")
+                {
+                    return ":class:`CloudError<msrestazure.azure_exceptions.CloudError>`";
+                }
+                return base.ExceptionDocumentation;
+            }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "exp"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "AutoRest.Core.Utilities.IndentedStringBuilder.AppendLine(System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "CloudError")]
         public override string RaisedException
         {
