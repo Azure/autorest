@@ -44,6 +44,8 @@ class ArrayOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.ArrayWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/array/valid'
@@ -89,6 +91,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         complex_body = models.ArrayWrapper(array=array)
 
@@ -132,6 +136,8 @@ class ArrayOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.ArrayWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/array/empty'
@@ -177,6 +183,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         complex_body = models.ArrayWrapper(array=array)
 
@@ -221,6 +229,8 @@ class ArrayOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.ArrayWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/array/notprovided'

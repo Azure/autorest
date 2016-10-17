@@ -49,6 +49,8 @@ class ParameterGroupingOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureParameterGrouping.models.ErrorException>`
         """
         body = None
         if parameter_grouping_post_required_parameters is not None:
@@ -119,6 +121,8 @@ class ParameterGroupingOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureParameterGrouping.models.ErrorException>`
         """
         custom_header = None
         if parameter_grouping_post_optional_parameters is not None:
@@ -178,6 +182,8 @@ class ParameterGroupingOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureParameterGrouping.models.ErrorException>`
         """
         header_one = None
         if first_parameter_group is not None:
@@ -242,6 +248,8 @@ class ParameterGroupingOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureParameterGrouping.models.ErrorException>`
         """
         header_one = None
         if first_parameter_group is not None:

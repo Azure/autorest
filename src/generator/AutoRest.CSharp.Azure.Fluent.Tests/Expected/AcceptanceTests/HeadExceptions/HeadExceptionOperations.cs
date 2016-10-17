@@ -73,7 +73,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();
             if (_queryParameters.Count > 0)
             {
-                _url += "?" + string.Join("&", _queryParameters);
+                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
             System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
@@ -119,7 +119,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
                 Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
                 Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
@@ -201,7 +201,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();
             if (_queryParameters.Count > 0)
             {
-                _url += "?" + string.Join("&", _queryParameters);
+                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
             System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
@@ -247,7 +247,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
                 Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
                 Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
@@ -329,7 +329,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();
             if (_queryParameters.Count > 0)
             {
-                _url += "?" + string.Join("&", _queryParameters);
+                _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
             System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
@@ -375,7 +375,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
                 Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
                 Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);

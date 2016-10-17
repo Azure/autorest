@@ -44,6 +44,8 @@ class PolymorphismOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.Fish>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/polymorphism/valid'
@@ -123,6 +125,8 @@ class PolymorphismOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/polymorphism/valid'
@@ -193,6 +197,8 @@ class PolymorphismOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/polymorphism/missingrequired/invalid'

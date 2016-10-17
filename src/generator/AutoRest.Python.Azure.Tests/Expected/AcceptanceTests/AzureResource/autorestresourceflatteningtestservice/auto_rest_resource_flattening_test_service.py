@@ -110,6 +110,8 @@ class AutoRestResourceFlatteningTestService(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureResource.models.ErrorException>`
         """
         # Construct URL
         url = '/azure/resource-flatten/array'
@@ -158,6 +160,8 @@ class AutoRestResourceFlatteningTestService(object):
          <Fixtures.AcceptanceTestsAzureResource.models.FlattenedProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureResource.models.ErrorException>`
         """
         # Construct URL
         url = '/azure/resource-flatten/array'
@@ -207,6 +211,8 @@ class AutoRestResourceFlatteningTestService(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureResource.models.ErrorException>`
         """
         # Construct URL
         url = '/azure/resource-flatten/dictionary'
@@ -254,6 +260,8 @@ class AutoRestResourceFlatteningTestService(object):
         :rtype: dict
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureResource.models.ErrorException>`
         """
         # Construct URL
         url = '/azure/resource-flatten/dictionary'
@@ -305,6 +313,8 @@ class AutoRestResourceFlatteningTestService(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureResource.models.ErrorException>`
         """
         # Construct URL
         url = '/azure/resource-flatten/resourcecollection'
@@ -353,6 +363,8 @@ class AutoRestResourceFlatteningTestService(object):
          <Fixtures.AcceptanceTestsAzureResource.models.ResourceCollection>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureResource.models.ErrorException>`
         """
         # Construct URL
         url = '/azure/resource-flatten/resourcecollection'
