@@ -17,7 +17,14 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="paths"></param>
         /// <returns></returns>
-        public override bool IsValid(SwaggerParameter Parameter) => Parameter.Name != null && (Parameter.Name == SubscriptionId || Parameter.Name == ApiVersion);
+        public override bool IsValid(SwaggerParameter Parameter)
+        {
+            if (Parameter == null || Parameter.Name == null)
+                return true;
+
+            return !((Parameter.Name == SubscriptionId || Parameter.Name == ApiVersion));
+
+        }
 
         /// <summary>
         /// The template message for this Rule. 
@@ -30,7 +37,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override LogEntrySeverity Severity => LogEntrySeverity.Error;
+        public override LogEntrySeverity Severity => LogEntrySeverity.Warning;
 
     }
 }

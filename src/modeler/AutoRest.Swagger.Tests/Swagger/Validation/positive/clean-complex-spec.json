@@ -185,14 +185,14 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "test subscription id"
     },
-    "ApiVersionParameter": {
+    "ApiVersion": {
       "name": "api-version",
-      "in": "query",
+      "in": "path",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "test api version"
     }
   },
   "responses": {

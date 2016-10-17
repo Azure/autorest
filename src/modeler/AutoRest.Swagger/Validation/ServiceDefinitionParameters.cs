@@ -19,6 +19,9 @@ namespace AutoRest.Swagger.Validation
         /// <returns></returns>
         public override bool IsValid(Dictionary<string, SwaggerParameter> ParametersMap)
         {
+            if (ParametersMap.Count==0 || ParametersMap == null)
+                return false;
+
             var Names = ParametersMap.Values.Select(Param => Param.Name).ToList();
             return Names.Contains(SubscriptionId) && Names.Contains(ApiVersion);
         }
@@ -34,7 +37,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override LogEntrySeverity Severity => LogEntrySeverity.Error;
+        public override LogEntrySeverity Severity => LogEntrySeverity.Warning;
 
     }
 }
