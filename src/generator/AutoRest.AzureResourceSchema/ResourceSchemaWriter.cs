@@ -168,6 +168,8 @@ namespace AutoRest.AzureResourceSchema
                 WriteProperty(writer, "minimum", definition.Minimum);
                 WriteProperty(writer, "maximum", definition.Maximum);
                 WriteProperty(writer, "pattern", definition.Pattern);
+                WriteProperty(writer, "minLength", definition.MinLength);
+                WriteProperty(writer, "maxLength", definition.MaxLength);
                 WriteStringArray(writer, "enum", definition.Enum);
                 WriteDefinitionArray(writer, "oneOf", definition.OneOf);
                 WriteDefinitionArray(writer, "anyOf", definition.AnyOf);
@@ -179,7 +181,6 @@ namespace AutoRest.AzureResourceSchema
                 WriteDefinitionMap(writer, "properties", definition.Properties, addExpressionReferences: true);
                 WriteStringArray(writer, "required", definition.Required);
             }
-            
             WriteProperty(writer, "description", definition.Description);
 
             writer.WriteEndObject();

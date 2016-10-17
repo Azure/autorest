@@ -609,6 +609,9 @@
                 "$ref": "#/definitions/sites_hybridconnection_childResource"
               },
               {
+                "$ref": "#/definitions/sites_premieraddons_childResource"
+              },
+              {
                 "$ref": "#/definitions/sites_hostNameBindings_childResource"
               },
               {
@@ -888,6 +891,72 @@
       ],
       "description": "Microsoft.Web/sites/instances/deployments"
     },
+    "sites_premieraddons": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/premieraddons"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Geo region resource belongs to e.g. SouthCentralUS, SouthEastAsia"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Tags associated with resource"
+        },
+        "plan": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ArmPlan"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Azure resource manager plan"
+        },
+        "properties": {
+          "description": "Resource specific properties"
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SkuDescription"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Sku description of the resource"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/premieraddons"
+    },
     "sites_slots": {
       "type": "object",
       "properties": {
@@ -949,6 +1018,9 @@
             "oneOf": [
               {
                 "$ref": "#/definitions/sites_slots_hybridconnection_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_slots_premieraddons_childResource"
               },
               {
                 "$ref": "#/definitions/sites_slots_hostNameBindings_childResource"
@@ -1226,6 +1298,72 @@
         "properties"
       ],
       "description": "Microsoft.Web/sites/slots/instances/deployments"
+    },
+    "sites_slots_premieraddons": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/slots/premieraddons"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Geo region resource belongs to e.g. SouthCentralUS, SouthEastAsia"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Tags associated with resource"
+        },
+        "plan": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ArmPlan"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Azure resource manager plan"
+        },
+        "properties": {
+          "description": "Resource specific properties"
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SkuDescription"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Sku description of the resource"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/premieraddons"
     },
     "sites_slots_virtualNetworkConnections": {
       "type": "object",
@@ -1514,6 +1652,32 @@
         }
       },
       "description": "Information about the formal API definition for the web app."
+    },
+    "ArmPlan": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name"
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher"
+        },
+        "product": {
+          "type": "string",
+          "description": "The product"
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "The promotion code"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of product"
+        }
+      },
+      "description": "The plan object in an ARM, represents a marketplace plan"
     },
     "AutoHealActions": {
       "type": "object",
@@ -3523,6 +3687,72 @@
       ],
       "description": "Microsoft.Web/sites/hybridconnection"
     },
+    "sites_premieraddons_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "premieraddons"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Geo region resource belongs to e.g. SouthCentralUS, SouthEastAsia"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Tags associated with resource"
+        },
+        "plan": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ArmPlan"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Azure resource manager plan"
+        },
+        "properties": {
+          "description": "Resource specific properties"
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SkuDescription"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Sku description of the resource"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/premieraddons"
+    },
     "sites_slots_childResource": {
       "type": "object",
       "properties": {
@@ -3584,6 +3814,9 @@
             "oneOf": [
               {
                 "$ref": "#/definitions/sites_slots_hybridconnection_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_slots_premieraddons_childResource"
               },
               {
                 "$ref": "#/definitions/sites_slots_hostNameBindings_childResource"
@@ -3794,6 +4027,72 @@
         "properties"
       ],
       "description": "Microsoft.Web/sites/slots/hybridconnection"
+    },
+    "sites_slots_premieraddons_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "premieraddons"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Geo region resource belongs to e.g. SouthCentralUS, SouthEastAsia"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Tags associated with resource"
+        },
+        "plan": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ArmPlan"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Azure resource manager plan"
+        },
+        "properties": {
+          "description": "Resource specific properties"
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SkuDescription"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Sku description of the resource"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/premieraddons"
     },
     "sites_slots_virtualNetworkConnections_childResource": {
       "type": "object",
