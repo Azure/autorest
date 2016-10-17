@@ -59,6 +59,12 @@ namespace AutoRest.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void Compute_2016_03_30b()
+        {
+            RunSwaggerTest("Compute", "2016-03-30b", "compute.json");
+        }
+
+        [Fact]
         public static void ContainerService_2016_03_30()
         {
             RunSwaggerTest("ContainerService", "2016-03-30", "containerService.json");
