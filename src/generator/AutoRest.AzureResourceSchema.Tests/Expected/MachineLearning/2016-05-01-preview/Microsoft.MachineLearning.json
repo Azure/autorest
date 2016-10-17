@@ -219,9 +219,7 @@
           "oneOf": [
             {
               "type": "array",
-              "items": {
-                "type": "object"
-              }
+              "items": {}
             },
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
@@ -311,9 +309,7 @@
                 "type": "array",
                 "items": {
                   "type": "array",
-                  "items": {
-                    "type": "object"
-                  }
+                  "items": {}
                 }
               }
             },
@@ -327,9 +323,7 @@
           "oneOf": [
             {
               "type": "object",
-              "additionalProperties": {
-                "type": "object"
-              }
+              "additionalProperties": {}
             },
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"

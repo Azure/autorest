@@ -155,6 +155,27 @@ namespace AutoRest.AzureResourceSchema
             get { return requiredList; }
         }
 
+        public bool IsEmpty()
+        {
+            return Ref == null &&
+                   Items == null &&
+                   AdditionalProperties == null &&
+                   Minimum == null &&
+                   Maximum == null &&
+                   Pattern == null &&
+                   IsEmpty(enumList) &&
+                   IsEmpty(properties) &&
+                   IsEmpty(requiredList) &&
+                   IsEmpty(oneOfList) &&
+                   IsEmpty(anyOfList) &&
+                   IsEmpty(allOfList);
+        }
+
+        private static bool IsEmpty<T>(IEnumerable<T> values)
+        {
+            return values == null || !values.Any();
+        }
+
         /// <summary>
         /// Add a new value (or values) to this JsonSchema's enum list. This JsonSchema (with the
         /// new value(s)) is then returned so that additional changes can be chained together.

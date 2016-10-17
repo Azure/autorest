@@ -92,7 +92,6 @@
       "description": "Identifies the unique system identifier for each Azure resource."
     },
     "VaultProperties": {
-      "type": "object",
       "description": "Properties of the vault."
     }
   }

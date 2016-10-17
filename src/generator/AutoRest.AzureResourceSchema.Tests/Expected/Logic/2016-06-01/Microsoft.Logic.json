@@ -129,25 +129,9 @@
           "description": "The type."
         },
         "value": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "The value."
         },
         "metadata": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "The metadata."
         },
         "description": {
@@ -201,14 +185,6 @@
           "description": "The integration account."
         },
         "definition": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "The definition."
         },
         "parameters": {

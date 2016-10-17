@@ -75,15 +75,31 @@ namespace AutoRest.AzureResourceSchema
                 {
                     JsonSchema definition = definitionMap[definitionName];
 
-                    bool shouldAddExpressionReference = addExpressionReferences &&
-                                                            (definition.JsonType != "string" ||
-                                                                (definition.Enum != null &&
-                                                                 definition.Enum.Count() > 0 &&
-                                                                 definitionName != "type" &&
-                                                                 definitionName != "apiVersion") ||
-                                                                (definition.Pattern != null)) &&
-                                                            (definition.JsonType != "array" ||
-                                                                (definitionName != "resources"));
+                    bool shouldAddExpressionReference = addExpressionReferences;
+                    if (shouldAddExpressionReference)
+                    {
+                        switch (definition.JsonType)
+                        {
+                            case "object":
+                                shouldAddExpressionReference = !definition.IsEmpty();
+                                break;
+
+                            case "string":
+                                shouldAddExpressionReference = (definition.Enum != null &&
+                                                                definition.Enum.Any() &&
+                                                                definitionName != "type" &&
+                                                                definitionName != "apiVersion") ||
+                                                               definition.Pattern != null;
+                                break;
+
+                            case "array":
+                                shouldAddExpressionReference = definitionName != "resources";
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
 
                     if (!shouldAddExpressionReference)
                     {
@@ -146,20 +162,24 @@ namespace AutoRest.AzureResourceSchema
 
             writer.WriteStartObject();
 
-            WriteProperty(writer, "type", definition.JsonType);
-            WriteProperty(writer, "minimum", definition.Minimum);
-            WriteProperty(writer, "maximum", definition.Maximum);
-            WriteProperty(writer, "pattern", definition.Pattern);
-            WriteStringArray(writer, "enum", definition.Enum);
-            WriteDefinitionArray(writer, "oneOf", definition.OneOf);
-            WriteDefinitionArray(writer, "anyOf", definition.AnyOf);
-            WriteDefinitionArray(writer, "allOf", definition.AllOf);
-            WriteProperty(writer, "format", definition.Format);
-            WriteProperty(writer, "$ref", definition.Ref);
-            WriteDefinition(writer, "items", definition.Items);
-            WriteDefinition(writer, "additionalProperties", definition.AdditionalProperties);
-            WriteDefinitionMap(writer, "properties", definition.Properties, addExpressionReferences: true);
-            WriteStringArray(writer, "required", definition.Required);
+            if (definition.JsonType != "object" || !definition.IsEmpty())
+            {
+                WriteProperty(writer, "type", definition.JsonType);
+                WriteProperty(writer, "minimum", definition.Minimum);
+                WriteProperty(writer, "maximum", definition.Maximum);
+                WriteProperty(writer, "pattern", definition.Pattern);
+                WriteStringArray(writer, "enum", definition.Enum);
+                WriteDefinitionArray(writer, "oneOf", definition.OneOf);
+                WriteDefinitionArray(writer, "anyOf", definition.AnyOf);
+                WriteDefinitionArray(writer, "allOf", definition.AllOf);
+                WriteProperty(writer, "format", definition.Format);
+                WriteProperty(writer, "$ref", definition.Ref);
+                WriteDefinition(writer, "items", definition.Items);
+                WriteDefinition(writer, "additionalProperties", definition.AdditionalProperties);
+                WriteDefinitionMap(writer, "properties", definition.Properties, addExpressionReferences: true);
+                WriteStringArray(writer, "required", definition.Required);
+            }
+            
             WriteProperty(writer, "description", definition.Description);
 
             writer.WriteEndObject();
