@@ -28,7 +28,7 @@ from setuptools import setup
 
 setup(
     name='msrestazure',
-    version='0.4.3',
+    version='0.4.4',
     author='Microsoft Corporation',
     packages=['msrestazure'],
     url=('https://github.com/Azure/autorest/tree/master/'
