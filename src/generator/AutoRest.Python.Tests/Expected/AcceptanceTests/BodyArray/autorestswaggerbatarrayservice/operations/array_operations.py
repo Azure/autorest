@@ -43,6 +43,8 @@ class ArrayOperations(object):
         :rtype: list of int
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/null'
@@ -86,6 +88,8 @@ class ArrayOperations(object):
         :rtype: list of int
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/invalid'
@@ -129,6 +133,8 @@ class ArrayOperations(object):
         :rtype: list of int
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/empty'
@@ -174,6 +180,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/empty'
@@ -214,6 +222,8 @@ class ArrayOperations(object):
         :rtype: list of bool
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/boolean/tfft'
@@ -259,6 +269,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/boolean/tfft'
@@ -299,6 +311,8 @@ class ArrayOperations(object):
         :rtype: list of bool
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/boolean/true.null.false'
@@ -342,6 +356,8 @@ class ArrayOperations(object):
         :rtype: list of bool
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/boolean/true.boolean.false'
@@ -385,6 +401,8 @@ class ArrayOperations(object):
         :rtype: list of int
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/integer/1.-1.3.300'
@@ -430,6 +448,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/integer/1.-1.3.300'
@@ -470,6 +490,8 @@ class ArrayOperations(object):
         :rtype: list of int
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/integer/1.null.zero'
@@ -513,6 +535,8 @@ class ArrayOperations(object):
         :rtype: list of int
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/integer/1.integer.0'
@@ -556,6 +580,8 @@ class ArrayOperations(object):
         :rtype: list of long
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/long/1.-1.3.300'
@@ -601,6 +627,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/long/1.-1.3.300'
@@ -641,6 +669,8 @@ class ArrayOperations(object):
         :rtype: list of long
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/long/1.null.zero'
@@ -684,6 +714,8 @@ class ArrayOperations(object):
         :rtype: list of long
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/long/1.integer.0'
@@ -727,6 +759,8 @@ class ArrayOperations(object):
         :rtype: list of float
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/float/0--0.01-1.2e20'
@@ -772,6 +806,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/float/0--0.01-1.2e20'
@@ -812,6 +848,8 @@ class ArrayOperations(object):
         :rtype: list of float
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/float/0.0-null-1.2e20'
@@ -855,6 +893,8 @@ class ArrayOperations(object):
         :rtype: list of float
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/float/1.number.0'
@@ -898,6 +938,8 @@ class ArrayOperations(object):
         :rtype: list of float
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/double/0--0.01-1.2e20'
@@ -943,6 +985,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/double/0--0.01-1.2e20'
@@ -983,6 +1027,8 @@ class ArrayOperations(object):
         :rtype: list of float
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/double/0.0-null-1.2e20'
@@ -1026,6 +1072,8 @@ class ArrayOperations(object):
         :rtype: list of float
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/double/1.number.0'
@@ -1069,6 +1117,8 @@ class ArrayOperations(object):
         :rtype: list of str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/string/foo1.foo2.foo3'
@@ -1114,6 +1164,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/string/foo1.foo2.foo3'
@@ -1154,6 +1206,8 @@ class ArrayOperations(object):
         :rtype: list of str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/string/foo.null.foo2'
@@ -1197,6 +1251,8 @@ class ArrayOperations(object):
         :rtype: list of str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/string/foo.123.foo2'
@@ -1242,6 +1298,8 @@ class ArrayOperations(object):
         :rtype: list of str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/uuid/valid'
@@ -1289,6 +1347,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/uuid/valid'
@@ -1329,6 +1389,8 @@ class ArrayOperations(object):
         :rtype: list of str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/uuid/invalidchars'
@@ -1372,6 +1434,8 @@ class ArrayOperations(object):
         :rtype: list of date
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/date/valid'
@@ -1417,6 +1481,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/date/valid'
@@ -1457,6 +1523,8 @@ class ArrayOperations(object):
         :rtype: list of date
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/date/invalidnull'
@@ -1500,6 +1568,8 @@ class ArrayOperations(object):
         :rtype: list of date
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/date/invalidchars'
@@ -1544,6 +1614,8 @@ class ArrayOperations(object):
         :rtype: list of datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/date-time/valid'
@@ -1590,6 +1662,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/date-time/valid'
@@ -1630,6 +1704,8 @@ class ArrayOperations(object):
         :rtype: list of datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/date-time/invalidnull'
@@ -1673,6 +1749,8 @@ class ArrayOperations(object):
         :rtype: list of datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/date-time/invalidchars'
@@ -1717,6 +1795,8 @@ class ArrayOperations(object):
         :rtype: list of datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/date-time-rfc1123/valid'
@@ -1763,6 +1843,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/date-time-rfc1123/valid'
@@ -1803,6 +1885,8 @@ class ArrayOperations(object):
         :rtype: list of timedelta
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/duration/valid'
@@ -1848,6 +1932,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/duration/valid'
@@ -1889,6 +1975,8 @@ class ArrayOperations(object):
         :rtype: list of bytearray
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/byte/valid'
@@ -1935,6 +2023,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/byte/valid'
@@ -1976,6 +2066,8 @@ class ArrayOperations(object):
         :rtype: list of bytearray
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/byte/invalidnull'
@@ -2020,6 +2112,8 @@ class ArrayOperations(object):
         :rtype: list of bytes
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/prim/base64url/valid'
@@ -2064,6 +2158,8 @@ class ArrayOperations(object):
          <Fixtures.AcceptanceTestsBodyArray.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/complex/null'
@@ -2108,6 +2204,8 @@ class ArrayOperations(object):
          <Fixtures.AcceptanceTestsBodyArray.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/complex/empty'
@@ -2153,6 +2251,8 @@ class ArrayOperations(object):
          <Fixtures.AcceptanceTestsBodyArray.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/complex/itemnull'
@@ -2198,6 +2298,8 @@ class ArrayOperations(object):
          <Fixtures.AcceptanceTestsBodyArray.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/complex/itemempty'
@@ -2243,6 +2345,8 @@ class ArrayOperations(object):
          <Fixtures.AcceptanceTestsBodyArray.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/complex/valid'
@@ -2290,6 +2394,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/complex/valid'
@@ -2330,6 +2436,8 @@ class ArrayOperations(object):
         :rtype: list of list of str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/array/null'
@@ -2373,6 +2481,8 @@ class ArrayOperations(object):
         :rtype: list of list of str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/array/empty'
@@ -2417,6 +2527,8 @@ class ArrayOperations(object):
         :rtype: list of list of str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/array/itemnull'
@@ -2461,6 +2573,8 @@ class ArrayOperations(object):
         :rtype: list of list of str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/array/itemempty'
@@ -2505,6 +2619,8 @@ class ArrayOperations(object):
         :rtype: list of list of str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/array/valid'
@@ -2551,6 +2667,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/array/valid'
@@ -2591,6 +2709,8 @@ class ArrayOperations(object):
         :rtype: list of dict
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/dictionary/null'
@@ -2634,6 +2754,8 @@ class ArrayOperations(object):
         :rtype: list of dict
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/dictionary/empty'
@@ -2679,6 +2801,8 @@ class ArrayOperations(object):
         :rtype: list of dict
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/dictionary/itemnull'
@@ -2724,6 +2848,8 @@ class ArrayOperations(object):
         :rtype: list of dict
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/dictionary/itemempty'
@@ -2769,6 +2895,8 @@ class ArrayOperations(object):
         :rtype: list of dict
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/dictionary/valid'
@@ -2816,6 +2944,8 @@ class ArrayOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyArray.models.ErrorException>`
         """
         # Construct URL
         url = '/array/dictionary/valid'

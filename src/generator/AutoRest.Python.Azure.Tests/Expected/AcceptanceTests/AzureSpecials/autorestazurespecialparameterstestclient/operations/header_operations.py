@@ -47,6 +47,8 @@ class HeaderOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/customNamedRequestId'
@@ -97,6 +99,8 @@ class HeaderOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
         """
         foo_client_request_id = None
         if header_custom_named_request_id_param_grouping_parameters is not None:

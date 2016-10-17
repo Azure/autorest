@@ -40,20 +40,43 @@ class CloudErrorData(object):
     _attribute_map = {
         'error': {'key': 'code', 'type': 'str'},
         'message': {'key': 'message', 'type': 'str'},
+        'target': {'key': 'target', 'type': 'str'},
+        'details': {'key': 'details', 'type': '[CloudErrorData]'},
         'data': {'key': 'values', 'type': '{str}'}
         }
 
     def __init__(self, *args, **kwargs):
-        self.error = None
-        self._message = None
+        self.error = kwargs.get('error')
+        self._message = kwargs.get('message')
         self.request_id = None
         self.error_time = None
-        self.data = None
+        self.target = kwargs.get('target')
+        self.details = kwargs.get('details')
+        self.data = kwargs.get('data')
         super(CloudErrorData, self).__init__(*args)
 
     def __str__(self):
         """Cloud error message."""
-        return str(self._message)
+        error_str = "Azure Error: {}".format(self.error)
+        error_str += "\nMessage: {}".format(self._message)
+        if self.target:
+            error_str += "\nTarget: {}".format(self.target)
+        if self.request_id:
+            error_str += "\nRequest ID: {}".format(self.request_id)
+        if self.error_time:
+            error_str += "\nError Time: {}".format(self.error_time)
+        if self.data:
+            error_str += "\nAdditional Data:"
+            for key, value in self.data.items():
+                error_str += "\n\t{} : {}".format(key, value)
+        if self.details:
+            error_str += "\nException Details:"
+            for error_obj in self.details:
+                error_str += "\n\tError Code: {}".format(error_obj.error)
+                error_str += "\n\tMessage: {}".format(error_obj.message)
+                error_str += "\n\tTarget: {}".format(error_obj.target)
+        error_bytes = error_str.encode()
+        return error_bytes.decode('ascii')
 
     @classmethod
     def _get_subtype_map(cls):
@@ -99,7 +122,7 @@ class CloudError(ClientException):
     """
 
     def __init__(self, response, error=None, *args, **kwargs):
-        self.deserializer = Deserializer()
+        self.deserializer = Deserializer({'CloudErrorData': CloudErrorData})
         self.error = None
         self.message = None
         self.response = response
@@ -120,6 +143,8 @@ class CloudError(ClientException):
 
     def __str__(self):
         """Cloud error message"""
+        if self.error:
+            return str(self.error)
         return str(self.message)
 
     def _build_error_data(self, response):
