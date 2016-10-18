@@ -357,7 +357,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Swagger API can reference either Microsoft.Compute or Microsoft.Network Apis and not both.
+        ///    Looks up a localized string similar to May not reference more than one of &apos;Microsoft.Compute&apos; and &apos;Microsoft.Network&apos;.
         /// </summary>
         public static string NetworkInterfacesApiWarningMessage {
             get {
@@ -375,7 +375,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Non application json MIME type has limited support.
+        ///    Looks up a localized string similar to Media types other than &apos;application/json&apos; has limited support.
         /// </summary>
         public static string NonAppJsonTypeNotSupported {
             get {
@@ -447,7 +447,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Non-HTTPS schemes have limited Autorest support.
+        ///    Looks up a localized string similar to Non-HTTPS/HTTP schemes have limited support.
         /// </summary>
         public static string SupportedSchemesWarningMessage {
             get {

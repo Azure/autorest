@@ -253,12 +253,12 @@
     <value>Constraint is not supported for this type and will be ignored.</value>
   </data>
   <data name="NonAppJsonTypeNotSupported" xml:space="preserve">
-    <value>Non application json MIME type has limited support</value>
+    <value>Media types other than 'application/json' has limited support</value>
   </data>
   <data name="SupportedSchemesWarningMessage" xml:space="preserve">
-    <value>Non-HTTPS schemes have limited Autorest support</value>
+    <value>Non-HTTPS/HTTP schemes have limited support</value>
   </data>
   <data name="NetworkInterfacesApiWarningMessage" xml:space="preserve">
-    <value>Swagger API can reference either Microsoft.Compute or Microsoft.Network Apis and not both</value>
+    <value>May not reference more than one of 'Microsoft.Compute' and 'Microsoft.Network'</value>
   </data>
 </root>

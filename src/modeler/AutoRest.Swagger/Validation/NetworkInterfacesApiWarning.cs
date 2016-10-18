@@ -21,13 +21,13 @@ namespace AutoRest.Swagger.Validation
         /// <returns></returns>
         public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths)
         {
-            Regex ApiRegExp = new Regex(@"(/.+)+/((M|m)icrosoft.(C|c)ompute|(M|m)icrosoft.(N|n)etwork)/.+");
+            Regex ApiRegExp = new Regex(@"(/.+)+/((?i)microsoft.compute|microsoft.network(?-i))/.+");
             var ApiQuery = paths.Keys.Where(Path => ApiRegExp.Match(Path).Success);
             if (!ApiQuery.Any())
                 return true;
             
-            Regex NetworkApiRegExp = new Regex(@"(/\w+)+/(M|m)icrosoft.(N|n)etwork/(\w+/)+");
-            Regex ComputeApiRegExp = new Regex(@"(/\w+)+/(M|m)icrosoft.(C|c)ompute/(\w+/)+");
+            Regex NetworkApiRegExp = new Regex(@"(/.+)+/((?i)microsoft.network(?-i))/.+");
+            Regex ComputeApiRegExp = new Regex(@"(/.+)+/((?i)microsoft.compute(?-i))/.+");
             var NetworkApiQuery = ApiQuery.Where(Path => NetworkApiRegExp.Match(Path).Success);
             var ComputeApiQuery = ApiQuery.Where(Path => ComputeApiRegExp.Match(Path).Success);
 
