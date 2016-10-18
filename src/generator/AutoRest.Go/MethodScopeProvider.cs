@@ -43,7 +43,7 @@ namespace AutoRest.Go
         /// </summary>
         /// <param name="prefix">The method prefix</param>
         /// <param name="group">The method group</param>
-        /// <param name="suffix">The suffux added to the variable - a simple counter is used to generate new method names</param>
+        /// <param name="suffix">The suffix added to the variable - a simple counter is used to generate new method names</param>
         /// <returns>A method name unique in this scope</returns>
         public string GetMethodName(string prefix, string group, int suffix = 0)
         {

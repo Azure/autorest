@@ -18,13 +18,5 @@ func ToDateTime(s string) date.Time {
 }
 
 func GetBaseURI() string {
-	/*
-		if strings.HasPrefix(baseURI, "https") {
-			baseURI = "http://localhost:3000"
-		} else {
-			baseURI += ":3000"
-		}
-		return baseURI
-	*/
 	return "http://localhost:3000"
 }

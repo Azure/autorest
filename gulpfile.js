@@ -131,6 +131,8 @@ var goMappings = {
   'required-optional':['../../dev/TestServer/swagger/required-optional.json','optionalgroup'],
   'url':['../../dev/TestServer/swagger/url.json','urlgroup'],
   'validation':['../../dev/TestServer/swagger/validation.json', 'validationgroup'],
+  'paging':['../../dev/TestServer/swagger/paging.json', 'paginggroup'],
+  'azurereport':['../../dev/TestServer/swagger/azure-report.json', 'azurereport']
 };
 
 var defaultAzureMappings = {
