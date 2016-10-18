@@ -39,12 +39,15 @@ class MicrosoftAzureTestUrlConfiguration(AzureConfiguration):
      x-ms-client-request-id value is generated and included in each request.
      Default is true.
     :type generate_client_request_id: bool
+    :param thread_daemon: Whether the operation polling thread is a daemon
+     thread. Default value is true.
+    :type thread_daemon: bool
     :param str base_url: Service URL
     :param str filepath: Existing config
     """
 
     def __init__(
-            self, credentials, subscription_id, api_version='2014-04-01-preview', accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, base_url=None, filepath=None):
+            self, credentials, subscription_id, api_version='2014-04-01-preview', accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, thread_daemon=True, base_url=None, filepath=None):
 
         if credentials is None:
             raise ValueError("Parameter 'credentials' must not be None.")
@@ -70,6 +73,7 @@ class MicrosoftAzureTestUrlConfiguration(AzureConfiguration):
         self.accept_language = accept_language
         self.long_running_operation_retry_timeout = long_running_operation_retry_timeout
         self.generate_client_request_id = generate_client_request_id
+        self.thread_daemon = thread_daemon
 
 
 class MicrosoftAzureTestUrl(object):
@@ -98,14 +102,17 @@ class MicrosoftAzureTestUrl(object):
      x-ms-client-request-id value is generated and included in each request.
      Default is true.
     :type generate_client_request_id: bool
+    :param thread_daemon: Whether the operation polling thread is a daemon
+     thread. Default value is true.
+    :type thread_daemon: bool
     :param str base_url: Service URL
     :param str filepath: Existing config
     """
 
     def __init__(
-            self, credentials, subscription_id, api_version='2014-04-01-preview', accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, base_url=None, filepath=None):
+            self, credentials, subscription_id, api_version='2014-04-01-preview', accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, thread_daemon=True, base_url=None, filepath=None):
 
-        self.config = MicrosoftAzureTestUrlConfiguration(credentials, subscription_id, api_version, accept_language, long_running_operation_retry_timeout, generate_client_request_id, base_url, filepath)
+        self.config = MicrosoftAzureTestUrlConfiguration(credentials, subscription_id, api_version, accept_language, long_running_operation_retry_timeout, generate_client_request_id, thread_daemon, base_url, filepath)
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}

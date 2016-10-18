@@ -23,6 +23,7 @@
 @:        @ParameterWrapComment(string.Empty, ":param callback: When specified, will be called with each chunk of data that is streamed. The callback should take two arguments, the bytes of the current chunk of data and the response object. If the data is uploading, response will be None.")
 @:        @ParameterWrapComment(string.Empty, ":type callback: Callable[Bytes, response=None]")
 }
+        @ParameterWrapComment(string.Empty, ":param operation_config: :ref:`Operation configuration overrides<msrestazure:optionsforoperations>`.")
         @ParameterWrapComment(string.Empty, ":rtype: :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>` instance that returns " + Model.GetDocumentationType(Model.ReturnType.Body))
         @ParameterWrapComment(string.Empty, ":rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if raw=true")
         @ParameterWrapComment(string.Empty, string.Format(":raises: {0}", Model.ExceptionDocumentation))
@@ -149,6 +150,8 @@ else
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
+        thread_daemon = operation_config.get(
+            'thread_daemon', self.config.thread_daemon)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, thread_daemon)

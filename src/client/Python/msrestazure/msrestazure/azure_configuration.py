@@ -44,6 +44,7 @@ class AzureConfiguration(Configuration):
     def __init__(self, base_url, filepath=None):
         super(AzureConfiguration, self).__init__(base_url, filepath)
         self.long_running_operation_timeout = 30
+        self.thread_daemon = True
         self.add_user_agent("msrest_azure/{}".format(msrestazure_version))
 
     def save(self, filepath):
@@ -57,6 +58,7 @@ class AzureConfiguration(Configuration):
         self._config.set("Azure",
                          "long_running_operation_timeout",
                          self.long_running_operation_timeout)
+        self._config.set("Azure", "thread_daemon", self.thread_daemon)
         return super(AzureConfiguration, self).save(filepath)
 
     def load(self, filepath):
@@ -70,6 +72,8 @@ class AzureConfiguration(Configuration):
             self._config.read(filepath)
             self.long_running_operation_timeout = self._config.getint(
                 "Azure", "long_running_operation_timeout")
+            self.thread_daemon = self._config.getboolean(
+                "Azure", "thread_daemon")
         except (ValueError, EnvironmentError, NoOptionError):
             msg = "Supplied config file incompatible"
             raise_with_traceback(ValueError, msg)

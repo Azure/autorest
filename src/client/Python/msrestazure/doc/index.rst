@@ -62,3 +62,4 @@ Indices and tables
   :glob:
 
   msrestazure
+  operation_config
