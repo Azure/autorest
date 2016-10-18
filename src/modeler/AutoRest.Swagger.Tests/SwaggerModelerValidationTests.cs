@@ -100,6 +100,49 @@ namespace AutoRest.Swagger.Tests
             messages.AssertOnlyValidationMessage(typeof(OneUnderscoreInOperationId));
         }
 
+
+        [Fact]
+        public void NonAppJsonTypeOperationForConsumes()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "non-app-json-operation-consumes.json"));
+            messages.AssertOnlyValidationWarning(typeof(NonAppJsonTypeWarning));
+        }
+
+        [Fact]
+        public void NonAppJsonTypeOperationForProduces()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "non-app-json-operation-produces.json"));
+            messages.AssertOnlyValidationWarning(typeof(NonAppJsonTypeWarning));
+        }
+
+        [Fact]
+        public void NonAppJsonTypeServiceDefinitionForProduces()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "non-app-json-service-def-produces.json"));
+            messages.AssertOnlyValidationWarning(typeof(NonAppJsonTypeWarning));
+        }
+
+        [Fact]
+        public void NonAppJsonTypeServiceDefinitionForConsumes()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "non-app-json-service-def-consumes.json"));
+            messages.AssertOnlyValidationWarning(typeof(NonAppJsonTypeWarning));
+        }
+
+        [Fact]
+        public void NonHttpsServiceDefinitionForScheme()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "non-https-service-def-scheme.json"));
+            messages.AssertOnlyValidationWarning(typeof(SupportedSchemesWarning));
+        }
+
+        [Fact]
+        public void NonHttpsOperationsForScheme()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "non-https-operations-scheme.json"));
+            messages.AssertOnlyValidationWarning(typeof(SupportedSchemesWarning));
+        }
+
         [Fact]
         public void NoResponsesValidation()
         {

@@ -366,6 +366,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Non application json MIME type has limited support.
+        /// </summary>
+        public static string NonAppJsonTypeNotSupported {
+            get {
+                return ResourceManager.GetString("NonAppJsonTypeNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to No responses defined..
         /// </summary>
         public static string NoResponses {
@@ -425,6 +434,15 @@ namespace AutoRest.Core.Properties {
         public static string ParameterValueIsNotValid {
             get {
                 return ResourceManager.GetString("ParameterValueIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Non-HTTPS schemes have limited Autorest support.
+        /// </summary>
+        public static string SupportedSchemesWarningMessage {
+            get {
+                return ResourceManager.GetString("SupportedSchemesWarningMessage", resourceCulture);
             }
         }
         

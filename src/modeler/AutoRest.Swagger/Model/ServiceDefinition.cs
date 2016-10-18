@@ -61,16 +61,19 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The transfer protocol of the API.
         /// </summary>
+        [CollectionRule(typeof(SupportedSchemesWarning))]
         public IList<TransferProtocolScheme> Schemes { get; set; }
 
         /// <summary>
         /// A list of MIME types the service can consume.
         /// </summary>
+        [CollectionRule(typeof(NonAppJsonTypeWarning))]
         public IList<string> Consumes { get; set; }
 
         /// <summary>
         /// A list of MIME types the APIs can produce.
         /// </summary>
+        [CollectionRule(typeof(NonAppJsonTypeWarning))]
         public IList<string> Produces { get; set; }
 
         /// <summary>
