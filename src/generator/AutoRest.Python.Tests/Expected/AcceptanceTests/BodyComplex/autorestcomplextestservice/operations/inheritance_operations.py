@@ -44,6 +44,8 @@ class InheritanceOperations(object):
          <Fixtures.AcceptanceTestsBodyComplex.models.Siamese>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/inheritance/valid'
@@ -93,6 +95,8 @@ class InheritanceOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/inheritance/valid'

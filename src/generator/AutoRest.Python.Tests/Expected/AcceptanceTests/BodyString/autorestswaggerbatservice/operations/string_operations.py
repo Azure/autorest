@@ -43,6 +43,8 @@ class StringOperations(object):
         :rtype: str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/null'
@@ -88,6 +90,8 @@ class StringOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/null'
@@ -131,6 +135,8 @@ class StringOperations(object):
         :rtype: str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/empty'
@@ -176,6 +182,8 @@ class StringOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/empty'
@@ -218,6 +226,8 @@ class StringOperations(object):
         :rtype: str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/mbcs'
@@ -267,6 +277,8 @@ class StringOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/mbcs'
@@ -309,6 +321,8 @@ class StringOperations(object):
         :rtype: str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/whitespace'
@@ -357,6 +371,8 @@ class StringOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/whitespace'
@@ -397,6 +413,8 @@ class StringOperations(object):
         :rtype: str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/notProvided'
@@ -440,6 +458,8 @@ class StringOperations(object):
         :rtype: bytes
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/base64Encoding'
@@ -483,6 +503,8 @@ class StringOperations(object):
         :rtype: bytes
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/base64UrlEncoding'
@@ -528,6 +550,8 @@ class StringOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/base64UrlEncoding'
@@ -568,6 +592,8 @@ class StringOperations(object):
         :rtype: bytes
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/nullBase64UrlEncoding'
