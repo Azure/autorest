@@ -10,7 +10,7 @@
   "host": "petstore.swagger.io",
   "basePath": "/v1",
   "schemes": [
-    "https"
+    "http"
   ],
   "consumes": [
     "application/json"

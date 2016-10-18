@@ -24,17 +24,13 @@ namespace AutoRest.Swagger.Validation
             Regex ApiRegExp = new Regex(@"(/.+)+/((?i)microsoft.compute|microsoft.network(?-i))/.+");
             var ApiQuery = paths.Keys.Where(Path => ApiRegExp.Match(Path).Success);
             if (!ApiQuery.Any())
+            {
                 return true;
+            }
             
             Regex NetworkApiRegExp = new Regex(@"(/.+)+/((?i)microsoft.network(?-i))/.+");
             Regex ComputeApiRegExp = new Regex(@"(/.+)+/((?i)microsoft.compute(?-i))/.+");
-            var NetworkApiQuery = ApiQuery.Where(Path => NetworkApiRegExp.Match(Path).Success);
-            var ComputeApiQuery = ApiQuery.Where(Path => ComputeApiRegExp.Match(Path).Success);
-
-            if (NetworkApiQuery.Any() && ComputeApiQuery.Any())
-                return false;
-
-            return true;
+            return !(ApiQuery.Any(Path => NetworkApiRegExp.Match(Path).Success)) || !(ApiQuery.Any(Path => ComputeApiRegExp.Match(Path).Success));
         }
 
         /// <summary>
