@@ -15,6 +15,14 @@ To install:
 Release History
 ---------------
 
+2016-10-17 Version 0.4.4
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+- More informative and well-formed CloudError exceptions (https://github.com/Azure/autorest/issues/1460)
+- Raise CustomException is defined in Swagger (https://github.com/Azure/autorest/issues/1404)
+
 2016-09-14 Version 0.4.3
 ++++++++++++++++++++++++
 
