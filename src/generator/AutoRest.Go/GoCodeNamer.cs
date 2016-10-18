@@ -214,7 +214,7 @@ namespace AutoRest.Go
                 "unsafe",
 
                 // Other reserved names and packages (defined by the base libraries this code uses)
-                "autorest", "client", "date", "err", "req", "resp", "result", "sender"
+                "autorest", "client", "date", "err", "req", "resp", "result", "sender", "to", "validation"
 
             }.ToList().ForEach(s => ReservedWords.Add(s));
 
@@ -531,6 +531,27 @@ namespace AutoRest.Go
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
             return new MapType(NormalizeTypeReference(dictionaryType.ValueType));
+        }
+
+        /// <summary>
+        /// Formats a string to pascal case using a specific character as splitter
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="splitter"></param>
+        /// <returns>The formatted string</returns>
+        public static string PascalCaseWithoutChar(string name, char splitter)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+
+            return
+                name.Split(splitter)
+                    .Where(s => !string.IsNullOrEmpty(s))
+                    .Select(s => char.ToUpperInvariant(s[0]) + s.Substring(1, s.Length - 1))
+                    .DefaultIfEmpty("")
+                    .Aggregate(string.Concat);
         }
 
         public override string GetEnumMemberName(string name)
