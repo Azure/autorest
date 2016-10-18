@@ -402,7 +402,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Parameters &quot;subscriptionId&quot; and &quot;api-version&quot; are not allowed in the operations section of azure swagger specs.
+        ///    Looks up a localized string similar to Parameters &quot;subscriptionId&quot; and &quot;api-version&quot; are not allowed in the operations section.
         /// </summary>
         public static string OperationParametersNotAllowedMessage {
             get {

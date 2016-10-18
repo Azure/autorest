@@ -17,15 +17,9 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="paths"></param>
         /// <returns></returns>
-        public override bool IsValid(Dictionary<string, SwaggerParameter> ParametersMap)
-        {
-            if (ParametersMap.Count==0 || ParametersMap == null)
-                return false;
-
-            var Names = ParametersMap.Values.Select(Param => Param.Name).ToList();
-            return Names.Contains(SubscriptionId) && Names.Contains(ApiVersion);
-        }
-
+        public override bool IsValid(Dictionary<string, SwaggerParameter> ParametersMap) =>        
+             true == (ParametersMap?.Values.Any(parameter => parameter.Name == SubscriptionId || parameter.Name == ApiVersion));
+        
         /// <summary>
         /// The template message for this Rule. 
         /// </summary>

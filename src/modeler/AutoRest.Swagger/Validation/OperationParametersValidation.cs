@@ -17,14 +17,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="paths"></param>
         /// <returns></returns>
-        public override bool IsValid(SwaggerParameter Parameter)
-        {
-            if (Parameter == null || Parameter.Name == null)
-                return true;
-
-            return !((Parameter.Name == SubscriptionId || Parameter.Name == ApiVersion));
-
-        }
+        public override bool IsValid(SwaggerParameter Parameter) => SubscriptionId != Parameter?.Name && ApiVersion != Parameter?.Name;
 
         /// <summary>
         /// The template message for this Rule. 
