@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Consumes has an unsupported MIME type",
+    "title": "Operations has invalid parameters",
     "description": "Some documentation.",
     "version": "2014-04-01-preview"
   },
