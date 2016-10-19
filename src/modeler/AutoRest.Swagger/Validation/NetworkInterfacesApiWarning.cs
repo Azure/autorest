@@ -13,8 +13,6 @@ namespace AutoRest.Swagger.Validation
 {
     public class NetworkInterfacesApiWarning : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
-        private const string MicrosoftComputeApi = "Microsoft.Compute";
-        private const string MicrosoftNetworkApi = "Microsoft.Network";
         /// <summary>
         /// This rule passes if the paths contain reference to either Microsoft.Network Apis or 
         /// Microsoft.Compute Apis but not both
