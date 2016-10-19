@@ -213,6 +213,12 @@ namespace AutoRest.AzureResourceSchema.Tests
         {
             RunSwaggerTest("Search", "2015-02-28", "search.json");
         }
+        
+        [Fact]
+        public static void ServerManagement_2016_07_01()
+        {
+            RunSwaggerTest("ServerManagement", "2016-07-01-preview", "servermanagement.json");
+        }
 
         [Fact]
         public static void ServiceBus_2015_08_01()
@@ -221,9 +227,9 @@ namespace AutoRest.AzureResourceSchema.Tests
         }
 
         [Fact]
-        public static void ServerManagement_2016_07_01()
+        public static void ServiceFabric_2016_01_28()
         {
-            RunSwaggerTest("ServerManagement", "2016-07-01-preview", "servermanagement.json");
+            RunSwaggerTest("ServiceFabric", "2016-01-28", "servicefabric.json");
         }
 
         [Fact]
