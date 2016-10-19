@@ -65,6 +65,13 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void DisallowMsdnReferencesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "definition-contains-msdn-reference.json"));
+            messages.AssertOnlyValidationMessage(typeof(DisallowMsdnReferences), 4);
+        }
+
+        [Fact]
         public void DefaultValueInEnumValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "default-value-not-in-enum.json"));

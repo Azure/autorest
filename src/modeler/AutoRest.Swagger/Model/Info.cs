@@ -4,6 +4,8 @@
 using System;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
+using AutoRest.Swagger.Validation;
+using AutoRest.Core.Validation;
 
 namespace AutoRest.Swagger.Model
 {
@@ -18,6 +20,7 @@ namespace AutoRest.Swagger.Model
         private string _description;
         public string Title { get; set; }
 
+        [Rule(typeof(DisallowMsdnReferences))]
         public string Description
         {
             get { return _description; }
