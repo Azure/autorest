@@ -13,6 +13,7 @@ namespace AutoRest.Swagger.Validation
 {
     public class NetworkInterfacesApiWarning : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
+        private static readonly List<string> NetworkApiNamespaces = new List<string>(new string[]{"microsoft.compute", "microsoft.network"});
         /// <summary>
         /// This rule passes if the paths contain reference to either Microsoft.Network Apis or 
         /// Microsoft.Compute Apis but not both
@@ -21,16 +22,38 @@ namespace AutoRest.Swagger.Validation
         /// <returns></returns>
         public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths)
         {
-            Regex ApiRegExp = new Regex(@"(/.+)+/((?i)microsoft.compute|microsoft.network(?-i))/.+");
-            var ApiQuery = paths.Keys.Where(Path => ApiRegExp.Match(Path).Success);
-            if (!ApiQuery.Any())
+            Regex apiRegExp = new Regex(@"/([^/]+)+");
+        
+            string firstMatch = null;
+
+            foreach (var path in paths.Keys)
             {
-                return true;
+                // for each path, check if it exists in our list of namespaces and 
+                // ensure it's unique for the given json
+                // regex finds all strings of the form /<str> from the path 
+                // firstMatch ensures there is only one kind of namespace referenced
+                for (Match m = apiRegExp.Match(path); m.Success; m = m.NextMatch())
+                {
+                    string val = m.Groups[1].Value.ToLowerInvariant();
+                    if (!NetworkApiNamespaces.Contains(val))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        if (firstMatch == null)
+                        {
+                            firstMatch = val;
+                        }
+                        else if (firstMatch != val)
+                        {
+                            return false;
+                        }
+                    }
+                }
+
             }
-            
-            Regex NetworkApiRegExp = new Regex(@"(/.+)+/((?i)microsoft.network(?-i))/.+");
-            Regex ComputeApiRegExp = new Regex(@"(/.+)+/((?i)microsoft.compute(?-i))/.+");
-            return !(ApiQuery.Any(Path => NetworkApiRegExp.Match(Path).Success)) || !(ApiQuery.Any(Path => ComputeApiRegExp.Match(Path).Success));
+            return true;
         }
 
         /// <summary>
