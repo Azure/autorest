@@ -1,0 +1,51 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Consumes has an unsupported MIME type",
+    "description": "Some documentation.  MSDN reference: https://msdn.microsoft.com/en-us/default.aspx.",
+    "version": "2014-04-01-preview"
+  },
+  "externalDocs": {
+    "description": "MSDN reference: http://msdn.microsoft.com/en-us/default.aspx."
+  }, 
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test subscription id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api version"
+    }
+  },
+  "paths": {
+    "/api/fake": {
+      "get": {
+        "operationId": "Api_Fake",
+        "description": "MSDN reference: https://msdn.com/en-us/default.aspx.",
+        "responses": {
+          "200": {
+            "description": "MSDN reference: http://msdn.com/en-us/default.aspx."
+          }
+        }
+      }
+    }
+  }
+}

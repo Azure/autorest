@@ -44,6 +44,7 @@ namespace AutoRest.Swagger.Model
             set { _summary = value.StripControlCharacters(); }
         }
 
+        [Rule(typeof(AvoidMsdnReferences))]
         public string Description
         {
             get { return _description; }
