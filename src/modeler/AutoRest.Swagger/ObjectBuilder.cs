@@ -77,7 +77,7 @@ namespace AutoRest.Swagger
                     }
                     var existingEnum =
                         Modeler.CodeModel.EnumTypes.FirstOrDefault(
-                            e => e.Name.EqualsIgnoreCase(enumType.Name));
+                            e => e.Name.RawValue.EqualsIgnoreCase(enumType.Name.RawValue));
                     if (existingEnum != null)
                     {
                         if (!existingEnum.Equals(enumType))
@@ -161,18 +161,6 @@ namespace AutoRest.Swagger
                 parameter.DefaultValue = swaggerObject.Enum[0];
                 parameter.IsConstant = true;
             }
-#if pending_removal
-            // GS: Did I need this for something?
-            var compositeType = parameter.Type as CompositeType;
-            if (compositeType != null && compositeType.ComposedProperties.Any())
-            {
-                if (compositeType.ComposedProperties.All(p => p.IsConstant))
-                {
-                    parameter.DefaultValue = "{}";
-                    parameter.IsConstant = true;
-                }
-            }
-#endif
 
             parameter.Documentation = swaggerObject.Description;
             parameter.CollectionFormat = swaggerObject.CollectionFormat;

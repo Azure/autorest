@@ -233,7 +233,7 @@ namespace AutoRest.CompositeSwagger
                 if (compositeClientMethod == null)
                 {
                     // Re-link client parameters
-                    foreach (var parameter in subClientMethod.Parameters.Where(p => p.ClientProperty != null))
+                    foreach (var parameter in subClientMethod.Parameters.Where(p => p.IsClientProperty))
                     {
                         var clientProperty = compositeClient.Properties
                             .FirstOrDefault(p => p.SerializedName == parameter.ClientProperty.SerializedName);
