@@ -88,11 +88,11 @@ namespace AutoRest.CSharp.Unit.Tests
             // After swagger Parser
             codeModel = AutoRestController.RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
 
-            // load model into language-specific code model
-            codeModel = plugin.Serializer.Load(codeModel);
-
             using (plugin.Activate())
             {
+                // load model into language-specific code model
+                codeModel = plugin.Serializer.Load(codeModel);
+
                 // we've loaded the model, run the extensions for after it's loaded
                 codeModel = AutoRestController.RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
 

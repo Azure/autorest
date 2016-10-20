@@ -135,20 +135,22 @@ namespace AutoRest.CSharp.Tests
 
                 new Settings();
                 var plugin = new PluginCs();
-                codeModel = plugin.Serializer.Load(codeModel);
-                codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+                using (plugin.Activate()) {
+                    codeModel = plugin.Serializer.Load(codeModel);
+                    codeModel = plugin.Transformer.TransformCodeModel(codeModel);
 
-                Assert.Equal("Sample", codeModel.ModelTypes.First(m => m.Name == "Sample").Name);
-                Assert.Equal("Child", codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[0].Name);
-                Assert.Equal("Child", codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[0].ModelType.Name);
-                Assert.Equal("ChildList", codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[1].Name);
-                Assert.Equal("System.Collections.Generic.IList<Child>",
-                    codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[1].ModelType.Name);
-                Assert.Equal("ChildDict", codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[2].Name);
-                Assert.Equal("System.Collections.Generic.IDictionary<string, Child>",
-                    codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[2].ModelType.Name);
-                Assert.Equal("Child", codeModel.ModelTypes.First(m => m.Name == "Child").Name);
-                Assert.Equal("string", codeModel.ModelTypes.First(m => m.Name == "Child").Properties[0].ModelType.Name);
+                    Assert.Equal("Sample", codeModel.ModelTypes.First(m => m.Name == "Sample").Name);
+                    Assert.Equal("Child", codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[0].Name);
+                    Assert.Equal("Child", codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[0].ModelType.Name);
+                    Assert.Equal("ChildList", codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[1].Name);
+                    Assert.Equal("System.Collections.Generic.IList<Child>",
+                        codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[1].ModelType.Name);
+                    Assert.Equal("ChildDict", codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[2].Name);
+                    Assert.Equal("System.Collections.Generic.IDictionary<string, Child>",
+                        codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[2].ModelType.Name);
+                    Assert.Equal("Child", codeModel.ModelTypes.First(m => m.Name == "Child").Name);
+                    Assert.Equal("string", codeModel.ModelTypes.First(m => m.Name == "Child").Properties[0].ModelType.Name);
+                }
             }
         }
 
@@ -242,15 +244,16 @@ namespace AutoRest.CSharp.Tests
                 {
                     new Settings();
                     var plugin = new PluginCs();
-                    codeModel = plugin.Serializer.Load(codeModel);
-                    codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+                    using (plugin.Activate()) {
+                        codeModel = plugin.Serializer.Load(codeModel);
+                        codeModel = plugin.Transformer.TransformCodeModel(codeModel);
 
-
-                    Assert.Equal("GreetingsModel", codeModel.ModelTypes[0].Name);
-                    Assert.Equal("System.Collections.Generic.IList<GreetingsModel>",
-                        codeModel.Methods[0].ReturnType.Body.Name);
-                    Assert.Equal("System.Collections.Generic.IDictionary<string, GreetingsModel>",
-                        codeModel.Methods[1].ReturnType.Body.Name);
+                        Assert.Equal("GreetingsModel", codeModel.ModelTypes[0].Name);
+                        Assert.Equal("System.Collections.Generic.IList<GreetingsModel>",
+                            codeModel.Methods[0].ReturnType.Body.Name);
+                        Assert.Equal("System.Collections.Generic.IDictionary<string, GreetingsModel>",
+                            codeModel.Methods[1].ReturnType.Body.Name);
+                    }
                 }
             }
         }
