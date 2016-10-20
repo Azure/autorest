@@ -1,7 +1,7 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
-    "title": "Operation with multiple body parameters",
+    "title": "Service definition does not contain required parameters",
     "description": "Some documentation.",
     "version": "2014-04-01-preview"
   },
@@ -19,32 +19,24 @@
   "paths": {
     "/foo": {
       "post": {
-        "operationId": "PostFoo",
+        "operationId": "Noun_Verb",
         "summary": "Foo path",
         "description": "Foo operation",
-        "responses": {}
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
       }
     }
   },
-  "definitions": {
-    "Error": {
-      "description": "Test"
-    }
-  },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
+    "NonSubscriptionIdParameter": {
+      "name": "myTestId",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "test subscription id"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "test api version"
+      "description": "test id"
     }
   }
 }

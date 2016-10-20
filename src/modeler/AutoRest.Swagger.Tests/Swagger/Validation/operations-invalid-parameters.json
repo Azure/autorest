@@ -1,7 +1,7 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
-    "title": "Consumes has an unsupported MIME type",
+    "title": "Operations has invalid parameters",
     "description": "Some documentation.",
     "version": "2014-04-01-preview"
   },
@@ -17,27 +17,29 @@
     "application/json"
   ],
   "paths": {
-    "/foo/{test}": {
+    "/foo": {
       "post": {
-        "operationId": "PostFoo",
+        "operationId": "Noun_Verb",
         "summary": "Foo path",
         "description": "Foo operation",
-        "parameters": [
-          {
-            "name": "test",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "test parameter",
-            "x-ms-client-name": ""
-          }
-        ],
         "responses": {
           "default": {
             "description": "Unexpected error"
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "name": "subscriptionId",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "invalid node for subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/SubscriptionIdParameter"
+        }
+      ]
     }
   },
   "parameters": {

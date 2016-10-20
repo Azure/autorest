@@ -101,6 +101,20 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void OperationParametersValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operations-invalid-parameters.json"));
+            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation));
+        }
+        
+        [Fact]
+        public void ServiceDefinitionParametersValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "service-def-invalid-parameters.json"));
+            messages.AssertOnlyValidationMessage(typeof(ServiceDefinitionParameters));
+        }
+        
+        [Fact]
         public void OperationGroupSingleUnderscoreValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operation-group-underscores.json"));
