@@ -539,7 +539,7 @@ namespace AutoRest.Go
         {
             return nameInUse
                 ? name.Equals(packageName, StringComparison.OrdinalIgnoreCase)
-                    ? attachment + name
+                    ? name
                     : name + attachment
                 : name;
         }
