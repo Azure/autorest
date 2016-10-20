@@ -339,6 +339,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to For better generated code quality, remove all references to &quot;msdn.microsoft.com&quot;..
+        /// </summary>
+        public static string MsdnReferencesDiscouraged {
+            get {
+                return ResourceManager.GetString("MsdnReferencesDiscouraged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to {0} (already used in {1}).
         /// </summary>
         public static string NamespaceConflictReasonMessage {
