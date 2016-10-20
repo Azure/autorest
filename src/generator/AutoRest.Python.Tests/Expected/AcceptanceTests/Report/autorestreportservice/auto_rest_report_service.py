@@ -69,6 +69,8 @@ class AutoRestReportService(object):
         :rtype: dict
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsReport.models.ErrorException>`
         """
         # Construct URL
         url = '/report'

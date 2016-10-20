@@ -72,6 +72,8 @@ class AutoRestResourceFlatteningTestService(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
         """
         # Construct URL
         url = '/model-flatten/array'
@@ -116,6 +118,8 @@ class AutoRestResourceFlatteningTestService(object):
          <Fixtures.AcceptanceTestsModelFlattening.models.FlattenedProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
         """
         # Construct URL
         url = '/model-flatten/array'
@@ -161,6 +165,8 @@ class AutoRestResourceFlatteningTestService(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
         """
         # Construct URL
         url = '/model-flatten/dictionary'
@@ -204,6 +210,8 @@ class AutoRestResourceFlatteningTestService(object):
         :rtype: dict
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
         """
         # Construct URL
         url = '/model-flatten/dictionary'
@@ -251,6 +259,8 @@ class AutoRestResourceFlatteningTestService(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
         """
         # Construct URL
         url = '/model-flatten/resourcecollection'
@@ -295,6 +305,8 @@ class AutoRestResourceFlatteningTestService(object):
          <Fixtures.AcceptanceTestsModelFlattening.models.ResourceCollection>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
         """
         # Construct URL
         url = '/model-flatten/resourcecollection'
@@ -342,6 +354,8 @@ class AutoRestResourceFlatteningTestService(object):
          <Fixtures.AcceptanceTestsModelFlattening.models.SimpleProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
         """
         # Construct URL
         url = '/model-flatten/customFlattening'
@@ -406,6 +420,8 @@ class AutoRestResourceFlatteningTestService(object):
          <Fixtures.AcceptanceTestsModelFlattening.models.SimpleProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
         """
         simple_body_product = None
         if product_id is not None or description is not None or max_product_display_name is not None or generic_value is not None or odatavalue is not None:
@@ -465,6 +481,8 @@ class AutoRestResourceFlatteningTestService(object):
          <Fixtures.AcceptanceTestsModelFlattening.models.SimpleProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
         """
         name = None
         if flatten_parameter_group is not None:

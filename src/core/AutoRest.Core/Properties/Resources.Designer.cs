@@ -420,6 +420,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Parameters &quot;subscriptionId&quot; and &quot;api-version&quot; are not allowed in the operations section.
+        /// </summary>
+        public static string OperationParametersNotAllowedMessage {
+            get {
+                return ResourceManager.GetString("OperationParametersNotAllowedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Parameter &apos;{0}&apos; is not expected..
         /// </summary>
         public static string ParameterIsNotValid {
@@ -452,6 +461,14 @@ namespace AutoRest.Core.Properties {
         public static string SupportedSchemesWarningMessage {
             get {
                 return ResourceManager.GetString("SupportedSchemesWarningMessage", resourceCulture);
+            }
+        }
+
+        ///    Looks up a localized string similar to Parameters &quot;subscriptionId&quot; or &quot;api-version&quot; are referenced but not defined in the parameters section of Service Definition.
+        /// </summary>
+        public static string ServiceDefinitionParametersMissingMessage {
+            get {
+                return ResourceManager.GetString("ServiceDefinitionParametersMissingMessage", resourceCulture);
             }
         }
         

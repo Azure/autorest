@@ -131,6 +131,8 @@ var goMappings = {
   'required-optional':['../../dev/TestServer/swagger/required-optional.json','optionalgroup'],
   'url':['../../dev/TestServer/swagger/url.json','urlgroup'],
   'validation':['../../dev/TestServer/swagger/validation.json', 'validationgroup'],
+  'paging':['../../dev/TestServer/swagger/paging.json', 'paginggroup'],
+  'azurereport':['../../dev/TestServer/swagger/azure-report.json', 'azurereport']
 };
 
 var defaultAzureMappings = {
@@ -267,10 +269,14 @@ gulp.task('regenerate:expected:node', ['regenerate:expected:nodecomposite'], fun
 })
 
 gulp.task('regenerate:expected:python', function(cb){
+  mappings = mergeOptions({
+    'AcceptanceTests/UrlMultiCollectionFormat' : '../../dev/TestServer/swagger/url-multi-collectionFormat.json'
+  }, defaultMappings);
+
   regenExpected({
     'outputBaseDir': 'src/generator/AutoRest.Python.Tests',
     'inputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
-    'mappings': defaultMappings,
+    'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Python',
     'flatteningThreshold': '1'
@@ -742,15 +748,12 @@ gulp.task('test:clientruntime:ruby', ['syncDependencies:runtime:ruby'], shell.ta
 gulp.task('test:clientruntime:rubyazure', ['syncDependencies:runtime:rubyazure'], shell.task('bundle exec rspec', { cwd: './src/client/Ruby/ms-rest-azure/', verbosity: 3 }));
 gulp.task('test:clientruntime:java', shell.task(basePathOrThrow() + '/gradlew :client-runtime:check', { cwd: './', verbosity: 3 }));
 gulp.task('test:clientruntime:javaazure', shell.task(basePathOrThrow() + '/gradlew :azure-client-runtime:check', { cwd: './', verbosity: 3 }));
-gulp.task('test:clientruntime:python', shell.task('tox', { cwd: './src/client/Python/msrest/', verbosity: 3 }));
-gulp.task('test:clientruntime:pythonazure', shell.task('tox', { cwd: './src/client/Python/msrestazure/', verbose:true }));
 
 gulp.task('test:clientruntime:javaauthjdk', shell.task(basePathOrThrow() + '/gradlew :azure-client-authentication:check', { cwd: './', verbosity: 3 }));
 gulp.task('test:clientruntime:javaauthandroid', shell.task(basePathOrThrow() + '/gradlew :azure-android-client-authentication:check', { cwd: './', verbosity: 3 }));
 gulp.task('test:clientruntime', function (cb) {
   runSequence('test:clientruntime:node', 'test:clientruntime:nodeazure',
     'test:clientruntime:ruby', 'test:clientruntime:rubyazure',
-    'test:clientruntime:python', 'test:clientruntime:pythonazure',
     'test:clientruntime:java', 'test:clientruntime:javaazure',
     'test:clientruntime:javaauthjdk', 'test:clientruntime:javaauthandroid', cb);
 });

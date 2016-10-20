@@ -43,6 +43,8 @@ class ByteOperations(object):
         :rtype: bytearray
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyByte.models.ErrorException>`
         """
         # Construct URL
         url = '/byte/null'
@@ -86,6 +88,8 @@ class ByteOperations(object):
         :rtype: bytearray
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyByte.models.ErrorException>`
         """
         # Construct URL
         url = '/byte/empty'
@@ -129,6 +133,8 @@ class ByteOperations(object):
         :rtype: bytearray
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyByte.models.ErrorException>`
         """
         # Construct URL
         url = '/byte/nonAscii'
@@ -175,6 +181,8 @@ class ByteOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyByte.models.ErrorException>`
         """
         # Construct URL
         url = '/byte/nonAscii'
@@ -215,6 +223,8 @@ class ByteOperations(object):
         :rtype: bytearray
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyByte.models.ErrorException>`
         """
         # Construct URL
         url = '/byte/invalid'

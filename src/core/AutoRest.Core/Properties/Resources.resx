@@ -260,5 +260,10 @@
   </data>
   <data name="NetworkInterfacesApiWarningMessage" xml:space="preserve">
     <value>May not reference more than one of 'Microsoft.Compute' and 'Microsoft.Network'</value>
+  <data name="OperationParametersNotAllowedMessage" xml:space="preserve">
+    <value>Parameters "subscriptionId" and "api-version" are not allowed in the operations section</value>
+  </data>
+  <data name="ServiceDefinitionParametersMissingMessage" xml:space="preserve">
+    <value>Parameters "subscriptionId" or "api-version" are referenced but not defined in the parameters section of Service Definition</value>
   </data>
 </root>
