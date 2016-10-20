@@ -189,14 +189,14 @@ namespace AutoRest.Core.Tests
 
                 AssertThrows<CodeGenerationException>(
                     () => ExtensionsLoader.GetPlugin(),
-                    "Error loading CSharp assembly");
+                    "Plugin CSharp does not have an assembly name in AutoRest.json");
             }
 
             using (NewContext)
             {
                 new Settings {CodeGenerator = "Java", FileSystem = _fileSystem};
                 AssertThrows<CodeGenerationException>(() => ExtensionsLoader.GetPlugin(),
-                    "Error loading Java assembly");
+                    "Plugin Java does not have an assembly name in AutoRest.json");
             }
         }
 
