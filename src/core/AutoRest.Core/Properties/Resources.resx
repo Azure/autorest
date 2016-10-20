@@ -193,7 +193,7 @@
     <value>For better generated code quality, define schemas instead of using anonymous types.</value>
   </data>
   <data name="MsdnReferencesDiscouraged" xml:space="preserve">
-    <value>For better generated code quality, remove all reference to https://msdn.microsoft.com/.</value>
+    <value>For better generated code quality, remove all references to "msdn.microsoft.com".</value>
   </data>
   <data name="BodyMustHaveSchema" xml:space="preserve">
     <value>Each body parameter must have a schema</value>

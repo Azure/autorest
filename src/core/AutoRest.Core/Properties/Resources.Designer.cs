@@ -339,7 +339,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to For better generated code quality, remove all reference to https://msdn.microsoft.com/..
+        ///    Looks up a localized string similar to For better generated code quality, remove all references to &quot;msdn.microsoft.com&quot;..
         /// </summary>
         public static string MsdnReferencesDiscouraged {
             get {

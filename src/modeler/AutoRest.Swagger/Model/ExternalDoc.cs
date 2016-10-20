@@ -24,7 +24,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// Description of external Swagger doc.
         /// </summary>
-        [Rule(typeof(DisallowMsdnReferences))]
+        [Rule(typeof(AvoidMsdnReferences))]
         public string Description
         {
             get { return _description; }

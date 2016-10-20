@@ -34,7 +34,7 @@ namespace AutoRest.Swagger.Tests
         internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, Type validationType, int count)
         {
             // checks that the collection has the right number of items and each is the correct type.
-            Assert.Equal(count, messages.Where(message => message.Type == validationType).Count());
+            Assert.Equal(count, messages.Count(message => message.Type == validationType));
         }
     }
 
@@ -68,7 +68,7 @@ namespace AutoRest.Swagger.Tests
         public void DisallowMsdnReferencesValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "definition-contains-msdn-reference.json"));
-            messages.AssertOnlyValidationMessage(typeof(DisallowMsdnReferences), 4);
+            messages.AssertOnlyValidationMessage(typeof(AvoidMsdnReferences), 4);
         }
 
         [Fact]

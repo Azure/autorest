@@ -20,7 +20,7 @@ namespace AutoRest.Swagger.Model
         private string _description;
         public string Title { get; set; }
 
-        [Rule(typeof(DisallowMsdnReferences))]
+        [Rule(typeof(AvoidMsdnReferences))]
         public string Description
         {
             get { return _description; }
