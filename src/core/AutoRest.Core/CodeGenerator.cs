@@ -22,10 +22,6 @@ namespace AutoRest.Core
 
         protected CodeGenerator()
         {
-#if removing
-            // apply custom settings to this when it's created.
-            Settings.PopulateSettings(this, Settings.Instance.CustomSettings);
-#endif 
         }
 
         // TODO: header files aren't part of most target languages. Remove?
@@ -39,24 +35,9 @@ namespace AutoRest.Core
         public abstract string UsageInstructions { get; }
 
         /// <summary>
-        /// Gets the Settings passed when invoking AutoRest.
-        /// </summary>
-        public Settings Settings => Settings.Instance;
-
-        /// <summary>
         /// Gets or sets boolean value indicating if code generation language supports all the code to be generated in a single file.
         /// </summary>
         public virtual bool IsSingleFileGenerationSupported => false;
-
-        /// <summary>
-        /// Populate settings on self and any child objects
-        /// </summary>
-        /// <param name="settings">A dictionary of settings</param>
-        public virtual void PopulateSettings(IDictionary<string, object> settings)
-        {
-            Settings.PopulateSettings(this, settings);
-        }
-
 
         private readonly List<string> FileList = new List<string>();
         private void ResetFileList()
@@ -85,9 +66,10 @@ namespace AutoRest.Core
         /// <returns></returns>
         public async Task Write(ITemplate template, string fileName)
         {
-#if DEBUG_WRITING
-            Console.WriteLine($"[WRITING] {template.GetType().Name} => {fileName}");
-#endif 
+            if (Settings.Instance.Verbose)
+            {
+                Console.WriteLine($"[WRITING] {template.GetType().Name} => {fileName}");
+            }
             template.Settings = Settings.Instance;
             var stringBuilder = new StringBuilder();
             using (template.TextWriter = new StringWriter(stringBuilder))

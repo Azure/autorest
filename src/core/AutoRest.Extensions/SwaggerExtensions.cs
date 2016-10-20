@@ -127,7 +127,7 @@ namespace AutoRest.Extensions
 
                             foreach (var method in codeModel.Methods)
                             {
-                                if (position.Equals("first", StringComparison.OrdinalIgnoreCase))
+                                if (position.EqualsIgnoreCase("first"))
                                 {
                                     method.InsertRange(((IEnumerable<Parameter>)hostParamList).Reverse());
                                 }
@@ -210,7 +210,7 @@ namespace AutoRest.Extensions
             List<Property> propertiesToProcess = new List<Property>();
             foreach(var property in codeModel.Properties)
             {
-                if (property.Extensions.ContainsKey(ParameterLocationExtension) && property.Extensions[ParameterLocationExtension].ToString().Equals("method", StringComparison.OrdinalIgnoreCase))
+                if (property.Extensions.ContainsKey(ParameterLocationExtension) && property.Extensions[ParameterLocationExtension].ToString().EqualsIgnoreCase("method"))
                 {
                     propertiesToProcess.Add(property);
                 }

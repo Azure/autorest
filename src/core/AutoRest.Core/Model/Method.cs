@@ -24,6 +24,7 @@ namespace AutoRest.Core.Model
         private string _summary;
         private readonly Fixable<string> _name = new Fixable<string>();
         private readonly Fixable<string> _group = new Fixable<string>();
+        private readonly Fixable<string> _url = new Fixable<string>();
         private MethodGroup _parent;
 
         public string Qualifier => "Method";
@@ -117,7 +118,13 @@ namespace AutoRest.Core.Model
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
             Justification = "Url might be used as a template, thus making it invalid url in certain scenarios.")]
-        public string Url { get; set; }
+        public Fixable<string> Url
+        {
+            get { return _url; }
+            set { _url.CopyFrom(value); }
+        }
+
+
 
         /// <summary>
         /// Indicates whether the HTTP url is absolute.

@@ -23,7 +23,7 @@ namespace AutoRest.NodeJS.Model
 
         }
 
-        public override Core.Model.Property Add(Core.Model.Property item)
+        public override Property Add(Property item)
         {
             var result = base.Add(item);
             if (result != null)
@@ -61,8 +61,8 @@ namespace AutoRest.NodeJS.Model
                     IsRequired = true,
                     Name = this.PolymorphicDiscriminator,
                     SerializedName = this.PolymorphicDiscriminator,
-                    Documentation = "Polymorhpic Discriminator",
-                    ModelType = new PrimaryTypeJs(KnownPrimaryType.String)
+                    Documentation = "Polymorphic Discriminator",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.String)
                 }));
             }
         }
@@ -71,9 +71,6 @@ namespace AutoRest.NodeJS.Model
         {
             get { return this.Properties.Where(p => !string.IsNullOrEmpty(p.SerializedName)); }
         }
-
-        public bool IsPolymorphic => !string.IsNullOrEmpty(PolymorphicDiscriminator) ||
-                                     true == (BaseModelType as CompositeTypeJs)?.IsPolymorphic;
 
         private class PropertyWrapper
         {
@@ -271,23 +268,6 @@ namespace AutoRest.NodeJS.Model
             return property.DefaultValue.IsNullOrEmpty() ?
                 $"{property.Summary.EnsureEndsWith(".")} {property.Documentation}".Trim() : 
                 $"{property.Summary.EnsureEndsWith(".")} {property.Documentation.EnsureEndsWith(".")} Default value: {property.DefaultValue} .".Trim();
-
-            /*
-
-            string summary = property.Summary.EnsureEndsWith(".");
-
-            
-            
-            string documentation = property.Documentation;
-            if (!property.DefaultValue.IsNullOrEmpty())
-            {
-                documentation = documentation.EnsureEndsWith(".");
-                documentation += " Default value: " + property.DefaultValue + " .";
-            }
-
-            string docString = string.Join(" ", (new[] {summary, documentation}).Where(s => !string.IsNullOrWhiteSpace(s)));
-            return docString;
-            */
         }
 
         /// <summary>

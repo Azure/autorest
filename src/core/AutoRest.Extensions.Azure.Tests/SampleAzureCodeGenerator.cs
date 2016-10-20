@@ -14,12 +14,6 @@ namespace AutoRest.Extensions.Azure.Tests
         public SampleAzureCodeGenerator() 
         {
         }
-#if removing
-        public override string Name => null;
-
-        public override string Description => null;
-
-#endif 
         public override string UsageInstructions => null;
 
         public override string ImplementationFileExtension => null;

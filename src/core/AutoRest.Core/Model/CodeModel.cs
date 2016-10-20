@@ -130,8 +130,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets the method groups.
         /// </summary>
-        // public virtual IEnumerable<string> MethodGroups => Methods.Where(m => !m.Group.IsNullOrEmpty()).Select(m => (string)m.Group).Distinct();
-        public virtual IEnumerable<string> MethodGroupNames => Operations.Where(group => !group.Name.IsNullOrEmpty()).Select(group => group.Name.Value);
+        public virtual IEnumerable<string> MethodGroupNames => Operations.Where(group => !group.Name.IsNullOrEmpty()).Select(group => group.TypeName.Value);
 
         /// <summary>
         /// Gets or sets the documentation.

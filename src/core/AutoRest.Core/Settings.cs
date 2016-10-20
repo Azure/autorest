@@ -396,9 +396,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 foreach (var setting in settings.ToArray())
                 {
                     PropertyInfo property = entityToPopulate.GetType().GetProperties()
-                        .FirstOrDefault(p => setting.Key.Equals(p.Name, StringComparison.OrdinalIgnoreCase) ||
+                        .FirstOrDefault(p => setting.Key.EqualsIgnoreCase(p.Name) ||
                                              p.GetCustomAttributes<SettingsAliasAttribute>()
-                                                .Any(a => setting.Key.Equals(a.Alias, StringComparison.OrdinalIgnoreCase)));
+                                                .Any(a => setting.Key.EqualsIgnoreCase(a.Alias)));
 
                     if (property != null)
                     {

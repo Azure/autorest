@@ -97,6 +97,11 @@ namespace AutoRest.Core.Model
         public virtual string PolymorphicDiscriminator { get; set; }
 
         /// <summary>
+        /// Returns true if this type or it's parent is polymorphic.
+        /// </summary>
+        public bool IsPolymorphic => !string.IsNullOrEmpty(PolymorphicDiscriminator) || true == BaseModelType?.IsPolymorphic;
+
+        /// <summary>
         /// Gets or sets the summary.
         /// </summary>
         public virtual string Summary

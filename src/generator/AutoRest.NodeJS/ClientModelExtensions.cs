@@ -605,7 +605,7 @@ namespace AutoRest.NodeJS
                         constraintCheck = $"{valueReference}.match({constraintValue}) === null";
                         break;
                     case Constraint.UniqueItems:
-                        if ("true".Equals(constraints[constraint], StringComparison.OrdinalIgnoreCase))
+                        if ("true".EqualsIgnoreCase(constraints[constraint]))
                         {
                             constraintCheck = string.Format(
                                 "{0}.length !== {0}.filter(function(item, i, ar) {{ return ar.indexOf(item) === i; }}).length", valueReference);

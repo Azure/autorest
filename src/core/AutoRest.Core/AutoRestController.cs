@@ -81,12 +81,15 @@ namespace AutoRest.Core
             Settings.Instance.Validate();
             try
             {
+                var genericSerializer = new ModelSerializer<CodeModel>();
+                var modelAsJson = genericSerializer.ToJson(codeModel);
+
                 // ensure once we're doing language-specific work, that we're working
                 // in context provided by the language-specific transformer. 
                 using (plugin.Activate())
                 {
                     // load model into language-specific code model
-                    codeModel = plugin.Serializer.Load(codeModel);
+                    codeModel = plugin.Serializer.Load(modelAsJson);
 
                     // we've loaded the model, run the extensions for after it's loaded
                     codeModel = RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);

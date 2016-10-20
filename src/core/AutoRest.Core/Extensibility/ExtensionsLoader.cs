@@ -40,7 +40,7 @@ namespace AutoRest.Core.Extensibility
 
             IAnyPlugin plugin = null;
 
-            if (string.Equals("None", Settings.Instance.CodeGenerator, StringComparison.OrdinalIgnoreCase))
+            if (Settings.Instance.CodeGenerator.EqualsIgnoreCase("None"))
             {
                 plugin = new NoOpPlugin();
             }
@@ -72,59 +72,6 @@ namespace AutoRest.Core.Extensibility
 
         }
 
-#if removing
-        /// <summary>
-        /// Gets the code generator specified in the provided Settings.
-        /// </summary>
-        /// <returns>Code generator specified in Settings.CodeGenerator</returns>
-        public static CodeGenerator GetCodeGenerator()
-        {
-            Logger.LogInfo(Resources.InitializingCodeGenerator);
-            if (Settings.Instance == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
-
-            if (string.IsNullOrEmpty(Settings.Instance.CodeGenerator))
-            {
-                throw new ArgumentException(
-                    string.Format(CultureInfo.InvariantCulture,
-                        Resources.ParameterValueIsMissing, "CodeGenerator"));
-            }
-
-            CodeGenerator codeGenerator = null;
-
-            if (string.Equals("None", Settings.Instance.CodeGenerator, StringComparison.OrdinalIgnoreCase))
-            {
-                codeGenerator = new NoOpCodeGenerator();
-            }
-            else
-            {
-                string configurationFile = GetConfigurationFileContent(Settings.Instance);
-
-                if (configurationFile != null)
-                {
-                    try
-                    {
-                        var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
-                        codeGenerator = LoadTypeFromAssembly<CodeGenerator>(config.CodeGenerators, Settings.Instance.CodeGenerator);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ErrorManager.CreateError(ex, Resources.ErrorParsingConfig);
-                    }
-                }
-                else
-                {
-                    throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
-                }
-            }
-            Logger.LogInfo(Resources.GeneratorInitialized,
-                Settings.Instance.CodeGenerator,
-                codeGenerator.GetType().Assembly.GetName().Version);
-            return codeGenerator;
-        }
-#endif 
         /// <summary>
         /// Gets the modeler specified in the provided Settings.
         /// </summary>

@@ -148,6 +148,14 @@ namespace AutoRest.Core.Utilities
             {
                 return ReferenceEquals(null,x.Value);
             }
+            if (x.Value == null && y.Value == null)
+            {
+                return false;
+            }
+            if (x.Value == null )
+            {
+                return true;
+            }
             return x.Value.Equals(y.Value);
         }
 

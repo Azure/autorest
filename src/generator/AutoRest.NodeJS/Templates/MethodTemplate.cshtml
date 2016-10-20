@@ -95,12 +95,12 @@
   // Construct URL
   @if (Model.IsAbsoluteUrl)
   {
-  @:var requestUrl = '@(Model.Url.EscapeSingleQuotes())';
+  @:var requestUrl = '@(((string)Model.Url).EscapeSingleQuotes())';
   }
   else
   {
   @:var baseUrl = @(Model.ClientReference).baseUri;
-  @:var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + '@((Model.Url.StartsWith("/") ? Model.Url.TrimStart('/') : Model.Url).EscapeSingleQuotes())';
+  @:var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + '@((Model.Url.StartsWith("/") ? Model.Url.TrimStart('/') : (string)Model.Url).EscapeSingleQuotes())';
   }
   @(Model.BuildUrl("requestUrl"))
   @EmptyLine

@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Logging;
+using AutoRest.Core.Utilities;
 using AutoRest.Properties;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -67,7 +68,7 @@ namespace AutoRest
                         {
                             if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
                             {
-                                if (!string.Equals("None", settings.CodeGenerator, StringComparison.OrdinalIgnoreCase))
+                                if (!"None".EqualsIgnoreCase(settings.CodeGenerator))
                                 {
                                     Console.WriteLine(Resources.GenerationFailed);
                                     Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}",
@@ -77,7 +78,7 @@ namespace AutoRest
                             }
                             else
                             {
-                                if (!string.Equals("None", settings.CodeGenerator, StringComparison.OrdinalIgnoreCase))
+                                if (!"None".EqualsIgnoreCase(settings.CodeGenerator))
                                 {
                                     Console.WriteLine(Resources.GenerationComplete,
                                         settings.CodeGenerator, settings.Input);
@@ -127,7 +128,7 @@ namespace AutoRest
         /// <returns>True if markdown formatted help should be shown, otherwise false.</returns>
         private static bool IsShowMarkdownHelpIncluded(string[] args)
         {
-            if (args.Any(a => a == "-md" || "-markdown".Equals(a, StringComparison.OrdinalIgnoreCase)))
+            if (args.Any(a => a == "-md" || "-markdown".EqualsIgnoreCase(a)))
             {
                 return true;
             }

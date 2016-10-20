@@ -238,7 +238,7 @@ namespace AutoRest.Extensions.Azure
             }
 
             var apiVersion = codeModel.Properties
-                .FirstOrDefault(p => ApiVersion.Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase));
+                .FirstOrDefault(p => ApiVersion.EqualsIgnoreCase(p.SerializedName));
             if (apiVersion != null)
             {
                 apiVersion.DefaultValue = codeModel.ApiVersion;
@@ -248,14 +248,14 @@ namespace AutoRest.Extensions.Azure
 
             var subscriptionId =
                 codeModel.Properties.FirstOrDefault(
-                    p => string.Equals(p.Name, "subscriptionId", StringComparison.OrdinalIgnoreCase));
+                    p => p.Name.EqualsIgnoreCase( "subscriptionId"));
             if (subscriptionId != null)
             {
                 subscriptionId.IsRequired = true;
             }
 
             var acceptLanguage = codeModel.Properties
-                .FirstOrDefault(p => AcceptLanguage.Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase));
+                .FirstOrDefault(p => AcceptLanguage.EqualsIgnoreCase(p.SerializedName));
             if (acceptLanguage == null)
             {
                 acceptLanguage = New<Property>(new
@@ -271,7 +271,7 @@ namespace AutoRest.Extensions.Azure
             acceptLanguage.IsRequired = false;
             acceptLanguage.ModelType = New<PrimaryType>(KnownPrimaryType.String);
             codeModel.Methods
-                .Where(m => !m.Parameters.Any(p => AcceptLanguage.Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase)))
+                .Where(m => !m.Parameters.Any(p => AcceptLanguage.EqualsIgnoreCase(p.SerializedName)))
                 .ForEach(m2 => m2.Add(New<Parameter>(new 
                     {
                         ClientProperty = acceptLanguage,
@@ -357,7 +357,7 @@ namespace AutoRest.Extensions.Azure
                     if (!string.IsNullOrEmpty(pageableExtension.OperationName))
                     {
                         nextLinkMethod = codeModel.Methods.FirstOrDefault(m =>
-                            pageableExtension.OperationName.Equals(m.SerializedName, StringComparison.OrdinalIgnoreCase));
+                            pageableExtension.OperationName.EqualsIgnoreCase(m.SerializedName));
                         if (nextLinkMethod != null)
                         {
                             nextLinkMethod.Extensions["nextLinkMethod"] = true;

@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Model
         public string MethodQualifier => (BaseModelType.ShouldValidateChain()) ? "override" : "virtual";
 
         [JsonIgnore]
-        public bool NeedsPolymorphicConverter => IsPolymorphicType && Name != SerializedName;
+        public bool NeedsPolymorphicConverter => IsPolymorphic && Name != SerializedName;
 
         [JsonIgnore]
         public bool NeedsTransformationConverter => Properties.Any(p => p.WasFlattened());
@@ -78,15 +78,6 @@ namespace AutoRest.CSharp.Model
 
                 int depth = baseProperties.Any() ? baseProperties.Max(p => p.Depth) : 0;
                 return baseProperties.Concat(Properties.Select(p => new InheritedPropertyInfo(p, depth)));
-            }
-        }
-
-        private bool IsPolymorphicType
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(PolymorphicDiscriminator) ||
-                    (BaseModelType != null && (BaseModelType as CompositeTypeCs).IsPolymorphicType);
             }
         }
 

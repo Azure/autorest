@@ -342,13 +342,7 @@ namespace AutoRest.Core.Utilities
             {
                 return pi;
             }
-            /*if (true == pi?.PropertyType?.IsGenericOf(typeof(IEnumerableWithIndex<>)))
-            {
-                return pi;
-            }*/
-            
             return true == pi?.CanWrite ? pi : GetWriteableProperty(type.BaseType, propertyName);
-
         }
         
 
@@ -394,20 +388,7 @@ namespace AutoRest.Core.Utilities
         /// <param name="type"></param>
         /// <param name="typeToMatch"></param>
         /// <returns></returns>
-        public static bool IsPrimaryType(this IModelType type, KnownPrimaryType typeToMatch)
-        {
-            if (type == null)
-            {
-                return false;
-            }
-
-            PrimaryType primaryType = type as PrimaryType;
-            if (primaryType != null)
-            {
-                return primaryType.KnownPrimaryType == typeToMatch;
-            }
-            return false;
-        }
+        public static bool IsPrimaryType(this IModelType type, KnownPrimaryType typeToMatch) => typeToMatch == (type as PrimaryType)?.KnownPrimaryType;
 
         /// <summary>
         /// Returns true if the <paramref name="type"/> is a PrimaryType with KnownPrimaryType matching <paramref name="typeToMatch"/>
@@ -503,11 +484,11 @@ namespace AutoRest.Core.Utilities
         public static string EnsureEndsWith(this string str, string suffix) => string.IsNullOrEmpty(str) ? str : (str.EndsWith(suffix) ? str : str + suffix);
         public static string EnsureEndsWith(this Fixable<string> str, string suffix) => str.IsNullOrEmpty() ? str.Value : str.Value.EnsureEndsWith(suffix);
 
-        public static string Else(this string preferred, string fallback) => string.IsNullOrEmpty(preferred) ? fallback : preferred;
+        public static string Else(this string preferred, string fallback) => string.IsNullOrWhiteSpace(preferred) ? fallback : preferred;
 
-        public static string Else(this Fixable<string> preferred, string fallback) => string.IsNullOrEmpty(preferred.Value) ? fallback : preferred.Value;
-        public static string Else(this string preferred, Fixable<string> fallback) => string.IsNullOrEmpty(preferred) ? fallback.Value : preferred;
-        public static string Else(this Fixable<string> preferred, Fixable<string> fallback) => string.IsNullOrEmpty(preferred.Value) ? fallback.Value : preferred.Value;
+        public static string Else(this Fixable<string> preferred, string fallback) => string.IsNullOrWhiteSpace(preferred.Value) ? fallback : preferred.Value;
+        public static string Else(this string preferred, Fixable<string> fallback) => string.IsNullOrWhiteSpace(preferred) ? fallback.Value : preferred;
+        public static string Else(this Fixable<string> preferred, Fixable<string> fallback) => string.IsNullOrWhiteSpace(preferred.Value) ? fallback.Value : preferred.Value;
         public static string GetUniqueName(this IChild scope, string desiredName)
         {
             // current hack: get the methods params and add them to the local list.
@@ -523,6 +504,10 @@ namespace AutoRest.Core.Utilities
             scope?.LocallyUsedNames?.Add(result);
             return result;
         }
+
+        public static string TrimStart(this Fixable<string> str, char ch) => str.Value.TrimStart(ch);
+        public static string TrimEnd(this Fixable<string> str, char ch) => str.Value.TrimEnd(ch);
+
 
         public static void Disambiguate(this IEnumerable<IChild> children)
         {
