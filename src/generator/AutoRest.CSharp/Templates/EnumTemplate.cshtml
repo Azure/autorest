@@ -4,6 +4,9 @@
 @EmptyLine
 namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
+    using Newtonsoft.Json;		
+    using Newtonsoft.Json.Converters;		
+    using System.Runtime.Serialization;
 @EmptyLine
     /// <summary>
     @WrapComment("/// ", "Defines values for " + Model.TypeDefinitionName + ".")

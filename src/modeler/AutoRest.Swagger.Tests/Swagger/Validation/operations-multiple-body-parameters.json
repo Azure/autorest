@@ -36,7 +36,7 @@
             "name": "test2",
             "in": "body",
             "required": true,
-            "description": "test parameter 2",
+            "description": "",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -44,7 +44,7 @@
         ],
         "responses": {
           "default": {
-            "description": "Unexpected error"
+            "description": ""
           }
         }
       }
