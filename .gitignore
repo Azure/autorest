@@ -196,8 +196,6 @@ Gemfile.lock
 src/generator/AutoRest.Go.Tests/pkg/*
 src/generator/AutoRest.Go.Tests/bin/*
 src/generator/AutoRest.Go.Tests/src/github.com/*
-src/generator/AutoRest.Go.Tests/src/test/vendor/*
-src/generator/AutoRest.Go.Tests/src/test/generated/*
 src/generator/AutoRest.Go.Tests/src/tests/generated/*
 src/generator/AutoRest.Go.Tests/src/tests/vendor/*
 src/generator/AutoRest.Go.Tests/src/tests/glide.lock

@@ -48,6 +48,8 @@ class SubscriptionInMethodOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}'
@@ -97,6 +99,8 @@ class SubscriptionInMethodOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}'
@@ -145,6 +149,8 @@ class SubscriptionInMethodOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}'
@@ -193,6 +199,8 @@ class SubscriptionInMethodOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}'

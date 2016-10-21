@@ -14,6 +14,8 @@ To set up a machine with the necessary tools for building AutoRest, run `.\Tools
 - Gradle
 - Python
 - tox
+- Go
+- glide
 - Visual Studio 2015
 - .NET CoreCLR
 
@@ -88,6 +90,15 @@ gem install bundler
 ### Python
 Install [Python 2.7 and Python 3.5](https://www.python.org/downloads/), and add one of them to your PATH (we recommend 3.5).
 >set PATH=PATH;C:\Python35
+
+### Go
+Install [Go 1.7](https://golang.org/dl/). Ensure Go is in your `PATH`.
+>set PATH=PATH;C:\Go\bin
+Add your [GOPATH](https://golang.org/doc/code.html#GOPATH) to your environment variables.
+
+#### Glide
+
+Install [glide](https://github.com/Masterminds/glide). Add glide to your `PATH`.
 
 ### Testing Your Environment
 To make sure you've set up all the prerequisites correctly, run `.\Tools\Verify-Settings.ps1` before you attempt to build.
