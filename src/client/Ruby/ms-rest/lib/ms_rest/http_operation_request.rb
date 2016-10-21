@@ -43,6 +43,9 @@ module MsRest
     
     # @return [Array] strings to be appended to the user agent in the request
     attr_accessor :user_agent_extended
+
+    # @return [Hash] ssl options
+    attr_accessor :ssl
     
     # Creates and initialize new instance of the HttpOperationResponse class.
     # @param [String|URI] base uri for requests
@@ -72,6 +75,7 @@ module MsRest
             middlewares: middlewares,
             log: log
         }
+        MsRest.use_ssl_cert(@ssl)
         @connection ||= HttpOperationRequest.create_faraday_connection(base_uri, options)
 
         @connection.run_request(:"#{method}", build_path, body, {'User-Agent' => user_agent}.merge(headers)) do |req|
@@ -119,7 +123,8 @@ module MsRest
     end
 
     def self.create_faraday_connection(base_uri, options = {})
-      Faraday.new(:url => base_uri, :ssl => MsRest.ssl_options) do |faraday|
+      ssl_options = options[:ssl] || MsRest.ssl_options
+      Faraday.new(:url => base_uri, :ssl => ssl_options) do |faraday|
         unless options.empty?
           options[:middlewares].each{ |args| faraday.use(*args) } unless options[:middlewares].nil?
           faraday.headers = options[:headers] unless options[:headers].nil?

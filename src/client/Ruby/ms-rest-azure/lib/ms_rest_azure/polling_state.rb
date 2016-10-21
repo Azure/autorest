@@ -99,9 +99,10 @@ module MsRestAzure
     def get_request(options = {})
       link = @azure_async_operation_header_link || @location_header_link
       faraday_options = {
-          middlewares: request.middlewares,
-          headers: request.headers,
-          log: request.log
+          middlewares: @request.middlewares,
+          headers: @request.headers,
+          log: @request.log,
+          ssl: @request.ssl
       }
       @connection ||= MsRest::HttpOperationRequest.create_faraday_connection(options[:base_uri], faraday_options)
       options[:connection] = @connection
