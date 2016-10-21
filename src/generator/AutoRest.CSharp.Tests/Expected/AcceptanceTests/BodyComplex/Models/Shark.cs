@@ -8,7 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
+    using System;		
     using System.Linq;
+    using System.Collections.Generic;		
+    using Newtonsoft.Json;		
+    using Microsoft.Rest;		
+    using Microsoft.Rest.Serialization;		
 
     [Newtonsoft.Json.JsonObject("shark")]
     public partial class Shark : Fish

@@ -8,6 +8,13 @@
 
 namespace Fixtures.AcceptanceTestsBodyFormData.Models
 {
+    using Microsoft.Rest;		
+    using System;		
+    using System.Net.Http;		
+    using System.Runtime.Serialization;		
+ #if !PORTABLE 		
+    using System.Security.Permissions;		
+ #endif
 
     /// <summary>
     /// Exception thrown for an invalid response with Error information.

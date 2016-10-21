@@ -8,8 +8,13 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening
 {
+    using System;		
+    using System.Collections;		
+    using System.Collections.Generic;		
+    using System.Threading;
     using System.Threading.Tasks;
-   using Models;
+    using Microsoft.Rest;
+    using Models;
 
     /// <summary>
     /// Extension methods for AutoRestResourceFlatteningTestService.

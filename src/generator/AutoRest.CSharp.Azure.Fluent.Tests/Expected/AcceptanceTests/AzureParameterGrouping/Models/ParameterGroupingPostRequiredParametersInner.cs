@@ -8,7 +8,13 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 {
+    using System;		
     using System.Linq;
+    using System.Collections.Generic;		
+    using Newtonsoft.Json;		
+    using Microsoft.Rest;		
+    using Microsoft.Rest.Serialization;		
+    using Microsoft.Rest.Azure;		
 
     /// <summary>
     /// Additional parameters for the parameterGrouping_postRequired operation.

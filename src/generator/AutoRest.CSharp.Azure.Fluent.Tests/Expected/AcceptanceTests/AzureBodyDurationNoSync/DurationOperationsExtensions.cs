@@ -8,9 +8,14 @@
 
 namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
 {
+    using System;		
+    using System.Collections;		
+    using System.Collections.Generic;		
+    using System.Threading;
     using System.Threading.Tasks;
-   using Microsoft.Rest.Azure;
-   using Models;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Azure;
+    using Models;
 
     /// <summary>
     /// Extension methods for DurationOperations.

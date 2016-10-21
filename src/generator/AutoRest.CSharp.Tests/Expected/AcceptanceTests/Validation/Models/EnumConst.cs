@@ -8,6 +8,9 @@
 
 namespace Fixtures.AcceptanceTestsValidation.Models
 {
+    using Newtonsoft.Json;		
+    using Newtonsoft.Json.Converters;		
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// Defines values for EnumConst.

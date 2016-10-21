@@ -8,6 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsBodyArray
 {
+    using System;		
+    using System.Collections.Generic;		
+    using System.Net.Http;		
+    using System.Threading;		
+    using System.Threading.Tasks;		
+    using Microsoft.Rest;
     using Models;
 
     /// <summary>
