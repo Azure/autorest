@@ -7,32 +7,22 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 
-namespace AutoRest.Ruby.TemplateModels
+namespace AutoRest.Ruby.Model
 {
     /// <summary>
     /// The model object for regular Ruby methods.
     /// </summary>
-    public class MethodTemplateModel : Method
+    public class MethodRb : Method
     {
         /// <summary>
         /// Initializes a new instance of the class MethodTemplateModel.
         /// </summary>
-        /// <param name="source">The source object.</param>
-        /// <param name="serviceClient">The service client.</param>
-        public MethodTemplateModel(Method source, ServiceClient serviceClient)
+        public MethodRb()
         {
-            this.LoadFrom(source);
-            ParameterTemplateModels = new List<ParameterTemplateModel>();
-            source.Parameters.ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
-
-            LogicalParameterTemplateModels = new List<ParameterTemplateModel>();
-            source.LogicalParameters.ForEach(p => LogicalParameterTemplateModels.Add(new ParameterTemplateModel(p)));
-
-            ServiceClient = serviceClient;
         }
 
         /// <summary>
@@ -69,13 +59,7 @@ namespace AutoRest.Ruby.TemplateModels
         /// Gets the list of namespaces where we look for classes that need to
         /// be instantiated dynamically due to polymorphism.
         /// </summary>
-        public virtual List<string> ClassNamespaces
-        {
-            get
-            {
-                return new List<string> { };
-            }
-        }
+        public virtual IEnumerable<string> ClassNamespaces => Enumerable.Empty<string>();
 
         /// <summary>
         /// Gets the path parameters as a Ruby dictionary string
@@ -124,25 +108,25 @@ namespace AutoRest.Ruby.TemplateModels
         /// <summary>
         /// Gets the path parameters not including the params that skip encoding
         /// </summary>
-        public virtual IEnumerable<ParameterTemplateModel> EncodingPathParams
+        public virtual IEnumerable<ParameterRb> EncodingPathParams
         {
             get
             {
                 return AllPathParams.Where(p => !(p.Extensions.ContainsKey(SwaggerExtensions.SkipUrlEncodingExtension) &&
-                  String.Equals(p.Extensions[SwaggerExtensions.SkipUrlEncodingExtension].ToString(), "true", StringComparison.OrdinalIgnoreCase)));
+                  "true".EqualsIgnoreCase(p.Extensions[SwaggerExtensions.SkipUrlEncodingExtension].ToString())));
             }
         }
 
         /// <summary>
         /// Gets the skip encoding path parameters
         /// </summary>
-        public virtual IEnumerable<ParameterTemplateModel> SkipEncodingPathParams
+        public virtual IEnumerable<ParameterRb> SkipEncodingPathParams
         {
             get
             {
                 return AllPathParams.Where(p =>
                     (p.Extensions.ContainsKey(SwaggerExtensions.SkipUrlEncodingExtension) &&
-                    String.Equals(p.Extensions[SwaggerExtensions.SkipUrlEncodingExtension].ToString(), "true", StringComparison.OrdinalIgnoreCase) &&
+                    "true".EqualsIgnoreCase(p.Extensions[SwaggerExtensions.SkipUrlEncodingExtension].ToString()) &&
                     !p.Extensions.ContainsKey("hostParameter")));
             }
         }
@@ -150,7 +134,7 @@ namespace AutoRest.Ruby.TemplateModels
         /// <summary>
         /// Gets all path parameters
         /// </summary>
-        public virtual IEnumerable<ParameterTemplateModel> AllPathParams
+        public virtual IEnumerable<ParameterRb> AllPathParams
         {
             get { return LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path); }
         }
@@ -158,7 +142,7 @@ namespace AutoRest.Ruby.TemplateModels
         /// <summary>
         /// Gets the skip encoding query parameters
         /// </summary>
-        public virtual IEnumerable<ParameterTemplateModel> SkipEncodingQueryParams
+        public virtual IEnumerable<ParameterRb> SkipEncodingQueryParams
         {
             get { return AllQueryParams.Where(p => p.Extensions.ContainsKey(SwaggerExtensions.SkipUrlEncodingExtension)); }
         }
@@ -166,7 +150,7 @@ namespace AutoRest.Ruby.TemplateModels
         /// <summary>
         /// Gets the query parameters not including the params that skip encoding
         /// </summary>
-        public virtual IEnumerable<ParameterTemplateModel> EncodingQueryParams
+        public virtual IEnumerable<ParameterRb> EncodingQueryParams
         {
             get { return AllQueryParams.Where(p => !p.Extensions.ContainsKey(SwaggerExtensions.SkipUrlEncodingExtension)); }
         }
@@ -174,7 +158,7 @@ namespace AutoRest.Ruby.TemplateModels
         /// <summary>
         /// Gets all of the query parameters
         /// </summary>
-        public virtual IEnumerable<ParameterTemplateModel> AllQueryParams
+        public virtual IEnumerable<ParameterRb> AllQueryParams
         {
             get
             {
@@ -209,19 +193,14 @@ namespace AutoRest.Ruby.TemplateModels
         }
 
         /// <summary>
-        /// Gets the reference to the service client object.
-        /// </summary>
-        public ServiceClient ServiceClient { get; set; }
-
-        /// <summary>
         /// Gets the list of method paramater templates.
         /// </summary>
-        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+        public IEnumerable<ParameterRb> ParameterTemplateModels => Parameters.Cast<ParameterRb>();
 
         /// <summary>
         /// Gets the list of logical method paramater templates.
         /// </summary>
-        private List<ParameterTemplateModel> LogicalParameterTemplateModels { get; set; }
+        private IEnumerable<ParameterRb> LogicalParameterTemplateModels => LogicalParameters.Cast<ParameterRb>();
 
         /// <summary>
         /// Gets the list of parameter which need to be included into HTTP header.
@@ -241,7 +220,7 @@ namespace AutoRest.Ruby.TemplateModels
         {
             get
             {
-                return this.Url.Split('?').First();
+                return ((string)Url).Split('?').First();
             }
         }
 
@@ -275,19 +254,19 @@ namespace AutoRest.Ruby.TemplateModels
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in MethodParameters)
+                foreach (var parameter in MethodParameters.Where(p => !p.IsConstant))
                 {
                     string format = "{0}";
                     if (!parameter.IsRequired)
                     {
                         format = "{0} = nil";
-                        if (parameter.DefaultValue != null && parameter.Type is PrimaryType)
+                        if (parameter.DefaultValue != null && parameter.ModelType is PrimaryType)
                         {
-                            PrimaryType type = parameter.Type as PrimaryType;
+                            PrimaryType type = parameter.ModelType as PrimaryType;
                             if (type != null)
                             {
-                                if (type.Type == KnownPrimaryType.Boolean || type.Type == KnownPrimaryType.Double ||
-                                    type.Type == KnownPrimaryType.Int || type.Type == KnownPrimaryType.Long || type.Type == KnownPrimaryType.String)
+                                if (type.KnownPrimaryType == KnownPrimaryType.Boolean || type.KnownPrimaryType == KnownPrimaryType.Double ||
+                                    type.KnownPrimaryType == KnownPrimaryType.Int || type.KnownPrimaryType == KnownPrimaryType.Long || type.KnownPrimaryType == KnownPrimaryType.String)
                                 {
                                     format = "{0} = " + parameter.DefaultValue;
                                 }
@@ -310,7 +289,7 @@ namespace AutoRest.Ruby.TemplateModels
         {
             get
             {
-                var invocationParams = MethodParameters.Select(p => p.Name).ToList();
+                var invocationParams = MethodParameters.Where(p => !p.IsConstant).Select(p => p.Name).ToList();
                 invocationParams.Add("custom_headers");
 
                 return string.Join(", ", invocationParams);
@@ -319,15 +298,15 @@ namespace AutoRest.Ruby.TemplateModels
 
         /// <summary>
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
-        /// exclude global parameters and constants
+        /// exclude global parameters
         /// </summary>
-        public IEnumerable<ParameterTemplateModel> MethodParameters
+        public IEnumerable<ParameterRb> MethodParameters
         {
             get
             {
+                //Omit parameter group parameters for now since AutoRest-Ruby doesn't support them
                 return
-                    ParameterTemplateModels.Where(
-                        p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name) && !p.IsConstant)
+                    ParameterTemplateModels.Where(p => p != null && !p.IsClientProperty && !string.IsNullOrWhiteSpace(p.Name) &&!p.IsConstant)
                         .OrderBy(item => !item.IsRequired);
             }
         }
@@ -335,7 +314,7 @@ namespace AutoRest.Ruby.TemplateModels
         /// <summary>
         /// Get the method's request body (or null if there is no request body)
         /// </summary>
-        public ParameterTemplateModel RequestBody
+        public ParameterRb RequestBody
         {
             get { return LogicalParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.Body); }
         }
@@ -345,7 +324,7 @@ namespace AutoRest.Ruby.TemplateModels
         /// </summary>
         public string UrlReference
         {
-            get { return Group == null ? "@base_url" : "@client.base_url"; }
+            get { return true == MethodGroup?.IsCodeModelMethodGroup? "@base_url" : "@client.base_url"; }
         }
 
         /// <summary>
@@ -353,7 +332,7 @@ namespace AutoRest.Ruby.TemplateModels
         /// </summary>
         public string ClientReference
         {
-            get { return Group == null ? "self" : "@client"; }
+            get { return true == MethodGroup?.IsCodeModelMethodGroup ? "self" : "@client"; }
         }
 
         /// <summary>
@@ -385,7 +364,7 @@ namespace AutoRest.Ruby.TemplateModels
         /// <param name="type">The type of input variable.</param>
         /// <param name="outputVariable">The output variable.</param>
         /// <returns>The deserialization string.</returns>
-        public virtual string CreateDeserializationString(string inputVariable, IType type, string outputVariable)
+        public virtual string CreateDeserializationString(string inputVariable, IModelType type, string outputVariable)
         {
             var builder = new IndentedStringBuilder("  ");
             var tempVariable = "parsed_response";
@@ -469,12 +448,12 @@ namespace AutoRest.Ruby.TemplateModels
                 builder.Indent();
                 foreach (var transformation in InputParameterTransformation)
                 {
-                    if (transformation.OutputParameter.Type is CompositeType &&
+                    if (transformation.OutputParameter.ModelType is CompositeType &&
                         transformation.OutputParameter.IsRequired)
                     {
                         builder.AppendLine("{0} = {1}.new",
                             transformation.OutputParameter.Name,
-                            transformation.OutputParameter.Type.Name);
+                            transformation.OutputParameter.ModelType.Name);
                     }
                     else
                     {
@@ -487,14 +466,14 @@ namespace AutoRest.Ruby.TemplateModels
                            .AppendLine().Indent();
                     var outputParameter = transformation.OutputParameter;
                     if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
-                        transformation.OutputParameter.Type is CompositeType)
+                        transformation.OutputParameter.ModelType is CompositeType)
                     {
                         //required outputParameter is initialized at the time of declaration
                         if (!transformation.OutputParameter.IsRequired)
                         {
                             builder.AppendLine("{0} = {1}.new",
                                 transformation.OutputParameter.Name,
-                                transformation.OutputParameter.Type.Name);
+                                transformation.OutputParameter.ModelType.Name);
                         }
                     }
 
@@ -564,7 +543,7 @@ namespace AutoRest.Ruby.TemplateModels
         /// </summary>
         /// <param name="parameters">The enumerable of parameters to be turned into a Ruby dictionary.</param>
         /// <returns>ruby dictionary as a string</returns>
-        protected string ParamsToRubyDict(IEnumerable<ParameterTemplateModel> parameters)
+        protected string ParamsToRubyDict(IEnumerable<ParameterRb> parameters)
         {
             var encodedParameters = new List<string>();
             foreach (var param in parameters)
@@ -601,14 +580,14 @@ namespace AutoRest.Ruby.TemplateModels
         public string ConstructRequestBodyMapper(string outputVariable = "request_mapper")
         {
             var builder = new IndentedStringBuilder("  ");
-            if (RequestBody.Type is CompositeType)
+            if (RequestBody.ModelType is CompositeType)
             {
-                builder.AppendLine("{0} = {1}.mapper()", outputVariable, RequestBody.Type.Name);
+                builder.AppendLine("{0} = {1}.mapper()", outputVariable, RequestBody.ModelType.Name);
             }
             else
             {
                 builder.AppendLine("{0} = {{{1}}}", outputVariable,
-                    RequestBody.Type.ConstructMapper(RequestBody.SerializedName, RequestBody, false));
+                    RequestBody.ModelType.ConstructMapper(RequestBody.SerializedName, RequestBody, false));
             }
             return builder.ToString();
         }
@@ -621,7 +600,7 @@ namespace AutoRest.Ruby.TemplateModels
         /// <param name="responseVariable">Response variable name.</param>
         /// <returns>Deserialization logic for the given <paramref name="type"/> as string.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a required parameter is null.</exception>
-        public string GetDeserializationString(IType type, string valueReference = "result", string responseVariable = "parsed_response")
+        public string GetDeserializationString(IModelType type, string valueReference = "result", string responseVariable = "parsed_response")
         {
             if (type == null)
             {
@@ -637,7 +616,7 @@ namespace AutoRest.Ruby.TemplateModels
             {
                 builder.AppendLine("result_mapper = {{{0}}}", type.ConstructMapper(responseVariable, null, false));
             }
-            if (Group == null)
+            if (MethodGroup.IsCodeModelMethodGroup)
             {
                 builder.AppendLine("{1} = self.deserialize(result_mapper, {0}, '{1}')", responseVariable, valueReference);
             }

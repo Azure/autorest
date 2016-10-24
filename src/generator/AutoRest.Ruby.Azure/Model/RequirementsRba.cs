@@ -2,16 +2,16 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Extensions.Azure;
-using AutoRest.Ruby.TemplateModels;
+using AutoRest.Ruby.Model;
 
-namespace AutoRest.Ruby.Azure.TemplateModels
+namespace AutoRest.Ruby.Azure.Model
 {
     /// <summary>
     /// Model class which represents data for the rendering sdk_requirements file.
     /// </summary>
-    class AzureRequirementsTemplateModel : RequirementsTemplateModel
+    class RequirementsRba : RequirementsRb
     {
         /// <summary>
         /// Checks whether model should be excluded from producing.
@@ -32,8 +32,8 @@ namespace AutoRest.Ruby.Azure.TemplateModels
         /// <param name="sdkName">The name of the generated SDK, required for proper folder structuring.</param>
         /// <param name="filesExtension">The files extension.</param>
         /// <param name="ns">The namespace of the SDK.</param>
-        public AzureRequirementsTemplateModel(ServiceClient serviceClient, string sdkName, string filesExtension, string ns)
-            : base(serviceClient, sdkName, filesExtension, ns)
+        public RequirementsRba(CodeModelRba codeModel, CodeGeneratorRba generator)
+            : base(codeModel, generator)
         {
         }
 

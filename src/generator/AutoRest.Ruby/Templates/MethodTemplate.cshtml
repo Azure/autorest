@@ -1,8 +1,9 @@
 ﻿@using System
 @using System.Linq;
-@using AutoRest.Core.ClientModel
-@using AutoRest.Ruby.TemplateModels
-@inherits AutoRest.Core.Template<AutoRest.Ruby.TemplateModels.MethodTemplateModel>
+@using AutoRest.Ruby;
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@inherits AutoRest.Core.Template<AutoRest.Ruby.Model.MethodRb>
 
 #
 @if (!String.IsNullOrEmpty(Model.Summary))
@@ -17,7 +18,7 @@
 }
 @foreach (var parameter in Model.MethodParameters)
 {
-@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.ModelType.GetYardDocumentation(), parameter.Documentation))
 }
 @WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #
@@ -44,7 +45,7 @@ end
 }
 @foreach (var parameter in Model.MethodParameters)
 {
-@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.ModelType.GetYardDocumentation(), parameter.Documentation))
 }
 @WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #
@@ -69,7 +70,7 @@ end
 }
 @foreach (var parameter in Model.MethodParameters)
 {
-@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.ModelType.GetYardDocumentation(), parameter.Documentation))
 }
 @WrapComment("# ", string.Format("@param [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #
@@ -99,11 +100,11 @@ def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
   @:@(Model.SetDefaultHeaders)
   foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.Header))
   {
-    if (parameter.SerializedName.ToLower() == "Content-Type".ToLower())
+    if (parameter.SerializedName.EqualsIgnoreCase("Content-Type"))
     {
   @:fail RuntimeError, 'Header Content-Type is forbidden to change'
     }
-  @:request_headers['@(parameter.SerializedName)'] = @(parameter.Type.ToString(parameter.Name)) unless @(parameter.Type.ToString(parameter.Name)).nil?
+  @:request_headers['@(parameter.SerializedName)'] = @(parameter.ModelType.ToString(parameter.Name)) unless @(parameter.ModelType.ToString(parameter.Name)).nil?
   }
 }
 

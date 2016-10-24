@@ -1,21 +1,17 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using AutoRest.Core.ClientModel;
-using AutoRest.Ruby;
-using AutoRest.Ruby.Azure.TemplateModels;
-using AutoRest.Extensions;
+using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 
-namespace AutoRest.Ruby.Azure
+namespace AutoRest.Ruby.Azure.Model
 {
-    public class PageTemplateModel : AzureModelTemplateModel
+    public class PageRba : CompositeTypeRba
     {
-        public PageTemplateModel(CompositeType source, ISet<CompositeType> allTypes, string nextLinkName, string itemName)
-            : base(source, allTypes)
+        public PageRba(CompositeType source,  string nextLinkName, string itemName)
         {
+            this.LoadFrom(source);
             this.NextLinkName = nextLinkName;
             this.ItemName = itemName;
         }
@@ -32,10 +28,10 @@ namespace AutoRest.Ruby.Azure
                 {
                     return null;
                 }
-                Property property = Properties.FirstOrDefault(p => p.Type is SequenceType);
+                Property property = Properties.FirstOrDefault(p => p.ModelType is SequenceType);
                 if (property != null)
                 {
-                    return ((SequenceType)property.Type).ElementType as CompositeType;
+                    return ((SequenceType)property.ModelType).ElementType as CompositeType;
                 }
                 else
                 {

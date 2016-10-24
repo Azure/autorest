@@ -6,15 +6,17 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.Ruby.TemplateModels
+namespace AutoRest.Ruby.Model
 {
     /// <summary>
     /// The model for requirements template (the main file which contains list of autoloading files).
     /// </summary>
-    public class RequirementsTemplateModel : ServiceClient
+    public class RequirementsRb
     {
         /// <summary>
         /// Name of the generated sub-folder inside ourput directory.
@@ -32,43 +34,13 @@ namespace AutoRest.Ruby.TemplateModels
         private const int SpacingForAutoload = 50;
 
         /// <summary>
-        /// The name of the SDK.
-        /// </summary>
-        private readonly string sdkName;
-
-        /// <summary>
-        /// Files extensions.
-        /// </summary>
-        private readonly string implementationFileExtension;
-
-        /// <summary>
-        /// Namspace of the service client.
-        /// </summary>
-        private readonly string ns;
-
-        /// <summary>
         /// Returns the ordered list of models. Ordered means that if some model has
         /// another model as a base then the base will be before the model in the list.
         /// </summary>
         /// <returns>The ordered list of models.</returns>
         private IEnumerable<CompositeType> GetOrderedModels()
         {
-            List<CompositeType> resultModels = new List<CompositeType>();
-            List<CompositeType> models = new List<CompositeType>(this.ModelTypes);
-
-            // Doing iteratively the following step:
-            // selecting independent models from the current models list
-            // and pushing them into result list until initial models list
-            // become empty.
-            while (models.Any())
-            {
-                var independentModels = models.Where(t => !models.Contains(t.BaseModelType)).ToArray();
-
-                resultModels.AddRange(independentModels);
-                models = models.Except(independentModels).ToList();
-            }
-
-            return resultModels;
+            return CodeModel.ModelTypes.OrderBy(each => each, CompositeType.Comparer);
         }
 
         /// <summary>
@@ -96,7 +68,7 @@ namespace AutoRest.Ruby.TemplateModels
                 spacing = sb.ToString();
             }
 
-            return string.Format(AutoloadFormat, typeName, spacing, this.sdkName, fileName);
+            return string.Format(AutoloadFormat, typeName, spacing, GeneratorSettingsRb.Instance.sdkName, fileName);
         }
 
         /// <summary>
@@ -109,19 +81,15 @@ namespace AutoRest.Ruby.TemplateModels
             return false;
         }
 
-        /// <summary>
-        /// Initializes a new instance of RequirementsTemplateModel class.
-        /// </summary>
-        /// <param name="serviceClient">The service client.</param>
-        /// <param name="sdkName">The name of the SDK.</param>
-        /// <param name="implementationFileExtension">The files extension.</param>
-        /// <param name="ns">The namespace of the SDK.</param>
-        public RequirementsTemplateModel(ServiceClient serviceClient, string sdkName, string implementationFileExtension, string ns)
+        protected CodeModelRb CodeModel { get; private set; }
+        protected CodeGeneratorRb Generator { get; private set; }
+        public CodeNamerRb CodeNamer => Singleton<CodeNamer>.Instance as CodeNamerRb;
+
+        // public RequirementsTemplateModel(ServiceClient serviceClient, string sdkName, string implementationFileExtension, string ns)
+        public RequirementsRb(CodeModelRb codeModel, CodeGeneratorRb generator)
         {
-            this.LoadFrom(serviceClient);
-            this.ns = ns;
-            this.sdkName = sdkName;
-            this.implementationFileExtension = implementationFileExtension;
+            CodeModel = codeModel;
+            Generator = generator;
         }
 
         /// <summary>
@@ -130,7 +98,7 @@ namespace AutoRest.Ruby.TemplateModels
         /// <returns>The API client client name in form of string.</returns>
         public string GetClientRequiredFile()
         {
-            return this.GetAutoloadFormat(this.Name, RubyCodeNamer.UnderscoreCase(this.Name) + this.implementationFileExtension);
+            return this.GetAutoloadFormat(CodeModel.Name, CodeNamer.UnderscoreCase(CodeModel.Name) + Generator.ImplementationFileExtension);
         }
 
         /// <summary>
@@ -141,8 +109,8 @@ namespace AutoRest.Ruby.TemplateModels
         {
             var sb = new IndentedStringBuilder();
 
-            this.MethodGroups.ForEach(method => sb.AppendLine("{0}",
-                this.GetAutoloadFormat(method, RubyCodeNamer.UnderscoreCase(method) + this.implementationFileExtension)));
+            CodeModel.MethodGroupNames.ForEach(method => sb.AppendLine("{0}",
+                this.GetAutoloadFormat(method, CodeNamer.UnderscoreCase(method) + Generator.ImplementationFileExtension)));
 
             return sb.ToString();
         }
@@ -157,9 +125,9 @@ namespace AutoRest.Ruby.TemplateModels
 
             this.GetOrderedModels()
                 .Where(m => !ExcludeModel(m))
-                .ForEach(model => sb.AppendLine(this.GetAutoloadFormat(model.Name, "models/" + RubyCodeNamer.UnderscoreCase(model.Name) + this.implementationFileExtension)));
+                .ForEach(model => sb.AppendLine(this.GetAutoloadFormat(model.Name, "models/" + CodeNamer.UnderscoreCase(model.Name) + Generator.ImplementationFileExtension)));
 
-            this.EnumTypes.ForEach(enumType => sb.AppendLine(this.GetAutoloadFormat(enumType.Name, "models/" + RubyCodeNamer.UnderscoreCase(enumType.Name) + this.implementationFileExtension)));
+            CodeModel.EnumTypes.ForEach(enumType => sb.AppendLine(this.GetAutoloadFormat(enumType.Name, "models/" + CodeNamer.UnderscoreCase(enumType.Name) + Generator.ImplementationFileExtension)));
 
             return sb.ToString();
         }
@@ -184,11 +152,11 @@ require 'faraday-cookie_jar'
 require 'concurrent'
 require 'ms_rest'";
 
-            if(!string.IsNullOrWhiteSpace(this.ns))
+            if(!string.IsNullOrWhiteSpace(Settings.Instance.Namespace))
             {
                 requirements = requirements 
                     + Environment.NewLine 
-                    + string.Format(CultureInfo.InvariantCulture, "require '{0}/{1}/module_definition'", GeneratedFolderName, this.sdkName);
+                    + string.Format(CultureInfo.InvariantCulture, "require '{0}/{1}/module_definition'", GeneratedFolderName, GeneratorSettingsRb.Instance.sdkName);
             }
 
             return requirements;
