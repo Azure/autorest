@@ -94,7 +94,7 @@ namespace AutoRest.Core.Model
 
             if (enumType != null)
             {
-                return enumType.Name.FixedValue == Name.FixedValue &&
+                return enumType.Name.RawValue == Name.RawValue &&
                     enumType.Values.OrderBy(t => t).SequenceEqual(Values.OrderBy(t => t));
             }
             return false;

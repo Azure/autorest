@@ -65,7 +65,7 @@ namespace AutoRest.Core
             [(char) 126] = "Tilde"
         };
 
-        protected CodeNamer()
+        public CodeNamer()
         {
         }
 

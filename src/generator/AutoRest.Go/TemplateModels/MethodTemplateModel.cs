@@ -22,14 +22,16 @@ namespace AutoRest.Go.TemplateModels
         private readonly string lroDescription = " This method may poll for completion. Polling can be canceled by passing the cancel channel argument. " +
                                                  "The channel will be used to cancel polling and any outstanding HTTP requests.";
 
+        public readonly bool NextAlreadyDefined = true;
 
-        public MethodTemplateModel(Method source, string owner, string packageName, MethodScopeProvider methodScope)
+        public MethodTemplateModel(Method source, string owner, string packageName, MethodScopeProvider methodScope, bool next)        
         {
             this.LoadFrom(source);
 
             MethodScope = methodScope;
             Owner = owner;
             PackageName = packageName;
+            NextAlreadyDefined = next;
 
             var parameter = Parameters.Find(p => p.Type.IsPrimaryType(KnownPrimaryType.Stream)
                                                 && !(p.Location == ParameterLocation.Body || p.Location == ParameterLocation.FormData));
@@ -151,7 +153,7 @@ namespace AutoRest.Go.TemplateModels
         }
 
         /// <summary>
-        /// Return the parameters as they apopear in the method signature excluding global parameters.
+        /// Return the parameters as they appear in the method signature excluding global parameters.
         /// </summary>
         public IEnumerable<Parameter> LocalParameters
         {
@@ -159,8 +161,8 @@ namespace AutoRest.Go.TemplateModels
             {
                 return
                     Parameters.Where(
-                       p => p != null && p.IsMethodArgument() && !string.IsNullOrWhiteSpace(p.Name) && !p.SerializedName.IsApiVersion())
-                        .OrderBy(item => !item.IsRequired);
+                        p => p != null && p.IsMethodArgument() && !string.IsNullOrWhiteSpace(p.Name))
+                                .OrderBy(item => !item.IsRequired);
             }
         }
         public string ParameterValidations

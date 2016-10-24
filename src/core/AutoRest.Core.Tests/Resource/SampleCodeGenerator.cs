@@ -10,34 +10,11 @@ namespace AutoRest.Core.Tests.Resource
 {
     public class SampleCodeGenerator : CodeGenerator
     {
-        public SampleCodeGenerator()
-            : base(new CodeModelTransformer())
-        {
-            
-        }
-
         public override bool IsSingleFileGenerationSupported => true;
 
+        public override string UsageInstructions => "TODO: copy";
 
-        public override string Name
-        {
-            get { return "CSharp"; }
-        }
-
-        public override string Description
-        {
-            get { return "C# for Http Client Libraries"; }
-        }
-
-        public override string UsageInstructions
-        {
-            get { return "TODO: copy"; }
-        }
-
-        public override string ImplementationFileExtension
-        {
-            get { return ".cs"; }
-        }
+        public override string ImplementationFileExtension => ".cs";
 
         public override async Task Generate(CodeModel codeModel)
         {

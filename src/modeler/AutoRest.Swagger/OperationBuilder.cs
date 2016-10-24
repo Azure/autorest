@@ -160,7 +160,7 @@ namespace AutoRest.Swagger
                     // if parameter with same name exists in Query and Path, make Query one required
                     if (s.In == ParameterLocation.Query &&
                         parameters.Any(t => t.In == ParameterLocation.Path &&
-                                            string.Equals(t.Name, s.Name, StringComparison.OrdinalIgnoreCase)))
+                                            t.Name.EqualsIgnoreCase(s.Name)))
                     {
                         s.IsRequired = true;
                     }
@@ -201,7 +201,7 @@ namespace AutoRest.Swagger
             var typesList = new List<Stack<IModelType>>();
             foreach (var response in _operation.Responses)
             {
-                if (string.Equals(response.Key, "default", StringComparison.OrdinalIgnoreCase))
+                if (response.Key.EqualsIgnoreCase("default"))
                 {
                     TryBuildDefaultResponse(methodName, response.Value, method, headerType);
                 }

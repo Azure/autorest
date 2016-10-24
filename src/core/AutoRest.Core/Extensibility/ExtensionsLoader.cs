@@ -12,7 +12,7 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
-
+using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 namespace AutoRest.Core.Extensibility
 {
     public static class ExtensionsLoader
@@ -22,12 +22,8 @@ namespace AutoRest.Core.Extensibility
         /// </summary>
         internal const string ConfigurationFileName = "AutoRest.json";
 
-        /// <summary>
-        /// Gets the code generator specified in the provided Settings.
-        /// </summary>
-        /// <param name="settings">The code generation settings</param>
-        /// <returns>Code generator specified in Settings.CodeGenerator</returns>
-        public static CodeGenerator GetCodeGenerator()
+
+        public static IAnyPlugin GetPlugin()
         {
             Logger.LogInfo(Resources.InitializingCodeGenerator);
             if (Settings.Instance == null)
@@ -42,11 +38,11 @@ namespace AutoRest.Core.Extensibility
                         Resources.ParameterValueIsMissing, "CodeGenerator"));
             }
 
-            CodeGenerator codeGenerator = null;
+            IAnyPlugin plugin = null;
 
-            if (string.Equals("None", Settings.Instance.CodeGenerator, StringComparison.OrdinalIgnoreCase))
+            if (Settings.Instance.CodeGenerator.EqualsIgnoreCase("None"))
             {
-                codeGenerator = new NoOpCodeGenerator();
+                plugin = new NoOpPlugin();
             }
             else
             {
@@ -57,7 +53,7 @@ namespace AutoRest.Core.Extensibility
                     try
                     {
                         var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
-                        codeGenerator = LoadTypeFromAssembly<CodeGenerator>(config.CodeGenerators, Settings.Instance.CodeGenerator);
+                        plugin = LoadTypeFromAssembly<IAnyPlugin>(config.Plugins, Settings.Instance.CodeGenerator);
                     }
                     catch (Exception ex)
                     {
@@ -71,8 +67,9 @@ namespace AutoRest.Core.Extensibility
             }
             Logger.LogInfo(Resources.GeneratorInitialized,
                 Settings.Instance.CodeGenerator,
-                codeGenerator.GetType().Assembly.GetName().Version);
-            return codeGenerator;
+                plugin.GetType().Assembly.GetName().Version);
+            return plugin;
+
         }
 
         /// <summary>

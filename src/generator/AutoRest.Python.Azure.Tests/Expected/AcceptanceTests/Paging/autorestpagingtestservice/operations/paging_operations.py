@@ -44,6 +44,7 @@ class PagingOperations(object):
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
          <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -108,6 +109,7 @@ class PagingOperations(object):
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
          <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         maxresults = None
         if paging_get_multiple_pages_options is not None:
@@ -186,6 +188,7 @@ class PagingOperations(object):
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged1
          <Fixtures.AcceptanceTestsPaging.models.ProductPaged1>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         maxresults = None
         if paging_get_odata_multiple_pages_options is not None:
@@ -263,6 +266,7 @@ class PagingOperations(object):
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
          <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         maxresults = None
         if paging_get_multiple_pages_with_offset_options is not None:
@@ -342,6 +346,7 @@ class PagingOperations(object):
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
          <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -401,6 +406,7 @@ class PagingOperations(object):
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
          <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -458,6 +464,7 @@ class PagingOperations(object):
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
          <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -515,6 +522,7 @@ class PagingOperations(object):
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
          <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -572,6 +580,7 @@ class PagingOperations(object):
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
          <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -633,6 +642,7 @@ class PagingOperations(object):
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged1
          <Fixtures.AcceptanceTestsPaging.models.ProductPaged1>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -705,6 +715,7 @@ class PagingOperations(object):
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged1
          <Fixtures.AcceptanceTestsPaging.models.ProductPaged1>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         api_version = None
         if custom_parameter_group is not None:

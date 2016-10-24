@@ -605,7 +605,7 @@ namespace AutoRest.NodeJS
                         constraintCheck = $"{valueReference}.match({constraintValue}) === null";
                         break;
                     case Constraint.UniqueItems:
-                        if ("true".Equals(constraints[constraint], StringComparison.OrdinalIgnoreCase))
+                        if ("true".EqualsIgnoreCase(constraints[constraint]))
                         {
                             constraintCheck = string.Format(
                                 "{0}.length !== {0}.filter(function(item, i, ar) {{ return ar.indexOf(item) === i; }}).length", valueReference);
@@ -904,7 +904,7 @@ namespace AutoRest.NodeJS
             builder.AppendLine("polymorphicDiscriminator: {")
                      .Indent()
                      .AppendLine("serializedName: '{0}',", composite.PolymorphicDiscriminator)
-                     .AppendLine("clientName: '{0}'", new NodeJsCodeNamer().GetPropertyName(composite.PolymorphicDiscriminator))
+                     .AppendLine("clientName: '{0}'", Singleton<CodeNamerJs>.Instance.GetPropertyName(composite.PolymorphicDiscriminator))
                    .Outdent()
                    .AppendLine("},");
             var polymorphicType = composite;

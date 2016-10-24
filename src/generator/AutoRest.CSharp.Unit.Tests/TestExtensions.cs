@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Unit.Tests
 
             settings.Input = fileName;
 
-            var codeGenerator = new CSharpCodeGenerator();
+            var plugin = new PluginCs();
             var modeler = ExtensionsLoader.GetModeler();
             var codeModel = modeler.Build();
 
@@ -88,17 +88,17 @@ namespace AutoRest.CSharp.Unit.Tests
             // After swagger Parser
             codeModel = AutoRestController.RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
 
-            // load model into language-specific code model
-            codeModel = codeGenerator.ModelTransformer.Load(codeModel);
-
-            using (codeGenerator.ModelTransformer.Activate())
+            using (plugin.Activate())
             {
+                // load model into language-specific code model
+                codeModel = plugin.Serializer.Load(codeModel);
+
                 // we've loaded the model, run the extensions for after it's loaded
                 codeModel = AutoRestController.RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
 
                 // apply language-specific tranformation (more than just language-specific types)
                 // used to be called "NormalizeClientModel" . 
-                codeModel = codeGenerator.ModelTransformer.TransformCodeModel(codeModel);
+                codeModel = plugin.Transformer.TransformCodeModel(codeModel);
 
                 // next set of extensions
                 codeModel = AutoRestController.RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 codeModel = AutoRestController.RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
 
                 // Generate code from CodeModel.
-                codeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+                plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
             }
 
             return fileSystem;

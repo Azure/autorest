@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
 
+using System;
 using AutoRest.Core.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -47,7 +48,7 @@ namespace AutoRest.CSharp.Model
                         return "System.DateTime";
                     
                     case KnownPrimaryType.DateTime:
-                        return Singleton<ICSharpGeneratorSettings>.Instance.UseDateTimeOffset ? "System.DateTimeOffset" : "System.DateTime";
+                        return Singleton<GeneratorSettingsCs>.Instance.UseDateTimeOffset ? "System.DateTimeOffset" : "System.DateTime";
 
                     case KnownPrimaryType.DateTimeRfc1123:
                         return "System.DateTime";
@@ -93,7 +94,7 @@ namespace AutoRest.CSharp.Model
                         return "System.Guid";
 
                 }
-                return "!!**UNKNOWN**!!";
+                throw new NotImplementedException($"Primary type {KnownPrimaryType} is not implemented in {GetType().Name}");
             }
         }
 

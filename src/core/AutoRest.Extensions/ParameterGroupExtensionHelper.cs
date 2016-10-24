@@ -153,7 +153,7 @@ namespace AutoRest.Extensions
                 foreach (ParameterGroup parameterGroup in parameterGroups)
                 {
                     CompositeType parameterGroupType =
-                        generatedParameterGroups.FirstOrDefault(item => item.Name == parameterGroup.Name);
+                        generatedParameterGroups.FirstOrDefault(item => item.Name.RawValue == parameterGroup.Name);
 
                     if (parameterGroupType == null)
                     {
@@ -172,10 +172,10 @@ namespace AutoRest.Extensions
                     foreach (Property property in parameterGroup.ParameterMapping.Keys)
                     {
                         Property matchingProperty = parameterGroupType.Properties.FirstOrDefault(
-                                item => item.Name == property.Name &&
+                                item => item.Name.RawValue == property.Name.RawValue &&
                                         item.IsReadOnly == property.IsReadOnly &&
-                                        item.DefaultValue == property.DefaultValue &&
-                                        item.SerializedName == property.SerializedName);
+                                        item.DefaultValue .RawValue== property.DefaultValue.RawValue &&
+                                        item.SerializedName.RawValue == property.SerializedName.RawValue);
                         if (matchingProperty == null)
                         {
                             parameterGroupType.Add(property);

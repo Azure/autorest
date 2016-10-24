@@ -300,7 +300,7 @@ namespace AutoRest.CSharp
         /// <param name="modelType">The type to check</param>
         /// <returns>True if the type maps to a C# value type, otherwise false</returns>
         public static bool IsValueType(this IModelType modelType) => true == (modelType as IExtendedModelType)?.IsValueType;
-        //gws01
+        
         public static string CheckNull(string valueReference, string executionBlock)
         {
             var sb = new IndentedStringBuilder();
@@ -424,7 +424,7 @@ namespace AutoRest.CSharp
                         constraintCheck = $"!System.Text.RegularExpressions.Regex.IsMatch({valueReference}, {constraintValue})";
                         break;
                     case Constraint.UniqueItems:
-                        if ("true".Equals(constraints[constraint], StringComparison.OrdinalIgnoreCase))
+                        if ("true".EqualsIgnoreCase(constraints[constraint]))
                         {
                             constraintCheck = $"{valueReference}.Count != {valueReference}.Distinct().Count()";
                         }

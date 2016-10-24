@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Model
 
         public override Method Add(Method method)
         {
-            (method as MethodCs).SyncMethods = Singleton<ICSharpGeneratorSettings>.Instance.SyncMethods;
+            (method as MethodCs).SyncMethods = Singleton<GeneratorSettingsCs>.Instance.SyncMethods;
             return base.Add(method);
         }
         private void InitProperties()

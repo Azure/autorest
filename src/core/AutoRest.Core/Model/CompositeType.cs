@@ -97,6 +97,11 @@ namespace AutoRest.Core.Model
         public virtual string PolymorphicDiscriminator { get; set; }
 
         /// <summary>
+        /// Returns true if this type or it's parent is polymorphic.
+        /// </summary>
+        public bool IsPolymorphic => !string.IsNullOrEmpty(PolymorphicDiscriminator) || true == BaseModelType?.IsPolymorphic;
+
+        /// <summary>
         /// Gets or sets the summary.
         /// </summary>
         public virtual string Summary
@@ -202,5 +207,25 @@ namespace AutoRest.Core.Model
 
         [JsonIgnore]
         public override string QualifierType => "Model Type";
+
+        public class CompositeTypeComparer : IComparer<CompositeType>
+        {
+            /// <summary>Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.</summary>
+            /// <returns>A signed integer that indicates the relative values of <paramref name="x" /> and <paramref name="y" />, as shown in the following table.
+            /// Value Less than zero<paramref name="x" /> is less than <paramref name="y" />.
+            /// Value Zero<paramref name="x" /> equals <paramref name="y" />.
+            /// Value Greater than zero<paramref name="x" /> is greater than <paramref name="y" />.</returns>
+            /// <param name="x">The first CompositeType to compare.</param>
+            /// <param name="y">The second CompositeType to compare.</param>
+            public int Compare(CompositeType x, CompositeType y)
+            {
+                return !ReferenceEquals(x, y) ?
+                    ReferenceEquals(x.BaseModelType, null) || ReferenceEquals(y.BaseModelType, x) ? -1 :
+                        ReferenceEquals(y.BaseModelType, null) || ReferenceEquals(x.BaseModelType, y) ? 1 : 0 :
+                           0;
+            }
+        }
+
+        public static CompositeTypeComparer Comparer => new CompositeTypeComparer();
     }
 }

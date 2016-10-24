@@ -30,24 +30,6 @@ namespace AutoRest.NodeJS.Model
         [JsonIgnore]
         public virtual IEnumerable<MethodGroupJs> MethodGroupModels => Operations.Cast<MethodGroupJs>().Where( each => !each.IsCodeModelMethodGroup );
 
-
-#if remove_this
-        [JsonIgnore]
-        public bool ContainsTimeSpan_
-        {
-            get
-            {
-                Method method = this.MethodTemplateModels.FirstOrDefault(m => m.Parameters.FirstOrDefault(p =>
-                    p.ModelType.IsPrimaryType(KnownPrimaryType.TimeSpan) ||
-                    (p.ModelType is SequenceTypeJs && (p.ModelType as SequenceTypeJs).ElementType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
-                    (p.ModelType is DictionaryTypeJs && (p.ModelType as DictionaryTypeJs).ValueType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
-                    (p.ModelType is CompositeType && (p.ModelType as CompositeType).ContainsTimeSpan())) != null);
-
-                return method != null;
-            }
-        }
-#endif
-
         /// <summary>
         /// Provides an ordered ModelTemplateModel list such that the parent 
         /// type comes before in the list than its child. This helps when 

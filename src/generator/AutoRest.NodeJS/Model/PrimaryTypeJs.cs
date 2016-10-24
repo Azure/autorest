@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
 
+using System;
 using AutoRest.Core.Model;
 
 namespace AutoRest.NodeJS.Model
@@ -61,7 +62,7 @@ namespace AutoRest.NodeJS.Model
                     case KnownPrimaryType.Uuid:
                         return "Uuid";
                 }
-                return "!!**UNKNOWN**!!";
+                throw new NotImplementedException($"Primary type {KnownPrimaryType} is not implemented in {GetType().Name}");
             }
         }
     }

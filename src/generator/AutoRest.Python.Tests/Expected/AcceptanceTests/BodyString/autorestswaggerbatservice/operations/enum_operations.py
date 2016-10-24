@@ -45,6 +45,8 @@ class EnumOperations(object):
          <Fixtures.AcceptanceTestsBodyString.models.Colors>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/enum/notExpandable'
@@ -93,6 +95,8 @@ class EnumOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/enum/notExpandable'
@@ -135,6 +139,8 @@ class EnumOperations(object):
          <Fixtures.AcceptanceTestsBodyString.models.Colors>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/enum/Referenced'
@@ -183,6 +189,8 @@ class EnumOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/enum/Referenced'
@@ -224,6 +232,8 @@ class EnumOperations(object):
          <Fixtures.AcceptanceTestsBodyString.models.RefColorConstant>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         # Construct URL
         url = '/string/enum/ReferencedConstant'
@@ -269,6 +279,8 @@ class EnumOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyString.models.ErrorException>`
         """
         enum_string_body = models.RefColorConstant(field1=field1)
 

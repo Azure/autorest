@@ -778,11 +778,12 @@ namespace AutoRest.Swagger.Tests
                 };
                 var modeler = ExtensionsLoader.GetModeler();
                 var client = modeler.Build();
-                var codeGenerator = ExtensionsLoader.GetCodeGenerator() as CSharpCodeGenerator;
+                var plugin = ExtensionsLoader.GetPlugin() as PluginCs;
+                Assert.NotNull(plugin);
                 settings.Validate();
 
                 Assert.Equal("MIT", settings.Header);
-                Assert.Equal(true, codeGenerator.InternalConstructors);
+                Assert.Equal(true, plugin.Settings.InternalConstructors);
             }
         }
 

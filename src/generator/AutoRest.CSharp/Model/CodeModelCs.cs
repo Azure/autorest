@@ -9,16 +9,12 @@ using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using Newtonsoft.Json;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Model
 {
-    public class CodeModelCs : Core.Model.CodeModel
+    public class CodeModelCs : CodeModel
     {
-        public CodeModelCs( bool internalConstructors)
-        {
-            ConstructorVisibility = internalConstructors ? "internal" : "public";
-        }
-        
         [JsonIgnore]
         public IEnumerable<MethodGroupCs> AllOperations => Operations.Where( operation => !operation.Name.IsNullOrEmpty()).Cast<MethodGroupCs>();
 
@@ -38,7 +34,9 @@ namespace AutoRest.CSharp.Model
         [JsonIgnore]
         public bool ContainsCredentials => Properties.Any(p => p.ModelType.IsPrimaryType(KnownPrimaryType.Credentials));
 
-        public string ConstructorVisibility { get; set; }        
+        [JsonIgnore]
+        public string ConstructorVisibility
+            => Singleton<GeneratorSettingsCs>.Instance.InternalConstructors ? "internal" : "public";
 
         [JsonIgnore]
         public string RequiredConstructorParameters

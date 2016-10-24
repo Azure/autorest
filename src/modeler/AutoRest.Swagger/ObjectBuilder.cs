@@ -56,9 +56,9 @@ namespace AutoRest.Swagger
             {
                 var enumType = New<EnumType>();
                 SwaggerObject.Enum.ForEach(v => enumType.Values.Add(new EnumValue { Name = v, SerializedName = v }));
-                if (SwaggerObject.Extensions.ContainsKey(CodeGenerator.EnumObject))
+                if (SwaggerObject.Extensions.ContainsKey(Core.Model.XmsExtensions.Enum.Name))
                 {
-                    var enumObject = SwaggerObject.Extensions[CodeGenerator.EnumObject] as Newtonsoft.Json.Linq.JContainer;
+                    var enumObject = SwaggerObject.Extensions[Core.Model.XmsExtensions.Enum.Name] as Newtonsoft.Json.Linq.JContainer;
                     if (enumObject != null)
                     {
                         enumType.SetName( enumObject["name"].ToString() );
@@ -72,12 +72,12 @@ namespace AutoRest.Swagger
                     {
                         throw new InvalidOperationException(
                             string.Format(CultureInfo.InvariantCulture, 
-                                "{0} extension needs to specify an enum name.", 
-                                CodeGenerator.EnumObject));
+                                "{0} extension needs to specify an enum name.",
+                                Core.Model.XmsExtensions.Enum.Name));
                     }
                     var existingEnum =
                         Modeler.CodeModel.EnumTypes.FirstOrDefault(
-                            e => e.Name.EqualsIgnoreCase(enumType.Name));
+                            e => e.Name.RawValue.EqualsIgnoreCase(enumType.Name.RawValue));
                     if (existingEnum != null)
                     {
                         if (!existingEnum.Equals(enumType))
@@ -85,7 +85,7 @@ namespace AutoRest.Swagger
                             throw new InvalidOperationException(
                                 string.Format(CultureInfo.InvariantCulture,
                                     "Swagger document contains two or more {0} extensions with the same name '{1}' and different values.",
-                                    CodeGenerator.EnumObject,
+                                    Core.Model.XmsExtensions.Enum.Name,
                                     enumType.Name));
                         }
                     }
@@ -161,18 +161,6 @@ namespace AutoRest.Swagger
                 parameter.DefaultValue = swaggerObject.Enum[0];
                 parameter.IsConstant = true;
             }
-#if pending_removal
-            // GS: Did I need this for something?
-            var compositeType = parameter.Type as CompositeType;
-            if (compositeType != null && compositeType.ComposedProperties.Any())
-            {
-                if (compositeType.ComposedProperties.All(p => p.IsConstant))
-                {
-                    parameter.DefaultValue = "{}";
-                    parameter.IsConstant = true;
-                }
-            }
-#endif
 
             parameter.Documentation = swaggerObject.Description;
             parameter.CollectionFormat = swaggerObject.CollectionFormat;

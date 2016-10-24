@@ -1,0 +1,5894 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceFabricClient",
+    "version": "1.0.0"
+  },
+  "host": "localhost:19080",
+  "paths": {
+    "/$/GetClusterManifest": {
+      "get": {
+        "operationId": "ClusterManifests_Get",
+        "description": "Get cluster manifests",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The cluster manifest",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/$/ReportClusterHealth": {
+      "post": {
+        "operationId": "ClusterHealths_Send",
+        "description": "Report cluster healths",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "clusterHealthReport",
+            "in": "body",
+            "description": "The report of the cluster health",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterHealthReport"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The cluster health",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes": {
+      "get": {
+        "operationId": "Nodes_List",
+        "description": "List nodes",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "continuation-token",
+            "in": "query",
+            "description": "The token of the continuation",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The node list",
+            "schema": {
+              "$ref": "#/definitions/NodeList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}": {
+      "get": {
+        "operationId": "Nodes_Get",
+        "description": "Get nodes",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The node",
+            "schema": {
+              "$ref": "#/definitions/Node"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/Activate": {
+      "post": {
+        "operationId": "Nodes_Enable",
+        "description": "Enable nodes",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The node",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/Deactivate": {
+      "post": {
+        "operationId": "Nodes_Disable",
+        "description": "Disable nodes",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "disableNode",
+            "in": "body",
+            "description": "The node",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DisableNode"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The node",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/RemoveNodeState": {
+      "post": {
+        "operationId": "NodeStates_Remove",
+        "description": "Remove node states",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The node state",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetHealth": {
+      "get": {
+        "operationId": "NodeHealths_Get",
+        "description": "Get node healths",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "EventsHealthStateFilter",
+            "in": "query",
+            "description": "The filter of the events health state",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The node health",
+            "schema": {
+              "$ref": "#/definitions/NodeHealth"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications": {
+      "get": {
+        "operationId": "DeployedApplications_List",
+        "description": "List deployed applications",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployed application list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeployedApplication"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}": {
+      "get": {
+        "operationId": "DeployedApplications_Get",
+        "description": "Get deployed applications",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployed application",
+            "schema": {
+              "$ref": "#/definitions/DeployedApplication"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetHealth": {
+      "get": {
+        "operationId": "DeployedApplicationHealths_Get",
+        "description": "Get deployed application healths",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "EventsHealthStateFilter",
+            "in": "query",
+            "description": "The filter of the events health state",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "DeployedServicePackagesHealthStateFilter",
+            "in": "query",
+            "description": "The filter of the deployed service packages health state",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployed application health",
+            "schema": {
+              "$ref": "#/definitions/DeployedApplicationHealth"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetLoadInformation": {
+      "get": {
+        "operationId": "NodeLoadInformations_Get",
+        "description": "Get node load informations",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The node load information",
+            "schema": {
+              "$ref": "#/definitions/NodeLoadInformation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetCodePackages": {
+      "get": {
+        "operationId": "DeployedCodePackages_Get",
+        "description": "Get deployed code packages",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployed code package",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeployedCodePackage"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetReplicas": {
+      "get": {
+        "operationId": "DeployedReplicas_Get",
+        "description": "Get deployed replicas",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployed replica",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeployedReplica"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetPartitions/{partitionName}/$/GetReplicas/{replicaId}/$/GetDetail": {
+      "get": {
+        "operationId": "DeployedReplicaDetails_Get",
+        "description": "Get deployed replica details",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "partitionName",
+            "in": "path",
+            "description": "The name of the partition",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "replicaId",
+            "in": "path",
+            "description": "The id of the replica",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployed replica detail",
+            "schema": {
+              "$ref": "#/definitions/DeployedReplicaDetail"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetServicePackages": {
+      "get": {
+        "operationId": "DeployedServicePackages_Get",
+        "description": "Get deployed service packages",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployed service package",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeployedServicePackage"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetServicePackages/{servicePackageName}/$/GetHealth": {
+      "get": {
+        "operationId": "DeployedServicePackageHealths_Get",
+        "description": "Get deployed service package healths",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "servicePackageName",
+            "in": "path",
+            "description": "The name of the service package",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "EventsHealthStateFilter",
+            "in": "query",
+            "description": "The filter of the events health state",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployed service package health",
+            "schema": {
+              "$ref": "#/definitions/DeployedServicePackageHealth"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetServiceTypes": {
+      "get": {
+        "operationId": "DeployedServiceTypes_Get",
+        "description": "Get deployed service types",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployed service type",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeployedServiceType"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/ReportHealth": {
+      "post": {
+        "operationId": "NodeHealths_Send",
+        "description": "Send node health",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "nodeHealthReport",
+            "in": "body",
+            "description": "The report of the node health",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeHealthReport"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The node health",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/ReportHealth": {
+      "post": {
+        "operationId": "DeployedApplicationHealths_Send",
+        "description": "Send deployed application health",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "deployedApplicationHealthReport",
+            "in": "body",
+            "description": "The report of the deployed application health",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeployedApplicationHealthReport"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployed application health",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Nodes/{nodeName}/$/GetApplications/{applicationName}/$/GetServicePackages/{serviceManifestName}/$/ReportHealth": {
+      "post": {
+        "operationId": "DeployedServicePackageHealths_Send",
+        "description": "Send deployed service package health",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The name of the node",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceManifestName",
+            "in": "path",
+            "description": "The name of the service manifest",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "deployedServicePackageHealthReport",
+            "in": "body",
+            "description": "The report of the deployed service package health",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeployedServiceHealthReport"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployed service package health",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/ApplicationTypes": {
+      "get": {
+        "operationId": "ApplicationTypes_List",
+        "description": "List application types",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application type",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApplicationType"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/ApplicationTypes/{applicationTypeName}": {
+      "get": {
+        "operationId": "ApplicationTypes_Get",
+        "description": "Get application types",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "The name of the application type",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application type",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApplicationType"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/ApplicationTypes/{applicationTypeName}/$/GetServiceManifest": {
+      "get": {
+        "operationId": "ServiceManifests_Get",
+        "description": "Get service manifests",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "The name of the application type",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "ApplicationTypeVersion",
+            "in": "query",
+            "description": "The version of the application type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ServiceManifestName",
+            "in": "query",
+            "description": "The name of the service manifest",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service manifest",
+            "schema": {
+              "$ref": "#/definitions/ServiceManifest"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/ApplicationTypes/{applicationTypeName}/$/GetServiceTypes": {
+      "get": {
+        "operationId": "ServiceTypes_Get",
+        "description": "Get service types",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "The name of the application type",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "ApplicationTypeVersion",
+            "in": "query",
+            "description": "The version of the application type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service type",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ServiceType"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/ApplicationTypes/{applicationTypeName}/$/GetApplicationManifest": {
+      "get": {
+        "operationId": "ApplicationManifests_Get",
+        "description": "Get application manifests",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "The name of the application type",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "ApplicationTypeVersion",
+            "in": "query",
+            "description": "The version of the application type",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application manifest",
+            "schema": {
+              "$ref": "#/definitions/ApplicationManifest"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/ApplicationTypes/$/Provision": {
+      "post": {
+        "operationId": "ApplicationTypes_Register",
+        "description": "Register application types",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "registerApplicationType",
+            "in": "body",
+            "description": "The type of the register application",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterApplicationType"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application type",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/ApplicationTypes/{applicationTypeName}/$/Unprovision": {
+      "post": {
+        "operationId": "ApplicationTypes_Unregister",
+        "description": "Unregister application types",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "The name of the application type",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "unregisterApplicationType",
+            "in": "body",
+            "description": "The type of the unregister application",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnregisterApplicationType"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application type",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications": {
+      "get": {
+        "operationId": "Applications_List",
+        "description": "List applications",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "continuation-token",
+            "in": "query",
+            "description": "The token of the continuation",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application list",
+            "schema": {
+              "$ref": "#/definitions/ApplicationList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}": {
+      "get": {
+        "operationId": "Applications_Get",
+        "description": "Get applications",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices": {
+      "get": {
+        "operationId": "Services_List",
+        "description": "List services",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service list",
+            "schema": {
+              "$ref": "#/definitions/ServiceList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices/{serviceName}": {
+      "get": {
+        "operationId": "Services_Get",
+        "description": "Get services",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service",
+            "schema": {
+              "$ref": "#/definitions/Service"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices/{serviceName}/$/GetServiceGroupDescription": {
+      "get": {
+        "operationId": "ServiceGroupDescriptions_Get",
+        "description": "Get service group descriptions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service group description",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupDescription"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices/{serviceName}/$/GetServiceGroupMembers": {
+      "get": {
+        "operationId": "ServiceGroupMembers_Get",
+        "description": "Get service group members",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service group description",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupMember"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetHealth": {
+      "get": {
+        "operationId": "ApplicationHealths_Get",
+        "description": "Get application healths",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "EventsHealthStateFilter",
+            "in": "query",
+            "description": "The filter of the events health state",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "DeployedApplicationsHealthStateFilter",
+            "in": "query",
+            "description": "The filter of the deployed application health state",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application health",
+            "schema": {
+              "$ref": "#/definitions/ApplicationHealth"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetUpgradeProgress": {
+      "get": {
+        "operationId": "ApplicationUpgrades_Get",
+        "description": "Get application upgrades",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application upgrade",
+            "schema": {
+              "$ref": "#/definitions/ApplicationUpgrade"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/ReportHealth": {
+      "post": {
+        "operationId": "ApplicationHealths_Send",
+        "description": "Send application health",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "applicationHealthReport",
+            "in": "body",
+            "description": "The report of the application health",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationHealthReport"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application health",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/$/Create": {
+      "post": {
+        "operationId": "Applications_Create",
+        "description": "Create applications",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationDescription",
+            "in": "body",
+            "description": "The description of the application",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationDescription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "The application description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "The application description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices/$/Create": {
+      "post": {
+        "operationId": "Services_Create",
+        "description": "Create services",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "createServiceDescription",
+            "in": "body",
+            "description": "The description of the service",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateServiceDescription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "The service description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "The service description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices/$/CreateFromTemplate": {
+      "post": {
+        "operationId": "ServiceFromTemplates_Create",
+        "description": "Create service from templates",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceDescriptionTemplate",
+            "in": "body",
+            "description": "The template of the service description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceDescriptionTemplate"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service description template",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "The service description template",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "The service description template",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices/$/CreateServiceGroup": {
+      "post": {
+        "operationId": "ServiceGroups_Create",
+        "description": "Create service groups",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the service group",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "createServiceGroupDescription",
+            "in": "body",
+            "description": "The description of the service group",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateServiceGroupDescription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "The service description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "The service description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServiceGroups/$/CreateServiceGroupFromTemplate": {
+      "post": {
+        "operationId": "ServiceGroupFromTemplates_Create",
+        "description": "Create service group from templates",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceDescriptionTemplate",
+            "in": "body",
+            "description": "The template of the service description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceDescriptionTemplate"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service group description template",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "The service group description template",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "The service group description template",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServices/{serviceName}/$/UpdateServiceGroup": {
+      "post": {
+        "operationId": "ServiceGroups_Update",
+        "description": "Update service groups",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "updateServiceGroupDescription",
+            "in": "body",
+            "description": "The description of the service group update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateServiceGroupDescription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service group update description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/Delete": {
+      "post": {
+        "operationId": "Applications_Remove",
+        "description": "Remove applications",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/Upgrade": {
+      "post": {
+        "operationId": "ApplicationUpgrades_Start",
+        "description": "Start application upgrades",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "startApplicationUpgradeDescription",
+            "in": "body",
+            "description": "The description of the start application upgrade",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartApplicationUpgradeDescription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The start application upgrade",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/UpdateUpgrade": {
+      "post": {
+        "operationId": "ApplicationUpgrades_Update",
+        "description": "Update application upgrades",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "updateApplicationUpgradeDescription",
+            "in": "body",
+            "description": "The description of the application upgrade",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateApplicationUpgradeDescription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The update application upgrade",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/MoveNextUpgradeDomain": {
+      "post": {
+        "operationId": "ApplicationUpgrades_Resume",
+        "description": "Resume application upgrades",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resumeApplicationUpgrade",
+            "in": "body",
+            "description": "The upgrade of the resume application",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResumeApplicationUpgrade"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resume application upgrade",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/RollbackUpgrade": {
+      "post": {
+        "operationId": "ApplicationUpgradeRollbacks_Start",
+        "description": "Start application upgrade rollbacks",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The application upgrade rollback",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/Update": {
+      "post": {
+        "operationId": "Services_Update",
+        "description": "Update services",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "updateServiceDescription",
+            "in": "body",
+            "description": "The description of the service update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateServiceDescription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service update description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/Delete": {
+      "post": {
+        "operationId": "Services_Remove",
+        "description": "Remove services",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Applications/{applicationName}/$/GetServiceGroups/{serviceName}/$/Delete": {
+      "post": {
+        "operationId": "ServiceGroups_Remove",
+        "description": "Remove service groups",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/GetDescription": {
+      "get": {
+        "operationId": "ServiceDescriptions_Get",
+        "description": "Get service descriptions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service description",
+            "schema": {
+              "$ref": "#/definitions/ServiceDescription"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/ResolvePartition": {
+      "get": {
+        "operationId": "Services_Resolve",
+        "description": "Resolve services",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "PartitionKeyType",
+            "in": "query",
+            "description": "The type of the partition key",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "PartitionKeyValue",
+            "in": "query",
+            "description": "The value of the partition key",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "PreviousRspVersion",
+            "in": "query",
+            "description": "The version of the previous rsp",
+            "type": "string",
+            "required": false
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The partition",
+            "schema": {
+              "$ref": "#/definitions/ResolvedServicePartition"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/GetHealth": {
+      "get": {
+        "operationId": "ServiceHealths_Get",
+        "description": "Get service healths",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service health",
+            "schema": {
+              "$ref": "#/definitions/ServiceHealth"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/ReportHealth": {
+      "post": {
+        "operationId": "ServiceHealths_Send",
+        "description": "Send service healths",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "serviceHealthReport",
+            "in": "body",
+            "description": "The report of the service health",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceHealthReport"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service health",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/GetPartitions": {
+      "get": {
+        "operationId": "Partitions_List",
+        "description": "List partitions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The partitions",
+            "schema": {
+              "$ref": "#/definitions/PartitionList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/GetPartitions/{partitionId}": {
+      "get": {
+        "operationId": "Partitions_Get",
+        "description": "Get partitions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "The id of the partition",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The partitions",
+            "schema": {
+              "$ref": "#/definitions/Partition"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Services/{serviceName}/$/GetPartitions/$/Recover": {
+      "post": {
+        "operationId": "PartitionLists_Repair",
+        "description": "Repair partition lists",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The repair partition",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/Recover": {
+      "post": {
+        "operationId": "Partitions_Repair",
+        "description": "Repair partitions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "The id of the partition",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The repair partition",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/ResetLoad": {
+      "post": {
+        "operationId": "PartitionLoads_Reset",
+        "description": "Reset partition loads",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "The id of the partition",
+            "type": "string",
+            "required": true,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The reset partition load",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/GetReplicas": {
+      "get": {
+        "operationId": "Replicas_List",
+        "description": "List replicas",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "The id of the partition",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The replica list",
+            "schema": {
+              "$ref": "#/definitions/ReplicaList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/GetReplicas/{replicaId}": {
+      "get": {
+        "operationId": "Replicas_Get",
+        "description": "Get replicas",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "The id of the partition",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "replicaId",
+            "in": "path",
+            "description": "The id of the replica",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The replica",
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/GetHealth": {
+      "get": {
+        "operationId": "PartitionHealths_Get",
+        "description": "Get partition healths",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "The id of the partition",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "EventsHealthStateFilter",
+            "in": "query",
+            "description": "The filter of the events health state",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ReplicasHealthStateFilter",
+            "in": "query",
+            "description": "The filter of the replicas health state",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The partition health",
+            "schema": {
+              "$ref": "#/definitions/PartitionHealth"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/ReportHealth": {
+      "post": {
+        "operationId": "PartitionHealths_Send",
+        "description": "Send partition health",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "The id of the partition",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "partitionHealthReport",
+            "in": "body",
+            "description": "The report of the partition health",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartitionHealthReport"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The partition health",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/GetReplicas/{replicaId}/$/GetHealth": {
+      "get": {
+        "operationId": "ReplicaHealths_Get",
+        "description": "Get replica healths",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "The id of the partition",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "replicaId",
+            "in": "path",
+            "description": "The id of the replica",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "EventsHealthStateFilter",
+            "in": "query",
+            "description": "The filter of the events health state",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The replica health",
+            "schema": {
+              "$ref": "#/definitions/ReplicaHealth"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/GetReplicas/{replicaId}/$/ReportHealth": {
+      "post": {
+        "operationId": "ReplicaHealths_Send",
+        "description": "Send replica healths",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "The id of the partition",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "replicaId",
+            "in": "path",
+            "description": "The id of the replica",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "replicaHealthReport",
+            "in": "body",
+            "description": "The report of the replica health",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReplicaHealthReport"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The replica health",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/GetLoadInformation": {
+      "get": {
+        "operationId": "PartitionLoadInformations_Get",
+        "description": "Get partition load informations",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "The id of the partition",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The partition load information",
+            "schema": {
+              "$ref": "#/definitions/PartitionLoadInformation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/Partitions/{partitionId}/$/GetReplicas/{replicaId}/$/GetLoadInformation": {
+      "get": {
+        "operationId": "ReplicaLoadInformations_Get",
+        "description": "Get replica load informations",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "partitionId",
+            "in": "path",
+            "description": "The id of the partition",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "replicaId",
+            "in": "path",
+            "description": "The id of the replica",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The replica load information",
+            "schema": {
+              "$ref": "#/definitions/ReplicaLoadInformation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/$/GetLoadInformation": {
+      "get": {
+        "operationId": "ClusterLoadInformations_Get",
+        "description": "Get cluster load informations",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The load information",
+            "schema": {
+              "$ref": "#/definitions/ClusterLoadInformation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/$/GetClusterHealth": {
+      "get": {
+        "operationId": "ClusterHealths_Get",
+        "description": "Get cluster healths",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "EventsHealthStateFilter",
+            "in": "query",
+            "description": "The filter of the events health state",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "NodesHealthStateFilter",
+            "in": "query",
+            "description": "The filter of the nodes health state",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ApplicationsHealthStateFilter",
+            "in": "query",
+            "description": "The filter of the applications health state",
+            "type": "string",
+            "required": false
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The cluster health",
+            "schema": {
+              "$ref": "#/definitions/ClusterHealth"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/$/GetUpgradeProgress": {
+      "get": {
+        "operationId": "UpgradeProgresses_Get",
+        "description": "Get upgrade progresses",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The upgrade progress",
+            "schema": {
+              "$ref": "#/definitions/ClusterUpgradeProgress"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Node": {
+      "type": "object",
+      "description": "The node",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "IpAddressOrFQDN": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "CodeVersion": {
+          "type": "string"
+        },
+        "ConfigVersion": {
+          "type": "string"
+        },
+        "NodeStatus": {
+          "type": "string",
+          "enum": [ "Invalid", "Up", "Down", "Enabling", "Disabling", "Disabled", "Unknown", "Removed" ]
+        },
+        "NodeUpTimeInSeconds": {
+          "type": "string"
+        },
+        "HealthState": {
+          "$ref": "#/definitions/HealthState"
+        },
+        "IsSeedNode": {
+          "type": "boolean"
+        },
+        "UpgradeDomain": {
+          "type": "string"
+        },
+        "FaultDomain": {
+          "type": "string"
+        },
+        "Id": {
+          "type": "object",
+          "description": "The id",
+          "properties": {
+            "Id": {
+              "type": "string"
+            }
+          }
+        },
+        "InstanceId": {
+          "type": "string"
+        },
+        "NodeDeactivationInfo": {
+          "type": "object",
+          "description": "The info of the deactivation info",
+          "properties": {
+            "NodeDeactivationIntent": {
+              "type": "string",
+              "enum": [ "Invalid", "Pause", "Restart", "RemoveData" ]
+            },
+            "NodeDeactivationStatus": {
+              "type": "string",
+              "enum": [ "Invalid", "SafetyCheckInProgress", "SafetyCheckComplete", "Completed" ]
+            }
+          }
+        }
+      }
+    },
+    "NodeList": {
+      "type": "object",
+      "description": "The list of the node",
+      "properties": {
+        "ContinuationToken": {
+          "type": "string"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Node"
+          }
+        }
+      }
+    },
+    "HealthReport": {
+      "type": "object",
+      "description": "The report of the health",
+      "properties": {
+        "SourceId": {
+          "type": "string"
+        },
+        "Property": {
+          "type": "string"
+        },
+        "HealthState": {
+          "$ref": "#/definitions/HealthState"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "TimeToLiveInMilliSeconds": {
+          "type": "string"
+        },
+        "SequenceNumber": {
+          "type": "string"
+        },
+        "RemoveWhenExpired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "NodeHealthReport": {
+      "type": "object",
+      "description": "The report of the node health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
+    },
+    "DisableNode": {
+      "type": "object",
+      "description": "The node",
+      "properties": {
+        "DeactivationIntent": {
+          "type": "string",
+          "enum": [ "Pause", "Restart", "RemoveData", "RemoveNode" ]
+        }
+      }
+    },
+    "HealthEvent": {
+      "type": "object",
+      "description": "The event of the health",
+      "properties": {
+        "SourceId": {
+          "type": "string"
+        },
+        "Property": {
+          "type": "string"
+        },
+        "HealthState": {
+          "$ref": "#/definitions/HealthState"
+        },
+        "TimeToLiveInMilliSeconds": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "SequenceNumber": {
+          "type": "string"
+        },
+        "RemoveWhenExpired": {
+          "type": "boolean"
+        },
+        "SourceUtcTimestamp": {
+          "type": "string"
+        },
+        "LastModifiedUtcTimestamp": {
+          "type": "string"
+        },
+        "IsExpired": {
+          "type": "boolean"
+        },
+        "LastOkTransitionAt": {
+          "type": "string"
+        },
+        "LastWarningTransitionAt": {
+          "type": "string"
+        },
+        "LastErrorTransitionAt": {
+          "type": "string"
+        }
+      }
+    },
+    "HealthEvaluation": {
+      "type": "object",
+      "description": "The evauation of the health",
+      "discriminator": "Kind",
+      "required": [
+        "Kind"
+      ],
+      "properties": {
+        "Kind": {
+          "type": "string",
+          "enum": [ "Invalid", "Event", "Replicas", "Partitions", "DeployedServicePackages", "DeployedApplications", "Services", "Nodes", "Applications", "SystemApplication", "UpgradeDomainDeployedApplications", "UpgradeDomainNodes", "Node", "Replica", "Partition", "Service", "DeployedServicePackage", "DeployedApplication", "Application", "DeltaNodesCheck", "UpgradeDomainDeltaNodesCheck", "ApplicationTypeApplications" ]
+        },
+        "Description": {
+          "type": "string"
+        },
+        "AggregatedHealthState": {
+          "$ref": "#/definitions/HealthState"
+        }
+      }
+    },
+    "UnhealthyEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the unhealthy",
+      "properties": {
+        "HealthEvaluation": {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      }
+    },
+    "EventHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the event health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "Event",
+      "properties": {
+        "UnhealthyEvent": {
+          "$ref": "#/definitions/HealthEvent"
+        },
+        "ConsiderWarningAsError": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PartitionsHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the partitions health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "Partitions",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyPartitionsPerService": {
+          "type": "integer"
+        }
+      }
+    },
+    "ReplicasHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the replicas health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "Replicas",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyPartitionsPerService": {
+          "type": "integer"
+        }
+      }
+    },
+    "DeployedServicePackagesHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the deployed service packages health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "DeployedServicePackages",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "DeployedApplicationsHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the deployed applications health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "DeployedApplications",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyDeployedApplications": {
+          "type": "integer"
+        }
+      }
+    },
+    "ServicesHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the services health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "Services",
+      "properties": {
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyServices": {
+          "type": "integer"
+        }
+      }
+    },
+    "NodesHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the nodes health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "Nodes",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyNodes": {
+          "type": "integer"
+        }
+      }
+    },
+    "ApplicationsHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the applications health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "Applications",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyApplications": {
+          "type": "integer"
+        }
+      }
+    },
+    "UpgradeDomainNodesHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the upgrade domain nodes health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "UpgradeDomainNodes",
+      "properties": {
+        "UpgradeDomainName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyNodes": {
+          "type": "integer"
+        }
+      }
+    },
+    "UpgradeDomainDeployedApplicationsHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the upgrade domain deployed applications health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "UpgradeDomainDeployedApplications",
+      "properties": {
+        "UpgradeDomainName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyDeployedApplications": {
+          "type": "integer"
+        }
+      }
+    },
+    "SystemApplicationHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the system application health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "SystemApplication",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "PartitionHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the partition health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "Partition",
+      "properties": {
+        "PartitionId": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "ReplicaHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the replica health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "Replica",
+      "properties": {
+        "PartitionId": {
+          "type": "string"
+        },
+        "ReplicaOrInstanceId": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "DeployedServicePackageHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the deployed service package health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "DeployedServicePackage",
+      "properties": {
+        "ApplicationName": {
+          "type": "string"
+        },
+        "NodeName": {
+          "type": "string"
+        },
+        "ServiceManifestName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "DeployedApplicationHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the deployed application health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "DeployedApplication",
+      "properties": {
+        "ApplicationName": {
+          "type": "string"
+        },
+        "NodeName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "ServiceHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the service health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "Service",
+      "properties": {
+        "ServiceName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "NodeHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the node health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "Node",
+      "properties": {
+        "NodeName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "ApplicationHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the application health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "Application",
+      "properties": {
+        "ServiceName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        }
+      }
+    },
+    "DeltaNodesCheckHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the delta nodes check health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "DeltaNodesCheck",
+      "properties": {
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "BaselineErrorCount": {
+          "type": "integer"
+        },
+        "BaselineTotalCount": {
+          "type": "integer"
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentDeltaUnhealthyNodes": {
+          "type": "integer"
+        }
+      }
+    },
+    "UpgradeDomainDeltaNodesCheckHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the upgrade domain delta nodes check health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "UpgradeDomainDeltaNodesCheck",
+      "properties": {
+        "UpgradeDomainName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "BaselineErrorCount": {
+          "type": "integer"
+        },
+        "BaselineTotalCount": {
+          "type": "integer"
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUpgradeDomainDeltaUnhealthyNodes": {
+          "type": "integer"
+        }
+      }
+    },
+    "RegisterApplicationType": {
+      "type": "object",
+      "description": "The type of the register application",
+      "properties": {
+        "ApplicationTypeBuildPath": {
+          "type": "string"
+        }
+      }
+    },
+    "UnregisterApplicationType": {
+      "type": "object",
+      "description": "The type of the unregister application",
+      "properties": {
+        "ApplicationTypeVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationTypeHealthEvaluation": {
+      "type": "object",
+      "description": "The evaluation of the application type health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthEvaluation"
+        }
+      ],
+      "x-ms-discriminator-value": "ApplicationType",
+      "properties": {
+        "ApplicationTypeName": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "TotalCount": {
+          "type": "integer"
+        },
+        "MaxPercentUnhealthyApplications": {
+          "type": "integer"
+        }
+      }
+    },
+    "NodeHealth": {
+      "type": "object",
+      "description": "The health of the node",
+      "properties": {
+        "HealthEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthEvent"
+          }
+        },
+        "AggregatedHealthState": {
+          "$ref": "#/definitions/HealthState"
+        },
+        "Name": {
+          "type": "string"
+        }
+      }
+    },
+    "DeployedApplication": {
+      "type": "object",
+      "description": "The application of the deployed",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "TypeName": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "WorkDirectory": {
+          "type": "string"
+        },
+        "LogDirectory": {
+          "type": "string"
+        },
+        "TempDirectory": {
+          "type": "string"
+        }
+      }
+    },
+    "DeployedApplicationHealthReport": {
+      "type": "object",
+      "description": "The report of the deployed application health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
+    },
+    "DeployedServicePackageHealthState": {
+      "type": "object",
+      "description": "The state of the deployed service package health",
+      "properties": {
+        "ApplicationName": {
+          "type": "string"
+        },
+        "ServiceManifestName": {
+          "type": "string"
+        },
+        "NodeName": {
+          "type": "string"
+        },
+        "AggregatedHealthState": {
+          "$ref": "#/definitions/HealthState"
+        }
+      }
+    },
+    "DeployedApplicationHealth": {
+      "type": "object",
+      "description": "The health of the deployed application",
+      "properties": {
+        "HealthEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthEvent"
+          }
+        },
+        "AggregatedHealthState": {
+          "$ref": "#/definitions/HealthState"
+        },
+        "UnhealthyEvaluations": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "NodeName": {
+          "type": "string"
+        },
+        "DeployedServicePackageHealthStates": {
+          "$ref": "#/definitions/DeployedServicePackageHealthState"
+        }
+      }
+    },
+    "NodeLoadMetricInformation": {
+      "type": "object",
+      "description": "The information of the node load metric",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "NodeCapacity": {
+          "type": "string"
+        },
+        "NodeLoad": {
+          "type": "string"
+        },
+        "NodeRemainingCapacity": {
+          "type": "string"
+        },
+        "IsCapacityViolation": {
+          "type": "boolean"
+        },
+        "NodeBufferedCapacity": {
+          "type": "string"
+        },
+        "NodeRemainingBufferedCapacity": {
+          "type": "string"
+        }
+      }
+    },
+    "NodeLoadInformation": {
+      "type": "object",
+      "description": "The information of the node load",
+      "properties": {
+        "NodeName": {
+          "type": "string"
+        },
+        "NodeLoadMetricInformation": {
+          "$ref": "#/definitions/NodeLoadMetricInformation"
+        }
+      }
+    },
+    "CodePackageEntryPointStatistics": {
+      "type": "object",
+      "description": "The statistics of the code package entry point",
+      "properties": {
+        "LastExitCode": {
+          "type": "integer"
+        },
+        "LastActivationTime": {
+          "type": "string"
+        },
+        "LastExitTime": {
+          "type": "string"
+        },
+        "LastSuccessfulActivationTime": {
+          "type": "string"
+        },
+        "LastSuccessfulExitTime": {
+          "type": "string"
+        },
+        "ActivationFailureCount": {
+          "type": "integer"
+        },
+        "ContinuousActivationFailureCount": {
+          "type": "integer"
+        },
+        "ExitFailureCount": {
+          "type": "integer"
+        },
+        "ContinuousExitFailureCount": {
+          "type": "integer"
+        },
+        "ActivationCount": {
+          "type": "integer"
+        },
+        "ExitCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "EntryPoint": {
+      "type": "object",
+      "description": "The point of the entry",
+      "properties": {
+        "EntryPointLocation": {
+          "type": "integer"
+        },
+        "ProcessId": {
+          "type": "integer"
+        },
+        "RunAsUserName": {
+          "type": "integer"
+        },
+        "NextActivationTime": {
+          "type": "integer"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "CodePackageEntryPointStatistics": {
+          "$ref": "#/definitions/CodePackageEntryPointStatistics"
+        }
+      }
+    },
+    "DeployedCodePackage": {
+      "type": "object",
+      "description": "The package of the deployed code",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        },
+        "ServiceManifestName": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "RunFrequencyInterval": {
+          "type": "string"
+        },
+        "SetupEntryPoint": {
+          "$ref": "#/definitions/EntryPoint"
+        },
+        "MainEntryPoint": {
+          "$ref": "#/definitions/EntryPoint"
+        },
+        "HasSetupEntryPoint": {
+          "type": "boolean"
+        }
+      }
+    },
+    "DeployedReplica": {
+      "type": "object",
+      "description": "The replica of the deployed",
+      "properties": {
+        "ServiceKind": {
+          "$ref": "#/definitions/ServiceKind"
+        },
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "ServiceManifestVersion": {
+          "type": "string"
+        },
+        "ServiceManifestName": {
+          "type": "string"
+        },
+        "CodePackageName": {
+          "type": "string"
+        },
+        "PartitionId": {
+          "type": "string"
+        },
+        "InstanceId": {
+          "type": "string"
+        },
+        "ReplicaId": {
+          "type": "string"
+        },
+        "ReplicaRole": {
+          "$ref": "#/definitions/ReplicaRole"
+        },
+        "ReplicaStatus": {
+          "$ref": "#/definitions/ReplicaStatus"
+        },
+        "Address": {
+          "type": "string"
+        }
+      }
+    },
+    "DeployedReplicaDetail": {
+      "type": "object",
+      "description": "The detail of the deployed replica",
+      "properties": {
+        "ServiceKind": {
+          "$ref": "#/definitions/ServiceKind"
+        },
+        "ServiceName": {
+          "type": "string"
+        },
+        "PartitionId": {
+          "type": "string"
+        },
+        "CurrentServiceOperation": {
+          "type": "integer"
+        },
+        "CurrentReplicatorOperation": {
+          "type": "integer"
+        },
+        "CurrentServiceOperationStartTimeUtc": {
+          "type": "string"
+        },
+        "InstanceId": {
+          "type": "string"
+        },
+        "ReplicaId": {
+          "type": "string"
+        },
+        "ReadStatus": {
+          "type": "integer"
+        },
+        "WriteStatus": {
+          "type": "integer"
+        },
+        "ReplicatorStatus": {
+          "type": "object",
+          "description": "The status of the replicator",
+          "properties": {
+            "Kind": {
+              "type": "integer"
+            },
+            "ReplicationQueueStatus": {
+              "type": "object",
+              "description": "The status of the replication queue",
+              "properties": {
+                "QueueUtilizationPercentage": {
+                  "type": "string"
+                },
+                "QueueMemorySize": {
+                  "type": "string"
+                },
+                "FirstSequenceNumber": {
+                  "type": "string"
+                },
+                "CompletedSequenceNumber": {
+                  "type": "string"
+                },
+                "CommittedSequenceNumber": {
+                  "type": "string"
+                },
+                "LastSequenceNumber": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "DeployedServicePackage": {
+      "type": "object",
+      "description": "The package of the deployed service",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        }
+      }
+    },
+    "DeployedServicePackageHealth": {
+      "type": "object",
+      "description": "The health of the deployed service package",
+      "properties": {
+        "ApplicationName": {
+          "type": "string"
+        },
+        "ServiceManifestName": {
+          "type": "string"
+        },
+        "NodeName": {
+          "type": "string"
+        },
+        "HealthEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthEvent"
+          }
+        },
+        "AggregatedHealthState": {
+          "$ref": "#/definitions/HealthState"
+        }
+      }
+    },
+    "DeployedServiceType": {
+      "type": "object",
+      "description": "The type of the deploye service",
+      "properties": {
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "CodePackageName": {
+          "type": "string"
+        },
+        "ServiceManifestName": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        }
+      }
+    },
+    "DeployedServiceHealthReport": {
+      "type": "object",
+      "description": "The report of the deployed service package health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
+    },
+    "ApplicationType": {
+      "type": "object",
+      "description": "The type of the application",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        },
+        "DefaultParameterList": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "The list of the default parameter",
+            "properties": {
+              "Key": {
+                "type": "string"
+              },
+              "Value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ServiceManifest": {
+      "type": "object",
+      "description": "The manifest of the service",
+      "properties": {
+        "Manifest": {
+          "type": "string"
+        }
+      }
+    },
+    "ServiceType": {
+      "type": "object",
+      "description": "The type of the service",
+      "properties": {
+        "ServiceTypeDescription": {
+          "type": "object",
+          "description": "The description of the service type",
+          "properties": {
+            "IsStateful": {
+              "type": "boolean"
+            },
+            "ServiceTypeName": {
+              "type": "string"
+            },
+            "PlacementConstraints": {
+              "type": "string"
+            },
+            "HasPersistedState": {
+              "type": "boolean"
+            }
+          }
+        },
+        "ServiceManifestVersion": {
+          "type": "string"
+        },
+        "ServiceManifestName": {
+          "type": "string"
+        },
+        "IsServiceGroup": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Application": {
+      "type": "object",
+      "description": "The application",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "TypeName": {
+          "type": "string"
+        },
+        "TypeVersion": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "Parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "The parameters",
+            "properties": {
+              "Key": {
+                "type": "string"
+              },
+              "Value": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "HealthState": {
+          "$ref": "#/definitions/HealthState"
+        }
+      }
+    },
+    "ApplicationList": {
+      "type": "object",
+      "description": "The list of the application",
+      "properties": {
+        "ContinuationToken": {
+          "type": "string"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        }
+      }
+    },
+    "ApplicationDescription": {
+      "type": "object",
+      "description": "The ",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "TypeName": {
+          "type": "string"
+        },
+        "TypeVersion": {
+          "type": "string"
+        },
+        "ParameterList": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "The list of the parameter",
+            "properties": {
+              "Key": {
+                "type": "string"
+              },
+              "Value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ApplicationManifest": {
+      "type": "object",
+      "description": "The manifest of the application",
+      "properties": {
+        "Manifest": {
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationHealthReport": {
+      "type": "object",
+      "description": "The report of the application health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
+    },
+    "Service": {
+      "type": "object",
+      "description": "The service",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "ServiceKind": {
+          "$ref": "#/definitions/ServiceKind"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "TypeName": {
+          "type": "string"
+        },
+        "ManifestVersion": {
+          "type": "string"
+        },
+        "HasPersistedState": {
+          "type": "boolean"
+        },
+        "HealthState": {
+          "$ref": "#/definitions/HealthState"
+        },
+        "ServiceStatus": {
+          "type": "string",
+          "enum": [ "Invalid", "Active", "Upgrading", "Deleting", "Creating", "Faile" ]
+        },
+        "IsServiceGroup": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ServiceList": {
+      "type": "object",
+      "description": "The list of the service",
+      "properties": {
+        "ContinuationToken": {
+          "type": "string"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Service"
+          }
+        }
+      }
+    },
+    "ServiceHealthReport": {
+      "type": "object",
+      "description": "The report of the service health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
+    },
+    "PartitionDescription": {
+      "type": "object",
+      "description": "The description of the partition",
+      "properties": {
+        "PartitionScheme": {
+          "$ref": "#/definitions/PartitionScheme"
+        },
+        "Count": {
+          "type": "integer"
+        },
+        "Names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "LowKey": {
+          "type": "string"
+        },
+        "HighKey": {
+          "type": "string"
+        }
+      }
+    },
+    "ServiceGroupMemberDescription": {
+      "type": "object",
+      "description": "The description of the service group member",
+      "properties": {
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "ServiceKind": {
+          "$ref": "#/definitions/ServiceKind"
+        }
+      }
+    },
+    "ServiceGroupDescription": {
+      "type": "object",
+      "description": "The description of the service group",
+      "discriminator": "ServiceKind",
+      "required": [
+        "ServiceKind"
+      ],
+      "properties": {
+        "ServiceKind": {
+          "$ref": "#/definitions/ServiceKind"
+        },
+        "ApplicationName": {
+          "type": "string"
+        },
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "PartitionDescription": {
+          "$ref": "#/definitions/PartitionDescription"
+        },
+        "PlacementConstraints": {
+          "type": "string"
+        },
+        "CorrelationScheme": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServiceLoadMetrics": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServicePlacementPolicies": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "Flags": {
+          "type": "integer"
+        },
+        "ServiceGroupMemberDescription": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceGroupMemberDescription"
+          }
+        }
+      }
+    },
+    "StatelessServiceGroupDescription": {
+      "type": "object",
+      "description": "The description of the stateless service group",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceGroupDescription"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateless",
+      "properties": {
+        "InstanceCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatefulServiceGroupDescription": {
+      "type": "object",
+      "description": "The description of the stateful service group",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceGroupDescription"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateful",
+      "properties": {
+        "TargetReplicaSetSize": {
+          "type": "integer"
+        },
+        "MinReplicaSetSize": {
+          "type": "integer"
+        },
+        "HasPersistedState": {
+          "type": "boolean"
+        },
+        "ReplicaRestartWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "QuorumLossWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "StandByReplicaKeepDurationSeconds": {
+          "type": "integer"
+        },
+        "DefaultMoveCost": {
+          "$ref": "#/definitions/DefaultMoveCost"
+        },
+        "IsDefaultMoveCostSpecified": {
+          "type": "boolean"
+        }
+      }
+    },
+    "CreateServiceGroupDescription": {
+      "type": "object",
+      "description": "The description of the create service group",
+      "discriminator": "ServiceKind",
+      "required": [
+        "ServiceKind"
+      ],
+      "properties": {
+        "ServiceKind": {
+          "$ref": "#/definitions/ServiceKind"
+        },
+        "ApplicationName": {
+          "type": "string"
+        },
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "PartitionDescription": {
+          "$ref": "#/definitions/PartitionDescription"
+        },
+        "PlacementConstraints": {
+          "type": "string"
+        },
+        "CorrelationScheme": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServiceLoadMetrics": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServicePlacementPolicies": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "Flags": {
+          "type": "integer"
+        },
+        "ServiceGroupMemberDescription": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceGroupMemberDescription"
+          }
+        }
+      }
+    },
+    "StatelessCreateServiceGroupDescription": {
+      "type": "object",
+      "description": "The description of the stateless create service group",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreateServiceGroupDescription"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateless",
+      "properties": {
+        "InstanceCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatefulCreateServiceGroupDescription": {
+      "type": "object",
+      "description": "The description of the stateful create service group",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreateServiceGroupDescription"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateful",
+      "properties": {
+        "TargetReplicaSetSize": {
+          "type": "integer"
+        },
+        "MinReplicaSetSize": {
+          "type": "integer"
+        },
+        "HasPersistedState": {
+          "type": "boolean"
+        },
+        "ReplicaRestartWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "QuorumLossWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "StandByReplicaKeepDurationSeconds": {
+          "type": "integer"
+        },
+        "DefaultMoveCost": {
+          "$ref": "#/definitions/DefaultMoveCost"
+        },
+        "IsDefaultMoveCostSpecified": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ServiceGroupMember": {
+      "type": "object",
+      "description": "The member of the service group",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "ServiceGroupMemberDescription": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceGroupMemberDescription"
+          }
+        }
+      }
+    },
+    "ApplicationHealth": {
+      "type": "object",
+      "description": "The health of the application",
+      "properties": {
+        "HealthEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthEvent"
+          }
+        },
+        "AggregatedHealthState": {
+          "$ref": "#/definitions/HealthState"
+        },
+        "UnhealthyEvaluations": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "ServiceHealthStates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "The states of the service health",
+            "properties": {
+              "ServiceName": {
+                "type": "string"
+              },
+              "AggregatedHealthState": {
+                "$ref": "#/definitions/HealthState"
+              }
+            }
+          }
+        },
+        "DeployedApplicationHealthStates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "The states of the deployed application health",
+            "properties": {
+              "ApplicationName": {
+                "type": "string"
+              },
+              "NodeName": {
+                "type": "string"
+              },
+              "AggregatedHealthState": {
+                "$ref": "#/definitions/HealthState"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ApplicationUpgrade": {
+      "type": "object",
+      "description": "The upgrade of the application",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "TypeName": {
+          "type": "string"
+        },
+        "TargetApplicationTypeVersion": {
+          "type": "string"
+        },
+        "UpgradeDomains": {
+          "type": "string"
+        },
+        "UpgradeState": {
+          "$ref": "#/definitions/UpgradeState"
+        },
+        "NextUpgradeDomain": {
+          "type": "string"
+        },
+        "RollingUpgradeMode": {
+          "$ref": "#/definitions/RollingUpgradeMode"
+        },
+        "UpgradeDurationInMilliseconds": {
+          "type": "string"
+        },
+        "UpgradeDomainDurationInMilliseconds": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "string"
+        },
+        "CurrentUpgradeDomainProgress": {
+          "type": "object",
+          "description": "The progress of the current upgrade domain",
+          "properties": {
+            "DomainName": {
+              "type": "string"
+            },
+            "NodeUpgradeProgressList": {
+              "type": "string"
+            }
+          }
+        },
+        "StartTimestampUtc": {
+          "type": "string"
+        },
+        "FailureTimestampUtc": {
+          "type": "string"
+        },
+        "FailureReason": {
+          "$ref": "#/definitions/FailureReason"
+        },
+        "DeployedApplicationHealthStates": {
+          "type": "object",
+          "description": "The states of the deployed application health",
+          "properties": {
+            "DomainName": {
+              "type": "string"
+            },
+            "NodeUpgradeProgressList": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ServiceCorrelationDescription": {
+      "type": "object",
+      "description": "The description of the service correlation",
+      "properties": {
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceCorrelationScheme": {
+          "type": "string",
+          "enum": [ "Invalid", "Affinity", "AlignedAffinity", "NonAlignedAffinity" ]
+        }
+      }
+    },
+    "ServiceLoadMetricDescription": {
+      "type": "object",
+      "description": "The description of the service load metric",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "ServiceLoadMetricWeight": {
+          "type": "string",
+          "enum": [ "Zero", "Low", "Medium", "High" ]
+        },
+        "PrimaryDefaultLoad": {
+          "type": "integer"
+        },
+        "SecondaryDefaultLoad": {
+          "type": "integer"
+        }
+      }
+    },
+    "ServicePlacementPolicyDescription": {
+      "type": "object",
+      "description": "The description of the service placement policy",
+      "properties": {
+        "Type": {
+          "type": "string"
+        }
+      }
+    },
+    "ServiceDescription": {
+      "type": "object",
+      "description": "The description of the service",
+      "discriminator": "ServiceKind",
+      "required": [
+        "ServiceKind"
+      ],
+      "properties": {
+        "ServiceKind": {
+          "$ref": "#/definitions/ServiceKind"
+        },
+        "ApplicationName": {
+          "type": "string"
+        },
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "PartitionDescription": {
+          "$ref": "#/definitions/PartitionDescription"
+        },
+        "PlacementConstraints": {
+          "type": "string"
+        },
+        "CorrelationScheme": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServiceLoadMetrics": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServicePlacementPolicies": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "Flags": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatelessServiceDescription": {
+      "type": "object",
+      "description": "The description of the stateless service",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceDescription"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateless",
+      "properties": {
+        "InstanceCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatefulServiceDescription": {
+      "type": "object",
+      "description": "The description of the stateful service",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceDescription"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateful",
+      "properties": {
+        "TargetReplicaSetSize": {
+          "type": "integer"
+        },
+        "MinReplicaSetSize": {
+          "type": "integer"
+        },
+        "HasPersistedState": {
+          "type": "boolean"
+        },
+        "ReplicaRestartWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "QuorumLossWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "StandByReplicaKeepDurationSeconds": {
+          "type": "integer"
+        },
+        "DefaultMoveCost": {
+          "$ref": "#/definitions/DefaultMoveCost"
+        },
+        "IsDefaultMoveCostSpecified": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ServiceDescriptionTemplate": {
+      "type": "object",
+      "description": "The template of the service description",
+      "properties": {
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceTypeName": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateServiceDescription": {
+      "type": "object",
+      "description": "The description of the create service",
+      "discriminator": "ServiceKind",
+      "required": [
+        "ServiceKind"
+      ],
+      "properties": {
+        "ServiceKind": {
+          "$ref": "#/definitions/ServiceKind"
+        },
+        "ApplicationName": {
+          "type": "string"
+        },
+        "ServiceName": {
+          "type": "string"
+        },
+        "ServiceTypeName": {
+          "type": "string"
+        },
+        "PartitionDescription": {
+          "$ref": "#/definitions/PartitionDescription"
+        },
+        "PlacementConstraints": {
+          "type": "string"
+        },
+        "CorrelationScheme": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServiceLoadMetrics": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "ServicePlacementPolicies": {
+          "$ref": "#/definitions/ServiceCorrelationDescription"
+        },
+        "Flags": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatelessCreateServiceDescription": {
+      "type": "object",
+      "description": "The description of the stateless create service",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreateServiceDescription"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateless",
+      "properties": {
+        "InstanceCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatefulCreateServiceDescription": {
+      "type": "object",
+      "description": "The description of the stateful create service",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreateServiceDescription"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateful",
+      "properties": {
+        "TargetReplicaSetSize": {
+          "type": "integer"
+        },
+        "MinReplicaSetSize": {
+          "type": "integer"
+        },
+        "HasPersistedState": {
+          "type": "boolean"
+        },
+        "ReplicaRestartWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "QuorumLossWaitDurationSeconds": {
+          "type": "integer"
+        },
+        "StandByReplicaKeepDurationSeconds": {
+          "type": "integer"
+        },
+        "DefaultMoveCost": {
+          "$ref": "#/definitions/DefaultMoveCost"
+        },
+        "IsDefaultMoveCostSpecified": {
+          "type": "boolean"
+        }
+      }
+    },
+    "UpdateServiceDescription": {
+      "type": "object",
+      "description": "The description of the update service",
+      "discriminator": "ServiceKind",
+      "required": [
+        "ServiceKind"
+      ],
+      "properties": {
+        "ServiceKind": {
+          "$ref": "#/definitions/ServiceKind"
+        },
+        "Flags": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatelessUpdateServiceDescription": {
+      "type": "object",
+      "description": "The description of the stateless update service",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateServiceDescription"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateless",
+      "properties": {
+        "InstanceCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatefulUpdateServiceDescription": {
+      "type": "object",
+      "description": "The description of the stateful update service",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateServiceDescription"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateful",
+      "properties": {
+        "TargetReplicaSetSize": {
+          "type": "integer"
+        },
+        "MinReplicaSetSize": {
+          "type": "integer"
+        },
+        "ReplicaRestartWaitDurationInMilliseconds": {
+          "type": "integer"
+        },
+        "QuorumLossWaitDurationInMilliseconds": {
+          "type": "integer"
+        },
+        "StandByReplicaKeepDurationInMilliseconds": {
+          "type": "integer"
+        }
+      }
+    },
+    "UpdateServiceGroupDescription": {
+      "type": "object",
+      "description": "The description of the update service group",
+      "discriminator": "ServiceKind",
+      "required": [
+        "ServiceKind"
+      ],
+      "properties": {
+        "ServiceKind": {
+          "$ref": "#/definitions/ServiceKind"
+        },
+        "Flags": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatelessUpdateServiceGroupDescription": {
+      "type": "object",
+      "description": "The description of the stateless update service group",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateServiceGroupDescription"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateless",
+      "properties": {
+        "InstanceCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatefulUpdateServiceGroupDescription": {
+      "type": "object",
+      "description": "The description of the stateful update service group",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateServiceGroupDescription"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateful",
+      "properties": {
+        "TargetReplicaSetSize": {
+          "type": "integer"
+        },
+        "MinReplicaSetSize": {
+          "type": "integer"
+        },
+        "ReplicaRestartWaitDurationInMilliseconds": {
+          "type": "integer"
+        },
+        "QuorumLossWaitDurationInMilliseconds": {
+          "type": "integer"
+        },
+        "StandByReplicaKeepDurationInMilliseconds": {
+          "type": "integer"
+        }
+      }
+    },
+    "ServiceHealth": {
+      "type": "object",
+      "description": "The health of the service",
+      "properties": {
+        "HealthEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthEvent"
+          }
+        },
+        "AggregatedHealthState": {
+          "$ref": "#/definitions/HealthState"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "PartitionHealthStates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "The states of the partition health",
+            "properties": {
+              "PartitionId": {
+                "type": "string"
+              },
+              "AggregatedHealthState": {
+                "$ref": "#/definitions/HealthState"
+              }
+            }
+          }
+        }
+      }
+    },
+    "PartitionInformation": {
+      "type": "object",
+      "description": "The information of the partition",
+      "properties": {
+        "ServicePartitionKind": {
+          "type": "string",
+          "enum": [ "Invalid", "Singleton", "Int64Range", "Named" ]
+        },
+        "Id": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "LowKey": {
+          "type": "string"
+        },
+        "HighKey": {
+          "type": "string"
+        }
+      }
+    },
+    "Partition": {
+      "type": "object",
+      "description": "The partition",
+      "properties": {
+        "ServiceKind": {
+          "$ref": "#/definitions/ServiceKind"
+        },
+        "PartitionInformation": {
+          "$ref": "#/definitions/PartitionInformation"
+        },
+        "InstanceCount": {
+          "type": "integer"
+        },
+        "TargetReplicaSetSize": {
+          "type": "integer"
+        },
+        "MinReplicaSetSize": {
+          "type": "integer"
+        },
+        "HealthState": {
+          "$ref": "#/definitions/HealthState"
+        },
+        "PartitionStatus": {
+          "type": "string",
+          "enum": [ "Invalid", "Ready", "NotReady", "InQuorumLoss", "Reconfiguring", "Deleting" ]
+        },
+        "CurrentConfigurationEpoch": {
+          "type": "object",
+          "description": "The epoch of the current configuration",
+          "properties": {
+            "ConfigurationVersion": {
+              "type": "string"
+            },
+            "DataLossVersion": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "PartitionList": {
+      "type": "object",
+      "description": "The list of the partition",
+      "properties": {
+        "ContinuationToken": {
+          "type": "string"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Partition"
+          }
+        }
+      }
+    },
+    "PartitionHealthReport": {
+      "type": "object",
+      "description": "The report of the partition health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
+    },
+    "Replica": {
+      "type": "object",
+      "description": "The replica",
+      "properties": {
+        "ServiceKind": {
+          "$ref": "#/definitions/ServiceKind"
+        },
+        "InstanceId": {
+          "type": "string"
+        },
+        "ReplicaId": {
+          "type": "string"
+        },
+        "ReplicaRole": {
+          "$ref": "#/definitions/ReplicaRole"
+        },
+        "ReplicaStatus": {
+          "$ref": "#/definitions/ReplicaStatus"
+        },
+        "HealthState": {
+          "$ref": "#/definitions/HealthState"
+        },
+        "Address": {
+          "type": "string"
+        },
+        "NodeName": {
+          "type": "string"
+        },
+        "LastInBuildDurationInSeconds": {
+          "type": "string"
+        }
+      }
+    },
+    "ReplicaList": {
+      "type": "object",
+      "description": "The list of the replica",
+      "properties": {
+        "ContinuationToken": {
+          "type": "string"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Replica"
+          }
+        }
+      }
+    },
+    "ReplicaHealthReport": {
+      "type": "object",
+      "description": "The report of the replica health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
+    },
+    "PartitionHealth": {
+      "type": "object",
+      "description": "The health of the partition",
+      "properties": {
+        "HealthEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthEvent"
+          }
+        },
+        "AggregatedHealthState": {
+          "$ref": "#/definitions/HealthState"
+        },
+        "PartitionId": {
+          "type": "string"
+        },
+        "ReplicaHealthStates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "The states of the replica health",
+            "properties": {
+              "HealthEvents": {
+                "type": "integer"
+              },
+              "PartitionId": {
+                "type": "string"
+              },
+              "ReplicaId": {
+                "type": "string"
+              },
+              "AggregatedHealthState": {
+                "$ref": "#/definitions/HealthState"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ReplicaHealth": {
+      "type": "object",
+      "description": "The health of the replica",
+      "properties": {
+        "ServiceKind": {
+          "$ref": "#/definitions/ServiceKind"
+        },
+        "PartitionId": {
+          "type": "string"
+        },
+        "ReplicaId": {
+          "type": "string"
+        },
+        "HealthEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthEvent"
+          }
+        },
+        "AggregatedHealthState": {
+          "$ref": "#/definitions/HealthState"
+        }
+      }
+    },
+    "PartitionLoadInformation": {
+      "type": "object",
+      "description": "The information of the partition load",
+      "properties": {
+        "PartitionId": {
+          "type": "string"
+        },
+        "PrimaryLoadMetricReports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "SecondaryLoadMetricReports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ReplicaLoadInformation": {
+      "type": "object",
+      "description": "The information of the replica load",
+      "properties": {
+        "PartitionId": {
+          "type": "string"
+        },
+        "ReplicaOrInstanceId": {
+          "type": "string"
+        },
+        "ReportedLoad": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LoadMetricInformation": {
+      "type": "object",
+      "description": "The information of the load metric",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "IsBalancedBefore": {
+          "type": "boolean"
+        },
+        "IsBalancedAfter": {
+          "type": "boolean"
+        },
+        "DeviationBefore": {
+          "type": "integer"
+        },
+        "DeviationAfter": {
+          "type": "integer"
+        },
+        "BalancingThreshold": {
+          "type": "integer"
+        },
+        "Action": {
+          "type": "string"
+        },
+        "ActivityThreshold": {
+          "type": "integer"
+        },
+        "ClusterCapacity": {
+          "type": "string"
+        },
+        "ClusterLoad": {
+          "type": "string"
+        },
+        "RemainingUnbufferedCapacity": {
+          "type": "string"
+        },
+        "NodeBufferPercentage": {
+          "type": "integer"
+        },
+        "BufferedCapacity": {
+          "type": "string"
+        },
+        "RemainingBufferedCapacity": {
+          "type": "string"
+        },
+        "IsClusterCapacityViolation": {
+          "type": "boolean"
+        },
+        "MinNodeLoadValue": {
+          "type": "string"
+        },
+        "MinNodeLoadId": {
+          "type": "object",
+          "description": "The id of the min node",
+          "properties": {
+            "Id": {
+              "type": "string"
+            }
+          }
+        },
+        "MaxNodeLoadValue": {
+          "type": "string"
+        },
+        "MaxNodeLoadId": {
+          "type": "object",
+          "description": "The id of the max node load",
+          "properties": {
+            "Id": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ClusterHealthReport": {
+      "type": "object",
+      "description": "The report of the cluster health",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthReport"
+        }
+      ]
+    },
+    "ClusterLoadInformation": {
+      "type": "object",
+      "description": "The information of the cluster load",
+      "properties": {
+        "LastBalancingStartTimeUtc": {
+          "type": "string"
+        },
+        "LastBalancingEndTimeUtc": {
+          "type": "string"
+        },
+        "LoadMetricInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadMetricInformation"
+          }
+        }
+      }
+    },
+    "ClusterHealth": {
+      "type": "object",
+      "description": "The health of the cluster",
+      "properties": {
+        "HealthEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthEvent"
+          }
+        },
+        "AggregatedHealthState": {
+          "$ref": "#/definitions/HealthState"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "NodeHealthStates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "The states of tehe node health",
+            "properties": {
+              "Name": {
+                "type": "string"
+              },
+              "Id": {
+                "type": "object",
+                "description": "The id",
+                "properties": {
+                  "Id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "AggregatedHealthState": {
+                "$ref": "#/definitions/HealthState"
+              }
+            }
+          }
+        },
+        "ApplicationHealthState": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "The state of the application health",
+            "properties": {
+              "Name": {
+                "type": "string"
+              },
+              "AggregatedHealthState": {
+                "$ref": "#/definitions/HealthState"
+              }
+            }
+          }
+        }
+      }
+    },
+    "MonitoringPolicy": {
+      "type": "object",
+      "description": "The policy of the monitoring",
+      "properties": {
+        "FailureAction": {
+          "type": "string"
+        },
+        "HealthCheckWaitDurationInMilliseconds": {
+          "type": "string"
+        },
+        "HealthCheckStableDurationInMilliseconds": {
+          "type": "string"
+        },
+        "HealthCheckRetryTimeoutInMilliseconds": {
+          "type": "string"
+        },
+        "UpgradeTimeoutInMilliseconds": {
+          "type": "string"
+        },
+        "UpgradeDomainTimeoutInMilliseconds": {
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationHealthPolicy": {
+      "type": "object",
+      "description": "The policy of the application health",
+      "properties": {
+        "ConsiderWarningAsError": {
+          "type": "boolean"
+        },
+        "MaxPercentUnhealthyDeployedApplications": {
+          "type": "integer"
+        },
+        "DefaultServiceTypeHealthPolicy": {
+          "type": "object",
+          "description": "The policy of the default service type health",
+          "properties": {
+            "MaxPercentUnhealthyServices": {
+              "type": "integer"
+            },
+            "MaxPercentUnhealthyPartitionsPerService": {
+              "type": "integer"
+            },
+            "MaxPercentUnhealthyReplicasPerPartition": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "StartApplicationUpgradeDescription": {
+      "type": "object",
+      "description": "The description of the start application upgrade",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "TargetApplicationTypeVersion": {
+          "type": "string"
+        },
+        "Parameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "UpgradeKind": {
+          "type": "string",
+          "enum": [ "Invalid", "Rolling" ]
+        },
+        "RollingUpgradeMode": {
+          "$ref": "#/definitions/RollingUpgradeMode"
+        },
+        "UpgradeReplicaSetCheckTimeoutInSeconds": {
+          "type": "integer"
+        },
+        "ForceRestart": {
+          "type": "boolean"
+        },
+        "MonitoringPolicy": {
+          "$ref": "#/definitions/MonitoringPolicy"
+        },
+        "ApplicationHealthPolicy": {
+          "$ref": "#/definitions/ApplicationHealthPolicy"
+        }
+      }
+    },
+    "UpdateApplicationUpgradeDescription": {
+      "type": "object",
+      "description": "The description of the update application upgrade",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "UpgradeKind": {
+          "type": "string"
+        },
+        "UpdateDescription": {
+          "type": "object",
+          "description": "The description of the update",
+          "properties": {
+            "RollingUpgradeMode": {
+              "$ref": "#/definitions/RollingUpgradeMode"
+            },
+            "ForceRestart": {
+              "type": "boolean"
+            },
+            "FailureAction": {
+              "type": "string"
+            },
+            "UpgradeReplicaSetCheckTimeoutInSeconds": {
+              "type": "integer"
+            },
+            "HealthCheckWaitDurationInMilliseconds": {
+              "type": "string"
+            },
+            "HealthCheckStableDurationInMilliseconds": {
+              "type": "string"
+            },
+            "HealthCheckRetryTimeoutInMilliseconds": {
+              "type": "string"
+            },
+            "UpgradeTimeoutInMilliseconds": {
+              "type": "string"
+            },
+            "UpgradeDomainTimeoutInMilliseconds": {
+              "type": "string"
+            }
+          }
+        },
+        "ApplicationHealthPolicy": {
+          "$ref": "#/definitions/ApplicationHealthPolicy"
+        }
+      }
+    },
+    "ResumeApplicationUpgrade": {
+      "type": "object",
+      "description": "The upgrade of the resume application",
+      "properties": {
+        "UpgradeDomainName": {
+          "type": "string"
+        }
+      }
+    },
+    "ResolvedServicePartition": {
+      "type": "object",
+      "description": "The partition of the resolved service",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "PartitionInformation": {
+          "$ref": "#/definitions/PartitionInformation"
+        },
+        "Endpoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "The endpoints",
+            "properties": {
+              "Kind": {
+                "type": "integer"
+              },
+              "Address": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "Version": {
+          "type": "string"
+        }
+      }
+    },
+    "ClusterUpgradeProgress": {
+      "type": "object",
+      "description": "The progress of the cluster upgrade",
+      "properties": {
+        "CodeVersion": {
+          "type": "string"
+        },
+        "ConfigVersion": {
+          "type": "string"
+        },
+        "UpgradeDomains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "UpgradeState": {
+          "$ref": "#/definitions/UpgradeState"
+        },
+        "NextUpgradeDomain": {
+          "type": "string"
+        },
+        "RollingUpgradeMode": {
+          "$ref": "#/definitions/RollingUpgradeMode"
+        },
+        "UpgradeDurationInMilliseconds": {
+          "type": "string"
+        },
+        "UpgradeDomainDurationInMilliseconds": {
+          "type": "string"
+        },
+        "UnhealthyEvaluations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnhealthyEvaluation"
+          }
+        },
+        "CurrentUpgradeDomainProgress": {
+          "type": "object",
+          "description": "The progress of the current upgrade domain",
+          "properties": {
+            "DomainName": {
+              "type": "string"
+            },
+            "NodeUpgradeProgressList": {
+              "type": "string"
+            }
+          }
+        },
+        "StartTimestampUtc": {
+          "type": "string"
+        },
+        "FailureTimestampUtc": {
+          "type": "string"
+        },
+        "FailureReason": {
+          "$ref": "#/definitions/FailureReason"
+        },
+        "UpgradeDomainProgressAtFailure": {
+          "type": "object",
+          "description": "The failure of the upgrade domain progress at",
+          "properties": {
+            "DomainName": {
+              "type": "string"
+            },
+            "NodeUpgradeProgressList": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "HealthState": {
+      "type": "string",
+      "enum": [ "Invalid", "Ok", "Warning", "Error", "Unknown" ]
+    },
+    "RollingUpgradeMode": {
+      "type": "string",
+      "enum": [ "Invalid", "UnmonitoredAuto", "UnmonitoredManual", "Monitored" ]
+    },
+    "FailureAction": {
+      "type": "string",
+      "enum": [ "Invalid", "Rollback", "Manual" ]
+    },
+    "ServiceKind": {
+      "type": "string",
+      "enum": [ "Invalid", "Stateless", "Stateful" ]
+    },
+    "PartitionScheme": {
+      "type": "string",
+      "enum": [ "Invalid", "Singleton", "UniformInt64", "Named" ]
+    },
+    "ReplicaRole": {
+      "type": "string",
+      "enum": [ "Invalid", "None", "Primary", "IdleSecondary", "ActiveSecondary" ]
+    },
+    "ReplicaStatus": {
+      "type": "string",
+      "enum": [ "Invalid", "InBuild", "Standby", "Ready", "Down", "Dropped" ]
+    },
+    "DefaultMoveCost": {
+      "type": "string",
+      "enum": [ "Zero", "Low", "Medium", "High" ]
+    },
+    "UpgradeState": {
+      "type": "string",
+      "enum": [ "Invalid", "RollingBackInProgress", "RollingBackCompleted", "RollingForwardPending", "RollingForwardInProgress", "RollingForwardCompleted" ]
+    },
+    "FailureReason": {
+      "type": "string",
+      "enum": [ "Invalid", "Interrupted", "HealthCheck", "UpgradeDomainTimeout", "OverallUpgradeTimeout" ]
+    },
+    "ErrorModel": {
+      "type": "object",
+      "description": "The model of the error",
+      "properties": {
+        "Error": {
+          "type": "object",
+          "description": "The error",
+          "properties": {
+            "Code": {
+              "type": "string"
+            },
+            "Message": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The version of the api",
+      "required": true,
+      "type": "string"
+    }
+  }
+}

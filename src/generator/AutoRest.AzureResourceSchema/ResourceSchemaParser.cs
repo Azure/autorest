@@ -41,8 +41,6 @@ namespace AutoRest.AzureResourceSchema
             foreach (Method method in serviceClient.Methods)
             {
                 if (method.HttpMethod != HttpMethod.Put ||
-                    method.ReturnType.Body == null ||
-                    !(method.ReturnType.Body is CompositeType) ||
                     string.IsNullOrWhiteSpace(method.Url) ||
                     !method.Url.StartsWith(resourceMethodPrefix, StringComparison.OrdinalIgnoreCase) ||
                     !method.Url.EndsWith("}", StringComparison.OrdinalIgnoreCase))
@@ -487,6 +485,16 @@ namespace AutoRest.AzureResourceSchema
                             case Constraint.Pattern:
                                 Debug.Assert(result.JsonType == "string", "Expected to only find a Pattern constraint on a string property.");
                                 result.Pattern = entry.Value;
+                                break;
+
+                            case Constraint.MinLength:
+                                Debug.Assert(result.JsonType == "string" || result.JsonType == "array", "Expected to only find a MinLength constraint on a string or array property.");
+                                result.MinLength = Double.Parse(entry.Value, CultureInfo.CurrentCulture);
+                                break;
+
+                            case Constraint.MaxLength:
+                                Debug.Assert(result.JsonType == "string" || result.JsonType == "array", "Expected to only find a MaxLength constraint on a string or array property.");
+                                result.MaxLength = Double.Parse(entry.Value, CultureInfo.CurrentCulture);
                                 break;
 
                             default:

@@ -8,13 +8,16 @@ using AutoRest.Core;
 using AutoRest.Core.Utilities;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 
 namespace AutoRest.Swagger.Tests
 {
+    using Core.Extensibility;
+
     public static class SwaggerSpecHelper
     {
         public static void RunTests<T>(string specFile, string resultFolder, string modeler = "Swagger",
-            Settings settings = null)
+            Settings settings = null) where T : IAnyPlugin , new()
         {
             using (NewContext)
             {
@@ -35,7 +38,7 @@ namespace AutoRest.Swagger.Tests
             }
         }
 
-        public static void RunTests<T>(Settings settings, string resultFolder)
+        public static void RunTests<T>(Settings settings, string resultFolder) where T : IAnyPlugin, new()
         {
             if (settings == null)
             {
@@ -51,16 +54,17 @@ namespace AutoRest.Swagger.Tests
             settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText("AutoRest.json"));
             settings.FileSystem.CreateDirectory(Path.GetDirectoryName(settings.Input));
             settings.FileSystem.WriteFile(settings.Input, File.ReadAllText(settings.Input));
-            var flavor =
-                (CodeGenerator)typeof(T).GetConstructor(new[] { typeof(Settings) }).Invoke(new object[] { settings });
-            settings.CodeGenerator = flavor.Name;
+
+            var plugin = new T();
+
+            var flavor = plugin.CodeGenerator;
 
             var expectedWithSeparator = "Expected" + Path.DirectorySeparatorChar;
             var specFileName = resultFolder.StartsWith(expectedWithSeparator, StringComparison.Ordinal)
                 ? resultFolder.Substring(expectedWithSeparator.Length)
                 : resultFolder;
             settings.Namespace = string.IsNullOrEmpty(settings.Namespace)
-                ? "Fixtures." + (flavor.Name.Contains("Azure") ? "Azure." : "") + specFileName.
+                ? "Fixtures." + (plugin.Settings.Name.Contains("Azure") ? "Azure." : "") + specFileName.
                     Replace(".cs", "").Replace(".Cs", "").Replace(".java", "").
                     Replace(".js", "").Replace(".", "").
                     Replace(Path.DirectorySeparatorChar.ToString(), "").Replace("-", "")

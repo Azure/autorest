@@ -39,7 +39,7 @@ namespace AutoRest.Swagger
             // If object with file format treat as stream
             if (_schema.Type != null
                 && _schema.Type == DataType.Object
-                && "file".Equals(_schema.Format, StringComparison.OrdinalIgnoreCase))
+                && "file".EqualsIgnoreCase(_schema.Format))
             {
                 return KnownPrimaryType.Stream;
             }

@@ -1,5 +1,5 @@
 {
-  "version": "0.17.0-*",
+  "version": "0.17.1-*",
   "authors": [ "Microsoft", "Azure-SDK" ],
  
   "packOptions": {
@@ -54,12 +54,12 @@
   "disabled_dependencies": {
     "AutoRest.Java.Azure": { "target": "project", "type": "build" },
     "AutoRest.Python.Azure": { "target": "project", "type": "build" },
-    "AutoRest.Ruby.Azure": { "target": "project", "type": "build" },
+    
     "AutoRest.AzureResourceSchema": { "target": "project", "type": "build" },
     "AutoRest.Java.Azure.Fluent": { "target": "project", "type": "build" },
     "AutoRest.Java": { "target": "project", "type": "build" },
     "AutoRest.Python": { "target": "project", "type": "build" },
-    "AutoRest.Ruby": { "target": "project", "type": "build" },
+    "AutoRest.Ruby.Azure": { "target": "project", "type": "build" },
     "AutoRest.Go": { "target": "project", "type": "build" },
     "AutoRest.CSharp.Azure.Fluent": { "target": "project", "type": "build" }
   }

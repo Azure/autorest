@@ -1,4 +1,18 @@
 ﻿{
+    "plugins": {
+        "CSharp": {
+            "type": "PluginCs, AutoRest.CSharp"
+        },
+        "Azure.CSharp": {
+            "type": "PluginCsa, AutoRest.CSharp.Azure"
+        },
+        "NodeJS": {
+            "type": "PluginJs, AutoRest.NodeJS"
+        },
+        "Azure.NodeJS": {
+            "type": "PluginJsa, AutoRest.NodeJS.Azure"
+        }
+    },
   "codeGenerators": {
     "CSharp": {
       "type": "CSharpCodeGenerator, AutoRest.CSharp"
