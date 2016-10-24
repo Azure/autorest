@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "Microsoft.NETCore.Platforms": "1.0.1",
-    "Microsoft.Rest.ClientRuntime":"2.3.3",
+    "Microsoft.Rest.ClientRuntime":"2.3.2",
     "AutoRest.Core": { "target": "project" },
     "AutoRest.CSharp": { "target": "project" },
     "Microsoft.Extensions.Logging": "1.0.0",
