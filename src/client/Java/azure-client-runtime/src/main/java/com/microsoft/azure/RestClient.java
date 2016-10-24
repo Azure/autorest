@@ -14,6 +14,7 @@ import com.microsoft.rest.UserAgentInterceptor;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.retry.RetryHandler;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import okhttp3.Authenticator;
 import okhttp3.ConnectionPool;
 import okhttp3.Interceptor;
 import okhttp3.JavaNetCookieJar;
@@ -319,6 +320,17 @@ public class RestClient {
              */
             public Buildable withProxy(Proxy proxy) {
                 httpClientBuilder.proxy(proxy);
+                return this;
+            }
+
+            /**
+             * Sets the proxy authenticator for the HTTP client.
+             *
+             * @param proxyAuthenticator the proxy authenticator to use
+             * @return the builder itself for chaining
+             */
+            public Buildable withProxyAuthenticator(Authenticator proxyAuthenticator) {
+                httpClientBuilder.proxyAuthenticator(proxyAuthenticator);
                 return this;
             }
 
