@@ -80,10 +80,10 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void NetworkApiValidation()
+        public void UniqueResourcePathsValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "network-interfaces-api.json"));
-            messages.AssertOnlyValidationWarning(typeof(NetworkInterfacesApiWarning));
+            messages.AssertOnlyValidationWarning(typeof(UniqueResourcePaths));
         }
 
         [Fact]

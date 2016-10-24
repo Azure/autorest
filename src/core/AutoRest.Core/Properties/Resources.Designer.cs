@@ -357,15 +357,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to May not reference more than one of &apos;Microsoft.Compute&apos; and &apos;Microsoft.Network&apos;.
-        /// </summary>
-        public static string NetworkInterfacesApiWarningMessage {
-            get {
-                return ResourceManager.GetString("NetworkInterfacesApiWarningMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///    Looks up a localized string similar to Could not find a definition for the path parameter &apos;{0}&apos;.
         /// </summary>
         public static string NoDefinitionForPathParameter {
@@ -456,19 +447,20 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Non-HTTPS/HTTP schemes have limited support.
-        /// </summary>
-        public static string SupportedSchemesWarningMessage {
-            get {
-                return ResourceManager.GetString("SupportedSchemesWarningMessage", resourceCulture);
-            }
-        }
-
         ///    Looks up a localized string similar to Parameters &quot;subscriptionId&quot; or &quot;api-version&quot; are referenced but not defined in the parameters section of Service Definition.
         /// </summary>
         public static string ServiceDefinitionParametersMissingMessage {
             get {
                 return ResourceManager.GetString("ServiceDefinitionParametersMissingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Non-HTTPS/HTTP schemes have limited support.
+        /// </summary>
+        public static string SupportedSchemesWarningMessage {
+            get {
+                return ResourceManager.GetString("SupportedSchemesWarningMessage", resourceCulture);
             }
         }
         
@@ -487,6 +479,15 @@ namespace AutoRest.Core.Properties {
         public static string TypeShouldBeAssemblyQualified {
             get {
                 return ResourceManager.GetString("TypeShouldBeAssemblyQualified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to More than one resource path is not allowed in a single spec.
+        /// </summary>
+        public static string UniqueResourcePathsWarning {
+            get {
+                return ResourceManager.GetString("UniqueResourcePathsWarning", resourceCulture);
             }
         }
         

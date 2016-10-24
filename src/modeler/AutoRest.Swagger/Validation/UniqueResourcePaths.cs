@@ -12,7 +12,7 @@ using System;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class NetworkInterfacesApiWarning : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
+    public class UniqueResourcePaths : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         // Ignore everything within /es except when we find microsoft.* and capture that group
         private readonly Regex apiRegExp = new Regex(@"(?:/[^/]+)+/(?i)microsoft(?-i).([^/]+)(?:/[^/]+)+");
@@ -31,7 +31,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.NetworkInterfacesApiWarningMessage;
+        public override string MessageTemplate => Resources.UniqueResourcePathsWarning;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
