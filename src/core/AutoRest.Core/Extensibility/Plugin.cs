@@ -51,6 +51,7 @@ namespace AutoRest.Core.Extensibility
 
                     // and the language specific settings
                     Singleton<TSettings>.Instance = Settings;
+                    Singleton<IGeneratorSettings>.Instance = Settings;
                 }
             };
         }

@@ -16,55 +16,46 @@ namespace AutoRest.Swagger.Tests
 
     public static class SwaggerSpecHelper
     {
-        public static void RunTests<T>(string specFile, string resultFolder, string modeler = "Swagger",
-            Settings settings = null) where T : IAnyPlugin , new()
+        public static void RunTests(string specFile, string resultFolder, string modeler = "Swagger", string plugin = "CSharp")
         {
             using (NewContext)
             {
-                if (settings == null)
-                {
-                    settings = new Settings
+                var settings = new Settings
                     {
                         Input = specFile,
                         OutputDirectory = "X:\\Output",
                         Header = "MICROSOFT_MIT_NO_VERSION",
                         Modeler = modeler,
-                        PayloadFlatteningThreshold = 1
+                    PayloadFlatteningThreshold = 1,
+                    CodeGenerator =  plugin
+
                     };
 
-                }
-
-                RunTests<T>(settings, resultFolder);
+                RunTests(resultFolder);
             }
         }
 
-        public static void RunTests<T>(Settings settings, string resultFolder) where T : IAnyPlugin, new()
-        {
-            if (settings == null)
+        public static void RunTests(string resultFolder)
             {
-                throw new ArgumentNullException("settings");
-            }
-
             if (resultFolder == null)
             {
                 throw new ArgumentNullException("settings");
             }
+            var settings = Settings.Instance;
 
             settings.FileSystem = new MemoryFileSystem();
             settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText("AutoRest.json"));
             settings.FileSystem.CreateDirectory(Path.GetDirectoryName(settings.Input));
             settings.FileSystem.WriteFile(settings.Input, File.ReadAllText(settings.Input));
 
-            var plugin = new T();
-
-            var flavor = plugin.CodeGenerator;
-
             var expectedWithSeparator = "Expected" + Path.DirectorySeparatorChar;
             var specFileName = resultFolder.StartsWith(expectedWithSeparator, StringComparison.Ordinal)
                 ? resultFolder.Substring(expectedWithSeparator.Length)
                 : resultFolder;
+
+            var name = ExtensionsLoader.GetPlugin().Settings.Name;
             settings.Namespace = string.IsNullOrEmpty(settings.Namespace)
-                ? "Fixtures." + (plugin.Settings.Name.Contains("Azure") ? "Azure." : "") + specFileName.
+                ? "Fixtures." + (name.Contains("Azure") ? "Azure." : "") + specFileName.
                     Replace(".cs", "").Replace(".Cs", "").Replace(".java", "").
                     Replace(".js", "").Replace(".", "").
                     Replace(Path.DirectorySeparatorChar.ToString(), "").Replace("-", "")
