@@ -1,0 +1,1237 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs to manage Azure ApiManagement deployment.",
+    "version": "2016-07-07"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{sourceResourceGroupName}/moveResources": {
+      "post": {
+        "tags": [
+          "ResourceProvider"
+        ],
+        "operationId": "ApiManagement_MoveResources",
+        "description": "Move resources from one resource group to another. The resources being moved should all be in the same resource group.",
+        "parameters": [
+          {
+            "name": "sourceResourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Source resource group name.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourcesMoveInfo"
+            },
+            "description": "move resources' parameters."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully moved ApiManagement resources."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/managedeployments": {
+      "post": {
+        "tags": [
+          "ResourceProvider"
+        ],
+        "operationId": "ApiManagementService_ManageDeployments",
+        "description": "Manage deployments of an Api Management service. This operation can be used to  Change Sku or Sku Units, Change Service Tier (Developer/Standard/Premium) and Manage Vpn Configuration. This is a long running operation and could take several minutes to complete.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiServiceManageDeploymentsParameters"
+            },
+            "description": "Parameters supplied to ManageDeployments operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully applied the new deployment Configuration on the ApiManagement service.",
+            "schema": {
+              "$ref": "#/definitions/ApiServiceResource"
+            }
+          },
+          "400": {
+            "description": "Request valdiation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "The service does not exist.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Service is currently being updated.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/restore": {
+      "post": {
+        "tags": [
+          "ResourceProvider"
+        ],
+        "operationId": "ApiManagementService_Restore",
+        "description": "This operation restores a backup of an ApiManagement service created using ApiManagementService_Backup operation on current service. This is a long running operation and could take several minutes to complete.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiServiceBackupRestoreParameters"
+            },
+            "description": "Parameters supplied to the Restore Api Management service from backup operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully restored the backup onto the ApiManagement service.",
+            "schema": {
+              "$ref": "#/definitions/ApiServiceResource"
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "The service does not exist.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Service is currently being updated.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backup": {
+      "post": {
+        "tags": [
+          "ResourceProvider"
+        ],
+        "operationId": "ApiManagementService_Backup",
+        "description": "This operation creates a backup of the ApiManagement service to the given Azure Storage Account. This is long running operation and could take several minutes to complete.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiServiceBackupRestoreParameters"
+            },
+            "description": "Parameters supplied to the ApiManagementService_Backup operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully backed up the ApiManagement service to the storage account.",
+            "schema": {
+              "$ref": "#/definitions/ApiServiceResource"
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "The service does not exist.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "Service is currently being updated.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}": {
+      "put": {
+        "tags": [
+          "ResourceProvider"
+        ],
+        "operationId": "ApiManagementService_CreateOrUpdate",
+        "description": "Creates a new API Management service or updates an existing Api Management service. This is long running operation and could take several minutes to complete.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiServiceCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Api Management service operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service was successfully Setup.",
+            "schema": {
+              "$ref": "#/definitions/ApiServiceResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ApiServiceResource"
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ResourceProvider"
+        ],
+        "operationId": "ApiManagementService_Update",
+        "description": "Updates an existing ApiManagement service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiServiceCreateOrUpdateParameters"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Api Management service operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the current ApiManagement service.",
+            "schema": {
+              "$ref": "#/definitions/ApiServiceResource"
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "The service does not exist.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "ResourceProvider"
+        ],
+        "operationId": "ApiManagementService_Get",
+        "description": "Get an Api Management service resource description.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the ApiManagement Service Resource.",
+            "schema": {
+              "$ref": "#/definitions/ApiServiceResource"
+            }
+          },
+          "404": {
+            "description": "ApiManagement Service not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ResourceProvider"
+        ],
+        "operationId": "ApiManagementService_Delete",
+        "description": "Deletes existing Api Management service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service was successfully deleted."
+          },
+          "204": {
+            "description": "Service is already deleted."
+          },
+          "404": {
+            "description": "ApiManagement Service not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/": {
+      "get": {
+        "tags": [
+          "ResourceProvider"
+        ],
+        "operationId": "ApiManagementService_ListByResourceGroup",
+        "description": "List all Api Management services within a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return the Api Service List.",
+            "schema": {
+              "$ref": "#/definitions/ApiServiceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/service/": {
+      "get": {
+        "tags": [
+          "ResourceProvider"
+        ],
+        "operationId": "ApiManagementService_ListBySubscriptionId",
+        "description": "List all Api Management services within an Azure Subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return the Api Service List.",
+            "schema": {
+              "$ref": "#/definitions/ApiServiceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/getssotoken": {
+      "get": {
+        "tags": [
+          "ResourceProvider"
+        ],
+        "operationId": "ApiManagementService_GetSsoToken",
+        "description": "Gets the Single Sign On token for the API Management Service valid for 5 Minutes.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns 200 OK if successful with the SSO Redirect URI.",
+            "schema": {
+              "$ref": "#/definitions/ApiServiceGetSsoTokenResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "ResourceProvider"
+        ],
+        "operationId": "ApiManagementService_CheckNameAvailability",
+        "description": "Checks availability and correctness of a name for an Api Management service.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiServiceCheckNameAvailabilityParameters"
+            },
+            "description": "Parameters supplied to the CheckNameAvailability operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return the result of check name availability.",
+            "schema": {
+              "$ref": "#/definitions/ApiServiceNameAvailabilityResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/updatecertificate": {
+      "post": {
+        "tags": [
+          "ResourceProvider"
+        ],
+        "operationId": "ApiManagementService_UploadCertificate",
+        "description": "Upload Custom Domain SSL certificate for an Api Management service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiServiceUploadCertificateParameters"
+            },
+            "description": "Parameters supplied to the Upload SSL certificate for an Api Management service operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully uploaded certificate to the ApiManagement Service.",
+            "schema": {
+              "$ref": "#/definitions/CertificateInformation"
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "ApiManagement Service not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/updatehostname": {
+      "post": {
+        "tags": [
+          "ResourceProvider"
+        ],
+        "operationId": "ApiManagementService_UpdateHostname",
+        "description": "This operation creates, updates or deletes a custom hostname for an ApiManagement service. The custome hostname can be applied to Proxy and Portal endpoint. This is a long running operation and could take several minutes to complete.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiServiceUpdateHostnameParameters"
+            },
+            "description": "Parameters supplied to the UpdateHostname operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service was successfully updated with desired hostnames.",
+            "schema": {
+              "$ref": "#/definitions/ApiServiceResource"
+            }
+          },
+          "400": {
+            "description": "Request validation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "ApiManagement Service not found.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "409": {
+            "description": "ApiManagement Service is currently being updated.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ResourcesMoveInfo": {
+      "properties": {
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The ids of the resources."
+        },
+        "targetResourceGroup": {
+          "type": "string",
+          "description": "The target resource group."
+        }
+      },
+      "description": "Parameters of move resources."
+    },
+    "CertificateInformation": {
+      "properties": {
+        "expiry": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Thumbprint of the certificate."
+        },
+        "subject": {
+          "type": "string",
+          "description": "Subject of the certificate."
+        }
+      },
+      "required": [
+        "expiry",
+        "thumbprint",
+        "subject"
+      ],
+      "description": "SSL certificate information."
+    },
+    "HostnameConfiguration": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Hostname type.",
+          "enum": [
+            "Proxy",
+            "Portal",
+            "Management",
+            "Scm"
+          ],
+          "x-ms-enum": {
+            "name": "HostnameType",
+            "modelAsString": false
+          }
+        },
+        "hostname": {
+          "type": "string",
+          "description": "Hostname."
+        },
+        "certificate": {
+          "$ref": "#/definitions/CertificateInformation",
+          "description": "Certificate information."
+        }
+      },
+      "required": [
+        "type",
+        "hostname",
+        "certificate"
+      ],
+      "description": "Custom hostname configuration."
+    },
+    "VirtualNetworkConfiguration": {
+      "properties": {
+        "vnetid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Virtual network id."
+        },
+        "subnetname": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Subnet name."
+        },
+        "subnetResourceId": {
+          "type": "string",
+          "description": "Subnet Resource Id."
+        },
+        "location": {
+          "type": "string",
+          "description": "Virtual network location name."
+        }
+      },
+      "description": "Configuration of a virtual network."
+    },
+    "AdditionalRegion": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location name."
+        },
+        "skuType": {
+          "type": "string",
+          "description": "Sku type in the location.",
+          "enum": [
+            "Developer",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuType",
+            "modelAsString": false
+          }
+        },
+        "skuUnitCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sku Unit count at the location."
+        },
+        "staticIPs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Static IP addresses of the location virtual machines."
+        },
+        "vpnconfiguration": {
+          "$ref": "#/definitions/VirtualNetworkConfiguration",
+          "description": "Virtual network configuration for the location."
+        }
+      },
+      "description": "Description of an additional ApiService resource location."
+    },
+    "ApiServiceManageDeploymentsParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location of the Api Management service Azure data center."
+        },
+        "skuType": {
+          "type": "string",
+          "description": "Sku type of the Api Management service.",
+          "enum": [
+            "Developer",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuType",
+            "modelAsString": false
+          }
+        },
+        "skuUnitCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sku Unit count of the Api Management service."
+        },
+        "additionalLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalRegion"
+          },
+          "description": "Additional data center locations for the Api Management service."
+        },
+        "vpnConfiguration": {
+          "$ref": "#/definitions/VirtualNetworkConfiguration",
+          "description": "Virtual network configuration."
+        },
+        "vpnType": {
+          "type": "string",
+          "description": "Vpn type.",
+          "enum": [
+            "None",
+            "External",
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "location",
+        "skuType"
+      ],
+      "description": "Parameters supplied to the ManageDeployments operation."
+    },
+    "ApiServiceBackupRestoreParameters": {
+      "properties": {
+        "storageAccount": {
+          "type": "string",
+          "description": "Azure Cloud Storage account (used to place/retrieve the backup) name."
+        },
+        "accessKey": {
+          "type": "string",
+          "description": "Azure Cloud Storage account (used to place/retrieve the backup) access key."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Azure Cloud Storage blob container name used to place/retrieve the backup."
+        },
+        "backupName": {
+          "type": "string",
+          "description": "The name of the backup."
+        }
+      },
+      "required": [
+        "storageAccount",
+        "accessKey",
+        "containerName",
+        "backupName"
+      ],
+      "description": "Parameters supplied to the Backup/Restore of an Api Management service operation."
+    },
+    "ApiServiceProperties": {
+      "properties": {
+        "publisherEmail": {
+          "type": "string",
+          "description": "Publisher email.",
+          "maxLength": 100
+        },
+        "publisherName": {
+          "type": "string",
+          "description": "Publisher name."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the Api Management service."
+        },
+        "targetProvisioningState": {
+          "type": "string",
+          "description": "Target provisioning state of the Api Management service.The state that is targeted for the Api Management service by the infrastructure."
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation UTC date of the Api Management service.The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "runtimeUrl": {
+          "type": "string",
+          "description": "Proxy endpoint Url of the Api Management service."
+        },
+        "portalUrl": {
+          "type": "string",
+          "description": "management portal endpoint Url of the Api Management service."
+        },
+        "managementApiUrl": {
+          "type": "string",
+          "description": "management api endpoint Url of the Api Management service."
+        },
+        "scmUrl": {
+          "type": "string",
+          "description": "Scm endpoint Url of the Api Management service."
+        },
+        "addresserEmail": {
+          "type": "string",
+          "description": "Addresser email."
+        },
+        "hostnameConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HostnameConfiguration"
+          },
+          "description": "Custom hostname configuration of the Api Management service."
+        },
+        "staticIPs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Static ip addresses of the Api Management service virtual machines. Available only for Standard and Premium Sku."
+        },
+        "vpnconfiguration": {
+          "$ref": "#/definitions/VirtualNetworkConfiguration",
+          "description": "Virtual network configuration of the Api Management service."
+        },
+        "additionalLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalRegion"
+          },
+          "description": "Additional datacenter locations description of the Api Management service."
+        },
+        "customProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Custom properties of the Api Management service."
+        },
+        "vpnType": {
+          "type": "string",
+          "description": "Virtual private network type of the Api Management service.",
+          "enum": [
+            "None",
+            "External",
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Properties of an Api Management service resource description."
+    },
+    "ApiServiceSkuProperties": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Sku.",
+          "enum": [
+            "Developer",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuType",
+            "modelAsString": false
+          }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Capacity of the Sku (number of deployed units of the Sku)."
+        }
+      },
+      "description": "Api Management service resource Sku properties."
+    },
+    "ApiServiceResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the created Api Management service."
+        },
+        "location": {
+          "type": "string",
+          "description": "Datacenter location of the Api Management service."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Api Management service."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type of the Api Management service."
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags of the Api Management service."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiServiceProperties",
+          "description": "Properties of the Api Management service."
+        },
+        "sku": {
+          "$ref": "#/definitions/ApiServiceSkuProperties",
+          "description": "Sku properties of the Api Management service."
+        }
+      },
+      "description": "Description of an Api Management service resource."
+    },
+    "ApiServiceCreateOrUpdateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Api Management service data center location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Api Management service tags. A maximum of 10 tags can be provided for a resource, and each tag must have a key no greater than 128 characters (and value no greater than 256 characters)"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApiServiceProperties",
+          "description": "Properties of the Api Management service."
+        },
+        "sku": {
+          "$ref": "#/definitions/ApiServiceSkuProperties",
+          "description": "Sku properties of the Api Management service."
+        }
+      },
+      "required": [
+        "location",
+        "properties",
+        "sku"
+      ],
+      "description": "Parameters supplied to the CreateOrUpdate Api Management service operation."
+    },
+    "ApiServiceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiServiceResource"
+          },
+          "description": "Result of the List Api Management services operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Api Management services."
+        }
+      },
+      "description": "The response of the List Api Management services operation."
+    },
+    "ApiServiceGetSsoTokenResult": {
+      "properties": {
+        "redirect_uri": {
+          "type": "string",
+          "description": "Redirect url containing the SSO token."
+        }
+      },
+      "description": "The response of the GetSsoToken operation."
+    },
+    "ApiServiceCheckNameAvailabilityParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name to check for."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Parameters supplied to the CheckNameAvailability operation."
+    },
+    "ApiServiceNameAvailabilityResult": {
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "True if the name is available and can be used to create new Api Management service. Otherwise false."
+        },
+        "message": {
+          "type": "string",
+          "description": "The message, which provides the resource naming requirements in case the reason is Invalid."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason when isAvailable is false.",
+          "enum": [
+            "Valid",
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "NameAvailabilityReason",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Response of the CheckNameAvailability operation."
+    },
+    "ApiServiceUploadCertificateParameters": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Hostname type.",
+          "enum": [
+            "Proxy",
+            "Portal",
+            "Management",
+            "Scm"
+          ],
+          "x-ms-enum": {
+            "name": "HostnameType",
+            "modelAsString": false
+          }
+        },
+        "certificate": {
+          "type": "string",
+          "description": "Base64 Encoded certificate."
+        },
+        "certificate_password": {
+          "type": "string",
+          "description": "Certificate password."
+        }
+      },
+      "required": [
+        "type",
+        "certificate",
+        "certificate_password"
+      ],
+      "description": "Parameters supplied to the Upload SSL certificate for an Api Management service operation."
+    },
+    "ApiServiceUpdateHostnameParameters": {
+      "properties": {
+        "update": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HostnameConfiguration"
+          },
+          "description": "Hostnames to create of update."
+        },
+        "delete": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Proxy",
+              "Portal",
+              "Management",
+              "Scm"
+            ],
+            "x-ms-enum": {
+              "name": "HostnameType",
+              "modelAsString": false
+            }
+          },
+          "description": "Hostnames to delete."
+        }
+      },
+      "description": "Parameters supplied to the UpdateHostname operation."
+    },
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      },
+      "description": "Error Response."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request."
+    },
+    "ServiceNameParameter": {
+      "name": "serviceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Api Management service.",
+      "minLength": 1,
+      "maxLength": 50,
+      "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
