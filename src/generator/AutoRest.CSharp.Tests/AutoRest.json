@@ -14,6 +14,9 @@
         },
         "Azure.NodeJS": {
             "type": "PluginJsa, AutoRest.NodeJS.Azure"
+        },
+        "AzureResourceSchema": {
+            "type": "PluginArs, AutoRest.AzureResourceSchema"
         }
     },
   "codeGenerators": {

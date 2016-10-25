@@ -1,4 +1,4 @@
-﻿{
+{
   "id": "http://schema.management.azure.com/schemas/2015-10-01-preview/Microsoft.DataLakeStore.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.DataLakeStore",

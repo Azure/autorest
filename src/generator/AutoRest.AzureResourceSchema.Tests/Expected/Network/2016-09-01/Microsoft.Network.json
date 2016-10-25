@@ -1,4 +1,4 @@
-﻿{
+{
   "id": "http://schema.management.azure.com/schemas/2016-09-01/Microsoft.Network.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.Network",
@@ -2422,7 +2422,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets AdvertisedPublicPrefixState of the Peering resource ."
+          "description": "Gets or sets AdvertisedPublicPrefixState of the Peering resource."
         },
         "customerASN": {
           "oneOf": [
@@ -2598,7 +2598,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets ServiceProviderProvisioningState state of the resource ."
+          "description": "Gets or sets ServiceProviderProvisioningState state of the resource."
         },
         "authorizations": {
           "oneOf": [

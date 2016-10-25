@@ -4,10 +4,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.Core;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json.Linq;
 using Xunit;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.AzureResourceSchema.Tests
 {
@@ -17,88 +18,89 @@ namespace AutoRest.AzureResourceSchema.Tests
         [Fact]
         public void Description()
         {
-            Assert.Equal("Azure Resource Schema generator", CreateGenerator().Description);
+            using (NewContext) {
+                new Settings();
+                Assert.Equal("Azure Resource Schema generator", CreatePlugin().Settings.Description);
+            }
         }
 
         [Fact]
         public void ImplementationFileExtension()
         {
-            Assert.Equal(".json", CreateGenerator().ImplementationFileExtension);
+            using (NewContext) {
+                new Settings();
+                Assert.Equal(".json", CreatePlugin().CodeGenerator.ImplementationFileExtension);
+            }
         }
 
         [Fact]
         public void Name()
         {
-            Assert.Equal("AzureResourceSchema", CreateGenerator().Name);
+            using (NewContext) {
+                new Settings();
+                Assert.Equal("AzureResourceSchema", CreatePlugin().Settings.Name);
+            }
         }
 
         [Fact]
         public void UsageInstructionsWithNoOutputFileSetting()
         {
-            AzureResourceSchemaCodeGenerator codeGen = CreateGenerator();
-            Assert.Equal("Your Azure Resource Schema(s) can be found in " + codeGen.Settings.OutputDirectory, codeGen.UsageInstructions);
+            using (NewContext) {
+                new Settings();
+                PluginArs plugin = CreatePlugin();
+                Assert.Equal("Your Azure Resource Schema(s) can be found in " + Settings.Instance.OutputDirectory, plugin.CodeGenerator.UsageInstructions);
+            }
         }
 
         [Fact]
         public void UsageInstructionsWithOutputFileSetting()
         {
-            Settings settings = new Settings()
-            {
-                OutputFileName = "spam.json"
-            };
-            AzureResourceSchemaCodeGenerator codeGen = CreateGenerator(settings);
+            using (NewContext) {
+                Settings settings = new Settings() {
+                    OutputFileName = "spam.json"
+                };
+                PluginArs plugin = CreatePlugin();
 
-            Assert.Equal("Your Azure Resource Schema(s) can be found in " + settings.OutputDirectory, codeGen.UsageInstructions);
+                Assert.Equal("Your Azure Resource Schema(s) can be found in " + settings.OutputDirectory, plugin.CodeGenerator.UsageInstructions);
+            }
         }
 
-        [Fact]
-        public void NormalizeClientModelDoesNothing()
-        {
-            ServiceClient serviceClient = new ServiceClient();
-            CreateGenerator().NormalizeClientModel(serviceClient);
 
-            // Nothing happens
-        }
-
-        private static AzureResourceSchemaCodeGenerator CreateGenerator()
+        private static PluginArs CreatePlugin()
         {
-            return CreateGenerator(new Settings());
-        }
-        private static AzureResourceSchemaCodeGenerator CreateGenerator(Settings settings)
-        {
-            return new AzureResourceSchemaCodeGenerator(settings);
+            return new PluginArs();
         }
 
         private static async Task TestGenerate(string apiVersion, string[] methodUrls, string expectedJsonString)
         {
-            MemoryFileSystem fileSystem = new MemoryFileSystem();
+            using (NewContext) {
+                MemoryFileSystem fileSystem = new MemoryFileSystem();
 
-            Settings settings = new Settings();
-            settings.FileSystem = fileSystem;
+                Settings settings = new Settings();
+                settings.FileSystem = fileSystem;
 
-            ServiceClient serviceClient = new ServiceClient();
-            serviceClient.ApiVersion = apiVersion;
-            foreach(string methodUrl in methodUrls)
-            {
-                serviceClient.Methods.Add(new Method()
-                {
-                    Url = methodUrl,
-                    HttpMethod = HttpMethod.Put,
-                });
+                CodeModel serviceClient = New<CodeModel>();
+                serviceClient.ApiVersion = apiVersion;
+                foreach (string methodUrl in methodUrls) {
+                    serviceClient.Add(New<Method>(new {
+                        Url = methodUrl,
+                        HttpMethod = HttpMethod.Put,
+                    }));
+                }
+                await CreatePlugin().CodeGenerator.Generate(serviceClient);
+
+                Assert.Equal(2, fileSystem.VirtualStore.Count);
+
+                string folderPath = fileSystem.VirtualStore.Keys.First();
+                Assert.Equal("Folder", fileSystem.VirtualStore[folderPath].ToString());
+
+                JObject expectedJSON = JObject.Parse(expectedJsonString);
+
+                string fileContents = fileSystem.VirtualStore[fileSystem.VirtualStore.Keys.Skip(1).First()].ToString();
+                JObject actualJson = JObject.Parse(fileContents);
+
+                Assert.Equal(expectedJSON, actualJson);
             }
-            await CreateGenerator(settings).Generate(serviceClient);
-
-            Assert.Equal(2, fileSystem.VirtualStore.Count);
-
-            string folderPath = fileSystem.VirtualStore.Keys.First();
-            Assert.Equal("Folder", fileSystem.VirtualStore[folderPath].ToString());
-
-            JObject expectedJSON = JObject.Parse(expectedJsonString);
-
-            string fileContents = fileSystem.VirtualStore[fileSystem.VirtualStore.Keys.Skip(1).First()].ToString();
-            JObject actualJson = JObject.Parse(fileContents);
-
-            Assert.Equal(expectedJSON, actualJson);
         }
     }
 }

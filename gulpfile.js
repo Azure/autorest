@@ -787,7 +787,7 @@ var xunitNetCoreXproj = [
   'src/core/AutoRest.Extensions.Azure.Tests/project.json',
   'src/core/AutoRest.Extensions.Tests/project.json',
 // Disabling until merged into the new model.    
-//   'src/generator/AutoRest.AzureResourceSchema.Tests/project.json',
+  'src/generator/AutoRest.AzureResourceSchema.Tests/project.json',
   'src/generator/AutoRest.CSharp.Azure.Tests/project.json',
   'src/generator/AutoRest.CSharp.Tests/project.json',
   'src/generator/AutoRest.CSharp.Unit.Tests/project.json',
