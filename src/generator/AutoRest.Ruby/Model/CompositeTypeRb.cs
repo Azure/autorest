@@ -49,7 +49,7 @@ namespace AutoRest.Ruby.Model
                     return this.parent.PolymorphicDiscriminatorProperty;
                 }
 
-                return this.PolymorphicDiscriminator;
+                return Singleton<CodeNamerRb>.Instance.UnderscoreCase(this.PolymorphicDiscriminator);
             }
         }
 
@@ -89,7 +89,7 @@ namespace AutoRest.Ruby.Model
         {
             if (!string.IsNullOrEmpty(PolymorphicDiscriminator) && Properties.All(p => p.Name != PolymorphicDiscriminator))
             {
-                base.Add(New<Property>(new
+                var newProp = base.Add(New<Property>(new
                 {
                     IsRequired = true,
                     Name = PolymorphicDiscriminator,
@@ -97,6 +97,7 @@ namespace AutoRest.Ruby.Model
                     Documentation = "Polymorphic Discriminator",
                     ModelType = New<PrimaryType>(KnownPrimaryType.String)
                 }));
+                newProp.Name.FixedValue = newProp.Name.RawValue;
             }
         }
 
