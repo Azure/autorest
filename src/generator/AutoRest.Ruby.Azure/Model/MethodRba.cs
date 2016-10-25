@@ -111,7 +111,7 @@ namespace AutoRest.Ruby.Azure.Model
                         bool isPageable = (bool)compositeType.Extensions[AzureExtensions.PageableExtension];
                         if (isPageable && !isNextLinkMethod)
                         {
-                            builder.AppendLine("first_page = {0}({1})", Name, MethodParameterInvocation);
+                            builder.AppendLine("first_page = {0}_as_lazy({1})", Name, MethodParameterInvocation);
                             builder.AppendLine("first_page.get_all_items");
                             return builder.ToString();
                         }
