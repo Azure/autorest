@@ -54,6 +54,12 @@ namespace AutoRest.Core.Utilities
                 return File.AppendText(path);
             }
             return File.CreateText(path);
+#if FORCE_UTF8_BOM
+            // existing ARS files have utf8withbom. 
+            // only necessary for some weird manual testing :D
+            var utf8WithBom = new System.Text.UTF8Encoding(true);
+            return new StreamWriter(path, false, utf8WithBom);
+#endif            
         }
 
         public bool FileExists(string path)

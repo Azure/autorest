@@ -1,4 +1,4 @@
-﻿{
+{
   "id": "http://schema.management.azure.com/schemas/2016-02-01-preview/Microsoft.CognitiveServices.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.CognitiveServices",

@@ -1,4 +1,4 @@
-﻿{
+{
   "id": "http://schema.management.azure.com/schemas/2016-01-29/Microsoft.PowerBI.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.PowerBI",
