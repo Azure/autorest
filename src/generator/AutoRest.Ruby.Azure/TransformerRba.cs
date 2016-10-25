@@ -81,8 +81,10 @@ namespace AutoRest.Ruby.Azure
                         if (!method.Extensions.ContainsKey(AzureExtensions.LongRunningExtension))
                         {
                             newMethod = New<Method>().LoadFrom(method);
+                            
                             // fix the name of this method so it does not get disambiguated
-                            newMethod.Name.FixedValue = $"{method.Name}_as_lazy";
+                            // (this leaves the 'raw' value the same, but overrides the 'Name' )
+                            newMethod.Name.OnGet += value => $"{value}_as_lazy";
                             foreach (var p in method.Parameters.Where(each => each.IsClientProperty))
                             {
                                 newMethod.Remove(param => param.Name.RawValue == p.Name.RawValue );

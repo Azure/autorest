@@ -1,5 +1,6 @@
 ﻿@using System
 @using System.Linq
+@using AutoRest.Core.Utilities
 @using AutoRest.Ruby
 @using AutoRest.Ruby.Model
 @inherits AutoRest.Core.Template<AutoRest.Ruby.Model.CompositeTypeRb>
@@ -42,7 +43,7 @@ module @(Settings.Namespace)
     @EmptyLine
     }
     
-    @foreach (var property in Model.PropertyTemplateModels.Where( each => each.SerializedName != Model.PolymorphicDiscriminator))
+    @foreach (var property in Model.PropertyTemplateModels.Where( each => each.SerializedName.IsNullOrEmpty() || Model.PolymorphicDiscriminator.IsNullOrEmpty() || each.SerializedName != Model.PolymorphicDiscriminator ))
     {
       @:@WrapComment("# ", string.Format("@return {0}{1}", property.ModelType.GetYardDocumentation(), CompositeTypeRb.GetPropertyDocumentationString(property)))
       // @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name

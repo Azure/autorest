@@ -54,6 +54,7 @@ namespace AutoRest.Core.Extensibility
                     {
                         var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
                         plugin = LoadTypeFromAssembly<IAnyPlugin>(config.Plugins, Settings.Instance.CodeGenerator);
+                        Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
                     }
                     catch (Exception ex)
                     {

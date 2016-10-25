@@ -716,11 +716,23 @@ namespace AutoRest.Ruby
             {
                 builder.AppendLine("class_name: '{0}',", composite.Name)
                        .AppendLine("model_properties: {").Indent();
-                var composedPropertyList = new List<Property>(composite.ComposedProperties.Where(each => each.SerializedName != composite.PolymorphicDiscriminator));
+                var composedPropertyList =
+                    new List<Property>(
+                        composite.ComposedProperties.Where(each =>
+                                each.SerializedName.IsNullOrEmpty() || 
+                                composite.PolymorphicDiscriminator.IsNullOrEmpty() ||
+                                each.SerializedName != composite.PolymorphicDiscriminator ));
+
                 for (var i = 0; i < composedPropertyList.Count; i++)
                 {
                     var prop = composedPropertyList[i];
-                    var serializedPropertyName = prop.SerializedName;
+                    var serializedPropertyName = prop.SerializedName.Value;
+
+                    // This is a temporary fix until ms_rest serializtion client > 0.6.0 is released.
+                    if (serializedPropertyName == "odata.nextLink")
+                    {
+                        serializedPropertyName = "odata\\\\.nextLink";
+                    }
 
                     if (i != composedPropertyList.Count - 1)
                     {

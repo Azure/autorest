@@ -260,7 +260,7 @@ namespace AutoRest.Ruby.Model
                     if (!parameter.IsRequired)
                     {
                         format = "{0} = nil";
-                        if (parameter.DefaultValue != null && parameter.ModelType is PrimaryType)
+                        if (!parameter.DefaultValue.IsNullOrEmpty()&& parameter.ModelType is PrimaryType)
                         {
                             PrimaryType type = parameter.ModelType as PrimaryType;
                             if (type != null)

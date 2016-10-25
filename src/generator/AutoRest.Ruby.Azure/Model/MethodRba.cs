@@ -3,9 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -64,21 +66,27 @@ namespace AutoRest.Ruby.Azure.Model
 
             IndentedStringBuilder builder = new IndentedStringBuilder("  ");
 
+            if (Name.EqualsIgnoreCase("get_multiple_pages_with_offset_as_lazy"))
+            {
+                Debugger.Break();
+            }
+
             // As there is no distinguishable property in next link parameter, we'll check to see whether any parameter contains "next" in the parameter name
             Parameter nextLinkParameter = nextMethod.Parameters.Where(p => ((string)p.Name).IndexOf("next", StringComparison.OrdinalIgnoreCase) >= 0).FirstOrDefault();
             builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "page.next_method = Proc.new do |{0}|", nextLinkParameter.Name));
 
             // In case of parmeter grouping, next methods parameter needs to be mapped with the origin methods parameter
-            IEnumerable<Parameter> origMethodGroupedParameters = Parameters.Where(p => p.Name.Contains(Name));
+            var origName = Singleton<CodeNamerRb>.Instance.UnderscoreCase(Name.RawValue);
+            IEnumerable<Parameter> origMethodGroupedParameters = Parameters.Where(p => p.Name.Contains(origName));
             if (origMethodGroupedParameters.Any())
             {
                 builder.Indent();
                 foreach (Parameter param in nextMethod.Parameters)
                 {
-                    if (param.Name.Contains(nextMethod.Name) && (((string)param.Name).Length > ((string)nextMethod.Name).Length)) //parameter that contains the method name + postfix, it's a grouped param
+                    if (param.Name.Contains(nextMethod.Name) && (((string)param.Name.RawValue).Length > ((string)nextMethod.Name).Length)) //parameter that contains the method name + postfix, it's a grouped param
                     {
                         //assigning grouped parameter passed to the lazy method, to the parameter used in the invocation to the next method
-                        string argumentName = ((string)param.Name).Replace(nextMethodName, Name);
+                        string argumentName = ((string)param.Name).Replace(nextMethodName, origName);
                         builder.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0} = {1}", param.Name, argumentName));
                     }
                 }
