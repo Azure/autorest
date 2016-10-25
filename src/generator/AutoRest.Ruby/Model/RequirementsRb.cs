@@ -68,7 +68,7 @@ namespace AutoRest.Ruby.Model
                 spacing = sb.ToString();
             }
 
-            return string.Format(AutoloadFormat, typeName, spacing, GeneratorSettingsRb.Instance.sdkName, fileName);
+            return string.Format(AutoloadFormat, typeName, spacing, GeneratorSettingsRb.Instance.packageName ?? GeneratorSettingsRb.Instance.sdkName, fileName);
         }
 
         /// <summary>
