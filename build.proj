@@ -289,7 +289,7 @@
 
    <!-- .xproj files (used for clean and razor compile tasks -->
   <ItemGroup>
-    <XProjFiles Include="$(MSBuildThisFileDirectory)src\**\*.xproj"/>
+    <XProjFiles Include="$(MSBuildThisFileDirectory)src/**/*.xproj"/>
   </ItemGroup>
   <Target Name="RazorCompile">
     <Message Text="xprojs are %(XProjFiles.Identity)" Importance="High"/>
