@@ -365,7 +365,7 @@ gulp.task('test:java:init', function(cb){
    } 
    fs.mkdir(basePathOrThrow()+'/src/client/');
    //clone the Java ClientRuntime repo
-   return gulp.src('./').pipe(shell('git clone https://github.com/azure/autorest-clientruntime-for-java.git src/client/Java --depth=1'));
+   return gulp.src('./').pipe(shell('git clone --branch v1.0.0-beta3 https://github.com/azure/autorest-clientruntime-for-java.git src/client/Java --depth=1'));
 });
 
 gulp.task('regenerate:expected:java', function(cb){
