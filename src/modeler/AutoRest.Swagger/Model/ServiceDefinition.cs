@@ -79,7 +79,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// Key is actual path and the value is serializationProperty of http operations and operation objects.
         /// </summary>
-        [Rule(typeof(NetworkInterfacesApiWarning))]
+        [Rule(typeof(UniqueResourcePaths))]
         public Dictionary<string, Dictionary<string, Operation>> Paths { get; set; }
 
         /// <summary>

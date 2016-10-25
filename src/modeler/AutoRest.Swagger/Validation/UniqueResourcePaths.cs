@@ -8,7 +8,6 @@ using AutoRest.Swagger.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -23,7 +22,9 @@ namespace AutoRest.Swagger.Validation
         /// <param name="paths"></param>
         /// <returns></returns>
         public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths) 
-            => paths.Keys.Select(path => { return apiRegExp.Match(path).Success ? apiRegExp.Match(path).Groups?[0]?.Value.ToString().ToLowerInvariant() : null; }).Except(new List<string> { null }).Distinct().Count() <= 1;
+            => paths.Keys.Select(path => 
+                    { return apiRegExp.Match(path).Success ? apiRegExp.Match(path).Groups?[0]?.Value.ToString().ToLowerInvariant() : null; })
+                                      .Except(new List<string> { null }).Distinct().Count() <= 1;
 
         /// <summary>
         /// The template message for this Rule. 
