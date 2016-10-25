@@ -156,7 +156,7 @@ require 'ms_rest'";
             {
                 requirements = requirements 
                     + Environment.NewLine 
-                    + string.Format(CultureInfo.InvariantCulture, "require '{0}/{1}/module_definition'", GeneratedFolderName, GeneratorSettingsRb.Instance.sdkName);
+                    + string.Format(CultureInfo.InvariantCulture, "require '{0}/{1}/module_definition'", GeneratedFolderName, GeneratorSettingsRb.Instance.packageName ?? GeneratorSettingsRb.Instance.sdkName);
             }
 
             return requirements;

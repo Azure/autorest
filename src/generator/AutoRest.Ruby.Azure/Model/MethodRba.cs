@@ -65,12 +65,7 @@ namespace AutoRest.Ruby.Azure.Model
             }
 
             IndentedStringBuilder builder = new IndentedStringBuilder("  ");
-
-            if (Name.EqualsIgnoreCase("get_multiple_pages_with_offset_as_lazy"))
-            {
-                Debugger.Break();
-            }
-
+            
             // As there is no distinguishable property in next link parameter, we'll check to see whether any parameter contains "next" in the parameter name
             Parameter nextLinkParameter = nextMethod.Parameters.Where(p => ((string)p.Name).IndexOf("next", StringComparison.OrdinalIgnoreCase) >= 0).FirstOrDefault();
             builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "page.next_method = Proc.new do |{0}|", nextLinkParameter.Name));
