@@ -63,12 +63,28 @@
         "bar",
         "baz"
       ],
-      "properties": { 
+      "properties": {
         "baz": {
           "description": "baz property",
           "type": "string"
         }
       }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test subscription id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api version"
     }
   }
 }

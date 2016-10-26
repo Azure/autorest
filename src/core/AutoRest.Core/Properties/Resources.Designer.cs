@@ -339,6 +339,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to For better generated code quality, remove all references to &quot;msdn.microsoft.com&quot;..
+        /// </summary>
+        public static string MsdnReferencesDiscouraged {
+            get {
+                return ResourceManager.GetString("MsdnReferencesDiscouraged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to {0} (already used in {1}).
         /// </summary>
         public static string NamespaceConflictReasonMessage {
@@ -402,6 +411,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Parameters &quot;subscriptionId&quot; and &quot;api-version&quot; are not allowed in the operations section.
+        /// </summary>
+        public static string OperationParametersNotAllowedMessage {
+            get {
+                return ResourceManager.GetString("OperationParametersNotAllowedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Parameter &apos;{0}&apos; is not expected..
         /// </summary>
         public static string ParameterIsNotValid {
@@ -425,6 +443,15 @@ namespace AutoRest.Core.Properties {
         public static string ParameterValueIsNotValid {
             get {
                 return ResourceManager.GetString("ParameterValueIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Parameters &quot;subscriptionId&quot; or &quot;api-version&quot; are referenced but not defined in the parameters section of Service Definition.
+        /// </summary>
+        public static string ServiceDefinitionParametersMissingMessage {
+            get {
+                return ResourceManager.GetString("ServiceDefinitionParametersMissingMessage", resourceCulture);
             }
         }
         

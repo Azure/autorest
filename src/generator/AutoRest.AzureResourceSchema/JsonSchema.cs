@@ -99,6 +99,16 @@ namespace AutoRest.AzureResourceSchema
         public string Pattern { get; set; }
 
         /// <summary>
+        /// The minimum length that a string or an array matching this schema can have.
+        /// </summary>
+        public double? MinLength { get; set; }
+
+        /// <summary>
+        /// The maximum length that a string or an array matching this schema can have.
+        /// </summary>
+        public double? MaxLength { get; set; }
+
+        /// <summary>
         /// The schema that matches additional properties that have not been specified in the
         /// Properties dictionary.
         /// </summary>

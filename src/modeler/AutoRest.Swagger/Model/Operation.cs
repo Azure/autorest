@@ -44,6 +44,7 @@ namespace AutoRest.Swagger.Model
             set { _summary = value.StripControlCharacters(); }
         }
 
+        [Rule(typeof(AvoidMsdnReferences))]
         public string Description
         {
             get { return _description; }
@@ -70,6 +71,7 @@ namespace AutoRest.Swagger.Model
         /// If a parameter is already defined at the Path Item, the 
         /// new definition will override it, but can never remove it.
         /// </summary>
+        [CollectionRule(typeof(OperationParametersValidation))]
         [CollectionRule(typeof(AnonymousParameterTypes))]
         public IList<SwaggerParameter> Parameters { get; set; }
 

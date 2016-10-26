@@ -95,6 +95,8 @@ class AutoRestValidationTest(object):
          <Fixtures.AcceptanceTestsValidation.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsValidation.models.ErrorException>`
         """
         # Construct URL
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}'
@@ -154,6 +156,8 @@ class AutoRestValidationTest(object):
          <Fixtures.AcceptanceTestsValidation.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsValidation.models.ErrorException>`
         """
         # Construct URL
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}'
@@ -211,6 +215,8 @@ class AutoRestValidationTest(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         constant_param = "constant"
 
@@ -257,6 +263,8 @@ class AutoRestValidationTest(object):
          <Fixtures.AcceptanceTestsValidation.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         constant_param = "constant"
 

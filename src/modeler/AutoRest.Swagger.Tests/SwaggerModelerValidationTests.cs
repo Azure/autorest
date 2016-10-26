@@ -34,7 +34,7 @@ namespace AutoRest.Swagger.Tests
         internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, Type validationType, int count)
         {
             // checks that the collection has the right number of items and each is the correct type.
-            Assert.Equal(count, messages.Where(message => message.Type == validationType).Count());
+            Assert.Equal(count, messages.Count(message => message.Type == validationType));
         }
     }
 
@@ -62,6 +62,13 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "definition-missing-description.json"));
             messages.AssertOnlyValidationMessage(typeof(ModelTypeIncomplete));
+        }
+
+        [Fact]
+        public void AvoidMsdnReferencesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "definition-contains-msdn-reference.json"));
+            messages.AssertOnlyValidationMessage(typeof(AvoidMsdnReferences), 4);
         }
 
         [Fact]
@@ -93,6 +100,20 @@ namespace AutoRest.Swagger.Tests
             messages.AssertOnlyValidationMessage(typeof(AnonymousParameterTypes));
         }
 
+        [Fact]
+        public void OperationParametersValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operations-invalid-parameters.json"));
+            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation));
+        }
+        
+        [Fact]
+        public void ServiceDefinitionParametersValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "service-def-invalid-parameters.json"));
+            messages.AssertOnlyValidationMessage(typeof(ServiceDefinitionParameters));
+        }
+        
         [Fact]
         public void OperationGroupSingleUnderscoreValidation()
         {
