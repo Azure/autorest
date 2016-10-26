@@ -665,7 +665,7 @@ var msbuildDefaults = {
   stdout: process.stdout,
   stderr: process.stderr,
   maxBuffer: MAX_BUFFER,
-  verbosity: 'normal',
+  verbosity: 'diag',
   errorOnFail: true,
   toolsVersion: msBuildToolsVersion
 };
