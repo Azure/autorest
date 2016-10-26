@@ -98,7 +98,15 @@ module MsRestAzure
     
     def get_request(options = {})
       link = @azure_async_operation_header_link || @location_header_link
-      options[:connection] = create_connection(options[:base_uri])
+      faraday_options = {
+          middlewares: @request.middlewares,
+          headers: @request.headers,
+          log: @request.log,
+          ssl: @request.ssl
+      }
+      @connection ||= MsRest::HttpOperationRequest.create_faraday_connection(options[:base_uri], faraday_options)
+      options[:connection] = @connection
+
       MsRest::HttpOperationRequest.new(nil, link, :get, options)
     end
 
@@ -109,17 +117,5 @@ module MsRestAzure
 
     attr_accessor :connection
 
-    def create_connection(base_url)
-      @connection ||= Faraday.new(:url => base_url, :ssl => MsRest.ssl_options) do |faraday|
-        [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]].each{ |args| faraday.use(*args) }
-        faraday.adapter Faraday.default_adapter
-        faraday.headers = request.headers
-        logging = ENV['AZURE_HTTP_LOGGING'] || request.log
-        if logging
-          faraday.response :logger, nil, { :bodies => logging == 'full' }
-        end
-      end
-    end
   end
-
 end

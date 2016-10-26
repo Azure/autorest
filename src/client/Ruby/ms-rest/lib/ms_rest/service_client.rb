@@ -40,6 +40,7 @@ module MsRest
     def make_request_async(base_url, method, path, options = {})
       options = @middlewares.merge(options)
       options[:credentials] = options[:credentials] || @credentials
+      options[:ssl] = options[:ssl] || MsRest.ssl_options
       request  = MsRest::HttpOperationRequest.new(base_url, path, method, options)
       promise = request.run_promise do |req|
         options[:credentials].sign_request(req) unless options[:credentials].nil?

@@ -36,7 +36,7 @@ module MsRestAzure
       azure_service_client = AzureServiceClient.new nil
       azure_service_client.long_running_operation_retry_timeout = 0
 
-      allow_any_instance_of(MsRestAzure::PollingState).to receive(:create_connection).and_return(nil)
+      allow_any_instance_of(MsRestAzure::PollingState).to receive(:get_request).and_return(nil)
       allow(azure_service_client).to receive(:update_state_from_azure_async_operation_header) do |request, polling_state|
         polling_state.status = AsyncOperationStatus::SUCCESS_STATUS
         polling_state.resource = 'resource'
@@ -63,7 +63,7 @@ module MsRestAzure
       azure_service_client = AzureServiceClient.new nil
       azure_service_client.long_running_operation_retry_timeout = 0
 
-      allow_any_instance_of(MsRestAzure::PollingState).to receive(:create_connection).and_return(nil)
+      allow_any_instance_of(MsRestAzure::PollingState).to receive(:get_request).and_return(nil)
       allow(azure_service_client).to receive(:update_state_from_location_header) do |request, polling_state|
         polling_state.status = AsyncOperationStatus::SUCCESS_STATUS
         polling_state.resource = 'resource'
@@ -86,7 +86,7 @@ module MsRestAzure
       azure_service_client = AzureServiceClient.new nil
       azure_service_client.long_running_operation_retry_timeout = 0
 
-      allow_any_instance_of(MsRestAzure::PollingState).to receive(:create_connection).and_return(nil)
+      allow_any_instance_of(MsRestAzure::PollingState).to receive(:get_request).and_return(nil)
       allow(azure_service_client).to receive(:update_state_from_azure_async_operation_header) do |request, polling_state|
         polling_state.status = AsyncOperationStatus::FAILED_STATUS
       end

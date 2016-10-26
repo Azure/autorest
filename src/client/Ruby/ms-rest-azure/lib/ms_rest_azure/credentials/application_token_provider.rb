@@ -91,9 +91,7 @@ module MsRestAzure
 
       url = URI.parse(token_acquire_url)
 
-      connection = Faraday.new(:url => url, :ssl => MsRest.ssl_options) do |builder|
-        builder.adapter Faraday.default_adapter
-      end
+      connection = MsRest::HttpOperationRequest.create_faraday_connection(url)
 
       request_body = REQUEST_BODY_PATTERN.dup
       request_body['{resource_uri}'] = ERB::Util.url_encode(@settings.token_audience)
