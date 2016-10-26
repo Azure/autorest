@@ -289,8 +289,46 @@
 
    <!-- .xproj files (used for clean and razor compile tasks -->
   <ItemGroup>
-    <XProjFiles Include="$(MSBuildThisFileDirectory)src/**/*.xproj"/>
+    <!--<XProjFiles Include="$(MSBuildThisFileDirectory)src/**/*.xproj"/>-->
+    <!-- .xproj files (used for clean and razor compile tasks -->
+  
+    <XProjFiles Include="src/core/AutoRest/AutoRest.xproj" />
+    <XProjFiles Include="src/core/AutoRest.Core/AutoRest.Core.xproj" />
+    <XProjFiles Include="src/core/AutoRest.Core.Tests/AutoRest.Core.Tests.xproj" />
+    <XProjFiles Include="src/core/AutoRest.Extensions/AutoRest.Extensions.xproj" />
+    <XProjFiles Include="src/core/AutoRest.Extensions.Azure/AutoRest.Extensions.Azure.xproj" />
+    <XProjFiles Include="src/core/AutoRest.Extensions.Azure.Tests/AutoRest.Extensions.Azure.Tests.xproj" />
+    <XProjFiles Include="src/core/AutoRest.Extensions.Tests/AutoRest.Extensions.Tests.xproj" />
+    <XProjFiles Include="src/dev/AutoRest.Tooling.CSharp.Compiler/AutoRest.Tooling.CSharp.Compiler.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.AzureResourceSchema/AutoRest.AzureResourceSchema.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.AzureResourceSchema.Tests/AutoRest.AzureResourceSchema.Tests.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.CSharp/AutoRest.CSharp.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.CSharp.Azure/AutoRest.CSharp.Azure.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.CSharp.Azure.Fluent/AutoRest.CSharp.Azure.Fluent.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.CSharp.Azure.Fluent.Tests/AutoRest.CSharp.Azure.Fluent.Tests.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.CSharp.Azure.Tests/AutoRest.CSharp.Azure.Tests.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.CSharp.Tests/AutoRest.CSharp.Tests.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.CSharp.Unit.Tests/AutoRest.CSharp.Unit.Tests.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.Go/AutoRest.Go.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.Java/AutoRest.Java.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.Java.Azure/AutoRest.Java.Azure.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.Java.Azure.Fluent/AutoRest.Java.Azure.Fluent.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.NodeJS/AutoRest.NodeJS.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.NodeJS.Azure/AutoRest.NodeJS.Azure.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.NodeJS.Azure.Tests/AutoRest.NodeJS.Azure.Tests.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.NodeJS.Tests/AutoRest.NodeJS.Tests.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.Python/AutoRest.Python.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.Python.Azure/AutoRest.Python.Azure.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.Python.Azure.Tests/AutoRest.Python.Azure.Tests.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.Python.Tests/AutoRest.Python.Tests.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.Ruby/AutoRest.Ruby.xproj" />
+    <XProjFiles Include="src/generator/AutoRest.Ruby.Azure/AutoRest.Ruby.Azure.xproj" />
+    <XProjFiles Include="src/modeler/AutoRest.CompositeSwagger/AutoRest.CompositeSwagger.xproj" />
+    <XProjFiles Include="src/modeler/AutoRest.CompositeSwagger.Tests/AutoRest.CompositeSwagger.Tests.xproj" />
+    <XProjFiles Include="src/modeler/AutoRest.Swagger/AutoRest.Swagger.xproj" />
+    <XProjFiles Include="src/modeler/AutoRest.Swagger.Tests/AutoRest.Swagger.Tests.xproj" />
   </ItemGroup>
+  
   <Target Name="RazorCompile">
     <Message Text="xprojs are %(XProjFiles.Identity)" Importance="High"/>
     <MSBuild BuildInParallel="false" Projects="%(XProjFiles.Identity)"
