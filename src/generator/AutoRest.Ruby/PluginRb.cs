@@ -29,7 +29,7 @@ namespace AutoRest.Ruby
                 new Factory<DictionaryType, DictionaryTypeRb>(),
                 new Factory<SequenceType, SequenceTypeRb>(),
                 new Factory<MethodGroup, MethodGroupRb>(),
-                new Factory<EnumType, EnumType>(),
+                new Factory<EnumType, EnumTypeRb>(),
                 new Factory<PrimaryType, PrimaryTypeRb>()
             };
         }
