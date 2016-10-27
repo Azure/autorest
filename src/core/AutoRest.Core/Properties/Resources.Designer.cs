@@ -375,6 +375,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Media types other than &apos;application/json&apos; has limited support.
+        /// </summary>
+        public static string NonAppJsonTypeNotSupported {
+            get {
+                return ResourceManager.GetString("NonAppJsonTypeNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to No responses defined..
         /// </summary>
         public static string NoResponses {
@@ -456,6 +465,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Non-HTTPS/HTTP schemes have limited support.
+        /// </summary>
+        public static string SupportedSchemesWarningMessage {
+            get {
+                return ResourceManager.GetString("SupportedSchemesWarningMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Operations can not have more than one &apos;body&apos; parameter. The following were found: &apos;{0}&apos;.
         /// </summary>
         public static string TooManyBodyParameters {
@@ -470,6 +488,15 @@ namespace AutoRest.Core.Properties {
         public static string TypeShouldBeAssemblyQualified {
             get {
                 return ResourceManager.GetString("TypeShouldBeAssemblyQualified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to More than one resource path is not allowed in a single spec.
+        /// </summary>
+        public static string UniqueResourcePathsWarning {
+            get {
+                return ResourceManager.GetString("UniqueResourcePathsWarning", resourceCulture);
             }
         }
         
