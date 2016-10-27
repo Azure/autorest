@@ -780,7 +780,8 @@ gulp.task('test:go', ['regenerate:expected:go'], shell.task([
 
 var xunitTestsDlls = [
 ];
-
+    
+var xunitNetCoreXproj = [
   'src/core/AutoRest.Core.Tests/project.json',
   'src/core/AutoRest.Extensions.Azure.Tests/project.json',
   'src/core/AutoRest.Extensions.Tests/project.json',
