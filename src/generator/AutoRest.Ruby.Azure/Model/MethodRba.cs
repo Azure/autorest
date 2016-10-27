@@ -3,65 +3,43 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using System.Text;
-using AutoRest.Core.ClientModel;
+using System.Net.NetworkInformation;
 using AutoRest.Core.Logging;
+using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions.Azure;
 using AutoRest.Extensions.Azure.Model;
 using AutoRest.Ruby.Azure.Properties;
-using AutoRest.Ruby.TemplateModels;
-using IndentedStringBuilder = AutoRest.Core.Utilities.IndentedStringBuilder;
+using AutoRest.Ruby.Model;
 using Newtonsoft.Json;
+using static AutoRest.Core.Utilities.DependencyInjection;
+using IndentedStringBuilder = AutoRest.Core.Utilities.IndentedStringBuilder;
 
-namespace AutoRest.Ruby.Azure.TemplateModels
+namespace AutoRest.Ruby.Azure.Model
 {
     /// <summary>
     /// The model object for Azure methods.
     /// </summary>
-    public class AzureMethodTemplateModel : MethodTemplateModel
+    public class MethodRba : MethodRb
     {
-        /// <summary>
-        /// Initializes a new instance of the AzureMethodTemplateModel class.
-        /// </summary>
-        /// <param name="source">The method current model is built for.</param>
-        /// <param name="serviceClient">The service client - main point of access to the SDK.</param>
-        public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
-            : base(source, serviceClient)
-        {
-            if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
 
-            ParameterTemplateModels.Clear();
-            source.Parameters.ForEach(p => ParameterTemplateModels.Add(new AzureParameterTemplateModel(p)));
+        public string ClientRequestIdString => AzureExtensions.GetClientRequestIdString(this);
 
-            this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
-            this.RequestIdString = AzureExtensions.GetRequestIdString(source);
-        }
-
-        public string ClientRequestIdString { get; private set; }
-
-        public string RequestIdString { get; private set; }
+        public string RequestIdString => AzureExtensions.GetRequestIdString(this);
 
         /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.
         /// </summary>
-        public bool IsLongRunningOperation
-        {
-            get { return Extensions.ContainsKey(AzureExtensions.LongRunningExtension); }
-        }
+        public bool IsLongRunningOperation => Extensions.ContainsKey(AzureExtensions.LongRunningExtension);
 
         /// <summary>
         /// Returns true if method has x-ms-pageable extension.
         /// </summary>
-        public bool IsPageable
-        {
-            get { return Extensions.ContainsKey(AzureExtensions.PageableExtension); }
-        }
+        public bool IsPageable => Extensions.ContainsKey(AzureExtensions.PageableExtension);
 
         /// <summary>
         /// Returns Ruby code as string which sets `next_method` property of the page with the respective next paging method
@@ -76,34 +54,34 @@ namespace AutoRest.Ruby.Azure.TemplateModels
             // When pageable extension have operation name
             if (pageableExtension != null && !string.IsNullOrWhiteSpace(pageableExtension.OperationName))
             {
-                nextMethod = ServiceClient.Methods.FirstOrDefault(m =>
-                    pageableExtension.OperationName.Equals(m.SerializedName, StringComparison.OrdinalIgnoreCase));
+                nextMethod = MethodGroup.Methods.FirstOrDefault(m =>pageableExtension.OperationName.EqualsIgnoreCase(m.SerializedName));
                 nextMethodName = nextMethod.Name;
             }
             // When pageable extension does not have operation name
             else
             {
                 nextMethodName = (string)Extensions["nextMethodName"];
-                nextMethod = ServiceClient.Methods.Where(m => m.Name == nextMethodName).FirstOrDefault();
+                nextMethod = MethodGroup.Methods.FirstOrDefault(m => m.Name == nextMethodName);
             }
 
             IndentedStringBuilder builder = new IndentedStringBuilder("  ");
-
+            
             // As there is no distinguishable property in next link parameter, we'll check to see whether any parameter contains "next" in the parameter name
-            Parameter nextLinkParameter = nextMethod.Parameters.Where(p => p.Name.IndexOf("next", StringComparison.OrdinalIgnoreCase) >= 0).FirstOrDefault();
+            Parameter nextLinkParameter = nextMethod.Parameters.Where(p => ((string)p.Name).IndexOf("next", StringComparison.OrdinalIgnoreCase) >= 0).FirstOrDefault();
             builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "page.next_method = Proc.new do |{0}|", nextLinkParameter.Name));
 
             // In case of parmeter grouping, next methods parameter needs to be mapped with the origin methods parameter
-            IEnumerable<Parameter> origMethodGroupedParameters = Parameters.Where(p => p.Name.Contains(Name));
-            if (origMethodGroupedParameters.Count() > 0)
+            var origName = Singleton<CodeNamerRb>.Instance.UnderscoreCase(Name.RawValue);
+            IEnumerable<Parameter> origMethodGroupedParameters = Parameters.Where(p => p.Name.Contains(origName));
+            if (origMethodGroupedParameters.Any())
             {
                 builder.Indent();
                 foreach (Parameter param in nextMethod.Parameters)
                 {
-                    if (param.Name.Contains(nextMethod.Name) && (param.Name.Length > nextMethod.Name.Length)) //parameter that contains the method name + postfix, it's a grouped param
+                    if (param.Name.Contains(nextMethod.Name) && (((string)param.Name.RawValue).Length > ((string)nextMethod.Name).Length)) //parameter that contains the method name + postfix, it's a grouped param
                     {
                         //assigning grouped parameter passed to the lazy method, to the parameter used in the invocation to the next method
-                        string argumentName = param.Name.Replace(nextMethodName, Name);
+                        string argumentName = ((string)param.Name).Replace(nextMethodName, origName);
                         builder.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0} = {1}", param.Name, argumentName));
                     }
                 }
@@ -111,7 +89,7 @@ namespace AutoRest.Ruby.Azure.TemplateModels
             }
 
             // Create AzureMethodTemplateModel from nextMethod to determine nextMethod's MethodParameterInvocation signature
-            AzureMethodTemplateModel nextMethodTemplateModel = new AzureMethodTemplateModel(nextMethod, ServiceClient);
+            MethodRba nextMethodTemplateModel = New<MethodRba>().LoadFrom(nextMethod);
             builder.Indent().AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}_async({1})", nextMethodName, nextMethodTemplateModel.MethodParameterInvocation));
             builder.Outdent().Append(String.Format(CultureInfo.InvariantCulture, "end"));
 
@@ -150,13 +128,11 @@ namespace AutoRest.Ruby.Azure.TemplateModels
         /// <summary>
         /// Gets the Get method model.
         /// </summary>
-        public AzureMethodTemplateModel GetMethod
+        public MethodRba GetMethod
         {
             get
             {
-                var getMethod = ServiceClient.Methods.FirstOrDefault(m => m.Url == Url
-                                                                          && m.HttpMethod == HttpMethod.Get &&
-                                                                          m.Group == Group);
+                var getMethod = MethodGroup.Methods.FirstOrDefault(m => m.Url == Url && m.HttpMethod == HttpMethod.Get );
                 if (getMethod == null)
                 {
                     throw new InvalidOperationException(
@@ -164,7 +140,7 @@ namespace AutoRest.Ruby.Azure.TemplateModels
                             Name, Group));
                 }
 
-                return new AzureMethodTemplateModel(getMethod, ServiceClient);
+                return New<MethodRba>().LoadFrom(getMethod);
             }
         }
 
@@ -174,7 +150,7 @@ namespace AutoRest.Ruby.Azure.TemplateModels
         /// <param name="variableName">Variable name which keeps the response.</param>
         /// <param name="type">Type of response.</param>
         /// <returns>Ruby code in form of string for deserializing polling response.</returns>
-        public string DeserializePollingResponse(string variableName, IType type)
+        public string DeserializePollingResponse(string variableName, IModelType type)
         {
             var builder = new IndentedStringBuilder("  ");
 
@@ -210,15 +186,9 @@ namespace AutoRest.Ruby.Azure.TemplateModels
         /// Gets the list of namespaces where we look for classes that need to
         /// be instantiated dynamically due to polymorphism.
         /// </summary>
-        public override List<string> ClassNamespaces
+        public override IEnumerable<string> ClassNamespaces
         {
-            get
-            {
-                return new List<string>
-                {
-                    "MsRestAzure"
-                };
-            }
+            get { yield return "MsRestAzure"; }
         }
 
         /// <summary>
@@ -289,7 +259,7 @@ namespace AutoRest.Ruby.Azure.TemplateModels
                 {
                     try
                     {
-                        SequenceType sequenceType = ((CompositeType)ReturnType.Body).Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
+                        SequenceType sequenceType = ((CompositeType)ReturnType.Body).Properties.Select(p => p.ModelType).FirstOrDefault(t => t is SequenceType) as SequenceType;
                         return string.Format(CultureInfo.InvariantCulture, "Array<{0}>", sequenceType.ElementType.Name);
                     }
                     catch (NullReferenceException nr)

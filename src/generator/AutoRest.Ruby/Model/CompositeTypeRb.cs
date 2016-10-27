@@ -5,87 +5,37 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.Ruby.TemplateModels
+namespace AutoRest.Ruby.Model
 {
     /// <summary>
     /// A model for the model template.
     /// </summary>
-    public class ModelTemplateModel : CompositeType
+    public class CompositeTypeRb : CompositeType
     {
-        /// <summary>
-        /// The current scope.
-        /// </summary>
-        private readonly IScopeProvider scope = new ScopeProvider();
-
         /// <summary>
         /// The reference to the base object.
         /// </summary>
-        private readonly ModelTemplateModel parent = null;
-
-        /// <summary>
-        /// List of all model types.
-        /// </summary>
-        private readonly ISet<CompositeType> allTypes;
+        private CompositeTypeRb parent => BaseModelType as CompositeTypeRb;
 
         /// <summary>
         /// Gets the list of own properties of the object.
         /// </summary>
-        public List<PropertyTemplateModel> PropertyTemplateModels { get; private set; }
-
-        /// <summary>
-        /// Gets the current scope.
-        /// </summary>
-        public IScopeProvider Scope
-        {
-            get { return scope; }
-        }
+        public IEnumerable<PropertyRb> PropertyTemplateModels => Properties.Cast<PropertyRb>();
 
         /// <summary>
         /// Gets the list of modules/classes which need to be included.
         /// </summary>
-        public virtual List<string> Includes
-        {
-            get
-            {
-                return new List<string>();
-            }
-        }
+        public virtual IEnumerable<string> Includes => Enumerable.Empty<string>();
 
         /// <summary>
         /// Gets the list of namespaces where we look for classes that need to
         /// be instantiated dynamically due to polymorphism.
         /// </summary>
-        public virtual List<string> ClassNamespaces
-        {
-            get
-            {
-                return new List<string> { };
-            }
-        }
-
-        /// <summary>
-        /// Gets the value indicating whether current object is polymorhic.
-        /// </summary>
-        public bool IsPolymorphic
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(this.PolymorphicDiscriminator))
-                {
-                    return true;
-                }
-
-                if (this.parent != null)
-                {
-                    return parent.IsPolymorphic;
-                }
-
-                return false;
-            }
-        }
+        public virtual IEnumerable<string> ClassNamespaces => Enumerable.Empty<string>();
 
         /// <summary>
         /// Gets the polymorphic discriminator to use for the current object, or its parent's if it doesn't have one.
@@ -99,54 +49,63 @@ namespace AutoRest.Ruby.TemplateModels
                     return this.parent.PolymorphicDiscriminatorProperty;
                 }
 
-                return this.PolymorphicDiscriminator;
+                return Singleton<CodeNamerRb>.Instance.UnderscoreCase(this.PolymorphicDiscriminator);
             }
         }
 
         /// <summary>
         /// Gets the list of all model types derived directly or indirectly from this type.
         /// </summary>
-        public IList<CompositeType> DerivedTypes
-        {
-            get
-            {
-                return allTypes.Where(t => t.DerivesFrom(this)).ToList();
-            }
-        }
+        public IEnumerable<CompositeType> DerivedTypes => CodeModel.ModelTypes.Where(t => t.DerivesFrom(this));
 
         /// <summary>
         /// Initializes a new instance of the ModelTemplateModel class.
         /// </summary>
-        /// <param name="source">The object to create model from.</param>
-        /// <param name="allTypes">The list of all model types; Used to implement polymorphism.</param>
-        public ModelTemplateModel(CompositeType source, ISet<CompositeType> allTypes)
+        protected CompositeTypeRb()
         {
-            this.LoadFrom(source);
-            PropertyTemplateModels = new List<PropertyTemplateModel>();
-            source.Properties.ForEach(p => PropertyTemplateModels.Add(new PropertyTemplateModel(p)));
+        }
 
-            if (!string.IsNullOrEmpty(source.PolymorphicDiscriminator))
+        protected CompositeTypeRb(string name): base(name)
+        {
+            
+        }
+        /// <summary>
+        /// Gets or sets the discriminator property for polymorphic types.
+        /// </summary>
+        public override string PolymorphicDiscriminator
+        {
+            get { return base.PolymorphicDiscriminator; }
+            set
             {
-                if (!source.Properties.Any(p => p.Name == source.PolymorphicDiscriminator))
+                base.PolymorphicDiscriminator = value;
+                AddPolymorphicPropertyIfNecessary();
+            }
+        }
+
+        /// <summary>
+        /// If PolymorphicDiscriminator is set, makes sure we have a PolymorphicDiscriminator property.
+        /// </summary>
+        private void AddPolymorphicPropertyIfNecessary()
+        {
+            if (!string.IsNullOrEmpty(PolymorphicDiscriminator) && Properties.All(p => p.Name != PolymorphicDiscriminator))
+            {
+                var newProp = base.Add(New<Property>(new
                 {
-                    var polymorphicProperty = new Property
-                    {
-                        IsRequired = true,
-                        Name = source.PolymorphicDiscriminator,
-                        SerializedName = source.PolymorphicDiscriminator,
-                        Documentation = "Polymorhpic Discriminator",
-                        Type = new PrimaryType(KnownPrimaryType.String)
-                    };
-                    source.Properties.Add(polymorphicProperty);
-                }
+                    IsRequired = true,
+                    Name = PolymorphicDiscriminator,
+                    SerializedName = PolymorphicDiscriminator,
+                    Documentation = "Polymorphic Discriminator",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.String)
+                }));
+                newProp.Name.FixedValue = newProp.Name.RawValue;
             }
+        }
 
-            if (source.BaseModelType != null)
-            {
-                this.parent = new ModelTemplateModel(source.BaseModelType, allTypes);
-            }
-
-            this.allTypes = allTypes;
+        public override Property Add(Property item)
+        {
+            var property = base.Add(item) as PropertyRb;
+            AddPolymorphicPropertyIfNecessary();
+            return property;
         }
 
         /// <summary>

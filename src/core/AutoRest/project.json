@@ -49,6 +49,8 @@
     "AutoRest.CSharp.Azure": { "target": "project", "type": "build" },
     "AutoRest.NodeJS": { "target": "project", "type": "build" },
     "AutoRest.NodeJS.Azure": { "target": "project", "type": "build" },
+    "AutoRest.Ruby": { "target": "project", "type": "build" },
+    "AutoRest.Ruby.Azure": { "target": "project", "type": "build" },
     "AutoRest.AzureResourceSchema": { "target": "project", "type": "build" }
   },
     

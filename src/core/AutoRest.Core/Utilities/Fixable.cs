@@ -150,11 +150,11 @@ namespace AutoRest.Core.Utilities
             }
             if (x.Value == null && y.Value == null)
             {
-                return false;
+                return true;
             }
             if (x.Value == null )
             {
-                return true;
+                return false;
             }
             return x.Value.Equals(y.Value);
         }
