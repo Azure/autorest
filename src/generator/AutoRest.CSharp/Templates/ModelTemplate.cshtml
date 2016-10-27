@@ -54,7 +54,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 && p.IsRequired
                 && ((CompositeType)p.ModelType).ContainsConstantProperties))
             {
-            @:@(property.Name) = new @(property.ModelTypeName)();
+            @:this.@(property.Name) = new @(property.ModelTypeName)();
             }
         }
 </text>
