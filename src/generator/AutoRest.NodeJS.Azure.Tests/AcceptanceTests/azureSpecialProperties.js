@@ -170,7 +170,7 @@ describe('nodejs', function () {
       });
     });
 
-    it('should have x-ms-request-id in the error object', function (done) {
+    it('should have x-ms-request-id in the err object', function (done) {
       var invalidClientId = '123';
       var options = {
         customHeaders: {

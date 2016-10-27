@@ -11,7 +11,7 @@ namespace AutoRest.Core.Validation
     /// A rule that validates objects of type <typeparamref name="T"/>
     /// </summary>
     /// <typeparam name="T">The type of the object to validate</typeparam>
-    public abstract class TypedRule<T> : Rule where T : class
+    public abstract class TypedRule<T> : Rule
     {
         protected TypedRule()
         {

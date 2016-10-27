@@ -18,8 +18,8 @@
     }
   ],
   "dependencies": {
-    "ms-rest": "file:../../client/NodeJS/ms-rest",
-    "ms-rest-azure": "file:../../client/NodeJS/ms-rest-azure",
+    "ms-rest": "1.15.2",
+    "ms-rest-azure": "1.15.2",
     "jshint": "2.8.0",
     "moment":  "^2.14.1",
     "xunit-file": "0.0.5",

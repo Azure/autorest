@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 {
+=======
+﻿{
+>>>>>>> bb07725b206cd577953adf1352edefc427ba134a
   "id": "http://schema.management.azure.com/schemas/2016-07-07/Microsoft.ApiManagement.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.ApiManagement",

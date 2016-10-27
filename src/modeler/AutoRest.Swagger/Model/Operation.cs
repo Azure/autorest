@@ -44,6 +44,7 @@ namespace AutoRest.Swagger.Model
             set { _summary = value.StripControlCharacters(); }
         }
 
+        [Rule(typeof(AvoidMsdnReferences))]
         public string Description
         {
             get { return _description; }
@@ -58,11 +59,13 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// A list of MIME types the operation can consume.
         /// </summary>
+        [CollectionRule(typeof(NonAppJsonTypeWarning))]
         public IList<string> Consumes { get; set; }
 
         /// <summary>
         /// A list of MIME types the operation can produce. 
         /// </summary>
+        [CollectionRule(typeof(NonAppJsonTypeWarning))]
         public IList<string> Produces { get; set; }
 
         /// <summary>
@@ -83,6 +86,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The transfer protocol for the operation. 
         /// </summary>
+        [CollectionRule(typeof(SupportedSchemesWarning))]
         public IList<TransferProtocolScheme> Schemes { get; set; }
 
         public bool Deprecated { get; set; }
