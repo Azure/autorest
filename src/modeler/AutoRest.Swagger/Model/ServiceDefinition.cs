@@ -61,21 +61,25 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The transfer protocol of the API.
         /// </summary>
+        [CollectionRule(typeof(SupportedSchemesWarning))]
         public IList<TransferProtocolScheme> Schemes { get; set; }
 
         /// <summary>
         /// A list of MIME types the service can consume.
         /// </summary>
+        [CollectionRule(typeof(NonAppJsonTypeWarning))]
         public IList<string> Consumes { get; set; }
 
         /// <summary>
         /// A list of MIME types the APIs can produce.
         /// </summary>
+        [CollectionRule(typeof(NonAppJsonTypeWarning))]
         public IList<string> Produces { get; set; }
 
         /// <summary>
         /// Key is actual path and the value is serializationProperty of http operations and operation objects.
         /// </summary>
+        [Rule(typeof(UniqueResourcePaths))]
         public Dictionary<string, Dictionary<string, Operation>> Paths { get; set; }
 
         /// <summary>
@@ -94,6 +98,7 @@ namespace AutoRest.Swagger.Model
         /// Dictionary of parameters that can be used across operations.
         /// This property does not define global parameters for all operations.
         /// </summary>
+        [Rule(typeof(ServiceDefinitionParameters))]
         [CollectionRule(typeof(AnonymousParameterTypes))]
         public Dictionary<string, SwaggerParameter> Parameters { get; set; }
 

@@ -1,0 +1,52 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Operations schemes has non-http/https type",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "Https"
+  ],
+  "basePath": "/",
+  "paths": {
+    "/foo": {
+      "post": {
+        "operationId": "Noun_Verb",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "schemes": [
+          "Ws"
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test subscription id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api version"
+    }
+  }
+}

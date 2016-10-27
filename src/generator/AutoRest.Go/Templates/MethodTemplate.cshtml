@@ -151,7 +151,7 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
     return
 }
 
-@if (Model.IsPageable())
+@if (Model.IsPageable() && !Model.NextAlreadyDefined)
 {
 @:@EmptyLine
 @:// @(Model.NextMethodName) retrieves the next set of results, if any.

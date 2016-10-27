@@ -65,6 +65,7 @@ namespace AutoRest.Java.Azure
             AzureExtensions.ProcessParameterizedHost(serviceClient, Settings);
             AzureExtensions.ProcessClientRequestIdExtension(serviceClient);
             AzureExtensions.UpdateHeadMethods(serviceClient);
+            AzureExtensions.ProcessGlobalParameters(serviceClient);
             AzureExtensions.FlattenModels(serviceClient);
             AzureExtensions.FlattenMethodParameters(serviceClient, Settings);
             ParameterGroupExtensionHelper.AddParameterGroups(serviceClient);
