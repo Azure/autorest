@@ -40,7 +40,7 @@ namespace AutoRest.Ruby
         ///     Gets the brief instructions required to complete before using the code generator.
         /// </summary>
         public override string UsageInstructions
-            => @"The ""gem 'ms_rest' ~> 0.5"" is required for working with generated code.";
+            => @"The ""gem 'ms_rest' ~> 0.6"" is required for working with generated code.";
 
         public CodeNamerRb CodeNamer => Singleton<CodeNamerRb>.Instance;
 
