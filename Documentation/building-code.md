@@ -106,7 +106,7 @@ To make sure you've set up all the prerequisites correctly, run `.\Tools\Verify-
 ## Build
 
 ### Visual Studio Build
-There are 2 solutions used to build C# ClientRuntime and AutoRest code generator. AutoRest.sln is used to build AutoRest code generator. ClientRuntime.sln is used to build C# ClientRuntime.
+AutoRest.sln is used to build AutoRest code generator.
 
 ###Command Line
 We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. Install for global use with
@@ -185,7 +185,7 @@ Make sure that you have built the entire `AutoRest.sln` solution.
 #####If you see the error `gulp is not recognized as an internal or external command`
 `gulp` is located at `C:\Users\[user]\AppData\Roaming\npm\gulp` in Windows after you install it globally.
 
-# Releasing AutoRest and ClientRuntimes
+# Releasing AutoRest
 
  - [ ] Merge pending PRs into the master branch
  - [ ] Create a release branch from master
