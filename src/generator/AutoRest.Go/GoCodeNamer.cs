@@ -214,7 +214,7 @@ namespace AutoRest.Go
                 "unsafe",
 
                 // Other reserved names and packages (defined by the base libraries this code uses)
-                "autorest", "client", "date", "err", "req", "resp", "result", "sender"
+                "autorest", "client", "date", "err", "req", "resp", "result", "sender", "to", "validation"
 
             }.ToList().ForEach(s => ReservedWords.Add(s));
 
@@ -260,21 +260,15 @@ namespace AutoRest.Go
                                             .Any(et => (et is IType && (et as IType).Name.Equals(name)) || (et is Method && (et as Method).Name.Equals(name)));
                         if (exported is EnumType)
                         {
-                            (exported as EnumType).Name = nameInUse
-                                                            ? name + "Enum"
-                                                            : name;
+                            (exported as EnumType).Name = AttachTypeName(name, PackageName, nameInUse, "Enum");
                         }
                         else if (exported is CompositeType)
                         {
-                            (exported as CompositeType).Name = nameInUse
-                                                            ? name + "Type"
-                                                            : name;
+                            (exported as CompositeType).Name = AttachTypeName(name, PackageName, nameInUse, "Type");
                         }
                         else if (exported is Method)
                         {
-                            (exported as Method).Name = nameInUse
-                                                            ? name + "Method"
-                                                            : name;
+                            (exported as Method).Name = AttachTypeName(name, PackageName, nameInUse, "Method");
                         }
                     });
             }
@@ -531,6 +525,44 @@ namespace AutoRest.Go
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
             return new MapType(NormalizeTypeReference(dictionaryType.ValueType));
+        }
+
+        /// <summary>
+        /// Formats a string to work around golint name stuttering
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="packageName"></param>
+        /// <param name="nameInUse"></param>
+        /// <param name="attachment"></param>
+        /// <returns>The formatted string</returns>
+        public static string AttachTypeName(string name, string packageName, bool nameInUse, string attachment)
+        {
+            return nameInUse
+                ? name.Equals(packageName, StringComparison.OrdinalIgnoreCase)
+                    ? name
+                    : name + attachment
+                : name;
+        }
+
+        /// <summary>
+        /// Formats a string to pascal case using a specific character as splitter
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="splitter"></param>
+        /// <returns>The formatted string</returns>
+        public static string PascalCaseWithoutChar(string name, char splitter)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+
+            return
+                name.Split(splitter)
+                    .Where(s => !string.IsNullOrEmpty(s))
+                    .Select(s => char.ToUpperInvariant(s[0]) + s.Substring(1, s.Length - 1))
+                    .DefaultIfEmpty("")
+                    .Aggregate(string.Concat);
         }
 
         public override string GetEnumMemberName(string name)

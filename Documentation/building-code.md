@@ -14,6 +14,8 @@ To set up a machine with the necessary tools for building AutoRest, run `.\Tools
 - Gradle
 - Python
 - tox
+- Go
+- glide
 - Visual Studio 2015
 - .NET CoreCLR
 
@@ -89,13 +91,22 @@ gem install bundler
 Install [Python 2.7 and Python 3.5](https://www.python.org/downloads/), and add one of them to your PATH (we recommend 3.5).
 >set PATH=PATH;C:\Python35
 
+### Go
+Install [Go 1.7](https://golang.org/dl/). Ensure Go is in your `PATH`.
+>set PATH=PATH;C:\Go\bin
+Add your [GOPATH](https://golang.org/doc/code.html#GOPATH) to your environment variables.
+
+#### Glide
+
+Install [glide](https://github.com/Masterminds/glide). Add glide to your `PATH`.
+
 ### Testing Your Environment
 To make sure you've set up all the prerequisites correctly, run `.\Tools\Verify-Settings.ps1` before you attempt to build.
 
 ## Build
 
 ### Visual Studio Build
-There are 2 solutions used to build C# ClientRuntime and AutoRest code generator. AutoRest.sln is used to build AutoRest code generator. ClientRuntime.sln is used to build C# ClientRuntime.
+AutoRest.sln is used to build AutoRest code generator.
 
 ###Command Line
 We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. Install for global use with
@@ -174,7 +185,7 @@ Make sure that you have built the entire `AutoRest.sln` solution.
 #####If you see the error `gulp is not recognized as an internal or external command`
 `gulp` is located at `C:\Users\[user]\AppData\Roaming\npm\gulp` in Windows after you install it globally.
 
-# Releasing AutoRest and ClientRuntimes
+# Releasing AutoRest
 
  - [ ] Merge pending PRs into the master branch
  - [ ] Create a release branch from master

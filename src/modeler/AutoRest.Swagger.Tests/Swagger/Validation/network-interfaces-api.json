@@ -1,0 +1,85 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Network interfaces have unallowed types",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}": {
+      "post": {
+        "operationId": "Noun_Verb1",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteServiceProviders": {
+      "post": {
+        "operationId": "Noun_Verb2",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ComputE/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces": {
+      "get": {
+        "operationId": "Noun_Verb3",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/foo?overload=true": {
+      "get": {
+        "operationId": "Noun_Verb4",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test subscription id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api version"
+    }
+  }
+}
