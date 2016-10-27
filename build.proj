@@ -166,7 +166,12 @@
     <Exec Command='"C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\x64\sn.exe" -Vx *' Condition="$(isadmin) == 0"/>
   </Target>
 
-   <!-- .xproj files -->
+  <!-- .xproj files -->
+  <!--> 
+    We need to explicitly list all the xproj files since mono does the **/*.xproj search inefficiently causing the process itself to timeout
+    Bin directories are also evaluated from this list. 
+    tl;dr: for cross plat stuff, do not use **/* when finding ItemGroups  
+  <-->
   <ItemGroup>
     <XProjFiles Include="src/core/AutoRest/AutoRest.xproj" />
     <XProjFiles Include="src/core/AutoRest.Core/AutoRest.Core.xproj" />
