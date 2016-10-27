@@ -14,6 +14,7 @@ using AutoRest.Extensions.Azure;
 using AutoRest.Ruby.Azure.Model;
 using AutoRest.Ruby.Templates;
 using AutoRest.Ruby.Azure.Templates;
+using AutoRest.Ruby.Model;
 
 namespace AutoRest.Ruby.Azure
 {
@@ -83,7 +84,7 @@ namespace AutoRest.Ruby.Azure
             }
 
             // Enums
-            foreach (var enumType in codeModel.EnumTypes)
+            foreach (EnumTypeRb enumType in codeModel.EnumTypes)
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
                 await Write(enumTemplate, Path.Combine(GeneratorSettingsRb.Instance.modelsPath, CodeNamer.UnderscoreCase(enumTemplate.Model.Name) + ImplementationFileExtension));

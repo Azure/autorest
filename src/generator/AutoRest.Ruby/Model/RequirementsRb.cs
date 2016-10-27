@@ -127,7 +127,7 @@ namespace AutoRest.Ruby.Model
                 .Where(m => !ExcludeModel(m))
                 .ForEach(model => sb.AppendLine(this.GetAutoloadFormat(model.Name, "models/" + CodeNamer.UnderscoreCase(model.Name) + Generator.ImplementationFileExtension)));
 
-            CodeModel.EnumTypes.ForEach(enumType => sb.AppendLine(this.GetAutoloadFormat(enumType.Name, "models/" + CodeNamer.UnderscoreCase(enumType.Name) + Generator.ImplementationFileExtension)));
+            CodeModel.EnumTypes.Cast<EnumTypeRb>().ForEach(enumType => sb.AppendLine(this.GetAutoloadFormat(enumType.ModuleName, "models/" + CodeNamer.UnderscoreCase(enumType.Name) + Generator.ImplementationFileExtension)));
 
             return sb.ToString();
         }

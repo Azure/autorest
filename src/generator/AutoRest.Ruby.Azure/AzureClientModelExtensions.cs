@@ -4,6 +4,7 @@
 using System.Globalization;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Ruby.Model;
 
 namespace AutoRest.Ruby.Azure
 {
@@ -29,7 +30,7 @@ namespace AutoRest.Ruby.Azure
             var sequence = type as SequenceType;
             var dictionary = type as DictionaryType;
             var primary = type as PrimaryType;
-            var enumType = type as EnumType;
+            var enumType = type as EnumTypeRb;
 
             var builder = new IndentedStringBuilder("  ");
 
@@ -76,9 +77,9 @@ namespace AutoRest.Ruby.Azure
                     .AppendLine("if (!{0}.nil? && !{0}.empty?)", valueReference)
                     .AppendLine(
                         "  enum_is_valid = {0}.constants.any? {{ |e| {0}.const_get(e).to_s.downcase == {1}.downcase }}",
-                        enumType.Name, valueReference)
+                        enumType.ModuleName, valueReference)
                     .AppendLine(
-                        "  warn 'Enum {0} does not contain ' + {1}.downcase + ', but was received from the server.' unless enum_is_valid", enumType.Name, valueReference)
+                        "  warn 'Enum {0} does not contain ' + {1}.downcase + ', but was received from the server.' unless enum_is_valid", enumType.ModuleName, valueReference)
                     .AppendLine("end")
                     .ToString();
             }

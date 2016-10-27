@@ -79,7 +79,7 @@ namespace AutoRest.Ruby
             }
 
             // Enums
-            foreach (var enumType in codeModel.EnumTypes)
+            foreach (EnumTypeRb enumType in codeModel.EnumTypes)
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
                 await Write(enumTemplate,

@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Ruby.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Ruby
@@ -125,7 +126,7 @@ namespace AutoRest.Ruby
 
             if (enumType != null)
             {
-                return enumType.Name;
+                return ((EnumTypeRb)enumType).ModuleName;
             }
 
             if (sequenceType != null)
@@ -355,7 +356,7 @@ namespace AutoRest.Ruby
             }
             else if (enumType != null && enumType.Name != null)
             {
-                builder.AppendLine(enumType.ContructMapperForEnumType());
+                builder.AppendLine(((EnumTypeRb)enumType).ContructMapperForEnumType());
             }
             else if (sequence != null)
             {
@@ -576,7 +577,7 @@ namespace AutoRest.Ruby
         ///   module: 'module_name'                         -- name of the module to be looked for enum values
         /// }
         /// </example>
-        private static string ContructMapperForEnumType(this EnumType enumeration)
+        private static string ContructMapperForEnumType(this EnumTypeRb enumeration)
         {
             if (enumeration == null)
             {
@@ -587,7 +588,7 @@ namespace AutoRest.Ruby
 
             builder.AppendLine("type: {").Indent()
                 .AppendLine("name: 'Enum',")
-                .AppendLine("module: '{0}'", enumeration.Name).Outdent()
+                .AppendLine("module: '{0}'", enumeration.ModuleName).Outdent()
                 .AppendLine("}");
 
             return builder.ToString();
