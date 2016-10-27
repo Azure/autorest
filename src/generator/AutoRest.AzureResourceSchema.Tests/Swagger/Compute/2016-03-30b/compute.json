@@ -2662,7 +2662,10 @@
           "type": "string",
           "description": "The type of extension to deployed to the virtual machine.",
           "enum": [
-            "IaasDiagnostics"
+            "Generic",
+            "IaasDiagnostics",
+            "IaasAntimalware",
+            "CustomScript"
           ]
         }
       },
