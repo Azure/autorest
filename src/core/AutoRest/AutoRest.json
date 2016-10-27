@@ -6,12 +6,12 @@
     "Azure.CSharp": {
       "type": "PluginCsa, AutoRest.CSharp.Azure"
     },
-        "Ruby": {
-            "type": "PluginRb, AutoRest.Ruby"
-        },
-        "Azure.Ruby": {
-            "type": "PluginRba, AutoRest.Ruby.Azure"
-        },
+    "Ruby": {
+      "type": "PluginRb, AutoRest.Ruby"
+    },
+    "Azure.Ruby": {
+      "type": "PluginRba, AutoRest.Ruby.Azure"
+    },
     "NodeJS": {
       "type": "PluginJs, AutoRest.NodeJS"
     },
@@ -19,7 +19,10 @@
       "type": "PluginJsa, AutoRest.NodeJS.Azure"
     },
     "AzureResourceSchema": {
-        "type": "PluginArs, AutoRest.AzureResourceSchema"
+      "type": "PluginArs, AutoRest.AzureResourceSchema"
+    },
+    "Azure.CSharp.Fluent": {
+      "type": "PluginCsaf, AutoRest.AutoRest.CSharp.Azure.Fluent"
     }
   },
 

@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Azure.Model
 {
     public class CodeModelCsa : CodeModelCs
     {
-        internal IDictionary<KeyValuePair<string, string>, string> pageClasses =
+        public IDictionary<KeyValuePair<string, string>, string> pageClasses =
             new Dictionary<KeyValuePair<string, string>, string>();
 
         /// <summary>
