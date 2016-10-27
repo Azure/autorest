@@ -7,7 +7,15 @@
 @EmptyLine
 namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
+    using System;		
     using System.Linq;
+    using System.Collections.Generic;		
+    using Newtonsoft.Json;		
+    using Microsoft.Rest;		
+    using Microsoft.Rest.Serialization;		
+ @foreach (var usingString in Model.Usings) {		
+    @:using @usingString;		
+ }
 @EmptyLine
 
 @if (!string.IsNullOrEmpty(Model.Summary) || !string.IsNullOrWhiteSpace(Model.Documentation))

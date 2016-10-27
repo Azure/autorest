@@ -8,6 +8,10 @@
 
 namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 {
+    using System.Collections.Generic;		
+    using System.Linq;		
+    using Newtonsoft.Json;		
+    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Defines a page in Azure responses.

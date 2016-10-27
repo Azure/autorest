@@ -8,6 +8,12 @@
 
 namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
 {
+    using System;		
+    using System.Collections.Generic;		
+    using System.Net.Http;		
+    using System.Threading;		
+    using System.Threading.Tasks;		
+    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
 
