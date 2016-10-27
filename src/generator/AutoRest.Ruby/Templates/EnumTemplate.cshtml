@@ -8,7 +8,7 @@ module @Settings.Namespace
     #
     @WrapComment("# ", "Defines values for " + Model.ModuleName)
     #
-    module @(Model.ModuleName))
+    module @(Model.ModuleName)
       @for (int i = 0; i < Model.Values.Count; i++)
       {
       @:@(CodeNamer.Instance.PascalCase(CodeNamer.Instance.RemoveInvalidCharacters(Model.Values[i].Name))) = "@(Model.Values[i].SerializedName)"
