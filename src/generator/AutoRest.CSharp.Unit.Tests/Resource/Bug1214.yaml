@@ -22,3 +22,6 @@ definitions:
       Name:
         type: string
         description: 'prop without underscore'
+      _namE:
+        type: string
+        description: 'same string diff case'

@@ -54,7 +54,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 && p.IsRequired
                 && ((CompositeType)p.ModelType).ContainsConstantProperties))
             {
-            @:this.@(property.Name) = new @(property.ModelTypeName)();
+            @:@(property.Name) = new @(property.ModelTypeName)();
             }
         }
 </text>
@@ -93,7 +93,15 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 
             foreach (var property in Model.Properties.Where(p => !p.IsConstant))
             {
-            @:@(property.Name) = @(CodeNamer.Instance.CamelCase(property.Name));
+                @{var propName = CodeNamer.Instance.CamelCase(property.Name);}
+                @if ((property.Name).Equals(@propName))
+                {
+                    @:this.@(property.Name) = @propName;
+                }
+                else
+                {
+                    @:@(property.Name) = @propName;
+                }
             }            
 
         @:}

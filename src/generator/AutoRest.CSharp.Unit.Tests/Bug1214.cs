@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Unit.Tests
             {
                 // Expected Files
                 Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\TestObject.cs"));
-                
+
                 var result = await Compile(fileSystem);
 
                 // filter the warnings
@@ -67,9 +67,17 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.NotNull(testObject);
 
                 // verify the property is generated 
-                var property = testObject.GetProperty("_name");
-                Assert.NotNull(property);
-                
+                var property1 = testObject.GetProperty("_name");
+                Assert.NotNull(property1);
+                /*
+                // verify the property is generated 
+                var property2 = testObject.GetProperty("Name");
+                Assert.NotNull(property2);
+
+                // verify the property is generated 
+                var property3 = testObject.GetProperty("_namE");
+                Assert.NotNull(property3);
+                */
             }
         }
     }
