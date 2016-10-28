@@ -88,6 +88,8 @@ namespace AutoRest.Swagger
                                     Core.Model.XmsExtensions.Enum.Name,
                                     enumType.Name));
                         }
+                        // Use the existing one!
+                        enumType = existingEnum;
                     }
                     else
                     {

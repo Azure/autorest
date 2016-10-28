@@ -2,14 +2,14 @@
 @using System.Linq
 @using AutoRest.Extensions.Azure
 @using AutoRest.Python
-@inherits AutoRest.Core.Template<AutoRest.Python.Azure.TemplateModels.AzureModelInitTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.Python.Azure.Model.CodeModelPya>
 # coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ").TrimMultilineHeader()
 # --------------------------------------------------------------------------
 @EmptyLine
 @{
-  foreach (var modelType in Model.ServiceClient.ModelTypes)
+  foreach (var modelType in Model.ModelTypes)
   {
     if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
       (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
@@ -22,10 +22,10 @@
   {
 @:from .@pagedName.ToPythonCase() import @pagedName
   }
-  if (Model.ServiceClient.EnumTypes.Any())
+  if (Model.EnumTypes.Any())
   {
-@:from .@(Model.ServiceClient.Name.ToPythonCase())_enums import (
-    foreach (var enumType in @Model.ServiceClient.EnumTypes)
+@:from .@(Model.Name.ToPythonCase())_enums import (
+    foreach (var enumType in @Model.EnumTypes)
     {
     @:@(enumType.Name),
     }
@@ -33,7 +33,7 @@
   }
 @EmptyLine
 @:__all__ = [
-  foreach (var modelType in Model.ServiceClient.ModelTypes)
+  foreach (var modelType in Model.ModelTypes)
   {
     if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
       (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
@@ -46,7 +46,7 @@
   {
 @:    '@pagedName',
   }
-  foreach (var enumType in @Model.ServiceClient.EnumTypes)
+  foreach (var enumType in @Model.EnumTypes)
   {
 @:    '@(enumType.Name)',
   }
