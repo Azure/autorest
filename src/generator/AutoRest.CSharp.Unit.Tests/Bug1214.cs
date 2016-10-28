@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 // verify the property is generated 
                 var property1 = testObject.GetProperty("_name");
                 Assert.NotNull(property1);
-                /*
+                
                 // verify the property is generated 
                 var property2 = testObject.GetProperty("Name");
                 Assert.NotNull(property2);
@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 // verify the property is generated 
                 var property3 = testObject.GetProperty("_namE");
                 Assert.NotNull(property3);
-                */
+                
             }
         }
     }
