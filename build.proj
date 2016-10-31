@@ -117,6 +117,7 @@
     <!-- need to clean out the lib folder of the autorest.nupkg file, because it's got ana autorest.exe without the dlls in it -->
     <ItemGroup>
       <AutoRestPackages Include="src\core\AutoRest\bin\Release\*.nupkg" Exclude="src\core\AutoRest\bin\Release\*.symbols.nupkg"/>
+      <AutoRestPackages Include="binaries\packages\AutoRest.0.*.nupkg" Exclude="binaries\packages\*.symbols.nupkg" />
     </ItemGroup>
     <Exec Command="$(MsBuildThisFileDirectory)tools\zip.exe -d &quot;%(AutoRestPackages.FullPath)&quot; lib\*" IgnoreExitCode="false" />
   </Target>
