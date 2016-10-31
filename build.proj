@@ -113,7 +113,13 @@
   <Import Condition=" $(OnPremiseBuild) == 'true' " Project="$(CIToolsPath)\Microsoft.WindowsAzure.Build.OnPremise.msbuild" />
 
   <!-- Packaging is the same as building at this point -->
-  <Target Name="Package" DependsOnTargets="Clean;Build" Condition="'$(Configuration)' == 'Release'" />
+  <Target Name="Package"  DependsOnTargets="Clean;Build" Condition="'$(Configuration)' == 'Release'" >
+    <!-- need to clean out the lib folder of the autorest.nupkg file, because it's got ana autorest.exe without the dlls in it -->
+    <ItemGroup>
+      <AutoRestPackages Include="src\core\AutoRest\bin\Release\*.nupkg" Exclude="src\core\AutoRest\bin\Release\*.symbols.nupkg"/>
+    </ItemGroup>
+    <Exec Command="$(MsBuildThisFileDirectory)tools\zip.exe -d &quot;%(AutoRestPackages.FullPath)&quot; lib\*" IgnoreExitCode="false" />
+  </Target>
 
   <!-- Publishing uploads the packages to the nuget server -->
   <Target Name="Publish"  DependsOnTargets="Package" Condition="'$(Configuration)' == 'Release'" >
