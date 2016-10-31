@@ -40,6 +40,9 @@ namespace AutoRest.CSharp.Unit.Tests
                 // use this to dump the files to disk for examination
                 // fileSystem.SaveFilesToTemp("bug1125");
 
+                // Or just use this to see the generated code in VsCode :D
+                // ShowGeneratedCode(fileSystem);
+
                 // filter the errors
                 var errors = result.Messages.Where(each => each.Severity == DiagnosticSeverity.Error).ToArray();
 

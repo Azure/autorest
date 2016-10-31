@@ -147,11 +147,11 @@ namespace AutoRest.Core.Model
         {
             get
             {
-                return Parameters.Where(gp => gp.Location != ParameterLocation.None)
+                 return Parameters.Where(gp => gp.Location != ParameterLocation.None)
                     .Union(InputParameterTransformation.Select(m => m.OutputParameter));
             }
         }
-
+        
         /// <summary>
         /// Gets or sets the body parameter.
         /// </summary>

@@ -13,7 +13,6 @@ namespace AutoRest.Python.Model
         {
             Name.OnGet += value =>
             {
-
                 if (!(Parent is CodeModel))
                 {
                     if (IsSpecialConstant && IsConstant && !value.StartsWith("self."))

@@ -505,6 +505,32 @@ namespace AutoRest.Core
                     each => each.MyReservedNames.WhereNotNull().Any(name => name.Equals(desiredName)));
         }
 
+        /// <summary>
+        /// Returns true when the name comparison is a special case and should not 
+        /// be used to determine name conflicts.
+        /// 
+        /// Override in subclasses so when the model is loaded into the language specific 
+        /// context, the behavior can be stricter than here.
+        ///  </summary>
+        /// <param name="whoIsAsking">the identifier that is checking to see if there is a conflict</param>
+        /// <param name="reservedName">the identifier that would normally be reserved.</param>
+        /// <returns></returns>
+        public virtual bool IsSpecialCase(IIdentifier whoIsAsking, IIdentifier reservedName)
+        {
+            // special case: properties can actually have the same name as a composite type 
+            if (whoIsAsking is Property && reservedName is CompositeType)
+            {
+                return true;
+            }
+
+            // special case: parameters can actually have the same name as a method 
+            if (whoIsAsking is Parameter && reservedName is Method)
+            {
+                return true;
+            }
+
+            return false;
+        }
 
         public virtual string GetUnique(string desiredName, IIdentifier whoIsAsking,
             IEnumerable<IIdentifier> reservedNames, IEnumerable<IIdentifier> siblingNames,
@@ -516,6 +542,7 @@ namespace AutoRest.Core
                 return desiredName;
             }
 
+#if refactoring_out
             // special case: properties can actually have the same name as a composite type 
             // as long as that type is not the parent class of the property itself.
             if (whoIsAsking is Property)
@@ -528,7 +555,9 @@ namespace AutoRest.Core
                     reservedNames = reservedNames.ConcatSingleItem(parent);
                 }
             }
-            
+#endif 
+
+            var names = new HashSet<IIdentifier>(reservedNames.Where(each => !IsSpecialCase(whoIsAsking, each)));
 
             // is this a legal name? -- add a Qualifier Suffix (ie, Method/Model/Property/etc)
             string conflict;
@@ -541,7 +570,7 @@ namespace AutoRest.Core
             }
 
             // does it conflict with a type name locally? (add a Qualifier Suffix)
-            var names = new HashSet<IIdentifier>(reservedNames);
+            
             IIdentifier confl;
             while (null != (confl = IsNameAvailable(desiredName, names)))
             {

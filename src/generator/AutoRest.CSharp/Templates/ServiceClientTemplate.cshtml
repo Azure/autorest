@@ -82,7 +82,7 @@ namespace @Settings.Namespace
                         new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
                     }
             };
-            @foreach (var polymorphicType in Model.ModelTypes.Where(t => t.PolymorphicDiscriminator != null))
+            @foreach (var polymorphicType in Model.ModelTypes.Where(t => t.IsPolymorphic))
             {
             @:SerializationSettings.Converters.Add(new Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
             @:DeserializationSettings.Converters.Add(new  Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));

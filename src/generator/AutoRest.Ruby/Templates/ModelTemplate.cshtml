@@ -43,7 +43,7 @@ module @(Settings.Namespace)
     @EmptyLine
     }
     
-    @foreach (var property in Model.PropertyTemplateModels.Where( each => each.SerializedName.IsNullOrEmpty() || Model.PolymorphicDiscriminator.IsNullOrEmpty() || each.SerializedName != Model.PolymorphicDiscriminator ))
+    @foreach (var property in Model.PropertyTemplateModels.Where( each => !each.IsPolymorphicDiscriminator))
     {
       @:@WrapComment("# ", string.Format("@return {0}{1}", property.ModelType.GetYardDocumentation(), CompositeTypeRb.GetPropertyDocumentationString(property)))
       // @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name

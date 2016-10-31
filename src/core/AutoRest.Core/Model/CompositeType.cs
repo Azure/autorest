@@ -3,18 +3,39 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core.Model
 {
     public interface ILiteralType
     {
         
+    }
+
+    public class OnlyUnique
+    {
+        public static void Add<TK, TV>(TK key, TV value)
+        {
+            if (!Singleton<Dictionary<TK, TV>>.HasInstance)
+            {
+                Singleton<Dictionary<TK, TV>>.Instance = new Dictionary<TK, TV>();
+            }
+            if (Singleton<Dictionary<TK, TV>>.Instance.ContainsKey(key))
+            {
+                Debugger.Break();
+            }
+            else
+            {
+                Singleton<Dictionary<TK, TV>>.Instance.Add( key, value);
+            }
+        }
     }
 
     /// <summary>
@@ -42,6 +63,8 @@ namespace AutoRest.Core.Model
 
         protected CompositeType(string name) : this()
         {
+            Console.WriteLine($"Creating CompositeType: {name}");
+            OnlyUnique.Add(name,this);
             Name = name;
         }
 
@@ -97,9 +120,32 @@ namespace AutoRest.Core.Model
         public virtual string PolymorphicDiscriminator { get; set; }
 
         /// <summary>
-        /// Returns true if this type or it's parent is polymorphic.
+        /// Returns the name of the polymorphic discriminator if this or its parent is polymorphic
         /// </summary>
-        public bool IsPolymorphic => !string.IsNullOrEmpty(PolymorphicDiscriminator) || true == BaseModelType?.IsPolymorphic;
+        [JsonIgnore]
+        public virtual string BasePolymorphicDiscriminator
+            => PolymorphicDiscriminator.Else(BaseModelType?.BasePolymorphicDiscriminator ?? null);
+
+        /// <summary>
+        /// Returns true if this type or its parent is polymorphic.
+        /// </summary>
+        [JsonIgnore]
+        public bool BaseIsPolymorphic => IsPolymorphic || true == BaseModelType?.BaseIsPolymorphic;
+
+        /// <summary>
+        /// Returns true if this CompositeType has a polymorphic discrimiator set.
+        /// note: this does not check any base types to see if they are set.
+        /// </summary>
+        [JsonIgnore]
+        public bool IsPolymorphic => !string.IsNullOrEmpty(PolymorphicDiscriminator);
+
+        /// <summary>
+        /// Returns a property that is used for polymorphic discriminator. 
+        /// (Not created for every language)
+        /// </summary>
+        [JsonIgnore]
+        public Property PolymorphicDiscriminatorProperty
+            => ComposedProperties.FirstOrDefault(each => each.IsPolymorphicDiscriminator);
 
         /// <summary>
         /// Gets or sets the summary.
@@ -156,8 +202,10 @@ namespace AutoRest.Core.Model
             }
         }
 
+        [JsonIgnore]
         public override string DefaultValue => IsConstant ? "{}" : null;
 
+        [JsonIgnore]
         public override bool IsConstant => ComposedProperties.Any() && ComposedProperties.All(p => p.IsConstant);
 
         /// <summary>

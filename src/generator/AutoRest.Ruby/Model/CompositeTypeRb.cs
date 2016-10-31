@@ -38,22 +38,6 @@ namespace AutoRest.Ruby.Model
         public virtual IEnumerable<string> ClassNamespaces => Enumerable.Empty<string>();
 
         /// <summary>
-        /// Gets the polymorphic discriminator to use for the current object, or its parent's if it doesn't have one.
-        /// </summary>
-        public string PolymorphicDiscriminatorProperty
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(this.PolymorphicDiscriminator) && this.parent != null)
-                {
-                    return this.parent.PolymorphicDiscriminatorProperty;
-                }
-
-                return Singleton<CodeNamerRb>.Instance.UnderscoreCase(this.PolymorphicDiscriminator);
-            }
-        }
-
-        /// <summary>
         /// Gets the list of all model types derived directly or indirectly from this type.
         /// </summary>
         public IEnumerable<CompositeType> DerivedTypes => CodeModel.ModelTypes.Where(t => t.DerivesFrom(this));

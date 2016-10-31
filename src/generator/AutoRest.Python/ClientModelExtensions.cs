@@ -295,7 +295,7 @@ namespace AutoRest.Python
                 }
                 else
                 {
-                    innerTypeName = innerType.Name;
+                    innerTypeName = innerType.Name.Else("str");
                 }
                 return "[" + innerTypeName + "]";
             }

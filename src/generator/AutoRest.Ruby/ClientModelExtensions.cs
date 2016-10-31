@@ -699,7 +699,7 @@ namespace AutoRest.Ruby
             builder.AppendLine("type: {").Indent()
                 .AppendLine("name: 'Composite',");
 
-            if (composite.PolymorphicDiscriminator != null)
+            if (composite.IsPolymorphic)
             {
                 builder.AppendLine("polymorphic_discriminator: '{0}',", composite.PolymorphicDiscriminator);
                 var polymorphicType = composite;
@@ -718,11 +718,7 @@ namespace AutoRest.Ruby
                 builder.AppendLine("class_name: '{0}',", composite.Name)
                        .AppendLine("model_properties: {").Indent();
                 var composedPropertyList =
-                    new List<Property>(
-                        composite.ComposedProperties.Where(each =>
-                                each.SerializedName.IsNullOrEmpty() || 
-                                composite.PolymorphicDiscriminator.IsNullOrEmpty() ||
-                                each.SerializedName != composite.PolymorphicDiscriminator ));
+                    new List<Property>(composite.ComposedProperties.Where(each => !each.IsPolymorphicDiscriminator ));
 
                 for (var i = 0; i < composedPropertyList.Count; i++)
                 {

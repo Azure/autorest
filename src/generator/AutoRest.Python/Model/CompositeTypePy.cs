@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using AutoRest.Core.Model;
@@ -18,11 +19,11 @@ namespace AutoRest.Python.Model
         
         private readonly IList<CompositeType> _subModelTypes = new List<CompositeType>();
         
-        public CompositeTypePy()
+        protected CompositeTypePy()
         {
         }
 
-        public CompositeTypePy(string name) : base(name)
+        protected CompositeTypePy(string name) : base(name)
         {
             
         }
@@ -68,7 +69,7 @@ namespace AutoRest.Python.Model
             }
         }
 
-        public IEnumerable<CompositeType> SubModelTypes => IsPolymorphic?  CodeModel.ModelTypes.Where(each => ReferenceEquals(this, each.BaseModelType) ) : Enumerable.Empty<CompositeType>();
+        public IEnumerable<CompositeType> SubModelTypes => BaseIsPolymorphic?  CodeModel.ModelTypes.Where(each => ReferenceEquals(this, each.BaseModelType) ) : Enumerable.Empty<CompositeType>();
 
         public bool IsException => CodeModel.ErrorTypes.Contains(this);
 
@@ -281,11 +282,8 @@ namespace AutoRest.Python.Model
         {
             List<string> combinedDeclarations = new List<string>();
 
-            foreach (var property in ComposedProperties.Except(Properties).Except(ReadOnlyAttributes))
+            foreach (var property in ComposedProperties.Except(Properties).Except(ReadOnlyAttributes).Where( each =>!each.IsPolymorphicDiscriminator))
             {
-                if (this.IsPolymorphic)
-                    if (property.Name == this.BasePolymorphicDiscriminator)
-                        continue;
                 combinedDeclarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}={0}", property.Name));
             }
             return string.Join(", ", combinedDeclarations);
@@ -297,9 +295,9 @@ namespace AutoRest.Python.Model
             List<string> requiredDeclarations = new List<string>();
             List<string> combinedDeclarations = new List<string>();
 
-            foreach (var property in ComposedProperties.Except(ReadOnlyAttributes).Where(each => each.Documentation != "Polymorphic Discriminator"))
+            foreach (var property in ComposedProperties.Except(ReadOnlyAttributes).Where(each => !each.IsPolymorphicDiscriminator))
             {
-                if (this.IsPolymorphic)
+                if (this.BaseIsPolymorphic)
                     if (property.Name == this.BasePolymorphicDiscriminator)
                         continue;
 
@@ -328,29 +326,6 @@ namespace AutoRest.Python.Model
             }
             return ", " + string.Join(", ", combinedDeclarations);
         }
-
-        [JsonIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "PolymorphicDiscriminator")]
-        public string BasePolymorphicDiscriminator
-        {
-            get
-            {
-                CompositeType type = this;
-                while (type != null)
-                {
-                    if (!string.IsNullOrEmpty(type.PolymorphicDiscriminator))
-                    {
-                        return type.PolymorphicDiscriminator;
-                    }
-                    type = type.BaseModelType;
-                }
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "No PolymorphicDiscriminator defined for type {0}", this.Name));
-            }
-        }
-
-        [JsonIgnore] 
-        public Property PolymorphicDiscriminatorProperty {
-            get { return ComposedProperties.FirstOrDefault(each => each.Name.RawValue.EqualsIgnoreCase(PolymorphicDiscriminator)); } }
 
         public string SubModelTypeList
         {
@@ -412,17 +387,14 @@ namespace AutoRest.Python.Model
                     return string.Format(CultureInfo.InvariantCulture, "{0} = {1}", property.Name, property.DefaultValue);
                 }
             }
-            if (IsPolymorphic)
+            if (BaseIsPolymorphic && property.IsPolymorphicDiscriminator)
             {
-                if (property.Name == this.BasePolymorphicDiscriminator)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = None", objectName, property.Name);
-                }
+                return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = None", objectName, property.Name);
             }
             return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = {1}", objectName, property.Name);
         }
 
-        public bool NeedsPolymorphicConverter => IsPolymorphic && BaseModelType != null;
+        public bool NeedsPolymorphicConverter => BaseIsPolymorphic && BaseModelType != null;
 
         /// <summary>
         /// Provides the type of the modelProperty
@@ -445,7 +417,7 @@ namespace AutoRest.Python.Model
             return (type as IExtendedModelTypePy)?.TypeDocumentation ?? PythonConstants.None;
         }
 
-        public string TypeDocumentation => $":class:`{Name} <{((CodeModelPy)CodeModel)?.modelNamespace}.models.{Name}>`";
+        public string TypeDocumentation =>       $":class:`{Name} <{((CodeModelPy)CodeModel)?.modelNamespace}.models.{Name}>`";
         public string ReturnTypeDocumentation => $":class:`{Name} <{((CodeModelPy)CodeModel)?.modelNamespace}.models.{Name}>`";
     }
 }

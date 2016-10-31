@@ -3,6 +3,7 @@
 // 
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Model;
@@ -37,6 +38,7 @@ namespace AutoRest.Python
 
                 foreach (var parameterMapping in parameterTransformation.ParameterMappings)
                 {
+                    
                     if (parameterMapping.InputParameterProperty != null)
                     {
                         parameterMapping.InputParameterProperty = CodeNamer.Instance.GetPropertyName(parameterMapping.InputParameterProperty);
@@ -58,7 +60,8 @@ namespace AutoRest.Python
                     .Where(p => p.IsConstant && !p.IsClientProperty).ToArray();
 
                 var constantProperties = new List<PropertyPy>();
-                
+
+
                 foreach (var parameter in allParameters)
                 {
                     if (allParameters.Any(p => p.Name == parameter.Name && p.DefaultValue != parameter.DefaultValue))

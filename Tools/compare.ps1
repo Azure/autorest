@@ -69,7 +69,7 @@ $scrp = {
   $output += &$lastexe -Namespace Test.NameSpace -OutputDirectory  "$commonFolder\Last\$uniqueName\$gen" -input $spec -CodeGenerator $gen -verbose -modeler $modeler
   # set-content -value $output -path "$commonFolder\last\$uniqueName\output-$gen.txt"
   
-  $output = "$newexe `n-Namespace Test.NameSpace -OutputDirectory  ""$commonFolder\New\$uniqueName\$gen"" -input $spec -CodeGenerator $gen -verbose -modeler $modeler`n"
+  write-output "$newexe `n-Namespace Test.NameSpace -OutputDirectory  ""$commonFolder\New\$uniqueName\$gen"" -input $spec -CodeGenerator $gen -verbose -modeler $modeler`n"
   $output += &$newexe -Namespace Test.NameSpace -OutputDirectory  "$commonFolder\New\$uniqueName\$gen" -input $spec -CodeGenerator $gen -verbose -modeler $modeler
   #set-content -value $output -path "$commonFolder\new\$uniqueName\output-$gen.txt"
 

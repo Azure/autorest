@@ -179,11 +179,13 @@ namespace AutoRest.Python.Model
             return string.Join(", ", combinedDeclarations);
         }
 
-        private static string BuildSerializeDataCall(Parameter parameter, string functionName)
+        private string BuildSerializeDataCall(Parameter parameter, string functionName)
         {
             string divChar = ClientModelExtensions.NeedsFormattedSeparator(parameter);
             string divParameter = string.Empty;
-
+            
+            string parameterName = (MethodGroup as MethodGroupPy)?.ConstantProperties?.FirstOrDefault(each => each.Name.RawValue == parameter.Name.RawValue && each.DefaultValue.RawValue == parameter.DefaultValue.RawValue)?.Name.Else(parameter.Name) ?? parameter.Name;
+            
             if (!string.IsNullOrEmpty(divChar))
             {
                 divParameter = string.Format(CultureInfo.InvariantCulture, ", div='{0}'", divChar);
@@ -193,7 +195,7 @@ namespace AutoRest.Python.Model
             return string.Format(CultureInfo.InvariantCulture,
                     "self._serialize.{0}(\"{1}\", {1}, '{2}'{3}{4}{5})",
                         functionName,
-                        parameter.Name,
+                        parameterName,
                         parameter.ModelType.ToPythonRuntimeTypeString(),
                         parameter.SkipUrlEncoding() ? ", skip_quote=True" : string.Empty,
                         divParameter,
