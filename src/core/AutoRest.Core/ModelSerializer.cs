@@ -16,11 +16,8 @@ namespace AutoRest.Core {
             if (!Context.IsActive) {
                 throw new Exception("Must be in an active context to load a model");
             }
-            var g = Guid.NewGuid();
-            try{File.WriteAllText($@"c:\tmp\orig-{g}.json", jsonText);}catch{}
             var result = JsonConvert.DeserializeObject<TCodeModel>(jsonText,
                 CodeModelSettings.DeserializerSettings);
-            try{File.WriteAllText($@"c:\tmp\second-{g}.json", ToJson(result));}catch{}
             return result;
         }
 

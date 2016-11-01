@@ -16,29 +16,9 @@ namespace AutoRest.Core.Model
 {
     public interface ILiteralType
     {
-        
     }
 
-    public class OnlyUnique
-    {
-        public static void Add<TK, TV>(TK key, TV value)
-        {
-            if (!Singleton<Dictionary<TK, TV>>.HasInstance)
-            {
-                Singleton<Dictionary<TK, TV>>.Instance = new Dictionary<TK, TV>();
-            }
-            if (Singleton<Dictionary<TK, TV>>.Instance.ContainsKey(key))
-            {
-                Debugger.Break();
-            }
-            else
-            {
-                Singleton<Dictionary<TK, TV>>.Instance.Add( key, value);
-            }
-        }
-    }
-
-    /// <summary>
+   /// <summary>
     /// Defines model data type.
     /// </summary>
     [JsonObject(IsReference = true)]
@@ -63,8 +43,6 @@ namespace AutoRest.Core.Model
 
         protected CompositeType(string name) : this()
         {
-            Console.WriteLine($"Creating CompositeType: {name}");
-            OnlyUnique.Add(name,this);
             Name = name;
         }
 
