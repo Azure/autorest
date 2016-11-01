@@ -500,7 +500,30 @@ namespace AutoRest.Python.Model
         {
             get
             {
-                return this.LocalParameters.Where(p => p.IsConstant && !p.Name.StartsWith("self.") && false == (MethodGroup as MethodGroupPy)?.ConstantProperties?.Any( each => each.Name.RawValue == p.Name.RawValue && p.DefaultValue == each.DefaultValue ) );
+                var constantParameters = LocalParameters.Where(p => p.IsConstant && !p.Name.StartsWith("self."));
+
+                if (!constantParameters.Any())
+                {
+                    return constantParameters;
+                }
+
+                var m = MethodGroup as MethodGroupPy;
+                if (m?.ConstantProperties != null)
+                {
+                    if (!m.ConstantProperties.Any())
+                    {
+                        return constantParameters;
+                    }
+
+
+                    return constantParameters.Where(parameter =>
+                            !m.ConstantProperties.Any(constantProperty =>
+                                constantProperty.Name.RawValue == parameter.Name.RawValue &&
+                                constantProperty.DefaultValue.Value == parameter.DefaultValue.Value)
+                    );
+                }
+
+               return constantParameters;
             }
         }
 
@@ -596,7 +619,8 @@ namespace AutoRest.Python.Model
 
                     foreach (var mapping in transformation.ParameterMappings)
                     {
-                        var mappedParams = composite.ComposedProperties.Where(x => x.Name.RawValue == mapping.InputParameter.Name.RawValue);
+                        // var mappedParams = composite.ComposedProperties.Where(x => x.Name.RawValue == mapping.InputParameter.Name.RawValue);
+                        var mappedParams = composite.ComposedProperties.Where(x => x.Name == mapping.InputParameter.Name);
                         if (mappedParams.Any())
                         {
                             var param = mappedParams.First();
