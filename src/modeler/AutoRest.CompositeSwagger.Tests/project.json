@@ -37,6 +37,9 @@
     },
     "AutoRest.CompositeSwagger": {
       "target": "project"
+    },
+    "AutoRest.Extensions": {
+      "target": "project"
     }
   }
 }

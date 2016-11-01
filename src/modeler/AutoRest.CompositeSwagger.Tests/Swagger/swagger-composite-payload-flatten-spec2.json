@@ -1,0 +1,74 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Consumes has an unsupported MIME type",
+        "description": "Some documentation.",
+        "version": "2014-04-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "paths": {
+        "/foo": {
+            "post": {
+                "operationId": "Noun_VerbExtra",
+                "summary": "Foo path",
+                "description": "Foo operation",
+                "responses": {
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "testParam",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/param1"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "test subscription id"
+        },
+        "ApiVersion": {
+            "name": "api-version",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "test api version"
+        }
+    },
+    "definitions": {
+        "param1": {
+            "type": "object",
+            "properties": {
+                "prop1": {
+                    "type": "string",
+                    "description": "test prop 1"
+                },
+                "prop2": {
+                    "type": "string",
+                    "description": "test prop 2"
+                }
+            }
+        }
+    }
+}
