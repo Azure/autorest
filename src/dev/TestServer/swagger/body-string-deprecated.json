@@ -1,0 +1,136 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Swagger BAT Deprecated Service",
+    "description": "Test Infrastructure for AutoRest Swagger BAT",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "schemes": [
+    "http"
+  ],
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/string/null": {
+      "get": {
+        "operationId": "string_getNull",
+        "description": "Get null string value value",
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The null String value",
+            "schema": {
+              "type": "string",
+              "enum": [ null ]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "deprecated": true
+      },
+      "put": {
+        "operationId": "string_putNull",
+        "description": "Set string value null",
+        "parameters": [
+          {
+            "name": "stringBody",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "enum": [ null ]
+            }
+          }
+        ],
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/string/empty": {
+      "get": {
+        "operationId": "string_getEmpty",
+        "description": "Get empty string value value ''",
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The empty String value",
+            "schema": {
+              "type": "string",
+              "enum": [ "" ]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "string_putEmpty",
+        "description": "Set string value empty ''",
+        "parameters": [
+          {
+            "name": "stringBody",
+            "in": "body",
+            "schema": {
+              "type": "string",
+              "enum": [ "" ]
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

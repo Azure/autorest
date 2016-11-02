@@ -3,7 +3,9 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Tests.Utilities
@@ -209,5 +211,7 @@ namespace AutoRest.CSharp.Tests.Utilities
             }
             return null;
         }
+
+        public static bool IsDeprecated(this MethodInfo member) => member.GetCustomAttributes(false).OfType<ObsoleteAttribute>().Any();
     }
 }
