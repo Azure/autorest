@@ -129,7 +129,6 @@
   <data name="GenerationFailed" xml:space="preserve">
     <value>Code generation failed.</value>
   </data>
-  
   <data name="HelpMarkdownTemplate" xml:space="preserve">
     <value>#AutoRest Command Line Interface Documentation
 
@@ -147,7 +146,11 @@ $parameters-end$
 ##Code Generators
 $generators-start$
 **-$generator$** $generator-desc$
+ ##Parameters
+ $generator-parameters-start$
+  **-$generator-parameters-name$** $generator-parameters-desc$
 
+ $generator-parameters-end$
 $generators-end$
 
 ##Examples
@@ -172,13 +175,18 @@ $parameters-end$
 
 Code Generators:
 $generators-start$
-  -$generator$: $generator-desc$
+  -$generator$: $generator-desc$ 
+  Parameters:
+ $generator-parameters-start$
+  -$generator-parameters-name$: $generator-parameters-desc$
+ $generator-parameters-end$
+
 $generators-end$
 
 Examples:
 $examples-start$
   $example-desc$
-  >$example$
+  &gt;$example$
 
 $examples-end$</value>
   </data>
