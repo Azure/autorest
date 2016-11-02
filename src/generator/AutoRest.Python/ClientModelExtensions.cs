@@ -158,7 +158,7 @@ namespace AutoRest.Python
 
                 if (known.KnownPrimaryType == KnownPrimaryType.Decimal)
                 {
-                    return "Decimal";
+                    return "decimal";
                 }
             }
 

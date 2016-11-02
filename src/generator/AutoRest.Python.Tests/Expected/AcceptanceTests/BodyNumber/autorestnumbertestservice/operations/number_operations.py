@@ -203,7 +203,7 @@ class NumberOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('Decimal', response)
+            deserialized = self._deserialize('decimal', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -597,7 +597,7 @@ class NumberOperations(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(number_body, 'Decimal')
+        body_content = self._serialize.body(number_body, 'decimal')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -648,7 +648,7 @@ class NumberOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('Decimal', response)
+            deserialized = self._deserialize('decimal', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -686,7 +686,7 @@ class NumberOperations(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(number_body, 'Decimal')
+        body_content = self._serialize.body(number_body, 'decimal')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -737,7 +737,7 @@ class NumberOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('Decimal', response)
+            deserialized = self._deserialize('decimal', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -775,7 +775,7 @@ class NumberOperations(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(number_body, 'Decimal')
+        body_content = self._serialize.body(number_body, 'decimal')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -826,7 +826,7 @@ class NumberOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('Decimal', response)
+            deserialized = self._deserialize('decimal', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -1042,7 +1042,7 @@ class NumberOperations(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(number_body, 'Decimal')
+        body_content = self._serialize.body(number_body, 'decimal')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1093,7 +1093,7 @@ class NumberOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('Decimal', response)
+            deserialized = self._deserialize('decimal', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
