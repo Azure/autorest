@@ -1,9 +1,13 @@
-﻿using System.IO;
-using System.Linq;
-using AutoRest.Core;
+﻿using AutoRest.Core;
 using AutoRest.Core.Logging;
-using Xunit;
+using AutoRest.Core.Validation;
+using AutoRest.Extensions;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Xunit;
+
 namespace AutoRest.CompositeSwagger.Tests
 {
     [Collection("AutoRest Tests")]
@@ -147,6 +151,52 @@ namespace AutoRest.CompositeSwagger.Tests
                 };
                 Modeler modeler = new CompositeSwaggerModeler();
                 Assert.Throws<CodeGenerationException>(() => modeler.Build());
+            }
+        }
+        [Fact]
+        public void CompositeSwaggerClientModelWithPayloadFlattening()
+        {
+            using (NewContext)
+            {
+                var setting = new Settings
+                {
+                    Namespace = "Test",
+                    Input = Path.Combine("Swagger", "swagger-composite-payload-flatten.json"),
+                    PayloadFlatteningThreshold = 1
+                };
+                var modeler = new CompositeSwaggerModeler();
+                IEnumerable<ValidationMessage> messages;
+                var clientModel = modeler.Build(out messages);
+                Assert.Empty(messages);
+
+                SwaggerExtensions.NormalizeClientModel(clientModel);
+
+                Assert.NotNull(clientModel);
+                Assert.Equal(1, clientModel.Methods.Count);
+                Assert.Equal(1, clientModel.Methods[0].Parameters.Count);
+                Assert.Equal("Param1 testParam", clientModel.Methods[0].Parameters[0].ToString());
+            }
+            using (NewContext)
+            {
+                var setting = new Settings
+                {
+                    Namespace = "Test",
+                    Input = Path.Combine("Swagger", "swagger-composite-payload-flatten.json"),
+                    PayloadFlatteningThreshold = 2
+                };
+                var modeler = new CompositeSwaggerModeler();
+                IEnumerable<ValidationMessage> messages;
+                var clientModel = modeler.Build(out messages);
+
+                Assert.Empty(messages);
+
+                SwaggerExtensions.NormalizeClientModel(clientModel);
+
+                Assert.NotNull(clientModel);
+                Assert.Equal(1, clientModel.Methods.Count);
+                Assert.Equal(2, clientModel.Methods[0].Parameters.Count);
+                Assert.Equal("String prop1", clientModel.Methods[0].Parameters[0].ToString());
+                Assert.Equal("String prop2", clientModel.Methods[0].Parameters[1].ToString());
             }
         }
     }
