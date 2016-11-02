@@ -82,6 +82,10 @@ foreach (var parameter in Model.LocalParameters)
 @:/// <param name='cancellationToken'>
 @:/// The cancellation token.
 @:/// </param>
+@if (Model.Deprecated)
+{
+@:[System.Obsolete()]
+}
 @:public static async @Model.TaskExtensionReturnTypeString @(Model.Name)Async(@Model.GetExtensionParameters(Model.GetAsyncMethodParameterDeclaration()))
 @:{
     if (Model.ReturnType.Body != null)
@@ -144,6 +148,10 @@ foreach (var parameter in Model.LocalParameters)
 @:/// <param name='customHeaders'>
 @:/// Headers that will be added to request.
 @:/// </param>
+@if (Model.Deprecated)
+{
+@:[System.Obsolete()]
+}
 @:public static @Model.OperationResponseReturnTypeString @(Model.Name)WithHttpMessages(@Model.GetExtensionParameters(Model.GetSyncMethodParameterDeclaration(true)))
 @:{
 @:    return operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("customHeaders", "System.Threading.CancellationToken.None"))).ConfigureAwait(false).GetAwaiter().GetResult();
