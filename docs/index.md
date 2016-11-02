@@ -1,4 +1,5 @@
 #AutoRest Documentation
+
 1. [Defining Clients With Swagger](developer/guide/defining-clients-swagger.md)
     - AutoRest-specific [Swagger Extensions](extensions/swagger-extensions.md)
 2. Generating Clients
