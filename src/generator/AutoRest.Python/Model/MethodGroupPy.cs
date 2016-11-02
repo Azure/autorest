@@ -33,41 +33,6 @@ namespace AutoRest.Python.Model
 
         public IEnumerable<PropertyPy> ConstantProperties { get; internal set; }
 
-#if yuck
-        public IEnumerable<PropertyPy> ConstantProperties
-        {
-            get
-            {
-                var uniq = new HashSet<string>();
-                var allParameters = MethodTemplateModels.SelectMany(x => x.Parameters)
-                        .Where(p => p.IsConstant && !p.IsClientProperty).ToArray();
-
-                foreach (var parameter in allParameters)
-                {
-                    if (allParameters.Any(p => p.Name == parameter.Name && p.DefaultValue != parameter.DefaultValue))
-                    {
-                        continue;
-                    }
-
-                    if (!uniq.Contains(parameter.Name.RawValue))
-                    {
-                        uniq.Add(parameter.Name.RawValue);
-                        yield return New<PropertyPy>(new
-                        {
-                            Name = parameter.Name.RawValue,
-                            DefaultValue = parameter.DefaultValue.RawValue,
-                            IsConstant = true,
-                            IsRequired = parameter.IsRequired,
-                            Documentation = parameter.Documentation,
-                            SerializedName = parameter.SerializedName.RawValue,
-                            ModelType = parameter.ModelType,
-                            IsSpecialConstant = true
-                        });
-                    }
-                }
-            }
-        }
-#endif
 
         public IEnumerable<MethodPy> MethodTemplateModels => Methods.Cast<MethodPy>();
 

@@ -97,7 +97,7 @@ namespace AutoRest.Python.Model
         {
             get
             {
-                var parameters = this.Properties.OrderBy(item => !item.IsRequired);
+                var parameters = this.Properties.Where(each => !each.IsConstant).OrderBy(item => !item.IsRequired);
                 var configParams = new List<string>();
                 foreach (var property in parameters)
                 {

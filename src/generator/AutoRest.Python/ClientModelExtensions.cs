@@ -158,7 +158,7 @@ namespace AutoRest.Python
 
                 if (known.KnownPrimaryType == KnownPrimaryType.Decimal)
                 {
-                    return "decimal";
+                    return "Decimal";
                 }
             }
 
@@ -268,7 +268,7 @@ namespace AutoRest.Python
                             { KnownPrimaryType.TimeSpan, "duration" },
                             { KnownPrimaryType.UnixTime, "unix-time" },
                             { KnownPrimaryType.Base64Url, "base64" },
-                            { KnownPrimaryType.Decimal, "decimal" }
+                            { KnownPrimaryType.Decimal, "Decimal" }
                         };
             PrimaryType primaryType = type as PrimaryType;
             if (primaryType != null)

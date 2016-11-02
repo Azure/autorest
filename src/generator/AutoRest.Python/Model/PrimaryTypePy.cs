@@ -63,7 +63,7 @@ namespace AutoRest.Python.Model
                         return "float";
 
                     case KnownPrimaryType.Decimal:
-                        return "decimal";
+                        return "Decimal";
 
                     case KnownPrimaryType.Int:
                         return "int";

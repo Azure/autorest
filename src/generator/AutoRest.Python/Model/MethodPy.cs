@@ -515,7 +515,6 @@ namespace AutoRest.Python.Model
                         return constantParameters;
                     }
 
-
                     return constantParameters.Where(parameter =>
                             !m.ConstantProperties.Any(constantProperty =>
                                 constantProperty.Name.RawValue == parameter.Name.RawValue &&

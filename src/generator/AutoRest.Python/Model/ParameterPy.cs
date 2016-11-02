@@ -18,14 +18,16 @@ namespace AutoRest.Python.Model
             {
                 if (!value.StartsWith("self."))
                 {
-                    if (IsConstant && IsClientProperty)
-                    {
-                        return $"self.{value}";
-                    }
                     if (IsClientProperty)
                     {
                         return $"self.config.{value}";
                     }
+
+                    if (IsConstant && IsClientProperty)
+                    {
+                        return $"self.{value}";
+                    }
+                   
                 }
                 return value;
             };

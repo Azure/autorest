@@ -23,7 +23,7 @@ module @(Settings.Namespace)
       @EmptyLine
     }
     
-    @if (Model.IsPolymorphic && Model.BaseModelType == null)
+    @if (Model.BaseIsPolymorphic && Model.BaseModelType == null)
     {
       @:@@@@discriminatorMap = Hash.new
       foreach (var derivedType in Model.DerivedTypes)
@@ -32,14 +32,14 @@ module @(Settings.Namespace)
       }
     }
     
-    @if (Model.IsPolymorphic)
+    @if (Model.BaseIsPolymorphic)
     {
     @EmptyLine
       @:def initialize
-      @:  @@@Model.PolymorphicDiscriminatorProperty = "@Model.SerializedName"
+      @:  @@@Model.PolymorphicDiscriminatorProperty.Name = "@Model.SerializedName"
       @:end
     @EmptyLine
-      @:attr_accessor :@Model.PolymorphicDiscriminatorProperty
+      @:attr_accessor :@Model.PolymorphicDiscriminatorProperty.Name
     @EmptyLine
     }
     
