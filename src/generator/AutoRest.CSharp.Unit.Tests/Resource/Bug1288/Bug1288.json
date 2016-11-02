@@ -1,0 +1,10 @@
+{
+  "info": {
+    "title": "Composite Model",
+    "description": "Composite Swagger Client to test payload flattening"
+  },
+  "documents": [
+    "swagger-composite-payload-flatten-spec1.json",
+    "swagger-composite-payload-flatten-spec2.json"
+  ]
+}

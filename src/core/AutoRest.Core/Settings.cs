@@ -93,7 +93,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                     }
                     else
                     {
-                        _inputFolder = new Uri(Path.Combine(Directory.GetParent(Input).FullName, "."));
+                        _inputFolder = new Uri(this.FileSystem.GetParentDir(Input), UriKind.Relative);
                     }
                 }
                 return _inputFolder;

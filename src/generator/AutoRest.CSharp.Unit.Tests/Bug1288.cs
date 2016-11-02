@@ -1,7 +1,8 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
 
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -11,24 +12,25 @@ using Xunit.Abstractions;
 
 namespace AutoRest.CSharp.Unit.Tests
 {
-    public class Bug1214 : BugTest
+    public class Bug1288 : BugTest
     {
-        public Bug1214(ITestOutputHelper output) : base(output)
+        public Bug1288(ITestOutputHelper output) : base(output)
         {
         }
 
         /// <summary>
-        ///     https://github.com/Azure/autorest/issues/1214
+        ///     https://github.com/Azure/autorest/issues/1288
         ///     Support format:'char' for single character strings.
         /// </summary>
         [Fact]
-        public async Task PropertyNamesWithLeadingUnderscores()
+        public async Task CompositeSwaggerWithPayloadFlattening()
         {
             // simplified test pattern for unit testing aspects of code generation
-            using (var fileSystem = GenerateCodeForTestFromSpec())
+            using (var fileSystem = GenerateCodeForTestFromSpec("CompositeSwagger"))
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\TestObject.cs"));
+                Assert.True(fileSystem.FileExists(@"GeneratedCode\CompositeModel.cs"));
+                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\Param1.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -38,7 +40,7 @@ namespace AutoRest.CSharp.Unit.Tests
                             && !SuppressWarnings.Contains(each.Id)).ToArray();
 
                 // use this to dump the files to disk for examination
-                // fileSystem.SaveFilesToTemp("bug1214");
+                // fileSystem.SaveFilesToTemp("bug1288");
 
                 // Or just use this to see the generated code in VsCode :D
                 // ShowGeneratedCode(fileSystem);
@@ -64,22 +66,21 @@ namespace AutoRest.CSharp.Unit.Tests
                 // try to load the assembly
                 var asm = Assembly.Load(result.Output.GetBuffer());
                 Assert.NotNull(asm);
-
+                
+                // verify that we have the composite class we expected
+                var testCompositeObject = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.CompositeModel");
+                Assert.NotNull(testCompositeObject);
+                
                 // verify that we have the class we expected
-                var testObject = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.TestObject");
+                var testObject = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.Param1");
                 Assert.NotNull(testObject);
 
                 // verify the property is generated 
-                var property1 = testObject.GetProperty("_name");
+                var property1 = testObject.GetProperty("Prop1");
                 Assert.NotNull(property1);
-                
                 // verify the property is generated 
-                var property2 = testObject.GetProperty("Name");
+                var property2 = testObject.GetProperty("Prop2");
                 Assert.NotNull(property2);
-
-                // verify the property is generated 
-                var property3 = testObject.GetProperty("_namE");
-                Assert.NotNull(property3);
                 
             }
         }

@@ -30,14 +30,39 @@ namespace AutoRest.CSharp.Unit.Tests
             return name[0] == '<' && name[1] == '>' && name.IndexOf("AnonymousType", StringComparison.Ordinal) > 0;
         }
 
-        internal static void Copy(this IFileSystem fileSystem, string sourceFileOnDisk)
+        internal static void Copy(this IFileSystem fileSystem, string source)
         {
-            Copy(fileSystem, sourceFileOnDisk, Path.GetFileName(sourceFileOnDisk));
+            Copy(fileSystem, source, (File.Exists(source)? Path.GetFileName(source): source));
         }
 
-        internal static void Copy(this IFileSystem fileSystem, string sourceFileOnDisk, string destination)
+        internal static void Copy(this IFileSystem fileSystem, string source, string destination)
         {
-            fileSystem.WriteFile(destination, File.ReadAllText(sourceFileOnDisk));
+            // if copying a file
+            if (File.Exists(source))
+            {
+                fileSystem.WriteFile(destination, File.ReadAllText(source));
+                return;
+            }
+            
+            // if copying a directory
+            if (fileSystem.DirectoryExists(destination))
+            {
+                fileSystem.DeleteDirectory(destination);
+            }
+            fileSystem.CreateDirectory(destination);
+        
+            // Copy dirs recursively
+            foreach (var child in Directory.GetDirectories(Path.GetFullPath(source), "*", SearchOption.TopDirectoryOnly).Select(p => Path.GetDirectoryName(p)))
+            {
+                fileSystem.Copy(Path.Combine(source, child), Path.Combine(destination, child));
+            }
+            // Copy files
+            foreach (var childFile in Directory.GetFiles(Path.GetFullPath(source), "*", SearchOption.TopDirectoryOnly).Select(p=>Path.GetFileName(p)))
+            {
+                fileSystem.Copy(Path.Combine(source, childFile), 
+                                Path.Combine(destination, childFile));
+            }
+           
         }
 
         internal static string[] GetFilesByExtension(this IFileSystem fileSystem, string path, SearchOption s, params string[] fileExts)
@@ -45,38 +70,28 @@ namespace AutoRest.CSharp.Unit.Tests
             return fileSystem.GetFiles(path, "*.*", s).Where(f => fileExts.Contains(f.Substring(f.LastIndexOf(".")+1))).ToArray();
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string inputFile,  MemoryFileSystem fileSystem)
+        internal static MemoryFileSystem GenerateCodeInto(this string inputDir,  MemoryFileSystem fileSystem, string modeler = "Swagger")
         {
             using (NewContext)
             {
             var settings = new Settings
             {
-                Modeler = "Swagger",
+                Modeler = modeler,
                 CodeGenerator = "CSharp",
                 FileSystem = fileSystem,
                 OutputDirectory = "GeneratedCode",
                 Namespace = "Test"
             };
 
-            return inputFile.GenerateCodeInto(fileSystem, settings);
+            return inputDir.GenerateCodeInto(fileSystem, settings);
         }
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string inputFile, MemoryFileSystem fileSystem, Settings settings)
+        internal static MemoryFileSystem GenerateCodeInto(this string inputDir, MemoryFileSystem fileSystem, Settings settings)
         {
-            string fileName = Path.GetFileName(inputFile);
-
-            // If inputFile does not contain a path use the local Resource folder
-            if (inputFile == fileName)
-            {
-                fileSystem.Copy(Path.Combine("Resource", inputFile));
-            }
-            else
-            {
-                fileSystem.Copy(inputFile);
-            }
-
-            settings.Input = fileName;
+            fileSystem.Copy(Path.Combine("Resource", inputDir));
+            var fileExt = (File.Exists(Path.Combine("Resource", Path.Combine(inputDir, inputDir + ".yaml"))) ? ".yaml" : ".json");
+            settings.Input = Path.Combine("Resource", Path.Combine(inputDir, inputDir + fileExt));
 
             var plugin = new PluginCs();
             var modeler = ExtensionsLoader.GetModeler();

@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Unit.Tests
                     ModelsName = modelsName
                 };
 
-                using (fileSystem = $"{GetType().Name}.yaml".GenerateCodeInto(fileSystem, settings))
+                using (fileSystem = $"{GetType().Name}".GenerateCodeInto(fileSystem, settings))
                 {
                     // Expected Files
                     Assert.True(fileSystem.FileExists($@"{settings.OutputDirectory}\{modelsName}\ResultObject.cs"));

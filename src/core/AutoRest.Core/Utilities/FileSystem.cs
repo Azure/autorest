@@ -20,7 +20,7 @@ namespace AutoRest.Core.Utilities
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static bool IsCompletePath(string path)
+        public bool IsCompletePath(string path)
             => Path.IsPathRooted(path) || Uri.IsWellFormedUriString(path, UriKind.Absolute);
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace AutoRest.Core.Utilities
         /// <param name="rootPath"></param>
         /// <param name="relativePath"></param>
         /// <returns></returns>
-        public static string MakePathRooted(Uri rootPath, string relativePath)
+        public string MakePathRooted(Uri rootPath, string relativePath)
         {
             var combined = new Uri(rootPath, relativePath);
             return combined.IsAbsoluteUri ? combined.AbsoluteUri : combined.LocalPath;
@@ -106,6 +106,16 @@ namespace AutoRest.Core.Utilities
         public string[] GetDirectories(string startDirectory, string filePattern, SearchOption options)
         {
             return Directory.GetDirectories(startDirectory, filePattern, options);
+        }
+
+        public string GetCurrentDir()
+        {
+            return Directory.GetCurrentDirectory();
+        }
+
+        public string GetParentDir(string path)
+        {
+            return Directory.GetParent(Path.Combine(Directory.GetCurrentDirectory(), path)).FullName;
         }
     }
 }
