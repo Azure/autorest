@@ -70,6 +70,7 @@ var defaultMappings = {
   'AcceptanceTests/BodyInteger': '../../dev/TestServer/swagger/body-integer.json',
   'AcceptanceTests/BodyNumber': '../../dev/TestServer/swagger/body-number.json',
   'AcceptanceTests/BodyString': '../../dev/TestServer/swagger/body-string.json',
+  'AcceptanceTests/BodyStringDeprecated': '../../dev/TestServer/swagger/body-string-deprecated.json',
   'AcceptanceTests/Header': '../../dev/TestServer/swagger/header.json',
   'AcceptanceTests/Http': '../../dev/TestServer/swagger/httpInfrastructure.json',
   'AcceptanceTests/Report': '../../dev/TestServer/swagger/report.json',
