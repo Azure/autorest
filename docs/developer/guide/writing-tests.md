@@ -27,7 +27,7 @@ There are two main components to the test server: the Swagger definitions that d
    - Update the routes to generate appropriate responses for your scenarios at paths specified in the Swagger files in step 1. This code is located in the [\\src\\dev\\TestServer\\server\\routes\\*.js](../../../src/dev/TestServer/server/routes) files.
    - For each scenario, the `coverage` dictionary needs to be incremented for the name of your scenario. This name will be used in the test report coverage. 
    - Update the `coverage` dictionary in [\\src\\dev\\TestServer\\server\\app.js](../../../src/dev/TestServer/server/app.js) to include the names of your new scenarios. This lets the final test report include your scenarios when reporting on the coverage for each language.
-3. Regenerate the expected code using `gulp regenerate` (this will use the Swagger files to generate client libraries for the test server).
+3. Regenerate the expected code using `gulp regenerate:expected` (this will use the Swagger files to generate client libraries for the test server).
 4. In each language, write tests that cover your scenarios (for example, in C#, you must update [\\src\\generator\\AutoRest.CSharp.Tests\\AcceptanceTests.cs](../../../src/generator/AutoRest.CSharp.Tests/AcceptanceTests.cs) or [\\src\\generator\\AutoRest.CSharp.Azure.Tests\\AcceptanceTests.cs](../../../src/generator/AutoRest.CSharp.Azure.Tests/AcceptanceTests.cs)). You will make calls to the test server using the generated code from step 3.
 5. [Run the tests](#running-tests)
 
