@@ -712,7 +712,7 @@ if ((int)_statusCode != 200)
 }
 ```
 
-See [Error Handling](clients-error.md) for details on how to catch and use the exceptions from generated clients.
+See [Error Handling](../../client/error.md) for details on how to catch and use the exceptions from generated clients.
 
 ### Composite Clients
 AutoRest supports a concept of a composite client where multiple swagger documents are merged together to generate a single ServiceClient. To use this feature the swagger documents need to conform to the following rules:
@@ -758,7 +758,7 @@ autorest.exe -modeler CompositeSwagger -input compositeDoc.json -output C:\Temp 
 
  
 ## Extensions
-AutoRest supports a number of extensions used to configure generated clients. Please refer to [Swagger Extensions](swagger-extensions.md) document for details.
+AutoRest supports a number of extensions used to configure generated clients. Please refer to [Swagger Extensions](../../extensions/index.md) document for details.
 
 [Swagger-spec2.0]:https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
 [JSON-primitive-types]:http://json-schema.org/latest/json-schema-core.html#anchor8

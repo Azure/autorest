@@ -3,7 +3,7 @@
 ## Architecture
 In the AutoRest pipeline, Swagger files get deserialized into intermediate classes, which are then used to create the language-independent client model. Our validation logic is performed on these deserialization classes to allow logic written in C# to be used to check the object representation of the Swagger spec.
 
-The root Swagger spec is deserialized into a [`ServiceDefinition`](../src/modeler/AutoRest.Swagger/Model/ServiceDefinition.cs) object. The validation step recursively traverses this object tree and applies the validation rules that apply to each property and consolidate the messages from all rules. Validation rules are associated with a property by decorating it with a `RuleAttribute`. This `RuleAttribute` will be passed the value for that property and determines if that value satisfies the rule or not. Multiple `RuleAttribute` attributes can be applied to the same property, and any rules that fail will be part of the output.
+The root Swagger spec is deserialized into a [`ServiceDefinition`](../../../src/modeler/AutoRest.Swagger/Model/ServiceDefinition.cs) object. The validation step recursively traverses this object tree and applies the validation rules that apply to each property and consolidate the messages from all rules. Validation rules are associated with a property by decorating it with a `RuleAttribute`. This `RuleAttribute` will be passed the value for that property and determines if that value satisfies the rule or not. Multiple `RuleAttribute` attributes can be applied to the same property, and any rules that fail will be part of the output.
 
 ## Steps for writing a rule (see [instructions below](#instructions))
 1. Define a canonical name that represents the rule and a message that should be shown to the user explaining the validation failure
@@ -15,10 +15,10 @@ The root Swagger spec is deserialized into a [`ServiceDefinition`](../src/modele
 ## Instructions
 ### 1. Add the rule name and message
 - The name of your validation rule should be added to the end of the `ValidationExceptionName` enum
-- Messages are added to the [`AutoRest.Core.Properties.Resource` resx](../src/core/AutoRest.Core/Properties/Resources.resx).
+- Messages are added to the [`AutoRest.Core.Properties.Resource` resx](../../../src/core/AutoRest.Core/Properties/Resources.resx).
 
 ### 2. Specify the severity of your validation rule
-- Add a mapping that associates your message with the rule name in [`ValidationExceptionConstants`](../src/core/AutoRest.Core/Validation/ValidationExceptionConstants.cs) in either the `Info`, `Warning` or `Error` sections.
+- Add a mapping that associates your message with the rule name in [`ValidationExceptionConstants`](../../../src/core/AutoRest.Core/Validation/ValidationExceptionConstants.cs) in either the `Info`, `Warning` or `Error` sections.
 
 ### 3. Add a `Rule` subclass that implements your validation rule logic
 - Create a subclass of the `Rule` class, and override the `bool IsValid(object entity)` method.
@@ -29,8 +29,8 @@ The root Swagger spec is deserialized into a [`ServiceDefinition`](../src/modele
 - The `typeof()` is necessary because C# doesn't support generics in attributes.
 
 ### 5. Add a test to `SwaggerModelerValidationTests` that validates your validation rule 
-- Add an incorrect Swagger file to the [`Swagger/Validation/`](../src/modeler/AutoRest.Swagger.Tests/Swagger/Validation) folder that should trigger your validation rule.
-- Add a test case to [`SwaggerModelerValidationTests.cs`](../src/modeler/AutoRest.Swagger.Tests/SwaggerModelerValidationTests.cs) that asserts that the validation message returned for the Swagger file is  
+- Add an incorrect Swagger file to the [`Swagger/Validation/`](../../../src/modeler/AutoRest.Swagger.Tests/Swagger/Validation) folder that should trigger your validation rule.
+- Add a test case to [`SwaggerModelerValidationTests.cs`](../../../src/modeler/AutoRest.Swagger.Tests/SwaggerModelerValidationTests.cs) that asserts that the validation message returned for the Swagger file is  
 
 ### 6. Ensure your validation rule applies to `clean-complex-spec.json`  
 - `clean-complex-spec.json` is a complex json that passes each validation rule specified in `SwaggerModelerValidationTests.cs`
@@ -50,4 +50,4 @@ Sometimes, a rule should apply to every item in a list or dictionary, but it can
 
 An example of this is the `AnonymousTypesDiscouraged` rule. The purpose of this rule is to have schemas defined in the `definitions` section of the Swagger file instead of in the parameter that it will be used for. It validates the `Schema` class, but it cannot be applied to all instances of this class, because the `definitions` section also uses the `Schema` class.
 
-Since we want to apply this rule to parameters in an operation, we can decorate the `Parameters` property of the [`OperationResponse`](../src/modeler/AutoRest.Swagger/Model/Operation.cs) class with the `CollectionRule` attribute. When the object tree is traversed to apply validation rules, each item in the collection will be validated against the `AnonymousParameterTypes` logic.
+Since we want to apply this rule to parameters in an operation, we can decorate the `Parameters` property of the [`OperationResponse`](../../../src/modeler/AutoRest.Swagger/Model/Operation.cs) class with the `CollectionRule` attribute. When the object tree is traversed to apply validation rules, each item in the collection will be validated against the `AnonymousParameterTypes` logic.
