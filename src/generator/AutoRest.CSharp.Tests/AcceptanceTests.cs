@@ -30,6 +30,7 @@ using Fixtures.AcceptanceTestsBodyInteger;
 using Fixtures.AcceptanceTestsBodyNumber;
 using Fixtures.AcceptanceTestsBodyString;
 using Fixtures.AcceptanceTestsBodyString.Models;
+using Fixtures.AcceptanceTestsBodyStringDeprecated;
 using Fixtures.AcceptanceTestsCompositeBoolIntClient;
 using Fixtures.AcceptanceTestsCustomBaseUri;
 using Fixtures.AcceptanceTestsCustomBaseUriMoreOptions;
@@ -306,6 +307,47 @@ namespace AutoRest.CSharp.Tests
                 client.StringModel.PutBase64UrlEncoded(
                     Encoding.UTF8.GetBytes("a string that gets encoded with base64url"));
             }
+        }
+        
+        [Fact]
+        public void StringDeprecatedTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("body-string-deprecated.json"), ExpectedPath("BodyStringDeprecated"));
+
+            using (var client = new AutoRestSwaggerBATDeprecatedService(Fixture.Uri))
+            {
+                // deprecated methods should still work
+                Assert.Null(client.StringModel.GetNull());
+                client.StringModel.PutNull(null);
+                Assert.Equal(string.Empty, client.StringModel.GetEmpty());
+                client.StringModel.PutEmpty("");
+            }
+
+            var typeIStringModel = typeof(Fixtures.AcceptanceTestsBodyStringDeprecated.IStringModel);
+            var typeStringModel = typeof(Fixtures.AcceptanceTestsBodyStringDeprecated.StringModel);
+            var typeStringModelExt = typeof(Fixtures.AcceptanceTestsBodyStringDeprecated.StringModelExtensions);
+
+            // check for deprecation
+            Assert.True(typeStringModelExt.GetMethod("GetNull").IsDeprecated());
+            Assert.True(typeStringModelExt.GetMethod("GetNullAsync").IsDeprecated());
+            Assert.True(typeIStringModel.GetMethod("GetNullWithHttpMessagesAsync").IsDeprecated());
+            Assert.True(typeStringModel.GetMethod("GetNullWithHttpMessagesAsync").IsDeprecated());
+
+            Assert.True(typeStringModelExt.GetMethod("PutNull").IsDeprecated());
+            Assert.True(typeStringModelExt.GetMethod("PutNullAsync").IsDeprecated());
+            Assert.True(typeIStringModel.GetMethod("PutNullWithHttpMessagesAsync").IsDeprecated());
+            Assert.True(typeStringModel.GetMethod("PutNullWithHttpMessagesAsync").IsDeprecated());
+
+            Assert.False(typeStringModelExt.GetMethod("GetEmpty").IsDeprecated());
+            Assert.False(typeStringModelExt.GetMethod("GetEmptyAsync").IsDeprecated());
+            Assert.False(typeIStringModel.GetMethod("GetEmptyWithHttpMessagesAsync").IsDeprecated());
+            Assert.False(typeStringModel.GetMethod("GetEmptyWithHttpMessagesAsync").IsDeprecated());
+
+            Assert.False(typeStringModelExt.GetMethod("PutEmpty").IsDeprecated());
+            Assert.False(typeStringModelExt.GetMethod("PutEmptyAsync").IsDeprecated());
+            Assert.False(typeIStringModel.GetMethod("PutEmptyWithHttpMessagesAsync").IsDeprecated());
+            Assert.False(typeStringModel.GetMethod("PutEmptyWithHttpMessagesAsync").IsDeprecated());
         }
 
         [Fact]
