@@ -112,7 +112,11 @@ namespace AutoRest.Properties {
         ///##Code Generators
         ///$generators-start$
         ///**-$generator$** $generator-desc$
+        /// ##Parameters
+        /// $generator-parameters-start$
+        ///  **-$generator-parameters-name$** $generator-parameters-desc$
         ///
+        /// $generator-parameters-end$
         ///$generators-end$
         ///
         ///##Examples
@@ -131,7 +135,7 @@ namespace AutoRest.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Microsoft (R) AutoRest $version$
+        ///    Looks up a localized string similar to  Microsoft (R) AutoRest $version$
         ///Copyright (C) Microsoft Corporation. All rights reserved.
         ///
         ///Usage: $syntax$
@@ -143,15 +147,22 @@ namespace AutoRest.Properties {
         ///
         ///Code Generators:
         ///$generators-start$
-        ///  -$generator$: $generator-desc$
+        ///  -$generator$: $generator-desc$ 
+        ///  Parameters:
+        /// $generator-parameters-start$
+        ///  -$generator-parameters-name$: $generator-parameters-desc$
+        /// $generator-parameters-end$
+        ///
         ///$generators-end$
+        ///
+        ///
         ///
         ///Examples:
         ///$examples-start$
         ///  $example-desc$
         ///  &gt;$example$
         ///
-        ///$examples-end$.
+        ///$examples-end [rest of string was truncated]&quot;;.
         /// </summary>
         public static string HelpTextTemplate {
             get {
