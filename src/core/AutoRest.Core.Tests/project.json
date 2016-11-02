@@ -1,5 +1,5 @@
 {
-  "version": "0.17.0-*",
+  "version": "1.0.0-*",
   "authors": [ "Microsoft" ],
 
   "buildOptions": {
@@ -35,7 +35,7 @@
     "AutoRest.CSharp.Azure": { "target": "project", "type": "build" },
     "AutoRest.NodeJS": { "target": "project", "type": "build" }
   },
-  "disabled_dependencies": {    
+  "disabled_dependencies": {
     "AutoRest.Java.Azure": { "target": "project", "type": "build" },
     "AutoRest.NodeJS.Azure": { "target": "project", "type": "build" },
     "AutoRest.Python.Azure": { "target": "project", "type": "build" },

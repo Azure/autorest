@@ -11,8 +11,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Microsoft Corporation")]
 [assembly: AssemblyProduct("Microsoft AutoRest")]
 [assembly: AssemblyCopyright("Copyright (c) Microsoft Corporation")]
-[assembly: AssemblyVersion("0.17.0.0")]
-[assembly: AssemblyFileVersion("0.17.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
 
 [assembly: NeutralResourcesLanguage("en")]
 [assembly: CLSCompliant(true)]

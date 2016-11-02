@@ -1,7 +1,7 @@
 {
-  "version": "0.17.3-*",
+  "version": "1.0.0-*",
   "authors": [ "Microsoft", "Azure-SDK" ],
- 
+
   "packOptions": {
     "owners": [ "Microsoft", "Azure-SDK" ],
     "summary": "AutoRest code generation of REST API client libraries.",
@@ -22,7 +22,7 @@
       }
     }
   },
-  
+
   "buildOptions": {
     "emitEntryPoint": true,
     "delaySign": true,
@@ -55,7 +55,7 @@
     "AutoRest.Python.Azure": { "target": "project", "type": "build" },
     "AutoRest.AzureResourceSchema": { "target": "project", "type": "build" }
   },
-    
+
   "disabled_dependencies": {
     "AutoRest.Java.Azure": { "target": "project", "type": "build" },
     "AutoRest.Java.Azure.Fluent": { "target": "project", "type": "build" },
