@@ -19,7 +19,7 @@ namespace Fixtures.PetstoreV2NoSync
     /// </summary>
     public partial interface ISwaggerPetstoreV2 : System.IDisposable
     {
-        /// <summary>   
+        /// <summary>
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

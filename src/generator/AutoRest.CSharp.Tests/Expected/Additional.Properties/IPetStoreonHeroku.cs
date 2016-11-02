@@ -15,7 +15,7 @@ namespace Fixtures.AdditionalProperties
     /// </summary>
     public partial interface IPetStoreonHeroku : System.IDisposable
     {
-        /// <summary>   
+        /// <summary>
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

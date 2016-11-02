@@ -16,7 +16,7 @@ namespace Fixtures.MirrorSequences
     /// </summary>
     public partial interface ISequenceRequestResponseTest : System.IDisposable
     {
-        /// <summary>   
+        /// <summary>
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

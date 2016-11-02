@@ -17,7 +17,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
     /// </summary>
     public partial interface IAutoRestReportServiceForAzure : System.IDisposable
     {
-        /// <summary>   
+        /// <summary>
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

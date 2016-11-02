@@ -17,7 +17,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     /// </summary>
     public partial interface IAutoRestAzureSpecialParametersTestClient : System.IDisposable
     {
-        /// <summary>   
+        /// <summary>
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

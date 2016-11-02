@@ -15,7 +15,7 @@ namespace Fixtures.MirrorPolymorphic
     /// </summary>
     public partial interface IPolymorphicAnimalStore : System.IDisposable
     {
-        /// <summary>   
+        /// <summary>
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

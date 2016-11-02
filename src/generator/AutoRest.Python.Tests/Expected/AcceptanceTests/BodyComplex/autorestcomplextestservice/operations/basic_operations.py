@@ -10,18 +10,17 @@
 # --------------------------------------------------------------------------
 
 from msrest.pipeline import ClientRawResponse
-import uuid
 
 from .. import models
 
 
-class SubscriptionInCredentialsOperations(object):
-    """SubscriptionInCredentialsOperations operations.
+class BasicOperations(object):
+    """BasicOperations operations.
 
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
-    :param deserializer: An objec model deserializer.
+    :param deserializer: An object model deserializer.
     """
 
     def __init__(self, client, config, serializer, deserializer):
@@ -32,28 +31,24 @@ class SubscriptionInCredentialsOperations(object):
 
         self.config = config
 
-    def post_method_global_valid(
+    def get_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """POST method with subscriptionId modeled in credentials.  Set the
-        credential subscriptionId to '1234-5678-9012-3456' to succeed.
+        """Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: None
+        :rtype: :class:`Basic
+         <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
-        url = '/azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}'
-        path_format_arguments = {
-            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        url = '/complex/basic/valid'
 
         # Construct parameters
         query_parameters = {}
@@ -61,30 +56,34 @@ class SubscriptionInCredentialsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        if self.config.generate_client_request_id:
-            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
-        if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query_parameters)
+        request = self._client.get(url, query_parameters)
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise models.ErrorException(self._deserialize, response)
 
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('Basic', response)
+
         if raw:
-            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response = ClientRawResponse(deserialized, response)
             return client_raw_response
 
-    def post_method_global_null(
-            self, custom_headers=None, raw=False, **operation_config):
-        """POST method with subscriptionId modeled in credentials.  Set the
-        credential subscriptionId to null, and client-side validation should
-        prevent you from making this call.
+        return deserialized
 
+    def put_valid(
+            self, complex_body, custom_headers=None, raw=False, **operation_config):
+        """Please put {id: 2, name: 'abc', color: 'Magenta'}.
+
+        :param complex_body: Please put {id: 2, name: 'abc', color: 'Magenta'}
+        :type complex_body: :class:`Basic
+         <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -94,61 +93,10 @@ class SubscriptionInCredentialsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
-        url = '/azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}'
-        path_format_arguments = {
-            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
-        }
-        url = self._client.format_url(url, **path_format_arguments)
-
-        # Construct parameters
-        query_parameters = {}
-
-        # Construct headers
-        header_parameters = {}
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        if self.config.generate_client_request_id:
-            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        if custom_headers:
-            header_parameters.update(custom_headers)
-        if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
-
-        # Construct and send request
-        request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, **operation_config)
-
-        if response.status_code not in [200]:
-            raise models.ErrorException(self._deserialize, response)
-
-        if raw:
-            client_raw_response = ClientRawResponse(None, response)
-            return client_raw_response
-
-    def post_method_global_not_provided_valid(
-            self, custom_headers=None, raw=False, **operation_config):
-        """POST method with subscriptionId modeled in credentials.  Set the
-        credential subscriptionId to '1234-5678-9012-3456' to succeed.
-
-        :param dict custom_headers: headers that will be added to the request
-        :param bool raw: returns the direct response alongside the
-         deserialized response
-        :param operation_config: :ref:`Operation configuration
-         overrides<msrest:optionsforoperations>`.
-        :rtype: None
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
-        :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
-        """
-        # Construct URL
-        url = '/azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}'
-        path_format_arguments = {
-            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        url = '/complex/basic/valid'
 
         # Construct parameters
         query_parameters = {}
@@ -157,16 +105,16 @@ class SubscriptionInCredentialsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        if self.config.generate_client_request_id:
-            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
-        if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
+
+        # Construct body
+        body_content = self._serialize.body(complex_body, 'Basic')
 
         # Construct and send request
-        request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, **operation_config)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise models.ErrorException(self._deserialize, response)
@@ -175,28 +123,24 @@ class SubscriptionInCredentialsOperations(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    def post_path_global_valid(
+    def get_invalid(
             self, custom_headers=None, raw=False, **operation_config):
-        """POST method with subscriptionId modeled in credentials.  Set the
-        credential subscriptionId to '1234-5678-9012-3456' to succeed.
+        """Get a basic complex type that is invalid for the local strong type.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: None
+        :rtype: :class:`Basic
+         <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
-        url = '/azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}'
-        path_format_arguments = {
-            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        url = '/complex/basic/invalid'
 
         # Construct parameters
         query_parameters = {}
@@ -204,46 +148,45 @@ class SubscriptionInCredentialsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        if self.config.generate_client_request_id:
-            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
-        if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query_parameters)
+        request = self._client.get(url, query_parameters)
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise models.ErrorException(self._deserialize, response)
 
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('Basic', response)
+
         if raw:
-            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response = ClientRawResponse(deserialized, response)
             return client_raw_response
 
-    def post_swagger_global_valid(
+        return deserialized
+
+    def get_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """POST method with subscriptionId modeled in credentials.  Set the
-        credential subscriptionId to '1234-5678-9012-3456' to succeed.
+        """Get a basic complex type that is empty.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: None
+        :rtype: :class:`Basic
+         <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
         """
         # Construct URL
-        url = '/azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}'
-        path_format_arguments = {
-            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        url = '/complex/basic/empty'
 
         # Construct parameters
         query_parameters = {}
@@ -251,20 +194,116 @@ class SubscriptionInCredentialsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        if self.config.generate_client_request_id:
-            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
-        if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query_parameters)
+        request = self._client.get(url, query_parameters)
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise models.ErrorException(self._deserialize, response)
 
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('Basic', response)
+
         if raw:
-            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response = ClientRawResponse(deserialized, response)
             return client_raw_response
+
+        return deserialized
+
+    def get_null(
+            self, custom_headers=None, raw=False, **operation_config):
+        """Get a basic complex type whose properties are null.
+
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`Basic
+         <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+        """
+        # Construct URL
+        url = '/complex/basic/null'
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('Basic', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+
+    def get_not_provided(
+            self, custom_headers=None, raw=False, **operation_config):
+        """Get a basic complex type while the server doesn't provide a response
+        payload.
+
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`Basic
+         <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
+        :raises:
+         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+        """
+        # Construct URL
+        url = '/complex/basic/notprovided'
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('Basic', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized

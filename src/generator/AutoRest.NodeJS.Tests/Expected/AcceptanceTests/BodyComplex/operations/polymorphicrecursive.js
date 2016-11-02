@@ -197,7 +197,7 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
  * 
  * @param {array} [complexBody.siblings]
  * 
- * @param {string} complexBody.fishtype Polymorhpic Discriminator
+ * @param {string} complexBody.fishtype Polymorphic Discriminator
  * 
  * @param {object} [options] Optional Parameters.
  * 

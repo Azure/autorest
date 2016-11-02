@@ -633,7 +633,7 @@ class StorageAccountsOperations(object):
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
-        regenerate_key = models.StorageAccountRegenerateKeyParameters(key_name=key_name)
+        regenerate_key1 = models.StorageAccountRegenerateKeyParameters(key_name=key_name)
 
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'
@@ -659,7 +659,7 @@ class StorageAccountsOperations(object):
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        body_content = self._serialize.body(regenerate_key, 'StorageAccountRegenerateKeyParameters')
+        body_content = self._serialize.body(regenerate_key1, 'StorageAccountRegenerateKeyParameters')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)

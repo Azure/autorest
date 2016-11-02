@@ -15,7 +15,7 @@ namespace Fixtures.AcceptanceTestsReport
     /// </summary>
     public partial interface IAutoRestReportService : System.IDisposable
     {
-        /// <summary>   
+        /// <summary>
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

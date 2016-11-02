@@ -104,7 +104,7 @@ export interface Siamese extends Cat {
  * 
  * @member {array} [siblings]
  * 
- * @member {string} fishtype Polymorhpic Discriminator
+ * @member {string} fishtype Polymorphic Discriminator
  * 
  */
 export interface Fish {

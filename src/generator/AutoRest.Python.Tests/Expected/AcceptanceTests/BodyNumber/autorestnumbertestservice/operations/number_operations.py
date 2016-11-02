@@ -175,7 +175,7 @@ class NumberOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: decimal
+        :rtype: Decimal
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
@@ -203,7 +203,7 @@ class NumberOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('decimal', response)
+            deserialized = self._deserialize('Decimal', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -572,7 +572,7 @@ class NumberOperations(object):
         """Put big decimal value 2.5976931e+101.
 
         :param number_body:
-        :type number_body: decimal
+        :type number_body: Decimal
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -597,7 +597,7 @@ class NumberOperations(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(number_body, 'decimal')
+        body_content = self._serialize.body(number_body, 'Decimal')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -620,7 +620,7 @@ class NumberOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: decimal
+        :rtype: Decimal
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
@@ -648,7 +648,7 @@ class NumberOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('decimal', response)
+            deserialized = self._deserialize('Decimal', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -661,7 +661,7 @@ class NumberOperations(object):
         """Put big decimal value 99999999.99.
 
         :param number_body:
-        :type number_body: decimal
+        :type number_body: Decimal
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -686,7 +686,7 @@ class NumberOperations(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(number_body, 'decimal')
+        body_content = self._serialize.body(number_body, 'Decimal')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -709,7 +709,7 @@ class NumberOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: decimal
+        :rtype: Decimal
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
@@ -737,7 +737,7 @@ class NumberOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('decimal', response)
+            deserialized = self._deserialize('Decimal', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -750,7 +750,7 @@ class NumberOperations(object):
         """Put big decimal value -99999999.99.
 
         :param number_body:
-        :type number_body: decimal
+        :type number_body: Decimal
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -775,7 +775,7 @@ class NumberOperations(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(number_body, 'decimal')
+        body_content = self._serialize.body(number_body, 'Decimal')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -798,7 +798,7 @@ class NumberOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: decimal
+        :rtype: Decimal
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
@@ -826,7 +826,7 @@ class NumberOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('decimal', response)
+            deserialized = self._deserialize('Decimal', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -1017,7 +1017,7 @@ class NumberOperations(object):
         """Put small decimal value 2.5976931e-101.
 
         :param number_body:
-        :type number_body: decimal
+        :type number_body: Decimal
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1042,7 +1042,7 @@ class NumberOperations(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(number_body, 'decimal')
+        body_content = self._serialize.body(number_body, 'Decimal')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1065,7 +1065,7 @@ class NumberOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: decimal
+        :rtype: Decimal
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
@@ -1093,7 +1093,7 @@ class NumberOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('decimal', response)
+            deserialized = self._deserialize('Decimal', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)

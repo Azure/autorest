@@ -15,7 +15,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
     /// </summary>
     public partial interface IAutoRestParameterizedHostTestClient : System.IDisposable
     {
-        /// <summary>   
+        /// <summary>
         /// The base URI of the service.
         /// </summary>
 
