@@ -1,6 +1,8 @@
 @using System
+@using System.Linq
 @using AutoRest.Core.Utilities
-@inherits AutoRest.Core.Template<AutoRest.CSharp.TemplateModels.ServiceClientTemplateModel>
+@using AutoRest.CSharp.Model
+@inherits AutoRest.Core.Template<CodeModelCs>
 @Header("// ")
 @EmptyLine
 namespace @Settings.Namespace
@@ -41,21 +43,22 @@ namespace @Settings.Namespace
         @:/// <summary>
         @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
         @:/// </summary>
-        @:@property.Type @property.Name { get;@(property.IsReadOnly || property.IsConstant ? "" : " set;") }
+        @:@property.ModelTypeName @property.Name { get;@(property.IsReadOnly || property.IsConstant ? "" : " set;") }
         @EmptyLine
         }
 
         @EmptyLine
-    @foreach(var operation in Model.Operations)
+    @foreach(var operation in Model.AllOperations)
     {
         @:/// <summary>
-        @:/// Gets the I@(operation.MethodGroupType).
+        @:/// Gets the I@(operation.TypeName).
         @:/// </summary>
-        @:I@(operation.MethodGroupType) @(operation.MethodGroupName) { get; }
+        @:I@(operation.TypeName) @(operation.NameForProperty) { get; }
         @EmptyLine
         @:
     }
-    @foreach(var method in Model.MethodTemplateModels)
+     
+    @foreach(MethodCs method in Model.Methods.Where( each => each.Group.IsNullOrEmpty()) )
     {
         if (!String.IsNullOrEmpty(method.Description) || !String.IsNullOrEmpty(method.Summary))
         {

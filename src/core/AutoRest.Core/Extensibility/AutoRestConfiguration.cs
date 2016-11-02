@@ -13,15 +13,15 @@ namespace AutoRest.Core.Extensibility
     {
         public AutoRestConfiguration()
         {
-            CodeGenerators = new Dictionary<string, AutoRestProviderConfiguration>();
+            Plugins = new Dictionary<string, AutoRestProviderConfiguration>();
             Modelers = new Dictionary<string, AutoRestProviderConfiguration>();
         }
 
         /// <summary>
-        /// Gets or sets collections of CodeGenerators.
+        /// Gets or sets collections of Plugins.
         /// </summary>
         [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "Required for JSON serialization.")]
-        public IDictionary<string, AutoRestProviderConfiguration> CodeGenerators { get; set; }
+        public IDictionary<string, AutoRestProviderConfiguration> Plugins { get; set; }
 
         /// <summary>
         /// Gets or sets collections of Modelers.

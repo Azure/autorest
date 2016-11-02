@@ -20,5 +20,5 @@ exports.FlattenedProduct = require('./flattenedProduct');
 exports.ResourceCollection = require('./resourceCollection');
 exports.BaseProduct = require('./baseProduct');
 exports.SimpleProduct = require('./simpleProduct');
-exports.FlattenParameterGroup = require('./flattenParameterGroup');
 exports.GenericUrl = require('./genericUrl');
+exports.FlattenParameterGroup = require('./flattenParameterGroup');

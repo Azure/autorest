@@ -18,8 +18,7 @@ exports.CloudError = msRestAzure.CloudError;
  * @constructor
  * @member {string} name
  * 
- * @member {string} [type]  Default value: 'Microsoft.Storage/storageAccounts'
- * .
+ * @member {string} [type] Default value: 'Microsoft.Storage/storageAccounts' .
  * 
  */
 export interface StorageAccountCheckNameAvailabilityParameters {
@@ -309,6 +308,24 @@ export interface StorageAccount extends Resource {
 export interface StorageAccountKeys {
   key1?: string;
   key2?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the StorageAccountListResult class.
+ * @constructor
+ * The list storage accounts operation response.
+ *
+ * @member {array} [value] Gets the list of storage accounts and their
+ * properties.
+ * 
+ * @member {string} [nextLink] Gets the link to the next set of results.
+ * Currently this will always be empty as the API does not support pagination.
+ * 
+ */
+export interface StorageAccountListResult {
+  value?: StorageAccount[];
+  nextLink?: string;
 }
 
 /**

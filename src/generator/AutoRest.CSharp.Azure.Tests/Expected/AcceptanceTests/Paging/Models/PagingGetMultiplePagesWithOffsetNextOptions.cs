@@ -11,7 +11,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
     using System.Linq;
 
     /// <summary>
-    /// Additional parameters for the getMultiplePagesWithOffsetNext operation.
+    /// Additional parameters for the GetMultiplePagesWithOffsetNext operation.
     /// </summary>
     public partial class PagingGetMultiplePagesWithOffsetNextOptions
     {

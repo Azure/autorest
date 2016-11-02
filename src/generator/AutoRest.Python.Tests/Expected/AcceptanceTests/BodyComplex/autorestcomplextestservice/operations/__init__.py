@@ -9,7 +9,7 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .basic_operations_operations import BasicOperationsOperations
+from .basic_operations import BasicOperations
 from .primitive_operations import PrimitiveOperations
 from .array_operations import ArrayOperations
 from .dictionary_operations import DictionaryOperations
@@ -19,7 +19,7 @@ from .polymorphicrecursive_operations import PolymorphicrecursiveOperations
 from .readonlyproperty_operations import ReadonlypropertyOperations
 
 __all__ = [
-    'BasicOperationsOperations',
+    'BasicOperations',
     'PrimitiveOperations',
     'ArrayOperations',
     'DictionaryOperations',

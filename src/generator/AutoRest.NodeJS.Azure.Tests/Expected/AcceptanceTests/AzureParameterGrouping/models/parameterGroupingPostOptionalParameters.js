@@ -14,7 +14,7 @@
  * @class
  * Initializes a new instance of the ParameterGroupingPostOptionalParameters class.
  * @constructor
- * Additional parameters for the parameterGrouping_postOptional operation.
+ * Additional parameters for the ParameterGrouping_postOptional operation.
  *
  * @member {string} [customHeader]
  * 

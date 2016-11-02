@@ -511,7 +511,7 @@ export interface Header {
      * @param {object} [options] Optional Parameters.
      * 
      * @param {string} [options.value] Send a post request with header values
-     * 'GREY' . Possible values include: 'White', 'black', 'GREY'
+     * 'GREY'. Possible values include: 'White', 'black', 'GREY'
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request

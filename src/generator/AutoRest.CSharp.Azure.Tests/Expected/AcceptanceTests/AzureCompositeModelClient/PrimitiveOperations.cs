@@ -2915,7 +2915,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PutDurationWithHttpMessagesAsync(System.TimeSpan? field = default(System.TimeSpan?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             DurationWrapper complexBody = new DurationWrapper();
-            complexBody.Field = field;
+            if (field != null)
+            {
+                complexBody.Field = field;
+            }
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;

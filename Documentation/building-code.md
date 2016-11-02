@@ -154,7 +154,7 @@ Prior to executing `gulp` to build and then test the code, make sure that the la
 
 If you're running Windows and get errors like this while building:
 
-> Unhandled Exception: System.IO.FileLoadException: Could not load file or assembly 'AutoRest, Version=0.17.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' or one of its dependencies. Strong name validation failed. (Exception from HRESULT: 0x8013141A) ---> System.Security.SecurityException: Strong name validation failed. (Exception from HRESULT: 0x8013141A)
+> Unhandled Exception: System.IO.FileLoadException: Could not load file or assembly 'AutoRest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' or one of its dependencies. Strong name validation failed. (Exception from HRESULT: 0x8013141A) ---> System.Security.SecurityException: Strong name validation failed. (Exception from HRESULT: 0x8013141A)
 
 It means you need to disable strong name validation on your dev box:
 

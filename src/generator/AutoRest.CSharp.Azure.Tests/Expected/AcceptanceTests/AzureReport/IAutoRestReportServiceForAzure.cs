@@ -55,7 +55,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         bool? GenerateClientRequestId { get; set; }
 
 
-            /// <summary>
+        /// <summary>
         /// Get test coverage report
         /// </summary>
         /// <param name='customHeaders'>

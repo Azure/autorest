@@ -5,11 +5,14 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection.Metadata;
 using AutoRest.Core;
-using AutoRest.Core.ClientModel;
-using AutoRest.CSharp.TemplateModels;
+using AutoRest.Core.Model;
+using AutoRest.CSharp.Model;
 using AutoRest.CSharp.Tests;
 using Xunit;
-using Parameter = AutoRest.Core.ClientModel.Parameter;
+using Parameter = AutoRest.Core.Model.Parameter;
+using static AutoRest.Core.Utilities.DependencyInjection;
+
+using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 
 namespace AutoRest.CSharp.Tests
 {
@@ -19,299 +22,308 @@ namespace AutoRest.CSharp.Tests
         [Fact]
         public void TypeNormalizationTest()
         {
-            var serviceClient = new ServiceClient();
-            serviceClient.Name = "azure always rocks!";
-            serviceClient.Properties.Add(new Property
+            using (NewContext)
             {
-                Name = "&%$ i rock too!",
-                Type = new PrimaryType(KnownPrimaryType.Int)
-            });
-            serviceClient.Properties.Add(new Property
-            {
-                Name = "some-other-stream",
-                Type = new PrimaryType(KnownPrimaryType.Stream)
-            });
 
-            var customObjectType = new CompositeType();
-            customObjectType.Name = "!@#$%^&*()abc";
-            customObjectType.SerializedName = "!@#$%^&*()abc";
-            customObjectType.Properties.Add(new Property
-            {
-                Name = "boolean-property",
-                Type = new PrimaryType(KnownPrimaryType.Boolean)
-            });
-            customObjectType.Properties.Add(new Property
-            {
-                Name = "some^dateTime_sequence",
-                Type = new SequenceType
+                var codeModel = New<CodeModel>();
+                codeModel.Name = "azure always rocks!";
+                codeModel.Add(New<Property>(new
                 {
-                    ElementType = new PrimaryType(KnownPrimaryType.DateTime)
-                }
-            });
+                    Name = "&%$ i rock too!",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.Int)
+                }));
+                codeModel.Add(New<Property>(new
+                {
+                    Name = "some-other-stream",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.Stream)
+                }));
 
-            var baseType = new CompositeType();
-            baseType.Name = "baseType";
-            baseType.SerializedName = "baseType";
-            baseType.Properties.Add(new Property
-            {
-                Name = "boolean-property",
-                SerializedName = "boolean-property",
-                Type = new PrimaryType(KnownPrimaryType.Boolean)
-            });
-            baseType.BaseModelType = baseType;
-            baseType.Properties.Add(new Property
-            {
-                Name = "self-property",
-                SerializedName = "self-property",
-                Type = baseType
-            });
+                var customObjectType = New<CompositeType>("!@#$%^&*()abc");
+                customObjectType.SerializedName = "!@#$%^&*()abc";
+                customObjectType.Add(New<Property>(new
+                {
+                    Name = "boolean-property",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.Boolean)
+                }));
+                customObjectType.Add(New<Property>(new
+                {
+                    Name = "some^dateTime_sequence",
+                    ModelType = New<SequenceType>(new
+                    {
+                        ElementType = New<PrimaryType>(KnownPrimaryType.DateTime)
+                    })
+                }));
 
-            customObjectType.BaseModelType = baseType;
+                var baseType = New<CompositeType>("baseType");
+                baseType.SerializedName = "baseType";
+                baseType.Add(New<Property>(new
+                {
+                    Name = "boolean-property",
+                    SerializedName = "boolean-property",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.Boolean)
+                }));
+                baseType.BaseModelType = baseType;
+                baseType.Add(New<Property>(new
+                {
+                    Name = "self-property",
+                    SerializedName = "self-property",
+                    ModelType = baseType
+                }));
 
-            serviceClient.ModelTypes.Add(customObjectType);
-            serviceClient.ModelTypes.Add(baseType);
+                customObjectType.BaseModelType = baseType;
 
-            var framework = new CSharpCodeNamer();
-            framework.NormalizeClientModel(serviceClient);
+                codeModel.Add(customObjectType);
+                codeModel.Add(baseType);
 
-            Assert.Equal("Azurealwaysrocks", serviceClient.Name);
-            Assert.Equal("Abc", serviceClient.ModelTypes.First(m => m.Name == "Abc").Name);
-            Assert.Equal("!@#$%^&*()abc", serviceClient.ModelTypes.First(m => m.Name == "Abc").SerializedName);
-            Assert.Equal("BooleanProperty", serviceClient.ModelTypes.First(m => m.Name == "Abc").Properties[0].Name);
-            Assert.Equal("SomedateTimeSequence", serviceClient.ModelTypes.First(m => m.Name == "Abc").Properties[1].Name);
-            Assert.Equal("BaseType", serviceClient.ModelTypes.First(m => m.Name == "BaseType").Name);
-            Assert.Equal("baseType", serviceClient.ModelTypes.First(m => m.Name == "BaseType").SerializedName);
-            Assert.Equal("BooleanProperty", serviceClient.ModelTypes.First(m => m.Name == "BaseType").Properties[0].Name);
-            Assert.Equal("boolean-property", serviceClient.ModelTypes.First(m => m.Name == "BaseType").Properties[0].SerializedName);
-            Assert.Equal("SelfProperty", serviceClient.ModelTypes.First(m => m.Name == "BaseType").Properties[1].Name);
-            Assert.Equal("self-property", serviceClient.ModelTypes.First(m => m.Name == "BaseType").Properties[1].SerializedName);
+                Assert.Equal("Azurealwaysrocks", codeModel.Name);
+                Assert.Equal("Abc", codeModel.ModelTypes.First(m => m.Name == "Abc").Name);
+                Assert.Equal("!@#$%^&*()abc", codeModel.ModelTypes.First(m => m.Name == "Abc").SerializedName);
+                Assert.Equal("BooleanProperty", codeModel.ModelTypes.First(m => m.Name == "Abc").Properties[0].Name);
+                Assert.Equal("SomedateTimeSequence", codeModel.ModelTypes.First(m => m.Name == "Abc").Properties[1].Name);
+                Assert.Equal("BaseType", codeModel.ModelTypes.First(m => m.Name == "BaseType").Name);
+                Assert.Equal("baseType", codeModel.ModelTypes.First(m => m.Name == "BaseType").SerializedName);
+                Assert.Equal("BooleanProperty", codeModel.ModelTypes.First(m => m.Name == "BaseType").Properties[0].Name);
+                Assert.Equal("boolean-property",
+                    codeModel.ModelTypes.First(m => m.Name == "BaseType").Properties[0].SerializedName);
+                Assert.Equal("SelfProperty", codeModel.ModelTypes.First(m => m.Name == "BaseType").Properties[1].Name);
+                Assert.Equal("self-property",
+                    codeModel.ModelTypes.First(m => m.Name == "BaseType").Properties[1].SerializedName);
+            }
         }
 
         [Fact]
         public void TypeNormalizationWithComplexTypesTest()
         {
-            var serviceClient = new ServiceClient();
-            serviceClient.Name = "azure always rocks!";
+            using (NewContext)
+            {
 
-            var childObject = new CompositeType();
-            childObject.Name = "child";
-            childObject.Properties.Add(new Property
-            {
-                Name = "childProperty",
-                Type = new PrimaryType(KnownPrimaryType.String)
-            });
+                var codeModel = New<CodeModel>();
+                codeModel.Name = "azure always rocks!";
 
-            var customObjectType = new CompositeType();
-            customObjectType.Name = "sample";
-            customObjectType.Properties.Add(new Property
-            {
-                Name = "child",
-                Type = childObject
-            });
-            customObjectType.Properties.Add(new Property
-            {
-                Name = "childList",
-                Type = new SequenceType
+                var childObject = New<CompositeType>("child");
+                childObject.Add(New<Property>(new
                 {
-                    ElementType = childObject
-                }
-            });
-            customObjectType.Properties.Add(new Property
-            {
-                Name = "childDict",
-                Type = new DictionaryType
+                    Name = "childProperty",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.String)
+                }));
+
+                var customObjectType = New<CompositeType>("sample");
+                customObjectType.Add(New<Property>(new
                 {
-                    ValueType = childObject
+                    Name = "child",
+                    ModelType = childObject
+                }));
+                customObjectType.Add(New<Property>(new
+                {
+                    Name = "childList",
+                    ModelType = New<SequenceType>(new
+                    {
+                        ElementType = childObject
+                    })
+                }));
+                customObjectType.Add(New<Property>(new
+                {
+                    Name = "childDict",
+                    ModelType = New<DictionaryType>(new
+                    {
+                        ValueType = childObject
+                    })
+                }));
+
+                codeModel.Add(customObjectType);
+                codeModel.Add(childObject);
+
+                new Settings();
+                var plugin = new PluginCs();
+                using (plugin.Activate()) {
+                    codeModel = plugin.Serializer.Load(codeModel);
+                    codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+
+                    Assert.Equal("Sample", codeModel.ModelTypes.First(m => m.Name == "Sample").Name);
+                    Assert.Equal("Child", codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[0].Name);
+                    Assert.Equal("Child", codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[0].ModelType.Name);
+                    Assert.Equal("ChildList", codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[1].Name);
+                    Assert.Equal("System.Collections.Generic.IList<Child>",
+                        codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[1].ModelType.Name);
+                    Assert.Equal("ChildDict", codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[2].Name);
+                    Assert.Equal("System.Collections.Generic.IDictionary<string, Child>",
+                        codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[2].ModelType.Name);
+                    Assert.Equal("Child", codeModel.ModelTypes.First(m => m.Name == "Child").Name);
+                    Assert.Equal("string", codeModel.ModelTypes.First(m => m.Name == "Child").Properties[0].ModelType.Name);
                 }
-            });
-
-            serviceClient.ModelTypes.Add(customObjectType);
-            serviceClient.ModelTypes.Add(childObject);
-
-            var framework = new CSharpCodeNamer();
-            framework.NormalizeClientModel(serviceClient);
-            framework.ResolveNameCollisions(serviceClient, "SampleNs", "SampleNs.Models");
-
-            Assert.Equal("Sample", serviceClient.ModelTypes.First(m => m.Name == "Sample").Name);
-            Assert.Equal("Child", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[0].Name);
-            Assert.Equal("Child", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[0].Type.Name);
-            Assert.Equal("ChildList", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[1].Name);
-            Assert.Equal("System.Collections.Generic.IList<Child>", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[1].Type.Name);
-            Assert.Equal("ChildDict", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[2].Name);
-            Assert.Equal("System.Collections.Generic.IDictionary<string, Child>", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[2].Type.Name);
-            Assert.Equal("Child", serviceClient.ModelTypes.First(m => m.Name == "Child").Name);
-            Assert.Equal("string", serviceClient.ModelTypes.First(m => m.Name == "Child").Properties[0].Type.Name);
+            }
         }
 
         [Fact]
         public void VerifyMethodRenaming()
         {
-            var serviceClient = new ServiceClient();
-            serviceClient.Name = "azure always rocks!";
-
-            var customObjectType = new CompositeType();
-            customObjectType.Name = "!@#$%^&*()abc";
-            customObjectType.Properties.Add(new Property
+            using (NewContext)
             {
-                Name = "boolean-property",
-                Type = new PrimaryType(KnownPrimaryType.Boolean)
-            });
-            serviceClient.Methods.Add(new Method
-            {
-                Name = " method name with lots of spaces",
-                Group = "#$% group with lots of-weird-characters",
-                ReturnType = new Response(customObjectType, null)
-            });
 
-            var framework = new CSharpCodeNamer();
-            framework.NormalizeClientModel(serviceClient);
+                var codeModel = New<CodeModel>();
+                codeModel.Name = "azure always rocks!";
 
-            Assert.Equal("Methodnamewithlotsofspaces", serviceClient.Methods[0].Name);
-            Assert.Equal("GroupwithlotsofWeirdCharacters", serviceClient.Methods[0].Group);
-            Assert.Equal("Abc", serviceClient.Methods[0].ReturnType.Body.Name);
+                var customObjectType = New<CompositeType>("!@#$%^&*()abc");
+                customObjectType.Add(New<Property>(new
+                {
+                    Name = "boolean-property",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.Boolean)
+                }));
+                codeModel.Add(New<Method>(new
+                {
+                    Name = " method name with lots of spaces",
+                    Group = "#$% group with lots of-weird-characters",
+                    ReturnType = new Response(customObjectType, null)
+                }));
+
+                Assert.Equal("Methodnamewithlotsofspaces", codeModel.Methods[0].Name);
+                Assert.Equal("GroupwithlotsofWeirdCharacters", codeModel.Methods[0].Group);
+                Assert.Equal("Abc", codeModel.Methods[0].ReturnType.Body.Name);
+            }
         }
 
-        [Fact]
-        public void NameCollisionTestWithoutNamespace()
-        {
-            var serviceClient = new ServiceClient();
-            serviceClient.Name = "azure always rocks!";
-
-            var customObjectType = new CompositeType();
-            customObjectType.Name = "azure always rocks!";
-
-            var baseType = new CompositeType();
-            baseType.Name = "azure always rocks!";
-
-            serviceClient.Methods.Add(new Method
-            {
-                Name = "azure always rocks!",
-                Group = "azure always rocks!",
-                ReturnType = new Response(customObjectType, null)
-            });
-
-            serviceClient.ModelTypes.Add(customObjectType);
-            serviceClient.ModelTypes.Add(baseType);
-
-            var framework = new CSharpCodeNamer();
-            framework.ResolveNameCollisions(serviceClient, null, null);
-
-            Assert.Equal("azure always rocks!Client", serviceClient.Name);
-            Assert.Equal("azure always rocks!Operations", serviceClient.MethodGroups.First());
-            Assert.Equal("azure always rocks!", serviceClient.Methods[0].Name);
-            Assert.Equal("azure always rocks!", serviceClient.ModelTypes.First(m => m.Name == "azure always rocks!").Name);
-        }
 
         [Fact]
         public void NameCollisionTestWithNamespace()
         {
-            var serviceClient = new ServiceClient();
-            serviceClient.Name = "azure always rocks!";
-
-            var customObjectType = new CompositeType();
-            customObjectType.Name = "azure always rocks!";
-
-            var baseType = new CompositeType();
-            baseType.Name = "azure always rocks!";
-
-            serviceClient.Methods.Add(new Method
+            using (NewContext)
             {
-                Name = "azure always rocks!",
-                Group = "azure always rocks!",
-                ReturnType = new Response(customObjectType, null)
-            });
+                var codeModel = New<CodeModel>(new
+                {
+                    Name = "AzureAlwaysRocksClient"
+                });
 
-            serviceClient.ModelTypes.Add(customObjectType);
-            serviceClient.ModelTypes.Add(baseType);
+                var customObjectType = New<CompositeType>("AzureAlwaysRocks");
 
-            var framework = new CSharpCodeNamer();
-            framework.ResolveNameCollisions(serviceClient, "azure always rocks!", "azure always rocks!.Models");
+                var baseType = New<CompositeType>("AzureAlwaysRocks");
 
-            Assert.Equal("azure always rocks!Client", serviceClient.Name);
-            Assert.Equal("azure always rocks!Operations", serviceClient.MethodGroups.First());
-            Assert.Equal("azure always rocks!", serviceClient.Methods[0].Name);
-            Assert.Equal("azure always rocks!Model", serviceClient.ModelTypes.First(m => m.Name == "azure always rocks!Model").Name);
+                codeModel.Add(customObjectType);
+                codeModel.Add(baseType);
+
+                codeModel.Add(New<Method>(new
+                {
+                    Name = "AzureAlwaysRocks",
+                    Group = "AzureAlwaysRocks",
+                    ReturnType = new Response(customObjectType, null)
+                }));
+
+                Assert.Equal("AzureAlwaysRocksClient", codeModel.Name);
+                Assert.Equal("AzureAlwaysRocksOperations", codeModel.Operations.First().TypeName);
+                Assert.Equal("AzureAlwaysRocksMethod", codeModel.Methods[0].Name);
+                Assert.Equal("AzureAlwaysRocks", codeModel.ModelTypes.First(m => m.Name == "AzureAlwaysRocks").Name);
+            }
         }
 
         [Fact]
         public void SequenceWithRenamedComplexType()
         {
-            var serviceClient = new ServiceClient();
-            serviceClient.Name = "azure always rocks!";
-
-            var complexType = new CompositeType();
-            complexType.Name = "Greetings";
-
-            serviceClient.Methods.Add(new Method
+            using (NewContext)
             {
-                Name = "List",
-                ReturnType = new Response(new SequenceType { ElementType = complexType }, null)
-            });
 
-            serviceClient.Methods.Add(new Method
-            {
-                Name = "List2",
-                ReturnType = new Response(new DictionaryType { ValueType = complexType }, null)
-            });
+                var codeModel = New<CodeModel>();
+                codeModel.Namespace = "Polar.Greetings";
+                codeModel.Name = "azure always rocks!";
 
-            serviceClient.ModelTypes.Add(complexType);
+                var complexType = New<CompositeType>("Greetings");
 
-            var codeGenerator = new CSharpCodeGenerator(new Settings { Namespace = "Polar.Greetings" });
-            codeGenerator.NormalizeClientModel(serviceClient);
+                codeModel.Add(New<Method>(new
+                {
+                    Name = "List",
+                    ReturnType = new Response(New<SequenceType>(new {ElementType = complexType}), null)
+                }));
 
-            Assert.Equal("GreetingsModel", complexType.Name);
-            Assert.Equal("System.Collections.Generic.IList<GreetingsModel>", serviceClient.Methods[0].ReturnType.Body.Name);
-            Assert.Equal("System.Collections.Generic.IDictionary<string, GreetingsModel>", serviceClient.Methods[1].ReturnType.Body.Name);
+                codeModel.Add(New<Method>(new
+                {
+                    Name = "List2",
+                    ReturnType = new Response(New<DictionaryType>(new {ValueType = complexType}), null)
+                }));
+
+                codeModel.Add(complexType);
+
+                using (NewContext)
+                {
+                    new Settings();
+                    var plugin = new PluginCs();
+                    using (plugin.Activate()) {
+                        codeModel = plugin.Serializer.Load(codeModel);
+                        codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+
+                        Assert.Equal("GreetingsModel", codeModel.ModelTypes[0].Name);
+                        Assert.Equal("System.Collections.Generic.IList<GreetingsModel>",
+                            codeModel.Methods[0].ReturnType.Body.Name);
+                        Assert.Equal("System.Collections.Generic.IDictionary<string, GreetingsModel>",
+                            codeModel.Methods[1].ReturnType.Body.Name);
+                    }
+                }
+            }
         }
 
         [Fact(Skip = "TODO: Test is not correct.")]
         public void VerifyInputMappingsForFlattening()
         {
-            var serviceClient = new ServiceClient();
-            serviceClient.Name = "test service client";
+            using (NewContext)
+            {
 
-            var customObjectType = new CompositeType();
-            customObjectType.Name = "Foo";
-            customObjectType.Properties.Add(new Property
-            {
-                Name = "A",
-                Type = new PrimaryType(KnownPrimaryType.Boolean)
-            });
-            customObjectType.Properties.Add(new Property
-            {
-                Name = "B",
-                Type = new PrimaryType(KnownPrimaryType.String)
-            });
-            var method = new Method
-            {
-                Name = "method1",
-                Group = "mGroup",
-                ReturnType = new Response(customObjectType, null)
-            };
-            var outputParameter = new Parameter { Name = "body", Type = customObjectType };
-            serviceClient.Methods.Add(method);
-            method.Parameters.Add(new Parameter { Name = "paramA", Type = new PrimaryType(KnownPrimaryType.Boolean), SerializedName = "paramA" });
-            method.Parameters.Add(new Parameter { Name = "paramB", Type = new PrimaryType(KnownPrimaryType.String), SerializedName = "paramB" });
-            method.InputParameterTransformation.Add(new ParameterTransformation
-            {
-                OutputParameter = outputParameter
-            });
-            method.InputParameterTransformation[0].ParameterMappings.Add(new ParameterMapping
-            {
-                InputParameter = method.Parameters[0],
-                OutputParameterProperty = "A"
-            });
-            method.InputParameterTransformation[0].ParameterMappings.Add(new ParameterMapping 
-            { 
-                InputParameter = method.Parameters[1],
-                OutputParameterProperty = "B"
-            });
+                var codeModel = New<CodeModel>();
+                codeModel.Name = "test service client";
 
-            MethodTemplateModel templateModel = new MethodTemplateModel(method, serviceClient,SyncMethodsGenerationMode.All);
-            var output = templateModel.BuildInputMappings();
-            System.Console.WriteLine(output);
-            string expected =
-          @"Foo body = default(Foo);
+                var customObjectType = New<CompositeType>("Foo");
+                customObjectType.Add(New<Property>(new
+                {
+                    Name = "A",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.Boolean)
+                }));
+                customObjectType.Add(New<Property>(new
+                {
+                    Name = "B",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.String)
+                }));
+                var method = New<Method>(new
+                {
+                    Name = "method1",
+                    Group = "mGroup",
+                    ReturnType = new Response(customObjectType, null)
+                });
+                var outputParameter = New<Parameter>(new {Name = "body", ModelType = customObjectType});
+                codeModel.Add(method);
+                method.Add(
+                    New<Parameter>(
+                        new
+                        {
+                            Name = "paramA",
+                            ModelType = New<PrimaryType>(KnownPrimaryType.Boolean),
+                            SerializedName = "paramA"
+                        }));
+                method.Add(
+                    New<Parameter>(
+                        new
+                        {
+                            Name = "paramB",
+                            ModelType = New<PrimaryType>(KnownPrimaryType.String),
+                            SerializedName = "paramB"
+                        }));
+                method.InputParameterTransformation.Add(new ParameterTransformation
+                {
+                    OutputParameter = outputParameter
+                });
+                method.InputParameterTransformation[0].ParameterMappings.Add(new ParameterMapping
+                {
+                    InputParameter = method.Parameters.FirstOrDefault(),
+                    OutputParameterProperty = "A"
+                });
+                method.InputParameterTransformation[0].ParameterMappings.Add(new ParameterMapping
+                {
+                    InputParameter = method.Parameters.Skip(1).FirstOrDefault(),
+                    OutputParameterProperty = "B"
+                });
+
+                MethodCs templateModel = method as MethodCs;
+                templateModel.SyncMethods = SyncMethodsGenerationMode.All;
+
+                var output = templateModel.BuildInputMappings();
+                System.Console.WriteLine(output);
+                string expected =
+                    @"Foo body = default(Foo);
             if (paramA != null || paramB != null)
             {
                 body = new Foo();
@@ -319,59 +331,78 @@ namespace AutoRest.CSharp.Tests
                 body.B = paramB;
             }";
 
-            MultilineAreEqual(expected, output.Trim());
+                MultilineAreEqual(expected, output.Trim());
+            }
         }
 
         [Fact(Skip = "TODO: This does not work correctly.")]
         public void VerifyInputMappingsForGrouping()
         {
-            var serviceClient = new ServiceClient();
-            serviceClient.Name = "test service client";
+            using (NewContext)
+            {
 
-            var customObjectType = new CompositeType();
-            customObjectType.Name = "Foo";
-            customObjectType.Properties.Add(new Property
-            {
-                Name = "A",
-                Type = new PrimaryType(KnownPrimaryType.Boolean)
-            });
-            customObjectType.Properties.Add(new Property
-            {
-                Name = "B",
-                Type = new PrimaryType(KnownPrimaryType.String)
-            });
-            var method = new Method
-            {
-                Name = "method1",
-                Group = "mGroup",
-                ReturnType = new Response(customObjectType, null)
-            };
-            var inputParameter = new Parameter { Name = "body", Type = customObjectType };
-            serviceClient.Methods.Add(method);
-            method.Parameters.Add(inputParameter);
-            method.InputParameterTransformation.Add(new ParameterTransformation
-            {
-                OutputParameter = new Parameter { Name = "paramA", Type = new PrimaryType(KnownPrimaryType.String), SerializedName = "paramA" }
-            });
-            method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
-            {
-                InputParameter = inputParameter,
-                InputParameterProperty = "A"
-            });
-            method.InputParameterTransformation.Add(new ParameterTransformation
-            {
-                OutputParameter = new Parameter { Name = "paramB", Type = new PrimaryType(KnownPrimaryType.String), SerializedName = "paramB" }
-            });
-            method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
-            {
-                InputParameter = inputParameter,
-                InputParameterProperty = "B"
-            });
+                var codeModel = New<CodeModel>();
+                codeModel.Name = "test service client";
 
-            MethodTemplateModel templateModel = new MethodTemplateModel(method, serviceClient, SyncMethodsGenerationMode.All);
-            var output = templateModel.BuildInputMappings();
-            string expected =
-          @"String paramA = default(String);
+                var customObjectType = New<CompositeType>("Foo");
+                customObjectType.Add(New<Property>(new
+                {
+                    Name = "A",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.Boolean)
+                }));
+                customObjectType.Add(New<Property>(new
+                {
+                    Name = "B",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.String)
+                }));
+                var method = New<Method>(new
+                {
+                    Name = "method1",
+                    Group = "mGroup",
+                    ReturnType = new Response(customObjectType, null)
+                });
+                var inputParameter = New<Parameter>(new {Name = "body", ModelType = customObjectType});
+                codeModel.Add(method);
+                method.Add(inputParameter);
+                method.InputParameterTransformation.Add(new ParameterTransformation
+                {
+                    OutputParameter =
+                        New<Parameter>(
+                            new
+                            {
+                                Name = "paramA",
+                                ModelType = New<PrimaryType>(KnownPrimaryType.String),
+                                SerializedName = "paramA"
+                            })
+                });
+                method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
+                {
+                    InputParameter = inputParameter,
+                    InputParameterProperty = "A"
+                });
+                method.InputParameterTransformation.Add(new ParameterTransformation
+                {
+                    OutputParameter =
+                        New<Parameter>(
+                            new
+                            {
+                                Name = "paramB",
+                                ModelType = New<PrimaryType>(KnownPrimaryType.String),
+                                SerializedName = "paramB"
+                            })
+                });
+                method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
+                {
+                    InputParameter = inputParameter,
+                    InputParameterProperty = "B"
+                });
+
+                MethodCs templateModel = method as MethodCs;
+                templateModel.SyncMethods = SyncMethodsGenerationMode.All;
+
+                var output = templateModel.BuildInputMappings();
+                string expected =
+                    @"String paramA = default(String);
             if (body != null)
             {
                 paramA = body.A;
@@ -382,95 +413,100 @@ namespace AutoRest.CSharp.Tests
                 paramB = body.B;
             }";
 
-            MultilineAreEqual(expected, output.Trim());
+                MultilineAreEqual(expected, output.Trim());
+            }
         }
 
         [Fact (Skip = "TODO: Implement more robust mapping for resource transformation")]
         public void VerifyInputMappingsForResources()
         {
-            var serviceClient = new ServiceClient();
-            serviceClient.Name = "test service client";
+            using (NewContext)
+            {
 
-            var flattenedPropertyType = new CompositeType();
-            flattenedPropertyType.Name = "FooFlattened";
-            flattenedPropertyType.Properties.Add(new Property
-            {
-                Name = "Sku",
-                Type = new PrimaryType(KnownPrimaryType.String)
-            });
-            flattenedPropertyType.Properties.Add(new Property
-            {
-                Name = "ProvState",
-                Type = new PrimaryType(KnownPrimaryType.String)
-            });
-            flattenedPropertyType.Properties.Add(new Property
-            {
-                Name = "Id",
-                Type = new PrimaryType(KnownPrimaryType.Int)
-            });
+                var codeModel = New<CodeModel>();
+                codeModel.Name = "test service client";
 
-            var customObjectPropertyType = new CompositeType();
-            customObjectPropertyType.Name = "FooProperty";
-            customObjectPropertyType.Properties.Add(new Property
-            {
-                Name = "Sku",
-                Type = new PrimaryType(KnownPrimaryType.String)
-            });
-            customObjectPropertyType.Properties.Add(new Property
-            {
-                Name = "ProvState",
-                Type = new PrimaryType(KnownPrimaryType.String)
-            });
+                var flattenedPropertyType = New<CompositeType>("FooFlattened");
+                flattenedPropertyType.Add(New<Property>(new
+                {
+                    Name = "Sku",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.String)
+                }));
+                flattenedPropertyType.Add(New<Property>(new
+                {
+                    Name = "ProvState",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.String)
+                }));
+                flattenedPropertyType.Add(New<Property>(new
+                {
+                    Name = "Id",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.Int)
+                }));
 
-            var customObjectType = new CompositeType();
-            customObjectType.Name = "Foo";
-            customObjectType.Properties.Add(new Property
-            {
-                Name = "Property",
-                Type = customObjectPropertyType
-            });
-            customObjectType.Properties.Add(new Property
-            {
-                Name = "Id",
-                Type = new PrimaryType(KnownPrimaryType.Int)
-            });
+                var customObjectPropertyType = New<CompositeType>("FooProperty");
 
-            var method = new Method
-            {
-                Name = "method1",
-                Group = "mGroup",
-                ReturnType = new Response(flattenedPropertyType, null)
-            };
-            var inputParameter = new Parameter { Name = "prop", Type = flattenedPropertyType };
-            serviceClient.Methods.Add(method);
-            method.Parameters.Add(inputParameter);
-            method.InputParameterTransformation.Add(new ParameterTransformation
-            {
-                OutputParameter = new Parameter { Name = "body", Type = customObjectType, SerializedName = "body" }
-            });
-            method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
-            {
-                InputParameter = inputParameter,
-                InputParameterProperty = "Id",
-                OutputParameterProperty = "Id"
-            });
-            method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
-            {
-                InputParameter = inputParameter,
-                InputParameterProperty = "Sku",
-                OutputParameterProperty = "Property.Sku"
-            });
-            method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
-            {
-                InputParameter = inputParameter,
-                InputParameterProperty = "ProvState",
-                OutputParameterProperty = "Property.ProvState"
-            });            
+                customObjectPropertyType.Add(New<Property>(new
+                {
+                    Name = "Sku",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.String)
+                }));
+                customObjectPropertyType.Add(New<Property>(new
+                {
+                    Name = "ProvState",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.String)
+                }));
 
-            MethodTemplateModel templateModel = new MethodTemplateModel(method, serviceClient,SyncMethodsGenerationMode.All);
-            var output = templateModel.BuildInputMappings();
-            string expected =
-          @"String paramA = null;
+                var customObjectType = New<CompositeType>("Foo");
+                customObjectType.Add(New<Property>(new
+                {
+                    Name = "Property",
+                    ModelType = customObjectPropertyType
+                }));
+                customObjectType.Add(New<Property>(new
+                {
+                    Name = "Id",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.Int)
+                }));
+
+                var method = New<Method>(new
+                {
+                    Name = "method1",
+                    Group = "mGroup",
+                    ReturnType = new Response(flattenedPropertyType, null)
+                });
+                var inputParameter = New<Parameter>(new {Name = "prop", ModelType = flattenedPropertyType});
+                codeModel.Add(method);
+                method.Add(inputParameter);
+                method.InputParameterTransformation.Add(new ParameterTransformation
+                {
+                    OutputParameter =
+                        New<Parameter>(new {Name = "body", ModelType = customObjectType, SerializedName = "body"})
+                });
+                method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
+                {
+                    InputParameter = inputParameter,
+                    InputParameterProperty = "Id",
+                    OutputParameterProperty = "Id"
+                });
+                method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
+                {
+                    InputParameter = inputParameter,
+                    InputParameterProperty = "Sku",
+                    OutputParameterProperty = "Property.Sku"
+                });
+                method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
+                {
+                    InputParameter = inputParameter,
+                    InputParameterProperty = "ProvState",
+                    OutputParameterProperty = "Property.ProvState"
+                });
+
+                MethodCs templateModel = method as MethodCs;
+                templateModel.SyncMethods = SyncMethodsGenerationMode.All;
+
+                var output = templateModel.BuildInputMappings();
+                string expected =
+                    @"String paramA = null;
             if (body != null)
             {
                 paramA = body.A;
@@ -481,20 +517,28 @@ namespace AutoRest.CSharp.Tests
                 paramB = body.B;
             }";
 
-            MultilineAreEqual(expected, output.Trim());
+                MultilineAreEqual(expected, output.Trim());
+            }
         }
 
         private static void MultilineAreEqual(string expectedText, string actualText)
         {
-            string[] expectedLines = expectedText.Split('\n').Select(p => p.TrimEnd('\r')).ToArray();
-            string[] actualLines = actualText.Split('\n').Select(p => p.TrimEnd('\r')).ToArray();
-
-            Assert.Equal(expectedLines.Length, actualLines.Length);
-
-            for (int i = 0; i < expectedLines.Length; i++)
+            using (NewContext)
             {
-                Assert.True(expectedLines[i].Trim().Equals(actualLines[i].Trim(), System.StringComparison.OrdinalIgnoreCase),
-                    string.Format(CultureInfo.InvariantCulture, "Difference on line {0}.\r\nExpected: {1}\r\nActual: {2}", i, expectedLines[i], actualLines[i]));
+
+                string[] expectedLines = expectedText.Split('\n').Select(p => p.TrimEnd('\r')).ToArray();
+                string[] actualLines = actualText.Split('\n').Select(p => p.TrimEnd('\r')).ToArray();
+
+                Assert.Equal(expectedLines.Length, actualLines.Length);
+
+                for (int i = 0; i < expectedLines.Length; i++)
+                {
+                    Assert.True(
+                        expectedLines[i].Trim().Equals(actualLines[i].Trim(), System.StringComparison.OrdinalIgnoreCase),
+                        string.Format(CultureInfo.InvariantCulture,
+                            "Difference on line {0}.\r\nExpected: {1}\r\nActual: {2}", i, expectedLines[i],
+                            actualLines[i]));
+                }
             }
         }
     }

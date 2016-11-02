@@ -322,7 +322,7 @@ export interface Primitive {
      * 
      * @param {string} [complexBody.empty]
      * 
-     * @param {string} [complexBody.null]
+     * @param {string} [complexBody.nullProperty]
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -527,7 +527,7 @@ export interface ArrayModel {
      *
      * @param {object} [options] Optional Parameters.
      * 
-     * @param {array} [options.arrayParameter]
+     * @param {array} [options.arrayProperty]
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
@@ -535,7 +535,7 @@ export interface ArrayModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putValid(options: { arrayParameter? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putValid(options: { arrayProperty? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putValid(callback: ServiceCallback<void>): void;
 
     /**
@@ -557,7 +557,7 @@ export interface ArrayModel {
      *
      * @param {object} [options] Optional Parameters.
      * 
-     * @param {array} [options.arrayParameter]
+     * @param {array} [options.arrayProperty]
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
@@ -565,7 +565,7 @@ export interface ArrayModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putEmpty(options: { arrayParameter? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putEmpty(options: { arrayProperty? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putEmpty(callback: ServiceCallback<void>): void;
 
     /**
@@ -796,7 +796,7 @@ export interface Polymorphism {
      * 
      * @param {array} [complexBody.siblings]
      * 
-     * @param {string} complexBody.fishtype Polymorhpic Discriminator
+     * @param {string} complexBody.fishtype Polymorphic Discriminator
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -847,7 +847,7 @@ export interface Polymorphism {
      * 
      * @param {array} [complexBody.siblings]
      * 
-     * @param {string} complexBody.fishtype Polymorhpic Discriminator
+     * @param {string} complexBody.fishtype Polymorphic Discriminator
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -946,7 +946,7 @@ export interface Polymorphicrecursive {
      * 
      * @param {array} [complexBody.siblings]
      * 
-     * @param {string} complexBody.fishtype Polymorhpic Discriminator
+     * @param {string} complexBody.fishtype Polymorphic Discriminator
      * 
      * @param {object} [options] Optional Parameters.
      * 

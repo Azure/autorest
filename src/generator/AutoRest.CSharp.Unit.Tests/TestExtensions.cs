@@ -9,6 +9,7 @@ using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Utilities;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Unit.Tests
 {
@@ -46,6 +47,8 @@ namespace AutoRest.CSharp.Unit.Tests
 
         internal static MemoryFileSystem GenerateCodeInto(this string inputFile,  MemoryFileSystem fileSystem)
         {
+            using (NewContext)
+            {
             var settings = new Settings
             {
                 Modeler = "Swagger",
@@ -56,6 +59,7 @@ namespace AutoRest.CSharp.Unit.Tests
             };
 
             return inputFile.GenerateCodeInto(fileSystem, settings);
+        }
         }
 
         internal static MemoryFileSystem GenerateCodeInto(this string inputFile, MemoryFileSystem fileSystem, Settings settings)
@@ -74,16 +78,42 @@ namespace AutoRest.CSharp.Unit.Tests
 
             settings.Input = fileName;
 
-            var codeGenerator = new CSharpCodeGenerator(settings);
-            var modeler = ExtensionsLoader.GetModeler(settings);
-            var sc = modeler.Build();
-            codeGenerator.NormalizeClientModel(sc);
-            codeGenerator.Generate(sc).GetAwaiter().GetResult();
+            var plugin = new PluginCs();
+            var modeler = ExtensionsLoader.GetModeler();
+            var codeModel = modeler.Build();
+
+            // After swagger Parser
+            codeModel = AutoRestController.RunExtensions(Trigger.AfterModelCreation, codeModel);
+
+            // After swagger Parser
+            codeModel = AutoRestController.RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
+
+            using (plugin.Activate())
+            {
+                // load model into language-specific code model
+                codeModel = plugin.Serializer.Load(codeModel);
+
+                // we've loaded the model, run the extensions for after it's loaded
+                codeModel = AutoRestController.RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
+
+                // apply language-specific tranformation (more than just language-specific types)
+                // used to be called "NormalizeClientModel" . 
+                codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+
+                // next set of extensions
+                codeModel = AutoRestController.RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
+
+                // next set of extensions
+                codeModel = AutoRestController.RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
+
+                // Generate code from CodeModel.
+                plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+            }
 
             return fileSystem;
         }
 
-        internal static void SaveFilesToTemp(this IFileSystem fileSystem, string folderName = null)
+        internal static string SaveFilesToTemp(this IFileSystem fileSystem, string folderName = null)
         {
             folderName = string.IsNullOrWhiteSpace(folderName) ? Guid.NewGuid().ToString() : folderName;
             var outputFolder = Path.Combine(Path.GetTempPath(), folderName);
@@ -107,6 +137,8 @@ namespace AutoRest.CSharp.Unit.Tests
                 Directory.CreateDirectory(Path.GetDirectoryName(target));
                 File.WriteAllText(target, fileSystem.ReadFileAsText(file));
             }
+
+            return outputFolder;
         }
     }
 }

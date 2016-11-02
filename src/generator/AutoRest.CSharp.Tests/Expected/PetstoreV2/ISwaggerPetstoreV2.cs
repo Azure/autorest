@@ -41,7 +41,7 @@ namespace Fixtures.PetstoreV2
         Microsoft.Rest.ServiceClientCredentials Credentials { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Add a new pet to the store
         /// </summary>
         /// <param name='body'>

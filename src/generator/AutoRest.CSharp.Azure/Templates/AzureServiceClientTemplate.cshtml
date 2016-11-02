@@ -2,10 +2,11 @@
 @using AutoRest.CSharp.Azure.Templates
 @using System.Linq
 @using AutoRest.Core.Utilities
-@using AutoRest.CSharp.Azure.TemplateModels
-@using AutoRest.CSharp.TemplateModels
+@using AutoRest.CSharp.Azure.Model
+@using AutoRest.CSharp.Model
 @using AutoRest.CSharp.Templates
-@inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.TemplateModels.AzureServiceClientTemplateModel>
+
+@inherits AutoRest.Core.Template<CodeModelCsa>
 @Header("// ")
 @EmptyLine
 namespace @Settings.Namespace
@@ -23,7 +24,7 @@ namespace @Settings.Namespace
     }
     public partial class @Model.Name : Microsoft.Rest.ServiceClient<@Model.Name>, I@(Model.Name), IAzureClient
     {
-        @(Include(new ServiceClientBodyTemplate(), (ServiceClientTemplateModel)Model))
+        @(Include(new ServiceClientBodyTemplate(), (CodeModelCs)Model))
     
         /// <summary>
         /// An optional partial-method to perform custom initialization.
@@ -35,9 +36,9 @@ namespace @Settings.Namespace
         /// </summary>
         private void Initialize()
         {
-        @foreach (var operation in Model.Operations) 
+        @foreach (var operation in Model.AllOperations) 
         {
-            @:this.@(operation.MethodGroupName) = new @(operation.MethodGroupType)(this);
+            @:this.@(operation.NameForProperty) = new @(operation.TypeName)(this);
         }
 
         @if (Model.IsCustomBaseUri)
@@ -83,7 +84,7 @@ namespace @Settings.Namespace
                         new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
                     }
             };
-            @foreach (var polymorphicType in Model.ModelTypes.Where(t => t.PolymorphicDiscriminator != null))
+            @foreach (var polymorphicType in Model.ModelTypes.Where(t => t.IsPolymorphic))
             {
             @:SerializationSettings.Converters.Add(new Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
             @:DeserializationSettings.Converters.Add(new Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
@@ -99,9 +100,9 @@ namespace @Settings.Namespace
             DeserializationSettings.Converters.Add(new Microsoft.Rest.Azure.CloudErrorJsonConverter()); 
         }    
     
-        @foreach (var method in Model.MethodTemplateModels)
-        {
-        @:@(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
+        @foreach (MethodCsa method in Model.Methods.Where(each => each.Group.IsNullOrEmpty()))
+            {
+        @:@(Include(new AzureMethodTemplate(), (MethodCsa)method))
         @EmptyLine
         @:
         }

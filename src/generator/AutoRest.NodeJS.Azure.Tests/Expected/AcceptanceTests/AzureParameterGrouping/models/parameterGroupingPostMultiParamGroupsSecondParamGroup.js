@@ -14,7 +14,7 @@
  * @class
  * Initializes a new instance of the ParameterGroupingPostMultiParamGroupsSecondParamGroup class.
  * @constructor
- * Additional parameters for the parameterGrouping_postMultiParamGroups
+ * Additional parameters for the ParameterGrouping_postMultiParamGroups
  * operation.
  *
  * @member {string} [headerTwo]

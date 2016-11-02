@@ -32,7 +32,7 @@ namespace Fixtures.MirrorSequences
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Creates a new pet in the store.  Duplicates are allowed
         /// </summary>
         /// <param name='pets'>

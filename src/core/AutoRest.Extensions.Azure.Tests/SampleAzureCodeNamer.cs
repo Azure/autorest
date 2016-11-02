@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 
 namespace AutoRest.Extensions.Azure.Tests
 {
@@ -12,19 +12,19 @@ namespace AutoRest.Extensions.Azure.Tests
         {
         }
 
-        public override IType NormalizeTypeReference(IType type)
+        public override IModelType NormalizeTypeReference(IModelType type)
         {
             // Do nothing
             return type;
         }
 
-        public override IType NormalizeTypeDeclaration(IType type)
+        public override IModelType NormalizeTypeDeclaration(IModelType type)
         {
             // Do nothing
             return type;
         }
 
-        public override string EscapeDefaultValue(string defaultValue, IType type)
+        public override string EscapeDefaultValue(string defaultValue, IModelType type)
         {
             return defaultValue;
         }

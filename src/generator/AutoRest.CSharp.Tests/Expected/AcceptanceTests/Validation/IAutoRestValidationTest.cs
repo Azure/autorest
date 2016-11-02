@@ -42,7 +42,7 @@ namespace Fixtures.AcceptanceTestsValidation
         string ApiVersion { get; set; }
 
 
-            /// <summary>
+        /// <summary>
         /// Validates input parameters on the method. See swagger for details.
         /// </summary>
         /// <param name='resourceGroupName'>

@@ -55,7 +55,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         bool? GenerateClientRequestId { get; set; }
 
 
-            /// <summary>
+        /// <summary>
         /// Put External Resource as an Array
         /// </summary>
         /// <param name='resourceArray'>

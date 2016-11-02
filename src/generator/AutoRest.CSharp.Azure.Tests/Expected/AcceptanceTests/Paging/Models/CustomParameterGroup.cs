@@ -12,8 +12,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 
     /// <summary>
     /// Additional parameters for a set of operations, such as:
-    /// Paging_getMultiplePagesFragmentWithGroupingNextLink,
-    /// Paging_nextFragmentWithGrouping.
+    /// Paging_GetMultiplePagesFragmentWithGroupingNextLink,
+    /// Paging_NextFragmentWithGrouping.
     /// </summary>
     public partial class CustomParameterGroup
     {

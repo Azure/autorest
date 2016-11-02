@@ -11,6 +11,7 @@ using AutoRest.Core.Logging;
 using AutoRest.Core;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Validation;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger.Tests
 {
@@ -43,18 +44,22 @@ namespace AutoRest.Swagger.Tests
     {
         private IEnumerable<ValidationMessage> ValidateSwagger(string input)
         {
-            var modeler = new SwaggerModeler(new Settings
+            using (NewContext)
             {
-                Namespace = "Test",
-                Input = input
-            });
-            IEnumerable<ValidationMessage> messages;
-            modeler.Build(out messages);
+                new Settings
+                {
+                    Namespace = "Test",
+                    Input = input
+                };
+                var modeler = new SwaggerModeler();
+                IEnumerable<ValidationMessage> messages;
+                modeler.Build(out messages);
 
-            // remove debug-level messages
-            messages = messages.Where(each => each.Severity > LogEntrySeverity.Debug);
+                // remove debug-level messages
+                messages = messages.Where(each => each.Severity > LogEntrySeverity.Debug);
 
-            return messages;
+                return messages;
+            }
         }
 
         [Fact]

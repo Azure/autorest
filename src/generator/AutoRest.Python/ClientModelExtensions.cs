@@ -6,9 +6,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Python
 {
@@ -26,7 +27,7 @@ namespace AutoRest.Python
                 throw new ArgumentNullException("parameter");
             }
 
-            SequenceType sequence = parameter.Type as SequenceType;
+            SequenceType sequence = parameter.ModelType as SequenceType;
             if (sequence == null)
             {
                 return null;
@@ -36,13 +37,10 @@ namespace AutoRest.Python
             EnumType enumType = sequence.ElementType as EnumType;
             if (enumType != null)
             {
-                primaryType = new PrimaryType(KnownPrimaryType.String)
-                {
-                    Name = "str"
-                };
+                primaryType = New<PrimaryType>(KnownPrimaryType.String);
             }
 
-            if (primaryType != null && primaryType.Type != KnownPrimaryType.String)
+            if (primaryType != null && primaryType.KnownPrimaryType != KnownPrimaryType.String)
             {
                 throw new InvalidOperationException(
                     string.Format(CultureInfo.InvariantCulture,
@@ -97,10 +95,8 @@ namespace AutoRest.Python
         /// </summary>
         /// <param name="value">The string to convert.</param>
         /// <returns>The python style string.</returns>
-        public static string ToPythonCase(this string value)
-        {
-            return PythonCodeNamer.PythonCase(value);
-        }
+        public static string ToPythonCase(this string value) => Singleton<CodeNamerPy>.Instance.PythonCase(value);
+        public static string ToPythonCase(this Fixable<string> value) => Singleton<CodeNamerPy>.Instance.PythonCase(value);
 
         /// <summary>
         /// Simple conversion of the type to string
@@ -108,7 +104,7 @@ namespace AutoRest.Python
         /// <param name="type">The type to convert</param>
         /// <param name="reference">a reference to an instance of the type</param>
         /// <returns></returns>
-        public static string ToString(this IType type, string reference)
+        public static string ToString(this IModelType type, string reference)
         {
             return string.Format(CultureInfo.InvariantCulture,
                 "self._serialize.serialize_data({0}, '{1}')", reference, type.ToPythonRuntimeTypeString());
@@ -119,7 +115,7 @@ namespace AutoRest.Python
         /// </summary>
         /// <param name="type">The type to convert</param>
         /// <returns></returns>
-        public static string ToPythonRuntimeTypeString(this IType type)
+        public static string ToPythonRuntimeTypeString(this IModelType type)
         {
             if (type == null)
             {
@@ -130,37 +126,37 @@ namespace AutoRest.Python
 
             if (known != null)
             {
-                if (known.Type == KnownPrimaryType.Date)
+                if (known.KnownPrimaryType == KnownPrimaryType.Date)
                 {
                     return "date";
                 }
 
-                if (known.Type == KnownPrimaryType.DateTimeRfc1123)
+                if (known.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
                 {
                     return "rfc-1123";
                 }
 
-                if (known.Type == KnownPrimaryType.DateTime)
+                if (known.KnownPrimaryType == KnownPrimaryType.DateTime)
                 {
                     return "iso-8601";
                 }
 
-                if (known.Type == KnownPrimaryType.TimeSpan)
+                if (known.KnownPrimaryType == KnownPrimaryType.TimeSpan)
                 {
                     return "duration";
                 }
 
-                if (known.Type == KnownPrimaryType.UnixTime)
+                if (known.KnownPrimaryType == KnownPrimaryType.UnixTime)
                 {
                     return "unix-time";
                 }
 
-                if (known.Type == KnownPrimaryType.Base64Url)
+                if (known.KnownPrimaryType == KnownPrimaryType.Base64Url)
                 {
                     return "base64";
                 }
 
-                if (known.Type == KnownPrimaryType.Decimal)
+                if (known.KnownPrimaryType == KnownPrimaryType.Decimal)
                 {
                     return "decimal";
                 }
@@ -211,9 +207,9 @@ namespace AutoRest.Python
             }
 
             Property prop = type.Properties.FirstOrDefault(p =>
-                p.Type.IsPrimaryType(KnownPrimaryType.Decimal) ||
-                (p.Type is SequenceType && (p.Type as SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.Decimal)) ||
-                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.Decimal)));
+                p.ModelType.IsPrimaryType(KnownPrimaryType.Decimal) ||
+                (p.ModelType is SequenceType && (p.ModelType as SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.Decimal)) ||
+                (p.ModelType is DictionaryType && (p.ModelType as DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.Decimal)));
 
             return prop != null;
         }
@@ -236,7 +232,7 @@ namespace AutoRest.Python
             return type.Name + "Exception";
         }
 
-        public static string GetExceptionDefinitionTypeIfExists(this CompositeType type, ServiceClient serviceClient)
+        public static string GetExceptionDefinitionTypeIfExists(this CompositeType type, CodeModel serviceClient)
         {
             if (type == null)
             {
@@ -258,7 +254,7 @@ namespace AutoRest.Python
             }
         }
 
-        public static string GetPythonSerializationType(IType type)
+        public static string GetPythonSerializationType(IModelType type)
         {
             if (type == null)
             {
@@ -272,14 +268,14 @@ namespace AutoRest.Python
                             { KnownPrimaryType.TimeSpan, "duration" },
                             { KnownPrimaryType.UnixTime, "unix-time" },
                             { KnownPrimaryType.Base64Url, "base64" },
-                            { KnownPrimaryType.Decimal, "decimal" }
+                            { KnownPrimaryType.Decimal, "Decimal" }
                         };
             PrimaryType primaryType = type as PrimaryType;
             if (primaryType != null)
             {
-                if (typeNameMapping.ContainsKey(primaryType.Type))
+                if (typeNameMapping.ContainsKey(primaryType.KnownPrimaryType))
                 {
-                    return typeNameMapping[primaryType.Type];
+                    return typeNameMapping[primaryType.KnownPrimaryType];
                 }
                 else
                 {
@@ -290,16 +286,16 @@ namespace AutoRest.Python
             SequenceType sequenceType = type as SequenceType;
             if (sequenceType != null)
             {
-                IType innerType = sequenceType.ElementType;
+                IModelType innerType = sequenceType.ElementType;
                 PrimaryType innerPrimaryType = innerType as PrimaryType;
                 string innerTypeName;
-                if (innerPrimaryType != null && typeNameMapping.ContainsKey(innerPrimaryType.Type))
+                if (innerPrimaryType != null && typeNameMapping.ContainsKey(innerPrimaryType.KnownPrimaryType))
                 {
-                    innerTypeName = typeNameMapping[innerPrimaryType.Type];
+                    innerTypeName = typeNameMapping[innerPrimaryType.KnownPrimaryType];
                 }
                 else
                 {
-                    innerTypeName = innerType.Name;
+                    innerTypeName = innerType.Name.Else("str");
                 }
                 return "[" + innerTypeName + "]";
             }
@@ -307,12 +303,12 @@ namespace AutoRest.Python
             DictionaryType dictType = type as DictionaryType;
             if (dictType != null)
             {
-                IType innerType = dictType.ValueType;
+                IModelType innerType = dictType.ValueType;
                 PrimaryType innerPrimaryType = innerType as PrimaryType;
                 string innerTypeName;
-                if (innerPrimaryType != null && typeNameMapping.ContainsKey(innerPrimaryType.Type))
+                if (innerPrimaryType != null && typeNameMapping.ContainsKey(innerPrimaryType.KnownPrimaryType))
                 {
-                    innerTypeName = typeNameMapping[innerPrimaryType.Type];
+                    innerTypeName = typeNameMapping[innerPrimaryType.KnownPrimaryType];
                 }
                 else
                 {

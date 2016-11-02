@@ -139,6 +139,19 @@ export interface SimpleProduct extends BaseProduct {
 
 /**
  * @class
+ * Initializes a new instance of the GenericUrl class.
+ * @constructor
+ * The Generic URL.
+ *
+ * @member {string} [genericValue] Generic URL value.
+ * 
+ */
+export interface GenericUrl {
+  genericValue?: string;
+}
+
+/**
+ * @class
  * Initializes a new instance of the FlattenParameterGroup class.
  * @constructor
  * Additional parameters for the putSimpleProductWithGrouping operation.
@@ -165,17 +178,4 @@ export interface FlattenParameterGroup {
   maxProductDisplayName: string;
   genericValue?: string;
   odatavalue?: string;
-}
-
-/**
- * @class
- * Initializes a new instance of the GenericUrl class.
- * @constructor
- * The Generic URL.
- *
- * @member {string} [genericValue] Generic URL value.
- * 
- */
-export interface GenericUrl {
-  genericValue?: string;
 }

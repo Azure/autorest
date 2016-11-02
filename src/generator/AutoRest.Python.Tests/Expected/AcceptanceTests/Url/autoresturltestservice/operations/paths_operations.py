@@ -21,7 +21,7 @@ class PathsOperations(object):
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
     :param deserializer: An object model deserializer.
-    :ivar byte_path: '' as byte array. Constant value: bytearray("", encoding="utf-8").
+    :ivar byte_path: '' as byte array
     :ivar date_path: '2012-01-01' as date. Constant value: "2012-01-01".
     :ivar date_time_path: '2012-01-01T01:01:01Z' as date-time. Constant value: "2012-01-01T01:01:01Z".
     """

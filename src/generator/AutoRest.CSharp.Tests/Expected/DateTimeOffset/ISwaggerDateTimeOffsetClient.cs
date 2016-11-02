@@ -31,7 +31,7 @@ namespace Fixtures.DateTimeOffset
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Product Types
         /// </summary>
         /// <param name='responseCode'>

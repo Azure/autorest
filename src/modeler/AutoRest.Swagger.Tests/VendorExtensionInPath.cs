@@ -4,6 +4,7 @@
 using System.IO;
 using AutoRest.Core;
 using Xunit;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger.Tests
 {
@@ -13,18 +14,23 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void AllowVendorExtensionInPath()
         {
-            SwaggerModeler modeler = new SwaggerModeler(new Settings
+            using (NewContext)
             {
-                Namespace = "Test",
-                Input = Path.Combine("Swagger", "vendor-extension-in-path.json")
-            });
-            var clientModel = modeler.Build();
+                new Settings
+                {
+                    Namespace = "Test",
+                    Input = Path.Combine("Swagger", "vendor-extension-in-path.json")
+                };
+                SwaggerModeler modeler = new SwaggerModeler();
+                var clientModel = modeler.Build();
 
-            // should return a valid model.
-            Assert.NotNull(clientModel);
+                // should return a valid model.
+                Assert.NotNull(clientModel);
 
-            // there should be one method in this generated api.
-            Assert.Equal(1, modeler.ServiceClient.Methods.Count);
+                // there should be one method in this generated api.
+                Assert.Equal(1, modeler.CodeModel.Methods.Count);
+            }
         }
+
     }
 }

@@ -21,7 +21,7 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments", 
     Scope = "type", Target = "AutoRest.SettingsInfoAttribute", Justification="Parameter is optional")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", 
-    MessageId = "Api", Scope = "member", Target = "AutoRest.ClientModel.ServiceClient.#ApiVersion")]
+    MessageId = "Api", Scope = "member", Target = "AutoRest.Core.Model.CodeModel.#ApiVersion")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", 
     MessageId = "Mit", Scope = "member", Target = "AutoRest.Settings.#MicrosoftMitLicenseHeader")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", 
@@ -57,7 +57,7 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", Target = "AutoRest.ClientModel.CompositeType.#Properties")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", Target = "AutoRest.ClientModel.EnumType.#Values")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", Target = "AutoRest.ClientModel.Method.#InputParameterTransformation")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", Target = "AutoRest.ClientModel.ServiceClient.#Methods")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", Target = "AutoRest.ClientModel.ServiceClient.#Properties")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", Target = "AutoRest.Core.Model.CodeModel.#Methods")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", Target = "AutoRest.Core.Model.CodeModel.#Properties")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", Target = "AutoRest.ClientModel.ParameterTransformation.#ParameterMappings")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "AutoRest.CodeNamer.#ResolveNameConflict(System.Collections.Generic.Dictionary`2<System.String,System.String>,System.String,System.String,System.String)")]

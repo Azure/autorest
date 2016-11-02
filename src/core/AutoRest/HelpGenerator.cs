@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using AutoRest.Core;
 using AutoRest.Core.Extensibility;
 using Newtonsoft.Json;
+using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 
 namespace AutoRest
 {
@@ -158,15 +159,14 @@ namespace AutoRest
             var generatorsSection = new StringBuilder();
             const string generatorsPattern = @"\$generators-start\$(.+)\$generators-end\$";
             var generatorsTemplate = Regex.Match(template, generatorsPattern, RegexOptions.Singleline).Groups[1].Value.Trim();
-            foreach (string generator in autorestConfig.CodeGenerators.Keys.OrderBy(k => k))
+            foreach (string generator in autorestConfig.Plugins.Keys.OrderBy(k => k))
             {
                 try
                 {
-                    var codeGenerator = ExtensionsLoader.LoadTypeFromAssembly<CodeGenerator>(autorestConfig.CodeGenerators, generator,
-                       settings);
+                    var plugin = ExtensionsLoader.LoadTypeFromAssembly<IAnyPlugin>(autorestConfig.Plugins, generator);
                     generatorsSection.AppendLine("  " + generatorsTemplate.
-                        Replace("$generator$", codeGenerator.Name).
-                        Replace("$generator-desc$", codeGenerator.Description));
+                        Replace("$generator$", plugin.Settings.Name).
+                        Replace("$generator-desc$", plugin.Settings.Description));
                 }
                 catch
                 {
@@ -187,7 +187,7 @@ namespace AutoRest
 
             // Process template replacing all major sections.
             template = template.
-                Replace("$version$", Core.AutoRest.Version).
+                Replace("$version$", Core.AutoRestController.Version).
                 Replace("$syntax$", syntaxSection.ToString());
 
             template = Regex.Replace(template, parametersPattern, parametersSection.ToString(), RegexOptions.Singleline);

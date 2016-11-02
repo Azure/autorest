@@ -1,7 +1,7 @@
 ﻿@using AutoRest.Python.Templates
 @using System.Linq;
 @using AutoRest.Python
-@inherits AutoRest.Core.Template<AutoRest.Python.TemplateModels.MethodGroupTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.Python.Model.MethodGroupPy>
 # coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ").TrimMultilineHeader()
@@ -19,8 +19,8 @@ from msrest.pipeline import ClientRawResponse
 }
 @EmptyLine
 @EmptyLine
-class @(Model.MethodGroupType)(object):
-    """@(Model.MethodGroupType) operations.
+class @((string) Model.TypeName)(object):
+    """@((string) Model.TypeName) operations.
 @EmptyLine
     :param client: Client for service requests.
     :param config: Configuration of service client.

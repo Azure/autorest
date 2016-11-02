@@ -31,7 +31,7 @@ namespace Fixtures.MirrorPolymorphic
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Product Types
         /// </summary>
         /// <remarks>

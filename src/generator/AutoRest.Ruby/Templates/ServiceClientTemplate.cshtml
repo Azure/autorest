@@ -1,7 +1,7 @@
 ﻿@using AutoRest.Ruby.Templates
 @using System.Linq
 @using AutoRest.Ruby
-@inherits AutoRest.Core.Template<AutoRest.Ruby.TemplateModels.ServiceClientTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.Ruby.Model.CodeModelRb>
 # encoding: utf-8
 @Header("# ")
 @EmptyLine
@@ -24,15 +24,15 @@ module @Settings.Namespace
 
 @foreach (var property in Model.Properties)
 {
-    @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), property.Documentation))
+    @:@WrapComment("# ", string.Format("@return {0}{1}", property.ModelType.GetYardDocumentation(), property.Documentation))
     @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name
 @EmptyLine
 }
 
-@foreach (var operation in Model.MethodGroups)
+@foreach (var operation in Model.Operations.Where(each => !each.IsCodeModelMethodGroup))
 {
-    @:@WrapComment("# ", string.Format("@return [{0}] {1}", operation, RubyCodeNamer.UnderscoreCase(operation)))
-    @:attr_reader :@(RubyCodeNamer.UnderscoreCase(operation))
+    @:@WrapComment("# ", string.Format("@return [{0}] {1}", operation.TypeName, Model.CodeNamer.UnderscoreCase(operation.TypeName)))
+    @:attr_reader :@(Model.CodeNamer.UnderscoreCase(operation.TypeName))
 @EmptyLine
 }
 
@@ -67,9 +67,9 @@ module @Settings.Namespace
       fail ArgumentError, 'invalid type of credentials input parameter' unless credentials.is_a?(MsRest::ServiceClientCredentials)
       @@credentials = credentials
       @EmptyLine
-      @foreach (var operation in Model.MethodGroups)
+      @foreach (var operation in Model.Operations.Where( each => !each.IsCodeModelMethodGroup))
       {
-      @:@@@(RubyCodeNamer.UnderscoreCase(operation)) = @(operation).new(self)
+      @:@@@(Model.CodeNamer.UnderscoreCase(operation.TypeName)) = @(operation.TypeName).new(self)
       }
 
       @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))

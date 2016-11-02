@@ -31,7 +31,7 @@ namespace Fixtures.MirrorRecursiveTypes
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Products
         /// </summary>
         /// <remarks>

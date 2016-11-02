@@ -1,5 +1,5 @@
 {
-  "version": "0.17.0-*",
+  "version": "1.0.0-*",
   "authors": [ "Microsoft" ],
 
   "packOptions": {
@@ -17,20 +17,6 @@
 
   "frameworks": {
     "net451": {
-    }
-  },
-  "old_frameworks": {
-    "net451": {
-    },
-    "netcoreapp1.0": {
-      "buildOptions": { "define": [ "PORTABLE" ] },
-      "imports": [ "dnxcore50", "portable-net45+win8" ],
-      "dependencies": {
-        "Microsoft.NETCore.App": {
-          "type": "platform",
-          "version": "1.0.0-*"
-        }
-      }
     }
   },
 

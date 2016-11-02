@@ -101,7 +101,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// </summary>
         IReadonlypropertyOperations Readonlyproperty { get; }
 
-            /// <summary>
+        /// <summary>
         /// Product Types
         /// </summary>
         /// <remarks>

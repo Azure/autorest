@@ -31,7 +31,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Put External Resource as an Array
         /// </summary>
         /// <param name='resourceArray'>

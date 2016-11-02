@@ -741,8 +741,8 @@ class PagingOperations(object):
             else:
                 url = '/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}'
                 path_format_arguments = {
-                    'nextLink': self._serialize.url("next_link", next_link, 'str', skip_quote=True),
-                    'tenant': self._serialize.url("tenant", tenant, 'str')
+                    'tenant': self._serialize.url("tenant", tenant, 'str'),
+                    'nextLink': self._serialize.url("next_link", next_link, 'str', skip_quote=True)
                 }
                 url = self._client.format_url(url, **path_format_arguments)
                 query_parameters = {}

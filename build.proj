@@ -95,7 +95,7 @@
     <VersionSuffix Condition=" $(NightlyBuild) == 'true' ">Nightly$([System.DateTime]::Now.ToString("yyyyMMdd"))</VersionSuffix>
 
     <!-- Otherwise, default Version Suffix if not codesigning-->
-    <VersionSuffix Condition="$(VersionSuffix) == '' AND '$(CodeSign)' != 'true'">preview-0.17</VersionSuffix>
+    <VersionSuffix Condition="$(VersionSuffix) == '' AND '$(CodeSign)' != 'true'">preview-$([System.DateTime]::Now.ToString("yyyyMMdd"))</VersionSuffix>
 
   </PropertyGroup>
 

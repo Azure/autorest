@@ -21,7 +21,7 @@ namespace AutoRest.Swagger.Validation
             var swaggerObject = (context.Parent?.Value as SwaggerObject);
             var knownFormat = swaggerObject?.KnownFormat;
 
-            if(knownFormat != null && knownFormat == Core.ClientModel.KnownFormat.unknown)
+            if(knownFormat != null && knownFormat == Core.Model.KnownFormat.unknown)
             {
                 formatParams = new string[] { swaggerObject?.Format };
                 return false;

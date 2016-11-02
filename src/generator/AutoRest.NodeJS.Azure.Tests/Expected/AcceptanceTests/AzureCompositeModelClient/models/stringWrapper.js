@@ -18,7 +18,7 @@
  * 
  * @member {string} [empty]
  * 
- * @member {string} [null]
+ * @member {string} [nullProperty]
  * 
  */
 function StringWrapper() {
@@ -52,7 +52,7 @@ StringWrapper.prototype.mapper = function () {
             name: 'String'
           }
         },
-        null: {
+        nullProperty: {
           required: false,
           serializedName: 'null',
           type: {

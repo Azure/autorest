@@ -5,7 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
@@ -41,7 +41,7 @@ namespace AutoRest.Swagger
                        throw new ArgumentNullException("method"); 
                     }
 
-                    method.Url = method.Url.Replace(
+                    method.Url = ((string)method.Url).Replace(
                         string.Format(CultureInfo.InvariantCulture, "{0}", currentSwaggerParam.Name),
                         string.Format(CultureInfo.InvariantCulture, "{0}", paramNameBuilder));
                 }

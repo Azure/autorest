@@ -1,9 +1,9 @@
 ﻿@using System.Linq
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
-@using AutoRest.NodeJS.Azure.TemplateModels
+@using AutoRest.NodeJS.Azure.Model
 @using AutoRest.NodeJS.Azure.Templates
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.TemplateModels.AzureServiceClientTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.Model.CodeModelJsa>
 /*
 @Header(" * ")
  */
@@ -29,11 +29,8 @@ var ServiceClient = msRestAzure.AzureServiceClient;
 }
 
 @EmptyLine
-@if (Model.ModelTypes.Any())
-{
-@:var models = require('./models');
-}
-@if (Model.MethodGroups.Any())
+var models = require('./models');
+@if (Model.MethodGroupModels.Any())
 {
 @:var operations = require('./operations');
 }
@@ -47,7 +44,7 @@ var ServiceClient = msRestAzure.AzureServiceClient;
  *
 @foreach (var param in requiredParameters)
 {
-@: * @@param {@param.Type.Name.ToCamelCase()} @param.Name - @param.Documentation
+@: * @@param {@param.ModelType.Name.ToCamelCase()} @param.Name - @param.Documentation
 @: *
 }
 
@@ -67,7 +64,7 @@ var ServiceClient = msRestAzure.AzureServiceClient;
  *
 @foreach (var param in optionalParameters)
 {
-@: * @@param {@param.Type.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
+@: * @@param {@param.ModelType.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
 @: *
 }
  */
@@ -85,7 +82,7 @@ function @(Model.Name)(@(!string.IsNullOrEmpty(Model.RequiredConstructorParamete
   @EmptyLine
   if (!options) options = {};
   @EmptyLine
-  @(Model.Name)['super_'].call(this, @(requiredParameters.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)) ? "credentials" : "null"), options);
+  @(Model.Name)['super_'].call(this, @(requiredParameters.Any(p => p.ModelType.IsPrimaryType(KnownPrimaryType.Credentials)) ? "credentials" : "null"), options);
 @if(!Model.IsCustomBaseUri)
 {
   @:this.baseUri = baseUri;
@@ -113,13 +110,10 @@ else
   
   @foreach (var methodGroup in Model.MethodGroupModels)
   {
-  @:this.@(methodGroup.MethodGroupName) = new operations.@(methodGroup.MethodGroupType)(this);
+  @:this.@(methodGroup.NameForProperty) = new operations.@(methodGroup.TypeName)(this);
   }
   
-  @if (Model.ModelTypes.Any())
-  {
-  @:this.models = models;
-  }
+  this.models = models;
   msRest.addSerializationMixin(this);
 }
 @EmptyLine
@@ -127,7 +121,7 @@ util.inherits(@Model.Name, ServiceClient);
 @foreach (var method in Model.MethodTemplateModels)
 {
 @EmptyLine
-@:@(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel))
+@:@(Include(new AzureMethodTemplate(), method as MethodJsa))
 }
 @EmptyLine
 module.exports = @Model.Name;
