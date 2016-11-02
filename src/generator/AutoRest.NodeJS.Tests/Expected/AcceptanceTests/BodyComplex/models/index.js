@@ -41,5 +41,10 @@ exports.ArrayWrapper = require('./arrayWrapper');
 exports.DictionaryWrapper = require('./dictionaryWrapper');
 exports.ReadonlyObj = require('./readonlyObj');
 exports.discriminators = {
-  'Fish' : exports.Fish
+  'Fish' : exports.Fish,
+  'Fish.salmon' : exports.Salmon,
+  'Fish.shark' : exports.Shark,
+  'Fish.sawshark' : exports.Sawshark,
+  'Fish.goblin' : exports.Goblinshark,
+  'Fish.cookiecuttershark' : exports.Cookiecuttershark
 };

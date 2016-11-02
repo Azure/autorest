@@ -97,7 +97,7 @@ namespace AutoRest.NodeJS.Model
             get
             {
                 IndentedStringBuilder builder = new IndentedStringBuilder(IndentedStringBuilder.TwoSpaces);
-                var polymorphicTypes = ModelTemplateModels.Where(m => m.IsPolymorphic);
+                var polymorphicTypes = ModelTemplateModels.Where(m => m.BaseIsPolymorphic);
 
                 for (int i = 0; i < polymorphicTypes.Count(); i++ )
                 {
