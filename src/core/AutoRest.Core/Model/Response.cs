@@ -8,19 +8,23 @@ namespace AutoRest.Core.Model
     /// <summary>
     /// Defines a structure for operation response.
     /// </summary>
-    public struct Response
+    public class Response
     {
         /// <summary>
         /// Initializes a new instance of Response.
         /// </summary>
         /// <param name="body">Body type.</param>
         /// <param name="headers">Headers type.</param>
-        public Response(IModelType body, IModelType headers) : this()
+        public Response(IModelType body, IModelType headers) 
         {
             Body = body;
             Headers = headers;
         }
 
+        public Response()
+        {
+            
+        }
         /// <summary>
         /// Gets or sets the body type.
         /// </summary>

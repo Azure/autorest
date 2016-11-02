@@ -15,7 +15,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
     /// </summary>
     public partial interface IAutoRestSwaggerBATArrayService : System.IDisposable
     {
-        /// <summary>   
+        /// <summary>
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

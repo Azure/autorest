@@ -3,7 +3,7 @@ param( $lastAutorest, $newAutoRest , [switch]$noclean , $swagger, [switch]$notri
 function get-fullpath( $path ) {
    $result = resolve-path $path -ea 0 -ErrorVariable e
    if( $e ) {
-    return $e.TargetPath
+    return $e.TargetObject
    }
    return $result
 }
@@ -15,7 +15,7 @@ $newRoot = get-fullpath "$baseFolder\New"
 if( !$noclean ) {
   # remove last run and create folders
   $null = rmdir -recurse -force -ea 0 $baseFolder 
-  $null = mkdir $baseFolder
+  $null = mkdir -ea 0 $baseFolder
 } else {
   $null = rmdir -recurse -force -ea 0 $lastRoot 
   $null = rmdir -recurse -force -ea 0 $newRoot 
@@ -67,11 +67,11 @@ $scrp = {
   param($lastexe, $newexe, $commonFolder,$uniqueName ,$spec, $gen, $modeler, $notrim)
   $output = "$lastexe `n-Namespace Test.NameSpace -OutputDirectory  ""$commonFolder\Last\$uniqueName\$gen"" -input $spec -CodeGenerator $gen -verbose -modeler $modeler`n"
   $output += &$lastexe -Namespace Test.NameSpace -OutputDirectory  "$commonFolder\Last\$uniqueName\$gen" -input $spec -CodeGenerator $gen -verbose -modeler $modeler
-  set-content -value $output -path "$commonFolder\last\$uniqueName\output-$gen.txt"
+  # set-content -value $output -path "$commonFolder\last\$uniqueName\output-$gen.txt"
   
-  $output = "$newexe `n-Namespace Test.NameSpace -OutputDirectory  ""$commonFolder\New\$uniqueName\$gen"" -input $spec -CodeGenerator $gen -verbose -modeler $modeler`n"
+  write-output "$newexe `n-Namespace Test.NameSpace -OutputDirectory  ""$commonFolder\New\$uniqueName\$gen"" -input $spec -CodeGenerator $gen -verbose -modeler $modeler`n"
   $output += &$newexe -Namespace Test.NameSpace -OutputDirectory  "$commonFolder\New\$uniqueName\$gen" -input $spec -CodeGenerator $gen -verbose -modeler $modeler
-  set-content -value $output -path "$commonFolder\new\$uniqueName\output-$gen.txt"
+  #set-content -value $output -path "$commonFolder\new\$uniqueName\output-$gen.txt"
 
   if( !$notrim ) {
     (dir "$commonFolder\Last\$uniqueName\" -recurse -file).FullName  |% {
@@ -85,8 +85,8 @@ $scrp = {
           if( $r -and $c ) {
             $v = compare-object $r $c 
             if( !$v )  {
-              erase $ref
-              erase $cur
+              # erase $ref
+              # erase $cur
             }
           }
         }
@@ -95,7 +95,8 @@ $scrp = {
   }
 }
 
-@("Azure.NodeJS", "Azure.CSharp") |% {
+# @("Azure.NodeJS", "Azure.CSharp") |% {
+ @("Azure.Python" ) |% {
   $gen = $_;
  
 
@@ -155,6 +156,7 @@ Get-Job |% {
   remove-job $_ 
 }
 
+<#
 try {
   $app = New-Object -ComObject "Merge70.Application"
   if( $app )  { 
@@ -189,4 +191,4 @@ try {
   }
 } catch { 
   write-host -fore red "Araxis Merge not installed (report skipped)"
-}
+}#>

@@ -815,7 +815,7 @@ namespace AutoRest.NodeJS
                 builder.AppendLine("type: {")
                          .Indent()
                          .AppendLine("name: 'Composite',");
-                if (composite.PolymorphicDiscriminator != null)
+                if (composite.IsPolymorphic)
                 {
                     builder = ConstructPolymorphicDiscriminator(composite, builder);
                 }

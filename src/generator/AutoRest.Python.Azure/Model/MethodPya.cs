@@ -1,62 +1,27 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Collections.Generic;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions.Azure;
-using AutoRest.Python.TemplateModels;
+using AutoRest.Python.Model;
 
-namespace AutoRest.Python.Azure.TemplateModels
+namespace AutoRest.Python.Azure.Model
 {
-    public class AzureMethodTemplateModel : MethodTemplateModel
+    public class MethodPya : MethodPy
     {
-        public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
-            : base(source, serviceClient)
+        public MethodPya()
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
-            
-            this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
-            this.RequestIdString = AzureExtensions.GetRequestIdString(source);
         }
 
-        public bool IsPagingMethod
-        {
-            get
-            {
-                return this.Extensions.ContainsKey(AzureExtensions.PageableExtension);
-            }
-        }
+        public bool IsPagingMethod => this.Extensions.ContainsKey(AzureExtensions.PageableExtension);
 
-        public string PagingURL
-        {
-            get
-            {
-                if (this.Extensions.ContainsKey("nextLinkURL"))
-                {
-                    return this.Extensions["nextLinkURL"] as string;
-                }
-                return null;
-            }
-        }
+        public string PagingURL { get; set; }
 
-        public IEnumerable<Parameter> PagingParameters
-        {
-            get
-            {
-                if (this.Extensions.ContainsKey("nextLinkParameters"))
-                {
-                    return this.Extensions["nextLinkParameters"] as IEnumerable<Parameter>;
-                }
-                return null;
-            }
-        }
+        public IEnumerable<Parameter> PagingParameters { get; set; }
 
         public string PagedResponseClassName
         {
@@ -72,9 +37,9 @@ namespace AutoRest.Python.Azure.TemplateModels
             }
         }
 
-        public string ClientRequestIdString { get; private set; }
+        public string ClientRequestIdString => AzureExtensions.GetClientRequestIdString(this);
 
-        public string RequestIdString { get; private set; }
+        public string RequestIdString => AzureExtensions.GetRequestIdString(this);
 
         /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.

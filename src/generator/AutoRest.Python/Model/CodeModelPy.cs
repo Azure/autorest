@@ -5,60 +5,45 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using System.Runtime.CompilerServices;
+using AutoRest.Core;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
+using Newtonsoft.Json;
 
-namespace AutoRest.Python.TemplateModels
+namespace AutoRest.Python.Model
 {
-    public class ServiceClientTemplateModel : ServiceClient
+    public class CodeModelPy : CodeModel
     {
-        public ServiceClientTemplateModel(ServiceClient serviceClient)
+        public CodeModelPy()
         {
-            this.LoadFrom(serviceClient);
-            MethodTemplateModels = new List<MethodTemplateModel>();
-            ModelTemplateModels = new List<ModelTemplateModel>();
-            Methods.Where(m => m.Group == null)
-                .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
-
-            ModelTypes.ForEach(m => ModelTemplateModels.Add(new ModelTemplateModel(m, serviceClient)));
-            ServiceClient = serviceClient;
-            this.Version = this.ApiVersion;
-
-            this.HasAnyModel = false;
-            if (ModelTemplateModels.Any())
-            {
-                this.HasAnyModel = true;
-            }
-            ConstantProperties = Properties.Where(p => p.IsConstant).ToList();
-            Properties.RemoveAll(p => ConstantProperties.Contains(p));
-            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
+            // todo: properties is expected to be just the non-constant properties.
+            // Properties.RemoveAll(p => ConstantProperties.Contains(p));
         }
 
-        public bool IsCustomBaseUri { get; private set; }
+        [JsonIgnore]
+        public bool IsCustomBaseUri => Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
 
-        public List<Property> ConstantProperties { get; set; }
+        [JsonIgnore]
+        public IEnumerable<Property> ConstantProperties => Properties.Where(p => p.IsConstant);
 
-        public ServiceClient ServiceClient { get; set; }
+        [JsonIgnore]
+        public IEnumerable<MethodPy> MethodTemplateModels => Methods.Cast<MethodPy>();
 
-        public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
+        [JsonIgnore]
+        public IEnumerable<CompositeTypePy> ModelTemplateModels => ModelTypes.Cast<CompositeTypePy>();
 
-        public List<ModelTemplateModel> ModelTemplateModels { get; private set; }
-
-        public virtual IEnumerable<MethodGroupTemplateModel> MethodGroupModels
-        {
-            get
-            {
-                return MethodGroups.Select(mg => new MethodGroupTemplateModel(this, mg));
-            }
-        }
+        [JsonIgnore]
+        public virtual IEnumerable<MethodGroupPy> MethodGroupModels => Operations.Cast<MethodGroupPy>().Where( each => !each.IsCodeModelMethodGroup);
+        
 
         public string PolymorphicDictionary
         {
             get
             {
                 IndentedStringBuilder builder = new IndentedStringBuilder(IndentedStringBuilder.TwoSpaces);
-                var polymorphicTypes = ModelTemplateModels.Where(m => m.IsPolymorphic);
+                var polymorphicTypes = ModelTemplateModels.Where(m => m.BaseIsPolymorphic);
 
                 for (int i = 0; i < polymorphicTypes.Count(); i++ )
                 {
@@ -85,17 +70,17 @@ namespace AutoRest.Python.TemplateModels
         {
             get
             {
-                var parameters = this.Properties.OrderBy(item => !item.IsRequired);
+                var parameters = this.Properties.Where( each => !each.IsConstant).OrderBy(item => !item.IsRequired);
                 var requireParams = new List<string>();
                 foreach (var property in parameters)
                 {
                     if (property.IsRequired)
                     {
-                        requireParams.Add(property.Name.ToPythonCase());
+                        requireParams.Add(property.Name);
                     }
                     else
                     {
-                        requireParams.Add(string.Format(CultureInfo.InvariantCulture, "{0}=None", property.Name.ToPythonCase()));
+                        requireParams.Add(string.Format(CultureInfo.InvariantCulture, "{0}=None", property.Name));
                     }
                 }
                 //requireParams.Add("baseUri");
@@ -112,11 +97,11 @@ namespace AutoRest.Python.TemplateModels
         {
             get
             {
-                var parameters = this.Properties.OrderBy(item => !item.IsRequired);
+                var parameters = this.Properties.Where(each => !each.IsConstant).OrderBy(item => !item.IsRequired);
                 var configParams = new List<string>();
                 foreach (var property in parameters)
                 {
-                    configParams.Add(property.Name.ToPythonCase());
+                    configParams.Add(property.Name);
                 }
                 var param = string.Join(", ", configParams);
                 if (!param.IsNullOrEmpty())
@@ -136,32 +121,32 @@ namespace AutoRest.Python.TemplateModels
             get
             {
                 var builder = new IndentedStringBuilder("    ");
-                foreach (var property in this.Properties)
+                foreach (var property in this.Properties.Where( each => !each.IsConstant ))
                 {
                     if (property.IsRequired)
                     {
                         builder.
-                            AppendFormat("if {0} is None:", property.Name.ToPythonCase()).AppendLine().
+                            AppendFormat("if {0} is None:", property.Name).AppendLine().
                             Indent().
-                                AppendLine(string.Format(CultureInfo.InvariantCulture, "raise ValueError(\"Parameter '{0}' must not be None.\")", property.Name.ToPythonCase())).
+                                AppendLine(string.Format(CultureInfo.InvariantCulture, "raise ValueError(\"Parameter '{0}' must not be None.\")", property.Name)).
                             Outdent();
-                        if (property.Type.IsPrimaryType(KnownPrimaryType.String))
+                        if (property.ModelType.IsPrimaryType(KnownPrimaryType.String))
                         {
                             builder.
-                                AppendFormat("if not isinstance({0}, str):", property.Name.ToPythonCase()).AppendLine().
+                                AppendFormat("if not isinstance({0}, str):", property.Name).AppendLine().
                                 Indent().
-                                    AppendLine(string.Format(CultureInfo.InvariantCulture, "raise TypeError(\"Parameter '{0}' must be str.\")", property.Name.ToPythonCase())).
+                                    AppendLine(string.Format(CultureInfo.InvariantCulture, "raise TypeError(\"Parameter '{0}' must be str.\")", property.Name)).
                                 Outdent();
                         }
                     }
                     else
                     {
-                        if (property.Type.IsPrimaryType(KnownPrimaryType.String))
+                        if (property.ModelType.IsPrimaryType(KnownPrimaryType.String))
                         {
                             builder.
-                                AppendFormat("if {0} is not None and not isinstance({0}, str):", property.Name.ToPythonCase()).AppendLine().
+                                AppendFormat("if {0} is not None and not isinstance({0}, str):", property.Name).AppendLine().
                                 Indent().
-                                    AppendLine(string.Format(CultureInfo.InvariantCulture, "raise TypeError(\"Optional parameter '{0}' must be str.\")", property.Name.ToPythonCase())).
+                                    AppendLine(string.Format(CultureInfo.InvariantCulture, "raise TypeError(\"Optional parameter '{0}' must be str.\")", property.Name)).
                                 Outdent();
                         }
 
@@ -173,41 +158,18 @@ namespace AutoRest.Python.TemplateModels
             }
         }
 
-        public virtual string UserAgent
-        {
-            get
-            {
-                return PackageName;
-            }
-        }
+        public virtual string UserAgent => PackageName;
 
-        public virtual string SetupRequires
-        {
-            get
-            {
-                return "\"msrest>=0.2.0\"";
-            }
-        }
-       
-        public virtual string CredentialObject
-        {
-            get
-            {
-                return "A msrest Authentication object<msrest.authentication>";
-            }
-        }
+        public virtual string SetupRequires => @"""msrest>=0.2.0""";
+        
 
-        public string Version { get; set; }
+        public string Version => Settings.Instance.PackageVersion.Else(ApiVersion);
 
-        public bool HasAnyModel { get; protected set; }
+        public virtual bool HasAnyModel => ModelTemplateModels.Any();
 
-        public string PackageName
-        {
-            get
-            {
-                return this.Name.ToPythonCase().Replace("_", "");
-            }
-        }
+        public string PackageName => Name.ToPythonCase().Replace("_", "");
+
+        public string modelNamespace => Namespace.Else(Name.ToPythonCase());
 
         public string ServiceDocument
         {
@@ -266,59 +228,31 @@ namespace AutoRest.Python.TemplateModels
         /// <param name="type">Parameter type to be documented</param>
         /// <returns>Parameter name in the correct jsdoc notation</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        public string GetPropertyDocumentationType(IType type)
+        public string GetPropertyDocumentationType(IModelType type)
         {
-            if (type == null)
-            {
-                throw new ArgumentNullException("type");
-            }
-
-            var modelNamespace = ServiceClient.Name.ToPythonCase();
-            if (!ServiceClient.Namespace.IsNullOrEmpty())
-                modelNamespace = ServiceClient.Namespace;
-
-            string result = "object";
-            var primaryType = type as PrimaryType;
-            var listType = type as SequenceType;
-            if (primaryType != null)
-            {
-                if (primaryType.Type == KnownPrimaryType.Credentials)
-                {
-                    result = string.Format(CultureInfo.InvariantCulture, ":mod:`{0}`", CredentialObject);
-                }
-                else
-                {
-                    result = type.Name;
-                }
-            }
-            else if (listType != null)
-            {
-                result = string.Format(CultureInfo.InvariantCulture, "list of {0}", GetPropertyDocumentationType(listType.ElementType));
-            }
-            else if (type is EnumType)
-            {
-                result = string.Format(CultureInfo.InvariantCulture, "str or :class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
-            }
-            else if (type is DictionaryType)
-            {
-                result = "dict";
-            }
-            else if (type is CompositeType)
-            {
-                result = string.Format(CultureInfo.InvariantCulture, ":class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
-            }
-
-            return result;
+            return (type as IExtendedModelTypePy)?.TypeDocumentation ?? PythonConstants.None;
         }
 
-        public virtual bool NeedsExtraImport
-        {
-            get { return false; }
-        }
+        public virtual bool NeedsExtraImport => false;
 
-        public bool HasAnyDefaultExceptions
+        public bool HasAnyDefaultExceptions => MethodTemplateModels.Any(item => item.DefaultResponse.Body == null);
+
+        public virtual string GetExceptionNameIfExist(IModelType type, bool needsQuote)
         {
-            get { return this.MethodTemplateModels.Any(item => item.DefaultResponse.Body == null); }
+            CompositeType compType = type as CompositeType;
+            if (compType != null)
+            {
+                if (ErrorTypes.Contains(compType))
+                {
+                    if (needsQuote)
+                    {
+                        return ", '" + compType.GetExceptionDefineType() + "'";
+                    }
+                    return ", " + compType.GetExceptionDefineType();
+                }
+            }
+
+            return string.Empty;
         }
     }
 }

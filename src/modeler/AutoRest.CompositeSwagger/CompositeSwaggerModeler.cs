@@ -247,7 +247,143 @@ namespace AutoRest.CompositeSwagger
                 }
             }
 
+
+            // make sure that properties and parameters are using the types from the new model
+            // and not the types from the original.
+            foreach (var property in compositeClient.Properties)
+            {
+                EnsureUsesTypeFromModel(property, compositeClient);
+            }
+            foreach (var method in compositeClient.Methods)
+            {
+                foreach (var parameter in method.Parameters)
+                {
+                    EnsureUsesTypeFromModel(parameter, compositeClient);
+                }
+
+                method.ReturnType.Body = EnsureUsesTypeFromModel(method.ReturnType.Body, compositeClient);
+                method.ReturnType.Headers = EnsureUsesTypeFromModel(method.ReturnType.Headers, compositeClient);
+            }
+            foreach (var modelType in compositeClient.ModelTypes)
+            {
+                foreach (var property in modelType.Properties)
+                {
+                    EnsureUsesTypeFromModel(property, compositeClient);
+                }
+            }
+
             return compositeClient;
+        }
+
+        private static void EnsureUsesTypeFromModel(IVariable variable, CodeModel compositeClient)
+        {
+            if (variable.ModelType == null)
+            {
+                return;
+            }
+            if (variable.ModelType is EnumType)
+            {
+                variable.ModelType = FindEnumType((EnumType) variable.ModelType,compositeClient);
+            }
+            if (variable.ModelType is CompositeType)
+            {
+                variable.ModelType = FindCompositeType((CompositeType)variable.ModelType, compositeClient);
+            }
+            if (variable.ModelType is SequenceType)
+            {
+                var st = (SequenceType)variable.ModelType;
+                if (st.ElementType is EnumType)
+                {
+                    st.ElementType = FindEnumType((EnumType)st.ElementType, compositeClient);
+                }
+                if (st.ElementType is CompositeType)
+                {
+                    st.ElementType = FindCompositeType((CompositeType)st.ElementType, compositeClient);
+                }
+            }
+            if (variable.ModelType is DictionaryType)
+            {
+                var dt = (DictionaryType)variable.ModelType;
+                if (dt.ValueType is EnumType)
+                {
+                    dt.ValueType  = FindEnumType((EnumType)dt.ValueType, compositeClient);
+                }
+                if (dt.ValueType is CompositeType)
+                {
+                    dt.ValueType = FindCompositeType((CompositeType)dt.ValueType, compositeClient);
+                }
+            }
+        }
+
+        private static IModelType EnsureUsesTypeFromModel(IModelType modelType, CodeModel compositeClient)
+        {
+            if (modelType == null)
+            {
+                return modelType;
+            }
+            if (modelType is EnumType)
+            {
+                return FindEnumType((EnumType)modelType, compositeClient);
+            }
+            if (modelType is CompositeType)
+            {
+                return FindCompositeType((CompositeType)modelType, compositeClient);
+            }
+            if (modelType is SequenceType)
+            {
+                var st = (SequenceType)modelType;
+                if (st.ElementType is EnumType)
+                {
+                    st.ElementType = FindEnumType((EnumType)st.ElementType, compositeClient);
+                }
+                if (st.ElementType is CompositeType)
+                {
+                    st.ElementType = FindCompositeType((CompositeType)st.ElementType, compositeClient);
+                }
+                return st;
+            }
+            if (modelType is DictionaryType)
+            {
+                var dt = (DictionaryType)modelType;
+                if (dt.ValueType is EnumType)
+                {
+                    dt.ValueType = FindEnumType((EnumType)dt.ValueType, compositeClient);
+                }
+                if (dt.ValueType is CompositeType)
+                {
+                    dt.ValueType = FindCompositeType((CompositeType)dt.ValueType, compositeClient);
+                }
+                return dt;
+            }
+            return modelType;
+        }
+
+        private static CompositeType FindCompositeType(CompositeType ct, CodeModel compositeClient)
+        {
+            if (ct != null && !ct.Name.IsNullOrEmpty())
+            {
+                // if this has a name, then make sure it's in the model
+                if (!compositeClient.ModelTypes.Any(each => ReferenceEquals(each, ct)))
+                {
+                    // otherwise find the correct one in the model.
+                    return compositeClient.ModelTypes.Single(each => each.Name == ct.Name);
+                }
+            }
+            return ct;
+        }
+
+        private static EnumType FindEnumType(EnumType et, CodeModel compositeClient)
+        {
+            if (et != null && !et.Name.IsNullOrEmpty())
+            {
+                // if this has a name, then make sure it's in the model
+                if (!compositeClient.EnumTypes.Any(each => ReferenceEquals(each, et)))
+                {
+                    // otherwise find the correct one in the model.
+                    return compositeClient.EnumTypes.Single(each => each.Name == et.Name);
+                }
+            }
+            return et;
         }
 
         private static void AssertJsonEquals<T>(T compositeParam, T subParam)

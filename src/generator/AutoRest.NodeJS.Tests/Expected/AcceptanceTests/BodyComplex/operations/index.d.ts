@@ -796,7 +796,7 @@ export interface Polymorphism {
      * 
      * @param {array} [complexBody.siblings]
      * 
-     * @param {string} complexBody.fishtype Polymorhpic Discriminator
+     * @param {string} complexBody.fishtype Polymorphic Discriminator
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -847,7 +847,7 @@ export interface Polymorphism {
      * 
      * @param {array} [complexBody.siblings]
      * 
-     * @param {string} complexBody.fishtype Polymorhpic Discriminator
+     * @param {string} complexBody.fishtype Polymorphic Discriminator
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -946,7 +946,7 @@ export interface Polymorphicrecursive {
      * 
      * @param {array} [complexBody.siblings]
      * 
-     * @param {string} complexBody.fishtype Polymorhpic Discriminator
+     * @param {string} complexBody.fishtype Polymorphic Discriminator
      * 
      * @param {object} [options] Optional Parameters.
      * 

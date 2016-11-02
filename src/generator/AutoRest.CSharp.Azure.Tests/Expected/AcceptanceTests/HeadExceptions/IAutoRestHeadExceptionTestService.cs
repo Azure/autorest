@@ -16,7 +16,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
     /// </summary>
     public partial interface IAutoRestHeadExceptionTestService : System.IDisposable
     {
-        /// <summary>   
+        /// <summary>
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

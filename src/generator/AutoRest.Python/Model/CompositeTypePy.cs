@@ -3,96 +3,77 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using Newtonsoft.Json;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.Python.TemplateModels
+namespace AutoRest.Python.Model
 {
-    public class ModelTemplateModel : CompositeType
+    public class CompositeTypePy : CompositeType, IExtendedModelTypePy
     {
-        private ModelTemplateModel _parent = null;
-        private bool _isException = false;
+        private CompositeTypePy _parent => BaseModelType as CompositeTypePy;
+        
         private readonly IList<CompositeType> _subModelTypes = new List<CompositeType>();
         
-        public ModelTemplateModel(CompositeType source, ServiceClient serviceClient)
+        protected CompositeTypePy()
         {
-            if (!string.IsNullOrEmpty(source.PolymorphicDiscriminator))
-            {
-                if (!source.Properties.Any(p => p.Name == source.PolymorphicDiscriminator))
-                {
-                    var polymorphicProperty = new Property
-                    {
-                        IsRequired = true,
-                        Name = source.PolymorphicDiscriminator,
-                        SerializedName = source.PolymorphicDiscriminator,
-                        Documentation = "Polymorphic Discriminator",
-                        Type = new PrimaryType(KnownPrimaryType.String) { Name = "str" }
-                    };
-                    source.Properties.Add(polymorphicProperty);
-                }
-            }
-            this.LoadFrom(source);
-            ServiceClient = serviceClient;
+        }
+
+        protected CompositeTypePy(string name) : base(name)
+        {
             
-            if (ServiceClient.ErrorTypes.Contains(source))
-            {
-                _isException = true;
-            }
-
-            if (source.BaseModelType != null)
-            {
-                _parent = new ModelTemplateModel(source.BaseModelType, serviceClient);
-            }
-
-            foreach (var property in ComposedProperties)
-            {
-                if (string.IsNullOrWhiteSpace(property.DefaultValue))
-                {
-                    property.DefaultValue = PythonConstants.None;
-                }
-            }
-
-            if (this.IsPolymorphic)
-            {
-                foreach (var modelType in ServiceClient.ModelTypes)
-                {
-                    if (modelType.BaseModelType == source)
-                    {
-                        _subModelTypes.Add(modelType);
-                    }
-                }
-            }
         }
 
-        public IList<CompositeType> SubModelTypes
+        public override Property Add(Property item)
         {
-            get
+            var result = base.Add(item);
+            if (result != null)
             {
-                return _subModelTypes;
+                AddPolymorphicPropertyIfNecessary();
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Gets or sets the discriminator property for polymorphic types.
+        /// </summary>
+        public override string PolymorphicDiscriminator
+        {
+            get { return base.PolymorphicDiscriminator; }
+            set
+            {
+                base.PolymorphicDiscriminator = value;
+                AddPolymorphicPropertyIfNecessary();
             }
         }
 
-        public bool IsException
+        /// <summary>
+        /// If PolymorphicDiscriminator is set, makes sure we have a PolymorphicDiscriminator property.
+        /// </summary>
+        private void AddPolymorphicPropertyIfNecessary()
         {
-            get { return _isException; }
-        }
-
-        public bool IsParameterGroup
-        {
-            get
+            if (!string.IsNullOrEmpty(PolymorphicDiscriminator) && Properties.All(p => p.Name != PolymorphicDiscriminator))
             {
-                foreach (var prop in this.Properties)
+                base.Add(New<Property>(new
                 {
-                    if (prop.SerializedName != null)
-                    {
-                        return false;
-                    }
-                }
-                return true;
+                    IsRequired = true,
+                    Name = PolymorphicDiscriminator,
+                    SerializedName = PolymorphicDiscriminator,
+                    Documentation = "Polymorphic Discriminator",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.String)
+                }));
             }
         }
+
+        public IEnumerable<CompositeType> SubModelTypes => BaseIsPolymorphic?  CodeModel.ModelTypes.Where(each => ReferenceEquals(this, each.BaseModelType) ) : Enumerable.Empty<CompositeType>();
+
+        public bool IsException => CodeModel.ErrorTypes.Contains(this);
+
+        public bool IsParameterGroup => Properties.All(prop => prop.SerializedName == null);
 
         public IList<string> Validators
         {
@@ -126,8 +107,6 @@ namespace AutoRest.Python.TemplateModels
                 return validators;
             }
         }
-
-        public ServiceClient ServiceClient { get; set; }
 
         private static List<string> BuildValidationParameters(Dictionary<Constraint, string> constraints)
         {
@@ -178,27 +157,7 @@ namespace AutoRest.Python.TemplateModels
 
         }
 
-        public bool IsPolymorphic
-        {
-            get
-            {
-                if(!string.IsNullOrEmpty(this.PolymorphicDiscriminator))
-                {
-                    return true;
-                }
-                else if(this._parent != null)
-                {
-                    return _parent.IsPolymorphic;
-                }
-
-                return false;
-            }
-        }
-
-        public bool HasParent
-        {
-            get { return this._parent != null; }
-        }
+        public bool HasParent => _parent != null;
 
         public bool NeedsConstructor
         {
@@ -209,21 +168,19 @@ namespace AutoRest.Python.TemplateModels
                 {
                     return true;
                 }
-                else
-                {
-                    return (HasParent || NeedsPolymorphicConverter);
-                }
+
+                return (HasParent || NeedsPolymorphicConverter);
             }
         }
 
         public string BuildSummaryAndDescriptionString()
         {
-            string summaryString = string.IsNullOrWhiteSpace(this.Summary) &&
-                                   string.IsNullOrWhiteSpace(this.Documentation)
-                ? this.Name
-                : this.Summary;
+            string summaryString = string.IsNullOrWhiteSpace(Summary) &&
+                                   string.IsNullOrWhiteSpace(Documentation)
+                ? (string)Name
+                : Summary;
 
-            return PythonCodeGenerator.BuildSummaryAndDescriptionString(summaryString, this.Documentation);
+            return CodeGeneratorPy.BuildSummaryAndDescriptionString(summaryString, Documentation);
         }
 
         /// <summary>
@@ -250,10 +207,10 @@ namespace AutoRest.Python.TemplateModels
                 summary += ".";
             }
 
-            string documentation = property.Documentation;
-            if (property.DefaultValue != PythonConstants.None)
+            string documentation = property.Documentation.Else(string.Empty);
+            if (!property.DefaultValue.EqualsIgnoreCase(PythonConstants.None) )
             {
-                if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))
+                if (!string.IsNullOrEmpty(documentation) && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))
                 {
                     documentation += ".";
                 }
@@ -301,16 +258,16 @@ namespace AutoRest.Python.TemplateModels
             }
         }
 
-        public IDictionary<string, IType> ComplexConstants
+        public IDictionary<string, IModelType> ComplexConstants
         {
             get
             {
-                Dictionary<string, IType> complexConstant = new Dictionary<string, IType> ();
+                Dictionary<string, IModelType> complexConstant = new Dictionary<string, IModelType> ();
                 foreach (var property in Properties)
                 {
                     if (property.IsConstant)
                     {
-                        CompositeType compType = property.Type as CompositeType;
+                        CompositeType compType = property.ModelType as CompositeType;
                         if (compType != null)
                         {
                             complexConstant[property.Name] = compType;
@@ -325,11 +282,8 @@ namespace AutoRest.Python.TemplateModels
         {
             List<string> combinedDeclarations = new List<string>();
 
-            foreach (var property in ComposedProperties.Except(Properties).Except(ReadOnlyAttributes))
+            foreach (var property in ComposedProperties.Except(Properties).Except(ReadOnlyAttributes).Where( each =>!each.IsPolymorphicDiscriminator))
             {
-                if (this.IsPolymorphic)
-                    if (property.Name == this.BasePolymorphicDiscriminator)
-                        continue;
                 combinedDeclarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}={0}", property.Name));
             }
             return string.Join(", ", combinedDeclarations);
@@ -341,19 +295,19 @@ namespace AutoRest.Python.TemplateModels
             List<string> requiredDeclarations = new List<string>();
             List<string> combinedDeclarations = new List<string>();
 
-            foreach (var property in ComposedProperties.Except(ReadOnlyAttributes))
+            foreach (var property in ComposedProperties.Except(ReadOnlyAttributes).Where(each => !each.IsPolymorphicDiscriminator))
             {
-                if (this.IsPolymorphic)
+                if (this.BaseIsPolymorphic)
                     if (property.Name == this.BasePolymorphicDiscriminator)
                         continue;
 
-                if (property.IsRequired && property.DefaultValue == PythonConstants.None)
+                if (property.IsRequired && property.DefaultValue.RawValue.IsNullOrEmpty())
                 {
                     requiredDeclarations.Add(property.Name);
                 }
                 else
                 {
-                    declarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}={1}", property.Name, property.DefaultValue));
+                    declarations.Add($"{property.Name}={property.DefaultValue}");
                 }
             }
 
@@ -371,24 +325,6 @@ namespace AutoRest.Python.TemplateModels
                 return string.Empty;
             }
             return ", " + string.Join(", ", combinedDeclarations);
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "PolymorphicDiscriminator")]
-        public string BasePolymorphicDiscriminator
-        {
-            get
-            {
-                CompositeType type = this;
-                while (type != null)
-                {
-                    if (!string.IsNullOrEmpty(type.PolymorphicDiscriminator))
-                    {
-                        return type.PolymorphicDiscriminator;
-                    }
-                    type = type.BaseModelType;
-                }
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "No PolymorphicDiscriminator defined for type {0}", this.Name));
-            }
         }
 
         public string SubModelTypeList
@@ -418,7 +354,7 @@ namespace AutoRest.Python.TemplateModels
 
         public virtual string InitializeProperty(Property modelProperty)
         {
-            if (modelProperty == null || modelProperty.Type == null)
+            if (modelProperty == null || modelProperty.ModelType == null)
             {
                 throw new ArgumentNullException("modelProperty");
             }
@@ -427,12 +363,12 @@ namespace AutoRest.Python.TemplateModels
             return string.Format(CultureInfo.InvariantCulture,
                 "'{0}': {{'key': '{1}', 'type': '{2}'}},",
                 modelProperty.Name, modelProperty.SerializedName,
-                ClientModelExtensions.GetPythonSerializationType(modelProperty.Type));
+                ClientModelExtensions.GetPythonSerializationType(modelProperty.ModelType));
         }
 
         public string InitializeProperty(string objectName, Property property)
         {
-            if (property == null || property.Type == null)
+            if (property == null || property.ModelType == null)
             {
                 throw new ArgumentNullException("property");
             }
@@ -444,30 +380,21 @@ namespace AutoRest.Python.TemplateModels
             {
                 if (ComplexConstants.ContainsKey(property.Name))
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0} = {1}()", property.Name, property.Type.Name);
+                    return string.Format(CultureInfo.InvariantCulture, "{0} = {1}()", property.Name, property.ModelTypeName);
                 }
                 else
                 {
                     return string.Format(CultureInfo.InvariantCulture, "{0} = {1}", property.Name, property.DefaultValue);
                 }
             }
-            if (IsPolymorphic)
+            if (BaseIsPolymorphic && property.IsPolymorphicDiscriminator)
             {
-                if (property.Name == this.BasePolymorphicDiscriminator)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = None", objectName, property.Name);
-                }
+                return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = None", objectName, property.Name);
             }
             return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = {1}", objectName, property.Name);
         }
 
-        public bool NeedsPolymorphicConverter
-        {
-            get
-            {
-                return this.IsPolymorphic && BaseModelType != null;
-            }
-        }
+        public bool NeedsPolymorphicConverter => BaseIsPolymorphic && BaseModelType != null;
 
         /// <summary>
         /// Provides the type of the modelProperty
@@ -475,41 +402,22 @@ namespace AutoRest.Python.TemplateModels
         /// <param name="type">Parameter type to be documented</param>
         /// <returns>Parameter name in the correct jsdoc notation</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        public string GetPropertyDocumentationType(IType type)
+        public string GetPropertyDocumentationType(IModelType type)
         {
-            if (type == null)
+            // todo: fix the glitch where some model types don't have their parent reference set correctly
+            if (type.Parent == null && (type is CompositeTypePy))
             {
-                throw new ArgumentNullException("type");
+                ((CompositeTypePy)type).CodeModel = CodeModel;
+            }
+            if (type.Parent == null && (type is EnumTypePy))
+            {
+                ((EnumTypePy)type).CodeModel = CodeModel;
             }
 
-            string result = "object";
-            var modelNamespace = ServiceClient.Name.ToPythonCase();
-            if (!ServiceClient.Namespace.IsNullOrEmpty())
-                modelNamespace = ServiceClient.Namespace;
+            return (type as IExtendedModelTypePy)?.TypeDocumentation ?? PythonConstants.None;
+        }
 
-            var listType = type as SequenceType;
-            if (type is PrimaryType)
-            {
-                result = type.Name;
-            }
-            else if (listType != null)
-            {
-                result = string.Format(CultureInfo.InvariantCulture, "list of {0}", GetPropertyDocumentationType(listType.ElementType));
-            }
-            else if (type is EnumType)
-            {
-                result = string.Format(CultureInfo.InvariantCulture, "str or :class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
-            }
-            else if (type is DictionaryType)
-            {
-                result = "dict";
-            }
-            else if (type is CompositeType)
-            {
-                result = string.Format(CultureInfo.InvariantCulture, ":class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
-            }
-
-            return result;
-       }
+        public string TypeDocumentation =>       $":class:`{Name} <{((CodeModelPy)CodeModel)?.modelNamespace}.models.{Name}>`";
+        public string ReturnTypeDocumentation => $":class:`{Name} <{((CodeModelPy)CodeModel)?.modelNamespace}.models.{Name}>`";
     }
 }

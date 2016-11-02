@@ -62,15 +62,28 @@ namespace AutoRest.CSharp.Unit.Tests
             return false;
         }
 
-        internal void InspectWithFavoriteCodeEditor(string folder, FileLinePositionSpan span)
+        internal void ShowGeneratedCode(IFileSystem fileSystem)
         {
-            // when working locally on windows we can pop up vs code to see if the code failure.
-            if (!StartVsCode(
-                folder,
-                "-g",
-                $"{Path.Combine(folder, span.Path)}:{span.StartLinePosition.Line + 1}:{span.StartLinePosition.Character + 1}"))
+            InspectWithFavoriteCodeEditor(fileSystem.SaveFilesToTemp(GetType().Name));
+        }
+
+        internal void InspectWithFavoriteCodeEditor(string folder, FileLinePositionSpan? span = null)
+        {
+            if (span != null)
             {
-                // todo: add code here to try another editor?
+                FileLinePositionSpan s = (FileLinePositionSpan)span;
+                // when working locally on windows we can pop up vs code to see if the code failure.
+                if (!StartVsCode(
+                    folder,
+                    "-g",
+                    $"{Path.Combine(folder, s.Path)}:{s.StartLinePosition.Line + 1}:{s.StartLinePosition.Character + 1}"))
+                {
+                    // todo: add code here to try another editor?
+                }
+            }
+            else
+            {
+                StartVsCode(folder);
             }
         }
         public BugTest(ITestOutputHelper output)

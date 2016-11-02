@@ -24,7 +24,7 @@ var util = require('util');
  * 
  * @member {array} [siblings]
  * 
- * @member {string} fishtype Polymorhpic Discriminator
+ * @member {string} fishtype Polymorphic Discriminator
  * 
  */
 function Fish() {

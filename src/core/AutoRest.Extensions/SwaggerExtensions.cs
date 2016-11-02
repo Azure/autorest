@@ -325,14 +325,13 @@ namespace AutoRest.Extensions
             {
                 basePath = "";
             }
-
-            basePath = basePath.Replace(".", "\\\\.");
+       
             string propertyName = property.SerializedName;
             if (escapePropertyName)
             {
                 propertyName = propertyName.Replace(".", "\\\\.");
             }
-            property.SerializedName = basePath + "." + propertyName;
+            property.SerializedName.FixedValue = basePath + "." + propertyName;
             return property;
         }
 

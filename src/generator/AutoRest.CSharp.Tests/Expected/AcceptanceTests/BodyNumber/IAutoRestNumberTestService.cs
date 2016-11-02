@@ -15,7 +15,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
     /// </summary>
     public partial interface IAutoRestNumberTestService : System.IDisposable
     {
-        /// <summary>   
+        /// <summary>
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

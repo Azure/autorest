@@ -246,9 +246,9 @@ namespace AutoRest.Swagger
                 IModelType type = typeStack.Peek();
                 while (!Equals(type, baseType))
                 {
-                    if (type is CompositeType && _swaggerModeler.ExtendedTypes.ContainsKey(type.Name.Value))
+                    if (type is CompositeType && _swaggerModeler.ExtendedTypes.ContainsKey(type.Name.RawValue))
                     {
-                        type = _swaggerModeler.GeneratedTypes[_swaggerModeler.ExtendedTypes[type.Name.Value]];
+                        type = _swaggerModeler.GeneratedTypes[_swaggerModeler.ExtendedTypes[type.Name.RawValue]];
                     }
                     else
                     {
@@ -305,7 +305,7 @@ namespace AutoRest.Swagger
 
         private void VerifyFirstPropertyIsByteArray(CompositeType serviceType)
         {
-            var referenceKey = serviceType.Name;
+            var referenceKey = serviceType.Name.RawValue;
             var responseType = _swaggerModeler.GeneratedTypes[referenceKey];
             var property = responseType.Properties.FirstOrDefault(p => p.ModelType is PrimaryType && ((PrimaryType)p.ModelType).KnownPrimaryType == KnownPrimaryType.ByteArray);
             if (property == null)

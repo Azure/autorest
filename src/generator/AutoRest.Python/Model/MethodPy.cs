@@ -3,89 +3,45 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 
-namespace AutoRest.Python.TemplateModels
+namespace AutoRest.Python.Model
 {
-    public class MethodTemplateModel : Method
+    public class MethodPy : Method
     {
-        public MethodTemplateModel(Method source, ServiceClient serviceClient)
+        public MethodPy()
         {
-            this.LoadFrom(source);
-            ParameterTemplateModels = new List<ParameterTemplateModel>();
-            source.Parameters.ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
-            ServiceClient = serviceClient;
-            if (source.Group != null)
+            Url.OnGet += value =>
             {
-                OperationName = source.Group.ToPascalCase();
-            }
-            else
-            {
-                OperationName = serviceClient.Name;
-            }
-            AddCustomHeader = true;
-            string formatter;
-            foreach (var parameter in LocalParameters)
-            {
-                if (string.IsNullOrWhiteSpace(parameter.DefaultValue))
+                foreach (Match m in Regex.Matches(value, @"\{[\w]+:[\w]+\}"))
                 {
-                    parameter.DefaultValue = PythonConstants.None;
+                    var formatter = m.Value.Split(':').First() + '}';
+                    value = value.Replace(m.Value, formatter);
                 }
-            }
-            foreach (Match m in Regex.Matches(Url, @"\{[\w]+:[\w]+\}"))
-            {
-                formatter = m.Value.Split(':').First() + '}';
-                Url = Url.Replace(m.Value, formatter);
-            }
+                return value;
+            };
         }
 
-        public bool AddCustomHeader { get; private set; }
+
+        public bool AddCustomHeader => true;
 
         public string OperationName { get; set; }
 
-        public ServiceClient ServiceClient { get; set; }
+        public IEnumerable<ParameterPy> ParameterTemplateModels => Parameters.Cast<ParameterPy>();
 
-        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+        public bool IsStreamResponse => this.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream);
 
-        public bool IsStreamResponse
-        {
-            get { return this.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream); }
-        }
+        public bool IsStreamRequestBody => LocalParameters.Any(parameter => 
+            parameter.Location == ParameterLocation.Body && 
+            parameter.ModelType.IsPrimaryType(KnownPrimaryType.Stream));
 
-        public bool IsStreamRequestBody
-        {
-            get
-            {
-                foreach (var parameter in LocalParameters)
-                {
-                    if (parameter.Location == ParameterLocation.Body && parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }
-
-        public bool IsFormData
-        {
-            get
-            {
-                foreach (var parameter in LocalParameters)
-                {
-                    if (parameter.Location == ParameterLocation.FormData)
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }
+        public bool IsFormData => LocalParameters.Any(parameter => parameter.Location == ParameterLocation.FormData);
 
         /// <summary>
         /// Get the predicate to determine of the http operation status code indicates success
@@ -128,16 +84,16 @@ namespace AutoRest.Python.TemplateModels
         {
             get
             {
-                IType body = DefaultResponse.Body;
+                IModelType body = DefaultResponse.Body;
                 if (body == null)
                 {
                     return ":class:`HttpOperationError<msrest.exceptions.HttpOperationError>`";
                 }
                 else
                 {
-                    var modelNamespace = ServiceClient.Name.ToPythonCase();
-                    if (!ServiceClient.Namespace.IsNullOrEmpty())
-                        modelNamespace = ServiceClient.Namespace;
+                    var modelNamespace = CodeModel.Name.ToPythonCase();
+                    if (!CodeModel.Namespace.IsNullOrEmpty())
+                        modelNamespace = CodeModel.Namespace;
                     CompositeType compType = body as CompositeType;
                     if (compType != null)
                     {
@@ -155,7 +111,7 @@ namespace AutoRest.Python.TemplateModels
         {
             get
             {
-                IType body = DefaultResponse.Body;
+                IModelType body = DefaultResponse.Body;
 
                 if (body == null)
                 {
@@ -189,7 +145,7 @@ namespace AutoRest.Python.TemplateModels
 
             foreach (var parameter in DocumentationParameters)
             {
-                if (parameter.IsRequired && parameter.DefaultValue == PythonConstants.None)
+                if (parameter.IsRequired && parameter.DefaultValue.RawValue.IsNullOrEmpty())
                 {
                     requiredDeclarations.Add(parameter.Name);
                 }
@@ -223,11 +179,13 @@ namespace AutoRest.Python.TemplateModels
             return string.Join(", ", combinedDeclarations);
         }
 
-        private static string BuildSerializeDataCall(Parameter parameter, string functionName)
+        private string BuildSerializeDataCall(Parameter parameter, string functionName)
         {
             string divChar = ClientModelExtensions.NeedsFormattedSeparator(parameter);
             string divParameter = string.Empty;
-
+            
+            string parameterName = (MethodGroup as MethodGroupPy)?.ConstantProperties?.FirstOrDefault(each => each.Name.RawValue == parameter.Name.RawValue && each.DefaultValue.RawValue == parameter.DefaultValue.RawValue)?.Name.Else(parameter.Name) ?? parameter.Name;
+            
             if (!string.IsNullOrEmpty(divChar))
             {
                 divParameter = string.Format(CultureInfo.InvariantCulture, ", div='{0}'", divChar);
@@ -237,8 +195,8 @@ namespace AutoRest.Python.TemplateModels
             return string.Format(CultureInfo.InvariantCulture,
                     "self._serialize.{0}(\"{1}\", {1}, '{2}'{3}{4}{5})",
                         functionName,
-                        parameter.Name,
-                        parameter.Type.ToPythonRuntimeTypeString(),
+                        parameterName,
+                        parameter.ModelType.ToPythonRuntimeTypeString(),
                         parameter.SkipUrlEncoding() ? ", skip_quote=True" : string.Empty,
                         divParameter,
                         BuildValidationParameters(parameter.Constraints));
@@ -466,14 +424,14 @@ namespace AutoRest.Python.TemplateModels
 
             foreach (var prop in headersType.Properties)
             {
-                var enumType = prop.Type as EnumType;
-                if (this.ServiceClient.EnumTypes.Contains(prop.Type) && !enumType.ModelAsString)
+                var enumType = prop.ModelType as EnumType;
+                if (CodeModel.EnumTypes.Contains(prop.ModelType) && !enumType.ModelAsString)
                 {
-                    builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': models.{1},", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
+                    builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': models.{1},", prop.SerializedName, prop.ModelType.ToPythonRuntimeTypeString()));
                 }
                 else
                 {
-                    builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': '{1}',", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
+                    builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': '{1}',", prop.SerializedName, prop.ModelType.ToPythonRuntimeTypeString()));
                 }
             }
         }
@@ -481,7 +439,7 @@ namespace AutoRest.Python.TemplateModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "AutoRest.Core.Utilities.IndentedStringBuilder.AppendLine(System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "headerdict")]
         public virtual string AddIndividualResponseHeader(HttpStatusCode? code)
         {
-            IType headersType = null;
+            IModelType headersType = null;
 
             if (HasResponseHeader)
             {
@@ -520,17 +478,17 @@ namespace AutoRest.Python.TemplateModels
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters
         /// </summary>
-        public IEnumerable<ParameterTemplateModel> LocalParameters
+        public IEnumerable<ParameterPy> LocalParameters
         {
             get
             {
                 return ParameterTemplateModels.Where(
-                    p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
+                    p => p != null && !p.IsClientProperty && !string.IsNullOrWhiteSpace(p.Name))
                     .OrderBy(item => !item.IsRequired);
             }
         }
 
-        public IEnumerable<ParameterTemplateModel> DocumentationParameters
+        public IEnumerable<ParameterPy> DocumentationParameters
         {
             get
             {
@@ -538,11 +496,33 @@ namespace AutoRest.Python.TemplateModels
             }
         }
 
-        public IEnumerable<ParameterTemplateModel> ConstantParameters
+        public IEnumerable<ParameterPy> ConstantParameters
         {
             get
             {
-                return this.LocalParameters.Where(p => p.IsConstant && !p.Name.StartsWith("self."));
+                var constantParameters = LocalParameters.Where(p => p.IsConstant && !p.Name.StartsWith("self."));
+
+                if (!constantParameters.Any())
+                {
+                    return constantParameters;
+                }
+
+                var m = MethodGroup as MethodGroupPy;
+                if (m?.ConstantProperties != null)
+                {
+                    if (!m.ConstantProperties.Any())
+                    {
+                        return constantParameters;
+                    }
+
+                    return constantParameters.Where(parameter =>
+                            !m.ConstantProperties.Any(constantProperty =>
+                                constantProperty.Name.RawValue == parameter.Name.RawValue &&
+                                constantProperty.DefaultValue.Value == parameter.DefaultValue.Value)
+                    );
+                }
+
+               return constantParameters;
             }
         }
 
@@ -585,71 +565,20 @@ namespace AutoRest.Python.TemplateModels
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        public string GetDocumentationType(IType type)
+        public string GetReturnTypeDocumentation(IModelType type)
         {
-            if (type == null)
-            {
-                return PythonConstants.None;
-            }
+            return (type as IExtendedModelTypePy)?.ReturnTypeDocumentation ?? PythonConstants.None;
+        }
 
-            string result = "object";
-            var modelNamespace = ServiceClient.Name.ToPythonCase();
-            if (!ServiceClient.Namespace.IsNullOrEmpty())
-                modelNamespace = ServiceClient.Namespace;
-
-            var primaryType = type as PrimaryType;
-            var listType = type as SequenceType;
-            var enumType = type as EnumType;
-            if (primaryType != null)
-            {
-                if (primaryType.Type == KnownPrimaryType.Stream)
-                {
-                    result = "Generator";
-                }
-                else
-                {
-                    result = type.Name.ToLower(CultureInfo.InvariantCulture);
-                }
-            }
-            else if (listType != null)
-            {
-                result = string.Format(CultureInfo.InvariantCulture, "list of {0}", GetDocumentationType(listType.ElementType));
-            }
-            else if (enumType != null)
-            {
-                if (enumType == ReturnType.Body)
-                {
-                    if (enumType.ModelAsString)
-                        result = "str";
-                    else
-                        result = string.Format(CultureInfo.InvariantCulture, ":class:`{0} <{1}.models.{0}>`", enumType.Name, modelNamespace);
-                }
-                else
-                    result = string.Format(CultureInfo.InvariantCulture, "str or :class:`{0} <{1}.models.{0}>`", enumType.Name, modelNamespace);
-            }
-            else if (type is DictionaryType)
-            {
-                result = "dict";
-            }
-            else if (type is CompositeType)
-            {
-                result = string.Format(CultureInfo.InvariantCulture, ":class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
-            }
-
-            return result;
+        public string GetDocumentationType(IModelType type)
+        {
+            return (type as IExtendedModelTypePy)?.TypeDocumentation ?? PythonConstants.None;
         }
 
         /// <summary>
         /// Get the method's request body (or null if there is no request body)
         /// </summary>
-        public ParameterTemplateModel RequestBody
-        {
-            get
-            {
-                return this.Body != null ? new ParameterTemplateModel(this.Body) : null;
-            }
-        }
+        public ParameterPy RequestBody => Body as ParameterPy;
 
         public static string GetStatusCodeReference(HttpStatusCode code)
         {
@@ -679,9 +608,9 @@ namespace AutoRest.Python.TemplateModels
             foreach (var transformation in InputParameterTransformation)
             {
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
-                    transformation.OutputParameter.Type is CompositeType)
+                    transformation.OutputParameter.ModelType is CompositeType)
                 {
-                    var comps = ServiceClient.ModelTypes.Where(x => x.Name == transformation.OutputParameter.Type.Name);
+                    var comps = CodeModel.ModelTypes.Where(x => x.Name == transformation.OutputParameter.ModelTypeName);
                     var composite = comps.First();
 
                     List<string> combinedParams = new List<string>();
@@ -689,6 +618,7 @@ namespace AutoRest.Python.TemplateModels
 
                     foreach (var mapping in transformation.ParameterMappings)
                     {
+                        // var mappedParams = composite.ComposedProperties.Where(x => x.Name.RawValue == mapping.InputParameter.Name.RawValue);
                         var mappedParams = composite.ComposedProperties.Where(x => x.Name == mapping.InputParameter.Name);
                         if (mappedParams.Any())
                         {
@@ -705,7 +635,7 @@ namespace AutoRest.Python.TemplateModels
                     }
                     builder.AppendLine("{0} = models.{1}({2})",
                         transformation.OutputParameter.Name,
-                        transformation.OutputParameter.Type.Name,
+                        transformation.OutputParameter.ModelType.Name,
                         string.Join(", ", combinedParams));
                 }
                 else
@@ -786,7 +716,7 @@ namespace AutoRest.Python.TemplateModels
             get
             {
                 string result = null;
-                IType body = ReturnType.Body;
+                IModelType body = ReturnType.Body;
                 EnumType enumType = body as EnumType;
 
                 if (enumType != null)
@@ -818,7 +748,7 @@ namespace AutoRest.Python.TemplateModels
 
         public string BuildSummaryAndDescriptionString()
         {
-            return PythonCodeGenerator.BuildSummaryAndDescriptionString(this.Summary, this.Description);
+            return CodeGeneratorPy.BuildSummaryAndDescriptionString(this.Summary, this.Description);
         }
     }
 }

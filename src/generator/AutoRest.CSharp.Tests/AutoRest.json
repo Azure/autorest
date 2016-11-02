@@ -15,6 +15,12 @@
         "Azure.NodeJS": {
             "type": "PluginJsa, AutoRest.NodeJS.Azure"
         },
+        "Python": {
+            "type": "PluginPy, AutoRest.Python"
+        },
+        "Azure.Python": {
+            "type": "PluginPya, AutoRest.Python.Azure"
+        },
         "AzureResourceSchema": {
             "type": "PluginArs, AutoRest.AzureResourceSchema"
         }

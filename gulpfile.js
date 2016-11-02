@@ -785,7 +785,6 @@ var xunitNetCoreXproj = [
   'src/core/AutoRest.Core.Tests/project.json',
   'src/core/AutoRest.Extensions.Azure.Tests/project.json',
   'src/core/AutoRest.Extensions.Tests/project.json',
-// Disabling until merged into the new model.    
   'src/generator/AutoRest.AzureResourceSchema.Tests/project.json',
   'src/generator/AutoRest.CSharp.Azure.Tests/project.json',
   'src/generator/AutoRest.CSharp.Tests/project.json',
@@ -883,8 +882,8 @@ gulp.task('test', function(cb){
       'test:ruby:azure',
 //      'test:java',
 //      'test:java:azure',
-//      'test:python',
-//      'test:python:azure',
+      'test:python',
+      'test:python:azure',
 //      'test:go',
       cb);
   } else {
@@ -894,12 +893,12 @@ gulp.task('test', function(cb){
       'test:node:azure',
 // DISABLING TESTS FOR LANGUAGES UNTIL MERGED INTO NEW MODEL    
 // and solve issues with linux building...
-//      'test:ruby',
-//      'test:ruby:azure',
+      'test:ruby',
+      'test:ruby:azure',
 //      'test:java',
 //      'test:java:azure',
-//      'test:python',
-//      'test:python:azure',
+      'test:python',
+      'test:python:azure',
 //      'test:go',
       cb);
   }

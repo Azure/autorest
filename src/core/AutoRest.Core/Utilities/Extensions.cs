@@ -325,7 +325,7 @@ namespace AutoRest.Core.Utilities
 
         private static IEnumerable<PropertyInfo> GetWriteableProperties(this Type type)
         {
-            return type.GetProperties(AnyPropertyFlags)
+            return type.GetProperties(AnyPropertyFlags).Where(each => !each.IsMarked<JsonIgnoreAttribute>())
                     .Select(each => GetWriteableProperty(type, each.Name))
                     .WhereNotNull();
         }

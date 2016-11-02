@@ -17,7 +17,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
     /// </summary>
     public partial interface IAutoRestLongRunningOperationTestService : System.IDisposable
     {
-        /// <summary>   
+        /// <summary>
         /// The base URI of the service.
         /// </summary>
         System.Uri BaseUri { get; set; }

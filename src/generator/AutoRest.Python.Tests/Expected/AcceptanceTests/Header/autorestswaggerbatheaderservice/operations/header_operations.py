@@ -1219,8 +1219,8 @@ class HeaderOperations(object):
         :param scenario: Send a post request with header values "scenario":
          "valid" or "null" or "empty"
         :type scenario: str
-        :param value: Send a post request with header values 'GREY' .
-         Possible values include: 'White', 'black', 'GREY'
+        :param value: Send a post request with header values 'GREY'. Possible
+         values include: 'White', 'black', 'GREY'
         :type value: str or :class:`GreyscaleColors
          <Fixtures.AcceptanceTestsHeader.models.GreyscaleColors>`
         :param dict custom_headers: headers that will be added to the request

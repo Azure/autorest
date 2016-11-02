@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Linq;
 using AutoRest.Core.Model;
@@ -699,7 +700,7 @@ namespace AutoRest.Ruby
             builder.AppendLine("type: {").Indent()
                 .AppendLine("name: 'Composite',");
 
-            if (composite.PolymorphicDiscriminator != null)
+            if (composite.IsPolymorphic)
             {
                 builder.AppendLine("polymorphic_discriminator: '{0}',", composite.PolymorphicDiscriminator);
                 var polymorphicType = composite;
@@ -717,12 +718,11 @@ namespace AutoRest.Ruby
             {
                 builder.AppendLine("class_name: '{0}',", composite.Name)
                        .AppendLine("model_properties: {").Indent();
-                var composedPropertyList =
-                    new List<Property>(
-                        composite.ComposedProperties.Where(each =>
-                                each.SerializedName.IsNullOrEmpty() || 
-                                composite.PolymorphicDiscriminator.IsNullOrEmpty() ||
-                                each.SerializedName != composite.PolymorphicDiscriminator ));
+
+                // if the type is the base type, it doesn't get the the polymorphic discriminator here
+                var composedPropertyList = composite.IsPolymorphic ? 
+                    new List<Property>(composite.ComposedProperties.Where(each => !each.IsPolymorphicDiscriminator)) :
+                    new List<Property>(composite.ComposedProperties);
 
                 for (var i = 0; i < composedPropertyList.Count; i++)
                 {

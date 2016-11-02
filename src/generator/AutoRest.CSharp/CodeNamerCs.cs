@@ -43,15 +43,27 @@ namespace AutoRest.CSharp
                 });
         }
 
-        public override string GetUnique(string desiredName, IIdentifier whoIsAsking,
-            IEnumerable<IIdentifier> reservedNames, IEnumerable<IIdentifier> siblingNames,
-            HashSet<string> locallyReservedNames = null)
+        /// <summary>
+        /// Returns true when the name comparison is a special case and should not 
+        /// be used to determine name conflicts.
+        ///  </summary>
+        /// <param name="whoIsAsking">the identifier that is checking to see if there is a conflict</param>
+        /// <param name="reservedName">the identifier that would normally be reserved.</param>
+        /// <returns></returns>
+        public override bool IsSpecialCase(IIdentifier whoIsAsking, IIdentifier reservedName)
         {
-            if (whoIsAsking is Property)
+            if (whoIsAsking is Property && reservedName is CompositeType)
             {
-                reservedNames = reservedNames.Where(each => !(each is CompositeType));
+                var parent = (whoIsAsking as IChild)?.Parent as IIdentifier;
+                if (ReferenceEquals(parent, reservedName))
+                {
+                    return false;
+                }
+                // special case: properties can have the same name as a compositetype
+                // unless it is the same name as a parent.
+                return true;
             }
-            return base.GetUnique(desiredName, whoIsAsking, reservedNames, siblingNames, locallyReservedNames);
+            return false;
         }
 
         public override string EscapeDefaultValue(string defaultValue, IModelType type)

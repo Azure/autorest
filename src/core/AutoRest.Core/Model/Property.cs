@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 
 namespace AutoRest.Core.Model
@@ -96,5 +97,7 @@ namespace AutoRest.Core.Model
         ///     A string representation of the Property object.
         /// </returns>
         public override string ToString() => $"{ModelTypeName} {Name} {{get;{(IsReadOnly ? "" : "set;")}}}";
+
+        public virtual bool IsPolymorphicDiscriminator => true == (Parent as CompositeType)?.BasePolymorphicDiscriminator?.EqualsIgnoreCase(Name.RawValue);
     }
 }

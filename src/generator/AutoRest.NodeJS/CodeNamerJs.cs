@@ -71,6 +71,29 @@ namespace AutoRest.NodeJS
             return GetValidName(name, '_', '-', '.');
         }
 
+        /// <summary>
+        /// Returns true when the name comparison is a special case and should not 
+        /// be used to determine name conflicts.
+        ///  </summary>
+        /// <param name="whoIsAsking">the identifier that is checking to see if there is a conflict</param>
+        /// <param name="reservedName">the identifier that would normally be reserved.</param>
+        /// <returns></returns>
+        public override bool IsSpecialCase(IIdentifier whoIsAsking, IIdentifier reservedName)
+        {
+            if (whoIsAsking is Property && reservedName is CompositeType)
+            {
+                var parent = (whoIsAsking as IChild)?.Parent as IIdentifier;
+                if (ReferenceEquals(parent, reservedName))
+                {
+                    return false;
+                }
+                // special case: properties can have the same name as a compositetype
+                // unless it is the same name as a parent.
+                return true;
+            }
+            return false;
+        }
+
         public override string EscapeDefaultValue(string defaultValue, IModelType type)
         {
             if (type == null)

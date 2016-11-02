@@ -147,11 +147,11 @@ namespace AutoRest.Core.Model
         {
             get
             {
-                return Parameters.Where(gp => gp.Location != ParameterLocation.None)
+                 return Parameters.Where(gp => gp.Location != ParameterLocation.None)
                     .Union(InputParameterTransformation.Select(m => m.OutputParameter));
             }
         }
-
+        
         /// <summary>
         /// Gets or sets the body parameter.
         /// </summary>
@@ -187,13 +187,13 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets or sets the default response.
         /// </summary>
-        public Response DefaultResponse { get; set; }
+        public Response DefaultResponse { get; set; } = new Response();
 
         /// <summary>
         /// Gets or sets the method return type. The tuple contains a body
         /// and headers.
         /// </summary>
-        public Response ReturnType { get; set; }
+        public Response ReturnType { get; set; } = new Response();
 
         /// <summary>
         /// Gets or sets the description.

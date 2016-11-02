@@ -16,7 +16,6 @@ namespace AutoRest.Core {
             if (!Context.IsActive) {
                 throw new Exception("Must be in an active context to load a model");
             }
-            
             var result = JsonConvert.DeserializeObject<TCodeModel>(jsonText,
                 CodeModelSettings.DeserializerSettings);
             return result;
