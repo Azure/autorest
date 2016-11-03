@@ -91,13 +91,14 @@ namespace AutoRest.Python.Model
                 }
                 else
                 {
+                    //TODO: Namespace handling is already done on CodeModelPy
                     var modelNamespace = CodeModel.Name.ToPythonCase();
                     if (!CodeModel.Namespace.IsNullOrEmpty())
                         modelNamespace = CodeModel.Namespace;
                     CompositeType compType = body as CompositeType;
                     if (compType != null)
                     {
-                        return string.Format(CultureInfo.InvariantCulture, ":class:`{0}<{1}.models.{0}>`", compType.GetExceptionDefineType(), modelNamespace);
+                        return string.Format(CultureInfo.InvariantCulture, ":class:`{0}<{1}.models.{0}>`", compType.GetExceptionDefineType(), modelNamespace.ToLower());
                     }
                     else
                     {
