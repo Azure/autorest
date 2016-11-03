@@ -21,7 +21,7 @@ namespace AutoRest.Ruby
         /// <summary>
         ///     Relative path to produced SDK model files.
         /// </summary>
-        public string modelsPath => Path.Combine(sdkPath, Settings.Instance.ModelsName);
+        public string modelsPath => Path.Combine(sdkPath, Settings.Instance.ModelsName.ToLowerInvariant());
 
         /// <summary>
         ///     Get the module declarations for the entire depth of modules generated.
