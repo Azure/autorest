@@ -28,6 +28,7 @@
   "dependencies": {
     "Microsoft.NETCore.Platforms": "1.0.1",
     "Microsoft.Rest.ClientRuntime": "2.3.2",
+    "Microsoft.Rest.ClientRuntime.Azure": "3.3.2",
     "Microsoft.Extensions.Logging": "1.0.0",
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Filter": "1.0.0",
@@ -36,6 +37,7 @@
 
     "AutoRest.Core": { "target": "project" },
     "AutoRest.Tooling.CSharp.Compiler": { "target": "project" },
-    "AutoRest.CSharp": { "target": "project"  }
+    "AutoRest.CSharp": { "target": "project" },
+    "AutoRest.CSharp.Azure": { "target": "project" }
   }
 }
