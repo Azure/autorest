@@ -400,7 +400,7 @@ namespace AutoRest.Extensions
                 {
                     var bodyParameterType = bodyParameter.ModelType as CompositeType;
                     if (bodyParameterType != null && 
-                        (bodyParameterType.ComposedProperties.Count(p => !p.IsConstant) <= Settings.Instance.PayloadFlatteningThreshold ||
+                        (bodyParameterType.ComposedProperties.Count(p => !p.IsConstant && !p.IsReadOnly) <= Settings.Instance.PayloadFlatteningThreshold ||
                          bodyParameter.ShouldBeFlattened()))
                     {
                         var parameterTransformation = new ParameterTransformation
@@ -410,7 +410,7 @@ namespace AutoRest.Extensions
                         method.InputParameterTransformation.Add(parameterTransformation);
                         method.Remove(bodyParameter);
 
-                        foreach (var property in bodyParameterType.ComposedProperties.Where(p => !p.IsConstant && p.Name != null))
+                        foreach (var property in bodyParameterType.ComposedProperties.Where(p => !p.IsConstant && p.Name != null && !p.IsReadOnly))
                         {
                             var newMethodParameter = New<Parameter>();
                             newMethodParameter.LoadFrom(property);
