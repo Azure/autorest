@@ -1259,9 +1259,7 @@ LROs.prototype.putAsyncNonResource = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options.product] Sub Product to put
- * 
- * @param {string} [options.product.provisioningState]
+ * @param {string} [options.provisioningState]
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -1335,9 +1333,7 @@ LROs.prototype.putSubResource = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options.product] Sub Product to put
- * 
- * @param {string} [options.product.provisioningState]
+ * @param {string} [options.provisioningState]
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -4977,9 +4973,7 @@ LROs.prototype.beginPutAsyncNonResource = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options.product] Sub Product to put
- * 
- * @param {string} [options.product.provisioningState]
+ * @param {string} [options.provisioningState]
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -5006,11 +5000,24 @@ LROs.prototype.beginPutSubResource = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = (options && options.product !== undefined) ? options.product : undefined;
+  var provisioningState = (options && options.provisioningState !== undefined) ? options.provisioningState : undefined;
   // Validate
   try {
+    if (provisioningState !== null && provisioningState !== undefined && typeof provisioningState.valueOf() !== 'string') {
+      throw new Error('provisioningState must be of type string.');
+    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+  var product;
+  try {
+    if (provisioningState !== null && provisioningState !== undefined)
+    {
+      product = new client.models['SubProduct']();
+      product.provisioningState = provisioningState;
     }
   } catch (error) {
     return callback(error);
@@ -5120,9 +5127,7 @@ LROs.prototype.beginPutSubResource = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options.product] Sub Product to put
- * 
- * @param {string} [options.product.provisioningState]
+ * @param {string} [options.provisioningState]
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -5149,11 +5154,24 @@ LROs.prototype.beginPutAsyncSubResource = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = (options && options.product !== undefined) ? options.product : undefined;
+  var provisioningState = (options && options.provisioningState !== undefined) ? options.provisioningState : undefined;
   // Validate
   try {
+    if (provisioningState !== null && provisioningState !== undefined && typeof provisioningState.valueOf() !== 'string') {
+      throw new Error('provisioningState must be of type string.');
+    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+  var product;
+  try {
+    if (provisioningState !== null && provisioningState !== undefined)
+    {
+      product = new client.models['SubProduct']();
+      product.provisioningState = provisioningState;
     }
   } catch (error) {
     return callback(error);
