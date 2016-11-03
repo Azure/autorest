@@ -45,21 +45,21 @@ namespace AutoRest.CSharp.Unit.Tests
             return fileSystem.GetFiles(path, "*.*", s).Where(f => fileExts.Contains(f.Substring(f.LastIndexOf(".")+1))).ToArray();
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string inputFile,  MemoryFileSystem fileSystem)
+        internal static MemoryFileSystem GenerateCodeInto(this string inputFile,  MemoryFileSystem fileSystem, string codeGenerator = "CSharp")
         {
             using (NewContext)
             {
-            var settings = new Settings
-            {
-                Modeler = "Swagger",
-                CodeGenerator = "CSharp",
-                FileSystem = fileSystem,
-                OutputDirectory = "GeneratedCode",
-                Namespace = "Test"
-            };
+                var settings = new Settings
+                {
+                    Modeler = "Swagger",
+                    CodeGenerator = codeGenerator,
+                    FileSystem = fileSystem,
+                    OutputDirectory = "GeneratedCode",
+                    Namespace = "Test"
+                };
 
-            return inputFile.GenerateCodeInto(fileSystem, settings);
-        }
+                return inputFile.GenerateCodeInto(fileSystem, settings);
+            }
         }
 
         internal static MemoryFileSystem GenerateCodeInto(this string inputFile, MemoryFileSystem fileSystem, Settings settings)
@@ -78,7 +78,8 @@ namespace AutoRest.CSharp.Unit.Tests
 
             settings.Input = fileName;
 
-            var plugin = new PluginCs();
+
+            var plugin = ExtensionsLoader.GetPlugin();
             var modeler = ExtensionsLoader.GetModeler();
             var codeModel = modeler.Build();
 
