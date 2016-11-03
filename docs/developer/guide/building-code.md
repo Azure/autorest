@@ -3,9 +3,38 @@
 ## Build Prerequisites
 AutoRest is developed primarily in C# but generates code for multiple languages. To build and test AutoRest requires a few things be installed locally.
 
-## Automated Setup
+## Setting up for development on AutoRest.
+Expected time around 100 minutes to install.
+
+- 90 minutes for VS Community
+- 10 minutes for everything else 😭 
+
+### Software Installed/operations:
+- Windows 10 Anniversary - (has PackageManagement, developer mode and supports WSL.)
+- JDK 8
+- Android SDK
+- NodeJS
+- Gulp
+- Ruby 2.3
+- Ruby Devkit
+  Including missing CA Roots for Ruby
+- Python 2.7
+- Python 3.5
+- Tox
+- Gradle
+- Go 
+- Glide
+- Git (copies git to x86 program files too. )
+- allows java, node, ruby, go, glide thru the firewall.
+- vs community (full install) 
+  **NOTE**: If you want a different SKU of Visual Studio, install it first, before running this script!
+- disables strong name verification on assemblies
+- vs code
+- dotnet cli 
+- Reboot
+
 ### Process
-- Enable Developer Mode 
+- Enable Developer Mode in win10
   In Cortana, search for `developer settings`
   click "Developer Mode", answer "yes"
   scroll down, and click apply, apply, apply
@@ -40,10 +69,13 @@ To compile the code in Visual Studio IDE,
 
 Install .Net CoreCLR RTM using [these steps](https://www.microsoft.com/net/core#windows).
 
-#### on Mac or Linux
-Install Mono 4.3.0 (MonoFramework-MDK-4.3.0.372.macos10.xamarin.x86.pkg)
 
-Install DNVM using [these steps](https://docs.asp.net/en/latest/getting-started/installing-on-mac.html).
+# Mac/Linux instructions are out of date, and will be updated soon.
+
+<!--
+#### on Mac or Linux
+NEW INSTRUCTIONS COMING SOON.
+
 
 ### Node.js
 Install the latest from [nodejs.org](https://nodejs.org/). Then from the project root run `npm install`.
@@ -99,6 +131,7 @@ Add your [GOPATH](https://golang.org/doc/code.html#GOPATH) to your environment v
 #### Glide
 
 Install [glide](https://github.com/Masterminds/glide). Add glide to your `PATH`.
+-->
 
 ### Testing Your Environment
 To make sure you've set up all the prerequisites correctly, run `.\Tools\Verify-Settings.ps1` before you attempt to build.
