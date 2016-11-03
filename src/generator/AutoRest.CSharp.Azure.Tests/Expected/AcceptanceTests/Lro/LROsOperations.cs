@@ -402,8 +402,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <summary>
         /// Long running put request with sub resource.
         /// </summary>
-        /// <param name='product'>
-        /// Sub Product to put
+        /// <param name='provisioningState'>
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -411,11 +410,11 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> PutSubResourceWithHttpMessagesAsync(SubProduct product = default(SubProduct), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> PutSubResourceWithHttpMessagesAsync(string provisioningState = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Send Request
             Microsoft.Rest.Azure.AzureOperationResponse<SubProduct> _response = await BeginPutSubResourceWithHttpMessagesAsync(
-                product, customHeaders, cancellationToken);
+                provisioningState, customHeaders, cancellationToken);
             return await this.Client.GetPutOrPatchOperationResultAsync(_response,
                 customHeaders,
                 cancellationToken);
@@ -424,8 +423,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <summary>
         /// Long running put request with sub resource.
         /// </summary>
-        /// <param name='product'>
-        /// Sub Product to put
+        /// <param name='provisioningState'>
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -433,11 +431,11 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> PutAsyncSubResourceWithHttpMessagesAsync(SubProduct product = default(SubProduct), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> PutAsyncSubResourceWithHttpMessagesAsync(string provisioningState = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Send Request
             Microsoft.Rest.Azure.AzureOperationResponse<SubProduct> _response = await BeginPutAsyncSubResourceWithHttpMessagesAsync(
-                product, customHeaders, cancellationToken);
+                provisioningState, customHeaders, cancellationToken);
             return await this.Client.GetPutOrPatchOperationResultAsync(_response,
                 customHeaders,
                 cancellationToken);
@@ -3472,8 +3470,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <summary>
         /// Long running put request with sub resource.
         /// </summary>
-        /// <param name='product'>
-        /// Sub Product to put
+        /// <param name='provisioningState'>
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -3490,8 +3487,14 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> BeginPutSubResourceWithHttpMessagesAsync(SubProduct product = default(SubProduct), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> BeginPutSubResourceWithHttpMessagesAsync(string provisioningState = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
+            SubProduct product = default(SubProduct);
+            if (provisioningState != null)
+            {
+                product = new SubProduct();
+                product.ProvisioningState = provisioningState;
+            }
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -3639,8 +3642,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <summary>
         /// Long running put request with sub resource.
         /// </summary>
-        /// <param name='product'>
-        /// Sub Product to put
+        /// <param name='provisioningState'>
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -3657,8 +3659,14 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> BeginPutAsyncSubResourceWithHttpMessagesAsync(SubProduct product = default(SubProduct), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> BeginPutAsyncSubResourceWithHttpMessagesAsync(string provisioningState = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
+            SubProduct product = default(SubProduct);
+            if (provisioningState != null)
+            {
+                product = new SubProduct();
+                product.ProvisioningState = provisioningState;
+            }
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;

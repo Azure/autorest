@@ -1375,7 +1375,7 @@ namespace AutoRest.CSharp.Tests
                 /* COMPLEX TYPE WITH READ ONLY PROPERTIES TESTS */
                 // PUT /readonlyproperty/valid
                 var o = client.Readonlyproperty.GetValid();
-                client.Readonlyproperty.PutValid(o);
+                client.Readonlyproperty.PutValid(2);
             }
         }
 
