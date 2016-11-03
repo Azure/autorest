@@ -26,12 +26,15 @@ namespace AutoRest
                     try
                     {
                         settings = Settings.Create(args);
+                        string defCodeGen = (args.Where(arg => arg.ToLowerInvariant().Contains("codegenerator")).IsNullOrEmpty()) ? "" : settings.CodeGenerator;
                         if (settings.ShowHelp && IsShowMarkdownHelpIncluded(args))
                         {
+                            settings.CodeGenerator = defCodeGen;
                             Console.WriteLine(HelpGenerator.Generate(Resources.HelpMarkdownTemplate, settings));
                         }
                         else if (settings.ShowHelp)
                         {
+                            settings.CodeGenerator = defCodeGen;
                             Console.WriteLine(HelpGenerator.Generate(Resources.HelpTextTemplate, settings));
                         }
                         else if (!string.IsNullOrEmpty(settings.Previous))

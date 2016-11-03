@@ -120,25 +120,9 @@ namespace AutoRest
             var parametersSection = new StringBuilder();
             const string parametersPattern = @"\$parameters-start\$(.+)\$parameters-end\$";
             var parameterTemplate = Regex.Match(template, parametersPattern, RegexOptions.Singleline).Groups[1].Value.Trim();
-            foreach (PropertyInfo property in typeof(Settings).GetProperties().OrderBy(p => p.Name))
-            {
-                SettingsInfoAttribute doc = (SettingsInfoAttribute)property.GetCustomAttributes(
-                    typeof(SettingsInfoAttribute)).FirstOrDefault();
 
-                if (doc != null)
-                {
-                    string documentation = doc.Documentation;
-                    string aliases = string.Join(", ", 
-                        property.GetCustomAttributes<SettingsAliasAttribute>().Select(a => "-" + a.Alias));
-                    if (!string.IsNullOrWhiteSpace(aliases))
-                    {
-                        documentation += " Aliases: " + aliases;
-                    }
-                    parametersSection.AppendLine("  " + parameterTemplate.
-                        Replace("$parameter$", property.Name).
-                        Replace("$parameter-desc$", documentation));
-                }
-            }
+            GetParametersInfo(typeof(Settings).GetProperties().OrderBy(p => p.Name), parametersSection, parameterTemplate,
+                              "$parameter$", "$parameter-desc$");
 
             // Parse autorest.json
             AutoRestConfiguration autorestConfig = new AutoRestConfiguration();
@@ -158,21 +142,38 @@ namespace AutoRest
             // Generate generators section
             var generatorsSection = new StringBuilder();
             const string generatorsPattern = @"\$generators-start\$(.+)\$generators-end\$";
+            const string generatorParametersPattern = @"\$generator-parameters-start\$(.+)\$generator-parameters-end\$";
             var generatorsTemplate = Regex.Match(template, generatorsPattern, RegexOptions.Singleline).Groups[1].Value.Trim();
-            foreach (string generator in autorestConfig.Plugins.Keys.OrderBy(k => k))
+            var generatorParametersTemplate = Regex.Match(template, generatorParametersPattern, RegexOptions.Singleline).Groups[1].Value.Trim();
+            var generatorParametersAnchor = Regex.Match(generatorsTemplate, generatorParametersPattern, RegexOptions.Singleline).Value.Trim();
+            foreach (string generator in autorestConfig.Plugins.Keys.Where(k => Regex.Match(k, settings.CodeGenerator, RegexOptions.IgnoreCase).Success).OrderBy(k => k))
             {
                 try
                 {
                     var plugin = ExtensionsLoader.LoadTypeFromAssembly<IAnyPlugin>(autorestConfig.Plugins, generator);
-                    generatorsSection.AppendLine("  " + generatorsTemplate.
+                    var generatorParametersSection = new StringBuilder();
+                    if (!string.IsNullOrEmpty(settings.CodeGenerator))
+                    {
+
+                        GetParametersInfo(plugin.Settings.GetType().GetProperties(), generatorParametersSection, generatorParametersTemplate,
+                                      "$generator-parameters-name$", "$generator-parameters-desc$");
+                    }
+                    else
+                    {
+                        // If not displaying the codegen props, remove the "Parameters" header
+                        generatorsTemplate = generatorsTemplate.Replace("Parameters:", "").Trim();
+                    }
+                    generatorsSection.AppendLine(("  " + generatorsTemplate.
                         Replace("$generator$", plugin.Settings.Name).
-                        Replace("$generator-desc$", plugin.Settings.Description));
+                        Replace("$generator-desc$", plugin.Settings.Description).
+                        Replace(generatorParametersAnchor, "").Trim() + "\n" + generatorParametersSection.ToString()).TrimEnd());
                 }
                 catch
                 {
                     // Skip
-                }                
+                }
             }
+
 
             // Generate examples section.
             var examplesSection = new StringBuilder();
@@ -195,6 +196,31 @@ namespace AutoRest
             template = Regex.Replace(template, generatorsPattern, generatorsSection.ToString(), RegexOptions.Singleline);
 
             return template;
+        }
+
+        private static void GetParametersInfo(IEnumerable<PropertyInfo> props, StringBuilder templateSection, 
+                                              string template, string propNameAnchor, string docAnchor)
+        {
+            foreach (PropertyInfo property in props)
+            {
+                SettingsInfoAttribute doc = (SettingsInfoAttribute)property.GetCustomAttributes(
+                    typeof(SettingsInfoAttribute)).FirstOrDefault();
+
+                if (doc != null)
+                {
+                    string documentation = doc.Documentation;
+                    string aliases = string.Join(", ",
+                        property.GetCustomAttributes<SettingsAliasAttribute>().Select(a => "-" + a.Alias));
+                    if (!string.IsNullOrWhiteSpace(aliases))
+                    {
+                        documentation += " Aliases: " + aliases;
+                    }
+
+                    templateSection.AppendLine("  " + template.
+                        Replace(propNameAnchor, property.Name).
+                        Replace(docAnchor, documentation));
+                }
+            }
         }
     }
 }
