@@ -45,7 +45,7 @@ class ApiVersionDefaultOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview'
@@ -88,7 +88,7 @@ class ApiVersionDefaultOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview'
@@ -131,7 +131,7 @@ class ApiVersionDefaultOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview'
@@ -174,7 +174,7 @@ class ApiVersionDefaultOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview'
