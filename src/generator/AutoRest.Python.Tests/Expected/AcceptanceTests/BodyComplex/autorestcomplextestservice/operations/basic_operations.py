@@ -41,11 +41,11 @@ class BasicOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Basic
-         <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
+         <fixtures.acceptancetestsbodycomplex.models.Basic>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/basic/valid'
@@ -83,7 +83,7 @@ class BasicOperations(object):
 
         :param complex_body: Please put {id: 2, name: 'abc', color: 'Magenta'}
         :type complex_body: :class:`Basic
-         <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
+         <fixtures.acceptancetestsbodycomplex.models.Basic>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -93,7 +93,7 @@ class BasicOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/basic/valid'
@@ -133,11 +133,11 @@ class BasicOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Basic
-         <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
+         <fixtures.acceptancetestsbodycomplex.models.Basic>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/basic/invalid'
@@ -179,11 +179,11 @@ class BasicOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Basic
-         <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
+         <fixtures.acceptancetestsbodycomplex.models.Basic>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/basic/empty'
@@ -225,11 +225,11 @@ class BasicOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Basic
-         <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
+         <fixtures.acceptancetestsbodycomplex.models.Basic>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/basic/null'
@@ -272,11 +272,11 @@ class BasicOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Basic
-         <Fixtures.AcceptanceTestsBodyComplex.models.Basic>`
+         <fixtures.acceptancetestsbodycomplex.models.Basic>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/basic/notprovided'

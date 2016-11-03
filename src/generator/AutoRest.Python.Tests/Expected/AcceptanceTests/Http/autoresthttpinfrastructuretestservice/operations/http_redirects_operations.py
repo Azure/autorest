@@ -44,7 +44,7 @@ class HttpRedirectsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/300'
@@ -85,7 +85,7 @@ class HttpRedirectsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/300'
@@ -135,7 +135,7 @@ class HttpRedirectsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/301'
@@ -176,7 +176,7 @@ class HttpRedirectsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/301'
@@ -221,7 +221,7 @@ class HttpRedirectsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/301'
@@ -269,7 +269,7 @@ class HttpRedirectsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/302'
@@ -310,7 +310,7 @@ class HttpRedirectsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/302'
@@ -355,7 +355,7 @@ class HttpRedirectsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/302'
@@ -407,7 +407,7 @@ class HttpRedirectsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/303'
@@ -455,7 +455,7 @@ class HttpRedirectsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/307'
@@ -496,7 +496,7 @@ class HttpRedirectsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/307'
@@ -539,7 +539,7 @@ class HttpRedirectsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/307'
@@ -589,7 +589,7 @@ class HttpRedirectsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/307'
@@ -639,7 +639,7 @@ class HttpRedirectsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/307'
@@ -689,7 +689,7 @@ class HttpRedirectsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/307'

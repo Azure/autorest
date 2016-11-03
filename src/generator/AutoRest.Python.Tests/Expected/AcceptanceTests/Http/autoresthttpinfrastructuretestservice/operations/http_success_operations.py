@@ -44,7 +44,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/200'
@@ -82,7 +82,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/200'
@@ -129,7 +129,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/200'
@@ -176,7 +176,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/200'
@@ -223,7 +223,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/200'
@@ -270,7 +270,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/200'
@@ -317,7 +317,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/201'
@@ -364,7 +364,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/201'
@@ -411,7 +411,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/202'
@@ -458,7 +458,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/202'
@@ -505,7 +505,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/202'
@@ -552,7 +552,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/202'
@@ -597,7 +597,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/204'
@@ -637,7 +637,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/204'
@@ -684,7 +684,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/204'
@@ -731,7 +731,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/204'
@@ -778,7 +778,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/204'
@@ -823,7 +823,7 @@ class HttpSuccessOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/success/404'

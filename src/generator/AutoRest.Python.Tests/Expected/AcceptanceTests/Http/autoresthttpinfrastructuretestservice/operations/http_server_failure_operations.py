@@ -41,11 +41,11 @@ class HttpServerFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <Fixtures.AcceptanceTestsHttp.models.Error>`
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/failure/server/501'
@@ -80,11 +80,11 @@ class HttpServerFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <Fixtures.AcceptanceTestsHttp.models.Error>`
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/failure/server/501'
@@ -121,11 +121,11 @@ class HttpServerFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <Fixtures.AcceptanceTestsHttp.models.Error>`
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/failure/server/505'
@@ -169,11 +169,11 @@ class HttpServerFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <Fixtures.AcceptanceTestsHttp.models.Error>`
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/failure/server/505'

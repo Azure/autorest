@@ -45,7 +45,7 @@ class HttpFailureOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/failure/emptybody/error'

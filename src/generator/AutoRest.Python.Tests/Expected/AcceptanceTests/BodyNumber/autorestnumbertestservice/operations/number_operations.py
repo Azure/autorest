@@ -44,7 +44,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/null'
@@ -89,7 +89,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/invalidfloat'
@@ -134,7 +134,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/invaliddouble'
@@ -179,7 +179,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/invaliddecimal'
@@ -226,7 +226,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/big/float/3.402823e+20'
@@ -268,7 +268,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/big/float/3.402823e+20'
@@ -315,7 +315,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/big/double/2.5976931e+101'
@@ -357,7 +357,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/big/double/2.5976931e+101'
@@ -404,7 +404,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/big/double/99999999.99'
@@ -446,7 +446,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/big/double/99999999.99'
@@ -493,7 +493,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/big/double/-99999999.99'
@@ -535,7 +535,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/big/double/-99999999.99'
@@ -582,7 +582,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/big/decimal/2.5976931e+101'
@@ -624,7 +624,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/big/decimal/2.5976931e+101'
@@ -671,7 +671,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/big/decimal/99999999.99'
@@ -713,7 +713,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/big/decimal/99999999.99'
@@ -760,7 +760,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/big/decimal/-99999999.99'
@@ -802,7 +802,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/big/decimal/-99999999.99'
@@ -849,7 +849,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/small/float/3.402823e-20'
@@ -891,7 +891,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/small/float/3.402823e-20'
@@ -938,7 +938,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/small/double/2.5976931e-101'
@@ -980,7 +980,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/small/double/2.5976931e-101'
@@ -1027,7 +1027,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/small/decimal/2.5976931e-101'
@@ -1069,7 +1069,7 @@ class NumberOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyNumber.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodynumber.models.ErrorException>`
         """
         # Construct URL
         url = '/number/small/decimal/2.5976931e-101'

@@ -47,7 +47,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrlMultiCollectionFormat.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurlmulticollectionformat.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/array/multi/string/null'
@@ -90,7 +90,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrlMultiCollectionFormat.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurlmulticollectionformat.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/array/multi/string/empty'
@@ -134,7 +134,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrlMultiCollectionFormat.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurlmulticollectionformat.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/array/multi/string/valid'
