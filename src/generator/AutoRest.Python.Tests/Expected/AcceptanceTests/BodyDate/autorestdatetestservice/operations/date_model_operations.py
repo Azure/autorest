@@ -44,7 +44,7 @@ class DateModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDate.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydate.models.ErrorException>`
         """
         # Construct URL
         url = '/date/null'
@@ -89,7 +89,7 @@ class DateModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDate.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydate.models.ErrorException>`
         """
         # Construct URL
         url = '/date/invaliddate'
@@ -134,7 +134,7 @@ class DateModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDate.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydate.models.ErrorException>`
         """
         # Construct URL
         url = '/date/overflowdate'
@@ -179,7 +179,7 @@ class DateModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDate.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydate.models.ErrorException>`
         """
         # Construct URL
         url = '/date/underflowdate'
@@ -226,7 +226,7 @@ class DateModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDate.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydate.models.ErrorException>`
         """
         # Construct URL
         url = '/date/max'
@@ -268,7 +268,7 @@ class DateModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDate.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydate.models.ErrorException>`
         """
         # Construct URL
         url = '/date/max'
@@ -315,7 +315,7 @@ class DateModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDate.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydate.models.ErrorException>`
         """
         # Construct URL
         url = '/date/min'
@@ -357,7 +357,7 @@ class DateModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDate.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydate.models.ErrorException>`
         """
         # Construct URL
         url = '/date/min'

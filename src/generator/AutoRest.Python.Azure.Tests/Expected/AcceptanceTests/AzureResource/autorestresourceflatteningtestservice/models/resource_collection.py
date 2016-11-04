@@ -17,10 +17,10 @@ class ResourceCollection(Model):
 
     :param productresource:
     :type productresource: :class:`FlattenedProduct
-     <Fixtures.AcceptanceTestsAzureResource.models.FlattenedProduct>`
+     <fixtures.acceptancetestsazureresource.models.FlattenedProduct>`
     :param arrayofresources:
     :type arrayofresources: list of :class:`FlattenedProduct
-     <Fixtures.AcceptanceTestsAzureResource.models.FlattenedProduct>`
+     <fixtures.acceptancetestsazureresource.models.FlattenedProduct>`
     :param dictionaryofresources:
     :type dictionaryofresources: dict
     """ 

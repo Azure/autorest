@@ -23,7 +23,7 @@ class Siamese(Cat):
     :type color: str
     :param hates:
     :type hates: list of :class:`Dog
-     <Fixtures.AcceptanceTestsBodyComplex.models.Dog>`
+     <fixtures.acceptancetestsbodycomplex.models.Dog>`
     :param breed:
     :type breed: str
     """ 

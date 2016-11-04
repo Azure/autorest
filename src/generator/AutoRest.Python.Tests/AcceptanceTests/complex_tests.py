@@ -205,7 +205,7 @@ class ComplexTests(unittest.TestCase):
         self.assertEqual(readonly_result, valid_obj)
 
         # PUT readonly/valid
-        readonly_result = client.readonlyproperty.put_valid(valid_obj)
+        readonly_result = client.readonlyproperty.put_valid(2)
         self.assertIsNone(readonly_result)
 
         """

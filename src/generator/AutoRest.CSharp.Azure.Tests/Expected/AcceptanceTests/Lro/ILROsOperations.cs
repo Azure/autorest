@@ -339,8 +339,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <summary>
         /// Long running put request with sub resource.
         /// </summary>
-        /// <param name='product'>
-        /// Sub Product to put
+        /// <param name='provisioningState'>
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -354,12 +353,11 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> PutSubResourceWithHttpMessagesAsync(SubProduct product = default(SubProduct), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> PutSubResourceWithHttpMessagesAsync(string provisioningState = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running put request with sub resource.
         /// </summary>
-        /// <param name='product'>
-        /// Sub Product to put
+        /// <param name='provisioningState'>
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -373,7 +371,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> PutAsyncSubResourceWithHttpMessagesAsync(SubProduct product = default(SubProduct), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> PutAsyncSubResourceWithHttpMessagesAsync(string provisioningState = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
         /// request, with an entity that contains
@@ -1033,8 +1031,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <summary>
         /// Long running put request with sub resource.
         /// </summary>
-        /// <param name='product'>
-        /// Sub Product to put
+        /// <param name='provisioningState'>
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -1048,12 +1045,11 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> BeginPutSubResourceWithHttpMessagesAsync(SubProduct product = default(SubProduct), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> BeginPutSubResourceWithHttpMessagesAsync(string provisioningState = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running put request with sub resource.
         /// </summary>
-        /// <param name='product'>
-        /// Sub Product to put
+        /// <param name='provisioningState'>
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -1067,7 +1063,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> BeginPutAsyncSubResourceWithHttpMessagesAsync(SubProduct product = default(SubProduct), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SubProduct>> BeginPutAsyncSubResourceWithHttpMessagesAsync(string provisioningState = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
         /// request, with an entity that contains

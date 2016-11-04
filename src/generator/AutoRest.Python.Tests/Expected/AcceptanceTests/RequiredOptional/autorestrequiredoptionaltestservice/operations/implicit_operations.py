@@ -43,11 +43,11 @@ class ImplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
+         <fixtures.acceptancetestsrequiredoptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/implicit/required/path/{pathParameter}'
@@ -91,7 +91,7 @@ class ImplicitOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/implicit/optional/query'
@@ -133,7 +133,7 @@ class ImplicitOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/implicit/optional/header'
@@ -175,7 +175,7 @@ class ImplicitOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/implicit/optional/body'
@@ -217,11 +217,11 @@ class ImplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
+         <fixtures.acceptancetestsrequiredoptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/global/required/path/{required-global-path}'
@@ -260,11 +260,11 @@ class ImplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
+         <fixtures.acceptancetestsrequiredoptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/global/required/query'
@@ -300,11 +300,11 @@ class ImplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
+         <fixtures.acceptancetestsrequiredoptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsRequiredOptional.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/global/optional/query'

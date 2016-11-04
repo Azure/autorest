@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// Put complex types that have readonly properties
         /// </summary>
-        /// <param name='complexBody'>
+        /// <param name='size'>
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -45,9 +45,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutValidWithHttpMessagesAsync(ReadonlyObj complexBody, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutValidWithHttpMessagesAsync(int? size = default(int?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     }
 }

@@ -41,14 +41,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -127,14 +127,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -213,14 +213,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -300,14 +300,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -389,14 +389,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -476,14 +476,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -565,14 +565,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -651,14 +651,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -743,14 +743,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -837,14 +837,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -930,14 +930,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1024,14 +1024,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1116,14 +1116,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1204,14 +1204,14 @@ class LROsOperations(object):
         """Long running put request with non resource.
 
         :param sku: sku to put
-        :type sku: :class:`Sku <Fixtures.AcceptanceTestsLro.models.Sku>`
+        :type sku: :class:`Sku <fixtures.acceptancetestslro.models.Sku>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Sku
-         <Fixtures.AcceptanceTestsLro.models.Sku>`
+         <fixtures.acceptancetestslro.models.Sku>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1287,14 +1287,14 @@ class LROsOperations(object):
         """Long running put request with non resource.
 
         :param sku: Sku to put
-        :type sku: :class:`Sku <Fixtures.AcceptanceTestsLro.models.Sku>`
+        :type sku: :class:`Sku <fixtures.acceptancetestslro.models.Sku>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Sku
-         <Fixtures.AcceptanceTestsLro.models.Sku>`
+         <fixtures.acceptancetestslro.models.Sku>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1366,23 +1366,26 @@ class LROsOperations(object):
             get_long_running_status, long_running_operation_timeout)
 
     def put_sub_resource(
-            self, product=None, custom_headers=None, raw=False, **operation_config):
+            self, provisioning_state=None, custom_headers=None, raw=False, **operation_config):
         """Long running put request with sub resource.
 
-        :param product: Sub Product to put
-        :type product: :class:`SubProduct
-         <Fixtures.AcceptanceTestsLro.models.SubProduct>`
+        :param provisioning_state:
+        :type provisioning_state: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`SubProduct
-         <Fixtures.AcceptanceTestsLro.models.SubProduct>`
+         <fixtures.acceptancetestslro.models.SubProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
+        product = None
+        if provisioning_state is not None:
+            product = models.SubProduct(provisioning_state=provisioning_state)
+
         # Construct URL
         url = '/lro/putsubresource/202/200'
 
@@ -1450,23 +1453,26 @@ class LROsOperations(object):
             get_long_running_status, long_running_operation_timeout)
 
     def put_async_sub_resource(
-            self, product=None, custom_headers=None, raw=False, **operation_config):
+            self, provisioning_state=None, custom_headers=None, raw=False, **operation_config):
         """Long running put request with sub resource.
 
-        :param product: Sub Product to put
-        :type product: :class:`SubProduct
-         <Fixtures.AcceptanceTestsLro.models.SubProduct>`
+        :param provisioning_state:
+        :type provisioning_state: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`SubProduct
-         <Fixtures.AcceptanceTestsLro.models.SubProduct>`
+         <fixtures.acceptancetestslro.models.SubProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
+        product = None
+        if provisioning_state is not None:
+            product = models.SubProduct(provisioning_state=provisioning_state)
+
         # Construct URL
         url = '/lro/putsubresourceasync/202/200'
 
@@ -1546,7 +1552,7 @@ class LROsOperations(object):
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1635,7 +1641,7 @@ class LROsOperations(object):
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1724,7 +1730,7 @@ class LROsOperations(object):
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1878,7 +1884,7 @@ class LROsOperations(object):
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1960,7 +1966,7 @@ class LROsOperations(object):
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -2476,7 +2482,7 @@ class LROsOperations(object):
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Sku
-         <Fixtures.AcceptanceTestsLro.models.Sku>`
+         <fixtures.acceptancetestslro.models.Sku>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -2550,7 +2556,7 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -2632,14 +2638,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -2725,14 +2731,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -2819,14 +2825,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -2913,7 +2919,7 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -2997,7 +3003,7 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response

@@ -41,11 +41,11 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/payloads/200/A/204/none/default/Error/response/200/valid'
@@ -86,11 +86,11 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/payloads/200/A/204/none/default/Error/response/204/none'
@@ -131,11 +131,11 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/payloads/200/A/204/none/default/Error/response/201/valid'
@@ -176,11 +176,11 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/payloads/200/A/204/none/default/Error/response/202/none'
@@ -222,11 +222,11 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/payloads/200/A/204/none/default/Error/response/400/valid'
@@ -267,11 +267,11 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/payloads/200/A/201/B/default/Error/response/200/valid'
@@ -315,11 +315,11 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/payloads/200/A/201/B/default/Error/response/201/valid'
@@ -363,11 +363,11 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/payloads/200/A/201/B/default/Error/response/400/valid'
@@ -414,7 +414,7 @@ class MultipleResponsesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid'
@@ -463,7 +463,7 @@ class MultipleResponsesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid'
@@ -512,7 +512,7 @@ class MultipleResponsesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid'
@@ -562,7 +562,7 @@ class MultipleResponsesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid'
@@ -611,7 +611,7 @@ class MultipleResponsesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/payloads/202/none/204/none/default/Error/response/202/none'
@@ -649,7 +649,7 @@ class MultipleResponsesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/payloads/202/none/204/none/default/Error/response/204/none'
@@ -688,7 +688,7 @@ class MultipleResponsesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHttp.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/payloads/202/none/204/none/default/Error/response/400/valid'
@@ -874,11 +874,11 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`MyException<Fixtures.AcceptanceTestsHttp.models.MyException>`
+         :class:`MyException<fixtures.acceptancetestshttp.models.MyException>`
         """
         # Construct URL
         url = '/http/payloads/default/A/response/200/valid'
@@ -912,11 +912,11 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`MyException<Fixtures.AcceptanceTestsHttp.models.MyException>`
+         :class:`MyException<fixtures.acceptancetestshttp.models.MyException>`
         """
         # Construct URL
         url = '/http/payloads/default/A/response/200/none'
@@ -950,11 +950,11 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`MyException<Fixtures.AcceptanceTestsHttp.models.MyException>`
+         :class:`MyException<fixtures.acceptancetestshttp.models.MyException>`
         """
         # Construct URL
         url = '/http/payloads/default/A/response/400/valid'
@@ -988,11 +988,11 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`MyException<Fixtures.AcceptanceTestsHttp.models.MyException>`
+         :class:`MyException<fixtures.acceptancetestshttp.models.MyException>`
         """
         # Construct URL
         url = '/http/payloads/default/A/response/400/none'
@@ -1179,7 +1179,7 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
@@ -1224,7 +1224,7 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
@@ -1269,7 +1269,7 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
@@ -1315,7 +1315,7 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
@@ -1360,7 +1360,7 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
@@ -1405,7 +1405,7 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
@@ -1450,7 +1450,7 @@ class MultipleResponsesOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`A <Fixtures.AcceptanceTestsHttp.models.A>`
+        :rtype: :class:`A <fixtures.acceptancetestshttp.models.A>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:

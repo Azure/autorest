@@ -156,11 +156,9 @@ Readonlyproperty.prototype.getValid = function (options, callback) {
 /**
  * Put complex types that have readonly properties
  *
- * @param {object} complexBody
- * 
- * @param {number} [complexBody.size]
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {number} [options.size]
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -177,7 +175,7 @@ Readonlyproperty.prototype.getValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Readonlyproperty.prototype.putValid = function (complexBody, options, callback) {
+Readonlyproperty.prototype.putValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -186,13 +184,23 @@ Readonlyproperty.prototype.putValid = function (complexBody, options, callback) 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var size = (options && options.size !== undefined) ? options.size : undefined;
   // Validate
   try {
-    if (complexBody === null || complexBody === undefined) {
-      throw new Error('complexBody cannot be null or undefined.');
+    if (size !== null && size !== undefined && typeof size !== 'number') {
+      throw new Error('size must be of type number.');
     }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+  var complexBody = new client.models['ReadonlyObj']();
+  try {
+    if (size !== null && size !== undefined)
+    {
+      complexBody.size = size;
     }
   } catch (error) {
     return callback(error);

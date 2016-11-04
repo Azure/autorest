@@ -41,11 +41,11 @@ class PolymorphismOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Fish
-         <Fixtures.AcceptanceTestsBodyComplex.models.Fish>`
+         <fixtures.acceptancetestsbodycomplex.models.Fish>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/polymorphism/valid'
@@ -116,7 +116,7 @@ class PolymorphismOperations(object):
          ]
          };
         :type complex_body: :class:`Fish
-         <Fixtures.AcceptanceTestsBodyComplex.models.Fish>`
+         <fixtures.acceptancetestsbodycomplex.models.Fish>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -126,7 +126,7 @@ class PolymorphismOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/polymorphism/valid'
@@ -188,7 +188,7 @@ class PolymorphismOperations(object):
          ]
          }
         :type complex_body: :class:`Fish
-         <Fixtures.AcceptanceTestsBodyComplex.models.Fish>`
+         <fixtures.acceptancetestsbodycomplex.models.Fish>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -198,7 +198,7 @@ class PolymorphismOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/polymorphism/missingrequired/invalid'

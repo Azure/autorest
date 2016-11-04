@@ -44,7 +44,7 @@ class ByteOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyByte.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodybyte.models.ErrorException>`
         """
         # Construct URL
         url = '/byte/null'
@@ -89,7 +89,7 @@ class ByteOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyByte.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodybyte.models.ErrorException>`
         """
         # Construct URL
         url = '/byte/empty'
@@ -134,7 +134,7 @@ class ByteOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyByte.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodybyte.models.ErrorException>`
         """
         # Construct URL
         url = '/byte/nonAscii'
@@ -182,7 +182,7 @@ class ByteOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyByte.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodybyte.models.ErrorException>`
         """
         # Construct URL
         url = '/byte/nonAscii'
@@ -224,7 +224,7 @@ class ByteOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyByte.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodybyte.models.ErrorException>`
         """
         # Construct URL
         url = '/byte/invalid'

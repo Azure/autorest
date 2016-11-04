@@ -379,9 +379,7 @@ export interface LROs {
      *
      * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options.product] Sub Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
+     * @param {string} [options.provisioningState]
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
@@ -389,7 +387,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putSubResource(options: { product? : models.SubProduct, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SubProduct>): void;
+    putSubResource(options: { provisioningState? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SubProduct>): void;
     putSubResource(callback: ServiceCallback<models.SubProduct>): void;
 
     /**
@@ -397,9 +395,7 @@ export interface LROs {
      *
      * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options.product] Sub Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
+     * @param {string} [options.provisioningState]
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
@@ -407,7 +403,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncSubResource(options: { product? : models.SubProduct, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SubProduct>): void;
+    putAsyncSubResource(options: { provisioningState? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SubProduct>): void;
     putAsyncSubResource(callback: ServiceCallback<models.SubProduct>): void;
 
     /**
@@ -1121,9 +1117,7 @@ export interface LROs {
      *
      * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options.product] Sub Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
+     * @param {string} [options.provisioningState]
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
@@ -1131,7 +1125,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutSubResource(options: { product? : models.SubProduct, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SubProduct>): void;
+    beginPutSubResource(options: { provisioningState? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SubProduct>): void;
     beginPutSubResource(callback: ServiceCallback<models.SubProduct>): void;
 
     /**
@@ -1139,9 +1133,7 @@ export interface LROs {
      *
      * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options.product] Sub Product to put
-     * 
-     * @param {string} [options.product.provisioningState]
+     * @param {string} [options.provisioningState]
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
@@ -1149,7 +1141,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncSubResource(options: { product? : models.SubProduct, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SubProduct>): void;
+    beginPutAsyncSubResource(options: { provisioningState? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SubProduct>): void;
     beginPutAsyncSubResource(callback: ServiceCallback<models.SubProduct>): void;
 
     /**
