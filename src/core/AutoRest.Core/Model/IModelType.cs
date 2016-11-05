@@ -127,6 +127,11 @@ namespace AutoRest.Core.Model
                 Name = name;
             }
         }
+        
+        /// <summary>
+        /// Gets a dictionary of x-vendor extensions defined for the CompositeType.
+        /// </summary>
+        public Dictionary<string, object> Extensions { get; } = new Dictionary<string, object>();
 
         [JsonProperty("$type", Order = -100)]
         public abstract string RefName { get; }
