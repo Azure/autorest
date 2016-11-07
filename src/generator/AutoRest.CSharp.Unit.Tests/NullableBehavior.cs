@@ -76,14 +76,14 @@ namespace AutoRest.CSharp.Unit.Tests
             Assert.True(properties.ContainsKey("Member110"));
 
             // if not required, it must be nullable
-            Assert.True(properties["Member000"].IsNullable());
-            Assert.True(properties["Member001"].IsNullable());
-            Assert.True(properties["Member010"].IsNullable());
-            Assert.True(properties["Member011"].IsNullable());
+            Assert.True(properties["Member000"].IsNullableValueType());
+            Assert.True(properties["Member001"].IsNullableValueType());
+            Assert.True(properties["Member010"].IsNullableValueType());
+            Assert.True(properties["Member011"].IsNullableValueType());
 
             // if required, it must not be nullable
-            Assert.False(properties["Member100"].IsNullable());
-            Assert.False(properties["Member110"].IsNullable());
+            Assert.False(properties["Member100"].IsNullableValueType());
+            Assert.False(properties["Member110"].IsNullableValueType());
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.Unit.Tests
         /// </summary>
         private void CheckForNonNullableMembers(Type modelType, Func<Type, Type> valueTypeSelector)
         {
-            Assert.True(modelType.GetProperties().All(prop => !valueTypeSelector(prop.PropertyType).IsNullable()));
+            Assert.True(modelType.GetProperties().All(prop => !valueTypeSelector(prop.PropertyType).IsNullableValueType()));
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.Unit.Tests
         /// </summary>
         private void CheckForNullableMembers(Type modelType, Func<Type, Type> valueTypeSelector)
         {
-            Assert.True(modelType.GetProperties().All(prop => valueTypeSelector(prop.PropertyType).IsNullable()));
+            Assert.True(modelType.GetProperties().All(prop => valueTypeSelector(prop.PropertyType).IsNullableValueType()));
         }
 
         /// <summary>
@@ -159,6 +159,10 @@ namespace AutoRest.CSharp.Unit.Tests
             CheckForNonNullableMembers(resultTypeXNfalse, selfSelector);
         }
 
+        /// <summary>
+        /// Related: https://github.com/Azure/autorest/issues/596
+        /// Dictionary value types are always nullable.
+        /// </summary>
         [Fact]
         public async Task NullableDictionaryItems()
         {
