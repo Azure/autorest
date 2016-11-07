@@ -73,6 +73,7 @@ namespace AutoRest.Swagger
                                _schema.AdditionalProperties.Reference != null
                                ? _schema.AdditionalProperties.Reference.StripDefinitionPath()
                                : serviceTypeName + "Value"),
+                    Extensions = _schema.AdditionalProperties.Extensions,
                     SupportsAdditionalProperties = true
                 });
 

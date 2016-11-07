@@ -3,6 +3,7 @@
 // 
 
 using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.CSharp.Model
 {
@@ -10,15 +11,19 @@ namespace AutoRest.CSharp.Model
     {
         public SequenceTypeCs()
         {
-            Name.OnGet += v => $"System.Collections.Generic.IList<{ElementType.AsNullableType()}>";
+            Name.OnGet += v => $"System.Collections.Generic.IList<{ElementType.AsNullableType(!ElementType.IsValueType() || (this.IsXNullable ?? true))}>";
         }
+
+        public virtual bool? IsXNullable => Extensions.Get<bool>("x-nullable");
     }
 
     public class DictionaryTypeCs : DictionaryType
     {
         public DictionaryTypeCs()
         {
-            Name.OnGet += v => $"System.Collections.Generic.IDictionary<string, {ValueType.AsNullableType()}>";
+            Name.OnGet += v => $"System.Collections.Generic.IDictionary<string, {ValueType.AsNullableType(!ValueType.IsValueType() || (this.IsXNullable ?? true))}>";
         }
+
+        public virtual bool? IsXNullable => Extensions.Get<bool>("x-nullable");
     }
 }
