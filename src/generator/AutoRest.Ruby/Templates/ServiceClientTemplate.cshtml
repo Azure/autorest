@@ -76,6 +76,7 @@ module @Settings.Namespace
       {
       @:@@@(property.Name) = @(property.DefaultValue)
       }
+      add_telemetry()
     end
 
     @EmptyLine
@@ -137,6 +138,18 @@ module @Settings.Namespace
 
       @EmptyLine
       super(request_url, method, path, options)
+    end
+
+    @EmptyLine
+    #
+    # Adds telemetry information.
+    #
+    def add_telemetry()
+        sdk_information = '@GeneratorSettingsRb.Instance.sdkPath'
+        if defined? @Settings.Namespace::VERSION
+          sdk_information = "#{sdk_information}/#{@Settings.Namespace::VERSION}" 
+        end
+        add_user_agent_information(sdk_information)
     end
 
     @EmptyLine
