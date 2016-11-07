@@ -12,11 +12,10 @@ paths:
           schema:
             $ref: '#/definitions/ResultInteger'
 
-# Naming: MemberDCBA
+# Naming: MemberCBA
 # A: readOnly (true or false)
 # B: default (set or not)
 # C: required (listed or not)
-# D: x-nullable (false or true or not set)
 definitions: 
   ResultInteger:
     required:
