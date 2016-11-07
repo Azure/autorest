@@ -116,11 +116,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 }
             }
         }
-
-        /// <summary>
-        ///     https://github.com/Azure/autorest/issues/1560
-        ///     Obsolete attribute does not get applied to all generated c# methods.
-        /// </summary>
+        
         [Fact]
         public async Task NullableParamsAzure()
         {
