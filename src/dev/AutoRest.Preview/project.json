@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0-*",
+  "authors": [ "Microsoft", "Azure-SDK" ],
+
+  "packOptions": {
+    "owners": [ "Microsoft", "Azure-SDK" ],
+    "summary": "AutoRest preview tool.",
+    "tags": [ "Microsoft AutoRest Generator Previewer" ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+    "iconUrl": "https://cdn.rawgit.com/Azure/AutoRest/7c1576dfb56974176223545cfac5762d168ded5f/Documentation/images/autorest-small-flat.png",
+    "requireLicenseAcceptance": true,
+    "description" : "The AutoRest preview tool.",
+    "copyright" : "Copyright (c) Microsoft Corporation",
+    "files": {
+      "mappings": {
+        "tools/": {
+          "include"  : ["bin/release/net451/win7-x64/*.exe","bin/release/net451/win7-x64/*.dll" ],
+          "exclude"  : ["**/*.pdb" ]
+        },
+        "tools/AutoRest.json": "../../core/AutoRest/Autorest.Release.json"
+      }
+    }
+  },
+
+    "buildOptions": {
+        
+        "emitEntryPoint": true,
+        "delaySign": true,
+        "publicSign": false,
+        "keyFile": "../../../Tools/MSSharedLibKey.snk",
+        "copyToOutput": {
+            "include": [ "AutoRest.json", "default.yaml" ]
+        },
+        "additionalArguments": [
+            "-highentropyva+"
+        ]
+    },
+
+  "frameworks": {
+    "net451": {
+        "frameworkAssemblies": {
+            "System.Windows.Forms": {},
+            "System.Drawing": {}
+        }
+    }
+  },
+
+  "dependencies": {
+    "Newtonsoft.Json": {"version": "[9.0.1,10.0)", "type":"build"},
+    "AutoRest.Core": { "target": "project" ,"type":"build"},
+    "AutoRest.Swagger": { "target": "project", "type": "build" },
+    "AutoRest.CompositeSwagger": { "target": "project", "type": "build" },
+    "AutoRest.CSharp": { "target": "project", "type": "build" },
+    "AutoRest.CSharp.Azure": { "target": "project", "type": "build" },
+    "AutoRest.NodeJS": { "target": "project", "type": "build" },
+    "AutoRest.NodeJS.Azure": { "target": "project", "type": "build" },
+    "AutoRest.Ruby": { "target": "project", "type": "build" },
+    "AutoRest.Ruby.Azure": { "target": "project", "type": "build" },
+    "AutoRest.Python": { "target": "project", "type": "build" },
+    "AutoRest.Python.Azure": { "target": "project", "type": "build" },
+    "AutoRest.AzureResourceSchema": { "target": "project", "type": "build" },
+    "AutoRest.Tooling.CSharp.Compiler": { "target": "project", "type": "build" },
+    "Microsoft.Rest.ClientRuntime": "2.3.2",
+    "Microsoft.Rest.ClientRuntime.Azure": "3.3.2",
+    "jacobslusser.ScintillaNET.Signed": "3.5.10"
+  }
+}
