@@ -82,6 +82,7 @@ namespace AutoRest.AzureResourceSchema
                     JsonSchema resourceDefinition = new JsonSchema();
                     resourceDefinition.JsonType = "object";
 
+                    resourceDefinition.ResourceType = resourceType;
                     resourceDefinition.AddProperty("type", JsonSchema.CreateStringEnum(resourceType), true);
                     resourceDefinition.AddProperty("apiVersion", JsonSchema.CreateStringEnum(apiVersion), true);
 
@@ -450,6 +451,11 @@ namespace AutoRest.AzureResourceSchema
                 case KnownPrimaryType.String:
                 case KnownPrimaryType.TimeSpan:
                     result.JsonType = "string";
+                    break;
+
+                case KnownPrimaryType.Uuid:
+                    result.JsonType = "string";
+                    result.Pattern = @"^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$";
                     break;
 
                 default:

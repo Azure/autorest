@@ -29,9 +29,11 @@ namespace AutoRest.AzureResourceSchema
             {
                 StringWriter stringWriter = new StringWriter();
                 ResourceSchemaWriter.Write(stringWriter, resourceSchemas[resourceProvider]);
+                await Write(stringWriter.ToString(), resourceProvider + ".json", true);
 
-                // string schemaPath = Path.Combine(Settings.Instance.OutputDirectory,);
-                await Write(stringWriter.ToString(), resourceProvider + ".json");
+                stringWriter = new StringWriter();
+                ResourceMarkdownWriter.Write(stringWriter, resourceSchemas[resourceProvider]);
+                await Write(stringWriter.ToString(), resourceProvider + ".md", false);
             }
         }
     }
