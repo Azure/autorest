@@ -1,0 +1,69 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  /operationInteger:
+    get:
+      operationId: test_integer
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResultInteger'
+    parameters:
+      - name: param000
+        in: query
+        type: integer
+        required: true
+      - name: param001
+        in: query
+        type: integer
+        x-nullable: false
+      - name: paramObj
+        in: query
+        schema:
+          $ref: '#/definitions/ResultInteger'
+
+definitions: 
+  ResultInteger:
+    required:
+      - Member100
+      - Member110
+    properties:
+      MemberInteger:
+        type: integer
+        readOnly: false
+        default: 42
+        x-nullable: true
+      MemberGuid:
+        type: string
+        format: uuid
+        readOnly: false
+        default: 42
+        x-nullable: true
+      MemberList:
+        type: array
+        items:
+          x-nullable: true
+          type: integer
+          readOnly: false
+          default: 42
+      MemberDictionary:
+        type: object
+        additionalProperties:
+          x-nullable: true
+          type: integer
+          readOnly: false
+          default: 42
+      MemberDictionaryX:
+        type: object
+        properties:
+          nested:
+            type: integer
+            x-nullable: false
+        additionalProperties:
+          x-nullable: false
+          type: integer
+          readOnly: false
+          default: 42
