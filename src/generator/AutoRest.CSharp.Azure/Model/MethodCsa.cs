@@ -277,8 +277,11 @@ namespace AutoRest.CSharp.Azure.Model
                         queryParametersAddString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", {1}));";
                     }
 
-                    builder.AppendLine("if ({0} != null)", queryParameter.Name)
-                        .AppendLine("{").Indent();
+                    if (queryParameter.IsNullable())
+                    {
+                        builder.AppendLine("if ({0} != null)", queryParameter.Name)
+                            .AppendLine("{").Indent();
+                    }
 
                     if (queryParameter.CollectionFormat == CollectionFormat.Multi)
                     {
@@ -299,8 +302,12 @@ namespace AutoRest.CSharp.Azure.Model
                         builder.AppendLine(queryParametersAddString,
                             queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference), queryParameter.Name);
                     }
-                    builder.Outdent()
-                        .AppendLine("}");
+
+                    if (queryParameter.IsNullable())
+                    {
+                        builder.Outdent()
+                            .AppendLine("}");
+                    }
                 }
             }
 

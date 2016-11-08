@@ -120,7 +120,8 @@ namespace AutoRest.Swagger
                     SwaggerObject.Items.GetBuilder(Modeler).BuildServiceType(itemServiceTypeName);
                 return New<SequenceType>(new 
                 {
-                    ElementType = elementType
+                    ElementType = elementType,
+                    Extensions = SwaggerObject.Items.Extensions
                 });
             }
             if (SwaggerObject.AdditionalProperties != null)
@@ -134,11 +135,12 @@ namespace AutoRest.Swagger
                 {
                     dictionaryValueServiceTypeName = serviceTypeName + "Value";
                 }
-                return New <DictionaryType>(new 
+                return New<DictionaryType>(new 
                 {
                     ValueType =
                         SwaggerObject.AdditionalProperties.GetBuilder(Modeler)
-                            .BuildServiceType((dictionaryValueServiceTypeName))
+                            .BuildServiceType((dictionaryValueServiceTypeName)),
+                    Extensions = SwaggerObject.AdditionalProperties.Extensions
                 });
             }
 

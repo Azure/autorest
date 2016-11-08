@@ -157,11 +157,6 @@ namespace AutoRest.Core.Model
         public virtual bool ContainsConstantProperties { get; set; }
 
         /// <summary>
-        /// Gets a dictionary of x-vendor extensions defined for the CompositeType.
-        /// </summary>
-        public Dictionary<string, object> Extensions { get; } = new Dictionary<string, object>();
-
-        /// <summary>
         /// Gets the union of Parent and current type properties
         /// </summary>
         [JsonIgnore]
