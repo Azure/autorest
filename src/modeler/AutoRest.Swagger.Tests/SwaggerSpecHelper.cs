@@ -64,8 +64,8 @@ namespace AutoRest.Swagger.Tests
             AutoRest.Core.AutoRestController.Generate();
             Assert.NotEmpty(((MemoryFileSystem)settings.FileSystem).VirtualStore);
 
-            var actualFiles = settings.FileSystem.GetFiles("X:\\Output", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
-            var expectedFiles = Directory.Exists(resultFolder) ? Directory.GetFiles(resultFolder, "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray() : new string[0];
+            var actualFiles = settings.FileSystem.GetFiles("X:\\Output", "*.json", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
+            var expectedFiles = Directory.Exists(resultFolder) ? Directory.GetFiles(resultFolder, "*.json", SearchOption.AllDirectories).OrderBy(f => f).ToArray() : new string[0];
             Assert.Equal(expectedFiles.Length, actualFiles.Length);
 
             for (int i = 0; i < expectedFiles.Length; i++)

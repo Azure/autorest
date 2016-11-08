@@ -76,7 +76,7 @@ namespace AutoRest.Core
             {
                 await template.ExecuteAsync().ConfigureAwait(false);
             }
-            await Write(stringBuilder.ToString(), fileName);
+            await Write(stringBuilder.ToString(), fileName, true);
         }
 
         /// <summary>
@@ -84,8 +84,9 @@ namespace AutoRest.Core
         /// </summary>
         /// <param name="template"></param>
         /// <param name="fileName"></param>
+        /// <param name="skipEmptyLines"></param>
         /// <returns></returns>
-        public async Task Write(string template, string fileName)
+        public async Task Write(string template, string fileName, bool skipEmptyLines)
         {
             string filePath = null;
 
@@ -131,7 +132,7 @@ namespace AutoRest.Core
                     {
                         await textWriter.WriteLineAsync();
                     }
-                    else if (!string.IsNullOrWhiteSpace(line))
+                    else if (!skipEmptyLines || !string.IsNullOrWhiteSpace(line))
                     {
                         await textWriter.WriteLineAsync(line);
                     }
