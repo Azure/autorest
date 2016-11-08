@@ -50,11 +50,11 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='complexBody'>
+            /// <param name='size'>
             /// </param>
-            public static void PutValid(this IReadonlyproperty operations, ReadonlyObj complexBody)
+            public static void PutValid(this IReadonlyproperty operations, int? size = default(int?))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IReadonlyproperty)s).PutValidAsync(complexBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IReadonlyproperty)s).PutValidAsync(size), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -63,14 +63,14 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='complexBody'>
+            /// <param name='size'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutValidAsync(this IReadonlyproperty operations, ReadonlyObj complexBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutValidAsync(this IReadonlyproperty operations, int? size = default(int?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
-                await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutValidWithHttpMessagesAsync(size, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

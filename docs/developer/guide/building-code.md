@@ -3,29 +3,58 @@
 ## Build Prerequisites
 AutoRest is developed primarily in C# but generates code for multiple languages. To build and test AutoRest requires a few things be installed locally.
 
-### Initialize Settings
-To set up a machine with the necessary tools for building AutoRest, run `.\Tools\initialize-settings.ps1`; this script will determine which tools are missing on your machine and installs them. **After all installations are complete, the script will restart your machine.**
+## Setting up for development on AutoRest.
+Expected time around 100 minutes to install.
 
-`initialize-settings.ps1` will look for the following tools on your machine:
-- .NET 4.5+
-- Java
-- Node.js
-- Ruby
+- 90 minutes for VS Community
+- 10 minutes for everything else 😭 
+
+### Software Installed/operations:
+- Windows 10 Anniversary - (has PackageManagement, developer mode and supports WSL.)
+- JDK 8
+- Android SDK
+- NodeJS
+- Gulp
+- Ruby 2.3
+- Ruby Devkit
+  Including missing CA Roots for Ruby
+- Python 2.7
+- Python 3.5
+- Tox
 - Gradle
-- Python
-- tox
-- Go
-- glide
-- Visual Studio 2015
-- .NET CoreCLR
+- Go 
+- Glide
+- Git (copies git to x86 program files too. )
+- allows java, node, ruby, go, glide thru the firewall.
+- vs community (full install) 
+  **NOTE**: If you want a different SKU of Visual Studio, install it first, before running this script!
+- disables strong name verification on assemblies
+- vs code
+- dotnet cli 
+- Reboot
 
-After your machine restarts, run the following commands to complete the Android SDK installation:
->`(echo y | android update sdk -u -a -t build-tools-23.0.1) && (echo y | android update sdk -u -a -t android-23) && (echo y | android update sdk -u -a -t extra-android-m2repository)`
->`Copy-Item "$($env:LOCALAPPDATA)\Android" "C:\Program Files (x86)\Android" -recurse`
+### Process
+- Enable Developer Mode in win10
+  In Cortana, search for `developer settings`
+  click "Developer Mode", answer "yes"
+  scroll down, and click apply, apply, apply
+  Close Settings.
+  Reboot (win-r `shutdown -r -t 0`)
 
-You will also want to run the following command from the project root:
->`gem install bundler && npm install && npm install gulp && npm install gulp -g && npm update`
+- After Reboot, login then:
+  Win-x , `cmd prompt (admin)` -- (ELEVATED!)
+  start Powershell and run this command:
 
+> See the actual script at: https://github.com/Azure/autorest/blob/master/Tools/setup-developerworkstation.ps1 
+
+``` powershell
+   # download the install script and run it.
+   iwr https://raw.githubusercontent.com/Azure/autorest/master/Tools/setup-developerworkstation.ps1 -OutFile c:\install-software.ps1 ; c:\install-software.ps1
+```
+
+**After this script finishes, you're done! No need to go through the instructions for manual setup.**
+
+## Manual Setup
 ### .Net
 #### on Windows 
 Install the [Microsoft Build Tools](http://go.microsoft.com/?linkid=9832060) or get them with [Visual Studio](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
@@ -40,10 +69,13 @@ To compile the code in Visual Studio IDE,
 
 Install .Net CoreCLR RTM using [these steps](https://www.microsoft.com/net/core#windows).
 
-#### on Mac or Linux
-Install Mono 4.3.0 (MonoFramework-MDK-4.3.0.372.macos10.xamarin.x86.pkg)
 
-Install DNVM using [these steps](https://docs.asp.net/en/latest/getting-started/installing-on-mac.html).
+# Mac/Linux instructions are out of date, and will be updated soon.
+
+<!--
+#### on Mac or Linux
+NEW INSTRUCTIONS COMING SOON.
+
 
 ### Node.js
 Install the latest from [nodejs.org](https://nodejs.org/). Then from the project root run `npm install`.
@@ -99,6 +131,7 @@ Add your [GOPATH](https://golang.org/doc/code.html#GOPATH) to your environment v
 #### Glide
 
 Install [glide](https://github.com/Masterminds/glide). Add glide to your `PATH`.
+-->
 
 ### Testing Your Environment
 To make sure you've set up all the prerequisites correctly, run `.\Tools\Verify-Settings.ps1` before you attempt to build.
@@ -154,7 +187,7 @@ Prior to executing `gulp` to build and then test the code, make sure that the la
 
 If you're running Windows and get errors like this while building:
 
-> Unhandled Exception: System.IO.FileLoadException: Could not load file or assembly 'AutoRest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' or one of its dependencies. Strong name validation failed. (Exception from HRESULT: 0x8013141A) ---> System.Security.SecurityException: Strong name validation failed. (Exception from HRESULT: 0x8013141A)
+> Unhandled Exception: System.IO.FileLoadException: Could not load file or assembly 'AutoRest, Version=0.17.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' or one of its dependencies. Strong name validation failed. (Exception from HRESULT: 0x8013141A) ---> System.Security.SecurityException: Strong name validation failed. (Exception from HRESULT: 0x8013141A)
 
 It means you need to disable strong name validation on your dev box:
 
@@ -164,7 +197,7 @@ It means you need to disable strong name validation on your dev box:
 
 ### Running AutoRest
 #### Command Line
-After building, the `AutoRest.exe` executable will be output to the `/binaries/net45/` folder. You can run it with the command line options specified in the [Command Line Interface](./cli.md) documentation.
+After building, the `AutoRest.exe` executable will be output to the `/binaries/net45/` folder. You can run it with the command line options specified in the [Command Line Interface](../../user/cli.md) documentation.
 
 #### Visual Studio
 You can run (and debug) AutoRest by providing the command line parameters in the properties for the AutoRest project. To set these:

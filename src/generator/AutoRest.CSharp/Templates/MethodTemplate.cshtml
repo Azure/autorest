@@ -53,6 +53,10 @@
 /// <return>
 /// A response object containing the response body and response headers.
 /// </return>
+@if (Model.Deprecated)
+{
+@:[System.Obsolete()]
+}
 public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     @foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))

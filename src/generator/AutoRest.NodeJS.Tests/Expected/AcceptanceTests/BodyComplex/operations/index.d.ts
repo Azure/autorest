@@ -985,11 +985,9 @@ export interface Readonlyproperty {
     /**
      * Put complex types that have readonly properties
      *
-     * @param {object} complexBody
-     * 
-     * @param {number} [complexBody.size]
-     * 
      * @param {object} [options] Optional Parameters.
+     * 
+     * @param {number} [options.size]
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
@@ -997,6 +995,6 @@ export interface Readonlyproperty {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putValid(complexBody: models.ReadonlyObj, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    putValid(complexBody: models.ReadonlyObj, callback: ServiceCallback<void>): void;
+    putValid(options: { size? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putValid(callback: ServiceCallback<void>): void;
 }

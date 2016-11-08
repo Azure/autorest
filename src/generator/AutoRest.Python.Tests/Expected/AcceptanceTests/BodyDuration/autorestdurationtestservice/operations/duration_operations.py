@@ -44,7 +44,7 @@ class DurationOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDuration.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyduration.models.ErrorException>`
         """
         # Construct URL
         url = '/duration/null'
@@ -91,7 +91,7 @@ class DurationOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDuration.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyduration.models.ErrorException>`
         """
         # Construct URL
         url = '/duration/positiveduration'
@@ -133,7 +133,7 @@ class DurationOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDuration.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyduration.models.ErrorException>`
         """
         # Construct URL
         url = '/duration/positiveduration'
@@ -178,7 +178,7 @@ class DurationOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDuration.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyduration.models.ErrorException>`
         """
         # Construct URL
         url = '/duration/invalid'

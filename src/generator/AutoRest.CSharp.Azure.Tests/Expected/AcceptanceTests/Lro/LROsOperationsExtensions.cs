@@ -589,12 +589,11 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='product'>
-            /// Sub Product to put
+            /// <param name='provisioningState'>
             /// </param>
-            public static SubProduct PutSubResource(this ILROsOperations operations, SubProduct product = default(SubProduct))
+            public static SubProduct PutSubResource(this ILROsOperations operations, string provisioningState = default(string))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutSubResourceAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutSubResourceAsync(provisioningState), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -603,15 +602,14 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='product'>
-            /// Sub Product to put
+            /// <param name='provisioningState'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<SubProduct> PutSubResourceAsync(this ILROsOperations operations, SubProduct product = default(SubProduct), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<SubProduct> PutSubResourceAsync(this ILROsOperations operations, string provisioningState = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
-                using (var _result = await operations.PutSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.PutSubResourceWithHttpMessagesAsync(provisioningState, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -623,12 +621,11 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='product'>
-            /// Sub Product to put
+            /// <param name='provisioningState'>
             /// </param>
-            public static SubProduct PutAsyncSubResource(this ILROsOperations operations, SubProduct product = default(SubProduct))
+            public static SubProduct PutAsyncSubResource(this ILROsOperations operations, string provisioningState = default(string))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncSubResourceAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncSubResourceAsync(provisioningState), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -637,15 +634,14 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='product'>
-            /// Sub Product to put
+            /// <param name='provisioningState'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<SubProduct> PutAsyncSubResourceAsync(this ILROsOperations operations, SubProduct product = default(SubProduct), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<SubProduct> PutAsyncSubResourceAsync(this ILROsOperations operations, string provisioningState = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
-                using (var _result = await operations.PutAsyncSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.PutAsyncSubResourceWithHttpMessagesAsync(provisioningState, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -1864,12 +1860,11 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='product'>
-            /// Sub Product to put
+            /// <param name='provisioningState'>
             /// </param>
-            public static SubProduct BeginPutSubResource(this ILROsOperations operations, SubProduct product = default(SubProduct))
+            public static SubProduct BeginPutSubResource(this ILROsOperations operations, string provisioningState = default(string))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutSubResourceAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutSubResourceAsync(provisioningState), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1878,15 +1873,14 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='product'>
-            /// Sub Product to put
+            /// <param name='provisioningState'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<SubProduct> BeginPutSubResourceAsync(this ILROsOperations operations, SubProduct product = default(SubProduct), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<SubProduct> BeginPutSubResourceAsync(this ILROsOperations operations, string provisioningState = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
-                using (var _result = await operations.BeginPutSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.BeginPutSubResourceWithHttpMessagesAsync(provisioningState, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -1898,12 +1892,11 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='product'>
-            /// Sub Product to put
+            /// <param name='provisioningState'>
             /// </param>
-            public static SubProduct BeginPutAsyncSubResource(this ILROsOperations operations, SubProduct product = default(SubProduct))
+            public static SubProduct BeginPutAsyncSubResource(this ILROsOperations operations, string provisioningState = default(string))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncSubResourceAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncSubResourceAsync(provisioningState), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1912,15 +1905,14 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='product'>
-            /// Sub Product to put
+            /// <param name='provisioningState'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<SubProduct> BeginPutAsyncSubResourceAsync(this ILROsOperations operations, SubProduct product = default(SubProduct), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<SubProduct> BeginPutAsyncSubResourceAsync(this ILROsOperations operations, string provisioningState = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
-                using (var _result = await operations.BeginPutAsyncSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.BeginPutAsyncSubResourceWithHttpMessagesAsync(provisioningState, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

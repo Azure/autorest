@@ -44,7 +44,7 @@ class IntModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyInteger.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyinteger.models.ErrorException>`
         """
         # Construct URL
         url = '/int/null'
@@ -89,7 +89,7 @@ class IntModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyInteger.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyinteger.models.ErrorException>`
         """
         # Construct URL
         url = '/int/invalid'
@@ -134,7 +134,7 @@ class IntModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyInteger.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyinteger.models.ErrorException>`
         """
         # Construct URL
         url = '/int/overflowint32'
@@ -179,7 +179,7 @@ class IntModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyInteger.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyinteger.models.ErrorException>`
         """
         # Construct URL
         url = '/int/underflowint32'
@@ -224,7 +224,7 @@ class IntModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyInteger.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyinteger.models.ErrorException>`
         """
         # Construct URL
         url = '/int/overflowint64'
@@ -269,7 +269,7 @@ class IntModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyInteger.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyinteger.models.ErrorException>`
         """
         # Construct URL
         url = '/int/underflowint64'
@@ -316,7 +316,7 @@ class IntModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyInteger.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyinteger.models.ErrorException>`
         """
         # Construct URL
         url = '/int/max/32'
@@ -360,7 +360,7 @@ class IntModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyInteger.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyinteger.models.ErrorException>`
         """
         # Construct URL
         url = '/int/max/64'
@@ -404,7 +404,7 @@ class IntModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyInteger.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyinteger.models.ErrorException>`
         """
         # Construct URL
         url = '/int/min/32'
@@ -448,7 +448,7 @@ class IntModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyInteger.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyinteger.models.ErrorException>`
         """
         # Construct URL
         url = '/int/min/64'
@@ -490,7 +490,7 @@ class IntModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyInteger.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyinteger.models.ErrorException>`
         """
         # Construct URL
         url = '/int/unixtime'
@@ -537,7 +537,7 @@ class IntModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyInteger.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyinteger.models.ErrorException>`
         """
         # Construct URL
         url = '/int/unixtime'
@@ -579,7 +579,7 @@ class IntModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyInteger.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyinteger.models.ErrorException>`
         """
         # Construct URL
         url = '/int/invalidunixtime'
@@ -624,7 +624,7 @@ class IntModelOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyInteger.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyinteger.models.ErrorException>`
         """
         # Construct URL
         url = '/int/nullunixtime'

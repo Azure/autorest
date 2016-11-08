@@ -1,0 +1,73 @@
+﻿swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  /operationInteger:
+    get:
+      operationId: test_op
+      responses:
+        200:
+          description: OK
+          type: integer
+    # Naming: paramDCBA
+    # A: readOnly (false or true or not set)
+    # B: required (false or true or not set)
+    # C: x-nullable (false or true or not set)
+    # D: default (not set or set)
+    parameters: [
+        { in: query, type: integer, name: param0000,              x-nullable: false, required: false, readOnly: false },
+        { in: query, type: integer, name: param0001,              x-nullable: false, required: false, readOnly: true  },
+        { in: query, type: integer, name: param0002,              x-nullable: false, required: false,                 },
+        { in: query, type: integer, name: param0010,              x-nullable: false, required: true , readOnly: false },
+        { in: query, type: integer, name: param0011,              x-nullable: false, required: true , readOnly: true  },
+        { in: query, type: integer, name: param0012,              x-nullable: false, required: true ,                 },
+        { in: query, type: integer, name: param0020,              x-nullable: false,                  readOnly: false },
+        { in: query, type: integer, name: param0021,              x-nullable: false,                  readOnly: true  },
+        { in: query, type: integer, name: param0022,              x-nullable: false,                                  },
+        { in: query, type: integer, name: param0100,              x-nullable: true , required: false, readOnly: false },
+        { in: query, type: integer, name: param0101,              x-nullable: true , required: false, readOnly: true  },
+        { in: query, type: integer, name: param0102,              x-nullable: true , required: false,                 },
+        { in: query, type: integer, name: param0110,              x-nullable: true , required: true , readOnly: false },
+        { in: query, type: integer, name: param0111,              x-nullable: true , required: true , readOnly: true  },
+        { in: query, type: integer, name: param0112,              x-nullable: true , required: true ,                 },
+        { in: query, type: integer, name: param0120,              x-nullable: true ,                  readOnly: false },
+        { in: query, type: integer, name: param0121,              x-nullable: true ,                  readOnly: true  },
+        { in: query, type: integer, name: param0122,              x-nullable: true ,                                  },
+        { in: query, type: integer, name: param0200,                                 required: false, readOnly: false },
+        { in: query, type: integer, name: param0201,                                 required: false, readOnly: true  },
+        { in: query, type: integer, name: param0202,                                 required: false,                 },
+        { in: query, type: integer, name: param0210,                                 required: true , readOnly: false },
+        { in: query, type: integer, name: param0211,                                 required: true , readOnly: true  },
+        { in: query, type: integer, name: param0212,                                 required: true ,                 },
+        { in: query, type: integer, name: param0220,                                                  readOnly: false },
+        { in: query, type: integer, name: param0221,                                                  readOnly: true  },
+        { in: query, type: integer, name: param0222,                                                                  },
+        { in: query, type: integer, name: param1000, default: 42, x-nullable: false, required: false, readOnly: false },
+        { in: query, type: integer, name: param1001, default: 42, x-nullable: false, required: false, readOnly: true  },
+        { in: query, type: integer, name: param1002, default: 42, x-nullable: false, required: false,                 },
+        { in: query, type: integer, name: param1010, default: 42, x-nullable: false, required: true , readOnly: false },
+        { in: query, type: integer, name: param1011, default: 42, x-nullable: false, required: true , readOnly: true  },
+        { in: query, type: integer, name: param1012, default: 42, x-nullable: false, required: true ,                 },
+        { in: query, type: integer, name: param1020, default: 42, x-nullable: false,                  readOnly: false },
+        { in: query, type: integer, name: param1021, default: 42, x-nullable: false,                  readOnly: true  },
+        { in: query, type: integer, name: param1022, default: 42, x-nullable: false,                                  },
+        { in: query, type: integer, name: param1100, default: 42, x-nullable: true , required: false, readOnly: false },
+        { in: query, type: integer, name: param1101, default: 42, x-nullable: true , required: false, readOnly: true  },
+        { in: query, type: integer, name: param1102, default: 42, x-nullable: true , required: false,                 },
+        { in: query, type: integer, name: param1110, default: 42, x-nullable: true , required: true , readOnly: false },
+        { in: query, type: integer, name: param1111, default: 42, x-nullable: true , required: true , readOnly: true  },
+        { in: query, type: integer, name: param1112, default: 42, x-nullable: true , required: true ,                 },
+        { in: query, type: integer, name: param1120, default: 42, x-nullable: true ,                  readOnly: false },
+        { in: query, type: integer, name: param1121, default: 42, x-nullable: true ,                  readOnly: true  },
+        { in: query, type: integer, name: param1122, default: 42, x-nullable: true ,                                  },
+        { in: query, type: integer, name: param1200, default: 42,                    required: false, readOnly: false },
+        { in: query, type: integer, name: param1201, default: 42,                    required: false, readOnly: true  },
+        { in: query, type: integer, name: param1202, default: 42,                    required: false,                 },
+        { in: query, type: integer, name: param1210, default: 42,                    required: true , readOnly: false },
+        { in: query, type: integer, name: param1211, default: 42,                    required: true , readOnly: true  },
+        { in: query, type: integer, name: param1212, default: 42,                    required: true ,                 },
+        { in: query, type: integer, name: param1220, default: 42,                                     readOnly: false },
+        { in: query, type: integer, name: param1221, default: 42,                                     readOnly: true  },
+        { in: query, type: integer, name: param1222, default: 42,                                                     }
+    ]

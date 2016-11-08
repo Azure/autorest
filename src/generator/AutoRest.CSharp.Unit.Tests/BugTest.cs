@@ -102,15 +102,15 @@ namespace AutoRest.CSharp.Unit.Tests
             return fs;
         }
 
-        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string modeler = "Swagger")
+        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string codeGenerator = "CSharp", string modeler = "Swagger")
         {
-           return GenerateCodeForTestFromSpec($"{GetType().Name}", modeler);
+           return GenerateCodeForTestFromSpec($"{GetType().Name}", codeGenerator, modeler);
         }
 
-        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string modeler = "Swagger")
+        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator="CSharp", string modeler = "Swagger")
         {
             var fs = CreateMockFilesystem();
-            dirName.GenerateCodeInto(fs, modeler);
+            dirName.GenerateCodeInto(fs, codeGenerator, modeler);
             return fs;
         }
 
@@ -179,7 +179,9 @@ namespace AutoRest.CSharp.Unit.Tests
                         .Concat(new[]
                         {
                             Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                "Microsoft.Rest.ClientRuntime.dll")
+                                "Microsoft.Rest.ClientRuntime.dll"),
+                            Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                                "Microsoft.Rest.ClientRuntime.Azure.dll")
                         })
                     ));
             var result = await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);

@@ -43,7 +43,7 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
@@ -101,14 +101,14 @@ class PagingOperations(object):
          the operation
         :type paging_get_multiple_pages_options:
          :class:`PagingGetMultiplePagesOptions
-         <Fixtures.AcceptanceTestsPaging.models.PagingGetMultiplePagesOptions>`
+         <fixtures.acceptancetestspaging.models.PagingGetMultiplePagesOptions>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         maxresults = None
@@ -180,14 +180,14 @@ class PagingOperations(object):
          for the operation
         :type paging_get_odata_multiple_pages_options:
          :class:`PagingGetOdataMultiplePagesOptions
-         <Fixtures.AcceptanceTestsPaging.models.PagingGetOdataMultiplePagesOptions>`
+         <fixtures.acceptancetestspaging.models.PagingGetOdataMultiplePagesOptions>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged1
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged1>`
+         <fixtures.acceptancetestspaging.models.ProductPaged1>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         maxresults = None
@@ -256,7 +256,7 @@ class PagingOperations(object):
          parameters for the operation
         :type paging_get_multiple_pages_with_offset_options:
          :class:`PagingGetMultiplePagesWithOffsetOptions
-         <Fixtures.AcceptanceTestsPaging.models.PagingGetMultiplePagesWithOffsetOptions>`
+         <fixtures.acceptancetestspaging.models.PagingGetMultiplePagesWithOffsetOptions>`
         :param client_request_id:
         :type client_request_id: str
         :param dict custom_headers: headers that will be added to the request
@@ -265,7 +265,7 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         maxresults = None
@@ -345,7 +345,7 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
@@ -405,7 +405,7 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
@@ -463,7 +463,7 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
@@ -521,7 +521,7 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
@@ -579,7 +579,7 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
@@ -641,7 +641,7 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged1
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged1>`
+         <fixtures.acceptancetestspaging.models.ProductPaged1>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
@@ -707,14 +707,14 @@ class PagingOperations(object):
 
         :param custom_parameter_group: Additional parameters for the operation
         :type custom_parameter_group: :class:`CustomParameterGroup
-         <Fixtures.AcceptanceTestsPaging.models.CustomParameterGroup>`
+         <fixtures.acceptancetestspaging.models.CustomParameterGroup>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged1
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged1>`
+         <fixtures.acceptancetestspaging.models.ProductPaged1>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         api_version = None

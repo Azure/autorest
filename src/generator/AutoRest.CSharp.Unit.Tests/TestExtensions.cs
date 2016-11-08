@@ -70,21 +70,21 @@ namespace AutoRest.CSharp.Unit.Tests
             return fileSystem.GetFiles(path, "*.*", s).Where(f => fileExts.Contains(f.Substring(f.LastIndexOf(".")+1))).ToArray();
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string inputDir,  MemoryFileSystem fileSystem, string modeler = "Swagger")
+        internal static MemoryFileSystem GenerateCodeInto(this string inputDir,  MemoryFileSystem fileSystem, string codeGenerator="CSharp", string modeler = "Swagger")
         {
             using (NewContext)
             {
             var settings = new Settings
             {
                 Modeler = modeler,
-                CodeGenerator = "CSharp",
+                CodeGenerator =codeGenerator,
                 FileSystem = fileSystem,
                 OutputDirectory = "GeneratedCode",
                 Namespace = "Test"
             };
 
             return inputDir.GenerateCodeInto(fileSystem, settings);
-        }
+            }
         }
 
         internal static MemoryFileSystem GenerateCodeInto(this string inputDir, MemoryFileSystem fileSystem, Settings settings)
@@ -93,7 +93,8 @@ namespace AutoRest.CSharp.Unit.Tests
             var fileExt = (File.Exists(Path.Combine("Resource", Path.Combine(inputDir, inputDir + ".yaml"))) ? ".yaml" : ".json");
             settings.Input = Path.Combine("Resource", Path.Combine(inputDir, inputDir + fileExt));
 
-            var plugin = new PluginCs();
+
+            var plugin = ExtensionsLoader.GetPlugin();
             var modeler = ExtensionsLoader.GetModeler();
             var codeModel = modeler.Build();
 
@@ -155,5 +156,7 @@ namespace AutoRest.CSharp.Unit.Tests
 
             return outputFolder;
         }
+
+        internal static bool IsNullableValueType(this Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
     }
 }

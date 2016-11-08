@@ -47,7 +47,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/param/existingkey'
@@ -86,7 +86,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/response/existingkey'
@@ -130,7 +130,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/param/protectedkey'
@@ -169,7 +169,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/response/protectedkey'
@@ -216,7 +216,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/param/prim/integer'
@@ -259,7 +259,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/response/prim/integer'
@@ -307,7 +307,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/param/prim/long'
@@ -350,7 +350,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/response/prim/long'
@@ -398,7 +398,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/param/prim/float'
@@ -441,7 +441,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/response/prim/float'
@@ -489,7 +489,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/param/prim/double'
@@ -532,7 +532,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/response/prim/double'
@@ -580,7 +580,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/param/prim/bool'
@@ -623,7 +623,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/response/prim/bool'
@@ -673,7 +673,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/param/prim/string'
@@ -718,7 +718,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/response/prim/string'
@@ -767,7 +767,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/param/prim/date'
@@ -810,7 +810,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/response/prim/date'
@@ -860,7 +860,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/param/prim/datetime'
@@ -904,7 +904,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/response/prim/datetime'
@@ -954,7 +954,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/param/prim/datetimerfc1123'
@@ -999,7 +999,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/response/prim/datetimerfc1123'
@@ -1048,7 +1048,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/param/prim/duration'
@@ -1091,7 +1091,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/response/prim/duration'
@@ -1139,7 +1139,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/param/prim/byte'
@@ -1182,7 +1182,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/response/prim/byte'
@@ -1222,7 +1222,7 @@ class HeaderOperations(object):
         :param value: Send a post request with header values 'GREY'. Possible
          values include: 'White', 'black', 'GREY'
         :type value: str or :class:`GreyscaleColors
-         <Fixtures.AcceptanceTestsHeader.models.GreyscaleColors>`
+         <fixtures.acceptancetestsheader.models.GreyscaleColors>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1232,7 +1232,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/param/prim/enum'
@@ -1276,7 +1276,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/response/prim/enum'
@@ -1319,7 +1319,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsHeader.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsheader.models.ErrorException>`
         """
         # Construct URL
         url = '/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'

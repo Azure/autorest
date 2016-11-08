@@ -50,7 +50,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         bool_path = True
 
@@ -94,7 +94,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         bool_path = False
 
@@ -138,7 +138,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         int_path = 1000000
 
@@ -182,7 +182,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         int_path = -1000000
 
@@ -226,7 +226,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         long_path = 10000000000
 
@@ -270,7 +270,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         long_path = -10000000000
 
@@ -314,7 +314,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         float_path = 1.034E+20
 
@@ -358,7 +358,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         float_path = -1.034E-20
 
@@ -402,7 +402,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         double_path = 9999999.999
 
@@ -446,7 +446,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         double_path = -9999999.999
 
@@ -490,7 +490,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         string_path = "啊齄丂狛狜隣郎隣兀﨩"
 
@@ -534,7 +534,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         string_path = "begin!*'();:@ &=+$,/?#[]end"
 
@@ -578,7 +578,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         string_path = ""
 
@@ -624,7 +624,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/paths/string/null/{stringPath}'
@@ -660,7 +660,7 @@ class PathsOperations(object):
         :param enum_path: send the value green. Possible values include: 'red
          color', 'green color', 'blue color'
         :type enum_path: str or :class:`UriColor
-         <Fixtures.AcceptanceTestsUrl.models.UriColor>`
+         <fixtures.acceptancetestsurl.models.UriColor>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -670,7 +670,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/paths/enum/green%20color/{enumPath}'
@@ -707,7 +707,7 @@ class PathsOperations(object):
         :param enum_path: send null should throw. Possible values include:
          'red color', 'green color', 'blue color'
         :type enum_path: str or :class:`UriColor
-         <Fixtures.AcceptanceTestsUrl.models.UriColor>`
+         <fixtures.acceptancetestsurl.models.UriColor>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -717,7 +717,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/paths/string/null/{enumPath}'
@@ -762,7 +762,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/paths/byte/multibyte/{bytePath}'
@@ -804,7 +804,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/paths/byte/empty/{bytePath}'
@@ -848,7 +848,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/paths/byte/null/{bytePath}'
@@ -890,7 +890,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/paths/date/2012-01-01/{datePath}'
@@ -935,7 +935,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/paths/date/null/{datePath}'
@@ -977,7 +977,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}'
@@ -1022,7 +1022,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/paths/datetime/null/{dateTimePath}'
@@ -1066,7 +1066,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/paths/string/bG9yZW0/{base64UrlPath}'
@@ -1112,7 +1112,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}'
@@ -1156,7 +1156,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/paths/int/1460505600/{unixTimeUrlPath}'

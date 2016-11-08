@@ -48,7 +48,7 @@ class ApiVersionLocalOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/apiVersion/method/string/none/query/local/2.0'
@@ -95,7 +95,7 @@ class ApiVersionLocalOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/apiVersion/method/string/none/query/local/null'
@@ -140,7 +140,7 @@ class ApiVersionLocalOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/apiVersion/path/string/none/query/local/2.0'
@@ -184,7 +184,7 @@ class ApiVersionLocalOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/apiVersion/swagger/string/none/query/local/2.0'

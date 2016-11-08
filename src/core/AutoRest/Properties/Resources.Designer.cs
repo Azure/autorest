@@ -112,7 +112,11 @@ namespace AutoRest.Properties {
         ///##Code Generators
         ///$generators-start$
         ///**-$generator$** $generator-desc$
+        /// ##Parameters
+        /// $generator-parameters-start$
+        ///  **-$generator-parameters-name$** $generator-parameters-desc$
         ///
+        /// $generator-parameters-end$
         ///$generators-end$
         ///
         ///##Examples
@@ -143,7 +147,12 @@ namespace AutoRest.Properties {
         ///
         ///Code Generators:
         ///$generators-start$
-        ///  -$generator$: $generator-desc$
+        ///  -$generator$: $generator-desc$ 
+        ///  Parameters:
+        /// $generator-parameters-start$
+        ///  -$generator-parameters-name$: $generator-parameters-desc$
+        /// $generator-parameters-end$
+        ///
         ///$generators-end$
         ///
         ///Examples:

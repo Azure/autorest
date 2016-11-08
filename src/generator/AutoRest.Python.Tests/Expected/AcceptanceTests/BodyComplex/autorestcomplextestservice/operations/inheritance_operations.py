@@ -41,11 +41,11 @@ class InheritanceOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Siamese
-         <Fixtures.AcceptanceTestsBodyComplex.models.Siamese>`
+         <fixtures.acceptancetestsbodycomplex.models.Siamese>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/inheritance/valid'
@@ -86,7 +86,7 @@ class InheritanceOperations(object):
          "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato"
          with id=-1 and food="french fries".
         :type complex_body: :class:`Siamese
-         <Fixtures.AcceptanceTestsBodyComplex.models.Siamese>`
+         <fixtures.acceptancetestsbodycomplex.models.Siamese>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -96,7 +96,7 @@ class InheritanceOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/inheritance/valid'

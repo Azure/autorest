@@ -44,14 +44,14 @@ class StorageAccountsOperations(object):
          only.
         :type account_name:
          :class:`StorageAccountCheckNameAvailabilityParameters
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountCheckNameAvailabilityParameters>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccountCheckNameAvailabilityParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`CheckNameAvailabilityResult
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.CheckNameAvailabilityResult>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.CheckNameAvailabilityResult>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -119,14 +119,14 @@ class StorageAccountsOperations(object):
         :type account_name: str
         :param parameters: The parameters to provide for the created account.
         :type parameters: :class:`StorageAccountCreateParameters
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountCreateParameters>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccountCreateParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`StorageAccount
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccount>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -279,7 +279,7 @@ class StorageAccountsOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccount
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccount>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -351,14 +351,14 @@ class StorageAccountsOperations(object):
         :param parameters: The parameters to update on the account. Note that
          only one property can be changed at a time using this API.
         :type parameters: :class:`StorageAccountUpdateParameters
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountUpdateParameters>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccountUpdateParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccount
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccount>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -425,7 +425,7 @@ class StorageAccountsOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountKeys
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountKeys>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccountKeys>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -485,7 +485,7 @@ class StorageAccountsOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountPaged
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountPaged>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccountPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
@@ -553,7 +553,7 @@ class StorageAccountsOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountPaged
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountPaged>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccountPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
@@ -621,14 +621,14 @@ class StorageAccountsOperations(object):
         :type account_name: str
         :param key_name: Possible values include: 'key1', 'key2'
         :type key_name: str or :class:`KeyName
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.KeyName>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.KeyName>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountKeys
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountKeys>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccountKeys>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
