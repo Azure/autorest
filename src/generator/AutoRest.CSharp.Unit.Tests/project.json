@@ -38,6 +38,7 @@
     "AutoRest.Core": { "target": "project" },
     "AutoRest.Tooling.CSharp.Compiler": { "target": "project" },
     "AutoRest.CSharp": { "target": "project" },
+    "AutoRest.CompositeSwagger": {"target": "project"},
     "AutoRest.CSharp.Azure": { "target": "project" }
   }
 }
