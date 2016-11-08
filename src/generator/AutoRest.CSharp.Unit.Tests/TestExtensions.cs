@@ -74,16 +74,16 @@ namespace AutoRest.CSharp.Unit.Tests
         {
             using (NewContext)
             {
-            var settings = new Settings
-            {
-                Modeler = modeler,
-                CodeGenerator =codeGenerator,
-                FileSystem = fileSystem,
-                OutputDirectory = "GeneratedCode",
-                Namespace = "Test"
-            };
+                var settings = new Settings
+                {
+                    Modeler = modeler,
+                    CodeGenerator =codeGenerator,
+                    FileSystem = fileSystem,
+                    OutputDirectory = "GeneratedCode",
+                    Namespace = "Test"
+                };
 
-            return inputDir.GenerateCodeInto(fileSystem, settings);
+                return inputDir.GenerateCodeInto(fileSystem, settings);
             }
         }
 
