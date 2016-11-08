@@ -29,7 +29,7 @@ namespace AutoRest.Core.Utilities
 
         public string MakePathRooted(Uri rootPath, string relativePath)
         {
-            return (new Uri(Path.Combine(rootPath.ToString(), relativePath), UriKind.Relative)).ToString();
+            return (new Uri(Path.Combine(rootPath.ToString(), relativePath).ToString(), UriKind.Relative)).ToString();
         }
 
         public string GetParentDir(string path)

@@ -33,7 +33,7 @@ namespace AutoRest.Core.Utilities
         /// <returns></returns>
         public string MakePathRooted(Uri rootPath, string relativePath)
         {
-            var combined = new Uri(rootPath, relativePath);
+            var combined = new Uri(Path.Combine(rootPath.ToString(), relativePath));
             return combined.IsAbsoluteUri ? combined.AbsoluteUri : combined.LocalPath;
         }
 
