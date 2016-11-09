@@ -41,10 +41,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 var warnings = result.Messages.Where(
                     each => each.Severity == DiagnosticSeverity.Warning
                             && !SuppressWarnings.Contains(each.Id)).ToArray();
-
-                // use this to dump the files to disk for examination
-                // fileSystem.SaveFilesToTemp("bug1285");
-
+                
                 // filter the errors
                 var errors = result.Messages.Where(each => each.Severity == DiagnosticSeverity.Error).ToArray();
 

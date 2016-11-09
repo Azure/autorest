@@ -67,10 +67,10 @@ namespace AutoRest.Swagger
         public override IModelType BuildServiceType(string serviceTypeName)
         {
             // Check if already generated
-            if (serviceTypeName != null && Modeler.GeneratedTypes.ContainsKey(serviceTypeName))
-            {
-                return Modeler.GeneratedTypes[serviceTypeName];
-            }
+            // if (serviceTypeName != null && Modeler.GeneratedTypes.ContainsKey(serviceTypeName))
+            // {
+            //    return Modeler.GeneratedTypes[serviceTypeName];
+            // }
 
             var swaggerParameter = Modeler.Unwrap(_swaggerParameter);
 
