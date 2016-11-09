@@ -192,9 +192,9 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             /// <summary>
-            /// A paging operation that includes a nextLink that has 10 pages, of which
-            /// the 2nd call fails first with 500. The client should retry and finish all
-            /// 10 pages eventually.
+            /// A paging operation that includes a nextLink that has 10 pages, of which the
+            /// 2nd call fails first with 500. The client should retry and finish all 10
+            /// pages eventually.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -205,9 +205,9 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             /// <summary>
-            /// A paging operation that includes a nextLink that has 10 pages, of which
-            /// the 2nd call fails first with 500. The client should retry and finish all
-            /// 10 pages eventually.
+            /// A paging operation that includes a nextLink that has 10 pages, of which the
+            /// 2nd call fails first with 500. The client should retry and finish all 10
+            /// pages eventually.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -674,9 +674,9 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             /// <summary>
-            /// A paging operation that includes a nextLink that has 10 pages, of which
-            /// the 2nd call fails first with 500. The client should retry and finish all
-            /// 10 pages eventually.
+            /// A paging operation that includes a nextLink that has 10 pages, of which the
+            /// 2nd call fails first with 500. The client should retry and finish all 10
+            /// pages eventually.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -690,9 +690,9 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             /// <summary>
-            /// A paging operation that includes a nextLink that has 10 pages, of which
-            /// the 2nd call fails first with 500. The client should retry and finish all
-            /// 10 pages eventually.
+            /// A paging operation that includes a nextLink that has 10 pages, of which the
+            /// 2nd call fails first with 500. The client should retry and finish all 10
+            /// pages eventually.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.

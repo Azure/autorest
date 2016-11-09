@@ -25,8 +25,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// Initializes a new instance of the
         /// PagingGetMultiplePagesWithOffsetNextOptions class.
         /// </summary>
-        /// <param name="maxresults">Sets the maximum number of items to
-        /// return in the response.</param>
+        /// <param name="maxresults">Sets the maximum number of items to return
+        /// in the response.</param>
         /// <param name="timeout">Sets the maximum time that the server can
         /// spend processing the request, in seconds. The default is 30
         /// seconds.</param>

@@ -13,6 +13,7 @@ namespace Fixtures.AdditionalProperties
 
     /// <summary>
     /// **This example has a working backend hosted in Heroku**
+    /// 
     /// </summary>
     public partial class PetStoreonHeroku : Microsoft.Rest.ServiceClient<PetStoreonHeroku>, IPetStoreonHeroku
     {

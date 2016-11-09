@@ -84,9 +84,9 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// </exception>
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutValidWithHttpMessagesAsync(Fish complexBody, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Put complex types that are polymorphic, attempting to omit
-        /// required 'birthday' field - the request should not be allowed
-        /// from the client
+        /// Put complex types that are polymorphic, attempting to omit required
+        /// 'birthday' field - the request should not be allowed from the
+        /// client
         /// </summary>
         /// <param name='complexBody'>
         /// Please attempt put a sawshark that looks like this, the client

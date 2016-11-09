@@ -1129,8 +1129,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
 
             /// <summary>
             /// Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01
-            /// GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492
-            /// 10:15:01 GMT"}
+            /// GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01
+            /// GMT"}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -1142,8 +1142,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
 
             /// <summary>
             /// Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01
-            /// GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492
-            /// 10:15:01 GMT"}
+            /// GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01
+            /// GMT"}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -1311,8 +1311,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             }
 
             /// <summary>
-            /// Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
-            /// first item base64 encoded
+            /// Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first
+            /// item base64 encoded
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -1323,8 +1323,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             }
 
             /// <summary>
-            /// Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
-            /// first item base64 encoded
+            /// Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first
+            /// item base64 encoded
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -1850,8 +1850,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
 
             /// <summary>
             /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-            /// "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
+            /// "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -1863,8 +1863,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
 
             /// <summary>
             /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-            /// "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
+            /// "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -1882,8 +1882,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
 
             /// <summary>
             /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-            /// "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
+            /// "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -1897,8 +1897,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
 
             /// <summary>
             /// Get an dictionaries of dictionaries of type &lt;string, string&gt; with
-            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four",
-            /// "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+            /// value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
+            /// "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.

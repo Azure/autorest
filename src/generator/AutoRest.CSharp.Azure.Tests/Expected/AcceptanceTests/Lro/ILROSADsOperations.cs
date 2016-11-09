@@ -213,9 +213,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Product>> PutError201NoProvisioningStatePayloadWithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
+        /// request, with an entity that contains ProvisioningState=’Creating’.
+        /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+        /// operation status
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -235,9 +235,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryNoStatusHeaders>> PutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
+        /// request, with an entity that contains ProvisioningState=’Creating’.
+        /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+        /// operation status
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -303,9 +303,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<LROSADsPost202NoLocationHeaders>> Post202NoLocationWithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
+        /// request, with an entity that contains ProvisioningState=’Creating’.
+        /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+        /// operation status
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -342,9 +342,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Product>> Put200InvalidJsonWithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. The endpoint indicated in the
-        /// Azure-AsyncOperation header is invalid.
+        /// request, with an entity that contains ProvisioningState=’Creating’.
+        /// The endpoint indicated in the Azure-AsyncOperation header is
+        /// invalid.
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -364,9 +364,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>> PutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
+        /// request, with an entity that contains ProvisioningState=’Creating’.
+        /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+        /// operation status
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -401,8 +401,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<LROSADsDelete202RetryInvalidHeaderHeaders>> Delete202RetryInvalidHeaderWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
-        /// request. The endpoint indicated in the Azure-AsyncOperation
-        /// header is invalid
+        /// request. The endpoint indicated in the Azure-AsyncOperation header
+        /// is invalid
         /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -448,9 +448,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<LROSADsPost202RetryInvalidHeaderHeaders>> Post202RetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. The endpoint indicated in the
-        /// Azure-AsyncOperation header is invalid.
+        /// request, with an entity that contains ProvisioningState=’Creating’.
+        /// The endpoint indicated in the Azure-AsyncOperation header is
+        /// invalid.
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -467,9 +467,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>> PostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
+        /// request, with an entity that contains ProvisioningState=’Creating’.
+        /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+        /// operation status
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -681,9 +681,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Product>> BeginPutError201NoProvisioningStatePayloadWithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
+        /// request, with an entity that contains ProvisioningState=’Creating’.
+        /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+        /// operation status
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -703,9 +703,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryNoStatusHeaders>> BeginPutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
+        /// request, with an entity that contains ProvisioningState=’Creating’.
+        /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+        /// operation status
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -771,9 +771,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<LROSADsPost202NoLocationHeaders>> BeginPost202NoLocationWithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
+        /// request, with an entity that contains ProvisioningState=’Creating’.
+        /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+        /// operation status
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -810,9 +810,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Product>> BeginPut200InvalidJsonWithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. The endpoint indicated in the
-        /// Azure-AsyncOperation header is invalid.
+        /// request, with an entity that contains ProvisioningState=’Creating’.
+        /// The endpoint indicated in the Azure-AsyncOperation header is
+        /// invalid.
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -832,9 +832,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>> BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running put request, service returns a 200 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
+        /// request, with an entity that contains ProvisioningState=’Creating’.
+        /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+        /// operation status
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -869,8 +869,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<LROSADsDelete202RetryInvalidHeaderHeaders>> BeginDelete202RetryInvalidHeaderWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running delete request, service returns a 202 to the initial
-        /// request. The endpoint indicated in the Azure-AsyncOperation
-        /// header is invalid
+        /// request. The endpoint indicated in the Azure-AsyncOperation header
+        /// is invalid
         /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -916,9 +916,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<LROSADsPost202RetryInvalidHeaderHeaders>> BeginPost202RetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. The endpoint indicated in the
-        /// Azure-AsyncOperation header is invalid.
+        /// request, with an entity that contains ProvisioningState=’Creating’.
+        /// The endpoint indicated in the Azure-AsyncOperation header is
+        /// invalid.
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -935,9 +935,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>> BeginPostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Long running post request, service returns a 202 to the initial
-        /// request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
+        /// request, with an entity that contains ProvisioningState=’Creating’.
+        /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+        /// operation status
         /// </summary>
         /// <param name='product'>
         /// Product to put

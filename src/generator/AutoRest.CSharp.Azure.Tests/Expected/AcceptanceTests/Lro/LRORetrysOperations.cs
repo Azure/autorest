@@ -43,8 +43,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
 
         /// <summary>
         /// Long running put request, service returns a 500, then a 201 to the initial
-        /// request, with an entity that contains ProvisioningState=’Creating’.
-        /// Polls return this value until the last poll returns a ‘200’ with
+        /// request, with an entity that contains ProvisioningState=’Creating’.  Polls
+        /// return this value until the last poll returns a ‘200’ with
         /// ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='product'>
@@ -93,9 +93,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
 
         /// <summary>
         /// Long running delete request, service returns a 500, then a  202 to the
-        /// initial request, with an entity that contains
-        /// ProvisioningState=’Accepted’.  Polls return this value until the last
-        /// poll returns a ‘200’ with ProvisioningState=’Succeeded’
+        /// initial request, with an entity that contains ProvisioningState=’Accepted’.
+        /// Polls return this value until the last poll returns a ‘200’ with
+        /// ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -150,9 +150,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Long running post request, service returns a 500, then a 202 to the
-        /// initial request, with 'Location' and 'Retry-After' headers, Polls return
-        /// a 200 with a response body after success
+        /// Long running post request, service returns a 500, then a 202 to the initial
+        /// request, with 'Location' and 'Retry-After' headers, Polls return a 200 with
+        /// a response body after success
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -172,10 +172,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Long running post request, service returns a 500, then a 202 to the
-        /// initial request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
+        /// Long running post request, service returns a 500, then a 202 to the initial
+        /// request, with an entity that contains ProvisioningState=’Creating’. Poll
+        /// the endpoint indicated in the Azure-AsyncOperation header for operation
+        /// status
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -196,8 +196,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
 
         /// <summary>
         /// Long running put request, service returns a 500, then a 201 to the initial
-        /// request, with an entity that contains ProvisioningState=’Creating’.
-        /// Polls return this value until the last poll returns a ‘200’ with
+        /// request, with an entity that contains ProvisioningState=’Creating’.  Polls
+        /// return this value until the last poll returns a ‘200’ with
         /// ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='product'>
@@ -567,9 +567,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
 
         /// <summary>
         /// Long running delete request, service returns a 500, then a  202 to the
-        /// initial request, with an entity that contains
-        /// ProvisioningState=’Accepted’.  Polls return this value until the last
-        /// poll returns a ‘200’ with ProvisioningState=’Succeeded’
+        /// initial request, with an entity that contains ProvisioningState=’Accepted’.
+        /// Polls return this value until the last poll returns a ‘200’ with
+        /// ProvisioningState=’Succeeded’
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -1059,9 +1059,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Long running post request, service returns a 500, then a 202 to the
-        /// initial request, with 'Location' and 'Retry-After' headers, Polls return
-        /// a 200 with a response body after success
+        /// Long running post request, service returns a 500, then a 202 to the initial
+        /// request, with 'Location' and 'Retry-After' headers, Polls return a 200 with
+        /// a response body after success
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -1220,10 +1220,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Long running post request, service returns a 500, then a 202 to the
-        /// initial request, with an entity that contains
-        /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        /// Azure-AsyncOperation header for operation status
+        /// Long running post request, service returns a 500, then a 202 to the initial
+        /// request, with an entity that contains ProvisioningState=’Creating’. Poll
+        /// the endpoint indicated in the Azure-AsyncOperation header for operation
+        /// status
         /// </summary>
         /// <param name='product'>
         /// Product to put

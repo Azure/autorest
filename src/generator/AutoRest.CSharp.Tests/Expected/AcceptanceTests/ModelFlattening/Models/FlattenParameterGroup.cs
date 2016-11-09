@@ -26,7 +26,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// </summary>
         /// <param name="name">Product name with value 'groupproduct'</param>
         /// <param name="productId">Unique identifier representing a specific
-        /// product for a given latitude & longitude. For example, uberX in
+        /// product for a given latitude &amp; longitude. For example, uberX in
         /// San Francisco will have a different product_id than uberX in Los
         /// Angeles.</param>
         /// <param name="maxProductDisplayName">Display name of
@@ -52,7 +52,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
 
         /// <summary>
         /// Gets or sets unique identifier representing a specific product for
-        /// a given latitude &amp; longitude. For example, uberX in San
+        /// a given latitude &amp;amp; longitude. For example, uberX in San
         /// Francisco will have a different product_id than uberX in Los
         /// Angeles.
         /// </summary>

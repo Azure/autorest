@@ -680,8 +680,8 @@ namespace Fixtures.AcceptanceTestsUrl
             /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayPath'>
-            /// an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-            /// null, ''] using the csv-array format
+            /// an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null,
+            /// ''] using the csv-array format
             /// </param>
             public static void ArrayCsvInPath(this IPaths operations, System.Collections.Generic.IList<string> arrayPath)
             {
@@ -696,8 +696,8 @@ namespace Fixtures.AcceptanceTestsUrl
             /// The operations group for this extension method.
             /// </param>
             /// <param name='arrayPath'>
-            /// an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-            /// null, ''] using the csv-array format
+            /// an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null,
+            /// ''] using the csv-array format
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.

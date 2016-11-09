@@ -737,8 +737,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
         /// </exception>
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutDurationValidWithHttpMessagesAsync(System.Collections.Generic.IList<System.TimeSpan?> arrayBody, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25,
-        /// 29, 43)] with each item encoded in base64
+        /// Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29,
+        /// 43)] with each item encoded in base64
         /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -790,8 +790,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
         /// </exception>
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<byte[]>>> GetByteInvalidNullWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get array value ['a string that gets encoded with base64url',
-        /// 'test string' 'Lorem ipsum'] with the items base64url encoded
+        /// Get array value ['a string that gets encoded with base64url', 'test
+        /// string' 'Lorem ipsum'] with the items base64url encoded
         /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -891,8 +891,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<Product>>> GetComplexValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Put an array of complex type with values [{'integer': 1 'string':
-        /// '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string':
-        /// '6'}]
+        /// '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
@@ -942,8 +941,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
         /// </exception>
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<System.Collections.Generic.IList<string>>>> GetArrayEmptyWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get an array of array of strings [['1', '2', '3'], null, ['7',
-        /// '8', '9']]
+        /// Get an array of array of strings [['1', '2', '3'], null, ['7', '8',
+        /// '9']]
         /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -976,8 +975,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
         /// </exception>
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<System.Collections.Generic.IList<string>>>> GetArrayItemEmptyWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get an array of array of strings [['1', '2', '3'], ['4', '5',
-        /// '6'], ['7', '8', '9']]
+        /// Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'],
+        /// ['7', '8', '9']]
         /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -993,8 +992,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
         /// </exception>
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<System.Collections.Generic.IList<string>>>> GetArrayValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Put An array of array of strings [['1', '2', '3'], ['4', '5',
-        /// '6'], ['7', '8', '9']]
+        /// Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'],
+        /// ['7', '8', '9']]
         /// </summary>
         /// <param name='arrayBody'>
         /// </param>
@@ -1046,8 +1045,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, string>>>> GetDictionaryEmptyWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get an array of Dictionaries of type &lt;string, string&gt; with
-        /// value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7':
-        /// 'seven', '8': 'eight', '9': 'nine'}]
+        /// value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven',
+        /// '8': 'eight', '9': 'nine'}]
         /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.

@@ -249,8 +249,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Long running put request, service returns a 201 to the initial request
-        /// with no payload
+        /// Long running put request, service returns a 201 to the initial request with
+        /// no payload
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -2258,8 +2258,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Long running put request, service returns a 201 to the initial request
-        /// with no payload
+        /// Long running put request, service returns a 201 to the initial request with
+        /// no payload
         /// </summary>
         /// <param name='product'>
         /// Product to put

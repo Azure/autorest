@@ -110,9 +110,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </exception>
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>> DeleteAsyncRelativeRetrySucceededWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Long running post request, service returns a 500, then a 202 to
-        /// the initial request, with 'Location' and 'Retry-After' headers,
-        /// Polls return a 200 with a response body after success
+        /// Long running post request, service returns a 500, then a 202 to the
+        /// initial request, with 'Location' and 'Retry-After' headers, Polls
+        /// return a 200 with a response body after success
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -128,8 +128,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </exception>
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<LRORetrysPost202Retry200Headers>> Post202Retry200WithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Long running post request, service returns a 500, then a 202 to
-        /// the initial request, with an entity that contains
+        /// Long running post request, service returns a 500, then a 202 to the
+        /// initial request, with an entity that contains
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
         /// Azure-AsyncOperation header for operation status
         /// </summary>
@@ -240,9 +240,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </exception>
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>> BeginDeleteAsyncRelativeRetrySucceededWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Long running post request, service returns a 500, then a 202 to
-        /// the initial request, with 'Location' and 'Retry-After' headers,
-        /// Polls return a 200 with a response body after success
+        /// Long running post request, service returns a 500, then a 202 to the
+        /// initial request, with 'Location' and 'Retry-After' headers, Polls
+        /// return a 200 with a response body after success
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -258,8 +258,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </exception>
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<LRORetrysPost202Retry200Headers>> BeginPost202Retry200WithHttpMessagesAsync(Product product = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Long running post request, service returns a 500, then a 202 to
-        /// the initial request, with an entity that contains
+        /// Long running post request, service returns a 500, then a 202 to the
+        /// initial request, with an entity that contains
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
         /// Azure-AsyncOperation header for operation status
         /// </summary>

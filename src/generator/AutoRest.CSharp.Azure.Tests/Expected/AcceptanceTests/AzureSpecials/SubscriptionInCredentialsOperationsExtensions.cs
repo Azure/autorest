@@ -18,8 +18,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     public static partial class SubscriptionInCredentialsOperationsExtensions
     {
             /// <summary>
-            /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
+            /// POST method with subscriptionId modeled in credentials.  Set the credential
+            /// subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -30,8 +30,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
 
             /// <summary>
-            /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
+            /// POST method with subscriptionId modeled in credentials.  Set the credential
+            /// subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -45,9 +45,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
 
             /// <summary>
-            /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to null, and client-side validation should
-            /// prevent you from making this call
+            /// POST method with subscriptionId modeled in credentials.  Set the credential
+            /// subscriptionId to null, and client-side validation should prevent you from
+            /// making this call
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -58,9 +58,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
 
             /// <summary>
-            /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to null, and client-side validation should
-            /// prevent you from making this call
+            /// POST method with subscriptionId modeled in credentials.  Set the credential
+            /// subscriptionId to null, and client-side validation should prevent you from
+            /// making this call
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -74,8 +74,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
 
             /// <summary>
-            /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
+            /// POST method with subscriptionId modeled in credentials.  Set the credential
+            /// subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -86,8 +86,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
 
             /// <summary>
-            /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
+            /// POST method with subscriptionId modeled in credentials.  Set the credential
+            /// subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -101,8 +101,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
 
             /// <summary>
-            /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
+            /// POST method with subscriptionId modeled in credentials.  Set the credential
+            /// subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -113,8 +113,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
 
             /// <summary>
-            /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
+            /// POST method with subscriptionId modeled in credentials.  Set the credential
+            /// subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -128,8 +128,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
 
             /// <summary>
-            /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
+            /// POST method with subscriptionId modeled in credentials.  Set the credential
+            /// subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -140,8 +140,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
 
             /// <summary>
-            /// POST method with subscriptionId modeled in credentials.  Set the
-            /// credential subscriptionId to '1234-5678-9012-3456' to succeed
+            /// POST method with subscriptionId modeled in credentials.  Set the credential
+            /// subscriptionId to '1234-5678-9012-3456' to succeed
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.

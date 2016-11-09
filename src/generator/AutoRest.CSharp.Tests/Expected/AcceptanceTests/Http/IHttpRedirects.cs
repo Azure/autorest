@@ -71,9 +71,9 @@ namespace Fixtures.AcceptanceTestsHttp
         /// </exception>
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HttpRedirectsGet301Headers>> Get301WithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Put true Boolean value in request returns 301.  This request
-        /// should not be automatically redirected, but should return the
-        /// received 301 to the caller for evaluation
+        /// Put true Boolean value in request returns 301.  This request should
+        /// not be automatically redirected, but should return the received 301
+        /// to the caller for evaluation
         /// </summary>
         /// <param name='booleanValue'>
         /// Simple boolean value true

@@ -5736,8 +5736,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
         }
 
         /// <summary>
-        /// Get array value ['a string that gets encoded with base64url', 'test
-        /// string' 'Lorem ipsum'] with the items base64url encoded
+        /// Get array value ['a string that gets encoded with base64url', 'test string'
+        /// 'Lorem ipsum'] with the items base64url encoded
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -7609,8 +7609,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
 
         /// <summary>
         /// Get an array of Dictionaries of type &lt;string, string&gt; with value
-        /// [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8':
-        /// 'eight', '9': 'nine'}]
+        /// [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight',
+        /// '9': 'nine'}]
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.

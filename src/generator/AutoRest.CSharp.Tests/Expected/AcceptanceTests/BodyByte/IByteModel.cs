@@ -67,8 +67,8 @@ namespace Fixtures.AcceptanceTestsBodyByte
         /// Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
         /// </summary>
         /// <param name='byteBody'>
-        /// Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8
-        /// F7 F6)
+        /// Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7
+        /// F6)
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.

@@ -188,8 +188,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// 'age':105,
         /// 'birthday': '1900-01-05T01:00:00Z',
         /// 'length':10.0,
-        /// 'picture': new Buffer([255, 255, 255, 255,
-        /// 254]).toString('base64'),
+        /// 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
         /// 'species':'dangerous',
         /// },
         /// {

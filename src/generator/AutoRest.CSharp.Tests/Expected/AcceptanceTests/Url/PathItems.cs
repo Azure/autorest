@@ -41,8 +41,8 @@ namespace Fixtures.AcceptanceTestsUrl
 
         /// <summary>
         /// send globalStringPath='globalStringPath',
-        /// pathItemStringPath='pathItemStringPath',
-        /// localStringPath='localStringPath', globalStringQuery='globalStringQuery',
+        /// pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+        /// globalStringQuery='globalStringQuery',
         /// pathItemStringQuery='pathItemStringQuery',
         /// localStringQuery='localStringQuery'
         /// </summary>
@@ -200,9 +200,8 @@ namespace Fixtures.AcceptanceTestsUrl
 
         /// <summary>
         /// send globalStringPath='globalStringPath',
-        /// pathItemStringPath='pathItemStringPath',
-        /// localStringPath='localStringPath', globalStringQuery=null,
-        /// pathItemStringQuery='pathItemStringQuery',
+        /// pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+        /// globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
         /// localStringQuery='localStringQuery'
         /// </summary>
         /// <param name='localStringPath'>
@@ -359,9 +358,9 @@ namespace Fixtures.AcceptanceTestsUrl
 
         /// <summary>
         /// send globalStringPath=globalStringPath,
-        /// pathItemStringPath='pathItemStringPath',
-        /// localStringPath='localStringPath', globalStringQuery=null,
-        /// pathItemStringQuery='pathItemStringQuery', localStringQuery=null
+        /// pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+        /// globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
+        /// localStringQuery=null
         /// </summary>
         /// <param name='localStringPath'>
         /// should contain value 'localStringPath'
@@ -517,9 +516,9 @@ namespace Fixtures.AcceptanceTestsUrl
 
         /// <summary>
         /// send globalStringPath='globalStringPath',
-        /// pathItemStringPath='pathItemStringPath',
-        /// localStringPath='localStringPath', globalStringQuery='globalStringQuery',
-        /// pathItemStringQuery=null, localStringQuery=null
+        /// pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+        /// globalStringQuery='globalStringQuery', pathItemStringQuery=null,
+        /// localStringQuery=null
         /// </summary>
         /// <param name='localStringPath'>
         /// should contain value 'localStringPath'

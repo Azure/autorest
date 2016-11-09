@@ -2660,8 +2660,8 @@ namespace Fixtures.AcceptanceTestsUrl
         /// null, ''] using the csv-array format
         /// </summary>
         /// <param name='arrayPath'>
-        /// an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
-        /// null, ''] using the csv-array format
+        /// an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null,
+        /// ''] using the csv-array format
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.

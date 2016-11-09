@@ -973,9 +973,9 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// A paging operation that includes a nextLink that has 10 pages, of which
-        /// the 2nd call fails first with 500. The client should retry and finish all
-        /// 10 pages eventually.
+        /// A paging operation that includes a nextLink that has 10 pages, of which the
+        /// 2nd call fails first with 500. The client should retry and finish all 10
+        /// pages eventually.
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -3328,9 +3328,9 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// A paging operation that includes a nextLink that has 10 pages, of which
-        /// the 2nd call fails first with 500. The client should retry and finish all
-        /// 10 pages eventually.
+        /// A paging operation that includes a nextLink that has 10 pages, of which the
+        /// 2nd call fails first with 500. The client should retry and finish all 10
+        /// pages eventually.
         /// </summary>
         /// <param name='nextPageLink'>
         /// The NextLink from the previous successful call to List operation.
