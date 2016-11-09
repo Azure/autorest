@@ -915,13 +915,13 @@ module Petstore
 
     #
     # Asynchronously creates a new storage account with the specified parameters.
-    # Existing accounts cannot be updated with this API and should instead use the
-    # Update Storage Account API. If an account is already created and subsequent
-    # PUT request is issued with exact same set of properties, then HTTP 200 would
-    # be returned.
+    # Existing accounts cannot be updated with this API and should instead use
+    # the Update Storage Account API. If an account is already created and
+    # subsequent PUT request is issued with exact same set of properties, then
+    # HTTP 200 would be returned.
     #
-    # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
@@ -939,13 +939,13 @@ module Petstore
 
     #
     # Asynchronously creates a new storage account with the specified parameters.
-    # Existing accounts cannot be updated with this API and should instead use the
-    # Update Storage Account API. If an account is already created and subsequent
-    # PUT request is issued with exact same set of properties, then HTTP 200 would
-    # be returned.
+    # Existing accounts cannot be updated with this API and should instead use
+    # the Update Storage Account API. If an account is already created and
+    # subsequent PUT request is issued with exact same set of properties, then
+    # HTTP 200 would be returned.
     #
-    # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
@@ -962,13 +962,13 @@ module Petstore
 
     #
     # Asynchronously creates a new storage account with the specified parameters.
-    # Existing accounts cannot be updated with this API and should instead use the
-    # Update Storage Account API. If an account is already created and subsequent
-    # PUT request is issued with exact same set of properties, then HTTP 200 would
-    # be returned.
+    # Existing accounts cannot be updated with this API and should instead use
+    # the Update Storage Account API. If an account is already created and
+    # subsequent PUT request is issued with exact same set of properties, then
+    # HTTP 200 would be returned.
     #
-    # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
