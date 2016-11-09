@@ -154,7 +154,7 @@ namespace AutoRest.CSharp
             }
 
             string documentation = String.Empty;
-            string summary = string.IsNullOrEmpty(property.Summary) ? property.Documentation : property.Summary;
+            string summary = string.IsNullOrEmpty(property.Summary) ? property.Documentation.EscapeXmlComment() : property.Summary.EscapeXmlComment();
 
             if (summary.TrimStart().StartsWith("Gets ", StringComparison.OrdinalIgnoreCase))
             {

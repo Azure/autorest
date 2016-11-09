@@ -88,52 +88,36 @@ namespace AutoRest.Core.Utilities
         {
             Debug.Assert(text != null, "text should not be null.");
 
-            int start = 0; // Start of the current line
-            int end = 0; // End of the current line
-            char last = ' '; // Last character processed
-
-            // Walk the entire string, processing line by line
-            for (int i = 0; i < text.Length; i++)
+            var lines = text.Split(new [] {"\r\n", "\r", "\n"}, StringSplitOptions.None);
+            foreach (var line in lines)
             {
-                // Support newlines inside the comment text.
-                if (text[i] == '\n')
+                var processedLine = line.Trim();
+
+                // yield empty lines as they are (probably) intensional
+                if (processedLine.Length == 0)
                 {
-                    yield return text.Substring(start, i - start + 1).Trim();
-
-                    start = i + 1;
-                    end = start;
-                    last = ' ';
-
-                    continue;
+                    yield return processedLine;
                 }
 
-                // If our current line is longer than the desired wrap width,
-                // we'll stop the line here
-                if (i - start >= width && start != end)
+                // feast on the line until it's gone
+                while (processedLine.Length > 0)
                 {
-                    // Yield the current line
-                    yield return text.Substring(start, end - start + 1).Trim();
+                    // determine potential wrapping points
+                    var whitespacePositions = Enumerable
+                        .Range(0, processedLine.Length)
+                        .Where(i => char.IsWhiteSpace(processedLine[i]))
+                        .Concat(new [] { processedLine.Length })
+                        .Cast<int?>();
+                    var preWidthWrapAt = whitespacePositions.LastOrDefault(i => i <= width);
+                    var postWidthWrapAt = whitespacePositions.FirstOrDefault(i => i > width);
 
-                    // Set things up for the next line
-                    start = end + 1;
-                    end = start;
-                    last = ' ';
+                    // choose preferred wrapping point
+                    var wrapAt = preWidthWrapAt ?? postWidthWrapAt ?? processedLine.Length;
+
+                    // wrap
+                    yield return processedLine.Substring(0, wrapAt);
+                    processedLine = processedLine.Substring(wrapAt).Trim();
                 }
-
-                // If the last character was a space, mark that spot as a
-                // candidate for a potential line break
-                if (!Char.IsWhiteSpace(last) && Char.IsWhiteSpace(text[i]))
-                {
-                    end = i - 1;
-                }
-
-                last = text[i];
-            }
-
-            // Don't forget to include the last line of text
-            if (start < text.Length)
-            {
-                yield return text.Substring(start, text.Length - start).Trim();
             }
         }
 
