@@ -55,8 +55,8 @@ namespace AutoRest.Core.Tests
 
             sampleModelTemplate.Model = sampleViewModel;
             var output = sampleModelTemplate.ToString();
-            Assert.True(output.ContainsMultiline(@"/// Deserialize current type to Json object because today is Friday
-        /// and there is a sun outside the window."));
+            Assert.True(output.ContainsMultiline(@"/// Deserialize current type to Json object because today is Friday and
+        /// there is a sun outside the window."));
         }
 
         [Fact]

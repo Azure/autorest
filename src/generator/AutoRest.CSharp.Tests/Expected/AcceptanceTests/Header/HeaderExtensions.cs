@@ -208,8 +208,8 @@ namespace Fixtures.AcceptanceTestsHeader
             }
 
             /// <summary>
-            /// Send a post request with header values "scenario": "positive", "value":
-            /// 105 or "scenario": "negative", "value": -2
+            /// Send a post request with header values "scenario": "positive", "value": 105
+            /// or "scenario": "negative", "value": -2
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -226,8 +226,8 @@ namespace Fixtures.AcceptanceTestsHeader
             }
 
             /// <summary>
-            /// Send a post request with header values "scenario": "positive", "value":
-            /// 105 or "scenario": "negative", "value": -2
+            /// Send a post request with header values "scenario": "positive", "value": 105
+            /// or "scenario": "negative", "value": -2
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -427,8 +427,8 @@ namespace Fixtures.AcceptanceTestsHeader
             }
 
             /// <summary>
-            /// Send a post request with header values "scenario": "true", "value": true
-            /// or "scenario": "false", "value": false
+            /// Send a post request with header values "scenario": "true", "value": true or
+            /// "scenario": "false", "value": false
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -445,8 +445,8 @@ namespace Fixtures.AcceptanceTestsHeader
             }
 
             /// <summary>
-            /// Send a post request with header values "scenario": "true", "value": true
-            /// or "scenario": "false", "value": false
+            /// Send a post request with header values "scenario": "true", "value": true or
+            /// "scenario": "false", "value": false
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -736,8 +736,8 @@ namespace Fixtures.AcceptanceTestsHeader
 
             /// <summary>
             /// Send a post request with header values "scenario": "valid", "value": "Wed,
-            /// 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan
-            /// 0001 00:00:00 GMT"
+            /// 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001
+            /// 00:00:00 GMT"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -756,8 +756,8 @@ namespace Fixtures.AcceptanceTestsHeader
 
             /// <summary>
             /// Send a post request with header values "scenario": "valid", "value": "Wed,
-            /// 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan
-            /// 0001 00:00:00 GMT"
+            /// 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001
+            /// 00:00:00 GMT"
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -960,8 +960,8 @@ namespace Fixtures.AcceptanceTestsHeader
             }
 
             /// <summary>
-            /// Send a post request with header values "scenario": "valid", "value":
-            /// "GREY" or "scenario": "null", "value": null
+            /// Send a post request with header values "scenario": "valid", "value": "GREY"
+            /// or "scenario": "null", "value": null
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -980,8 +980,8 @@ namespace Fixtures.AcceptanceTestsHeader
             }
 
             /// <summary>
-            /// Send a post request with header values "scenario": "valid", "value":
-            /// "GREY" or "scenario": "null", "value": null
+            /// Send a post request with header values "scenario": "valid", "value": "GREY"
+            /// or "scenario": "null", "value": null
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.

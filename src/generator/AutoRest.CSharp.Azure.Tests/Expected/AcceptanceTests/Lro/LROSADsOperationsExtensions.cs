@@ -356,8 +356,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             /// <summary>
-            /// Long running put request, service returns a 201 to the initial request
-            /// with no payload
+            /// Long running put request, service returns a 201 to the initial request with
+            /// no payload
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -371,8 +371,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             /// <summary>
-            /// Long running put request, service returns a 201 to the initial request
-            /// with no payload
+            /// Long running put request, service returns a 201 to the initial request with
+            /// no payload
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -1255,8 +1255,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             /// <summary>
-            /// Long running put request, service returns a 201 to the initial request
-            /// with no payload
+            /// Long running put request, service returns a 201 to the initial request with
+            /// no payload
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -1270,8 +1270,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             /// <summary>
-            /// Long running put request, service returns a 201 to the initial request
-            /// with no payload
+            /// Long running put request, service returns a 201 to the initial request with
+            /// no payload
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.

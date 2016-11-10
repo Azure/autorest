@@ -29,8 +29,8 @@ namespace Fixtures.AdditionalProperties.Models
         }
 
         /// <summary>
-        /// Gets or sets unmatched properties from the message are
-        /// deserialized this collection
+        /// Gets or sets unmatched properties from the message are deserialized
+        /// this collection
         /// </summary>
         [Newtonsoft.Json.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, Feature> AdditionalProperties { get; set; }

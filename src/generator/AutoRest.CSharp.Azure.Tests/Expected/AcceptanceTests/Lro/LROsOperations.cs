@@ -89,8 +89,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
 
         /// <summary>
         /// Long running put request, service returns a 202 to the initial request,
-        /// with a location header that points to a polling URL that returns a 200
-        /// and an entity that doesn't contains ProvisioningState
+        /// with a location header that points to a polling URL that returns a 200 and
+        /// an entity that doesn't contains ProvisioningState
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -212,8 +212,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Long running put request, service returns a 202 to the initial request
-        /// with location header. Subsequent calls to operation status do not contain
+        /// Long running put request, service returns a 202 to the initial request with
+        /// location header. Subsequent calls to operation status do not contain
         /// location header.
         /// </summary>
         /// <param name='product'>
@@ -332,9 +332,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Long running put request, service returns a 202 to the initial request
-        /// with Azure-AsyncOperation header. Subsequent calls to operation status do
-        /// not contain Azure-AsyncOperation header.
+        /// Long running put request, service returns a 202 to the initial request with
+        /// Azure-AsyncOperation header. Subsequent calls to operation status do not
+        /// contain Azure-AsyncOperation header.
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -576,9 +576,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Long running delete request, service returns an Azure-AsyncOperation
-        /// header in the initial request. Subsequent calls to operation status do
-        /// not contain Azure-AsyncOperation header.
+        /// Long running delete request, service returns an Azure-AsyncOperation header
+        /// in the initial request. Subsequent calls to operation status do not contain
+        /// Azure-AsyncOperation header.
         /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -1158,8 +1158,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
 
         /// <summary>
         /// Long running put request, service returns a 202 to the initial request,
-        /// with a location header that points to a polling URL that returns a 200
-        /// and an entity that doesn't contains ProvisioningState
+        /// with a location header that points to a polling URL that returns a 200 and
+        /// an entity that doesn't contains ProvisioningState
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -2042,8 +2042,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Long running put request, service returns a 202 to the initial request
-        /// with location header. Subsequent calls to operation status do not contain
+        /// Long running put request, service returns a 202 to the initial request with
+        /// location header. Subsequent calls to operation status do not contain
         /// location header.
         /// </summary>
         /// <param name='product'>
@@ -2952,9 +2952,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Long running put request, service returns a 202 to the initial request
-        /// with Azure-AsyncOperation header. Subsequent calls to operation status do
-        /// not contain Azure-AsyncOperation header.
+        /// Long running put request, service returns a 202 to the initial request with
+        /// Azure-AsyncOperation header. Subsequent calls to operation status do not
+        /// contain Azure-AsyncOperation header.
         /// </summary>
         /// <param name='product'>
         /// Product to put
@@ -5016,9 +5016,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Long running delete request, service returns an Azure-AsyncOperation
-        /// header in the initial request. Subsequent calls to operation status do
-        /// not contain Azure-AsyncOperation header.
+        /// Long running delete request, service returns an Azure-AsyncOperation header
+        /// in the initial request. Subsequent calls to operation status do not contain
+        /// Azure-AsyncOperation header.
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.

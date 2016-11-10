@@ -31,8 +31,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <param name="location">Location to poll for result status: will be
         /// set to
         /// /lro/retryerror/deleteasync/retry/succeeded/operationResults/200</param>
-        /// <param name="retryAfter">Number of milliseconds until the next
-        /// poll should be sent, will be set to zero</param>
+        /// <param name="retryAfter">Number of milliseconds until the next poll
+        /// should be sent, will be set to zero</param>
         public LRORetrysDeleteAsyncRelativeRetrySucceededHeaders(string azureAsyncOperation = default(string), string location = default(string), int? retryAfter = default(int?))
         {
             AzureAsyncOperation = azureAsyncOperation;

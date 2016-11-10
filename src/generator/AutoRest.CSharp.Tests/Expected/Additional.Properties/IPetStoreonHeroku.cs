@@ -12,6 +12,7 @@ namespace Fixtures.AdditionalProperties
 
     /// <summary>
     /// **This example has a working backend hosted in Heroku**
+    /// 
     /// </summary>
     public partial interface IPetStoreonHeroku : System.IDisposable
     {

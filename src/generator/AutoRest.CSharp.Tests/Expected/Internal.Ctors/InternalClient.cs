@@ -11,8 +11,8 @@ namespace Fixtures.InternalCtors
     using Microsoft.Rest;
 
     /// <summary>
-    /// A sample API that uses a petstore as an example to demonstrate
-    /// features in the swagger-2.0 specification
+    /// A sample API that uses a petstore as an example to demonstrate features
+    /// in the swagger-2.0 specification
     /// </summary>
     public partial class InternalClient : Microsoft.Rest.ServiceClient<InternalClient>, IInternalClient
     {

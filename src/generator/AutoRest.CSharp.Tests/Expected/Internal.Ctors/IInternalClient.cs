@@ -10,8 +10,8 @@ namespace Fixtures.InternalCtors
 {
 
     /// <summary>
-    /// A sample API that uses a petstore as an example to demonstrate
-    /// features in the swagger-2.0 specification
+    /// A sample API that uses a petstore as an example to demonstrate features
+    /// in the swagger-2.0 specification
     /// </summary>
     public partial interface IInternalClient : System.IDisposable
     {

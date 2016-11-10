@@ -148,7 +148,7 @@ namespace AutoRest.CSharp.Model
 
                 foreach (var property in parametersWithDocumentation)
                 {
-                    var documentationInnerText = string.IsNullOrEmpty(property.Summary) ? property.Documentation : property.Summary;
+                    var documentationInnerText = string.IsNullOrEmpty(property.Summary) ? property.Documentation.EscapeXmlComment() : property.Summary.EscapeXmlComment();
 
                     var documentation = string.Format(
                         CultureInfo.InvariantCulture,

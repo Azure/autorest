@@ -130,8 +130,8 @@ namespace Fixtures.AcceptanceTestsHttp
 
             /// <summary>
             /// Put true Boolean value in request returns 301.  This request should not be
-            /// automatically redirected, but should return the received 301 to the
-            /// caller for evaluation
+            /// automatically redirected, but should return the received 301 to the caller
+            /// for evaluation
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -146,8 +146,8 @@ namespace Fixtures.AcceptanceTestsHttp
 
             /// <summary>
             /// Put true Boolean value in request returns 301.  This request should not be
-            /// automatically redirected, but should return the received 301 to the
-            /// caller for evaluation
+            /// automatically redirected, but should return the received 301 to the caller
+            /// for evaluation
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.

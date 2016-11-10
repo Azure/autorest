@@ -33,8 +33,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// Gets or sets response with header values "The quick brown fox
-        /// jumps over the lazy dog" or null or ""
+        /// Gets or sets response with header values "The quick brown fox jumps
+        /// over the lazy dog" or null or ""
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
         public string Value { get; set; }

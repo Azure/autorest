@@ -1791,8 +1791,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
 
         /// <summary>
         /// Test explicitly required complex object. Please put a valid class-wrapper
-        /// with 'value' = null and the client library should throw before the
-        /// request is sent.
+        /// with 'value' = null and the client library should throw before the request
+        /// is sent.
         /// </summary>
         /// <param name='value'>
         /// </param>
@@ -2568,8 +2568,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         }
 
         /// <summary>
-        /// Test explicitly required array. Please put a header 'headerParameter'
-        /// =&gt; null and the client library should throw before the request is sent.
+        /// Test explicitly required array. Please put a header 'headerParameter' =&gt;
+        /// null and the client library should throw before the request is sent.
         /// </summary>
         /// <param name='headerParameter'>
         /// </param>
