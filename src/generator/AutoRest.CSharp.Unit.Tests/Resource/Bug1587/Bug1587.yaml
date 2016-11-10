@@ -1,0 +1,25 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  /operation0:
+    put:
+      operationId: lru0
+      responses:
+        200:
+          description: OK
+      x-ms-long-running-operation: false
+  /operation1:
+    put:
+      operationId: lru1
+      responses:
+        200:
+          description: OK
+      x-ms-long-running-operation: true
+  /operation2:
+    put:
+      operationId: lru2
+      responses:
+        200:
+          description: OK

@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Azure.Model
         /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.
         /// </summary>
-        public bool IsLongRunningOperation => Extensions.ContainsKey(AzureExtensions.LongRunningExtension);
+        public bool IsLongRunningOperation => Extensions.ContainsKey(AzureExtensions.LongRunningExtension) && true == Extensions[AzureExtensions.LongRunningExtension] as bool?;
 
         private string ReturnTypePageInterfaceName
         {
