@@ -37,9 +37,9 @@ namespace AutoRest.Swagger.JsonConverters
             {
                 return null;
             }
-
+            
             // Unwrap if it's a reference object.
-            while (jobject.First.Path == "$ref")
+            while (jobject.First?.Path == "$ref")
             {
                 jobject =
                     Document.SelectToken(jobject.GetValue("$ref", StringComparison.Ordinal).ToString().
