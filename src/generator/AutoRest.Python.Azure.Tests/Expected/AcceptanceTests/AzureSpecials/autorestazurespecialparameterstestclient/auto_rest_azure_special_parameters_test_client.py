@@ -35,8 +35,8 @@ class AutoRestAzureSpecialParametersTestClientConfiguration(AzureConfiguration):
     :param subscription_id: The subscription id, which appears in the path,
      always modeled in credentials. The value is always '1234-5678-9012-3456'
     :type subscription_id: str
-    :param api_version: The api version, which appears in the query, the
-     value is always '2015-07-01-preview'
+    :param api_version: The api version, which appears in the query, the value
+     is always '2015-07-01-preview'
     :type api_version: str
     :param accept_language: Gets or sets the preferred language for the
      response.
@@ -110,8 +110,8 @@ class AutoRestAzureSpecialParametersTestClient(object):
     :param subscription_id: The subscription id, which appears in the path,
      always modeled in credentials. The value is always '1234-5678-9012-3456'
     :type subscription_id: str
-    :param api_version: The api version, which appears in the query, the
-     value is always '2015-07-01-preview'
+    :param api_version: The api version, which appears in the query, the value
+     is always '2015-07-01-preview'
     :type api_version: str
     :param accept_language: Gets or sets the preferred language for the
      response.

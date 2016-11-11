@@ -400,8 +400,8 @@ class AutoRestResourceFlatteningTestService(object):
         parameter.
 
         :param product_id: Unique identifier representing a specific product
-         for a given latitude & longitude. For example, uberX in San
-         Francisco will have a different product_id than uberX in Los Angeles.
+         for a given latitude & longitude. For example, uberX in San Francisco
+         will have a different product_id than uberX in Los Angeles.
         :type product_id: str
         :param max_product_display_name: Display name of product.
         :type max_product_display_name: str

@@ -36,8 +36,8 @@ class LROsOperations(object):
 
     def put200_succeeded(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that contains ProvisioningState=’Succeeded’.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that contains ProvisioningState=’Succeeded’.
 
         :param product: Product to put
         :type product: :class:`Product
@@ -121,9 +121,8 @@ class LROsOperations(object):
 
     def put200_succeeded_no_state(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that does not contain
-        ProvisioningState=’Succeeded’.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that does not contain ProvisioningState=’Succeeded’.
 
         :param product: Product to put
         :type product: :class:`Product
@@ -207,9 +206,9 @@ class LROsOperations(object):
 
     def put202_retry200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 202 to the initial
-        request, with a location header that points to a polling URL that
-        returns a 200 and an entity that doesn't contains ProvisioningState.
+        """Long running put request, service returns a 202 to the initial request,
+        with a location header that points to a polling URL that returns a 200
+        and an entity that doesn't contains ProvisioningState.
 
         :param product: Product to put
         :type product: :class:`Product
@@ -293,9 +292,9 @@ class LROsOperations(object):
 
     def put201_creating_succeeded200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 201 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        Polls return this value until the last poll returns a ‘200’ with
+        """Long running put request, service returns a 201 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’.  Polls
+        return this value until the last poll returns a ‘200’ with
         ProvisioningState=’Succeeded’.
 
         :param product: Product to put
@@ -382,9 +381,9 @@ class LROsOperations(object):
 
     def put200_updating_succeeded204(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 201 to the initial
-        request, with an entity that contains ProvisioningState=’Updating’.
-        Polls return this value until the last poll returns a ‘200’ with
+        """Long running put request, service returns a 201 to the initial request,
+        with an entity that contains ProvisioningState=’Updating’.  Polls
+        return this value until the last poll returns a ‘200’ with
         ProvisioningState=’Succeeded’.
 
         :param product: Product to put
@@ -469,9 +468,9 @@ class LROsOperations(object):
 
     def put201_creating_failed200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 201 to the initial
-        request, with an entity that contains ProvisioningState=’Created’.
-        Polls return this value until the last poll returns a ‘200’ with
+        """Long running put request, service returns a 201 to the initial request,
+        with an entity that contains ProvisioningState=’Created’.  Polls return
+        this value until the last poll returns a ‘200’ with
         ProvisioningState=’Failed’.
 
         :param product: Product to put
@@ -558,9 +557,9 @@ class LROsOperations(object):
 
     def put200_acceptedcanceled200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 201 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        Polls return this value until the last poll returns a ‘200’ with
+        """Long running put request, service returns a 201 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’.  Polls
+        return this value until the last poll returns a ‘200’ with
         ProvisioningState=’Canceled’.
 
         :param product: Product to put
@@ -736,10 +735,10 @@ class LROsOperations(object):
 
     def put_async_retry_succeeded(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        Poll the endpoint indicated in the Azure-AsyncOperation header for
-        operation status.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’. Poll the
+        endpoint indicated in the Azure-AsyncOperation header for operation
+        status.
 
         :param product: Product to put
         :type product: :class:`Product
@@ -830,10 +829,10 @@ class LROsOperations(object):
 
     def put_async_no_retry_succeeded(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        Poll the endpoint indicated in the Azure-AsyncOperation header for
-        operation status.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’. Poll the
+        endpoint indicated in the Azure-AsyncOperation header for operation
+        status.
 
         :param product: Product to put
         :type product: :class:`Product
@@ -923,10 +922,10 @@ class LROsOperations(object):
 
     def put_async_retry_failed(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        Poll the endpoint indicated in the Azure-AsyncOperation header for
-        operation status.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’. Poll the
+        endpoint indicated in the Azure-AsyncOperation header for operation
+        status.
 
         :param product: Product to put
         :type product: :class:`Product
@@ -1017,10 +1016,10 @@ class LROsOperations(object):
 
     def put_async_no_retrycanceled(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        Poll the endpoint indicated in the Azure-AsyncOperation header for
-        operation status.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’. Poll the
+        endpoint indicated in the Azure-AsyncOperation header for operation
+        status.
 
         :param product: Product to put
         :type product: :class:`Product
@@ -1111,8 +1110,8 @@ class LROsOperations(object):
     def put_async_no_header_in_retry(
             self, product=None, custom_headers=None, raw=False, **operation_config):
         """Long running put request, service returns a 202 to the initial request
-        with Azure-AsyncOperation header. Subsequent calls to operation
-        status do not contain Azure-AsyncOperation header.
+        with Azure-AsyncOperation header. Subsequent calls to operation status
+        do not contain Azure-AsyncOperation header.
 
         :param product: Product to put
         :type product: :class:`Product
@@ -1542,7 +1541,7 @@ class LROsOperations(object):
     def delete_provisioning202_accepted200_succeeded(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request, with an entity that contains ProvisioningState=’Accepted’.
+        request, with an entity that contains ProvisioningState=’Accepted’. 
         Polls return this value until the last poll returns a ‘200’ with
         ProvisioningState=’Succeeded’.
 
@@ -1631,7 +1630,7 @@ class LROsOperations(object):
     def delete_provisioning202_deleting_failed200(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
+        request, with an entity that contains ProvisioningState=’Creating’. 
         Polls return this value until the last poll returns a ‘200’ with
         ProvisioningState=’Failed’.
 
@@ -1720,7 +1719,7 @@ class LROsOperations(object):
     def delete_provisioning202_deletingcanceled200(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
+        request, with an entity that contains ProvisioningState=’Creating’. 
         Polls return this value until the last poll returns a ‘200’ with
         ProvisioningState=’Canceled’.
 
@@ -2110,8 +2109,8 @@ class LROsOperations(object):
     def delete_async_no_header_in_retry(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns an Azure-AsyncOperation
-        header in the initial request. Subsequent calls to operation status
-        do not contain Azure-AsyncOperation header.
+        header in the initial request. Subsequent calls to operation status do
+        not contain Azure-AsyncOperation header.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2181,8 +2180,8 @@ class LROsOperations(object):
     def delete_async_retry_succeeded(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request. Poll the endpoint indicated in the Azure-AsyncOperation
-        header for operation status.
+        request. Poll the endpoint indicated in the Azure-AsyncOperation header
+        for operation status.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2254,8 +2253,8 @@ class LROsOperations(object):
     def delete_async_no_retry_succeeded(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request. Poll the endpoint indicated in the Azure-AsyncOperation
-        header for operation status.
+        request. Poll the endpoint indicated in the Azure-AsyncOperation header
+        for operation status.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2327,8 +2326,8 @@ class LROsOperations(object):
     def delete_async_retry_failed(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request. Poll the endpoint indicated in the Azure-AsyncOperation
-        header for operation status.
+        request. Poll the endpoint indicated in the Azure-AsyncOperation header
+        for operation status.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2400,8 +2399,8 @@ class LROsOperations(object):
     def delete_async_retrycanceled(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request. Poll the endpoint indicated in the Azure-AsyncOperation
-        header for operation status.
+        request. Poll the endpoint indicated in the Azure-AsyncOperation header
+        for operation status.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2551,8 +2550,8 @@ class LROsOperations(object):
     def post202_retry200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
         """Long running post request, service returns a 202 to the initial
-        request, with 'Location' and 'Retry-After' headers, Polls return a
-        200 with a response body after success.
+        request, with 'Location' and 'Retry-After' headers, Polls return a 200
+        with a response body after success.
 
         :param product: Product to put
         :type product: :class:`Product

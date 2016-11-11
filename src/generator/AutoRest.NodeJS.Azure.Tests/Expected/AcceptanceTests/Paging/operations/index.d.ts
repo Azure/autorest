@@ -71,8 +71,8 @@ export interface Paging {
      * @param {object} [options.pagingGetOdataMultiplePagesOptions] Additional
      * parameters for the operation
      * 
-     * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults]
-     * Sets the maximum number of items to return in the response.
+     * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults] Sets
+     * the maximum number of items to return in the response.
      * 
      * @param {number} [options.pagingGetOdataMultiplePagesOptions.timeout] Sets
      * the maximum time that the server can spend processing the request, in
@@ -330,8 +330,8 @@ export interface Paging {
      * @param {object} [options.pagingGetOdataMultiplePagesOptions] Additional
      * parameters for the operation
      * 
-     * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults]
-     * Sets the maximum number of items to return in the response.
+     * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults] Sets
+     * the maximum number of items to return in the response.
      * 
      * @param {number} [options.pagingGetOdataMultiplePagesOptions.timeout] Sets
      * the maximum time that the server can spend processing the request, in

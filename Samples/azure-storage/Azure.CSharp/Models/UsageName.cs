@@ -18,8 +18,8 @@ namespace Petstore.Models
         /// </summary>
         /// <param name="value">Gets a string describing the resource
         /// name.</param>
-        /// <param name="localizedValue">Gets a localized string describing
-        /// the resource name.</param>
+        /// <param name="localizedValue">Gets a localized string describing the
+        /// resource name.</param>
         public UsageName(string value = default(string), string localizedValue = default(string))
         {
             Value = value;

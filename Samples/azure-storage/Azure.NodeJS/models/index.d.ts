@@ -31,11 +31,11 @@ export interface StorageAccountCheckNameAvailabilityParameters {
  * be used.
  * 
  * @member {string} [reason] Gets the reason that a storage account name could
- * not be used. The Reason element is only returned if NameAvailable is
- * false. Possible values include: 'AccountNameInvalid', 'AlreadyExists'
+ * not be used. The Reason element is only returned if NameAvailable is false.
+ * Possible values include: 'AccountNameInvalid', 'AlreadyExists'
  * 
- * @member {string} [message] Gets an error message explaining the Reason
- * value in more detail.
+ * @member {string} [message] Gets an error message explaining the Reason value
+ * in more detail.
  * 
  */
 export interface CheckNameAvailabilityResult {
@@ -110,12 +110,11 @@ export interface Endpoints {
  * The custom domain assigned to this storage account. This can be set via
  * Update.
  *
- * @member {string} name Gets or sets the custom domain name. Name is the
- * CNAME source.
+ * @member {string} name Gets or sets the custom domain name. Name is the CNAME
+ * source.
  * 
- * @member {boolean} [useSubDomain] Indicates whether indirect CName
- * validation is enabled. Default value is false. This should only be set on
- * updates
+ * @member {boolean} [useSubDomain] Indicates whether indirect CName validation
+ * is enabled. Default value is false. This should only be set on updates
  * 
  */
 export interface CustomDomain {
@@ -135,9 +134,9 @@ export interface CustomDomain {
  * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
  * 'Standard_RAGRS', 'Premium_LRS'
  * 
- * @member {object} [primaryEndpoints] Gets the URLs that are used to perform
- * a retrieval of a public blob, queue or table object.Note that StandardZRS
- * and PremiumLRS accounts only return the blob endpoint.
+ * @member {object} [primaryEndpoints] Gets the URLs that are used to perform a
+ * retrieval of a public blob, queue or table object.Note that StandardZRS and
+ * PremiumLRS accounts only return the blob endpoint.
  * 
  * @member {string} [primaryEndpoints.blob] Gets the blob endpoint.
  * 
@@ -156,21 +155,21 @@ export interface CustomDomain {
  * 
  * @member {date} [lastGeoFailoverTime] Gets the timestamp of the most recent
  * instance of a failover to the secondary location. Only the most recent
- * timestamp is retained. This element is not returned if there has never
- * been a failover instance. Only available if the accountType is StandardGRS
- * or StandardRAGRS.
+ * timestamp is retained. This element is not returned if there has never been
+ * a failover instance. Only available if the accountType is StandardGRS or
+ * StandardRAGRS.
  * 
- * @member {string} [secondaryLocation] Gets the location of the geo
- * replicated secondary for the storage account. Only available if the
- * accountType is StandardGRS or StandardRAGRS.
+ * @member {string} [secondaryLocation] Gets the location of the geo replicated
+ * secondary for the storage account. Only available if the accountType is
+ * StandardGRS or StandardRAGRS.
  * 
  * @member {string} [statusOfSecondary] Gets the status indicating whether the
- * secondary location of the storage account is available or unavailable.
- * Only available if the accountType is StandardGRS or StandardRAGRS.
- * Possible values include: 'Available', 'Unavailable'
+ * secondary location of the storage account is available or unavailable. Only
+ * available if the accountType is StandardGRS or StandardRAGRS. Possible
+ * values include: 'Available', 'Unavailable'
  * 
- * @member {date} [creationTime] Gets the creation date and time of the
- * storage account in UTC.
+ * @member {date} [creationTime] Gets the creation date and time of the storage
+ * account in UTC.
  * 
  * @member {object} [customDomain] Gets the user assigned custom domain
  * assigned to this storage account.
@@ -179,13 +178,13 @@ export interface CustomDomain {
  * Name is the CNAME source.
  * 
  * @member {boolean} [customDomain.useSubDomain] Indicates whether indirect
- * CName validation is enabled. Default value is false. This should only be
- * set on updates
+ * CName validation is enabled. Default value is false. This should only be set
+ * on updates
  * 
- * @member {object} [secondaryEndpoints] Gets the URLs that are used to
- * perform a retrieval of a public blob, queue or table object from the
- * secondary location of the storage account. Only available if the
- * accountType is StandardRAGRS.
+ * @member {object} [secondaryEndpoints] Gets the URLs that are used to perform
+ * a retrieval of a public blob, queue or table object from the secondary
+ * location of the storage account. Only available if the accountType is
+ * StandardRAGRS.
  * 
  * @member {string} [secondaryEndpoints.blob] Gets the blob endpoint.
  * 
@@ -271,13 +270,13 @@ export interface Resource extends BaseResource {
  * unavailable. Possible values include: 'Available', 'Unavailable'
  * 
  * @member {date} [properties.lastGeoFailoverTime] Gets the timestamp of the
- * most recent instance of a failover to the secondary location. Only the
- * most recent timestamp is retained. This element is not returned if there
- * has never been a failover instance. Only available if the accountType is
+ * most recent instance of a failover to the secondary location. Only the most
+ * recent timestamp is retained. This element is not returned if there has
+ * never been a failover instance. Only available if the accountType is
  * StandardGRS or StandardRAGRS.
  * 
- * @member {string} [properties.secondaryLocation] Gets the location of the
- * geo replicated secondary for the storage account. Only available if the
+ * @member {string} [properties.secondaryLocation] Gets the location of the geo
+ * replicated secondary for the storage account. Only available if the
  * accountType is StandardGRS or StandardRAGRS.
  * 
  * @member {string} [properties.statusOfSecondary] Gets the status indicating
@@ -298,10 +297,10 @@ export interface Resource extends BaseResource {
  * indirect CName validation is enabled. Default value is false. This should
  * only be set on updates
  * 
- * @member {object} [properties.secondaryEndpoints] Gets the URLs that are
- * used to perform a retrieval of a public blob, queue or table object from
- * the secondary location of the storage account. Only available if the
- * accountType is StandardRAGRS.
+ * @member {object} [properties.secondaryEndpoints] Gets the URLs that are used
+ * to perform a retrieval of a public blob, queue or table object from the
+ * secondary location of the storage account. Only available if the accountType
+ * is StandardRAGRS.
  * 
  * @member {string} [properties.secondaryEndpoints.blob] Gets the blob
  * endpoint.
@@ -360,17 +359,17 @@ export interface StorageAccountListResult {
  * PremiumLRS. Possible values include: 'Standard_LRS', 'Standard_ZRS',
  * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
  * 
- * @member {object} [customDomain] User domain assigned to the storage
- * account. Name is the CNAME source. Only one custom domain is supported per
- * storage account at this time. To clear the existing custom domain, use an
- * empty string for the custom domain name property.
+ * @member {object} [customDomain] User domain assigned to the storage account.
+ * Name is the CNAME source. Only one custom domain is supported per storage
+ * account at this time. To clear the existing custom domain, use an empty
+ * string for the custom domain name property.
  * 
  * @member {string} [customDomain.name] Gets or sets the custom domain name.
  * Name is the CNAME source.
  * 
  * @member {boolean} [customDomain.useSubDomain] Indicates whether indirect
- * CName validation is enabled. Default value is false. This should only be
- * set on updates
+ * CName validation is enabled. Default value is false. This should only be set
+ * on updates
  * 
  */
 export interface StorageAccountPropertiesUpdateParameters {
@@ -446,9 +445,8 @@ export interface UsageName {
  * @constructor
  * Describes Storage Resource Usage.
  *
- * @member {string} unit Gets the unit of measurement. Possible values
- * include: 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
- * 'BytesPerSecond'
+ * @member {string} unit Gets the unit of measurement. Possible values include:
+ * 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond'
  * 
  * @member {number} currentValue Gets the current count of the allocated
  * resources in the subscription.

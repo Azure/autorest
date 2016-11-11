@@ -37,10 +37,10 @@ export interface StorageAccounts {
 
     /**
      * Asynchronously creates a new storage account with the specified parameters.
-     * Existing accounts cannot be updated with this API and should instead use
-     * the Update Storage Account API. If an account is already created and
-     * subsequent PUT request is issued with exact same set of properties, then
-     * HTTP 200 would be returned.
+     * Existing accounts cannot be updated with this API and should instead use the
+     * Update Storage Account API. If an account is already created and subsequent
+     * PUT request is issued with exact same set of properties, then HTTP 200 would
+     * be returned.
      *
      * @param {string} resourceGroupName The name of the resource group within the
      * user's subscription.
@@ -120,16 +120,16 @@ export interface StorageAccounts {
     /**
      * Updates the account type or tags for a storage account. It can also be used
      * to add a custom domain (note that custom domains cannot be added via the
-     * Create operation). Only one custom domain is supported per storage
-     * account. In order to replace a custom domain, the old value must be
-     * cleared before a new value may be set. To clear a custom domain, simply
-     * update the custom domain with empty string. Then call update again with
-     * the new cutsom domain name. The update API can only be used to update one
-     * of tags, accountType, or customDomain per call. To update multiple of
-     * these properties, call the API multiple times with one change per call.
-     * This call does not change the storage keys for the account. If you want to
-     * change storage account keys, use the RegenerateKey operation. The location
-     * and name of the storage account cannot be changed after creation.
+     * Create operation). Only one custom domain is supported per storage account.
+     * In order to replace a custom domain, the old value must be cleared before a
+     * new value may be set. To clear a custom domain, simply update the custom
+     * domain with empty string. Then call update again with the new cutsom domain
+     * name. The update API can only be used to update one of tags, accountType, or
+     * customDomain per call. To update multiple of these properties, call the API
+     * multiple times with one change per call. This call does not change the
+     * storage keys for the account. If you want to change storage account keys,
+     * use the RegenerateKey operation. The location and name of the storage
+     * account cannot be changed after creation.
      *
      * @param {string} resourceGroupName The name of the resource group within the
      * user's subscription.
@@ -145,23 +145,23 @@ export interface StorageAccounts {
      * 
      * @param {object} [parameters.properties]
      * 
-     * @param {string} [parameters.properties.accountType] Gets or sets the
-     * account type. Note that StandardZRS and PremiumLRS accounts cannot be
-     * changed to other account types, and other account types cannot be changed
-     * to StandardZRS or PremiumLRS. Possible values include: 'Standard_LRS',
+     * @param {string} [parameters.properties.accountType] Gets or sets the account
+     * type. Note that StandardZRS and PremiumLRS accounts cannot be changed to
+     * other account types, and other account types cannot be changed to
+     * StandardZRS or PremiumLRS. Possible values include: 'Standard_LRS',
      * 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
      * 
-     * @param {object} [parameters.properties.customDomain] User domain assigned
-     * to the storage account. Name is the CNAME source. Only one custom domain
-     * is supported per storage account at this time. To clear the existing
-     * custom domain, use an empty string for the custom domain name property.
+     * @param {object} [parameters.properties.customDomain] User domain assigned to
+     * the storage account. Name is the CNAME source. Only one custom domain is
+     * supported per storage account at this time. To clear the existing custom
+     * domain, use an empty string for the custom domain name property.
      * 
      * @param {string} parameters.properties.customDomain.name Gets or sets the
      * custom domain name. Name is the CNAME source.
      * 
-     * @param {boolean} [parameters.properties.customDomain.useSubDomain]
-     * Indicates whether indirect CName validation is enabled. Default value is
-     * false. This should only be set on updates
+     * @param {boolean} [parameters.properties.customDomain.useSubDomain] Indicates
+     * whether indirect CName validation is enabled. Default value is false. This
+     * should only be set on updates
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -254,10 +254,10 @@ export interface StorageAccounts {
 
     /**
      * Asynchronously creates a new storage account with the specified parameters.
-     * Existing accounts cannot be updated with this API and should instead use
-     * the Update Storage Account API. If an account is already created and
-     * subsequent PUT request is issued with exact same set of properties, then
-     * HTTP 200 would be returned.
+     * Existing accounts cannot be updated with this API and should instead use the
+     * Update Storage Account API. If an account is already created and subsequent
+     * PUT request is issued with exact same set of properties, then HTTP 200 would
+     * be returned.
      *
      * @param {string} resourceGroupName The name of the resource group within the
      * user's subscription.

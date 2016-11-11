@@ -111,8 +111,8 @@ LROSADs.prototype.putNonRetry400 = function (options, callback) {
 
 /**
  *
- * Long running put request, service returns a Product with
- * 'ProvisioningState' = 'Creating' and 201 response code
+ * Long running put request, service returns a Product with 'ProvisioningState'
+ * = 'Creating' and 201 response code
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -192,8 +192,8 @@ LROSADs.prototype.putNonRetry201Creating400 = function (options, callback) {
 
 /**
  *
- * Long running put request, service returns a Product with
- * 'ProvisioningState' = 'Creating' and 201 response code
+ * Long running put request, service returns a Product with 'ProvisioningState'
+ * = 'Creating' and 201 response code
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -470,8 +470,8 @@ LROSADs.prototype.delete202NonRetry400 = function (options, callback) {
 /**
  *
  * Long running delete request, service returns a 202 to the initial request.
- * Poll the endpoint indicated in the Azure-AsyncOperation header for
- * operation status
+ * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+ * status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -658,9 +658,9 @@ LROSADs.prototype.post202NonRetry400 = function (options, callback) {
 
 /**
  *
- * Long running post request, service returns a 202 to the initial request
- * Poll the endpoint indicated in the Azure-AsyncOperation header for
- * operation status
+ * Long running post request, service returns a 202 to the initial request Poll
+ * the endpoint indicated in the Azure-AsyncOperation header for operation
+ * status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -806,9 +806,9 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (options, cal
 
 /**
  *
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. Poll the
- * endpoint indicated in the Azure-AsyncOperation header for operation status
+ * Long running put request, service returns a 200 to the initial request, with
+ * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+ * indicated in the Azure-AsyncOperation header for operation status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -888,9 +888,9 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (options, callback) {
 
 /**
  *
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. Poll the
- * endpoint indicated in the Azure-AsyncOperation header for operation status
+ * Long running put request, service returns a 200 to the initial request, with
+ * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+ * indicated in the Azure-AsyncOperation header for operation status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -1029,8 +1029,8 @@ LROSADs.prototype.delete204Succeeded = function (options, callback) {
 /**
  *
  * Long running delete request, service returns a 202 to the initial request.
- * Poll the endpoint indicated in the Azure-AsyncOperation header for
- * operation status
+ * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+ * status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -1154,8 +1154,8 @@ LROSADs.prototype.post202NoLocation = function (options, callback) {
 /**
  *
  * Long running post request, service returns a 202 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. Poll the
- * endpoint indicated in the Azure-AsyncOperation header for operation status
+ * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+ * indicated in the Azure-AsyncOperation header for operation status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -1220,8 +1220,8 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (options, callback)
 
 /**
  *
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that is not a valid json
+ * Long running put request, service returns a 200 to the initial request, with
+ * an entity that is not a valid json
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -1301,9 +1301,9 @@ LROSADs.prototype.put200InvalidJson = function (options, callback) {
 
 /**
  *
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. The endpoint
- * indicated in the Azure-AsyncOperation header is invalid.
+ * Long running put request, service returns a 200 to the initial request, with
+ * an entity that contains ProvisioningState=’Creating’. The endpoint indicated
+ * in the Azure-AsyncOperation header is invalid.
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -1383,9 +1383,9 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (options, callba
 
 /**
  *
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. Poll the
- * endpoint indicated in the Azure-AsyncOperation header for operation status
+ * Long running put request, service returns a 200 to the initial request, with
+ * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+ * indicated in the Azure-AsyncOperation header for operation status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -1582,8 +1582,8 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidHeader = function (options, cal
 /**
  *
  * Long running delete request, service returns a 202 to the initial request.
- * Poll the endpoint indicated in the Azure-AsyncOperation header for
- * operation status
+ * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+ * status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -1774,8 +1774,8 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (options, callb
 /**
  *
  * Long running post request, service returns a 202 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. Poll the
- * endpoint indicated in the Azure-AsyncOperation header for operation status
+ * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+ * indicated in the Azure-AsyncOperation header for operation status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -2003,8 +2003,8 @@ LROSADs.prototype.beginPutNonRetry400 = function (options, callback) {
 };
 
 /**
- * Long running put request, service returns a Product with
- * 'ProvisioningState' = 'Creating' and 201 response code
+ * Long running put request, service returns a Product with 'ProvisioningState'
+ * = 'Creating' and 201 response code
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -2168,8 +2168,8 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (options, callback) 
 };
 
 /**
- * Long running put request, service returns a Product with
- * 'ProvisioningState' = 'Creating' and 201 response code
+ * Long running put request, service returns a Product with 'ProvisioningState'
+ * = 'Creating' and 201 response code
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -2695,8 +2695,8 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
 
 /**
  * Long running delete request, service returns a 202 to the initial request.
- * Poll the endpoint indicated in the Azure-AsyncOperation header for
- * operation status
+ * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+ * status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -3060,9 +3060,9 @@ LROSADs.prototype.beginPost202NonRetry400 = function (options, callback) {
 };
 
 /**
- * Long running post request, service returns a 202 to the initial request
- * Poll the endpoint indicated in the Azure-AsyncOperation header for
- * operation status
+ * Long running post request, service returns a 202 to the initial request Poll
+ * the endpoint indicated in the Azure-AsyncOperation header for operation
+ * status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -3356,9 +3356,9 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (options
 };
 
 /**
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. Poll the
- * endpoint indicated in the Azure-AsyncOperation header for operation status
+ * Long running put request, service returns a 200 to the initial request, with
+ * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+ * indicated in the Azure-AsyncOperation header for operation status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -3505,9 +3505,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (options, callba
 };
 
 /**
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. Poll the
- * endpoint indicated in the Azure-AsyncOperation header for operation status
+ * Long running put request, service returns a 200 to the initial request, with
+ * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+ * indicated in the Azure-AsyncOperation header for operation status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -3762,8 +3762,8 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
 
 /**
  * Long running delete request, service returns a 202 to the initial request.
- * Poll the endpoint indicated in the Azure-AsyncOperation header for
- * operation status
+ * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+ * status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -4000,8 +4000,8 @@ LROSADs.prototype.beginPost202NoLocation = function (options, callback) {
 
 /**
  * Long running post request, service returns a 202 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. Poll the
- * endpoint indicated in the Azure-AsyncOperation header for operation status
+ * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+ * indicated in the Azure-AsyncOperation header for operation status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -4130,8 +4130,8 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (options, call
 };
 
 /**
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that is not a valid json
+ * Long running put request, service returns a 200 to the initial request, with
+ * an entity that is not a valid json
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -4278,9 +4278,9 @@ LROSADs.prototype.beginPut200InvalidJson = function (options, callback) {
 };
 
 /**
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. The endpoint
- * indicated in the Azure-AsyncOperation header is invalid.
+ * Long running put request, service returns a 200 to the initial request, with
+ * an entity that contains ProvisioningState=’Creating’. The endpoint indicated
+ * in the Azure-AsyncOperation header is invalid.
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -4427,9 +4427,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (options, c
 };
 
 /**
- * Long running put request, service returns a 200 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. Poll the
- * endpoint indicated in the Azure-AsyncOperation header for operation status
+ * Long running put request, service returns a 200 to the initial request, with
+ * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+ * indicated in the Azure-AsyncOperation header for operation status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -4791,8 +4791,8 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
 
 /**
  * Long running delete request, service returns a 202 to the initial request.
- * Poll the endpoint indicated in the Azure-AsyncOperation header for
- * operation status
+ * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+ * status
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -5160,8 +5160,8 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (options, 
 
 /**
  * Long running post request, service returns a 202 to the initial request,
- * with an entity that contains ProvisioningState=’Creating’. Poll the
- * endpoint indicated in the Azure-AsyncOperation header for operation status
+ * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+ * indicated in the Azure-AsyncOperation header for operation status
  *
  * @param {object} [options] Optional Parameters.
  * 

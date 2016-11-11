@@ -54,8 +54,8 @@ namespace Petstore
         int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
-        /// When set to true a unique x-ms-client-request-id value is
-        /// generated and included in each request. Default is true.
+        /// When set to true a unique x-ms-client-request-id value is generated
+        /// and included in each request. Default is true.
         /// </summary>
         bool? GenerateClientRequestId { get; set; }
 

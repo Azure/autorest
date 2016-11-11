@@ -921,8 +921,8 @@ class PathsOperations(object):
 
     def date_null(
             self, date_path, custom_headers=None, raw=False, **operation_config):
-        """Get null as date - this should throw or be unusable on the client
-        side, depending on date representation.
+        """Get null as date - this should throw or be unusable on the client side,
+        depending on date representation.
 
         :param date_path: null as date (should throw)
         :type date_path: date

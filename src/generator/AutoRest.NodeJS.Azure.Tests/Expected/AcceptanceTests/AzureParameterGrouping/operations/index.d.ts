@@ -51,8 +51,8 @@ export interface ParameterGrouping {
      *
      * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options.parameterGroupingPostOptionalParameters]
-     * Additional parameters for the operation
+     * @param {object} [options.parameterGroupingPostOptionalParameters] Additional
+     * parameters for the operation
      * 
      * @param {string}
      * [options.parameterGroupingPostOptionalParameters.customHeader]

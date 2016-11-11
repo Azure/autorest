@@ -35,8 +35,8 @@ function Odata(client) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [options.filter] The filter parameter with value
- * '$filter=id gt 5 and name eq 'foo''.
+ * @param {string} [options.filter] The filter parameter with value '$filter=id
+ * gt 5 and name eq 'foo''.
  * 
  * @param {number} [options.top] The top parameter with value 10.
  * 

@@ -1300,8 +1300,8 @@ Paths.prototype.stringNull = function (stringPath, options, callback) {
 /**
  * Get using uri with 'green color' in path parameter
  *
- * @param {string} enumPath send the value green. Possible values include:
- * 'red color', 'green color', 'blue color'
+ * @param {string} enumPath send the value green. Possible values include: 'red
+ * color', 'green color', 'blue color'
  * 
  * @param {object} [options] Optional Parameters.
  * 

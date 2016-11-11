@@ -32,8 +32,8 @@ function LROsCustomHeader(client) {
 /**
  *
  * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
- * message header for all requests. Long running put request, service returns
- * a 200 to the initial request, with an entity that contains
+ * message header for all requests. Long running put request, service returns a
+ * 200 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
  *
@@ -116,8 +116,8 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (options, callback)
 /**
  *
  * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
- * message header for all requests. Long running put request, service returns
- * a 201 to the initial request, with an entity that contains
+ * message header for all requests. Long running put request, service returns a
+ * 201 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’.  Polls return this value until the last poll
  * returns a ‘200’ with ProvisioningState=’Succeeded’
  *
@@ -200,9 +200,9 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (options, callb
 /**
  *
  * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
- * message header for all requests. Long running post request, service
- * returns a 202 to the initial request, with 'Location' and 'Retry-After'
- * headers, Polls return a 200 with a response body after success
+ * message header for all requests. Long running post request, service returns
+ * a 202 to the initial request, with 'Location' and 'Retry-After' headers,
+ * Polls return a 200 with a response body after success
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -268,8 +268,8 @@ LROsCustomHeader.prototype.post202Retry200 = function (options, callback) {
 /**
  *
  * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
- * message header for all requests. Long running post request, service
- * returns a 202 to the initial request, with an entity that contains
+ * message header for all requests. Long running post request, service returns
+ * a 202 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
  *
@@ -336,8 +336,8 @@ LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (options, callback
 
 /**
  * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
- * message header for all requests. Long running put request, service returns
- * a 200 to the initial request, with an entity that contains
+ * message header for all requests. Long running put request, service returns a
+ * 200 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
  *
@@ -487,8 +487,8 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (options, call
 
 /**
  * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
- * message header for all requests. Long running put request, service returns
- * a 201 to the initial request, with an entity that contains
+ * message header for all requests. Long running put request, service returns a
+ * 201 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’.  Polls return this value until the last poll
  * returns a ‘200’ with ProvisioningState=’Succeeded’
  *
@@ -655,9 +655,9 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (options, 
 
 /**
  * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
- * message header for all requests. Long running post request, service
- * returns a 202 to the initial request, with 'Location' and 'Retry-After'
- * headers, Polls return a 200 with a response body after success
+ * message header for all requests. Long running post request, service returns
+ * a 202 to the initial request, with 'Location' and 'Retry-After' headers,
+ * Polls return a 200 with a response body after success
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -787,8 +787,8 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (options, callback) {
 
 /**
  * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
- * message header for all requests. Long running post request, service
- * returns a 202 to the initial request, with an entity that contains
+ * message header for all requests. Long running post request, service returns
+ * a 202 to the initial request, with an entity that contains
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
  *

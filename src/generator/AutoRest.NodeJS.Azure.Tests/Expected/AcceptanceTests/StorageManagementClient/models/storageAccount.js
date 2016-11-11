@@ -28,9 +28,9 @@ var util = require('util');
  * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
  * 'Standard_RAGRS', 'Premium_LRS'
  * 
- * @member {object} [primaryEndpoints] Gets the URLs that are used to perform
- * a retrieval of a public blob, queue or table object.Note that StandardZRS
- * and PremiumLRS accounts only return the blob endpoint.
+ * @member {object} [primaryEndpoints] Gets the URLs that are used to perform a
+ * retrieval of a public blob, queue or table object.Note that StandardZRS and
+ * PremiumLRS accounts only return the blob endpoint.
  * 
  * @member {string} [primaryEndpoints.blob] Gets the blob endpoint.
  * 
@@ -56,21 +56,21 @@ var util = require('util');
  * 
  * @member {date} [lastGeoFailoverTime] Gets the timestamp of the most recent
  * instance of a failover to the secondary location. Only the most recent
- * timestamp is retained. This element is not returned if there has never
- * been a failover instance. Only available if the accountType is StandardGRS
- * or StandardRAGRS.
+ * timestamp is retained. This element is not returned if there has never been
+ * a failover instance. Only available if the accountType is StandardGRS or
+ * StandardRAGRS.
  * 
- * @member {string} [secondaryLocation] Gets the location of the geo
- * replicated secondary for the storage account. Only available if the
- * accountType is StandardGRS or StandardRAGRS.
+ * @member {string} [secondaryLocation] Gets the location of the geo replicated
+ * secondary for the storage account. Only available if the accountType is
+ * StandardGRS or StandardRAGRS.
  * 
  * @member {string} [statusOfSecondary] Gets the status indicating whether the
- * secondary location of the storage account is available or unavailable.
- * Only available if the accountType is StandardGRS or StandardRAGRS.
- * Possible values include: 'Available', 'Unavailable'
+ * secondary location of the storage account is available or unavailable. Only
+ * available if the accountType is StandardGRS or StandardRAGRS. Possible
+ * values include: 'Available', 'Unavailable'
  * 
- * @member {date} [creationTime] Gets the creation date and time of the
- * storage account in UTC.
+ * @member {date} [creationTime] Gets the creation date and time of the storage
+ * account in UTC.
  * 
  * @member {object} [customDomain] Gets the user assigned custom domain
  * assigned to this storage account.
@@ -79,13 +79,13 @@ var util = require('util');
  * Name is the CNAME source.
  * 
  * @member {boolean} [customDomain.useSubDomain] Indicates whether indirect
- * CName validation is enabled. Default value is false. This should only be
- * set on updates
+ * CName validation is enabled. Default value is false. This should only be set
+ * on updates
  * 
- * @member {object} [secondaryEndpoints] Gets the URLs that are used to
- * perform a retrieval of a public blob, queue or table object from the
- * secondary location of the storage account. Only available if the
- * accountType is StandardRAGRS.
+ * @member {object} [secondaryEndpoints] Gets the URLs that are used to perform
+ * a retrieval of a public blob, queue or table object from the secondary
+ * location of the storage account. Only available if the accountType is
+ * StandardRAGRS.
  * 
  * @member {string} [secondaryEndpoints.blob] Gets the blob endpoint.
  * 

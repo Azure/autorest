@@ -15,10 +15,10 @@ class StorageAccountPropertiesUpdateParameters(Model):
      'Standard_RAGRS', 'Premium_LRS'
     :type account_type: str or :class:`AccountType
      <petstore.models.AccountType>`
-    :param custom_domain: User domain assigned to the storage account. Name
-     is the CNAME source. Only one custom domain is supported per storage
-     account at this time. To clear the existing custom domain, use an empty
-     string for the custom domain name property.
+    :param custom_domain: User domain assigned to the storage account. Name is
+     the CNAME source. Only one custom domain is supported per storage account
+     at this time. To clear the existing custom domain, use an empty string for
+     the custom domain name property.
     :type custom_domain: :class:`CustomDomain <petstore.models.CustomDomain>`
     """ 
 

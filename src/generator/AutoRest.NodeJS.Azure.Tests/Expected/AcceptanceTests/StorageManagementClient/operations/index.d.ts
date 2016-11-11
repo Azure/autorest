@@ -44,10 +44,10 @@ export interface StorageAccounts {
 
     /**
      * Asynchronously creates a new storage account with the specified parameters.
-     * Existing accounts cannot be updated with this API and should instead use
-     * the Update Storage Account API. If an account is already created and
-     * subsequent PUT request is issued with exact same set of properties, then
-     * HTTP 200 would be returned.
+     * Existing accounts cannot be updated with this API and should instead use the
+     * Update Storage Account API. If an account is already created and subsequent
+     * PUT request is issued with exact same set of properties, then HTTP 200 would
+     * be returned.
      *
      * @param {string} resourceGroupName The name of the resource group within the
      * user’s subscription.
@@ -125,10 +125,10 @@ export interface StorageAccounts {
     /**
      * Updates the account type or tags for a storage account. It can also be used
      * to add a custom domain (note that custom domains cannot be added via the
-     * Create operation). Only one custom domain is supported per storage
-     * account. This API can only be used to update one of tags, accountType, or
-     * customDomain per call. To update multiple of these properties, call the
-     * API multiple times with one change per call. This call does not change the
+     * Create operation). Only one custom domain is supported per storage account.
+     * This API can only be used to update one of tags, accountType, or
+     * customDomain per call. To update multiple of these properties, call the API
+     * multiple times with one change per call. This call does not change the
      * storage keys for the account. If you want to change storage account keys,
      * use the RegenerateKey operation. The location and name of the storage
      * account cannot be changed after creation.
@@ -143,9 +143,9 @@ export interface StorageAccounts {
      * @param {object} parameters The parameters to update on the account. Note
      * that only one property can be changed at a time using this API.
      * 
-     * @param {string} [parameters.accountType] Gets or sets the account type.
-     * Note that StandardZRS and PremiumLRS accounts cannot be changed to other
-     * account types, and other account types cannot be changed to StandardZRS or
+     * @param {string} [parameters.accountType] Gets or sets the account type. Note
+     * that StandardZRS and PremiumLRS accounts cannot be changed to other account
+     * types, and other account types cannot be changed to StandardZRS or
      * PremiumLRS. Possible values include: 'Standard_LRS', 'Standard_ZRS',
      * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
      * 
@@ -254,10 +254,10 @@ export interface StorageAccounts {
 
     /**
      * Asynchronously creates a new storage account with the specified parameters.
-     * Existing accounts cannot be updated with this API and should instead use
-     * the Update Storage Account API. If an account is already created and
-     * subsequent PUT request is issued with exact same set of properties, then
-     * HTTP 200 would be returned.
+     * Existing accounts cannot be updated with this API and should instead use the
+     * Update Storage Account API. If an account is already created and subsequent
+     * PUT request is issued with exact same set of properties, then HTTP 200 would
+     * be returned.
      *
      * @param {string} resourceGroupName The name of the resource group within the
      * user’s subscription.

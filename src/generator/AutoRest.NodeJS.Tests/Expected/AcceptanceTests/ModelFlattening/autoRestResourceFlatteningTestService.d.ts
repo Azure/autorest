@@ -149,8 +149,8 @@ declare class AutoRestResourceFlatteningTestService {
          * 
          * @param {object} [options.simpleBodyProduct] Simple body product to put
          * 
-         * @param {string} options.simpleBodyProduct.maxProductDisplayName Display
-         * name of product.
+         * @param {string} options.simpleBodyProduct.maxProductDisplayName Display name
+         * of product.
          * 
          * @param {string} [options.simpleBodyProduct.genericValue] Generic URL value.
          * 
@@ -158,8 +158,8 @@ declare class AutoRestResourceFlatteningTestService {
          * 
          * @param {string} options.simpleBodyProduct.productId Unique identifier
          * representing a specific product for a given latitude & longitude. For
-         * example, uberX in San Francisco will have a different product_id than
-         * uberX in Los Angeles.
+         * example, uberX in San Francisco will have a different product_id than uberX
+         * in Los Angeles.
          * 
          * @param {string} [options.simpleBodyProduct.description] Description of
          * product.
@@ -210,8 +210,8 @@ declare class AutoRestResourceFlatteningTestService {
          * 
          * @param {string} flattenParameterGroup.productId Unique identifier
          * representing a specific product for a given latitude & longitude. For
-         * example, uberX in San Francisco will have a different product_id than
-         * uberX in Los Angeles.
+         * example, uberX in San Francisco will have a different product_id than uberX
+         * in Los Angeles.
          * 
          * @param {string} [flattenParameterGroup.description] Description of product.
          * 

@@ -171,8 +171,8 @@ class PagingOperations(object):
 
     def get_odata_multiple_pages(
             self, client_request_id=None, paging_get_odata_multiple_pages_options=None, custom_headers=None, raw=False, **operation_config):
-        """A paging operation that includes a nextLink in odata format that has
-        10 pages.
+        """A paging operation that includes a nextLink in odata format that has 10
+        pages.
 
         :param client_request_id:
         :type client_request_id: str
@@ -336,8 +336,7 @@ class PagingOperations(object):
     def get_multiple_pages_retry_first(
             self, custom_headers=None, raw=False, **operation_config):
         """A paging operation that fails on the first call with 500 and then
-        retries and then get a response including a nextLink that has 10
-        pages.
+        retries and then get a response including a nextLink that has 10 pages.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -395,9 +394,9 @@ class PagingOperations(object):
 
     def get_multiple_pages_retry_second(
             self, custom_headers=None, raw=False, **operation_config):
-        """A paging operation that includes a nextLink that has 10 pages, of
-        which the 2nd call fails first with 500. The client should retry and
-        finish all 10 pages eventually.
+        """A paging operation that includes a nextLink that has 10 pages, of which
+        the 2nd call fails first with 500. The client should retry and finish
+        all 10 pages eventually.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -702,8 +701,8 @@ class PagingOperations(object):
 
     def get_multiple_pages_fragment_with_grouping_next_link(
             self, custom_parameter_group, custom_headers=None, raw=False, **operation_config):
-        """A paging operation that doesn't return a full URL, just a fragment
-        with parameters grouped.
+        """A paging operation that doesn't return a full URL, just a fragment with
+        parameters grouped.
 
         :param custom_parameter_group: Additional parameters for the operation
         :type custom_parameter_group: :class:`CustomParameterGroup

@@ -53,8 +53,8 @@ class SwaggerPetstore(object):
 
     def add_pet_using_byte_array(
             self, body=None, custom_headers=None, raw=False, **operation_config):
-        """Fake endpoint to test byte array in body parameter for adding a new
-        pet to the store.
+        """Fake endpoint to test byte array in body parameter for adding a new pet
+        to the store.
 
         :param body: Pet object in the form of byte array
         :type body: str

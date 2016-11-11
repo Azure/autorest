@@ -4747,8 +4747,8 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
 
 /**
  * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01
- * GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492
- * 10:15:01 GMT"}
+ * GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01
+ * GMT"}
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -4866,8 +4866,8 @@ Dictionary.prototype.getDateTimeRfc1123Valid = function (options, callback) {
 };
 
 /**
- * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1":
- * "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+ * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed,
+ * 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
  *
  * @param {object} arrayBody
  * 
@@ -5973,8 +5973,8 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
 };
 
 /**
- * Get dictionary of complex type with null item {"0": {"integer": 1,
- * "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
+ * Get dictionary of complex type with null item {"0": {"integer": 1, "string":
+ * "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -6333,9 +6333,9 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
 };
 
 /**
- * Put an dictionary of complex type with values {"0": {"integer": 1,
- * "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
- * "string": "6"}}
+ * Put an dictionary of complex type with values {"0": {"integer": 1, "string":
+ * "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string":
+ * "6"}}
  *
  * @param {object} arrayBody
  * 
@@ -6703,8 +6703,8 @@ Dictionary.prototype.getArrayEmpty = function (options, callback) {
 };
 
 /**
- * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null,
- * "2": ["7", "8", "9"]}
+ * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2":
+ * ["7", "8", "9"]}
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -6829,8 +6829,8 @@ Dictionary.prototype.getArrayItemNull = function (options, callback) {
 };
 
 /**
- * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
- * ["7", "8", "9"]}
+ * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7",
+ * "8", "9"]}
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -7474,8 +7474,8 @@ Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
 
 /**
  * Get an dictionaries of dictionaries of type <string, string> with value
- * {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7":
- * "seven", "8": "eight", "9": "nine"}}
+ * {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven",
+ * "8": "eight", "9": "nine"}}
  *
  * @param {object} [options] Optional Parameters.
  * 

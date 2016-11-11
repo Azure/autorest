@@ -5378,8 +5378,8 @@ ArrayModel.prototype.getByteValid = function (options, callback) {
 };
 
 /**
- * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
- * with each elementencoded in base 64
+ * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with
+ * each elementencoded in base 64
  *
  * @param {array} arrayBody
  * 
@@ -6105,8 +6105,8 @@ ArrayModel.prototype.getComplexItemNull = function (options, callback) {
 };
 
 /**
- * Get array of complex type with empty item [{'integer': 1 'string': '2'},
- * {}, {'integer': 5, 'string': '6'}]
+ * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {},
+ * {'integer': 5, 'string': '6'}]
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -6225,8 +6225,8 @@ ArrayModel.prototype.getComplexItemEmpty = function (options, callback) {
 };
 
 /**
- * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer':
- * 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
+ * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3,
+ * 'string': '4'}, {'integer': 5, 'string': '6'}]
  *
  * @param {object} [options] Optional Parameters.
  * 

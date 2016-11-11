@@ -4,8 +4,8 @@ namespace Petstore.Models
     using System.Linq;
 
     /// <summary>
-    /// The custom domain assigned to this storage account. This can be set
-    /// via Update.
+    /// The custom domain assigned to this storage account. This can be set via
+    /// Update.
     /// </summary>
     public partial class CustomDomain
     {
@@ -17,11 +17,11 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the CustomDomain class.
         /// </summary>
-        /// <param name="name">Gets or sets the custom domain name. Name is
-        /// the CNAME source.</param>
+        /// <param name="name">Gets or sets the custom domain name. Name is the
+        /// CNAME source.</param>
         /// <param name="useSubDomain">Indicates whether indirect CName
-        /// validation is enabled. Default value is false. This should only
-        /// be set on updates</param>
+        /// validation is enabled. Default value is false. This should only be
+        /// set on updates</param>
         public CustomDomain(string name, bool? useSubDomain = default(bool?))
         {
             Name = name;
@@ -36,8 +36,7 @@ namespace Petstore.Models
 
         /// <summary>
         /// Gets or sets indicates whether indirect CName validation is
-        /// enabled. Default value is false. This should only be set on
-        /// updates
+        /// enabled. Default value is false. This should only be set on updates
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "useSubDomain")]
         public bool? UseSubDomain { get; set; }

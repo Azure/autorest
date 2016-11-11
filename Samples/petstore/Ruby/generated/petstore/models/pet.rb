@@ -8,8 +8,8 @@ module Petstore
     # A group of properties representing a pet.
     #
     class Pet
-      # @return [Integer] The id of the pet. A more detailed description of
-      # the id of the pet.
+      # @return [Integer] The id of the pet. A more detailed description of the
+      # id of the pet.
       attr_accessor :id
 
       # @return [Category]
