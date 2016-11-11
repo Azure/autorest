@@ -9,8 +9,7 @@
  * @constructor
  * @member {string} name
  * 
- * @member {string} [type]  Default value: 'Microsoft.Storage/storageAccounts'
- * .
+ * @member {string} [type] Default value: 'Microsoft.Storage/storageAccounts' .
  * 
  */
 function StorageAccountCheckNameAvailabilityParameters() {
