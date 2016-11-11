@@ -60,6 +60,21 @@ namespace AutoRest.Core.Model
         }
 
         /// <summary>
+        /// Determines whether the specified model type is functionally equal to this object.
+        /// </summary>
+        /// <param name="other">The object to compare with this object.</param>
+        /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
+        public override bool FunctionallyEquals(IModelType other)
+        {
+            if (ReferenceEquals(other as SequenceType, null))
+            {
+                return false;
+            }
+
+            return ElementType.FunctionallyEquals((other as SequenceType).ElementType);
+        }
+
+        /// <summary>
         /// Serves as a hash function based on ElementType.
         /// </summary>
         /// <returns>

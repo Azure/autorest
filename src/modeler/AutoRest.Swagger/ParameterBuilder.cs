@@ -66,22 +66,14 @@ namespace AutoRest.Swagger
 
         public override IModelType BuildServiceType(string serviceTypeName)
         {
-            // Check if already generated
-            // if (serviceTypeName != null && Modeler.GeneratedTypes.ContainsKey(serviceTypeName))
-            // {
-            //    return Modeler.GeneratedTypes[serviceTypeName];
-            // }
-
             var swaggerParameter = Modeler.Unwrap(_swaggerParameter);
-
-            // Generic type
-            if (swaggerParameter.In != ParameterLocation.Body)
-            {
-                return swaggerParameter.GetBuilder(Modeler).ParentBuildServiceType(serviceTypeName);
-            }
-
-            // Contains a complex type schema
-            return swaggerParameter.Schema.GetBuilder(Modeler).BuildServiceType(serviceTypeName);
+            
+            // create service type
+            var serviceType = swaggerParameter.In == ParameterLocation.Body ?
+                swaggerParameter.Schema.GetBuilder(Modeler).BuildServiceType(serviceTypeName) :
+                swaggerParameter.GetBuilder(Modeler).ParentBuildServiceType(serviceTypeName);
+            
+            return serviceType;
         }
 
         public override IModelType ParentBuildServiceType(string serviceTypeName)

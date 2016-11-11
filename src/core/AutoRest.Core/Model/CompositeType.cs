@@ -192,22 +192,22 @@ namespace AutoRest.Core.Model
             return Name;
         }
 
-        /// <summary>
-        /// Determines whether the specified object is equal to this object based on the Name.
-        /// </summary>
-        /// <param name="obj">The object to compare with this object.</param>
-        /// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
-        public override bool Equals(object obj)
-        {
-            var modelType = obj as CompositeType;
+        ///// <summary>
+        ///// Determines whether the specified object is equal to this object based on the Name.
+        ///// </summary>
+        ///// <param name="obj">The object to compare with this object.</param>
+        ///// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
+        //public override bool Equals(object obj)
+        //{
+        //    var modelType = obj as CompositeType;
 
-            if (modelType != null)
-            {
-                return modelType.Name == Name;
-            }
+        //    if (modelType != null)
+        //    {
+        //        return modelType.Name == Name;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
         /// <summary>
         /// Serves as a hash function based on Name.
@@ -219,7 +219,28 @@ namespace AutoRest.Core.Model
         {
             return Name == null ? 0 : Name.GetHashCode();
         }
-       
+
+        /// <summary>
+        /// Determines whether the specified model type is functionally equal to this object.
+        /// </summary>
+        /// <param name="other">The object to compare with this object.</param>
+        /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
+        public override bool FunctionallyEquals(IModelType other)
+        {
+            if (ReferenceEquals(other as CompositeType, null))
+            {
+                return false;
+            }
+
+            return ComposedProperties.SequenceEqual((other as CompositeType).ComposedProperties, 
+                new Utilities.EqualityComparer<Property>((a, b) => 
+                    a.Name == b.Name && 
+                    a.ModelType.FunctionallyEquals(b.ModelType) && 
+                    a.IsReadOnly == b.IsReadOnly && 
+                    a.IsConstant == b.IsConstant && 
+                    a.IsRequired == b.IsRequired));
+        }
+
         [JsonIgnore]
         public override IEnumerable<IChild> Children => Properties;
 

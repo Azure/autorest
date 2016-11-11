@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Model;
@@ -29,12 +30,6 @@ namespace AutoRest.Swagger
 
         public override IModelType BuildServiceType(string serviceTypeName)
         {
-            // Check if already generated
-            if (serviceTypeName != null && Modeler.GeneratedTypes.ContainsKey(serviceTypeName))
-            {
-                return Modeler.GeneratedTypes[serviceTypeName];
-            }
-
             _schema = Modeler.Resolver.Unwrap(_schema);
 
             // If it's a primitive type, let the parent build service handle it
@@ -59,8 +54,13 @@ namespace AutoRest.Swagger
                 Summary = _schema.Title
             });
 
-            // Put this in already generated types serializationProperty
-            Modeler.GeneratedTypes[serviceTypeName] = objectType;
+            // associate this type with its schema (by reference) in order to allow recursive models to terminate
+            // (e.g. if `objectType` type has property of type `objectType[]`)
+            if (Modeler.GeneratingTypes.ContainsKey(_schema))
+            {
+                return Modeler.GeneratingTypes[_schema];
+            }
+            Modeler.GeneratingTypes[_schema] = objectType;
 
             if (_schema.Type == DataType.Object && _schema.AdditionalProperties != null)
             {
@@ -175,6 +175,20 @@ namespace AutoRest.Swagger
                 // Put this in the extended type serializationProperty for building method return type in the end
                 Modeler.ExtendedTypes[serviceTypeName] = _schema.Extends.StripDefinitionPath();
             }
+            
+            // Put this in already generated types serializationProperty
+            string localName = serviceTypeName;
+            while (Modeler.GeneratedTypes.ContainsKey(localName))
+            {
+                var existing = Modeler.GeneratedTypes[localName];
+                if (objectType.FunctionallyEquals(existing))
+                {
+                    objectType = existing;
+                    break;
+                }
+                localName = localName.GetHashCode().ToString();
+            }
+            Modeler.GeneratedTypes[localName] = objectType;
 
             return objectType;
         }
