@@ -186,7 +186,7 @@ namespace AutoRest.Swagger
                     objectType = existing;
                     break;
                 }
-                localName = localName.GetHashCode().ToString();
+                localName = localName + "_";
             }
             Modeler.GeneratedTypes[localName] = objectType;
 
