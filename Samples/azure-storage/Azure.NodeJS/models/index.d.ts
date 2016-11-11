@@ -11,8 +11,7 @@ exports.CloudError = msRestAzure.CloudError;
  * @constructor
  * @member {string} name
  * 
- * @member {string} [type]  Default value: 'Microsoft.Storage/storageAccounts'
- * .
+ * @member {string} [type] Default value: 'Microsoft.Storage/storageAccounts' .
  * 
  */
 export interface StorageAccountCheckNameAvailabilityParameters {
@@ -339,6 +338,20 @@ export interface StorageAccountKeys {
 
 /**
  * @class
+ * Initializes a new instance of the StorageAccountListResult class.
+ * @constructor
+ * The list storage accounts operation response.
+ *
+ * @member {array} [value] Gets the list of storage accounts and their
+ * properties.
+ * 
+ */
+export interface StorageAccountListResult {
+  value?: StorageAccount[];
+}
+
+/**
+ * @class
  * Initializes a new instance of the StorageAccountPropertiesUpdateParameters class.
  * @constructor
  * @member {string} [accountType] Gets or sets the account type. Note that
@@ -456,6 +469,19 @@ export interface Usage {
   currentValue: number;
   limit: number;
   name: UsageName;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the UsageListResult class.
+ * @constructor
+ * The List Usages operation response.
+ *
+ * @member {array} [value] Gets or sets the list Storage Resource Usages.
+ * 
+ */
+export interface UsageListResult {
+  value?: Usage[];
 }
 
 

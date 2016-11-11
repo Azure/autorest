@@ -28,7 +28,7 @@ namespace Petstore
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Fake endpoint to test byte array in body parameter for adding a
         /// new pet to the store
         /// </summary>

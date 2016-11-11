@@ -758,7 +758,7 @@ autorest.exe -modeler CompositeSwagger -input compositeDoc.json -output C:\Temp 
 
  
 ## Extensions
-AutoRest supports a number of extensions used to configure generated clients. Please refer to [Swagger Extensions](../../extensions/index.md) document for details.
+AutoRest supports a number of extensions used to configure generated clients. Please refer to [Swagger Extensions](../../extensions/readme.md) document for details.
 
 [Swagger-spec2.0]:https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
 [JSON-primitive-types]:http://json-schema.org/latest/json-schema-core.html#anchor8
