@@ -26,19 +26,11 @@
         },
         "AzureResourceSchema": {
             "type": "PluginArs, AutoRest.AzureResourceSchema"
+        },
+        "Azure.CSharp.Fluent": {
+          "type": "PluginCsaf, AutoRest.AutoRest.CSharp.Azure.Fluent"
         }
     },
-  "codeGenerators": {
-    "CSharp": {
-      "type": "CSharpCodeGenerator, AutoRest.CSharp"
-    },
-    "NodeJS": {
-      "type": "NodeJSCodeGenerator, AutoRest.NodeJS",
-      "settings": {
-        "disableTypeScriptGeneration": true
-      }
-    }
-  },
   "modelers": {
     "Swagger": {
       "type": "SwaggerModeler, AutoRest.Swagger"
