@@ -1,6 +1,6 @@
 # AvoidNestedProperties
 ## Description
-This rule appears when you define a property with the name `properties`, and do not use the [`x-ms-client-flatten` extension](../../extensions/index.md#x-ms-client-flatten). Users often provide feedback that they don't want to create multiple levels of properties to be able to use an operation. By applying the `x-ms-client-flatten` extension, you move the inner `properties` to the top level of your definition.
+This rule appears when you define a property with the name `properties`, and do not use the [`x-ms-client-flatten` extension](../../extensions/readme.md#x-ms-client-flatten). Users often provide feedback that they don't want to create multiple levels of properties to be able to use an operation. By applying the `x-ms-client-flatten` extension, you move the inner `properties` to the top level of your definition.
 ## How to fix
 Add the `x-ms-client-flatten` extension to the inner `properties` definition.
 ## Effect on generated code
