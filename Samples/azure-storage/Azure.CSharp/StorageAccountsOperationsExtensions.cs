@@ -107,64 +107,6 @@ namespace Petstore
             }
 
             /// <summary>
-            /// Asynchronously creates a new storage account with the specified
-            /// parameters. Existing accounts cannot be updated with this API and should
-            /// instead use the Update Storage Account API. If an account is already
-            /// created and subsequent PUT request is issued with exact same set of
-            /// properties, then HTTP 200 would be returned.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='resourceGroupName'>
-            /// The name of the resource group within the user's subscription.
-            /// </param>
-            /// <param name='accountName'>
-            /// The name of the storage account within the specified resource group.
-            /// Storage account names must be between 3 and 24 characters in length and
-            /// use numbers and lower-case letters only.
-            /// </param>
-            /// <param name='parameters'>
-            /// The parameters to provide for the created account.
-            /// </param>
-            public static StorageAccount BeginCreate(this IStorageAccountsOperations operations, string resourceGroupName, string accountName, StorageAccountCreateParameters parameters)
-            {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IStorageAccountsOperations)s).BeginCreateAsync(resourceGroupName, accountName, parameters), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Asynchronously creates a new storage account with the specified
-            /// parameters. Existing accounts cannot be updated with this API and should
-            /// instead use the Update Storage Account API. If an account is already
-            /// created and subsequent PUT request is issued with exact same set of
-            /// properties, then HTTP 200 would be returned.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='resourceGroupName'>
-            /// The name of the resource group within the user's subscription.
-            /// </param>
-            /// <param name='accountName'>
-            /// The name of the storage account within the specified resource group.
-            /// Storage account names must be between 3 and 24 characters in length and
-            /// use numbers and lower-case letters only.
-            /// </param>
-            /// <param name='parameters'>
-            /// The parameters to provide for the created account.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async System.Threading.Tasks.Task<StorageAccount> BeginCreateAsync(this IStorageAccountsOperations operations, string resourceGroupName, string accountName, StorageAccountCreateParameters parameters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-            {
-                using (var _result = await operations.BeginCreateWithHttpMessagesAsync(resourceGroupName, accountName, parameters, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
             /// Deletes a storage account in Microsoft Azure.
             /// </summary>
             /// <param name='operations'>
@@ -482,6 +424,64 @@ namespace Petstore
             public static async System.Threading.Tasks.Task<StorageAccountKeys> RegenerateKeyAsync(this IStorageAccountsOperations operations, string resourceGroupName, string accountName, StorageAccountRegenerateKeyParameters regenerateKey, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.RegenerateKeyWithHttpMessagesAsync(resourceGroupName, accountName, regenerateKey, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Asynchronously creates a new storage account with the specified
+            /// parameters. Existing accounts cannot be updated with this API and should
+            /// instead use the Update Storage Account API. If an account is already
+            /// created and subsequent PUT request is issued with exact same set of
+            /// properties, then HTTP 200 would be returned.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group within the user's subscription.
+            /// </param>
+            /// <param name='accountName'>
+            /// The name of the storage account within the specified resource group.
+            /// Storage account names must be between 3 and 24 characters in length and
+            /// use numbers and lower-case letters only.
+            /// </param>
+            /// <param name='parameters'>
+            /// The parameters to provide for the created account.
+            /// </param>
+            public static StorageAccount BeginCreate(this IStorageAccountsOperations operations, string resourceGroupName, string accountName, StorageAccountCreateParameters parameters)
+            {
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IStorageAccountsOperations)s).BeginCreateAsync(resourceGroupName, accountName, parameters), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Asynchronously creates a new storage account with the specified
+            /// parameters. Existing accounts cannot be updated with this API and should
+            /// instead use the Update Storage Account API. If an account is already
+            /// created and subsequent PUT request is issued with exact same set of
+            /// properties, then HTTP 200 would be returned.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceGroupName'>
+            /// The name of the resource group within the user's subscription.
+            /// </param>
+            /// <param name='accountName'>
+            /// The name of the storage account within the specified resource group.
+            /// Storage account names must be between 3 and 24 characters in length and
+            /// use numbers and lower-case letters only.
+            /// </param>
+            /// <param name='parameters'>
+            /// The parameters to provide for the created account.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async System.Threading.Tasks.Task<StorageAccount> BeginCreateAsync(this IStorageAccountsOperations operations, string resourceGroupName, string accountName, StorageAccountCreateParameters parameters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            {
+                using (var _result = await operations.BeginCreateWithHttpMessagesAsync(resourceGroupName, accountName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

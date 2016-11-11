@@ -12,7 +12,7 @@ class StorageAccountPropertiesCreateParameters(Model):
      include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
      'Standard_RAGRS', 'Premium_LRS'
     :type account_type: str or :class:`AccountType
-     <Petstore.models.AccountType>`
+     <petstore.models.AccountType>`
     """ 
 
     _validation = {

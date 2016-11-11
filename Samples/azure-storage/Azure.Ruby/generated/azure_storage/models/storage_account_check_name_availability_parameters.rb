@@ -12,7 +12,7 @@ module Petstore
       # @return [String]
       attr_accessor :name
 
-      # @return [String]  Default value: 'Microsoft.Storage/storageAccounts' .
+      # @return [String] . Default value: 'Microsoft.Storage/storageAccounts' .
       attr_accessor :type
 
 
