@@ -9,20 +9,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AutoRest.Core;
-using AutoRest.Core.Extensibility;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Validation;
-using AutoRest.Swagger.JsonConverters;
-using AutoRest.Swagger.Model;
 using Microsoft.CodeAnalysis;
 using Microsoft.CSharp;
 using Microsoft.Rest.CSharp.Compiler.Compilation;
-using Newtonsoft.Json;
 using ScintillaNET;
 using OutputKind = Microsoft.Rest.CSharp.Compiler.Compilation.OutputKind;
-using AutoRest.Swagger;
 using YamlDotNet.RepresentationModel;
 
 namespace AutoRest.Preview
@@ -55,9 +49,9 @@ namespace AutoRest.Preview
             return await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);
         }
 
-        private static string[] SuppressWarnings = {"CS1701", "CS1591"};
+        private static readonly string[] SuppressWarnings = {"CS1701", "CS1591"};
 
-        public static YamlNode Resolve(YamlNode node, IEnumerable<string> path)
+        public static YamlNode ResolvePath(YamlNode node, IEnumerable<string> path)
         {
             if (!path.Any())
                 return node;
@@ -71,7 +65,7 @@ namespace AutoRest.Preview
                 var child = mnode.Children.Where(pair => pair.Key.ToString().Equals(next, StringComparison.InvariantCultureIgnoreCase)).Select(pair => pair.Value).FirstOrDefault();
                 if (child != null)
                 {
-                    return Resolve(child, path);
+                    return ResolvePath(child, path);
                 }
             }
 
@@ -114,7 +108,7 @@ namespace AutoRest.Preview
             scintillaSrc.CallTipCancel();
         }
 
-        private void ProcessMessages(string swagger, IEnumerable<ValidationMessage> messages)
+        private void ProcessLinterMessages(string swagger, IEnumerable<ValidationMessage> messages)
         {
             // parse
             var reader = new StringReader(swagger);
@@ -150,7 +144,7 @@ namespace AutoRest.Preview
             foreach (var message in messages)
             {
                 scintillaSrc.IndicatorCurrent = INDICATOR_BASE + (int)message.Severity;
-                var node = Resolve(doc, message.Path.Reverse().Skip(1));
+                var node = ResolvePath(doc, message.Path.Reverse().Skip(1));
                 scintillaSrc.IndicatorFillRange(node.Start.Index, node.End.Index - node.Start.Index);
                 highlights.Add(new Highlight
                 {
@@ -166,7 +160,7 @@ namespace AutoRest.Preview
             IEnumerable<ValidationMessage> messages;
             using (var fileSystem = AutoRestPipeline.GenerateCodeForTest(swagger, language, out messages))
             {
-                ProcessMessages(swagger, messages);
+                ProcessLinterMessages(swagger, messages);
 
                 // concat all source
                 var allSources = string.Join("\n\n\n",
