@@ -26,8 +26,8 @@ export interface Formdata {
      *
      * @param {object} fileContent File to upload.
      * 
-     * @param {string} fileName File name to upload. Name has to be spelled
-     * exactly as written here.
+     * @param {string} fileName File name to upload. Name has to be spelled exactly
+     * as written here.
      * 
      * @param {object} [options] Optional Parameters.
      * 

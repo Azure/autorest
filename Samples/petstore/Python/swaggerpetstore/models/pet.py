@@ -10,8 +10,8 @@ class Pet(Model):
 
     A group of properties representing a pet.
 
-    :param id: The id of the pet. A more detailed description of the id of
-     the pet.
+    :param id: The id of the pet. A more detailed description of the id of the
+     pet.
     :type id: long
     :param category:
     :type category: :class:`Category <petstore.models.Category>`

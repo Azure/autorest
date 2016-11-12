@@ -13,9 +13,9 @@ class StorageAccountProperties(Model):
      'ResolvingDNS', 'Succeeded'
     :type provisioning_state: str or :class:`ProvisioningState
      <petstore.models.ProvisioningState>`
-    :param account_type: Gets the type of the storage account. Possible
-     values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
-     'Standard_RAGRS', 'Premium_LRS'
+    :param account_type: Gets the type of the storage account. Possible values
+     include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
+     'Premium_LRS'
     :type account_type: str or :class:`AccountType
      <petstore.models.AccountType>`
     :param primary_endpoints: Gets the URLs that are used to perform a
@@ -33,8 +33,8 @@ class StorageAccountProperties(Model):
     :param last_geo_failover_time: Gets the timestamp of the most recent
      instance of a failover to the secondary location. Only the most recent
      timestamp is retained. This element is not returned if there has never
-     been a failover instance. Only available if the accountType is
-     StandardGRS or StandardRAGRS.
+     been a failover instance. Only available if the accountType is StandardGRS
+     or StandardRAGRS.
     :type last_geo_failover_time: datetime
     :param secondary_location: Gets the location of the geo replicated
      secondary for the storage account. Only available if the accountType is

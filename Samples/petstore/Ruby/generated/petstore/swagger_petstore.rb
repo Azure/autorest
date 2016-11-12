@@ -1111,8 +1111,8 @@ module Petstore
     #
     # Find purchase order by ID
     #
-    # For valid response try integer IDs with value <= 5 or > 10. Other values
-    # will generated exceptions
+    # For valid response try integer IDs with value <= 5 or > 10. Other values will
+    # generated exceptions
     #
     # @param order_id [String] ID of pet that needs to be fetched
     # @param custom_headers [Hash{String => String}] A hash of custom headers that
@@ -1128,8 +1128,8 @@ module Petstore
     #
     # Find purchase order by ID
     #
-    # For valid response try integer IDs with value <= 5 or > 10. Other values
-    # will generated exceptions
+    # For valid response try integer IDs with value <= 5 or > 10. Other values will
+    # generated exceptions
     #
     # @param order_id [String] ID of pet that needs to be fetched
     # @param custom_headers [Hash{String => String}] A hash of custom headers that
@@ -1144,8 +1144,8 @@ module Petstore
     #
     # Find purchase order by ID
     #
-    # For valid response try integer IDs with value <= 5 or > 10. Other values
-    # will generated exceptions
+    # For valid response try integer IDs with value <= 5 or > 10. Other values will
+    # generated exceptions
     #
     # @param order_id [String] ID of pet that needs to be fetched
     # @param [Hash{String => String}] A hash of custom headers that will be added

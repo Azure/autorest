@@ -2818,8 +2818,8 @@ Queries.prototype.dateTimeNull = function (options, callback) {
 };
 
 /**
- * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
- * null, ''] using the csv-array format
+ * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+ * ''] using the csv-array format
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -3152,8 +3152,8 @@ Queries.prototype.arrayStringCsvEmpty = function (options, callback) {
 };
 
 /**
- * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
- * null, ''] using the ssv-array format
+ * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+ * ''] using the ssv-array format
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -3264,8 +3264,8 @@ Queries.prototype.arrayStringSsvValid = function (options, callback) {
 };
 
 /**
- * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
- * null, ''] using the tsv-array format
+ * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+ * ''] using the tsv-array format
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -3376,8 +3376,8 @@ Queries.prototype.arrayStringTsvValid = function (options, callback) {
 };
 
 /**
- * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
- * null, ''] using the pipes-array format
+ * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+ * ''] using the pipes-array format
  *
  * @param {object} [options] Optional Parameters.
  * 

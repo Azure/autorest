@@ -136,8 +136,8 @@ XMsClientRequestId.prototype.get = function (options, callback) {
  * Get method that overwrites x-ms-client-request header with value
  * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
  *
- * @param {string} xMsClientRequestId This should appear as a method
- * parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+ * @param {string} xMsClientRequestId This should appear as a method parameter,
+ * use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
  * 
  * @param {object} [options] Optional Parameters.
  * 

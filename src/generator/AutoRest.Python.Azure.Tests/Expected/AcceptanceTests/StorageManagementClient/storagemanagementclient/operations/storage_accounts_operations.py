@@ -39,9 +39,8 @@ class StorageAccountsOperations(object):
         """Checks that account name is valid and is not in use.
 
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name:
          :class:`StorageAccountCheckNameAvailabilityParameters
          <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccountCheckNameAvailabilityParameters>`
@@ -113,9 +112,8 @@ class StorageAccountsOperations(object):
          user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param parameters: The parameters to provide for the created account.
         :type parameters: :class:`StorageAccountCreateParameters
@@ -209,9 +207,8 @@ class StorageAccountsOperations(object):
          user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -269,9 +266,8 @@ class StorageAccountsOperations(object):
          user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -334,19 +330,18 @@ class StorageAccountsOperations(object):
         via the Create operation). Only one custom domain is supported per
         storage account. This API can only be used to update one of tags,
         accountType, or customDomain per call. To update multiple of these
-        properties, call the API multiple times with one change per call.
-        This call does not change the storage keys for the account. If you
-        want to change storage account keys, use the RegenerateKey operation.
-        The location and name of the storage account cannot be changed after
+        properties, call the API multiple times with one change per call. This
+        call does not change the storage keys for the account. If you want to
+        change storage account keys, use the RegenerateKey operation. The
+        location and name of the storage account cannot be changed after
         creation.
 
         :param resource_group_name: The name of the resource group within the
          user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param parameters: The parameters to update on the account. Note that
          only one property can be changed at a time using this API.
@@ -615,9 +610,8 @@ class StorageAccountsOperations(object):
          user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param key_name: Possible values include: 'key1', 'key2'
         :type key_name: str or :class:`KeyName

@@ -45,13 +45,13 @@ var util = require('util');
  * unavailable. Possible values include: 'Available', 'Unavailable'
  * 
  * @member {date} [properties.lastGeoFailoverTime] Gets the timestamp of the
- * most recent instance of a failover to the secondary location. Only the
- * most recent timestamp is retained. This element is not returned if there
- * has never been a failover instance. Only available if the accountType is
+ * most recent instance of a failover to the secondary location. Only the most
+ * recent timestamp is retained. This element is not returned if there has
+ * never been a failover instance. Only available if the accountType is
  * StandardGRS or StandardRAGRS.
  * 
- * @member {string} [properties.secondaryLocation] Gets the location of the
- * geo replicated secondary for the storage account. Only available if the
+ * @member {string} [properties.secondaryLocation] Gets the location of the geo
+ * replicated secondary for the storage account. Only available if the
  * accountType is StandardGRS or StandardRAGRS.
  * 
  * @member {string} [properties.statusOfSecondary] Gets the status indicating
@@ -72,10 +72,10 @@ var util = require('util');
  * indirect CName validation is enabled. Default value is false. This should
  * only be set on updates
  * 
- * @member {object} [properties.secondaryEndpoints] Gets the URLs that are
- * used to perform a retrieval of a public blob, queue or table object from
- * the secondary location of the storage account. Only available if the
- * accountType is StandardRAGRS.
+ * @member {object} [properties.secondaryEndpoints] Gets the URLs that are used
+ * to perform a retrieval of a public blob, queue or table object from the
+ * secondary location of the storage account. Only available if the accountType
+ * is StandardRAGRS.
  * 
  * @member {string} [properties.secondaryEndpoints.blob] Gets the blob
  * endpoint.

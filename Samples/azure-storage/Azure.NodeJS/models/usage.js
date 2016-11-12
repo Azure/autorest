@@ -11,9 +11,8 @@ var models = require('./index');
  * @constructor
  * Describes Storage Resource Usage.
  *
- * @member {string} unit Gets the unit of measurement. Possible values
- * include: 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
- * 'BytesPerSecond'
+ * @member {string} unit Gets the unit of measurement. Possible values include:
+ * 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond'
  * 
  * @member {number} currentValue Gets the current count of the allocated
  * resources in the subscription.

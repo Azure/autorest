@@ -26,6 +26,9 @@
         },
         "AzureResourceSchema": {
             "type": "PluginArs, AutoRest.AzureResourceSchema"
+        },
+        "Azure.CSharp.Fluent": {
+          "type": "PluginCsaf, AutoRest.AutoRest.CSharp.Azure.Fluent"
         }
     },
   "codeGenerators": {

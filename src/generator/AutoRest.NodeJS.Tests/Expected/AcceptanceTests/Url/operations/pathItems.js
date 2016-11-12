@@ -30,8 +30,8 @@ function PathItems(client) {
 
 /**
  * send globalStringPath='globalStringPath',
- * pathItemStringPath='pathItemStringPath',
- * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
+ * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+ * globalStringQuery='globalStringQuery',
  * pathItemStringQuery='pathItemStringQuery',
  * localStringQuery='localStringQuery'
  *
@@ -174,9 +174,8 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
 
 /**
  * send globalStringPath='globalStringPath',
- * pathItemStringPath='pathItemStringPath',
- * localStringPath='localStringPath', globalStringQuery=null,
- * pathItemStringQuery='pathItemStringQuery',
+ * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+ * globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
  * localStringQuery='localStringQuery'
  *
  * @param {string} localStringPath should contain value 'localStringPath'
@@ -318,9 +317,9 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
 
 /**
  * send globalStringPath=globalStringPath,
- * pathItemStringPath='pathItemStringPath',
- * localStringPath='localStringPath', globalStringQuery=null,
- * pathItemStringQuery='pathItemStringQuery', localStringQuery=null
+ * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+ * globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
+ * localStringQuery=null
  *
  * @param {string} localStringPath should contain value 'localStringPath'
  * 
@@ -460,9 +459,9 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
 
 /**
  * send globalStringPath='globalStringPath',
- * pathItemStringPath='pathItemStringPath',
- * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
- * pathItemStringQuery=null, localStringQuery=null
+ * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+ * globalStringQuery='globalStringQuery', pathItemStringQuery=null,
+ * localStringQuery=null
  *
  * @param {string} localStringPath should contain value 'localStringPath'
  * 

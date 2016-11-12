@@ -2010,8 +2010,8 @@ class ArrayOperations(object):
 
     def put_byte_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29,
-        43)] with each elementencoded in base 64.
+        """Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)]
+        with each elementencoded in base 64.
 
         :param array_body:
         :type array_body: list of bytearray
@@ -2055,8 +2055,8 @@ class ArrayOperations(object):
 
     def get_byte_invalid_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get byte array value [hex(AB, AC, AD), null] with the first item
-        base64 encoded.
+        """Get byte array value [hex(AB, AC, AD), null] with the first item base64
+        encoded.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2239,8 +2239,8 @@ class ArrayOperations(object):
 
     def get_complex_item_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get array of complex type with null item [{'integer': 1 'string':
-        '2'}, null, {'integer': 5, 'string': '6'}].
+        """Get array of complex type with null item [{'integer': 1 'string': '2'},
+        null, {'integer': 5, 'string': '6'}].
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2380,8 +2380,8 @@ class ArrayOperations(object):
 
     def put_complex_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """Put an array of complex type with values [{'integer': 1 'string':
-        '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
+        """Put an array of complex type with values [{'integer': 1 'string': '2'},
+        {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
 
         :param array_body:
         :type array_body: list of :class:`Product
@@ -2789,9 +2789,9 @@ class ArrayOperations(object):
 
     def get_dictionary_item_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get an array of Dictionaries of type <string, string> with value
-        [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8':
-        'eight', '9': 'nine'}].
+        """Get an array of Dictionaries of type <string, string> with value [{'1':
+        'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight',
+        '9': 'nine'}].
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2836,9 +2836,9 @@ class ArrayOperations(object):
 
     def get_dictionary_item_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get an array of Dictionaries of type <string, string> with value
-        [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8':
-        'eight', '9': 'nine'}].
+        """Get an array of Dictionaries of type <string, string> with value [{'1':
+        'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9':
+        'nine'}].
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2883,9 +2883,9 @@ class ArrayOperations(object):
 
     def get_dictionary_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get an array of Dictionaries of type <string, string> with value
-        [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five',
-        '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+        """Get an array of Dictionaries of type <string, string> with value [{'1':
+        'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6':
+        'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2930,9 +2930,9 @@ class ArrayOperations(object):
 
     def put_dictionary_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """Get an array of Dictionaries of type <string, string> with value
-        [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five',
-        '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+        """Get an array of Dictionaries of type <string, string> with value [{'1':
+        'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6':
+        'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
 
         :param array_body:
         :type array_body: list of dict

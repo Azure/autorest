@@ -4,6 +4,7 @@ module Petstore
   module Models
     #
     # Model object.
+    # 
     #
     class Order
       # @return [Integer]

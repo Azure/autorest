@@ -742,8 +742,8 @@ namespace Petstore
         /// Fake endpoint to test byte array return by 'Find pet by ID'
         /// </summary>
         /// <remarks>
-        /// Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate
-        /// API error conditions
+        /// Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API
+        /// error conditions
         /// </remarks>
         /// <param name='petId'>
         /// ID of pet that needs to be fetched
@@ -869,8 +869,8 @@ namespace Petstore
         /// Find pet by ID
         /// </summary>
         /// <remarks>
-        /// Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate
-        /// API error conditions
+        /// Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API
+        /// error conditions
         /// </remarks>
         /// <param name='petId'>
         /// ID of pet that needs to be fetched

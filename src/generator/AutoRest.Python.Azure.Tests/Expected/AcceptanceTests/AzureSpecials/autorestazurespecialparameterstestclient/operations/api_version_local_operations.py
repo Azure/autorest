@@ -36,8 +36,8 @@ class ApiVersionLocalOperations(object):
 
     def get_method_local_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get method with api-version modeled in the method.  pass in
-        api-version = '2.0' to succeed.
+        """Get method with api-version modeled in the method.  pass in api-version
+        = '2.0' to succeed.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -80,8 +80,8 @@ class ApiVersionLocalOperations(object):
 
     def get_method_local_null(
             self, api_version=None, custom_headers=None, raw=False, **operation_config):
-        """Get method with api-version modeled in the method.  pass in
-        api-version = null to succeed.
+        """Get method with api-version modeled in the method.  pass in api-version
+        = null to succeed.
 
         :param api_version: This should appear as a method parameter, use
          value null, this should result in no serialized parameter
@@ -128,8 +128,8 @@ class ApiVersionLocalOperations(object):
 
     def get_path_local_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get method with api-version modeled in the method.  pass in
-        api-version = '2.0' to succeed.
+        """Get method with api-version modeled in the method.  pass in api-version
+        = '2.0' to succeed.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -172,8 +172,8 @@ class ApiVersionLocalOperations(object):
 
     def get_swagger_local_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get method with api-version modeled in the method.  pass in
-        api-version = '2.0' to succeed.
+        """Get method with api-version modeled in the method.  pass in api-version
+        = '2.0' to succeed.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

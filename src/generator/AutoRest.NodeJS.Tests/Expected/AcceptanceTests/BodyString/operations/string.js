@@ -837,8 +837,8 @@ String.prototype.getWhitespace = function (options, callback) {
  * '<tab><space><space>Now is the time for all good men to come to the aid of
  * their country<tab><space><space>'
  *
- * @param {string} stringBody Possible values include: '    Now is the time
- * for all good men to come to the aid of their country    '
+ * @param {string} stringBody Possible values include: '    Now is the time for
+ * all good men to come to the aid of their country    '
  * 
  * @param {object} [options] Optional Parameters.
  * 

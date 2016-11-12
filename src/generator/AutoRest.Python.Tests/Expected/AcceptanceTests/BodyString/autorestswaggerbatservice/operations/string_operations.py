@@ -310,8 +310,8 @@ class StringOperations(object):
     def get_whitespace(
             self, custom_headers=None, raw=False, **operation_config):
         """Get string value with leading and trailing whitespace
-        '<tab><space><space>Now is the time for all good men to come to the
-        aid of their country<tab><space><space>'.
+        '<tab><space><space>Now is the time for all good men to come to the aid
+        of their country<tab><space><space>'.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -357,8 +357,8 @@ class StringOperations(object):
     def put_whitespace(
             self, string_body, custom_headers=None, raw=False, **operation_config):
         """Set String value with leading and trailing whitespace
-        '<tab><space><space>Now is the time for all good men to come to the
-        aid of their country<tab><space><space>'.
+        '<tab><space><space>Now is the time for all good men to come to the aid
+        of their country<tab><space><space>'.
 
         :param string_body: Possible values include: '    Now is the time for
          all good men to come to the aid of their country    '

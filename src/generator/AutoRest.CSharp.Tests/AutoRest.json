@@ -23,34 +23,11 @@
         },
         "AzureResourceSchema": {
             "type": "PluginArs, AutoRest.AzureResourceSchema"
+        },
+        "Azure.CSharp.Fluent": {
+          "type": "PluginCsaf, AutoRest.AutoRest.CSharp.Azure.Fluent"
         }
     },
-  "codeGenerators": {
-    "Ruby": {
-      "type": "RubyCodeGenerator, AutoRest.Ruby"
-    },
-    "Azure.Ruby": {
-      "type": "AzureRubyCodeGenerator, AutoRest.Ruby.Azure"
-    },
-    "CSharp": {
-      "type": "CSharpCodeGenerator, AutoRest.CSharp"
-    },
-    "Azure.CSharp": {
-      "type": "AzureCSharpCodeGenerator, AutoRest.CSharp.Azure"
-    },
-    "NodeJS": {
-      "type": "NodeJSCodeGenerator, AutoRest.NodeJS"
-    },
-    "Azure.NodeJS": {
-      "type": "AzureNodeJSCodeGenerator, AutoRest.NodeJS.Azure"
-    },
-    "Java": {
-      "type": "JavaCodeGenerator, AutoRest.Java"
-    },
-    "Azure.Java": {
-      "type": "AzureJavaCodeGenerator, AutoRest.Java.Azure"
-    }
-  },
   "modelers": {
     "Swagger": {
       "type": "SwaggerModeler, AutoRest.Swagger"

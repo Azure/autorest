@@ -48,8 +48,8 @@ function SwaggerPetstore(baseUri, options) {
 util.inherits(SwaggerPetstore, ServiceClient);
 
 /**
- * @summary Fake endpoint to test byte array in body parameter for adding a
- * new pet to the store
+ * @summary Fake endpoint to test byte array in body parameter for adding a new
+ * pet to the store
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -413,8 +413,8 @@ SwaggerPetstore.prototype.updatePet = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {array} [options.status] Status values that need to be considered
- * for filter
+ * @param {array} [options.status] Status values that need to be considered for
+ * filter
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -1387,8 +1387,8 @@ SwaggerPetstore.prototype.getInventory = function (options, callback) {
  * 
  * @param {date} [options.body.shipDate]
  * 
- * @param {string} [options.body.status] Order Status. Possible values
- * include: 'placed', 'approved', 'delivered'
+ * @param {string} [options.body.status] Order Status. Possible values include:
+ * 'placed', 'approved', 'delivered'
  * 
  * @param {boolean} [options.body.complete]
  * 
@@ -1623,8 +1623,8 @@ SwaggerPetstore.prototype.getOrderById = function (orderId, options, callback) {
 /**
  * @summary Delete purchase order by ID
  *
- * For valid response try integer IDs with value < 1000. Anything above 1000
- * or nonintegers will generate API errors
+ * For valid response try integer IDs with value < 1000. Anything above 1000 or
+ * nonintegers will generate API errors
  *
  * @param {string} orderId ID of the order that needs to be deleted
  * 

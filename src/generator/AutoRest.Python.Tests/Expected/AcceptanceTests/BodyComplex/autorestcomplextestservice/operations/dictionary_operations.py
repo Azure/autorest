@@ -263,8 +263,8 @@ class DictionaryOperations(object):
 
     def get_not_provided(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get complex types with dictionary property while server doesn't
-        provide a response payload.
+        """Get complex types with dictionary property while server doesn't provide
+        a response payload.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

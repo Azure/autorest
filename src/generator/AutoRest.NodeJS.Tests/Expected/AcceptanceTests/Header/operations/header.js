@@ -410,8 +410,8 @@ Header.prototype.responseProtectedKey = function (options, callback) {
 };
 
 /**
- * Send a post request with header values "scenario": "positive", "value": 1
- * or "scenario": "negative", "value": -2
+ * Send a post request with header values "scenario": "positive", "value": 1 or
+ * "scenario": "negative", "value": -2
  *
  * @param {string} scenario Send a post request with header values "scenario":
  * "positive" or "negative"
@@ -836,8 +836,8 @@ Header.prototype.responseLong = function (scenario, options, callback) {
 };
 
 /**
- * Send a post request with header values "scenario": "positive", "value":
- * 0.07 or "scenario": "negative", "value": -3.0
+ * Send a post request with header values "scenario": "positive", "value": 0.07
+ * or "scenario": "negative", "value": -3.0
  *
  * @param {string} scenario Send a post request with header values "scenario":
  * "positive" or "negative"
@@ -1908,8 +1908,7 @@ Header.prototype.responseDate = function (scenario, options, callback) {
 
 /**
  * Send a post request with header values "scenario": "valid", "value":
- * "2010-01-01T12:34:56Z" or "scenario": "min", "value":
- * "0001-01-01T00:00:00Z"
+ * "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z"
  *
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "min"

@@ -227,9 +227,8 @@ class ExplicitOperations(object):
 
     def post_required_integer_header(
             self, header_parameter, custom_headers=None, raw=False, **operation_config):
-        """Test explicitly required integer. Please put a header
-        'headerParameter' => null and the client library should throw before
-        the request is sent.
+        """Test explicitly required integer. Please put a header 'headerParameter'
+        => null and the client library should throw before the request is sent.
 
         :param header_parameter:
         :type header_parameter: int
@@ -271,8 +270,8 @@ class ExplicitOperations(object):
 
     def post_optional_integer_header(
             self, header_parameter=None, custom_headers=None, raw=False, **operation_config):
-        """Test explicitly optional integer. Please put a header
-        'headerParameter' => null.
+        """Test explicitly optional integer. Please put a header 'headerParameter'
+        => null.
 
         :param header_parameter:
         :type header_parameter: int
@@ -314,8 +313,8 @@ class ExplicitOperations(object):
 
     def post_required_string_parameter(
             self, body_parameter, custom_headers=None, raw=False, **operation_config):
-        """Test explicitly required string. Please put null and the client
-        library should throw before the request is sent.
+        """Test explicitly required string. Please put null and the client library
+        should throw before the request is sent.
 
         :param body_parameter:
         :type body_parameter: str
@@ -407,9 +406,9 @@ class ExplicitOperations(object):
 
     def post_required_string_property(
             self, value, custom_headers=None, raw=False, **operation_config):
-        """Test explicitly required string. Please put a valid string-wrapper
-        with 'value' = null and the client library should throw before the
-        request is sent.
+        """Test explicitly required string. Please put a valid string-wrapper with
+        'value' = null and the client library should throw before the request
+        is sent.
 
         :param value:
         :type value: str
@@ -509,8 +508,7 @@ class ExplicitOperations(object):
     def post_required_string_header(
             self, header_parameter, custom_headers=None, raw=False, **operation_config):
         """Test explicitly required string. Please put a header 'headerParameter'
-        => null and the client library should throw before the request is
-        sent.
+        => null and the client library should throw before the request is sent.
 
         :param header_parameter:
         :type header_parameter: str
@@ -595,8 +593,8 @@ class ExplicitOperations(object):
 
     def post_required_class_parameter(
             self, body_parameter, custom_headers=None, raw=False, **operation_config):
-        """Test explicitly required complex object. Please put null and the
-        client library should throw before the request is sent.
+        """Test explicitly required complex object. Please put null and the client
+        library should throw before the request is sent.
 
         :param body_parameter:
         :type body_parameter: :class:`Product
@@ -988,8 +986,7 @@ class ExplicitOperations(object):
     def post_required_array_header(
             self, header_parameter, custom_headers=None, raw=False, **operation_config):
         """Test explicitly required array. Please put a header 'headerParameter'
-        => null and the client library should throw before the request is
-        sent.
+        => null and the client library should throw before the request is sent.
 
         :param header_parameter:
         :type header_parameter: list of str
@@ -1031,8 +1028,8 @@ class ExplicitOperations(object):
 
     def post_optional_array_header(
             self, header_parameter=None, custom_headers=None, raw=False, **operation_config):
-        """Test explicitly optional integer. Please put a header
-        'headerParameter' => null.
+        """Test explicitly optional integer. Please put a header 'headerParameter'
+        => null.
 
         :param header_parameter:
         :type header_parameter: list of str

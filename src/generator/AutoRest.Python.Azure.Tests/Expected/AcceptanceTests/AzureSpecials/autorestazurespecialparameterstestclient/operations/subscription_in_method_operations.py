@@ -85,8 +85,8 @@ class SubscriptionInMethodOperations(object):
     def post_method_local_null(
             self, subscription_id, custom_headers=None, raw=False, **operation_config):
         """POST method with subscriptionId modeled in the method.  pass in
-        subscription id = null, client-side validation should prevent you
-        from making this call.
+        subscription id = null, client-side validation should prevent you from
+        making this call.
 
         :param subscription_id: This should appear as a method parameter, use
          value null, client-side validation should prvenet the call
@@ -138,8 +138,8 @@ class SubscriptionInMethodOperations(object):
         """POST method with subscriptionId modeled in the method.  pass in
         subscription id = '1234-5678-9012-3456' to succeed.
 
-        :param subscription_id: Should appear as a method parameter -use
-         value '1234-5678-9012-3456'
+        :param subscription_id: Should appear as a method parameter -use value
+         '1234-5678-9012-3456'
         :type subscription_id: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -188,8 +188,8 @@ class SubscriptionInMethodOperations(object):
         """POST method with subscriptionId modeled in the method.  pass in
         subscription id = '1234-5678-9012-3456' to succeed.
 
-        :param subscription_id: The subscriptionId, which appears in the
-         path, the value is always '1234-5678-9012-3456'
+        :param subscription_id: The subscriptionId, which appears in the path,
+         the value is always '1234-5678-9012-3456'
         :type subscription_id: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

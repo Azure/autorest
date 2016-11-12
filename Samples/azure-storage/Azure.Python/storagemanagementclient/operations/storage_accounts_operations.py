@@ -32,9 +32,8 @@ class StorageAccountsOperations(object):
         """Checks that account name is valid and is not in use.
 
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name:
          :class:`StorageAccountCheckNameAvailabilityParameters
          <petstore.models.StorageAccountCheckNameAvailabilityParameters>`
@@ -106,9 +105,8 @@ class StorageAccountsOperations(object):
          user's subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param parameters: The parameters to provide for the created account.
         :type parameters: :class:`StorageAccountCreateParameters
@@ -202,9 +200,8 @@ class StorageAccountsOperations(object):
          user's subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -262,9 +259,8 @@ class StorageAccountsOperations(object):
          user's subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -339,9 +335,8 @@ class StorageAccountsOperations(object):
          user's subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param parameters: The parameters to update on the account. Note that
          only one property can be changed at a time using this API.
@@ -608,9 +603,8 @@ class StorageAccountsOperations(object):
          user's subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param regenerate_key: Specifies name of the key which should be
          regenerated. key1 or key2 for the default keys

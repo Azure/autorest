@@ -148,8 +148,8 @@ Header.prototype.customNamedRequestId = function (fooClientRequestId, options, c
  * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the
  * header of the request, via a parameter group
  *
- * @param {object} headerCustomNamedRequestIdParamGroupingParameters
- * Additional parameters for the operation
+ * @param {object} headerCustomNamedRequestIdParamGroupingParameters Additional
+ * parameters for the operation
  * 
  * @param {string}
  * headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId The

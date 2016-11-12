@@ -80,8 +80,8 @@ class EnumOperations(object):
 
     def put_not_expandable(
             self, string_body, custom_headers=None, raw=False, **operation_config):
-        """Sends value 'red color' from enumeration of 'red color',
-        'green-color', 'blue_color'.
+        """Sends value 'red color' from enumeration of 'red color', 'green-color',
+        'blue_color'.
 
         :param string_body: Possible values include: 'red color',
          'green-color', 'blue_color'
@@ -174,8 +174,8 @@ class EnumOperations(object):
 
     def put_referenced(
             self, enum_string_body, custom_headers=None, raw=False, **operation_config):
-        """Sends value 'red color' from enumeration of 'red color',
-        'green-color', 'blue_color'.
+        """Sends value 'red color' from enumeration of 'red color', 'green-color',
+        'blue_color'.
 
         :param enum_string_body: Possible values include: 'red color',
          'green-color', 'blue_color'

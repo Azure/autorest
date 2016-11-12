@@ -708,9 +708,9 @@ HttpRedirects.prototype.get302 = function (options, callback) {
 };
 
 /**
- * Patch true Boolean value in request returns 302.  This request should not
- * be automatically redirected, but should return the received 302 to the
- * caller for evaluation
+ * Patch true Boolean value in request returns 302.  This request should not be
+ * automatically redirected, but should return the received 302 to the caller
+ * for evaluation
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -830,8 +830,7 @@ HttpRedirects.prototype.patch302 = function (options, callback) {
 
 /**
  * Post true Boolean value in request returns 303.  This request should be
- * automatically redirected usign a get, ultimately returning a 200 status
- * code
+ * automatically redirected usign a get, ultimately returning a 200 status code
  *
  * @param {object} [options] Optional Parameters.
  * 

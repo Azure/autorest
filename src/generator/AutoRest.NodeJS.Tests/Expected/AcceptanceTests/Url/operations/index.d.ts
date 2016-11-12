@@ -221,8 +221,8 @@ export interface Paths {
     /**
      * Get using uri with 'green color' in path parameter
      *
-     * @param {string} enumPath send the value green. Possible values include:
-     * 'red color', 'green color', 'blue color'
+     * @param {string} enumPath send the value green. Possible values include: 'red
+     * color', 'green color', 'blue color'
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -842,8 +842,8 @@ export interface Queries {
     dateTimeNull(callback: ServiceCallback<void>): void;
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-     * null, ''] using the csv-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+     * ''] using the csv-array format
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -894,8 +894,8 @@ export interface Queries {
     arrayStringCsvEmpty(callback: ServiceCallback<void>): void;
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-     * null, ''] using the ssv-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+     * ''] using the ssv-array format
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -912,8 +912,8 @@ export interface Queries {
     arrayStringSsvValid(callback: ServiceCallback<void>): void;
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-     * null, ''] using the tsv-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+     * ''] using the tsv-array format
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -930,8 +930,8 @@ export interface Queries {
     arrayStringTsvValid(callback: ServiceCallback<void>): void;
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-     * null, ''] using the pipes-array format
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+     * ''] using the pipes-array format
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -958,8 +958,8 @@ export interface PathItems {
 
     /**
      * send globalStringPath='globalStringPath',
-     * pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
+     * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+     * globalStringQuery='globalStringQuery',
      * pathItemStringQuery='pathItemStringQuery',
      * localStringQuery='localStringQuery'
      *
@@ -987,9 +987,8 @@ export interface PathItems {
 
     /**
      * send globalStringPath='globalStringPath',
-     * pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null,
-     * pathItemStringQuery='pathItemStringQuery',
+     * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+     * globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
      * localStringQuery='localStringQuery'
      *
      * @param {string} localStringPath should contain value 'localStringPath'
@@ -1016,9 +1015,9 @@ export interface PathItems {
 
     /**
      * send globalStringPath=globalStringPath,
-     * pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null,
-     * pathItemStringQuery='pathItemStringQuery', localStringQuery=null
+     * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+     * globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
+     * localStringQuery=null
      *
      * @param {string} localStringPath should contain value 'localStringPath'
      * 
@@ -1043,9 +1042,9 @@ export interface PathItems {
 
     /**
      * send globalStringPath='globalStringPath',
-     * pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
-     * pathItemStringQuery=null, localStringQuery=null
+     * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+     * globalStringQuery='globalStringQuery', pathItemStringQuery=null,
+     * localStringQuery=null
      *
      * @param {string} localStringPath should contain value 'localStringPath'
      * 

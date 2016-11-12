@@ -21,8 +21,8 @@ import * as models from '../models';
 export interface LROs {
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Succeeded’.
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -44,8 +44,8 @@ export interface LROs {
     put200Succeeded(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that does not contain ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -67,9 +67,9 @@ export interface LROs {
     put200SucceededNoState(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 202 to the initial request,
-     * with a location header that points to a polling URL that returns a 200 and
-     * an entity that doesn't contains ProvisioningState
+     * Long running put request, service returns a 202 to the initial request, with
+     * a location header that points to a polling URL that returns a 200 and an
+     * entity that doesn't contains ProvisioningState
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -91,10 +91,9 @@ export interface LROs {
     put202Retry200(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls return
-     * this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running put request, service returns a 201 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’.  Polls return this
+     * value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -116,10 +115,9 @@ export interface LROs {
     put201CreatingSucceeded200(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Updating’.  Polls return
-     * this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running put request, service returns a 201 to the initial request, with
+     * an entity that contains ProvisioningState=’Updating’.  Polls return this
+     * value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -141,10 +139,9 @@ export interface LROs {
     put200UpdatingSucceeded204(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Created’.  Polls return
-     * this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’
+     * Long running put request, service returns a 201 to the initial request, with
+     * an entity that contains ProvisioningState=’Created’.  Polls return this
+     * value until the last poll returns a ‘200’ with ProvisioningState=’Failed’
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -166,10 +163,9 @@ export interface LROs {
     put201CreatingFailed200(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls return
-     * this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’
+     * Long running put request, service returns a 201 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’.  Polls return this
+     * value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -215,9 +211,9 @@ export interface LROs {
     putNoHeaderInRetry(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -239,9 +235,9 @@ export interface LROs {
     putAsyncRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -263,9 +259,9 @@ export interface LROs {
     putAsyncNoRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -287,9 +283,9 @@ export interface LROs {
     putAsyncRetryFailed(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -521,8 +517,8 @@ export interface LROs {
 
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header
-     * in the initial request. Subsequent calls to operation status do not
-     * contain Azure-AsyncOperation header.
+     * in the initial request. Subsequent calls to operation status do not contain
+     * Azure-AsyncOperation header.
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -537,8 +533,8 @@ export interface LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -553,8 +549,8 @@ export interface LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -569,8 +565,8 @@ export interface LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -585,8 +581,8 @@ export interface LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -664,8 +660,8 @@ export interface LROs {
 
     /**
      * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -688,8 +684,8 @@ export interface LROs {
 
     /**
      * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -712,8 +708,8 @@ export interface LROs {
 
     /**
      * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -736,8 +732,8 @@ export interface LROs {
 
     /**
      * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -759,8 +755,8 @@ export interface LROs {
     postAsyncRetrycanceled(callback: ServiceCallback<void>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Succeeded’.
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -782,8 +778,8 @@ export interface LROs {
     beginPut200Succeeded(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that does not contain ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -805,9 +801,9 @@ export interface LROs {
     beginPut200SucceededNoState(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 202 to the initial request,
-     * with a location header that points to a polling URL that returns a 200 and
-     * an entity that doesn't contains ProvisioningState
+     * Long running put request, service returns a 202 to the initial request, with
+     * a location header that points to a polling URL that returns a 200 and an
+     * entity that doesn't contains ProvisioningState
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -829,10 +825,9 @@ export interface LROs {
     beginPut202Retry200(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls return
-     * this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running put request, service returns a 201 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’.  Polls return this
+     * value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -854,10 +849,9 @@ export interface LROs {
     beginPut201CreatingSucceeded200(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Updating’.  Polls return
-     * this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’
+     * Long running put request, service returns a 201 to the initial request, with
+     * an entity that contains ProvisioningState=’Updating’.  Polls return this
+     * value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -879,10 +873,9 @@ export interface LROs {
     beginPut200UpdatingSucceeded204(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Created’.  Polls return
-     * this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’
+     * Long running put request, service returns a 201 to the initial request, with
+     * an entity that contains ProvisioningState=’Created’.  Polls return this
+     * value until the last poll returns a ‘200’ with ProvisioningState=’Failed’
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -904,10 +897,9 @@ export interface LROs {
     beginPut201CreatingFailed200(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 201 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’.  Polls return
-     * this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’
+     * Long running put request, service returns a 201 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’.  Polls return this
+     * value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -953,9 +945,9 @@ export interface LROs {
     beginPutNoHeaderInRetry(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -977,9 +969,9 @@ export interface LROs {
     beginPutAsyncRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1001,9 +993,9 @@ export interface LROs {
     beginPutAsyncNoRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1025,9 +1017,9 @@ export interface LROs {
     beginPutAsyncRetryFailed(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1259,8 +1251,8 @@ export interface LROs {
 
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header
-     * in the initial request. Subsequent calls to operation status do not
-     * contain Azure-AsyncOperation header.
+     * in the initial request. Subsequent calls to operation status do not contain
+     * Azure-AsyncOperation header.
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1275,8 +1267,8 @@ export interface LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1291,8 +1283,8 @@ export interface LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1307,8 +1299,8 @@ export interface LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1323,8 +1315,8 @@ export interface LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1402,8 +1394,8 @@ export interface LROs {
 
     /**
      * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1426,8 +1418,8 @@ export interface LROs {
 
     /**
      * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1450,8 +1442,8 @@ export interface LROs {
 
     /**
      * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1474,8 +1466,8 @@ export interface LROs {
 
     /**
      * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1532,9 +1524,8 @@ export interface LRORetrys {
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’. Poll
-     * the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * request, with an entity that contains ProvisioningState=’Creating’. Poll the
+     * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1557,9 +1548,9 @@ export interface LRORetrys {
 
     /**
      * Long running delete request, service returns a 500, then a  202 to the
-     * initial request, with an entity that contains
-     * ProvisioningState=’Accepted’.  Polls return this value until the last poll
-     * returns a ‘200’ with ProvisioningState=’Succeeded’
+     * initial request, with an entity that contains ProvisioningState=’Accepted’. 
+     * Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1574,8 +1565,8 @@ export interface LRORetrys {
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the
-     * initial request. Polls return this value until the last poll returns a
-     * ‘200’ with ProvisioningState=’Succeeded’
+     * initial request. Polls return this value until the last poll returns a ‘200’
+     * with ProvisioningState=’Succeeded’
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1606,8 +1597,8 @@ export interface LRORetrys {
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial
-     * request, with 'Location' and 'Retry-After' headers, Polls return a 200
-     * with a response body after success
+     * request, with 'Location' and 'Retry-After' headers, Polls return a 200 with
+     * a response body after success
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1630,9 +1621,8 @@ export interface LRORetrys {
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’. Poll
-     * the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * request, with an entity that contains ProvisioningState=’Creating’. Poll the
+     * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1680,9 +1670,8 @@ export interface LRORetrys {
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’. Poll
-     * the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * request, with an entity that contains ProvisioningState=’Creating’. Poll the
+     * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1705,9 +1694,9 @@ export interface LRORetrys {
 
     /**
      * Long running delete request, service returns a 500, then a  202 to the
-     * initial request, with an entity that contains
-     * ProvisioningState=’Accepted’.  Polls return this value until the last poll
-     * returns a ‘200’ with ProvisioningState=’Succeeded’
+     * initial request, with an entity that contains ProvisioningState=’Accepted’. 
+     * Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1722,8 +1711,8 @@ export interface LRORetrys {
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the
-     * initial request. Polls return this value until the last poll returns a
-     * ‘200’ with ProvisioningState=’Succeeded’
+     * initial request. Polls return this value until the last poll returns a ‘200’
+     * with ProvisioningState=’Succeeded’
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1754,8 +1743,8 @@ export interface LRORetrys {
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial
-     * request, with 'Location' and 'Retry-After' headers, Polls return a 200
-     * with a response body after success
+     * request, with 'Location' and 'Retry-After' headers, Polls return a 200 with
+     * a response body after success
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1778,9 +1767,8 @@ export interface LRORetrys {
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial
-     * request, with an entity that contains ProvisioningState=’Creating’. Poll
-     * the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status
+     * request, with an entity that contains ProvisioningState=’Creating’. Poll the
+     * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1833,8 +1821,8 @@ export interface LROSADs {
     putNonRetry400(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a Product with
-     * 'ProvisioningState' = 'Creating' and 201 response code
+     * Long running put request, service returns a Product with 'ProvisioningState'
+     * = 'Creating' and 201 response code
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1856,8 +1844,8 @@ export interface LROSADs {
     putNonRetry201Creating400(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a Product with
-     * 'ProvisioningState' = 'Creating' and 201 response code
+     * Long running put request, service returns a Product with 'ProvisioningState'
+     * = 'Creating' and 201 response code
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1932,8 +1920,8 @@ export interface LROSADs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -1991,9 +1979,9 @@ export interface LROSADs {
     post202NonRetry400(callback: ServiceCallback<void>): void;
 
     /**
-     * Long running post request, service returns a 202 to the initial request
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request Poll
+     * the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2038,9 +2026,9 @@ export interface LROSADs {
     putError201NoProvisioningStatePayload(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2062,9 +2050,9 @@ export interface LROSADs {
     putAsyncRelativeRetryNoStatus(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2102,8 +2090,8 @@ export interface LROSADs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2141,8 +2129,8 @@ export interface LROSADs {
 
     /**
      * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2164,8 +2152,8 @@ export interface LROSADs {
     postAsyncRelativeRetryNoPayload(callback: ServiceCallback<void>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that is not a valid json
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that is not a valid json
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2187,9 +2175,9 @@ export interface LROSADs {
     put200InvalidJson(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. The endpoint
-     * indicated in the Azure-AsyncOperation header is invalid.
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. The endpoint indicated
+     * in the Azure-AsyncOperation header is invalid.
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2211,9 +2199,9 @@ export interface LROSADs {
     putAsyncRelativeRetryInvalidHeader(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2266,8 +2254,8 @@ export interface LROSADs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2329,8 +2317,8 @@ export interface LROSADs {
 
     /**
      * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2374,8 +2362,8 @@ export interface LROSADs {
     beginPutNonRetry400(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a Product with
-     * 'ProvisioningState' = 'Creating' and 201 response code
+     * Long running put request, service returns a Product with 'ProvisioningState'
+     * = 'Creating' and 201 response code
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2397,8 +2385,8 @@ export interface LROSADs {
     beginPutNonRetry201Creating400(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a Product with
-     * 'ProvisioningState' = 'Creating' and 201 response code
+     * Long running put request, service returns a Product with 'ProvisioningState'
+     * = 'Creating' and 201 response code
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2473,8 +2461,8 @@ export interface LROSADs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2532,9 +2520,9 @@ export interface LROSADs {
     beginPost202NonRetry400(callback: ServiceCallback<void>): void;
 
     /**
-     * Long running post request, service returns a 202 to the initial request
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Long running post request, service returns a 202 to the initial request Poll
+     * the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2579,9 +2567,9 @@ export interface LROSADs {
     beginPutError201NoProvisioningStatePayload(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2603,9 +2591,9 @@ export interface LROSADs {
     beginPutAsyncRelativeRetryNoStatus(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2643,8 +2631,8 @@ export interface LROSADs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2682,8 +2670,8 @@ export interface LROSADs {
 
     /**
      * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2705,8 +2693,8 @@ export interface LROSADs {
     beginPostAsyncRelativeRetryNoPayload(callback: ServiceCallback<void>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that is not a valid json
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that is not a valid json
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2728,9 +2716,9 @@ export interface LROSADs {
     beginPut200InvalidJson(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. The endpoint
-     * indicated in the Azure-AsyncOperation header is invalid.
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. The endpoint indicated
+     * in the Azure-AsyncOperation header is invalid.
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2752,9 +2740,9 @@ export interface LROSADs {
     beginPutAsyncRelativeRetryInvalidHeader(callback: ServiceCallback<models.Product>): void;
 
     /**
-     * Long running put request, service returns a 200 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * Long running put request, service returns a 200 to the initial request, with
+     * an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2807,8 +2795,8 @@ export interface LROSADs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request.
-     * Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status
+     * Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2870,8 +2858,8 @@ export interface LROSADs {
 
     /**
      * Long running post request, service returns a 202 to the initial request,
-     * with an entity that contains ProvisioningState=’Creating’. Poll the
-     * endpoint indicated in the Azure-AsyncOperation header for operation status
+     * with an entity that contains ProvisioningState=’Creating’. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2903,8 +2891,8 @@ export interface LROsCustomHeader {
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
-     * message header for all requests. Long running put request, service returns
-     * a 200 to the initial request, with an entity that contains
+     * message header for all requests. Long running put request, service returns a
+     * 200 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the
      * Azure-AsyncOperation header for operation status
      *
@@ -2929,8 +2917,8 @@ export interface LROsCustomHeader {
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
-     * message header for all requests. Long running put request, service returns
-     * a 201 to the initial request, with an entity that contains
+     * message header for all requests. Long running put request, service returns a
+     * 201 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’.  Polls return this value until the last poll
      * returns a ‘200’ with ProvisioningState=’Succeeded’
      *
@@ -2955,9 +2943,9 @@ export interface LROsCustomHeader {
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
-     * message header for all requests. Long running post request, service
-     * returns a 202 to the initial request, with 'Location' and 'Retry-After'
-     * headers, Polls return a 200 with a response body after success
+     * message header for all requests. Long running post request, service returns
+     * a 202 to the initial request, with 'Location' and 'Retry-After' headers,
+     * Polls return a 200 with a response body after success
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -2980,8 +2968,8 @@ export interface LROsCustomHeader {
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
-     * message header for all requests. Long running post request, service
-     * returns a 202 to the initial request, with an entity that contains
+     * message header for all requests. Long running post request, service returns
+     * a 202 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the
      * Azure-AsyncOperation header for operation status
      *
@@ -3006,8 +2994,8 @@ export interface LROsCustomHeader {
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
-     * message header for all requests. Long running put request, service returns
-     * a 200 to the initial request, with an entity that contains
+     * message header for all requests. Long running put request, service returns a
+     * 200 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the
      * Azure-AsyncOperation header for operation status
      *
@@ -3032,8 +3020,8 @@ export interface LROsCustomHeader {
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
-     * message header for all requests. Long running put request, service returns
-     * a 201 to the initial request, with an entity that contains
+     * message header for all requests. Long running put request, service returns a
+     * 201 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’.  Polls return this value until the last poll
      * returns a ‘200’ with ProvisioningState=’Succeeded’
      *
@@ -3058,9 +3046,9 @@ export interface LROsCustomHeader {
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
-     * message header for all requests. Long running post request, service
-     * returns a 202 to the initial request, with 'Location' and 'Retry-After'
-     * headers, Polls return a 200 with a response body after success
+     * message header for all requests. Long running post request, service returns
+     * a 202 to the initial request, with 'Location' and 'Retry-After' headers,
+     * Polls return a 200 with a response body after success
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -3083,8 +3071,8 @@ export interface LROsCustomHeader {
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
-     * message header for all requests. Long running post request, service
-     * returns a 202 to the initial request, with an entity that contains
+     * message header for all requests. Long running post request, service returns
+     * a 202 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the
      * Azure-AsyncOperation header for operation status
      *

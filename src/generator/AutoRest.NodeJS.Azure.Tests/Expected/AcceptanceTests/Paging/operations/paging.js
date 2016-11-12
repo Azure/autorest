@@ -334,8 +334,8 @@ Paging.prototype.getMultiplePages = function (options, callback) {
  * @param {object} [options.pagingGetOdataMultiplePagesOptions] Additional
  * parameters for the operation
  * 
- * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults]
- * Sets the maximum number of items to return in the response.
+ * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults] Sets
+ * the maximum number of items to return in the response.
  * 
  * @param {number} [options.pagingGetOdataMultiplePagesOptions.timeout] Sets
  * the maximum time that the server can spend processing the request, in
@@ -2208,8 +2208,8 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
  * @param {object} [options.pagingGetOdataMultiplePagesOptions] Additional
  * parameters for the operation
  * 
- * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults]
- * Sets the maximum number of items to return in the response.
+ * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults] Sets
+ * the maximum number of items to return in the response.
  * 
  * @param {number} [options.pagingGetOdataMultiplePagesOptions.timeout] Sets
  * the maximum time that the server can spend processing the request, in
