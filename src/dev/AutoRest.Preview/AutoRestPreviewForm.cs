@@ -228,14 +228,46 @@ namespace AutoRest.Preview
             sb.Append(type.Name);
             sb.AppendLine();
             sb.AppendLine("{");
-            foreach (var member in type.GetProperties())
+
+            var props = type.GetProperties();
+            var methods = type.GetMethods().Where(m => !m.IsSpecialName).ToArray();
+
+            // properties
+            if (props.Length > 0)
             {
                 sb.Append(' ', indentLevel);
-                sb.Append(GetSimpleName(member.PropertyType));
-                sb.Append(' ');
-                sb.Append(member.Name);
-                sb.AppendLine(";");
+                sb.AppendLine("// properties");
+                foreach (var member in props)
+                {
+                    sb.Append(' ', indentLevel);
+                    sb.Append(GetSimpleName(member.PropertyType));
+                    sb.Append(' ');
+                    sb.Append(member.Name);
+                    sb.AppendLine(";");
+                }
             }
+
+            if (methods.Length > 0 && props.Length > 0)
+                sb.AppendLine();
+
+            // methods
+            if (methods.Length > 0)
+            {
+                sb.Append(' ', indentLevel);
+                sb.AppendLine("// methods");
+                foreach (var member in methods)
+                {
+                    sb.Append(' ', indentLevel);
+                    sb.Append(GetSimpleName(member.ReturnType));
+                    sb.Append(' ');
+                    sb.Append(member.Name);
+                    sb.Append('(');
+                    sb.Append(string.Join(", ", member.GetParameters().Select(p => GetSimpleName(p.ParameterType) + " " + p.Name)));
+                    sb.Append(')');
+                    sb.AppendLine(";");
+                }
+            }
+
             sb.AppendLine("}");
 
             return sb.ToString();
