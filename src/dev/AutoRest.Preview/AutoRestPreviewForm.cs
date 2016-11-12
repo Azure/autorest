@@ -1,22 +1,14 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoRest.Core.Logging;
-using AutoRest.Core.Utilities;
 using AutoRest.Core.Validation;
-using Microsoft.CodeAnalysis;
-using Microsoft.CSharp;
-using Microsoft.Rest.CSharp.Compiler.Compilation;
 using ScintillaNET;
-using OutputKind = Microsoft.Rest.CSharp.Compiler.Compilation.OutputKind;
 using YamlDotNet.RepresentationModel;
 
 namespace AutoRest.Preview
@@ -26,65 +18,6 @@ namespace AutoRest.Preview
         public AutoRestPreviewForm()
         {
             InitializeComponent();
-        }
-
-        private async Task<CompilationResult> Compile(IFileSystem fileSystem)
-        {
-            var compiler = new CSharpCompiler(
-                fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)
-                    .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(),
-                ManagedAssets.FrameworkAssemblies.Concat(
-                    AppDomain.CurrentDomain.GetAssemblies()
-                        .Where(each => !each.IsDynamic && !string.IsNullOrEmpty(each.Location))
-                        .Select(each => each.Location)
-                        .Concat(new[]
-                        {
-                            Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                "Microsoft.Rest.ClientRuntime.dll"),
-                            Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                "Microsoft.Rest.ClientRuntime.Azure.dll")
-                        })
-                ));
-
-            return await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);
-        }
-
-        private static readonly string[] SuppressWarnings = {"CS1701", "CS1591"};
-
-        public static YamlNode ResolvePath(YamlNode node, IEnumerable<string> path)
-        {
-            if (!path.Any())
-                return node;
-
-            var next = path.First();
-            path = path.Skip(1);
-
-            var mnode = node as YamlMappingNode;
-            if (mnode != null)
-            {
-                var child = mnode.Children.Where(pair => pair.Key.ToString().Equals(next, StringComparison.InvariantCultureIgnoreCase)).Select(pair => pair.Value).FirstOrDefault();
-                if (child != null)
-                {
-                    return ResolvePath(child, path);
-                }
-            }
-
-            var snode = node as YamlSequenceNode;
-            if (snode != null)
-            {
-                var indexStr = next.TrimStart('[').TrimEnd(']');
-                int index;
-                if (int.TryParse(indexStr, out index))
-                {
-                    index--;
-                    if (0 <= index && index < snode.Children.Count)
-                    {
-                        return snode.Children[index];
-                    }
-                }
-            }
-
-            return node;
         }
 
         class Highlight
@@ -108,19 +41,12 @@ namespace AutoRest.Preview
             scintillaSrc.CallTipCancel();
         }
 
-        private void ProcessLinterMessages(string swagger, IEnumerable<ValidationMessage> messages)
+        private readonly int INDICATOR_BASE = 8;
+        private readonly Color[] INDIXATOR_COLORS = { Color.CornflowerBlue, Color.Green, Color.Yellow, Color.Red, Color.Red };
+
+        private void ResetLinter()
         {
-            // parse
-            var reader = new StringReader(swagger);
-            var yamlStream = new YamlStream();
-            yamlStream.Load(reader);
-            var doc = yamlStream.Documents[0].RootNode;
-
-            // process messages
             highlights.Clear();
-
-            int INDICATOR_BASE = 8;
-            var INDIXATOR_COLORS = new Color[] { Color.CornflowerBlue, Color.Green, Color.Yellow, Color.Red, Color.Red };
 
             var severityNames = Enum.GetNames(typeof(LogEntrySeverity));
 
@@ -140,11 +66,21 @@ namespace AutoRest.Preview
                 scintillaSrc.Indicators[indicator].OutlineAlpha = 80;
                 scintillaSrc.Indicators[indicator].Alpha = 50;
             }
+        }
 
+        private void ProcessLinterMessages(string swagger, IEnumerable<ValidationMessage> messages)
+        {
+            // parse
+            var reader = new StringReader(swagger);
+            var yamlStream = new YamlStream();
+            yamlStream.Load(reader);
+            var doc = yamlStream.Documents[0].RootNode;
+
+            // process messages
             foreach (var message in messages)
             {
                 scintillaSrc.IndicatorCurrent = INDICATOR_BASE + (int)message.Severity;
-                var node = ResolvePath(doc, message.Path.Reverse().Skip(1));
+                var node = doc.ResolvePath(message.Path.Reverse().Skip(1));
                 scintillaSrc.IndicatorFillRange(node.Start.Index, node.End.Index - node.Start.Index);
                 highlights.Add(new Highlight
                 {
@@ -157,6 +93,7 @@ namespace AutoRest.Preview
 
         private async Task<string> Regenerate(string swagger, string language = "CSharp", bool shortVersion = true)
         {
+            ResetLinter();
             IEnumerable<ValidationMessage> messages;
             using (var fileSystem = AutoRestPipeline.GenerateCodeForTest(swagger, language, out messages))
             {
@@ -178,102 +115,16 @@ namespace AutoRest.Preview
                 {
                     case "CSharp":
                     case "Azure.CSharp":
-                        // compile
-                        var result = await Compile(fileSystem);
+                        var types = await CSharpCompilerHelper.CompileTypes(fileSystem);
+                        return string.Join("\n\n", types.Select(type => type.CreateSummary(scintillaDst.TabWidth)));
 
-                        // filter the warnings
-                        var warnings = result.Messages.Where(
-                            each => each.Severity == DiagnosticSeverity.Warning
-                                    && !SuppressWarnings.Contains(each.Id)).ToArray();
-
-                        // filter the errors
-                        var errors = result.Messages.Where(each => each.Severity == DiagnosticSeverity.Error).ToArray();
-                        
-                        if (!result.Succeeded)
-                        {
-                            throw new Exception("compilation failed: " + string.Join(", ", errors.Concat(warnings)));
-                        }
-
-                        // try to load the assembly
-                        var asm = Assembly.Load(result.Output.GetBuffer());
-                        if (asm == null)
-                        {
-                            throw new Exception("could not load assembly");
-                        }
-
-                        var types = asm.ExportedTypes;
-                        return string.Join("\n\n", types.Select(CreateTypeSummary));
-                        
                     default:
                         return allSources;
                 }
             }
         }
 
-        private string GetSimpleName(Type type)
-        {
-            var compiler = new CSharpCodeProvider();
-            var result = compiler.GetTypeOutput(new CodeTypeReference(type));
-            result = Regex.Replace(result, @"[_A-Za-z0-9]+\.", "");
-            result = Regex.Replace(result, @"Nullable<(.+?)>", @"$1?");
-            return result;
-        }
-
-        private string CreateTypeSummary(Type type)
-        {
-            int indentLevel = scintillaDst.TabWidth;
-
-            var sb = new StringBuilder();
-            sb.Append("class ");
-            sb.Append(type.Name);
-            sb.AppendLine();
-            sb.AppendLine("{");
-
-            var props = type.GetProperties();
-            var methods = type.GetMethods().Where(m => !m.IsSpecialName).ToArray();
-
-            // properties
-            if (props.Length > 0)
-            {
-                sb.Append(' ', indentLevel);
-                sb.AppendLine("// properties");
-                foreach (var member in props)
-                {
-                    sb.Append(' ', indentLevel);
-                    sb.Append(GetSimpleName(member.PropertyType));
-                    sb.Append(' ');
-                    sb.Append(member.Name);
-                    sb.AppendLine(";");
-                }
-            }
-
-            if (methods.Length > 0 && props.Length > 0)
-                sb.AppendLine();
-
-            // methods
-            if (methods.Length > 0)
-            {
-                sb.Append(' ', indentLevel);
-                sb.AppendLine("// methods");
-                foreach (var member in methods)
-                {
-                    sb.Append(' ', indentLevel);
-                    sb.Append(GetSimpleName(member.ReturnType));
-                    sb.Append(' ');
-                    sb.Append(member.Name);
-                    sb.Append('(');
-                    sb.Append(string.Join(", ", member.GetParameters().Select(p => GetSimpleName(p.ParameterType) + " " + p.Name)));
-                    sb.Append(')');
-                    sb.AppendLine(";");
-                }
-            }
-
-            sb.AppendLine("}");
-
-            return sb.ToString();
-        }
-
-        private void SetupCintilla(Scintilla scintilla)
+        private void SetupScintilla(Scintilla scintilla)
         {
             scintilla.StyleResetDefault();
             scintilla.Styles[Style.Default].Font = "Consolas";
@@ -352,8 +203,8 @@ namespace AutoRest.Preview
 
         private void AutoRestPreviewForm_Load(object sender, EventArgs ea)
         {
-            SetupCintilla(scintillaSrc);
-            SetupCintilla(scintillaDst);
+            SetupScintilla(scintillaSrc);
+            SetupScintilla(scintillaDst);
 
             scintillaSrc.InsertCheck += (o, e) =>
             {
