@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace AutoRestPreview
+namespace AutoRest.Preview
 {
     partial class AutoRestPreviewForm
     {
@@ -171,6 +171,7 @@ namespace AutoRestPreview
             this.scintillaSrc.IndentationGuides = ScintillaNET.IndentView.Real;
             this.scintillaSrc.Lexer = ScintillaNET.Lexer.Python;
             this.scintillaSrc.Location = new System.Drawing.Point(0, 0);
+            this.scintillaSrc.MouseDwellTime = 200;
             this.scintillaSrc.MouseSelectionRectangularSwitch = true;
             this.scintillaSrc.MultipleSelection = true;
             this.scintillaSrc.Name = "scintillaSrc";
@@ -181,6 +182,8 @@ namespace AutoRestPreview
             this.scintillaSrc.Text = File.ReadAllText("default.yaml");
             this.scintillaSrc.WrapIndentMode = ScintillaNET.WrapIndentMode.Indent;
             this.scintillaSrc.TextChanged += new System.EventHandler(this.scintillaSrc_TextChanged);
+            this.scintillaSrc.DwellStart += ScintillaSrc_DwellStart;
+            this.scintillaSrc.DwellEnd += ScintillaSrc_DwellEnd;
             // 
             // checkBoxShort
             // 

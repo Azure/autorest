@@ -11,28 +11,30 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoRest.Core;
 using AutoRest.Core.Extensibility;
+using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Validation;
+using AutoRest.Swagger.JsonConverters;
+using AutoRest.Swagger.Model;
 using Microsoft.CodeAnalysis;
 using Microsoft.CSharp;
 using Microsoft.Rest.CSharp.Compiler.Compilation;
+using Newtonsoft.Json;
 using ScintillaNET;
 using OutputKind = Microsoft.Rest.CSharp.Compiler.Compilation.OutputKind;
-using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Swagger;
+using YamlDotNet.RepresentationModel;
 
-namespace AutoRestPreview
+namespace AutoRest.Preview
 {
     public partial class AutoRestPreviewForm : Form
     {
-        private readonly string autoRestJson;
-
         public AutoRestPreviewForm()
         {
             InitializeComponent();
-
-            autoRestJson = File.ReadAllText("AutoRest.json");
         }
 
-        protected async Task<CompilationResult> Compile(IFileSystem fileSystem)
+        private async Task<CompilationResult> Compile(IFileSystem fileSystem)
         {
             var compiler = new CSharpCompiler(
                 fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)
@@ -53,71 +55,119 @@ namespace AutoRestPreview
             return await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);
         }
 
-        private MemoryFileSystem GenerateCodeForTest(string json, string codeGenerator)
+        private static string[] SuppressWarnings = {"CS1701", "CS1591"};
+
+        public static YamlNode Resolve(YamlNode node, IEnumerable<string> path)
         {
-            using (NewContext)
+            if (!path.Any())
+                return node;
+
+            var next = path.First();
+            path = path.Skip(1);
+
+            var mnode = node as YamlMappingNode;
+            if (mnode != null)
             {
-                var fs = new MemoryFileSystem();
-                var settings = new Settings
+                var child = mnode.Children.Where(pair => pair.Key.ToString().Equals(next, StringComparison.InvariantCultureIgnoreCase)).Select(pair => pair.Value).FirstOrDefault();
+                if (child != null)
                 {
-                    Modeler = "Swagger",
-                    CodeGenerator = codeGenerator,
-                    FileSystem = fs,
-                    OutputDirectory = "GeneratedCode",
-                    Namespace = "Test",
-                    Input = "input.json"
-                };
-
-                fs.WriteFile(settings.Input, json);
-                fs.WriteFile("AutoRest.json", autoRestJson);
-
-                return GenerateCodeInto(fs, settings);
+                    return Resolve(child, path);
+                }
             }
-        }
 
-        private static MemoryFileSystem GenerateCodeInto(MemoryFileSystem fileSystem, Settings settings)
-        {
-            var plugin = ExtensionsLoader.GetPlugin();
-            var modeler = ExtensionsLoader.GetModeler();
-            var codeModel = modeler.Build();
-
-            // After swagger Parser
-            codeModel = AutoRestController.RunExtensions(Trigger.AfterModelCreation, codeModel);
-
-            // After swagger Parser
-            codeModel = AutoRestController.RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
-
-            using (plugin.Activate())
+            var snode = node as YamlSequenceNode;
+            if (snode != null)
             {
-                // load model into language-specific code model
-                codeModel = plugin.Serializer.Load(codeModel);
-
-                // we've loaded the model, run the extensions for after it's loaded
-                codeModel = AutoRestController.RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
-
-                // apply language-specific tranformation (more than just language-specific types)
-                // used to be called "NormalizeClientModel" . 
-                codeModel = plugin.Transformer.TransformCodeModel(codeModel);
-
-                // next set of extensions
-                codeModel = AutoRestController.RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
-
-                // next set of extensions
-                codeModel = AutoRestController.RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
-
-                // Generate code from CodeModel.
-                plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+                var indexStr = next.TrimStart('[').TrimEnd(']');
+                int index;
+                if (int.TryParse(indexStr, out index))
+                {
+                    index--;
+                    if (0 <= index && index < snode.Children.Count)
+                    {
+                        return snode.Children[index];
+                    }
+                }
             }
 
-            return fileSystem;
+            return node;
         }
 
-        internal static string[] SuppressWarnings = {"CS1701", "CS1591"};
+        class Highlight
+        {
+            public int Start;
+            public int End;
+            public string Message;
+        }
+        List<Highlight> highlights = new List<Highlight>();
+
+        private void ScintillaSrc_DwellStart(object sender, ScintillaNET.DwellEventArgs e)
+        {
+            var highlight = highlights.FirstOrDefault(h => h.Start <= e.Position && e.Position <= h.End);
+            if (highlight != null)
+            {
+                scintillaSrc.CallTipShow(highlight.Start, highlight.Message);
+            }
+        }
+        private void ScintillaSrc_DwellEnd(object sender, ScintillaNET.DwellEventArgs e)
+        {
+            scintillaSrc.CallTipCancel();
+        }
+
+        private void ProcessMessages(string swagger, IEnumerable<ValidationMessage> messages)
+        {
+            // parse
+            var reader = new StringReader(swagger);
+            var yamlStream = new YamlStream();
+            yamlStream.Load(reader);
+            var doc = yamlStream.Documents[0].RootNode;
+
+            // process messages
+            highlights.Clear();
+
+            int INDICATOR_BASE = 8;
+            var INDIXATOR_COLORS = new Color[] { Color.CornflowerBlue, Color.Green, Color.Yellow, Color.Red, Color.Red };
+
+            var severityNames = Enum.GetNames(typeof(LogEntrySeverity));
+
+            for (int i = 0; i < severityNames.Length; ++i)
+            {
+                int indicator = INDICATOR_BASE + i;
+
+                // Remove all uses of our indicator
+                scintillaSrc.IndicatorCurrent = indicator;
+                scintillaSrc.IndicatorClearRange(0, scintillaSrc.TextLength);
+
+                // Update indicator appearance
+                scintillaSrc.Indicators[indicator].Style = IndicatorStyle.StraightBox;
+                //scintillaSrc.Indicators[indicator].Style = IndicatorStyle.Squiggle;
+                scintillaSrc.Indicators[indicator].Under = true;
+                scintillaSrc.Indicators[indicator].ForeColor = INDIXATOR_COLORS[i];
+                scintillaSrc.Indicators[indicator].OutlineAlpha = 80;
+                scintillaSrc.Indicators[indicator].Alpha = 50;
+            }
+
+            foreach (var message in messages)
+            {
+                scintillaSrc.IndicatorCurrent = INDICATOR_BASE + (int)message.Severity;
+                var node = Resolve(doc, message.Path.Reverse().Skip(1));
+                scintillaSrc.IndicatorFillRange(node.Start.Index, node.End.Index - node.Start.Index);
+                highlights.Add(new Highlight
+                {
+                    Start = node.Start.Index,
+                    End = node.End.Index,
+                    Message = $"{message.Severity}: {message.Message}"
+                });
+            }
+        }
 
         private async Task<string> Regenerate(string swagger, string language = "CSharp", bool shortVersion = true)
         {
-            using (var fileSystem = GenerateCodeForTest(swagger, language))
+            IEnumerable<ValidationMessage> messages;
+            using (var fileSystem = AutoRestPipeline.GenerateCodeForTest(swagger, language, out messages))
             {
+                ProcessMessages(swagger, messages);
+
                 // concat all source
                 var allSources = string.Join("\n\n\n",
                     fileSystem
