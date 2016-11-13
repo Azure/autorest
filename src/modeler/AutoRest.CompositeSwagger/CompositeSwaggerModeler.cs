@@ -8,7 +8,7 @@ using System.Linq;
 using AutoRest.CompositeSwagger.Model;
 using AutoRest.CompositeSwagger.Properties;
 using AutoRest.Core;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger;
@@ -16,17 +16,14 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CompositeSwagger
 {
     public class CompositeSwaggerModeler : Modeler
     {
-        public CompositeSwaggerModeler(Settings settings) : base(settings)
+        public CompositeSwaggerModeler()
         {
-            if (settings == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
         }
 
         public override string Name
@@ -34,7 +31,7 @@ namespace AutoRest.CompositeSwagger
             get { return "CompositeSwagger"; }
         }
 
-        public override ServiceClient Build()
+        public override CodeModel Build()
         {
             var compositeSwaggerModel = Parse(Settings.Input);
             if (compositeSwaggerModel == null)
@@ -53,48 +50,34 @@ namespace AutoRest.CompositeSwagger
                 throw ErrorManager.CreateError(Resources.InfoSectionMissing);
             }
 
-            //Ensure all the docs are absolute paths
-            string basePath;
-            var isBasePathUri = Uri.IsWellFormedUriString(Settings.Input, UriKind.Absolute);
-            if (isBasePathUri)
-            {
-                basePath = new Uri(new Uri(Settings.Input), ".").ToString();
-            }
-            else
-            {
-                basePath = Directory.GetParent(Settings.Input).FullName;
-            }
+            // Ensure all the docs are absolute URIs or rooted paths
             for (var i = 0; i < compositeSwaggerModel.Documents.Count; i++)
             {
-                if (!(Path.IsPathRooted(compositeSwaggerModel.Documents[i]) ||
-                    Uri.IsWellFormedUriString(compositeSwaggerModel.Documents[i], UriKind.Absolute)))
+                var compositeDocument = compositeSwaggerModel.Documents[i];
+                if (!Settings.FileSystem.IsCompletePath(compositeDocument) || !Settings.FileSystem.FileExists(compositeDocument))
                 {
-                    var tempPath = Path.Combine(basePath, compositeSwaggerModel.Documents[i]);
-                    if (isBasePathUri)
-                    {
-                        compositeSwaggerModel.Documents[i] = new Uri(tempPath).AbsoluteUri;
-                    }
-                    else
-                    {
-                        compositeSwaggerModel.Documents[i] = Path.GetFullPath(tempPath);
-                    }
+                    // Otherwise, root it from the current path
+                    compositeSwaggerModel.Documents[i] = Settings.FileSystem.MakePathRooted(Settings.InputFolder, compositeDocument);
                 }
             }
 
-            ServiceClient compositeClient = InitializeServiceClient(compositeSwaggerModel);
-            foreach (var childSwaggerPath in compositeSwaggerModel.Documents)
+            CodeModel compositeClient = InitializeServiceClient(compositeSwaggerModel);
+            using (NewContext)
             {
-                Settings.Input = childSwaggerPath;
-                var swaggerModeler = new SwaggerModeler(Settings);
-                var serviceClient = swaggerModeler.Build();
-                compositeClient = Merge(compositeClient, serviceClient);
+                foreach (var childSwaggerPath in compositeSwaggerModel.Documents)
+                {
+                    Settings.Input = childSwaggerPath;
+                    var swaggerModeler = new SwaggerModeler();
+                    var serviceClient = swaggerModeler.Build();
+                    compositeClient = Merge(compositeClient, serviceClient);
+                }
             }
             return compositeClient;
         }
 
-        private ServiceClient InitializeServiceClient(CompositeServiceDefinition compositeSwaggerModel)
+        private CodeModel InitializeServiceClient(CompositeServiceDefinition compositeSwaggerModel)
         {
-            ServiceClient compositeClient = new ServiceClient();
+            CodeModel compositeClient = New<CodeModel>();
 
             if (string.IsNullOrWhiteSpace(Settings.ClientName))
             {
@@ -135,7 +118,7 @@ namespace AutoRest.CompositeSwagger
             }
         }
 
-        private static ServiceClient Merge(ServiceClient compositeClient, ServiceClient subClient)
+        private static CodeModel Merge(CodeModel compositeClient, CodeModel subClient)
         {
             if (compositeClient == null)
             {
@@ -148,7 +131,7 @@ namespace AutoRest.CompositeSwagger
             }
 
             // Merge
-            if(compositeClient.BaseUrl == null)
+            if (compositeClient.BaseUrl == null)
             {
                 compositeClient.BaseUrl = subClient.BaseUrl;
             }
@@ -168,7 +151,7 @@ namespace AutoRest.CompositeSwagger
                 var compositeClientProperty = compositeClient.Properties.FirstOrDefault(p => p.Name == subClientProperty.Name);
                 if (compositeClientProperty == null)
                 {
-                    compositeClient.Properties.Add(subClientProperty);
+                    compositeClient.Add( subClientProperty);
                 }
                 else
                 {
@@ -182,7 +165,7 @@ namespace AutoRest.CompositeSwagger
                 var compositeClientModel = compositeClient.ModelTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
                 if (compositeClientModel == null)
                 {
-                    compositeClient.ModelTypes.Add(subClientModel);
+                    compositeClient.Add(subClientModel);
                 }
                 else
                 {
@@ -196,7 +179,7 @@ namespace AutoRest.CompositeSwagger
                 var compositeClientModel = compositeClient.EnumTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
                 if (compositeClientModel == null)
                 {
-                    compositeClient.EnumTypes.Add(subClientModel);
+                    compositeClient.Add(subClientModel);
                 }
                 else
                 {
@@ -210,7 +193,7 @@ namespace AutoRest.CompositeSwagger
                 var compositeClientModel = compositeClient.ErrorTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
                 if (compositeClientModel == null)
                 {
-                    compositeClient.ErrorTypes.Add(subClientModel);
+                    compositeClient.AddError(subClientModel);
                 }
                 else
                 {
@@ -224,7 +207,7 @@ namespace AutoRest.CompositeSwagger
                 var compositeClientModel = compositeClient.HeaderTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
                 if (compositeClientModel == null)
                 {
-                    compositeClient.HeaderTypes.Add(subClientModel);
+                    compositeClient.AddHeader(subClientModel);
                 }
                 else
                 {
@@ -249,7 +232,7 @@ namespace AutoRest.CompositeSwagger
                 if (compositeClientMethod == null)
                 {
                     // Re-link client parameters
-                    foreach (var parameter in subClientMethod.Parameters.Where(p => p.ClientProperty != null))
+                    foreach (var parameter in subClientMethod.Parameters.Where(p => p.IsClientProperty))
                     {
                         var clientProperty = compositeClient.Properties
                             .FirstOrDefault(p => p.SerializedName == parameter.ClientProperty.SerializedName);
@@ -258,11 +241,148 @@ namespace AutoRest.CompositeSwagger
                             parameter.ClientProperty = clientProperty;
                         }
                     }
-                    compositeClient.Methods.Add(subClientMethod);
+                    compositeClient.Add(subClientMethod);
+                    
+                }
+            }
+
+
+            // make sure that properties and parameters are using the types from the new model
+            // and not the types from the original.
+            foreach (var property in compositeClient.Properties)
+            {
+                EnsureUsesTypeFromModel(property, compositeClient);
+            }
+            foreach (var method in compositeClient.Methods)
+            {
+                foreach (var parameter in method.Parameters)
+                {
+                    EnsureUsesTypeFromModel(parameter, compositeClient);
+                }
+
+                method.ReturnType.Body = EnsureUsesTypeFromModel(method.ReturnType.Body, compositeClient);
+                method.ReturnType.Headers = EnsureUsesTypeFromModel(method.ReturnType.Headers, compositeClient);
+            }
+            foreach (var modelType in compositeClient.ModelTypes)
+            {
+                foreach (var property in modelType.Properties)
+                {
+                    EnsureUsesTypeFromModel(property, compositeClient);
                 }
             }
 
             return compositeClient;
+        }
+
+        private static void EnsureUsesTypeFromModel(IVariable variable, CodeModel compositeClient)
+        {
+            if (variable.ModelType == null)
+            {
+                return;
+            }
+            if (variable.ModelType is EnumType)
+            {
+                variable.ModelType = FindEnumType((EnumType) variable.ModelType,compositeClient);
+            }
+            if (variable.ModelType is CompositeType)
+            {
+                variable.ModelType = FindCompositeType((CompositeType)variable.ModelType, compositeClient);
+            }
+            if (variable.ModelType is SequenceType)
+            {
+                var st = (SequenceType)variable.ModelType;
+                if (st.ElementType is EnumType)
+                {
+                    st.ElementType = FindEnumType((EnumType)st.ElementType, compositeClient);
+                }
+                if (st.ElementType is CompositeType)
+                {
+                    st.ElementType = FindCompositeType((CompositeType)st.ElementType, compositeClient);
+                }
+            }
+            if (variable.ModelType is DictionaryType)
+            {
+                var dt = (DictionaryType)variable.ModelType;
+                if (dt.ValueType is EnumType)
+                {
+                    dt.ValueType  = FindEnumType((EnumType)dt.ValueType, compositeClient);
+                }
+                if (dt.ValueType is CompositeType)
+                {
+                    dt.ValueType = FindCompositeType((CompositeType)dt.ValueType, compositeClient);
+                }
+            }
+        }
+
+        private static IModelType EnsureUsesTypeFromModel(IModelType modelType, CodeModel compositeClient)
+        {
+            if (modelType == null)
+            {
+                return modelType;
+            }
+            if (modelType is EnumType)
+            {
+                return FindEnumType((EnumType)modelType, compositeClient);
+            }
+            if (modelType is CompositeType)
+            {
+                return FindCompositeType((CompositeType)modelType, compositeClient);
+            }
+            if (modelType is SequenceType)
+            {
+                var st = (SequenceType)modelType;
+                if (st.ElementType is EnumType)
+                {
+                    st.ElementType = FindEnumType((EnumType)st.ElementType, compositeClient);
+                }
+                if (st.ElementType is CompositeType)
+                {
+                    st.ElementType = FindCompositeType((CompositeType)st.ElementType, compositeClient);
+                }
+                return st;
+            }
+            if (modelType is DictionaryType)
+            {
+                var dt = (DictionaryType)modelType;
+                if (dt.ValueType is EnumType)
+                {
+                    dt.ValueType = FindEnumType((EnumType)dt.ValueType, compositeClient);
+                }
+                if (dt.ValueType is CompositeType)
+                {
+                    dt.ValueType = FindCompositeType((CompositeType)dt.ValueType, compositeClient);
+                }
+                return dt;
+            }
+            return modelType;
+        }
+
+        private static CompositeType FindCompositeType(CompositeType ct, CodeModel compositeClient)
+        {
+            if (ct != null && !ct.Name.IsNullOrEmpty())
+            {
+                // if this has a name, then make sure it's in the model
+                if (!compositeClient.ModelTypes.Any(each => ReferenceEquals(each, ct)))
+                {
+                    // otherwise find the correct one in the model.
+                    return compositeClient.ModelTypes.Single(each => each.Name == ct.Name);
+                }
+            }
+            return ct;
+        }
+
+        private static EnumType FindEnumType(EnumType et, CodeModel compositeClient)
+        {
+            if (et != null && !et.Name.IsNullOrEmpty())
+            {
+                // if this has a name, then make sure it's in the model
+                if (!compositeClient.EnumTypes.Any(each => ReferenceEquals(each, et)))
+                {
+                    // otherwise find the correct one in the model.
+                    return compositeClient.EnumTypes.Single(each => each.Name == et.Name);
+                }
+            }
+            return et;
         }
 
         private static void AssertJsonEquals<T>(T compositeParam, T subParam)
@@ -303,7 +423,7 @@ namespace AutoRest.CompositeSwagger
             }
         }
 
-        public override ServiceClient Build(out IEnumerable<ValidationMessage> messages)
+        public override CodeModel Build(out IEnumerable<ValidationMessage> messages)
         {
             // No composite modeler validation messages yet
             messages = new List<ValidationMessage>();
@@ -316,7 +436,7 @@ namespace AutoRest.CompositeSwagger
         /// <returns></returns>
         public override IEnumerable<ComparisonMessage> Compare()
         {
-            throw new NotImplementedException("Version comparison of compositions. Please run the comparison on individual specifications" );
+            throw new NotImplementedException("Version comparison of compositions. Please run the comparison on individual specifications");
         }
     }
 }

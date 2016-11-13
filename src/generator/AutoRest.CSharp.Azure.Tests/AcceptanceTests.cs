@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-//using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -177,8 +176,8 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
                 Assert.Equal("Succeeded", client.LROs.PutNoHeaderInRetry(new Product { Location = "West US" }).ProvisioningState);
                 Assert.Equal("Succeeded", client.LROs.PutAsyncNoHeaderInRetry(new Product { Location = "West US" }).ProvisioningState);
-                Assert.Equal("Succeeded", client.LROs.PutSubResource(new SubProduct()).ProvisioningState);
-                Assert.Equal("Succeeded", client.LROs.PutAsyncSubResource(new SubProduct()).ProvisioningState);
+                Assert.Equal("Succeeded", client.LROs.PutSubResource(new SubProduct().ProvisioningState).ProvisioningState);
+                Assert.Equal("Succeeded", client.LROs.PutAsyncSubResource(new SubProduct().ProvisioningState).ProvisioningState);
                 Assert.Equal("100", client.LROs.PutNonResource(new Sku()).Id);
                 Assert.Equal("100", client.LROs.PutAsyncNonResource(new Sku()).Id);
                 client.LROs.Post202Retry200(new Product { Location = "West US" });

@@ -80,11 +80,8 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void postMethodGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
+    public void postMethodGlobalValid() {
         postMethodGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -145,11 +142,8 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void postMethodGlobalNull() throws ErrorException, IOException, IllegalArgumentException {
+    public void postMethodGlobalNull() {
         postMethodGlobalNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -210,11 +204,8 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void postMethodGlobalNotProvidedValid() throws ErrorException, IOException, IllegalArgumentException {
+    public void postMethodGlobalNotProvidedValid() {
         postMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -278,11 +269,8 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void postPathGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
+    public void postPathGlobalValid() {
         postPathGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -343,11 +331,8 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void postSwaggerGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
+    public void postSwaggerGlobalValid() {
         postSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

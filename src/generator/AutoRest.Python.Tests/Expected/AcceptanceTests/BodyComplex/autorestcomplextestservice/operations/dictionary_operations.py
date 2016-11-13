@@ -41,9 +41,11 @@ class DictionaryOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DictionaryWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.DictionaryWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.DictionaryWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/dictionary/typed/valid'
@@ -89,6 +91,8 @@ class DictionaryOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         complex_body = models.DictionaryWrapper(default_program=default_program)
 
@@ -129,9 +133,11 @@ class DictionaryOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DictionaryWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.DictionaryWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.DictionaryWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/dictionary/typed/empty'
@@ -177,6 +183,8 @@ class DictionaryOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         complex_body = models.DictionaryWrapper(default_program=default_program)
 
@@ -217,9 +225,11 @@ class DictionaryOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DictionaryWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.DictionaryWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.DictionaryWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/dictionary/typed/null'
@@ -253,8 +263,8 @@ class DictionaryOperations(object):
 
     def get_not_provided(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get complex types with dictionary property while server doesn't
-        provide a response payload.
+        """Get complex types with dictionary property while server doesn't provide
+        a response payload.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -262,9 +272,11 @@ class DictionaryOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DictionaryWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.DictionaryWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.DictionaryWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/dictionary/typed/notprovided'

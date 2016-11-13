@@ -69,11 +69,8 @@ Polymorphism.prototype.getValid = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//complex/polymorphism/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/polymorphism/valid';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -179,8 +176,7 @@ Polymorphism.prototype.getValid = function (options, callback) {
  * 'age':105,
  * 'birthday': '1900-01-05T01:00:00Z',
  * 'length':10.0,
- * 'picture': new Buffer([255, 255, 255, 255,
- * 254]).toString('base64'),
+ * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
  * 'species':'dangerous',
  * },
  * {
@@ -200,7 +196,7 @@ Polymorphism.prototype.getValid = function (options, callback) {
  * 
  * @param {array} [complexBody.siblings]
  * 
- * @param {string} complexBody.fishtype Polymorhpic Discriminator
+ * @param {string} complexBody.fishtype Polymorphic Discriminator
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -241,11 +237,8 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//complex/polymorphism/valid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/polymorphism/valid';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -363,7 +356,7 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
  * 
  * @param {array} [complexBody.siblings]
  * 
- * @param {string} complexBody.fishtype Polymorhpic Discriminator
+ * @param {string} complexBody.fishtype Polymorphic Discriminator
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -404,11 +397,8 @@ Polymorphism.prototype.putValidMissingRequired = function (complexBody, options,
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//complex/polymorphism/missingrequired/invalid';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/polymorphism/missingrequired/invalid';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');

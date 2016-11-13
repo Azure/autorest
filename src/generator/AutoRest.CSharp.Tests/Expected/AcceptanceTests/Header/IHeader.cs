@@ -256,8 +256,8 @@ namespace Fixtures.AcceptanceTestsHeader
         /// </exception>
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HeaderResponseDoubleHeaders>> ResponseDoubleWithHttpMessagesAsync(string scenario, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Send a post request with header values "scenario": "true",
-        /// "value": true or "scenario": "false", "value": false
+        /// Send a post request with header values "scenario": "true", "value":
+        /// true or "scenario": "false", "value": false
         /// </summary>
         /// <param name='scenario'>
         /// Send a post request with header values "scenario": "true" or
@@ -302,8 +302,8 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <summary>
         /// Send a post request with header values "scenario": "valid",
         /// "value": "The quick brown fox jumps over the lazy dog" or
-        /// "scenario": "null", "value": null or "scenario": "empty",
-        /// "value": ""
+        /// "scenario": "null", "value": null or "scenario": "empty", "value":
+        /// ""
         /// </summary>
         /// <param name='scenario'>
         /// Send a post request with header values "scenario": "valid" or
@@ -572,7 +572,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// "null" or "empty"
         /// </param>
         /// <param name='value'>
-        /// Send a post request with header values 'GREY' . Possible values
+        /// Send a post request with header values 'GREY'. Possible values
         /// include: 'White', 'black', 'GREY'
         /// </param>
         /// <param name='customHeaders'>

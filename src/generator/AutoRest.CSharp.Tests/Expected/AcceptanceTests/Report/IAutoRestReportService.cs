@@ -31,7 +31,7 @@ namespace Fixtures.AcceptanceTestsReport
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Get test coverage report
         /// </summary>
         /// <param name='customHeaders'>

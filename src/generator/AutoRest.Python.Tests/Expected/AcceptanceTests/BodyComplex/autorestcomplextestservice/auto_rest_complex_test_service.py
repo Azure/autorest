@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.basic_operations_operations import BasicOperationsOperations
+from .operations.basic_operations import BasicOperations
 from .operations.primitive_operations import PrimitiveOperations
 from .operations.array_operations import ArrayOperations
 from .operations.dictionary_operations import DictionaryOperations
@@ -53,8 +53,8 @@ class AutoRestComplexTestService(object):
     :ivar config: Configuration for client.
     :vartype config: AutoRestComplexTestServiceConfiguration
 
-    :ivar basic_operations: BasicOperations operations
-    :vartype basic_operations: .operations.BasicOperationsOperations
+    :ivar basic: Basic operations
+    :vartype basic: .operations.BasicOperations
     :ivar primitive: Primitive operations
     :vartype primitive: .operations.PrimitiveOperations
     :ivar array: Array operations
@@ -84,7 +84,7 @@ class AutoRestComplexTestService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.basic_operations = BasicOperationsOperations(
+        self.basic = BasicOperations(
             self._client, self.config, self._serialize, self._deserialize)
         self.primitive = PrimitiveOperations(
             self._client, self.config, self._serialize, self._deserialize)

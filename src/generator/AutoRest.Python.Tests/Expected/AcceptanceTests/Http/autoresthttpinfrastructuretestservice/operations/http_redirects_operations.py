@@ -43,6 +43,8 @@ class HttpRedirectsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/300'
@@ -82,6 +84,8 @@ class HttpRedirectsOperations(object):
         :rtype: list of str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/300'
@@ -130,6 +134,8 @@ class HttpRedirectsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/301'
@@ -169,6 +175,8 @@ class HttpRedirectsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/301'
@@ -198,9 +206,9 @@ class HttpRedirectsOperations(object):
 
     def put301(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """Put true Boolean value in request returns 301.  This request should
-        not be automatically redirected, but should return the received 301
-        to the caller for evaluation.
+        """Put true Boolean value in request returns 301.  This request should not
+        be automatically redirected, but should return the received 301 to the
+        caller for evaluation.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -212,6 +220,8 @@ class HttpRedirectsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/301'
@@ -258,6 +268,8 @@ class HttpRedirectsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/302'
@@ -297,6 +309,8 @@ class HttpRedirectsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/302'
@@ -327,8 +341,8 @@ class HttpRedirectsOperations(object):
     def patch302(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """Patch true Boolean value in request returns 302.  This request should
-        not be automatically redirected, but should return the received 302
-        to the caller for evaluation.
+        not be automatically redirected, but should return the received 302 to
+        the caller for evaluation.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -340,6 +354,8 @@ class HttpRedirectsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/302'
@@ -376,9 +392,9 @@ class HttpRedirectsOperations(object):
 
     def post303(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """Post true Boolean value in request returns 303.  This request should
-        be automatically redirected usign a get, ultimately returning a 200
-        status code.
+        """Post true Boolean value in request returns 303.  This request should be
+        automatically redirected usign a get, ultimately returning a 200 status
+        code.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -390,6 +406,8 @@ class HttpRedirectsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/303'
@@ -436,6 +454,8 @@ class HttpRedirectsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/307'
@@ -475,6 +495,8 @@ class HttpRedirectsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/307'
@@ -516,6 +538,8 @@ class HttpRedirectsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/307'
@@ -564,6 +588,8 @@ class HttpRedirectsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/307'
@@ -612,6 +638,8 @@ class HttpRedirectsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/307'
@@ -660,6 +688,8 @@ class HttpRedirectsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/redirect/307'

@@ -13,12 +13,10 @@ package fixtures.azureparametergrouping;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.azureparametergrouping.models.ErrorException;
 import fixtures.azureparametergrouping.models.FirstParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -30,11 +28,8 @@ public interface ParameterGroupings {
      * Post a bunch of required parameters grouped.
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) throws ErrorException, IOException, IllegalArgumentException;
+    void postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
 
     /**
      * Post a bunch of required parameters grouped.
@@ -64,10 +59,8 @@ public interface ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptional() throws ErrorException, IOException;
+    void postOptional();
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -94,10 +87,8 @@ public interface ParameterGroupings {
      * Post a bunch of optional parameters grouped.
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) throws ErrorException, IOException;
+    void postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -127,10 +118,8 @@ public interface ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postMultiParamGroups() throws ErrorException, IOException;
+    void postMultiParamGroups();
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -158,10 +147,8 @@ public interface ParameterGroupings {
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) throws ErrorException, IOException;
+    void postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -194,10 +181,8 @@ public interface ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postSharedParameterGroupObject() throws ErrorException, IOException;
+    void postSharedParameterGroupObject();
 
     /**
      * Post parameters with a shared parameter group object.
@@ -224,10 +209,8 @@ public interface ParameterGroupings {
      * Post parameters with a shared parameter group object.
      *
      * @param firstParameterGroup Additional parameters for the operation
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) throws ErrorException, IOException;
+    void postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup);
 
     /**
      * Post parameters with a shared parameter group object.

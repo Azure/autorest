@@ -125,8 +125,8 @@ namespace Fixtures.AcceptanceTestsBodyString
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutMbcsWithHttpMessagesAsync(string stringBody, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get string value with leading and trailing whitespace
-        /// '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all
-        /// good men to come to the aid of their
+        /// '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good
+        /// men to come to the aid of their
         /// country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
         /// </summary>
         /// <param name='customHeaders'>
@@ -144,8 +144,8 @@ namespace Fixtures.AcceptanceTestsBodyString
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<string>> GetWhitespaceWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Set String value with leading and trailing whitespace
-        /// '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all
-        /// good men to come to the aid of their
+        /// '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good
+        /// men to come to the aid of their
         /// country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
         /// </summary>
         /// <param name='stringBody'>

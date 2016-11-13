@@ -25,8 +25,8 @@ var models = require('./index');
  * @member {number} [currentValue] Gets the current count of the allocated
  * resources in the subscription.
  * 
- * @member {number} [limit] Gets the maximum count of the resources that can
- * be allocated in the subscription.
+ * @member {number} [limit] Gets the maximum count of the resources that can be
+ * allocated in the subscription.
  * 
  * @member {object} [name] Gets the name of the type of usage.
  * 

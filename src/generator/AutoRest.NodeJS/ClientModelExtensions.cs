@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using AutoRest.NodeJS.Properties;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.NodeJS
 {
@@ -23,7 +24,7 @@ namespace AutoRest.NodeJS
             }
             else
             {
-                return string.Format(CultureInfo.InvariantCulture, "HttpMethod.{0}", method);
+                return $"HttpMethod.{method}";
             }
         }
 
@@ -36,32 +37,29 @@ namespace AutoRest.NodeJS
         {
             if (parameter == null)
             {
-                throw new ArgumentNullException("parameter");
+                throw new ArgumentNullException(nameof(parameter));
             }
 
-            SequenceType sequence = parameter.Type as SequenceType;
+            SequenceType sequence = parameter.ModelType as SequenceType;
             if (sequence == null)
             {
-                return parameter.Type.ToString(parameter.Name);
+                return parameter.ModelType.ToString(parameter.Name);
             }
 
             PrimaryType primaryType = sequence.ElementType as PrimaryType;
             EnumType enumType = sequence.ElementType as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                primaryType = new PrimaryType(KnownPrimaryType.String);
+                primaryType = New<PrimaryType>(KnownPrimaryType.String);
             }
 
-            if (primaryType == null || primaryType.Type != KnownPrimaryType.String)
+            if (primaryType == null || primaryType.KnownPrimaryType != KnownPrimaryType.String)
             {
                 throw new InvalidOperationException(
-                    string.Format(CultureInfo.InvariantCulture,
-                    "Cannot generate a formatted sequence from a " +
-                                  "non-string array parameter {0}", parameter));
+                    $"Cannot generate a formatted sequence from a non-string array parameter {parameter}");
             }
 
-            return string.Format(CultureInfo.InvariantCulture,
-                "{0}.join('{1}')", parameter.Name, parameter.CollectionFormat.GetSeparator());
+            return $"{parameter.Name}.join('{parameter.CollectionFormat.GetSeparator()}')";
         }
 
         /// <summary>
@@ -82,8 +80,7 @@ namespace AutoRest.NodeJS
                 case CollectionFormat.Tsv:
                     return "\t";
                 default:
-                    throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
-                        "Collection format {0} is not supported.", format));
+                    throw new NotSupportedException($"Collection format {format} is not supported.");
             }
         }
 
@@ -93,7 +90,7 @@ namespace AutoRest.NodeJS
         /// <param name="type">The type to convert</param>
         /// <param name="reference">a reference to an instance of the type</param>
         /// <returns></returns>
-        public static string ToString(this IType type, string reference)
+        public static string ToString(this IModelType type, string reference)
         {
             var known = type as PrimaryType;
             var enumType = type as EnumType;
@@ -104,44 +101,25 @@ namespace AutoRest.NodeJS
 
             if (known != null)
             {
-                if (known.Type == KnownPrimaryType.Date)
+                switch (known.KnownPrimaryType)
                 {
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "client.serializeObject({0}).replace(/[Tt].*[Zz]/, '')", reference);
-                }
-
-                if (known.Type == KnownPrimaryType.DateTimeRfc1123)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}.toUTCString()", reference);
-                }
-
-                if (known.Type == KnownPrimaryType.DateTime ||
-                    known.Type == KnownPrimaryType.ByteArray)
-                {
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "client.serializeObject({0})", reference);
-                }
-
-                if (known.Type == KnownPrimaryType.TimeSpan)
-                {
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "{0}.toISOString()", reference);
-                }
-
-                if (known.Type == KnownPrimaryType.Base64Url)
-                {
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "client.serialize({{required: true, serializedName: '{0}', type: {{name: 'Base64Url'}}}}, {0}, '{0}')", reference);
-                }
-
-                if (known.Type == KnownPrimaryType.UnixTime)
-                {
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "client.serialize({{required: true, serializedName: '{0}', type: {{name: 'UnixTime'}}}}, {0}, '{0}')", reference);
+                    case KnownPrimaryType.Date:
+                        return $"client.serializeObject({reference}).replace(/[Tt].*[Zz]/, '')";
+                    case KnownPrimaryType.DateTimeRfc1123:
+                        return $"{reference}.toUTCString()";
+                    case KnownPrimaryType.DateTime:
+                    case KnownPrimaryType.ByteArray:
+                        return $"client.serializeObject({reference})";
+                    case KnownPrimaryType.TimeSpan:
+                        return $"{reference}.toISOString()";
+                    case KnownPrimaryType.Base64Url:
+                        return $"client.serialize({{required: true, serializedName: '{reference}', type: {{name: 'Base64Url'}}}}, {reference}, '{reference}')";
+                    case KnownPrimaryType.UnixTime:
+                        return $"client.serialize({{required: true, serializedName: '{reference}', type: {{name: 'UnixTime'}}}}, {reference}, '{reference}')";
                 }
             }
 
-            return string.Format(CultureInfo.InvariantCulture, "{0}.toString()", reference);
+            return $"{reference}.toString()";
         }
 
         /// <summary>
@@ -153,19 +131,17 @@ namespace AutoRest.NodeJS
         {
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
             }
 
-            return string.Format(CultureInfo.InvariantCulture,
-                "[ {0} ]", string.Join(", ",
-                type.Values.Select(p => string.Format(CultureInfo.InvariantCulture, "'{0}'", p.Name))));
+            return $"[ {string.Join(", ", type.Values.Select(p => $"'{p.Name}'"))} ]";
         }
 
         public static string EscapeSingleQuotes(this string valueReference)
         {
             if (valueReference == null)
             {
-                throw new ArgumentNullException("valueReference");
+                throw new ArgumentNullException(nameof(valueReference));
             }
 
             return valueReference.Replace("'", "\\'");
@@ -182,28 +158,28 @@ namespace AutoRest.NodeJS
                           .AppendLine("}");
         }
 
-        private static string ValidatePrimaryType(this PrimaryType primary, IScopeProvider scope, string valueReference, bool isRequired)
+        private static string ValidatePrimaryType(this PrimaryType primary, IChild scope, string valueReference, bool isRequired)
         {
             if (scope == null)
             {
-                throw new ArgumentNullException("scope");
+                throw new ArgumentNullException(nameof(scope));
             }
 
             if (primary == null)
             {
-                throw new ArgumentNullException("primary");
+                throw new ArgumentNullException(nameof(primary));
             }
 
             var builder = new IndentedStringBuilder("  ");
             var requiredTypeErrorMessage = "throw new Error('{0} cannot be null or undefined and it must be of type {1}.');";
             var typeErrorMessage = "throw new Error('{0} must be of type {1}.');";
-            var lowercaseTypeName = primary.Name.ToLower(CultureInfo.InvariantCulture);
-            if (primary.Type == KnownPrimaryType.Boolean ||
-                primary.Type == KnownPrimaryType.Double ||
-                primary.Type == KnownPrimaryType.Decimal ||
-                primary.Type == KnownPrimaryType.Int ||
-                primary.Type == KnownPrimaryType.Long ||
-                primary.Type == KnownPrimaryType.Object)
+            var lowercaseTypeName = primary.Name.ToLower();
+            if (primary.KnownPrimaryType == KnownPrimaryType.Boolean ||
+                primary.KnownPrimaryType == KnownPrimaryType.Double ||
+                primary.KnownPrimaryType == KnownPrimaryType.Decimal ||
+                primary.KnownPrimaryType == KnownPrimaryType.Int ||
+                primary.KnownPrimaryType == KnownPrimaryType.Long ||
+                primary.KnownPrimaryType == KnownPrimaryType.Object)
             {
                 if (isRequired)
                 {
@@ -214,7 +190,7 @@ namespace AutoRest.NodeJS
                 builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0} !== '{1}') {{", valueReference, lowercaseTypeName);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary.Type == KnownPrimaryType.Stream)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.Stream)
             {
                 if (isRequired)
                 {
@@ -225,7 +201,7 @@ namespace AutoRest.NodeJS
                 builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary.Type == KnownPrimaryType.String)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.String)
             {
                 if (isRequired)
                 {
@@ -237,7 +213,7 @@ namespace AutoRest.NodeJS
                 builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary.Type == KnownPrimaryType.Uuid)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.Uuid)
             {
                 if (isRequired)
                 {
@@ -250,7 +226,7 @@ namespace AutoRest.NodeJS
                 builder.AppendLine("if ({0} !== null && {0} !== undefined && !(typeof {0}.valueOf() === 'string' && msRest.isValidUuid({0}))) {{", valueReference);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary.Type == KnownPrimaryType.ByteArray || primary.Type == KnownPrimaryType.Base64Url)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.ByteArray || primary.KnownPrimaryType == KnownPrimaryType.Base64Url)
             {
                 if (isRequired)
                 {
@@ -261,8 +237,8 @@ namespace AutoRest.NodeJS
                 builder.AppendLine("if ({0} && !Buffer.isBuffer({0})) {{", valueReference, lowercaseTypeName);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary.Type == KnownPrimaryType.DateTime || primary.Type == KnownPrimaryType.Date || 
-                primary.Type == KnownPrimaryType.DateTimeRfc1123 || primary.Type == KnownPrimaryType.UnixTime)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.DateTime || primary.KnownPrimaryType == KnownPrimaryType.Date || 
+                primary.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123 || primary.KnownPrimaryType == KnownPrimaryType.UnixTime)
             {
                 if (isRequired)
                 {
@@ -279,7 +255,7 @@ namespace AutoRest.NodeJS
                                               .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary.Type == KnownPrimaryType.TimeSpan)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.TimeSpan)
             {
                 if (isRequired)
                 {
@@ -292,54 +268,52 @@ namespace AutoRest.NodeJS
             }
             else
             {
-                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
-                    "'{0}' not implemented", valueReference));
+                throw new NotImplementedException($"'{valueReference}' not implemented");
             }
         }
 
         /// <summary>
-        /// Returns the TypeScript type string for the specified primary type
+        /// Returns the TypeScript type string for the specified primary.KnownPrimaryType
         /// </summary>
-        /// <param name="primary">primary type to query</param>
-        /// <returns>The TypeScript type correspoinding to this model primary type</returns>
+        /// <param name="primary">primary.KnownPrimaryType to query</param>
+        /// <returns>The TypeScript type correspoinding to this model primary.KnownPrimaryType</returns>
         private static string PrimaryTSType(this PrimaryType primary) 
         {
             if (primary == null)
             {
-                throw new ArgumentNullException("primary");
+                throw new ArgumentNullException(nameof(primary));
             }
 
-            if (primary.Type == KnownPrimaryType.Boolean)
+            if (primary.KnownPrimaryType == KnownPrimaryType.Boolean)
                 return "boolean";
-            else if (primary.Type == KnownPrimaryType.Double || primary.Type == KnownPrimaryType.Decimal || 
-                primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.Double || primary.KnownPrimaryType == KnownPrimaryType.Decimal || 
+                primary.KnownPrimaryType == KnownPrimaryType.Int || primary.KnownPrimaryType == KnownPrimaryType.Long)
                 return "number";
-            else if (primary.Type == KnownPrimaryType.String || primary.Type == KnownPrimaryType.Uuid)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.String || primary.KnownPrimaryType == KnownPrimaryType.Uuid)
                 return "string";
-            else if (primary.Type == KnownPrimaryType.Date || primary.Type == KnownPrimaryType.DateTime || 
-                primary.Type == KnownPrimaryType.DateTimeRfc1123 || primary.Type == KnownPrimaryType.UnixTime)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.Date || primary.KnownPrimaryType == KnownPrimaryType.DateTime || 
+                primary.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123 || primary.KnownPrimaryType == KnownPrimaryType.UnixTime)
                 return "Date";
-            else if (primary.Type == KnownPrimaryType.Object)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.Object)
                 return "any";   // TODO: test this
-            else if (primary.Type == KnownPrimaryType.ByteArray || primary.Type == KnownPrimaryType.Base64Url)  
+            else if (primary.KnownPrimaryType == KnownPrimaryType.ByteArray || primary.KnownPrimaryType == KnownPrimaryType.Base64Url)  
                 return "Buffer";  
-            else if (primary.Type == KnownPrimaryType.Stream)  
+            else if (primary.KnownPrimaryType == KnownPrimaryType.Stream)  
                 return "stream.Readable";
-            else if (primary.Type == KnownPrimaryType.TimeSpan)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.TimeSpan)
                 return "moment.Duration"; //TODO: test this, add include for it
-            else if (primary.Type == KnownPrimaryType.Credentials)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.Credentials)
                 return "ServiceClientCredentials"; //TODO: test this, add include for it
             else {
-                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
-                    "Type '{0}' not implemented", primary));
+                throw new NotImplementedException($"Type '{primary}' not implemented");
             }
         }
 
-        private static string ValidateEnumType(this EnumType enumType, IScopeProvider scope, string valueReference, bool isRequired)
+        private static string ValidateEnumType(this EnumType enumType, IChild scope, string valueReference, bool isRequired)
         {
             if (scope == null)
             {
-                throw new ArgumentNullException("scope");
+                throw new ArgumentNullException(nameof(scope));
             }
 
             var builder = new IndentedStringBuilder("  ");
@@ -370,11 +344,11 @@ namespace AutoRest.NodeJS
             return builder.ToString();
         }
 
-        private static string ValidateCompositeType(IScopeProvider scope, string valueReference, bool isRequired)
+        private static string ValidateCompositeType(IChild scope, string valueReference, bool isRequired)
         {
             if (scope == null)
             {
-                throw new ArgumentNullException("scope");
+                throw new ArgumentNullException(nameof(scope));
             }
 
             var builder = new IndentedStringBuilder("  ");
@@ -391,11 +365,11 @@ namespace AutoRest.NodeJS
             return builder.ToString();
         }
 
-        private static string ValidateSequenceType(this SequenceType sequence, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client.models")
+        private static string ValidateSequenceType(this SequenceType sequence, IChild scope, string valueReference, bool isRequired, string modelReference = "client.models")
         {
             if (scope == null)
             {
-                throw new ArgumentNullException("scope");
+                throw new ArgumentNullException(nameof(scope));
             }
 
             var builder = new IndentedStringBuilder("  ");
@@ -410,7 +384,7 @@ namespace AutoRest.NodeJS
                     return builder.AppendLine("if (!util.isArray({0})) {{", valueReference)
                         .Indent()
                           .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');",
-                          escapedValueReference, sequence.Name.ToLower(CultureInfo.InvariantCulture))
+                          escapedValueReference, sequence.Name.ToLower())
                         .Outdent()
                       .AppendLine("}")
                       .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", valueReference, indexVar)
@@ -434,11 +408,11 @@ namespace AutoRest.NodeJS
             return null;
         }
 
-        private static string ValidateDictionaryType(this DictionaryType dictionary, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client.models")
+        private static string ValidateDictionaryType(this DictionaryType dictionary, IChild scope, string valueReference, bool isRequired, string modelReference = "client.models")
         {
             if (scope == null)
             {
-                throw new ArgumentNullException("scope");
+                throw new ArgumentNullException(nameof(scope));
             }
 
             var builder = new IndentedStringBuilder("  ");
@@ -452,7 +426,7 @@ namespace AutoRest.NodeJS
                     return builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0} !== 'object') {{", valueReference)
                         .Indent()
                           .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');",
-                            escapedValueReference, dictionary.Name.ToLower(CultureInfo.InvariantCulture))
+                            escapedValueReference, dictionary.Name.ToLower())
                         .Outdent()
                       .AppendLine("}")
                       .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
@@ -485,11 +459,11 @@ namespace AutoRest.NodeJS
         /// <param name="isRequired">True if the parameter is required.</param>
         /// <param name="modelReference">A reference to the models array</param>
         /// <returns>The code to validate the reference of the given type</returns>
-        public static string ValidateType(this IType type, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client.models")
+        public static string ValidateType(this IModelType type, IChild scope, string valueReference, bool isRequired, string modelReference = "client.models")
         {
             if (scope == null)
             {
-                throw new ArgumentNullException("scope");
+                throw new ArgumentNullException(nameof(scope));
             }
 
             CompositeType composite = type as CompositeType;
@@ -503,6 +477,10 @@ namespace AutoRest.NodeJS
             }
             else if (enumType != null && enumType.Values.Any())
             {
+                if (enumType.ModelAsString)
+                {
+                    return New<PrimaryType>(KnownPrimaryType.String).ValidatePrimaryType(scope, valueReference, isRequired);
+                }
                 return enumType.ValidateEnumType(scope, valueReference, isRequired);
             }
             else if (composite != null && composite.Properties.Any())
@@ -527,7 +505,7 @@ namespace AutoRest.NodeJS
         /// <param name="type">IType to query</param>
         /// <param name="inModelsModule">Pass true if generating the code for the models module, thus model types don't need a "models." prefix</param>
         /// <returns>TypeScript type string for type</returns>
-        public static string TSType(this IType type, bool inModelsModule) {
+        public static string TSType(this IModelType type, bool inModelsModule) {
             CompositeType composite = type as CompositeType;
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
@@ -548,7 +526,7 @@ namespace AutoRest.NodeJS
                 // ServiceClientCredentials starts with the "msRest." prefix, so strip msRest./msRestAzure. as we import those
                 // types with no module prefix needed
                 var compositeName = composite.Name;
-                if (compositeName.StartsWith("msRest.", StringComparison.Ordinal) || compositeName.StartsWith("msRestAzure.", StringComparison.Ordinal))
+                if (compositeName.StartsWith("msRest.") || compositeName.StartsWith("msRestAzure."))
                     tsType = compositeName.Substring(compositeName.IndexOf('.') + 1);
                 else if (inModelsModule || compositeName.Contains('.'))
                     tsType = compositeName;
@@ -565,27 +543,27 @@ namespace AutoRest.NodeJS
                 // C# target level of functionality
                 tsType = "{ [propertyName: string]: " + dictionary.ValueType.TSType(inModelsModule) + " }";
             }
-            else throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, "Type '{0}' not implemented", type));
+            else throw new NotImplementedException($"Type '{type}' not implemented");
 
             return tsType;
         }
 
-        public static IndentedStringBuilder AppendConstraintValidations(this IType type, string valueReference, Dictionary<Constraint, string> constraints, 
+        public static IndentedStringBuilder AppendConstraintValidations(this IModelType type, string valueReference, Dictionary<Constraint, string> constraints, 
             IndentedStringBuilder builder)
         {
             if (valueReference == null)
             {
-                throw new ArgumentNullException("valueReference");
+                throw new ArgumentNullException(nameof(valueReference));
             }
 
             if (constraints == null)
             {
-                throw new ArgumentNullException("constraints");
+                throw new ArgumentNullException(nameof(constraints));
             }
 
             if (builder == null)
             {
-                throw new ArgumentNullException("builder");
+                throw new ArgumentNullException(nameof(builder));
             }
 
             foreach (var constraint in constraints.Keys)
@@ -595,51 +573,41 @@ namespace AutoRest.NodeJS
                 switch (constraint)
                 {
                     case Constraint.ExclusiveMaximum:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} >= {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference} >= {constraints[constraint]}";
                         break;
                     case Constraint.ExclusiveMinimum:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} <= {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference} <= {constraints[constraint]}";
                         break;
                     case Constraint.InclusiveMaximum:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} > {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference} > {constraints[constraint]}";
                         break;
                     case Constraint.InclusiveMinimum:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} < {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference} < {constraints[constraint]}";
                         break;
                     case Constraint.MaxItems:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.length > {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference}.length > {constraints[constraint]}";
                         break;
                     case Constraint.MaxLength:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.length > {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference}.length > {constraints[constraint]}";
                         break;
                     case Constraint.MinItems:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.length < {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference}.length < {constraints[constraint]}";
                         break;
                     case Constraint.MinLength:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.length < {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference}.length < {constraints[constraint]}";
                         break;
                     case Constraint.MultipleOf:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} % {1} !== 0", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference} % {constraints[constraint]} !== 0";
                         break;
                     case Constraint.Pattern:
 
                         constraintValue = "/" + constraintValue.Replace("/", "\\/") + "/";
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture,
-                            "{0}.match({1}) === null", valueReference, constraintValue);
+                        constraintCheck = $"{valueReference}.match({constraintValue}) === null";
                         break;
                     case Constraint.UniqueItems:
-                        if ("true".Equals(constraints[constraint], StringComparison.OrdinalIgnoreCase))
+                        if ("true".EqualsIgnoreCase(constraints[constraint]))
                         {
-                            constraintCheck = string.Format(CultureInfo.InvariantCulture,
+                            constraintCheck = string.Format(
                                 "{0}.length !== {0}.filter(function(item, i, ar) {{ return ar.indexOf(item) === i; }}).length", valueReference);
                         }
                         else
@@ -674,7 +642,7 @@ namespace AutoRest.NodeJS
             return builder;
         }
 
-        public static string ConstructMapper(this IType type, string serializedName, IParameter parameter, bool isPageable, bool expandComposite)
+        public static string ConstructMapper(this IModelType type, string serializedName, IVariable parameter, bool isPageable, bool expandComposite)
         {
             var builder = new IndentedStringBuilder("  ");
             string defaultValue = null;
@@ -737,7 +705,7 @@ namespace AutoRest.NodeJS
                     var constraintValue = constraints[keys[j]];
                     if (keys[j] == Constraint.Pattern)
                     {
-                        constraintValue = string.Format(CultureInfo.InvariantCulture, "'{0}'", constraintValue);
+                        constraintValue = $"'{constraintValue}'";
                     }
                     if (j != keys.Count - 1)
                     {
@@ -753,72 +721,74 @@ namespace AutoRest.NodeJS
             // Add type information 
             if (primary != null)
             {
-                if (primary.Type == KnownPrimaryType.Boolean)
+                switch (primary.KnownPrimaryType)
                 {
-                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Boolean'").Outdent().AppendLine("}");
-                }
-                else if (primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long ||
-                    primary.Type == KnownPrimaryType.Decimal || primary.Type == KnownPrimaryType.Double)
-                {
-                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Number'").Outdent().AppendLine("}");
-                }
-                else if (primary.Type == KnownPrimaryType.String || primary.Type == KnownPrimaryType.Uuid)
-                {
-                    builder.AppendLine("type: {").Indent().AppendLine("name: 'String'").Outdent().AppendLine("}");
-                }
-                else if (primary.Type == KnownPrimaryType.Uuid)
-                {
-                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Uuid'").Outdent().AppendLine("}");
-                }
-                else if (primary.Type == KnownPrimaryType.ByteArray)
-                {
-                    builder.AppendLine("type: {").Indent().AppendLine("name: 'ByteArray'").Outdent().AppendLine("}");
-                }
-                else if (primary.Type == KnownPrimaryType.Base64Url)
-                {
-                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Base64Url'").Outdent().AppendLine("}");
-                }
-                else if (primary.Type == KnownPrimaryType.Date)
-                {
-                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Date'").Outdent().AppendLine("}");
-                }
-                else if (primary.Type == KnownPrimaryType.DateTime)
-                {
-                    builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTime'").Outdent().AppendLine("}");
-                }
-                else if (primary.Type == KnownPrimaryType.DateTimeRfc1123)
-                {
-                    builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTimeRfc1123'").Outdent().AppendLine("}");
-                }
-                else if (primary.Type == KnownPrimaryType.TimeSpan)
-                {
-                    builder.AppendLine("type: {").Indent().AppendLine("name: 'TimeSpan'").Outdent().AppendLine("}");
-                }
-                else if (primary.Type == KnownPrimaryType.UnixTime)
-                {
-                    builder.AppendLine("type: {").Indent().AppendLine("name: 'UnixTime'").Outdent().AppendLine("}");
-                }
-                else if (primary.Type == KnownPrimaryType.Object)
-                {
-                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Object'").Outdent().AppendLine("}");
-                }
-                else if (primary.Type == KnownPrimaryType.Stream)
-                {
-                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Stream'").Outdent().AppendLine("}");
-                }
-                else
-                {
-                    throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, Resources.InvalidType, primary));
+                    case KnownPrimaryType.Boolean:
+                        builder.AppendLine("type: {").Indent().AppendLine("name: 'Boolean'").Outdent().AppendLine("}");
+                        break;
+                    case KnownPrimaryType.Int:
+                    case KnownPrimaryType.Long:
+                    case KnownPrimaryType.Decimal:
+                    case KnownPrimaryType.Double:
+                        builder.AppendLine("type: {").Indent().AppendLine("name: 'Number'").Outdent().AppendLine("}");
+                        break;
+                    case KnownPrimaryType.String:
+                        builder.AppendLine("type: {").Indent().AppendLine("name: 'String'").Outdent().AppendLine("}");
+                        break;
+
+                    case KnownPrimaryType.Uuid:
+                       builder.AppendLine("type: {").Indent().AppendLine("name: 'String'").Outdent().AppendLine("}");
+                        break;
+                  
+                    // case KnownPrimaryType.Uuid:
+                       //  builder.AppendLine("type: {").Indent().AppendLine("name: 'Uuid'").Outdent().AppendLine("}");
+                        //break;
+                    case KnownPrimaryType.ByteArray:
+                        builder.AppendLine("type: {").Indent().AppendLine("name: 'ByteArray'").Outdent().AppendLine("}");
+                        break;
+                    case KnownPrimaryType.Base64Url:
+                        builder.AppendLine("type: {").Indent().AppendLine("name: 'Base64Url'").Outdent().AppendLine("}");
+                        break;
+                    case KnownPrimaryType.Date:
+                        builder.AppendLine("type: {").Indent().AppendLine("name: 'Date'").Outdent().AppendLine("}");
+                        break;
+                    case KnownPrimaryType.DateTime:
+                        builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTime'").Outdent().AppendLine("}");
+                        break;
+                    case KnownPrimaryType.DateTimeRfc1123:
+                        builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTimeRfc1123'").Outdent().AppendLine("}");
+                        break;
+                    case KnownPrimaryType.TimeSpan:
+                        builder.AppendLine("type: {").Indent().AppendLine("name: 'TimeSpan'").Outdent().AppendLine("}");
+                        break;
+                    case KnownPrimaryType.UnixTime:
+                        builder.AppendLine("type: {").Indent().AppendLine("name: 'UnixTime'").Outdent().AppendLine("}");
+                        break;
+                    case KnownPrimaryType.Object:
+                        builder.AppendLine("type: {").Indent().AppendLine("name: 'Object'").Outdent().AppendLine("}");
+                        break;
+                    case KnownPrimaryType.Stream:
+                        builder.AppendLine("type: {").Indent().AppendLine("name: 'Stream'").Outdent().AppendLine("}");
+                        break;
+                    default:
+                        throw new NotImplementedException(string.Format( Resources.InvalidType, primary));
                 }
             }
             else if (enumType != null)
             {
-                builder.AppendLine("type: {")
-                         .Indent()
-                         .AppendLine("name: 'Enum',")
-                         .AppendLine("allowedValues: {0}", enumType.GetEnumValuesArray())
-                       .Outdent()
-                       .AppendLine("}");
+                if (enumType.ModelAsString)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'String'").Outdent().AppendLine("}");
+                }
+                else
+                {
+                    builder.AppendLine("type: {")
+                        .Indent()
+                        .AppendLine("name: 'Enum',")
+                        .AppendLine("allowedValues: {0}", enumType.GetEnumValuesArray())
+                        .Outdent()
+                        .AppendLine("}");
+                }
             }
             else if (sequence != null)
             {
@@ -827,7 +797,7 @@ namespace AutoRest.NodeJS
                          .AppendLine("name: 'Sequence',")
                          .AppendLine("element: {")
                            .Indent()
-                           .AppendLine("{0}", sequence.ElementType.ConstructMapper(sequence.ElementType.Name + "ElementType", null, false, false))
+                           .AppendLine("{0}", sequence.ElementType.ConstructMapper(sequence.ElementType.DeclarationName + "ElementType", null, false, false))
                          .Outdent().AppendLine("}").Outdent().AppendLine("}");
             }
             else if (dictionary != null)
@@ -837,7 +807,7 @@ namespace AutoRest.NodeJS
                          .AppendLine("name: 'Dictionary',")
                          .AppendLine("value: {")
                            .Indent()
-                           .AppendLine("{0}", dictionary.ValueType.ConstructMapper(dictionary.ValueType.Name + "ElementType", null, false, false))
+                           .AppendLine("{0}", dictionary.ValueType.ConstructMapper(dictionary.ValueType.DeclarationName + "ElementType", null, false, false))
                          .Outdent().AppendLine("}").Outdent().AppendLine("}");
             }
             else if (composite != null)
@@ -845,15 +815,9 @@ namespace AutoRest.NodeJS
                 builder.AppendLine("type: {")
                          .Indent()
                          .AppendLine("name: 'Composite',");
-                if (composite.PolymorphicDiscriminator != null)
+                if (composite.IsPolymorphic)
                 {
-                    builder.AppendLine("polymorphicDiscriminator: '{0}',", composite.PolymorphicDiscriminator);
-                    var polymorphicType = composite;
-                    while (polymorphicType.BaseModelType != null)
-                    {
-                        polymorphicType = polymorphicType.BaseModelType;
-                    }
-                    builder.AppendLine("uberParent: '{0}',", polymorphicType.Name);
+                    builder = ConstructPolymorphicDiscriminator(composite, builder);
                 }
                 if (!expandComposite)
                 {
@@ -890,25 +854,25 @@ namespace AutoRest.NodeJS
                         {
                             if (!isPageable)
                             {
-                                builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop, false, false));
+                                builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.ModelType.ConstructMapper(serializedPropertyName, prop, false, false));
                             }
                             else
                             {
                                 // if pageable and nextlink is also present then we need a comma as nextLink would be the next one to be added
                                 if (nextLinkNameValue != null)
                                 {
-                                    builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop, false, false));
+                                    builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.ModelType.ConstructMapper(serializedPropertyName, prop, false, false));
                                 }
                                 else
                                 {
-                                    builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop, false, false));
+                                    builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.ModelType.ConstructMapper(serializedPropertyName, prop, false, false));
                                 }
                                     
                             }   
                         }
                         else
                         {
-                            builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop, false, false));
+                            builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.ModelType.ConstructMapper(serializedPropertyName, prop, false, false));
                         }
                     }
                     // end of modelProperties and type
@@ -917,9 +881,39 @@ namespace AutoRest.NodeJS
             }
             else
             {
-                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, Resources.InvalidType, type));
+                throw new NotImplementedException(string.Format( Resources.InvalidType, type));
             }
             return builder.ToString();
+        }
+
+        public static IndentedStringBuilder ConstructPolymorphicDiscriminator(CompositeType composite, IndentedStringBuilder builder)
+        {
+            if (composite == null)
+            {
+                throw new ArgumentNullException("composite");
+            }
+            if (builder == null)
+            {
+                throw new ArgumentNullException("builder");
+            }
+            // Note: If the polymorphicDiscriminator has a dot in it's name then do not escape that dot for 
+            // it's serializedName, the way it is done for other properties. This makes it easy to find the 
+            // discriminator property from the responseBody during deserialization. Please, do not get confused  
+            // between the definition of the discriminator and the definition of the property that is  
+            // marked as the discriminator. 
+            builder.AppendLine("polymorphicDiscriminator: {")
+                     .Indent()
+                     .AppendLine("serializedName: '{0}',", composite.PolymorphicDiscriminator)
+                     .AppendLine("clientName: '{0}'", Singleton<CodeNamerJs>.Instance.GetPropertyName(composite.PolymorphicDiscriminator))
+                   .Outdent()
+                   .AppendLine("},");
+            var polymorphicType = composite;
+            while (polymorphicType.BaseModelType != null)
+            {
+                polymorphicType = polymorphicType.BaseModelType;
+            }
+            builder.AppendLine("uberParent: '{0}',", polymorphicType.Name);
+            return builder;
         }
 
         /// <summary>
@@ -942,13 +936,13 @@ namespace AutoRest.NodeJS
         {
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
             }
 
             Property prop = type.Properties.FirstOrDefault(p =>
-                p.Type.IsPrimaryType(KnownPrimaryType.TimeSpan) ||
-                (p.Type is SequenceType && (p.Type as SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
-                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.TimeSpan)));
+                p.ModelType.IsPrimaryType(KnownPrimaryType.TimeSpan) ||
+                (p.ModelType is SequenceType && (p.ModelType as SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
+                (p.ModelType is DictionaryType && (p.ModelType as DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.TimeSpan)));
 
             return prop != null;
         }

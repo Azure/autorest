@@ -6,6 +6,7 @@ using System.Linq;
 
 using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
+using AutoRest.Go;
 
 namespace AutoRest.Go.TemplateModels
 {
@@ -15,6 +16,9 @@ namespace AutoRest.Go.TemplateModels
         public List<ModelTemplateModel> ModelTemplateModels { get; set; }
         public string PackageName { get; set; }
         public Dictionary<IType, string> PagedTypes { get; set; }
+        // NextMethodUndefined is used to keep track of those models which are returned by paged methods,
+        // but the next method is not defined in the service client, so these models need a preparer.
+        public List<IType> NextMethodUndefined { get; set; }
         
         public ModelsTemplateModel(ServiceClient serviceClient, string packageName)
         {
@@ -67,7 +71,7 @@ namespace AutoRest.Go.TemplateModels
             EnumTemplateModels
                 .ForEach(em => 
                 {
-                    if (em.Values.Where(v => topLevelNames.Contains(v.Name)).Count() > 0)
+                    if (em.Values.Where(v => topLevelNames.Contains(v.Name) || GoCodeNamer.UserDefinedNames.Contains(v.Name)).Count() > 0)
                     {
                         em.HasUniqueNames = false;
                     }
@@ -92,6 +96,7 @@ namespace AutoRest.Go.TemplateModels
 
             // Find all methods that returned paged results
             PagedTypes = new Dictionary<IType, string>();
+            NextMethodUndefined = new List<IType>();
             serviceClient.Methods
                 .Where(m => m.IsPageable())
                 .ForEach(m =>
@@ -99,6 +104,9 @@ namespace AutoRest.Go.TemplateModels
                     if (!PagedTypes.ContainsKey(m.ReturnValue().Body))
                     {
                         PagedTypes.Add(m.ReturnValue().Body, m.NextLink());
+                    }
+                    if (!m.NextMethodExists(serviceClient.Methods)) {
+                        NextMethodUndefined.Add(m.ReturnValue().Body);
                     }
                 });
 
@@ -113,7 +121,12 @@ namespace AutoRest.Go.TemplateModels
                     mtm.IsResponseType = true;
                     if (PagedTypes.ContainsKey(mtm))
                     {
-                        mtm.NextLink = PagedTypes[mtm];
+                        mtm.NextLink = GoCodeNamer.PascalCaseWithoutChar(PagedTypes[mtm], '.');
+                        if (NextMethodUndefined.Contains(mtm)) {
+                            mtm.PreparerNeeded = true;
+                        } else {
+                            mtm.PreparerNeeded = false;
+                        }
                     }
                 });
 
@@ -134,7 +147,7 @@ namespace AutoRest.Go.TemplateModels
                     .ForEach(mt =>
                     {
                         (mt as CompositeType).AddImports(imports);
-                        if (PagedTypes.ContainsKey(mt))
+                        if (NextMethodUndefined.Count > 0)
                         {
                             imports.UnionWith(GoCodeNamer.PageableImports);
                         }

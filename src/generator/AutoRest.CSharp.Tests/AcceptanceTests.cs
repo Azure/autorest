@@ -1068,27 +1068,27 @@ namespace AutoRest.CSharp.Tests
             {
                 /* BASIC COMPLEX TYPE TESTS */
                 // GET basic/valid
-                var basicResult = client.BasicOperations.GetValid();
+                var basicResult = client.Basic.GetValid();
                 Assert.Equal(2, basicResult.Id);
                 Assert.Equal("abc", basicResult.Name);
                 Assert.Equal(CMYKColors.YELLOW, basicResult.Color);
                 // PUT basic/valid
                 var basicRequest = new Basic {Id = 2, Name = "abc", Color = CMYKColors.Magenta};
-                client.BasicOperations.PutValid(basicRequest);
+                client.Basic.PutValid(basicRequest);
                 // GET basic/empty
-                basicResult = client.BasicOperations.GetEmpty();
+                basicResult = client.Basic.GetEmpty();
                 Assert.Equal(null, basicResult.Id);
                 Assert.Equal(null, basicResult.Name);
                 // GET basic/null
-                client.BasicOperations.GetNull();
+                client.Basic.GetNull();
                 Assert.Equal(null, basicResult.Id);
                 Assert.Equal(null, basicResult.Name);
                 // GET basic/notprovided
-                client.BasicOperations.GetNotProvided();
+                client.Basic.GetNotProvided();
                 Assert.Equal(null, basicResult.Id);
                 Assert.Equal(null, basicResult.Name);
                 // GET basic/invalid
-                Assert.Throws<SerializationException>(() => client.BasicOperations.GetInvalid());
+                Assert.Throws<SerializationException>(() => client.Basic.GetInvalid());
 
                 /* COMPLEX TYPE WITH PRIMITIVE PROPERTIES */
                 // GET primitive/integer
@@ -1375,7 +1375,7 @@ namespace AutoRest.CSharp.Tests
                 /* COMPLEX TYPE WITH READ ONLY PROPERTIES TESTS */
                 // PUT /readonlyproperty/valid
                 var o = client.Readonlyproperty.GetValid();
-                client.Readonlyproperty.PutValid(o);
+                client.Readonlyproperty.PutValid(2);
             }
         }
 

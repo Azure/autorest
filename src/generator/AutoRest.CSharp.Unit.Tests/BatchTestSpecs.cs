@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Unit.Tests
                     continue;
                 }
 
-                using (var memoryFileSystem = GenerateCodeForTestFromSpec(file))
+                using (var memoryFileSystem = GenerateCodeForTestFromSpec(dirName: file))
                 {
                     // Expected Files
                     Assert.True(memoryFileSystem.GetFiles(@"GeneratedCode\", "*.cs", SearchOption.TopDirectoryOnly).GetUpperBound(0) > 0);

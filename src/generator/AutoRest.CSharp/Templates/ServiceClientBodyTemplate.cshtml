@@ -1,8 +1,8 @@
 ﻿@using System
 @using System.Linq
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
-@inherits AutoRest.Core.Template<AutoRest.CSharp.TemplateModels.ServiceClientTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.CodeModelCs>
 
 
 /// <summary>
@@ -35,16 +35,16 @@ public Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; pri
 @:/// <summary>
 @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
 @:/// </summary>
-@:public @property.Type @property.Name { get; @(property.IsReadOnly || property.IsConstant ? "private " : "")set; }
+@:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly || property.IsConstant ? "private " : "")set; }
 @EmptyLine
 }
         
-@foreach (var operation in Model.Operations) 
+@foreach (var operation in Model.AllOperations) 
 {
 @:/// <summary>
-@:/// Gets the I@(operation.MethodGroupType).
+@:/// Gets the I@(operation.TypeName).
 @:/// </summary>
-@:public virtual I@(operation.MethodGroupType) @(operation.MethodGroupName) { get; private set; }
+@:public virtual I@(operation.TypeName) @(operation.NameForProperty) { get; private set; }
 @EmptyLine
 }
        
@@ -157,7 +157,7 @@ foreach (var param in parameters)
 foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());
-    @if (param.Type.IsPrimaryType(KnownPrimaryType.Credentials))
+    @if (param.ModelType.IsPrimaryType(KnownPrimaryType.Credentials))
     {
     @:if (this.Credentials != null)
     @:{
@@ -198,7 +198,7 @@ foreach (var param in parameters)
 foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());
-    @if (param.Type.IsPrimaryType(KnownPrimaryType.Credentials))
+    @if (param.ModelType.IsPrimaryType(KnownPrimaryType.Credentials))
     {
     @:if (this.Credentials != null)
     @:{
@@ -249,7 +249,7 @@ foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());
 
-@if (param.Type.IsPrimaryType(KnownPrimaryType.Credentials))
+@if (param.ModelType.IsPrimaryType(KnownPrimaryType.Credentials))
 {
     @:if (this.Credentials != null)
     @:{
@@ -302,7 +302,7 @@ foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());
 
-@if (param.Type.IsPrimaryType(KnownPrimaryType.Credentials))
+@if (param.ModelType.IsPrimaryType(KnownPrimaryType.Credentials))
 {
     @:if (this.Credentials != null)
     @:{

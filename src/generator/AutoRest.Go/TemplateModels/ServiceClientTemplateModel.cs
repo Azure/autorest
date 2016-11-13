@@ -34,14 +34,15 @@ namespace AutoRest.Go.TemplateModels
             BaseClient = "ManagementClient";
             ClientName = string.IsNullOrEmpty(MethodGroupName)
                             ? BaseClient
-                            : (MethodGroupName + "Client").TrimPackageName(PackageName);
-
+                            : MethodGroupName.IsNamePlural(PackageName)
+                                             ? MethodGroupName + "Client"
+                                             : (MethodGroupName + "Client").TrimPackageName(PackageName);
             MethodScope = new MethodScopeProvider();
             MethodTemplateModels = new List<MethodTemplateModel>();
             Methods.Where(m => m.BelongsToGroup(MethodGroupName, PackageName))
                 .OrderBy(m => m.Name)
-                .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, ClientName, PackageName, new MethodScopeProvider())));
-
+                .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, ClientName, PackageName, new MethodScopeProvider(), m.NextMethodExists(Methods))));
+                
             Documentation = string.Format("Package {0} implements the Azure ARM {1} service API version {2}.\n\n{3}", PackageName, ServiceName, ApiVersion,
                                     !string.IsNullOrEmpty(Documentation) ? Documentation.UnwrapAnchorTags() : "");
             ClientDocumentation = string.Format("{0} is the base client for {1}.", ClientName, ServiceName);

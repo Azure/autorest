@@ -11,8 +11,8 @@ namespace Fixtures.MirrorSequences
     using Models;
 
     /// <summary>
-    /// A sample API that uses a petstore as an example to demonstrate
-    /// features in the swagger-2.0 specification
+    /// A sample API that uses a petstore as an example to demonstrate features
+    /// in the swagger-2.0 specification
     /// </summary>
     public partial interface ISequenceRequestResponseTest : System.IDisposable
     {
@@ -32,7 +32,7 @@ namespace Fixtures.MirrorSequences
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Creates a new pet in the store.  Duplicates are allowed
         /// </summary>
         /// <param name='pets'>

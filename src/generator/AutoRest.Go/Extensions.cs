@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
 using AutoRest.Go.TemplateModels;
 using AutoRest.Extensions.Azure;
+using AutoRest.Extensions.Azure.Model;
 
 namespace AutoRest.Go
 {
@@ -24,6 +26,11 @@ namespace AutoRest.Go
         public const string SkipUrlEncoding = "x-ms-skip-url-encoding";
         
         private static readonly Regex SplitPattern = new Regex(@"(\p{Lu}\p{Ll}+)");
+
+        private static Dictionary<string, string> plural = new Dictionary<string, string>()
+        {
+            { "eventhub", "eventhubs" }
+        };
 
         /////////////////////////////////////////////////////////////////////////////////////////
         //
@@ -87,6 +94,19 @@ namespace AutoRest.Go
         public static string[] ToWords(this string value)
         {
             return SplitPattern.Split(value).Where(s => !string.IsNullOrEmpty(s)).ToArray();
+        }
+
+        /// <summary>
+        /// This method checks if MethodGroupName is plural of package name. 
+        /// It returns false for packages not listed in dictionary 'plural'.
+        /// Example, group EventHubs in package EventHub.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="packageName"></param>
+        /// <returns></returns>
+        public static bool IsNamePlural(this string value, string packageName)
+        {
+            return plural.ContainsKey(packageName) && plural[packageName] == value.ToLower();
         }
 
         /// <summary>
@@ -362,7 +382,7 @@ namespace AutoRest.Go
 
         public static bool IsClientProperty(this Parameter parameter)
         {
-            return parameter.ClientProperty != null;
+            return parameter.ClientProperty != null || parameter.SerializedName.IsApiVersion();
         }
 
         public static string GetParameterName(this Parameter parameter)
@@ -379,7 +399,7 @@ namespace AutoRest.Go
 
         public static bool IsApiVersion(this string name)
         {
-            string rgx = @"^api[^a-zA-Z0-9]?version";
+            string rgx = @"^api[^a-zA-Z0-9_]?version";
             return Regex.IsMatch(name, rgx, RegexOptions.IgnoreCase);
         }
 
@@ -542,7 +562,13 @@ namespace AutoRest.Go
                 &&  !String.IsNullOrEmpty((compositeType as ModelTemplateModel).NextLink))
             {
                 var nextLinkField = (compositeType as ModelTemplateModel).NextLink;
-                if (!properties.Any(p => p.Name == nextLinkField))
+                foreach (Property p in properties) {
+                    p.Name = GoCodeNamer.PascalCaseWithoutChar(p.Name, '.');
+                    if (p.Name.Equals(nextLinkField, StringComparison.OrdinalIgnoreCase)) {
+                        p.Name = nextLinkField;
+                    }
+                }
+                if (!properties.Any(p => p.Name.Equals(nextLinkField, StringComparison.OrdinalIgnoreCase)))
                 {
                     var property = new Property();
                     property.Name = nextLinkField;
@@ -704,7 +730,7 @@ namespace AutoRest.Go
                     x.AddRange(p.ValidateType(name, method));
 
                 if (x.Count != 0)
-                    v.Add($"{{{name},\n[]validation.Constraint{{{string.Join(",\n", x)}}}}}");
+                    v.Add($"{{ TargetValue: {name},\n Constraints: []validation.Constraint{{{string.Join(",\n", x)}}}}}");
             }
             return string.Join(",\n", v);
         }
@@ -784,7 +810,7 @@ namespace AutoRest.Go
 
             x.AddRange(from prop in ((CompositeType)p.Type).Properties
                        where prop.IsReadOnly
-                       select GetConstraint(prop.Name, ReadOnlyConstraint, "true"));
+                       select GetConstraint($"{name}.{prop.Name}", ReadOnlyConstraint, "true"));
 
             List<string> y = new List<string>();
             if (x.Count > 0)
@@ -826,7 +852,7 @@ namespace AutoRest.Go
             List<string> a = new List<string>
             {
                 GetConstraint(name, constraint, $"{isRequired}".ToLower(), true),
-                $"[]validation.Constraint{{{x[0]}"
+                $"Chain: []validation.Constraint{{{x[0]}"
             };
             a.AddRange(x.GetRange(1, x.Count - 1));
             a.Add("}}");
@@ -908,9 +934,9 @@ namespace AutoRest.Go
                                           ? $"`{constraintValue}`"
                                           : constraintValue;
             return string.Format(chain
-                                     ? "\t{{\"{0}\", validation.{1}, {2} "
-                                     : "\t{{\"{0}\", validation.{1}, {2}, nil }}",
-                                     name, constraintName, value);
+                                    ? "\t{{Target: \"{0}\", Name: validation.{1}, Rule: {2} "
+                                    : "\t{{Target: \"{0}\", Name: validation.{1}, Rule: {2}, Chain: nil }}",
+                                    name, constraintName, value);
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////
@@ -928,8 +954,8 @@ namespace AutoRest.Go
         public static bool BelongsToGroup(this Method method, string groupName, string packageName)
         {
             return string.IsNullOrEmpty(groupName)
-                    ? string.IsNullOrEmpty(method.Group) || string.Equals(method.Group, packageName, System.StringComparison.InvariantCultureIgnoreCase)
-                    : string.Equals(method.Group, groupName);
+                     ? string.IsNullOrEmpty(method.Group)
+                     : string.Equals(method.Group, groupName);
         }
 
         /// <summary>
@@ -963,6 +989,24 @@ namespace AutoRest.Go
         public static bool IsPageable(this Method method)
         {
             return !string.IsNullOrEmpty(method.NextLink());
+        }
+
+        /// <summary>
+        /// Checks if method for next page of results on paged methods is already present in the method list.
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="methods"></param>
+        /// <returns></returns>
+        public static bool NextMethodExists(this Method method, List<Method> methods) {
+            if (method.Extensions.ContainsKey(AzureExtensions.PageableExtension))
+            {
+                var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(method.Extensions[AzureExtensions.PageableExtension].ToString());
+                if (pageableExtension != null && !string.IsNullOrWhiteSpace(pageableExtension.OperationName))
+                {
+                    return methods.Any(m => m.SerializedName.Equals(pageableExtension.OperationName, StringComparison.OrdinalIgnoreCase));
+                }
+            }
+            return false;
         }
 
         /// <summary>
@@ -1004,7 +1048,7 @@ namespace AutoRest.Go
                     var nextLinkName = (string)pageableExtension["nextLinkName"];
                     if (!string.IsNullOrEmpty(nextLinkName))
                     {
-                        nextLink = GoCodeNamer.PascalCase(nextLinkName);
+                        nextLink = GoCodeNamer.PascalCaseWithoutChar(nextLinkName, '.');
                     }
                 }
             }

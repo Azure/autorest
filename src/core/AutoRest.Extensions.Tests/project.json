@@ -1,5 +1,5 @@
 {
-  "version": "0.17.0-*",
+  "version": "1.0.0-*",
   "authors": [ "Microsoft" ],
 
   "packOptions": {
@@ -39,23 +39,27 @@
     "AutoRest.Swagger": {
       "target": "project"
     },
-    "AutoRest.Ruby": {
-      "target": "project"
-    },
-    "AutoRest.Java": {
-      "target": "project"
-    },
-    "AutoRest.NodeJS": {
-      "target": "project"
-    },
-    "AutoRest.Python": {
-      "target": "project"
-    },
+
     "AutoRest.CSharp": {
       "target": "project"
     },
     "AutoRest.Extensions": {
       "target": "project"
     },
+    "AutoRest.NodeJS": {
+      "target": "project"
+    }
+    },
+  "disabled_dependencies": {
+    "AutoRest.Ruby": {
+      "target": "project"
+    },
+    "AutoRest.Java": {
+      "target": "project"
+    },
+
+    "AutoRest.Python": {
+      "target": "project"
+    }
   }
 }

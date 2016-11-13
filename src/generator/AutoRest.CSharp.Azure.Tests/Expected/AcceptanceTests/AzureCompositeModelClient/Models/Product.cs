@@ -24,7 +24,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// Initializes a new instance of the Product class.
         /// </summary>
         /// <param name="productId">Unique identifier representing a specific
-        /// product for a given latitude & longitude. For example, uberX in
+        /// product for a given latitude &amp; longitude. For example, uberX in
         /// San Francisco will have a different product_id than uberX in Los
         /// Angeles.</param>
         /// <param name="description">Description of product.</param>
@@ -43,7 +43,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// Gets or sets unique identifier representing a specific product for
-        /// a given latitude &amp; longitude. For example, uberX in San
+        /// a given latitude &amp;amp; longitude. For example, uberX in San
         /// Francisco will have a different product_id than uberX in Los
         /// Angeles.
         /// </summary>

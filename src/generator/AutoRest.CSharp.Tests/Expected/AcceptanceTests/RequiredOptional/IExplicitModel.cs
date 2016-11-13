@@ -48,8 +48,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PostOptionalIntegerParameterWithHttpMessagesAsync(int? bodyParameter = default(int?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Test explicitly required integer. Please put a valid int-wrapper
-        /// with 'value' = null and the client library should throw before
-        /// the request is sent.
+        /// with 'value' = null and the client library should throw before the
+        /// request is sent.
         /// </summary>
         /// <param name='value'>
         /// </param>
@@ -148,8 +148,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PostOptionalStringParameterWithHttpMessagesAsync(string bodyParameter = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Test explicitly required string. Please put a valid string-wrapper
-        /// with 'value' = null and the client library should throw before
-        /// the request is sent.
+        /// with 'value' = null and the client library should throw before the
+        /// request is sent.
         /// </summary>
         /// <param name='value'>
         /// </param>
@@ -167,8 +167,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// </exception>
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<Error>> PostRequiredStringPropertyWithHttpMessagesAsync(string value, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Test explicitly optional integer. Please put a valid
-        /// string-wrapper with 'value' = null.
+        /// Test explicitly optional integer. Please put a valid string-wrapper
+        /// with 'value' = null.
         /// </summary>
         /// <param name='value'>
         /// </param>
@@ -324,8 +324,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PostOptionalArrayParameterWithHttpMessagesAsync(System.Collections.Generic.IList<string> bodyParameter = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Test explicitly required array. Please put a valid array-wrapper
-        /// with 'value' = null and the client library should throw before
-        /// the request is sent.
+        /// with 'value' = null and the client library should throw before the
+        /// request is sent.
         /// </summary>
         /// <param name='value'>
         /// </param>

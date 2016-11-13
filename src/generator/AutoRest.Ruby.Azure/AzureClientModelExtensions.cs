@@ -2,8 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Globalization;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Ruby.Model;
 
 namespace AutoRest.Ruby.Azure
 {
@@ -21,51 +22,51 @@ namespace AutoRest.Ruby.Azure
         /// <param name="valueReference">Reference to object which needs to be deserialized.</param>
         /// <returns>Generated Ruby code in form of string.</returns>
         public static string AzureDeserializeType(
-            this IType type,
-            IScopeProvider scope,
+            this IModelType type,
+            IChild scope,
             string valueReference)
         {
             var composite = type as CompositeType;
             var sequence = type as SequenceType;
             var dictionary = type as DictionaryType;
             var primary = type as PrimaryType;
-            var enumType = type as EnumType;
+            var enumType = type as EnumTypeRb;
 
             var builder = new IndentedStringBuilder("  ");
 
             if (primary != null)
             {
-                if (primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long)
+                if (primary.KnownPrimaryType == KnownPrimaryType.Int || primary.KnownPrimaryType == KnownPrimaryType.Long)
                 {
                     return builder.AppendLine("{0} = Integer({0}) unless {0}.to_s.empty?", valueReference).ToString();
                 }
 
-                if (primary.Type == KnownPrimaryType.Double)
+                if (primary.KnownPrimaryType == KnownPrimaryType.Double)
                 {
                     return builder.AppendLine("{0} = Float({0}) unless {0}.to_s.empty?", valueReference).ToString();
                 }
 
-                if (primary.Type == KnownPrimaryType.ByteArray)
+                if (primary.KnownPrimaryType == KnownPrimaryType.ByteArray)
                 {
                     return builder.AppendLine("{0} = Base64.strict_decode64({0}).unpack('C*') unless {0}.to_s.empty?", valueReference).ToString();
                 }
 
-                if (primary.Type == KnownPrimaryType.Date)
+                if (primary.KnownPrimaryType == KnownPrimaryType.Date)
                 {
                     return builder.AppendLine("{0} = MsRest::Serialization.deserialize_date({0}) unless {0}.to_s.empty?", valueReference).ToString();
                 }
 
-                if (primary.Type == KnownPrimaryType.DateTime)
+                if (primary.KnownPrimaryType == KnownPrimaryType.DateTime)
                 {
                     return builder.AppendLine("{0} = DateTime.parse({0}) unless {0}.to_s.empty?", valueReference).ToString();
                 }
 
-                if (primary.Type == KnownPrimaryType.DateTimeRfc1123)
+                if (primary.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
                 {
                     return builder.AppendLine("{0} = DateTime.parse({0}) unless {0}.to_s.empty?", valueReference).ToString();
                 }
 
-                if (primary.Type == KnownPrimaryType.UnixTime)
+                if (primary.KnownPrimaryType == KnownPrimaryType.UnixTime)
                 {
                     return builder.AppendLine("{0} = DateTime.strptime({0}.to_s, '%s') unless {0}.to_s.empty?", valueReference).ToString();
                 }
@@ -76,9 +77,9 @@ namespace AutoRest.Ruby.Azure
                     .AppendLine("if (!{0}.nil? && !{0}.empty?)", valueReference)
                     .AppendLine(
                         "  enum_is_valid = {0}.constants.any? {{ |e| {0}.const_get(e).to_s.downcase == {1}.downcase }}",
-                        enumType.Name, valueReference)
+                        enumType.ModuleName, valueReference)
                     .AppendLine(
-                        "  warn 'Enum {0} does not contain ' + {1}.downcase + ', but was received from the server.' unless enum_is_valid", enumType.Name, valueReference)
+                        "  warn 'Enum {0} does not contain ' + {1}.downcase + ', but was received from the server.' unless enum_is_valid", enumType.ModuleName, valueReference)
                     .AppendLine("end")
                     .ToString();
             }
@@ -149,8 +150,8 @@ namespace AutoRest.Ruby.Azure
         /// <param name="valueReference">Reference to object which needs to serialized.</param>
         /// <returns>Generated Ruby code in form of string.</returns>
         public static string AzureSerializeType(
-            this IType type,
-            IScopeProvider scope,
+            this IModelType type,
+            IChild scope,
             string valueReference)
         {
             var composite = type as CompositeType;
@@ -162,22 +163,22 @@ namespace AutoRest.Ruby.Azure
 
             if (primary != null)
             {
-                if (primary.Type == KnownPrimaryType.ByteArray)
+                if (primary.KnownPrimaryType == KnownPrimaryType.ByteArray)
                 {
                     return builder.AppendLine("{0} = Base64.strict_encode64({0}.pack('c*'))", valueReference).ToString();
                 }
 
-                if (primary.Type == KnownPrimaryType.DateTime)
+                if (primary.KnownPrimaryType == KnownPrimaryType.DateTime)
                 {
                     return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%FT%TZ')", valueReference).ToString();
                 }
 
-                if (primary.Type == KnownPrimaryType.DateTimeRfc1123)
+                if (primary.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
                 {
                     return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%a, %d %b %Y %H:%M:%S GMT')", valueReference).ToString();
                 }
 
-                if (primary.Type == KnownPrimaryType.UnixTime)
+                if (primary.KnownPrimaryType == KnownPrimaryType.UnixTime)
                 {
                     return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%s')", valueReference).ToString();
                 }

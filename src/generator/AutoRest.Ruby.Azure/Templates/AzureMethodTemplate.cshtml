@@ -1,12 +1,14 @@
 @using System
+@using System.Linq
+@using AutoRest.Core.Model
 @using AutoRest.Ruby
-@using AutoRest.Ruby.TemplateModels
+@using AutoRest.Ruby.Model
 @using AutoRest.Ruby.Templates
-@inherits AutoRest.Core.Template<AutoRest.Ruby.Azure.TemplateModels.AzureMethodTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.Ruby.Azure.Model.MethodRba>
 
 @if (!Model.IsLongRunningOperation && !Model.IsPageable)
 {
-@:@(Include(new MethodTemplate(), (MethodTemplateModel)Model))
+@:@(Include(new MethodTemplate(), (MethodRb)Model))
 }
 @if (Model.IsPageable) 
 {
@@ -22,21 +24,19 @@
   @WrapComment("# ", Model.Description)@:
 @:#
 }
-@foreach (var parameter in Model.LocalParameters)
+@foreach (var parameter in Model.MethodParameters)
 {
-@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.ModelType.GetYardDocumentation(), parameter.Documentation))
 }
 @WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #
 @WrapComment("# ", string.Format("@return [{0}] which provide lazy access to pages of the response.", Model.ReturnType))
 #
-def @(Model.Name)_as_lazy(@(Model.MethodParameterDeclaration))
-  response = @(Model.Name)_async(@(Model.MethodParameterInvocation)).value!
+def @(Model.Name)(@(Model.MethodParameterDeclaration))
+  response = @(Model.Name.Value.Replace("_as_lazy",""))_async(@(Model.MethodParameterInvocation)).value!
   unless response.nil?
     page = response.body
-    page.next_method = Proc.new do |next_link|
-      @(Model.InvokeNextMethodAsync())
-    end
+    @(Model.AssignNextMethodToPage())
     page
   end
 end
@@ -56,9 +56,9 @@ end
   @WrapComment("# ", Model.Description)@:
 @:#
 }
-@foreach (var parameter in Model.LocalParameters)
+@foreach (var parameter in Model.MethodParameters)
 {
-@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.ModelType.GetYardDocumentation(), parameter.Documentation))
 }
 @WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #
@@ -72,9 +72,9 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
 end
 @EmptyLine
 #
-@foreach (var parameter in Model.LocalParameters)
+@foreach (var parameter in Model.MethodParameters)
 {
-@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.ModelType.GetYardDocumentation(), parameter.Documentation))
 }
 @WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #

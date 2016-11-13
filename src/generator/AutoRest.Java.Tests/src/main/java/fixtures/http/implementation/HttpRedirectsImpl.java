@@ -139,10 +139,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void head300() throws ErrorException, IOException {
+    public void head300() {
         head300WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -201,11 +199,9 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object if successful.
      */
-    public List<String> get300() throws ErrorException, IOException {
+    public List<String> get300() {
         return get300WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -264,10 +260,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void head301() throws ErrorException, IOException {
+    public void head301() {
         head301WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -326,10 +320,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void get301() throws ErrorException, IOException {
+    public void get301() {
         get301WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -388,10 +380,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put301() throws ErrorException, IOException {
+    public void put301() {
         put301WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -444,10 +434,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put301(Boolean booleanValue) throws ErrorException, IOException {
+    public void put301(Boolean booleanValue) {
         put301WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -508,10 +496,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void head302() throws ErrorException, IOException {
+    public void head302() {
         head302WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -570,10 +556,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void get302() throws ErrorException, IOException {
+    public void get302() {
         get302WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -632,10 +616,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void patch302() throws ErrorException, IOException {
+    public void patch302() {
         patch302WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -688,10 +670,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void patch302(Boolean booleanValue) throws ErrorException, IOException {
+    public void patch302(Boolean booleanValue) {
         patch302WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -752,10 +732,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void post303() throws ErrorException, IOException {
+    public void post303() {
         post303WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -808,10 +786,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void post303(Boolean booleanValue) throws ErrorException, IOException {
+    public void post303(Boolean booleanValue) {
         post303WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -873,10 +849,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect with 307, resulting in a 200 success.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void head307() throws ErrorException, IOException {
+    public void head307() {
         head307WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -935,10 +909,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect get with 307, resulting in a 200 success.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void get307() throws ErrorException, IOException {
+    public void get307() {
         get307WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -997,10 +969,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put307() throws ErrorException, IOException {
+    public void put307() {
         put307WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1053,10 +1023,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * Put redirected with 307, resulting in a 200 after redirect.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put307(Boolean booleanValue) throws ErrorException, IOException {
+    public void put307(Boolean booleanValue) {
         put307WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1118,10 +1086,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void patch307() throws ErrorException, IOException {
+    public void patch307() {
         patch307WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1174,10 +1140,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void patch307(Boolean booleanValue) throws ErrorException, IOException {
+    public void patch307(Boolean booleanValue) {
         patch307WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1239,10 +1203,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void post307() throws ErrorException, IOException {
+    public void post307() {
         post307WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1295,10 +1257,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * Post redirected with 307, resulting in a 200 after redirect.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void post307(Boolean booleanValue) throws ErrorException, IOException {
+    public void post307(Boolean booleanValue) {
         post307WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1360,10 +1320,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void delete307() throws ErrorException, IOException {
+    public void delete307() {
         delete307WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1416,10 +1374,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void delete307(Boolean booleanValue) throws ErrorException, IOException {
+    public void delete307(Boolean booleanValue) {
         delete307WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 

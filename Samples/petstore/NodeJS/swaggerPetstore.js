@@ -48,8 +48,8 @@ function SwaggerPetstore(baseUri, options) {
 util.inherits(SwaggerPetstore, ServiceClient);
 
 /**
- * @summary Fake endpoint to test byte array in body parameter for adding a
- * new pet to the store
+ * @summary Fake endpoint to test byte array in body parameter for adding a new
+ * pet to the store
  *
  * @param {object} [options] Optional Parameters.
  * 
@@ -90,11 +90,8 @@ SwaggerPetstore.prototype.addPetUsingByteArray = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//pet';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'pet';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -222,11 +219,8 @@ SwaggerPetstore.prototype.addPet = function (options, callback) {
   var body = (options && options.body !== undefined) ? options.body : undefined;
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//pet';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'pet';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -345,11 +339,8 @@ SwaggerPetstore.prototype.updatePet = function (options, callback) {
   var body = (options && options.body !== undefined) ? options.body : undefined;
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//pet';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'pet';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -422,8 +413,8 @@ SwaggerPetstore.prototype.updatePet = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {array} [options.status] Status values that need to be considered
- * for filter
+ * @param {array} [options.status] Status values that need to be considered for
+ * filter
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -464,11 +455,8 @@ SwaggerPetstore.prototype.findPetsByStatus = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//pet/findByStatus';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'pet/findByStatus';
   var queryParameters = [];
   if (status !== null && status !== undefined) {
     queryParameters.push('status=' + encodeURIComponent(status.join(',')));
@@ -607,11 +595,8 @@ SwaggerPetstore.prototype.findPetsByTags = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//pet/findByTags';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'pet/findByTags';
   var queryParameters = [];
   if (tags !== null && tags !== undefined) {
     queryParameters.push('tags=' + encodeURIComponent(tags.join(',')));
@@ -745,12 +730,9 @@ SwaggerPetstore.prototype.findPetsWithByteArray = function (petId, options, call
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//pet/{petId}';
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'pet/{petId}';
   requestUrl = requestUrl.replace('{petId}', encodeURIComponent(petId.toString()));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -870,12 +852,9 @@ SwaggerPetstore.prototype.getPetById = function (petId, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//pet/{petId}';
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'pet/{petId}';
   requestUrl = requestUrl.replace('{petId}', encodeURIComponent(petId.toString()));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -997,12 +976,9 @@ SwaggerPetstore.prototype.updatePetWithForm = function (petId, options, callback
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//pet/{petId}';
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'pet/{petId}';
   requestUrl = requestUrl.replace('{petId}', encodeURIComponent(petId));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1109,12 +1085,9 @@ SwaggerPetstore.prototype.deletePet = function (petId, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//pet/{petId}';
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'pet/{petId}';
   requestUrl = requestUrl.replace('{petId}', encodeURIComponent(petId.toString()));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1223,12 +1196,9 @@ SwaggerPetstore.prototype.uploadFile = function (petId, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//pet/{petId}/uploadImage';
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'pet/{petId}/uploadImage';
   requestUrl = requestUrl.replace('{petId}', encodeURIComponent(petId.toString()));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1321,11 +1291,8 @@ SwaggerPetstore.prototype.getInventory = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//store/inventory';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'store/inventory';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1420,8 +1387,8 @@ SwaggerPetstore.prototype.getInventory = function (options, callback) {
  * 
  * @param {date} [options.body.shipDate]
  * 
- * @param {string} [options.body.status] Order Status. Possible values
- * include: 'placed', 'approved', 'delivered'
+ * @param {string} [options.body.status] Order Status. Possible values include:
+ * 'placed', 'approved', 'delivered'
  * 
  * @param {boolean} [options.body.complete]
  * 
@@ -1453,11 +1420,8 @@ SwaggerPetstore.prototype.placeOrder = function (options, callback) {
   var body = (options && options.body !== undefined) ? options.body : undefined;
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//store/order';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'store/order';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1585,12 +1549,9 @@ SwaggerPetstore.prototype.getOrderById = function (orderId, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//store/order/{orderId}';
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'store/order/{orderId}';
   requestUrl = requestUrl.replace('{orderId}', encodeURIComponent(orderId));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1662,8 +1623,8 @@ SwaggerPetstore.prototype.getOrderById = function (orderId, options, callback) {
 /**
  * @summary Delete purchase order by ID
  *
- * For valid response try integer IDs with value < 1000. Anything above 1000
- * or nonintegers will generate API errors
+ * For valid response try integer IDs with value < 1000. Anything above 1000 or
+ * nonintegers will generate API errors
  *
  * @param {string} orderId ID of the order that needs to be deleted
  * 
@@ -1703,12 +1664,9 @@ SwaggerPetstore.prototype.deleteOrder = function (orderId, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//store/order/{orderId}';
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'store/order/{orderId}';
   requestUrl = requestUrl.replace('{orderId}', encodeURIComponent(orderId));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1812,11 +1770,8 @@ SwaggerPetstore.prototype.createUser = function (options, callback) {
   var body = (options && options.body !== undefined) ? options.body : undefined;
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//user';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'user';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1916,11 +1871,8 @@ SwaggerPetstore.prototype.createUsersWithArrayInput = function (options, callbac
   var body = (options && options.body !== undefined) ? options.body : undefined;
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//user/createWithArray';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'user/createWithArray';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2034,11 +1986,8 @@ SwaggerPetstore.prototype.createUsersWithListInput = function (options, callback
   var body = (options && options.body !== undefined) ? options.body : undefined;
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//user/createWithList';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'user/createWithList';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2166,11 +2115,8 @@ SwaggerPetstore.prototype.loginUser = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//user/login';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'user/login';
   var queryParameters = [];
   if (username !== null && username !== undefined) {
     queryParameters.push('username=' + encodeURIComponent(username));
@@ -2286,11 +2232,8 @@ SwaggerPetstore.prototype.logoutUser = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//user/logout';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'user/logout';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2385,12 +2328,9 @@ SwaggerPetstore.prototype.getUserByName = function (username, options, callback)
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//user/{username}';
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'user/{username}';
   requestUrl = requestUrl.replace('{username}', encodeURIComponent(username));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2521,12 +2461,9 @@ SwaggerPetstore.prototype.updateUser = function (username, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//user/{username}';
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'user/{username}';
   requestUrl = requestUrl.replace('{username}', encodeURIComponent(username));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2635,12 +2572,9 @@ SwaggerPetstore.prototype.deleteUser = function (username, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.baseUri +
-                   '//user/{username}';
+  var baseUrl = this.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'user/{username}';
   requestUrl = requestUrl.replace('{username}', encodeURIComponent(username));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

@@ -167,12 +167,9 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Product object if successful.
      */
-    public Product validationOfMethodParameters(String resourceGroupName, int id) throws ErrorException, IOException, IllegalArgumentException {
+    public Product validationOfMethodParameters(String resourceGroupName, int id) {
         return validationOfMethodParametersWithServiceResponseAsync(resourceGroupName, id).toBlocking().single().getBody();
     }
 
@@ -247,12 +244,9 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Product object if successful.
      */
-    public Product validationOfBody(String resourceGroupName, int id) throws ErrorException, IOException, IllegalArgumentException {
+    public Product validationOfBody(String resourceGroupName, int id) {
         return validationOfBodyWithServiceResponseAsync(resourceGroupName, id).toBlocking().single().getBody();
     }
 
@@ -322,12 +316,9 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Product object if successful.
      */
-    public Product validationOfBody(String resourceGroupName, int id, Product body) throws ErrorException, IOException, IllegalArgumentException {
+    public Product validationOfBody(String resourceGroupName, int id, Product body) {
         return validationOfBodyWithServiceResponseAsync(resourceGroupName, id, body).toBlocking().single().getBody();
     }
 
@@ -403,10 +394,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
 
     /**
      *
-     * @throws ServiceException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getWithConstantInPath() throws ServiceException, IOException {
+    public void getWithConstantInPath() {
         getWithConstantInPathWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -460,11 +449,9 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
 
     /**
      *
-     * @throws ServiceException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product postWithConstantInBody() throws ServiceException, IOException {
+    public Product postWithConstantInBody() {
         return postWithConstantInBodyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -514,11 +501,9 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     /**
      *
      * @param body the Product value
-     * @throws ServiceException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    public Product postWithConstantInBody(Product body) throws ServiceException, IOException {
+    public Product postWithConstantInBody(Product body) {
         return postWithConstantInBodyWithServiceResponseAsync(body).toBlocking().single().getBody();
     }
 

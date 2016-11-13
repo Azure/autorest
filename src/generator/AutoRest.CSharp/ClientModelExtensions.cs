@@ -5,9 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.CSharp.Model;
 using AutoRest.Extensions;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp
 {
@@ -43,19 +46,19 @@ namespace AutoRest.CSharp
             return string.Format(CultureInfo.InvariantCulture, "HttpMethod.{0}", method);
         }
 
-        public static bool ShouldValidateChain(this IType model)
+        public static bool ShouldValidateChain(this IModelType model)
         {
             if (model == null)
             {
                 return false;
             }
 
-            var typesToValidate = new Stack<IType>();
+            var typesToValidate = new Stack<IModelType>();
             typesToValidate.Push(model);
-            var validatedTypes = new HashSet<IType>();
+            var validatedTypes = new HashSet<IModelType>();
             while (typesToValidate.Count > 0)
             {
-                IType modelToValidate = typesToValidate.Pop();
+                IModelType modelToValidate = typesToValidate.Pop();
                 if (validatedTypes.Contains(modelToValidate))
                 {
                     continue;
@@ -86,19 +89,19 @@ namespace AutoRest.CSharp
             return false;
         }
 
-        private static bool ShouldValidate(this IType model)
+        private static bool ShouldValidate(this IModelType model)
         {
             if (model == null)
             {
                 return false;
             }
 
-            var typesToValidate = new Stack<IType>();
+            var typesToValidate = new Stack<IModelType>();
             typesToValidate.Push(model);
-            var validatedTypes = new HashSet<IType>();
+            var validatedTypes = new HashSet<IModelType>();
             while (typesToValidate.Count > 0)
             {
-                IType modelToValidate = typesToValidate.Pop();
+                IModelType modelToValidate = typesToValidate.Pop();
                 if (validatedTypes.Contains(modelToValidate))
                 {
                     continue;
@@ -119,8 +122,8 @@ namespace AutoRest.CSharp
                 else if (composite != null)
                 {
                     composite.Properties
-                        .Where(p => p.Type is CompositeType)
-                        .ForEach(cp => typesToValidate.Push(cp.Type));
+                        .Where(p => p.ModelType is CompositeType)
+                        .ForEach(cp => typesToValidate.Push(cp.ModelType));
 
                     if (composite.Properties.Any(p => (p.IsRequired && !p.IsConstant) || p.Constraints.Any()))
                     {
@@ -151,7 +154,7 @@ namespace AutoRest.CSharp
             }
 
             string documentation = String.Empty;
-            string summary = string.IsNullOrEmpty(property.Summary) ? property.Documentation : property.Summary;
+            string summary = string.IsNullOrEmpty(property.Summary) ? property.Documentation.EscapeXmlComment() : property.Summary.EscapeXmlComment();
 
             if (summary.TrimStart().StartsWith("Gets ", StringComparison.OrdinalIgnoreCase))
             {
@@ -188,23 +191,20 @@ namespace AutoRest.CSharp
                 throw new ArgumentNullException("parameter");
             }
 
-            SequenceType sequence = parameter.Type as SequenceType;
+            SequenceType sequence = parameter.ModelType as SequenceType;
             if (sequence == null)
             {
-                return parameter.Type.ToString(clientReference, parameter.Name);
+                return parameter.ModelType.ToString(clientReference, parameter.Name);
             }
 
             PrimaryType primaryType = sequence.ElementType as PrimaryType;
             EnumType enumType = sequence.ElementType as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                primaryType = new PrimaryType(KnownPrimaryType.String)
-                {
-                    Name = "string"
-                };
+                primaryType = New<PrimaryType>(KnownPrimaryType.String);
             }
 
-            if (primaryType == null || primaryType.Type != KnownPrimaryType.String)
+            if (primaryType == null || primaryType.KnownPrimaryType != KnownPrimaryType.String)
             {
                 throw new InvalidOperationException(
                     string.Format(CultureInfo.InvariantCulture, 
@@ -241,35 +241,48 @@ namespace AutoRest.CSharp
         }
 
         /// <summary>
+        /// Returns true if the IModelType is a kind of string (ie, string PrimaryType or an Enum that is modeled as a string)
+        /// </summary>
+        /// <param name="t">ModelType to check</param>
+        /// <returns>true if the IModelType is a kind of string</returns>
+        public static bool IsKindOfString(this IModelType t) => 
+            t is PrimaryType && 
+                ((PrimaryType) t).KnownPrimaryType == KnownPrimaryType.String && 
+                ((PrimaryType) t).KnownFormat != KnownFormat.@char ||
+            t is EnumType && 
+                ((EnumType) t).ModelAsString;
+
+        /// <summary>
         /// Simple conversion of the type to string
         /// </summary>
         /// <param name="type">The type to convert</param>
         /// <param name="clientReference">The reference to the client</param>
         /// <param name="reference">a reference to an instance of the type</param>
         /// <returns></returns>
-        public static string ToString(this IType type, string clientReference, string reference)
+        public static string ToString(this IModelType type, string clientReference, string reference)
         {
-            PrimaryType primaryType = type as PrimaryType;
-            if (type == null || primaryType != null && primaryType.Type == KnownPrimaryType.String && primaryType.KnownFormat != KnownFormat.@char)
+            if (type == null || type.IsKindOfString() )
             {
                 return reference;
             }
+
+            PrimaryType primaryType = type as PrimaryType;
             string serializationSettings = string.Format(CultureInfo.InvariantCulture, "{0}.SerializationSettings", clientReference);
             if (primaryType != null)
             {
-                if (primaryType.Type == KnownPrimaryType.Date)
+                if (primaryType.KnownPrimaryType == KnownPrimaryType.Date)
                 {
                     serializationSettings = "new Microsoft.Rest.Serialization.DateJsonConverter()";
                 }
-                else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
+                else if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
                 {
                     serializationSettings = "new Microsoft.Rest.Serialization.DateTimeRfc1123JsonConverter()";
                 }
-                else if (primaryType.Type == KnownPrimaryType.Base64Url)
+                else if (primaryType.KnownPrimaryType == KnownPrimaryType.Base64Url)
                 {
                     serializationSettings = "new Microsoft.Rest.Serialization.Base64UrlJsonConverter()";
                 }
-                else if (primaryType.Type == KnownPrimaryType.UnixTime)
+                else if (primaryType.KnownPrimaryType == KnownPrimaryType.UnixTime)
                 {
                     serializationSettings = "new Microsoft.Rest.Serialization.UnixTimeJsonConverter()";
                 }
@@ -281,57 +294,13 @@ namespace AutoRest.CSharp
                     serializationSettings);
         }
 
-        public static bool CanBeNull(this IParameter parameter)
-        {
-            if (parameter == null)
-            {
-                throw new ArgumentNullException("parameter");
-            }
-
-            if (parameter.IsRequired && parameter.Type.IsValueType())
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         /// <summary>
-        /// Determines if the given IType is a value type in C#
+        /// Determines if the given IModelType is a value type in C#
         /// </summary>
-        /// <param name="type">The type to check</param>
+        /// <param name="modelType">The type to check</param>
         /// <returns>True if the type maps to a C# value type, otherwise false</returns>
-        public static bool IsValueType(this IType type)
-        {
-            if (type is EnumType)
-            {
-                return true;
-            }
-            
-            switch ((type as PrimaryType)?.Type ) 
-            {
-                case KnownPrimaryType.Boolean:
-                case KnownPrimaryType.DateTime:
-                case KnownPrimaryType.Date:
-                case KnownPrimaryType.Decimal:
-                case KnownPrimaryType.Double:
-                case KnownPrimaryType.Int:
-                case KnownPrimaryType.Long:
-                case KnownPrimaryType.TimeSpan:
-                case KnownPrimaryType.DateTimeRfc1123:
-                case KnownPrimaryType.UnixTime:
-                case KnownPrimaryType.Uuid:
-                    return true;
-
-                case KnownPrimaryType.String:
-                    return ((PrimaryType) type).KnownFormat == KnownFormat.@char;
-
-                default:
-                    return false;
-            }
-
-        }
-
+        public static bool IsValueType(this IModelType modelType) => true == (modelType as IExtendedModelType)?.IsValueType;
+        
         public static string CheckNull(string valueReference, string executionBlock)
         {
             var sb = new IndentedStringBuilder();
@@ -350,7 +319,7 @@ namespace AutoRest.CSharp
         /// <param name="valueReference">A reference to the value being validated</param>
         /// <param name="constraints">Constraints</param>
         /// <returns>The code to validate the reference of the given type</returns>
-        public static string ValidateType(this IType type, IScopeProvider scope, string valueReference, 
+        public static string ValidateType(this IModelType type, IChild scope, string valueReference, 
             Dictionary<Constraint, string> constraints)
         {
             if (scope == null)
@@ -358,9 +327,9 @@ namespace AutoRest.CSharp
                 throw new ArgumentNullException("scope");
             }
 
-            CompositeType model = type as CompositeType;
-            SequenceType sequence = type as SequenceType;
-            DictionaryType dictionary = type as DictionaryType;
+            var model = type as CompositeTypeCs;
+            var sequence = type as SequenceTypeCs;
+            var dictionary = type as DictionaryTypeCs;
 
             var sb = new IndentedStringBuilder();
 
@@ -455,7 +424,7 @@ namespace AutoRest.CSharp
                         constraintCheck = $"!System.Text.RegularExpressions.Regex.IsMatch({valueReference}, {constraintValue})";
                         break;
                     case Constraint.UniqueItems:
-                        if ("true".Equals(constraints[constraint], StringComparison.OrdinalIgnoreCase))
+                        if ("true".EqualsIgnoreCase(constraints[constraint]))
                         {
                             constraintCheck = $"{valueReference}.Count != {valueReference}.Distinct().Count()";
                         }
@@ -488,5 +457,36 @@ namespace AutoRest.CSharp
                 }
             }
         }
+
+        /// <summary>
+        /// Returns the ModelType name expressed as a nullable type (for classes, nothing different, for value types, append a '?'
+        /// </summary>
+        /// <param name="modelType">The ModelType to return as nullable</param>
+        /// <returns>The ModelType name expressed as a nullable type</returns>
+        public static string AsNullableType(this IModelType modelType) => modelType.IsValueType() ? $"{modelType.Name}?" : modelType.DeclarationName;
+
+        /// <summary>
+        /// Conditiallaly returns the ModelType name expressed as a nullable type (for classes, nothing different, for value types, append a '?'
+        /// </summary>
+        /// <param name="modelType">The ModelType to return as nullable</param>
+        /// <param name="predicate">An expression indicating whether to make the type nullable</param>
+        /// <returns>The ModelType name expressed as a nullable type</returns>
+        public static string AsNullableType(this IModelType modelType, Func<bool> predicate ) => predicate() && modelType.IsValueType() ? $"{modelType.Name}?" : modelType.DeclarationName;
+        /// <summary>
+        /// Conditionally returns the ModelType name expressed as a nullable type (for classes, nothing different, for value types, append a '?'
+        /// </summary>
+        /// <param name="modelType">The ModelType to return as nullable</param>
+        /// <param name="predicate">An boolean indicating whether to make the type nullable</param>
+        /// <returns>The ModelType name expressed as a nullable type</returns>
+        public static string AsNullableType(this IModelType modelType, bool predicate) => predicate && modelType.IsValueType() ? $"{modelType.Name}?" : modelType.DeclarationName;
+
+        /// <summary>
+        /// This returns true if the parameter or property should be expressed as a nullable type.
+        /// 
+        /// Note: do not confuse this with "Can this be null" or "Can this be made nullable" 
+        /// </summary>
+        /// <param name="variable">The property or parameter to check </param>
+        /// <returns>True when the property or parameter can be assigned to null.</returns>
+        public static bool IsNullable(this IVariable variable) => !variable.ModelType.IsValueType() || (variable.IsXNullable ?? !variable.IsRequired);
     }
 }

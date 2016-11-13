@@ -1,0 +1,256 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete Databases, Servers and related resources.",
+    "version": "2015-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/securityAlertPolicies/Default": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "SecurityAlertPolicy"
+        ],
+        "operationId": "SecurityAlertPolicy_CreateOrUpdate",
+        "description": "Creates or updates an Azure SQL Server security alert policy.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerSecurityAlertPolicyCreateOrUpdateParameters"
+            },
+            "description": "The required parameters for creating or updating a Azure SQL Server security alert policy."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the server belongs."
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Server."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Server Threat Detection Policy",
+            "schema": {
+              "$ref": "#/definitions/ServerSecurityAlertPolicy"
+            }
+          },
+          "201": {
+            "description": "The Server Threat Detection Policy",
+            "schema": {
+              "$ref": "#/definitions/ServerSecurityAlertPolicy"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SecurityAlertPolicy"
+        ],
+        "operationId": "SecurityAlertPolicy_Get",
+        "description": "Returns an Azure SQL Server security alert policy.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Resource Group to which the server belongs."
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Azure SQL Server."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Server Threat Detection Policy",
+            "schema": {
+              "$ref": "#/definitions/ServerSecurityAlertPolicy"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServerSecurityAlertPolicyProperties": {
+      "properties": {
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The state of the Azure SQL Security alert policy (New, Enabled or Disabled).",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "New"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": false
+          }
+        },
+        "disabledAlerts": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The disable alerts of the Azure SQL Security alert policy."
+        },
+        "emailAddresses": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The list of email addresses to send the alert."
+        },
+        "emailAccountAdmins": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Value that indicated whether to email the azure account admins.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EmailAccountAdmins",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Represents the properties of an Azure SQL Security alert policy."
+    },
+    "ServerSecurityAlertPolicyCreateOrUpdateParameters": {
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServerSecurityAlertPolicyProperties",
+          "description": "Properties of the request."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Create or update server security alert policy parameters."
+    },
+    "ServerSecurityAlertPolicy": {
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServerSecurityAlertPolicyProperties",
+          "description": "Represents the properties of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Represents an Azure SQL Server Security Alert Policy."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription credentials which uniquely identify Microsoft Azure subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}

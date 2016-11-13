@@ -329,11 +329,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get null dictionary value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
-    public Map<String, Integer> getNull() throws ErrorException, IOException {
+    public Map<String, Integer> getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -391,11 +389,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get empty dictionary value {}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
-    public Map<String, Integer> getEmpty() throws ErrorException, IOException {
+    public Map<String, Integer> getEmpty() {
         return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -454,11 +450,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Set dictionary value empty {}.
      *
      * @param arrayBody the Map&lt;String, String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putEmpty(Map<String, String> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putEmpty(Map<String, String> arrayBody) {
         putEmptyWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -523,11 +516,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with null value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
      */
-    public Map<String, String> getNullValue() throws ErrorException, IOException {
+    public Map<String, String> getNullValue() {
         return getNullValueWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -585,11 +576,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with null key.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
      */
-    public Map<String, String> getNullKey() throws ErrorException, IOException {
+    public Map<String, String> getNullKey() {
         return getNullKeyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -647,11 +636,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with key as empty string.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
      */
-    public Map<String, String> getEmptyStringKey() throws ErrorException, IOException {
+    public Map<String, String> getEmptyStringKey() {
         return getEmptyStringKeyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -709,11 +696,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get invalid Dictionary value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
      */
-    public Map<String, String> getInvalid() throws ErrorException, IOException {
+    public Map<String, String> getInvalid() {
         return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -771,11 +756,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
-    public Map<String, Boolean> getBooleanTfft() throws ErrorException, IOException {
+    public Map<String, Boolean> getBooleanTfft() {
         return getBooleanTfftWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -834,11 +817,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putBooleanTfft(Map<String, Boolean> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putBooleanTfft(Map<String, Boolean> arrayBody) {
         putBooleanTfftWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -903,11 +883,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
-    public Map<String, Boolean> getBooleanInvalidNull() throws ErrorException, IOException {
+    public Map<String, Boolean> getBooleanInvalidNull() {
         return getBooleanInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -965,11 +943,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
-    public Map<String, Boolean> getBooleanInvalidString() throws ErrorException, IOException {
+    public Map<String, Boolean> getBooleanInvalidString() {
         return getBooleanInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1027,11 +1003,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
-    public Map<String, Integer> getIntegerValid() throws ErrorException, IOException {
+    public Map<String, Integer> getIntegerValid() {
         return getIntegerValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1090,11 +1064,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param arrayBody the Map&lt;String, Integer&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putIntegerValid(Map<String, Integer> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putIntegerValid(Map<String, Integer> arrayBody) {
         putIntegerValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -1159,11 +1130,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
-    public Map<String, Integer> getIntInvalidNull() throws ErrorException, IOException {
+    public Map<String, Integer> getIntInvalidNull() {
         return getIntInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1221,11 +1190,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
-    public Map<String, Integer> getIntInvalidString() throws ErrorException, IOException {
+    public Map<String, Integer> getIntInvalidString() {
         return getIntInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1283,11 +1250,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object if successful.
      */
-    public Map<String, Long> getLongValid() throws ErrorException, IOException {
+    public Map<String, Long> getLongValid() {
         return getLongValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1346,11 +1311,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param arrayBody the Map&lt;String, Long&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putLongValid(Map<String, Long> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putLongValid(Map<String, Long> arrayBody) {
         putLongValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -1415,11 +1377,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object if successful.
      */
-    public Map<String, Long> getLongInvalidNull() throws ErrorException, IOException {
+    public Map<String, Long> getLongInvalidNull() {
         return getLongInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1477,11 +1437,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object if successful.
      */
-    public Map<String, Long> getLongInvalidString() throws ErrorException, IOException {
+    public Map<String, Long> getLongInvalidString() {
         return getLongInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1539,11 +1497,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
      */
-    public Map<String, Double> getFloatValid() throws ErrorException, IOException {
+    public Map<String, Double> getFloatValid() {
         return getFloatValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1602,11 +1558,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putFloatValid(Map<String, Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putFloatValid(Map<String, Double> arrayBody) {
         putFloatValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -1671,11 +1624,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
      */
-    public Map<String, Double> getFloatInvalidNull() throws ErrorException, IOException {
+    public Map<String, Double> getFloatInvalidNull() {
         return getFloatInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1733,11 +1684,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
      */
-    public Map<String, Double> getFloatInvalidString() throws ErrorException, IOException {
+    public Map<String, Double> getFloatInvalidString() {
         return getFloatInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1795,11 +1744,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
      */
-    public Map<String, Double> getDoubleValid() throws ErrorException, IOException {
+    public Map<String, Double> getDoubleValid() {
         return getDoubleValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1858,11 +1805,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putDoubleValid(Map<String, Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putDoubleValid(Map<String, Double> arrayBody) {
         putDoubleValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -1927,11 +1871,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
      */
-    public Map<String, Double> getDoubleInvalidNull() throws ErrorException, IOException {
+    public Map<String, Double> getDoubleInvalidNull() {
         return getDoubleInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1989,11 +1931,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
      */
-    public Map<String, Double> getDoubleInvalidString() throws ErrorException, IOException {
+    public Map<String, Double> getDoubleInvalidString() {
         return getDoubleInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2051,11 +1991,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
      */
-    public Map<String, String> getStringValid() throws ErrorException, IOException {
+    public Map<String, String> getStringValid() {
         return getStringValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2114,11 +2052,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
      * @param arrayBody the Map&lt;String, String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putStringValid(Map<String, String> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putStringValid(Map<String, String> arrayBody) {
         putStringValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -2183,11 +2118,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
      */
-    public Map<String, String> getStringWithNull() throws ErrorException, IOException {
+    public Map<String, String> getStringWithNull() {
         return getStringWithNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2245,11 +2178,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
      */
-    public Map<String, String> getStringWithInvalid() throws ErrorException, IOException {
+    public Map<String, String> getStringWithInvalid() {
         return getStringWithInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2307,11 +2238,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
-    public Map<String, LocalDate> getDateValid() throws ErrorException, IOException {
+    public Map<String, LocalDate> getDateValid() {
         return getDateValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2370,11 +2299,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putDateValid(Map<String, LocalDate> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putDateValid(Map<String, LocalDate> arrayBody) {
         putDateValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -2439,11 +2365,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
-    public Map<String, LocalDate> getDateInvalidNull() throws ErrorException, IOException {
+    public Map<String, LocalDate> getDateInvalidNull() {
         return getDateInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2501,11 +2425,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
-    public Map<String, LocalDate> getDateInvalidChars() throws ErrorException, IOException {
+    public Map<String, LocalDate> getDateInvalidChars() {
         return getDateInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2563,11 +2485,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
-    public Map<String, DateTime> getDateTimeValid() throws ErrorException, IOException {
+    public Map<String, DateTime> getDateTimeValid() {
         return getDateTimeValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2626,11 +2546,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putDateTimeValid(Map<String, DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putDateTimeValid(Map<String, DateTime> arrayBody) {
         putDateTimeValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -2695,11 +2612,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
-    public Map<String, DateTime> getDateTimeInvalidNull() throws ErrorException, IOException {
+    public Map<String, DateTime> getDateTimeInvalidNull() {
         return getDateTimeInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2757,11 +2672,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
-    public Map<String, DateTime> getDateTimeInvalidChars() throws ErrorException, IOException {
+    public Map<String, DateTime> getDateTimeInvalidChars() {
         return getDateTimeInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2819,11 +2732,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
-    public Map<String, DateTime> getDateTimeRfc1123Valid() throws ErrorException, IOException {
+    public Map<String, DateTime> getDateTimeRfc1123Valid() {
         return getDateTimeRfc1123ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2892,11 +2803,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
      * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putDateTimeRfc1123Valid(Map<String, DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putDateTimeRfc1123Valid(Map<String, DateTime> arrayBody) {
         putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -2966,11 +2874,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Period&gt; object if successful.
      */
-    public Map<String, Period> getDurationValid() throws ErrorException, IOException {
+    public Map<String, Period> getDurationValid() {
         return getDurationValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3029,11 +2935,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
      * @param arrayBody the Map&lt;String, Period&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putDurationValid(Map<String, Period> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putDurationValid(Map<String, Period> arrayBody) {
         putDurationValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -3098,11 +3001,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
-    public Map<String, byte[]> getByteValid() throws ErrorException, IOException {
+    public Map<String, byte[]> getByteValid() {
         return getByteValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3161,11 +3062,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putByteValid(Map<String, byte[]> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putByteValid(Map<String, byte[]> arrayBody) {
         putByteValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -3230,11 +3128,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
-    public Map<String, byte[]> getByteInvalidNull() throws ErrorException, IOException {
+    public Map<String, byte[]> getByteInvalidNull() {
         return getByteInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3292,11 +3188,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
-    public Map<String, byte[]> getBase64Url() throws ErrorException, IOException {
+    public Map<String, byte[]> getBase64Url() {
         return getBase64UrlWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3364,11 +3258,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type null value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
-    public Map<String, Widget> getComplexNull() throws ErrorException, IOException {
+    public Map<String, Widget> getComplexNull() {
         return getComplexNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3426,11 +3318,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get empty dictionary of complex type {}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
-    public Map<String, Widget> getComplexEmpty() throws ErrorException, IOException {
+    public Map<String, Widget> getComplexEmpty() {
         return getComplexEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3488,11 +3378,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
-    public Map<String, Widget> getComplexItemNull() throws ErrorException, IOException {
+    public Map<String, Widget> getComplexItemNull() {
         return getComplexItemNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3550,11 +3438,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
-    public Map<String, Widget> getComplexItemEmpty() throws ErrorException, IOException {
+    public Map<String, Widget> getComplexItemEmpty() {
         return getComplexItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3612,11 +3498,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
-    public Map<String, Widget> getComplexValid() throws ErrorException, IOException {
+    public Map<String, Widget> getComplexValid() {
         return getComplexValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3675,11 +3559,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putComplexValid(Map<String, Widget> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putComplexValid(Map<String, Widget> arrayBody) {
         putComplexValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -3744,11 +3625,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get a null array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
-    public Map<String, List<String>> getArrayNull() throws ErrorException, IOException {
+    public Map<String, List<String>> getArrayNull() {
         return getArrayNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3806,11 +3685,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an empty dictionary {}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
-    public Map<String, List<String>> getArrayEmpty() throws ErrorException, IOException {
+    public Map<String, List<String>> getArrayEmpty() {
         return getArrayEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3868,11 +3745,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
-    public Map<String, List<String>> getArrayItemNull() throws ErrorException, IOException {
+    public Map<String, List<String>> getArrayItemNull() {
         return getArrayItemNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3930,11 +3805,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
-    public Map<String, List<String>> getArrayItemEmpty() throws ErrorException, IOException {
+    public Map<String, List<String>> getArrayItemEmpty() {
         return getArrayItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3992,11 +3865,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
-    public Map<String, List<String>> getArrayValid() throws ErrorException, IOException {
+    public Map<String, List<String>> getArrayValid() {
         return getArrayValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4055,11 +3926,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putArrayValid(Map<String, List<String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putArrayValid(Map<String, List<String>> arrayBody) {
         putArrayValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
@@ -4124,11 +3992,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries with value null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
-    public Map<String, Map<String, String>> getDictionaryNull() throws ErrorException, IOException {
+    public Map<String, Map<String, String>> getDictionaryNull() {
         return getDictionaryNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4186,11 +4052,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
-    public Map<String, Map<String, String>> getDictionaryEmpty() throws ErrorException, IOException {
+    public Map<String, Map<String, String>> getDictionaryEmpty() {
         return getDictionaryEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4248,11 +4112,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
-    public Map<String, Map<String, String>> getDictionaryItemNull() throws ErrorException, IOException {
+    public Map<String, Map<String, String>> getDictionaryItemNull() {
         return getDictionaryItemNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4310,11 +4172,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
-    public Map<String, Map<String, String>> getDictionaryItemEmpty() throws ErrorException, IOException {
+    public Map<String, Map<String, String>> getDictionaryItemEmpty() {
         return getDictionaryItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4372,11 +4232,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
-    public Map<String, Map<String, String>> getDictionaryValid() throws ErrorException, IOException {
+    public Map<String, Map<String, String>> getDictionaryValid() {
         return getDictionaryValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -4435,11 +4293,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) {
         putDictionaryValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 

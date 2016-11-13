@@ -3,10 +3,11 @@
 
 using System;
 using System.Globalization;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger
 {
@@ -26,7 +27,7 @@ namespace AutoRest.Swagger
             _schema = schema;
         }
 
-        public override IType BuildServiceType(string serviceTypeName)
+        public override IModelType BuildServiceType(string serviceTypeName)
         {
             // Check if already generated
             if (serviceTypeName != null && Modeler.GeneratedTypes.ContainsKey(serviceTypeName))
@@ -46,18 +47,17 @@ namespace AutoRest.Swagger
             var primaryType = _schema.GetSimplePrimaryType();
             if (primaryType != KnownPrimaryType.None)
             {
-                return new PrimaryType(primaryType);
+                return New<PrimaryType>(primaryType);
             }
 
             // Otherwise create new object type
-            var objectType = new CompositeType
+            var objectType = New<CompositeType>(serviceTypeName,new 
             {
-                Name = serviceTypeName,
                 SerializedName = serviceTypeName,
                 Documentation = _schema.Description,
                 ExternalDocsUrl = _schema.ExternalDocs?.Url,
                 Summary = _schema.Title
-            };
+            });
 
             // Put this in already generated types serializationProperty
             Modeler.GeneratedTypes[serviceTypeName] = objectType;
@@ -67,22 +67,23 @@ namespace AutoRest.Swagger
                 // this schema is defining 'additionalProperties' which expects to create an extra
                 // property that will catch all the unbound properties during deserialization.
                 var name = "additionalProperties";
-                var propertyType = new DictionaryType
+                var propertyType = New<DictionaryType>(new
                 {
                     ValueType = _schema.AdditionalProperties.GetBuilder(Modeler).BuildServiceType(
                                _schema.AdditionalProperties.Reference != null
                                ? _schema.AdditionalProperties.Reference.StripDefinitionPath()
                                : serviceTypeName + "Value"),
+                    Extensions = _schema.AdditionalProperties.Extensions,
                     SupportsAdditionalProperties = true
-                };
+                });
 
                 // now add the extra property to the type.
-                objectType.Properties.Add(new Property
+                objectType.Add(New<Property>(new
                 {
                     Name = name,
-                    Type = propertyType,
+                    ModelType = propertyType,
                     Documentation = "Unmatched properties from the message are deserialized this collection"
-                });
+                }));
             }
 
             if (_schema.Properties != null)
@@ -128,14 +129,14 @@ namespace AutoRest.Swagger
                                            ? refSchema.GetBuilder(Modeler).BuildServiceType(propertyServiceTypeName)
                                            : property.Value.GetBuilder(Modeler).BuildServiceType(propertyServiceTypeName);
 
-                        var propertyObj = new Property
+                        var propertyObj = New<Property>(new
                         {
                             Name = name,
                             SerializedName = name,
-                            Type = propertyType,
+                            ModelType = propertyType,
                             IsReadOnly = property.Value.ReadOnly,
                             Summary = property.Value.Title
-                        };
+                        });
                         PopulateParameter(propertyObj, refSchema != null ? refSchema : property.Value);
                         var propertyCompositeType = propertyType as CompositeType;
                         if (propertyObj.IsConstant ||
@@ -145,7 +146,7 @@ namespace AutoRest.Swagger
                             objectType.ContainsConstantProperties = true;
                         }
 
-                        objectType.Properties.Add(propertyObj);
+                        objectType.Add(propertyObj);
                     }
                     else
                     {
@@ -178,7 +179,7 @@ namespace AutoRest.Swagger
             return objectType;
         }
 
-        public override IType ParentBuildServiceType(string serviceTypeName)
+        public override IModelType ParentBuildServiceType(string serviceTypeName)
         {
             return base.BuildServiceType(serviceTypeName);
         }

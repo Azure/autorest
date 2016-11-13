@@ -16,10 +16,8 @@ import com.microsoft.azure.RestClient;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
 import fixtures.azureresource.models.ResourceCollection;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import rx.Observable;
@@ -96,10 +94,8 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as an Array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putArray() throws ErrorException, IOException;
+    void putArray();
 
     /**
      * Put External Resource as an Array.
@@ -126,10 +122,8 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putArray(List<Resource> resourceArray) throws ErrorException, IOException;
+    void putArray(List<Resource> resourceArray);
 
     /**
      * Put External Resource as an Array.
@@ -159,11 +153,9 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as an Array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
-    List<FlattenedProduct> getArray() throws ErrorException, IOException;
+    List<FlattenedProduct> getArray();
 
     /**
      * Get External Resource as an Array.
@@ -190,10 +182,8 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a Dictionary.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putDictionary() throws ErrorException, IOException;
+    void putDictionary();
 
     /**
      * Put External Resource as a Dictionary.
@@ -220,10 +210,8 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ErrorException, IOException;
+    void putDictionary(Map<String, FlattenedProduct> resourceDictionary);
 
     /**
      * Put External Resource as a Dictionary.
@@ -253,11 +241,9 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a Dictionary.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
-    Map<String, FlattenedProduct> getDictionary() throws ErrorException, IOException;
+    Map<String, FlattenedProduct> getDictionary();
 
     /**
      * Get External Resource as a Dictionary.
@@ -284,10 +270,8 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putResourceCollection() throws ErrorException, IOException;
+    void putResourceCollection();
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -314,10 +298,8 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putResourceCollection(ResourceCollection resourceComplexObject) throws ErrorException, IOException;
+    void putResourceCollection(ResourceCollection resourceComplexObject);
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -347,11 +329,9 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the ResourceCollection object if successful.
      */
-    ResourceCollection getResourceCollection() throws ErrorException, IOException;
+    ResourceCollection getResourceCollection();
 
     /**
      * Get External Resource as a ResourceCollection.

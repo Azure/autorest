@@ -140,7 +140,7 @@ describe('nodejs', function () {
           should.not.exist(error);
           result.field.should.equal('goodrequest');
           result.empty.should.equal('');
-          should.not.exist(result['null']);
+          should.not.exist(result['nullProperty']);
           testClient.primitive.putString({ 'field': 'goodrequest', 'empty': '' }, function (error, result) {
             should.not.exist(error);
             done();
@@ -223,8 +223,8 @@ describe('nodejs', function () {
         var testArray = ['1, 2, 3, 4', '', null, '&S#$(*Y', 'The quick brown fox jumps over the lazy dog'];
         testClient.arrayModel.getValid(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.array, testArray);
-          testClient.arrayModel.putValid({ arrayParameter: testArray }, function (error, result) {
+          assert.deepEqual(result.arrayProperty, testArray);
+          testClient.arrayModel.putValid({ arrayProperty : testArray }, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -234,8 +234,8 @@ describe('nodejs', function () {
       it('should get and put empty array type properties', function (done) {
         testClient.arrayModel.getEmpty(function (error, result) {
           should.not.exist(error);
-          assert.deepEqual(result.array, []);
-          testClient.arrayModel.putEmpty({ arrayParameter: [] }, function (error, result) {
+          assert.deepEqual(result.arrayProperty, []);
+          testClient.arrayModel.putEmpty({ arrayProperty: [] }, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -245,7 +245,7 @@ describe('nodejs', function () {
       it('should get array type properties when the payload is empty', function (done) {
         testClient.arrayModel.getNotProvided(function (error, result) {
           should.not.exist(error);
-          should.not.exist(result.array);
+          should.not.exist(result.arrayProperty);
           done();
         });
       });

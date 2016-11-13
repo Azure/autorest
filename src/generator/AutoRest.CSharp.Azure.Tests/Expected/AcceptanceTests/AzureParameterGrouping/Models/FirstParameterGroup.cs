@@ -12,8 +12,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 
     /// <summary>
     /// Additional parameters for a set of operations, such as:
-    /// parameterGrouping_postMultiParamGroups,
-    /// parameterGrouping_postSharedParameterGroupObject.
+    /// ParameterGrouping_PostMultiParamGroups,
+    /// ParameterGrouping_PostSharedParameterGroupObject.
     /// </summary>
     public partial class FirstParameterGroup
     {

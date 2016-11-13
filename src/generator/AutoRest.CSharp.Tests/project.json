@@ -1,5 +1,5 @@
 {
-  "version": "0.17.0-*",
+  "version": "1.0.0-*",
   "authors": [ "Microsoft" ],
 
   "packOptions": {
@@ -8,7 +8,7 @@
     "projectUrl": "https://github.com/Azure/AutoRest",
     "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
   },
-  
+
   "buildOptions": {
     "delaySign": true,
     "publicSign": false,
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "Microsoft.NETCore.Platforms": "1.0.1",
-    "Microsoft.Rest.ClientRuntime":{ "target": "project"},
+    "Microsoft.Rest.ClientRuntime":"2.3.2",
     "AutoRest.Core": { "target": "project" },
     "AutoRest.CSharp": { "target": "project" },
     "Microsoft.Extensions.Logging": "1.0.0",

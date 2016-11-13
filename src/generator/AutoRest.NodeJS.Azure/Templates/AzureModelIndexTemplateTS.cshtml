@@ -1,12 +1,14 @@
 ﻿@using System.Linq
 @using AutoRest.NodeJS.Templates
 @using AutoRest.NodeJS.Azure.Templates
-@using AutoRest.NodeJS.Azure.TemplateModels
-@inherits AutoRest.Core.Template<AzureServiceClientTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.Model.CodeModelJsa>
 /*
 @Header(" * ")
  */
 @EmptyLine
+import * as msRestAzure from 'ms-rest-azure';
+exports.BaseResource = msRestAzure.BaseResource;
+exports.CloudError = msRestAzure.CloudError;
 @foreach (var model in Model.OrderedModelTemplateModels) {
 @EmptyLine
 @:@(Include(new ModelTemplateTS(), model))

@@ -10,17 +10,17 @@ class Pet(Model):
 
     A group of properties representing a pet.
 
-    :param id: The id of the pet. A more detailed description of the id of
-     the pet.
+    :param id: The id of the pet. A more detailed description of the id of the
+     pet.
     :type id: long
     :param category:
-    :type category: :class:`Category <Petstore.models.Category>`
+    :type category: :class:`Category <petstore.models.Category>`
     :param name:
     :type name: str
     :param photo_urls:
     :type photo_urls: list of str
     :param tags:
-    :type tags: list of :class:`Tag <Petstore.models.Tag>`
+    :type tags: list of :class:`Tag <petstore.models.Tag>`
     :param status: pet status in the store. Possible values include:
      'available', 'pending', 'sold'
     :type status: str

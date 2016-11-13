@@ -2,17 +2,17 @@
 @using AutoRest.Core.Utilities
 @using AutoRest.NodeJS
 @using AutoRest.NodeJS.Templates
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.ServiceClientTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Model.CodeModelJs>
 /*
 @Header(" * ")
  */
 @EmptyLine
-import { ServiceClientOptions, RequestOptions, ServiceCallback, ServiceClientCredentials } from 'ms-rest';
+@Model.ConstructImportTS()
 @if (Model.MethodTemplateModels.Any())
 {
 @:import * as models from "./models";
 }
-@if (Model.MethodGroups.Any()) {
+@if (Model.MethodGroupModels.Any()) {
 @:import * as operations from "./operations";
 }
 @EmptyLine
@@ -26,7 +26,7 @@ declare class @(Model.Name) {
      *
     @foreach (var param in requiredParameters)
     {
-    @: * @@param {@param.Type.Name.ToCamelCase()} @param.Name - @param.Documentation
+    @: * @@param {@param.ModelType.Name.ToCamelCase()} @param.Name - @param.Documentation
     @: *
     }
 
@@ -47,7 +47,7 @@ declare class @(Model.Name) {
      *
     @foreach (var param in optionalParameters)
     {
-    @: * @@param {@param.Type.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
+    @: * @@param {@param.ModelType.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
     @: *
     }
      */
@@ -56,7 +56,7 @@ declare class @(Model.Name) {
     @foreach (var property in Model.Properties)
     {
     @EmptyLine
-    @:@(property.Name): @(property.Type.TSType(false));
+    @:@(property.Name): @(property.ModelType.TSType(false));
     }
 
     @if (Model.MethodGroupModels.Any())
@@ -65,7 +65,7 @@ declare class @(Model.Name) {
     @:// Operation groups
     foreach (var methodGroup in Model.MethodGroupModels)
     {
-    @:@(methodGroup.MethodGroupName): operations.@(methodGroup.MethodGroupType);
+    @:@(methodGroup.NameForProperty): operations.@(methodGroup.TypeName);
     }
     }
     @foreach (var method in Model.MethodTemplateModels)

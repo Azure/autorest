@@ -1,7 +1,9 @@
 @using System
 @using System.Linq;
 @using AutoRest.Core.Utilities
-@inherits AutoRest.Core.Template<AutoRest.CSharp.TemplateModels.MethodGroupTemplateModel>
+@using AutoRest.CSharp
+@using AutoRest.CSharp.Model
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodGroupCs>
 @Header("// ")
 @EmptyLine
 namespace @Settings.Namespace
@@ -11,11 +13,11 @@ namespace @Settings.Namespace
 }
 @EmptyLine
     /// <summary>
-    /// @(Model.MethodGroupType) operations.
+    /// @(Model.TypeName) operations.
     /// </summary>
-    public partial interface I@(Model.MethodGroupType)
+    public partial interface I@(Model.TypeName)
     {
-    @foreach(var method in Model.MethodTemplateModels)
+    @foreach(MethodCs method in Model.Methods)
     {
         if (!String.IsNullOrEmpty(method.Description) || !String.IsNullOrEmpty(method.Summary))
         {
@@ -33,7 +35,7 @@ namespace @Settings.Namespace
         @:@WrapComment("/// ", method.Description.EscapeXmlComment())
         @:/// </remarks>
         }
-        foreach (var parameter in method.LocalParameters)
+        foreach (ParameterCs parameter in method.LocalParameters)
         {
         @:/// <param name='@parameter.Name'>
         @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
@@ -54,11 +56,15 @@ namespace @Settings.Namespace
         @:/// Thrown when unable to deserialize the response
         @:/// </exception>
         }
-        @if (method.ParameterTemplateModels.Where(p => !p.IsConstant && p.IsRequired && !p.Type.IsValueType()).Any())
+        @if (method.Parameters.Any(p => p.IsRequired && p.IsNullable()))
         {
         @:/// <exception cref="Microsoft.Rest.ValidationException">
         @:/// Thrown when a required parameter is null
         @:/// </exception>
+        }
+        @if (method.Deprecated)
+        {
+        @:[System.Obsolete()]
         }
         @:System.Threading.Tasks.Task<@method.OperationResponseReturnTypeString> @(method.Name)WithHttpMessagesAsync(@(method.GetAsyncMethodParameterDeclaration(true)));
     }

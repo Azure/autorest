@@ -1,4 +1,4 @@
-﻿{
+{
   "id": "http://schema.management.azure.com/schemas/2015-05-04-preview/Microsoft.Network.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.Network",
@@ -18,6 +18,24 @@
           "enum": [
             "2015-05-04-preview"
           ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "etag": {
           "type": "string",
@@ -72,6 +90,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones"
@@ -91,6 +110,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -110,6 +147,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/A"
@@ -129,6 +167,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -148,6 +204,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/AAAA"
@@ -167,6 +224,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -186,6 +261,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/CNAME"
@@ -205,6 +281,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -224,6 +318,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/MX"
@@ -243,6 +338,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -262,6 +375,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/NS"
@@ -281,6 +395,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -300,6 +432,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/PTR"
@@ -319,6 +452,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -338,6 +489,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/SOA"
@@ -357,6 +509,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -376,6 +546,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/SRV"
@@ -395,6 +566,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -414,6 +603,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/TXT"
@@ -465,6 +655,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -484,6 +692,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/A"
@@ -503,6 +712,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -522,6 +749,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/AAAA"
@@ -541,6 +769,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -560,6 +806,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/CNAME"
@@ -579,6 +826,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -598,6 +863,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/MX"
@@ -617,6 +883,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -636,6 +920,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/NS"
@@ -655,6 +940,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -674,6 +977,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/PTR"
@@ -693,6 +997,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -712,6 +1034,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/SOA"
@@ -731,6 +1054,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -750,6 +1091,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/SRV"
@@ -769,6 +1111,24 @@
             "2015-05-04-preview"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -788,6 +1148,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Network/dnszones/TXT"

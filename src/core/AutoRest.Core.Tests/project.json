@@ -1,5 +1,5 @@
 {
-  "version": "0.17.0-*",
+  "version": "1.0.0-*",
   "authors": [ "Microsoft" ],
 
   "buildOptions": {
@@ -8,7 +8,7 @@
     "keyFile": "../../../Tools/MSSharedLibKey.snk",
 
     "copyToOutput": {
-      "include": ["Resource"],
+      "include": ["Resource"]
     }
   },
 
@@ -28,22 +28,20 @@
     "xunit": "2.2.0-beta2-build3300",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "Newtonsoft.Json": "[9.0.1,10.0)",
-    "AutoRest.Core": {
-      "target": "project"
-    },
-
+    "AutoRest.Core": { "target": "project","type": "build"  },
     "AutoRest.Swagger": { "target": "project", "type": "build" },
     "AutoRest.CompositeSwagger": { "target": "project", "type": "build" },
     "AutoRest.CSharp": { "target": "project", "type": "build" },
     "AutoRest.CSharp.Azure": { "target": "project", "type": "build" },
+    "AutoRest.NodeJS": { "target": "project", "type": "build" }
+  },
+  "disabled_dependencies": {
     "AutoRest.Java.Azure": { "target": "project", "type": "build" },
     "AutoRest.NodeJS.Azure": { "target": "project", "type": "build" },
     "AutoRest.Python.Azure": { "target": "project", "type": "build" },
     "AutoRest.Ruby.Azure": { "target": "project", "type": "build" },
     "AutoRest.AzureResourceSchema": { "target": "project", "type": "build" },
-    "AutoRest.CSharp": { "target": "project", "type": "build" },
     "AutoRest.Java": { "target": "project", "type": "build" },
-    "AutoRest.NodeJS": { "target": "project", "type": "build" },
     "AutoRest.Python": { "target": "project", "type": "build" },
     "AutoRest.Ruby": { "target": "project", "type": "build" }
   }

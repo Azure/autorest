@@ -9,6 +9,7 @@ using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Utilities;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Unit.Tests
 {
@@ -29,14 +30,39 @@ namespace AutoRest.CSharp.Unit.Tests
             return name[0] == '<' && name[1] == '>' && name.IndexOf("AnonymousType", StringComparison.Ordinal) > 0;
         }
 
-        internal static void Copy(this IFileSystem fileSystem, string sourceFileOnDisk)
+        internal static void Copy(this IFileSystem fileSystem, string source)
         {
-            Copy(fileSystem, sourceFileOnDisk, Path.GetFileName(sourceFileOnDisk));
+            Copy(fileSystem, source, (File.Exists(source)? Path.GetFileName(source): source));
         }
 
-        internal static void Copy(this IFileSystem fileSystem, string sourceFileOnDisk, string destination)
+        internal static void Copy(this IFileSystem fileSystem, string source, string destination)
         {
-            fileSystem.WriteFile(destination, File.ReadAllText(sourceFileOnDisk));
+            // if copying a file
+            if (File.Exists(source))
+            {
+                fileSystem.WriteFile(destination, File.ReadAllText(source));
+                return;
+            }
+            
+            // if copying a directory
+            if (fileSystem.DirectoryExists(destination))
+            {
+                fileSystem.DeleteDirectory(destination);
+            }
+            fileSystem.CreateDirectory(destination);
+        
+            // Copy dirs recursively
+            foreach (var child in Directory.GetDirectories(Path.GetFullPath(source), "*", SearchOption.TopDirectoryOnly).Select(p => Path.GetDirectoryName(p)))
+            {
+                fileSystem.Copy(Path.Combine(source, child), Path.Combine(destination, child));
+            }
+            // Copy files
+            foreach (var childFile in Directory.GetFiles(Path.GetFullPath(source), "*", SearchOption.TopDirectoryOnly).Select(p=>Path.GetFileName(p)))
+            {
+                fileSystem.Copy(Path.Combine(source, childFile), 
+                                Path.Combine(destination, childFile));
+            }
+           
         }
 
         internal static string[] GetFilesByExtension(this IFileSystem fileSystem, string path, SearchOption s, params string[] fileExts)
@@ -44,46 +70,66 @@ namespace AutoRest.CSharp.Unit.Tests
             return fileSystem.GetFiles(path, "*.*", s).Where(f => fileExts.Contains(f.Substring(f.LastIndexOf(".")+1))).ToArray();
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string inputFile,  MemoryFileSystem fileSystem)
+        internal static MemoryFileSystem GenerateCodeInto(this string inputDir,  MemoryFileSystem fileSystem, string codeGenerator="CSharp", string modeler = "Swagger")
         {
-            var settings = new Settings
+            using (NewContext)
             {
-                Modeler = "Swagger",
-                CodeGenerator = "CSharp",
-                FileSystem = fileSystem,
-                OutputDirectory = "GeneratedCode",
-                Namespace = "Test"
-            };
+                var settings = new Settings
+                {
+                    Modeler = modeler,
+                    CodeGenerator =codeGenerator,
+                    FileSystem = fileSystem,
+                    OutputDirectory = "GeneratedCode",
+                    Namespace = "Test"
+                };
 
-            return inputFile.GenerateCodeInto(fileSystem, settings);
+                return inputDir.GenerateCodeInto(fileSystem, settings);
+            }
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string inputFile, MemoryFileSystem fileSystem, Settings settings)
+        internal static MemoryFileSystem GenerateCodeInto(this string inputDir, MemoryFileSystem fileSystem, Settings settings)
         {
-            string fileName = Path.GetFileName(inputFile);
+            fileSystem.Copy(Path.Combine("Resource", inputDir));
+            var fileExt = (File.Exists(Path.Combine("Resource", Path.Combine(inputDir, inputDir + ".yaml"))) ? ".yaml" : ".json");
+            settings.Input = Path.Combine("Resource", Path.Combine(inputDir, inputDir + fileExt));
 
-            // If inputFile does not contain a path use the local Resource folder
-            if (inputFile == fileName)
+
+            var plugin = ExtensionsLoader.GetPlugin();
+            var modeler = ExtensionsLoader.GetModeler();
+            var codeModel = modeler.Build();
+
+            // After swagger Parser
+            codeModel = AutoRestController.RunExtensions(Trigger.AfterModelCreation, codeModel);
+
+            // After swagger Parser
+            codeModel = AutoRestController.RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
+
+            using (plugin.Activate())
             {
-                fileSystem.Copy(Path.Combine("Resource", inputFile));
-            }
-            else
-            {
-                fileSystem.Copy(inputFile);
-            }
+                // load model into language-specific code model
+                codeModel = plugin.Serializer.Load(codeModel);
 
-            settings.Input = fileName;
+                // we've loaded the model, run the extensions for after it's loaded
+                codeModel = AutoRestController.RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
 
-            var codeGenerator = new CSharpCodeGenerator(settings);
-            var modeler = ExtensionsLoader.GetModeler(settings);
-            var sc = modeler.Build();
-            codeGenerator.NormalizeClientModel(sc);
-            codeGenerator.Generate(sc).GetAwaiter().GetResult();
+                // apply language-specific tranformation (more than just language-specific types)
+                // used to be called "NormalizeClientModel" . 
+                codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+
+                // next set of extensions
+                codeModel = AutoRestController.RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
+
+                // next set of extensions
+                codeModel = AutoRestController.RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
+
+                // Generate code from CodeModel.
+                plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+            }
 
             return fileSystem;
         }
 
-        internal static void SaveFilesToTemp(this IFileSystem fileSystem, string folderName = null)
+        internal static string SaveFilesToTemp(this IFileSystem fileSystem, string folderName = null)
         {
             folderName = string.IsNullOrWhiteSpace(folderName) ? Guid.NewGuid().ToString() : folderName;
             var outputFolder = Path.Combine(Path.GetTempPath(), folderName);
@@ -107,6 +153,10 @@ namespace AutoRest.CSharp.Unit.Tests
                 Directory.CreateDirectory(Path.GetDirectoryName(target));
                 File.WriteAllText(target, fileSystem.ReadFileAsText(file));
             }
+
+            return outputFolder;
         }
+
+        internal static bool IsNullableValueType(this Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
     }
 }

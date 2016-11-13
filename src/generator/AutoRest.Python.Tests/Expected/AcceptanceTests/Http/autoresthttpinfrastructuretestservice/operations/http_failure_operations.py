@@ -44,6 +44,8 @@ class HttpFailureOperations(object):
         :rtype: bool
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
         # Construct URL
         url = '/http/failure/emptybody/error'
@@ -87,6 +89,8 @@ class HttpFailureOperations(object):
         :rtype: bool
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
         url = '/http/failure/nomodel/error'
@@ -130,6 +134,8 @@ class HttpFailureOperations(object):
         :rtype: bool
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         # Construct URL
         url = '/http/failure/nomodel/empty'

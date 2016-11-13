@@ -44,6 +44,8 @@ class DurationOperations(object):
         :rtype: timedelta
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazurebodyduration.models.ErrorException>`
         """
         # Construct URL
         url = '/duration/null'
@@ -93,6 +95,8 @@ class DurationOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazurebodyduration.models.ErrorException>`
         """
         # Construct URL
         url = '/duration/positiveduration'
@@ -137,6 +141,8 @@ class DurationOperations(object):
         :rtype: timedelta
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazurebodyduration.models.ErrorException>`
         """
         # Construct URL
         url = '/duration/positiveduration'
@@ -184,6 +190,8 @@ class DurationOperations(object):
         :rtype: timedelta
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazurebodyduration.models.ErrorException>`
         """
         # Construct URL
         url = '/duration/invalid'

@@ -39,8 +39,8 @@ export interface XMsClientRequestId {
      * Get method that overwrites x-ms-client-request header with value
      * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @param {string} xMsClientRequestId This should appear as a method
-     * parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+     * @param {string} xMsClientRequestId This should appear as a method parameter,
+     * use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -148,11 +148,11 @@ export interface SubscriptionInCredentials {
 export interface SubscriptionInMethod {
 
     /**
-     * POST method with subscriptionId modeled in the method.  pass in
-     * subscription id = '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in the method.  pass in subscription
+     * id = '1234-5678-9012-3456' to succeed
      *
-     * @param {string} subscriptionId This should appear as a method parameter,
-     * use value '1234-5678-9012-3456'
+     * @param {string} subscriptionId This should appear as a method parameter, use
+     * value '1234-5678-9012-3456'
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -166,12 +166,11 @@ export interface SubscriptionInMethod {
     postMethodLocalValid(subscriptionId: string, callback: ServiceCallback<void>): void;
 
     /**
-     * POST method with subscriptionId modeled in the method.  pass in
-     * subscription id = null, client-side validation should prevent you from
-     * making this call
+     * POST method with subscriptionId modeled in the method.  pass in subscription
+     * id = null, client-side validation should prevent you from making this call
      *
-     * @param {string} subscriptionId This should appear as a method parameter,
-     * use value null, client-side validation should prvenet the call
+     * @param {string} subscriptionId This should appear as a method parameter, use
+     * value null, client-side validation should prvenet the call
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -185,8 +184,8 @@ export interface SubscriptionInMethod {
     postMethodLocalNull(subscriptionId: string, callback: ServiceCallback<void>): void;
 
     /**
-     * POST method with subscriptionId modeled in the method.  pass in
-     * subscription id = '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in the method.  pass in subscription
+     * id = '1234-5678-9012-3456' to succeed
      *
      * @param {string} subscriptionId Should appear as a method parameter -use
      * value '1234-5678-9012-3456'
@@ -203,8 +202,8 @@ export interface SubscriptionInMethod {
     postPathLocalValid(subscriptionId: string, callback: ServiceCallback<void>): void;
 
     /**
-     * POST method with subscriptionId modeled in the method.  pass in
-     * subscription id = '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in the method.  pass in subscription
+     * id = '1234-5678-9012-3456' to succeed
      *
      * @param {string} subscriptionId The subscriptionId, which appears in the
      * path, the value is always '1234-5678-9012-3456'
@@ -496,8 +495,8 @@ export interface Odata {
      *
      * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [options.filter] The filter parameter with value
-     * '$filter=id gt 5 and name eq 'foo''.
+     * @param {string} [options.filter] The filter parameter with value '$filter=id
+     * gt 5 and name eq 'foo''.
      * 
      * @param {number} [options.top] The top parameter with value 10.
      * 
@@ -542,8 +541,8 @@ export interface Header {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the
      * header of the request, via a parameter group
      *
-     * @param {object} headerCustomNamedRequestIdParamGroupingParameters
-     * Additional parameters for the operation
+     * @param {object} headerCustomNamedRequestIdParamGroupingParameters Additional
+     * parameters for the operation
      * 
      * @param {string}
      * headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId The

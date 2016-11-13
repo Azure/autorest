@@ -43,6 +43,8 @@ class DatetimeModelOperations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/null'
@@ -86,6 +88,8 @@ class DatetimeModelOperations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/invalid'
@@ -129,6 +133,8 @@ class DatetimeModelOperations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/overflow'
@@ -172,6 +178,8 @@ class DatetimeModelOperations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/underflow'
@@ -217,6 +225,8 @@ class DatetimeModelOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/max/utc'
@@ -257,6 +267,8 @@ class DatetimeModelOperations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/max/utc/lowercase'
@@ -300,6 +312,8 @@ class DatetimeModelOperations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/max/utc/uppercase'
@@ -346,6 +360,8 @@ class DatetimeModelOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/max/localpositiveoffset'
@@ -387,6 +403,8 @@ class DatetimeModelOperations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/max/localpositiveoffset/lowercase'
@@ -431,6 +449,8 @@ class DatetimeModelOperations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/max/localpositiveoffset/uppercase'
@@ -477,6 +497,8 @@ class DatetimeModelOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/max/localnegativeoffset'
@@ -518,6 +540,8 @@ class DatetimeModelOperations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/max/localnegativeoffset/uppercase'
@@ -562,6 +586,8 @@ class DatetimeModelOperations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/max/localnegativeoffset/lowercase'
@@ -607,6 +633,8 @@ class DatetimeModelOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/min/utc'
@@ -647,6 +675,8 @@ class DatetimeModelOperations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/min/utc'
@@ -692,6 +722,8 @@ class DatetimeModelOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/min/localpositiveoffset'
@@ -732,6 +764,8 @@ class DatetimeModelOperations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/min/localpositiveoffset'
@@ -777,6 +811,8 @@ class DatetimeModelOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/min/localnegativeoffset'
@@ -817,6 +853,8 @@ class DatetimeModelOperations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetime.models.ErrorException>`
         """
         # Construct URL
         url = '/datetime/min/localnegativeoffset'

@@ -52,6 +52,8 @@ class OdataOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/odata/filter'

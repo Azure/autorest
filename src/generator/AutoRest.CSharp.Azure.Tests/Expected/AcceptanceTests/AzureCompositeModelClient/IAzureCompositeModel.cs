@@ -55,8 +55,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
-        /// When set to true a unique x-ms-client-request-id value is
-        /// generated and included in each request. Default is true.
+        /// When set to true a unique x-ms-client-request-id value is generated
+        /// and included in each request. Default is true.
         /// </summary>
         bool? GenerateClientRequestId { get; set; }
 
@@ -101,14 +101,14 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// </summary>
         IReadonlypropertyOperations Readonlyproperty { get; }
 
-            /// <summary>
+        /// <summary>
         /// Product Types
         /// </summary>
         /// <remarks>
         /// The Products endpoint returns information about the Uber products
-        /// offered at a given location. The response includes the display
-        /// name and other details about each product, and lists the products
-        /// in the proper display order.
+        /// offered at a given location. The response includes the display name
+        /// and other details about each product, and lists the products in the
+        /// proper display order.
         /// </remarks>
         /// <param name='resourceGroupName'>
         /// Resource Group ID.

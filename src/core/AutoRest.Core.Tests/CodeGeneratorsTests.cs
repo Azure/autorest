@@ -3,13 +3,13 @@
 
 using System.IO;
 using System.Text;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Tests.Resource;
 using AutoRest.Core.Tests.Templates;
 using AutoRest.Core.Utilities;
 using Xunit;
-
+using static AutoRest.Core.Utilities.DependencyInjection;
 namespace AutoRest.Core.Tests
 {
     [Collection("AutoRest Tests")]
@@ -32,15 +32,19 @@ namespace AutoRest.Core.Tests
         [Fact]
         public void CodeWriterCreatesDirectory()
         {
-            var settings = new Settings
+            using (NewContext)
             {
-                CodeGenerator = "CSharp",
-                FileSystem = _fileSystem,
-                OutputDirectory = Path.GetTempPath()
-            };
-            SampleCodeGenerator codeGenerator = new SampleCodeGenerator(settings);
-            codeGenerator.Generate(new ServiceClient()).GetAwaiter().GetResult();
-            Assert.Contains(Path.Combine(settings.OutputDirectory, settings.ModelsName), _fileSystem.VirtualStore.Keys);
+                var settings = new Settings
+                {
+                    CodeGenerator = "CSharp",
+                    FileSystem = _fileSystem,
+                    OutputDirectory = Path.GetTempPath()
+                };
+                SampleCodeGenerator codeGenerator = new SampleCodeGenerator();
+                codeGenerator.Generate(New<CodeModel>()).GetAwaiter().GetResult();
+                Assert.Contains(Path.Combine(settings.OutputDirectory, settings.ModelsName),
+                    _fileSystem.VirtualStore.Keys);
+            }
         }
 
         [Fact]
@@ -51,8 +55,8 @@ namespace AutoRest.Core.Tests
 
             sampleModelTemplate.Model = sampleViewModel;
             var output = sampleModelTemplate.ToString();
-            Assert.True(output.ContainsMultiline(@"/// Deserialize current type to Json object because today is Friday
-        /// and there is a sun outside the window."));
+            Assert.True(output.ContainsMultiline(@"/// Deserialize current type to Json object because today is Friday and
+        /// there is a sun outside the window."));
         }
 
         [Fact]
@@ -70,43 +74,49 @@ namespace AutoRest.Core.Tests
         [Fact]
         public void CodeWriterOverwritesExistingFile()
         {
-            var settings = new Settings
+            using (NewContext)
             {
-                CodeGenerator = "CSharp",
-                FileSystem = _fileSystem,
-                OutputDirectory = Path.GetTempPath()
-            };
-            string existingContents = "this is dummy";
-            string path = Path.Combine(settings.OutputDirectory, settings.ModelsName, "Pet.cs");
-            _fileSystem.VirtualStore[path] = new StringBuilder(existingContents);
-            var codeGenerator = new SampleCodeGenerator(settings);
-            codeGenerator.Generate(new ServiceClient()).GetAwaiter().GetResult();
-            Assert.NotEqual(existingContents, _fileSystem.VirtualStore[path].ToString());
+                var settings = new Settings
+                {
+                    CodeGenerator = "CSharp",
+                    FileSystem = _fileSystem,
+                    OutputDirectory = Path.GetTempPath()
+                };
+                string existingContents = "this is dummy";
+                string path = Path.Combine(settings.OutputDirectory, settings.ModelsName, "Pet.cs");
+                _fileSystem.VirtualStore[path] = new StringBuilder(existingContents);
+                var codeGenerator = new SampleCodeGenerator();
+                codeGenerator.Generate(New<CodeModel>()).GetAwaiter().GetResult();
+                Assert.NotEqual(existingContents, _fileSystem.VirtualStore[path].ToString());
+            }
         }
 
         [Fact]
         public void OutputToSingleFile()
         {
-            var settings = new Settings
+            using (NewContext)
             {
-                Modeler = "Swagger",
-                CodeGenerator = "CSharp",
-                Input = "RedisResource.json",
-                FileSystem = _fileSystem,
-                OutputDirectory = Path.GetTempPath(),
-                OutputFileName = "test.file.cs"
-            };
+                var settings = new Settings
+                {
+                    Modeler = "Swagger",
+                    CodeGenerator = "CSharp",
+                    Input = "RedisResource.json",
+                    FileSystem = _fileSystem,
+                    OutputDirectory = Path.GetTempPath(),
+                    OutputFileName = "test.file.cs"
+                };
 
-            string path = Path.Combine(settings.OutputDirectory, "test.file.cs");
-            string existingContents = "this is dummy";
-            _fileSystem.VirtualStore[path] = new StringBuilder(existingContents);
-            var codeGenerator = new SampleCodeGenerator(settings);
-            codeGenerator.Generate(new ServiceClient()).GetAwaiter().GetResult();
-            Assert.DoesNotContain(existingContents, _fileSystem.VirtualStore[path].ToString());
-            Assert.Equal(4, _fileSystem.VirtualStore.Count);
-            Assert.True(_fileSystem.VirtualStore.ContainsKey(path));
-            Assert.True(_fileSystem.VirtualStore.ContainsKey("AutoRest.json"));
-            Assert.True(_fileSystem.VirtualStore.ContainsKey("RedisResource.json"));
+                string path = Path.Combine(settings.OutputDirectory, "test.file.cs");
+                string existingContents = "this is dummy";
+                _fileSystem.VirtualStore[path] = new StringBuilder(existingContents);
+                var codeGenerator = new SampleCodeGenerator();
+                codeGenerator.Generate(New<CodeModel>()).GetAwaiter().GetResult();
+                Assert.DoesNotContain(existingContents, _fileSystem.VirtualStore[path].ToString());
+                Assert.Equal(4, _fileSystem.VirtualStore.Count);
+                Assert.True(_fileSystem.VirtualStore.ContainsKey(path));
+                Assert.True(_fileSystem.VirtualStore.ContainsKey("AutoRest.json"));
+                Assert.True(_fileSystem.VirtualStore.ContainsKey("RedisResource.json"));
+            }
         }
     }
 }

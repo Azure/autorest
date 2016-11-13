@@ -1,13 +1,14 @@
 @using System
 @using System.Linq
 @using AutoRest.Core.Utilities
-@using AutoRest.NodeJS.TemplateModels
+@using AutoRest.NodeJS.Model
 @using AutoRest.NodeJS.Templates
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.TemplateModels.AzureMethodTemplateModel>
+@using AutoRest.NodeJS.Azure.Model
+@inherits AutoRest.Core.Template<MethodJsa>
 
 @if (!Model.IsLongRunningOperation)
 {
-@:@(Include( new MethodTemplate(), Model as MethodTemplateModel))
+@:@(Include( new MethodTemplate(), Model as MethodJs))
 }
 else
 {
@@ -26,10 +27,10 @@ else
 }
 @foreach (var parameter in Model.DocumentationParameters)
 {
- @MethodTemplateModel.ConstructParameterDocumentation(
+ @MethodJs.ConstructParameterDocumentation(
                       WrapComment(" * ", "@param {"
-                                        + MethodTemplateModel.GetParameterDocumentationType(parameter)
-                                        + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
+                                        + MethodJs.GetParameterDocumentationType(parameter)
+                                        + "} " + MethodJs.GetParameterDocumentationName(parameter)
                                         + " " + parameter.Documentation))
 }
 @WrapComment(" * ", " @param {function} callback")
@@ -45,7 +46,7 @@ else
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-@(Model.OperationName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
+@(Model.MethodGroup.TypeName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
   var client = @(Model.ClientReference);
   if(!callback && typeof options === 'function') {
     callback = options;

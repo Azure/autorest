@@ -1,9 +1,9 @@
 ﻿@using System
 @using System.Linq
 @using System.Collections.Generic
-@using AutoRest.Core.ClientModel
-@using AutoRest.NodeJS.TemplateModels
-@inherits AutoRest.Core.Template<ModelTemplateModel>
+@using AutoRest.Core.Model
+@using AutoRest.NodeJS.Model
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Model.CompositeTypeJs>
 
 /**
  * @@class
@@ -21,10 +21,10 @@
 }
 @foreach (var property in Model.DocumentationPropertyList)
 {
-    @ModelTemplateModel.ConstructPropertyDocumentation(
-              WrapComment(" * ", "@member {" + ModelTemplateModel.GetPropertyDocumentationType(property)
-                                             + "} " + ModelTemplateModel.GetPropertyDocumentationName(property)
-                                             + " " + ModelTemplateModel.GetPropertyDocumentationString(property)))
+    @CompositeTypeJs.ConstructPropertyDocumentation(
+              WrapComment(" * ", "@member {" + CompositeTypeJs.GetPropertyDocumentationType(property)
+                                             + "} " + CompositeTypeJs.GetPropertyDocumentationName(property)
+                                             + " " + CompositeTypeJs.GetPropertyDocumentationString(property)))
 }
  */
 @{
@@ -38,10 +38,10 @@
 @:export interface @(Model.Name) {
     }
     
-    var propertyList = new List<Property>(Model.Properties.Where(p => !p.IsConstant));
+    var propertyList = new List<AutoRest.Core.Model.Property>(Model.Properties.Where(p => !p.IsConstant));
     for (int i = 0; i < propertyList.Count; i++)
     {
-  @:@(ModelTemplateModel.PropertyTS(propertyList[i], true));
+  @:@(CompositeTypeJs.PropertyTS(propertyList[i], true));
     }
 
 @:}

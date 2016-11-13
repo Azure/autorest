@@ -18,13 +18,11 @@ import fixtures.requiredoptional.models.ArrayWrapper;
 import fixtures.requiredoptional.models.ClassOptionalWrapper;
 import fixtures.requiredoptional.models.ClassWrapper;
 import fixtures.requiredoptional.models.Error;
-import fixtures.requiredoptional.models.ErrorException;
 import fixtures.requiredoptional.models.IntOptionalWrapper;
 import fixtures.requiredoptional.models.IntWrapper;
 import fixtures.requiredoptional.models.Product;
 import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
-import java.io.IOException;
 import java.util.List;
 import rx.Observable;
 
@@ -37,11 +35,9 @@ public interface Explicits {
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the int value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error postRequiredIntegerParameter(int bodyParameter) throws ErrorException, IOException;
+    Error postRequiredIntegerParameter(int bodyParameter);
 
     /**
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
@@ -71,10 +67,8 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalIntegerParameter() throws ErrorException, IOException;
+    void postOptionalIntegerParameter();
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -101,10 +95,8 @@ public interface Explicits {
      * Test explicitly optional integer. Please put null.
      *
      * @param bodyParameter the Integer value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalIntegerParameter(Integer bodyParameter) throws ErrorException, IOException;
+    void postOptionalIntegerParameter(Integer bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -135,12 +127,9 @@ public interface Explicits {
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the IntWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    Error postRequiredIntegerProperty(IntWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredIntegerProperty(IntWrapper bodyParameter);
 
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -170,10 +159,8 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalIntegerProperty() throws ErrorException, IOException;
+    void postOptionalIntegerProperty();
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -200,10 +187,8 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter the IntOptionalWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ErrorException, IOException;
+    void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -234,11 +219,9 @@ public interface Explicits {
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the int value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
      */
-    Error postRequiredIntegerHeader(int headerParameter) throws ErrorException, IOException;
+    Error postRequiredIntegerHeader(int headerParameter);
 
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -268,10 +251,8 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalIntegerHeader() throws ErrorException, IOException;
+    void postOptionalIntegerHeader();
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -298,10 +279,8 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the Integer value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalIntegerHeader(Integer headerParameter) throws ErrorException, IOException;
+    void postOptionalIntegerHeader(Integer headerParameter);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -332,12 +311,9 @@ public interface Explicits {
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    Error postRequiredStringParameter(String bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredStringParameter(String bodyParameter);
 
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
@@ -367,10 +343,8 @@ public interface Explicits {
     /**
      * Test explicitly optional string. Please put null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalStringParameter() throws ErrorException, IOException;
+    void postOptionalStringParameter();
 
     /**
      * Test explicitly optional string. Please put null.
@@ -397,10 +371,8 @@ public interface Explicits {
      * Test explicitly optional string. Please put null.
      *
      * @param bodyParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalStringParameter(String bodyParameter) throws ErrorException, IOException;
+    void postOptionalStringParameter(String bodyParameter);
 
     /**
      * Test explicitly optional string. Please put null.
@@ -431,12 +403,9 @@ public interface Explicits {
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the StringWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    Error postRequiredStringProperty(StringWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredStringProperty(StringWrapper bodyParameter);
 
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -466,10 +435,8 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalStringProperty() throws ErrorException, IOException;
+    void postOptionalStringProperty();
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -496,10 +463,8 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter the StringOptionalWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ErrorException, IOException;
+    void postOptionalStringProperty(StringOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -530,12 +495,9 @@ public interface Explicits {
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    Error postRequiredStringHeader(String headerParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredStringHeader(String headerParameter);
 
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -565,10 +527,8 @@ public interface Explicits {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalStringHeader() throws ErrorException, IOException;
+    void postOptionalStringHeader();
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -595,10 +555,8 @@ public interface Explicits {
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter the String value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalStringHeader(String bodyParameter) throws ErrorException, IOException;
+    void postOptionalStringHeader(String bodyParameter);
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -629,12 +587,9 @@ public interface Explicits {
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the Product value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    Error postRequiredClassParameter(Product bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredClassParameter(Product bodyParameter);
 
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
@@ -664,10 +619,8 @@ public interface Explicits {
     /**
      * Test explicitly optional complex object. Please put null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalClassParameter() throws ErrorException, IOException;
+    void postOptionalClassParameter();
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -694,10 +647,8 @@ public interface Explicits {
      * Test explicitly optional complex object. Please put null.
      *
      * @param bodyParameter the Product value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalClassParameter(Product bodyParameter) throws ErrorException, IOException;
+    void postOptionalClassParameter(Product bodyParameter);
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -728,12 +679,9 @@ public interface Explicits {
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ClassWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    Error postRequiredClassProperty(ClassWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredClassProperty(ClassWrapper bodyParameter);
 
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -763,10 +711,8 @@ public interface Explicits {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalClassProperty() throws ErrorException, IOException;
+    void postOptionalClassProperty();
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -793,10 +739,8 @@ public interface Explicits {
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter the ClassOptionalWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ErrorException, IOException;
+    void postOptionalClassProperty(ClassOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -827,12 +771,9 @@ public interface Explicits {
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the List&lt;String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    Error postRequiredArrayParameter(List<String> bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredArrayParameter(List<String> bodyParameter);
 
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
@@ -862,10 +803,8 @@ public interface Explicits {
     /**
      * Test explicitly optional array. Please put null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalArrayParameter() throws ErrorException, IOException;
+    void postOptionalArrayParameter();
 
     /**
      * Test explicitly optional array. Please put null.
@@ -892,10 +831,8 @@ public interface Explicits {
      * Test explicitly optional array. Please put null.
      *
      * @param bodyParameter the List&lt;String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalArrayParameter(List<String> bodyParameter) throws ErrorException, IOException;
+    void postOptionalArrayParameter(List<String> bodyParameter);
 
     /**
      * Test explicitly optional array. Please put null.
@@ -926,12 +863,9 @@ public interface Explicits {
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ArrayWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    Error postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredArrayProperty(ArrayWrapper bodyParameter);
 
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -961,10 +895,8 @@ public interface Explicits {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalArrayProperty() throws ErrorException, IOException;
+    void postOptionalArrayProperty();
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -991,10 +923,8 @@ public interface Explicits {
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter the ArrayOptionalWrapper value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ErrorException, IOException;
+    void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -1025,12 +955,9 @@ public interface Explicits {
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the List&lt;String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
      */
-    Error postRequiredArrayHeader(List<String> headerParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredArrayHeader(List<String> headerParameter);
 
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -1060,10 +987,8 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalArrayHeader() throws ErrorException, IOException;
+    void postOptionalArrayHeader();
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -1090,10 +1015,8 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the List&lt;String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void postOptionalArrayHeader(List<String> headerParameter) throws ErrorException, IOException;
+    void postOptionalArrayHeader(List<String> headerParameter);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.

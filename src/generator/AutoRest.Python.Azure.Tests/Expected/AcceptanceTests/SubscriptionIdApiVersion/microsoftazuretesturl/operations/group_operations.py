@@ -45,9 +45,11 @@ class GroupOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`SampleResourceGroup
-         <Fixtures.AcceptanceTestsSubscriptionIdApiVersion.models.SampleResourceGroup>`
+         <fixtures.acceptancetestssubscriptionidapiversion.models.SampleResourceGroup>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestssubscriptionidapiversion.models.ErrorException>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}'

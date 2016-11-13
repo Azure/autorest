@@ -74,11 +74,8 @@ Header.prototype.customNamedRequestId = function (fooClientRequestId, options, c
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/customNamedRequestId';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/customNamedRequestId';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -151,8 +148,8 @@ Header.prototype.customNamedRequestId = function (fooClientRequestId, options, c
  * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the
  * header of the request, via a parameter group
  *
- * @param {object} headerCustomNamedRequestIdParamGroupingParameters
- * Additional parameters for the operation
+ * @param {object} headerCustomNamedRequestIdParamGroupingParameters Additional
+ * parameters for the operation
  * 
  * @param {string}
  * headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId The
@@ -209,11 +206,8 @@ Header.prototype.customNamedRequestIdParamGrouping = function (headerCustomNamed
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/customNamedRequestIdParamGrouping';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/customNamedRequestIdParamGrouping';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');

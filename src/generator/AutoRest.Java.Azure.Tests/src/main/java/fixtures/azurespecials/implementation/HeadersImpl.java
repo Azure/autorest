@@ -70,11 +70,8 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void customNamedRequestId(String fooClientRequestId) throws ErrorException, IOException, IllegalArgumentException {
+    public void customNamedRequestId(String fooClientRequestId) {
         customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).toBlocking().single().getBody();
     }
 
@@ -139,11 +136,8 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) throws ErrorException, IOException, IllegalArgumentException {
+    public void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).toBlocking().single().getBody();
     }
 

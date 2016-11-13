@@ -8,6 +8,9 @@
  * regenerated.
  */
 
+import * as msRestAzure from 'ms-rest-azure';
+exports.BaseResource = msRestAzure.BaseResource;
+exports.CloudError = msRestAzure.CloudError;
 
 /**
  * @class
@@ -15,8 +18,7 @@
  * @constructor
  * @member {string} name
  * 
- * @member {string} [type]  Default value: 'Microsoft.Storage/storageAccounts'
- * .
+ * @member {string} [type] Default value: 'Microsoft.Storage/storageAccounts' .
  * 
  */
 export interface StorageAccountCheckNameAvailabilityParameters {
@@ -36,11 +38,11 @@ export interface StorageAccountCheckNameAvailabilityParameters {
  * be used.
  * 
  * @member {string} [reason] Gets the reason that a storage account name could
- * not be used. The Reason element is only returned if NameAvailable is
- * false. Possible values include: 'AccountNameInvalid', 'AlreadyExists'
+ * not be used. The Reason element is only returned if NameAvailable is false.
+ * Possible values include: 'AccountNameInvalid', 'AlreadyExists'
  * 
- * @member {string} [message] Gets an error message explaining the Reason
- * value in more detail.
+ * @member {string} [message] Gets an error message explaining the Reason value
+ * in more detail.
  * 
  */
 export interface CheckNameAvailabilityResult {
@@ -179,9 +181,8 @@ export interface Bar {
  * @member {string} [name] Gets or sets the custom domain name. Name is the
  * CNAME source.
  * 
- * @member {boolean} [useSubDomain] Indicates whether indirect CName
- * validation is enabled. Default value is false. This should only be set on
- * updates
+ * @member {boolean} [useSubDomain] Indicates whether indirect CName validation
+ * is enabled. Default value is false. This should only be set on updates
  * 
  */
 export interface CustomDomain {
@@ -203,9 +204,9 @@ export interface CustomDomain {
  * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
  * 'Standard_RAGRS', 'Premium_LRS'
  * 
- * @member {object} [primaryEndpoints] Gets the URLs that are used to perform
- * a retrieval of a public blob, queue or table object.Note that StandardZRS
- * and PremiumLRS accounts only return the blob endpoint.
+ * @member {object} [primaryEndpoints] Gets the URLs that are used to perform a
+ * retrieval of a public blob, queue or table object.Note that StandardZRS and
+ * PremiumLRS accounts only return the blob endpoint.
  * 
  * @member {string} [primaryEndpoints.blob] Gets the blob endpoint.
  * 
@@ -231,21 +232,21 @@ export interface CustomDomain {
  * 
  * @member {date} [lastGeoFailoverTime] Gets the timestamp of the most recent
  * instance of a failover to the secondary location. Only the most recent
- * timestamp is retained. This element is not returned if there has never
- * been a failover instance. Only available if the accountType is StandardGRS
- * or StandardRAGRS.
+ * timestamp is retained. This element is not returned if there has never been
+ * a failover instance. Only available if the accountType is StandardGRS or
+ * StandardRAGRS.
  * 
- * @member {string} [secondaryLocation] Gets the location of the geo
- * replicated secondary for the storage account. Only available if the
- * accountType is StandardGRS or StandardRAGRS.
+ * @member {string} [secondaryLocation] Gets the location of the geo replicated
+ * secondary for the storage account. Only available if the accountType is
+ * StandardGRS or StandardRAGRS.
  * 
  * @member {string} [statusOfSecondary] Gets the status indicating whether the
- * secondary location of the storage account is available or unavailable.
- * Only available if the accountType is StandardGRS or StandardRAGRS.
- * Possible values include: 'Available', 'Unavailable'
+ * secondary location of the storage account is available or unavailable. Only
+ * available if the accountType is StandardGRS or StandardRAGRS. Possible
+ * values include: 'Available', 'Unavailable'
  * 
- * @member {date} [creationTime] Gets the creation date and time of the
- * storage account in UTC.
+ * @member {date} [creationTime] Gets the creation date and time of the storage
+ * account in UTC.
  * 
  * @member {object} [customDomain] Gets the user assigned custom domain
  * assigned to this storage account.
@@ -254,13 +255,13 @@ export interface CustomDomain {
  * Name is the CNAME source.
  * 
  * @member {boolean} [customDomain.useSubDomain] Indicates whether indirect
- * CName validation is enabled. Default value is false. This should only be
- * set on updates
+ * CName validation is enabled. Default value is false. This should only be set
+ * on updates
  * 
- * @member {object} [secondaryEndpoints] Gets the URLs that are used to
- * perform a retrieval of a public blob, queue or table object from the
- * secondary location of the storage account. Only available if the
- * accountType is StandardRAGRS.
+ * @member {object} [secondaryEndpoints] Gets the URLs that are used to perform
+ * a retrieval of a public blob, queue or table object from the secondary
+ * location of the storage account. Only available if the accountType is
+ * StandardRAGRS.
  * 
  * @member {string} [secondaryEndpoints.blob] Gets the blob endpoint.
  * 
@@ -310,6 +311,24 @@ export interface StorageAccountKeys {
 
 /**
  * @class
+ * Initializes a new instance of the StorageAccountListResult class.
+ * @constructor
+ * The list storage accounts operation response.
+ *
+ * @member {array} [value] Gets the list of storage accounts and their
+ * properties.
+ * 
+ * @member {string} [nextLink] Gets the link to the next set of results.
+ * Currently this will always be empty as the API does not support pagination.
+ * 
+ */
+export interface StorageAccountListResult {
+  value?: StorageAccount[];
+  nextLink?: string;
+}
+
+/**
+ * @class
  * Initializes a new instance of the StorageAccountUpdateParameters class.
  * @constructor
  * The parameters to update on the account.
@@ -320,17 +339,17 @@ export interface StorageAccountKeys {
  * PremiumLRS. Possible values include: 'Standard_LRS', 'Standard_ZRS',
  * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
  * 
- * @member {object} [customDomain] User domain assigned to the storage
- * account. Name is the CNAME source. Only one custom domain is supported per
- * storage account at this time. To clear the existing custom domain, use an
- * empty string for the custom domain name property.
+ * @member {object} [customDomain] User domain assigned to the storage account.
+ * Name is the CNAME source. Only one custom domain is supported per storage
+ * account at this time. To clear the existing custom domain, use an empty
+ * string for the custom domain name property.
  * 
  * @member {string} [customDomain.name] Gets or sets the custom domain name.
  * Name is the CNAME source.
  * 
  * @member {boolean} [customDomain.useSubDomain] Indicates whether indirect
- * CName validation is enabled. Default value is false. This should only be
- * set on updates
+ * CName validation is enabled. Default value is false. This should only be set
+ * on updates
  * 
  */
 export interface StorageAccountUpdateParameters extends Resource {
@@ -379,8 +398,8 @@ export interface UsageName {
  * @member {number} [currentValue] Gets the current count of the allocated
  * resources in the subscription.
  * 
- * @member {number} [limit] Gets the maximum count of the resources that can
- * be allocated in the subscription.
+ * @member {number} [limit] Gets the maximum count of the resources that can be
+ * allocated in the subscription.
  * 
  * @member {object} [name] Gets the name of the type of usage.
  * 

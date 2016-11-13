@@ -31,7 +31,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Put External Resource as an Array
         /// </summary>
         /// <param name='resourceArray'>
@@ -126,8 +126,8 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// </summary>
         /// <param name='productId'>
         /// Unique identifier representing a specific product for a given
-        /// latitude &amp; longitude. For example, uberX in San Francisco
-        /// will have a different product_id than uberX in Los Angeles.
+        /// latitude &amp; longitude. For example, uberX in San Francisco will
+        /// have a different product_id than uberX in Los Angeles.
         /// </param>
         /// <param name='maxProductDisplayName'>
         /// Display name of product.

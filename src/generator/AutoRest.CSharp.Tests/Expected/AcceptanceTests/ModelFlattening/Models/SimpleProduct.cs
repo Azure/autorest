@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// Initializes a new instance of the SimpleProduct class.
         /// </summary>
         /// <param name="productId">Unique identifier representing a specific
-        /// product for a given latitude & longitude. For example, uberX in
+        /// product for a given latitude &amp; longitude. For example, uberX in
         /// San Francisco will have a different product_id than uberX in Los
         /// Angeles.</param>
         /// <param name="maxProductDisplayName">Display name of

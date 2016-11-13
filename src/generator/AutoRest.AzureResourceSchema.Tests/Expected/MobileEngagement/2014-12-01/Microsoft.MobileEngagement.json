@@ -1,0 +1,6 @@
+{
+  "id": "http://schema.management.azure.com/schemas/2014-12-01/Microsoft.MobileEngagement.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.MobileEngagement",
+  "description": "Microsoft MobileEngagement Resource Types"
+}

@@ -27,8 +27,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         /// <param name="location">Location to poll for result status: will be
         /// set to /foo</param>
-        /// <param name="retryAfter">Number of milliseconds until the next
-        /// poll should be sent, will be set to /bar</param>
+        /// <param name="retryAfter">Number of milliseconds until the next poll
+        /// should be sent, will be set to /bar</param>
         public LROSADsDelete202RetryInvalidHeaderHeaders(string location = default(string), int? retryAfter = default(int?))
         {
             Location = location;

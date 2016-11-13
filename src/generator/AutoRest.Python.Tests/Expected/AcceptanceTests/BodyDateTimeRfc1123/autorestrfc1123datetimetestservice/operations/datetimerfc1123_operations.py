@@ -43,6 +43,8 @@ class Datetimerfc1123Operations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetimerfc1123.models.ErrorException>`
         """
         # Construct URL
         url = '/datetimerfc1123/null'
@@ -86,6 +88,8 @@ class Datetimerfc1123Operations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetimerfc1123.models.ErrorException>`
         """
         # Construct URL
         url = '/datetimerfc1123/invalid'
@@ -129,6 +133,8 @@ class Datetimerfc1123Operations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetimerfc1123.models.ErrorException>`
         """
         # Construct URL
         url = '/datetimerfc1123/overflow'
@@ -172,6 +178,8 @@ class Datetimerfc1123Operations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetimerfc1123.models.ErrorException>`
         """
         # Construct URL
         url = '/datetimerfc1123/underflow'
@@ -217,6 +225,8 @@ class Datetimerfc1123Operations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetimerfc1123.models.ErrorException>`
         """
         # Construct URL
         url = '/datetimerfc1123/max'
@@ -257,6 +267,8 @@ class Datetimerfc1123Operations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetimerfc1123.models.ErrorException>`
         """
         # Construct URL
         url = '/datetimerfc1123/max/lowercase'
@@ -300,6 +312,8 @@ class Datetimerfc1123Operations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetimerfc1123.models.ErrorException>`
         """
         # Construct URL
         url = '/datetimerfc1123/max/uppercase'
@@ -345,6 +359,8 @@ class Datetimerfc1123Operations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetimerfc1123.models.ErrorException>`
         """
         # Construct URL
         url = '/datetimerfc1123/min'
@@ -385,6 +401,8 @@ class Datetimerfc1123Operations(object):
         :rtype: datetime
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodydatetimerfc1123.models.ErrorException>`
         """
         # Construct URL
         url = '/datetimerfc1123/min'

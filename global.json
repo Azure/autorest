@@ -1,6 +1,5 @@
 {
   "projects": [
-    "src/client",
     "src/generator",
     "src/modeler",
     "src/core",

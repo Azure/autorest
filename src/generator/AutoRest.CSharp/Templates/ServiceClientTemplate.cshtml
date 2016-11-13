@@ -1,8 +1,9 @@
 ﻿@using System
 @using System.Linq
 @using AutoRest.Core.Utilities
+@using AutoRest.CSharp.Model
 @using AutoRest.CSharp.Templates
-@inherits AutoRest.Core.Template<AutoRest.CSharp.TemplateModels.ServiceClientTemplateModel>
+@inherits AutoRest.Core.Template<CodeModelCs>
 @Header("// ")
 @EmptyLine
 namespace @Settings.Namespace
@@ -33,9 +34,9 @@ namespace @Settings.Namespace
         /// </summary>
         private void Initialize()
         {
-        @foreach (var operation in Model.Operations) 
+        @foreach (var operation in Model.AllOperations) 
         {
-            @:this.@(operation.MethodGroupName) = new @(operation.MethodGroupType)(this);
+            @:this.@(operation.NameForProperty) = new @(operation.TypeName)(this);
         }
 
         @if (Model.IsCustomBaseUri)
@@ -47,7 +48,7 @@ namespace @Settings.Namespace
             @:this.BaseUri = new System.Uri("@Model.BaseUrl");
         }
 
-        @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+        @foreach (var property in Model.Properties.Where(p => !p.DefaultValue.IsNullOrEmpty()))
         {
             @:this.@(property.Name) = @(property.DefaultValue);
         }
@@ -81,7 +82,7 @@ namespace @Settings.Namespace
                         new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
                     }
             };
-            @foreach (var polymorphicType in Model.ModelTypes.Where(t => t.PolymorphicDiscriminator != null))
+            @foreach (var polymorphicType in Model.ModelTypes.Where(t => t.IsPolymorphic))
             {
             @:SerializationSettings.Converters.Add(new Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
             @:DeserializationSettings.Converters.Add(new  Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
@@ -96,7 +97,7 @@ namespace @Settings.Namespace
     
         }    
     
-        @foreach (var method in Model.MethodTemplateModels)
+        @foreach (MethodCs method in Model.Methods.Where( m => m.Group.IsNullOrEmpty()))
         {
         @:@(Include(new MethodTemplate(), method))
         @EmptyLine

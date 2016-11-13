@@ -1,4 +1,4 @@
-﻿{
+{
   "id": "http://schema.management.azure.com/schemas/2016-04-01/Microsoft.Cache.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.Cache",
@@ -19,6 +19,24 @@
             "2016-04-01"
           ]
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -34,6 +52,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.Cache/Redis"

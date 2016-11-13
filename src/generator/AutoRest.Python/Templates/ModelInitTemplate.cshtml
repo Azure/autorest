@@ -1,21 +1,21 @@
 ﻿@using AutoRest.Python.Templates
 @using System.Linq
 @using AutoRest.Python
-@inherits AutoRest.Core.Template<AutoRest.Python.TemplateModels.ModelInitTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.Python.Model.CodeModelPy>
 # coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ").TrimMultilineHeader()
 # --------------------------------------------------------------------------
 @EmptyLine
 @{
-  foreach (var modelType in Model.ServiceClient.ModelTypes)
+  foreach (var modelType in Model.ModelTypes)
   {
 @:from .@(modelType.Name.ToPythonCase()) import @modelType.Name@Model.GetExceptionNameIfExist(modelType, false)
   }
-  if (Model.ServiceClient.EnumTypes.Any())
+  if (Model.EnumTypes.Any())
   {
-@:from .@(Model.ServiceClient.Name.ToPythonCase())_enums import (
-    foreach (var enumType in @Model.ServiceClient.EnumTypes)
+@:from .@(Model.Name.ToPythonCase())_enums import (
+    foreach (var enumType in @Model.EnumTypes)
     {
     @:@(enumType.Name),
     }
@@ -23,11 +23,11 @@
   }
 @EmptyLine
 @:__all__ = [
-  foreach (var modelType in Model.ServiceClient.ModelTypes)
+  foreach (var modelType in Model.ModelTypes)
   {
 @:    '@modelType.Name'@Model.GetExceptionNameIfExist(modelType, true),
   }
-  foreach (var enumType in @Model.ServiceClient.EnumTypes)
+  foreach (var enumType in @Model.EnumTypes)
   {
 @:    '@(enumType.Name)',
   }

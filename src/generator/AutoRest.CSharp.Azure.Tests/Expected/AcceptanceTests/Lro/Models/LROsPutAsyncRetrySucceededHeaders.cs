@@ -16,22 +16,22 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     public partial class LROsPutAsyncRetrySucceededHeaders
     {
         /// <summary>
-        /// Initializes a new instance of the
-        /// LROsPutAsyncRetrySucceededHeaders class.
+        /// Initializes a new instance of the LROsPutAsyncRetrySucceededHeaders
+        /// class.
         /// </summary>
         public LROsPutAsyncRetrySucceededHeaders() { }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// LROsPutAsyncRetrySucceededHeaders class.
+        /// Initializes a new instance of the LROsPutAsyncRetrySucceededHeaders
+        /// class.
         /// </summary>
         /// <param name="azureAsyncOperation">Location to poll for result
         /// status: will be set to
         /// /lro/putasync/retry/succeeded/operationResults/200</param>
         /// <param name="location">Location to poll for result status: will be
         /// set to /lro/putasync/retry/succeeded/operationResults/200</param>
-        /// <param name="retryAfter">Number of milliseconds until the next
-        /// poll should be sent, will be set to zero</param>
+        /// <param name="retryAfter">Number of milliseconds until the next poll
+        /// should be sent, will be set to zero</param>
         public LROsPutAsyncRetrySucceededHeaders(string azureAsyncOperation = default(string), string location = default(string), int? retryAfter = default(int?))
         {
             AzureAsyncOperation = azureAsyncOperation;

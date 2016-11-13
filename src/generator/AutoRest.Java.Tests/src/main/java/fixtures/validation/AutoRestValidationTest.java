@@ -12,11 +12,8 @@ package fixtures.validation;
 
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -63,12 +60,9 @@ public interface AutoRestValidationTest {
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Product object if successful.
      */
-    Product validationOfMethodParameters(String resourceGroupName, int id) throws ErrorException, IOException, IllegalArgumentException;
+    Product validationOfMethodParameters(String resourceGroupName, int id);
 
     /**
      * Validates input parameters on the method. See swagger for details.
@@ -103,12 +97,9 @@ public interface AutoRestValidationTest {
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Product object if successful.
      */
-    Product validationOfBody(String resourceGroupName, int id) throws ErrorException, IOException, IllegalArgumentException;
+    Product validationOfBody(String resourceGroupName, int id);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -143,12 +134,9 @@ public interface AutoRestValidationTest {
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Product object if successful.
      */
-    Product validationOfBody(String resourceGroupName, int id, Product body) throws ErrorException, IOException, IllegalArgumentException;
+    Product validationOfBody(String resourceGroupName, int id, Product body);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -183,10 +171,8 @@ public interface AutoRestValidationTest {
 
     /**
      *
-     * @throws ServiceException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getWithConstantInPath() throws ServiceException, IOException;
+    void getWithConstantInPath();
 
     /**
      *
@@ -209,11 +195,9 @@ public interface AutoRestValidationTest {
 
     /**
      *
-     * @throws ServiceException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    Product postWithConstantInBody() throws ServiceException, IOException;
+    Product postWithConstantInBody();
 
     /**
      *
@@ -236,11 +220,9 @@ public interface AutoRestValidationTest {
     /**
      *
      * @param body the Product value
-     * @throws ServiceException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object if successful.
      */
-    Product postWithConstantInBody(Product body) throws ServiceException, IOException;
+    Product postWithConstantInBody(Product body);
 
     /**
      *

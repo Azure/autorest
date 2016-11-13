@@ -7,15 +7,17 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using AutoRest.Core;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions.Azure.Model;
 using AutoRest.Extensions.Azure.Properties;
 using AutoRest.Swagger;
 using AutoRest.Swagger.Model;
 using Newtonsoft.Json;
-using ParameterLocation = AutoRest.Core.ClientModel.ParameterLocation;
+using ParameterLocation = AutoRest.Core.Model.ParameterLocation;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Extensions.Azure
 {
@@ -51,55 +53,53 @@ namespace AutoRest.Extensions.Azure
         /// <summary>
         /// Normalizes client model using Azure-specific extensions.
         /// </summary>
-        /// <param name="serviceClient">Service client</param>
+        /// <param name="codeModelient">Service client</param>
         /// <param name="settings">AutoRest settings</param>
         /// <param name="codeNamer">AutoRest settings</param>
         /// <returns></returns>
-        public static void NormalizeAzureClientModel(ServiceClient serviceClient, Settings settings, CodeNamer codeNamer)
+        public static void NormalizeAzureClientModel(CodeModel codeModel)
         {
-            if (serviceClient == null)
+            var settings = Settings.Instance;
+            using (NewContext)
             {
-                throw new ArgumentNullException("serviceClient");
-            }
-            if (settings == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
-            if (codeNamer == null)
-            {
-                throw new ArgumentNullException("codeNamer");
-            }
+                settings = new Settings().LoadFrom(settings);
+                settings.AddCredentials = true;
 
-            settings.AddCredentials = true;
+                if (codeModel == null)
+                {
+                    throw new ArgumentNullException("codeModel");
+                }
+               
 
-            // This extension from general extensions must be run prior to Azure specific extensions.
-            ProcessParameterizedHost(serviceClient, settings);
-            
-            ProcessClientRequestIdExtension(serviceClient);
-            UpdateHeadMethods(serviceClient);
-            ParseODataExtension(serviceClient);
-            ProcessGlobalParameters(serviceClient);
-            FlattenModels(serviceClient);
-            FlattenMethodParameters(serviceClient, settings);
-            ParameterGroupExtensionHelper.AddParameterGroups(serviceClient);
-            AddLongRunningOperations(serviceClient);
-            AddAzureProperties(serviceClient);
-            SetDefaultResponses(serviceClient);
-            AddPageableMethod(serviceClient, codeNamer);
+                // This extension from general extensions must be run prior to Azure specific extensions.
+                ProcessParameterizedHost(codeModel);
+
+                ProcessClientRequestIdExtension(codeModel);
+                UpdateHeadMethods(codeModel);
+                ParseODataExtension(codeModel);
+                ProcessGlobalParameters(codeModel);
+                FlattenModels(codeModel);
+                FlattenMethodParameters(codeModel);
+                ParameterGroupExtensionHelper.AddParameterGroups(codeModel);
+                AddLongRunningOperations(codeModel);
+                AddAzureProperties(codeModel);
+                SetDefaultResponses(codeModel);
+                AddPageableMethod(codeModel);
+            }
         }
 
         /// <summary>
         /// Changes head method return type.
         /// </summary>
-        /// <param name="serviceClient">Service client</param>
-        public static void UpdateHeadMethods(ServiceClient serviceClient)
+        /// <param name="codeModelient">Service client</param>
+        public static void UpdateHeadMethods(CodeModel codeModel)
         {
-            if (serviceClient == null)
+            if (codeModel == null)
             {
-                throw new ArgumentNullException("serviceClient");
+                throw new ArgumentNullException("codeModel");
             }
 
-            foreach (var method in serviceClient.Methods.Where(m => m.HttpMethod == HttpMethod.Head)
+            foreach (var method in codeModel.Methods.Where(m => m.HttpMethod == HttpMethod.Head)
                                                               .Where(m => m.ReturnType.Body == null))
             {
                 HttpStatusCode successStatusCode = method.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
@@ -108,7 +108,7 @@ namespace AutoRest.Extensions.Azure
                     successStatusCode != default(HttpStatusCode) &&
                     method.Responses.ContainsKey(HttpStatusCode.NotFound))
                 {
-                    method.ReturnType = new Response(new PrimaryType(KnownPrimaryType.Boolean), method.ReturnType.Headers);
+                    method.ReturnType = new Response(New<PrimaryType>(KnownPrimaryType.Boolean), method.ReturnType.Headers);
                 }
                 else
                 {
@@ -120,29 +120,29 @@ namespace AutoRest.Extensions.Azure
         /// <summary>
         /// Set default response to CloudError if not defined explicitly.
         /// </summary>
-        /// <param name="serviceClient"></param>
-        public static void SetDefaultResponses(ServiceClient serviceClient)
+        /// <param name="codeModelient"></param>
+        public static void SetDefaultResponses(CodeModel codeModel)
         {
-            if (serviceClient == null)
+            if (codeModel == null)
             {
-                throw new ArgumentNullException("serviceClient");
+                throw new ArgumentNullException("codeModel");
             }
 
             // Create CloudError if not already defined
-            CompositeType cloudError = serviceClient.ModelTypes.FirstOrDefault(c =>
-                c.Name.Equals("cloudError", StringComparison.OrdinalIgnoreCase));
+            CompositeType cloudError = codeModel.ModelTypes.FirstOrDefault(c =>
+                c.Name.EqualsIgnoreCase("cloudError"));
             if (cloudError == null)
             {
-                cloudError = new CompositeType
+                cloudError = New<CompositeType>( new
                 {
                     Name = "cloudError",
                     SerializedName = "cloudError"
-                };
+                });
                 cloudError.Extensions[ExternalExtension] = true;
-                serviceClient.ModelTypes.Add(cloudError);
+                codeModel.Add(cloudError);
             }
             // Set default response if not defined explicitly
-            foreach (var method in serviceClient.Methods)
+            foreach (var method in codeModel.Methods)
             {
                 if (method.DefaultResponse.Body == null && method.ReturnType.Body != null)
                 {
@@ -154,15 +154,15 @@ namespace AutoRest.Extensions.Azure
         /// <summary>
         /// Converts Azure Parameters to regular parameters.
         /// </summary>
-        /// <param name="serviceClient">Service client</param>
-        public static void ParseODataExtension(ServiceClient serviceClient)
+        /// <param name="codeModelient">Service client</param>
+        public static void ParseODataExtension(CodeModel codeModel)
         {
-            if (serviceClient == null)
+            if (codeModel == null)
             {
-                throw new ArgumentNullException("serviceClient");
+                throw new ArgumentNullException("codeModel");
             }
 
-            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(ODataExtension)))
+            foreach (var method in codeModel.Methods.Where(m => m.Extensions.ContainsKey(ODataExtension)))
             {
                 string odataModelPath = (string) method.Extensions[ODataExtension];
                 if (odataModelPath == null)
@@ -174,8 +174,8 @@ namespace AutoRest.Extensions.Azure
 
                 odataModelPath = odataModelPath.StripDefinitionPath();
 
-                CompositeType odataType = serviceClient.ModelTypes
-                    .FirstOrDefault(t => t.Name.Equals(odataModelPath, StringComparison.OrdinalIgnoreCase));
+                CompositeType odataType = codeModel.ModelTypes
+                    .FirstOrDefault(t => t.Name.EqualsIgnoreCase(odataModelPath));
 
                 if (odataType == null)
                 {
@@ -185,7 +185,7 @@ namespace AutoRest.Extensions.Azure
                 }
                 var filterParameter = method.Parameters
                     .FirstOrDefault(p => p.Location == ParameterLocation.Query &&
-                                         p.Name == "$filter");
+                                         p.Name.FixedValue == "$filter");
                 if (filterParameter == null)
                 {
                     throw new InvalidOperationException(
@@ -193,35 +193,35 @@ namespace AutoRest.Extensions.Azure
                         Resources.ODataFilterMissing, ODataExtension));
                 }
 
-                filterParameter.Type = odataType;
+                filterParameter.ModelType = odataType;
             }
         }
 
         /// <summary>
         /// Creates long running operation methods.
         /// </summary>
-        /// <param name="serviceClient"></param>
-        public static void AddLongRunningOperations(ServiceClient serviceClient)
+        /// <param name="codeModelient"></param>
+        public static void AddLongRunningOperations(CodeModel codeModel)
         {
-            if (serviceClient == null)
+            if (codeModel == null)
             {
-                throw new ArgumentNullException("serviceClient");
+                throw new ArgumentNullException("codeModel");
             }
 
-            for (int i = 0; i < serviceClient.Methods.Count; i++)
+            foreach( var method in codeModel.Methods.Where( each => each.Extensions.ContainsKey(LongRunningExtension)).Distinct( each  => each.Group + each.Name ).ToArray())
             {
-                var method = serviceClient.Methods[i];
-                if (method.Extensions.ContainsKey(LongRunningExtension))
+                var isLongRunning = method.Extensions[LongRunningExtension];
+                if (true == isLongRunning as bool?)
                 {
-                    var isLongRunning = method.Extensions[LongRunningExtension];
-                    if (isLongRunning is bool && (bool)isLongRunning)
-                    {
-                        serviceClient.Methods.Insert(i, (Method) method.Clone());
-                        method.Name = "Begin" + method.Name.ToPascalCase(); 
-                        i++;
-                   }
-                   
-                   method.Extensions.Remove(LongRunningExtension);
+                    // copy the method 
+                    var m = Duplicate(method);
+
+                    // change the name, remove the extension.
+                    m.Name = "Begin" + m.Name.ToPascalCase();
+                    m.Extensions.Remove(LongRunningExtension);
+
+                    codeModel.Add(m);
+
                 }
             }
         }
@@ -229,82 +229,82 @@ namespace AutoRest.Extensions.Azure
         /// <summary>
         /// Creates azure specific properties.
         /// </summary>
-        /// <param name="serviceClient"></param>
-        public static void AddAzureProperties(ServiceClient serviceClient)
+        /// <param name="codeModelient"></param>
+        public static void AddAzureProperties(CodeModel codeModel)
         {
-            if (serviceClient == null)
+            if (codeModel == null)
             {
-                throw new ArgumentNullException("serviceClient");
+                throw new ArgumentNullException("codeModel");
             }
 
-            var apiVersion = serviceClient.Properties
-                .FirstOrDefault(p => ApiVersion.Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase));
+            var apiVersion = codeModel.Properties
+                .FirstOrDefault(p => ApiVersion.EqualsIgnoreCase(p.SerializedName));
             if (apiVersion != null)
             {
-                apiVersion.DefaultValue = serviceClient.ApiVersion;
+                apiVersion.DefaultValue = codeModel.ApiVersion;
                 apiVersion.IsReadOnly = true;
                 apiVersion.IsRequired = false;
             }
 
             var subscriptionId =
-                serviceClient.Properties.FirstOrDefault(
-                    p => string.Equals(p.Name, "subscriptionId", StringComparison.OrdinalIgnoreCase));
+                codeModel.Properties.FirstOrDefault(
+                    p => p.Name.EqualsIgnoreCase( "subscriptionId"));
             if (subscriptionId != null)
             {
                 subscriptionId.IsRequired = true;
             }
 
-            var acceptLanguage = serviceClient.Properties
-                .FirstOrDefault(p => AcceptLanguage.Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase));
+            var acceptLanguage = codeModel.Properties
+                .FirstOrDefault(p => AcceptLanguage.EqualsIgnoreCase(p.SerializedName));
             if (acceptLanguage == null)
             {
-                acceptLanguage = new Property
+                acceptLanguage = New<Property>(new
                 {
                     Name = AcceptLanguage,
                     Documentation = "Gets or sets the preferred language for the response.",
                     SerializedName = AcceptLanguage,
                     DefaultValue = "en-US"
-                };
-                serviceClient.Properties.Add(acceptLanguage);
+                });
+                codeModel.Add( acceptLanguage);
             }
             acceptLanguage.IsReadOnly = false;
             acceptLanguage.IsRequired = false;
-            acceptLanguage.Type = new PrimaryType(KnownPrimaryType.String);
-            serviceClient.Methods
-                .Where(m => !m.Parameters.Any(p => AcceptLanguage.Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase)))
-                .ForEach(m2 => m2.Parameters.Add(new Parameter
+            acceptLanguage.ModelType = New<PrimaryType>(KnownPrimaryType.String);
+            codeModel.Methods
+                .Where(m => !m.Parameters.Any(p => AcceptLanguage.EqualsIgnoreCase(p.SerializedName)))
+                .ForEach(m2 => m2.Add(New<Parameter>(new 
                     {
                         ClientProperty = acceptLanguage,
                         Location = ParameterLocation.Header
-                    }.LoadFrom(acceptLanguage)));
+                    }).LoadFrom(acceptLanguage)));
 
-            serviceClient.Properties.Insert(0, new Property
+            codeModel.Insert(New<Property>(new
             {
                 Name = "Credentials",
                 SerializedName = "credentials",
-                Type = new PrimaryType(KnownPrimaryType.Credentials),
+                ModelType = New<PrimaryType>(KnownPrimaryType.Credentials),
                 IsRequired = true,
                 IsReadOnly = true,
                 Documentation = "Credentials needed for the client to connect to Azure."
-            });
+            }));
 
-            serviceClient.Properties.Add(new Property
+            codeModel.Add(New<Property>(new
             {
                 Name = "LongRunningOperationRetryTimeout",
                 SerializedName = "longRunningOperationRetryTimeout",
-                Type = new PrimaryType(KnownPrimaryType.Int),
+                ModelType = New<PrimaryType>(KnownPrimaryType.Int),
                 Documentation = "Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.",
                 DefaultValue = "30"
-            });
+            }));
 
-            serviceClient.Properties.Add(new Property
+            codeModel.Add( New<Property>(new 
             {
                 Name = "GenerateClientRequestId",
                 SerializedName = "generateClientRequestId",
-                Type = new PrimaryType(KnownPrimaryType.Boolean),
+                ModelType = New<PrimaryType>(KnownPrimaryType.Boolean),
                 Documentation = "When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.",
                 DefaultValue = "true"
-            });
+            }));
         }
 
         
@@ -334,20 +334,16 @@ namespace AutoRest.Extensions.Azure
         /// <summary>
         /// Adds ListNext() method for each List method with x-ms-pageable extension.
         /// </summary>
-        /// <param name="serviceClient"></param>
+        /// <param name="codeModelient"></param>
         /// <param name="codeNamer"></param>
-        public static void AddPageableMethod(ServiceClient serviceClient, CodeNamer codeNamer)
+        public static void AddPageableMethod(CodeModel codeModel)
         {
-            if (codeNamer == null)
+            if (codeModel == null)
             {
-                throw new ArgumentNullException("codeNamer");
-            }
-            if (serviceClient == null)
-            {
-                throw new ArgumentNullException("serviceClient");
+                throw new ArgumentNullException("codeModel");
             }
 
-            foreach (var method in serviceClient.Methods.ToArray())
+            foreach (var method in codeModel.Methods.Distinct(each => each.Group + each.Name).ToArray())
             {
                 if (method.Extensions.ContainsKey(PageableExtension))
                 {
@@ -360,8 +356,8 @@ namespace AutoRest.Extensions.Azure
                     Method nextLinkMethod = null;
                     if (!string.IsNullOrEmpty(pageableExtension.OperationName))
                     {
-                        nextLinkMethod = serviceClient.Methods.FirstOrDefault(m =>
-                            pageableExtension.OperationName.Equals(m.SerializedName, StringComparison.OrdinalIgnoreCase));
+                        nextLinkMethod = codeModel.Methods.FirstOrDefault(m =>
+                            pageableExtension.OperationName.EqualsIgnoreCase(m.SerializedName));
                         if (nextLinkMethod != null)
                         {
                             nextLinkMethod.Extensions["nextLinkMethod"] = true;
@@ -372,13 +368,13 @@ namespace AutoRest.Extensions.Azure
 
                     if (nextLinkMethod == null)
                     {
-                        nextLinkMethod = (Method)method.Clone();
+                        nextLinkMethod = Duplicate<Method>(method);
 
                         if (!string.IsNullOrEmpty(pageableExtension.OperationName))
                         {
-                            nextLinkMethod.Name = codeNamer.GetMethodName(SwaggerModeler.GetMethodName(
+                            nextLinkMethod.Name = CodeNamer.Instance.GetMethodName(SwaggerModeler.GetMethodName(
                                 new Operation { OperationId = pageableExtension.OperationName }));
-                            nextLinkMethod.Group = codeNamer.GetMethodGroupName(SwaggerModeler.GetMethodGroup(
+                            nextLinkMethod.Group = CodeNamer.Instance.GetMethodGroupName(SwaggerModeler.GetMethodGroup(
                                 new Operation { OperationId = pageableExtension.OperationName }));
                         }
                         else
@@ -388,26 +384,26 @@ namespace AutoRest.Extensions.Azure
                         method.Extensions["nextMethodName"] = nextLinkMethod.Name;
                         method.Extensions["nextMethodGroup"] = nextLinkMethod.Group;
                         nextLinkMethod.Extensions["nextLinkMethod"] = true;
-                        nextLinkMethod.Parameters.Clear();
+                        nextLinkMethod.ClearParameters();
                         nextLinkMethod.Url = "{nextLink}";
                         nextLinkMethod.IsAbsoluteUrl = true;
-                        var nextLinkParameter = new Parameter
+                        var nextLinkParameter = New<Parameter>(new
                         {
                             Name = "nextPageLink",
                             SerializedName = "nextLink",
-                            Type = new PrimaryType(KnownPrimaryType.String),
+                            ModelType = New<PrimaryType>(KnownPrimaryType.String),
                             Documentation = "The NextLink from the previous successful call to List operation.",
                             IsRequired = true,
                             Location = ParameterLocation.Path
-                        };
+                        });
                         nextLinkParameter.Extensions[SkipUrlEncodingExtension] = true;
-                        nextLinkMethod.Parameters.Add(nextLinkParameter);
+                        nextLinkMethod.Add(nextLinkParameter);
 
                         // Need copy all the header parameters from List method to ListNext method
-                        foreach (var param in method.Parameters.Where(p => p.Location == ParameterLocation.Header))
-                        {
-                            nextLinkMethod.Parameters.Add((Parameter)param.Clone());
-                        }
+                       foreach (var param in method.Parameters.Where(p => p.Location == ParameterLocation.Header))
+                       {
+                            nextLinkMethod.Add(Duplicate(param));
+                       }
 
                         // Copy all grouped parameters that only contain header parameters
                         nextLinkMethod.InputParameterTransformation.Clear();
@@ -416,7 +412,7 @@ namespace AutoRest.Extensions.Azure
                                 if (grouping.All(t => t.OutputParameter.Location == ParameterLocation.Header))
                                 {
                                     // All grouped properties were header parameters, reuse data type
-                                    nextLinkMethod.Parameters.Add(grouping.Key);
+                                    nextLinkMethod.Add(grouping.Key);
                                     grouping.ForEach(t => nextLinkMethod.InputParameterTransformation.Add(t));
                                 }
                                 else if (grouping.Any(t => t.OutputParameter.Location == ParameterLocation.Header))
@@ -424,23 +420,26 @@ namespace AutoRest.Extensions.Azure
                                     // Some grouped properties were header parameters, creating new data types
                                     var headerGrouping = grouping.Where(t => t.OutputParameter.Location == ParameterLocation.Header);
                                     headerGrouping.ForEach(t => nextLinkMethod.InputParameterTransformation.Add((ParameterTransformation) t.Clone()));
-                                    var newGroupingParam = CreateParameterFromGrouping(headerGrouping, nextLinkMethod, serviceClient);
-                                    nextLinkMethod.Parameters.Add(newGroupingParam);
+                                    var newGroupingParam = CreateParameterFromGrouping(headerGrouping, nextLinkMethod, codeModel);
+                                    nextLinkMethod.Add(newGroupingParam);
                                     //grouping.Key.Name = newGroupingParam.Name;
-                                    var inputParameter = (Parameter) nextLinkMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter.Clone();
-                                    inputParameter.Name = codeNamer.GetParameterName(newGroupingParam.Name);
+                                    // var inputParameter = (Parameter) nextLinkMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter.Clone();
+                                    var inputParameter = Duplicate(nextLinkMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter);
+                                    inputParameter.Name = CodeNamer.Instance.GetParameterName(newGroupingParam.Name);
+
                                     inputParameter.IsRequired = newGroupingParam.IsRequired;
                                     nextLinkMethod.InputParameterTransformation.ForEach(t => t.ParameterMappings[0].InputParameter = inputParameter);
                                 }
                             });
 
-                        serviceClient.Methods.Add(nextLinkMethod);
+                        codeModel.Add( nextLinkMethod);
+                        
                     }
                 }
             }
         }
 
-        private static Parameter CreateParameterFromGrouping(IEnumerable<ParameterTransformation> grouping, Method method, ServiceClient serviceClient)
+        private static Parameter CreateParameterFromGrouping(IEnumerable<ParameterTransformation> grouping, Method method, CodeModel codeModel)
         {
             var properties = new List<Property>();
             string parameterGroupName = null;
@@ -458,7 +457,7 @@ namespace AutoRest.Extensions.Azure
                     parameterGroupName = specifiedGroupName;
                 }
 
-                Property groupProperty = new Property()
+                Property groupProperty = New<Property>(new
                 {
                     IsReadOnly = false, //Since these properties are used as parameters they are never read only
                     Name = parameter.Name,
@@ -466,48 +465,47 @@ namespace AutoRest.Extensions.Azure
                     DefaultValue = parameter.DefaultValue,
                     //Constraints = parameter.Constraints, Omit these since we don't want to perform parameter validation
                     Documentation = parameter.Documentation,
-                    Type = parameter.Type,
-                    SerializedName = null //Parameter is never serialized directly
-                };
+                    ModelType = parameter.ModelType,
+                    SerializedName = default(string) //Parameter is never serialized directly
+                });
                 properties.Add(groupProperty);
             }
             
-            var parameterGroupType = new CompositeType()
+            var parameterGroupType = New <CompositeType>(parameterGroupName, new
             {
-                Name = parameterGroupName,
                 Documentation = "Additional parameters for the " + method.Name + " operation."
-            };
+            });
 
             //Add to the service client
-            serviceClient.ModelTypes.Add(parameterGroupType);
+            codeModel.Add(parameterGroupType);
 
             foreach (Property property in properties)
             {
-                parameterGroupType.Properties.Add(property);
+                parameterGroupType.Add(property);
             }
 
             bool isGroupParameterRequired = parameterGroupType.Properties.Any(p => p.IsRequired);
 
             //Create the new parameter object based on the parameter group type
-            return new Parameter()
+            return New<Parameter>(new
             {
                 Name = parameterGroupName,
                 IsRequired = isGroupParameterRequired,
                 Location = ParameterLocation.None,
                 SerializedName = string.Empty,
-                Type = parameterGroupType,
+                ModelType = parameterGroupType,
                 Documentation = "Additional parameters for the operation"
-            };
+            });
         }
 
-        public static void ProcessClientRequestIdExtension(ServiceClient serviceClient)
+        public static void ProcessClientRequestIdExtension(CodeModel codeModel)
         {
-            if (serviceClient == null)
+            if (codeModel == null)
             {
-                throw new ArgumentNullException("serviceClient");
+                throw new ArgumentNullException("codeModel");
             }
 
-            foreach (Method method in serviceClient.Methods)
+            foreach (Method method in codeModel.Methods)
             {
                 const string defaultClientRequestIdName = "x-ms-client-request-id";
                 string customClientRequestIdName =
@@ -517,7 +515,7 @@ namespace AutoRest.Extensions.Azure
                             bool? extensionObject = parameter.Extensions[ClientRequestIdExtension] as bool?;
                             if (extensionObject != null && extensionObject.Value)
                             {
-                                return parameter.SerializedName;
+                                return parameter.SerializedName.Value;
                             }
                             return null;
                         })

@@ -35,7 +35,7 @@ namespace Fixtures.PetstoreV2NoSync
         Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
-            /// <summary>
+        /// <summary>
         /// Add a new pet to the store
         /// </summary>
         /// <param name='body'>

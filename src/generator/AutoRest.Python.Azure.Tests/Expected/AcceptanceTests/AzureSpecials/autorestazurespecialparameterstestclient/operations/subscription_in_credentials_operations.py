@@ -45,6 +45,8 @@ class SubscriptionInCredentialsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}'
@@ -91,6 +93,8 @@ class SubscriptionInCredentialsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}'
@@ -136,6 +140,8 @@ class SubscriptionInCredentialsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}'
@@ -182,6 +188,8 @@ class SubscriptionInCredentialsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}'
@@ -227,6 +235,8 @@ class SubscriptionInCredentialsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}'

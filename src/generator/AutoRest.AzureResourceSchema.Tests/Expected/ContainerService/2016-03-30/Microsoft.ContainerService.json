@@ -1,0 +1,387 @@
+{
+  "id": "http://schema.management.azure.com/schemas/2016-03-30/Microsoft.ContainerService.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.ContainerService",
+  "description": "Microsoft ContainerService Resource Types",
+  "resourceDefinitions": {
+    "containerServices": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.ContainerService/containerServices"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ContainerServiceProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "Microsoft.ContainerService/containerServices"
+    }
+  },
+  "definitions": {
+    "ContainerServiceAgentPoolProfile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique name of the agent pool profile within the context of the subscription and resource group"
+        },
+        "count": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "No. of agents (VMs) that will host docker containers"
+        },
+        "vmSize": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Standard_A0",
+                "Standard_A1",
+                "Standard_A2",
+                "Standard_A3",
+                "Standard_A4",
+                "Standard_A5",
+                "Standard_A6",
+                "Standard_A7",
+                "Standard_A8",
+                "Standard_A9",
+                "Standard_A10",
+                "Standard_A11",
+                "Standard_D1",
+                "Standard_D2",
+                "Standard_D3",
+                "Standard_D4",
+                "Standard_D11",
+                "Standard_D12",
+                "Standard_D13",
+                "Standard_D14",
+                "Standard_D1_v2",
+                "Standard_D2_v2",
+                "Standard_D3_v2",
+                "Standard_D4_v2",
+                "Standard_D5_v2",
+                "Standard_D11_v2",
+                "Standard_D12_v2",
+                "Standard_D13_v2",
+                "Standard_D14_v2",
+                "Standard_G1",
+                "Standard_G2",
+                "Standard_G3",
+                "Standard_G4",
+                "Standard_G5",
+                "Standard_DS1",
+                "Standard_DS2",
+                "Standard_DS3",
+                "Standard_DS4",
+                "Standard_DS11",
+                "Standard_DS12",
+                "Standard_DS13",
+                "Standard_DS14",
+                "Standard_GS1",
+                "Standard_GS2",
+                "Standard_GS3",
+                "Standard_GS4",
+                "Standard_GS5"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Size of agent VMs."
+        },
+        "dnsPrefix": {
+          "type": "string",
+          "description": "DNS prefix to be used to create FQDN for this agent pool"
+        }
+      },
+      "required": [
+        "name",
+        "dnsPrefix"
+      ],
+      "description": "Profile for container service agent pool"
+    },
+    "ContainerServiceDiagnosticsProfile": {
+      "type": "object",
+      "properties": {
+        "vmDiagnostics": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ContainerServiceVMDiagnostics"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Profile for container service VM diagnostic agent"
+        }
+      }
+    },
+    "ContainerServiceLinuxProfile": {
+      "type": "object",
+      "properties": {
+        "adminUsername": {
+          "type": "string",
+          "description": "The administrator username to use for all Linux VMs"
+        },
+        "ssh": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ContainerServiceSshConfiguration"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Specifies the ssh key configuration for Linux VMs"
+        }
+      },
+      "required": [
+        "adminUsername",
+        "ssh"
+      ],
+      "description": "Profile for Linux VMs"
+    },
+    "ContainerServiceMasterProfile": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Number of masters (VMs) in the container cluster"
+        },
+        "dnsPrefix": {
+          "type": "string",
+          "description": "DNS prefix to be used to create FQDN for master"
+        }
+      },
+      "required": [
+        "dnsPrefix"
+      ],
+      "description": "Profile for container service master"
+    },
+    "ContainerServiceOrchestratorProfile": {
+      "type": "object",
+      "properties": {
+        "orchestratorType": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Swarm",
+                "DCOS"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Specifies what orchestrator will be used to manage container cluster resources."
+        }
+      },
+      "description": "Profile for Orchestrator"
+    },
+    "ContainerServiceProperties": {
+      "type": "object",
+      "properties": {
+        "orchestratorProfile": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ContainerServiceOrchestratorProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of orchestrator"
+        },
+        "masterProfile": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ContainerServiceMasterProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of master agents"
+        },
+        "agentPoolProfiles": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ContainerServiceAgentPoolProfile"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of agent pools"
+        },
+        "windowsProfile": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ContainerServiceWindowsProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of Windows VMs"
+        },
+        "linuxProfile": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ContainerServiceLinuxProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties for Linux VMs"
+        },
+        "diagnosticsProfile": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ContainerServiceDiagnosticsProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties for Diagnostic Agent"
+        }
+      },
+      "required": [
+        "masterProfile",
+        "agentPoolProfiles",
+        "linuxProfile"
+      ],
+      "description": "Properties of container service"
+    },
+    "ContainerServiceSshConfiguration": {
+      "type": "object",
+      "properties": {
+        "publicKeys": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ContainerServiceSshPublicKey"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the list of SSH public keys used to authenticate with Linux based VMs"
+        }
+      },
+      "description": "SSH configuration for Linux based VMs running on Azure"
+    },
+    "ContainerServiceSshPublicKey": {
+      "type": "object",
+      "properties": {
+        "keyData": {
+          "type": "string",
+          "description": "Certificate public key used to authenticate with VM through SSH. The certificate must be in Pem format with or without headers."
+        }
+      },
+      "required": [
+        "keyData"
+      ],
+      "description": "Contains information about SSH certificate public key data."
+    },
+    "ContainerServiceVMDiagnostics": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "whether VM Diagnostic Agent should be provisioned on the Virtual Machine."
+        }
+      },
+      "description": "Describes VM Diagnostics."
+    },
+    "ContainerServiceWindowsProfile": {
+      "type": "object",
+      "properties": {
+        "adminUsername": {
+          "type": "string",
+          "description": "The administrator username to use for Windows VMs"
+        },
+        "adminPassword": {
+          "type": "string",
+          "description": "The administrator password to use for Windows VMs"
+        }
+      },
+      "required": [
+        "adminUsername",
+        "adminPassword"
+      ],
+      "description": "Profile for Windows VMs"
+    }
+  }
+}

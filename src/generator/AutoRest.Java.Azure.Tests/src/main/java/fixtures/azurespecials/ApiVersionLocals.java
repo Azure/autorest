@@ -13,8 +13,6 @@ package fixtures.azurespecials;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.azurespecials.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -25,10 +23,8 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getMethodLocalValid() throws ErrorException, IOException;
+    void getMethodLocalValid();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -55,10 +51,8 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getMethodLocalNull() throws ErrorException, IOException;
+    void getMethodLocalNull();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -85,10 +79,8 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getMethodLocalNull(String apiVersion) throws ErrorException, IOException;
+    void getMethodLocalNull(String apiVersion);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -118,10 +110,8 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getPathLocalValid() throws ErrorException, IOException;
+    void getPathLocalValid();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -148,10 +138,8 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void getSwaggerLocalValid() throws ErrorException, IOException;
+    void getSwaggerLocalValid();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.

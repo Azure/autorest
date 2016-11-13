@@ -1,9 +1,9 @@
 @using System;
 @using System.Linq;
 @using AutoRest.Python
-@using AutoRest.Python.TemplateModels
+@using AutoRest.Python.Model
 @using AutoRest.Python.Templates
-@inherits AutoRest.Python.PythonTemplate<AutoRest.Python.Azure.TemplateModels.AzureMethodTemplateModel>
+@inherits AutoRest.Python.PythonTemplate<AutoRest.Python.Azure.Model.MethodPya>
     def @(Model.Name.ToPythonCase())(
             self, @(Model.MethodParameterDeclaration(true))):
         """@(WrapComment(string.Empty, Model.BuildSummaryAndDescriptionString()))
@@ -11,13 +11,14 @@
 @*need to fix comment here for paging function*@
 @foreach(var parameter in Model.DocumentationParameters)
 {
-@:        @ParameterWrapComment(string.Empty, MethodTemplateModel.GetParameterDocumentationString(parameter))
-@:        @ParameterWrapComment(string.Empty, ":type " + parameter.Name + ": " + Model.GetDocumentationType(parameter.Type))
+@:        @ParameterWrapComment(string.Empty, MethodPy.GetParameterDocumentationString(parameter))
+@:        @ParameterWrapComment(string.Empty, ":type " + parameter.Name + ": " + Model.GetDocumentationType(parameter.ModelType))
 }
         @ParameterWrapComment(string.Empty, ":param dict custom_headers: headers that will be added to the request")
         @ParameterWrapComment(string.Empty, ":param bool raw: returns the direct response alongside the deserialized response")
         @ParameterWrapComment(string.Empty, ":param operation_config: :ref:`Operation configuration overrides<msrest:optionsforoperations>`.")
-        @ParameterWrapComment(string.Empty, string.Format(":rtype: {0}", Model.GetDocumentationType(Model.ReturnType.Body)))
+        @ParameterWrapComment(string.Empty, string.Format(":rtype: {0}", Model.GetReturnTypeDocumentation(Model.ReturnType.Body)))
+        @ParameterWrapComment(string.Empty, string.Format(":raises: {0}", Model.ExceptionDocumentation))
         """
         @Model.BuildInputMappings()
 @if (Model.InputParameterTransformation.Any())
@@ -67,19 +68,19 @@ else
             @:# Construct body
   if (Model.RequestBody.IsRequired)
   {
-            @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+            @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.ModelType.ToPythonRuntimeTypeString())')
   }
   else
   {
             @:if @Model.RequestBody.Name is not None:
-                @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+                @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.ModelType.ToPythonRuntimeTypeString())')
             @:else:
                 @:body_content = None
   }
 @EmptyLine
 }
             # Construct and send request
-            request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query_parameters)
+            request = self._client.@(MethodPy.GetHttpFunction(Model.HttpMethod))(url, query_parameters)
 @if (Model.RequestBody != null)
 {
             @:response = self._client.send(

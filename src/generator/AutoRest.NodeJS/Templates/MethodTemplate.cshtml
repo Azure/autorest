@@ -1,12 +1,12 @@
 @using System
 @using System.Globalization
 @using System.Linq;
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
 @using AutoRest.NodeJS
-@using AutoRest.NodeJS.TemplateModels
+@using AutoRest.NodeJS.Model
 @using AutoRest.NodeJS.Templates
-@inherits AutoRest.Core.Template<global::AutoRest.NodeJS.TemplateModels.MethodTemplateModel>
+@inherits AutoRest.Core.Template<MethodJs>
 
 /**
 @if (!String.IsNullOrEmpty(Model.Summary))
@@ -21,10 +21,10 @@
 }
 @foreach (var parameter in Model.DocumentationParameters)
 {
- @MethodTemplateModel.ConstructParameterDocumentation(
+ @MethodJs.ConstructParameterDocumentation(
                       WrapComment(" * ", "@param {"
-                                        + MethodTemplateModel.GetParameterDocumentationType(parameter)
-                                        + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
+                                        + MethodJs.GetParameterDocumentationType(parameter)
+                                        + "} " + MethodJs.GetParameterDocumentationName(parameter)
                                         + " " + parameter.Documentation))
 }
 @WrapComment(" * ", " @param {function} callback")
@@ -40,7 +40,7 @@
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-@(Model.OperationName).prototype.@(Model.Name.ToCamelCase()) = function (@(Model.MethodParameterDeclarationWithCallback)) {
+@(Model.MethodGroup.TypeName).prototype.@(Model.Name.ToCamelCase()) = function (@(Model.MethodParameterDeclarationWithCallback)) {
   var client = @(Model.ClientReference);
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -50,23 +50,23 @@
     throw new Error('callback cannot be null.');
   }
 
-  @if (((CompositeType)Model.OptionsParameterTemplateModel.Type).Properties.Count > 1)
+  @if (((CompositeType)Model.OptionsParameterTemplateModel.ModelType).Properties.Count > 1)
   {
   @:@(Model.BuildOptionalMappings())
   }
 
   @foreach(var parameter in Model.ParameterTemplateModels)
   {
-    if (parameter.IsConstant && parameter.ClientProperty == null)
+    if (parameter.IsConstant && !parameter.IsClientProperty)
     {
   @:var @(parameter.Name) = @(parameter.DefaultValue);
     }
 
-    if (parameter.Type is CompositeType
+    if (parameter.ModelType is CompositeType
       && !parameter.IsConstant
       && parameter.IsRequired
-      && parameter.ClientProperty == null
-      && ((CompositeType)parameter.Type).ContainsConstantProperties)
+      && !parameter.IsClientProperty
+      && ((CompositeType)parameter.ModelType).ContainsConstantProperties)
     {
   @:if (@(parameter.Name) === null || @(parameter.Name) === undefined)
   @:{
@@ -95,12 +95,12 @@
   // Construct URL
   @if (Model.IsAbsoluteUrl)
   {
-  @:var requestUrl = '@(Model.Url.EscapeSingleQuotes())';
+  @:var requestUrl = '@(((string)Model.Url).EscapeSingleQuotes())';
   }
   else
   {
-  @:var requestUrl = @(Model.ClientReference).baseUri +
-  @:                 '/@(Model.Url.EscapeSingleQuotes())';
+  @:var baseUrl = @(Model.ClientReference).baseUri;
+  @:var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + '@((Model.Url.StartsWith("/") ? Model.Url.TrimStart('/') : (string)Model.Url).EscapeSingleQuotes())';
   }
   @(Model.BuildUrl("requestUrl"))
   @EmptyLine
@@ -115,7 +115,7 @@
   @foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.Header))
   {
   @:if (@(parameter.Name) !== undefined && @(parameter.Name) !== null) {
-  @:  httpRequest.headers['@(parameter.SerializedName)'] = @parameter.Type.ToString(parameter.Name);
+  @:  httpRequest.headers['@(parameter.SerializedName)'] = @parameter.ModelType.ToString(parameter.Name);
   @:}
   }
   if(options) {
@@ -129,7 +129,7 @@
 
   @if (Model.RequestBody != null)
   {
-      if (Model.RequestBody.Type.IsPrimaryType(KnownPrimaryType.Stream))
+      if (Model.RequestBody.ModelType.IsPrimaryType(KnownPrimaryType.Stream))
       {
   <text>
   // Serialize Request  
@@ -167,13 +167,13 @@
       @foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData))
       {
   @:if (@(parameter.Name) !== undefined && @(parameter.Name) !== null) {
-          if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
+          if (parameter.ModelType.IsPrimaryType(KnownPrimaryType.Stream))
           {  
     @:formData['@(parameter.SerializedName)'] = @(parameter.Name);  
           }
           else
           {
-    @:formData['@(parameter.SerializedName)'] = @(parameter.Type.ToString(parameter.Name));
+    @:formData['@(parameter.SerializedName)'] = @parameter.ModelType.ToString(parameter.Name);
           }
   @:}
       }  

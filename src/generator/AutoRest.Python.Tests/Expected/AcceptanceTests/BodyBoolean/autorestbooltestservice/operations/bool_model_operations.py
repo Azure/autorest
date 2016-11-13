@@ -43,6 +43,8 @@ class BoolModelOperations(object):
         :rtype: bool
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodyboolean.models.ErrorException>`
         """
         # Construct URL
         url = '/bool/true'
@@ -88,6 +90,8 @@ class BoolModelOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodyboolean.models.ErrorException>`
         """
         # Construct URL
         url = '/bool/true'
@@ -128,6 +132,8 @@ class BoolModelOperations(object):
         :rtype: bool
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodyboolean.models.ErrorException>`
         """
         # Construct URL
         url = '/bool/false'
@@ -173,6 +179,8 @@ class BoolModelOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodyboolean.models.ErrorException>`
         """
         # Construct URL
         url = '/bool/false'
@@ -213,6 +221,8 @@ class BoolModelOperations(object):
         :rtype: bool
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodyboolean.models.ErrorException>`
         """
         # Construct URL
         url = '/bool/null'
@@ -256,6 +266,8 @@ class BoolModelOperations(object):
         :rtype: bool
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodyboolean.models.ErrorException>`
         """
         # Construct URL
         url = '/bool/invalid'

@@ -429,8 +429,11 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PostOptionalIntegerPropertyWithHttpMessagesAsync(int? value = default(int?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             IntOptionalWrapper bodyParameter = default(IntOptionalWrapper);
-            bodyParameter = new IntOptionalWrapper();
-            bodyParameter.Value = value;
+            if (value != null)
+            {
+                bodyParameter = new IntOptionalWrapper();
+                bodyParameter.Value = value;
+            }
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1788,8 +1791,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
 
         /// <summary>
         /// Test explicitly required complex object. Please put a valid class-wrapper
-        /// with 'value' = null and the client library should throw before the
-        /// request is sent.
+        /// with 'value' = null and the client library should throw before the request
+        /// is sent.
         /// </summary>
         /// <param name='value'>
         /// </param>
@@ -2565,8 +2568,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         }
 
         /// <summary>
-        /// Test explicitly required array. Please put a header 'headerParameter'
-        /// =&gt; null and the client library should throw before the request is sent.
+        /// Test explicitly required array. Please put a header 'headerParameter' =&gt;
+        /// null and the client library should throw before the request is sent.
         /// </summary>
         /// <param name='headerParameter'>
         /// </param>

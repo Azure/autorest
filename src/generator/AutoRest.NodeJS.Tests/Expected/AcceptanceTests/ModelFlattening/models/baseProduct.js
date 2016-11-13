@@ -16,9 +16,9 @@
  * @constructor
  * The product documentation.
  *
- * @member {string} productId Unique identifier representing a specific
- * product for a given latitude & longitude. For example, uberX in San
- * Francisco will have a different product_id than uberX in Los Angeles.
+ * @member {string} productId Unique identifier representing a specific product
+ * for a given latitude & longitude. For example, uberX in San Francisco will
+ * have a different product_id than uberX in Los Angeles.
  * 
  * @member {string} [description] Description of product.
  * 

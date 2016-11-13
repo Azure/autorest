@@ -1,9 +1,9 @@
 ﻿@using AutoRest.Python.Templates
 @using System.Linq;
 @using AutoRest.Python
-@using AutoRest.Python.Azure.TemplateModels
+@using AutoRest.Python.Azure.Model
 @using AutoRest.Python.Azure.Templates
-@inherits AutoRest.Core.Template<AutoRest.Python.Azure.TemplateModels.AzureMethodGroupTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.Python.Azure.Model.MethodGroupPya>
 # coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ").TrimMultilineHeader()
@@ -27,8 +27,8 @@ import uuid
 
 @EmptyLine
 @EmptyLine
-class @(Model.MethodGroupType)(object):
-    """@(Model.MethodGroupType) operations.
+class @((string) Model.TypeName)(object):
+    """@((string) Model.TypeName) operations.
 @EmptyLine
     :param client: Client for service requests.
     :param config: Configuration of service client.
@@ -54,5 +54,5 @@ class @(Model.MethodGroupType)(object):
 @foreach (var method in Model.MethodTemplateModels)
 {
 @EmptyLine
-@:@(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
+@:@(Include(new AzureMethodTemplate(), (MethodPya)method))
 }

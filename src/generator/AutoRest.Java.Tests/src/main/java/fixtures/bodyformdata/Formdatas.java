@@ -13,9 +13,7 @@ package fixtures.bodyformdata;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodyformdata.models.ErrorException;
 import java.io.InputStream;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -28,12 +26,9 @@ public interface Formdatas {
      *
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the InputStream object if successful.
      */
-    InputStream uploadFile(byte[] fileContent, String fileName) throws ErrorException, IOException, IllegalArgumentException;
+    InputStream uploadFile(byte[] fileContent, String fileName);
 
     /**
      * Upload file.
@@ -67,12 +62,9 @@ public interface Formdatas {
      * Upload file.
      *
      * @param fileContent File to upload.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the InputStream object if successful.
      */
-    InputStream uploadFileViaBody(byte[] fileContent) throws ErrorException, IOException, IllegalArgumentException;
+    InputStream uploadFileViaBody(byte[] fileContent);
 
     /**
      * Upload file.

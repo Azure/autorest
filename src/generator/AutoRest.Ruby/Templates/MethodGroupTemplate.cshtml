@@ -1,14 +1,15 @@
-﻿@using AutoRest.Ruby.Templates
-@inherits AutoRest.Core.Template<AutoRest.Ruby.TemplateModels.MethodGroupTemplateModel>
+﻿@using System.Linq
+@using AutoRest.Ruby.Templates
+@inherits AutoRest.Core.Template<AutoRest.Ruby.Model.MethodGroupRb>
 # encoding: utf-8
 @Header("# ")
 @EmptyLine
 module @Settings.Namespace
   #
-  @WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? Model.MethodGroupName : Model.Documentation)
+  @WrapComment("# ", string.IsNullOrEmpty(Model.CodeModel.Documentation) ? (string) Model.TypeName : Model.CodeModel.Documentation)
   #
-  class @(Model.MethodGroupName)
-@if (Model.HasModelTypes)
+  class @((string) Model.TypeName)
+@if (Model.CodeModel.ModelTypes.Any())
 {
     @:include @(Settings.Namespace)::Models
 }
@@ -19,7 +20,7 @@ module @Settings.Namespace
     @EmptyLine
 
     #
-    # Creates and initializes a new instance of the @Model.MethodGroupName class.
+    # Creates and initializes a new instance of the @((string) Model.TypeName) class.
     # @@param client service class for accessing basic functionality.
     #
     def initialize(client)
@@ -27,7 +28,7 @@ module @Settings.Namespace
     end
 
     @EmptyLine
-    # @@return [@(Model.Name)] reference to the @(Model.Name)
+    # @@return [@(Model.CodeModel.Name)] reference to the @(Model.CodeModel.Name)
     attr_reader :client
 
     @EmptyLine

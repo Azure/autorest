@@ -59,11 +59,8 @@ Number.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/null';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/null';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -173,11 +170,8 @@ Number.prototype.getInvalidFloat = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/invalidfloat';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/invalidfloat';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -287,11 +281,8 @@ Number.prototype.getInvalidDouble = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/invaliddouble';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/invaliddouble';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -401,11 +392,8 @@ Number.prototype.getInvalidDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/invaliddecimal';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/invaliddecimal';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -525,11 +513,8 @@ Number.prototype.putBigFloat = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/big/float/3.402823e+20';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/float/3.402823e+20';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -636,11 +621,8 @@ Number.prototype.getBigFloat = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/big/float/3.402823e+20';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/float/3.402823e+20';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -760,11 +742,8 @@ Number.prototype.putBigDouble = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/big/double/2.5976931e+101';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/2.5976931e+101';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -871,11 +850,8 @@ Number.prototype.getBigDouble = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/big/double/2.5976931e+101';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/2.5976931e+101';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -995,11 +971,8 @@ Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, ca
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/big/double/99999999.99';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/99999999.99';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1106,11 +1079,8 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/big/double/99999999.99';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/99999999.99';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1230,11 +1200,8 @@ Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, ca
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/big/double/-99999999.99';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/-99999999.99';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1341,11 +1308,8 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/big/double/-99999999.99';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/-99999999.99';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1465,11 +1429,8 @@ Number.prototype.putBigDecimal = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/big/decimal/2.5976931e+101';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/2.5976931e+101';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1576,11 +1537,8 @@ Number.prototype.getBigDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/big/decimal/2.5976931e+101';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/2.5976931e+101';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1700,11 +1658,8 @@ Number.prototype.putBigDecimalPositiveDecimal = function (numberBody, options, c
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/big/decimal/99999999.99';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/99999999.99';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1811,11 +1766,8 @@ Number.prototype.getBigDecimalPositiveDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/big/decimal/99999999.99';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/99999999.99';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1935,11 +1887,8 @@ Number.prototype.putBigDecimalNegativeDecimal = function (numberBody, options, c
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/big/decimal/-99999999.99';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/-99999999.99';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2046,11 +1995,8 @@ Number.prototype.getBigDecimalNegativeDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/big/decimal/-99999999.99';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/-99999999.99';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2170,11 +2116,8 @@ Number.prototype.putSmallFloat = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/small/float/3.402823e-20';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/float/3.402823e-20';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2281,11 +2224,8 @@ Number.prototype.getSmallFloat = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/small/float/3.402823e-20';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/float/3.402823e-20';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2405,11 +2345,8 @@ Number.prototype.putSmallDouble = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/small/double/2.5976931e-101';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/double/2.5976931e-101';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2516,11 +2453,8 @@ Number.prototype.getSmallDouble = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/small/double/2.5976931e-101';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/double/2.5976931e-101';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2640,11 +2574,8 @@ Number.prototype.putSmallDecimal = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/small/decimal/2.5976931e-101';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/decimal/2.5976931e-101';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2751,11 +2682,8 @@ Number.prototype.getSmallDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//number/small/decimal/2.5976931e-101';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/decimal/2.5976931e-101';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

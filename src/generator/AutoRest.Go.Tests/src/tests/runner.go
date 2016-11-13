@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"tests/acceptancetests/utils"
+	"tests/generated/azurereport"
 	"tests/generated/report"
 )
 
@@ -17,6 +18,7 @@ func main() {
 	allPass := true
 	runTests(&allPass)
 	getReport()
+	getAzureReport()
 	server.Kill()
 	if !allPass {
 		fmt.Println("Not all tests passed")
@@ -64,7 +66,7 @@ func runTests(allPass *bool) {
 		"custombaseurlgroup",
 		"filegroup",
 		// "formdatagroup",
-	}
+		"paginggroup"}
 
 	for _, suite := range testSuites {
 		fmt.Printf("Run test (go test ./acceptancetests/%vtest -v) ...\n", suite)
@@ -78,7 +80,7 @@ func runTests(allPass *bool) {
 			fmt.Printf("Error! %v\n", err)
 			*allPass = false
 		}
-		if stderr.String()[:2] != "OK" {
+		if len(stderr.String()) >= 2 && stderr.String()[:2] != "OK" {
 			*allPass = false
 		}
 	}
@@ -90,15 +92,28 @@ func getReport() {
 	if err != nil {
 		fmt.Println("Error:", err)
 	}
+	printReport(res.Value, "")
+}
 
+func getAzureReport() {
+	var reportClient = azurereport.NewWithBaseURI(utils.GetBaseURI())
+	res, err := reportClient.GetReport()
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+	printReport(res.Value, "Azure")
+}
+
+func printReport(res *map[string]*int32, report string) {
 	count := 0
-	for key, val := range *res.Value {
+	for key, val := range *res {
 		if *val <= 0 {
 			fmt.Println(key, *val)
 			count++
 		}
 	}
-	total := len(*res.Value)
+	total := len(*res)
 	fmt.Printf("\nReport:	Passed(%v)  Failed(%v)\n", total-count, count)
-	fmt.Println("Go Done.......\n")
+	fmt.Printf("Go %s Done.......\n\n", report)
+
 }

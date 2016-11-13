@@ -43,6 +43,8 @@ class StringOperations(object):
         :rtype: str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/null'
@@ -88,6 +90,8 @@ class StringOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/null'
@@ -131,6 +135,8 @@ class StringOperations(object):
         :rtype: str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/empty'
@@ -176,6 +182,8 @@ class StringOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/empty'
@@ -218,6 +226,8 @@ class StringOperations(object):
         :rtype: str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/mbcs'
@@ -267,6 +277,8 @@ class StringOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/mbcs'
@@ -298,8 +310,8 @@ class StringOperations(object):
     def get_whitespace(
             self, custom_headers=None, raw=False, **operation_config):
         """Get string value with leading and trailing whitespace
-        '<tab><space><space>Now is the time for all good men to come to the
-        aid of their country<tab><space><space>'.
+        '<tab><space><space>Now is the time for all good men to come to the aid
+        of their country<tab><space><space>'.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -309,6 +321,8 @@ class StringOperations(object):
         :rtype: str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/whitespace'
@@ -343,8 +357,8 @@ class StringOperations(object):
     def put_whitespace(
             self, string_body, custom_headers=None, raw=False, **operation_config):
         """Set String value with leading and trailing whitespace
-        '<tab><space><space>Now is the time for all good men to come to the
-        aid of their country<tab><space><space>'.
+        '<tab><space><space>Now is the time for all good men to come to the aid
+        of their country<tab><space><space>'.
 
         :param string_body: Possible values include: '    Now is the time for
          all good men to come to the aid of their country    '
@@ -357,6 +371,8 @@ class StringOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/whitespace'
@@ -397,6 +413,8 @@ class StringOperations(object):
         :rtype: str
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/notProvided'
@@ -440,6 +458,8 @@ class StringOperations(object):
         :rtype: bytes
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/base64Encoding'
@@ -483,6 +503,8 @@ class StringOperations(object):
         :rtype: bytes
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/base64UrlEncoding'
@@ -528,6 +550,8 @@ class StringOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/base64UrlEncoding'
@@ -568,6 +592,8 @@ class StringOperations(object):
         :rtype: bytes
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/nullBase64UrlEncoding'

@@ -1,4 +1,4 @@
-﻿{
+{
   "id": "http://schema.management.azure.com/schemas/2016-05-01-preview/Microsoft.MachineLearning.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.MachineLearning",
@@ -19,6 +19,28 @@
             "2016-05-01-preview"
           ]
         },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -34,6 +56,7 @@
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
       "description": "Microsoft.MachineLearning/webServices"

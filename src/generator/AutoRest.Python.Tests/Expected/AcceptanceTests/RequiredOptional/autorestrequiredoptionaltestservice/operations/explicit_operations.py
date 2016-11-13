@@ -44,9 +44,11 @@ class ExplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
+         <fixtures.acceptancetestsrequiredoptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/requied/integer/parameter'
@@ -89,6 +91,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/optional/integer/parameter'
@@ -134,9 +138,11 @@ class ExplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
+         <fixtures.acceptancetestsrequiredoptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         body_parameter = models.IntWrapper(value=value)
 
@@ -182,6 +188,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         body_parameter = None
         if value is not None:
@@ -219,9 +227,8 @@ class ExplicitOperations(object):
 
     def post_required_integer_header(
             self, header_parameter, custom_headers=None, raw=False, **operation_config):
-        """Test explicitly required integer. Please put a header
-        'headerParameter' => null and the client library should throw before
-        the request is sent.
+        """Test explicitly required integer. Please put a header 'headerParameter'
+        => null and the client library should throw before the request is sent.
 
         :param header_parameter:
         :type header_parameter: int
@@ -231,9 +238,11 @@ class ExplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
+         <fixtures.acceptancetestsrequiredoptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/requied/integer/header'
@@ -261,8 +270,8 @@ class ExplicitOperations(object):
 
     def post_optional_integer_header(
             self, header_parameter=None, custom_headers=None, raw=False, **operation_config):
-        """Test explicitly optional integer. Please put a header
-        'headerParameter' => null.
+        """Test explicitly optional integer. Please put a header 'headerParameter'
+        => null.
 
         :param header_parameter:
         :type header_parameter: int
@@ -274,6 +283,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/optional/integer/header'
@@ -302,8 +313,8 @@ class ExplicitOperations(object):
 
     def post_required_string_parameter(
             self, body_parameter, custom_headers=None, raw=False, **operation_config):
-        """Test explicitly required string. Please put null and the client
-        library should throw before the request is sent.
+        """Test explicitly required string. Please put null and the client library
+        should throw before the request is sent.
 
         :param body_parameter:
         :type body_parameter: str
@@ -313,9 +324,11 @@ class ExplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
+         <fixtures.acceptancetestsrequiredoptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/requied/string/parameter'
@@ -358,6 +371,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/optional/string/parameter'
@@ -391,9 +406,9 @@ class ExplicitOperations(object):
 
     def post_required_string_property(
             self, value, custom_headers=None, raw=False, **operation_config):
-        """Test explicitly required string. Please put a valid string-wrapper
-        with 'value' = null and the client library should throw before the
-        request is sent.
+        """Test explicitly required string. Please put a valid string-wrapper with
+        'value' = null and the client library should throw before the request
+        is sent.
 
         :param value:
         :type value: str
@@ -403,9 +418,11 @@ class ExplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
+         <fixtures.acceptancetestsrequiredoptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         body_parameter = models.StringWrapper(value=value)
 
@@ -451,6 +468,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         body_parameter = None
         if value is not None:
@@ -489,8 +508,7 @@ class ExplicitOperations(object):
     def post_required_string_header(
             self, header_parameter, custom_headers=None, raw=False, **operation_config):
         """Test explicitly required string. Please put a header 'headerParameter'
-        => null and the client library should throw before the request is
-        sent.
+        => null and the client library should throw before the request is sent.
 
         :param header_parameter:
         :type header_parameter: str
@@ -500,9 +518,11 @@ class ExplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
+         <fixtures.acceptancetestsrequiredoptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/requied/string/header'
@@ -543,6 +563,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/optional/string/header'
@@ -571,21 +593,23 @@ class ExplicitOperations(object):
 
     def post_required_class_parameter(
             self, body_parameter, custom_headers=None, raw=False, **operation_config):
-        """Test explicitly required complex object. Please put null and the
-        client library should throw before the request is sent.
+        """Test explicitly required complex object. Please put null and the client
+        library should throw before the request is sent.
 
         :param body_parameter:
         :type body_parameter: :class:`Product
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Product>`
+         <fixtures.acceptancetestsrequiredoptional.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
+         <fixtures.acceptancetestsrequiredoptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/requied/class/parameter'
@@ -620,7 +644,7 @@ class ExplicitOperations(object):
 
         :param body_parameter:
         :type body_parameter: :class:`Product
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Product>`
+         <fixtures.acceptancetestsrequiredoptional.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -629,6 +653,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/optional/class/parameter'
@@ -668,16 +694,18 @@ class ExplicitOperations(object):
 
         :param value:
         :type value: :class:`Product
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Product>`
+         <fixtures.acceptancetestsrequiredoptional.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
+         <fixtures.acceptancetestsrequiredoptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         body_parameter = models.ClassWrapper(value=value)
 
@@ -715,7 +743,7 @@ class ExplicitOperations(object):
 
         :param value:
         :type value: :class:`Product
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Product>`
+         <fixtures.acceptancetestsrequiredoptional.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -724,6 +752,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         body_parameter = None
         if value is not None:
@@ -772,9 +802,11 @@ class ExplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
+         <fixtures.acceptancetestsrequiredoptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/requied/array/parameter'
@@ -817,6 +849,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/optional/array/parameter'
@@ -862,9 +896,11 @@ class ExplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
+         <fixtures.acceptancetestsrequiredoptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         body_parameter = models.ArrayWrapper(value=value)
 
@@ -910,6 +946,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         body_parameter = None
         if value is not None:
@@ -948,8 +986,7 @@ class ExplicitOperations(object):
     def post_required_array_header(
             self, header_parameter, custom_headers=None, raw=False, **operation_config):
         """Test explicitly required array. Please put a header 'headerParameter'
-        => null and the client library should throw before the request is
-        sent.
+        => null and the client library should throw before the request is sent.
 
         :param header_parameter:
         :type header_parameter: list of str
@@ -959,9 +996,11 @@ class ExplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
+         <fixtures.acceptancetestsrequiredoptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/requied/array/header'
@@ -989,8 +1028,8 @@ class ExplicitOperations(object):
 
     def post_optional_array_header(
             self, header_parameter=None, custom_headers=None, raw=False, **operation_config):
-        """Test explicitly optional integer. Please put a header
-        'headerParameter' => null.
+        """Test explicitly optional integer. Please put a header 'headerParameter'
+        => null.
 
         :param header_parameter:
         :type header_parameter: list of str
@@ -1002,6 +1041,8 @@ class ExplicitOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsrequiredoptional.models.ErrorException>`
         """
         # Construct URL
         url = '/reqopt/optional/array/header'

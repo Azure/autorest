@@ -43,7 +43,8 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -100,14 +101,15 @@ class PagingOperations(object):
          the operation
         :type paging_get_multiple_pages_options:
          :class:`PagingGetMultiplePagesOptions
-         <Fixtures.AcceptanceTestsPaging.models.PagingGetMultiplePagesOptions>`
+         <fixtures.acceptancetestspaging.models.PagingGetMultiplePagesOptions>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         maxresults = None
         if paging_get_multiple_pages_options is not None:
@@ -169,8 +171,8 @@ class PagingOperations(object):
 
     def get_odata_multiple_pages(
             self, client_request_id=None, paging_get_odata_multiple_pages_options=None, custom_headers=None, raw=False, **operation_config):
-        """A paging operation that includes a nextLink in odata format that has
-        10 pages.
+        """A paging operation that includes a nextLink in odata format that has 10
+        pages.
 
         :param client_request_id:
         :type client_request_id: str
@@ -178,14 +180,15 @@ class PagingOperations(object):
          for the operation
         :type paging_get_odata_multiple_pages_options:
          :class:`PagingGetOdataMultiplePagesOptions
-         <Fixtures.AcceptanceTestsPaging.models.PagingGetOdataMultiplePagesOptions>`
+         <fixtures.acceptancetestspaging.models.PagingGetOdataMultiplePagesOptions>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged1
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged1>`
+         <fixtures.acceptancetestspaging.models.ProductPaged1>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         maxresults = None
         if paging_get_odata_multiple_pages_options is not None:
@@ -253,7 +256,7 @@ class PagingOperations(object):
          parameters for the operation
         :type paging_get_multiple_pages_with_offset_options:
          :class:`PagingGetMultiplePagesWithOffsetOptions
-         <Fixtures.AcceptanceTestsPaging.models.PagingGetMultiplePagesWithOffsetOptions>`
+         <fixtures.acceptancetestspaging.models.PagingGetMultiplePagesWithOffsetOptions>`
         :param client_request_id:
         :type client_request_id: str
         :param dict custom_headers: headers that will be added to the request
@@ -262,7 +265,8 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         maxresults = None
         if paging_get_multiple_pages_with_offset_options is not None:
@@ -332,8 +336,7 @@ class PagingOperations(object):
     def get_multiple_pages_retry_first(
             self, custom_headers=None, raw=False, **operation_config):
         """A paging operation that fails on the first call with 500 and then
-        retries and then get a response including a nextLink that has 10
-        pages.
+        retries and then get a response including a nextLink that has 10 pages.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -341,7 +344,8 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -390,9 +394,9 @@ class PagingOperations(object):
 
     def get_multiple_pages_retry_second(
             self, custom_headers=None, raw=False, **operation_config):
-        """A paging operation that includes a nextLink that has 10 pages, of
-        which the 2nd call fails first with 500. The client should retry and
-        finish all 10 pages eventually.
+        """A paging operation that includes a nextLink that has 10 pages, of which
+        the 2nd call fails first with 500. The client should retry and finish
+        all 10 pages eventually.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -400,7 +404,8 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -457,7 +462,8 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -514,7 +520,8 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -571,7 +578,8 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -632,7 +640,8 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged1
-         <Fixtures.AcceptanceTestsPaging.models.ProductPaged1>`
+         <fixtures.acceptancetestspaging.models.ProductPaged1>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -650,6 +659,86 @@ class PagingOperations(object):
 
             else:
                 url = '/paging/multiple/fragment/{tenant}/{nextLink}'
+                path_format_arguments = {
+                    'tenant': self._serialize.url("tenant", tenant, 'str'),
+                    'nextLink': self._serialize.url("next_link", next_link, 'str', skip_quote=True)
+                }
+                url = self._client.format_url(url, **path_format_arguments)
+                query_parameters = {}
+                query_parameters['api_version'] = self._serialize.query("api_version", api_version, 'str')
+
+            # Construct headers
+            header_parameters = {}
+            header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+            if self.config.generate_client_request_id:
+                header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+            if custom_headers:
+                header_parameters.update(custom_headers)
+            if self.config.accept_language is not None:
+                header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
+
+            # Construct and send request
+            request = self._client.get(url, query_parameters)
+            response = self._client.send(
+                request, header_parameters, **operation_config)
+
+            if response.status_code not in [200]:
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
+
+            return response
+
+        # Deserialize response
+        deserialized = models.ProductPaged1(internal_paging, self._deserialize.dependencies)
+
+        if raw:
+            header_dict = {}
+            client_raw_response = models.ProductPaged1(internal_paging, self._deserialize.dependencies, header_dict)
+            return client_raw_response
+
+        return deserialized
+
+    def get_multiple_pages_fragment_with_grouping_next_link(
+            self, custom_parameter_group, custom_headers=None, raw=False, **operation_config):
+        """A paging operation that doesn't return a full URL, just a fragment with
+        parameters grouped.
+
+        :param custom_parameter_group: Additional parameters for the operation
+        :type custom_parameter_group: :class:`CustomParameterGroup
+         <fixtures.acceptancetestspaging.models.CustomParameterGroup>`
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`ProductPaged1
+         <fixtures.acceptancetestspaging.models.ProductPaged1>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
+        """
+        api_version = None
+        if custom_parameter_group is not None:
+            api_version = custom_parameter_group.api_version
+        tenant = None
+        if custom_parameter_group is not None:
+            tenant = custom_parameter_group.tenant
+
+        def internal_paging(next_link=None, raw=False):
+
+            if not next_link:
+                # Construct URL
+                url = '/paging/multiple/fragmentwithgrouping/{tenant}'
+                path_format_arguments = {
+                    'tenant': self._serialize.url("tenant", tenant, 'str')
+                }
+                url = self._client.format_url(url, **path_format_arguments)
+
+                # Construct parameters
+                query_parameters = {}
+                query_parameters['api_version'] = self._serialize.query("api_version", api_version, 'str')
+
+            else:
+                url = '/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}'
                 path_format_arguments = {
                     'tenant': self._serialize.url("tenant", tenant, 'str'),
                     'nextLink': self._serialize.url("next_link", next_link, 'str', skip_quote=True)

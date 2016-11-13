@@ -150,6 +150,8 @@ namespace AutoRest.AzureResourceSchema
             WriteProperty(writer, "minimum", definition.Minimum);
             WriteProperty(writer, "maximum", definition.Maximum);
             WriteProperty(writer, "pattern", definition.Pattern);
+            WriteProperty(writer, "minLength", definition.MinLength);
+            WriteProperty(writer, "maxLength", definition.MaxLength);
             WriteStringArray(writer, "enum", definition.Enum);
             WriteDefinitionArray(writer, "oneOf", definition.OneOf);
             WriteProperty(writer, "format", definition.Format);

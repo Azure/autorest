@@ -1,0 +1,944 @@
+{
+  "id": "http://schema.management.azure.com/schemas/2016-03-01/Microsoft.NotificationHubs.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.NotificationHubs",
+  "description": "Microsoft NotificationHubs Resource Types",
+  "resourceDefinitions": {
+    "namespaces": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.NotificationHubs/namespaces"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The sku of the created namespace"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/NamespaceProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of the Namespace."
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/namespaces_notificationHubs_childResource"
+              },
+              {
+                "$ref": "#/definitions/namespaces_AuthorizationRules_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "Microsoft.NotificationHubs/namespaces"
+    },
+    "namespaces_AuthorizationRules": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.NotificationHubs/namespaces/AuthorizationRules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The sku of the created namespace"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of the Namespace AuthorizationRules."
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "Microsoft.NotificationHubs/namespaces/AuthorizationRules"
+    },
+    "namespaces_notificationHubs": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.NotificationHubs/namespaces/notificationHubs"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The sku of the created namespace"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/NotificationHubProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of the NotificationHub."
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/namespaces_notificationHubs_AuthorizationRules_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "Microsoft.NotificationHubs/namespaces/notificationHubs"
+    },
+    "namespaces_notificationHubs_AuthorizationRules": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.NotificationHubs/namespaces/notificationHubs/AuthorizationRules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The sku of the created namespace"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of the Namespace AuthorizationRules."
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "Microsoft.NotificationHubs/namespaces/notificationHubs/AuthorizationRules"
+    }
+  },
+  "definitions": {
+    "AdmCredential": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AdmCredentialProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of NotificationHub AdmCredential."
+        }
+      },
+      "description": "Description of a NotificationHub AdmCredential."
+    },
+    "AdmCredentialProperties": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The client identifier."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "The credential secret access key."
+        },
+        "authTokenUrl": {
+          "type": "string",
+          "description": "The URL of the authorization token."
+        }
+      },
+      "description": "Description of a NotificationHub AdmCredential."
+    },
+    "ApnsCredential": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ApnsCredentialProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of NotificationHub ApnsCredential."
+        }
+      },
+      "description": "Description of a NotificationHub ApnsCredential."
+    },
+    "ApnsCredentialProperties": {
+      "type": "object",
+      "properties": {
+        "apnsCertificate": {
+          "type": "string",
+          "description": "The APNS certificate."
+        },
+        "certificateKey": {
+          "type": "string",
+          "description": "The certificate key."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The endpoint of this credential."
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "The Apns certificate Thumbprint"
+        }
+      },
+      "description": "Description of a NotificationHub ApnsCredential."
+    },
+    "BaiduCredential": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/BaiduCredentialProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of NotificationHub BaiduCredential."
+        }
+      },
+      "description": "Description of a NotificationHub BaiduCredential."
+    },
+    "BaiduCredentialProperties": {
+      "type": "object",
+      "properties": {
+        "baiduApiKey": {
+          "type": "string",
+          "description": "Baidu Api Key."
+        },
+        "baiduEndPoint": {
+          "type": "string",
+          "description": "Baidu Endpoint."
+        },
+        "baiduSecretKey": {
+          "type": "string",
+          "description": "Baidu Secret Key"
+        }
+      },
+      "description": "Description of a NotificationHub BaiduCredential."
+    },
+    "GcmCredential": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/GcmCredentialProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of NotificationHub GcmCredential."
+        }
+      },
+      "description": "Description of a NotificationHub GcmCredential."
+    },
+    "GcmCredentialProperties": {
+      "type": "object",
+      "properties": {
+        "gcmEndpoint": {
+          "type": "string",
+          "description": "The GCM endpoint."
+        },
+        "googleApiKey": {
+          "type": "string",
+          "description": "The Google API key."
+        }
+      },
+      "description": "Description of a NotificationHub GcmCredential."
+    },
+    "MpnsCredential": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/MpnsCredentialProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of NotificationHub MpnsCredential."
+        }
+      },
+      "description": "Description of a NotificationHub MpnsCredential."
+    },
+    "MpnsCredentialProperties": {
+      "type": "object",
+      "properties": {
+        "mpnsCertificate": {
+          "type": "string",
+          "description": "The MPNS certificate."
+        },
+        "certificateKey": {
+          "type": "string",
+          "description": "The certificate key for this credential."
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "The Mpns certificate Thumbprint"
+        }
+      },
+      "description": "Description of a NotificationHub MpnsCredential."
+    },
+    "NamespaceProperties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the namespace."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the Namespace."
+        },
+        "region": {
+          "type": "string",
+          "description": "Specifies the targeted region in which the namespace should be created. It can be any of the following values: Australia EastAustralia SoutheastCentral USEast USEast US 2West USNorth Central USSouth Central USEast AsiaSoutheast AsiaBrazil SouthJapan EastJapan WestNorth EuropeWest Europe"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the namespace. It can be any of these values:1 = Created/Active2 = Creating3 = Suspended4 = Deleting"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the namespace was created."
+        },
+        "serviceBusEndpoint": {
+          "type": "string",
+          "description": "Endpoint you can use to perform NotificationHub operations."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The Id of the Azure subscription associated with the namespace."
+        },
+        "scaleUnit": {
+          "type": "string",
+          "description": "ScaleUnit where the namespace gets created"
+        },
+        "enabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Whether or not the namespace is currently enabled."
+        },
+        "critical": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Whether or not the namespace is set as Critical."
+        },
+        "namespaceType": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Messaging",
+                "NotificationHub"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The namespace type."
+        }
+      },
+      "description": "Namespace properties."
+    },
+    "namespaces_AuthorizationRules_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "AuthorizationRules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The sku of the created namespace"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of the Namespace AuthorizationRules."
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "Microsoft.NotificationHubs/namespaces/AuthorizationRules"
+    },
+    "namespaces_notificationHubs_AuthorizationRules_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "AuthorizationRules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The sku of the created namespace"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of the Namespace AuthorizationRules."
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "Microsoft.NotificationHubs/namespaces/notificationHubs/AuthorizationRules"
+    },
+    "namespaces_notificationHubs_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "notificationHubs"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The sku of the created namespace"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/NotificationHubProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of the NotificationHub."
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/namespaces_notificationHubs_AuthorizationRules_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "Microsoft.NotificationHubs/namespaces/notificationHubs"
+    },
+    "NotificationHubProperties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The NotificationHub name."
+        },
+        "registrationTtl": {
+          "type": "string",
+          "description": "The RegistrationTtl of the created NotificationHub"
+        },
+        "authorizationRules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The AuthorizationRules of the created NotificationHub"
+        },
+        "apnsCredential": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ApnsCredential"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The ApnsCredential of the created NotificationHub"
+        },
+        "wnsCredential": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/WnsCredential"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The WnsCredential of the created NotificationHub"
+        },
+        "gcmCredential": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/GcmCredential"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The GcmCredential of the created NotificationHub"
+        },
+        "mpnsCredential": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/MpnsCredential"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The MpnsCredential of the created NotificationHub"
+        },
+        "admCredential": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AdmCredential"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The AdmCredential of the created NotificationHub"
+        },
+        "baiduCredential": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/BaiduCredential"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The BaiduCredential of the created NotificationHub"
+        }
+      },
+      "description": "NotificationHub properties."
+    },
+    "SharedAccessAuthorizationRuleProperties": {
+      "type": "object",
+      "properties": {
+        "rights": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Manage",
+                  "Send",
+                  "Listen"
+                ]
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The rights associated with the rule."
+        }
+      },
+      "description": "SharedAccessAuthorizationRule properties."
+    },
+    "Sku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Free",
+                "Basic",
+                "Standard"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Name of the notification hub sku."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of particular sku"
+        },
+        "size": {
+          "type": "string",
+          "description": "The Sku size"
+        },
+        "family": {
+          "type": "string",
+          "description": "The Sku Family"
+        },
+        "capacity": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The capacity of the resource"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The Sku description for a namespace"
+    },
+    "WnsCredential": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/WnsCredentialProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of NotificationHub WnsCredential."
+        }
+      },
+      "description": "Description of a NotificationHub WnsCredential."
+    },
+    "WnsCredentialProperties": {
+      "type": "object",
+      "properties": {
+        "packageSid": {
+          "type": "string",
+          "description": "The package ID for this credential."
+        },
+        "secretKey": {
+          "type": "string",
+          "description": "The secret key."
+        },
+        "windowsLiveEndpoint": {
+          "type": "string",
+          "description": "The Windows Live endpoint."
+        }
+      },
+      "description": "Description of a NotificationHub WnsCredential."
+    }
+  }
+}

@@ -106,9 +106,9 @@ export interface ResourceCollection {
  * @constructor
  * The product documentation.
  *
- * @member {string} productId Unique identifier representing a specific
- * product for a given latitude & longitude. For example, uberX in San
- * Francisco will have a different product_id than uberX in Los Angeles.
+ * @member {string} productId Unique identifier representing a specific product
+ * for a given latitude & longitude. For example, uberX in San Francisco will
+ * have a different product_id than uberX in Los Angeles.
  * 
  * @member {string} [description] Description of product.
  * 
@@ -139,15 +139,28 @@ export interface SimpleProduct extends BaseProduct {
 
 /**
  * @class
+ * Initializes a new instance of the GenericUrl class.
+ * @constructor
+ * The Generic URL.
+ *
+ * @member {string} [genericValue] Generic URL value.
+ * 
+ */
+export interface GenericUrl {
+  genericValue?: string;
+}
+
+/**
+ * @class
  * Initializes a new instance of the FlattenParameterGroup class.
  * @constructor
  * Additional parameters for the putSimpleProductWithGrouping operation.
  *
  * @member {string} name Product name with value 'groupproduct'
  * 
- * @member {string} productId Unique identifier representing a specific
- * product for a given latitude & longitude. For example, uberX in San
- * Francisco will have a different product_id than uberX in Los Angeles.
+ * @member {string} productId Unique identifier representing a specific product
+ * for a given latitude & longitude. For example, uberX in San Francisco will
+ * have a different product_id than uberX in Los Angeles.
  * 
  * @member {string} [description] Description of product.
  * 
@@ -165,17 +178,4 @@ export interface FlattenParameterGroup {
   maxProductDisplayName: string;
   genericValue?: string;
   odatavalue?: string;
-}
-
-/**
- * @class
- * Initializes a new instance of the GenericUrl class.
- * @constructor
- * The Generic URL.
- *
- * @member {string} [genericValue] Generic URL value.
- * 
- */
-export interface GenericUrl {
-  genericValue?: string;
 }

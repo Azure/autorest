@@ -41,9 +41,11 @@ class ReadonlypropertyOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ReadonlyObj
-         <Fixtures.AcceptanceTestsBodyComplex.models.ReadonlyObj>`
+         <fixtures.acceptancetestsbodycomplex.models.ReadonlyObj>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/readonlyproperty/valid'
@@ -76,12 +78,11 @@ class ReadonlypropertyOperations(object):
         return deserialized
 
     def put_valid(
-            self, complex_body, custom_headers=None, raw=False, **operation_config):
+            self, size=None, custom_headers=None, raw=False, **operation_config):
         """Put complex types that have readonly properties.
 
-        :param complex_body:
-        :type complex_body: :class:`ReadonlyObj
-         <Fixtures.AcceptanceTestsBodyComplex.models.ReadonlyObj>`
+        :param size:
+        :type size: int
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -90,7 +91,11 @@ class ReadonlypropertyOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
+        complex_body = models.ReadonlyObj(size=size)
+
         # Construct URL
         url = '/complex/readonlyproperty/valid'
 

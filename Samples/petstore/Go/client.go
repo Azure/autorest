@@ -30,7 +30,7 @@ type ManagementClient struct {
 }
 
 // New creates an instance of the ManagementClient client.
-func New() ManagementClient {
+func New()ManagementClient {
     return NewWithBaseURI(DefaultBaseURI, )
 }
 
@@ -49,12 +49,12 @@ func NewWithBaseURI(baseURI string, ) ManagementClient {
 // body is pet object that needs to be added to the store
 func (client ManagementClient) AddPet(body *Pet) (result autorest.Response, err error) {
     if err := validation.Validate([]validation.Validation{
-         {body,
-         []validation.Constraint{	{"body", validation.Null, false ,
-         []validation.Constraint{	{"Name", validation.Null, true, nil },
-         	{"PhotoUrls", validation.Null, true, nil },
+         { TargetValue: body,
+          Constraints: []validation.Constraint{	{Target: "body", Name: validation.Null, Rule: false ,
+         Chain: []validation.Constraint{	{Target: "body.Name", Name: validation.Null, Rule: true, Chain: nil },
+         	{Target: "body.PhotoUrls", Name: validation.Null, Rule: true, Chain: nil },
          }}}}}); err != nil {
-             return result, autorest.NewErrorWithError(err, "Petstore.ManagementClient", "AddPet", nil , "Validation error ")
+             return result, validation.NewErrorWithValidationError(err, "Petstore.ManagementClient","AddPet")
     }
 
     req, err := client.AddPetPreparer(body)
@@ -1000,11 +1000,11 @@ func (client ManagementClient) LogoutUserResponder(resp *http.Response) (result 
 // body is order placed for purchasing the pet
 func (client ManagementClient) PlaceOrder(body *Order) (result Order, err error) {
     if err := validation.Validate([]validation.Validation{
-         {body,
-         []validation.Constraint{	{"body", validation.Null, false ,
-         []validation.Constraint{	{"ID", validation.ReadOnly, true, nil },
+         { TargetValue: body,
+          Constraints: []validation.Constraint{	{Target: "body", Name: validation.Null, Rule: false ,
+         Chain: []validation.Constraint{	{Target: "body.ID", Name: validation.ReadOnly, Rule: true, Chain: nil },
          }}}}}); err != nil {
-             return result, autorest.NewErrorWithError(err, "Petstore.ManagementClient", "PlaceOrder", nil , "Validation error ")
+             return result, validation.NewErrorWithValidationError(err, "Petstore.ManagementClient","PlaceOrder")
     }
 
     req, err := client.PlaceOrderPreparer(body)
@@ -1064,12 +1064,12 @@ func (client ManagementClient) PlaceOrderResponder(resp *http.Response) (result 
 // body is pet object that needs to be added to the store
 func (client ManagementClient) UpdatePet(body *Pet) (result autorest.Response, err error) {
     if err := validation.Validate([]validation.Validation{
-         {body,
-         []validation.Constraint{	{"body", validation.Null, false ,
-         []validation.Constraint{	{"Name", validation.Null, true, nil },
-         	{"PhotoUrls", validation.Null, true, nil },
+         { TargetValue: body,
+          Constraints: []validation.Constraint{	{Target: "body", Name: validation.Null, Rule: false ,
+         Chain: []validation.Constraint{	{Target: "body.Name", Name: validation.Null, Rule: true, Chain: nil },
+         	{Target: "body.PhotoUrls", Name: validation.Null, Rule: true, Chain: nil },
          }}}}}); err != nil {
-             return result, autorest.NewErrorWithError(err, "Petstore.ManagementClient", "UpdatePet", nil , "Validation error ")
+             return result, validation.NewErrorWithValidationError(err, "Petstore.ManagementClient","UpdatePet")
     }
 
     req, err := client.UpdatePetPreparer(body)

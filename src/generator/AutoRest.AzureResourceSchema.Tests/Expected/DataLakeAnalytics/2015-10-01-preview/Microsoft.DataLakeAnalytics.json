@@ -1,4 +1,4 @@
-﻿{
+{
   "id": "http://schema.management.azure.com/schemas/2015-10-01-preview/Microsoft.DataLakeAnalytics.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.DataLakeAnalytics",
@@ -51,6 +51,19 @@
             }
           ],
           "description": "Gets or sets the properties defined by Data Lake Analytics all properties are specific to each resource provider."
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/accounts_DataLakeStoreAccounts_childResource"
+              },
+              {
+                "$ref": "#/definitions/accounts_StorageAccounts_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -59,9 +72,145 @@
         "properties"
       ],
       "description": "Microsoft.DataLakeAnalytics/accounts"
+    },
+    "accounts_DataLakeStoreAccounts": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.DataLakeAnalytics/accounts/DataLakeStoreAccounts"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-10-01-preview"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DataLakeStoreAccountInfoProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the properties for the Data Lake Store account being added."
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.DataLakeAnalytics/accounts/DataLakeStoreAccounts"
+    },
+    "accounts_StorageAccounts": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.DataLakeAnalytics/accounts/StorageAccounts"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-10-01-preview"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/StorageAccountProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the properties for the Azure Storage account being added."
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.DataLakeAnalytics/accounts/StorageAccounts"
     }
   },
   "definitions": {
+    "accounts_DataLakeStoreAccounts_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "DataLakeStoreAccounts"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-10-01-preview"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DataLakeStoreAccountInfoProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the properties for the Data Lake Store account being added."
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.DataLakeAnalytics/accounts/DataLakeStoreAccounts"
+    },
+    "accounts_StorageAccounts_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "StorageAccounts"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-10-01-preview"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/StorageAccountProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the properties for the Azure Storage account being added."
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.DataLakeAnalytics/accounts/StorageAccounts"
+    },
     "DataLakeAnalyticsAccountProperties": {
       "type": "object",
       "properties": {

@@ -17,8 +17,8 @@ namespace Petstore.Models
         /// Initializes a new instance of the Usage class.
         /// </summary>
         /// <param name="unit">Gets the unit of measurement. Possible values
-        /// include: 'Count', 'Bytes', 'Seconds', 'Percent',
-        /// 'CountsPerSecond', 'BytesPerSecond'</param>
+        /// include: 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
+        /// 'BytesPerSecond'</param>
         /// <param name="currentValue">Gets the current count of the allocated
         /// resources in the subscription.</param>
         /// <param name="limit">Gets the maximum count of the resources that

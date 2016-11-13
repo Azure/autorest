@@ -41,9 +41,11 @@ class PolymorphismOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Fish
-         <Fixtures.AcceptanceTestsBodyComplex.models.Fish>`
+         <fixtures.acceptancetestsbodycomplex.models.Fish>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/polymorphism/valid'
@@ -99,8 +101,7 @@ class PolymorphismOperations(object):
          'age':105,
          'birthday': '1900-01-05T01:00:00Z',
          'length':10.0,
-         'picture': new Buffer([255, 255, 255, 255,
-         254]).toString('base64'),
+         'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
          'species':'dangerous',
          },
          {
@@ -114,7 +115,7 @@ class PolymorphismOperations(object):
          ]
          };
         :type complex_body: :class:`Fish
-         <Fixtures.AcceptanceTestsBodyComplex.models.Fish>`
+         <fixtures.acceptancetestsbodycomplex.models.Fish>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -123,6 +124,8 @@ class PolymorphismOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/polymorphism/valid'
@@ -184,7 +187,7 @@ class PolymorphismOperations(object):
          ]
          }
         :type complex_body: :class:`Fish
-         <Fixtures.AcceptanceTestsBodyComplex.models.Fish>`
+         <fixtures.acceptancetestsbodycomplex.models.Fish>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -193,6 +196,8 @@ class PolymorphismOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/polymorphism/missingrequired/invalid'

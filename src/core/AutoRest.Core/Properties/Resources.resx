@@ -192,6 +192,9 @@
   <data name="AnonymousTypesDiscouraged" xml:space="preserve">
     <value>For better generated code quality, define schemas instead of using anonymous types.</value>
   </data>
+  <data name="MsdnReferencesDiscouraged" xml:space="preserve">
+    <value>For better generated code quality, remove all references to "msdn.microsoft.com".</value>
+  </data>
   <data name="BodyMustHaveSchema" xml:space="preserve">
     <value>Each body parameter must have a schema</value>
   </data>
@@ -251,5 +254,20 @@
   </data>
   <data name="InvalidConstraint" xml:space="preserve">
     <value>Constraint is not supported for this type and will be ignored.</value>
+  </data>
+  <data name="NonAppJsonTypeNotSupported" xml:space="preserve">
+    <value>Media types other than 'application/json' has limited support</value>
+  </data>
+  <data name="SupportedSchemesWarningMessage" xml:space="preserve">
+    <value>Non-HTTPS/HTTP schemes have limited support</value>
+  </data>
+  <data name="OperationParametersNotAllowedMessage" xml:space="preserve">
+    <value>Parameters "subscriptionId" and "api-version" are not allowed in the operations section</value>
+  </data>
+  <data name="ServiceDefinitionParametersMissingMessage" xml:space="preserve">
+    <value>Parameters "subscriptionId" or "api-version" are referenced but not defined in the parameters section of Service Definition</value>
+  </data>
+  <data name="UniqueResourcePathsWarning" xml:space="preserve">
+    <value>More than one resource path is not allowed in a single spec</value>
   </data>
 </root>

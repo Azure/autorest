@@ -35,8 +35,8 @@ function Odata(client) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [options.filter] The filter parameter with value
- * '$filter=id gt 5 and name eq 'foo''.
+ * @param {string} [options.filter] The filter parameter with value '$filter=id
+ * gt 5 and name eq 'foo''.
  * 
  * @param {number} [options.top] The top parameter with value 10.
  * 
@@ -88,11 +88,8 @@ Odata.prototype.getWithFilter = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//azurespecials/odata/filter';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/odata/filter';
   var queryParameters = [];
   if (filter !== null && filter !== undefined) {
     queryParameters.push('$filter=' + encodeURIComponent(filter));

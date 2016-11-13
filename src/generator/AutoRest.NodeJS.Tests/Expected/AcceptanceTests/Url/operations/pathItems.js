@@ -30,8 +30,8 @@ function PathItems(client) {
 
 /**
  * send globalStringPath='globalStringPath',
- * pathItemStringPath='pathItemStringPath',
- * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
+ * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+ * globalStringQuery='globalStringQuery',
  * pathItemStringQuery='pathItemStringQuery',
  * localStringQuery='localStringQuery'
  *
@@ -99,14 +99,11 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
   requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(this.client.globalStringPath));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));
@@ -177,9 +174,8 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
 
 /**
  * send globalStringPath='globalStringPath',
- * pathItemStringPath='pathItemStringPath',
- * localStringPath='localStringPath', globalStringQuery=null,
- * pathItemStringQuery='pathItemStringQuery',
+ * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+ * globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
  * localStringQuery='localStringQuery'
  *
  * @param {string} localStringPath should contain value 'localStringPath'
@@ -246,14 +242,11 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
   requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(this.client.globalStringPath));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));
@@ -324,9 +317,9 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
 
 /**
  * send globalStringPath=globalStringPath,
- * pathItemStringPath='pathItemStringPath',
- * localStringPath='localStringPath', globalStringQuery=null,
- * pathItemStringQuery='pathItemStringQuery', localStringQuery=null
+ * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+ * globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
+ * localStringQuery=null
  *
  * @param {string} localStringPath should contain value 'localStringPath'
  * 
@@ -391,14 +384,11 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
   requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(this.client.globalStringPath));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));
@@ -469,9 +459,9 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
 
 /**
  * send globalStringPath='globalStringPath',
- * pathItemStringPath='pathItemStringPath',
- * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
- * pathItemStringQuery=null, localStringQuery=null
+ * pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+ * globalStringQuery='globalStringQuery', pathItemStringQuery=null,
+ * localStringQuery=null
  *
  * @param {string} localStringPath should contain value 'localStringPath'
  * 
@@ -535,14 +525,11 @@ PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathI
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null';
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null';
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
   requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(this.client.globalStringPath));
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));

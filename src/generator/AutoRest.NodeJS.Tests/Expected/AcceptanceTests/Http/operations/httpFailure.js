@@ -59,11 +59,8 @@ HttpFailure.prototype.getEmptyError = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/failure/emptybody/error';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/failure/emptybody/error';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -173,11 +170,8 @@ HttpFailure.prototype.getNoModelError = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/failure/nomodel/error';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/failure/nomodel/error';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -283,11 +277,8 @@ HttpFailure.prototype.getNoModelEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var requestUrl = this.client.baseUri +
-                   '//http/failure/nomodel/empty';
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'http/failure/nomodel/empty';
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

@@ -16,14 +16,14 @@ namespace Fixtures.AcceptanceTestsHeader.Models
     public partial class HeaderResponseProtectedKeyHeaders
     {
         /// <summary>
-        /// Initializes a new instance of the
-        /// HeaderResponseProtectedKeyHeaders class.
+        /// Initializes a new instance of the HeaderResponseProtectedKeyHeaders
+        /// class.
         /// </summary>
         public HeaderResponseProtectedKeyHeaders() { }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// HeaderResponseProtectedKeyHeaders class.
+        /// Initializes a new instance of the HeaderResponseProtectedKeyHeaders
+        /// class.
         /// </summary>
         /// <param name="contentType">response with header value
         /// "Content-Type": "text/html"</param>

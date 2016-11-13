@@ -32,11 +32,9 @@ import tempfile
 import json
 from datetime import date, datetime, timedelta, tzinfo
 import os
-from os.path import dirname, pardir, join, realpath, sep, pardir
+from os.path import dirname, pardir, join, realpath
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir))
-sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
@@ -65,34 +63,34 @@ class ComplexTests(unittest.TestCase):
         client = AutoRestComplexTestService(base_url="http://localhost:3000")
 
         # GET basic/valid
-        basic_result = client.basic_operations.get_valid()
+        basic_result = client.basic.get_valid()
         self.assertEqual(2, basic_result.id)
         self.assertEqual("abc", basic_result.name);
         self.assertEqual(CMYKColors.yellow.value, basic_result.color);
 
         # PUT basic/valid
         basic_result = Basic(id=2, name='abc', color="Magenta")
-        client.basic_operations.put_valid(basic_result)
+        client.basic.put_valid(basic_result)
         basic_result = Basic(id=2, name='abc', color=CMYKColors.magenta)
-        client.basic_operations.put_valid(basic_result)
+        client.basic.put_valid(basic_result)
 
         # GET basic/empty
-        basic_result = client.basic_operations.get_empty()
+        basic_result = client.basic.get_empty()
         self.assertIsNone(basic_result.id)
         self.assertIsNone(basic_result.name)
 
         # GET basic/null
-        basic_result = client.basic_operations.get_null()
+        basic_result = client.basic.get_null()
         self.assertIsNone(basic_result.id)
         self.assertIsNone(basic_result.name)
 
         # GET basic/notprovided
-        basic_result = client.basic_operations.get_not_provided()
+        basic_result = client.basic.get_not_provided()
         self.assertIsNone(basic_result)
 
         # GET basic/invalid
         with self.assertRaises(DeserializationError):
-            client.basic_operations.get_invalid()
+            client.basic.get_invalid()
 
         """
         COMPLEX TYPE WITH PRIMITIVE PROPERTIES
@@ -207,7 +205,7 @@ class ComplexTests(unittest.TestCase):
         self.assertEqual(readonly_result, valid_obj)
 
         # PUT readonly/valid
-        readonly_result = client.readonlyproperty.put_valid(valid_obj)
+        readonly_result = client.readonlyproperty.put_valid(2)
         self.assertIsNone(readonly_result)
 
         """

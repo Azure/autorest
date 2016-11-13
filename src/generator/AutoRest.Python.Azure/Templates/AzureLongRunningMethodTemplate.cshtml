@@ -1,11 +1,11 @@
 @using System;
 @using System.Linq;
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
 @using AutoRest.Python
-@using AutoRest.Python.TemplateModels
+@using AutoRest.Python.Model
 @using AutoRest.Python.Templates
-@inherits AutoRest.Python.PythonTemplate<AutoRest.Python.Azure.TemplateModels.AzureMethodTemplateModel>
+@inherits AutoRest.Python.PythonTemplate<AutoRest.Python.Azure.Model.MethodPya>
     def @(Model.Name.ToPythonCase())(
             self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):
         """@(WrapComment(string.Empty, Model.BuildSummaryAndDescriptionString()))
@@ -13,8 +13,8 @@
 @EmptyLine
 @foreach(var parameter in Model.DocumentationParameters)
 {
-@:        @ParameterWrapComment(string.Empty, MethodTemplateModel.GetParameterDocumentationString(parameter))
-@:        @ParameterWrapComment(string.Empty, ":type " + parameter.Name + ": " + Model.GetDocumentationType(parameter.Type))
+@:        @ParameterWrapComment(string.Empty, MethodPy.GetParameterDocumentationString(parameter))
+@:        @ParameterWrapComment(string.Empty, ":type " + parameter.Name + ": " + Model.GetDocumentationType(parameter.ModelType))
 }
         @ParameterWrapComment(string.Empty, ":param dict custom_headers: headers that will be added to the request")
         @ParameterWrapComment(string.Empty, ":param bool raw: returns the direct response alongside the deserialized response")
@@ -25,6 +25,7 @@
 }
         @ParameterWrapComment(string.Empty, ":rtype: :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>` instance that returns " + Model.GetDocumentationType(Model.ReturnType.Body))
         @ParameterWrapComment(string.Empty, ":rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if raw=true")
+        @ParameterWrapComment(string.Empty, string.Format(":raises: {0}", Model.ExceptionDocumentation))
         """
         @Model.BuildInputMappings()
 @if (Model.InputParameterTransformation.Any())
@@ -60,7 +61,7 @@
   {
     foreach (var parameter in Model.LocalParameters)
     {
-      if (parameter.Location == ParameterLocation.Body && parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
+      if (parameter.Location == ParameterLocation.Body && parameter.ModelType.IsPrimaryType(KnownPrimaryType.Stream))
       {
         @:body_content = upload_gen(@parameter.Name)
         break;
@@ -69,12 +70,12 @@
   }
   else if (Model.RequestBody.IsRequired)
   {
-        @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+        @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.ModelType.ToPythonRuntimeTypeString())')
   }
   else
   {
         @:if @Model.RequestBody.Name is not None:
-            @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+            @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.ModelType.ToPythonRuntimeTypeString())')
         @:else:
             @:body_content = None
   }
@@ -83,7 +84,7 @@
         # Construct and send request
         def long_running_send():
 @EmptyLine
-            request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query_parameters)
+            request = self._client.@(MethodPy.GetHttpFunction(Model.HttpMethod))(url, query_parameters)
 @if (Model.RequestBody != null)
 {
             @:return self._client.send(
@@ -117,7 +118,7 @@ else
 @EmptyLine
   foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null))
   {
-            @:if response.status_code == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key):
+            @:if response.status_code == @MethodPy.GetStatusCodeReference(responsePair.Key):
     if (responsePair.Value.Body.IsPrimaryType(KnownPrimaryType.Stream))
     {
                 @:deserialized = self._client.stream_download(response, callback)

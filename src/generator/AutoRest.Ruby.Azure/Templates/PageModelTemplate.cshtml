@@ -1,12 +1,11 @@
 @using System.Linq
 @using System.Collections.Generic
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
 @using AutoRest.Ruby
 @using AutoRest.Ruby.Azure
-@using AutoRest.Ruby.Azure.TemplateModels;
 @using AutoRest.Ruby.Azure.Templates
 @using AutoRest.Core.Utilities
-@inherits AutoRest.Core.Template<PageTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.Ruby.Azure.Model.PageRba>
 # encoding: utf-8
 @Header("# ")
 @EmptyLine
@@ -37,7 +36,7 @@ module @(Settings.Namespace)
 
     @foreach (var property in Model.PropertyTemplateModels)
     {
-      @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), property.Documentation))
+      @:@WrapComment("# ", string.Format("@return {0}{1}", property.ModelType.GetYardDocumentation(), property.Documentation))
       // @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name
       @:attr_accessor :@property.Name
       @EmptyLine

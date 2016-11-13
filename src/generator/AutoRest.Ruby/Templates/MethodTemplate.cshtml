@@ -1,8 +1,9 @@
 ﻿@using System
 @using System.Linq;
-@using AutoRest.Core.ClientModel
-@using AutoRest.Ruby.TemplateModels
-@inherits AutoRest.Core.Template<AutoRest.Ruby.TemplateModels.MethodTemplateModel>
+@using AutoRest.Ruby;
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@inherits AutoRest.Core.Template<AutoRest.Ruby.Model.MethodRb>
 
 #
 @if (!String.IsNullOrEmpty(Model.Summary))
@@ -15,9 +16,9 @@
   @WrapComment("# ", Model.Description)@:
 @:#
 }
-@foreach (var parameter in Model.LocalParameters.Where(p => !p.IsConstant))
+@foreach (var parameter in Model.MethodParameters)
 {
-@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.ModelType.GetYardDocumentation(), parameter.Documentation))
 }
 @WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #
@@ -42,9 +43,9 @@ end
   @WrapComment("# ", Model.Description)@:
 @:#
 }
-@foreach (var parameter in Model.LocalParameters.Where(p => !p.IsConstant))
+@foreach (var parameter in Model.MethodParameters)
 {
-@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.ModelType.GetYardDocumentation(), parameter.Documentation))
 }
 @WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #
@@ -67,9 +68,9 @@ end
   @WrapComment("# ", Model.Description)@:
 @:#
 }
-@foreach (var parameter in Model.LocalParameters.Where(p => !p.IsConstant))
+@foreach (var parameter in Model.MethodParameters)
 {
-@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.ModelType.GetYardDocumentation(), parameter.Documentation))
 }
 @WrapComment("# ", string.Format("@param [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #
@@ -99,11 +100,11 @@ def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
   @:@(Model.SetDefaultHeaders)
   foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.Header))
   {
-    if (parameter.SerializedName.ToLower() == "Content-Type".ToLower())
+    if (parameter.SerializedName.EqualsIgnoreCase("Content-Type"))
     {
   @:fail RuntimeError, 'Header Content-Type is forbidden to change'
     }
-  @:request_headers['@(parameter.SerializedName)'] = @(parameter.Type.ToString(parameter.Name)) unless @(parameter.Type.ToString(parameter.Name)).nil?
+  @:request_headers['@(parameter.SerializedName)'] = @(parameter.ModelType.ToString(parameter.Name)) unless @(parameter.ModelType.ToString(parameter.Name)).nil?
   }
 }
 
@@ -120,6 +121,12 @@ def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
 }
 
   path_template = '@Model.Url'
+
+@EmptyLine
+  request_url = @@base_url || @(Model.ClientReference).base_url
+@(Model.BuildUrl("request_url"))
+@EmptyLine
+
   options = {
       middlewares: [@string.Join(", ", Model.FaradayMiddlewares)],
 @if (Model.EncodingPathParams.Any())
@@ -142,32 +149,24 @@ def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
 {
       @:body: request_content,
 }
-      headers: request_headers.merge(custom_headers || {})
+      headers: request_headers.merge(custom_headers || {}),
+      base_url: request_url
   }
   
-@EmptyLine
-  request_url = @@base_url || @(Model.ClientReference).base_url
-  @(Model.BuildUrl("request_url"))
-@EmptyLine
-
-  request = MsRest::HttpOperationRequest.new(request_url, path_template, :@Model.HttpMethod.ToString().ToLower(), options)
-  promise = request.run_promise do |req|
-    @(Model.ClientReference).credentials.sign_request(req) unless @(Model.ClientReference).credentials.nil?
-  end
+  promise = @(Model.ClientReference).make_request_async(:@Model.HttpMethod.ToString().ToLower(), path_template, options)
 
   @EmptyLine
-  promise = promise.then do |http_response|
+  promise = promise.then do |result|
+    http_response = result.response
     status_code = http_response.status
     response_content = http_response.body
     unless @Model.SuccessStatusCodePredicate
       error_model = JSON.load(response_content)
-      fail @(Model.OperationExceptionTypeString).new(request, http_response, error_model)
+      fail @(Model.OperationExceptionTypeString).new(result.request, http_response, error_model)
     end
 
     @EmptyLine
-    # Create Result
-    result = @(Model.OperationResponseReturnTypeString).new(request, http_response)
-    @Model.InitializeResponseBody
+    @Model.InitializeResponseBody 
 
     @foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null && r.Value.Body.IsSerializable()))
     {

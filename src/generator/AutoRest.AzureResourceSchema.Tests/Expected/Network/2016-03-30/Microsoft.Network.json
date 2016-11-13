@@ -19,6 +19,28 @@
             "2016-03-30"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -56,6 +78,28 @@
             "2016-03-30"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -92,6 +136,28 @@
           "enum": [
             "2016-03-30"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "sku": {
           "oneOf": [
@@ -154,6 +220,10 @@
             "2016-03-30"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
         "properties": {
           "oneOf": [
             {
@@ -194,6 +264,10 @@
           "enum": [
             "2016-03-30"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
         },
         "properties": {
           "oneOf": [
@@ -236,6 +310,28 @@
             "2016-03-30"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -272,6 +368,28 @@
           "enum": [
             "2016-03-30"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "properties": {
           "oneOf": [
@@ -310,6 +428,28 @@
             "2016-03-30"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -346,6 +486,28 @@
           "enum": [
             "2016-03-30"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "properties": {
           "oneOf": [
@@ -394,6 +556,10 @@
             "2016-03-30"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
         "properties": {
           "oneOf": [
             {
@@ -435,6 +601,28 @@
             "2016-03-30"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -471,6 +659,28 @@
           "enum": [
             "2016-03-30"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "properties": {
           "oneOf": [
@@ -519,6 +729,10 @@
             "2016-03-30"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
         "properties": {
           "oneOf": [
             {
@@ -560,6 +774,28 @@
             "2016-03-30"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
         "properties": {
           "oneOf": [
             {
@@ -596,6 +832,28 @@
           "enum": [
             "2016-03-30"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
         },
         "properties": {
           "oneOf": [
@@ -643,6 +901,10 @@
           "enum": [
             "2016-03-30"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
         },
         "properties": {
           "oneOf": [
@@ -1996,7 +2258,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets AdvertisedPublicPrefixState of the Peering resource ."
+          "description": "Gets or sets AdvertisedPublicPrefixState of the Peering resource."
         },
         "customerASN": {
           "oneOf": [
@@ -2164,7 +2426,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets ServiceProviderProvisioningState state of the resource ."
+          "description": "Gets or sets ServiceProviderProvisioningState state of the resource."
         },
         "authorizations": {
           "oneOf": [
@@ -2235,6 +2497,10 @@
             "2016-03-30"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
         "properties": {
           "oneOf": [
             {
@@ -2275,6 +2541,10 @@
           "enum": [
             "2016-03-30"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
         },
         "properties": {
           "oneOf": [
@@ -3631,6 +3901,10 @@
             "2016-03-30"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
         "properties": {
           "oneOf": [
             {
@@ -4141,6 +4415,10 @@
           "enum": [
             "2016-03-30"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
         },
         "properties": {
           "oneOf": [
@@ -4862,6 +5140,10 @@
           "enum": [
             "2016-03-30"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
         },
         "properties": {
           "oneOf": [

@@ -24,6 +24,19 @@ namespace AutoRest.Core.Utilities
             get { return _virtualStore; }
         }
 
+        public bool IsCompletePath(string path)
+           => Uri.IsWellFormedUriString(path, UriKind.Relative);
+
+        public string MakePathRooted(Uri rootPath, string relativePath)
+        {
+            return (new Uri(Path.Combine(rootPath.ToString(), relativePath).ToString(), UriKind.Relative)).ToString();
+        }
+
+        public string GetParentDir(string path)
+        {
+           return (path == "") ? "" : Path.GetDirectoryName(path);
+        }
+        
         public void WriteFile(string path, string contents)
         {
             var directory = Path.GetDirectoryName(path);
@@ -190,6 +203,10 @@ namespace AutoRest.Core.Utilities
             {
                 _virtualStore?.Clear();
             }
+        }
+        public string GetCurrentDir()
+        {
+            return "";
         }
     }
 }

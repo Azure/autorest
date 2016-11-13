@@ -135,10 +135,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void head200() throws ErrorException, IOException {
+    public void head200() {
         head200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -196,11 +194,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Get 200 success.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    public boolean get200() throws ErrorException, IOException {
+    public boolean get200() {
         return get200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -258,10 +254,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put boolean value true returning 200 success.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put200() throws ErrorException, IOException {
+    public void put200() {
         put200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -314,10 +308,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Put boolean value true returning 200 success.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put200(Boolean booleanValue) throws ErrorException, IOException {
+    public void put200(Boolean booleanValue) {
         put200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -378,10 +370,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returning 200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void patch200() throws ErrorException, IOException {
+    public void patch200() {
         patch200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -434,10 +424,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Patch true Boolean value in request returning 200.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void patch200(Boolean booleanValue) throws ErrorException, IOException {
+    public void patch200(Boolean booleanValue) {
         patch200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -498,10 +486,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post bollean value true in request that returns a 200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void post200() throws ErrorException, IOException {
+    public void post200() {
         post200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -554,10 +540,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Post bollean value true in request that returns a 200.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void post200(Boolean booleanValue) throws ErrorException, IOException {
+    public void post200(Boolean booleanValue) {
         post200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -618,10 +602,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete simple boolean value true returns 200.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void delete200() throws ErrorException, IOException {
+    public void delete200() {
         delete200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -674,10 +656,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Delete simple boolean value true returns 200.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void delete200(Boolean booleanValue) throws ErrorException, IOException {
+    public void delete200(Boolean booleanValue) {
         delete200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -738,10 +718,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 201.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put201() throws ErrorException, IOException {
+    public void put201() {
         put201WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -794,10 +772,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Put true Boolean value in request returns 201.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put201(Boolean booleanValue) throws ErrorException, IOException {
+    public void put201(Boolean booleanValue) {
         put201WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -858,10 +834,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void post201() throws ErrorException, IOException {
+    public void post201() {
         post201WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -914,10 +888,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Post true Boolean value in request returns 201 (Created).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void post201(Boolean booleanValue) throws ErrorException, IOException {
+    public void post201(Boolean booleanValue) {
         post201WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -978,10 +950,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put202() throws ErrorException, IOException {
+    public void put202() {
         put202WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1034,10 +1004,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Put true Boolean value in request returns 202 (Accepted).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put202(Boolean booleanValue) throws ErrorException, IOException {
+    public void put202(Boolean booleanValue) {
         put202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1098,10 +1066,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 202.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void patch202() throws ErrorException, IOException {
+    public void patch202() {
         patch202WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1154,10 +1120,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Patch true Boolean value in request returns 202.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void patch202(Boolean booleanValue) throws ErrorException, IOException {
+    public void patch202(Boolean booleanValue) {
         patch202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1218,10 +1182,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void post202() throws ErrorException, IOException {
+    public void post202() {
         post202WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1274,10 +1236,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Post true Boolean value in request returns 202 (Accepted).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void post202(Boolean booleanValue) throws ErrorException, IOException {
+    public void post202(Boolean booleanValue) {
         post202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1338,10 +1298,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void delete202() throws ErrorException, IOException {
+    public void delete202() {
         delete202WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1394,10 +1352,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Delete true Boolean value in request returns 202 (accepted).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void delete202(Boolean booleanValue) throws ErrorException, IOException {
+    public void delete202(Boolean booleanValue) {
         delete202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1458,10 +1414,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void head204() throws ErrorException, IOException {
+    public void head204() {
         head204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1519,10 +1473,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put204() throws ErrorException, IOException {
+    public void put204() {
         put204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1575,10 +1527,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Put true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void put204(Boolean booleanValue) throws ErrorException, IOException {
+    public void put204(Boolean booleanValue) {
         put204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1639,10 +1589,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void patch204() throws ErrorException, IOException {
+    public void patch204() {
         patch204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1695,10 +1643,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Patch true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void patch204(Boolean booleanValue) throws ErrorException, IOException {
+    public void patch204(Boolean booleanValue) {
         patch204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1759,10 +1705,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void post204() throws ErrorException, IOException {
+    public void post204() {
         post204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1815,10 +1759,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Post true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void post204(Boolean booleanValue) throws ErrorException, IOException {
+    public void post204(Boolean booleanValue) {
         post204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1879,10 +1821,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void delete204() throws ErrorException, IOException {
+    public void delete204() {
         delete204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1935,10 +1875,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Delete true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void delete204(Boolean booleanValue) throws ErrorException, IOException {
+    public void delete204(Boolean booleanValue) {
         delete204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
@@ -1999,10 +1937,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 404 status code.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void head404() throws ErrorException, IOException {
+    public void head404() {
         head404WithServiceResponseAsync().toBlocking().single().getBody();
     }
 

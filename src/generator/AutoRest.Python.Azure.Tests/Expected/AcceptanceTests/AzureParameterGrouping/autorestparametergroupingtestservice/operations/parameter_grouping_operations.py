@@ -40,7 +40,7 @@ class ParameterGroupingOperations(object):
          parameters for the operation
         :type parameter_grouping_post_required_parameters:
          :class:`ParameterGroupingPostRequiredParameters
-         <Fixtures.AcceptanceTestsAzureParameterGrouping.models.ParameterGroupingPostRequiredParameters>`
+         <fixtures.acceptancetestsazureparametergrouping.models.ParameterGroupingPostRequiredParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -49,6 +49,8 @@ class ParameterGroupingOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazureparametergrouping.models.ErrorException>`
         """
         body = None
         if parameter_grouping_post_required_parameters is not None:
@@ -110,7 +112,7 @@ class ParameterGroupingOperations(object):
          parameters for the operation
         :type parameter_grouping_post_optional_parameters:
          :class:`ParameterGroupingPostOptionalParameters
-         <Fixtures.AcceptanceTestsAzureParameterGrouping.models.ParameterGroupingPostOptionalParameters>`
+         <fixtures.acceptancetestsazureparametergrouping.models.ParameterGroupingPostOptionalParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -119,6 +121,8 @@ class ParameterGroupingOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazureparametergrouping.models.ErrorException>`
         """
         custom_header = None
         if parameter_grouping_post_optional_parameters is not None:
@@ -164,12 +168,12 @@ class ParameterGroupingOperations(object):
 
         :param first_parameter_group: Additional parameters for the operation
         :type first_parameter_group: :class:`FirstParameterGroup
-         <Fixtures.AcceptanceTestsAzureParameterGrouping.models.FirstParameterGroup>`
+         <fixtures.acceptancetestsazureparametergrouping.models.FirstParameterGroup>`
         :param parameter_grouping_post_multi_param_groups_second_param_group:
          Additional parameters for the operation
         :type parameter_grouping_post_multi_param_groups_second_param_group:
          :class:`ParameterGroupingPostMultiParamGroupsSecondParamGroup
-         <Fixtures.AcceptanceTestsAzureParameterGrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup>`
+         <fixtures.acceptancetestsazureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -178,6 +182,8 @@ class ParameterGroupingOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazureparametergrouping.models.ErrorException>`
         """
         header_one = None
         if first_parameter_group is not None:
@@ -233,7 +239,7 @@ class ParameterGroupingOperations(object):
 
         :param first_parameter_group: Additional parameters for the operation
         :type first_parameter_group: :class:`FirstParameterGroup
-         <Fixtures.AcceptanceTestsAzureParameterGrouping.models.FirstParameterGroup>`
+         <fixtures.acceptancetestsazureparametergrouping.models.FirstParameterGroup>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -242,6 +248,8 @@ class ParameterGroupingOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazureparametergrouping.models.ErrorException>`
         """
         header_one = None
         if first_parameter_group is not None:

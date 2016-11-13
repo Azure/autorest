@@ -41,9 +41,11 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`IntWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.IntWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.IntWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/integer'
@@ -81,7 +83,7 @@ class PrimitiveOperations(object):
 
         :param complex_body: Please put -1 and 2
         :type complex_body: :class:`IntWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.IntWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.IntWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -90,6 +92,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/integer'
@@ -128,9 +132,11 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`LongWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.LongWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.LongWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/long'
@@ -168,7 +174,7 @@ class PrimitiveOperations(object):
 
         :param complex_body: Please put 1099511627775 and -999511627788
         :type complex_body: :class:`LongWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.LongWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.LongWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -177,6 +183,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/long'
@@ -215,9 +223,11 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`FloatWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.FloatWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.FloatWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/float'
@@ -255,7 +265,7 @@ class PrimitiveOperations(object):
 
         :param complex_body: Please put 1.05 and -0.003
         :type complex_body: :class:`FloatWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.FloatWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.FloatWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -264,6 +274,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/float'
@@ -302,9 +314,11 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DoubleWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.DoubleWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.DoubleWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/double'
@@ -343,7 +357,7 @@ class PrimitiveOperations(object):
         :param complex_body: Please put 3e-100 and
          -0.000000000000000000000000000000000000000000000000000000005
         :type complex_body: :class:`DoubleWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.DoubleWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.DoubleWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -352,6 +366,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/double'
@@ -390,9 +406,11 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`BooleanWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.BooleanWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.BooleanWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/bool'
@@ -430,7 +448,7 @@ class PrimitiveOperations(object):
 
         :param complex_body: Please put true and false
         :type complex_body: :class:`BooleanWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.BooleanWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.BooleanWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -439,6 +457,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/bool'
@@ -477,9 +497,11 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StringWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.StringWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.StringWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/string'
@@ -517,7 +539,7 @@ class PrimitiveOperations(object):
 
         :param complex_body: Please put 'goodrequest', '', and null
         :type complex_body: :class:`StringWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.StringWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.StringWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -526,6 +548,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/string'
@@ -564,9 +588,11 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DateWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.DateWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.DateWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/date'
@@ -604,7 +630,7 @@ class PrimitiveOperations(object):
 
         :param complex_body: Please put '0001-01-01' and '2016-02-29'
         :type complex_body: :class:`DateWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.DateWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.DateWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -613,6 +639,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/date'
@@ -651,9 +679,11 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DatetimeWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.DatetimeWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.DatetimeWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/datetime'
@@ -692,7 +722,7 @@ class PrimitiveOperations(object):
         :param complex_body: Please put '0001-01-01T12:00:00-04:00' and
          '2015-05-18T11:38:00-08:00'
         :type complex_body: :class:`DatetimeWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.DatetimeWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.DatetimeWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -701,6 +731,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/datetime'
@@ -739,9 +771,11 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Datetimerfc1123Wrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.Datetimerfc1123Wrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.Datetimerfc1123Wrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/datetimerfc1123'
@@ -780,7 +814,7 @@ class PrimitiveOperations(object):
         :param complex_body: Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and
          'Mon, 18 May 2015 11:38:00 GMT'
         :type complex_body: :class:`Datetimerfc1123Wrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.Datetimerfc1123Wrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.Datetimerfc1123Wrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -789,6 +823,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/datetimerfc1123'
@@ -827,9 +863,11 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DurationWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.DurationWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.DurationWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/duration'
@@ -875,6 +913,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         complex_body = models.DurationWrapper(field=field)
 
@@ -915,9 +955,11 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ByteWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.ByteWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.ByteWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/primitive/byte'
@@ -963,6 +1005,8 @@ class PrimitiveOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         complex_body = models.ByteWrapper(field=field)
 

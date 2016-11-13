@@ -46,6 +46,7 @@ class XMsClientRequestIdOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/azurespecials/overwrite/x-ms-client-request-id/method/'
@@ -92,6 +93,8 @@ class XMsClientRequestIdOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/overwrite/x-ms-client-request-id/via-param/method/'

@@ -44,10 +44,10 @@ export interface StorageAccounts {
 
     /**
      * Asynchronously creates a new storage account with the specified parameters.
-     * Existing accounts cannot be updated with this API and should instead use
-     * the Update Storage Account API. If an account is already created and
-     * subsequent PUT request is issued with exact same set of properties, then
-     * HTTP 200 would be returned.
+     * Existing accounts cannot be updated with this API and should instead use the
+     * Update Storage Account API. If an account is already created and subsequent
+     * PUT request is issued with exact same set of properties, then HTTP 200 would
+     * be returned.
      *
      * @param {string} resourceGroupName The name of the resource group within the
      * user’s subscription.
@@ -77,42 +77,6 @@ export interface StorageAccounts {
      */
     create(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccount>): void;
     create(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, callback: ServiceCallback<models.StorageAccount>): void;
-
-    /**
-     * Asynchronously creates a new storage account with the specified parameters.
-     * Existing accounts cannot be updated with this API and should instead use
-     * the Update Storage Account API. If an account is already created and
-     * subsequent PUT request is issued with exact same set of properties, then
-     * HTTP 200 would be returned.
-     *
-     * @param {string} resourceGroupName The name of the resource group within the
-     * user’s subscription.
-     * 
-     * @param {string} accountName The name of the storage account within the
-     * specified resource group. Storage account names must be between 3 and 24
-     * characters in length and use numbers and lower-case letters only.
-     * 
-     * @param {object} parameters The parameters to provide for the created
-     * account.
-     * 
-     * @param {string} [parameters.accountType] Gets or sets the account type.
-     * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
-     * 'Standard_RAGRS', 'Premium_LRS'
-     * 
-     * @param {string} parameters.location Resource location
-     * 
-     * @param {object} [parameters.tags] Resource tags
-     * 
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     * 
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    beginCreate(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccount>): void;
-    beginCreate(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, callback: ServiceCallback<models.StorageAccount>): void;
 
     /**
      * Deletes a storage account in Microsoft Azure.
@@ -161,10 +125,10 @@ export interface StorageAccounts {
     /**
      * Updates the account type or tags for a storage account. It can also be used
      * to add a custom domain (note that custom domains cannot be added via the
-     * Create operation). Only one custom domain is supported per storage
-     * account. This API can only be used to update one of tags, accountType, or
-     * customDomain per call. To update multiple of these properties, call the
-     * API multiple times with one change per call. This call does not change the
+     * Create operation). Only one custom domain is supported per storage account.
+     * This API can only be used to update one of tags, accountType, or
+     * customDomain per call. To update multiple of these properties, call the API
+     * multiple times with one change per call. This call does not change the
      * storage keys for the account. If you want to change storage account keys,
      * use the RegenerateKey operation. The location and name of the storage
      * account cannot be changed after creation.
@@ -179,9 +143,9 @@ export interface StorageAccounts {
      * @param {object} parameters The parameters to update on the account. Note
      * that only one property can be changed at a time using this API.
      * 
-     * @param {string} [parameters.accountType] Gets or sets the account type.
-     * Note that StandardZRS and PremiumLRS accounts cannot be changed to other
-     * account types, and other account types cannot be changed to StandardZRS or
+     * @param {string} [parameters.accountType] Gets or sets the account type. Note
+     * that StandardZRS and PremiumLRS accounts cannot be changed to other account
+     * types, and other account types cannot be changed to StandardZRS or
      * PremiumLRS. Possible values include: 'Standard_LRS', 'Standard_ZRS',
      * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
      * 
@@ -287,6 +251,42 @@ export interface StorageAccounts {
      */
     regenerateKey(resourceGroupName: string, accountName: string, options: { keyName? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccountKeys>): void;
     regenerateKey(resourceGroupName: string, accountName: string, callback: ServiceCallback<models.StorageAccountKeys>): void;
+
+    /**
+     * Asynchronously creates a new storage account with the specified parameters.
+     * Existing accounts cannot be updated with this API and should instead use the
+     * Update Storage Account API. If an account is already created and subsequent
+     * PUT request is issued with exact same set of properties, then HTTP 200 would
+     * be returned.
+     *
+     * @param {string} resourceGroupName The name of the resource group within the
+     * user’s subscription.
+     * 
+     * @param {string} accountName The name of the storage account within the
+     * specified resource group. Storage account names must be between 3 and 24
+     * characters in length and use numbers and lower-case letters only.
+     * 
+     * @param {object} parameters The parameters to provide for the created
+     * account.
+     * 
+     * @param {string} [parameters.accountType] Gets or sets the account type.
+     * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+     * 'Standard_RAGRS', 'Premium_LRS'
+     * 
+     * @param {string} parameters.location Resource location
+     * 
+     * @param {object} [parameters.tags] Resource tags
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginCreate(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccount>): void;
+    beginCreate(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, callback: ServiceCallback<models.StorageAccount>): void;
 }
 
 /**

@@ -71,8 +71,8 @@ export interface Paging {
      * @param {object} [options.pagingGetOdataMultiplePagesOptions] Additional
      * parameters for the operation
      * 
-     * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults]
-     * Sets the maximum number of items to return in the response.
+     * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults] Sets
+     * the maximum number of items to return in the response.
      * 
      * @param {number} [options.pagingGetOdataMultiplePagesOptions.timeout] Sets
      * the maximum time that the server can spend processing the request, in
@@ -208,6 +208,27 @@ export interface Paging {
     getMultiplePagesFragmentNextLink(apiVersion: string, tenant: string, callback: ServiceCallback<models.OdataProductResult>): void;
 
     /**
+     * A paging operation that doesn't return a full URL, just a fragment with
+     * parameters grouped
+     *
+     * @param {object} customParameterGroup Additional parameters for the operation
+     * 
+     * @param {string} customParameterGroup.apiVersion Sets the api version to use.
+     * 
+     * @param {string} customParameterGroup.tenant Sets the tenant to use.
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getMultiplePagesFragmentWithGroupingNextLink(customParameterGroup: models.CustomParameterGroup, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.OdataProductResult>): void;
+    getMultiplePagesFragmentWithGroupingNextLink(customParameterGroup: models.CustomParameterGroup, callback: ServiceCallback<models.OdataProductResult>): void;
+
+    /**
      * A paging operation that doesn't return a full URL, just a fragment
      *
      * @param {string} apiVersion Sets the api version to use.
@@ -226,6 +247,28 @@ export interface Paging {
      */
     nextFragment(apiVersion: string, tenant: string, nextLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.OdataProductResult>): void;
     nextFragment(apiVersion: string, tenant: string, nextLink: string, callback: ServiceCallback<models.OdataProductResult>): void;
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment
+     *
+     * @param {string} nextLink Next link for list operation.
+     * 
+     * @param {object} customParameterGroup Additional parameters for the operation
+     * 
+     * @param {string} customParameterGroup.apiVersion Sets the api version to use.
+     * 
+     * @param {string} customParameterGroup.tenant Sets the tenant to use.
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    nextFragmentWithGrouping(nextLink: string, customParameterGroup: models.CustomParameterGroup, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.OdataProductResult>): void;
+    nextFragmentWithGrouping(nextLink: string, customParameterGroup: models.CustomParameterGroup, callback: ServiceCallback<models.OdataProductResult>): void;
 
     /**
      * A paging operation that finishes on the first call without a nextlink
@@ -287,8 +330,8 @@ export interface Paging {
      * @param {object} [options.pagingGetOdataMultiplePagesOptions] Additional
      * parameters for the operation
      * 
-     * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults]
-     * Sets the maximum number of items to return in the response.
+     * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults] Sets
+     * the maximum number of items to return in the response.
      * 
      * @param {number} [options.pagingGetOdataMultiplePagesOptions.timeout] Sets
      * the maximum time that the server can spend processing the request, in

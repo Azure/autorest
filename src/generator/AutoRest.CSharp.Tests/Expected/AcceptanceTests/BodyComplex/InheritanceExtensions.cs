@@ -51,10 +51,9 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
-            /// Please put a siamese with id=2, name="Siameee", color=green,
-            /// breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1
-            /// and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-            /// food="french fries".
+            /// Please put a siamese with id=2, name="Siameee", color=green, breed=persion,
+            /// which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato",
+            /// and the 2nd one named "Tomato" with id=-1 and food="french fries".
             /// </param>
             public static void PutValid(this IInheritance operations, Siamese complexBody)
             {
@@ -68,10 +67,9 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// The operations group for this extension method.
             /// </param>
             /// <param name='complexBody'>
-            /// Please put a siamese with id=2, name="Siameee", color=green,
-            /// breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1
-            /// and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-            /// food="french fries".
+            /// Please put a siamese with id=2, name="Siameee", color=green, breed=persion,
+            /// which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato",
+            /// and the 2nd one named "Tomato" with id=-1 and food="french fries".
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.

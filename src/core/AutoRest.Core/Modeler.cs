@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
 
@@ -11,16 +11,11 @@ namespace AutoRest.Core
     {
         public abstract string Name { get; }
 
-        public Settings Settings { get; private set; }
+        public Settings Settings => Settings.Instance;
 
-        protected Modeler(Settings settings)
-        {
-            Settings = settings;
-        }
+        public abstract CodeModel Build();
 
-        public abstract ServiceClient Build();
-
-        public abstract ServiceClient Build(out IEnumerable<ValidationMessage> messages);
+        public abstract CodeModel Build(out IEnumerable<ValidationMessage> messages);
 
         /// <summary>
         /// Copares two versions of the same service specification.

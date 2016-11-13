@@ -1,8 +1,8 @@
 ﻿@using System
 @using System.Linq
 @using System.Collections.Generic
-@using AutoRest.NodeJS.TemplateModels
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.ModelTemplateModel>
+@using AutoRest.NodeJS.Model
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Model.CompositeTypeJs>
 /*
 @Header(" * ")
  */
@@ -35,10 +35,10 @@
 }
 @foreach (var property in Model.DocumentationPropertyList)
 {
-    @ModelTemplateModel.ConstructPropertyDocumentation(
-              WrapComment(" * ", "@member {" + ModelTemplateModel.GetPropertyDocumentationType(property)
-                                             + "} " + ModelTemplateModel.GetPropertyDocumentationName(property)
-                                             + " " + ModelTemplateModel.GetPropertyDocumentationString(property)))
+    @CompositeTypeJs.ConstructPropertyDocumentation(
+              WrapComment(" * ", "@member {" + CompositeTypeJs.GetPropertyDocumentationType(property)
+                                             + "} " + CompositeTypeJs.GetPropertyDocumentationName(property)
+                                             + " " + CompositeTypeJs.GetPropertyDocumentationString(property)))
 }
  */
 function @(Model.Name)() {

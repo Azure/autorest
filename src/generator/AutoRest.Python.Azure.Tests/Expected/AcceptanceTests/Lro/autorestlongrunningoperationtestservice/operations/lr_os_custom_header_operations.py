@@ -44,16 +44,17 @@ class LROsCustomHeaderOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/customheader/putasync/retry/succeeded'
@@ -138,16 +139,17 @@ class LROsCustomHeaderOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/customheader/put/201/creating/succeeded/200'
@@ -227,7 +229,7 @@ class LROsCustomHeaderOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -236,6 +238,7 @@ class LROsCustomHeaderOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/customheader/post/202/retry/200'
@@ -310,7 +313,7 @@ class LROsCustomHeaderOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -319,6 +322,7 @@ class LROsCustomHeaderOperations(object):
          instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/lro/customheader/postasync/retry/succeeded'

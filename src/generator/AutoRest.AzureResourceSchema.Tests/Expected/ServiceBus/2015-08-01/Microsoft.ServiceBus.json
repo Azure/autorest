@@ -1,0 +1,1428 @@
+{
+  "id": "http://schema.management.azure.com/schemas/2015-08-01/Microsoft.ServiceBus.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.ServiceBus",
+  "description": "Microsoft ServiceBus Resource Types",
+  "resourceDefinitions": {
+    "namespaces": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.ServiceBus/namespaces"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Namespace location."
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Namespace tags."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/NamespaceProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/namespaces_topics_childResource"
+              },
+              {
+                "$ref": "#/definitions/namespaces_queues_childResource"
+              },
+              {
+                "$ref": "#/definitions/namespaces_AuthorizationRules_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "Microsoft.ServiceBus/namespaces"
+    },
+    "namespaces_AuthorizationRules": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.ServiceBus/namespaces/AuthorizationRules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "data center location."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the AuthorizationRule."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.ServiceBus/namespaces/AuthorizationRules"
+    },
+    "namespaces_queues": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.ServiceBus/namespaces/queues"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Queue name."
+        },
+        "location": {
+          "type": "string",
+          "description": "location of the resource."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/QueueProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/namespaces_queues_authorizationRules_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "Microsoft.ServiceBus/namespaces/queues"
+    },
+    "namespaces_queues_authorizationRules": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.ServiceBus/namespaces/queues/authorizationRules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "data center location."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the AuthorizationRule."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.ServiceBus/namespaces/queues/authorizationRules"
+    },
+    "namespaces_topics": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.ServiceBus/namespaces/topics"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Topic name."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/TopicProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/namespaces_topics_subscriptions_childResource"
+              },
+              {
+                "$ref": "#/definitions/namespaces_topics_authorizationRules_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "Microsoft.ServiceBus/namespaces/topics"
+    },
+    "namespaces_topics_authorizationRules": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.ServiceBus/namespaces/topics/authorizationRules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "data center location."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the AuthorizationRule."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.ServiceBus/namespaces/topics/authorizationRules"
+    },
+    "namespaces_topics_subscriptions": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.ServiceBus/namespaces/topics/subscriptions"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Subscription data center location."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SubscriptionProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "Microsoft.ServiceBus/namespaces/topics/subscriptions"
+    }
+  },
+  "definitions": {
+    "MessageCountDetails": {
+      "type": "object",
+      "properties": {
+        "activeMessageCount": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Number of active messages in the queue, topic, or subscription."
+        },
+        "deadLetterMessageCount": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Number of messages that are dead letters."
+        },
+        "scheduledMessageCount": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Number scheduled messages."
+        },
+        "transferDeadLetterMessageCount": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Number of messages transferred into dead letters."
+        },
+        "transferMessageCount": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Number of messages transferred to another queue, topic, or subscription."
+        }
+      },
+      "description": "Message Count Details."
+    },
+    "NamespaceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the Namespace."
+        },
+        "status": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Unknown",
+                "Creating",
+                "Created",
+                "Activating",
+                "Enabling",
+                "Active",
+                "Disabling",
+                "Disabled",
+                "SoftDeleting",
+                "SoftDeleted",
+                "Removing",
+                "Removed",
+                "Failed"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "State of the namespace."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the namespace was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the namespace was updated."
+        },
+        "serviceBusEndpoint": {
+          "type": "string",
+          "description": "Endpoint you can use to perform ServiceBus operations."
+        },
+        "createACSNamespace": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Indicates whether to create ACS namespace."
+        },
+        "enabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Specifies whether this instance is enabled."
+        }
+      },
+      "description": "Properties of the Namespace."
+    },
+    "namespaces_AuthorizationRules_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "AuthorizationRules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "data center location."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the AuthorizationRule."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.ServiceBus/namespaces/AuthorizationRules"
+    },
+    "namespaces_queues_authorizationRules_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "authorizationRules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "data center location."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the AuthorizationRule."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.ServiceBus/namespaces/queues/authorizationRules"
+    },
+    "namespaces_queues_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "queues"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Queue name."
+        },
+        "location": {
+          "type": "string",
+          "description": "location of the resource."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/QueueProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/namespaces_queues_authorizationRules_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "Microsoft.ServiceBus/namespaces/queues"
+    },
+    "namespaces_topics_authorizationRules_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "authorizationRules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "data center location."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the AuthorizationRule."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.ServiceBus/namespaces/topics/authorizationRules"
+    },
+    "namespaces_topics_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "topics"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Topic name."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/TopicProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/namespaces_topics_subscriptions_childResource"
+              },
+              {
+                "$ref": "#/definitions/namespaces_topics_authorizationRules_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "Microsoft.ServiceBus/namespaces/topics"
+    },
+    "namespaces_topics_subscriptions_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "subscriptions"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Subscription data center location."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SubscriptionProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "Microsoft.ServiceBus/namespaces/topics/subscriptions"
+    },
+    "QueueProperties": {
+      "type": "object",
+      "properties": {
+        "lockDuration ": {
+          "type": "string",
+          "description": "the duration of a peek lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute."
+        },
+        "accessedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time a message was sent, or the last time there was a receive request to this queue."
+        },
+        "autoDeleteOnIdle": {
+          "type": "string",
+          "description": "the TimeSpan idle interval after which the queue is automatically deleted. The minimum duration is 5 minutes."
+        },
+        "entityAvailabilityStatus ": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Available",
+                "Limited",
+                "Renaming",
+                "Restoring",
+                "Unknown"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Entity availability status for the queue."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the exact time the message was created."
+        },
+        "defaultMessageTimeToLive": {
+          "type": "string",
+          "description": "the default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
+        },
+        "duplicateDetectionHistoryTimeWindow ": {
+          "type": "string",
+          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.."
+        },
+        "enableBatchedOperations": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "value that indicates whether server-side batched operations are enabled.."
+        },
+        "deadLetteringOnMessageExpiration": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "a value that indicates whether this queue has dead letter support when a message expires."
+        },
+        "enableExpress": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "a value that indicates whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage."
+        },
+        "enablePartitioning": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "value that indicates whether the queue to be partitioned across multiple message brokers is enabled."
+        },
+        "isAnonymousAccessible": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "a value that indicates whether the message is anonymous accessible."
+        },
+        "maxDeliveryCount ": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the maximum delivery count. A message is automatically deadlettered after this number of deliveries."
+        },
+        "maxSizeInMegabytes": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the maximum size of the queue in megabytes, which is the size of memory allocated for the queue."
+        },
+        "messageCount ": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the number of messages in the queue."
+        },
+        "countDetails": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/MessageCountDetails"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "requiresDuplicateDetection": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the value indicating if this queue requires duplicate detection."
+        },
+        "requiresSession": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "a value that indicates whether the queue supports the concept of session."
+        },
+        "sizeInBytes ": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the size of the queue in bytes."
+        },
+        "status": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Active",
+                "Creating",
+                "Deleting",
+                "Disabled",
+                "ReceiveDisabled",
+                "Renaming",
+                "Restoring",
+                "SendDisabled",
+                "Unknown"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Enumerates the possible values for the status of a messaging entity."
+        },
+        "supportOrdering": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "a value that indicates whether the queue supports ordering."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the exact time the message has been updated."
+        }
+      }
+    },
+    "SharedAccessAuthorizationRuleProperties": {
+      "type": "object",
+      "properties": {
+        "rights": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Manage",
+                  "Send",
+                  "Listen"
+                ]
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The rights associated with the rule."
+        }
+      },
+      "required": [
+        "rights"
+      ],
+      "description": "SharedAccessAuthorizationRule properties."
+    },
+    "Sku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Basic",
+                "Standard",
+                "Premium"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Name of this Sku."
+        },
+        "tier": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Basic",
+                "Standard",
+                "Premium"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The tier of this particular SKU."
+        },
+        "capacity": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The messaging units for the tier specified"
+        }
+      },
+      "required": [
+        "tier"
+      ],
+      "description": "Sku of the Namespace."
+    },
+    "SubscriptionProperties": {
+      "type": "object",
+      "properties": {
+        "accessedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time a there was a receive request to this subscription."
+        },
+        "autoDeleteOnIdle": {
+          "type": "string",
+          "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
+        },
+        "countDetails": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/MessageCountDetails"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Exact time the message was created."
+        },
+        "defaultMessageTimeToLive": {
+          "type": "string",
+          "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
+        },
+        "deadLetteringOnFilterEvaluationExceptions": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Value that indicates if a subscription has dead letter support on Filter evaluation exceptions."
+        },
+        "deadLetteringOnMessageExpiration": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Value that indicates if a subscription has dead letter support when a message expires."
+        },
+        "enableBatchedOperations": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Value that indicates whether server-side batched operations are enabled.."
+        },
+        "entityAvailabilityStatus": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Available",
+                "Limited",
+                "Renaming",
+                "Restoring",
+                "Unknown"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Entity availability status for the topic."
+        },
+        "isReadOnly": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Value that indicates whether the entity description is read-only."
+        },
+        "lockDuration": {
+          "type": "string",
+          "description": "The lock duration time span for the subscription."
+        },
+        "maxDeliveryCount": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Number of maximum deliveries."
+        },
+        "messageCount": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Number of messages."
+        },
+        "requiresSession": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Value indicating if a subscription supports the concept of session."
+        },
+        "status": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Active",
+                "Creating",
+                "Deleting",
+                "Disabled",
+                "ReceiveDisabled",
+                "Renaming",
+                "Restoring",
+                "SendDisabled",
+                "Unknown"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Enumerates the possible values for the status of a messaging entity."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The exact time the message has been updated."
+        }
+      },
+      "description": "Description of Subscription Resource."
+    },
+    "TopicProperties": {
+      "type": "object",
+      "properties": {
+        "accessedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the message was sent or a request was received for this topic."
+        },
+        "autoDeleteOnIdle": {
+          "type": "string",
+          "description": "TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes."
+        },
+        "entityAvailabilityStatus ": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Available",
+                "Limited",
+                "Renaming",
+                "Restoring",
+                "Unknown"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Entity availability status for the topic."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Exact time the message was created."
+        },
+        "countDetails": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/MessageCountDetails"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "defaultMessageTimeToLive": {
+          "type": "string",
+          "description": "Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself."
+        },
+        "duplicateDetectionHistoryTimeWindow ": {
+          "type": "string",
+          "description": "TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes.."
+        },
+        "enableBatchedOperations": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Value that indicates whether server-side batched operations are enabled.."
+        },
+        "enableExpress": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Value that indicates whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage."
+        },
+        "enablePartitioning": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Value that indicates whether the topic to be partitioned across multiple message brokers is enabled."
+        },
+        "enableSubscriptionPartitioning": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Value that indicates whether partitioning is enabled or disabled.."
+        },
+        "filteringMessagesBeforePublishing": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Whether messages should be filtered before publishing."
+        },
+        "isAnonymousAccessible": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Value that indicates whether the message is anonymous accessible."
+        },
+        "isExpress": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "maxSizeInMegabytes": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Maximum size of the topic in megabytes, which is the size of memory allocated for the topic."
+        },
+        "requiresDuplicateDetection": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Value indicating if this topic requires duplicate detection."
+        },
+        "sizeInBytes": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Size of the topic in bytes."
+        },
+        "status": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Active",
+                "Creating",
+                "Deleting",
+                "Disabled",
+                "ReceiveDisabled",
+                "Renaming",
+                "Restoring",
+                "SendDisabled",
+                "Unknown"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Enumerates the possible values for the status of a messaging entity."
+        },
+        "subscriptionCount": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Number of subscriptions."
+        },
+        "supportOrdering": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Value that indicates whether the topic supports ordering."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The exact time the message has been updated."
+        }
+      }
+    }
+  }
+}

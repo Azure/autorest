@@ -322,7 +322,7 @@ export interface Primitive {
      * 
      * @param {string} [complexBody.empty]
      * 
-     * @param {string} [complexBody.null]
+     * @param {string} [complexBody.nullProperty]
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -527,7 +527,7 @@ export interface ArrayModel {
      *
      * @param {object} [options] Optional Parameters.
      * 
-     * @param {array} [options.arrayParameter]
+     * @param {array} [options.arrayProperty]
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
@@ -535,7 +535,7 @@ export interface ArrayModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putValid(options: { arrayParameter? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putValid(options: { arrayProperty? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putValid(callback: ServiceCallback<void>): void;
 
     /**
@@ -557,7 +557,7 @@ export interface ArrayModel {
      *
      * @param {object} [options] Optional Parameters.
      * 
-     * @param {array} [options.arrayParameter]
+     * @param {array} [options.arrayProperty]
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
@@ -565,7 +565,7 @@ export interface ArrayModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putEmpty(options: { arrayParameter? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putEmpty(options: { arrayProperty? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putEmpty(callback: ServiceCallback<void>): void;
 
     /**
@@ -775,8 +775,7 @@ export interface Polymorphism {
      * 'age':105,
      * 'birthday': '1900-01-05T01:00:00Z',
      * 'length':10.0,
-     * 'picture': new Buffer([255, 255, 255, 255,
-     * 254]).toString('base64'),
+     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
      * 'species':'dangerous',
      * },
      * {
@@ -796,7 +795,7 @@ export interface Polymorphism {
      * 
      * @param {array} [complexBody.siblings]
      * 
-     * @param {string} complexBody.fishtype Polymorhpic Discriminator
+     * @param {string} complexBody.fishtype Polymorphic Discriminator
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -847,7 +846,7 @@ export interface Polymorphism {
      * 
      * @param {array} [complexBody.siblings]
      * 
-     * @param {string} complexBody.fishtype Polymorhpic Discriminator
+     * @param {string} complexBody.fishtype Polymorphic Discriminator
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -946,7 +945,7 @@ export interface Polymorphicrecursive {
      * 
      * @param {array} [complexBody.siblings]
      * 
-     * @param {string} complexBody.fishtype Polymorhpic Discriminator
+     * @param {string} complexBody.fishtype Polymorphic Discriminator
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -985,11 +984,9 @@ export interface Readonlyproperty {
     /**
      * Put complex types that have readonly properties
      *
-     * @param {object} complexBody
-     * 
-     * @param {number} [complexBody.size]
-     * 
      * @param {object} [options] Optional Parameters.
+     * 
+     * @param {number} [options.size]
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
@@ -997,6 +994,6 @@ export interface Readonlyproperty {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putValid(complexBody: models.ReadonlyObj, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    putValid(complexBody: models.ReadonlyObj, callback: ServiceCallback<void>): void;
+    putValid(options: { size? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putValid(callback: ServiceCallback<void>): void;
 }

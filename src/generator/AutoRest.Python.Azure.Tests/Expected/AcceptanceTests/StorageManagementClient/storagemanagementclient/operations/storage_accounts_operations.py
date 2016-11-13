@@ -39,21 +39,21 @@ class StorageAccountsOperations(object):
         """Checks that account name is valid and is not in use.
 
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name:
          :class:`StorageAccountCheckNameAvailabilityParameters
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountCheckNameAvailabilityParameters>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccountCheckNameAvailabilityParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`CheckNameAvailabilityResult
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.CheckNameAvailabilityResult>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.CheckNameAvailabilityResult>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability'
@@ -112,22 +112,22 @@ class StorageAccountsOperations(object):
          user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param parameters: The parameters to provide for the created account.
         :type parameters: :class:`StorageAccountCreateParameters
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountCreateParameters>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccountCreateParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`StorageAccount
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccount>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -207,9 +207,8 @@ class StorageAccountsOperations(object):
          user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -219,6 +218,7 @@ class StorageAccountsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -266,9 +266,8 @@ class StorageAccountsOperations(object):
          user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -276,9 +275,10 @@ class StorageAccountsOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccount
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccount>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -330,33 +330,33 @@ class StorageAccountsOperations(object):
         via the Create operation). Only one custom domain is supported per
         storage account. This API can only be used to update one of tags,
         accountType, or customDomain per call. To update multiple of these
-        properties, call the API multiple times with one change per call.
-        This call does not change the storage keys for the account. If you
-        want to change storage account keys, use the RegenerateKey operation.
-        The location and name of the storage account cannot be changed after
+        properties, call the API multiple times with one change per call. This
+        call does not change the storage keys for the account. If you want to
+        change storage account keys, use the RegenerateKey operation. The
+        location and name of the storage account cannot be changed after
         creation.
 
         :param resource_group_name: The name of the resource group within the
          user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param parameters: The parameters to update on the account. Note that
          only one property can be changed at a time using this API.
         :type parameters: :class:`StorageAccountUpdateParameters
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountUpdateParameters>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccountUpdateParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccount
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccount>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -420,9 +420,10 @@ class StorageAccountsOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountKeys
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountKeys>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccountKeys>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
@@ -479,7 +480,8 @@ class StorageAccountsOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountPaged
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountPaged>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccountPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -546,7 +548,8 @@ class StorageAccountsOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountPaged
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountPaged>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccountPaged>`
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -607,24 +610,24 @@ class StorageAccountsOperations(object):
          user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-         specified resource group. Storage account names must be between 3
-         and 24 characters in length and use numbers and lower-case letters
-         only.
+         specified resource group. Storage account names must be between 3 and
+         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param key_name: Possible values include: 'key1', 'key2'
         :type key_name: str or :class:`KeyName
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.KeyName>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.KeyName>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountKeys
-         <Fixtures.AcceptanceTestsStorageManagementClient.models.StorageAccountKeys>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccountKeys>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
-        regenerate_key = models.StorageAccountRegenerateKeyParameters(key_name=key_name)
+        regenerate_key1 = models.StorageAccountRegenerateKeyParameters(key_name=key_name)
 
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'
@@ -650,7 +653,7 @@ class StorageAccountsOperations(object):
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        body_content = self._serialize.body(regenerate_key, 'StorageAccountRegenerateKeyParameters')
+        body_content = self._serialize.body(regenerate_key1, 'StorageAccountRegenerateKeyParameters')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)

@@ -53,6 +53,8 @@ class FormdataOperations(object):
         :rtype: Generator
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodyformdata.models.ErrorException>`
         """
         # Construct URL
         url = '/formdata/stream/uploadfile'
@@ -110,6 +112,8 @@ class FormdataOperations(object):
         :rtype: Generator
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodyformdata.models.ErrorException>`
         """
         # Construct URL
         url = '/formdata/stream/uploadfile'

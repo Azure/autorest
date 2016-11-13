@@ -11,6 +11,7 @@ using AutoRest.Core.Logging;
 using AutoRest.Core;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Validation;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger.Tests
 {
@@ -34,7 +35,7 @@ namespace AutoRest.Swagger.Tests
         internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, Type validationType, int count)
         {
             // checks that the collection has the right number of items and each is the correct type.
-            Assert.Equal(count, messages.Where(message => message.Type == validationType).Count());
+            Assert.Equal(count, messages.Count(message => message.Type == validationType));
         }
     }
 
@@ -43,18 +44,22 @@ namespace AutoRest.Swagger.Tests
     {
         private IEnumerable<ValidationMessage> ValidateSwagger(string input)
         {
-            var modeler = new SwaggerModeler(new Settings
+            using (NewContext)
             {
-                Namespace = "Test",
-                Input = input
-            });
-            IEnumerable<ValidationMessage> messages;
-            modeler.Build(out messages);
+                new Settings
+                {
+                    Namespace = "Test",
+                    Input = input
+                };
+                var modeler = new SwaggerModeler();
+                IEnumerable<ValidationMessage> messages;
+                modeler.Build(out messages);
 
-            // remove debug-level messages
-            messages = messages.Where(each => each.Severity > LogEntrySeverity.Debug);
+                // remove debug-level messages
+                messages = messages.Where(each => each.Severity > LogEntrySeverity.Debug);
 
-            return messages;
+                return messages;
+            }
         }
 
         [Fact]
@@ -62,6 +67,13 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "definition-missing-description.json"));
             messages.AssertOnlyValidationMessage(typeof(ModelTypeIncomplete));
+        }
+
+        [Fact]
+        public void AvoidMsdnReferencesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "definition-contains-msdn-reference.json"));
+            messages.AssertOnlyValidationMessage(typeof(AvoidMsdnReferences), 4);
         }
 
         [Fact]
@@ -80,6 +92,13 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void UniqueResourcePathsValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "network-interfaces-api.json"));
+            messages.AssertOnlyValidationWarning(typeof(UniqueResourcePaths));
+        }
+
+        [Fact]
         public void AnonymousSchemasDiscouragedValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "anonymous-response-type.json"));
@@ -94,10 +113,67 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void OperationParametersValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operations-invalid-parameters.json"));
+            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation));
+        }
+        
+        [Fact]
+        public void ServiceDefinitionParametersValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "service-def-invalid-parameters.json"));
+            messages.AssertOnlyValidationMessage(typeof(ServiceDefinitionParameters));
+        }
+        
+        [Fact]
         public void OperationGroupSingleUnderscoreValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operation-group-underscores.json"));
             messages.AssertOnlyValidationMessage(typeof(OneUnderscoreInOperationId));
+        }
+
+
+        [Fact]
+        public void NonAppJsonTypeOperationForConsumes()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "non-app-json-operation-consumes.json"));
+            messages.AssertOnlyValidationWarning(typeof(NonAppJsonTypeWarning));
+        }
+
+        [Fact]
+        public void NonAppJsonTypeOperationForProduces()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "non-app-json-operation-produces.json"));
+            messages.AssertOnlyValidationWarning(typeof(NonAppJsonTypeWarning));
+        }
+
+        [Fact]
+        public void NonAppJsonTypeServiceDefinitionForProduces()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "non-app-json-service-def-produces.json"));
+            messages.AssertOnlyValidationWarning(typeof(NonAppJsonTypeWarning));
+        }
+
+        [Fact]
+        public void NonAppJsonTypeServiceDefinitionForConsumes()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "non-app-json-service-def-consumes.json"));
+            messages.AssertOnlyValidationWarning(typeof(NonAppJsonTypeWarning));
+        }
+
+        [Fact]
+        public void NonHttpsServiceDefinitionForScheme()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "non-https-service-def-scheme.json"));
+            messages.AssertOnlyValidationWarning(typeof(SupportedSchemesWarning));
+        }
+
+        [Fact]
+        public void NonHttpsOperationsForScheme()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "non-https-operations-scheme.json"));
+            messages.AssertOnlyValidationWarning(typeof(SupportedSchemesWarning));
         }
 
         [Fact]

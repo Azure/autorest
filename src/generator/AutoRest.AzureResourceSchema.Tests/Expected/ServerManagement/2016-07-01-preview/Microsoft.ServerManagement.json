@@ -1,0 +1,299 @@
+{
+  "id": "http://schema.management.azure.com/schemas/2016-07-01-preview/Microsoft.ServerManagement.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.ServerManagement",
+  "description": "Microsoft ServerManagement Resource Types",
+  "resourceDefinitions": {
+    "gateways": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.ServerManagement/gateways"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-07-01-preview"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "location of the resource"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "resource tags"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/GatewayParameters_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "collection of properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.ServerManagement/gateways"
+    },
+    "nodes": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.ServerManagement/nodes"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-07-01-preview"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "location of the resource?"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "resource tags"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/NodeParameters_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "collection of properties"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/nodes_sessions_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.ServerManagement/nodes"
+    },
+    "nodes_sessions": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.ServerManagement/nodes/sessions"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-07-01-preview"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SessionParameters_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "collection of properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.ServerManagement/nodes/sessions"
+    },
+    "nodes_sessions_features_pssessions": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.ServerManagement/nodes/sessions/features/pssessions"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-07-01-preview"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion"
+      ],
+      "description": "Microsoft.ServerManagement/nodes/sessions/features/pssessions"
+    }
+  },
+  "definitions": {
+    "GatewayParameters_properties": {
+      "type": "object",
+      "properties": {
+        "upgradeMode": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Manual",
+                "Automatic"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The upgradeMode property gives the flexibility to gateway to auto upgrade itself. If properties value not specified, then we assume upgradeMode = Automatic."
+        }
+      },
+      "description": "collection of properties"
+    },
+    "NodeParameters_properties": {
+      "type": "object",
+      "properties": {
+        "gatewayId": {
+          "type": "string",
+          "description": "Gateway id which will manage this node"
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "myhost.domain.com"
+        },
+        "userName": {
+          "type": "string",
+          "description": "User name to be used to connect to node"
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Password associated with user name"
+        }
+      },
+      "description": "collection of properties"
+    },
+    "nodes_sessions_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "sessions"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-07-01-preview"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SessionParameters_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "collection of properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.ServerManagement/nodes/sessions"
+    },
+    "SessionParameters_properties": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "encrypted User name to be used to connect to node"
+        },
+        "password": {
+          "type": "string",
+          "description": "encrypted Password associated with user name"
+        },
+        "retentionPeriod": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Session",
+                "Persistent"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "session retention period."
+        },
+        "credentialDataFormat": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "RsaEncrypted"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "credential data format."
+        },
+        "EncryptionCertificateThumbprint": {
+          "type": "string",
+          "description": "encryption certificate thumbprint"
+        }
+      },
+      "description": "collection of properties"
+    }
+  }
+}

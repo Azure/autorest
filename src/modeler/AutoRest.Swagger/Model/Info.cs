@@ -4,6 +4,8 @@
 using System;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
+using AutoRest.Swagger.Validation;
+using AutoRest.Core.Validation;
 
 namespace AutoRest.Swagger.Model
 {
@@ -18,10 +20,17 @@ namespace AutoRest.Swagger.Model
         private string _description;
         public string Title { get; set; }
 
+        [Rule(typeof(AvoidMsdnReferences))]
         public string Description
         {
             get { return _description; }
-            set { _description = value.StripControlCharacters(); ; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(_description))
+                {
+                    _description = value.StripControlCharacters();
+                }
+            }
         }
 
         public string TermsOfService { get; set; }

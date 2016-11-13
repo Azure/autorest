@@ -13,8 +13,6 @@ package fixtures.bodystring;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodystring.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -25,11 +23,9 @@ public interface Strings {
     /**
      * Get null string value value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the String object if successful.
      */
-    String getNull() throws ErrorException, IOException;
+    String getNull();
 
     /**
      * Get null string value value.
@@ -56,10 +52,8 @@ public interface Strings {
     /**
      * Set string value null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putNull() throws ErrorException, IOException;
+    void putNull();
 
     /**
      * Set string value null.
@@ -86,10 +80,8 @@ public interface Strings {
      * Set string value null.
      *
      * @param stringBody Possible values include: ''
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    void putNull(String stringBody) throws ErrorException, IOException;
+    void putNull(String stringBody);
 
     /**
      * Set string value null.
@@ -119,11 +111,9 @@ public interface Strings {
     /**
      * Get empty string value value ''.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the String object if successful.
      */
-    String getEmpty() throws ErrorException, IOException;
+    String getEmpty();
 
     /**
      * Get empty string value value ''.
@@ -151,11 +141,8 @@ public interface Strings {
      * Set string value empty ''.
      *
      * @param stringBody Possible values include: ''
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putEmpty(String stringBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putEmpty(String stringBody);
 
     /**
      * Set string value empty ''.
@@ -185,11 +172,9 @@ public interface Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the String object if successful.
      */
-    String getMbcs() throws ErrorException, IOException;
+    String getMbcs();
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -217,11 +202,8 @@ public interface Strings {
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putMbcs(String stringBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putMbcs(String stringBody);
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -251,11 +233,9 @@ public interface Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the String object if successful.
      */
-    String getWhitespace() throws ErrorException, IOException;
+    String getWhitespace();
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -283,11 +263,8 @@ public interface Strings {
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putWhitespace(String stringBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putWhitespace(String stringBody);
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -317,11 +294,9 @@ public interface Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the String object if successful.
      */
-    String getNotProvided() throws ErrorException, IOException;
+    String getNotProvided();
 
     /**
      * Get String value when no string value is sent in response payload.
@@ -348,11 +323,9 @@ public interface Strings {
     /**
      * Get value that is base64 encoded.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object if successful.
      */
-    byte[] getBase64Encoded() throws ErrorException, IOException;
+    byte[] getBase64Encoded();
 
     /**
      * Get value that is base64 encoded.
@@ -379,11 +352,9 @@ public interface Strings {
     /**
      * Get value that is base64url encoded.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object if successful.
      */
-    byte[] getBase64UrlEncoded() throws ErrorException, IOException;
+    byte[] getBase64UrlEncoded();
 
     /**
      * Get value that is base64url encoded.
@@ -411,11 +382,8 @@ public interface Strings {
      * Put value that is base64url encoded.
      *
      * @param stringBody the Base64Url value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putBase64UrlEncoded(byte[] stringBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putBase64UrlEncoded(byte[] stringBody);
 
     /**
      * Put value that is base64url encoded.
@@ -445,11 +413,9 @@ public interface Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object if successful.
      */
-    byte[] getNullBase64UrlEncoded() throws ErrorException, IOException;
+    byte[] getNullBase64UrlEncoded();
 
     /**
      * Get null value that is expected to be base64url encoded.

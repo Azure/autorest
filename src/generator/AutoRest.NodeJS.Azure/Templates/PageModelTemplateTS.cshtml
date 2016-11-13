@@ -1,9 +1,10 @@
 @using System
 @using System.Linq
 @using System.Collections.Generic
-@using AutoRest.Core.ClientModel
-@using AutoRest.NodeJS.Azure.TemplateModels
-@inherits AutoRest.Core.Template<PageTemplateModel>
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.NodeJS.Azure.Model
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.Model.PageCompositeTypeJsa>
 
 /**
  * @@class
@@ -24,9 +25,9 @@
     if (property.Name.ToLowerInvariant() != "value")
     {
 
-    @PageTemplateModel.ConstructPropertyDocumentation(
-                                WrapComment(" * ", "@member {" + PageTemplateModel.GetPropertyDocumentationType(property)
-                                                                + "} " + PageTemplateModel.GetPropertyDocumentationName(property)
+    @PageCompositeTypeJsa.ConstructPropertyDocumentation(
+                                WrapComment(" * ", "@member {" + PageCompositeTypeJsa.GetPropertyDocumentationType(property)
+                                                                + "} " + PageCompositeTypeJsa.GetPropertyDocumentationName(property)
                                                     + " " + property.Documentation));
     }
 }
@@ -36,7 +37,7 @@ export interface @(Model.Name) extends Array@(Model.ConstructTSItemTypeName()) {
     Property prop = Model.Properties.Where(p => p.Name.ToLowerInvariant().Contains("nextlink")).FirstOrDefault();
     if (prop != null)
     {
-  @:@(PageTemplateModel.PropertyTS(prop, true));
+  @:@(PageCompositeTypeJsa.PropertyTS(prop, true));
     }
  }
 }

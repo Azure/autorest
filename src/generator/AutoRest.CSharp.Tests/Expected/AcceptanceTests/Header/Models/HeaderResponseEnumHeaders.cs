@@ -23,15 +23,16 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Initializes a new instance of the HeaderResponseEnumHeaders class.
         /// </summary>
-        /// <param name="value">response with header values "GREY" or
-        /// null</param>
+        /// <param name="value">response with header values "GREY" or null.
+        /// Possible values include: 'White', 'black', 'GREY'</param>
         public HeaderResponseEnumHeaders(GreyscaleColors? value = default(GreyscaleColors?))
         {
             Value = value;
         }
 
         /// <summary>
-        /// Gets or sets response with header values "GREY" or null
+        /// Gets or sets response with header values "GREY" or null. Possible
+        /// values include: 'White', 'black', 'GREY'
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
         public GreyscaleColors? Value { get; set; }

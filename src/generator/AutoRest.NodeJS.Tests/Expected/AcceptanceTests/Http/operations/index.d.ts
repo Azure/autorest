@@ -463,9 +463,9 @@ export interface HttpRedirects {
     get302(callback: ServiceCallback<void>): void;
 
     /**
-     * Patch true Boolean value in request returns 302.  This request should not
-     * be automatically redirected, but should return the received 302 to the
-     * caller for evaluation
+     * Patch true Boolean value in request returns 302.  This request should not be
+     * automatically redirected, but should return the received 302 to the caller
+     * for evaluation
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -482,8 +482,7 @@ export interface HttpRedirects {
 
     /**
      * Post true Boolean value in request returns 303.  This request should be
-     * automatically redirected usign a get, ultimately returning a 200 status
-     * code
+     * automatically redirected usign a get, ultimately returning a 200 status code
      *
      * @param {object} [options] Optional Parameters.
      * 

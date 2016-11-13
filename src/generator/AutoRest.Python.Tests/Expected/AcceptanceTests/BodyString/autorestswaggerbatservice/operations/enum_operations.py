@@ -42,9 +42,11 @@ class EnumOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Colors
-         <Fixtures.AcceptanceTestsBodyString.models.Colors>`
+         <fixtures.acceptancetestsbodystring.models.Colors>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/enum/notExpandable'
@@ -78,13 +80,13 @@ class EnumOperations(object):
 
     def put_not_expandable(
             self, string_body, custom_headers=None, raw=False, **operation_config):
-        """Sends value 'red color' from enumeration of 'red color',
-        'green-color', 'blue_color'.
+        """Sends value 'red color' from enumeration of 'red color', 'green-color',
+        'blue_color'.
 
         :param string_body: Possible values include: 'red color',
          'green-color', 'blue_color'
         :type string_body: str or :class:`Colors
-         <Fixtures.AcceptanceTestsBodyString.models.Colors>`
+         <fixtures.acceptancetestsbodystring.models.Colors>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -93,6 +95,8 @@ class EnumOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/enum/notExpandable'
@@ -132,9 +136,11 @@ class EnumOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Colors
-         <Fixtures.AcceptanceTestsBodyString.models.Colors>`
+         <fixtures.acceptancetestsbodystring.models.Colors>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/enum/Referenced'
@@ -168,13 +174,13 @@ class EnumOperations(object):
 
     def put_referenced(
             self, enum_string_body, custom_headers=None, raw=False, **operation_config):
-        """Sends value 'red color' from enumeration of 'red color',
-        'green-color', 'blue_color'.
+        """Sends value 'red color' from enumeration of 'red color', 'green-color',
+        'blue_color'.
 
         :param enum_string_body: Possible values include: 'red color',
          'green-color', 'blue_color'
         :type enum_string_body: str or :class:`Colors
-         <Fixtures.AcceptanceTestsBodyString.models.Colors>`
+         <fixtures.acceptancetestsbodystring.models.Colors>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -183,6 +189,8 @@ class EnumOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/enum/Referenced'
@@ -221,9 +229,11 @@ class EnumOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`RefColorConstant
-         <Fixtures.AcceptanceTestsBodyString.models.RefColorConstant>`
+         <fixtures.acceptancetestsbodystring.models.RefColorConstant>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         # Construct URL
         url = '/string/enum/ReferencedConstant'
@@ -269,6 +279,8 @@ class EnumOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodystring.models.ErrorException>`
         """
         enum_string_body = models.RefColorConstant(field1=field1)
 

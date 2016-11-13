@@ -24,42 +24,53 @@ namespace AutoRest.Go
         // CommonInitialisms are those "words" within a name that Golint expects to be uppercase.
         // See https://github.com/golang/lint/blob/master/lint.go for detail.
         private static readonly List<String> CommonInitialisms = new List<String>() {
-	                                                                        "Api",
-	                                                                        "Ascii",
-	                                                                        "Cpu",
-	                                                                        "Css",
-	                                                                        "Dns",
-	                                                                        "Eof",
-	                                                                        "Guid",
-	                                                                        "Html",
-	                                                                        "Http",
-	                                                                        "Https",
-	                                                                        "Id",
-	                                                                        "Ip",
-	                                                                        "Json",
-	                                                                        "Lhs",
-	                                                                        "Qps",
-	                                                                        "Ram",
-	                                                                        "Rhs",
-	                                                                        "Rpc",
-	                                                                        "Sla",
-	                                                                        "Smtp",
-	                                                                        "Sql",
-	                                                                        "Ssh",
-	                                                                        "Tcp",
-	                                                                        "Tls",
-	                                                                        "Ttl",
-	                                                                        "Udp",
-	                                                                        "Ui",
-	                                                                        "Uid",
-	                                                                        "Uuid",
-	                                                                        "Uri",
-	                                                                        "Url",
-	                                                                        "Utf8",
-	                                                                        "Vm",
-	                                                                        "Xml",
-	                                                                        "Xsrf",
-	                                                                        "Xss",
+                                                                            "Acl",
+                                                                            "Api",
+                                                                            "Ascii",
+                                                                            "Cpu",
+                                                                            "Css",
+                                                                            "Dns",
+                                                                            "Eof",
+                                                                            "Guid",
+                                                                            "Html",
+                                                                            "Http",
+                                                                            "Https",
+                                                                            "Id",
+                                                                            "Ip",
+                                                                            "Json",
+                                                                            "Lhs",
+                                                                            "Qps",
+                                                                            "Ram",
+                                                                            "Rhs",
+                                                                            "Rpc",
+                                                                            "Sla",
+                                                                            "Smtp",
+                                                                            "Sql",
+                                                                            "Ssh",
+                                                                            "Tcp",
+                                                                            "Tls",
+                                                                            "Ttl",
+                                                                            "Udp",
+                                                                            "Ui",
+                                                                            "Uid",
+                                                                            "Uuid",
+                                                                            "Uri",
+                                                                            "Url",
+                                                                            "Utf8",
+                                                                            "Vm",
+                                                                            "Xml",
+                                                                            "Xsrf",
+                                                                            "Xss",
+                                                                        };
+
+        public static readonly List<string> UserDefinedNames = new List<string>() {
+                                                                            "UserAgent",
+                                                                            "Version",
+                                                                            "APIVersion",
+                                                                            "DefaultBaseURI",
+                                                                            "ManagementClient",
+                                                                            "NewWithBaseURI",
+                                                                            "New",
                                                                         };
 
         private readonly Dictionary<IType, IType> _normalizedTypes;
@@ -74,7 +85,7 @@ namespace AutoRest.Go
             foreach (var sc in new HttpStatusCode[]{
                 HttpStatusCode.Continue,
                 HttpStatusCode.SwitchingProtocols,
-                
+
                 HttpStatusCode.OK,
                 HttpStatusCode.Created,
                 HttpStatusCode.Accepted,
@@ -82,7 +93,7 @@ namespace AutoRest.Go
                 HttpStatusCode.NoContent,
                 HttpStatusCode.ResetContent,
                 HttpStatusCode.PartialContent,
-                
+
                 HttpStatusCode.MultipleChoices,
                 HttpStatusCode.MovedPermanently,
                 HttpStatusCode.Found,
@@ -90,7 +101,7 @@ namespace AutoRest.Go
                 HttpStatusCode.NotModified,
                 HttpStatusCode.UseProxy,
                 HttpStatusCode.TemporaryRedirect,
-                
+
                 HttpStatusCode.BadRequest,
                 HttpStatusCode.Unauthorized,
                 HttpStatusCode.PaymentRequired,
@@ -109,7 +120,7 @@ namespace AutoRest.Go
                 HttpStatusCode.UnsupportedMediaType,
                 HttpStatusCode.RequestedRangeNotSatisfiable,
                 HttpStatusCode.ExpectationFailed,
-                
+
                 HttpStatusCode.InternalServerError,
                 HttpStatusCode.NotImplemented,
                 HttpStatusCode.BadGateway,
@@ -154,7 +165,7 @@ namespace AutoRest.Go
                 "uintptr",
 
                 "true", "false", "iota",
-                
+
                 "nil",
 
                 "append", "cap", "close", "complex", "copy", "delete", "imag", "len", "make", "new", "panic", "print", "println", "real", "recover",
@@ -203,13 +214,13 @@ namespace AutoRest.Go
                 "unsafe",
 
                 // Other reserved names and packages (defined by the base libraries this code uses)
-                "autorest", "client", "date", "err", "req", "resp", "result", "sender"
+                "autorest", "client", "date", "err", "req", "resp", "result", "sender", "to", "validation"
 
             }.ToList().ForEach(s => ReservedWords.Add(s));
 
             _normalizedTypes = new Dictionary<IType, IType>();
         }
-        
+
         public string PackageName { get; private set; }
 
         public override void NormalizeClientModel(ServiceClient client)
@@ -249,21 +260,15 @@ namespace AutoRest.Go
                                             .Any(et => (et is IType && (et as IType).Name.Equals(name)) || (et is Method && (et as Method).Name.Equals(name)));
                         if (exported is EnumType)
                         {
-                            (exported as EnumType).Name = nameInUse
-                                                            ? name + "Enum"
-                                                            : name;
+                            (exported as EnumType).Name = AttachTypeName(name, PackageName, nameInUse, "Enum");
                         }
                         else if (exported is CompositeType)
                         {
-                            (exported as CompositeType).Name = nameInUse
-                                                            ? name + "Type"
-                                                            : name;
+                            (exported as CompositeType).Name = AttachTypeName(name, PackageName, nameInUse, "Type");
                         }
                         else if (exported is Method)
                         {
-                            (exported as Method).Name = nameInUse
-                                                            ? name + "Method"
-                                                            : name;
+                            (exported as Method).Name = AttachTypeName(name, PackageName, nameInUse, "Method");
                         }
                     });
             }
@@ -291,6 +296,8 @@ namespace AutoRest.Go
                     }
                 }
             }
+
+            normalizedTypesForUserDefinedNames(client);
         }
 
         /// <summary>
@@ -443,7 +450,7 @@ namespace AutoRest.Go
             }
             else if (primaryType.Type == KnownPrimaryType.Uuid)
             {
-                return new PackageType {Import = "github.com/satori/uuid", Member = "UUID"};
+                return new PackageType { Import = "github.com/satori/uuid", Member = "UUID" };
             }
             else
             {
@@ -509,7 +516,7 @@ namespace AutoRest.Go
         {
             // Sequence types normalize to the same object
             _normalizedTypes[sequenceType] = sequenceType;
-            
+
             sequenceType.ElementType = NormalizeTypeReference(sequenceType.ElementType);
             sequenceType.NameFormat = "[]{0}";
             return sequenceType;
@@ -518,6 +525,44 @@ namespace AutoRest.Go
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
             return new MapType(NormalizeTypeReference(dictionaryType.ValueType));
+        }
+
+        /// <summary>
+        /// Formats a string to work around golint name stuttering
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="packageName"></param>
+        /// <param name="nameInUse"></param>
+        /// <param name="attachment"></param>
+        /// <returns>The formatted string</returns>
+        public static string AttachTypeName(string name, string packageName, bool nameInUse, string attachment)
+        {
+            return nameInUse
+                ? name.Equals(packageName, StringComparison.OrdinalIgnoreCase)
+                    ? name
+                    : name + attachment
+                : name;
+        }
+
+        /// <summary>
+        /// Formats a string to pascal case using a specific character as splitter
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="splitter"></param>
+        /// <returns>The formatted string</returns>
+        public static string PascalCaseWithoutChar(string name, char splitter)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+
+            return
+                name.Split(splitter)
+                    .Where(s => !string.IsNullOrEmpty(s))
+                    .Select(s => char.ToUpperInvariant(s[0]) + s.Substring(1, s.Length - 1))
+                    .DefaultIfEmpty("")
+                    .Aggregate(string.Concat);
         }
 
         public override string GetEnumMemberName(string name)
@@ -556,12 +601,16 @@ namespace AutoRest.Go
             }
             return EnsureNameCase(GetEscapedReservedName(PascalCase(RemoveInvalidCharacters(name)), "Method"));
         }
-        
+
         public override string GetMethodGroupName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 return name;
+            }
+            if (name.IsNamePlural(PackageName))
+            {
+                return EnsureNameCase(PascalCase(RemoveInvalidCharacters(GetEscapedReservedName(name, "Group"))));
             }
             return EnsureNameCase(PascalCase(RemoveInvalidCharacters(GetEscapedReservedName(name, "Group"))).TrimPackageName(PackageName));
         }
@@ -692,7 +741,7 @@ namespace AutoRest.Go
             packages.ToList().ForEach(p => items.Add(FormatPackageName(p)));
             return String.Join("/", items.ToArray<string>());
         }
-    
+
         public static string FormatPackageName(string packageName)
         {
             if (string.IsNullOrWhiteSpace(packageName))
@@ -715,6 +764,20 @@ namespace AutoRest.Go
             return namespaceParts[namespaceParts.Count() - 1];
         }
 
+        public static string[] SDKVersionFromPackageVersion(string v)
+        {
+            if (string.IsNullOrEmpty(v))
+            {
+                throw new ArgumentNullException("package version");
+            }
+            string[] version = v.Split('.');
+            if (version.Length != 3)
+            {
+                throw new InvalidOperationException("version string should have major, minor and patch versions.");
+            }
+            return version;
+        }
+
         public override string EscapeDefaultValue(string defaultValue, IType type)
         {
             if (type == null)
@@ -730,7 +793,7 @@ namespace AutoRest.Go
                 }
                 else if (primaryType != null)
                 {
-                    if (primaryType.Type == KnownPrimaryType.String  
+                    if (primaryType.Type == KnownPrimaryType.String
                         || primaryType.Type == KnownPrimaryType.Uuid
                         || primaryType.Type == KnownPrimaryType.TimeSpan)
                     {
@@ -746,11 +809,26 @@ namespace AutoRest.Go
                     }
                     else
                     {
-                       //TODO: handle imports for package types.
+                        //TODO: handle imports for package types.
                     }
                 }
             }
             return defaultValue;
+        }
+
+        /// <summary>
+        /// This method adds digit 1 to type name if type name from swagger 
+        /// conflicts with user defined variable names or method names defined by us. 
+        /// </summary>
+        /// <param name="client"></param>
+        private void normalizedTypesForUserDefinedNames(ServiceClient client)
+        {
+            client.ModelTypes.ToList().ForEach(t =>
+            {
+                t.Name = UserDefinedNames.Contains(t.Name)
+                                 ? $"{t.Name}{PackageName.Capitalize()}"
+                                 : t.Name;
+            });
         }
     }
 }

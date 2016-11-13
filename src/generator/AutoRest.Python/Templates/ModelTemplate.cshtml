@@ -1,10 +1,10 @@
 ﻿@using System;
 @using System.Linq
 @using System.Collections.Generic
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
 @using AutoRest.Python
-@using AutoRest.Python.TemplateModels
-@inherits AutoRest.Python.PythonTemplate<AutoRest.Python.TemplateModels.ModelTemplateModel>
+@using AutoRest.Python.Model
+@inherits AutoRest.Python.PythonTemplate<AutoRest.Python.Model.CompositeTypePy>
 # coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ").TrimMultilineHeader()
@@ -50,14 +50,14 @@ else
 @EmptyLine
     foreach (var property in Model.ComposedProperties)
     {
-@:    @ParameterWrapComment(string.Empty, ModelTemplateModel.GetPropertyDocumentationString(property))
+@:    @ParameterWrapComment(string.Empty, CompositeTypePy.GetPropertyDocumentationString(property))
         if (property.IsConstant || property.IsReadOnly)
         {
-@:    @ParameterWrapComment(string.Empty, ":vartype " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
+@:    @ParameterWrapComment(string.Empty, ":vartype " + property.Name + ": " + Model.GetPropertyDocumentationType(property.ModelType))
     }
         else
         {
-@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
+@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.ModelType))
         }
     }
 }
@@ -95,7 +95,7 @@ else
 <text>
 @EmptyLine
     _subtype_map = {
-        '@Model.BasePolymorphicDiscriminator': {@Model.SubModelTypeList}
+        '@Model.PolymorphicDiscriminatorProperty.Name': {@Model.SubModelTypeList}
     }
 </text>
 }
@@ -128,7 +128,7 @@ else
 	}
     if (Model.NeedsPolymorphicConverter)
     {
-        @:self.@Model.BasePolymorphicDiscriminator = '@Model.SerializedName'
+        @:self.@Model.PolymorphicDiscriminatorProperty.Name = '@Model.SerializedName'
     }
 }
 @if (Model.IsException)

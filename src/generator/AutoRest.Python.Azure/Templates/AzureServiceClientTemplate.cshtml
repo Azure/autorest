@@ -1,12 +1,13 @@
 ﻿@using AutoRest.Python.Templates
 @using System.Linq
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
+@using AutoRest.Extensions.Azure
 @using AutoRest.Python
-@using AutoRest.Python.Azure.TemplateModels
+@using AutoRest.Python.Azure.Model
 @using AutoRest.Python.Azure.Templates
-@using AutoRest.Python.TemplateModels
-@inherits AutoRest.Python.PythonTemplate<AutoRest.Python.Azure.TemplateModels.AzureServiceClientTemplateModel>
+@using AutoRest.Python.Model
+@inherits AutoRest.Python.PythonTemplate<CodeModelPya>
 # coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ").TrimMultilineHeader()
@@ -16,7 +17,7 @@ from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
 from .version import VERSION
-@if (Model.MethodTemplateModels.Any())
+@if (Model.MethodTemplateModels.Any( each => each.MethodGroup.IsCodeModelMethodGroup))
 {
 <text>
 from msrest.pipeline import ClientRawResponse
@@ -35,7 +36,7 @@ import uuid
 {
   foreach (var modelGroupType in Model.MethodGroupModels)
   {
-@:from .operations.@(modelGroupType.MethodGroupType.ToPythonCase()) import @modelGroupType.MethodGroupType
+@:from .operations.@(((string) modelGroupType.TypeName).ToPythonCase()) import @((string) modelGroupType.TypeName)
   }
 }
 @if (Model.HasAnyModel)
@@ -49,15 +50,15 @@ class @(Model.Name)Configuration(AzureConfiguration):
     Note that all parameters used to create this instance are saved as instance
     attributes.
 @EmptyLine
-@foreach(var property in Model.Properties)
+@foreach(var property in Model.Properties.Where(each => !each.IsConstant))
 {
-@:    @ParameterWrapComment(string.Empty, ServiceClientTemplateModel.GetPropertyDocumentationString(property))
-@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
+@:    @ParameterWrapComment(string.Empty, CodeModelPy.GetPropertyDocumentationString(property))
+@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.ModelType))
 }
 @foreach(var property in Model.ConstantProperties)
 {
-@:    @ParameterWrapComment(string.Empty, ServiceClientTemplateModel.GetPropertyDocumentationString(property))
-@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
+@:    @ParameterWrapComment(string.Empty, CodeModelPy.GetPropertyDocumentationString(property))
+@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.ModelType))
 }
 
 @if (!Model.IsCustomBaseUri)
@@ -90,7 +91,7 @@ else
 @if (Model.Properties.Any())
 {
 @EmptyLine
-  foreach (var property in Model.Properties)
+  foreach (var property in Model.Properties.Where(each => !each.IsConstant))
   {
         @:self.@(property.Name) = @(property.Name)
   }
@@ -111,15 +112,15 @@ class @(Model.Name)(object):
     @EmptyLine
     foreach (var methodGroup in Model.MethodGroupModels)
     {
-@:    :ivar @(methodGroup.MethodGroupName.ToPythonCase()): @(methodGroup.MethodGroupName) operations
-@:    :vartype @(methodGroup.MethodGroupName.ToPythonCase()): .operations.@(methodGroup.MethodGroupType)
+@:    :ivar @(((string) methodGroup.Name).ToPythonCase()): @((string) methodGroup.Name) operations
+@:    :vartype @(((string) methodGroup.Name).ToPythonCase()): .operations.@((string) methodGroup.TypeName)
     }
 }
 @EmptyLine
-@foreach (var property in Model.Properties)
+@foreach (var property in Model.Properties.Where(each => !each.IsConstant))
 {
-@:    @ParameterWrapComment(string.Empty, ServiceClientTemplateModel.GetPropertyDocumentationString(property))
-@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
+@:    @ParameterWrapComment(string.Empty, CodeModelPy.GetPropertyDocumentationString(property))
+@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.ModelType))
 }
 
 @if (!Model.IsCustomBaseUri)
@@ -133,9 +134,9 @@ class @(Model.Name)(object):
             self, @(Model.RequiredConstructorParameters)@(Model.IsCustomBaseUri ? "" : "base_url=None, ")filepath=None):
 @EmptyLine
         self.config = @(Model.Name)Configuration(@(Model.ConfigConstructorParameters)@(Model.IsCustomBaseUri ? "" : "base_url, ")filepath)
-        self._client = ServiceClient(@(Model.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)) ? "self.config.credentials" : PythonConstants.None), self.config)
+        self._client = ServiceClient(@(Model.Properties.Any(p => p.ModelType.IsPrimaryType(KnownPrimaryType.Credentials)) ? "self.config.credentials" : PythonConstants.None), self.config)
 @EmptyLine
-@if (Model.ModelTemplateModels.Any())
+@if (Model.ModelTemplateModels.Any(each => !each.Extensions.ContainsKey(AzureExtensions.ExternalExtension)))
 {
         @:client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
 }
@@ -148,11 +149,11 @@ else
 @EmptyLine
 @foreach (var methodGroup in Model.MethodGroupModels)
 {
-        @:self.@(methodGroup.MethodGroupName.ToPythonCase()) = @(methodGroup.MethodGroupType)(
+        @:self.@(((string) methodGroup.Name).ToPythonCase()) = @((string) methodGroup.TypeName)(
             @:self._client, self.config, self._serialize, self._deserialize)
 }
-@foreach (var method in Model.MethodTemplateModels)
+@foreach (var method in Model.MethodTemplateModels.Where(each => each.MethodGroup.IsCodeModelMethodGroup))
 {
 @EmptyLine
-@(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
+@(Include(new AzureMethodTemplate(), (MethodPya)method))
 }

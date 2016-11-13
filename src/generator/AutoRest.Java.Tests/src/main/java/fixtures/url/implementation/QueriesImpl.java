@@ -201,10 +201,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get true Boolean value on path.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getBooleanTrue() throws ErrorException, IOException {
+    public void getBooleanTrue() {
         getBooleanTrueWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -263,10 +261,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get false Boolean value on path.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getBooleanFalse() throws ErrorException, IOException {
+    public void getBooleanFalse() {
         getBooleanFalseWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -325,10 +321,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getBooleanNull() throws ErrorException, IOException {
+    public void getBooleanNull() {
         getBooleanNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -381,10 +375,8 @@ public final class QueriesImpl implements Queries {
      * Get null Boolean value on query (query string should be absent).
      *
      * @param boolQuery null boolean value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getBooleanNull(Boolean boolQuery) throws ErrorException, IOException {
+    public void getBooleanNull(Boolean boolQuery) {
         getBooleanNullWithServiceResponseAsync(boolQuery).toBlocking().single().getBody();
     }
 
@@ -445,10 +437,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '1000000' integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getIntOneMillion() throws ErrorException, IOException {
+    public void getIntOneMillion() {
         getIntOneMillionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -507,10 +497,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-1000000' integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getIntNegativeOneMillion() throws ErrorException, IOException {
+    public void getIntNegativeOneMillion() {
         getIntNegativeOneMillionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -569,10 +557,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null integer value (no query parameter).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getIntNull() throws ErrorException, IOException {
+    public void getIntNull() {
         getIntNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -625,10 +611,8 @@ public final class QueriesImpl implements Queries {
      * Get null integer value (no query parameter).
      *
      * @param intQuery null integer value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getIntNull(Integer intQuery) throws ErrorException, IOException {
+    public void getIntNull(Integer intQuery) {
         getIntNullWithServiceResponseAsync(intQuery).toBlocking().single().getBody();
     }
 
@@ -689,10 +673,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getTenBillion() throws ErrorException, IOException {
+    public void getTenBillion() {
         getTenBillionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -751,10 +733,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getNegativeTenBillion() throws ErrorException, IOException {
+    public void getNegativeTenBillion() {
         getNegativeTenBillionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -813,10 +793,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getLongNull() throws ErrorException, IOException {
+    public void getLongNull() {
         getLongNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -869,10 +847,8 @@ public final class QueriesImpl implements Queries {
      * Get 'null 64 bit integer value (no query param in uri).
      *
      * @param longQuery null 64 bit integer value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getLongNull(Long longQuery) throws ErrorException, IOException {
+    public void getLongNull(Long longQuery) {
         getLongNullWithServiceResponseAsync(longQuery).toBlocking().single().getBody();
     }
 
@@ -933,10 +909,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void floatScientificPositive() throws ErrorException, IOException {
+    public void floatScientificPositive() {
         floatScientificPositiveWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -995,10 +969,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void floatScientificNegative() throws ErrorException, IOException {
+    public void floatScientificNegative() {
         floatScientificNegativeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1057,10 +1029,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void floatNull() throws ErrorException, IOException {
+    public void floatNull() {
         floatNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1113,10 +1083,8 @@ public final class QueriesImpl implements Queries {
      * Get null numeric value (no query parameter).
      *
      * @param floatQuery null numeric value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void floatNull(Double floatQuery) throws ErrorException, IOException {
+    public void floatNull(Double floatQuery) {
         floatNullWithServiceResponseAsync(floatQuery).toBlocking().single().getBody();
     }
 
@@ -1177,10 +1145,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void doubleDecimalPositive() throws ErrorException, IOException {
+    public void doubleDecimalPositive() {
         doubleDecimalPositiveWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1239,10 +1205,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void doubleDecimalNegative() throws ErrorException, IOException {
+    public void doubleDecimalNegative() {
         doubleDecimalNegativeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1301,10 +1265,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void doubleNull() throws ErrorException, IOException {
+    public void doubleNull() {
         doubleNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1357,10 +1319,8 @@ public final class QueriesImpl implements Queries {
      * Get null numeric value (no query parameter).
      *
      * @param doubleQuery null numeric value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void doubleNull(Double doubleQuery) throws ErrorException, IOException {
+    public void doubleNull(Double doubleQuery) {
         doubleNullWithServiceResponseAsync(doubleQuery).toBlocking().single().getBody();
     }
 
@@ -1421,10 +1381,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void stringUnicode() throws ErrorException, IOException {
+    public void stringUnicode() {
         stringUnicodeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1483,10 +1441,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void stringUrlEncoded() throws ErrorException, IOException {
+    public void stringUrlEncoded() {
         stringUrlEncodedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1545,10 +1501,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get ''.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void stringEmpty() throws ErrorException, IOException {
+    public void stringEmpty() {
         stringEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1607,10 +1561,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void stringNull() throws ErrorException, IOException {
+    public void stringNull() {
         stringNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1663,10 +1615,8 @@ public final class QueriesImpl implements Queries {
      * Get null (no query parameter in url).
      *
      * @param stringQuery null string value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void stringNull(String stringQuery) throws ErrorException, IOException {
+    public void stringNull(String stringQuery) {
         stringNullWithServiceResponseAsync(stringQuery).toBlocking().single().getBody();
     }
 
@@ -1727,10 +1677,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void enumValid() throws ErrorException, IOException {
+    public void enumValid() {
         enumValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1783,10 +1731,8 @@ public final class QueriesImpl implements Queries {
      * Get using uri with query parameter 'green color'.
      *
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void enumValid(UriColor enumQuery) throws ErrorException, IOException {
+    public void enumValid(UriColor enumQuery) {
         enumValidWithServiceResponseAsync(enumQuery).toBlocking().single().getBody();
     }
 
@@ -1847,10 +1793,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void enumNull() throws ErrorException, IOException {
+    public void enumNull() {
         enumNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1903,10 +1847,8 @@ public final class QueriesImpl implements Queries {
      * Get null (no query parameter in url).
      *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void enumNull(UriColor enumQuery) throws ErrorException, IOException {
+    public void enumNull(UriColor enumQuery) {
         enumNullWithServiceResponseAsync(enumQuery).toBlocking().single().getBody();
     }
 
@@ -1967,10 +1909,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void byteMultiByte() throws ErrorException, IOException {
+    public void byteMultiByte() {
         byteMultiByteWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2024,10 +1964,8 @@ public final class QueriesImpl implements Queries {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void byteMultiByte(byte[] byteQuery) throws ErrorException, IOException {
+    public void byteMultiByte(byte[] byteQuery) {
         byteMultiByteWithServiceResponseAsync(byteQuery).toBlocking().single().getBody();
     }
 
@@ -2089,10 +2027,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '' as byte array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void byteEmpty() throws ErrorException, IOException {
+    public void byteEmpty() {
         byteEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2152,10 +2088,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void byteNull() throws ErrorException, IOException {
+    public void byteNull() {
         byteNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2209,10 +2143,8 @@ public final class QueriesImpl implements Queries {
      * Get null as byte array (no query parameters in uri).
      *
      * @param byteQuery null as byte array (no query parameters in uri)
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void byteNull(byte[] byteQuery) throws ErrorException, IOException {
+    public void byteNull(byte[] byteQuery) {
         byteNullWithServiceResponseAsync(byteQuery).toBlocking().single().getBody();
     }
 
@@ -2274,10 +2206,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '2012-01-01' as date.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void dateValid() throws ErrorException, IOException {
+    public void dateValid() {
         dateValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2336,10 +2266,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void dateNull() throws ErrorException, IOException {
+    public void dateNull() {
         dateNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2392,10 +2320,8 @@ public final class QueriesImpl implements Queries {
      * Get null as date - this should result in no query parameters in uri.
      *
      * @param dateQuery null as date (no query parameters in uri)
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void dateNull(LocalDate dateQuery) throws ErrorException, IOException {
+    public void dateNull(LocalDate dateQuery) {
         dateNullWithServiceResponseAsync(dateQuery).toBlocking().single().getBody();
     }
 
@@ -2456,10 +2382,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void dateTimeValid() throws ErrorException, IOException {
+    public void dateTimeValid() {
         dateTimeValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2518,10 +2442,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void dateTimeNull() throws ErrorException, IOException {
+    public void dateTimeNull() {
         dateTimeNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2574,10 +2496,8 @@ public final class QueriesImpl implements Queries {
      * Get null as date-time, should result in no query parameters in uri.
      *
      * @param dateTimeQuery null as date-time (no query parameters)
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void dateTimeNull(DateTime dateTimeQuery) throws ErrorException, IOException {
+    public void dateTimeNull(DateTime dateTimeQuery) {
         dateTimeNullWithServiceResponseAsync(dateTimeQuery).toBlocking().single().getBody();
     }
 
@@ -2638,10 +2558,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void arrayStringCsvValid() throws ErrorException, IOException {
+    public void arrayStringCsvValid() {
         arrayStringCsvValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2695,10 +2613,8 @@ public final class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void arrayStringCsvValid(List<String> arrayQuery) throws ErrorException, IOException {
+    public void arrayStringCsvValid(List<String> arrayQuery) {
         arrayStringCsvValidWithServiceResponseAsync(arrayQuery).toBlocking().single().getBody();
     }
 
@@ -2761,10 +2677,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void arrayStringCsvNull() throws ErrorException, IOException {
+    public void arrayStringCsvNull() {
         arrayStringCsvNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2818,10 +2732,8 @@ public final class QueriesImpl implements Queries {
      * Get a null array of string using the csv-array format.
      *
      * @param arrayQuery a null array of string using the csv-array format
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void arrayStringCsvNull(List<String> arrayQuery) throws ErrorException, IOException {
+    public void arrayStringCsvNull(List<String> arrayQuery) {
         arrayStringCsvNullWithServiceResponseAsync(arrayQuery).toBlocking().single().getBody();
     }
 
@@ -2884,10 +2796,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void arrayStringCsvEmpty() throws ErrorException, IOException {
+    public void arrayStringCsvEmpty() {
         arrayStringCsvEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -2941,10 +2851,8 @@ public final class QueriesImpl implements Queries {
      * Get an empty array [] of string using the csv-array format.
      *
      * @param arrayQuery an empty array [] of string using the csv-array format
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void arrayStringCsvEmpty(List<String> arrayQuery) throws ErrorException, IOException {
+    public void arrayStringCsvEmpty(List<String> arrayQuery) {
         arrayStringCsvEmptyWithServiceResponseAsync(arrayQuery).toBlocking().single().getBody();
     }
 
@@ -3007,10 +2915,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void arrayStringSsvValid() throws ErrorException, IOException {
+    public void arrayStringSsvValid() {
         arrayStringSsvValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3064,10 +2970,8 @@ public final class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void arrayStringSsvValid(List<String> arrayQuery) throws ErrorException, IOException {
+    public void arrayStringSsvValid(List<String> arrayQuery) {
         arrayStringSsvValidWithServiceResponseAsync(arrayQuery).toBlocking().single().getBody();
     }
 
@@ -3130,10 +3034,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void arrayStringTsvValid() throws ErrorException, IOException {
+    public void arrayStringTsvValid() {
         arrayStringTsvValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3187,10 +3089,8 @@ public final class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void arrayStringTsvValid(List<String> arrayQuery) throws ErrorException, IOException {
+    public void arrayStringTsvValid(List<String> arrayQuery) {
         arrayStringTsvValidWithServiceResponseAsync(arrayQuery).toBlocking().single().getBody();
     }
 
@@ -3253,10 +3153,8 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void arrayStringPipesValid() throws ErrorException, IOException {
+    public void arrayStringPipesValid() {
         arrayStringPipesValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -3310,10 +3208,8 @@ public final class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void arrayStringPipesValid(List<String> arrayQuery) throws ErrorException, IOException {
+    public void arrayStringPipesValid(List<String> arrayQuery) {
         arrayStringPipesValidWithServiceResponseAsync(arrayQuery).toBlocking().single().getBody();
     }
 

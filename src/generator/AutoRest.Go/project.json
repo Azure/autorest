@@ -20,14 +20,13 @@
   },
 
   "frameworks": {
-    "net451": {
-    }
+    "net451": {}
   },
 
 
   "dependencies": {
     "System.Threading.Tasks": "4.0.0",
-    "AutoRest.Extensions.Azure": "0.17.0-*",
+    "AutoRest.Extensions.Azure": "1.0.0-*",
     "AutoRest.Extensions": {
       "target": "project"
     },

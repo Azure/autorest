@@ -50,6 +50,8 @@ class AvailabilitySetsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
         tags1 = models.AvailabilitySetUpdateParameters(tags=tags)
 

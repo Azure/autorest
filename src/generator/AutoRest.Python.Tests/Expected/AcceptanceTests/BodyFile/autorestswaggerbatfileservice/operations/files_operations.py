@@ -48,6 +48,8 @@ class FilesOperations(object):
         :rtype: Generator
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodyfile.models.ErrorException>`
         """
         # Construct URL
         url = '/files/stream/nonempty'
@@ -96,6 +98,8 @@ class FilesOperations(object):
         :rtype: Generator
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodyfile.models.ErrorException>`
         """
         # Construct URL
         url = '/files/stream/verylarge'
@@ -144,6 +148,8 @@ class FilesOperations(object):
         :rtype: Generator
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodyfile.models.ErrorException>`
         """
         # Construct URL
         url = '/files/stream/empty'

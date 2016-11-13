@@ -31,8 +31,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <param name="location">Location to poll for result status: will be
         /// set to
         /// /lro/nonretryerror/putasync/retry/operationResults/400</param>
-        /// <param name="retryAfter">Number of milliseconds until the next
-        /// poll should be sent, will be set to zero</param>
+        /// <param name="retryAfter">Number of milliseconds until the next poll
+        /// should be sent, will be set to zero</param>
         public LROSADsPostAsyncRelativeRetry400Headers(string azureAsyncOperation = default(string), string location = default(string), int? retryAfter = default(int?))
         {
             AzureAsyncOperation = azureAsyncOperation;

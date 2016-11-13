@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using Newtonsoft.Json.Linq;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Extensions
 {
@@ -24,7 +25,7 @@ namespace AutoRest.Extensions
 
         private static Property CreateParameterGroupProperty(Parameter parameter)
         {
-            Property groupProperty = new Property()
+            Property groupProperty = New<Property>(new
             {
                 IsReadOnly = false, //Since these properties are used as parameters they are never read only
                 Name = parameter.Name,
@@ -32,9 +33,9 @@ namespace AutoRest.Extensions
                 DefaultValue = parameter.DefaultValue,
                 //Constraints = parameter.Constraints, Omit these since we don't want to perform parameter validation
                 Documentation = parameter.Documentation,
-                Type = parameter.Type,
-                SerializedName = null //Parameter is never serialized directly
-            };
+                ModelType = parameter.ModelType,
+                SerializedName = default(string) //Parameter is never serialized directly
+            });
 
             // Copy over extensions
             foreach (var key in parameter.Extensions.Keys)
@@ -109,12 +110,12 @@ namespace AutoRest.Extensions
             {
                 Method method = methodList.Single();
                 return string.Format(CultureInfo.InvariantCulture, "Additional parameters for the {0} operation.",
-                    createOperationDisplayString(method.Group, method.Name));
+                    createOperationDisplayString(method.MethodGroup.Name, method.Name));
             }
             else if (methodList.Count <= 4)
             {
                 string operationsString = string.Join(", ", methodList.Select(
-                    m => string.Format(CultureInfo.InvariantCulture, createOperationDisplayString(m.Group, m.Name))));
+                    m => string.Format(CultureInfo.InvariantCulture, createOperationDisplayString(m.MethodGroup.Name, m.Name))));
 
                 return string.Format(CultureInfo.InvariantCulture, "Additional parameters for a set of operations, such as: {0}.", operationsString);
             }
@@ -127,17 +128,17 @@ namespace AutoRest.Extensions
         /// <summary>
         /// Adds the parameter groups to operation parameters.
         /// </summary>
-        /// <param name="serviceClient"></param>
-        public static void AddParameterGroups(ServiceClient serviceClient)
+        /// <param name="codeModelient"></param>
+        public static void AddParameterGroups(CodeModel codeModel)
         {
-            if (serviceClient == null)
+            if (codeModel == null)
             {
-                throw new ArgumentNullException("serviceClient");
+                throw new ArgumentNullException("codeModel");
             }
 
             HashSet<CompositeType> generatedParameterGroups = new HashSet<CompositeType>();
 
-            foreach (Method method in serviceClient.Methods)
+            foreach (Method method in codeModel.Methods)
             {
                 //Copy out flattening transformations as they should be the last
                 List<ParameterTransformation> flatteningTransformations = method.InputParameterTransformation.ToList();
@@ -152,48 +153,47 @@ namespace AutoRest.Extensions
                 foreach (ParameterGroup parameterGroup in parameterGroups)
                 {
                     CompositeType parameterGroupType =
-                        generatedParameterGroups.FirstOrDefault(item => item.Name == parameterGroup.Name);
+                        generatedParameterGroups.FirstOrDefault(item => item.Name.RawValue == parameterGroup.Name);
 
                     if (parameterGroupType == null)
                     {
-                        IEnumerable<Method> methodsWhichUseGroup = GetMethodsUsingParameterGroup(serviceClient.Methods, parameterGroup);
+                        IEnumerable<Method> methodsWhichUseGroup = GetMethodsUsingParameterGroup(codeModel.Methods, parameterGroup);
 
-                        parameterGroupType = new CompositeType
+                        parameterGroupType = New<CompositeType>(parameterGroup.Name,new
                         {
-                            Name = parameterGroup.Name,
                             Documentation = GenerateParameterGroupModelText(methodsWhichUseGroup)
-                        };
+                        });
                         generatedParameterGroups.Add(parameterGroupType);
 
                         //Add to the service client
-                        serviceClient.ModelTypes.Add(parameterGroupType);
+                        codeModel.Add(parameterGroupType);
                     }
 
                     foreach (Property property in parameterGroup.ParameterMapping.Keys)
                     {
                         Property matchingProperty = parameterGroupType.Properties.FirstOrDefault(
-                                item => item.Name == property.Name &&
+                                item => item.Name.RawValue == property.Name.RawValue &&
                                         item.IsReadOnly == property.IsReadOnly &&
-                                        item.DefaultValue == property.DefaultValue &&
-                                        item.SerializedName == property.SerializedName);
+                                        item.DefaultValue .RawValue== property.DefaultValue.RawValue &&
+                                        item.SerializedName.RawValue == property.SerializedName.RawValue);
                         if (matchingProperty == null)
                         {
-                            parameterGroupType.Properties.Add(property);
+                            parameterGroupType.Add(property);
                         }
                     }
 
                     bool isGroupParameterRequired = parameterGroupType.Properties.Any(p => p.IsRequired);
 
                     //Create the new parameter object based on the parameter group type
-                    Parameter newParameter = new Parameter()
+                    Parameter newParameter = New<Parameter>(new
                     {
                         Name = parameterGroup.Name,
                         IsRequired = isGroupParameterRequired,
                         Location = ParameterLocation.None,
                         SerializedName = string.Empty,
-                        Type = parameterGroupType,
+                        ModelType = parameterGroupType,
                         Documentation = "Additional parameters for the operation"
-                    };
+                    });
                     parametersToAddToMethod.Add(newParameter);
 
                     //Link the grouped parameters to their parent, and remove them from the method parameters
@@ -215,9 +215,8 @@ namespace AutoRest.Extensions
                         parametersToRemoveFromMethod.Add(p);
                     }
                 }
-
-                method.Parameters.RemoveAll(p => parametersToRemoveFromMethod.Contains(p));
-                method.Parameters.AddRange(parametersToAddToMethod);
+                method.Remove(p => parametersToRemoveFromMethod.Contains(p));
+                method.AddRange(parametersToAddToMethod);
 
                 // Copy back flattening transformations if any
                 flatteningTransformations.ForEach(t => method.InputParameterTransformation.Add(t));

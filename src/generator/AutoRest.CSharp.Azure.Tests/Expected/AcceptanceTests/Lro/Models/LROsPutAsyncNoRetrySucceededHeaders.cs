@@ -29,8 +29,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// status: will be set to
         /// /lro/putasync/noretry/succeeded/operationResults/200</param>
         /// <param name="location">Location to poll for result status: will be
-        /// set to
-        /// /lro/putasync/noretry/succeeded/operationResults/200</param>
+        /// set to /lro/putasync/noretry/succeeded/operationResults/200</param>
         public LROsPutAsyncNoRetrySucceededHeaders(string azureAsyncOperation = default(string), string location = default(string))
         {
             AzureAsyncOperation = azureAsyncOperation;

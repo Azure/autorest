@@ -1,30 +1,33 @@
 ﻿{
-  "codeGenerators": {
-    "Ruby": {
-      "type": "RubyCodeGenerator, AutoRest.Ruby"
+    "plugins": {
+        "CSharp": {
+            "type": "PluginCs, AutoRest.CSharp"
+        },
+        "Azure.CSharp": {
+            "type": "PluginCsa, AutoRest.CSharp.Azure"
+        },
+        "Ruby": {
+            "type": "PluginRb, AutoRest.Ruby"
+        },
+        "NodeJS": {
+            "type": "PluginJs, AutoRest.NodeJS"
+        },
+        "Azure.NodeJS": {
+            "type": "PluginJsa, AutoRest.NodeJS.Azure"
+        },
+        "Python": {
+            "type": "PluginPy, AutoRest.Python"
+        },
+        "Azure.Python": {
+            "type": "PluginPya, AutoRest.Python.Azure"
+        },
+        "AzureResourceSchema": {
+            "type": "PluginArs, AutoRest.AzureResourceSchema"
+        },
+        "Azure.CSharp.Fluent": {
+          "type": "PluginCsaf, AutoRest.AutoRest.CSharp.Azure.Fluent"
+        }
     },
-    "Azure.Ruby": {
-      "type": "AzureRubyCodeGenerator, AutoRest.Ruby.Azure"
-    },
-    "CSharp": {
-      "type": "CSharpCodeGenerator, AutoRest.CSharp"
-    },
-    "Azure.CSharp": {
-      "type": "AzureCSharpCodeGenerator, AutoRest.CSharp.Azure"
-    },
-    "NodeJS": {
-      "type": "NodeJSCodeGenerator, AutoRest.NodeJS"
-    },
-    "Azure.NodeJS": {
-      "type": "AzureNodeJSCodeGenerator, AutoRest.NodeJS.Azure"
-    },
-    "Java": {
-      "type": "JavaCodeGenerator, AutoRest.Java"
-    },
-    "Azure.Java": {
-      "type": "AzureJavaCodeGenerator, AutoRest.Java.Azure"
-    }
-  },
   "modelers": {
     "Swagger": {
       "type": "SwaggerModeler, AutoRest.Swagger"

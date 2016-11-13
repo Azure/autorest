@@ -18,8 +18,8 @@ namespace Fixtures.AcceptanceTestsUrl
     {
             /// <summary>
             /// send globalStringPath='globalStringPath',
-            /// pathItemStringPath='pathItemStringPath',
-            /// localStringPath='localStringPath', globalStringQuery='globalStringQuery',
+            /// pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+            /// globalStringQuery='globalStringQuery',
             /// pathItemStringQuery='pathItemStringQuery',
             /// localStringQuery='localStringQuery'
             /// </summary>
@@ -45,8 +45,8 @@ namespace Fixtures.AcceptanceTestsUrl
 
             /// <summary>
             /// send globalStringPath='globalStringPath',
-            /// pathItemStringPath='pathItemStringPath',
-            /// localStringPath='localStringPath', globalStringQuery='globalStringQuery',
+            /// pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+            /// globalStringQuery='globalStringQuery',
             /// pathItemStringQuery='pathItemStringQuery',
             /// localStringQuery='localStringQuery'
             /// </summary>
@@ -75,9 +75,8 @@ namespace Fixtures.AcceptanceTestsUrl
 
             /// <summary>
             /// send globalStringPath='globalStringPath',
-            /// pathItemStringPath='pathItemStringPath',
-            /// localStringPath='localStringPath', globalStringQuery=null,
-            /// pathItemStringQuery='pathItemStringQuery',
+            /// pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+            /// globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
             /// localStringQuery='localStringQuery'
             /// </summary>
             /// <param name='operations'>
@@ -102,9 +101,8 @@ namespace Fixtures.AcceptanceTestsUrl
 
             /// <summary>
             /// send globalStringPath='globalStringPath',
-            /// pathItemStringPath='pathItemStringPath',
-            /// localStringPath='localStringPath', globalStringQuery=null,
-            /// pathItemStringQuery='pathItemStringQuery',
+            /// pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+            /// globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
             /// localStringQuery='localStringQuery'
             /// </summary>
             /// <param name='operations'>
@@ -132,9 +130,9 @@ namespace Fixtures.AcceptanceTestsUrl
 
             /// <summary>
             /// send globalStringPath=globalStringPath,
-            /// pathItemStringPath='pathItemStringPath',
-            /// localStringPath='localStringPath', globalStringQuery=null,
-            /// pathItemStringQuery='pathItemStringQuery', localStringQuery=null
+            /// pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+            /// globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
+            /// localStringQuery=null
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -158,9 +156,9 @@ namespace Fixtures.AcceptanceTestsUrl
 
             /// <summary>
             /// send globalStringPath=globalStringPath,
-            /// pathItemStringPath='pathItemStringPath',
-            /// localStringPath='localStringPath', globalStringQuery=null,
-            /// pathItemStringQuery='pathItemStringQuery', localStringQuery=null
+            /// pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+            /// globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
+            /// localStringQuery=null
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -187,9 +185,9 @@ namespace Fixtures.AcceptanceTestsUrl
 
             /// <summary>
             /// send globalStringPath='globalStringPath',
-            /// pathItemStringPath='pathItemStringPath',
-            /// localStringPath='localStringPath', globalStringQuery='globalStringQuery',
-            /// pathItemStringQuery=null, localStringQuery=null
+            /// pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+            /// globalStringQuery='globalStringQuery', pathItemStringQuery=null,
+            /// localStringQuery=null
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -213,9 +211,9 @@ namespace Fixtures.AcceptanceTestsUrl
 
             /// <summary>
             /// send globalStringPath='globalStringPath',
-            /// pathItemStringPath='pathItemStringPath',
-            /// localStringPath='localStringPath', globalStringQuery='globalStringQuery',
-            /// pathItemStringQuery=null, localStringQuery=null
+            /// pathItemStringPath='pathItemStringPath', localStringPath='localStringPath',
+            /// globalStringQuery='globalStringQuery', pathItemStringQuery=null,
+            /// localStringQuery=null
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.

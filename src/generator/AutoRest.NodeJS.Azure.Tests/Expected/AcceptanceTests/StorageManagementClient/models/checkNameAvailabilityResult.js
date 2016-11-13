@@ -22,11 +22,11 @@
  * be used.
  * 
  * @member {string} [reason] Gets the reason that a storage account name could
- * not be used. The Reason element is only returned if NameAvailable is
- * false. Possible values include: 'AccountNameInvalid', 'AlreadyExists'
+ * not be used. The Reason element is only returned if NameAvailable is false.
+ * Possible values include: 'AccountNameInvalid', 'AlreadyExists'
  * 
- * @member {string} [message] Gets an error message explaining the Reason
- * value in more detail.
+ * @member {string} [message] Gets an error message explaining the Reason value
+ * in more detail.
  * 
  */
 function CheckNameAvailabilityResult() {

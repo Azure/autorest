@@ -13,6 +13,7 @@ namespace AutoRest.AzureResourceSchema
     /// </summary>
     public class JsonSchema
     {
+        private string resourceType;
         private IList<string> enumList;
         private IDictionary<string, JsonSchema> properties;
         private IList<string> requiredList;
@@ -48,38 +49,29 @@ namespace AutoRest.AzureResourceSchema
         public string JsonType { get; set; }
 
         /// <summary>
-        /// Get the resource type of this JsonSchema. If this JsonSchema defines an Azure Resource,
-        /// then this value will be found in definition.properties.type.enum[0]. If this JsonSchema
-        /// does not define an Azure Resource, then this will return null.
+        /// Gets or sets the resource type of this JsonSchema.
         /// </summary>
         public string ResourceType
         {
             get
             {
-                string result = null;
-
-                if (Properties != null &&
-                    Properties.ContainsKey("type") &&
-                    Properties["type"].Enum != null)
-                {
-                    result = Properties["type"].Enum.SingleOrDefault();
-                }
-
-                return result;
+                return resourceType;
             }
             set
             {
-                if (properties == null)
+                resourceType = value;
+                if (Properties != null && Properties.ContainsKey("type"))
                 {
-                    properties = new Dictionary<string, JsonSchema>();
-                }
+                    // update the value of the type enum.  we have to be careful though that we don't
+                    // stomp over some other enum that happens to have the name "type".  this code path
+                    // is typically hit when building a child resource definition from a cloned parent.
+                    if (Properties["type"].enumList.Count > 1)
+                        throw new InvalidOperationException("Attempt to update 'type' enum that contains more than one member (possible collision).");
+                    if (!Properties["type"].enumList[0].EndsWith(value))
+                        throw new InvalidOperationException($"The updated type value '{value}' is not a child of type value '{Properties["type"].enumList[0]}'");
 
-                if (!Properties.ContainsKey("type"))
-                {
-                    Properties["type"] = new JsonSchema();
+                    Properties["type"].enumList[0] = value;
                 }
-
-                Properties["type"].enumList = new List<string>() { value };
             }
         }
 
@@ -97,6 +89,16 @@ namespace AutoRest.AzureResourceSchema
         /// The regular expression pattern that a string value matching this schema must match.
         /// </summary>
         public string Pattern { get; set; }
+
+        /// <summary>
+        /// The minimum length that a string or an array matching this schema can have.
+        /// </summary>
+        public double? MinLength { get; set; }
+
+        /// <summary>
+        /// The maximum length that a string or an array matching this schema can have.
+        /// </summary>
+        public double? MaxLength { get; set; }
 
         /// <summary>
         /// The schema that matches additional properties that have not been specified in the

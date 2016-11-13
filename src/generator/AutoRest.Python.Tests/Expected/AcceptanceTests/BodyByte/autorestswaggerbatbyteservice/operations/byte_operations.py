@@ -43,6 +43,8 @@ class ByteOperations(object):
         :rtype: bytearray
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodybyte.models.ErrorException>`
         """
         # Construct URL
         url = '/byte/null'
@@ -86,6 +88,8 @@ class ByteOperations(object):
         :rtype: bytearray
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodybyte.models.ErrorException>`
         """
         # Construct URL
         url = '/byte/empty'
@@ -129,6 +133,8 @@ class ByteOperations(object):
         :rtype: bytearray
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodybyte.models.ErrorException>`
         """
         # Construct URL
         url = '/byte/nonAscii'
@@ -164,8 +170,8 @@ class ByteOperations(object):
             self, byte_body, custom_headers=None, raw=False, **operation_config):
         """Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
 
-        :param byte_body: Base64-encoded non-ascii byte string hex(FF FE FD
-         FC FB FA F9 F8 F7 F6)
+        :param byte_body: Base64-encoded non-ascii byte string hex(FF FE FD FC
+         FB FA F9 F8 F7 F6)
         :type byte_body: bytearray
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -175,6 +181,8 @@ class ByteOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodybyte.models.ErrorException>`
         """
         # Construct URL
         url = '/byte/nonAscii'
@@ -215,6 +223,8 @@ class ByteOperations(object):
         :rtype: bytearray
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsbodybyte.models.ErrorException>`
         """
         # Construct URL
         url = '/byte/invalid'

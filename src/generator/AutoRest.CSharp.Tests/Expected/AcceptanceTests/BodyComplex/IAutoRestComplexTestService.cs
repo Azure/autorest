@@ -39,7 +39,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// Gets the IBasicOperations.
         /// </summary>
-        IBasicOperations BasicOperations { get; }
+        IBasicOperations Basic { get; }
 
         /// <summary>
         /// Gets the IPrimitive.

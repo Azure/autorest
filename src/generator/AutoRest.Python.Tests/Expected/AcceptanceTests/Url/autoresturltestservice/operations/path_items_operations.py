@@ -42,8 +42,8 @@ class PathItemsOperations(object):
 
         :param local_string_path: should contain value 'localStringPath'
         :type local_string_path: str
-        :param path_item_string_path: A string value 'pathItemStringPath'
-         that appears in the path
+        :param path_item_string_path: A string value 'pathItemStringPath' that
+         appears in the path
         :type path_item_string_path: str
         :param local_string_query: should contain value 'localStringQuery'
         :type local_string_query: str
@@ -58,6 +58,8 @@ class PathItemsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery'
@@ -104,8 +106,8 @@ class PathItemsOperations(object):
 
         :param local_string_path: should contain value 'localStringPath'
         :type local_string_path: str
-        :param path_item_string_path: A string value 'pathItemStringPath'
-         that appears in the path
+        :param path_item_string_path: A string value 'pathItemStringPath' that
+         appears in the path
         :type path_item_string_path: str
         :param local_string_query: should contain value 'localStringQuery'
         :type local_string_query: str
@@ -120,6 +122,8 @@ class PathItemsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery'
@@ -165,8 +169,8 @@ class PathItemsOperations(object):
 
         :param local_string_path: should contain value 'localStringPath'
         :type local_string_path: str
-        :param path_item_string_path: A string value 'pathItemStringPath'
-         that appears in the path
+        :param path_item_string_path: A string value 'pathItemStringPath' that
+         appears in the path
         :type path_item_string_path: str
         :param local_string_query: should contain null value
         :type local_string_query: str
@@ -181,6 +185,8 @@ class PathItemsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null'
@@ -227,8 +233,8 @@ class PathItemsOperations(object):
 
         :param local_string_path: should contain value 'localStringPath'
         :type local_string_path: str
-        :param path_item_string_path: A string value 'pathItemStringPath'
-         that appears in the path
+        :param path_item_string_path: A string value 'pathItemStringPath' that
+         appears in the path
         :type path_item_string_path: str
         :param local_string_query: should contain value null
         :type local_string_query: str
@@ -242,6 +248,8 @@ class PathItemsOperations(object):
         :rtype: None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null'
