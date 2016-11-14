@@ -42,32 +42,32 @@ namespace AutoRest.Core.Model
             get { return _serializedName; }
             set { _serializedName.CopyFrom(value); }
         }
-        /// <summary>
-        /// Determines whether the specified object is equal to this object based on Name.
-        /// </summary>
-        /// <param name="obj">The object to compare with this object.</param>
-        /// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
-        public override bool Equals(object obj)
-        {
-            var enumType = obj as EnumValue;
+        ///// <summary>
+        ///// Determines whether the specified object is equal to this object based on Name.
+        ///// </summary>
+        ///// <param name="obj">The object to compare with this object.</param>
+        ///// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
+        //public override bool Equals(object obj)
+        //{
+        //    var enumType = obj as EnumValue;
 
-            if (enumType != null)
-            {
-                return enumType.Name == Name;
-            }
-            return false;
-        }
+        //    if (enumType != null)
+        //    {
+        //        return enumType.Name == Name;
+        //    }
+        //    return false;
+        //}
 
-        /// <summary>
-        /// Serves as a hash function based on name.
-        /// </summary>
-        /// <returns>
-        /// A hash code for the current object.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return Name.GetHashCode();
-        }
+        ///// <summary>
+        ///// Serves as a hash function based on name.
+        ///// </summary>
+        ///// <returns>
+        ///// A hash code for the current object.
+        ///// </returns>
+        //public override int GetHashCode()
+        //{
+        //    return Name.GetHashCode();
+        //}
 
         public int CompareTo(object obj)
         {

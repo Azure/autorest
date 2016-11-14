@@ -42,22 +42,22 @@ namespace AutoRest.Core.Model
             return Name;
         }
 
-        /// <summary>
-        /// Determines whether the specified object is equal to this object based on the ElementType.
-        /// </summary>
-        /// <param name="obj">The object to compare with this object.</param>
-        /// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
-        public override bool Equals(object obj)
-        {
-            var sequenceType = obj as SequenceType;
+        ///// <summary>
+        ///// Determines whether the specified object is equal to this object based on the ElementType.
+        ///// </summary>
+        ///// <param name="obj">The object to compare with this object.</param>
+        ///// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
+        //public override bool Equals(object obj)
+        //{
+        //    var sequenceType = obj as SequenceType;
 
-            if (sequenceType != null)
-            {
-                return sequenceType.ElementType == ElementType;
-            }
+        //    if (sequenceType != null)
+        //    {
+        //        return sequenceType.ElementType == ElementType;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
         /// <summary>
         /// Determines whether the specified model type is functionally equal to this object.
@@ -74,15 +74,15 @@ namespace AutoRest.Core.Model
             return ElementType.FunctionallyEquals((other as SequenceType).ElementType);
         }
 
-        /// <summary>
-        /// Serves as a hash function based on ElementType.
-        /// </summary>
-        /// <returns>
-        /// A hash code for the current object.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return ElementType.GetHashCode();
-        }
+        ///// <summary>
+        ///// Serves as a hash function based on ElementType.
+        ///// </summary>
+        ///// <returns>
+        ///// A hash code for the current object.
+        ///// </returns>
+        //public override int GetHashCode()
+        //{
+        //    return ElementType.GetHashCode();
+        //}
     }
 }

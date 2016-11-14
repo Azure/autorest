@@ -80,7 +80,7 @@ namespace AutoRest.Swagger
                             e => e.Name.RawValue.EqualsIgnoreCase(enumType.Name.RawValue));
                     if (existingEnum != null)
                     {
-                        if (!existingEnum.Equals(enumType))
+                        if (!existingEnum.FunctionallyEquals(enumType))
                         {
                             throw new InvalidOperationException(
                                 string.Format(CultureInfo.InvariantCulture,

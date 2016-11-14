@@ -209,16 +209,16 @@ namespace AutoRest.Core.Model
         //    return false;
         //}
 
-        /// <summary>
-        /// Serves as a hash function based on Name.
-        /// </summary>
-        /// <returns>
-        /// A hash code for the current object.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return Name == null ? 0 : Name.GetHashCode();
-        }
+        ///// <summary>
+        ///// Serves as a hash function based on Name.
+        ///// </summary>
+        ///// <returns>
+        ///// A hash code for the current object.
+        ///// </returns>
+        //public override int GetHashCode()
+        //{
+        //    return Name == null ? 0 : Name.GetHashCode();
+        //}
 
         /// <summary>
         /// Determines whether the specified model type is functionally equal to this object.
