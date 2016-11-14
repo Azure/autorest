@@ -185,8 +185,7 @@ namespace AutoRest.CSharp.Azure.Model
             get
             {
                 var sb = new IndentedStringBuilder();
-                if (this.HttpMethod == HttpMethod.Head &&
-                    this.ReturnType.Body != null)
+                if (this.HttpMethod == HttpMethod.Head)
                 {
                     HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
                     sb.AppendFormat("_result.Body = (_statusCode == System.Net.HttpStatusCode.{0});", code.ToString()).AppendLine();

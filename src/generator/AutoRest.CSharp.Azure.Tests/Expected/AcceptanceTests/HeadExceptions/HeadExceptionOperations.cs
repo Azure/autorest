@@ -157,6 +157,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             var _result = new Microsoft.Rest.Azure.AzureOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
+            _result.Body = (_statusCode == System.Net.HttpStatusCode.OK);
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -285,6 +286,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             var _result = new Microsoft.Rest.Azure.AzureOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
+            _result.Body = (_statusCode == System.Net.HttpStatusCode.NoContent);
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -413,6 +415,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             var _result = new Microsoft.Rest.Azure.AzureOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
+            _result.Body = (_statusCode == System.Net.HttpStatusCode.NoContent);
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
