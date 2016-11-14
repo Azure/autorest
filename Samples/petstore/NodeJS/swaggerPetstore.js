@@ -144,9 +144,10 @@ SwaggerPetstore.prototype.addPetUsingByteArray = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -267,9 +268,10 @@ SwaggerPetstore.prototype.addPet = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -387,9 +389,10 @@ SwaggerPetstore.prototype.updatePet = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -496,9 +499,10 @@ SwaggerPetstore.prototype.findPetsByStatus = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -636,9 +640,10 @@ SwaggerPetstore.prototype.findPetsByTags = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -765,9 +770,10 @@ SwaggerPetstore.prototype.findPetsWithByteArray = function (petId, options, call
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -887,9 +893,10 @@ SwaggerPetstore.prototype.getPetById = function (petId, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1019,9 +1026,10 @@ SwaggerPetstore.prototype.updatePetWithForm = function (petId, options, callback
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1123,9 +1131,10 @@ SwaggerPetstore.prototype.deletePet = function (petId, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1239,9 +1248,10 @@ SwaggerPetstore.prototype.uploadFile = function (petId, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1325,9 +1335,10 @@ SwaggerPetstore.prototype.getInventory = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1468,9 +1479,10 @@ SwaggerPetstore.prototype.placeOrder = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1584,9 +1596,10 @@ SwaggerPetstore.prototype.getOrderById = function (orderId, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1699,9 +1712,10 @@ SwaggerPetstore.prototype.deleteOrder = function (orderId, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1818,9 +1832,10 @@ SwaggerPetstore.prototype.createUser = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1933,9 +1948,10 @@ SwaggerPetstore.prototype.createUsersWithArrayInput = function (options, callbac
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2048,9 +2064,10 @@ SwaggerPetstore.prototype.createUsersWithListInput = function (options, callback
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2159,9 +2176,10 @@ SwaggerPetstore.prototype.loginUser = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2266,9 +2284,10 @@ SwaggerPetstore.prototype.logoutUser = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2363,9 +2382,10 @@ SwaggerPetstore.prototype.getUserByName = function (username, options, callback)
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2510,9 +2530,10 @@ SwaggerPetstore.prototype.updateUser = function (username, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2607,9 +2628,10 @@ SwaggerPetstore.prototype.deleteUser = function (username, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 

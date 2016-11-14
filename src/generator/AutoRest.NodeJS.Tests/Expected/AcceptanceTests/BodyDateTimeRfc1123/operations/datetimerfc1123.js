@@ -93,9 +93,10 @@ Datetimerfc1123.prototype.getNull = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -204,9 +205,10 @@ Datetimerfc1123.prototype.getInvalid = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -315,9 +317,10 @@ Datetimerfc1123.prototype.getOverflow = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -426,9 +429,10 @@ Datetimerfc1123.prototype.getUnderflow = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -568,9 +572,10 @@ Datetimerfc1123.prototype.putUtcMaxDateTime = function (datetimeBody, options, c
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -656,9 +661,10 @@ Datetimerfc1123.prototype.getUtcLowercaseMaxDateTime = function (options, callba
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -767,9 +773,10 @@ Datetimerfc1123.prototype.getUtcUppercaseMaxDateTime = function (options, callba
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -909,9 +916,10 @@ Datetimerfc1123.prototype.putUtcMinDateTime = function (datetimeBody, options, c
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -997,9 +1005,10 @@ Datetimerfc1123.prototype.getUtcMinDateTime = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
