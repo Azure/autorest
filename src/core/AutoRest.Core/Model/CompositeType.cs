@@ -231,6 +231,10 @@ namespace AutoRest.Core.Model
             {
                 return false;
             }
+            if (ReferenceEquals(other as CompositeType, this))
+            {
+                return true;
+            }
 
             return ComposedProperties.SequenceEqual((other as CompositeType).ComposedProperties, 
                 new Utilities.EqualityComparer<Property>((a, b) => 

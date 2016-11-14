@@ -36,7 +36,7 @@ namespace AutoRest.Swagger.Tests
         }
 
         public static void RunTests(string resultFolder)
-            {
+        {
             if (resultFolder == null)
             {
                 throw new ArgumentNullException("settings");
