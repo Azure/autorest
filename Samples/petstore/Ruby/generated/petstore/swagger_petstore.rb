@@ -24,6 +24,7 @@ module Petstore
       fail ArgumentError, 'invalid type of credentials input parameter' unless credentials.is_a?(MsRest::ServiceClientCredentials)
       @credentials = credentials
 
+      add_telemetry
     end
 
     #
@@ -1924,5 +1925,17 @@ module Petstore
       promise.execute
     end
 
+
+    private
+    #
+    # Adds telemetry information.
+    #
+    def add_telemetry
+        sdk_information = 'petstore'
+        if defined? Petstore::VERSION
+          sdk_information = "#{sdk_information}/#{Petstore::VERSION}" 
+        end
+        add_user_agent_information(sdk_information)
+    end
   end
 end
