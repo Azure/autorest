@@ -167,7 +167,7 @@ namespace AutoRest.Ruby.Azure.Model
             {
                 var sb = new IndentedStringBuilder();
 
-                if (this.HttpMethod == HttpMethod.Head && this.ReturnType.Body != null)
+                if (this.HttpMethod == HttpMethod.Head)
                 {
                     HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
                     sb.AppendLine("result.body = (status_code == {0})", (int)code);
