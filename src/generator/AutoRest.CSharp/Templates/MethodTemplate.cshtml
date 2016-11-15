@@ -213,26 +213,27 @@ else
         {
     @:if (@(parameter.Name) != null)
     @:{
-            if (parameter.ModelType.IsPrimaryType(KnownPrimaryType.Stream))
-            {
+        @{ string localParam = "_"+ @parameter.Name.FixedValue.Replace("this.", ""); }
+        if (parameter.ModelType.IsPrimaryType(KnownPrimaryType.Stream))
+        {
         <text>        
          System.Net.Http.StreamContent _@parameter.Name = new System.Net.Http.StreamContent(@parameter.Name);
-        _@(parameter.Name).Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
-        System.IO.FileStream _@(parameter.Name)AsFileStream = @parameter.Name as System.IO.FileStream;
-        if (_@(parameter.Name)AsFileStream != null)
+        @(localParam).Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+        System.IO.FileStream @(localParam)AsFileStream = @parameter.Name as System.IO.FileStream;
+        if (@(localParam)AsFileStream != null)
         {
             System.Net.Http.Headers.ContentDispositionHeaderValue _contentDispositionHeaderValue = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data");
             _contentDispositionHeaderValue.Name = "@(parameter.SerializedName)";
-            _contentDispositionHeaderValue.FileName = _@(parameter.Name)AsFileStream.Name;
-            _@(parameter.Name).Headers.ContentDisposition = _contentDispositionHeaderValue;        
+            _contentDispositionHeaderValue.FileName = @(localParam)AsFileStream.Name;
+            @(localParam).Headers.ContentDisposition = _contentDispositionHeaderValue;        
         }    
         </text>
             }
             else
             {
-        @:System.Net.Http.StringContent @(parameter.Name) = new System.Net.Http.StringContent(@(parameter.ModelType.ToString(Model.ClientReference, parameter.Name)), System.Text.Encoding.UTF8);
+        @:System.Net.Http.StringContent @(localParam) = new System.Net.Http.StringContent(@(parameter.ModelType.ToString(Model.ClientReference, parameter.Name)), System.Text.Encoding.UTF8);
             }
-        @:_multiPartContent.Add(@(parameter.Name), "@(parameter.SerializedName)");
+        @:_multiPartContent.Add(@(localParam), "@(parameter.SerializedName)");
     @:}
         }
     @:_httpRequest.Content = _multiPartContent;

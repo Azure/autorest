@@ -2,7 +2,7 @@
 swagger: '2.0'
 info:
   version: 1.0.0
-  title: Simple API
+  title: API with referenced form data
 paths:
   "/operation":
     post:
@@ -11,7 +11,7 @@ paths:
       consumes:
       - multipart/form-data
       parameters:
-      - $ref: "#/parameters/ApiId"
+      - $ref: '#/parameters/ApiId'
       responses:
         '200':
           description: OK

@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // check for the expected class.
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\SimpleAPIwithemptyobjectpath.cs"));
+                Assert.True(fileSystem.FileExists(@"GeneratedCode\APIwithreferencedformdata.cs"));
 
                 var result = await Compile(fileSystem);
 
