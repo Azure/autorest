@@ -108,9 +108,10 @@ Header.prototype.paramExistingKey = function (userAgent, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -196,9 +197,10 @@ Header.prototype.responseExistingKey = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -298,9 +300,10 @@ Header.prototype.paramProtectedKey = function (contentType, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -386,9 +389,10 @@ Header.prototype.responseProtectedKey = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -497,9 +501,10 @@ Header.prototype.paramInteger = function (scenario, value, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -599,9 +604,10 @@ Header.prototype.responseInteger = function (scenario, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -710,9 +716,10 @@ Header.prototype.paramLong = function (scenario, value, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -812,9 +819,10 @@ Header.prototype.responseLong = function (scenario, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -923,9 +931,10 @@ Header.prototype.paramFloat = function (scenario, value, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1025,9 +1034,10 @@ Header.prototype.responseFloat = function (scenario, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1136,9 +1146,10 @@ Header.prototype.paramDouble = function (scenario, value, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1238,9 +1249,10 @@ Header.prototype.responseDouble = function (scenario, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1349,9 +1361,10 @@ Header.prototype.paramBool = function (scenario, value, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1451,9 +1464,10 @@ Header.prototype.responseBool = function (scenario, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1565,9 +1579,10 @@ Header.prototype.paramString = function (scenario, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1668,9 +1683,10 @@ Header.prototype.responseString = function (scenario, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1781,9 +1797,10 @@ Header.prototype.paramDate = function (scenario, value, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1883,9 +1900,10 @@ Header.prototype.responseDate = function (scenario, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1996,9 +2014,10 @@ Header.prototype.paramDatetime = function (scenario, value, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -2099,9 +2118,10 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -2214,9 +2234,10 @@ Header.prototype.paramDatetimeRfc1123 = function (scenario, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -2317,9 +2338,10 @@ Header.prototype.responseDatetimeRfc1123 = function (scenario, options, callback
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -2429,9 +2451,10 @@ Header.prototype.paramDuration = function (scenario, value, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -2531,9 +2554,10 @@ Header.prototype.responseDuration = function (scenario, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -2642,9 +2666,10 @@ Header.prototype.paramByte = function (scenario, value, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -2744,9 +2769,10 @@ Header.prototype.responseByte = function (scenario, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -2860,9 +2886,10 @@ Header.prototype.paramEnum = function (scenario, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -2962,9 +2989,10 @@ Header.prototype.responseEnum = function (scenario, options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -3051,9 +3079,10 @@ Header.prototype.customRequestId = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();

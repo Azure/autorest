@@ -149,9 +149,10 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -292,9 +293,10 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -434,9 +436,10 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -575,9 +578,10 @@ PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathI
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
