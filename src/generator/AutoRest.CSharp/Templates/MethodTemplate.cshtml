@@ -230,9 +230,9 @@ else
             }
             else
             {
-        @:System.Net.Http.StringContent _@(parameter.Name) = new System.Net.Http.StringContent(@(parameter.ModelType.ToString(Model.ClientReference, parameter.Name)), System.Text.Encoding.UTF8);
+        @:System.Net.Http.StringContent @(parameter.Name) = new System.Net.Http.StringContent(@(parameter.ModelType.ToString(Model.ClientReference, parameter.Name)), System.Text.Encoding.UTF8);
             }
-        @:_multiPartContent.Add(_@(parameter.Name), "@(parameter.SerializedName)");
+        @:_multiPartContent.Add(@(parameter.Name), "@(parameter.SerializedName)");
     @:}
         }
     @:_httpRequest.Content = _multiPartContent;
