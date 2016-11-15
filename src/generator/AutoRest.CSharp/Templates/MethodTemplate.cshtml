@@ -213,7 +213,7 @@ else
         {
     @:if (@(parameter.Name) != null)
     @:{
-        @{ string localParam = "_"+ @parameter.Name.FixedValue.Replace("this.", ""); }
+        @{ string localParam = "_"+ @parameter.Name.Value.Replace("this.", ""); }
         if (parameter.ModelType.IsPrimaryType(KnownPrimaryType.Stream))
         {
         <text>        
