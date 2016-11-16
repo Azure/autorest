@@ -17,10 +17,7 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
     try {
       parsedErrorResponse = JSON.parse(responseBody);
       if (parsedErrorResponse) {
-        var internalError = null;
-        if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-        if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-        if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+        @(Model.PopulateErrorCodeAndMessage())
       }
   @if (Model.DefaultResponse.Body != null)
   {
