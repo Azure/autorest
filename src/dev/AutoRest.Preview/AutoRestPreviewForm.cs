@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AutoRest.Core.Logging;
-using AutoRest.Core.Utilities;
-using AutoRest.Core.Validation;
 using ScintillaNET;
-using YamlDotNet.RepresentationModel;
 
 namespace AutoRest.Preview
 {
@@ -123,6 +117,8 @@ namespace AutoRest.Preview
         private void UpdatePreview()
         {
             linting.Reset();
+
+            // immediate feedback
             panelError.Visible = false;
             panelProgress.Visible = true;
 
@@ -131,12 +127,14 @@ namespace AutoRest.Preview
 
         public async void regenerateTimer_Tick(object sender, EventArgs e)
         {
-            if (regenerate && !regenerating)
+            while (regenerate && !regenerating)
             {
                 regenerate = false;
                 regenerating = true;
 
                 // start
+                panelError.Visible = false;
+                panelProgress.Visible = true;
                 try
                 {
                     var swaggerText = scintillaSrc.Text;
