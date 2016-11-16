@@ -19,10 +19,12 @@ namespace AutoRest.Preview
             var mnode = node as YamlMappingNode;
             if (mnode != null)
             {
-                var child = mnode.Children.Where(pair => pair.Key.ToString().Equals(next, StringComparison.InvariantCultureIgnoreCase)).Select(pair => pair.Value).FirstOrDefault();
-                if (child != null)
+                var child = mnode.Children.FirstOrDefault(pair => pair.Key.ToString().Equals(next, StringComparison.InvariantCultureIgnoreCase));
+                if (child.Value != null)
                 {
-                    return ResolvePath(child, path);
+                    return path.Any()
+                        ? ResolvePath(child.Value, path)
+                        : child.Key;
                 }
             }
 

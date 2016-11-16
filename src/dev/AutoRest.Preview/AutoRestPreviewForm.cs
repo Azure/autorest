@@ -4,9 +4,11 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoRest.Core.Logging;
+using AutoRest.Core.Utilities;
 using AutoRest.Core.Validation;
 using ScintillaNET;
 using YamlDotNet.RepresentationModel;
@@ -15,9 +17,12 @@ namespace AutoRest.Preview
 {
     public partial class AutoRestPreviewForm : Form
     {
+        private SynchronizationContext ui;
+
         public AutoRestPreviewForm()
         {
             InitializeComponent();
+            ui = SynchronizationContext.Current;
         }
 
         class Highlight
@@ -42,7 +47,7 @@ namespace AutoRest.Preview
         }
 
         private readonly int INDICATOR_BASE = 8;
-        private readonly Color[] INDIXATOR_COLORS = { Color.CornflowerBlue, Color.Green, Color.Yellow, Color.Red, Color.Red };
+        private readonly Color[] INDIXATOR_COLORS = { Color.LightSkyBlue, Color.LightGreen, Color.Yellow, Color.PaleVioletRed, Color.PaleVioletRed };
 
         private void ResetLinter()
         {
@@ -70,32 +75,47 @@ namespace AutoRest.Preview
 
         private void ProcessLinterMessages(string swagger, IEnumerable<ValidationMessage> messages)
         {
-            // parse
+            // try parse
             var reader = new StringReader(swagger);
-            var yamlStream = new YamlStream();
-            yamlStream.Load(reader);
-            var doc = yamlStream.Documents[0].RootNode;
+            YamlNode doc = null;
+            try
+            {
+                var yamlStream = new YamlStream();
+                yamlStream.Load(reader);
+                doc = yamlStream.Documents[0].RootNode;
+            }
+            catch { }
 
             // process messages
-            foreach (var message in messages)
+            if (doc != null)
             {
-                scintillaSrc.IndicatorCurrent = INDICATOR_BASE + (int)message.Severity;
-                var node = doc.ResolvePath(message.Path.Reverse().Skip(1));
-                var len = Math.Max(node.End.Index - node.Start.Index, 1);
-                scintillaSrc.IndicatorFillRange(node.Start.Index, len);
-                highlights.Add(new Highlight
+                foreach (var message in messages)
                 {
-                    Start = node.Start.Index,
-                    End = node.End.Index,
-                    Message = $"{message.Severity}: {message.Message}"
-                });
+                    if (message.Severity > LogEntrySeverity.Debug)
+                    {
+                        scintillaSrc.IndicatorCurrent = INDICATOR_BASE + (int)message.Severity;
+                        var node = doc.ResolvePath(message.Path.Reverse().Skip(1));
+                        var start = node.Start.Index;
+                        var len = Math.Max(1, node.End.Index - start);
+                        scintillaSrc.IndicatorFillRange(start, len);
+                        highlights.Add(new Highlight
+                        {
+                            Start = start,
+                            End = start + len,
+                            Message =
+                                $"{message.Severity}: [{string.Join("->", message.Path.Reverse())}] {message.Message}"
+                        });
+                    }
+                }
             }
         }
 
-        private async Task<string> Regenerate(string swagger, string language, bool shortVersion)
+        private async Task<string> RegenerateAsync(string swagger, string language, bool shortVersion)
         {
-            ResetLinter();
-            using (var fileSystem = AutoRestPipeline.GenerateCodeForTest(swagger, language, messages => ProcessLinterMessages(swagger, messages)))
+            using (var fileSystem = AutoRestPipeline.GenerateCodeForTest(
+                                            swagger, 
+                                            language, 
+                                            messages => ui.Post(_ => ProcessLinterMessages(swagger, messages), null)))
             {
                 // concat all source
                 var allSources = string.Join("\n\n\n",
@@ -148,6 +168,7 @@ namespace AutoRest.Preview
             if (true)
             {
                 BackColor = Color.FromArgb(0, 0, 0);
+                this.progressBar.BackColor = BackColor;
                 scintilla.Styles[Style.Default].ForeColor = Color.Silver;
                 scintilla.Styles[Style.Default].BackColor = Color.FromArgb(30, 30, 30);
                 scintilla.CaretForeColor = Color.Silver;
@@ -179,23 +200,46 @@ namespace AutoRest.Preview
             //scintilla.Margins[0].Width = 16;
         }
 
-        private async Task UpdatePreview()
-        {
-            try
-            {
-                string result = await Regenerate(scintillaSrc.Text, comboBoxTargetLang.SelectedItem as string ?? "CSharp", checkBoxShort.Checked);
-                int scrollStart = scintillaDst.FirstVisibleLine;
-                scintillaDst.ReadOnly = false;
-                scintillaDst.Text = result;
-                scintillaDst.ReadOnly = true;
-                scintillaDst.LineScroll(scrollStart, 0);
+        private bool regenerate = false;
+        private bool regenerating = false;
 
-                panelError.Visible = false;
-            }
-            catch (Exception ex)
+        private void UpdatePreview()
+        {
+            ResetLinter();
+            panelError.Visible = false;
+            panelProgress.Visible = true;
+
+            regenerate = true;
+        }
+
+        public async void regenerateTimer_Tick(object sender, EventArgs e)
+        {
+            if (regenerate && !regenerating)
             {
-                labelError.Text = $@"{ex.GetType().Name}: {ex.Message}";
-                panelError.Visible = true;
+                regenerate = false;
+                regenerating = true;
+
+                // start
+                try
+                {
+                    string result = await Task.Run(() => 
+                        RegenerateAsync(scintillaSrc.Text, comboBoxTargetLang.SelectedItem as string ?? "CSharp", checkBoxShort.Checked));
+
+                    int scrollStart = scintillaDst.FirstVisibleLine;
+                    scintillaDst.ReadOnly = false;
+                    scintillaDst.Text = result;
+                    scintillaDst.ReadOnly = true;
+                    scintillaDst.LineScroll(scrollStart, 0);
+                }
+                catch (Exception ex)
+                {
+                    labelError.Text = $@"{ex.GetType().Name}: {ex.Message}";
+                    panelError.Visible = true;
+                }
+                panelProgress.Visible = false;
+                // end
+
+                regenerating = false;
             }
         }
 
@@ -225,19 +269,19 @@ namespace AutoRest.Preview
             comboBoxTargetLang.SelectedItem = comboBoxTargetLang.Items[0];
         }
 
-        private async void scintillaSrc_TextChanged(object sender, EventArgs e)
+        private void scintillaSrc_TextChanged(object sender, EventArgs e)
         {
-            await UpdatePreview();
+            UpdatePreview();
         }
 
-        private async void comboBoxTargetLang_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxTargetLang_SelectedIndexChanged(object sender, EventArgs e)
         {
-            await UpdatePreview();
+            UpdatePreview();
         }
 
-        private async void checkBoxShort_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxShort_CheckedChanged(object sender, EventArgs e)
         {
-            await UpdatePreview();
+            UpdatePreview();
         }
     }
 }
