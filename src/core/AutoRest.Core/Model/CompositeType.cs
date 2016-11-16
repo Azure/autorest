@@ -192,34 +192,6 @@ namespace AutoRest.Core.Model
             return Name;
         }
 
-        ///// <summary>
-        ///// Determines whether the specified object is equal to this object based on the Name.
-        ///// </summary>
-        ///// <param name="obj">The object to compare with this object.</param>
-        ///// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
-        //public override bool Equals(object obj)
-        //{
-        //    var modelType = obj as CompositeType;
-
-        //    if (modelType != null)
-        //    {
-        //        return modelType.Name == Name;
-        //    }
-
-        //    return false;
-        //}
-
-        ///// <summary>
-        ///// Serves as a hash function based on Name.
-        ///// </summary>
-        ///// <returns>
-        ///// A hash code for the current object.
-        ///// </returns>
-        //public override int GetHashCode()
-        //{
-        //    return Name == null ? 0 : Name.GetHashCode();
-        //}
-
         /// <summary>
         /// Determines whether the specified model type is functionally equal to this object.
         /// </summary>

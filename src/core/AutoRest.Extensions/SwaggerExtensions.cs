@@ -167,6 +167,8 @@ namespace AutoRest.Extensions
                 throw new ArgumentNullException("codeModel");
             }
 
+            // About "flattenDepth": flattening was not really deterministic and depended on order of specification
+            // Sorting by the following method enforces the right behavior
             Func<IModelType, int, int> flattenDepth = null;
             flattenDepth = (type, depth) =>
             {

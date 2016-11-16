@@ -83,23 +83,6 @@ namespace AutoRest.Core.Model
             return Name;
         }
 
-        ///// <summary>
-        ///// Determines whether the specified object is equal to this object based on Name and Values.
-        ///// </summary>
-        ///// <param name="obj">The object to compare with this object.</param>
-        ///// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
-        //public override bool Equals(object obj)
-        //{
-        //    var enumType = obj as EnumType;
-
-        //    if (enumType != null)
-        //    {
-        //        return enumType.Name.RawValue == Name.RawValue &&
-        //            enumType.Values.OrderBy(t => t).SequenceEqual(Values.OrderBy(t => t));
-        //    }
-        //    return false;
-        //}
-
         /// <summary>
         /// Determines whether the specified model type is functionally equal to this object.
         /// </summary>
@@ -115,17 +98,6 @@ namespace AutoRest.Core.Model
             return Values.OrderBy(t => t).SequenceEqual(Values.OrderBy(t => t)) &&
                 ModelAsString == (other as EnumType).ModelAsString;
         }
-
-        ///// <summary>
-        ///// Serves as a hash function based on value count.
-        ///// </summary>
-        ///// <returns>
-        ///// A hash code for the current object.
-        ///// </returns>
-        //public override int GetHashCode()
-        //{
-        //    return Values.Count;
-        //}
 
         public override string ExtendedDocumentation
             => $"Possible values include: {string.Join(", ", Values.Select(v => $"'{v.Name}'"))}";
