@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using AutoRest.Core;
 using AutoRest.Core.Extensibility;
@@ -12,7 +13,7 @@ namespace AutoRest
     {
         private static readonly string autoRestJson = File.ReadAllText("AutoRest.json");
         
-        public static MemoryFileSystem GenerateCodeForTest(string json, string codeGenerator, out IEnumerable<ValidationMessage> messages)
+        public static MemoryFileSystem GenerateCodeForTest(string json, string codeGenerator, Action<IEnumerable<ValidationMessage>> processMessages)
         {
             using (NewContext)
             {
@@ -30,18 +31,20 @@ namespace AutoRest
                 fs.WriteFile(settings.Input, json);
                 fs.WriteFile("AutoRest.json", autoRestJson);
 
-                GenerateCodeInto(settings, out messages);
+                GenerateCodeInto(processMessages);
 
                 return fs;
             }
         }
 
-        private static void GenerateCodeInto(Settings settings, out IEnumerable<ValidationMessage> messages)
+        private static void GenerateCodeInto(Action<IEnumerable<ValidationMessage>> processMessages)
         {
             var plugin = ExtensionsLoader.GetPlugin();
             var modeler = ExtensionsLoader.GetModeler();
+            IEnumerable<ValidationMessage> messages;
             var codeModel = modeler.Build(out messages);
-
+            processMessages(messages);
+            
             // After swagger Parser
             codeModel = AutoRestController.RunExtensions(Trigger.AfterModelCreation, codeModel);
 

@@ -81,7 +81,8 @@ namespace AutoRest.Preview
             {
                 scintillaSrc.IndicatorCurrent = INDICATOR_BASE + (int)message.Severity;
                 var node = doc.ResolvePath(message.Path.Reverse().Skip(1));
-                scintillaSrc.IndicatorFillRange(node.Start.Index, node.End.Index - node.Start.Index);
+                var len = Math.Max(node.End.Index - node.Start.Index, 1);
+                scintillaSrc.IndicatorFillRange(node.Start.Index, len);
                 highlights.Add(new Highlight
                 {
                     Start = node.Start.Index,
@@ -91,14 +92,11 @@ namespace AutoRest.Preview
             }
         }
 
-        private async Task<string> Regenerate(string swagger, string language = "CSharp", bool shortVersion = true)
+        private async Task<string> Regenerate(string swagger, string language, bool shortVersion)
         {
             ResetLinter();
-            IEnumerable<ValidationMessage> messages;
-            using (var fileSystem = AutoRestPipeline.GenerateCodeForTest(swagger, language, out messages))
+            using (var fileSystem = AutoRestPipeline.GenerateCodeForTest(swagger, language, messages => ProcessLinterMessages(swagger, messages)))
             {
-                ProcessLinterMessages(swagger, messages);
-
                 // concat all source
                 var allSources = string.Join("\n\n\n",
                     fileSystem

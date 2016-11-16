@@ -33,7 +33,6 @@ namespace AutoRest.Preview
                 int index;
                 if (int.TryParse(indexStr, out index))
                 {
-                    index--;
                     if (0 <= index && index < snode.Children.Count)
                     {
                         return snode.Children[index];
