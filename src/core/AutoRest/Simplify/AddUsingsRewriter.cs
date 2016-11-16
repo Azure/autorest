@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using AutoRest.Core.Utilities;
 #pragma warning disable CS3009 // Base type is not CLS-compliant
 #pragma warning disable CS3001
 #pragma warning disable CS3002
@@ -45,6 +46,6 @@ namespace AutoRest.Simplify
                     OrderBy(x => x.StaticKeyword.IsKind(SyntaxKind.StaticKeyword) ? 1 : x.Alias == null ? 0 : 2).
                     ThenBy(x => x.Alias?.ToString()).
                     ThenBy(x => x.Name.ToString())
-                    .Distinct(new AdHocEqualityComparer<UsingDirectiveSyntax>((a, b) => a.Name.ToString() == b.Name.ToString())));
+                    .Distinct(new AutoRest.Core.Utilities.EqualityComparer<UsingDirectiveSyntax>((a, b) => a.Name.ToString() == b.Name.ToString(), a=> 0 )));
     }
 }
