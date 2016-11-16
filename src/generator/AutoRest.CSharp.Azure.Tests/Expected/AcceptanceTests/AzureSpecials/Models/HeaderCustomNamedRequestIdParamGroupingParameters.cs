@@ -8,7 +8,12 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 {
+    using Azure;
+    using AcceptanceTestsAzureSpecials;
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// Additional parameters for the Header_CustomNamedRequestIdParamGrouping
@@ -41,14 +46,14 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (FooClientRequestId == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "FooClientRequestId");
+                throw new ValidationException(ValidationRules.CannotBeNull, "FooClientRequestId");
             }
         }
     }

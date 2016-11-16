@@ -9,6 +9,8 @@
 namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
 {
     using Models;
+    using Newtonsoft.Json;
+    using System.Net.Http;
 
     /// <summary>
     /// Test Infrastructure for AutoRest

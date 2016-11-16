@@ -8,9 +8,12 @@
 
 namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
 {
+    using Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
+    using Newtonsoft.Json;
+    using System.Net.Http;
 
     /// <summary>
     /// Test Infrastructure for AutoRest
@@ -34,7 +37,7 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
         /// <summary>
         /// Credentials needed for the client to connect to Azure.
         /// </summary>
-        Microsoft.Rest.ServiceClientCredentials Credentials { get; }
+        ServiceClientCredentials Credentials { get; }
 
         /// <summary>
         /// A string value that is used as a global part of the parameterized

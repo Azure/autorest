@@ -8,6 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsBodyString.Models
 {
+    using AcceptanceTestsBodyString;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using System.Net.Http;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// Defines values for Colors.

@@ -8,8 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex
 {
-    using System.Threading.Tasks;
    using Models;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for Inheritance.
@@ -24,7 +26,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static Siamese GetValid(this IInheritance operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IInheritance)s).GetValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IInheritance)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -36,7 +38,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Siamese> GetValidAsync(this IInheritance operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Siamese> GetValidAsync(this IInheritance operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -57,7 +59,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutValid(this IInheritance operations, Siamese complexBody)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IInheritance)s).PutValidAsync(complexBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IInheritance)s).PutValidAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -74,7 +76,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutValidAsync(this IInheritance operations, Siamese complexBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutValidAsync(this IInheritance operations, Siamese complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }

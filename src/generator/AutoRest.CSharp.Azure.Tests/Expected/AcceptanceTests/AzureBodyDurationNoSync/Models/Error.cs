@@ -8,7 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync.Models
 {
+    using AcceptanceTestsAzureBodyDurationNoSync;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Error
     {

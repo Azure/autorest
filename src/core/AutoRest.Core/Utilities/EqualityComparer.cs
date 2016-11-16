@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AutoRest.Core.Utilities
 {
-    internal class EqualityComparer<T> : IEqualityComparer<T>
+    public class EqualityComparer<T> : IEqualityComparer<T>
     {
         private readonly Func<T, T, bool> _compareFn;
         private readonly Func<T, int> _hashFn;

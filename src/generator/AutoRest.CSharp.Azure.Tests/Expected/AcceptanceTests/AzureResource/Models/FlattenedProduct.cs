@@ -8,9 +8,17 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 {
+    using Azure;
+    using AcceptanceTestsAzureResource;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
 
-    [Microsoft.Rest.Serialization.JsonTransformation]
+    [JsonTransformation]
     public partial class FlattenedProduct : Resource
     {
         /// <summary>
@@ -25,7 +33,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <param name="type">Resource Type</param>
         /// <param name="location">Resource Location</param>
         /// <param name="name">Resource Name</param>
-        public FlattenedProduct(string id = default(string), string type = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), string location = default(string), string name = default(string), string pname = default(string), int? lsize = default(int?), string provisioningState = default(string))
+        public FlattenedProduct(string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string location = default(string), string name = default(string), string pname = default(string), int? lsize = default(int?), string provisioningState = default(string))
             : base(id, type, tags, location, name)
         {
             Pname = pname;

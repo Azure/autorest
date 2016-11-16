@@ -8,7 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsHttp.Models
 {
+    using AcceptanceTestsHttp;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// Defines headers for get302 operation.

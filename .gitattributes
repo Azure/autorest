@@ -32,8 +32,5 @@
 *.targets text
 *.txt text
 *.xml text
-*.ts text eol=lf
-*.py text eol=lf
-*.rb text eol=lf
 
 *.sln text eol=crlf merge=union

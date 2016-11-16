@@ -8,8 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex
 {
-    using System.Threading.Tasks;
    using Models;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for Readonlyproperty.
@@ -24,7 +26,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static ReadonlyObj GetValid(this IReadonlyproperty operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IReadonlyproperty)s).GetValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IReadonlyproperty)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -36,7 +38,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<ReadonlyObj> GetValidAsync(this IReadonlyproperty operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<ReadonlyObj> GetValidAsync(this IReadonlyproperty operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -54,7 +56,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutValid(this IReadonlyproperty operations, int? size = default(int?))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IReadonlyproperty)s).PutValidAsync(size), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IReadonlyproperty)s).PutValidAsync(size), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -68,7 +70,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutValidAsync(this IReadonlyproperty operations, int? size = default(int?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutValidAsync(this IReadonlyproperty operations, int? size = default(int?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(size, null, cancellationToken).ConfigureAwait(false);
             }

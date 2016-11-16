@@ -8,9 +8,17 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
+    using Azure;
+    using AcceptanceTestsLro;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
 
-    [Microsoft.Rest.Serialization.JsonTransformation]
+    [JsonTransformation]
     public partial class Product : Resource
     {
         /// <summary>
@@ -29,7 +37,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
         /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
         /// 'OK'</param>
-        public Product(string id = default(string), string type = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), string location = default(string), string name = default(string), string provisioningState = default(string), string provisioningStateValues = default(string))
+        public Product(string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string location = default(string), string name = default(string), string provisioningState = default(string), string provisioningStateValues = default(string))
             : base(id, type, tags, location, name)
         {
             ProvisioningState = provisioningState;

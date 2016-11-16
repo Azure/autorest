@@ -8,7 +8,11 @@
 
 namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
 {
+    using Azure;
+    using AcceptanceTestsSubscriptionIdApiVersion;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Error
     {

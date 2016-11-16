@@ -8,7 +8,12 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 {
+    using Azure;
+    using AcceptanceTestsAzureParameterGrouping;
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// Additional parameters for the ParameterGrouping_PostRequired operation.
@@ -60,14 +65,14 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Path == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Path");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Path");
             }
         }
     }

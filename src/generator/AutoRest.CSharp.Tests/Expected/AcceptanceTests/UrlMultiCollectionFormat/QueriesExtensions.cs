@@ -8,8 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
 {
-    using System.Threading.Tasks;
    using Models;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for Queries.
@@ -25,9 +29,9 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             /// <param name='arrayQuery'>
             /// a null array of string using the multi-array format
             /// </param>
-            public static void ArrayStringMultiNull(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>))
+            public static void ArrayStringMultiNull(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).ArrayStringMultiNullAsync(arrayQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringMultiNullAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -42,7 +46,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ArrayStringMultiNullAsync(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task ArrayStringMultiNullAsync(this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ArrayStringMultiNullWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -56,9 +60,9 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             /// <param name='arrayQuery'>
             /// an empty array [] of string using the multi-array format
             /// </param>
-            public static void ArrayStringMultiEmpty(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>))
+            public static void ArrayStringMultiEmpty(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).ArrayStringMultiEmptyAsync(arrayQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringMultiEmptyAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -73,7 +77,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ArrayStringMultiEmptyAsync(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task ArrayStringMultiEmptyAsync(this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ArrayStringMultiEmptyWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -89,9 +93,9 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
             /// null, ''] using the mult-array format
             /// </param>
-            public static void ArrayStringMultiValid(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>))
+            public static void ArrayStringMultiValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).ArrayStringMultiValidAsync(arrayQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringMultiValidAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -108,7 +112,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ArrayStringMultiValidAsync(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task ArrayStringMultiValidAsync(this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ArrayStringMultiValidWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
             }

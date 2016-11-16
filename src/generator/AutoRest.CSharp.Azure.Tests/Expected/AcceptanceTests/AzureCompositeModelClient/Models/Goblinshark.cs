@@ -8,7 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
+    using AcceptanceTestsAzureCompositeModelClient;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
 
     [Newtonsoft.Json.JsonObject("goblin")]
     public partial class Goblinshark : Shark
@@ -21,7 +26,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Goblinshark class.
         /// </summary>
-        public Goblinshark(double length, System.DateTime birthday, string species = default(string), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>), int? age = default(int?), int? jawsize = default(int?))
+        public Goblinshark(double length, System.DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?), int? jawsize = default(int?))
             : base(length, birthday, species, siblings, age)
         {
             Jawsize = jawsize;

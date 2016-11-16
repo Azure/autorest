@@ -8,8 +8,10 @@
 
 namespace Fixtures.AdditionalProperties
 {
-    using System.Threading.Tasks;
    using Models;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for Post.
@@ -24,7 +26,7 @@ namespace Fixtures.AdditionalProperties
             /// </param>
             public static void Pets(this IPost operations, Pet pet)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPost)s).PetsAsync(pet), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPost)s).PetsAsync(pet), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -36,7 +38,7 @@ namespace Fixtures.AdditionalProperties
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PetsAsync(this IPost operations, Pet pet, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PetsAsync(this IPost operations, Pet pet, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PetsWithHttpMessagesAsync(pet, null, cancellationToken).ConfigureAwait(false);
             }

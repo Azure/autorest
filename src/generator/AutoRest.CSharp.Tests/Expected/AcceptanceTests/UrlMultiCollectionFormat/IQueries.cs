@@ -8,7 +8,13 @@
 
 namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
 {
+    using Microsoft.Rest;
     using Models;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Queries operations.
@@ -30,7 +36,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringMultiNullWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse> ArrayStringMultiNullWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an empty array [] of string using the multi-array format
         /// </summary>
@@ -46,7 +52,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringMultiEmptyWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse> ArrayStringMultiEmptyWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@
         /// &amp;=+$,/?#[]end' , null, ''] using the mult-array format
@@ -64,6 +70,6 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringMultiValidWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse> ArrayStringMultiValidWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

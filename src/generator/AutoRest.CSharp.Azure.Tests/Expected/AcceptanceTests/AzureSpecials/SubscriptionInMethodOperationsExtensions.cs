@@ -8,9 +8,13 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 {
-    using System.Threading.Tasks;
+    using Azure;
+    using Microsoft.Rest;
    using Microsoft.Rest.Azure;
    using Models;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for SubscriptionInMethodOperations.
@@ -29,7 +33,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostMethodLocalValid(this ISubscriptionInMethodOperations operations, string subscriptionId)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostMethodLocalValidAsync(subscriptionId), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostMethodLocalValidAsync(subscriptionId), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -45,7 +49,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PostMethodLocalValidAsync(this ISubscriptionInMethodOperations operations, string subscriptionId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PostMethodLocalValidAsync(this ISubscriptionInMethodOperations operations, string subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PostMethodLocalValidWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false);
             }
@@ -64,7 +68,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostMethodLocalNull(this ISubscriptionInMethodOperations operations, string subscriptionId)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostMethodLocalNullAsync(subscriptionId), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostMethodLocalNullAsync(subscriptionId), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -82,7 +86,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PostMethodLocalNullAsync(this ISubscriptionInMethodOperations operations, string subscriptionId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PostMethodLocalNullAsync(this ISubscriptionInMethodOperations operations, string subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PostMethodLocalNullWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false);
             }
@@ -99,7 +103,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostPathLocalValid(this ISubscriptionInMethodOperations operations, string subscriptionId)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostPathLocalValidAsync(subscriptionId), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostPathLocalValidAsync(subscriptionId), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -115,7 +119,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PostPathLocalValidAsync(this ISubscriptionInMethodOperations operations, string subscriptionId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PostPathLocalValidAsync(this ISubscriptionInMethodOperations operations, string subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PostPathLocalValidWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false);
             }
@@ -133,7 +137,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostSwaggerLocalValid(this ISubscriptionInMethodOperations operations, string subscriptionId)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostSwaggerLocalValidAsync(subscriptionId), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostSwaggerLocalValidAsync(subscriptionId), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -150,7 +154,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PostSwaggerLocalValidAsync(this ISubscriptionInMethodOperations operations, string subscriptionId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PostSwaggerLocalValidAsync(this ISubscriptionInMethodOperations operations, string subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PostSwaggerLocalValidWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false);
             }

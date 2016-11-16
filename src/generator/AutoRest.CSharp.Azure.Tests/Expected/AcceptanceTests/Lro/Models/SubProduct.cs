@@ -8,9 +8,15 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
+    using Azure;
+    using AcceptanceTestsLro;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
-    [Microsoft.Rest.Serialization.JsonTransformation]
+    [JsonTransformation]
     public partial class SubProduct : SubResource
     {
         /// <summary>

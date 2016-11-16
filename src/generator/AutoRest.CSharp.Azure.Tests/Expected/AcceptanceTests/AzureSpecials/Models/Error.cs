@@ -8,7 +8,11 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 {
+    using Azure;
+    using AcceptanceTestsAzureSpecials;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Error
     {

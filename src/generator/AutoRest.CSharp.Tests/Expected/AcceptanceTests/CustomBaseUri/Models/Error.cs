@@ -8,7 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsCustomBaseUri.Models
 {
+    using AcceptanceTestsCustomBaseUri;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Error
     {

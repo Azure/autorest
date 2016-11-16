@@ -8,7 +8,10 @@
 
 namespace Fixtures.PetstoreV2.Models
 {
+    using PetstoreV2;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// Defines headers for loginUser operation.

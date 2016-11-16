@@ -8,8 +8,10 @@
 
 namespace Fixtures.MirrorRecursiveTypes
 {
-    using System.Threading.Tasks;
    using Models;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for RecursiveTypesAPI.
@@ -42,7 +44,7 @@ namespace Fixtures.MirrorRecursiveTypes
             /// </param>
             public static Product Post(this IRecursiveTypesAPI operations, string subscriptionId, string resourceGroupName, string apiVersion, Product body = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IRecursiveTypesAPI)s).PostAsync(subscriptionId, resourceGroupName, apiVersion, body), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IRecursiveTypesAPI)s).PostAsync(subscriptionId, resourceGroupName, apiVersion, body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -72,7 +74,7 @@ namespace Fixtures.MirrorRecursiveTypes
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> PostAsync(this IRecursiveTypesAPI operations, string subscriptionId, string resourceGroupName, string apiVersion, Product body = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> PostAsync(this IRecursiveTypesAPI operations, string subscriptionId, string resourceGroupName, string apiVersion, Product body = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PostWithHttpMessagesAsync(subscriptionId, resourceGroupName, apiVersion, body, null, cancellationToken).ConfigureAwait(false))
                 {

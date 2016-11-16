@@ -8,9 +8,14 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 {
-    using System.Threading.Tasks;
+    using Azure;
+    using Microsoft.Rest;
    using Microsoft.Rest.Azure;
+    using Microsoft.Rest.Azure.OData;
    using Models;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for OdataOperations.
@@ -27,9 +32,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='odataQuery'>
             /// OData parameters to apply to the operation.
             /// </param>
-            public static void GetWithFilter(this IOdataOperations operations, Microsoft.Rest.Azure.OData.ODataQuery<OdataFilter> odataQuery = default(Microsoft.Rest.Azure.OData.ODataQuery<OdataFilter>))
+            public static void GetWithFilter(this IOdataOperations operations, ODataQuery<OdataFilter> odataQuery = default(ODataQuery<OdataFilter>))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IOdataOperations)s).GetWithFilterAsync(odataQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IOdataOperations)s).GetWithFilterAsync(odataQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -45,7 +50,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetWithFilterAsync(this IOdataOperations operations, Microsoft.Rest.Azure.OData.ODataQuery<OdataFilter> odataQuery = default(Microsoft.Rest.Azure.OData.ODataQuery<OdataFilter>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task GetWithFilterAsync(this IOdataOperations operations, ODataQuery<OdataFilter> odataQuery = default(ODataQuery<OdataFilter>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetWithFilterWithHttpMessagesAsync(odataQuery, null, cancellationToken).ConfigureAwait(false);
             }

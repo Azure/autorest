@@ -8,9 +8,13 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 {
-    using System.Threading.Tasks;
+    using Azure;
+    using Microsoft.Rest;
    using Microsoft.Rest.Azure;
    using Models;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for XMsClientRequestIdOperations.
@@ -26,7 +30,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void Get(this IXMsClientRequestIdOperations operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IXMsClientRequestIdOperations)s).GetAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IXMsClientRequestIdOperations)s).GetAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -39,7 +43,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetAsync(this IXMsClientRequestIdOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task GetAsync(this IXMsClientRequestIdOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -57,7 +61,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void ParamGet(this IXMsClientRequestIdOperations operations, string xMsClientRequestId)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IXMsClientRequestIdOperations)s).ParamGetAsync(xMsClientRequestId), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IXMsClientRequestIdOperations)s).ParamGetAsync(xMsClientRequestId), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -74,7 +78,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ParamGetAsync(this IXMsClientRequestIdOperations operations, string xMsClientRequestId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task ParamGetAsync(this IXMsClientRequestIdOperations operations, string xMsClientRequestId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ParamGetWithHttpMessagesAsync(xMsClientRequestId, null, cancellationToken).ConfigureAwait(false);
             }

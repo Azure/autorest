@@ -8,7 +8,10 @@
 
 namespace Fixtures.MirrorRecursiveTypes.Models
 {
+    using MirrorRecursiveTypes;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Error
     {

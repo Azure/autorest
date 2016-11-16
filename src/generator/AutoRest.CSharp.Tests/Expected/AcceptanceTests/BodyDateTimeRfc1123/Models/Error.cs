@@ -8,7 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123.Models
 {
+    using AcceptanceTestsBodyDateTimeRfc1123;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Error
     {

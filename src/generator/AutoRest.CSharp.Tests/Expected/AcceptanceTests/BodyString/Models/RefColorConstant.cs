@@ -8,7 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsBodyString.Models
 {
+    using AcceptanceTestsBodyString;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class RefColorConstant
     {

@@ -8,8 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsBodyString
 {
-    using System.Threading.Tasks;
    using Models;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for EnumModel.
@@ -25,7 +27,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static Colors? GetNotExpandable(this IEnumModel operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IEnumModel)s).GetNotExpandableAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IEnumModel)s).GetNotExpandableAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -38,7 +40,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Colors?> GetNotExpandableAsync(this IEnumModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Colors?> GetNotExpandableAsync(this IEnumModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNotExpandableWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -58,7 +60,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static void PutNotExpandable(this IEnumModel operations, Colors stringBody)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IEnumModel)s).PutNotExpandableAsync(stringBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IEnumModel)s).PutNotExpandableAsync(stringBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -74,7 +76,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutNotExpandableAsync(this IEnumModel operations, Colors stringBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutNotExpandableAsync(this IEnumModel operations, Colors stringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutNotExpandableWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -88,7 +90,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static Colors? GetReferenced(this IEnumModel operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IEnumModel)s).GetReferencedAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IEnumModel)s).GetReferencedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -101,7 +103,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Colors?> GetReferencedAsync(this IEnumModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Colors?> GetReferencedAsync(this IEnumModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetReferencedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -121,7 +123,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static void PutReferenced(this IEnumModel operations, Colors enumStringBody)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IEnumModel)s).PutReferencedAsync(enumStringBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IEnumModel)s).PutReferencedAsync(enumStringBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -137,7 +139,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutReferencedAsync(this IEnumModel operations, Colors enumStringBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutReferencedAsync(this IEnumModel operations, Colors enumStringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutReferencedWithHttpMessagesAsync(enumStringBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -150,7 +152,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static RefColorConstant GetReferencedConstant(this IEnumModel operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IEnumModel)s).GetReferencedConstantAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IEnumModel)s).GetReferencedConstantAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -162,7 +164,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<RefColorConstant> GetReferencedConstantAsync(this IEnumModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<RefColorConstant> GetReferencedConstantAsync(this IEnumModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetReferencedConstantWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -181,7 +183,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static void PutReferencedConstant(this IEnumModel operations, string field1 = default(string))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IEnumModel)s).PutReferencedConstantAsync(field1), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IEnumModel)s).PutReferencedConstantAsync(field1), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -196,7 +198,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutReferencedConstantAsync(this IEnumModel operations, string field1 = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutReferencedConstantAsync(this IEnumModel operations, string field1 = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutReferencedConstantWithHttpMessagesAsync(field1, null, cancellationToken).ConfigureAwait(false);
             }

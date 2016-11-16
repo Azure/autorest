@@ -9,6 +9,8 @@
 namespace Fixtures.AcceptanceTestsParameterFlattening
 {
     using Models;
+    using Newtonsoft.Json;
+    using System.Net.Http;
 
     /// <summary>
     /// Resource Flattening for AutoRest
