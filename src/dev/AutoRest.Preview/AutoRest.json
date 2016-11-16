@@ -28,7 +28,7 @@
             "type": "PluginArs, AutoRest.AzureResourceSchema"
         },
         "Azure.CSharp.Fluent": {
-          "type": "PluginCsaf, AutoRest.AutoRest.CSharp.Azure.Fluent"
+          "type": "PluginCsaf, AutoRest.CSharp.Azure.Fluent"
         }
     },
   "modelers": {
