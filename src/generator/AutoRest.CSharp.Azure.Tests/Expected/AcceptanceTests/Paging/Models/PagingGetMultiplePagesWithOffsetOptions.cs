@@ -8,7 +8,11 @@
 
 namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 {
+    using Azure;
+    using AcceptanceTestsPaging;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// Additional parameters for the Paging_GetMultiplePagesWithOffset

@@ -8,7 +8,14 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening
 {
+    using Microsoft.Rest;
     using Models;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Resource Flattening for AutoRest
@@ -43,7 +50,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutArrayWithHttpMessagesAsync(System.Collections.Generic.IList<Resource> resourceArray = default(System.Collections.Generic.IList<Resource>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse> PutArrayWithHttpMessagesAsync(IList<Resource> resourceArray = default(IList<Resource>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Get External Resource as an Array
@@ -54,7 +61,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<FlattenedProduct>>> GetArrayWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse<IList<FlattenedProduct>>> GetArrayWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Put External Resource as a Dictionary
@@ -68,7 +75,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutDictionaryWithHttpMessagesAsync(System.Collections.Generic.IDictionary<string, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<string, FlattenedProduct>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse> PutDictionaryWithHttpMessagesAsync(IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Get External Resource as a Dictionary
@@ -79,7 +86,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IDictionary<string, FlattenedProduct>>> GetDictionaryWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse<IDictionary<string, FlattenedProduct>>> GetDictionaryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Put External Resource as a ResourceCollection
@@ -93,7 +100,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutResourceCollectionWithHttpMessagesAsync(ResourceCollection resourceComplexObject = default(ResourceCollection), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse> PutResourceCollectionWithHttpMessagesAsync(ResourceCollection resourceComplexObject = default(ResourceCollection), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Get External Resource as a ResourceCollection
@@ -104,7 +111,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<ResourceCollection>> GetResourceCollectionWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse<ResourceCollection>> GetResourceCollectionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Put Simple Product with client flattening true on the model
@@ -118,7 +125,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<SimpleProduct>> PutSimpleProductWithHttpMessagesAsync(SimpleProduct simpleBodyProduct = default(SimpleProduct), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse<SimpleProduct>> PutSimpleProductWithHttpMessagesAsync(SimpleProduct simpleBodyProduct = default(SimpleProduct), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Put Flattened Simple Product with client flattening true on the
@@ -147,7 +154,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Put Simple Product with client flattening true on the model
@@ -161,7 +168,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<SimpleProduct>> PutSimpleProductWithGroupingWithHttpMessagesAsync(FlattenParameterGroup flattenParameterGroup, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse<SimpleProduct>> PutSimpleProductWithGroupingWithHttpMessagesAsync(FlattenParameterGroup flattenParameterGroup, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

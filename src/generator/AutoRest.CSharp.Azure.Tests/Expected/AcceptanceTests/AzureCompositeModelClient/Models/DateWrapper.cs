@@ -8,7 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
+    using AcceptanceTestsAzureCompositeModelClient;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class DateWrapper
     {
@@ -28,13 +33,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.DateJsonConverter))]
+        [Newtonsoft.Json.JsonConverter(typeof(DateJsonConverter))]
         [Newtonsoft.Json.JsonProperty(PropertyName = "field")]
         public System.DateTime? Field { get; set; }
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.DateJsonConverter))]
+        [Newtonsoft.Json.JsonConverter(typeof(DateJsonConverter))]
         [Newtonsoft.Json.JsonProperty(PropertyName = "leap")]
         public System.DateTime? Leap { get; set; }
 

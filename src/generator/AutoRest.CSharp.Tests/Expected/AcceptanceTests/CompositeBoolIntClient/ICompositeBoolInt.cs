@@ -9,6 +9,8 @@
 namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
 {
     using Models;
+    using Newtonsoft.Json;
+    using System.Net.Http;
 
     /// <summary>
     /// Composite Swagger Client that represents merging body boolean and body

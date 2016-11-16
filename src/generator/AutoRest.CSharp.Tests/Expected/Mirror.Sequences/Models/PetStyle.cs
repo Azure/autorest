@@ -8,7 +8,11 @@
 
 namespace Fixtures.MirrorSequences.Models
 {
+    using MirrorSequences;
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class PetStyle
     {
@@ -33,14 +37,14 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Name == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Name");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
             }
         }
     }

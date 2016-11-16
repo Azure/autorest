@@ -8,7 +8,14 @@
 
 namespace Fixtures.MirrorPolymorphic
 {
+    using Microsoft.Rest;
     using Models;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Some cool documentation.
@@ -49,7 +56,7 @@ namespace Fixtures.MirrorPolymorphic
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<Animal>> CreateOrUpdatePolymorphicAnimalsWithHttpMessagesAsync(Animal animalCreateOrUpdateParameter = default(Animal), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse<Animal>> CreateOrUpdatePolymorphicAnimalsWithHttpMessagesAsync(Animal animalCreateOrUpdateParameter = default(Animal), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

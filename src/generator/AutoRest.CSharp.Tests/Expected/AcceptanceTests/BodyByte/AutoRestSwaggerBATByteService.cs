@@ -9,12 +9,18 @@
 namespace Fixtures.AcceptanceTestsBodyByte
 {
     using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Models;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Net.Http;
 
     /// <summary>
     /// Test Infrastructure for AutoRest Swagger BAT
     /// </summary>
-    public partial class AutoRestSwaggerBATByteService : Microsoft.Rest.ServiceClient<AutoRestSwaggerBATByteService>, IAutoRestSwaggerBATByteService
+    public partial class AutoRestSwaggerBATByteService : ServiceClient<AutoRestSwaggerBATByteService>, IAutoRestSwaggerBATByteService
     {
         /// <summary>
         /// The base URI of the service.
@@ -44,7 +50,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
         /// </param>
         public AutoRestSwaggerBATByteService(params System.Net.Http.DelegatingHandler[] handlers) : base(handlers)
         {
-            this.Initialize();
+            Initialize();
         }
 
         /// <summary>
@@ -58,7 +64,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
         /// </param>
         public AutoRestSwaggerBATByteService(System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
-            this.Initialize();
+            Initialize();
         }
 
         /// <summary>
@@ -79,7 +85,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             {
                 throw new System.ArgumentNullException("baseUri");
             }
-            this.BaseUri = baseUri;
+            BaseUri = baseUri;
         }
 
         /// <summary>
@@ -103,7 +109,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             {
                 throw new System.ArgumentNullException("baseUri");
             }
-            this.BaseUri = baseUri;
+            BaseUri = baseUri;
         }
 
         /// <summary>
@@ -115,8 +121,8 @@ namespace Fixtures.AcceptanceTestsBodyByte
         /// </summary>
         private void Initialize()
         {
-            this.ByteModel = new ByteModel(this);
-            this.BaseUri = new System.Uri("http://localhost");
+            ByteModel = new ByteModel(this);
+            BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new Newtonsoft.Json.JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,
@@ -124,10 +130,10 @@ namespace Fixtures.AcceptanceTestsBodyByte
                 DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
-                ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver(),
+                ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new  System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
                     {
-                        new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
+                        new Iso8601TimeSpanConverter()
                     }
             };
             DeserializationSettings = new Newtonsoft.Json.JsonSerializerSettings
@@ -136,10 +142,10 @@ namespace Fixtures.AcceptanceTestsBodyByte
                 DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
-                ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver(),
+                ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
                     {
-                        new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
+                        new Iso8601TimeSpanConverter()
                     }
             };
             CustomInitialize();

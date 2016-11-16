@@ -8,7 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
+    using AcceptanceTestsModelFlattening;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// The Generic URL.

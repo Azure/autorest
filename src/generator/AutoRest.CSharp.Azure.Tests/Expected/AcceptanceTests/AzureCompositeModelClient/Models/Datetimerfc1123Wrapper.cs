@@ -8,7 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
+    using AcceptanceTestsAzureCompositeModelClient;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Datetimerfc1123Wrapper
     {
@@ -28,13 +33,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.DateTimeRfc1123JsonConverter))]
+        [Newtonsoft.Json.JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
         [Newtonsoft.Json.JsonProperty(PropertyName = "field")]
         public System.DateTime? Field { get; set; }
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.DateTimeRfc1123JsonConverter))]
+        [Newtonsoft.Json.JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
         [Newtonsoft.Json.JsonProperty(PropertyName = "now")]
         public System.DateTime? Now { get; set; }
 

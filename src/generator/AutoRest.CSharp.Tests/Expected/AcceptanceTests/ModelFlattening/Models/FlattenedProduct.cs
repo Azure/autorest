@@ -8,13 +8,20 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
+    using AcceptanceTestsModelFlattening;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// Flattened product.
     /// <see href="http://tempuri.org" />
     /// </summary>
-    [Microsoft.Rest.Serialization.JsonTransformation]
+    [JsonTransformation]
     public partial class FlattenedProduct : Resource
     {
         /// <summary>
@@ -33,7 +40,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
         /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
         /// 'OK'</param>
-        public FlattenedProduct(string id = default(string), string type = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), string location = default(string), string name = default(string), string pname = default(string), string flattenedProductType = default(string), string provisioningStateValues = default(string), string provisioningState = default(string))
+        public FlattenedProduct(string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string location = default(string), string name = default(string), string pname = default(string), string flattenedProductType = default(string), string provisioningStateValues = default(string), string provisioningState = default(string))
             : base(id, type, tags, location, name)
         {
             Pname = pname;

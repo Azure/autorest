@@ -9,6 +9,8 @@
 namespace Fixtures.AdditionalProperties
 {
     using Models;
+    using Newtonsoft.Json;
+    using System.Net.Http;
 
     /// <summary>
     /// **This example has a working backend hosted in Heroku**

@@ -8,12 +8,17 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
+    using AcceptanceTestsModelFlattening;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// The product documentation.
     /// </summary>
-    [Microsoft.Rest.Serialization.JsonTransformation]
+    [JsonTransformation]
     public partial class SimpleProduct : BaseProduct
     {
         /// <summary>
@@ -75,7 +80,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public override void Validate()
@@ -83,7 +88,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
             base.Validate();
             if (MaxProductDisplayName == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "MaxProductDisplayName");
+                throw new ValidationException(ValidationRules.CannotBeNull, "MaxProductDisplayName");
             }
         }
     }

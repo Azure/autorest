@@ -8,7 +8,11 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
+    using Azure;
+    using AcceptanceTestsLro;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// Defines headers for postAsyncRelativeRetry400 operation.

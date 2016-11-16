@@ -8,8 +8,16 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 {
+    using Azure;
+    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
+    using Microsoft.Rest.Azure.OData;
     using Models;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// OdataOperations operations.
@@ -32,6 +40,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> GetWithFilterWithHttpMessagesAsync(Microsoft.Rest.Azure.OData.ODataQuery<OdataFilter> odataQuery = default(Microsoft.Rest.Azure.OData.ODataQuery<OdataFilter>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse> GetWithFilterWithHttpMessagesAsync(ODataQuery<OdataFilter> odataQuery = default(ODataQuery<OdataFilter>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

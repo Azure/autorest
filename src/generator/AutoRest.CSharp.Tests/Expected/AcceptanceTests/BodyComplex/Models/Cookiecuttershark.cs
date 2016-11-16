@@ -8,7 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
+    using AcceptanceTestsBodyComplex;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
 
     [Newtonsoft.Json.JsonObject("cookiecuttershark")]
     public partial class Cookiecuttershark : Shark
@@ -21,7 +26,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Cookiecuttershark class.
         /// </summary>
-        public Cookiecuttershark(double length, System.DateTime birthday, string species = default(string), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>), int? age = default(int?))
+        public Cookiecuttershark(double length, System.DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?))
             : base(length, birthday, species, siblings, age)
         {
         }

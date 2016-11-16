@@ -8,7 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsBodyFormData.Models
 {
+    using AcceptanceTestsBodyFormData;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Error
     {

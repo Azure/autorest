@@ -8,7 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
+    using AcceptanceTestsBodyComplex;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Fish
     {
@@ -20,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Fish class.
         /// </summary>
-        public Fish(double length, string species = default(string), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>))
+        public Fish(double length, string species = default(string), IList<Fish> siblings = default(IList<Fish>))
         {
             Species = species;
             Length = length;
@@ -40,7 +45,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "siblings")]
-        public System.Collections.Generic.IList<Fish> Siblings { get; set; }
+        public IList<Fish> Siblings { get; set; }
 
         /// <summary>
         /// Validate the object.
@@ -50,9 +55,9 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// </exception>
         public virtual void Validate()
         {
-            if (this.Siblings != null)
+            if (Siblings != null)
             {
-                foreach (var element in this.Siblings)
+                foreach (var element in Siblings)
                 {
                     if (element != null)
                     {

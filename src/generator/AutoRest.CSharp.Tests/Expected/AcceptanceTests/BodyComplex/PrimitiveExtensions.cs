@@ -8,8 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex
 {
-    using System.Threading.Tasks;
    using Models;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for Primitive.
@@ -24,7 +26,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static IntWrapper GetInt(this IPrimitive operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).GetIntAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IPrimitive)s).GetIntAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -36,7 +38,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<IntWrapper> GetIntAsync(this IPrimitive operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<IntWrapper> GetIntAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetIntWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -55,7 +57,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutInt(this IPrimitive operations, IntWrapper complexBody)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).PutIntAsync(complexBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPrimitive)s).PutIntAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -70,7 +72,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutIntAsync(this IPrimitive operations, IntWrapper complexBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutIntAsync(this IPrimitive operations, IntWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutIntWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -83,7 +85,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static LongWrapper GetLong(this IPrimitive operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).GetLongAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IPrimitive)s).GetLongAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -95,7 +97,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LongWrapper> GetLongAsync(this IPrimitive operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LongWrapper> GetLongAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetLongWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -114,7 +116,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutLong(this IPrimitive operations, LongWrapper complexBody)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).PutLongAsync(complexBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPrimitive)s).PutLongAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -129,7 +131,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutLongAsync(this IPrimitive operations, LongWrapper complexBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutLongAsync(this IPrimitive operations, LongWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutLongWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -142,7 +144,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static FloatWrapper GetFloat(this IPrimitive operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).GetFloatAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IPrimitive)s).GetFloatAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -154,7 +156,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<FloatWrapper> GetFloatAsync(this IPrimitive operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<FloatWrapper> GetFloatAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -173,7 +175,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutFloat(this IPrimitive operations, FloatWrapper complexBody)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).PutFloatAsync(complexBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPrimitive)s).PutFloatAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,7 +190,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutFloatAsync(this IPrimitive operations, FloatWrapper complexBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutFloatAsync(this IPrimitive operations, FloatWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutFloatWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -201,7 +203,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DoubleWrapper GetDouble(this IPrimitive operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).GetDoubleAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IPrimitive)s).GetDoubleAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -213,7 +215,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<DoubleWrapper> GetDoubleAsync(this IPrimitive operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<DoubleWrapper> GetDoubleAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -233,7 +235,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutDouble(this IPrimitive operations, DoubleWrapper complexBody)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).PutDoubleAsync(complexBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPrimitive)s).PutDoubleAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -249,7 +251,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutDoubleAsync(this IPrimitive operations, DoubleWrapper complexBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutDoubleAsync(this IPrimitive operations, DoubleWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutDoubleWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -262,7 +264,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static BooleanWrapper GetBool(this IPrimitive operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).GetBoolAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IPrimitive)s).GetBoolAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -274,7 +276,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<BooleanWrapper> GetBoolAsync(this IPrimitive operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<BooleanWrapper> GetBoolAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetBoolWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -293,7 +295,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutBool(this IPrimitive operations, BooleanWrapper complexBody)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).PutBoolAsync(complexBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPrimitive)s).PutBoolAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,7 +310,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutBoolAsync(this IPrimitive operations, BooleanWrapper complexBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutBoolAsync(this IPrimitive operations, BooleanWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutBoolWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -321,7 +323,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static StringWrapper GetString(this IPrimitive operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).GetStringAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IPrimitive)s).GetStringAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -333,7 +335,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<StringWrapper> GetStringAsync(this IPrimitive operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<StringWrapper> GetStringAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -352,7 +354,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutString(this IPrimitive operations, StringWrapper complexBody)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).PutStringAsync(complexBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPrimitive)s).PutStringAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -367,7 +369,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutStringAsync(this IPrimitive operations, StringWrapper complexBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutStringAsync(this IPrimitive operations, StringWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutStringWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -380,7 +382,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DateWrapper GetDate(this IPrimitive operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).GetDateAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IPrimitive)s).GetDateAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -392,7 +394,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<DateWrapper> GetDateAsync(this IPrimitive operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<DateWrapper> GetDateAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -411,7 +413,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutDate(this IPrimitive operations, DateWrapper complexBody)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).PutDateAsync(complexBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPrimitive)s).PutDateAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -426,7 +428,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutDateAsync(this IPrimitive operations, DateWrapper complexBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutDateAsync(this IPrimitive operations, DateWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutDateWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -439,7 +441,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DatetimeWrapper GetDateTime(this IPrimitive operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).GetDateTimeAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IPrimitive)s).GetDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -451,7 +453,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<DatetimeWrapper> GetDateTimeAsync(this IPrimitive operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<DatetimeWrapper> GetDateTimeAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -470,7 +472,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutDateTime(this IPrimitive operations, DatetimeWrapper complexBody)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).PutDateTimeAsync(complexBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPrimitive)s).PutDateTimeAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -485,7 +487,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutDateTimeAsync(this IPrimitive operations, DatetimeWrapper complexBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutDateTimeAsync(this IPrimitive operations, DatetimeWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutDateTimeWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -498,7 +500,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static Datetimerfc1123Wrapper GetDateTimeRfc1123(this IPrimitive operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).GetDateTimeRfc1123Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IPrimitive)s).GetDateTimeRfc1123Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -510,7 +512,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Datetimerfc1123Wrapper> GetDateTimeRfc1123Async(this IPrimitive operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Datetimerfc1123Wrapper> GetDateTimeRfc1123Async(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDateTimeRfc1123WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -530,7 +532,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutDateTimeRfc1123(this IPrimitive operations, Datetimerfc1123Wrapper complexBody)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).PutDateTimeRfc1123Async(complexBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPrimitive)s).PutDateTimeRfc1123Async(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -546,7 +548,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutDateTimeRfc1123Async(this IPrimitive operations, Datetimerfc1123Wrapper complexBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutDateTimeRfc1123Async(this IPrimitive operations, Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutDateTimeRfc1123WithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -559,7 +561,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DurationWrapper GetDuration(this IPrimitive operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).GetDurationAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IPrimitive)s).GetDurationAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -571,7 +573,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<DurationWrapper> GetDurationAsync(this IPrimitive operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<DurationWrapper> GetDurationAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDurationWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -589,7 +591,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutDuration(this IPrimitive operations, System.TimeSpan? field = default(System.TimeSpan?))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).PutDurationAsync(field), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPrimitive)s).PutDurationAsync(field), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -603,7 +605,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutDurationAsync(this IPrimitive operations, System.TimeSpan? field = default(System.TimeSpan?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutDurationAsync(this IPrimitive operations, System.TimeSpan? field = default(System.TimeSpan?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutDurationWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false);
             }
@@ -616,7 +618,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static ByteWrapper GetByte(this IPrimitive operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).GetByteAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IPrimitive)s).GetByteAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -628,7 +630,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<ByteWrapper> GetByteAsync(this IPrimitive operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<ByteWrapper> GetByteAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetByteWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -646,7 +648,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutByte(this IPrimitive operations, byte[] field = default(byte[]))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).PutByteAsync(field), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPrimitive)s).PutByteAsync(field), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -660,7 +662,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutByteAsync(this IPrimitive operations, byte[] field = default(byte[]), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutByteAsync(this IPrimitive operations, byte[] field = default(byte[]), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutByteWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false);
             }

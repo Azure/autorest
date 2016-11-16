@@ -8,7 +8,13 @@
 
 namespace Fixtures.AdditionalProperties
 {
+    using Microsoft.Rest;
     using Models;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Get operations.
@@ -30,6 +36,6 @@ namespace Fixtures.AdditionalProperties
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<Pet>>> PetsWithHttpMessagesAsync(int? limit = 11, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse<IList<Pet>>> PetsWithHttpMessagesAsync(int? limit = 11, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

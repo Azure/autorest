@@ -8,7 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
+    using AcceptanceTestsAzureCompositeModelClient;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class DurationWrapper
     {

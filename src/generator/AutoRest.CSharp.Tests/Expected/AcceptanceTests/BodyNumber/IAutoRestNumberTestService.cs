@@ -9,6 +9,8 @@
 namespace Fixtures.AcceptanceTestsBodyNumber
 {
     using Models;
+    using Newtonsoft.Json;
+    using System.Net.Http;
 
     /// <summary>
     /// Test Infrastructure for AutoRest

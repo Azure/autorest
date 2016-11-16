@@ -8,7 +8,11 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 {
+    using Azure;
+    using AcceptanceTestsAzureParameterGrouping;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// Additional parameters for a set of operations, such as:

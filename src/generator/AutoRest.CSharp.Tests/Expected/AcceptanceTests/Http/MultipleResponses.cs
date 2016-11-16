@@ -10,11 +10,18 @@ namespace Fixtures.AcceptanceTestsHttp
 {
     using Microsoft.Rest;
     using Models;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// MultipleResponses operations.
     /// </summary>
-    public partial class MultipleResponses : Microsoft.Rest.IServiceOperations<AutoRestHttpInfrastructureTestService>, IMultipleResponses
+    public partial class MultipleResponses : IServiceOperations<AutoRestHttpInfrastructureTestService>, IMultipleResponses
     {
         /// <summary>
         /// Initializes a new instance of the MultipleResponses class.
@@ -31,7 +38,7 @@ namespace Fixtures.AcceptanceTestsHttp
             {
                 throw new System.ArgumentNullException("client");
             }
-            this.Client = client;
+            Client = client;
         }
 
         /// <summary>
@@ -51,29 +58,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> Get200Model204NoModelDefaultError200ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError200ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200Model204NoModelDefaultError200Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200Model204NoModelDefaultError200Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/204/none/default/Error/response/200/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -95,15 +102,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 204)
@@ -112,7 +119,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -122,11 +129,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -136,7 +143,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -145,7 +152,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -154,12 +161,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -176,29 +183,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> Get200Model204NoModelDefaultError204ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError204ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200Model204NoModelDefaultError204Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200Model204NoModelDefaultError204Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/204/none/default/Error/response/204/none").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -220,15 +227,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 204)
@@ -237,7 +244,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -247,11 +254,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -261,7 +268,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -270,7 +277,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -279,12 +286,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -301,29 +308,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> Get200Model204NoModelDefaultError201InvalidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError201InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200Model204NoModelDefaultError201Invalid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200Model204NoModelDefaultError201Invalid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/204/none/default/Error/response/201/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -345,15 +352,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 204)
@@ -362,7 +369,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -372,11 +379,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -386,7 +393,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -395,7 +402,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -404,12 +411,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -426,29 +433,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> Get200Model204NoModelDefaultError202NoneWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError202NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200Model204NoModelDefaultError202None", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200Model204NoModelDefaultError202None", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/204/none/default/Error/response/202/none").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -470,15 +477,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 204)
@@ -487,7 +494,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -497,11 +504,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -511,7 +518,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -520,7 +527,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -529,12 +536,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -552,29 +559,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> Get200Model204NoModelDefaultError400ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> Get200Model204NoModelDefaultError400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200Model204NoModelDefaultError400Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200Model204NoModelDefaultError400Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/204/none/default/Error/response/400/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -596,15 +603,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 204)
@@ -613,7 +620,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -623,11 +630,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -637,7 +644,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -646,7 +653,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -655,12 +662,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -677,29 +684,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> Get200Model201ModelDefaultError200ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> Get200Model201ModelDefaultError200ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200Model201ModelDefaultError200Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200Model201ModelDefaultError200Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/201/B/default/Error/response/200/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -721,15 +728,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201)
@@ -738,7 +745,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -748,11 +755,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -762,7 +769,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -771,7 +778,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -780,7 +787,7 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             // Deserialize Response
@@ -789,7 +796,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<B>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<B>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -798,12 +805,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -821,29 +828,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> Get200Model201ModelDefaultError201ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> Get200Model201ModelDefaultError201ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200Model201ModelDefaultError201Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200Model201ModelDefaultError201Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/201/B/default/Error/response/201/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -865,15 +872,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201)
@@ -882,7 +889,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -892,11 +899,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -906,7 +913,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -915,7 +922,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -924,7 +931,7 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             // Deserialize Response
@@ -933,7 +940,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<B>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<B>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -942,12 +949,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -965,29 +972,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> Get200Model201ModelDefaultError400ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> Get200Model201ModelDefaultError400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200Model201ModelDefaultError400Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200Model201ModelDefaultError400Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/201/B/default/Error/response/400/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -1009,15 +1016,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201)
@@ -1026,7 +1033,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -1036,11 +1043,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1050,7 +1057,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -1059,7 +1066,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -1068,7 +1075,7 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             // Deserialize Response
@@ -1077,7 +1084,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<B>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<B>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -1086,12 +1093,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -1108,29 +1115,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError200ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError200ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA201ModelC404ModelDDefaultError200Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA201ModelC404ModelDDefaultError200Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/201/C/404/D/default/Error/response/200/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -1152,15 +1159,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201 && (int)_statusCode != 404)
@@ -1169,7 +1176,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -1179,11 +1186,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1193,7 +1200,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<object>();
+            var _result = new HttpOperationResponse<object>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -1202,7 +1209,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -1211,7 +1218,7 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             // Deserialize Response
@@ -1220,7 +1227,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<C>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<C>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -1229,7 +1236,7 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             // Deserialize Response
@@ -1238,7 +1245,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<D>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<D>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -1247,12 +1254,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -1269,29 +1276,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError201ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError201ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA201ModelC404ModelDDefaultError201Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA201ModelC404ModelDDefaultError201Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/201/C/404/D/default/Error/response/201/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -1313,15 +1320,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201 && (int)_statusCode != 404)
@@ -1330,7 +1337,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -1340,11 +1347,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1354,7 +1361,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<object>();
+            var _result = new HttpOperationResponse<object>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -1363,7 +1370,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -1372,7 +1379,7 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             // Deserialize Response
@@ -1381,7 +1388,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<C>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<C>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -1390,7 +1397,7 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             // Deserialize Response
@@ -1399,7 +1406,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<D>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<D>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -1408,12 +1415,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -1430,29 +1437,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError404ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError404ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA201ModelC404ModelDDefaultError404Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA201ModelC404ModelDDefaultError404Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/201/C/404/D/default/Error/response/404/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -1474,15 +1481,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201 && (int)_statusCode != 404)
@@ -1491,7 +1498,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -1501,11 +1508,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1515,7 +1522,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<object>();
+            var _result = new HttpOperationResponse<object>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -1524,7 +1531,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -1533,7 +1540,7 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             // Deserialize Response
@@ -1542,7 +1549,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<C>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<C>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -1551,7 +1558,7 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             // Deserialize Response
@@ -1560,7 +1567,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<D>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<D>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -1569,12 +1576,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -1592,29 +1599,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError400ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<object>> Get200ModelA201ModelC404ModelDDefaultError400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA201ModelC404ModelDDefaultError400Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA201ModelC404ModelDDefaultError400Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/201/C/404/D/default/Error/response/400/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -1636,15 +1643,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201 && (int)_statusCode != 404)
@@ -1653,7 +1660,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -1663,11 +1670,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1677,7 +1684,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<object>();
+            var _result = new HttpOperationResponse<object>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -1686,7 +1693,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -1695,7 +1702,7 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             // Deserialize Response
@@ -1704,7 +1711,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<C>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<C>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -1713,7 +1720,7 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             // Deserialize Response
@@ -1722,7 +1729,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<D>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<D>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -1731,12 +1738,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -1756,23 +1763,23 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> Get202None204NoneDefaultError202NoneWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse> Get202None204NoneDefaultError202NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get202None204NoneDefaultError202None", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get202None204NoneDefaultError202None", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/202/none/204/none/default/Error/response/202/none").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -1794,15 +1801,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 202 && (int)_statusCode != 204)
@@ -1811,7 +1818,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -1821,11 +1828,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1835,12 +1842,12 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse();
+            var _result = new HttpOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -1860,23 +1867,23 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> Get202None204NoneDefaultError204NoneWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse> Get202None204NoneDefaultError204NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get202None204NoneDefaultError204None", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get202None204NoneDefaultError204None", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/202/none/204/none/default/Error/response/204/none").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -1898,15 +1905,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 202 && (int)_statusCode != 204)
@@ -1915,7 +1922,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -1925,11 +1932,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1939,12 +1946,12 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse();
+            var _result = new HttpOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -1965,23 +1972,23 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> Get202None204NoneDefaultError400ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse> Get202None204NoneDefaultError400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get202None204NoneDefaultError400Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get202None204NoneDefaultError400Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/202/none/204/none/default/Error/response/400/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -2003,15 +2010,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 202 && (int)_statusCode != 204)
@@ -2020,7 +2027,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -2030,11 +2037,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2044,12 +2051,12 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse();
+            var _result = new HttpOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -2063,29 +2070,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> Get202None204NoneDefaultNone202InvalidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse> Get202None204NoneDefaultNone202InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get202None204NoneDefaultNone202Invalid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get202None204NoneDefaultNone202Invalid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/202/none/204/none/default/none/response/202/invalid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -2107,31 +2114,31 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 202 && (int)_statusCode != 204)
             {
-                var ex = new Microsoft.Rest.HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2141,12 +2148,12 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse();
+            var _result = new HttpOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -2160,29 +2167,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> Get202None204NoneDefaultNone204NoneWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse> Get202None204NoneDefaultNone204NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get202None204NoneDefaultNone204None", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get202None204NoneDefaultNone204None", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/202/none/204/none/default/none/response/204/none").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -2204,31 +2211,31 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 202 && (int)_statusCode != 204)
             {
-                var ex = new Microsoft.Rest.HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2238,12 +2245,12 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse();
+            var _result = new HttpOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -2257,29 +2264,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> Get202None204NoneDefaultNone400NoneWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse> Get202None204NoneDefaultNone400NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get202None204NoneDefaultNone400None", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get202None204NoneDefaultNone400None", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/202/none/204/none/default/none/response/400/none").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -2301,31 +2308,31 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 202 && (int)_statusCode != 204)
             {
-                var ex = new Microsoft.Rest.HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2335,12 +2342,12 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse();
+            var _result = new HttpOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -2354,29 +2361,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> Get202None204NoneDefaultNone400InvalidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse> Get202None204NoneDefaultNone400InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get202None204NoneDefaultNone400Invalid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get202None204NoneDefaultNone400Invalid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/202/none/204/none/default/none/response/400/invalid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -2398,31 +2405,31 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 202 && (int)_statusCode != 204)
             {
-                var ex = new Microsoft.Rest.HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2432,12 +2439,12 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse();
+            var _result = new HttpOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -2457,23 +2464,23 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> GetDefaultModelA200ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> GetDefaultModelA200ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "GetDefaultModelA200Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetDefaultModelA200Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/default/A/response/200/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -2495,15 +2502,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
@@ -2512,7 +2519,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    A _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    A _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -2522,11 +2529,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2536,13 +2543,13 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             try
             {
-                _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_defaultResponseContent, this.Client.DeserializationSettings);
+                _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_defaultResponseContent, Client.DeserializationSettings);
             }
             catch (Newtonsoft.Json.JsonException ex)
             {
@@ -2551,11 +2558,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     _httpResponse.Dispose();
                 }
-                throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _defaultResponseContent, ex);
+                throw new SerializationException("Unable to deserialize the response.", _defaultResponseContent, ex);
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -2575,23 +2582,23 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> GetDefaultModelA200NoneWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> GetDefaultModelA200NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "GetDefaultModelA200None", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetDefaultModelA200None", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/default/A/response/200/none").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -2613,15 +2620,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
@@ -2630,7 +2637,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    A _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    A _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -2640,11 +2647,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2654,13 +2661,13 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             try
             {
-                _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_defaultResponseContent, this.Client.DeserializationSettings);
+                _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_defaultResponseContent, Client.DeserializationSettings);
             }
             catch (Newtonsoft.Json.JsonException ex)
             {
@@ -2669,11 +2676,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     _httpResponse.Dispose();
                 }
-                throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _defaultResponseContent, ex);
+                throw new SerializationException("Unable to deserialize the response.", _defaultResponseContent, ex);
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -2693,23 +2700,23 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> GetDefaultModelA400ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> GetDefaultModelA400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "GetDefaultModelA400Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetDefaultModelA400Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/default/A/response/400/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -2731,15 +2738,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
@@ -2748,7 +2755,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    A _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    A _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -2758,11 +2765,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2772,13 +2779,13 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             try
             {
-                _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_defaultResponseContent, this.Client.DeserializationSettings);
+                _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_defaultResponseContent, Client.DeserializationSettings);
             }
             catch (Newtonsoft.Json.JsonException ex)
             {
@@ -2787,11 +2794,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     _httpResponse.Dispose();
                 }
-                throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _defaultResponseContent, ex);
+                throw new SerializationException("Unable to deserialize the response.", _defaultResponseContent, ex);
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -2811,23 +2818,23 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> GetDefaultModelA400NoneWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> GetDefaultModelA400NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "GetDefaultModelA400None", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetDefaultModelA400None", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/default/A/response/400/none").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -2849,15 +2856,15 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
@@ -2866,7 +2873,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    A _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    A _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
@@ -2876,11 +2883,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     // Ignore the exception
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2890,13 +2897,13 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             try
             {
-                _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_defaultResponseContent, this.Client.DeserializationSettings);
+                _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_defaultResponseContent, Client.DeserializationSettings);
             }
             catch (Newtonsoft.Json.JsonException ex)
             {
@@ -2905,11 +2912,11 @@ namespace Fixtures.AcceptanceTestsHttp
                 {
                     _httpResponse.Dispose();
                 }
-                throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _defaultResponseContent, ex);
+                throw new SerializationException("Unable to deserialize the response.", _defaultResponseContent, ex);
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -2923,29 +2930,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetDefaultNone200InvalidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse> GetDefaultNone200InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "GetDefaultNone200Invalid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetDefaultNone200Invalid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/default/none/response/200/invalid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -2967,31 +2974,31 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new Microsoft.Rest.HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3001,12 +3008,12 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse();
+            var _result = new HttpOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -3020,29 +3027,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetDefaultNone200NoneWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse> GetDefaultNone200NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "GetDefaultNone200None", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetDefaultNone200None", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/default/none/response/200/none").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -3064,31 +3071,31 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new Microsoft.Rest.HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3098,12 +3105,12 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse();
+            var _result = new HttpOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -3117,29 +3124,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetDefaultNone400InvalidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse> GetDefaultNone400InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "GetDefaultNone400Invalid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetDefaultNone400Invalid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/default/none/response/400/invalid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -3161,31 +3168,31 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new Microsoft.Rest.HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3195,12 +3202,12 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse();
+            var _result = new HttpOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -3214,29 +3221,29 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetDefaultNone400NoneWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse> GetDefaultNone400NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "GetDefaultNone400None", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetDefaultNone400None", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/default/none/response/400/none").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -3258,31 +3265,31 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
-                var ex = new Microsoft.Rest.HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3292,12 +3299,12 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse();
+            var _result = new HttpOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -3312,32 +3319,32 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> Get200ModelA200NoneWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> Get200ModelA200NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA200None", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA200None", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/response/200/none").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -3359,31 +3366,31 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new Microsoft.Rest.HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3393,7 +3400,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -3402,7 +3409,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -3411,12 +3418,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -3430,32 +3437,32 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> Get200ModelA200ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> Get200ModelA200ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA200Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA200Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/response/200/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -3477,31 +3484,31 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new Microsoft.Rest.HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3511,7 +3518,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -3520,7 +3527,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -3529,12 +3536,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -3548,32 +3555,32 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> Get200ModelA200InvalidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> Get200ModelA200InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA200Invalid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA200Invalid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/response/200/invalid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -3595,31 +3602,31 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new Microsoft.Rest.HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3629,7 +3636,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -3638,7 +3645,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -3647,12 +3654,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -3667,32 +3674,32 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> Get200ModelA400NoneWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> Get200ModelA400NoneWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA400None", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA400None", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/response/400/none").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -3714,31 +3721,31 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new Microsoft.Rest.HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3748,7 +3755,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -3757,7 +3764,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -3766,12 +3773,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -3785,32 +3792,32 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> Get200ModelA400ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> Get200ModelA400ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA400Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA400Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/response/400/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -3832,31 +3839,31 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new Microsoft.Rest.HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3866,7 +3873,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -3875,7 +3882,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -3884,12 +3891,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -3903,32 +3910,32 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> Get200ModelA400InvalidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> Get200ModelA400InvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA400Invalid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA400Invalid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/response/400/invalid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -3950,31 +3957,31 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new Microsoft.Rest.HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3984,7 +3991,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -3993,7 +4000,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -4002,12 +4009,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -4021,32 +4028,32 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<A>> Get200ModelA202ValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<A>> Get200ModelA202ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
-                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA202Valid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "Get200ModelA202Valid", tracingParameters);
             }
             // Construct URL
-            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/payloads/200/A/response/202/valid").ToString();
             // Create HTTP transport objects
-            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            var _httpRequest = new System.Net.Http.HttpRequestMessage();
             System.Net.Http.HttpResponseMessage _httpResponse = null;
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
@@ -4068,31 +4075,31 @@ namespace Fixtures.AcceptanceTestsHttp
             // Send Request
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new Microsoft.Rest.HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
                 }
-                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -4102,7 +4109,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<A>();
+            var _result = new HttpOperationResponse<A>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -4111,7 +4118,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<A>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -4120,12 +4127,12 @@ namespace Fixtures.AcceptanceTestsHttp
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }

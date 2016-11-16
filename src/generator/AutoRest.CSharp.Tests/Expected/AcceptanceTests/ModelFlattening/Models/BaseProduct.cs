@@ -8,7 +8,11 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
+    using AcceptanceTestsModelFlattening;
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// The product documentation.
@@ -52,14 +56,14 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (ProductId == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "ProductId");
+                throw new ValidationException(ValidationRules.CannotBeNull, "ProductId");
             }
         }
     }

@@ -8,7 +8,10 @@
 
 namespace Fixtures.PetstoreV2AllSync.Models
 {
+    using PetstoreV2AllSync;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class ApiResponse
     {

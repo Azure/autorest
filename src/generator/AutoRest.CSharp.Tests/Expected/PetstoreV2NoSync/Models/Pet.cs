@@ -8,7 +8,13 @@
 
 namespace Fixtures.PetstoreV2NoSync.Models
 {
+    using PetstoreV2NoSync;
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Pet
     {
@@ -22,7 +28,7 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// </summary>
         /// <param name="status">pet status in the store. Possible values
         /// include: 'available', 'pending', 'sold'</param>
-        public Pet(string name, System.Collections.Generic.IList<string> photoUrls, long? id = default(long?), Category category = default(Category), System.Collections.Generic.IList<Tag> tags = default(System.Collections.Generic.IList<Tag>), byte[] sByteProperty = default(byte[]), System.DateTime? birthday = default(System.DateTime?), System.Collections.Generic.IDictionary<string, Category> dictionary = default(System.Collections.Generic.IDictionary<string, Category>), string status = default(string))
+        public Pet(string name, IList<string> photoUrls, long? id = default(long?), Category category = default(Category), IList<Tag> tags = default(IList<Tag>), byte[] sByteProperty = default(byte[]), System.DateTime? birthday = default(System.DateTime?), IDictionary<string, Category> dictionary = default(IDictionary<string, Category>), string status = default(string))
         {
             Id = id;
             Category = category;
@@ -53,12 +59,12 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "photoUrls")]
-        public System.Collections.Generic.IList<string> PhotoUrls { get; set; }
+        public IList<string> PhotoUrls { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "tags")]
-        public System.Collections.Generic.IList<Tag> Tags { get; set; }
+        public IList<Tag> Tags { get; set; }
 
         /// <summary>
         /// </summary>
@@ -73,7 +79,7 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "dictionary")]
-        public System.Collections.Generic.IDictionary<string, Category> Dictionary { get; set; }
+        public IDictionary<string, Category> Dictionary { get; set; }
 
         /// <summary>
         /// Gets or sets pet status in the store. Possible values include:
@@ -85,18 +91,18 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Name == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Name");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
             }
             if (PhotoUrls == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "PhotoUrls");
+                throw new ValidationException(ValidationRules.CannotBeNull, "PhotoUrls");
             }
         }
     }

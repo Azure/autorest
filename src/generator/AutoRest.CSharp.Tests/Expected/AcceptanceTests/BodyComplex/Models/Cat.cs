@@ -8,7 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
+    using AcceptanceTestsBodyComplex;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Cat : Pet
     {
@@ -20,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Cat class.
         /// </summary>
-        public Cat(int? id = default(int?), string name = default(string), string color = default(string), System.Collections.Generic.IList<Dog> hates = default(System.Collections.Generic.IList<Dog>))
+        public Cat(int? id = default(int?), string name = default(string), string color = default(string), IList<Dog> hates = default(IList<Dog>))
             : base(id, name)
         {
             Color = color;
@@ -35,7 +40,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "hates")]
-        public System.Collections.Generic.IList<Dog> Hates { get; set; }
+        public IList<Dog> Hates { get; set; }
 
     }
 }

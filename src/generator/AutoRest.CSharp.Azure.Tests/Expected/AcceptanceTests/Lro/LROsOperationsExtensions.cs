@@ -8,9 +8,13 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro
 {
-    using System.Threading.Tasks;
+    using Azure;
+    using Microsoft.Rest;
    using Microsoft.Rest.Azure;
    using Models;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for LROsOperations.
@@ -29,7 +33,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product Put200Succeeded(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put200SucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).Put200SucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -45,7 +49,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> Put200SucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> Put200SucceededAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Put200SucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -65,7 +69,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product Put200SucceededNoState(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put200SucceededNoStateAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).Put200SucceededNoStateAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -81,7 +85,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> Put200SucceededNoStateAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> Put200SucceededNoStateAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Put200SucceededNoStateWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -102,7 +106,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product Put202Retry200(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put202Retry200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).Put202Retry200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -119,7 +123,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> Put202Retry200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> Put202Retry200Async(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Put202Retry200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -141,7 +145,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product Put201CreatingSucceeded200(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put201CreatingSucceeded200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).Put201CreatingSucceeded200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -159,7 +163,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> Put201CreatingSucceeded200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> Put201CreatingSucceeded200Async(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Put201CreatingSucceeded200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -181,7 +185,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product Put200UpdatingSucceeded204(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put200UpdatingSucceeded204Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).Put200UpdatingSucceeded204Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -199,7 +203,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> Put200UpdatingSucceeded204Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> Put200UpdatingSucceeded204Async(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Put200UpdatingSucceeded204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -221,7 +225,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product Put201CreatingFailed200(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put201CreatingFailed200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).Put201CreatingFailed200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -239,7 +243,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> Put201CreatingFailed200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> Put201CreatingFailed200Async(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Put201CreatingFailed200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -261,7 +265,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product Put200Acceptedcanceled200(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Put200Acceptedcanceled200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).Put200Acceptedcanceled200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -279,7 +283,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> Put200Acceptedcanceled200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> Put200Acceptedcanceled200Async(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Put200Acceptedcanceled200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -300,7 +304,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutNoHeaderInRetry(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutNoHeaderInRetryAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutNoHeaderInRetryAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -317,7 +321,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> PutNoHeaderInRetryAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> PutNoHeaderInRetryAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PutNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -338,7 +342,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutAsyncRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -355,7 +359,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> PutAsyncRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> PutAsyncRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PutAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -376,7 +380,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutAsyncNoRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNoRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNoRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -393,7 +397,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> PutAsyncNoRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> PutAsyncNoRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PutAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -414,7 +418,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutAsyncRetryFailed(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncRetryFailedAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncRetryFailedAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -431,7 +435,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> PutAsyncRetryFailedAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> PutAsyncRetryFailedAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PutAsyncRetryFailedWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -452,7 +456,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutAsyncNoRetrycanceled(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNoRetrycanceledAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNoRetrycanceledAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -469,7 +473,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> PutAsyncNoRetrycanceledAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> PutAsyncNoRetrycanceledAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PutAsyncNoRetrycanceledWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -490,7 +494,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutAsyncNoHeaderInRetry(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNoHeaderInRetryAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNoHeaderInRetryAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -507,7 +511,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> PutAsyncNoHeaderInRetryAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> PutAsyncNoHeaderInRetryAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PutAsyncNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -526,7 +530,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Sku PutNonResource(this ILROsOperations operations, Sku sku = default(Sku))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutNonResourceAsync(sku), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutNonResourceAsync(sku), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -541,7 +545,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Sku> PutNonResourceAsync(this ILROsOperations operations, Sku sku = default(Sku), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Sku> PutNonResourceAsync(this ILROsOperations operations, Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PutNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -560,7 +564,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Sku PutAsyncNonResource(this ILROsOperations operations, Sku sku = default(Sku))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNonResourceAsync(sku), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncNonResourceAsync(sku), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -575,7 +579,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Sku> PutAsyncNonResourceAsync(this ILROsOperations operations, Sku sku = default(Sku), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Sku> PutAsyncNonResourceAsync(this ILROsOperations operations, Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PutAsyncNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -593,7 +597,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static SubProduct PutSubResource(this ILROsOperations operations, string provisioningState = default(string))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutSubResourceAsync(provisioningState), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutSubResourceAsync(provisioningState), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -607,7 +611,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<SubProduct> PutSubResourceAsync(this ILROsOperations operations, string provisioningState = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<SubProduct> PutSubResourceAsync(this ILROsOperations operations, string provisioningState = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PutSubResourceWithHttpMessagesAsync(provisioningState, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -625,7 +629,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static SubProduct PutAsyncSubResource(this ILROsOperations operations, string provisioningState = default(string))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncSubResourceAsync(provisioningState), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PutAsyncSubResourceAsync(provisioningState), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -639,7 +643,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<SubProduct> PutAsyncSubResourceAsync(this ILROsOperations operations, string provisioningState = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<SubProduct> PutAsyncSubResourceAsync(this ILROsOperations operations, string provisioningState = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PutAsyncSubResourceWithHttpMessagesAsync(provisioningState, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -658,7 +662,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product DeleteProvisioning202Accepted200Succeeded(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteProvisioning202Accepted200SucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteProvisioning202Accepted200SucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -673,7 +677,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> DeleteProvisioning202Accepted200SucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> DeleteProvisioning202Accepted200SucceededAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -692,7 +696,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product DeleteProvisioning202DeletingFailed200(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteProvisioning202DeletingFailed200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteProvisioning202DeletingFailed200Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -707,7 +711,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> DeleteProvisioning202DeletingFailed200Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> DeleteProvisioning202DeletingFailed200Async(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -726,7 +730,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product DeleteProvisioning202Deletingcanceled200(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteProvisioning202Deletingcanceled200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteProvisioning202Deletingcanceled200Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -741,7 +745,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> DeleteProvisioning202Deletingcanceled200Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> DeleteProvisioning202Deletingcanceled200Async(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -757,7 +761,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static void Delete204Succeeded(this ILROsOperations operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Delete204SucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((ILROsOperations)s).Delete204SucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -769,7 +773,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Delete204SucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task Delete204SucceededAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.Delete204SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -784,7 +788,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product Delete202Retry200(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Delete202Retry200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).Delete202Retry200Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -798,7 +802,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> Delete202Retry200Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> Delete202Retry200Async(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Delete202Retry200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -816,7 +820,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product Delete202NoRetry204(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Delete202NoRetry204Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).Delete202NoRetry204Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -830,7 +834,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> Delete202NoRetry204Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> Delete202NoRetry204Async(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Delete202NoRetry204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -848,7 +852,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsDeleteNoHeaderInRetryHeaders DeleteNoHeaderInRetry(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteNoHeaderInRetryAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteNoHeaderInRetryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -862,7 +866,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteNoHeaderInRetryHeaders> DeleteNoHeaderInRetryAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsDeleteNoHeaderInRetryHeaders> DeleteNoHeaderInRetryAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DeleteNoHeaderInRetryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -880,7 +884,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsDeleteAsyncNoHeaderInRetryHeaders DeleteAsyncNoHeaderInRetry(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncNoHeaderInRetryAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncNoHeaderInRetryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -894,7 +898,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteAsyncNoHeaderInRetryHeaders> DeleteAsyncNoHeaderInRetryAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsDeleteAsyncNoHeaderInRetryHeaders> DeleteAsyncNoHeaderInRetryAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DeleteAsyncNoHeaderInRetryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -912,7 +916,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsDeleteAsyncRetrySucceededHeaders DeleteAsyncRetrySucceeded(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncRetrySucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncRetrySucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -926,7 +930,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteAsyncRetrySucceededHeaders> DeleteAsyncRetrySucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsDeleteAsyncRetrySucceededHeaders> DeleteAsyncRetrySucceededAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DeleteAsyncRetrySucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -944,7 +948,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsDeleteAsyncNoRetrySucceededHeaders DeleteAsyncNoRetrySucceeded(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncNoRetrySucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncNoRetrySucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -958,7 +962,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteAsyncNoRetrySucceededHeaders> DeleteAsyncNoRetrySucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsDeleteAsyncNoRetrySucceededHeaders> DeleteAsyncNoRetrySucceededAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DeleteAsyncNoRetrySucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -976,7 +980,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsDeleteAsyncRetryFailedHeaders DeleteAsyncRetryFailed(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncRetryFailedAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncRetryFailedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -990,7 +994,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteAsyncRetryFailedHeaders> DeleteAsyncRetryFailedAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsDeleteAsyncRetryFailedHeaders> DeleteAsyncRetryFailedAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DeleteAsyncRetryFailedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1008,7 +1012,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsDeleteAsyncRetrycanceledHeaders DeleteAsyncRetrycanceled(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncRetrycanceledAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).DeleteAsyncRetrycanceledAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1022,7 +1026,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteAsyncRetrycanceledHeaders> DeleteAsyncRetrycanceledAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsDeleteAsyncRetrycanceledHeaders> DeleteAsyncRetrycanceledAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DeleteAsyncRetrycanceledWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1040,7 +1044,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Sku Post200WithPayload(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Post200WithPayloadAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).Post200WithPayloadAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1054,7 +1058,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Sku> Post200WithPayloadAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Sku> Post200WithPayloadAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Post200WithPayloadWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1075,7 +1079,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsPost202Retry200Headers Post202Retry200(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Post202Retry200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).Post202Retry200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1092,7 +1096,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsPost202Retry200Headers> Post202Retry200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsPost202Retry200Headers> Post202Retry200Async(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Post202Retry200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1112,7 +1116,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product Post202NoRetry204(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).Post202NoRetry204Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).Post202NoRetry204Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1128,7 +1132,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> Post202NoRetry204Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> Post202NoRetry204Async(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Post202NoRetry204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1149,7 +1153,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PostAsyncRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1166,7 +1170,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> PostAsyncRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> PostAsyncRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PostAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1187,7 +1191,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PostAsyncNoRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncNoRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncNoRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1204,7 +1208,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> PostAsyncNoRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> PostAsyncNoRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PostAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1225,7 +1229,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsPostAsyncRetryFailedHeaders PostAsyncRetryFailed(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncRetryFailedAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncRetryFailedAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1242,7 +1246,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsPostAsyncRetryFailedHeaders> PostAsyncRetryFailedAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsPostAsyncRetryFailedHeaders> PostAsyncRetryFailedAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PostAsyncRetryFailedWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1263,7 +1267,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsPostAsyncRetrycanceledHeaders PostAsyncRetrycanceled(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncRetrycanceledAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).PostAsyncRetrycanceledAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1280,7 +1284,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsPostAsyncRetrycanceledHeaders> PostAsyncRetrycanceledAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsPostAsyncRetrycanceledHeaders> PostAsyncRetrycanceledAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PostAsyncRetrycanceledWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1300,7 +1304,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPut200Succeeded(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut200SucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut200SucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1316,7 +1320,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPut200SucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPut200SucceededAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPut200SucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1336,7 +1340,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPut200SucceededNoState(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut200SucceededNoStateAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut200SucceededNoStateAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1352,7 +1356,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPut200SucceededNoStateAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPut200SucceededNoStateAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPut200SucceededNoStateWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1373,7 +1377,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPut202Retry200(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut202Retry200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut202Retry200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1390,7 +1394,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPut202Retry200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPut202Retry200Async(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPut202Retry200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1412,7 +1416,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPut201CreatingSucceeded200(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut201CreatingSucceeded200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut201CreatingSucceeded200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1430,7 +1434,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPut201CreatingSucceeded200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPut201CreatingSucceeded200Async(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPut201CreatingSucceeded200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1452,7 +1456,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPut200UpdatingSucceeded204(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut200UpdatingSucceeded204Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut200UpdatingSucceeded204Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1470,7 +1474,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPut200UpdatingSucceeded204Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPut200UpdatingSucceeded204Async(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPut200UpdatingSucceeded204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1492,7 +1496,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPut201CreatingFailed200(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut201CreatingFailed200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut201CreatingFailed200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1510,7 +1514,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPut201CreatingFailed200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPut201CreatingFailed200Async(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPut201CreatingFailed200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1532,7 +1536,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPut200Acceptedcanceled200(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut200Acceptedcanceled200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPut200Acceptedcanceled200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1550,7 +1554,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPut200Acceptedcanceled200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPut200Acceptedcanceled200Async(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPut200Acceptedcanceled200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1571,7 +1575,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutNoHeaderInRetry(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutNoHeaderInRetryAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutNoHeaderInRetryAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1588,7 +1592,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPutNoHeaderInRetryAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPutNoHeaderInRetryAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPutNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1609,7 +1613,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutAsyncRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1626,7 +1630,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPutAsyncRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPutAsyncRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPutAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1647,7 +1651,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutAsyncNoRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncNoRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncNoRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1664,7 +1668,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPutAsyncNoRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPutAsyncNoRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPutAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1685,7 +1689,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutAsyncRetryFailed(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncRetryFailedAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncRetryFailedAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1702,7 +1706,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPutAsyncRetryFailedAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPutAsyncRetryFailedAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPutAsyncRetryFailedWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1723,7 +1727,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutAsyncNoRetrycanceled(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncNoRetrycanceledAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncNoRetrycanceledAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1740,7 +1744,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPutAsyncNoRetrycanceledAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPutAsyncNoRetrycanceledAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPutAsyncNoRetrycanceledWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1761,7 +1765,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutAsyncNoHeaderInRetry(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncNoHeaderInRetryAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncNoHeaderInRetryAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1778,7 +1782,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPutAsyncNoHeaderInRetryAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPutAsyncNoHeaderInRetryAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPutAsyncNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1797,7 +1801,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Sku BeginPutNonResource(this ILROsOperations operations, Sku sku = default(Sku))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutNonResourceAsync(sku), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutNonResourceAsync(sku), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1812,7 +1816,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Sku> BeginPutNonResourceAsync(this ILROsOperations operations, Sku sku = default(Sku), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Sku> BeginPutNonResourceAsync(this ILROsOperations operations, Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPutNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1831,7 +1835,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Sku BeginPutAsyncNonResource(this ILROsOperations operations, Sku sku = default(Sku))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncNonResourceAsync(sku), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncNonResourceAsync(sku), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1846,7 +1850,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Sku> BeginPutAsyncNonResourceAsync(this ILROsOperations operations, Sku sku = default(Sku), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Sku> BeginPutAsyncNonResourceAsync(this ILROsOperations operations, Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPutAsyncNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1864,7 +1868,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static SubProduct BeginPutSubResource(this ILROsOperations operations, string provisioningState = default(string))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutSubResourceAsync(provisioningState), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutSubResourceAsync(provisioningState), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1878,7 +1882,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<SubProduct> BeginPutSubResourceAsync(this ILROsOperations operations, string provisioningState = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<SubProduct> BeginPutSubResourceAsync(this ILROsOperations operations, string provisioningState = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPutSubResourceWithHttpMessagesAsync(provisioningState, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1896,7 +1900,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static SubProduct BeginPutAsyncSubResource(this ILROsOperations operations, string provisioningState = default(string))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncSubResourceAsync(provisioningState), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPutAsyncSubResourceAsync(provisioningState), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1910,7 +1914,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<SubProduct> BeginPutAsyncSubResourceAsync(this ILROsOperations operations, string provisioningState = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<SubProduct> BeginPutAsyncSubResourceAsync(this ILROsOperations operations, string provisioningState = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPutAsyncSubResourceWithHttpMessagesAsync(provisioningState, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1929,7 +1933,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginDeleteProvisioning202Accepted200Succeeded(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteProvisioning202Accepted200SucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteProvisioning202Accepted200SucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1944,7 +1948,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginDeleteProvisioning202Accepted200SucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginDeleteProvisioning202Accepted200SucceededAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1963,7 +1967,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginDeleteProvisioning202DeletingFailed200(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteProvisioning202DeletingFailed200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteProvisioning202DeletingFailed200Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1978,7 +1982,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginDeleteProvisioning202DeletingFailed200Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginDeleteProvisioning202DeletingFailed200Async(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginDeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1997,7 +2001,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginDeleteProvisioning202Deletingcanceled200(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteProvisioning202Deletingcanceled200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteProvisioning202Deletingcanceled200Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2012,7 +2016,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginDeleteProvisioning202Deletingcanceled200Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginDeleteProvisioning202Deletingcanceled200Async(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginDeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2028,7 +2032,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static void BeginDelete204Succeeded(this ILROsOperations operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDelete204SucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDelete204SucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2040,7 +2044,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task BeginDelete204SucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task BeginDelete204SucceededAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.BeginDelete204SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -2055,7 +2059,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginDelete202Retry200(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDelete202Retry200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDelete202Retry200Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2069,7 +2073,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginDelete202Retry200Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginDelete202Retry200Async(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginDelete202Retry200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2087,7 +2091,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginDelete202NoRetry204(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDelete202NoRetry204Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDelete202NoRetry204Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2101,7 +2105,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginDelete202NoRetry204Async(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginDelete202NoRetry204Async(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginDelete202NoRetry204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2119,7 +2123,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsDeleteNoHeaderInRetryHeaders BeginDeleteNoHeaderInRetry(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteNoHeaderInRetryAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteNoHeaderInRetryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2133,7 +2137,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteNoHeaderInRetryHeaders> BeginDeleteNoHeaderInRetryAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsDeleteNoHeaderInRetryHeaders> BeginDeleteNoHeaderInRetryAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginDeleteNoHeaderInRetryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2151,7 +2155,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsDeleteAsyncNoHeaderInRetryHeaders BeginDeleteAsyncNoHeaderInRetry(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteAsyncNoHeaderInRetryAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteAsyncNoHeaderInRetryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2165,7 +2169,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteAsyncNoHeaderInRetryHeaders> BeginDeleteAsyncNoHeaderInRetryAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsDeleteAsyncNoHeaderInRetryHeaders> BeginDeleteAsyncNoHeaderInRetryAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginDeleteAsyncNoHeaderInRetryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2183,7 +2187,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsDeleteAsyncRetrySucceededHeaders BeginDeleteAsyncRetrySucceeded(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteAsyncRetrySucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteAsyncRetrySucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2197,7 +2201,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteAsyncRetrySucceededHeaders> BeginDeleteAsyncRetrySucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsDeleteAsyncRetrySucceededHeaders> BeginDeleteAsyncRetrySucceededAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginDeleteAsyncRetrySucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2215,7 +2219,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsDeleteAsyncNoRetrySucceededHeaders BeginDeleteAsyncNoRetrySucceeded(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteAsyncNoRetrySucceededAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteAsyncNoRetrySucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2229,7 +2233,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteAsyncNoRetrySucceededHeaders> BeginDeleteAsyncNoRetrySucceededAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsDeleteAsyncNoRetrySucceededHeaders> BeginDeleteAsyncNoRetrySucceededAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginDeleteAsyncNoRetrySucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2247,7 +2251,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsDeleteAsyncRetryFailedHeaders BeginDeleteAsyncRetryFailed(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteAsyncRetryFailedAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteAsyncRetryFailedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2261,7 +2265,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteAsyncRetryFailedHeaders> BeginDeleteAsyncRetryFailedAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsDeleteAsyncRetryFailedHeaders> BeginDeleteAsyncRetryFailedAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginDeleteAsyncRetryFailedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2279,7 +2283,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsDeleteAsyncRetrycanceledHeaders BeginDeleteAsyncRetrycanceled(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteAsyncRetrycanceledAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginDeleteAsyncRetrycanceledAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2293,7 +2297,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsDeleteAsyncRetrycanceledHeaders> BeginDeleteAsyncRetrycanceledAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsDeleteAsyncRetrycanceledHeaders> BeginDeleteAsyncRetrycanceledAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginDeleteAsyncRetrycanceledWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2311,7 +2315,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Sku BeginPost200WithPayload(this ILROsOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPost200WithPayloadAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPost200WithPayloadAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2325,7 +2329,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Sku> BeginPost200WithPayloadAsync(this ILROsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Sku> BeginPost200WithPayloadAsync(this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPost200WithPayloadWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2346,7 +2350,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsPost202Retry200Headers BeginPost202Retry200(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPost202Retry200Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPost202Retry200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2363,7 +2367,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsPost202Retry200Headers> BeginPost202Retry200Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsPost202Retry200Headers> BeginPost202Retry200Async(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPost202Retry200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2383,7 +2387,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPost202NoRetry204(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPost202NoRetry204Async(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPost202NoRetry204Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2399,7 +2403,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPost202NoRetry204Async(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPost202NoRetry204Async(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPost202NoRetry204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2420,7 +2424,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPostAsyncRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPostAsyncRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPostAsyncRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2437,7 +2441,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPostAsyncRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPostAsyncRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPostAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2458,7 +2462,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPostAsyncNoRetrySucceeded(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPostAsyncNoRetrySucceededAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPostAsyncNoRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2475,7 +2479,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> BeginPostAsyncNoRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Product> BeginPostAsyncNoRetrySucceededAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPostAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2496,7 +2500,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsPostAsyncRetryFailedHeaders BeginPostAsyncRetryFailed(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPostAsyncRetryFailedAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPostAsyncRetryFailedAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2513,7 +2517,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsPostAsyncRetryFailedHeaders> BeginPostAsyncRetryFailedAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsPostAsyncRetryFailedHeaders> BeginPostAsyncRetryFailedAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPostAsyncRetryFailedWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2534,7 +2538,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsPostAsyncRetrycanceledHeaders BeginPostAsyncRetrycanceled(this ILROsOperations operations, Product product = default(Product))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPostAsyncRetrycanceledAsync(product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROsOperations)s).BeginPostAsyncRetrycanceledAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -2551,7 +2555,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<LROsPostAsyncRetrycanceledHeaders> BeginPostAsyncRetrycanceledAsync(this ILROsOperations operations, Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<LROsPostAsyncRetrycanceledHeaders> BeginPostAsyncRetrycanceledAsync(this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPostAsyncRetrycanceledWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {

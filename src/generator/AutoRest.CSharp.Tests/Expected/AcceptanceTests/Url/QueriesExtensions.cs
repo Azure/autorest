@@ -8,8 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsUrl
 {
-    using System.Threading.Tasks;
    using Models;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for Queries.
@@ -24,7 +28,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetBooleanTrue(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).GetBooleanTrueAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).GetBooleanTrueAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -36,7 +40,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetBooleanTrueAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task GetBooleanTrueAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetBooleanTrueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -49,7 +53,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetBooleanFalse(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).GetBooleanFalseAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).GetBooleanFalseAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -61,7 +65,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetBooleanFalseAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task GetBooleanFalseAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetBooleanFalseWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -77,7 +81,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetBooleanNull(this IQueries operations, bool? boolQuery = default(bool?))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).GetBooleanNullAsync(boolQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).GetBooleanNullAsync(boolQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -92,7 +96,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetBooleanNullAsync(this IQueries operations, bool? boolQuery = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task GetBooleanNullAsync(this IQueries operations, bool? boolQuery = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetBooleanNullWithHttpMessagesAsync(boolQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -105,7 +109,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetIntOneMillion(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).GetIntOneMillionAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).GetIntOneMillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -117,7 +121,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetIntOneMillionAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task GetIntOneMillionAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetIntOneMillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -130,7 +134,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetIntNegativeOneMillion(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).GetIntNegativeOneMillionAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).GetIntNegativeOneMillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -142,7 +146,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetIntNegativeOneMillionAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task GetIntNegativeOneMillionAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetIntNegativeOneMillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -158,7 +162,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetIntNull(this IQueries operations, int? intQuery = default(int?))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).GetIntNullAsync(intQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).GetIntNullAsync(intQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -173,7 +177,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetIntNullAsync(this IQueries operations, int? intQuery = default(int?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task GetIntNullAsync(this IQueries operations, int? intQuery = default(int?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetIntNullWithHttpMessagesAsync(intQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -186,7 +190,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetTenBillion(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).GetTenBillionAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).GetTenBillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -198,7 +202,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetTenBillionAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task GetTenBillionAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetTenBillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -211,7 +215,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetNegativeTenBillion(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).GetNegativeTenBillionAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).GetNegativeTenBillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -223,7 +227,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetNegativeTenBillionAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task GetNegativeTenBillionAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetNegativeTenBillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -239,7 +243,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetLongNull(this IQueries operations, long? longQuery = default(long?))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).GetLongNullAsync(longQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).GetLongNullAsync(longQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -254,7 +258,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetLongNullAsync(this IQueries operations, long? longQuery = default(long?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task GetLongNullAsync(this IQueries operations, long? longQuery = default(long?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetLongNullWithHttpMessagesAsync(longQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -267,7 +271,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void FloatScientificPositive(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).FloatScientificPositiveAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).FloatScientificPositiveAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -279,7 +283,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task FloatScientificPositiveAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task FloatScientificPositiveAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.FloatScientificPositiveWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -292,7 +296,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void FloatScientificNegative(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).FloatScientificNegativeAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).FloatScientificNegativeAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -304,7 +308,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task FloatScientificNegativeAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task FloatScientificNegativeAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.FloatScientificNegativeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -320,7 +324,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void FloatNull(this IQueries operations, double? floatQuery = default(double?))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).FloatNullAsync(floatQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).FloatNullAsync(floatQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -335,7 +339,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task FloatNullAsync(this IQueries operations, double? floatQuery = default(double?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task FloatNullAsync(this IQueries operations, double? floatQuery = default(double?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.FloatNullWithHttpMessagesAsync(floatQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -348,7 +352,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DoubleDecimalPositive(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).DoubleDecimalPositiveAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).DoubleDecimalPositiveAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -360,7 +364,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task DoubleDecimalPositiveAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task DoubleDecimalPositiveAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DoubleDecimalPositiveWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -373,7 +377,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DoubleDecimalNegative(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).DoubleDecimalNegativeAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).DoubleDecimalNegativeAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -385,7 +389,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task DoubleDecimalNegativeAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task DoubleDecimalNegativeAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DoubleDecimalNegativeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -401,7 +405,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DoubleNull(this IQueries operations, double? doubleQuery = default(double?))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).DoubleNullAsync(doubleQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).DoubleNullAsync(doubleQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -416,7 +420,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task DoubleNullAsync(this IQueries operations, double? doubleQuery = default(double?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task DoubleNullAsync(this IQueries operations, double? doubleQuery = default(double?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DoubleNullWithHttpMessagesAsync(doubleQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -429,7 +433,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void StringUnicode(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).StringUnicodeAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).StringUnicodeAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -441,7 +445,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task StringUnicodeAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task StringUnicodeAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.StringUnicodeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -454,7 +458,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void StringUrlEncoded(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).StringUrlEncodedAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).StringUrlEncodedAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -466,7 +470,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task StringUrlEncodedAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task StringUrlEncodedAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.StringUrlEncodedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -479,7 +483,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void StringEmpty(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).StringEmptyAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).StringEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -491,7 +495,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task StringEmptyAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task StringEmptyAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.StringEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -507,7 +511,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void StringNull(this IQueries operations, string stringQuery = default(string))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).StringNullAsync(stringQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).StringNullAsync(stringQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -522,7 +526,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task StringNullAsync(this IQueries operations, string stringQuery = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task StringNullAsync(this IQueries operations, string stringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.StringNullWithHttpMessagesAsync(stringQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -539,7 +543,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void EnumValid(this IQueries operations, UriColor? enumQuery = default(UriColor?))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).EnumValidAsync(enumQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).EnumValidAsync(enumQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -555,7 +559,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task EnumValidAsync(this IQueries operations, UriColor? enumQuery = default(UriColor?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task EnumValidAsync(this IQueries operations, UriColor? enumQuery = default(UriColor?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.EnumValidWithHttpMessagesAsync(enumQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -572,7 +576,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void EnumNull(this IQueries operations, UriColor? enumQuery = default(UriColor?))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).EnumNullAsync(enumQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).EnumNullAsync(enumQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -588,7 +592,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task EnumNullAsync(this IQueries operations, UriColor? enumQuery = default(UriColor?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task EnumNullAsync(this IQueries operations, UriColor? enumQuery = default(UriColor?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.EnumNullWithHttpMessagesAsync(enumQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -604,7 +608,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ByteMultiByte(this IQueries operations, byte[] byteQuery = default(byte[]))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).ByteMultiByteAsync(byteQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).ByteMultiByteAsync(byteQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -619,7 +623,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ByteMultiByteAsync(this IQueries operations, byte[] byteQuery = default(byte[]), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task ByteMultiByteAsync(this IQueries operations, byte[] byteQuery = default(byte[]), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ByteMultiByteWithHttpMessagesAsync(byteQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -632,7 +636,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ByteEmpty(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).ByteEmptyAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).ByteEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -644,7 +648,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ByteEmptyAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task ByteEmptyAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ByteEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -660,7 +664,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ByteNull(this IQueries operations, byte[] byteQuery = default(byte[]))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).ByteNullAsync(byteQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).ByteNullAsync(byteQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -675,7 +679,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ByteNullAsync(this IQueries operations, byte[] byteQuery = default(byte[]), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task ByteNullAsync(this IQueries operations, byte[] byteQuery = default(byte[]), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ByteNullWithHttpMessagesAsync(byteQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -688,7 +692,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DateValid(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).DateValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).DateValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -700,7 +704,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task DateValidAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task DateValidAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DateValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -716,7 +720,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DateNull(this IQueries operations, System.DateTime? dateQuery = default(System.DateTime?))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).DateNullAsync(dateQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).DateNullAsync(dateQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -731,7 +735,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task DateNullAsync(this IQueries operations, System.DateTime? dateQuery = default(System.DateTime?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task DateNullAsync(this IQueries operations, System.DateTime? dateQuery = default(System.DateTime?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DateNullWithHttpMessagesAsync(dateQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -744,7 +748,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DateTimeValid(this IQueries operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).DateTimeValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).DateTimeValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -756,7 +760,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task DateTimeValidAsync(this IQueries operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task DateTimeValidAsync(this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DateTimeValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -772,7 +776,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DateTimeNull(this IQueries operations, System.DateTime? dateTimeQuery = default(System.DateTime?))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).DateTimeNullAsync(dateTimeQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).DateTimeNullAsync(dateTimeQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -787,7 +791,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task DateTimeNullAsync(this IQueries operations, System.DateTime? dateTimeQuery = default(System.DateTime?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task DateTimeNullAsync(this IQueries operations, System.DateTime? dateTimeQuery = default(System.DateTime?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DateTimeNullWithHttpMessagesAsync(dateTimeQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -803,9 +807,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
             /// null, ''] using the csv-array format
             /// </param>
-            public static void ArrayStringCsvValid(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>))
+            public static void ArrayStringCsvValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).ArrayStringCsvValidAsync(arrayQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringCsvValidAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -822,7 +826,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ArrayStringCsvValidAsync(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task ArrayStringCsvValidAsync(this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ArrayStringCsvValidWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -836,9 +840,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='arrayQuery'>
             /// a null array of string using the csv-array format
             /// </param>
-            public static void ArrayStringCsvNull(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>))
+            public static void ArrayStringCsvNull(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).ArrayStringCsvNullAsync(arrayQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringCsvNullAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -853,7 +857,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ArrayStringCsvNullAsync(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task ArrayStringCsvNullAsync(this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ArrayStringCsvNullWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -867,9 +871,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='arrayQuery'>
             /// an empty array [] of string using the csv-array format
             /// </param>
-            public static void ArrayStringCsvEmpty(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>))
+            public static void ArrayStringCsvEmpty(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).ArrayStringCsvEmptyAsync(arrayQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringCsvEmptyAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -884,7 +888,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ArrayStringCsvEmptyAsync(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task ArrayStringCsvEmptyAsync(this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ArrayStringCsvEmptyWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -900,9 +904,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
             /// null, ''] using the ssv-array format
             /// </param>
-            public static void ArrayStringSsvValid(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>))
+            public static void ArrayStringSsvValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).ArrayStringSsvValidAsync(arrayQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringSsvValidAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -919,7 +923,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ArrayStringSsvValidAsync(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task ArrayStringSsvValidAsync(this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ArrayStringSsvValidWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -935,9 +939,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
             /// null, ''] using the tsv-array format
             /// </param>
-            public static void ArrayStringTsvValid(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>))
+            public static void ArrayStringTsvValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).ArrayStringTsvValidAsync(arrayQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringTsvValidAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -954,7 +958,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ArrayStringTsvValidAsync(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task ArrayStringTsvValidAsync(this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ArrayStringTsvValidWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -970,9 +974,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
             /// null, ''] using the pipes-array format
             /// </param>
-            public static void ArrayStringPipesValid(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>))
+            public static void ArrayStringPipesValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IQueries)s).ArrayStringPipesValidAsync(arrayQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringPipesValidAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -989,7 +993,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ArrayStringPipesValidAsync(this IQueries operations, System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task ArrayStringPipesValidAsync(this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ArrayStringPipesValidWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
             }

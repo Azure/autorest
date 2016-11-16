@@ -8,6 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
+    using AcceptanceTestsAzureCompositeModelClient;
+    using System.Net.Http;
 
     /// <summary>
     /// Defines values for CMYKColors.

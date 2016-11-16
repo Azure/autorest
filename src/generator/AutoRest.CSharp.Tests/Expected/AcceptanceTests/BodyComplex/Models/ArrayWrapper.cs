@@ -8,7 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
+    using AcceptanceTestsBodyComplex;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class ArrayWrapper
     {
@@ -20,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the ArrayWrapper class.
         /// </summary>
-        public ArrayWrapper(System.Collections.Generic.IList<string> array = default(System.Collections.Generic.IList<string>))
+        public ArrayWrapper(IList<string> array = default(IList<string>))
         {
             Array = array;
         }
@@ -28,7 +33,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "array")]
-        public System.Collections.Generic.IList<string> Array { get; set; }
+        public IList<string> Array { get; set; }
 
     }
 }

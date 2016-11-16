@@ -8,9 +8,12 @@
 
 namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
 {
+    using Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
+    using Newtonsoft.Json;
+    using System.Net.Http;
 
     /// <summary>
     /// Some cool documentation.
@@ -35,7 +38,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// <summary>
         /// Credentials needed for the client to connect to Azure.
         /// </summary>
-        Microsoft.Rest.ServiceClientCredentials Credentials { get; }
+        ServiceClientCredentials Credentials { get; }
 
         /// <summary>
         /// Subscription Id.

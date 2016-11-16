@@ -8,7 +8,13 @@
 
 namespace Fixtures.AcceptanceTestsValidation.Models
 {
+    using AcceptanceTestsValidation;
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// The product documentation.
@@ -33,7 +39,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// <param name="image">Image URL representing the product.</param>
         /// <param name="constStringAsEnum">Constant string as Enum. Possible
         /// values include: 'constant_string_as_enum'</param>
-        public Product(ChildProduct child, System.Collections.Generic.IList<string> displayNames = default(System.Collections.Generic.IList<string>), int? capacity = default(int?), string image = default(string), EnumConst? constStringAsEnum = default(EnumConst?))
+        public Product(ChildProduct child, IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string), EnumConst? constStringAsEnum = default(EnumConst?))
         {
             Child = new ChildProduct();
             DisplayNames = displayNames;
@@ -57,7 +63,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// elements.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "display_names")]
-        public System.Collections.Generic.IList<string> DisplayNames { get; set; }
+        public IList<string> DisplayNames { get; set; }
 
         /// <summary>
         /// Gets or sets non required int betwen 0 and 100 exclusive.
@@ -103,43 +109,43 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Child == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Child");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Child");
             }
-            if (this.DisplayNames != null)
+            if (DisplayNames != null)
             {
-                if (this.DisplayNames.Count > 6)
+                if (DisplayNames.Count > 6)
                 {
-                    throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.MaxItems, "DisplayNames", 6);
+                    throw new ValidationException(ValidationRules.MaxItems, "DisplayNames", 6);
                 }
-                if (this.DisplayNames.Count < 0)
+                if (DisplayNames.Count < 0)
                 {
-                    throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.MinItems, "DisplayNames", 0);
+                    throw new ValidationException(ValidationRules.MinItems, "DisplayNames", 0);
                 }
-                if (this.DisplayNames.Count != this.DisplayNames.Distinct().Count())
+                if (DisplayNames.Count != DisplayNames.Distinct().Count())
                 {
-                    throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.UniqueItems, "DisplayNames");
+                    throw new ValidationException(ValidationRules.UniqueItems, "DisplayNames");
                 }
             }
-            if (this.Capacity >= 100)
+            if (Capacity >= 100)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.ExclusiveMaximum, "Capacity", 100);
+                throw new ValidationException(ValidationRules.ExclusiveMaximum, "Capacity", 100);
             }
-            if (this.Capacity <= 0)
+            if (Capacity <= 0)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.ExclusiveMinimum, "Capacity", 0);
+                throw new ValidationException(ValidationRules.ExclusiveMinimum, "Capacity", 0);
             }
-            if (this.Image != null)
+            if (Image != null)
             {
-                if (!System.Text.RegularExpressions.Regex.IsMatch(this.Image, "http://\\w+"))
+                if (!System.Text.RegularExpressions.Regex.IsMatch(Image, "http://\\w+"))
                 {
-                    throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.Pattern, "Image", "http://\\w+");
+                    throw new ValidationException(ValidationRules.Pattern, "Image", "http://\\w+");
                 }
             }
         }

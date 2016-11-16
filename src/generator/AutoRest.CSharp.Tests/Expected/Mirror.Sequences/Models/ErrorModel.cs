@@ -8,7 +8,11 @@
 
 namespace Fixtures.MirrorSequences.Models
 {
+    using MirrorSequences;
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class ErrorModel
     {
@@ -39,14 +43,14 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Message == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Message");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Message");
             }
         }
     }

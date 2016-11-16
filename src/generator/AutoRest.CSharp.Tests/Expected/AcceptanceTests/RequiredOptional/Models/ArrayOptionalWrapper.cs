@@ -8,7 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 {
+    using AcceptanceTestsRequiredOptional;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class ArrayOptionalWrapper
     {
@@ -20,7 +25,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// Initializes a new instance of the ArrayOptionalWrapper class.
         /// </summary>
-        public ArrayOptionalWrapper(System.Collections.Generic.IList<string> value = default(System.Collections.Generic.IList<string>))
+        public ArrayOptionalWrapper(IList<string> value = default(IList<string>))
         {
             Value = value;
         }
@@ -28,7 +33,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
-        public System.Collections.Generic.IList<string> Value { get; set; }
+        public IList<string> Value { get; set; }
 
     }
 }

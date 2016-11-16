@@ -8,7 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat.Models
 {
+    using AcceptanceTestsUrlMultiCollectionFormat;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Error
     {

@@ -8,7 +8,14 @@
 
 namespace Fixtures.AcceptanceTestsValidation
 {
+    using Microsoft.Rest;
     using Models;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Test Infrastructure for AutoRest. No server backend exists for these
@@ -57,7 +64,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<Product>> ValidationOfMethodParametersWithHttpMessagesAsync(string resourceGroupName, int id, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse<Product>> ValidationOfMethodParametersWithHttpMessagesAsync(string resourceGroupName, int id, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Validates body parameters on the method. See swagger for details.
@@ -76,7 +83,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<Product>> ValidationOfBodyWithHttpMessagesAsync(string resourceGroupName, int id, Product body = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse<Product>> ValidationOfBodyWithHttpMessagesAsync(string resourceGroupName, int id, Product body = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -84,7 +91,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetWithConstantInPathWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse> GetWithConstantInPathWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='body'>
         /// </param>
@@ -94,7 +101,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<Product>> PostWithConstantInBodyWithHttpMessagesAsync(Product body = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse<Product>> PostWithConstantInBodyWithHttpMessagesAsync(Product body = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }
