@@ -18,96 +18,13 @@ namespace AutoRest.Preview
     public partial class AutoRestPreviewForm : Form
     {
         private SynchronizationContext ui;
+        private Linting linting;
 
         public AutoRestPreviewForm()
         {
             InitializeComponent();
             ui = SynchronizationContext.Current;
-        }
-
-        class Highlight
-        {
-            public int Start;
-            public int End;
-            public string Message;
-        }
-        List<Highlight> highlights = new List<Highlight>();
-
-        private void ScintillaSrc_DwellStart(object sender, ScintillaNET.DwellEventArgs e)
-        {
-            var highlight = highlights.FirstOrDefault(h => h.Start <= e.Position && e.Position <= h.End);
-            if (highlight != null)
-            {
-                scintillaSrc.CallTipShow(highlight.Start, highlight.Message);
-            }
-        }
-        private void ScintillaSrc_DwellEnd(object sender, ScintillaNET.DwellEventArgs e)
-        {
-            scintillaSrc.CallTipCancel();
-        }
-
-        private readonly int INDICATOR_BASE = 8;
-        private readonly Color[] INDIXATOR_COLORS = { Color.LightSkyBlue, Color.LightGreen, Color.Yellow, Color.PaleVioletRed, Color.PaleVioletRed };
-
-        private void ResetLinter()
-        {
-            highlights.Clear();
-
-            var severityNames = Enum.GetNames(typeof(LogEntrySeverity));
-
-            for (int i = 0; i < severityNames.Length; ++i)
-            {
-                int indicator = INDICATOR_BASE + i;
-
-                // Remove all uses of our indicator
-                scintillaSrc.IndicatorCurrent = indicator;
-                scintillaSrc.IndicatorClearRange(0, scintillaSrc.TextLength);
-
-                // Update indicator appearance
-                scintillaSrc.Indicators[indicator].Style = IndicatorStyle.StraightBox;
-                //scintillaSrc.Indicators[indicator].Style = IndicatorStyle.Squiggle;
-                scintillaSrc.Indicators[indicator].Under = true;
-                scintillaSrc.Indicators[indicator].ForeColor = INDIXATOR_COLORS[i];
-                scintillaSrc.Indicators[indicator].OutlineAlpha = 80;
-                scintillaSrc.Indicators[indicator].Alpha = 50;
-            }
-        }
-
-        private void ProcessLinterMessages(string swagger, IEnumerable<ValidationMessage> messages)
-        {
-            // try parse
-            var reader = new StringReader(swagger);
-            YamlNode doc = null;
-            try
-            {
-                var yamlStream = new YamlStream();
-                yamlStream.Load(reader);
-                doc = yamlStream.Documents[0].RootNode;
-            }
-            catch { }
-
-            // process messages
-            if (doc != null)
-            {
-                foreach (var message in messages)
-                {
-                    if (message.Severity > LogEntrySeverity.Debug)
-                    {
-                        scintillaSrc.IndicatorCurrent = INDICATOR_BASE + (int)message.Severity;
-                        var node = doc.ResolvePath(message.Path.Reverse().Skip(1));
-                        var start = node.Start.Index;
-                        var len = Math.Max(1, node.End.Index - start);
-                        scintillaSrc.IndicatorFillRange(start, len);
-                        highlights.Add(new Highlight
-                        {
-                            Start = start,
-                            End = start + len,
-                            Message =
-                                $"{message.Severity}: [{string.Join("->", message.Path.Reverse())}] {message.Message}"
-                        });
-                    }
-                }
-            }
+            linting = new Linting(scintillaSrc);
         }
 
         private async Task<string> RegenerateAsync(string swagger, string language, bool shortVersion)
@@ -115,7 +32,7 @@ namespace AutoRest.Preview
             using (var fileSystem = AutoRestPipeline.GenerateCodeForTest(
                                             swagger, 
                                             language, 
-                                            messages => ui.Post(_ => ProcessLinterMessages(swagger, messages), null)))
+                                            messages => ui.Post(_ => linting.ProcessMessages(swagger, messages), null)))
             {
                 // concat all source
                 var allSources = string.Join("\n\n\n",
@@ -205,7 +122,7 @@ namespace AutoRest.Preview
 
         private void UpdatePreview()
         {
-            ResetLinter();
+            linting.Reset();
             panelError.Visible = false;
             panelProgress.Visible = true;
 
@@ -222,8 +139,11 @@ namespace AutoRest.Preview
                 // start
                 try
                 {
-                    string result = await Task.Run(() => 
-                        RegenerateAsync(scintillaSrc.Text, comboBoxTargetLang.SelectedItem as string ?? "CSharp", checkBoxShort.Checked));
+                    var swaggerText = scintillaSrc.Text;
+                    var generator = comboBoxTargetLang.SelectedItem as string ?? "CSharp";
+                    var shortOutput = checkBoxShort.Checked;
+
+                    string result = await Task.Run(() => RegenerateAsync(swaggerText, generator, shortOutput));
 
                     int scrollStart = scintillaDst.FirstVisibleLine;
                     scintillaDst.ReadOnly = false;
@@ -270,18 +190,12 @@ namespace AutoRest.Preview
         }
 
         private void scintillaSrc_TextChanged(object sender, EventArgs e)
-        {
-            UpdatePreview();
-        }
+            => UpdatePreview();
 
         private void comboBoxTargetLang_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdatePreview();
-        }
+            => UpdatePreview();
 
         private void checkBoxShort_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdatePreview();
-        }
+            => UpdatePreview();
     }
 }

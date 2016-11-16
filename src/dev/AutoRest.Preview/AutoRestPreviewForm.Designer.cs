@@ -199,8 +199,6 @@ namespace AutoRest.Preview
             this.scintillaSrc.Text = File.ReadAllText("default.yaml");
             this.scintillaSrc.WrapIndentMode = ScintillaNET.WrapIndentMode.Indent;
             this.scintillaSrc.TextChanged += new System.EventHandler(this.scintillaSrc_TextChanged);
-            this.scintillaSrc.DwellStart += ScintillaSrc_DwellStart;
-            this.scintillaSrc.DwellEnd += ScintillaSrc_DwellEnd;
             // 
             // checkBoxShort
             // 
