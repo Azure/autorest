@@ -357,6 +357,25 @@ namespace AutoRest.NodeJS.Model
             }
         }
 
+        public string PopulateErrorCodeAndMessage()
+        {
+            var builder = new IndentedStringBuilder("  ");
+            if (DefaultResponse.Body != null && DefaultResponse.Body.Name.RawValue.Equals("CloudError", StringComparison.InvariantCultureIgnoreCase))
+            {
+                builder.AppendLine("if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;")
+                       .AppendLine("if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;")
+                       .AppendLine("if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;");
+            }
+            else
+            {
+                builder.AppendLine("var internalError = null;")
+                       .AppendLine("if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;")
+                       .AppendLine("error.code = internalError ? internalError.code : parsedErrorResponse.code;")
+                       .AppendLine("error.message = internalError ? internalError.message : parsedErrorResponse.message;");
+            }
+            return builder.ToString();
+        }
+
         /// <summary>
         /// Provides the parameter name in the correct jsdoc notation depending on 
         /// whether it is required or optional
