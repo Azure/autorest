@@ -260,6 +260,12 @@ namespace AutoRest.CompositeSwagger
                     EnsureUsesTypeFromModel(parameter, compositeClient);
                 }
 
+                foreach (var response in method.Responses.Values)
+                {
+                    response.Body = EnsureUsesTypeFromModel(response.Body, compositeClient);
+                    response.Headers = EnsureUsesTypeFromModel(response.Headers, compositeClient);
+                }
+
                 method.ReturnType.Body = EnsureUsesTypeFromModel(method.ReturnType.Body, compositeClient);
                 method.ReturnType.Headers = EnsureUsesTypeFromModel(method.ReturnType.Headers, compositeClient);
             }

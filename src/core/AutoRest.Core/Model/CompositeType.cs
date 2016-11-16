@@ -193,33 +193,31 @@ namespace AutoRest.Core.Model
         }
 
         /// <summary>
-        /// Determines whether the specified object is equal to this object based on the Name.
+        /// Determines whether the specified model type is structurally equal to this object.
         /// </summary>
-        /// <param name="obj">The object to compare with this object.</param>
-        /// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
-        public override bool Equals(object obj)
+        /// <param name="other">The object to compare with this object.</param>
+        /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
+        public override bool StructurallyEquals(IModelType other)
         {
-            var modelType = obj as CompositeType;
-
-            if (modelType != null)
+            if (ReferenceEquals(other as CompositeType, null))
             {
-                return modelType.Name == Name;
+                return false;
+            }
+            if (ReferenceEquals(other as CompositeType, this))
+            {
+                return true;
             }
 
-            return false;
+            return base.StructurallyEquals(other) &&
+                ComposedProperties.SequenceEqual((other as CompositeType).ComposedProperties, 
+                new Utilities.EqualityComparer<Property>((a, b) => 
+                    a.Name == b.Name && 
+                    a.ModelType.StructurallyEquals(b.ModelType) && 
+                    a.IsReadOnly == b.IsReadOnly && 
+                    a.IsConstant == b.IsConstant && 
+                    a.IsRequired == b.IsRequired));
         }
 
-        /// <summary>
-        /// Serves as a hash function based on Name.
-        /// </summary>
-        /// <returns>
-        /// A hash code for the current object.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return Name == null ? 0 : Name.GetHashCode();
-        }
-       
         [JsonIgnore]
         public override IEnumerable<IChild> Children => Properties;
 
