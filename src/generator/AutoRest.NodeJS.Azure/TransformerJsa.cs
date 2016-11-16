@@ -89,7 +89,7 @@ namespace AutoRest.NodeJS.Azure
                         compositType.Extensions[AzureExtensions.PageableExtension] = true;
                         var pageTemplateModel = new PageCompositeTypeJsa(nextLinkName, itemName).LoadFrom(compositType);
                         // var pageTemplateModel = new PageTemplateModel(compositType, serviceClient, nextLinkName, itemName);
-                        if (!codeModel.PageTemplateModels.Any(ptm => ptm.Name == pageTemplateModel.Name && ptm.FunctionallyEquals(pageTemplateModel)))
+                        if (!codeModel.PageTemplateModels.Any(ptm => ptm.StructurallyEquals(pageTemplateModel)))
                         {
                             codeModel.PageTemplateModels.Add(pageTemplateModel);
                         }

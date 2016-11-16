@@ -84,18 +84,19 @@ namespace AutoRest.Core.Model
         }
 
         /// <summary>
-        /// Determines whether the specified model type is functionally equal to this object.
+        /// Determines whether the specified model type is structurally equal to this object.
         /// </summary>
         /// <param name="other">The object to compare with this object.</param>
         /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
-        public override bool FunctionallyEquals(IModelType other)
+        public override bool StructurallyEquals(IModelType other)
         {
             if (ReferenceEquals(other as EnumType, null))
             {
                 return false;
             }
 
-            return Values.OrderBy(t => t).SequenceEqual(Values.OrderBy(t => t)) &&
+            return base.StructurallyEquals(other) && 
+                Values.OrderBy(t => t).SequenceEqual(Values.OrderBy(t => t)) &&
                 ModelAsString == (other as EnumType).ModelAsString;
         }
 

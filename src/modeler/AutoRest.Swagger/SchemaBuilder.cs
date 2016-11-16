@@ -181,7 +181,7 @@ namespace AutoRest.Swagger
             while (Modeler.GeneratedTypes.ContainsKey(localName))
             {
                 var existing = Modeler.GeneratedTypes[localName];
-                if (objectType.Name.Equals(existing.Name) && objectType.FunctionallyEquals(existing))
+                if (objectType.StructurallyEquals(existing))
                 {
                     objectType = existing;
                     break;

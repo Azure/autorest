@@ -265,7 +265,7 @@ namespace AutoRest.Swagger
                 foreach (var typeStack in types)
                 {
                     IModelType t = typeStack.Pop();
-                    if (!(t.Name.Equals(currentType.Name) && t.FunctionallyEquals(currentType)))
+                    if (!t.StructurallyEquals(currentType))
                     {
                         return new Response(baseType, headerType);
                     }

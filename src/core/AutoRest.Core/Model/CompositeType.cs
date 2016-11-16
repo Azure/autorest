@@ -193,11 +193,11 @@ namespace AutoRest.Core.Model
         }
 
         /// <summary>
-        /// Determines whether the specified model type is functionally equal to this object.
+        /// Determines whether the specified model type is structurally equal to this object.
         /// </summary>
         /// <param name="other">The object to compare with this object.</param>
         /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
-        public override bool FunctionallyEquals(IModelType other)
+        public override bool StructurallyEquals(IModelType other)
         {
             if (ReferenceEquals(other as CompositeType, null))
             {
@@ -208,10 +208,11 @@ namespace AutoRest.Core.Model
                 return true;
             }
 
-            return ComposedProperties.SequenceEqual((other as CompositeType).ComposedProperties, 
+            return base.StructurallyEquals(other) &&
+                ComposedProperties.SequenceEqual((other as CompositeType).ComposedProperties, 
                 new Utilities.EqualityComparer<Property>((a, b) => 
                     a.Name == b.Name && 
-                    a.ModelType.FunctionallyEquals(b.ModelType) && 
+                    a.ModelType.StructurallyEquals(b.ModelType) && 
                     a.IsReadOnly == b.IsReadOnly && 
                     a.IsConstant == b.IsConstant && 
                     a.IsRequired == b.IsRequired));

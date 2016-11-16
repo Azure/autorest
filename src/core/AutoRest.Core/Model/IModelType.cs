@@ -46,11 +46,11 @@ namespace AutoRest.Core.Model
         string ClassName { get; }
 
         /// <summary>
-        /// Determines whether the specified model type is functionally equal to this object.
+        /// Determines whether the specified model type is structurally equal to this object.
         /// </summary>
         /// <param name="other">The object to compare with this object.</param>
         /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
-        bool FunctionallyEquals(IModelType other);
+        bool StructurallyEquals(IModelType other);
     }
 
     /// <summary>
@@ -136,18 +136,18 @@ namespace AutoRest.Core.Model
         }
 
         /// <summary>
-        /// Determines whether the specified model type is functionally equal to this object.
+        /// Determines whether the specified model type is structurally equal to this object.
         /// </summary>
         /// <param name="other">The object to compare with this object.</param>
         /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
-        public virtual bool FunctionallyEquals(IModelType other)
+        public virtual bool StructurallyEquals(IModelType other)
         {
             if (ReferenceEquals(other, null))
             {
                 return false;
             }
 
-            return GetType() == other.GetType();
+            return GetType() == other.GetType() && Name.Equals(other.Name);
         }
 
         /// <summary>
