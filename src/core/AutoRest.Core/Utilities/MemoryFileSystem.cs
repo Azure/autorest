@@ -204,9 +204,12 @@ namespace AutoRest.Core.Utilities
                 _virtualStore?.Clear();
             }
         }
-        public string GetCurrentDir()
+        public string CurrentDirectory
         {
-            return "";
+            get
+            {
+                return "";
+            }
         }
     }
 }
