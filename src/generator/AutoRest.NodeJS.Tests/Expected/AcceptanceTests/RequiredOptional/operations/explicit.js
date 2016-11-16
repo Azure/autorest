@@ -127,8 +127,8 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -261,8 +261,8 @@ Explicit.prototype.postOptionalIntegerParameter = function (options, callback) {
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -382,8 +382,8 @@ Explicit.prototype.postRequiredIntegerProperty = function (value, options, callb
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -516,8 +516,8 @@ Explicit.prototype.postOptionalIntegerProperty = function (options, callback) {
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -620,8 +620,8 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -738,8 +738,8 @@ Explicit.prototype.postOptionalIntegerHeader = function (options, callback) {
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -859,8 +859,8 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -993,8 +993,8 @@ Explicit.prototype.postOptionalStringParameter = function (options, callback) {
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1114,8 +1114,8 @@ Explicit.prototype.postRequiredStringProperty = function (value, options, callba
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1248,8 +1248,8 @@ Explicit.prototype.postOptionalStringProperty = function (options, callback) {
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1352,8 +1352,8 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1470,8 +1470,8 @@ Explicit.prototype.postOptionalStringHeader = function (options, callback) {
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1589,8 +1589,8 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1713,8 +1713,8 @@ Explicit.prototype.postOptionalClassParameter = function (options, callback) {
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1838,8 +1838,8 @@ Explicit.prototype.postRequiredClassProperty = function (value, options, callbac
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1968,8 +1968,8 @@ Explicit.prototype.postOptionalClassProperty = function (options, callback) {
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -2101,8 +2101,8 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -2246,8 +2246,8 @@ Explicit.prototype.postOptionalArrayParameter = function (options, callback) {
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -2372,8 +2372,8 @@ Explicit.prototype.postRequiredArrayProperty = function (value, options, callbac
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -2510,8 +2510,8 @@ Explicit.prototype.postOptionalArrayProperty = function (options, callback) {
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -2619,8 +2619,8 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -2741,8 +2741,8 @@ Explicit.prototype.postOptionalArrayHeader = function (options, callback) {
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();

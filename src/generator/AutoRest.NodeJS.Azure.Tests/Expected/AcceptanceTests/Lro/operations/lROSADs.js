@@ -1945,10 +1945,9 @@ LROSADs.prototype.beginPutNonRetry400 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -2111,10 +2110,9 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (options, callback) 
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -2277,10 +2275,9 @@ LROSADs.prototype.beginPutNonRetry201Creating400InvalidJson = function (options,
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -2444,10 +2441,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -2568,10 +2564,9 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -2675,10 +2670,9 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -2784,10 +2778,9 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -2914,10 +2907,9 @@ LROSADs.prototype.beginPostNonRetry400 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -3044,10 +3036,9 @@ LROSADs.prototype.beginPost202NonRetry400 = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -3176,10 +3167,9 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (options, callback) 
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -3308,10 +3298,9 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (options
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -3475,10 +3464,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (options, callba
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -3625,10 +3613,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (options,
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -3750,10 +3737,9 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -3859,10 +3845,9 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -3990,10 +3975,9 @@ LROSADs.prototype.beginPost202NoLocation = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -4122,10 +4106,9 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (options, call
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -4254,10 +4237,9 @@ LROSADs.prototype.beginPut200InvalidJson = function (options, callback) {
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -4404,10 +4386,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (options, c
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -4554,10 +4535,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (optio
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -4679,10 +4659,9 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -4787,10 +4766,9 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -4896,10 +4874,9 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -5027,10 +5004,9 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (options, callback) 
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -5159,10 +5135,9 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (options, 
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
@@ -5291,10 +5266,9 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (opti
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();

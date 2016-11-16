@@ -96,8 +96,8 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -203,8 +203,8 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -310,8 +310,8 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = functi
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -417,8 +417,8 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function 
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -525,8 +525,8 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -632,8 +632,8 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -757,8 +757,8 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -882,8 +882,8 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1005,8 +1005,8 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1145,8 +1145,8 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1285,8 +1285,8 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1426,8 +1426,8 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1566,8 +1566,8 @@ MultipleResponses.prototype.get202None204NoneDefaultError202None = function (opt
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1655,8 +1655,8 @@ MultipleResponses.prototype.get202None204NoneDefaultError204None = function (opt
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1745,8 +1745,8 @@ MultipleResponses.prototype.get202None204NoneDefaultError400Valid = function (op
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1834,8 +1834,8 @@ MultipleResponses.prototype.get202None204NoneDefaultNone202Invalid = function (o
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1919,8 +1919,8 @@ MultipleResponses.prototype.get202None204NoneDefaultNone204None = function (opti
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2004,8 +2004,8 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400None = function (opti
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2089,8 +2089,8 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400Invalid = function (o
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2175,8 +2175,8 @@ MultipleResponses.prototype.getDefaultModelA200Valid = function (options, callba
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['A']().mapper();
@@ -2279,8 +2279,8 @@ MultipleResponses.prototype.getDefaultModelA200None = function (options, callbac
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['A']().mapper();
@@ -2383,8 +2383,8 @@ MultipleResponses.prototype.getDefaultModelA400Valid = function (options, callba
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['A']().mapper();
@@ -2487,8 +2487,8 @@ MultipleResponses.prototype.getDefaultModelA400None = function (options, callbac
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['A']().mapper();
@@ -2590,8 +2590,8 @@ MultipleResponses.prototype.getDefaultNone200Invalid = function (options, callba
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2675,8 +2675,8 @@ MultipleResponses.prototype.getDefaultNone200None = function (options, callback)
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2760,8 +2760,8 @@ MultipleResponses.prototype.getDefaultNone400Invalid = function (options, callba
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2845,8 +2845,8 @@ MultipleResponses.prototype.getDefaultNone400None = function (options, callback)
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2932,8 +2932,8 @@ MultipleResponses.prototype.get200ModelA200None = function (options, callback) {
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -3035,8 +3035,8 @@ MultipleResponses.prototype.get200ModelA200Valid = function (options, callback) 
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -3138,8 +3138,8 @@ MultipleResponses.prototype.get200ModelA200Invalid = function (options, callback
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -3242,8 +3242,8 @@ MultipleResponses.prototype.get200ModelA400None = function (options, callback) {
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -3345,8 +3345,8 @@ MultipleResponses.prototype.get200ModelA400Valid = function (options, callback) 
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -3448,8 +3448,8 @@ MultipleResponses.prototype.get200ModelA400Invalid = function (options, callback
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -3551,8 +3551,8 @@ MultipleResponses.prototype.get200ModelA202Valid = function (options, callback) 
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 

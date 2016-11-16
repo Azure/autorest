@@ -152,8 +152,8 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -241,8 +241,8 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -393,8 +393,8 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -482,8 +482,8 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -639,8 +639,8 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -729,8 +729,8 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -868,8 +868,8 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (opt
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1038,8 +1038,8 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
@@ -1250,8 +1250,8 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
         if (parsedErrorResponse) {
           var internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = internalError ? internalError.message : parsedErrorResponse.message;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
