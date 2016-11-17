@@ -8,6 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
+    using AcceptanceTestsBodyComplex;
+    using System.Net.Http;
 
     /// <summary>
     /// Defines values for CMYKColors.

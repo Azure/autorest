@@ -8,6 +8,8 @@
 
 namespace Fixtures.InternalCtors
 {
+    using Newtonsoft.Json;
+    using System.Net.Http;
 
     /// <summary>
     /// A sample API that uses a petstore as an example to demonstrate features

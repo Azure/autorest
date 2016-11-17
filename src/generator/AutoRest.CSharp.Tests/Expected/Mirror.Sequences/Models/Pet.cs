@@ -8,7 +8,13 @@
 
 namespace Fixtures.MirrorSequences.Models
 {
+    using MirrorSequences;
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Pet
     {
@@ -20,7 +26,7 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Initializes a new instance of the Pet class.
         /// </summary>
-        public Pet(long id, string name, System.Collections.Generic.IList<PetStyle> styles = default(System.Collections.Generic.IList<PetStyle>), string tag = default(string))
+        public Pet(long id, string name, IList<PetStyle> styles = default(IList<PetStyle>), string tag = default(string))
         {
             Id = id;
             Name = name;
@@ -41,7 +47,7 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "styles")]
-        public System.Collections.Generic.IList<PetStyle> Styles { get; set; }
+        public IList<PetStyle> Styles { get; set; }
 
         /// <summary>
         /// </summary>
@@ -51,18 +57,18 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Name == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Name");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
             }
-            if (this.Styles != null)
+            if (Styles != null)
             {
-                foreach (var element in this.Styles)
+                foreach (var element in Styles)
                 {
                     if (element != null)
                     {

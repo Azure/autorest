@@ -8,7 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsBodyBoolean.Models
 {
+    using AcceptanceTestsBodyBoolean;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Error
     {

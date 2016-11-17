@@ -8,7 +8,11 @@
 
 namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 {
+    using AcceptanceTestsRequiredOptional;
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class ClassWrapper
     {
@@ -33,18 +37,18 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Value == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Value");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Value");
             }
-            if (this.Value != null)
+            if (Value != null)
             {
-                this.Value.Validate();
+                Value.Validate();
             }
         }
     }

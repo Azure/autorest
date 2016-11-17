@@ -8,12 +8,17 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
+    using AcceptanceTestsModelFlattening;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// Additional parameters for the PutSimpleProductWithGrouping operation.
     /// </summary>
-    [Microsoft.Rest.Serialization.JsonTransformation]
+    [JsonTransformation]
     public partial class FlattenParameterGroup
     {
         /// <summary>
@@ -86,22 +91,22 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Name == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Name");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
             }
             if (ProductId == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "ProductId");
+                throw new ValidationException(ValidationRules.CannotBeNull, "ProductId");
             }
             if (MaxProductDisplayName == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "MaxProductDisplayName");
+                throw new ValidationException(ValidationRules.CannotBeNull, "MaxProductDisplayName");
             }
         }
     }

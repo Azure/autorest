@@ -12,7 +12,7 @@ namespace AutoRest.Core.Utilities
     {
         public void WriteFile(string path, string contents)
         {
-            File.WriteAllText(path, contents, Encoding.UTF8);
+            File.WriteAllText(path, contents, new UTF8Encoding(false, true));
         }
 
         /// <summary>
@@ -108,10 +108,7 @@ namespace AutoRest.Core.Utilities
             return Directory.GetDirectories(startDirectory, filePattern, options);
         }
 
-        public string GetCurrentDir()
-        {
-            return Directory.GetCurrentDirectory();
-        }
+        public string CurrentDirectory => Directory.GetCurrentDirectory();
 
         public string GetParentDir(string path)
         {

@@ -8,8 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsReport
 {
-    using System.Threading.Tasks;
    using Models;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for AutoRestReportService.
@@ -22,9 +26,9 @@ namespace Fixtures.AcceptanceTestsReport
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IDictionary<string, int?> GetReport(this IAutoRestReportService operations)
+            public static IDictionary<string, int?> GetReport(this IAutoRestReportService operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestReportService)s).GetReportAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IAutoRestReportService)s).GetReportAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -36,7 +40,7 @@ namespace Fixtures.AcceptanceTestsReport
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, int?>> GetReportAsync(this IAutoRestReportService operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<IDictionary<string, int?>> GetReportAsync(this IAutoRestReportService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetReportWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

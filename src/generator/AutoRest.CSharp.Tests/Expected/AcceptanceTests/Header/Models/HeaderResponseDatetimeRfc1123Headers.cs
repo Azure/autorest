@@ -8,7 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
+    using AcceptanceTestsHeader;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// Defines headers for responseDatetimeRfc1123 operation.
@@ -36,7 +41,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Gets or sets response with header values "Wed, 01 Jan 2010 12:34:56
         /// GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
         /// </summary>
-        [Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.DateTimeRfc1123JsonConverter))]
+        [Newtonsoft.Json.JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
         [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
         public System.DateTime? Value { get; set; }
 

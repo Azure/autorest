@@ -8,9 +8,13 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 {
-    using System.Threading.Tasks;
+    using Azure;
+    using Microsoft.Rest;
    using Microsoft.Rest.Azure;
    using Models;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for ApiVersionDefaultOperations.
@@ -25,7 +29,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetMethodGlobalValid(this IApiVersionDefaultOperations operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IApiVersionDefaultOperations)s).GetMethodGlobalValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IApiVersionDefaultOperations)s).GetMethodGlobalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -37,7 +41,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetMethodGlobalValidAsync(this IApiVersionDefaultOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task GetMethodGlobalValidAsync(this IApiVersionDefaultOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetMethodGlobalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -50,7 +54,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetMethodGlobalNotProvidedValid(this IApiVersionDefaultOperations operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IApiVersionDefaultOperations)s).GetMethodGlobalNotProvidedValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IApiVersionDefaultOperations)s).GetMethodGlobalNotProvidedValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -62,7 +66,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetMethodGlobalNotProvidedValidAsync(this IApiVersionDefaultOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task GetMethodGlobalNotProvidedValidAsync(this IApiVersionDefaultOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetMethodGlobalNotProvidedValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -75,7 +79,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetPathGlobalValid(this IApiVersionDefaultOperations operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IApiVersionDefaultOperations)s).GetPathGlobalValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IApiVersionDefaultOperations)s).GetPathGlobalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -87,7 +91,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetPathGlobalValidAsync(this IApiVersionDefaultOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task GetPathGlobalValidAsync(this IApiVersionDefaultOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetPathGlobalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -100,7 +104,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetSwaggerGlobalValid(this IApiVersionDefaultOperations operations)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IApiVersionDefaultOperations)s).GetSwaggerGlobalValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IApiVersionDefaultOperations)s).GetSwaggerGlobalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -112,7 +116,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetSwaggerGlobalValidAsync(this IApiVersionDefaultOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task GetSwaggerGlobalValidAsync(this IApiVersionDefaultOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetSwaggerGlobalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }

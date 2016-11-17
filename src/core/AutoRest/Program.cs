@@ -8,6 +8,7 @@ using AutoRest.Core;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
 using AutoRest.Properties;
+using AutoRest.Simplify;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest
@@ -44,6 +45,10 @@ namespace AutoRest
                         else
                         {
                             Core.AutoRestController.Generate();
+                            if (!Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1 )
+                            {
+                                new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
+                            }
                         }
                     }
                     catch (CodeGenerationException)

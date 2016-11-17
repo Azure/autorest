@@ -131,7 +131,7 @@ else
 }
     @(Model.BuildUrl("_url"))
     // Create HTTP transport objects
-    System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+    var _httpRequest = new System.Net.Http.HttpRequestMessage();
     System.Net.Http.HttpResponseMessage _httpResponse = null;
 
     _httpRequest.Method = new System.Net.Http.HttpMethod("@(Model.HttpMethod.ToString().ToUpper())");

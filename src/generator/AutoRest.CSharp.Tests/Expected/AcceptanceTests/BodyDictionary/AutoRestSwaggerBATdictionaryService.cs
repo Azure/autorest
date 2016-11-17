@@ -9,12 +9,18 @@
 namespace Fixtures.AcceptanceTestsBodyDictionary
 {
     using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Models;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Net.Http;
 
     /// <summary>
     /// Test Infrastructure for AutoRest Swagger BAT
     /// </summary>
-    public partial class AutoRestSwaggerBATdictionaryService : Microsoft.Rest.ServiceClient<AutoRestSwaggerBATdictionaryService>, IAutoRestSwaggerBATdictionaryService
+    public partial class AutoRestSwaggerBATdictionaryService : ServiceClient<AutoRestSwaggerBATdictionaryService>, IAutoRestSwaggerBATdictionaryService
     {
         /// <summary>
         /// The base URI of the service.
@@ -44,7 +50,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// </param>
         public AutoRestSwaggerBATdictionaryService(params System.Net.Http.DelegatingHandler[] handlers) : base(handlers)
         {
-            this.Initialize();
+            Initialize();
         }
 
         /// <summary>
@@ -58,7 +64,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// </param>
         public AutoRestSwaggerBATdictionaryService(System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
-            this.Initialize();
+            Initialize();
         }
 
         /// <summary>
@@ -79,7 +85,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             {
                 throw new System.ArgumentNullException("baseUri");
             }
-            this.BaseUri = baseUri;
+            BaseUri = baseUri;
         }
 
         /// <summary>
@@ -103,7 +109,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             {
                 throw new System.ArgumentNullException("baseUri");
             }
-            this.BaseUri = baseUri;
+            BaseUri = baseUri;
         }
 
         /// <summary>
@@ -115,8 +121,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// </summary>
         private void Initialize()
         {
-            this.Dictionary = new Dictionary(this);
-            this.BaseUri = new System.Uri("http://localhost");
+            Dictionary = new Dictionary(this);
+            BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new Newtonsoft.Json.JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,
@@ -124,10 +130,10 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
-                ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver(),
+                ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new  System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
                     {
-                        new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
+                        new Iso8601TimeSpanConverter()
                     }
             };
             DeserializationSettings = new Newtonsoft.Json.JsonSerializerSettings
@@ -136,10 +142,10 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
-                ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver(),
+                ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
                     {
-                        new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
+                        new Iso8601TimeSpanConverter()
                     }
             };
             CustomInitialize();

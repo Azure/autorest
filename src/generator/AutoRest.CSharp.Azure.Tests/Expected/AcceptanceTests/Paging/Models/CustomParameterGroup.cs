@@ -8,7 +8,12 @@
 
 namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 {
+    using Azure;
+    using AcceptanceTestsPaging;
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// Additional parameters for a set of operations, such as:
@@ -48,18 +53,18 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (ApiVersion == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "ApiVersion");
+                throw new ValidationException(ValidationRules.CannotBeNull, "ApiVersion");
             }
             if (Tenant == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Tenant");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Tenant");
             }
         }
     }

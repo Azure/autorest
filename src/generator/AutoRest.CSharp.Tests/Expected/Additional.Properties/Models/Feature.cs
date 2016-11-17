@@ -8,7 +8,10 @@
 
 namespace Fixtures.AdditionalProperties.Models
 {
+    using AdditionalProperties;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Feature
     {

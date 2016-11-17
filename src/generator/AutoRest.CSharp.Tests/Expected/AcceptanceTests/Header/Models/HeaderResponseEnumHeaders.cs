@@ -8,7 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
+    using AcceptanceTestsHeader;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     /// <summary>
     /// Defines headers for responseEnum operation.

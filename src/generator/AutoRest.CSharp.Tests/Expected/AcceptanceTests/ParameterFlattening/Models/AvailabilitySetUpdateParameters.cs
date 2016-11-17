@@ -8,7 +8,13 @@
 
 namespace Fixtures.AcceptanceTestsParameterFlattening.Models
 {
+    using AcceptanceTestsParameterFlattening;
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class AvailabilitySetUpdateParameters
     {
@@ -23,7 +29,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
         /// class.
         /// </summary>
         /// <param name="tags">A set of tags.</param>
-        public AvailabilitySetUpdateParameters(System.Collections.Generic.IDictionary<string, string> tags)
+        public AvailabilitySetUpdateParameters(IDictionary<string, string> tags)
         {
             Tags = tags;
         }
@@ -35,19 +41,19 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
         /// A description about the set of tags.
         /// </remarks>
         [Newtonsoft.Json.JsonProperty(PropertyName = "tags")]
-        public System.Collections.Generic.IDictionary<string, string> Tags { get; set; }
+        public IDictionary<string, string> Tags { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Tags == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Tags");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Tags");
             }
         }
     }

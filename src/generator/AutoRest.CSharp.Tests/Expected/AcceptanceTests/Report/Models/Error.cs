@@ -8,7 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsReport.Models
 {
+    using AcceptanceTestsReport;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Error
     {

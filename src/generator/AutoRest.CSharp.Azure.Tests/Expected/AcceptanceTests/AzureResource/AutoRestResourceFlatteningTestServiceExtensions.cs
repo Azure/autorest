@@ -8,9 +8,15 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureResource
 {
-    using System.Threading.Tasks;
+    using Azure;
+    using Microsoft.Rest;
    using Microsoft.Rest.Azure;
    using Models;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for AutoRestResourceFlatteningTestService.
@@ -27,9 +33,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='resourceArray'>
             /// External Resource as an Array to put
             /// </param>
-            public static void PutArray(this IAutoRestResourceFlatteningTestService operations, System.Collections.Generic.IList<Resource> resourceArray = default(System.Collections.Generic.IList<Resource>))
+            public static void PutArray(this IAutoRestResourceFlatteningTestService operations, IList<Resource> resourceArray = default(IList<Resource>))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutArrayAsync(resourceArray), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutArrayAsync(resourceArray), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -45,7 +51,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutArrayAsync(this IAutoRestResourceFlatteningTestService operations, System.Collections.Generic.IList<Resource> resourceArray = default(System.Collections.Generic.IList<Resource>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutArrayAsync(this IAutoRestResourceFlatteningTestService operations, IList<Resource> resourceArray = default(IList<Resource>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutArrayWithHttpMessagesAsync(resourceArray, null, cancellationToken).ConfigureAwait(false);
             }
@@ -57,9 +63,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<FlattenedProduct> GetArray(this IAutoRestResourceFlatteningTestService operations)
+            public static IList<FlattenedProduct> GetArray(this IAutoRestResourceFlatteningTestService operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).GetArrayAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).GetArrayAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -72,7 +78,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<FlattenedProduct>> GetArrayAsync(this IAutoRestResourceFlatteningTestService operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<IList<FlattenedProduct>> GetArrayAsync(this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetArrayWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -90,9 +96,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='resourceDictionary'>
             /// External Resource as a Dictionary to put
             /// </param>
-            public static void PutDictionary(this IAutoRestResourceFlatteningTestService operations, System.Collections.Generic.IDictionary<string, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<string, FlattenedProduct>))
+            public static void PutDictionary(this IAutoRestResourceFlatteningTestService operations, IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutDictionaryAsync(resourceDictionary), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutDictionaryAsync(resourceDictionary), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -108,7 +114,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutDictionaryAsync(this IAutoRestResourceFlatteningTestService operations, System.Collections.Generic.IDictionary<string, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<string, FlattenedProduct>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutDictionaryAsync(this IAutoRestResourceFlatteningTestService operations, IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutDictionaryWithHttpMessagesAsync(resourceDictionary, null, cancellationToken).ConfigureAwait(false);
             }
@@ -120,9 +126,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IDictionary<string, FlattenedProduct> GetDictionary(this IAutoRestResourceFlatteningTestService operations)
+            public static IDictionary<string, FlattenedProduct> GetDictionary(this IAutoRestResourceFlatteningTestService operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).GetDictionaryAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).GetDictionaryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -135,7 +141,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, FlattenedProduct>> GetDictionaryAsync(this IAutoRestResourceFlatteningTestService operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<IDictionary<string, FlattenedProduct>> GetDictionaryAsync(this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDictionaryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -155,7 +161,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// </param>
             public static void PutResourceCollection(this IAutoRestResourceFlatteningTestService operations, ResourceCollection resourceComplexObject = default(ResourceCollection))
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutResourceCollectionAsync(resourceComplexObject), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutResourceCollectionAsync(resourceComplexObject), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -171,7 +177,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutResourceCollectionAsync(this IAutoRestResourceFlatteningTestService operations, ResourceCollection resourceComplexObject = default(ResourceCollection), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task PutResourceCollectionAsync(this IAutoRestResourceFlatteningTestService operations, ResourceCollection resourceComplexObject = default(ResourceCollection), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutResourceCollectionWithHttpMessagesAsync(resourceComplexObject, null, cancellationToken).ConfigureAwait(false);
             }
@@ -185,7 +191,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// </param>
             public static ResourceCollection GetResourceCollection(this IAutoRestResourceFlatteningTestService operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).GetResourceCollectionAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).GetResourceCollectionAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -198,7 +204,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<ResourceCollection> GetResourceCollectionAsync(this IAutoRestResourceFlatteningTestService operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<ResourceCollection> GetResourceCollectionAsync(this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetResourceCollectionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

@@ -8,7 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
+    using AcceptanceTestsBodyComplex;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
 
     [Newtonsoft.Json.JsonObject("salmon")]
     public partial class Salmon : Fish
@@ -21,7 +26,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Salmon class.
         /// </summary>
-        public Salmon(double length, string species = default(string), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>), string location = default(string), bool? iswild = default(bool?))
+        public Salmon(double length, string species = default(string), IList<Fish> siblings = default(IList<Fish>), string location = default(string), bool? iswild = default(bool?))
             : base(length, species, siblings)
         {
             Location = location;

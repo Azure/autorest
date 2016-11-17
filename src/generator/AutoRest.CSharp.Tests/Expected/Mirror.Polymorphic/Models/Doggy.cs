@@ -8,7 +8,10 @@
 
 namespace Fixtures.MirrorPolymorphic.Models
 {
+    using MirrorPolymorphic;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class Doggy : Animal
     {

@@ -8,7 +8,13 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 {
+    using Azure;
+    using AcceptanceTestsAzureResource;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class ResourceCollection
     {
@@ -20,7 +26,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <summary>
         /// Initializes a new instance of the ResourceCollection class.
         /// </summary>
-        public ResourceCollection(FlattenedProduct productresource = default(FlattenedProduct), System.Collections.Generic.IList<FlattenedProduct> arrayofresources = default(System.Collections.Generic.IList<FlattenedProduct>), System.Collections.Generic.IDictionary<string, FlattenedProduct> dictionaryofresources = default(System.Collections.Generic.IDictionary<string, FlattenedProduct>))
+        public ResourceCollection(FlattenedProduct productresource = default(FlattenedProduct), IList<FlattenedProduct> arrayofresources = default(IList<FlattenedProduct>), IDictionary<string, FlattenedProduct> dictionaryofresources = default(IDictionary<string, FlattenedProduct>))
         {
             Productresource = productresource;
             Arrayofresources = arrayofresources;
@@ -35,12 +41,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "arrayofresources")]
-        public System.Collections.Generic.IList<FlattenedProduct> Arrayofresources { get; set; }
+        public IList<FlattenedProduct> Arrayofresources { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "dictionaryofresources")]
-        public System.Collections.Generic.IDictionary<string, FlattenedProduct> Dictionaryofresources { get; set; }
+        public IDictionary<string, FlattenedProduct> Dictionaryofresources { get; set; }
 
     }
 }

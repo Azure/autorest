@@ -8,6 +8,13 @@
 
 namespace Fixtures.MirrorPolymorphic.Models
 {
+    using MirrorPolymorphic;
+    using Microsoft.Rest;
+    using System.Net.Http;
+    using System.Runtime;
+    using System.Runtime.Serialization;
+    using System.Security;
+    using System.Security.Permissions;
 
     /// <summary>
     /// Exception thrown for an invalid response with Error2 information.
@@ -15,17 +22,17 @@ namespace Fixtures.MirrorPolymorphic.Models
 #if !PORTABLE 
     [System.Serializable]
 #endif
-    public class Error2Exception : Microsoft.Rest.RestException
+    public class Error2Exception : RestException
     {
         /// <summary>
         /// Gets information about the associated HTTP request.
         /// </summary>
-        public Microsoft.Rest.HttpRequestMessageWrapper Request { get; set; }
+        public HttpRequestMessageWrapper Request { get; set; }
 
         /// <summary>
         /// Gets information about the associated HTTP response.
         /// </summary>
-        public Microsoft.Rest.HttpResponseMessageWrapper Response { get; set; }
+        public HttpResponseMessageWrapper Response { get; set; }
 
         /// <summary>
         /// Gets or sets the body object.
@@ -64,7 +71,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>
-        protected Error2Exception(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+        protected Error2Exception(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
@@ -77,8 +84,8 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
             if (info == null)

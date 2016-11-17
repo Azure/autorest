@@ -8,9 +8,15 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
+    using Azure;
+    using AcceptanceTestsLro;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Azure;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
-    public partial class SubResource : Microsoft.Rest.Azure.IResource
+    public partial class SubResource : IResource
     {
         /// <summary>
         /// Initializes a new instance of the SubResource class.

@@ -8,7 +8,10 @@
 
 namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 {
+    using AcceptanceTestsRequiredOptional;
+    using Newtonsoft.Json;
     using System.Linq;
+    using System.Net.Http;
 
     public partial class ClassOptionalWrapper
     {
@@ -38,9 +41,9 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// </exception>
         public virtual void Validate()
         {
-            if (this.Value != null)
+            if (Value != null)
             {
-                this.Value.Validate();
+                Value.Validate();
             }
         }
     }
