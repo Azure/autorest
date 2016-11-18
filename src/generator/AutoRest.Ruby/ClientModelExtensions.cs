@@ -728,12 +728,6 @@ namespace AutoRest.Ruby
                     var prop = composedPropertyList[i];
                     var serializedPropertyName = prop.SerializedName.Value;
 
-                    // This is a temporary fix until ms_rest serializtion client > 0.6.0 is released.
-                    if (serializedPropertyName == "odata.nextLink")
-                    {
-                        serializedPropertyName = "odata\\\\.nextLink";
-                    }
-
                     if (i != composedPropertyList.Count - 1)
                     {
                         builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.ModelType.ConstructMapper(serializedPropertyName, prop, false));
