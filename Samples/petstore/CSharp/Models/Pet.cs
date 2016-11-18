@@ -1,6 +1,10 @@
 
 namespace Petstore.Models
 {
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -22,7 +26,7 @@ namespace Petstore.Models
         /// <param name="id">The id of the pet.</param>
         /// <param name="status">pet status in the store. Possible values
         /// include: 'available', 'pending', 'sold'</param>
-        public Pet(string name, System.Collections.Generic.IList<string> photoUrls, long? id = default(long?), Category category = default(Category), System.Collections.Generic.IList<Tag> tags = default(System.Collections.Generic.IList<Tag>), string status = default(string))
+        public Pet(string name, IList<string> photoUrls, long? id = default(long?), Category category = default(Category), IList<Tag> tags = default(IList<Tag>), string status = default(string))
         {
             Id = id;
             Category = category;
@@ -38,52 +42,53 @@ namespace Petstore.Models
         /// <remarks>
         /// A more detailed description of the id of the pet.
         /// </remarks>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
+        [JsonProperty(PropertyName = "id")]
         public long? Id { get; set; }
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "category")]
+        [JsonProperty(PropertyName = "category")]
         public Category Category { get; set; }
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "photoUrls")]
-        public System.Collections.Generic.IList<string> PhotoUrls { get; set; }
+        [JsonProperty(PropertyName = "photoUrls")]
+        public IList<string> PhotoUrls { get; set; }
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "tags")]
-        public System.Collections.Generic.IList<Tag> Tags { get; set; }
+        [JsonProperty(PropertyName = "tags")]
+        public IList<Tag> Tags { get; set; }
 
         /// <summary>
         /// Gets or sets pet status in the store. Possible values include:
         /// 'available', 'pending', 'sold'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
+        [JsonProperty(PropertyName = "status")]
         public string Status { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Name == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Name");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
             }
             if (PhotoUrls == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "PhotoUrls");
+                throw new ValidationException(ValidationRules.CannotBeNull, "PhotoUrls");
             }
         }
     }
 }
+
