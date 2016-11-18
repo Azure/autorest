@@ -3,6 +3,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 
@@ -12,7 +13,23 @@ namespace AutoRest.Core.Utilities
     {
         public void WriteFile(string path, string contents)
         {
-            File.WriteAllText(path, contents, new UTF8Encoding(false, true));
+            var eol = path.LineEnding();
+            var lines = contents.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            if (File.Exists(path))
+            {
+                var mvname = $"{path}_{new Random().Next(999999)}";
+                File.Move(path,mvname);
+                File.Delete(mvname);
+            }
+            // write out the file, with correct line endings for file.
+            using (var writer = GetTextWriter(path))
+            {
+                foreach (var line in lines)
+                {
+                    writer.Write(line);
+                    writer.Write(eol);
+                }
+            }
         }
 
         /// <summary>
@@ -53,13 +70,8 @@ namespace AutoRest.Core.Utilities
             {
                 return File.AppendText(path);
             }
-            return File.CreateText(path);
-#if FORCE_UTF8_BOM
-            // existing ARS files have utf8withbom. 
-            // only necessary for some weird manual testing :D
-            var utf8WithBom = new System.Text.UTF8Encoding(true);
-            return new StreamWriter(path, false, utf8WithBom);
-#endif            
+            // ensure that we're being very very explicit: NO BYTE ORDER MARK. 
+            return new StreamWriter(path, false, new UTF8Encoding(false, true));
         }
 
         public bool FileExists(string path)
