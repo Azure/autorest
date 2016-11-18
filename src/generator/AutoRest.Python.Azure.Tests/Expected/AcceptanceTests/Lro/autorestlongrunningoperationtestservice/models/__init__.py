@@ -14,8 +14,8 @@ from .sku import Sku
 from .product import Product
 from .sub_product import SubProduct
 from .sub_resource import SubResource
-from .operation_result import OperationResult
 from .operation_result_error import OperationResultError
+from .operation_result import OperationResult
 
 __all__ = [
     'Resource',
@@ -23,6 +23,6 @@ __all__ = [
     'Product',
     'SubProduct',
     'SubResource',
-    'OperationResult',
     'OperationResultError',
+    'OperationResult',
 ]

@@ -17,7 +17,7 @@ class ByteWrapper(Model):
 
     :param field:
     :type field: bytearray
-    """ 
+    """
 
     _attribute_map = {
         'field': {'key': 'field', 'type': 'bytearray'},

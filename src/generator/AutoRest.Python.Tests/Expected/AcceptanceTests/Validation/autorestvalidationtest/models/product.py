@@ -40,7 +40,7 @@ class Product(Model):
      include: 'constant_string_as_enum'
     :type const_string_as_enum: str or :class:`EnumConst
      <fixtures.acceptancetestsvalidation.models.EnumConst>`
-    """ 
+    """
 
     _validation = {
         'display_names': {'max_items': 6, 'min_items': 0, 'unique': True},

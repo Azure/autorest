@@ -1541,7 +1541,7 @@ class LROsOperations(object):
     def delete_provisioning202_accepted200_succeeded(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request, with an entity that contains ProvisioningState=’Accepted’. 
+        request, with an entity that contains ProvisioningState=’Accepted’.
         Polls return this value until the last poll returns a ‘200’ with
         ProvisioningState=’Succeeded’.
 
@@ -1630,7 +1630,7 @@ class LROsOperations(object):
     def delete_provisioning202_deleting_failed200(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’. 
+        request, with an entity that contains ProvisioningState=’Creating’.
         Polls return this value until the last poll returns a ‘200’ with
         ProvisioningState=’Failed’.
 
@@ -1719,7 +1719,7 @@ class LROsOperations(object):
     def delete_provisioning202_deletingcanceled200(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’. 
+        request, with an entity that contains ProvisioningState=’Creating’.
         Polls return this value until the last poll returns a ‘200’ with
         ProvisioningState=’Canceled’.
 

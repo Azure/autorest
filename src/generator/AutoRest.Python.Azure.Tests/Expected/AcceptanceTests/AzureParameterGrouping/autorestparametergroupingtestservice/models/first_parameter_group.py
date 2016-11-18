@@ -21,7 +21,7 @@ class FirstParameterGroup(Model):
     :type header_one: str
     :param query_one: Query parameter with default. Default value: 30 .
     :type query_one: int
-    """ 
+    """
 
     def __init__(self, header_one=None, query_one=30):
         self.header_one = header_one

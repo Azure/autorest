@@ -26,7 +26,7 @@ class Basic(Model):
      'blacK'
     :type color: str or :class:`CMYKColors
      <fixtures.acceptancetestsbodycomplex.models.CMYKColors>`
-    """ 
+    """
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},

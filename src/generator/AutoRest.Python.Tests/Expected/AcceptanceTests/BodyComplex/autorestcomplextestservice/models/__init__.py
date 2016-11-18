@@ -12,8 +12,8 @@
 from .error import Error, ErrorException
 from .basic import Basic
 from .pet import Pet
-from .cat import Cat
 from .dog import Dog
+from .cat import Cat
 from .siamese import Siamese
 from .fish import Fish
 from .salmon import Salmon
@@ -43,8 +43,8 @@ __all__ = [
     'Error', 'ErrorException',
     'Basic',
     'Pet',
-    'Cat',
     'Dog',
+    'Cat',
     'Siamese',
     'Fish',
     'Salmon',

@@ -28,7 +28,7 @@ class Salmon(Fish):
     :type location: str
     :param iswild:
     :type iswild: bool
-    """ 
+    """
 
     _validation = {
         'length': {'required': True},

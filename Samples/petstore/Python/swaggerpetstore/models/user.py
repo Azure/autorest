@@ -24,7 +24,7 @@ class User(Model):
     :type phone: str
     :param user_status: User Status
     :type user_status: int
-    """ 
+    """
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'long'},

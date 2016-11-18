@@ -23,7 +23,7 @@ class ParameterGroupingPostRequiredParameters(Model):
     :type query: int
     :param path: Path parameter
     :type path: str
-    """ 
+    """
 
     _validation = {
         'body': {'required': True},

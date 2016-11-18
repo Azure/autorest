@@ -12,7 +12,7 @@ class StorageAccountCheckNameAvailabilityParameters(Model):
     :type name: str
     :param type:  Default value: "Microsoft.Storage/storageAccounts" .
     :type type: str
-    """ 
+    """
 
     _validation = {
         'name': {'required': True},

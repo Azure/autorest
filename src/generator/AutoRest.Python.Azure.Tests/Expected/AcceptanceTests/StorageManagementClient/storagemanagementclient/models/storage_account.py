@@ -80,7 +80,7 @@ class StorageAccount(Resource):
      StandardRAGRS.
     :type secondary_endpoints: :class:`Endpoints
      <fixtures.acceptancetestsstoragemanagementclient.models.Endpoints>`
-    """ 
+    """
 
     _validation = {
         'id': {'readonly': True},

@@ -17,7 +17,7 @@ class IntWrapper(Model):
 
     :param value:
     :type value: int
-    """ 
+    """
 
     _validation = {
         'value': {'required': True},

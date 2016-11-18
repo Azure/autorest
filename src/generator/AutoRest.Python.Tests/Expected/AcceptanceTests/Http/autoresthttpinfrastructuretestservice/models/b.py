@@ -19,7 +19,7 @@ class B(A):
     :type status_code: str
     :param text_status_code:
     :type text_status_code: str
-    """ 
+    """
 
     _attribute_map = {
         'status_code': {'key': 'statusCode', 'type': 'str'},

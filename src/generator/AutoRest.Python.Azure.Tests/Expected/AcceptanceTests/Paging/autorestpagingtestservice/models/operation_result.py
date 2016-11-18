@@ -19,7 +19,7 @@ class OperationResult(Model):
      'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
      'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
     :type status: str
-    """ 
+    """
 
     _attribute_map = {
         'status': {'key': 'status', 'type': 'str'},
