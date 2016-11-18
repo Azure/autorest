@@ -9,6 +9,6 @@
 
 exports.User = require('./user');
 exports.Category = require('./category');
-exports.Pet = require('./pet');
 exports.Tag = require('./tag');
+exports.Pet = require('./pet');
 exports.Order = require('./order');

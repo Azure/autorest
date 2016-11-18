@@ -8,21 +8,21 @@
  * Initializes a new instance of the User class.
  * @constructor
  * @member {number} [id]
- * 
+ *
  * @member {string} [username]
- * 
+ *
  * @member {string} [firstName]
- * 
+ *
  * @member {string} [lastName]
- * 
+ *
  * @member {string} [email]
- * 
+ *
  * @member {string} [password]
- * 
+ *
  * @member {string} [phone]
- * 
+ *
  * @member {number} [userStatus] User Status
- * 
+ *
  */
 function User() {
 }
