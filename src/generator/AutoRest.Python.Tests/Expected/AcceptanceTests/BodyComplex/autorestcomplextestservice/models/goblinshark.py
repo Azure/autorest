@@ -30,7 +30,7 @@ class Goblinshark(Shark):
     :type birthday: datetime
     :param jawsize:
     :type jawsize: int
-    """ 
+    """
 
     _validation = {
         'length': {'required': True},

@@ -24,7 +24,7 @@ class Fish(Model):
      <fixtures.acceptancetestsbodycomplex.models.Fish>`
     :param fishtype: Polymorphic Discriminator
     :type fishtype: str
-    """ 
+    """
 
     _validation = {
         'length': {'required': True},

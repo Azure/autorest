@@ -76,7 +76,7 @@ namespace AutoRest.Simplify
                     var newRoot = await document.GetSyntaxRootAsync();
 
                     // get the namespaces used in the file
-                    var names = new GetQualifiedNames().GetNames(newRoot).Concat(new[] {"System.Net.Http"});
+                    var names = new GetQualifiedNames().GetNames(newRoot);
 
                     // add the usings that we found
                     newRoot = new AddUsingsRewriter(names).Visit(newRoot);
@@ -92,9 +92,20 @@ namespace AutoRest.Simplify
                         // get rid of any BOMs 
                         .Trim('\x00EF', '\x00BB', '\x00BF', '\uFEFF', '\u200B');
 
-                    // Write out the files back to their original location
-                    var output = Path.Combine(Settings.Instance.FileSystem.CurrentDirectory, document.Name);
-                    Settings.Instance.FileSystem.WriteFile(output, text);
+
+                    // special cases the simplifier can't handle.
+                    text = text.
+                        Replace("[Newtonsoft.Json.JsonConverter(", "[JsonConverter(").
+                        Replace("[System.Runtime.Serialization.EnumMember(", "[EnumMember(").
+                        Replace("[Newtonsoft.Json.JsonProperty(", "[JsonProperty(").
+                        Replace("[Newtonsoft.Json.JsonProperty]", "[JsonProperty]").
+                        Replace("[Newtonsoft.Json.JsonObject]", "[JsonObject]").
+                        Replace("[Microsoft.Rest.Serialization.JsonTransformation]", "[JsonTransformation]").
+                        Replace("[Newtonsoft.Json.JsonExtensionData]", "[JsonExtensionData]");
+
+                        // Write out the files back to their original location
+                        var output = Path.Combine(Settings.Instance.FileSystem.CurrentDirectory, document.Name);
+                        Settings.Instance.FileSystem.WriteFile(output, text);
                 }
             }
         }

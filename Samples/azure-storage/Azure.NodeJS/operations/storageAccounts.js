@@ -28,16 +28,16 @@ function StorageAccounts(client) {
  * @param {object} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
- * 
+ *
  * @param {string} accountName.name
- * 
+ *
  * @param {string} [accountName.type]
- * 
+ *
  * @param {object} [options] Optional Parameters.
- * 
+ *
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- * 
+ *
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -119,7 +119,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
         'payload - "%s"', error.message, util.inspect(accountName, {depth: null})));
     return callback(serializationError);
   }
@@ -149,7 +149,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
                          '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
@@ -190,29 +190,29 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
  *
  * @param {string} resourceGroupName The name of the resource group within the
  * user's subscription.
- * 
+ *
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
- * 
+ *
  * @param {object} parameters The parameters to provide for the created
  * account.
- * 
+ *
  * @param {string} parameters.location Resource location
- * 
+ *
  * @param {object} [parameters.tags] Resource tags
- * 
+ *
  * @param {object} [parameters.properties]
- * 
+ *
  * @param {string} parameters.properties.accountType Gets or sets the account
  * type. Possible values include: 'Standard_LRS', 'Standard_ZRS',
  * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
- * 
+ *
  * @param {object} [options] Optional Parameters.
- * 
+ *
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- * 
+ *
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -281,16 +281,16 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
  *
  * @param {string} resourceGroupName The name of the resource group within the
  * user's subscription.
- * 
+ *
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
- * 
+ *
  * @param {object} [options] Optional Parameters.
- * 
+ *
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- * 
+ *
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -392,12 +392,13 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
                          '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
@@ -418,16 +419,16 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
  *
  * @param {string} resourceGroupName The name of the resource group within the
  * user's subscription.
- * 
+ *
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
- * 
+ *
  * @param {object} [options] Optional Parameters.
- * 
+ *
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- * 
+ *
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -539,7 +540,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
                          '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
@@ -586,41 +587,41 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
  *
  * @param {string} resourceGroupName The name of the resource group within the
  * user's subscription.
- * 
+ *
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
- * 
+ *
  * @param {object} parameters The parameters to update on the account. Note
  * that only one property can be changed at a time using this API.
- * 
+ *
  * @param {object} [parameters.tags] Resource tags
- * 
+ *
  * @param {object} [parameters.properties]
- * 
+ *
  * @param {string} [parameters.properties.accountType] Gets or sets the account
  * type. Note that StandardZRS and PremiumLRS accounts cannot be changed to
  * other account types, and other account types cannot be changed to
  * StandardZRS or PremiumLRS. Possible values include: 'Standard_LRS',
  * 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
- * 
+ *
  * @param {object} [parameters.properties.customDomain] User domain assigned to
  * the storage account. Name is the CNAME source. Only one custom domain is
  * supported per storage account at this time. To clear the existing custom
  * domain, use an empty string for the custom domain name property.
- * 
+ *
  * @param {string} parameters.properties.customDomain.name Gets or sets the
  * custom domain name. Name is the CNAME source.
- * 
+ *
  * @param {boolean} [parameters.properties.customDomain.useSubDomain] Indicates
  * whether indirect CName validation is enabled. Default value is false. This
  * should only be set on updates
- * 
+ *
  * @param {object} [options] Optional Parameters.
- * 
+ *
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- * 
+ *
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -719,7 +720,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
         'payload - "%s"', error.message, util.inspect(parameters, {depth: null})));
     return callback(serializationError);
   }
@@ -749,7 +750,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
                          '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
@@ -784,14 +785,14 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
  * Lists the access keys for the specified storage account.
  *
  * @param {string} resourceGroupName The name of the resource group.
- * 
+ *
  * @param {string} accountName The name of the storage account.
- * 
+ *
  * @param {object} [options] Optional Parameters.
- * 
+ *
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- * 
+ *
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -903,7 +904,7 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
                          '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
@@ -939,10 +940,10 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
  * storage keys are not returned; use the ListKeys operation for this.
  *
  * @param {object} [options] Optional Parameters.
- * 
+ *
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- * 
+ *
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1037,7 +1038,7 @@ StorageAccounts.prototype.list = function (options, callback) {
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
                          '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
@@ -1075,12 +1076,12 @@ StorageAccounts.prototype.list = function (options, callback) {
  *
  * @param {string} resourceGroupName The name of the resource group within the
  * user's subscription.
- * 
+ *
  * @param {object} [options] Optional Parameters.
- * 
+ *
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- * 
+ *
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1179,7 +1180,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
                          '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
@@ -1215,21 +1216,21 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
  *
  * @param {string} resourceGroupName The name of the resource group within the
  * user's subscription.
- * 
+ *
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
- * 
+ *
  * @param {object} regenerateKeyParameter Specifies name of the key which
  * should be regenerated. key1 or key2 for the default keys
- * 
+ *
  * @param {string} regenerateKeyParameter.keyName
- * 
+ *
  * @param {object} [options] Optional Parameters.
- * 
+ *
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- * 
+ *
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1328,7 +1329,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
         'payload - "%s"', error.message, util.inspect(regenerateKeyParameter, {depth: null})));
     return callback(serializationError);
   }
@@ -1358,7 +1359,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
                          '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
@@ -1398,29 +1399,29 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
  *
  * @param {string} resourceGroupName The name of the resource group within the
  * user's subscription.
- * 
+ *
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
- * 
+ *
  * @param {object} parameters The parameters to provide for the created
  * account.
- * 
+ *
  * @param {string} parameters.location Resource location
- * 
+ *
  * @param {object} [parameters.tags] Resource tags
- * 
+ *
  * @param {object} [parameters.properties]
- * 
+ *
  * @param {string} parameters.properties.accountType Gets or sets the account
  * type. Possible values include: 'Standard_LRS', 'Standard_ZRS',
  * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
- * 
+ *
  * @param {object} [options] Optional Parameters.
- * 
+ *
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- * 
+ *
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1519,7 +1520,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
         'payload - "%s"', error.message, util.inspect(parameters, {depth: null})));
     return callback(serializationError);
   }
@@ -1549,7 +1550,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
                          '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }

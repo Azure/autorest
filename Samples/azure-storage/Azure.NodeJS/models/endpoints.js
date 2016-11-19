@@ -11,13 +11,13 @@
  * table object.
  *
  * @member {string} [blob] Gets the blob endpoint.
- * 
+ *
  * @member {string} [queue] Gets the queue endpoint.
- * 
+ *
  * @member {string} [table] Gets the table endpoint.
- * 
+ *
  * @member {string} [file] Gets the file endpoint.
- * 
+ *
  */
 function Endpoints() {
 }

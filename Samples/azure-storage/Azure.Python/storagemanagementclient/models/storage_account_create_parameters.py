@@ -15,7 +15,7 @@ class StorageAccountCreateParameters(Model):
     :param properties:
     :type properties: :class:`StorageAccountPropertiesCreateParameters
      <petstore.models.StorageAccountPropertiesCreateParameters>`
-    """ 
+    """
 
     _validation = {
         'location': {'required': True},

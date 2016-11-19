@@ -1,6 +1,7 @@
 
 namespace Petstore.Models
 {
+    using Newtonsoft.Json;
     using System.Linq;
 
     public partial class Order
@@ -27,35 +28,36 @@ namespace Petstore.Models
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public long? Id { get; private set; }
+        [JsonProperty(PropertyName = "id")]
+        public long? Id { get; protected set; }
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "petId")]
+        [JsonProperty(PropertyName = "petId")]
         public long? PetId { get; set; }
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "quantity")]
+        [JsonProperty(PropertyName = "quantity")]
         public int? Quantity { get; set; }
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "shipDate")]
+        [JsonProperty(PropertyName = "shipDate")]
         public System.DateTime? ShipDate { get; set; }
 
         /// <summary>
         /// Gets or sets order Status. Possible values include: 'placed',
         /// 'approved', 'delivered'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
+        [JsonProperty(PropertyName = "status")]
         public string Status { get; set; }
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "complete")]
+        [JsonProperty(PropertyName = "complete")]
         public bool? Complete { get; set; }
 
     }
 }
+

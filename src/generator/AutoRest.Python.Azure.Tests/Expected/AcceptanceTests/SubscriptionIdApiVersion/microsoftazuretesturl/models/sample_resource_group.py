@@ -19,7 +19,7 @@ class SampleResourceGroup(Model):
     :type name: str
     :param location: resource group location 'West US'
     :type location: str
-    """ 
+    """
 
     _attribute_map = {
         'name': {'key': 'name', 'type': 'str'},

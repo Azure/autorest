@@ -24,7 +24,7 @@ class Order(Model):
     :type status: str
     :param complete:
     :type complete: bool
-    """ 
+    """
 
     _validation = {
         'id': {'readonly': True},

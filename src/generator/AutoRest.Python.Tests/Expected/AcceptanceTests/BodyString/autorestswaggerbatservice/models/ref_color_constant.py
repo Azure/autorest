@@ -23,7 +23,7 @@ class RefColorConstant(Model):
     :vartype color_constant: str
     :param field1: Sample string.
     :type field1: str
-    """ 
+    """
 
     _validation = {
         'color_constant': {'required': True, 'constant': True},

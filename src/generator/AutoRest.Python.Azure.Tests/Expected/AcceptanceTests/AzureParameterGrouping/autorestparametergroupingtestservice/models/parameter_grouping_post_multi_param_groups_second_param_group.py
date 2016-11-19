@@ -20,7 +20,7 @@ class ParameterGroupingPostMultiParamGroupsSecondParamGroup(Model):
     :type header_two: str
     :param query_two: Query parameter with default. Default value: 30 .
     :type query_two: int
-    """ 
+    """
 
     def __init__(self, header_two=None, query_two=30):
         self.header_two = header_two

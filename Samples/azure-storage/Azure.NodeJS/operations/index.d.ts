@@ -19,16 +19,16 @@ export interface StorageAccounts {
      * @param {object} accountName The name of the storage account within the
      * specified resource group. Storage account names must be between 3 and 24
      * characters in length and use numbers and lower-case letters only.
-     * 
+     *
      * @param {string} accountName.name
-     * 
+     *
      * @param {string} [accountName.type]
-     * 
+     *
      * @param {object} [options] Optional Parameters.
-     * 
+     *
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     * 
+     *
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -44,29 +44,29 @@ export interface StorageAccounts {
      *
      * @param {string} resourceGroupName The name of the resource group within the
      * user's subscription.
-     * 
+     *
      * @param {string} accountName The name of the storage account within the
      * specified resource group. Storage account names must be between 3 and 24
      * characters in length and use numbers and lower-case letters only.
-     * 
+     *
      * @param {object} parameters The parameters to provide for the created
      * account.
-     * 
+     *
      * @param {string} parameters.location Resource location
-     * 
+     *
      * @param {object} [parameters.tags] Resource tags
-     * 
+     *
      * @param {object} [parameters.properties]
-     * 
+     *
      * @param {string} parameters.properties.accountType Gets or sets the account
      * type. Possible values include: 'Standard_LRS', 'Standard_ZRS',
      * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
-     * 
+     *
      * @param {object} [options] Optional Parameters.
-     * 
+     *
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     * 
+     *
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -78,16 +78,16 @@ export interface StorageAccounts {
      *
      * @param {string} resourceGroupName The name of the resource group within the
      * user's subscription.
-     * 
+     *
      * @param {string} accountName The name of the storage account within the
      * specified resource group. Storage account names must be between 3 and 24
      * characters in length and use numbers and lower-case letters only.
-     * 
+     *
      * @param {object} [options] Optional Parameters.
-     * 
+     *
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     * 
+     *
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -101,16 +101,16 @@ export interface StorageAccounts {
      *
      * @param {string} resourceGroupName The name of the resource group within the
      * user's subscription.
-     * 
+     *
      * @param {string} accountName The name of the storage account within the
      * specified resource group. Storage account names must be between 3 and 24
      * characters in length and use numbers and lower-case letters only.
-     * 
+     *
      * @param {object} [options] Optional Parameters.
-     * 
+     *
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     * 
+     *
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -133,41 +133,41 @@ export interface StorageAccounts {
      *
      * @param {string} resourceGroupName The name of the resource group within the
      * user's subscription.
-     * 
+     *
      * @param {string} accountName The name of the storage account within the
      * specified resource group. Storage account names must be between 3 and 24
      * characters in length and use numbers and lower-case letters only.
-     * 
+     *
      * @param {object} parameters The parameters to update on the account. Note
      * that only one property can be changed at a time using this API.
-     * 
+     *
      * @param {object} [parameters.tags] Resource tags
-     * 
+     *
      * @param {object} [parameters.properties]
-     * 
+     *
      * @param {string} [parameters.properties.accountType] Gets or sets the account
      * type. Note that StandardZRS and PremiumLRS accounts cannot be changed to
      * other account types, and other account types cannot be changed to
      * StandardZRS or PremiumLRS. Possible values include: 'Standard_LRS',
      * 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
-     * 
+     *
      * @param {object} [parameters.properties.customDomain] User domain assigned to
      * the storage account. Name is the CNAME source. Only one custom domain is
      * supported per storage account at this time. To clear the existing custom
      * domain, use an empty string for the custom domain name property.
-     * 
+     *
      * @param {string} parameters.properties.customDomain.name Gets or sets the
      * custom domain name. Name is the CNAME source.
-     * 
+     *
      * @param {boolean} [parameters.properties.customDomain.useSubDomain] Indicates
      * whether indirect CName validation is enabled. Default value is false. This
      * should only be set on updates
-     * 
+     *
      * @param {object} [options] Optional Parameters.
-     * 
+     *
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     * 
+     *
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -178,14 +178,14 @@ export interface StorageAccounts {
      * Lists the access keys for the specified storage account.
      *
      * @param {string} resourceGroupName The name of the resource group.
-     * 
+     *
      * @param {string} accountName The name of the storage account.
-     * 
+     *
      * @param {object} [options] Optional Parameters.
-     * 
+     *
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     * 
+     *
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -197,10 +197,10 @@ export interface StorageAccounts {
      * storage keys are not returned; use the ListKeys operation for this.
      *
      * @param {object} [options] Optional Parameters.
-     * 
+     *
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     * 
+     *
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -214,12 +214,12 @@ export interface StorageAccounts {
      *
      * @param {string} resourceGroupName The name of the resource group within the
      * user's subscription.
-     * 
+     *
      * @param {object} [options] Optional Parameters.
-     * 
+     *
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     * 
+     *
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -231,21 +231,21 @@ export interface StorageAccounts {
      *
      * @param {string} resourceGroupName The name of the resource group within the
      * user's subscription.
-     * 
+     *
      * @param {string} accountName The name of the storage account within the
      * specified resource group. Storage account names must be between 3 and 24
      * characters in length and use numbers and lower-case letters only.
-     * 
+     *
      * @param {object} regenerateKeyParameter Specifies name of the key which
      * should be regenerated. key1 or key2 for the default keys
-     * 
+     *
      * @param {string} regenerateKeyParameter.keyName
-     * 
+     *
      * @param {object} [options] Optional Parameters.
-     * 
+     *
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     * 
+     *
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -261,29 +261,29 @@ export interface StorageAccounts {
      *
      * @param {string} resourceGroupName The name of the resource group within the
      * user's subscription.
-     * 
+     *
      * @param {string} accountName The name of the storage account within the
      * specified resource group. Storage account names must be between 3 and 24
      * characters in length and use numbers and lower-case letters only.
-     * 
+     *
      * @param {object} parameters The parameters to provide for the created
      * account.
-     * 
+     *
      * @param {string} parameters.location Resource location
-     * 
+     *
      * @param {object} [parameters.tags] Resource tags
-     * 
+     *
      * @param {object} [parameters.properties]
-     * 
+     *
      * @param {string} parameters.properties.accountType Gets or sets the account
      * type. Possible values include: 'Standard_LRS', 'Standard_ZRS',
      * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
-     * 
+     *
      * @param {object} [options] Optional Parameters.
-     * 
+     *
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     * 
+     *
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -304,10 +304,10 @@ export interface UsageOperations {
      * subscription.
      *
      * @param {object} [options] Optional Parameters.
-     * 
+     *
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     * 
+     *
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */

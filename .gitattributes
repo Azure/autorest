@@ -20,7 +20,6 @@
 *.htm text
 *.html text
 
-*.js text
 *.json text
 
 *.msbuild text

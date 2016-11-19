@@ -33,7 +33,7 @@ class SimpleProduct(BaseProduct):
     :type generic_value: str
     :param odatavalue: URL value.
     :type odatavalue: str
-    """ 
+    """
 
     _validation = {
         'product_id': {'required': True},

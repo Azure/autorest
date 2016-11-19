@@ -19,7 +19,7 @@ class IntWrapper(Model):
     :type field1: int
     :param field2:
     :type field2: int
-    """ 
+    """
 
     _attribute_map = {
         'field1': {'key': 'field1', 'type': 'int'},

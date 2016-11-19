@@ -19,7 +19,7 @@ class FloatWrapper(Model):
     :type field1: float
     :param field2:
     :type field2: float
-    """ 
+    """
 
     _attribute_map = {
         'field1': {'key': 'field1', 'type': 'float'},

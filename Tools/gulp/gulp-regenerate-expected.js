@@ -84,6 +84,7 @@ function gulpRegenerateExpected(options, done) {
     var mappingBaseDir = optsMappingsValue instanceof Array ? optsMappingsValue[0] : optsMappingsValue;
     var args = [
       GetAutoRestFolder()+'AutoRest.exe',
+//      '-verbose',
       '-Modeler', opts.modeler,
       '-CodeGenerator', opts.codeGenerator,
       '-PayloadFlatteningThreshold', opts.flatteningThreshold,

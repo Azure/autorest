@@ -19,7 +19,7 @@ class DateWrapper(Model):
     :type field: date
     :param leap:
     :type leap: date
-    """ 
+    """
 
     _attribute_map = {
         'field': {'key': 'field', 'type': 'date'},
