@@ -1,6 +1,8 @@
 
 namespace Petstore.Models
 {
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
     using System.Linq;
 
     public partial class StorageAccountRegenerateKeyParameters
@@ -22,21 +24,22 @@ namespace Petstore.Models
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "keyName")]
+        [JsonProperty(PropertyName = "keyName")]
         public string KeyName { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (KeyName == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "KeyName");
+                throw new ValidationException(ValidationRules.CannotBeNull, "KeyName");
             }
         }
     }
 }
+

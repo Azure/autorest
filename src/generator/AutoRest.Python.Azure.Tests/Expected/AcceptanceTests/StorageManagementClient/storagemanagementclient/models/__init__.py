@@ -12,9 +12,9 @@
 from .storage_account_check_name_availability_parameters import StorageAccountCheckNameAvailabilityParameters
 from .check_name_availability_result import CheckNameAvailabilityResult
 from .storage_account_create_parameters import StorageAccountCreateParameters
-from .endpoints import Endpoints
-from .foo import Foo
 from .bar import Bar
+from .foo import Foo
+from .endpoints import Endpoints
 from .custom_domain import CustomDomain
 from .storage_account import StorageAccount
 from .storage_account_keys import StorageAccountKeys
@@ -39,9 +39,9 @@ __all__ = [
     'StorageAccountCheckNameAvailabilityParameters',
     'CheckNameAvailabilityResult',
     'StorageAccountCreateParameters',
-    'Endpoints',
-    'Foo',
     'Bar',
+    'Foo',
+    'Endpoints',
     'CustomDomain',
     'StorageAccount',
     'StorageAccountKeys',

@@ -10,9 +10,9 @@
  * The access keys for the storage account.
  *
  * @member {string} [key1] Gets the value of key 1.
- * 
+ *
  * @member {string} [key2] Gets the value of key 2.
- * 
+ *
  */
 function StorageAccountKeys() {
 }

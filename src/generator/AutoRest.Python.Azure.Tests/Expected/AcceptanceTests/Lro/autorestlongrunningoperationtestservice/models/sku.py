@@ -19,7 +19,7 @@ class Sku(Model):
     :type name: str
     :param id:
     :type id: str
-    """ 
+    """
 
     _attribute_map = {
         'name': {'key': 'name', 'type': 'str'},

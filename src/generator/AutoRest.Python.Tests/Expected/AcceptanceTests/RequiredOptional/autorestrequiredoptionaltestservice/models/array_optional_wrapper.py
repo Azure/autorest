@@ -17,7 +17,7 @@ class ArrayOptionalWrapper(Model):
 
     :param value:
     :type value: list of str
-    """ 
+    """
 
     _attribute_map = {
         'value': {'key': 'value', 'type': '[str]'},

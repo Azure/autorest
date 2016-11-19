@@ -19,7 +19,7 @@ class CheckNameAvailabilityResult(Model):
     :param message: Gets an error message explaining the Reason value in more
      detail.
     :type message: str
-    """ 
+    """
 
     _attribute_map = {
         'name_available': {'key': 'nameAvailable', 'type': 'bool'},

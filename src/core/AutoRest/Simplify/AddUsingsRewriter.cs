@@ -11,6 +11,7 @@ using AutoRest.Core.Utilities;
 #pragma warning disable CS3009 // Base type is not CLS-compliant
 #pragma warning disable CS3001
 #pragma warning disable CS3002
+#pragma warning disable CS3008
 
 namespace AutoRest.Simplify
 {

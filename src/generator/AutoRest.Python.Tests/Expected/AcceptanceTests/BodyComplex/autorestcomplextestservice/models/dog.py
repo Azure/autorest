@@ -21,7 +21,7 @@ class Dog(Pet):
     :type name: str
     :param food:
     :type food: str
-    """ 
+    """
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},

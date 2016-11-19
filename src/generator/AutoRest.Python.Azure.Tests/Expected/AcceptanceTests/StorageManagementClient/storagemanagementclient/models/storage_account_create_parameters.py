@@ -33,7 +33,7 @@ class StorageAccountCreateParameters(Resource):
      'Premium_LRS'
     :type account_type: str or :class:`AccountType
      <fixtures.acceptancetestsstoragemanagementclient.models.AccountType>`
-    """ 
+    """
 
     _validation = {
         'id': {'readonly': True},

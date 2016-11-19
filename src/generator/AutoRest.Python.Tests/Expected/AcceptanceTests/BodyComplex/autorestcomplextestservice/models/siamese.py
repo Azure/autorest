@@ -26,7 +26,7 @@ class Siamese(Cat):
      <fixtures.acceptancetestsbodycomplex.models.Dog>`
     :param breed:
     :type breed: str
-    """ 
+    """
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},

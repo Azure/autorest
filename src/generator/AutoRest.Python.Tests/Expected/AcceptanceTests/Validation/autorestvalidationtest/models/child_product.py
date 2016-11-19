@@ -22,7 +22,7 @@ class ChildProduct(Model):
     :vartype const_property: str
     :param count: Count
     :type count: int
-    """ 
+    """
 
     _validation = {
         'const_property': {'required': True, 'constant': True},

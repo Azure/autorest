@@ -23,7 +23,7 @@ class ResourceCollection(Model):
      <fixtures.acceptancetestsazureresource.models.FlattenedProduct>`
     :param dictionaryofresources:
     :type dictionaryofresources: dict
-    """ 
+    """
 
     _attribute_map = {
         'productresource': {'key': 'productresource', 'type': 'FlattenedProduct'},

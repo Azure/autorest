@@ -28,7 +28,7 @@ class Resource(Model):
     :type location: str
     :ivar name: Resource Name
     :vartype name: str
-    """ 
+    """
 
     _validation = {
         'id': {'readonly': True},

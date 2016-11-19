@@ -17,22 +17,22 @@ var util = require('util');
  *
  * @member {number} [id] The id of the pet. A more detailed description of the
  * id of the pet.
- * 
+ *
  * @member {object} [category]
- * 
+ *
  * @member {number} [category.id]
- * 
+ *
  * @member {string} [category.name]
- * 
+ *
  * @member {string} name
- * 
+ *
  * @member {array} photoUrls
- * 
+ *
  * @member {array} [tags]
- * 
+ *
  * @member {string} [status] pet status in the store. Possible values include:
  * 'available', 'pending', 'sold'
- * 
+ *
  */
 function Pet() {
 }

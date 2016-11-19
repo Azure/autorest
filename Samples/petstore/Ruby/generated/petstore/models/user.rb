@@ -4,7 +4,7 @@ module Petstore
   module Models
     #
     # Model object.
-    # 
+    #
     #
     class User
       # @return [Integer]

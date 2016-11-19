@@ -1,6 +1,7 @@
 
 namespace Petstore.Models
 {
+    using Newtonsoft.Json;
     using System.Linq;
 
     public partial class StorageAccountPropertiesCreateParameters
@@ -28,7 +29,7 @@ namespace Petstore.Models
         /// 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
         /// 'Premium_LRS'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "accountType")]
+        [JsonProperty(PropertyName = "accountType")]
         public AccountType AccountType { get; set; }
 
         /// <summary>
@@ -42,3 +43,4 @@ namespace Petstore.Models
         }
     }
 }
+

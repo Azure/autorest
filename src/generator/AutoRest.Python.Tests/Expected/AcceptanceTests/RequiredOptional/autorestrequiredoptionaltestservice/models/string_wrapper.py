@@ -17,7 +17,7 @@ class StringWrapper(Model):
 
     :param value:
     :type value: str
-    """ 
+    """
 
     _validation = {
         'value': {'required': True},

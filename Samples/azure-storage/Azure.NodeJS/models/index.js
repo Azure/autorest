@@ -28,3 +28,5 @@ exports.StorageAccountRegenerateKeyParameters = require('./storageAccountRegener
 exports.UsageName = require('./usageName');
 exports.Usage = require('./usage');
 exports.UsageListResult = require('./usageListResult');
+exports.StorageAccountListResult = require('./storageAccountListResult');
+exports.UsageListResult = require('./usageListResult');

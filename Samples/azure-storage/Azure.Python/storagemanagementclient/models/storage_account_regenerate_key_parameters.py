@@ -10,7 +10,7 @@ class StorageAccountRegenerateKeyParameters(Model):
 
     :param key_name:
     :type key_name: str
-    """ 
+    """
 
     _validation = {
         'key_name': {'required': True},

@@ -19,7 +19,7 @@ class BooleanWrapper(Model):
     :type field_true: bool
     :param field_false:
     :type field_false: bool
-    """ 
+    """
 
     _attribute_map = {
         'field_true': {'key': 'field_true', 'type': 'bool'},
