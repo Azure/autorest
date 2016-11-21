@@ -2350,8 +2350,8 @@ Paths.prototype.arrayCsvInPath = function (arrayPath, options, callback) {
 
   // Construct URL
   var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath:commaSeparated}';
-  requestUrl = requestUrl.replace('{arrayPath:commaSeparated}', encodeURIComponent(arrayPath.toString()));
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}';
+  requestUrl = requestUrl.replace('{arrayPath}', encodeURIComponent(arrayPath.toString()));
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
