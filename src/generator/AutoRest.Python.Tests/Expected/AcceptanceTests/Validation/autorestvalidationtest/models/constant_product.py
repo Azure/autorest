@@ -22,7 +22,7 @@ class ConstantProduct(Model):
     :vartype const_property: str
     :ivar const_property2: Constant string2. Default value: "constant2" .
     :vartype const_property2: str
-    """ 
+    """
 
     _validation = {
         'const_property': {'required': True, 'constant': True},

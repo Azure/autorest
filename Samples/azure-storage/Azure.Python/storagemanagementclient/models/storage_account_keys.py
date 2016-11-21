@@ -12,7 +12,7 @@ class StorageAccountKeys(Model):
     :type key1: str
     :param key2: Gets the value of key 2.
     :type key2: str
-    """ 
+    """
 
     _attribute_map = {
         'key1': {'key': 'key1', 'type': 'str'},

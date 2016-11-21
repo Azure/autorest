@@ -12,15 +12,15 @@ var util = require('util');
  * Initializes a new instance of the Resource class.
  * @constructor
  * @member {string} [id] Resource Id
- * 
+ *
  * @member {string} [name] Resource name
- * 
+ *
  * @member {string} [type] Resource type
- * 
+ *
  * @member {string} [location] Resource location
- * 
+ *
  * @member {object} [tags] Resource tags
- * 
+ *
  */
 function Resource() {
   Resource['super_'].call(this);

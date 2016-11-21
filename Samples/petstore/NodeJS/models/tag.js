@@ -8,9 +8,9 @@
  * Initializes a new instance of the Tag class.
  * @constructor
  * @member {number} [id]
- * 
+ *
  * @member {string} [name]
- * 
+ *
  */
 function Tag() {
 }

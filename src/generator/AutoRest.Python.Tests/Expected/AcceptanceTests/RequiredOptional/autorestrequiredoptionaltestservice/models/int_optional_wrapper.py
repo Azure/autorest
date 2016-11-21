@@ -17,7 +17,7 @@ class IntOptionalWrapper(Model):
 
     :param value:
     :type value: int
-    """ 
+    """
 
     _attribute_map = {
         'value': {'key': 'value', 'type': 'int'},

@@ -18,7 +18,7 @@ class HeaderCustomNamedRequestIdParamGroupingParameters(Model):
 
     :param foo_client_request_id: The fooRequestId
     :type foo_client_request_id: str
-    """ 
+    """
 
     _validation = {
         'foo_client_request_id': {'required': True},

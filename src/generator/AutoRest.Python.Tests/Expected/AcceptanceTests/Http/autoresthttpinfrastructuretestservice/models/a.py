@@ -18,7 +18,7 @@ class A(Model):
 
     :param status_code:
     :type status_code: str
-    """ 
+    """
 
     _attribute_map = {
         'status_code': {'key': 'statusCode', 'type': 'str'},

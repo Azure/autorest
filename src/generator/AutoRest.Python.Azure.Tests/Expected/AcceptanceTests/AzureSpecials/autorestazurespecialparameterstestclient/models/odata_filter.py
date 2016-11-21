@@ -19,7 +19,7 @@ class OdataFilter(Model):
     :type id: int
     :param name:
     :type name: str
-    """ 
+    """
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},

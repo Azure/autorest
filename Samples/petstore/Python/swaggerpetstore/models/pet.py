@@ -24,7 +24,7 @@ class Pet(Model):
     :param status: pet status in the store. Possible values include:
      'available', 'pending', 'sold'
     :type status: str
-    """ 
+    """
 
     _validation = {
         'name': {'required': True},

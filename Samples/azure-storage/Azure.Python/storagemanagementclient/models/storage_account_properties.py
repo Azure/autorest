@@ -57,7 +57,7 @@ class StorageAccountProperties(Model):
      location of the storage account. Only available if the accountType is
      StandardRAGRS.
     :type secondary_endpoints: :class:`Endpoints <petstore.models.Endpoints>`
-    """ 
+    """
 
     _attribute_map = {
         'provisioning_state': {'key': 'provisioningState', 'type': 'ProvisioningState'},

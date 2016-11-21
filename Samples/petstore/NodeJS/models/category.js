@@ -8,9 +8,9 @@
  * Initializes a new instance of the Category class.
  * @constructor
  * @member {number} [id]
- * 
+ *
  * @member {string} [name]
- * 
+ *
  */
 function Category() {
 }

@@ -24,7 +24,7 @@ class StorageAccount(Resource):
     :param properties:
     :type properties: :class:`StorageAccountProperties
      <petstore.models.StorageAccountProperties>`
-    """ 
+    """
 
     _validation = {
         'id': {'readonly': True},
