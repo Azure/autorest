@@ -533,8 +533,7 @@ namespace AutoRest.Ruby.Model
             foreach (var pathParameter in pathParameters)
             {
                 var pathReplaceFormat = "{0} = {0}.gsub('{{{1}}}', {2})";
-                var urlPathName = UrlPathNameFromPathPattern(pathParameter.SerializedName);
-                builder.AppendLine(pathReplaceFormat, variableName, urlPathName, pathParameter.GetFormattedReferenceValue());
+                builder.AppendLine(pathReplaceFormat, variableName, pathParameter.SerializedName, pathParameter.GetFormattedReferenceValue());
             }
         }
 
@@ -549,29 +548,11 @@ namespace AutoRest.Ruby.Model
             foreach (var param in parameters)
             {
                 string variableName = param.Name;
-                string urlPathName = UrlPathNameFromPathPattern(param.SerializedName);
-                encodedParameters.Add(string.Format("'{0}' => {1}", urlPathName, param.GetFormattedReferenceValue()));
+                encodedParameters.Add(string.Format("'{0}' => {1}", param.SerializedName, param.GetFormattedReferenceValue()));
             }
             return string.Format(CultureInfo.InvariantCulture, "{{{0}}}", string.Join(",", encodedParameters));
         }
-
-        /// <summary>
-        /// Builds the url path parameter from the pattern if exists
-        /// </summary>
-        /// <param name="urlPathParamName">Name of the path parameter to match.</param>
-        /// <returns>url path parameter as a string</returns>
-        private string UrlPathNameFromPathPattern(string urlPathParamName)
-        {
-            string pat = @".*\{" + urlPathParamName + @"(\:\w+)\}";
-            Regex r = new Regex(pat);
-            Match m = r.Match(Url);
-            if (m.Success)
-            {
-                urlPathParamName += m.Groups[1].Value;
-            }
-            return urlPathParamName;
-        }
-
+        
         /// <summary>
         /// Constructs mapper for the request body.
         /// </summary>
