@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 
 using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
+using AutoRest.Extensions;
 using AutoRest.Go.TemplateModels;
 using AutoRest.Extensions.Azure;
 using AutoRest.Extensions.Azure.Model;
@@ -29,7 +30,8 @@ namespace AutoRest.Go
 
         private static Dictionary<string, string> plural = new Dictionary<string, string>()
         {
-            { "eventhub", "eventhubs" }
+            { "eventhub", "eventhubs" },
+            { "containerservice", "containerservices" }
         };
 
         /////////////////////////////////////////////////////////////////////////////////////////
@@ -125,19 +127,32 @@ namespace AutoRest.Go
         }
 
         /// <summary>
-        /// Gets package name from the value string.
+        /// Removes the package name from the beginning of a type or method name.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="packageName"></param>
-        /// <returns></returns>
+        /// <param name="value">The name of the type or method from which to remove the package name.</param>
+        /// <param name="packageName">The name of the package to be removed.</param>
+        /// <returns>A string containing the modified name.</returns>
         public static string TrimPackageName(this string value, string packageName)
         {
-            var cchValue = value.Length;
-            value = value.TrimStartsWith(packageName);
-            if (value.Length == cchValue && packageName.EndsWith("s") && (value.Length - packageName.Length + 1) > 1)
+            // check if the package name straddles a casing boundary, if it
+            // does then don't trim the name.  e.g. if value == "SubscriptionState"
+            // and packageName == "subscriptions" it would be incorrect to remove
+            // the package name from the value.
+
+            bool straddle = value.Length > packageName.Length && !char.IsUpper(value[packageName.Length]);
+
+            var originalLen = value.Length;
+
+            if (!straddle)
+                value = value.TrimStartsWith(packageName);
+
+            // if nothing was trimmed and the package name is plural then make the
+            // package name singular and try removing that if it's not too short
+            if (value.Length == originalLen && packageName.EndsWith("s") && (value.Length - packageName.Length + 1) > 1)
             {
-                value = value.TrimStartsWith(packageName.Substring(0, packageName.Length-1));
+                value = value.TrimPackageName(packageName.Substring(0, packageName.Length - 1));
             }
+
             return value;
         }
 
@@ -593,6 +608,11 @@ namespace AutoRest.Go
                 else if (property.Type is DictionaryType)
                 {
                     indented.AppendFormat("{0} *{1} {2}\n", property.Name, (property.Type as MapType).FieldName, property.JsonTag());
+                }
+                else if (property.ShouldBeFlattened())
+                {
+                    // embed as an anonymous struct
+                    indented.AppendFormat("*{0} {1}\n", property.Type.Name, property.JsonTag());
                 }
                 else
                 {
