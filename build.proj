@@ -271,7 +271,7 @@
     <Delete Files="@(PackagesToSign->'%(RootDir)%(Directory)\%(Filename)\[Content_Types].xml')" />
 
     <ItemGroup>
-      <_TempBinaries Include="$(PackageOutputDir)\**\*.dll"  Exclude="$(PackageOutputDir)\**\Newtonsoft.Json.dll;$(PackageOutputDir)\**\YamlDotNet.dll" />
+      <_TempBinaries Include="$(PackageOutputDir)\**\*.dll"  Exclude="$(PackageOutputDir)\**\Newtonsoft.Json.dll;$(PackageOutputDir)\**\YamlDotNet.dll;$(PackageOutputDir)\**\System.*.dll;$(PackageOutputDir)\**\ Microsoft.CodeAnalysis.dll" />
       <_TempBinaries Include="$(PackageOutputDir)\**\*.exe" />
       <_PackageBinaries Include="@(_TempBinaries)">
         <!-- Flattened file for signing -->
