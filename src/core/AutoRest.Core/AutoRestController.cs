@@ -41,94 +41,179 @@ namespace AutoRest.Core
             }
             Logger.Entries.Clear();
             Logger.LogInfo(Resources.AutoRestCore, Version);
-
-            // Fixed pipeline: parse
+            Settings.Instance.Validate();
             if (string.IsNullOrWhiteSpace(Settings.Instance.Input))
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
 
-            //Logger.LogInfo(Resources.ParsingSwagger);
-            var parser = ExtensionsLoader.GetParser();
-            var serviceDefinition = parser.Transform(Settings.Instance.FileSystem.ReadFileAsText(Settings.Instance.Input));
-            if (serviceDefinition == null)
-            {
-                throw ErrorManager.CreateError("Resources.ErrorParsingSpec"); // TODO
-            }
-
-            // Look for semantic errors and warnings in the document.
-            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            var messages = validator.GetValidationExceptions(serviceDefinition).ToList();
-
-            CodeModel codeModel = null;
-            
-            var modeler = ExtensionsLoader.GetModeler();
-
-            try
-            {
-                // generate model from swagger 
-                codeModel = modeler.Transform(serviceDefinition);
-
-                // After swagger Parser
-                codeModel = RunExtensions(Trigger.AfterModelCreation, codeModel);
-
-                // After swagger Parser
-                codeModel = RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
-
-                foreach (var message in messages)
-                {
-                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
-                }
-
-                if (messages.Any(entry => entry.Severity >= Settings.Instance.ValidationLevel))
-                {
-                    throw ErrorManager.CreateError(null, Resources.ErrorGeneratingClientModel, "Errors found during Swagger validation");
-                }
-            }
-            catch (Exception exception)
-            {
-                throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
-            }
-
             var plugin = ExtensionsLoader.GetPlugin();
-
             Logger.WriteOutput(plugin.CodeGenerator.UsageInstructions);
 
-            Settings.Instance.Validate();
-            try
-            {
-                var genericSerializer = new ModelSerializer<CodeModel>();
-                var modelAsJson = genericSerializer.ToJson(codeModel);
-
-                // ensure once we're doing language-specific work, that we're working
-                // in context provided by the language-specific transformer. 
-                using (plugin.Activate())
+            // FIXED SCHEDULE
+            var messages = new List<ValidationMessage>();
+            var schedule = Schedule.FromLinearPipeline(
+                ExtensionsLoader.GetParser(),
+                new FuncTransformer<object, object>(serviceDefinition =>
                 {
-                    // load model into language-specific code model
-                    codeModel = plugin.Serializer.Load(modelAsJson);
+                    var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+                    messages.AddRange(validator.GetValidationExceptions(serviceDefinition));
+                    return serviceDefinition;
+                }),
+                ExtensionsLoader.GetModeler(),
+                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                {
+                    try
+                    {
+                        return RunExtensions(Trigger.AfterModelCreation, codeModel);
+                    }
+                    catch (Exception exception)
+                    {
+                        throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel,
+                            exception.Message);
+                    }
+                    return codeModel;
+                }),
+                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                {
+                    try
+                    {
+                        return RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
+                    }
+                    catch (Exception exception)
+                    {
+                        throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel,
+                            exception.Message);
+                    }
+                    return codeModel;
+                }),
+                new FuncTransformer<object, object>(codeModel =>
+                {
+                    try
+                    {
+                        foreach (var message in messages)
+                        {
+                            Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
+                        }
 
-                    // we've loaded the model, run the extensions for after it's loaded
-                    codeModel = RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
-     
-                    // apply language-specific tranformation (more than just language-specific types)
-                    // used to be called "NormalizeClientModel" . 
-                    codeModel = plugin.Transformer.Transform(codeModel);
+                        if (messages.Any(entry => entry.Severity >= Settings.Instance.ValidationLevel))
+                        {
+                            throw ErrorManager.CreateError(null, Resources.ErrorGeneratingClientModel,
+                                "Errors found during Swagger validation");
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel,
+                            exception.Message);
+                    }
+                    return codeModel;
+                }),
+                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                {
+                    try
+                    {
+                        using (plugin.Activate())
+                        {
+                            // load model into language-specific code model
+                            return plugin.Serializer.Load(new ModelSerializer<CodeModel>().ToJson(codeModel));
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                    }
+                }),
+                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                {
+                    try
+                    {
+                        using (plugin.Activate())
+                        {
+                            // we've loaded the model, run the extensions for after it's loaded
+                            return RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                    }
+                }),
+                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                {
+                    try
+                    {
+                        using (plugin.Activate())
+                        {
+                            // apply language-specific tranformation (more than just language-specific types)
+                            // used to be called "NormalizeClientModel" . 
+                            return plugin.Transformer.Transform(codeModel);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                    }
+                }),
+                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                {
+                    try
+                    {
+                        using (plugin.Activate())
+                        {
+                            // next set of extensions
+                            return RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                    }
+                }),
+                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                {
+                    try
+                    {
+                        using (plugin.Activate())
+                        {
+                            // next set of extensions
+                            return RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                    }
+                }),
+                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                {
+                    try
+                    {
+                        using (plugin.Activate())
+                        {
+                            // Generate code from CodeModel.
+                            plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                    }
+                    return null;
+                })
+            );
 
-                    // next set of extensions
-                    codeModel = RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
+                    
+            //Logger.LogInfo(Resources.ParsingSwagger);
+            var input = Settings.Instance.FileSystem.ReadFileAsText(Settings.Instance.Input);
 
+            //if (serviceDefinition == null)
+            //{
+            //    throw ErrorManager.CreateError("Resources.ErrorParsingSpec"); 
+            //    // TODO: extract that into Transformer! Or is there any transformer that may return null?
+            //}
 
-                    // next set of extensions
-                    codeModel = RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
-
-                    // Generate code from CodeModel.
-                    plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
-                }
-            }
-            catch (Exception exception)
-            {
-                throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
-            }
+            schedule.Run(input).GetAwaiter().GetResult();
         }
 
         public static CodeModel RunExtensions(Trigger trigger, CodeModel codeModel)

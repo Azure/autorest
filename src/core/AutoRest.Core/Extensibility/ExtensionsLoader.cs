@@ -121,6 +121,7 @@ namespace AutoRest.Core.Extensibility
             return modeler;
         }
 
+        [Obsolete]
         public static ITransformer<string, object> GetParser()
         {
             // TODO: not necessary in final model
