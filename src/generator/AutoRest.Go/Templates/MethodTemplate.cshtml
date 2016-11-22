@@ -110,7 +110,7 @@ func (client @(Model.Owner)) @(Model.PreparerMethodName)(@(Model.MethodParameter
     @:if @(p.Type.GetEmptyCheck(p.GetParameterName(),false)) {
         @:preparer = autorest.DecoratePreparer(preparer,
                             @:@(string.Format("autorest.WithHeader(\"{0}\",autorest.String({1}))",
-                            p.SerializedName, p.Name)))
+                            p.SerializedName, p.GetParameterName())))
     @:}
 }
 
