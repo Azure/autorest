@@ -62,49 +62,17 @@ namespace AutoRest.Core
                     return serviceDefinition;
                 }),
                 ExtensionsLoader.GetModeler(),
-                new FuncTransformer<CodeModel, CodeModel>("AfterModelCreation", codeModel =>
-                {
-                    try
-                    {
-                        return RunExtensions(Trigger.AfterModelCreation, codeModel);
-                    }
-                    catch (Exception exception)
-                    {
-                        throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel,
-                            exception.Message);
-                    }
-                }),
-                new FuncTransformer<CodeModel, CodeModel>("BeforeLoadingLanguageSpecificModel", codeModel =>
-                {
-                    try
-                    {
-                        return RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
-                    }
-                    catch (Exception exception)
-                    {
-                        throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel,
-                            exception.Message);
-                    }
-                }),
                 new ActionTransformer<object>("Logging", codeModel =>
                 {
-                    try
+                    foreach (var message in messages)
                     {
-                        foreach (var message in messages)
-                        {
-                            Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
-                        }
-
-                        if (messages.Any(entry => entry.Severity >= Settings.Instance.ValidationLevel))
-                        {
-                            throw ErrorManager.CreateError(null, Resources.ErrorGeneratingClientModel,
-                                "Errors found during Swagger validation");
-                        }
+                        Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
                     }
-                    catch (Exception exception)
+
+                    if (messages.Any(entry => entry.Severity >= Settings.Instance.ValidationLevel))
                     {
-                        throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel,
-                            exception.Message);
+                        throw ErrorManager.CreateError(null, Resources.ErrorGeneratingClientModel,
+                            "Errors found during Swagger validation");
                     }
                 }),
                 new FuncTransformer<CodeModel, string>("model2json", codeModel => new ModelSerializer<CodeModel>().ToJson(codeModel)),
@@ -135,93 +103,27 @@ namespace AutoRest.Core
                 //}),
                 new FuncTransformer<string, CodeModel>("json2model", json =>
                 {
-                    try
+                    using (plugin.Activate())
                     {
-                        using (plugin.Activate())
-                        {
-                            // load model into language-specific code model
-                            return plugin.Serializer.Load(json);
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
-                    }
-                }),
-                new FuncTransformer<CodeModel, CodeModel>("AfterLoadingLanguageSpecificModel", codeModel =>
-                {
-                    try
-                    {
-                        using (plugin.Activate())
-                        {
-                            // we've loaded the model, run the extensions for after it's loaded
-                            return RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                        // load model into language-specific code model
+                        return plugin.Serializer.Load(json);
                     }
                 }),
                 new FuncTransformer<CodeModel, CodeModel>("plugin.Transformer", async codeModel =>
                 {
-                    try
+                    using (plugin.Activate())
                     {
-                        using (plugin.Activate())
-                        {
-                            // apply language-specific tranformation (more than just language-specific types)
-                            // used to be called "NormalizeClientModel" . 
-                            return await plugin.Transformer.TransformAsync(codeModel) as CodeModel;
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
-                    }
-                }),
-                new FuncTransformer<CodeModel, CodeModel>("AfterLanguageSpecificTransform", codeModel =>
-                {
-                    try
-                    {
-                        using (plugin.Activate())
-                        {
-                            // next set of extensions
-                            return RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
-                    }
-                }),
-                new FuncTransformer<CodeModel, CodeModel>("BeforeGeneratingCode", codeModel =>
-                {
-                    try
-                    {
-                        using (plugin.Activate())
-                        {
-                            // next set of extensions
-                            return RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                        // apply language-specific tranformation (more than just language-specific types)
+                        // used to be called "NormalizeClientModel" . 
+                        return await plugin.Transformer.TransformAsync(codeModel) as CodeModel;
                     }
                 }),
                 new ActionTransformer<CodeModel>("generate code", async codeModel => // TODO: return MemoryFS containing code
                 {
-                    try
+                    using (plugin.Activate())
                     {
-                        using (plugin.Activate())
-                        {
-                            // Generate code from CodeModel.
-                            await plugin.CodeGenerator.Generate(codeModel);
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                        // Generate code from CodeModel.
+                        await plugin.CodeGenerator.Generate(codeModel);
                     }
                 })
             );
@@ -230,23 +132,7 @@ namespace AutoRest.Core
             //Logger.LogInfo(Resources.ParsingSwagger);
             var input = Settings.Instance.FileSystem.ReadFileAsText(Settings.Instance.Input);
 
-            //if (serviceDefinition == null)
-            //{
-            //    throw ErrorManager.CreateError("Resources.ErrorParsingSpec"); 
-            //    // TODO: extract that into Transformer! Or is there any transformer that may return null?
-            //}
-
             schedule.Run(input).GetAwaiter().GetResult();
-        }
-
-        public static CodeModel RunExtensions(Trigger trigger, CodeModel codeModel)
-        {
-            /*
-             foreach (var extension in extensions.Where(each => each.trigger == trugger).SortBy(each => each.Priority))
-                 codeModel = extension.Transform(codeModel);
-            */
-
-            return codeModel;
         }
 
         /// <summary>

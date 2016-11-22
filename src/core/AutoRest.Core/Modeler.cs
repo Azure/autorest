@@ -11,8 +11,6 @@ namespace AutoRest.Core
 {
     public abstract class Modeler : Transformer<object, CodeModel> // TODO: no more Modeler base class
     {
-        public abstract string Name { get; }
-
         public Settings Settings => Settings.Instance;
 
         /// <summary>
