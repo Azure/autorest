@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -16,7 +17,7 @@ namespace AutoRest.NodeJS
 {
     public class TransformerJs : CodeModelTransformer<CodeModelJs>
     {
-        public override CodeModelJs Transform(CodeModel cm)
+        public override Task<CodeModelJs> Transform(CodeModel cm)
         {
             var codeModel = cm as CodeModelJs;
 
@@ -52,7 +53,7 @@ namespace AutoRest.NodeJS
                 }
             }
 
-            return codeModel;
+            return Task.FromResult(codeModel);
         }
 
         /// <summary>

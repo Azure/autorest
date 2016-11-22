@@ -6,8 +6,10 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Extensibility;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -70,7 +72,7 @@ namespace AutoRest.CSharp.Unit.Tests
             return fileSystem.GetFiles(path, "*.*", s).Where(f => fileExts.Contains(f.Substring(f.LastIndexOf(".")+1))).ToArray();
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string inputDir,  MemoryFileSystem fileSystem, string codeGenerator="CSharp", string modeler = "Swagger")
+        internal static async Task<MemoryFileSystem> GenerateCodeInto(this string inputDir,  MemoryFileSystem fileSystem, string codeGenerator="CSharp", string modeler = "Swagger")
         {
             using (NewContext)
             {
@@ -83,11 +85,11 @@ namespace AutoRest.CSharp.Unit.Tests
                     Namespace = "Test"
                 };
 
-                return inputDir.GenerateCodeInto(fileSystem, settings);
+                return await inputDir.GenerateCodeInto(fileSystem, settings);
             }
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string inputDir, MemoryFileSystem fileSystem, Settings settings)
+        internal static async Task<MemoryFileSystem> GenerateCodeInto(this string inputDir, MemoryFileSystem fileSystem, Settings settings)
         {
             fileSystem.Copy(Path.Combine("Resource", inputDir));
             var fileExt = (File.Exists(Path.Combine("Resource", Path.Combine(inputDir, inputDir + ".yaml"))) ? ".yaml" : ".json");
@@ -114,7 +116,7 @@ namespace AutoRest.CSharp.Unit.Tests
 
                 // apply language-specific tranformation (more than just language-specific types)
                 // used to be called "NormalizeClientModel" . 
-                codeModel = plugin.Transformer.Transform(codeModel);
+                codeModel = await plugin.Transformer.Transform(codeModel) as CodeModel;
 
                 // next set of extensions
                 codeModel = AutoRestController.RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);

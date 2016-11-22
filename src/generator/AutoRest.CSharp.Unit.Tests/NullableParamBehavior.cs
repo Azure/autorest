@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task NullableParams()
         {
-            using (var fileSystem = GenerateCodeForTestFromSpec())
+            using (var fileSystem = await GenerateCodeForTestFromSpec())
             {
                 // Expected Files
                 string generatedCodeFileName = @"GeneratedCode\TestOperations.cs";
@@ -120,7 +120,7 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task NullableParamsAzure()
         {
-            using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
+            using (var fileSystem = await GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
             {
                 // Expected Files
                 string generatedCodeFileName = @"GeneratedCode\TestOperations.cs";

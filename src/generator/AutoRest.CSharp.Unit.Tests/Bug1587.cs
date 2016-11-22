@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task CheckLruCodegenBehavior()
         {
-            using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
+            using (var fileSystem = await GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
             {
                 // Expected Files
                 Assert.True(fileSystem.FileExists(@"GeneratedCode\SimpleAPI.cs"));

@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Unit.Tests
         public async Task SupportCharFormatForString()
         {
             // simplified test pattern for unit testing aspects of code generation
-            using (var fileSystem = GenerateCodeForTestFromSpec())
+            using (var fileSystem = await GenerateCodeForTestFromSpec())
             {
                 // Expected Files
                 Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\ResultObject.cs"));

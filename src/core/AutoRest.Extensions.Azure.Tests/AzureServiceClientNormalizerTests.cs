@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -15,7 +16,7 @@ namespace AutoRest.Extensions.Azure.Tests
     public class AzureServiceClientNormalizerTests
     {
         [Fact]
-        public void ResourceIsFlattenedForSimpleResource()
+        public async Task ResourceIsFlattenedForSimpleResource()
         {
             using (NewContext)
             {
@@ -86,7 +87,7 @@ namespace AutoRest.Extensions.Azure.Tests
 
                 new Settings();
                 var transformer = new SampleAzureTransformer();
-                codeModel = transformer.Transform(codeModel);
+                codeModel = await transformer.Transform(codeModel);
 
                 Assert.Equal(3, codeModel.ModelTypes.Count);
                 Assert.Equal("Dog", codeModel.ModelTypes.First(m => m.Name == "Dog").Name);
@@ -103,7 +104,7 @@ namespace AutoRest.Extensions.Azure.Tests
         }
 
         [Fact]
-        public void ResourceIsFlattenedForConflictingResource()
+        public async Task ResourceIsFlattenedForConflictingResource()
         {
             using (NewContext)
             {
@@ -196,7 +197,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 codeModel.Add(dog);
                 new Settings();
                 var transformer = new SampleAzureTransformer();
-                codeModel = transformer.Transform(codeModel);
+                codeModel = await transformer.Transform(codeModel);
 
                 Assert.Equal(3, codeModel.ModelTypes.Count);
                 Assert.Equal("Dog", codeModel.ModelTypes.First(m => m.Name == "Dog").Name);
@@ -277,7 +278,7 @@ namespace AutoRest.Extensions.Azure.Tests
         }
 
         [Fact]
-        public void ResourceIsFlattenedForComplexResource()
+        public async Task ResourceIsFlattenedForComplexResource()
         {
             using (NewContext)
             {
@@ -385,7 +386,7 @@ namespace AutoRest.Extensions.Azure.Tests
 
                 new Settings();
                 var transformer = new SampleAzureTransformer();
-                codeModel = transformer.Transform(codeModel);
+                codeModel = await transformer.Transform(codeModel);
 
                 Assert.Equal(4, codeModel.ModelTypes.Count);
                 Assert.Equal("Dog", codeModel.ModelTypes.First(m => m.Name == "Dog").Name);
@@ -398,7 +399,7 @@ namespace AutoRest.Extensions.Azure.Tests
         }
 
         [Fact]
-        public void SwaggerODataSpecParsingTest()
+        public async Task SwaggerODataSpecParsingTest()
         {
             using (NewContext)
             {
@@ -412,7 +413,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
                 var transformer = new SampleAzureTransformer();
-                codeModel = transformer.Transform(codeModel);
+                codeModel = await transformer.Transform(codeModel);
 
                 Assert.NotNull(codeModel);
                 Assert.Equal(5, codeModel.Methods[0].Parameters.Count);
@@ -422,7 +423,7 @@ namespace AutoRest.Extensions.Azure.Tests
         }
 
         [Fact]
-        public void SwaggerResourceExternalFalseTest()
+        public async Task SwaggerResourceExternalFalseTest()
         {
             using (NewContext)
             {
@@ -436,7 +437,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
                 var transformer = new SampleAzureTransformer();
-                codeModel = transformer.Transform(codeModel);
+                codeModel = await transformer.Transform(codeModel);
                 Assert.NotNull(codeModel);
                 var resource = codeModel.ModelTypes.First(m =>
                         m.Name.EqualsIgnoreCase("Resource"));
@@ -449,7 +450,7 @@ namespace AutoRest.Extensions.Azure.Tests
         }
 
         [Fact]
-        public void AzureParameterTest()
+        public async Task AzureParameterTest()
         {
             using (NewContext)
             {
@@ -463,7 +464,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
                 var transformer = new SampleAzureTransformer();
-                codeModel = transformer.Transform(codeModel);
+                codeModel = await transformer.Transform(codeModel);
 
 
                 Assert.NotNull(codeModel);
@@ -482,7 +483,7 @@ namespace AutoRest.Extensions.Azure.Tests
         }
 
         [Fact]
-        public void PageableTest()
+        public async Task PageableTest()
         {
             using (NewContext)
             {
@@ -496,7 +497,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
                 var transformer = new SampleAzureTransformer();
-                codeModel = transformer.Transform(codeModel);
+                codeModel = await transformer.Transform(codeModel);
 
                 Assert.NotNull(codeModel);
                 Assert.Equal(3, codeModel.Methods.Count);
@@ -512,7 +513,7 @@ namespace AutoRest.Extensions.Azure.Tests
         }
 
         [Fact]
-        public void FlatteningTest()
+        public async Task FlatteningTest()
         {
             using (NewContext)
             {
@@ -526,7 +527,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
                 var transformer = new SampleAzureTransformer();
-                codeModel = transformer.Transform(codeModel);
+                codeModel = await transformer.Transform(codeModel);
                 Assert.NotNull(codeModel);
                 Assert.True(codeModel.ModelTypes.Any(t => t.Name == "Product"));
                 // ProductProperties type is not removed because it is referenced in response of one of the methods

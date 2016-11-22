@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -25,12 +26,12 @@ namespace AutoRest.Ruby.Azure
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override CodeModelRb Transform(CodeModel codeModel)
+        public override async Task<CodeModelRb> Transform(CodeModel codeModel)
         {
-            return ((ITransformer<CodeModel, CodeModelRba>) this).Transform(codeModel);
+            return await ((ITransformer<CodeModel, CodeModelRba>) this).Transform(codeModel);
         }
 
-        CodeModelRba ITransformer<CodeModel, CodeModelRba>.Transform(CodeModel cs)
+        Task<CodeModelRba> ITransformer<CodeModel, CodeModelRba>.Transform(CodeModel cs)
         {
             var codeModel = cs as CodeModelRba;
 
@@ -42,7 +43,7 @@ namespace AutoRest.Ruby.Azure
             AddRubyPageableMethod(codeModel);
             ApplyPagination(codeModel);
 
-            return codeModel;
+            return Task.FromResult(codeModel);
         }
 
         /// <summary>

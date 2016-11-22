@@ -13,7 +13,7 @@ namespace AutoRest.CompositeSwagger
 {
     public class CompositeSwaggerParser : Transformer<string, CompositeServiceDefinition>
     {
-        public override CompositeServiceDefinition Transform(string json)
+        public override Task<CompositeServiceDefinition> Transform(string json)
         {
             try
             {
@@ -22,7 +22,7 @@ namespace AutoRest.CompositeSwagger
                     TypeNameHandling = TypeNameHandling.None,
                     MetadataPropertyHandling = MetadataPropertyHandling.Ignore
                 };
-                return JsonConvert.DeserializeObject<CompositeServiceDefinition>(json, settings);
+                return Task.FromResult(JsonConvert.DeserializeObject<CompositeServiceDefinition>(json, settings));
             }
             catch (JsonException ex)
             {

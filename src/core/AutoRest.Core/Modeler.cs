@@ -4,6 +4,7 @@
 using AutoRest.Core.Model;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoRest.Core.Extensibility;
 
 namespace AutoRest.Core

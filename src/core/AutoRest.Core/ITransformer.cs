@@ -3,39 +3,84 @@
 // 
 
 using System;
+using System.Threading.Tasks;
+using ISomething = System.Object;
 
-namespace AutoRest.Core {
-    public class FuncTransformer<TInput, TOutput> : Transformer<TInput, TOutput>
+namespace AutoRest.Core
+{
+    public class ActionTransformer<TInputOutput> : Transformer<TInputOutput, TInputOutput>
+        //where TInputOutput : ISomething
     {
-        private readonly Func<TInput, TOutput> transform;
+        private readonly Func<TInputOutput, Task> action;
 
-        public FuncTransformer(Func<TInput, TOutput> transform)
+        public ActionTransformer(Func<TInputOutput, Task> action)
+        {
+            this.action = action;
+        }
+
+        public ActionTransformer(Action<TInputOutput> action) 
+            : this(input =>
+            {
+                action(input);
+                return Task.FromResult(false);
+            })
+        {
+        }
+
+        public override async Task<TInputOutput> Transform(TInputOutput input)
+        {
+            await action(input);
+            return input;
+        }
+    }
+
+    public class FuncTransformer<TInput, TOutput> : Transformer<TInput, TOutput>
+        //where TInput : ISomething
+        //where TOutput : ISomething
+    {
+        private readonly Func<TInput, Task<TOutput>> transform;
+
+        public FuncTransformer(Func<TInput, Task<TOutput>> transform)
         {
             this.transform = transform;
         }
 
-        public override TOutput Transform(TInput model) => transform(model);
+        public FuncTransformer(Func<TInput, TOutput> transform) : this(input => Task.FromResult(transform(input)))
+        {
+        }
+
+        public override Task<TOutput> Transform(TInput input) => transform(input);
     }
 
     public abstract class Transformer<TInput, TOutput> : ITransformer<TInput, TOutput>
+        //where TInput : ISomething
+        //where TOutput : ISomething
     {
         public virtual Trigger Trigger { get; set; } = Trigger.AfterModelCreation;
         public virtual int Priority { get; set; } = 0;
-        public abstract TOutput Transform(TInput input);
+        public abstract Task<TOutput> Transform(TInput input);
 
-        object ITransformer.Transform(object input)
-            => Transform((TInput)input);
+        async Task<ISomething> ITransformer.Transform(ISomething input)
+        {
+            return await Transform((TInput) input);
+        }
     }
-    public interface ITransformer<in TInput, out TOutput> : ITransformer
-        /* where TInputModel, TOutputModel : ISomething */
+    public interface ITransformer<in TInput, TOutput> : ITransformer
+        //where TInput : ISomething
+        //where TOutput : ISomething
     {
-        TOutput Transform(TInput input);
+        Task<TOutput> Transform(TInput input);
     }
 
     public interface ITransformer
     {
         int Priority { get; set; }
         Trigger Trigger { get; set; }
-        object/*ISomething*/ Transform(object/*ISomething*/ input);
+        Task<ISomething> Transform(ISomething input);
     }
+
+    //public interface ISomething
+    //{
+        
+    //}
 }

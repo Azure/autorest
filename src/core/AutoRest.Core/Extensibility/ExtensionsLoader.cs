@@ -12,7 +12,7 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
-using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel, AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
+using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 namespace AutoRest.Core.Extensibility
 {
     public static class ExtensionsLoader
@@ -122,7 +122,7 @@ namespace AutoRest.Core.Extensibility
         }
 
         [Obsolete]
-        public static ITransformer<string, object> GetParser()
+        public static ITransformer GetParser()
         {
             // TODO: not necessary in final model
             Logger.LogInfo(Resources.InitializingModeler);
@@ -138,7 +138,7 @@ namespace AutoRest.Core.Extensibility
                         Resources.ParameterValueIsMissing, "Modeler"));
             }
 
-            ITransformer<string, object> parser = null;
+            ITransformer parser = null;
 
             string configurationFile = GetConfigurationFileContent(Settings.Instance);
 
@@ -148,7 +148,7 @@ namespace AutoRest.Core.Extensibility
                 {
                     var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
                     // HACK!
-                    parser = LoadTypeFromAssembly<ITransformer<string, object>>(
+                    parser = LoadTypeFromAssembly<ITransformer>(
                         config.Modelers.ToDictionary(x => x.Key, x => new AutoRestProviderConfiguration { Settings = x.Value.Settings, TypeName = x.Value.TypeName.Replace("Modeler", "Parser") }), 
                         Settings.Instance.Modeler);
                     Settings.PopulateSettings(parser, Settings.Instance.CustomSettings);

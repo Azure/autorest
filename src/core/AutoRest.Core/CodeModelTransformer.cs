@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
 
+using System.Threading.Tasks;
 using AutoRest.Core.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -15,13 +16,13 @@ namespace AutoRest.Core
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override TCodeModel Transform(CodeModel codeModel)
+        public override Task<TCodeModel> Transform(CodeModel codeModel)
         {
-            return codeModel as TCodeModel;
+            return Task.FromResult(codeModel as TCodeModel);
         }
     }
 
-    public class CodeModelTransformer<TCodeModel, TBaseTransformer> : CodeModelTransformer<TCodeModel> where TCodeModel : CodeModel where TBaseTransformer : class, ITransformer<CodeModel, CodeModel>
+    public class CodeModelTransformer<TCodeModel, TBaseTransformer> : CodeModelTransformer<TCodeModel> where TCodeModel : CodeModel where TBaseTransformer : class, ITransformer
     {
         protected TBaseTransformer Base = New<TBaseTransformer>();
     }

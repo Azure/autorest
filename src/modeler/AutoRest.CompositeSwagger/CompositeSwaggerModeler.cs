@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CompositeSwagger
@@ -31,7 +32,7 @@ namespace AutoRest.CompositeSwagger
             get { return "CompositeSwagger"; }
         }
 
-        public override CodeModel Transform(object serviceDefinition)
+        public override Task<CodeModel> Transform(object serviceDefinition)
         {
             var compositeSwaggerModel = serviceDefinition as CompositeServiceDefinition;
             if (!compositeSwaggerModel.Documents.Any())
@@ -67,7 +68,7 @@ namespace AutoRest.CompositeSwagger
                     compositeClient = Merge(compositeClient, serviceClient);
                 }
             }
-            return compositeClient;
+            return Task.FromResult(compositeClient);
         }
 
         private CodeModel InitializeServiceClient(CompositeServiceDefinition compositeSwaggerModel)
@@ -416,8 +417,9 @@ namespace AutoRest.CompositeSwagger
 
         public override CodeModel Build() // TODO: this is only for compatibility
         {
-            return Transform(new CompositeSwaggerParser().Transform(
-                Settings.FileSystem.ReadFileAsText(Settings.Input)));
+            var input = Settings.FileSystem.ReadFileAsText(Settings.Input);
+            var serviceDefinition = new CompositeSwaggerParser().Transform(input).Result;
+            return Transform(serviceDefinition).Result;
         }
     }
 }

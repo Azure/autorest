@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task MarkAllDeprecatedOperationVariantsObsolete()
         {
-            using (var fileSystem = GenerateCodeForTestFromSpec())
+            using (var fileSystem = await GenerateCodeForTestFromSpec())
             {
                 // Expected Files
                 Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\ResultObject.cs"));
@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task MarkAllDeprecatedOperationVariantsObsoleteAzure()
         {
-            using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
+            using (var fileSystem = await GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
             {
                 // Expected Files
                 Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\ResultObject.cs"));

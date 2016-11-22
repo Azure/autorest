@@ -23,7 +23,7 @@ namespace AutoRest.Preview
 
         private async Task<string> RegenerateAsync(string swagger, string language, bool shortVersion)
         {
-            using (var fileSystem = AutoRestPipeline.GenerateCodeForTest(
+            using (var fileSystem = await AutoRestPipeline.GenerateCodeForTest(
                                             swagger, 
                                             language, 
                                             messages => ui.Post(_ => linting.ProcessMessages(swagger, messages), null)))

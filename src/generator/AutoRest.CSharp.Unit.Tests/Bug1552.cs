@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task CheckForProperDescriptionEscaping()
         {
-            using (var fileSystem = GenerateCodeForTestFromSpec())
+            using (var fileSystem = await GenerateCodeForTestFromSpec())
             {
                 // if newlines and stuff aren't excaped properly, compilation will fail
                 var result = await Compile(fileSystem);

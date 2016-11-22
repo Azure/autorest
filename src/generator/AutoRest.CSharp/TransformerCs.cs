@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
 
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.CSharp.Model;
@@ -12,7 +13,7 @@ namespace AutoRest.CSharp
 {
     public class TransformerCs : CodeModelTransformer<CodeModelCs>
     {
-        public override CodeModelCs Transform(CodeModel cs)
+        public override Task<CodeModelCs> Transform(CodeModel cs)
         {
             var codeModel = cs as CodeModelCs;
             // we're guaranteed to be in our language-specific context here.
@@ -26,7 +27,7 @@ namespace AutoRest.CSharp
             // Do parameter transformations
             TransformParameters(codeModel);
 
-            return codeModel;
+            return Task.FromResult(codeModel);
         }
 
         protected void TransformParameters(CodeModel codeModel)

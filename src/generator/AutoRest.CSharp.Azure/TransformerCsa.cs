@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -26,12 +27,12 @@ namespace AutoRest.CSharp.Azure
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override CodeModelCs Transform(CodeModel codeModel)
+        public override async Task<CodeModelCs> Transform(CodeModel codeModel)
         {
-            return ((ITransformer<CodeModel, CodeModelCsa>)this).Transform(codeModel);
+            return await ((ITransformer<CodeModel, CodeModelCsa>)this).Transform(codeModel);
         }
 
-        CodeModelCsa ITransformer<CodeModel, CodeModelCsa>.Transform(CodeModel cs)
+        Task<CodeModelCsa> ITransformer<CodeModel, CodeModelCsa>.Transform(CodeModel cs)
         {
             var codeModel = cs as CodeModelCsa;
 
@@ -60,7 +61,7 @@ namespace AutoRest.CSharp.Azure
                 }
             }
 
-            return codeModel;
+            return Task.FromResult(codeModel);
         }
 
         public virtual void NormalizeODataMethods(CodeModel client)

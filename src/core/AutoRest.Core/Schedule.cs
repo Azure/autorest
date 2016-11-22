@@ -11,12 +11,11 @@ namespace AutoRest.Core
 
         public IEnumerable<Schedule> Continuations { get; set; }
 
-        public Task Run(object input)
+        public async Task Run(object input)
         {
-            // TODO: make transformers themselves async
-            var output = Transformer.Transform(input);
+            var output = await Transformer.Transform(input);
             var continuationTasks = Continuations.AsParallel().Select(c => c.Run(output));
-            return Task.WhenAll(continuationTasks);
+            await Task.WhenAll(continuationTasks);
         }
 
         // TODO: the following is just convenience for now - reevaluate

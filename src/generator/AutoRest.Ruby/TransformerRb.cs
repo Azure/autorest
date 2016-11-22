@@ -3,6 +3,7 @@
 // 
 
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -14,14 +15,14 @@ namespace AutoRest.Ruby
 {
     public class TransformerRb : CodeModelTransformer<CodeModelRb> 
     {
-        public override CodeModelRb Transform(CodeModel cm)
+        public override Task<CodeModelRb> Transform(CodeModel cm)
         {
             var codeModel = cm as CodeModelRb;
             SwaggerExtensions.NormalizeClientModel(codeModel);
             PopulateAdditionalProperties(codeModel);
             Flattening(codeModel);
 
-            return codeModel;
+            return Task.FromResult(codeModel);
         }
 
         /// <summary>

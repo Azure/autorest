@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
@@ -62,7 +63,7 @@ namespace AutoRest.Swagger
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override CodeModel Transform(object serviceDefinition)
+        public override async Task<CodeModel> Transform(object serviceDefinition)
         {
             ServiceDefinition = serviceDefinition as ServiceDefinition;
 
@@ -71,7 +72,7 @@ namespace AutoRest.Swagger
             UpdateSettings();
 
             InitializeClientModel();
-            BuildCompositeTypes();
+            await BuildCompositeTypes();
 
             // Build client parameters
             foreach (var swaggerParameter in ServiceDefinition.Parameters.Values)
@@ -156,8 +157,8 @@ namespace AutoRest.Swagger
             }
 
             var parser = new SwaggerParser();
-            var oldDefintion = parser.Transform(Settings.FileSystem.ReadFileAsText(Settings.Previous));
-            var newDefintion = parser.Transform(Settings.FileSystem.ReadFileAsText(Settings.Input));
+            var oldDefintion = parser.Transform(Settings.FileSystem.ReadFileAsText(Settings.Previous)).Result;
+            var newDefintion = parser.Transform(Settings.FileSystem.ReadFileAsText(Settings.Input)).Result;
             
             var context = new ComparisonContext(oldDefintion, newDefintion);
 
@@ -245,7 +246,7 @@ namespace AutoRest.Swagger
         /// <summary>
         /// Build composite types from definitions
         /// </summary>
-        public virtual void BuildCompositeTypes()
+        public virtual async Task BuildCompositeTypes()
         {
             // Load any external references
             foreach (var reference in ServiceDefinition.ExternalReferences)
@@ -261,7 +262,7 @@ namespace AutoRest.Swagger
                 }
                 string externalDefinition = Settings.FileSystem.ReadFileAsText(filePath);
                 var parser = new SwaggerParser();
-                ServiceDefinition external = parser.Transform(externalDefinition);
+                ServiceDefinition external = await parser.Transform(externalDefinition);
                 external.Definitions.ForEach(d => ServiceDefinition.Definitions[d.Key] = d.Value);
             }
 
@@ -410,10 +411,11 @@ namespace AutoRest.Swagger
             get { return new SchemaResolver(this); }
         }
 
-        public override CodeModel Build() // TODO: this is only for compatibility
+        public override CodeModel Build() // TODO: this is only for convenience
         {
-            return Transform(new SwaggerParser().Transform(
-                Settings.FileSystem.ReadFileAsText(Settings.Input)));
+            var input = Settings.FileSystem.ReadFileAsText(Settings.Input);
+            var serviceDefinition = new SwaggerParser().Transform(input).GetAwaiter().GetResult();
+            return Transform(serviceDefinition).GetAwaiter().GetResult();
         }
     }
 }

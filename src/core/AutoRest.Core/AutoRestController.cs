@@ -10,6 +10,7 @@ using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace AutoRest.Core
 {
@@ -72,7 +73,6 @@ namespace AutoRest.Core
                         throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel,
                             exception.Message);
                     }
-                    return codeModel;
                 }),
                 new FuncTransformer<CodeModel, CodeModel>(codeModel =>
                 {
@@ -85,9 +85,8 @@ namespace AutoRest.Core
                         throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel,
                             exception.Message);
                     }
-                    return codeModel;
                 }),
-                new FuncTransformer<object, object>(codeModel =>
+                new ActionTransformer<object>(codeModel =>
                 {
                     try
                     {
@@ -107,7 +106,6 @@ namespace AutoRest.Core
                         throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel,
                             exception.Message);
                     }
-                    return codeModel;
                 }),
                 new FuncTransformer<CodeModel, CodeModel>(codeModel =>
                 {
@@ -139,7 +137,7 @@ namespace AutoRest.Core
                         throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
                     }
                 }),
-                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                new FuncTransformer<CodeModel, CodeModel>(async codeModel =>
                 {
                     try
                     {
@@ -147,7 +145,7 @@ namespace AutoRest.Core
                         {
                             // apply language-specific tranformation (more than just language-specific types)
                             // used to be called "NormalizeClientModel" . 
-                            return plugin.Transformer.Transform(codeModel);
+                            return await plugin.Transformer.Transform(codeModel) as CodeModel;
                         }
                     }
                     catch (Exception exception)
@@ -185,7 +183,7 @@ namespace AutoRest.Core
                         throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
                     }
                 }),
-                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                new ActionTransformer<CodeModel>(codeModel => // TODO: return MemoryFS containing code
                 {
                     try
                     {
@@ -199,7 +197,6 @@ namespace AutoRest.Core
                     {
                         throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
                     }
-                    return null;
                 })
             );
 

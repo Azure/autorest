@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Logging;
 using AutoRest.Swagger.JsonConverters;
@@ -15,7 +16,7 @@ namespace AutoRest.Swagger
 {
     public class SwaggerParser : Transformer<string, ServiceDefinition>
     {
-        public override ServiceDefinition Transform(string swaggerDocument)
+        public override Task<ServiceDefinition> Transform(string swaggerDocument)
         {
             try
             {
@@ -42,7 +43,7 @@ namespace AutoRest.Swagger
                     }
                 }
 
-                return swaggerService;
+                return Task.FromResult(swaggerService);
             }
             catch (JsonException ex)
             {
@@ -53,7 +54,7 @@ namespace AutoRest.Swagger
 
         public ServiceDefinition GetServiceDefinition()
         {
-            return Transform(Settings.Instance.FileSystem.ReadFileAsText(Settings.Instance.Input));
+            return Transform(Settings.Instance.FileSystem.ReadFileAsText(Settings.Instance.Input)).GetAwaiter().GetResult();
         }
     }
 }
