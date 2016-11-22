@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Unit.Tests
 
                 // apply language-specific tranformation (more than just language-specific types)
                 // used to be called "NormalizeClientModel" . 
-                codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+                codeModel = plugin.Transformer.TransformModel(codeModel);
 
                 // next set of extensions
                 codeModel = AutoRestController.RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);

@@ -7,7 +7,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core
 {
-    public class CodeModelTransformer<TCodeModel> : ITransformer<TCodeModel> where TCodeModel : CodeModel
+    public class CodeModelTransformer<TCodeModel> : ITransformer<CodeModel, TCodeModel> where TCodeModel : CodeModel
     {
         public virtual Trigger Trigger { get; set; } = Trigger.AfterModelCreation;
         public virtual int Priority { get; set; } = 0;
@@ -18,13 +18,13 @@ namespace AutoRest.Core
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public virtual TCodeModel TransformCodeModel(CodeModel codeModel)
+        public virtual TCodeModel TransformModel(CodeModel codeModel)
         {
             return codeModel as TCodeModel;
         }
     }
 
-    public class CodeModelTransformer<TCodeModel, TBaseTransformer> : CodeModelTransformer<TCodeModel> where TCodeModel : CodeModel where TBaseTransformer : class, ITransformer<CodeModel>
+    public class CodeModelTransformer<TCodeModel, TBaseTransformer> : CodeModelTransformer<TCodeModel> where TCodeModel : CodeModel where TBaseTransformer : class, ITransformer<CodeModel, CodeModel>
     {
         protected TBaseTransformer Base = New<TBaseTransformer>();
     }

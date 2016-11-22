@@ -16,7 +16,7 @@ namespace AutoRest.NodeJS
 {
     public class TransformerJs : CodeModelTransformer<CodeModelJs>
     {
-        public override CodeModelJs TransformCodeModel(CodeModel cm)
+        public override CodeModelJs TransformModel(CodeModel cm)
         {
             var codeModel = cm as CodeModelJs;
 

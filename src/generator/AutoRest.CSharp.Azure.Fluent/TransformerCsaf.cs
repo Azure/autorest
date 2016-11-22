@@ -12,9 +12,9 @@ using AutoRest.Extensions.Azure;
 
 namespace AutoRest.CSharp.Azure.Fluent
 {
-    public class TransformerCsaf : TransformerCsa, ITransformer<CodeModelCsaf>
+    public class TransformerCsaf : TransformerCsa, ITransformer<CodeModel, CodeModelCsaf>
     {
-        CodeModelCsaf ITransformer<CodeModelCsaf>.TransformCodeModel(CodeModel cs)
+        CodeModelCsaf ITransformer<CodeModel, CodeModelCsaf>.TransformModel(CodeModel cs)
         {
             var codeModel = cs as CodeModelCsaf;
 
@@ -42,9 +42,9 @@ namespace AutoRest.CSharp.Azure.Fluent
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override CodeModelCs TransformCodeModel(CodeModel codeModel)
+        public override CodeModelCs TransformModel(CodeModel codeModel)
         {
-            return ((ITransformer<CodeModelCsaf>) this).TransformCodeModel(codeModel);
+            return ((ITransformer<CodeModel, CodeModelCsaf>) this).TransformModel(codeModel);
         }
 
         public void NormalizeResourceTypes(CodeModelCsaf codeModel)

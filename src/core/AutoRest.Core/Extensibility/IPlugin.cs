@@ -11,7 +11,7 @@ namespace AutoRest.Core.Extensibility
     public interface IPlugin<out TSettings, out TSerializer, out TTransformer, out TGenerator, out TNamer, out TCodeModel>
         where TSettings : IGeneratorSettings
         where TSerializer : IModelSerializer<TCodeModel>
-        where TTransformer : ITransformer<TCodeModel>
+        where TTransformer : ITransformer<CodeModel, TCodeModel>
         where TGenerator : CodeGenerator
         where TNamer : CodeNamer
         where TCodeModel : CodeModel

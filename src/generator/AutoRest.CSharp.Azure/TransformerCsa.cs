@@ -18,7 +18,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Azure
 {
-    public class TransformerCsa : TransformerCs, ITransformer<CodeModelCsa>
+    public class TransformerCsa : TransformerCs, ITransformer<CodeModel, CodeModelCsa>
     {
         /// <summary>
         /// A type-specific method for code model tranformation.
@@ -26,12 +26,12 @@ namespace AutoRest.CSharp.Azure
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override CodeModelCs TransformCodeModel(CodeModel codeModel)
+        public override CodeModelCs TransformModel(CodeModel codeModel)
         {
-            return ((ITransformer<CodeModelCsa>)this).TransformCodeModel(codeModel);
+            return ((ITransformer<CodeModel, CodeModelCsa>)this).TransformModel(codeModel);
         }
 
-        CodeModelCsa ITransformer<CodeModelCsa>.TransformCodeModel(CodeModel cs)
+        CodeModelCsa ITransformer<CodeModel, CodeModelCsa>.TransformModel(CodeModel cs)
         {
             var codeModel = cs as CodeModelCsa;
 

@@ -12,7 +12,7 @@ namespace AutoRest.Core.Extensibility
             IPlugin<TSettings, TSerializer, TTransformer, TGenerator, TNamer, TCodeModel>
         where TSettings : IGeneratorSettings, new()
         where TSerializer : IModelSerializer<TCodeModel>, new()
-        where TTransformer : ITransformer<TCodeModel>, new()
+        where TTransformer : ITransformer<CodeModel, TCodeModel>, new()
         where TGenerator : CodeGenerator, new()
         where TNamer : CodeNamer, new()
         where TCodeModel : CodeModel
@@ -21,9 +21,9 @@ namespace AutoRest.Core.Extensibility
         private readonly CodeGenerator _generator;
         private readonly CodeNamer _namer;
         private readonly IModelSerializer<TCodeModel> _serializer;
-        private readonly ITransformer<TCodeModel> _transformer;
+        private readonly ITransformer<CodeModel, TCodeModel> _transformer;
 
-        private Plugin(IGeneratorSettings generatorSettings, IModelSerializer<TCodeModel> serializer, ITransformer<TCodeModel> transformer,
+        private Plugin(IGeneratorSettings generatorSettings, IModelSerializer<TCodeModel> serializer, ITransformer<CodeModel, TCodeModel> transformer,
             CodeGenerator generator, CodeNamer namer)
         {
             _generatorSettings = generatorSettings;

@@ -10,15 +10,15 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.NodeJS.Azure
 {
-    public class TransformerJsa : TransformerJs, ITransformer<CodeModelJsa>
+    public class TransformerJsa : TransformerJs, ITransformer<CodeModel, CodeModelJsa>
     {
 
-        public override CodeModelJs TransformCodeModel(CodeModel codeModel)
+        public override CodeModelJs TransformModel(CodeModel codeModel)
         {
-            return ((ITransformer<CodeModelJsa>)this).TransformCodeModel(codeModel);
+            return ((ITransformer<CodeModel, CodeModelJsa>)this).TransformModel(codeModel);
         }
 
-        CodeModelJsa ITransformer<CodeModelJsa>.TransformCodeModel(CodeModel cm)
+        CodeModelJsa ITransformer<CodeModel, CodeModelJsa>.TransformModel(CodeModel cm)
         {
             var codeModel = cm as CodeModelJsa;
             if (codeModel == null)
@@ -33,7 +33,7 @@ namespace AutoRest.NodeJS.Azure
 
             AzureExtensions.NormalizeAzureClientModel(codeModel);
 
-            base.TransformCodeModel(codeModel);
+            base.TransformModel(codeModel);
 
             NormalizePaginatedMethods(codeModel);
             ExtendAllResourcesToBaseResource(codeModel);

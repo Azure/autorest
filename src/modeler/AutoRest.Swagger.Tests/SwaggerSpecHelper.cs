@@ -8,7 +8,6 @@ using AutoRest.Core;
 using AutoRest.Core.Utilities;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 
 namespace AutoRest.Swagger.Tests
 {

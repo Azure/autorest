@@ -5,9 +5,14 @@
 namespace AutoRest.Core {
     using Model;
 
-    public interface ITransformer<out TResultCodeModel> where TResultCodeModel : CodeModel {
+    public interface ITransformer<in TInputModel, out TOutputModel> : ITransformer  /* where TInputModel, TOutputModel : ISomething */
+    {
         int Priority {get; set;}
         Trigger Trigger {get; set;}
-        TResultCodeModel TransformCodeModel(CodeModel codeModel);
+        TOutputModel TransformModel(TInputModel model);
+    }
+
+    public interface ITransformer
+    {
     }
 }

@@ -17,7 +17,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Ruby.Azure
 {
-    public class TransformerRba : TransformerRb, ITransformer<CodeModelRba>
+    public class TransformerRba : TransformerRb, ITransformer<CodeModel, CodeModelRba>
     {
         /// <summary>
         ///     A type-specific method for code model tranformation.
@@ -25,12 +25,12 @@ namespace AutoRest.Ruby.Azure
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override CodeModelRb TransformCodeModel(CodeModel codeModel)
+        public override CodeModelRb TransformModel(CodeModel codeModel)
         {
-            return ((ITransformer<CodeModelRba>) this).TransformCodeModel(codeModel);
+            return ((ITransformer<CodeModel, CodeModelRba>) this).TransformModel(codeModel);
         }
 
-        CodeModelRba ITransformer<CodeModelRba>.TransformCodeModel(CodeModel cs)
+        CodeModelRba ITransformer<CodeModel, CodeModelRba>.TransformModel(CodeModel cs)
         {
             var codeModel = cs as CodeModelRba;
 
