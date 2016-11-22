@@ -13,9 +13,9 @@ namespace AutoRest.Core
 
         public async Task Run(object input)
         {
-            var output = await Transformer.Transform(input);
+            var output = await Transformer.Transform(input).ConfigureAwait(false);
             var continuationTasks = Continuations.AsParallel().Select(c => c.Run(output));
-            await Task.WhenAll(continuationTasks);
+            await Task.WhenAll(continuationTasks).ConfigureAwait(false);
         }
 
         // TODO: the following is just convenience for now - reevaluate

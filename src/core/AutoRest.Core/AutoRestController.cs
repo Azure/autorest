@@ -11,6 +11,7 @@ using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 
 namespace AutoRest.Core
 {
@@ -48,8 +49,7 @@ namespace AutoRest.Core
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
 
-            var plugin = ExtensionsLoader.GetPlugin();
-            Logger.WriteOutput(plugin.CodeGenerator.UsageInstructions);
+            IAnyPlugin plugin = null;
 
             // FIXED SCHEDULE
             var messages = new List<ValidationMessage>();
@@ -107,14 +107,40 @@ namespace AutoRest.Core
                             exception.Message);
                     }
                 }),
-                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                new FuncTransformer<CodeModel, string>(codeModel => new ModelSerializer<CodeModel>().ToJson(codeModel)),
+                new ActionTransformer<string>(_ =>
+                {
+                    plugin = ExtensionsLoader.GetPlugin();
+                    Logger.WriteOutput(plugin.CodeGenerator.UsageInstructions);
+                }),
+                //new FuncTransformer<string, CodeModel>(async json =>
+                //{
+                //    try
+                //    {
+                //        using (plugin.Activate())
+                //        {
+                //            var codeModel = plugin.Serializer.Load(json);
+                //            codeModel = RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
+                //            codeModel = await plugin.Transformer.Transform(codeModel) as CodeModel;
+                //            codeModel = RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
+                //            codeModel = RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
+                //            await plugin.CodeGenerator.Generate(codeModel);
+                //            return codeModel;
+                //        }
+                //    }
+                //    catch (Exception exception)
+                //    {
+                //        throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                //    }
+                //}),
+                new FuncTransformer<string, CodeModel>(json =>
                 {
                     try
                     {
                         using (plugin.Activate())
                         {
                             // load model into language-specific code model
-                            return plugin.Serializer.Load(new ModelSerializer<CodeModel>().ToJson(codeModel));
+                            return plugin.Serializer.Load(json);
                         }
                     }
                     catch (Exception exception)
@@ -183,14 +209,14 @@ namespace AutoRest.Core
                         throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
                     }
                 }),
-                new ActionTransformer<CodeModel>(codeModel => // TODO: return MemoryFS containing code
+                new ActionTransformer<CodeModel>(async codeModel => // TODO: return MemoryFS containing code
                 {
                     try
                     {
                         using (plugin.Activate())
                         {
                             // Generate code from CodeModel.
-                            plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+                            await plugin.CodeGenerator.Generate(codeModel);
                         }
                     }
                     catch (Exception exception)

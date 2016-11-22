@@ -53,9 +53,10 @@ namespace AutoRest.Core
     }
 
     public abstract class Transformer<TInput, TOutput> : ITransformer<TInput, TOutput>
-        //where TInput : ISomething
-        //where TOutput : ISomething
+    //where TInput : ISomething
+    //where TOutput : ISomething
     {
+        public  Name { get; set; }
         public virtual Trigger Trigger { get; set; } = Trigger.AfterModelCreation;
         public virtual int Priority { get; set; } = 0;
         public abstract Task<TOutput> Transform(TInput input);
@@ -74,6 +75,8 @@ namespace AutoRest.Core
 
     public interface ITransformer
     {
+        string Name { get; set; }
+
         int Priority { get; set; }
         Trigger Trigger { get; set; }
         Task<ISomething> Transform(ISomething input);
