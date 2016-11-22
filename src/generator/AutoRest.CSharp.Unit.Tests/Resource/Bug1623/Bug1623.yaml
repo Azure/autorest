@@ -1,0 +1,27 @@
+﻿swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+produces:
+  - application/json
+paths:
+  /operationInteger:
+    get:
+      x-ms-pageable:
+        nextLinkName: nextLink
+      operationId: products_list
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ProductListResult'
+definitions:
+  ProductListResult:
+    type: object
+    properties:
+      value:
+        type: array
+        items:
+          type: integer
+      nextLink:
+        type: string
