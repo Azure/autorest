@@ -27,12 +27,12 @@ namespace AutoRest.CSharp.Azure
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override async Task<CodeModelCs> Transform(CodeModel codeModel)
+        public override async Task<CodeModelCs> TransformAsync(CodeModel codeModel)
         {
-            return await ((ITransformer<CodeModel, CodeModelCsa>)this).Transform(codeModel);
+            return await ((ITransformer<CodeModel, CodeModelCsa>)this).TransformAsync(codeModel);
         }
 
-        Task<CodeModelCsa> ITransformer<CodeModel, CodeModelCsa>.Transform(CodeModel cs)
+        Task<CodeModelCsa> ITransformer<CodeModel, CodeModelCsa>.TransformAsync(CodeModel cs)
         {
             var codeModel = cs as CodeModelCsa;
 

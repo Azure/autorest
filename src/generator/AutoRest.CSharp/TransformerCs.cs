@@ -13,7 +13,7 @@ namespace AutoRest.CSharp
 {
     public class TransformerCs : CodeModelTransformer<CodeModelCs>
     {
-        public override Task<CodeModelCs> Transform(CodeModel cs)
+        public override Task<CodeModelCs> TransformAsync(CodeModel cs)
         {
             var codeModel = cs as CodeModelCs;
             // we're guaranteed to be in our language-specific context here.

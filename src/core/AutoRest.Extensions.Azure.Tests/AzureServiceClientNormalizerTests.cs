@@ -87,7 +87,7 @@ namespace AutoRest.Extensions.Azure.Tests
 
                 new Settings();
                 var transformer = new SampleAzureTransformer();
-                codeModel = await transformer.Transform(codeModel);
+                codeModel = await transformer.TransformAsync(codeModel);
 
                 Assert.Equal(3, codeModel.ModelTypes.Count);
                 Assert.Equal("Dog", codeModel.ModelTypes.First(m => m.Name == "Dog").Name);
@@ -197,7 +197,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 codeModel.Add(dog);
                 new Settings();
                 var transformer = new SampleAzureTransformer();
-                codeModel = await transformer.Transform(codeModel);
+                codeModel = await transformer.TransformAsync(codeModel);
 
                 Assert.Equal(3, codeModel.ModelTypes.Count);
                 Assert.Equal("Dog", codeModel.ModelTypes.First(m => m.Name == "Dog").Name);
@@ -271,7 +271,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 }));
                 new Settings();
                 var transformer = new SampleAzureTransformer();
-                transformer.Transform(codeModel);
+                transformer.TransformAsync(codeModel);
 
                 Assert.Equal(3, codeModel.ModelTypes.Count);
             }
@@ -386,7 +386,7 @@ namespace AutoRest.Extensions.Azure.Tests
 
                 new Settings();
                 var transformer = new SampleAzureTransformer();
-                codeModel = await transformer.Transform(codeModel);
+                codeModel = await transformer.TransformAsync(codeModel);
 
                 Assert.Equal(4, codeModel.ModelTypes.Count);
                 Assert.Equal("Dog", codeModel.ModelTypes.First(m => m.Name == "Dog").Name);
@@ -413,7 +413,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
                 var transformer = new SampleAzureTransformer();
-                codeModel = await transformer.Transform(codeModel);
+                codeModel = await transformer.TransformAsync(codeModel);
 
                 Assert.NotNull(codeModel);
                 Assert.Equal(5, codeModel.Methods[0].Parameters.Count);
@@ -437,7 +437,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
                 var transformer = new SampleAzureTransformer();
-                codeModel = await transformer.Transform(codeModel);
+                codeModel = await transformer.TransformAsync(codeModel);
                 Assert.NotNull(codeModel);
                 var resource = codeModel.ModelTypes.First(m =>
                         m.Name.EqualsIgnoreCase("Resource"));
@@ -464,7 +464,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
                 var transformer = new SampleAzureTransformer();
-                codeModel = await transformer.Transform(codeModel);
+                codeModel = await transformer.TransformAsync(codeModel);
 
 
                 Assert.NotNull(codeModel);
@@ -497,7 +497,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
                 var transformer = new SampleAzureTransformer();
-                codeModel = await transformer.Transform(codeModel);
+                codeModel = await transformer.TransformAsync(codeModel);
 
                 Assert.NotNull(codeModel);
                 Assert.Equal(3, codeModel.Methods.Count);
@@ -527,7 +527,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
                 var transformer = new SampleAzureTransformer();
-                codeModel = await transformer.Transform(codeModel);
+                codeModel = await transformer.TransformAsync(codeModel);
                 Assert.NotNull(codeModel);
                 Assert.True(codeModel.ModelTypes.Any(t => t.Name == "Product"));
                 // ProductProperties type is not removed because it is referenced in response of one of the methods

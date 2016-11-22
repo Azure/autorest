@@ -63,7 +63,7 @@ namespace AutoRest.Swagger
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override async Task<CodeModel> Transform(object serviceDefinition)
+        public override async Task<CodeModel> TransformAsync(object serviceDefinition)
         {
             ServiceDefinition = serviceDefinition as ServiceDefinition;
 
@@ -157,8 +157,8 @@ namespace AutoRest.Swagger
             }
 
             var parser = new SwaggerParser();
-            var oldDefintion = parser.Transform(Settings.FileSystem.ReadFileAsText(Settings.Previous)).Result;
-            var newDefintion = parser.Transform(Settings.FileSystem.ReadFileAsText(Settings.Input)).Result;
+            var oldDefintion = parser.TransformAsync(Settings.FileSystem.ReadFileAsText(Settings.Previous)).Result;
+            var newDefintion = parser.TransformAsync(Settings.FileSystem.ReadFileAsText(Settings.Input)).Result;
             
             var context = new ComparisonContext(oldDefintion, newDefintion);
 
@@ -262,7 +262,7 @@ namespace AutoRest.Swagger
                 }
                 string externalDefinition = Settings.FileSystem.ReadFileAsText(filePath);
                 var parser = new SwaggerParser();
-                ServiceDefinition external = await parser.Transform(externalDefinition);
+                ServiceDefinition external = await parser.TransformAsync(externalDefinition);
                 external.Definitions.ForEach(d => ServiceDefinition.Definitions[d.Key] = d.Value);
             }
 
@@ -414,8 +414,8 @@ namespace AutoRest.Swagger
         public override CodeModel Build() // TODO: this is only for convenience
         {
             var input = Settings.FileSystem.ReadFileAsText(Settings.Input);
-            var serviceDefinition = new SwaggerParser().Transform(input).GetAwaiter().GetResult();
-            return Transform(serviceDefinition).GetAwaiter().GetResult();
+            var serviceDefinition = new SwaggerParser().TransformAsync(input).GetAwaiter().GetResult();
+            return TransformAsync(serviceDefinition).GetAwaiter().GetResult();
         }
     }
 }

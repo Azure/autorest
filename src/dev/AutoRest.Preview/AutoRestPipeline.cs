@@ -65,7 +65,7 @@ namespace AutoRest
 
                     // apply language-specific tranformation (more than just language-specific types)
                     // used to be called "NormalizeClientModel" . 
-                    codeModel = await plugin.Transformer.Transform(codeModel) as CodeModel;
+                    codeModel = await plugin.Transformer.TransformAsync(codeModel) as CodeModel;
 
                     // next set of extensions
                     codeModel = AutoRestController.RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);

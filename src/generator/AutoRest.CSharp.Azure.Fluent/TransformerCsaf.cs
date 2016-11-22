@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Azure.Fluent
 {
     public class TransformerCsaf : TransformerCsa, ITransformer<CodeModel, CodeModelCsaf>
     {
-        Task<CodeModelCsaf> ITransformer<CodeModel, CodeModelCsaf>.Transform(CodeModel cs)
+        Task<CodeModelCsaf> ITransformer<CodeModel, CodeModelCsaf>.TransformAsync(CodeModel cs)
         {
             var codeModel = cs as CodeModelCsaf;
 
@@ -43,9 +43,9 @@ namespace AutoRest.CSharp.Azure.Fluent
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override async Task<CodeModelCs> Transform(CodeModel codeModel)
+        public override async Task<CodeModelCs> TransformAsync(CodeModel codeModel)
         {
-            return await ((ITransformer<CodeModel, CodeModelCsaf>) this).Transform(codeModel);
+            return await ((ITransformer<CodeModel, CodeModelCsaf>) this).TransformAsync(codeModel);
         }
 
         public void NormalizeResourceTypes(CodeModelCsaf codeModel)

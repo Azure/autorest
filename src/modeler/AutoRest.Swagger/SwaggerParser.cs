@@ -16,7 +16,7 @@ namespace AutoRest.Swagger
 {
     public class SwaggerParser : Transformer<string, ServiceDefinition>
     {
-        public override Task<ServiceDefinition> Transform(string swaggerDocument)
+        public override Task<ServiceDefinition> TransformAsync(string swaggerDocument)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace AutoRest.Swagger
 
         public ServiceDefinition GetServiceDefinition()
         {
-            return Transform(Settings.Instance.FileSystem.ReadFileAsText(Settings.Instance.Input)).GetAwaiter().GetResult();
+            return TransformAsync(Settings.Instance.FileSystem.ReadFileAsText(Settings.Instance.Input)).GetAwaiter().GetResult();
         }
     }
 }

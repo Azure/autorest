@@ -13,7 +13,7 @@ namespace AutoRest.CompositeSwagger
 {
     public class CompositeSwaggerParser : Transformer<string, CompositeServiceDefinition>
     {
-        public override Task<CompositeServiceDefinition> Transform(string json)
+        public override Task<CompositeServiceDefinition> TransformAsync(string json)
         {
             try
             {

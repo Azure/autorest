@@ -492,6 +492,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Error in transformer &apos;{0}&apos;. &apos;{1}&apos;..
+        /// </summary>
+        public static string TransformerError {
+            get {
+                return ResourceManager.GetString("TransformerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Type &apos;{0}&apos; name should be assembly qualified. For example &apos;ClassName, AssemblyName&apos;.
         /// </summary>
         public static string TypeShouldBeAssemblyQualified {

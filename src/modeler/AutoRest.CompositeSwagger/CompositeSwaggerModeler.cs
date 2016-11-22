@@ -32,7 +32,7 @@ namespace AutoRest.CompositeSwagger
             get { return "CompositeSwagger"; }
         }
 
-        public override Task<CodeModel> Transform(object serviceDefinition)
+        public override Task<CodeModel> TransformAsync(object serviceDefinition)
         {
             var compositeSwaggerModel = serviceDefinition as CompositeServiceDefinition;
             if (!compositeSwaggerModel.Documents.Any())
@@ -418,8 +418,8 @@ namespace AutoRest.CompositeSwagger
         public override CodeModel Build() // TODO: this is only for compatibility
         {
             var input = Settings.FileSystem.ReadFileAsText(Settings.Input);
-            var serviceDefinition = new CompositeSwaggerParser().Transform(input).Result;
-            return Transform(serviceDefinition).Result;
+            var serviceDefinition = new CompositeSwaggerParser().TransformAsync(input).Result;
+            return TransformAsync(serviceDefinition).Result;
         }
     }
 }

@@ -26,12 +26,12 @@ namespace AutoRest.Ruby.Azure
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override async Task<CodeModelRb> Transform(CodeModel codeModel)
+        public override async Task<CodeModelRb> TransformAsync(CodeModel codeModel)
         {
-            return await ((ITransformer<CodeModel, CodeModelRba>) this).Transform(codeModel);
+            return await ((ITransformer<CodeModel, CodeModelRba>) this).TransformAsync(codeModel);
         }
 
-        Task<CodeModelRba> ITransformer<CodeModel, CodeModelRba>.Transform(CodeModel cs)
+        Task<CodeModelRba> ITransformer<CodeModel, CodeModelRba>.TransformAsync(CodeModel cs)
         {
             var codeModel = cs as CodeModelRba;
 

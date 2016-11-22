@@ -55,14 +55,14 @@ namespace AutoRest.Core
             var messages = new List<ValidationMessage>();
             var schedule = Schedule.FromLinearPipeline(
                 ExtensionsLoader.GetParser(),
-                new FuncTransformer<object, object>(serviceDefinition =>
+                new FuncTransformer<object, object>("SwaggerValidation", serviceDefinition =>
                 {
                     var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
                     messages.AddRange(validator.GetValidationExceptions(serviceDefinition));
                     return serviceDefinition;
                 }),
                 ExtensionsLoader.GetModeler(),
-                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                new FuncTransformer<CodeModel, CodeModel>("AfterModelCreation", codeModel =>
                 {
                     try
                     {
@@ -74,7 +74,7 @@ namespace AutoRest.Core
                             exception.Message);
                     }
                 }),
-                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                new FuncTransformer<CodeModel, CodeModel>("BeforeLoadingLanguageSpecificModel", codeModel =>
                 {
                     try
                     {
@@ -86,7 +86,7 @@ namespace AutoRest.Core
                             exception.Message);
                     }
                 }),
-                new ActionTransformer<object>(codeModel =>
+                new ActionTransformer<object>("Logging", codeModel =>
                 {
                     try
                     {
@@ -107,8 +107,8 @@ namespace AutoRest.Core
                             exception.Message);
                     }
                 }),
-                new FuncTransformer<CodeModel, string>(codeModel => new ModelSerializer<CodeModel>().ToJson(codeModel)),
-                new ActionTransformer<string>(_ =>
+                new FuncTransformer<CodeModel, string>("model2json", codeModel => new ModelSerializer<CodeModel>().ToJson(codeModel)),
+                new ActionTransformer<string>("load plugin", _ =>
                 {
                     plugin = ExtensionsLoader.GetPlugin();
                     Logger.WriteOutput(plugin.CodeGenerator.UsageInstructions);
@@ -133,7 +133,7 @@ namespace AutoRest.Core
                 //        throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
                 //    }
                 //}),
-                new FuncTransformer<string, CodeModel>(json =>
+                new FuncTransformer<string, CodeModel>("json2model", json =>
                 {
                     try
                     {
@@ -148,7 +148,7 @@ namespace AutoRest.Core
                         throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
                     }
                 }),
-                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                new FuncTransformer<CodeModel, CodeModel>("AfterLoadingLanguageSpecificModel", codeModel =>
                 {
                     try
                     {
@@ -163,7 +163,7 @@ namespace AutoRest.Core
                         throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
                     }
                 }),
-                new FuncTransformer<CodeModel, CodeModel>(async codeModel =>
+                new FuncTransformer<CodeModel, CodeModel>("plugin.Transformer", async codeModel =>
                 {
                     try
                     {
@@ -171,7 +171,7 @@ namespace AutoRest.Core
                         {
                             // apply language-specific tranformation (more than just language-specific types)
                             // used to be called "NormalizeClientModel" . 
-                            return await plugin.Transformer.Transform(codeModel) as CodeModel;
+                            return await plugin.Transformer.TransformAsync(codeModel) as CodeModel;
                         }
                     }
                     catch (Exception exception)
@@ -179,7 +179,7 @@ namespace AutoRest.Core
                         throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
                     }
                 }),
-                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                new FuncTransformer<CodeModel, CodeModel>("AfterLanguageSpecificTransform", codeModel =>
                 {
                     try
                     {
@@ -194,7 +194,7 @@ namespace AutoRest.Core
                         throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
                     }
                 }),
-                new FuncTransformer<CodeModel, CodeModel>(codeModel =>
+                new FuncTransformer<CodeModel, CodeModel>("BeforeGeneratingCode", codeModel =>
                 {
                     try
                     {
@@ -209,7 +209,7 @@ namespace AutoRest.Core
                         throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
                     }
                 }),
-                new ActionTransformer<CodeModel>(async codeModel => // TODO: return MemoryFS containing code
+                new ActionTransformer<CodeModel>("generate code", async codeModel => // TODO: return MemoryFS containing code
                 {
                     try
                     {

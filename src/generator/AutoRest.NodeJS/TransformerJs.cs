@@ -17,7 +17,7 @@ namespace AutoRest.NodeJS
 {
     public class TransformerJs : CodeModelTransformer<CodeModelJs>
     {
-        public override Task<CodeModelJs> Transform(CodeModel cm)
+        public override Task<CodeModelJs> TransformAsync(CodeModel cm)
         {
             var codeModel = cm as CodeModelJs;
 

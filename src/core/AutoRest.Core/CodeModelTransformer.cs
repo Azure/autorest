@@ -16,7 +16,7 @@ namespace AutoRest.Core
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override Task<TCodeModel> Transform(CodeModel codeModel)
+        public override Task<TCodeModel> TransformAsync(CodeModel codeModel)
         {
             return Task.FromResult(codeModel as TCodeModel);
         }

@@ -15,7 +15,7 @@ namespace AutoRest.Ruby
 {
     public class TransformerRb : CodeModelTransformer<CodeModelRb> 
     {
-        public override Task<CodeModelRb> Transform(CodeModel cm)
+        public override Task<CodeModelRb> TransformAsync(CodeModel cm)
         {
             var codeModel = cm as CodeModelRb;
             SwaggerExtensions.NormalizeClientModel(codeModel);

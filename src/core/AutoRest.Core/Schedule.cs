@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Properties;
 
 namespace AutoRest.Core
 {
-    class Schedule
+    public class Schedule
     {
         public ITransformer Transformer { get; set; }
 
@@ -13,7 +15,17 @@ namespace AutoRest.Core
 
         public async Task Run(object input)
         {
-            var output = await Transformer.Transform(input).ConfigureAwait(false);
+            object output = null;
+            try
+            {
+                Logger.LogInfo("> {0}", Transformer.Name); // TODO: resx
+                output = await Transformer.TransformAsync(input).ConfigureAwait(false);
+                Logger.LogInfo("< {0} (triggering: {1})", Transformer.Name, string.Join(", ", Continuations.Select(c => c.Transformer.Name))); // TODO: resx
+            }
+            catch (Exception exception)
+            {
+                throw ErrorManager.CreateError(exception, Resources.TransformerError, Transformer.Name, exception.Message);
+            }
             var continuationTasks = Continuations.AsParallel().Select(c => c.Run(output));
             await Task.WhenAll(continuationTasks).ConfigureAwait(false);
         }

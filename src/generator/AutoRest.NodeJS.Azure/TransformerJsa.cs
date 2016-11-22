@@ -14,12 +14,12 @@ namespace AutoRest.NodeJS.Azure
     public class TransformerJsa : TransformerJs, ITransformer<CodeModel, CodeModelJsa>
     {
 
-        public override async Task<CodeModelJs> Transform(CodeModel codeModel)
+        public override async Task<CodeModelJs> TransformAsync(CodeModel codeModel)
         {
-            return await ((ITransformer<CodeModel, CodeModelJsa>)this).Transform(codeModel);
+            return await ((ITransformer<CodeModel, CodeModelJsa>)this).TransformAsync(codeModel);
         }
 
-        async Task<CodeModelJsa> ITransformer<CodeModel, CodeModelJsa>.Transform(CodeModel cm)
+        async Task<CodeModelJsa> ITransformer<CodeModel, CodeModelJsa>.TransformAsync(CodeModel cm)
         {
             var codeModel = cm as CodeModelJsa;
             if (codeModel == null)
@@ -34,7 +34,7 @@ namespace AutoRest.NodeJS.Azure
 
             AzureExtensions.NormalizeAzureClientModel(codeModel);
 
-            await base.Transform(codeModel);
+            await base.TransformAsync(codeModel);
 
             NormalizePaginatedMethods(codeModel);
             ExtendAllResourcesToBaseResource(codeModel);

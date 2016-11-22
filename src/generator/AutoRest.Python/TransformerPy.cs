@@ -17,7 +17,7 @@ namespace AutoRest.Python
 {
     public class TransformerPy : CodeModelTransformer<CodeModelPy>
     {
-        public override Task<CodeModelPy> Transform(CodeModel cm)
+        public override Task<CodeModelPy> TransformAsync(CodeModel cm)
         {
             var codeModel = cm as CodeModelPy;
 

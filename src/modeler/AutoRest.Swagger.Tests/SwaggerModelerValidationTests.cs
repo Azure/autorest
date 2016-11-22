@@ -54,7 +54,7 @@ namespace AutoRest.Swagger.Tests
                 };
                 IEnumerable<ValidationMessage> messages;
                 var parser = new SwaggerParser();
-                var serviceDefinition = await parser.Transform(Settings.Instance.FileSystem.ReadFileAsText(Settings.Instance.Input));
+                var serviceDefinition = await parser.TransformAsync(Settings.Instance.FileSystem.ReadFileAsText(Settings.Instance.Input));
 
                 // Look for semantic errors and warnings in the document.
                 var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
