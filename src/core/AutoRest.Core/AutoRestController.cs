@@ -41,17 +41,33 @@ namespace AutoRest.Core
             }
             Logger.Entries.Clear();
             Logger.LogInfo(Resources.AutoRestCore, Version);
-            
+
+            // Fixed pipeline: parse
+            if (string.IsNullOrWhiteSpace(Settings.Instance.Input))
+            {
+                throw ErrorManager.CreateError(Resources.InputRequired);
+            }
+
+            //Logger.LogInfo(Resources.ParsingSwagger);
+            var parser = ExtensionsLoader.GetParser();
+            var serviceDefinition = parser.Transform(Settings.Instance.FileSystem.ReadFileAsText(Settings.Instance.Input));
+            if (serviceDefinition == null)
+            {
+                throw ErrorManager.CreateError("Resources.ErrorParsingSpec"); // TODO
+            }
+
+            // Look for semantic errors and warnings in the document.
+            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+            var messages = validator.GetValidationExceptions(serviceDefinition).ToList();
+
             CodeModel codeModel = null;
             
             var modeler = ExtensionsLoader.GetModeler();
 
             try
             {
-                IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
-
                 // generate model from swagger 
-                codeModel = modeler.Build(out messages);
+                codeModel = modeler.Transform(serviceDefinition);
 
                 // After swagger Parser
                 codeModel = RunExtensions(Trigger.AfterModelCreation, codeModel);
@@ -96,7 +112,7 @@ namespace AutoRest.Core
      
                     // apply language-specific tranformation (more than just language-specific types)
                     // used to be called "NormalizeClientModel" . 
-                    codeModel = plugin.Transformer.TransformModel(codeModel);
+                    codeModel = plugin.Transformer.Transform(codeModel);
 
                     // next set of extensions
                     codeModel = RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);

@@ -20,7 +20,7 @@ namespace AutoRest.Python.Azure
 {
     public class TransformerPya : CodeModelTransformer<CodeModelPya, TransformerPy>
     {
-        public override CodeModelPya TransformModel(CodeModel cm)
+        public override CodeModelPya Transform(CodeModel cm)
         {
             var codeModel = (CodeModelPya)cm;
             TransformPagingMethods(codeModel);
@@ -36,7 +36,7 @@ namespace AutoRest.Python.Azure
             AzureExtensions.SetDefaultResponses(codeModel);
             CorrectFilterParameters(codeModel);
 
-            Base.TransformModel(codeModel);
+            Base.Transform(codeModel);
             
             NormalizePaginatedMethods(codeModel);
 

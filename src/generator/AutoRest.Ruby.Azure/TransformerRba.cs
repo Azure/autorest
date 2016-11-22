@@ -25,12 +25,12 @@ namespace AutoRest.Ruby.Azure
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override CodeModelRb TransformModel(CodeModel codeModel)
+        public override CodeModelRb Transform(CodeModel codeModel)
         {
-            return ((ITransformer<CodeModel, CodeModelRba>) this).TransformModel(codeModel);
+            return ((ITransformer<CodeModel, CodeModelRba>) this).Transform(codeModel);
         }
 
-        CodeModelRba ITransformer<CodeModel, CodeModelRba>.TransformModel(CodeModel cs)
+        CodeModelRba ITransformer<CodeModel, CodeModelRba>.Transform(CodeModel cs)
         {
             var codeModel = cs as CodeModelRba;
 

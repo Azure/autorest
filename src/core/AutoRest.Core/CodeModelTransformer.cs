@@ -7,18 +7,15 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core
 {
-    public class CodeModelTransformer<TCodeModel> : ITransformer<CodeModel, TCodeModel> where TCodeModel : CodeModel
+    public class CodeModelTransformer<TCodeModel> : Transformer<CodeModel, TCodeModel> where TCodeModel : CodeModel
     {
-        public virtual Trigger Trigger { get; set; } = Trigger.AfterModelCreation;
-        public virtual int Priority { get; set; } = 0;
-
         /// <summary>
         /// A type-specific method for code model tranformation.
         /// Note: This is the method you want to override.
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public virtual TCodeModel TransformModel(CodeModel codeModel)
+        public override TCodeModel Transform(CodeModel codeModel)
         {
             return codeModel as TCodeModel;
         }

@@ -270,4 +270,7 @@
   <data name="UniqueResourcePathsWarning" xml:space="preserve">
     <value>More than one resource path is not allowed in a single spec</value>
   </data>
+  <data name="InputRequired" xml:space="preserve">
+    <value>Input parameter is required.</value>
+  </data>
 </root>

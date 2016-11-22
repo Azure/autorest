@@ -26,12 +26,12 @@ namespace AutoRest.CSharp.Azure
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override CodeModelCs TransformModel(CodeModel codeModel)
+        public override CodeModelCs Transform(CodeModel codeModel)
         {
-            return ((ITransformer<CodeModel, CodeModelCsa>)this).TransformModel(codeModel);
+            return ((ITransformer<CodeModel, CodeModelCsa>)this).Transform(codeModel);
         }
 
-        CodeModelCsa ITransformer<CodeModel, CodeModelCsa>.TransformModel(CodeModel cs)
+        CodeModelCsa ITransformer<CodeModel, CodeModelCsa>.Transform(CodeModel cs)
         {
             var codeModel = cs as CodeModelCsa;
 

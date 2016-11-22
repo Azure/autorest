@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.Tests
                 var plugin = new PluginCs();
                 using (plugin.Activate()) {
                     codeModel = plugin.Serializer.Load(codeModel);
-                    codeModel = plugin.Transformer.TransformModel(codeModel);
+                    codeModel = plugin.Transformer.Transform(codeModel);
 
                     Assert.Equal("Sample", codeModel.ModelTypes.First(m => m.Name == "Sample").Name);
                     Assert.Equal("Child", codeModel.ModelTypes.First(m => m.Name == "Sample").Properties[0].Name);
@@ -244,7 +244,7 @@ namespace AutoRest.CSharp.Tests
                     var plugin = new PluginCs();
                     using (plugin.Activate()) {
                         codeModel = plugin.Serializer.Load(codeModel);
-                        codeModel = plugin.Transformer.TransformModel(codeModel);
+                        codeModel = plugin.Transformer.Transform(codeModel);
 
                         Assert.Equal("GreetingsModel", codeModel.ModelTypes[0].Name);
                         Assert.Equal("System.Collections.Generic.IList<GreetingsModel>",

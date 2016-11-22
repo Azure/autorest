@@ -56,30 +56,15 @@ namespace AutoRest.Swagger
         /// Default protocol when no protocol is specified in the schema
         /// </summary>
         public TransferProtocolScheme DefaultProtocol { get; set; }
-
-        public override CodeModel Build()
-        {
-            IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
-            return Build(out messages);
-        }
-
+        
         /// <summary>
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override CodeModel Build(out IEnumerable<ValidationMessage> messages)
+        public override CodeModel Transform(object serviceDefinition)
         {
-            Logger.LogInfo(Resources.ParsingSwagger);
-            if (string.IsNullOrWhiteSpace(Settings.Input))
-            {
-                throw ErrorManager.CreateError(Resources.InputRequired);
-            }
-            ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
-
-            // Look for semantic errors and warnings in the document.
-            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            messages = validator.GetValidationExceptions(ServiceDefinition).ToList();
+            ServiceDefinition = serviceDefinition as ServiceDefinition;
 
             Logger.LogInfo(Resources.GeneratingClient);
             // Update settings
@@ -170,9 +155,10 @@ namespace AutoRest.Swagger
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
 
-            var oldDefintion = SwaggerParser.Load(Settings.Previous, Settings.FileSystem);
-            var newDefintion = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
-
+            var parser = new SwaggerParser();
+            var oldDefintion = parser.Transform(Settings.FileSystem.ReadFileAsText(Settings.Previous));
+            var newDefintion = parser.Transform(Settings.FileSystem.ReadFileAsText(Settings.Input));
+            
             var context = new ComparisonContext(oldDefintion, newDefintion);
 
             // Look for semantic errors and warnings in the new document.
@@ -274,7 +260,8 @@ namespace AutoRest.Swagger
                     filePath = Settings.FileSystem.MakePathRooted(Settings.InputFolder, filePath);
                 }
                 string externalDefinition = Settings.FileSystem.ReadFileAsText(filePath);
-                ServiceDefinition external = SwaggerParser.Parse(externalDefinition);
+                var parser = new SwaggerParser();
+                ServiceDefinition external = parser.Transform(externalDefinition);
                 external.Definitions.ForEach(d => ServiceDefinition.Definitions[d.Key] = d.Value);
             }
 
@@ -421,6 +408,12 @@ namespace AutoRest.Swagger
         public SchemaResolver Resolver
         {
             get { return new SchemaResolver(this); }
+        }
+
+        public override CodeModel Build() // TODO: this is only for compatibility
+        {
+            return Transform(new SwaggerParser().Transform(
+                Settings.FileSystem.ReadFileAsText(Settings.Input)));
         }
     }
 }

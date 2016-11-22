@@ -5,14 +5,21 @@
 namespace AutoRest.Core {
     using Model;
 
-    public interface ITransformer<in TInputModel, out TOutputModel> : ITransformer  /* where TInputModel, TOutputModel : ISomething */
+    public abstract class Transformer<TInput, TOutput> : ITransformer<TInput, TOutput>
     {
-        int Priority {get; set;}
-        Trigger Trigger {get; set;}
-        TOutputModel TransformModel(TInputModel model);
+        public virtual Trigger Trigger { get; set; } = Trigger.AfterModelCreation;
+        public virtual int Priority { get; set; } = 0;
+        public abstract TOutput Transform(TInput model);
+    }
+    public interface ITransformer<in TInput, out TOutput> : ITransformer
+        /* where TInputModel, TOutputModel : ISomething */
+    {
+        TOutput Transform(TInput model);
     }
 
     public interface ITransformer
     {
+        int Priority { get; set; }
+        Trigger Trigger { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var plugin = new PluginCsa();
                 using (plugin.Activate()) {
                     codeModel = plugin.Serializer.Load(codeModel);
-                    codeModel = plugin.Transformer.TransformModel(codeModel);
+                    codeModel = plugin.Transformer.Transform(codeModel);
 
                     Assert.Equal(7, codeModel.Methods.Count);
                     Assert.Equal(1, codeModel.Methods.Count(m => m.Name == "GetSinglePage"));

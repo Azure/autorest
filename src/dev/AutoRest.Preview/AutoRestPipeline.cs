@@ -45,7 +45,7 @@ namespace AutoRest
             IEnumerable<ValidationMessage> messages = Enumerable.Empty<ValidationMessage>();
             try
             {
-                var codeModel = modeler.Build(out messages);
+                var codeModel = modeler.Build();
 
                 // After swagger Parser
                 codeModel = AutoRestController.RunExtensions(Trigger.AfterModelCreation, codeModel);
@@ -63,7 +63,7 @@ namespace AutoRest
 
                     // apply language-specific tranformation (more than just language-specific types)
                     // used to be called "NormalizeClientModel" . 
-                    codeModel = plugin.Transformer.TransformModel(codeModel);
+                    codeModel = plugin.Transformer.Transform(codeModel);
 
                     // next set of extensions
                     codeModel = AutoRestController.RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);

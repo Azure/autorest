@@ -23,7 +23,7 @@ namespace AutoRest.Extensions.Azure.Tests
 
     public class SampleAzureTransformer : CodeModelTransformer<CodeModel>
     {
-        public override CodeModel TransformModel(CodeModel codeModel)
+        public override CodeModel Transform(CodeModel codeModel)
         {
             // we're guaranteed to be in our language-specific context here.
             Settings.Instance.AddCredentials = true;

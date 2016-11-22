@@ -51,9 +51,13 @@ namespace AutoRest.Swagger.Tests
                     Namespace = "Test",
                     Input = input
                 };
-                var modeler = new SwaggerModeler();
                 IEnumerable<ValidationMessage> messages;
-                modeler.Build(out messages);
+                var parser = new SwaggerParser();
+                var serviceDefinition = parser.Transform(Settings.Instance.FileSystem.ReadFileAsText(Settings.Instance.Input));
+
+                // Look for semantic errors and warnings in the document.
+                var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+                messages = validator.GetValidationExceptions(serviceDefinition).ToList();
 
                 // remove debug-level messages
                 messages = messages.Where(each => each.Severity > LogEntrySeverity.Debug);

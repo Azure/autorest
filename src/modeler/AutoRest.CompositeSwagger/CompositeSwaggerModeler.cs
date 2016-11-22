@@ -31,14 +31,9 @@ namespace AutoRest.CompositeSwagger
             get { return "CompositeSwagger"; }
         }
 
-        public override CodeModel Build()
+        public override CodeModel Transform(object serviceDefinition)
         {
-            var compositeSwaggerModel = Parse(Settings.Input);
-            if (compositeSwaggerModel == null)
-            {
-                throw ErrorManager.CreateError(Resources.ErrorParsingSpec);
-            }
-
+            var compositeSwaggerModel = serviceDefinition as CompositeServiceDefinition;
             if (!compositeSwaggerModel.Documents.Any())
             {
                 throw ErrorManager.CreateError(string.Format(CultureInfo.InvariantCulture, "{0}. {1}",
@@ -97,25 +92,6 @@ namespace AutoRest.CompositeSwagger
             compositeClient.Documentation = compositeSwaggerModel.Info.Description;
 
             return compositeClient;
-        }
-
-        private CompositeServiceDefinition Parse(string input)
-        {
-            var inputBody = Settings.FileSystem.ReadFileAsText(input);
-            try
-            {
-                var settings = new JsonSerializerSettings
-                {
-                    TypeNameHandling = TypeNameHandling.None,
-                    MetadataPropertyHandling = MetadataPropertyHandling.Ignore
-                };
-                return JsonConvert.DeserializeObject<CompositeServiceDefinition>(inputBody, settings);
-            }
-            catch (JsonException ex)
-            {
-                throw ErrorManager.CreateError(string.Format(CultureInfo.InvariantCulture, "{0}. {1}",
-                    Resources.ErrorParsingSpec, ex.Message), ex);
-            }
         }
 
         private static CodeModel Merge(CodeModel compositeClient, CodeModel subClient)
@@ -429,13 +405,6 @@ namespace AutoRest.CompositeSwagger
             }
         }
 
-        public override CodeModel Build(out IEnumerable<ValidationMessage> messages)
-        {
-            // No composite modeler validation messages yet
-            messages = new List<ValidationMessage>();
-            return Build();
-        }
-
         /// <summary>
         /// Copares two versions of the same service specification.
         /// </summary>
@@ -443,6 +412,12 @@ namespace AutoRest.CompositeSwagger
         public override IEnumerable<ComparisonMessage> Compare()
         {
             throw new NotImplementedException("Version comparison of compositions. Please run the comparison on individual specifications");
+        }
+
+        public override CodeModel Build() // TODO: this is only for compatibility
+        {
+            return Transform(new CompositeSwaggerParser().Transform(
+                Settings.FileSystem.ReadFileAsText(Settings.Input)));
         }
     }
 }

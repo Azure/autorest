@@ -121,6 +121,50 @@ namespace AutoRest.Core.Extensibility
             return modeler;
         }
 
+        public static ITransformer<string, object> GetParser()
+        {
+            // TODO: not necessary in final model
+            Logger.LogInfo(Resources.InitializingModeler);
+            if (Settings.Instance == null)
+            {
+                throw new ArgumentNullException("settings", "settings or settings.Modeler cannot be null.");
+            }
+
+            if (string.IsNullOrEmpty(Settings.Instance.Modeler))
+            {
+                throw new ArgumentException(
+                    string.Format(CultureInfo.InvariantCulture,
+                        Resources.ParameterValueIsMissing, "Modeler"));
+            }
+
+            ITransformer<string, object> parser = null;
+
+            string configurationFile = GetConfigurationFileContent(Settings.Instance);
+
+            if (configurationFile != null)
+            {
+                try
+                {
+                    var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
+                    // HACK!
+                    parser = LoadTypeFromAssembly<ITransformer<string, object>>(
+                        config.Modelers.ToDictionary(x => x.Key, x => new AutoRestProviderConfiguration { Settings = x.Value.Settings, TypeName = x.Value.TypeName.Replace("Modeler", "Parser") }), 
+                        Settings.Instance.Modeler);
+                    Settings.PopulateSettings(parser, Settings.Instance.CustomSettings);
+                }
+                catch (Exception ex)
+                {
+                    throw ErrorManager.CreateError(ex, Resources.ErrorParsingConfig);
+                }
+            }
+            else
+            {
+                throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
+            }
+            
+            return parser;
+        }
+
         public static string GetConfigurationFileContent(Settings settings)
         {
             if (settings == null)

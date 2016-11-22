@@ -3,8 +3,8 @@
 
 using System;
 using System.Globalization;
+using AutoRest.Core;
 using AutoRest.Core.Logging;
-using AutoRest.Core.Utilities;
 using AutoRest.Swagger.JsonConverters;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
@@ -13,19 +13,9 @@ using Newtonsoft.Json.Linq;
 
 namespace AutoRest.Swagger
 {
-    public static class SwaggerParser
+    public class SwaggerParser : Transformer<string, ServiceDefinition>
     {
-        public static ServiceDefinition Load(string path, IFileSystem fileSystem)
-        {
-            if (fileSystem == null)
-            {
-                throw new ArgumentNullException("fileSystem");
-            }
-
-            return SwaggerParser.Parse(fileSystem.ReadFileAsText(path));
-        }
-
-        public static ServiceDefinition Parse(string swaggerDocument)
+        public override ServiceDefinition Transform(string swaggerDocument)
         {
             try
             {
@@ -59,6 +49,11 @@ namespace AutoRest.Swagger
                 throw ErrorManager.CreateError(string.Format(CultureInfo.InvariantCulture, "{0}. {1}",
                     Resources.ErrorParsingSpec, ex.Message), ex);
             }
+        }
+
+        public ServiceDefinition GetServiceDefinition()
+        {
+            return Transform(Settings.Instance.FileSystem.ReadFileAsText(Settings.Instance.Input));
         }
     }
 }
