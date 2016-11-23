@@ -1,0 +1,46 @@
+---
+swagger: '2.0'
+info:
+  title: PetStore Inc.
+  description: Pets online.
+  version: 0.0.0
+  x-ms-code-generation-settings:
+    useDateTimeOffset: true
+    internalConstructors: true
+x-ms-parameterized-host:
+  hostTemplate: "{petBaseUrl}"
+  parameters:
+  - name: petBaseUrl
+    required: true
+    type: string
+    in: path
+    x-ms-skip-url-encoding: true
+paths:
+  "/Pets/{petId}/GetPet":
+    post:
+      operationId: Pet_GetPetById
+      description: Gets pets by id.
+      parameters:
+      - name: petId
+        in: path
+        required: true
+        type: string
+        description: pet id
+      - name: streamContents
+        in: body
+        schema:
+          type: object
+          format: file
+        required: false
+      responses:
+        '200':
+          description: ''
+          schema:
+            "$ref": "#/definitions/Pet"
+definitions:
+  Pet:
+    properties:
+      name:
+        type: string
+        readOnly: true
+        description: Gets the Pet by id.
