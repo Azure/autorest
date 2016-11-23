@@ -4,6 +4,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
@@ -44,7 +45,7 @@ namespace AutoRest
                         }
                         else
                         {
-                            Core.AutoRestController.Generate();
+                            Core.AutoRestController.Generate().Wait(); // TODO: horrible
                             if (!Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1 )
                             {
                                 new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();

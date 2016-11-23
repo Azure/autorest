@@ -34,7 +34,7 @@ namespace AutoRest.Swagger.Tests
             }
         }
 
-        public static void RunTests(string resultFolder)
+        public static async void RunTests(string resultFolder)
         {
             if (resultFolder == null)
             {
@@ -60,7 +60,7 @@ namespace AutoRest.Swagger.Tests
                     Replace(Path.DirectorySeparatorChar.ToString(), "").Replace("-", "")
                 : settings.Namespace;
 
-            AutoRest.Core.AutoRestController.Generate();
+            await AutoRest.Core.AutoRestController.Generate();
             Assert.NotEmpty(((MemoryFileSystem)settings.FileSystem).VirtualStore);
 
             var actualFiles = settings.FileSystem.GetFiles("X:\\Output", "*.json", SearchOption.AllDirectories).OrderBy(f => f).ToArray();

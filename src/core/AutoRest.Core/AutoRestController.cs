@@ -35,7 +35,7 @@ namespace AutoRest.Core
         /// <summary>
         /// Generates client using provided settings.
         /// </summary>
-        public static void Generate()
+        public static async Task Generate()
         {
             if (Settings.Instance == null)
             {
@@ -81,26 +81,6 @@ namespace AutoRest.Core
                     plugin = ExtensionsLoader.GetPlugin();
                     Logger.WriteOutput(plugin.CodeGenerator.UsageInstructions);
                 }),
-                //new FuncTransformer<string, CodeModel>(async json =>
-                //{
-                //    try
-                //    {
-                //        using (plugin.Activate())
-                //        {
-                //            var codeModel = plugin.Serializer.Load(json);
-                //            codeModel = RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
-                //            codeModel = await plugin.Transformer.Transform(codeModel) as CodeModel;
-                //            codeModel = RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
-                //            codeModel = RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
-                //            await plugin.CodeGenerator.Generate(codeModel);
-                //            return codeModel;
-                //        }
-                //    }
-                //    catch (Exception exception)
-                //    {
-                //        throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
-                //    }
-                //}),
                 new FuncTransformer<string, CodeModel>("json2model", json =>
                 {
                     using (plugin.Activate())
@@ -132,7 +112,7 @@ namespace AutoRest.Core
             //Logger.LogInfo(Resources.ParsingSwagger);
             var input = Settings.Instance.FileSystem.ReadFileAsText(Settings.Instance.Input);
 
-            schedule.Run(input).GetAwaiter().GetResult();
+            await schedule.Run(input);
         }
 
         /// <summary>
