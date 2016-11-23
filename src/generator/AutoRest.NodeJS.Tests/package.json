@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "tslint": "^2.5.1",
-    "typescript": "^1.6.2"
+    "typescript": "^2.0.10"
   },
   "homepage": "https://github.com/Azure/AutoRest/src/generator/AutoRest.NodeJS.Tests",
   "repository": {
