@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHttp
 {
-   using Models;
+    using Models;
     using System.Threading;
     using System.Threading.Tasks;
 

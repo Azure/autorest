@@ -72,6 +72,9 @@ namespace Fixtures.AcceptanceTestsBodyFormData
         /// <exception cref="ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
@@ -221,6 +224,9 @@ namespace Fixtures.AcceptanceTestsBodyFormData
         /// <exception cref="ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
@@ -264,9 +270,15 @@ namespace Fixtures.AcceptanceTestsBodyFormData
 
             // Serialize Request
             string _requestContent = null;
-             System.Net.Http.StreamContent _fileStreamContent = new System.Net.Http.StreamContent(fileContent);
-            _httpRequest.Content = _fileStreamContent;
-            _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/octet-stream");
+            if(fileContent == null)
+            {
+              throw new System.ArgumentNullException("fileContent");
+            }
+            if (fileContent != null && fileContent != Stream.Null)
+            {
+              _httpRequest.Content = new System.Net.Http.StreamContent(fileContent);
+              _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/octet-stream");
+            }
             // Send Request
             if (_shouldTrace)
             {

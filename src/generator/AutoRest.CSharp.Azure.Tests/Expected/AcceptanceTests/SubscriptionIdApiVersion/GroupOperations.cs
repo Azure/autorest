@@ -70,6 +70,9 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// <exception cref="ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
