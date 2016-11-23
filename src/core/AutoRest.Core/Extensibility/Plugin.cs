@@ -8,10 +8,9 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core.Extensibility
 {
-    public class Plugin<TSettings, TSerializer, TTransformer, TGenerator, TNamer, TCodeModel> :
-            IPlugin<TSettings, TSerializer, TTransformer, TGenerator, TNamer, TCodeModel>
+    public class Plugin<TSettings, TTransformer, TGenerator, TNamer, TCodeModel> :
+            IPlugin<TSettings, TTransformer, TGenerator, TNamer, TCodeModel>
         where TSettings : IGeneratorSettings, new()
-        where TSerializer : IModelSerializer<TCodeModel>, new()
         where TTransformer : ITransformer<CodeModel, TCodeModel>, new()
         where TGenerator : CodeGenerator, new()
         where TNamer : CodeNamer, new()
@@ -23,11 +22,11 @@ namespace AutoRest.Core.Extensibility
         private readonly IModelSerializer<TCodeModel> _serializer;
         private readonly ITransformer<CodeModel, TCodeModel> _transformer;
 
-        private Plugin(IGeneratorSettings generatorSettings, IModelSerializer<TCodeModel> serializer, ITransformer<CodeModel, TCodeModel> transformer,
+        private Plugin(IGeneratorSettings generatorSettings, ITransformer<CodeModel, TCodeModel> transformer,
             CodeGenerator generator, CodeNamer namer)
         {
             _generatorSettings = generatorSettings;
-            _serializer = serializer;
+            _serializer = new ModelSerializer<TCodeModel>();
             _transformer = transformer;
             _generator = generator;
             _namer = namer;
@@ -39,7 +38,7 @@ namespace AutoRest.Core.Extensibility
         }
 
         protected Plugin()
-            : this(new TSettings(), new TSerializer(), new TTransformer(), new TGenerator(), new TNamer())
+            : this(new TSettings(), new TTransformer(), new TGenerator(), new TNamer())
         {
             Context = new Context
             {
@@ -59,7 +58,7 @@ namespace AutoRest.Core.Extensibility
         public Context Context { get; protected set; }
 
         public TSettings Settings => (TSettings) _generatorSettings;
-        public TSerializer Serializer => (TSerializer) _serializer;
+        public IModelSerializer<TCodeModel> Serializer => _serializer;
         public TTransformer Transformer => (TTransformer) _transformer;
         public TGenerator CodeGenerator => (TGenerator) _generator;
         public TNamer CodeNamer => (TNamer) _namer;

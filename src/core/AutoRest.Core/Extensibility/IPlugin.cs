@@ -8,9 +8,8 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core.Extensibility
 {
-    public interface IPlugin<out TSettings, out TSerializer, out TTransformer, out TGenerator, out TNamer, out TCodeModel>
+    public interface IPlugin<out TSettings, out TTransformer, out TGenerator, out TNamer, out TCodeModel>
         where TSettings : IGeneratorSettings
-        where TSerializer : IModelSerializer<TCodeModel>
         where TTransformer : ITransformer
         where TGenerator : CodeGenerator
         where TNamer : CodeNamer
@@ -20,7 +19,7 @@ namespace AutoRest.Core.Extensibility
         TNamer CodeNamer { get; }
         Context Context { get; }
         TTransformer Transformer { get; }
-        TSerializer Serializer { get; }
+        IModelSerializer<TCodeModel> Serializer { get; }
         TSettings Settings { get; }
 
         IDisposable Activate();
