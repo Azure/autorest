@@ -49,19 +49,14 @@ namespace AutoRest.Core
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
 
-            IAnyPlugin plugin = null;
+            IAnyPlugin plugin = ExtensionsLoader.GetPlugin();
+            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
 
             // FIXED SCHEDULE
             var messages = new List<ValidationMessage>();
             var schedule = Schedule.FromLinearPipeline(
                 ExtensionsLoader.GetParser(),
-                new FuncTransformer<object, object>("SwaggerValidation", serviceDefinition =>
-                {
-                    var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-                    messages.AddRange(validator.GetValidationExceptions(serviceDefinition));
-                    return serviceDefinition;
-                }),
-                ExtensionsLoader.GetModeler(),
+                new ActionTransformer<object>("SwaggerValidation", serviceDefinition => messages.AddRange(validator.GetValidationExceptions(serviceDefinition))),
                 new ActionTransformer<object>("Logging", codeModel =>
                 {
                     foreach (var message in messages)
@@ -75,37 +70,17 @@ namespace AutoRest.Core
                             "Errors found during Swagger validation");
                     }
                 }),
-                new FuncTransformer<CodeModel, string>("model2json", codeModel => new ModelSerializer<CodeModel>().ToJson(codeModel)),
-                new ActionTransformer<string>("load plugin", _ =>
+                ExtensionsLoader.GetModeler(),
+                new ActionTransformer<CodeModel>("load plugin", _ =>
                 {
                     plugin = ExtensionsLoader.GetPlugin();
                     Logger.WriteOutput(plugin.CodeGenerator.UsageInstructions);
                 }),
-                new FuncTransformer<string, CodeModel>("json2model", json =>
-                {
-                    using (plugin.Activate())
-                    {
-                        // load model into language-specific code model
-                        return plugin.Serializer.Load(json);
-                    }
-                }),
-                new FuncTransformer<CodeModel, CodeModel>("plugin.Transformer", async codeModel =>
-                {
-                    using (plugin.Activate())
-                    {
-                        // apply language-specific tranformation (more than just language-specific types)
-                        // used to be called "NormalizeClientModel" . 
-                        return await plugin.Transformer.TransformAsync(codeModel) as CodeModel;
-                    }
-                }),
-                new ActionTransformer<CodeModel>("generate code", async codeModel => // TODO: return MemoryFS containing code
-                {
-                    using (plugin.Activate())
-                    {
-                        // Generate code from CodeModel.
-                        await plugin.CodeGenerator.Generate(codeModel);
-                    }
-                })
+                new FuncTransformer<CodeModel, string>("model2json", codeModel => new ModelSerializer<CodeModel>().ToJson(codeModel)),
+                new FuncTransformer<string, CodeModel>("json2model", json => plugin.Serializer.Load(json)).WithPlugin(plugin),
+                plugin.Transformer.WithPlugin(plugin),
+                new ActionTransformer<CodeModel>("generate code", plugin.CodeGenerator.Generate).WithPlugin(plugin)
+                // TODO: return MemoryFS containing code
             );
 
                     

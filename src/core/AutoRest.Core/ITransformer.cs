@@ -4,12 +4,11 @@
 
 using System;
 using System.Threading.Tasks;
-using ISomething = System.Object;
+using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 
 namespace AutoRest.Core
 {
     public class ActionTransformer<TInputOutput> : Transformer<TInputOutput, TInputOutput>
-    //where TInputOutput : ISomething
     {
         private readonly Func<TInputOutput, Task> actionAsync;
 
@@ -38,8 +37,6 @@ namespace AutoRest.Core
     }
 
     public class FuncTransformer<TInput, TOutput> : Transformer<TInput, TOutput>
-    //where TInput : ISomething
-    //where TOutput : ISomething
     {
         private readonly Func<TInput, Task<TOutput>> transformAsync;
 
@@ -60,22 +57,18 @@ namespace AutoRest.Core
     }
 
     public abstract class Transformer<TInput, TOutput> : ITransformer<TInput, TOutput>
-    //where TInput : ISomething
-    //where TOutput : ISomething
     {
         public virtual string Name => GetType().Name;
         public virtual Trigger Trigger { get; } = Trigger.AfterModelCreation;
         public virtual int Priority { get; } = 0;
         public abstract Task<TOutput> TransformAsync(TInput input);
 
-        async Task<ISomething> ITransformer.TransformAsync(ISomething input)
+        async Task<object> ITransformer.TransformAsync(object input)
         {
             return await TransformAsync((TInput) input);
         }
     }
     public interface ITransformer<in TInput, TOutput> : ITransformer
-        //where TInput : ISomething
-        //where TOutput : ISomething
     {
         Task<TOutput> TransformAsync(TInput input);
     }
@@ -86,11 +79,20 @@ namespace AutoRest.Core
 
         int Priority { get; }
         Trigger Trigger { get; }
-        Task<ISomething> TransformAsync(ISomething input);
+        Task<object> TransformAsync(object input);
     }
 
-    //public interface ISomething
-    //{
-        
-    //}
+    public static class ITransformerExtensions
+    {
+        public static ITransformer WithPlugin(this ITransformer transformer, IAnyPlugin plugin)
+        {
+            return new FuncTransformer<object, object>(transformer.Name, async input =>
+            {
+                using (plugin.Activate())
+                {
+                    return await transformer.TransformAsync(input);
+                }
+            });
+        }
+    }
 }

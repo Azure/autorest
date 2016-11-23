@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Utilities;
 using Xunit;
@@ -15,7 +16,7 @@ namespace AutoRest.Swagger.Tests
 
     public static class SwaggerSpecHelper
     {
-        public static void RunTests(string specFile, string resultFolder, string modeler = "Swagger", string plugin = "CSharp")
+        public static async Task RunTests(string specFile, string resultFolder, string modeler = "Swagger", string plugin = "CSharp")
         {
             using (NewContext)
             {
@@ -30,11 +31,11 @@ namespace AutoRest.Swagger.Tests
 
                     };
 
-                RunTests(resultFolder);
+                await RunTests(resultFolder);
             }
         }
 
-        public static async void RunTests(string resultFolder)
+        public static async Task RunTests(string resultFolder)
         {
             if (resultFolder == null)
             {
@@ -60,7 +61,7 @@ namespace AutoRest.Swagger.Tests
                     Replace(Path.DirectorySeparatorChar.ToString(), "").Replace("-", "")
                 : settings.Namespace;
 
-            await AutoRest.Core.AutoRestController.Generate();
+            await AutoRestController.Generate();
             Assert.NotEmpty(((MemoryFileSystem)settings.FileSystem).VirtualStore);
 
             var actualFiles = settings.FileSystem.GetFiles("X:\\Output", "*.json", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
