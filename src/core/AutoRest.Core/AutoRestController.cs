@@ -50,6 +50,7 @@ namespace AutoRest.Core
             }
 
             IAnyPlugin plugin = ExtensionsLoader.GetPlugin();
+            Logger.WriteOutput(plugin.CodeGenerator.UsageInstructions);
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
 
             // FIXED SCHEDULE
@@ -71,11 +72,7 @@ namespace AutoRest.Core
                     }
                 }),
                 ExtensionsLoader.GetModeler(),
-                new ActionTransformer<CodeModel>("load plugin", _ =>
-                {
-                    plugin = ExtensionsLoader.GetPlugin();
-                    Logger.WriteOutput(plugin.CodeGenerator.UsageInstructions);
-                }),
+                new ActionTransformer<CodeModel>("update plugin", _ => Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings)),
                 new FuncTransformer<CodeModel, string>("model2json", codeModel => new ModelSerializer<CodeModel>().ToJson(codeModel)),
                 new FuncTransformer<string, CodeModel>("json2model", json => plugin.Serializer.Load(json)).WithPlugin(plugin),
                 plugin.Transformer.WithPlugin(plugin),
@@ -88,6 +85,7 @@ namespace AutoRest.Core
             var input = Settings.Instance.FileSystem.ReadFileAsText(Settings.Instance.Input);
 
             await schedule.Run(input);
+            // TODO: write MemoryFS out
         }
 
         /// <summary>
