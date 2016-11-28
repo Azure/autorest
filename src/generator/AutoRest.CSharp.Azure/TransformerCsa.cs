@@ -149,15 +149,15 @@ namespace AutoRest.CSharp.Azure
                     var compositType = (CompositeType)method.Responses[responseStatus].Body;
                     var sequenceType =
                         compositType.Properties.Select(p => p.ModelType).FirstOrDefault(t => t is SequenceType) as
-                            SequenceType;
+                            SequenceTypeCs;
 
                     // if the type is a wrapper over page-able response
                     if (sequenceType != null)
                     {
                         var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, pageClassName,
-                            sequenceType.ElementType.Name);
+                            sequenceType.ElementType.AsNullableType(!sequenceType.ElementType.IsValueType() || (sequenceType.IsXNullable ?? true)));
                         var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat,
-                            sequenceType.ElementType.Name);
+                            sequenceType.ElementType.AsNullableType(!sequenceType.ElementType.IsValueType() || (sequenceType.IsXNullable ?? true)));
 
                         var pagedResult = New<ILiteralType>(pagableTypeName) as CompositeType;
 

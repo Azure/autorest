@@ -623,15 +623,8 @@ namespace AutoRest.NodeJS.Model
                 {
                     pathReplaceFormat = "{0} = {0}.replace('{{{1}}}', {2});";
                 }
-                var urlPathName = pathParameter.SerializedName;
-                string pat = @".*\{" + urlPathName + @"(\:\w+)\}";
-                Regex r = new Regex(pat);
-                Match m = r.Match(Url);
-                if (m.Success)
-                {
-                    urlPathName += m.Groups[1].Value;
-                }
-                builder.AppendLine(pathReplaceFormat, variableName, urlPathName,
+                
+                builder.AppendLine(pathReplaceFormat, variableName, pathParameter.SerializedName,
                     pathParameter.ModelType.ToString(pathParameter.Name));
             }
         }
