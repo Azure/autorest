@@ -91,7 +91,7 @@ namespace AutoRest.Core.Parsing
                 throw new ArgumentNullException(nameof(b));
             }
 
-            // iterate over all members
+            // iterate all members
             var result = new YamlMappingNode();
             var keys = a.Children.Keys.Concat(b.Children.Keys).Distinct();
             foreach (var key in keys)
