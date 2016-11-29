@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Validation;
 using ScintillaNET;
 using YamlDotNet.RepresentationModel;
+using AutoRest.Core.Parsing;
 
 namespace AutoRest.Preview
 {
