@@ -222,8 +222,24 @@ namespace AutoRest.Swagger
                     }
                 }
             }
-
+            RemoveResponsesWithDefaultType(method, typesList);
             return typesList;
+        }
+
+        private void RemoveResponsesWithDefaultType(Method method, List<Stack<IModelType>> typesList)
+        {
+            var type = method.DefaultResponse.Body as CompositeType;
+            if (type == null) return;
+            var keys = method.Responses.Keys;
+            foreach (var key in keys)
+            {
+                //Names have been disambiguated by this point.
+                if (method.Responses[key].Body.Name == type.Name)
+                {
+                    method.Responses.Remove(key);
+                }
+            }
+            
         }
 
         private Response BuildMethodReturnType(List<Stack<IModelType>> types, IModelType headerType)
