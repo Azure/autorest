@@ -81,7 +81,7 @@ namespace AutoRest.Core.Parsing
         }
 
         public static YamlMappingNode MergeYamlObjects(YamlMappingNode a, YamlMappingNode b, string path)
-        { // TODO: unify path type
+        {
             if (a == null)
             {
                 throw new ArgumentNullException(nameof(a));
@@ -124,7 +124,7 @@ namespace AutoRest.Core.Parsing
 
         public static YamlMappingNode MergeWith(this YamlMappingNode self, YamlMappingNode other)
         {
-            return MergeYamlObjects(self, other, "");
+            return MergeYamlObjects(self, other, "#");
         }
     }
 }
