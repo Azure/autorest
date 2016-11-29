@@ -8,14 +8,13 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
-using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
-using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
-
 using static AutoRest.Core.Utilities.DependencyInjection;
+using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
 
 namespace AutoRest.Swagger
 {
@@ -51,14 +50,13 @@ namespace AutoRest.Swagger
         {
             EnsureUniqueMethodName(methodName, methodGroup);
 
-            var method = New<Method>(new 
-            {
+            var method = New<Method>(new {
                 HttpMethod = httpMethod,
                 Url = url,
                 Name = methodName,
                 SerializedName = _operation.OperationId
             });
-            
+
             method.RequestContentType = _effectiveConsumes.FirstOrDefault() ?? APP_JSON_MIME;
             string produce = _effectiveConsumes.FirstOrDefault(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase));
             if (!string.IsNullOrEmpty(produce))
@@ -96,16 +94,12 @@ namespace AutoRest.Swagger
 
             var headerTypeName = string.Format(CultureInfo.InvariantCulture,
                 "{0}-{1}-Headers", methodGroup, methodName).Trim('-');
-            var headerType = New<CompositeType>(headerTypeName,new
-            {
+            var headerType = New<CompositeType>(headerTypeName, new {
                 SerializedName = headerTypeName,
                 Documentation = string.Format(CultureInfo.InvariantCulture, "Defines headers for {0} operation.", methodName)
             });
-            responseHeaders.ForEach(h =>
-            {
-                
-                var property = New<Property>(new
-                {
+            responseHeaders.ForEach(h => {
+                var property = New<Property>(new {
                     Name = h.Key,
                     SerializedName = h.Key,
                     ModelType = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key),
@@ -142,8 +136,7 @@ namespace AutoRest.Swagger
         private static IEnumerable<SwaggerParameter> DeduplicateParameters(IEnumerable<SwaggerParameter> parameters)
         {
             return parameters
-                .Select(s =>
-                {
+                .Select(s => {
                     // if parameter with the same name exists in Body and Path/Query then we need to give it a unique name
                     if (s.In == ParameterLocation.Body)
                     {
@@ -228,18 +221,29 @@ namespace AutoRest.Swagger
 
         private void RemoveResponsesWithDefaultType(Method method, List<Stack<IModelType>> typesList)
         {
-            var type = method.DefaultResponse.Body as CompositeType;
-            if (type == null) return;
+            var errorModelType = method.DefaultResponse.Body as CompositeType;
+            if (errorModelType == null || method.Responses == null) return;
             var keys = method.Responses.Keys;
+            var removeResponses = new List<HttpStatusCode>();
             foreach (var key in keys)
             {
                 //Names have been disambiguated by this point.
-                if (method.Responses[key].Body.Name == type.Name)
+                if (method.Responses[key] == null || method.Responses[key].Body == null)
                 {
-                    method.Responses.Remove(key);
+                    continue;
+                }
+                if (method.Responses[key].Body.Name == errorModelType.Name)
+                {
+                    removeResponses.Add(key);
                 }
             }
-            
+
+            foreach (var key in removeResponses)
+            {
+                method.Responses.Remove(key);
+            }
+
+            typesList.RemoveAll(foo => foo.Peek().Name.Equals(errorModelType.Name));
         }
 
         private Response BuildMethodReturnType(List<Stack<IModelType>> types, IModelType headerType)
@@ -257,8 +261,7 @@ namespace AutoRest.Swagger
             }
 
             // BuildParameter up type inheritance tree
-            types.ForEach(typeStack =>
-            {
+            types.ForEach(typeStack => {
                 IModelType type = typeStack.Peek();
                 while (!Equals(type, baseType))
                 {
