@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static bool? GetEmptyError(this IHttpFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpFailure)s).GetEmptyErrorAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetEmptyErrorAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static bool? GetNoModelError(this IHttpFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpFailure)s).GetNoModelErrorAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNoModelErrorAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static bool? GetNoModelEmpty(this IHttpFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpFailure)s).GetNoModelEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNoModelEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

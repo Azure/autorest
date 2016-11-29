@@ -31,7 +31,7 @@ namespace Fixtures.AcceptanceTestsValidation
             /// </param>
             public static Product ValidationOfMethodParameters(this IAutoRestValidationTest operations, string resourceGroupName, int id)
             {
-                return Task.Factory.StartNew(s => ((IAutoRestValidationTest)s).ValidationOfMethodParametersAsync(resourceGroupName, id), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ValidationOfMethodParametersAsync(resourceGroupName, id).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -73,7 +73,7 @@ namespace Fixtures.AcceptanceTestsValidation
             /// </param>
             public static Product ValidationOfBody(this IAutoRestValidationTest operations, string resourceGroupName, int id, Product body = default(Product))
             {
-                return Task.Factory.StartNew(s => ((IAutoRestValidationTest)s).ValidationOfBodyAsync(resourceGroupName, id, body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ValidationOfBodyAsync(resourceGroupName, id, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -106,7 +106,7 @@ namespace Fixtures.AcceptanceTestsValidation
             /// </param>
             public static void GetWithConstantInPath(this IAutoRestValidationTest operations)
             {
-                Task.Factory.StartNew(s => ((IAutoRestValidationTest)s).GetWithConstantInPathAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetWithConstantInPathAsync().GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -127,7 +127,7 @@ namespace Fixtures.AcceptanceTestsValidation
             /// </param>
             public static Product PostWithConstantInBody(this IAutoRestValidationTest operations, Product body = default(Product))
             {
-                return Task.Factory.StartNew(s => ((IAutoRestValidationTest)s).PostWithConstantInBodyAsync(body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostWithConstantInBodyAsync(body).GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>

@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             /// </param>
             public static System.TimeSpan? GetNull(this IDuration operations)
             {
-                return Task.Factory.StartNew(s => ((IDuration)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -55,7 +55,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             /// </param>
             public static void PutPositiveDuration(this IDuration operations, System.TimeSpan durationBody)
             {
-                Task.Factory.StartNew(s => ((IDuration)s).PutPositiveDurationAsync(durationBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutPositiveDurationAsync(durationBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -82,7 +82,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             /// </param>
             public static System.TimeSpan? GetPositiveDuration(this IDuration operations)
             {
-                return Task.Factory.StartNew(s => ((IDuration)s).GetPositiveDurationAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetPositiveDurationAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -110,7 +110,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             /// </param>
             public static System.TimeSpan? GetInvalid(this IDuration operations)
             {
-                return Task.Factory.StartNew(s => ((IDuration)s).GetInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

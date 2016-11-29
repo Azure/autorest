@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Head200(this IHttpSuccess operations)
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Head200Async(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Head200Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -50,7 +50,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static bool? Get200(this IHttpSuccess operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpSuccess)s).Get200Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Put200(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Put200Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Put200Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -112,7 +112,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Patch200(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Patch200Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Patch200Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -143,7 +143,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Post200(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Post200Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Post200Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -174,7 +174,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Delete200(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Delete200Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Delete200Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -205,7 +205,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Put201(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Put201Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Put201Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -236,7 +236,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Post201(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Post201Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Post201Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -267,7 +267,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Put202(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Put202Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Put202Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -298,7 +298,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Patch202(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Patch202Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Patch202Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -329,7 +329,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Post202(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Post202Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Post202Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -360,7 +360,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Delete202(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Delete202Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Delete202Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -388,7 +388,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Head204(this IHttpSuccess operations)
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Head204Async(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Head204Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -416,7 +416,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Put204(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Put204Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Put204Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -447,7 +447,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Patch204(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Patch204Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Patch204Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -478,7 +478,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Post204(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Post204Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Post204Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -509,7 +509,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Delete204(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Delete204Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Delete204Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -537,7 +537,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Head404(this IHttpSuccess operations)
             {
-                Task.Factory.StartNew(s => ((IHttpSuccess)s).Head404Async(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Head404Async().GetAwaiter().GetResult();
             }
 
             /// <summary>

@@ -26,7 +26,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static Colors? GetNotExpandable(this IEnumModel operations)
             {
-                return Task.Factory.StartNew(s => ((IEnumModel)s).GetNotExpandableAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNotExpandableAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -59,7 +59,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static void PutNotExpandable(this IEnumModel operations, Colors stringBody)
             {
-                Task.Factory.StartNew(s => ((IEnumModel)s).PutNotExpandableAsync(stringBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutNotExpandableAsync(stringBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -89,7 +89,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static Colors? GetReferenced(this IEnumModel operations)
             {
-                return Task.Factory.StartNew(s => ((IEnumModel)s).GetReferencedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetReferencedAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -122,7 +122,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static void PutReferenced(this IEnumModel operations, Colors enumStringBody)
             {
-                Task.Factory.StartNew(s => ((IEnumModel)s).PutReferencedAsync(enumStringBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutReferencedAsync(enumStringBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -151,7 +151,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static RefColorConstant GetReferencedConstant(this IEnumModel operations)
             {
-                return Task.Factory.StartNew(s => ((IEnumModel)s).GetReferencedConstantAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetReferencedConstantAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -182,7 +182,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static void PutReferencedConstant(this IEnumModel operations, string field1 = default(string))
             {
-                Task.Factory.StartNew(s => ((IEnumModel)s).PutReferencedConstantAsync(field1), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutReferencedConstantAsync(field1).GetAwaiter().GetResult();
             }
 
             /// <summary>

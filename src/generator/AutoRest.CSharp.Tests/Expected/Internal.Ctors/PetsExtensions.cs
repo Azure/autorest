@@ -24,7 +24,7 @@ namespace Fixtures.InternalCtors
             /// </param>
             public static void Get(this IPets operations)
             {
-                Task.Factory.StartNew(s => ((IPets)s).GetAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

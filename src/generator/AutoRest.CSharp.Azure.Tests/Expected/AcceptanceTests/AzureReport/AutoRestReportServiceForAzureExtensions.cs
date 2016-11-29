@@ -30,7 +30,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
             /// </param>
             public static IDictionary<string, int?> GetReport(this IAutoRestReportServiceForAzure operations)
             {
-                return Task.Factory.StartNew(s => ((IAutoRestReportServiceForAzure)s).GetReportAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetReportAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

@@ -32,7 +32,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static Pet AddPet(this ISwaggerPetstoreV2 operations, Pet body)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).AddPetAsync(body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.AddPetAsync(body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -83,7 +83,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void UpdatePet(this ISwaggerPetstoreV2 operations, Pet body)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).UpdatePetAsync(body), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.UpdatePetAsync(body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -134,7 +134,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static IList<Pet> FindPetsByStatus(this ISwaggerPetstoreV2 operations, IList<string> status)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).FindPetsByStatusAsync(status), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.FindPetsByStatusAsync(status).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -195,7 +195,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static IList<Pet> FindPetsByTags(this ISwaggerPetstoreV2 operations, IList<string> tags)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).FindPetsByTagsAsync(tags), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.FindPetsByTagsAsync(tags).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -257,7 +257,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static Pet GetPetById(this ISwaggerPetstoreV2 operations, long petId)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).GetPetByIdAsync(petId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetPetByIdAsync(petId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -323,7 +323,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void UpdatePetWithForm(this ISwaggerPetstoreV2 operations, long petId, Stream fileContent, string fileName = default(string), string status = default(string))
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).UpdatePetWithFormAsync(petId, fileContent, fileName, status), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.UpdatePetWithFormAsync(petId, fileContent, fileName, status).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -391,7 +391,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void DeletePet(this ISwaggerPetstoreV2 operations, long petId, string apiKey = "")
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).DeletePetAsync(petId, apiKey), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DeletePetAsync(petId, apiKey).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -443,7 +443,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static IDictionary<string, int?> GetInventory(this ISwaggerPetstoreV2 operations)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).GetInventoryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInventoryAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -494,7 +494,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static Order PlaceOrder(this ISwaggerPetstoreV2 operations, Order body)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).PlaceOrderAsync(body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PlaceOrderAsync(body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -549,7 +549,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static Order GetOrderById(this ISwaggerPetstoreV2 operations, string orderId)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).GetOrderByIdAsync(orderId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetOrderByIdAsync(orderId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -612,7 +612,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void DeleteOrder(this ISwaggerPetstoreV2 operations, string orderId)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).DeleteOrderAsync(orderId), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DeleteOrderAsync(orderId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -671,7 +671,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void CreateUser(this ISwaggerPetstoreV2 operations, User body)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).CreateUserAsync(body), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.CreateUserAsync(body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -725,7 +725,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void CreateUsersWithArrayInput(this ISwaggerPetstoreV2 operations, IList<User> body)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).CreateUsersWithArrayInputAsync(body), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.CreateUsersWithArrayInputAsync(body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -773,7 +773,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void CreateUsersWithListInput(this ISwaggerPetstoreV2 operations, IList<User> body)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).CreateUsersWithListInputAsync(body), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.CreateUsersWithListInputAsync(body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -824,7 +824,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static string LoginUser(this ISwaggerPetstoreV2 operations, string username, string password)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).LoginUserAsync(username, password), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.LoginUserAsync(username, password).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -878,7 +878,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void LogoutUser(this ISwaggerPetstoreV2 operations)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).LogoutUserAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.LogoutUserAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -920,7 +920,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static User GetUserByName(this ISwaggerPetstoreV2 operations, string username)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).GetUserByNameAsync(username), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUserByNameAsync(username).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -977,7 +977,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void UpdateUser(this ISwaggerPetstoreV2 operations, string username, User body)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).UpdateUserAsync(username, body), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.UpdateUserAsync(username, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1040,7 +1040,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void DeleteUser(this ISwaggerPetstoreV2 operations, string username)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).DeleteUserAsync(username), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DeleteUserAsync(username).GetAwaiter().GetResult();
             }
 
             /// <summary>

@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             /// </param>
             public static System.DateTime? GetNull(this IDatetimerfc1123 operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetimerfc1123)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             /// </param>
             public static System.DateTime? GetInvalid(this IDatetimerfc1123 operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetimerfc1123)s).GetInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             /// </param>
             public static System.DateTime? GetOverflow(this IDatetimerfc1123 operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetimerfc1123)s).GetOverflowAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetOverflowAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -109,7 +109,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             /// </param>
             public static System.DateTime? GetUnderflow(this IDatetimerfc1123 operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetimerfc1123)s).GetUnderflowAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUnderflowAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -139,7 +139,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             /// </param>
             public static void PutUtcMaxDateTime(this IDatetimerfc1123 operations, System.DateTime datetimeBody)
             {
-                Task.Factory.StartNew(s => ((IDatetimerfc1123)s).PutUtcMaxDateTimeAsync(datetimeBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutUtcMaxDateTimeAsync(datetimeBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -166,7 +166,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             /// </param>
             public static System.DateTime? GetUtcLowercaseMaxDateTime(this IDatetimerfc1123 operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetimerfc1123)s).GetUtcLowercaseMaxDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUtcLowercaseMaxDateTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -194,7 +194,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             /// </param>
             public static System.DateTime? GetUtcUppercaseMaxDateTime(this IDatetimerfc1123 operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetimerfc1123)s).GetUtcUppercaseMaxDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUtcUppercaseMaxDateTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -224,7 +224,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             /// </param>
             public static void PutUtcMinDateTime(this IDatetimerfc1123 operations, System.DateTime datetimeBody)
             {
-                Task.Factory.StartNew(s => ((IDatetimerfc1123)s).PutUtcMinDateTimeAsync(datetimeBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutUtcMinDateTimeAsync(datetimeBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,7 +251,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             /// </param>
             public static System.DateTime? GetUtcMinDateTime(this IDatetimerfc1123 operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetimerfc1123)s).GetUtcMinDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUtcMinDateTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

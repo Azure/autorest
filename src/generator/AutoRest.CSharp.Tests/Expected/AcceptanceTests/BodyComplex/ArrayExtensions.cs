@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static ArrayWrapper GetValid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -57,7 +57,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutValid(this IArray operations, IList<string> array = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutValidAsync(array), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutValidAsync(array).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -84,7 +84,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static ArrayWrapper GetEmpty(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -114,7 +114,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutEmpty(this IArray operations, IList<string> array = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutEmptyAsync(array), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutEmptyAsync(array).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -142,7 +142,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static ArrayWrapper GetNotProvided(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetNotProvidedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNotProvidedAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

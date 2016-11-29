@@ -34,7 +34,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product Put201CreatingSucceeded200(this ILRORetrysOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).Put201CreatingSucceeded200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Put201CreatingSucceeded200Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -74,7 +74,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutAsyncRelativeRetrySucceeded(this ILRORetrysOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).PutAsyncRelativeRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PutAsyncRelativeRetrySucceededAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -111,7 +111,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product DeleteProvisioning202Accepted200Succeeded(this ILRORetrysOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).DeleteProvisioning202Accepted200SucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.DeleteProvisioning202Accepted200SucceededAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -144,7 +144,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LRORetrysDelete202Retry200Headers Delete202Retry200(this ILRORetrysOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).Delete202Retry200Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Delete202Retry200Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -176,7 +176,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LRORetrysDeleteAsyncRelativeRetrySucceededHeaders DeleteAsyncRelativeRetrySucceeded(this ILRORetrysOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).DeleteAsyncRelativeRetrySucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.DeleteAsyncRelativeRetrySucceededAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -211,7 +211,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LRORetrysPost202Retry200Headers Post202Retry200(this ILRORetrysOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).Post202Retry200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Post202Retry200Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -250,7 +250,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LRORetrysPostAsyncRelativeRetrySucceededHeaders PostAsyncRelativeRetrySucceeded(this ILRORetrysOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).PostAsyncRelativeRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostAsyncRelativeRetrySucceededAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -290,7 +290,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPut201CreatingSucceeded200(this ILRORetrysOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).BeginPut201CreatingSucceeded200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPut201CreatingSucceeded200Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -330,7 +330,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutAsyncRelativeRetrySucceeded(this ILRORetrysOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).BeginPutAsyncRelativeRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPutAsyncRelativeRetrySucceededAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -367,7 +367,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginDeleteProvisioning202Accepted200Succeeded(this ILRORetrysOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).BeginDeleteProvisioning202Accepted200SucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginDeleteProvisioning202Accepted200SucceededAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -400,7 +400,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LRORetrysDelete202Retry200Headers BeginDelete202Retry200(this ILRORetrysOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).BeginDelete202Retry200Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginDelete202Retry200Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -432,7 +432,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LRORetrysDeleteAsyncRelativeRetrySucceededHeaders BeginDeleteAsyncRelativeRetrySucceeded(this ILRORetrysOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).BeginDeleteAsyncRelativeRetrySucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginDeleteAsyncRelativeRetrySucceededAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -467,7 +467,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LRORetrysPost202Retry200Headers BeginPost202Retry200(this ILRORetrysOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).BeginPost202Retry200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPost202Retry200Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -506,7 +506,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LRORetrysPostAsyncRelativeRetrySucceededHeaders BeginPostAsyncRelativeRetrySucceeded(this ILRORetrysOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILRORetrysOperations)s).BeginPostAsyncRelativeRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPostAsyncRelativeRetrySucceededAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>

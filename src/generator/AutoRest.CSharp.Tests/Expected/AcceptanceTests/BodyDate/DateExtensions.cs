@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static System.DateTime? GetNull(this IDate operations)
             {
-                return Task.Factory.StartNew(s => ((IDate)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static System.DateTime? GetInvalidDate(this IDate operations)
             {
-                return Task.Factory.StartNew(s => ((IDate)s).GetInvalidDateAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInvalidDateAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static System.DateTime? GetOverflowDate(this IDate operations)
             {
-                return Task.Factory.StartNew(s => ((IDate)s).GetOverflowDateAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetOverflowDateAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -109,7 +109,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static System.DateTime? GetUnderflowDate(this IDate operations)
             {
-                return Task.Factory.StartNew(s => ((IDate)s).GetUnderflowDateAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUnderflowDateAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -139,7 +139,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static void PutMaxDate(this IDate operations, System.DateTime dateBody)
             {
-                Task.Factory.StartNew(s => ((IDate)s).PutMaxDateAsync(dateBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutMaxDateAsync(dateBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -166,7 +166,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static System.DateTime? GetMaxDate(this IDate operations)
             {
-                return Task.Factory.StartNew(s => ((IDate)s).GetMaxDateAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMaxDateAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -196,7 +196,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static void PutMinDate(this IDate operations, System.DateTime dateBody)
             {
-                Task.Factory.StartNew(s => ((IDate)s).PutMinDateAsync(dateBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutMinDateAsync(dateBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -223,7 +223,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static System.DateTime? GetMinDate(this IDate operations)
             {
-                return Task.Factory.StartNew(s => ((IDate)s).GetMinDateAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMinDateAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetBooleanTrue(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).GetBooleanTrueAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetBooleanTrueAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -52,7 +52,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetBooleanFalse(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).GetBooleanFalseAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetBooleanFalseAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -77,7 +77,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetIntOneMillion(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).GetIntOneMillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetIntOneMillionAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -102,7 +102,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetIntNegativeOneMillion(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).GetIntNegativeOneMillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetIntNegativeOneMillionAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -127,7 +127,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetTenBillion(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).GetTenBillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetTenBillionAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -152,7 +152,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetNegativeTenBillion(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).GetNegativeTenBillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetNegativeTenBillionAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -177,7 +177,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void FloatScientificPositive(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).FloatScientificPositiveAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.FloatScientificPositiveAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -202,7 +202,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void FloatScientificNegative(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).FloatScientificNegativeAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.FloatScientificNegativeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -227,7 +227,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DoubleDecimalPositive(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).DoubleDecimalPositiveAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DoubleDecimalPositiveAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -252,7 +252,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DoubleDecimalNegative(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).DoubleDecimalNegativeAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DoubleDecimalNegativeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -277,7 +277,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void StringUnicode(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).StringUnicodeAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.StringUnicodeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -302,7 +302,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void StringUrlEncoded(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).StringUrlEncodedAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.StringUrlEncodedAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -327,7 +327,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void StringEmpty(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).StringEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.StringEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -355,7 +355,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void StringNull(this IPaths operations, string stringPath)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).StringNullAsync(stringPath), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.StringNullAsync(stringPath).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -387,7 +387,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void EnumValid(this IPaths operations, UriColor enumPath)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).EnumValidAsync(enumPath), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.EnumValidAsync(enumPath).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -420,7 +420,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void EnumNull(this IPaths operations, UriColor enumPath)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).EnumNullAsync(enumPath), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.EnumNullAsync(enumPath).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -452,7 +452,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ByteMultiByte(this IPaths operations, byte[] bytePath)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).ByteMultiByteAsync(bytePath), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ByteMultiByteAsync(bytePath).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -480,7 +480,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ByteEmpty(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).ByteEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ByteEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -508,7 +508,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ByteNull(this IPaths operations, byte[] bytePath)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).ByteNullAsync(bytePath), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ByteNullAsync(bytePath).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -536,7 +536,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DateValid(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).DateValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DateValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -565,7 +565,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DateNull(this IPaths operations, System.DateTime datePath)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).DateNullAsync(datePath), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DateNullAsync(datePath).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -594,7 +594,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DateTimeValid(this IPaths operations)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).DateTimeValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DateTimeValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -623,7 +623,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DateTimeNull(this IPaths operations, System.DateTime dateTimePath)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).DateTimeNullAsync(dateTimePath), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DateTimeNullAsync(dateTimePath).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -655,7 +655,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void Base64Url(this IPaths operations, byte[] base64UrlPath)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).Base64UrlAsync(base64UrlPath), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Base64UrlAsync(base64UrlPath).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -688,7 +688,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ArrayCsvInPath(this IPaths operations, IList<string> arrayPath)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).ArrayCsvInPathAsync(arrayPath), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ArrayCsvInPathAsync(arrayPath).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -721,7 +721,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void UnixTimeUrl(this IPaths operations, System.DateTime unixTimeUrlPath)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).UnixTimeUrlAsync(unixTimeUrlPath), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.UnixTimeUrlAsync(unixTimeUrlPath).GetAwaiter().GetResult();
             }
 
             /// <summary>

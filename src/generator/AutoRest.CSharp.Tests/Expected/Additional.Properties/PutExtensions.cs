@@ -25,7 +25,7 @@ namespace Fixtures.AdditionalProperties
             /// </param>
             public static void Pets(this IPut operations, Pet pet)
             {
-                Task.Factory.StartNew(s => ((IPut)s).PetsAsync(pet), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PetsAsync(pet).GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>

@@ -27,7 +27,7 @@ namespace Fixtures.AdditionalProperties
             /// </param>
             public static IList<Pet> Pets(this IGet operations, int? limit = 11)
             {
-                return Task.Factory.StartNew(s => ((IGet)s).PetsAsync(limit), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PetsAsync(limit).GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>

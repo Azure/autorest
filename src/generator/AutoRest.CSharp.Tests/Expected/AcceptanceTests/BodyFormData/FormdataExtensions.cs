@@ -32,7 +32,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             /// </param>
             public static Stream UploadFile(this IFormdata operations, Stream fileContent, string fileName)
             {
-                return Task.Factory.StartNew(s => ((IFormdata)s).UploadFileAsync(fileContent, fileName), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.UploadFileAsync(fileContent, fileName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -68,7 +68,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             /// </param>
             public static Stream UploadFileViaBody(this IFormdata operations, Stream fileContent)
             {
-                return Task.Factory.StartNew(s => ((IFormdata)s).UploadFileViaBodyAsync(fileContent), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.UploadFileViaBodyAsync(fileContent).GetAwaiter().GetResult();
             }
 
             /// <summary>

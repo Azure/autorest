@@ -30,7 +30,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static Error PostRequiredIntegerParameter(this IExplicitModel operations, int bodyParameter)
             {
-                return Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredIntegerParameterAsync(bodyParameter), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostRequiredIntegerParameterAsync(bodyParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -63,7 +63,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static void PostOptionalIntegerParameter(this IExplicitModel operations, int? bodyParameter = default(int?))
             {
-                Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalIntegerParameterAsync(bodyParameter), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostOptionalIntegerParameterAsync(bodyParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -94,7 +94,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static Error PostRequiredIntegerProperty(this IExplicitModel operations, int value)
             {
-                return Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredIntegerPropertyAsync(value), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostRequiredIntegerPropertyAsync(value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -129,7 +129,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static void PostOptionalIntegerProperty(this IExplicitModel operations, int? value = default(int?))
             {
-                Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalIntegerPropertyAsync(value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostOptionalIntegerPropertyAsync(value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -160,7 +160,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static Error PostRequiredIntegerHeader(this IExplicitModel operations, int headerParameter)
             {
-                return Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredIntegerHeaderAsync(headerParameter), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostRequiredIntegerHeaderAsync(headerParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -194,7 +194,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static void PostOptionalIntegerHeader(this IExplicitModel operations, int? headerParameter = default(int?))
             {
-                Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalIntegerHeaderAsync(headerParameter), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostOptionalIntegerHeaderAsync(headerParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -225,7 +225,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static Error PostRequiredStringParameter(this IExplicitModel operations, string bodyParameter)
             {
-                return Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredStringParameterAsync(bodyParameter), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostRequiredStringParameterAsync(bodyParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -258,7 +258,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static void PostOptionalStringParameter(this IExplicitModel operations, string bodyParameter = default(string))
             {
-                Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalStringParameterAsync(bodyParameter), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostOptionalStringParameterAsync(bodyParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -289,7 +289,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static Error PostRequiredStringProperty(this IExplicitModel operations, string value)
             {
-                return Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredStringPropertyAsync(value), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostRequiredStringPropertyAsync(value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -324,7 +324,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static void PostOptionalStringProperty(this IExplicitModel operations, string value = default(string))
             {
-                Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalStringPropertyAsync(value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostOptionalStringPropertyAsync(value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -355,7 +355,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static Error PostRequiredStringHeader(this IExplicitModel operations, string headerParameter)
             {
-                return Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredStringHeaderAsync(headerParameter), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostRequiredStringHeaderAsync(headerParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -389,7 +389,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static void PostOptionalStringHeader(this IExplicitModel operations, string bodyParameter = default(string))
             {
-                Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalStringHeaderAsync(bodyParameter), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostOptionalStringHeaderAsync(bodyParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -420,7 +420,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static Error PostRequiredClassParameter(this IExplicitModel operations, Product bodyParameter)
             {
-                return Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredClassParameterAsync(bodyParameter), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostRequiredClassParameterAsync(bodyParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -453,7 +453,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static void PostOptionalClassParameter(this IExplicitModel operations, Product bodyParameter = default(Product))
             {
-                Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalClassParameterAsync(bodyParameter), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostOptionalClassParameterAsync(bodyParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -484,7 +484,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static Error PostRequiredClassProperty(this IExplicitModel operations, Product value)
             {
-                return Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredClassPropertyAsync(value), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostRequiredClassPropertyAsync(value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -519,7 +519,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static void PostOptionalClassProperty(this IExplicitModel operations, Product value = default(Product))
             {
-                Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalClassPropertyAsync(value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostOptionalClassPropertyAsync(value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -550,7 +550,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static Error PostRequiredArrayParameter(this IExplicitModel operations, IList<string> bodyParameter)
             {
-                return Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredArrayParameterAsync(bodyParameter), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostRequiredArrayParameterAsync(bodyParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -583,7 +583,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static void PostOptionalArrayParameter(this IExplicitModel operations, IList<string> bodyParameter = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalArrayParameterAsync(bodyParameter), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostOptionalArrayParameterAsync(bodyParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -614,7 +614,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static Error PostRequiredArrayProperty(this IExplicitModel operations, IList<string> value)
             {
-                return Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredArrayPropertyAsync(value), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostRequiredArrayPropertyAsync(value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -649,7 +649,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static void PostOptionalArrayProperty(this IExplicitModel operations, IList<string> value = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalArrayPropertyAsync(value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostOptionalArrayPropertyAsync(value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -680,7 +680,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static Error PostRequiredArrayHeader(this IExplicitModel operations, IList<string> headerParameter)
             {
-                return Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredArrayHeaderAsync(headerParameter), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostRequiredArrayHeaderAsync(headerParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -714,7 +714,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static void PostOptionalArrayHeader(this IExplicitModel operations, IList<string> headerParameter = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalArrayHeaderAsync(headerParameter), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostOptionalArrayHeaderAsync(headerParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>

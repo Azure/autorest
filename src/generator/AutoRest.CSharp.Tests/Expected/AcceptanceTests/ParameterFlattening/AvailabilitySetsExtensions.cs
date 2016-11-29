@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             /// </param>
             public static void Update(this IAvailabilitySets operations, string resourceGroupName, string avset, IDictionary<string, string> tags)
             {
-                Task.Factory.StartNew(s => ((IAvailabilitySets)s).UpdateAsync(resourceGroupName, avset, tags), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.UpdateAsync(resourceGroupName, avset, tags).GetAwaiter().GetResult();
             }
 
             /// <summary>

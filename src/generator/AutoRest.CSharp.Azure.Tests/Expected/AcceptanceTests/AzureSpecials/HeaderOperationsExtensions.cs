@@ -32,7 +32,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static HeaderCustomNamedRequestIdHeaders CustomNamedRequestId(this IHeaderOperations operations, string fooClientRequestId)
             {
-                return Task.Factory.StartNew(s => ((IHeaderOperations)s).CustomNamedRequestIdAsync(fooClientRequestId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.CustomNamedRequestIdAsync(fooClientRequestId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -68,7 +68,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static HeaderCustomNamedRequestIdParamGroupingHeaders CustomNamedRequestIdParamGrouping(this IHeaderOperations operations, HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters)
             {
-                return Task.Factory.StartNew(s => ((IHeaderOperations)s).CustomNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.CustomNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).GetAwaiter().GetResult();
             }
 
             /// <summary>

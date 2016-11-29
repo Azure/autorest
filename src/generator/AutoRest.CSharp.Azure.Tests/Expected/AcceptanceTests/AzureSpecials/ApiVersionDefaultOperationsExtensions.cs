@@ -28,7 +28,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetMethodGlobalValid(this IApiVersionDefaultOperations operations)
             {
-                Task.Factory.StartNew(s => ((IApiVersionDefaultOperations)s).GetMethodGlobalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetMethodGlobalValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +53,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetMethodGlobalNotProvidedValid(this IApiVersionDefaultOperations operations)
             {
-                Task.Factory.StartNew(s => ((IApiVersionDefaultOperations)s).GetMethodGlobalNotProvidedValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetMethodGlobalNotProvidedValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -78,7 +78,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetPathGlobalValid(this IApiVersionDefaultOperations operations)
             {
-                Task.Factory.StartNew(s => ((IApiVersionDefaultOperations)s).GetPathGlobalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetPathGlobalValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -103,7 +103,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetSwaggerGlobalValid(this IApiVersionDefaultOperations operations)
             {
-                Task.Factory.StartNew(s => ((IApiVersionDefaultOperations)s).GetSwaggerGlobalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetSwaggerGlobalValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

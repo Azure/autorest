@@ -31,7 +31,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
             /// </param>
             public static SampleResourceGroup GetSampleResourceGroup(this IGroupOperations operations, string resourceGroupName)
             {
-                return Task.Factory.StartNew(s => ((IGroupOperations)s).GetSampleResourceGroupAsync(resourceGroupName), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetSampleResourceGroupAsync(resourceGroupName).GetAwaiter().GetResult();
             }
 
             /// <summary>

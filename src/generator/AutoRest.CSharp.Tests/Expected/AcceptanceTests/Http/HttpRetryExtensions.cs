@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Head408(this IHttpRetry operations)
             {
-                Task.Factory.StartNew(s => ((IHttpRetry)s).Head408Async(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Head408Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Put500(this IHttpRetry operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpRetry)s).Put500Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Put500Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -84,7 +84,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Patch500(this IHttpRetry operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpRetry)s).Patch500Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Patch500Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -112,7 +112,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Get502(this IHttpRetry operations)
             {
-                Task.Factory.StartNew(s => ((IHttpRetry)s).Get502Async(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Get502Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -140,7 +140,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Post503(this IHttpRetry operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpRetry)s).Post503Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Post503Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -171,7 +171,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Delete503(this IHttpRetry operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpRetry)s).Delete503Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Delete503Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -202,7 +202,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Put504(this IHttpRetry operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpRetry)s).Put504Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Put504Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -233,7 +233,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Patch504(this IHttpRetry operations, bool? booleanValue = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IHttpRetry)s).Patch504Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Patch504Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>

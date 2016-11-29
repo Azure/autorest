@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static Fish GetValid(this IPolymorphicrecursive operations)
             {
-                return Task.Factory.StartNew(s => ((IPolymorphicrecursive)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -108,7 +108,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutValid(this IPolymorphicrecursive operations, Fish complexBody)
             {
-                Task.Factory.StartNew(s => ((IPolymorphicrecursive)s).PutValidAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutValidAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>

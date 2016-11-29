@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsReport
             /// </param>
             public static IDictionary<string, int?> GetReport(this IAutoRestReportService operations)
             {
-                return Task.Factory.StartNew(s => ((IAutoRestReportService)s).GetReportAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetReportAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

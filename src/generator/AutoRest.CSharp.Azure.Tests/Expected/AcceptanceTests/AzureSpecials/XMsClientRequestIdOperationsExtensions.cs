@@ -29,7 +29,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void Get(this IXMsClientRequestIdOperations operations)
             {
-                Task.Factory.StartNew(s => ((IXMsClientRequestIdOperations)s).GetAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -60,7 +60,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void ParamGet(this IXMsClientRequestIdOperations operations, string xMsClientRequestId)
             {
-                Task.Factory.StartNew(s => ((IXMsClientRequestIdOperations)s).ParamGetAsync(xMsClientRequestId), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ParamGetAsync(xMsClientRequestId).GetAwaiter().GetResult();
             }
 
             /// <summary>

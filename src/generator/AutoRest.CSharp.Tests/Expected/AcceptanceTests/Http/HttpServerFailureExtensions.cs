@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Head501(this IHttpServerFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpServerFailure)s).Head501Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Head501Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Get501(this IHttpServerFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpServerFailure)s).Get501Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get501Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -84,7 +84,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Post505(this IHttpServerFailure operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpServerFailure)s).Post505Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Post505Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -118,7 +118,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Delete505(this IHttpServerFailure operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpServerFailure)s).Delete505Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Delete505Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>

@@ -34,7 +34,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// </param>
             public static void PutArray(this IAutoRestResourceFlatteningTestService operations, IList<Resource> resourceArray = default(IList<Resource>))
             {
-                Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutArrayAsync(resourceArray), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutArrayAsync(resourceArray).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -64,7 +64,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// </param>
             public static IList<FlattenedProduct> GetArray(this IAutoRestResourceFlatteningTestService operations)
             {
-                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).GetArrayAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetArrayAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -97,7 +97,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// </param>
             public static void PutDictionary(this IAutoRestResourceFlatteningTestService operations, IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>))
             {
-                Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutDictionaryAsync(resourceDictionary), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDictionaryAsync(resourceDictionary).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -127,7 +127,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// </param>
             public static IDictionary<string, FlattenedProduct> GetDictionary(this IAutoRestResourceFlatteningTestService operations)
             {
-                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).GetDictionaryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDictionaryAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -160,7 +160,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// </param>
             public static void PutResourceCollection(this IAutoRestResourceFlatteningTestService operations, ResourceCollection resourceComplexObject = default(ResourceCollection))
             {
-                Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutResourceCollectionAsync(resourceComplexObject), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutResourceCollectionAsync(resourceComplexObject).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -190,7 +190,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// </param>
             public static ResourceCollection GetResourceCollection(this IAutoRestResourceFlatteningTestService operations)
             {
-                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).GetResourceCollectionAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetResourceCollectionAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

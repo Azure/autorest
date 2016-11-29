@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
             /// </param>
             public static void GetEmpty(this IPaths operations, string accountName)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).GetEmptyAsync(accountName), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetEmptyAsync(accountName).GetAwaiter().GetResult();
             }
 
             /// <summary>

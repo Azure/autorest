@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static double? GetNull(this INumber operations)
             {
-                return Task.Factory.StartNew(s => ((INumber)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static double? GetInvalidFloat(this INumber operations)
             {
-                return Task.Factory.StartNew(s => ((INumber)s).GetInvalidFloatAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInvalidFloatAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static double? GetInvalidDouble(this INumber operations)
             {
-                return Task.Factory.StartNew(s => ((INumber)s).GetInvalidDoubleAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInvalidDoubleAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -109,7 +109,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static decimal? GetInvalidDecimal(this INumber operations)
             {
-                return Task.Factory.StartNew(s => ((INumber)s).GetInvalidDecimalAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInvalidDecimalAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -139,7 +139,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static void PutBigFloat(this INumber operations, double numberBody)
             {
-                Task.Factory.StartNew(s => ((INumber)s).PutBigFloatAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutBigFloatAsync(numberBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -166,7 +166,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static double? GetBigFloat(this INumber operations)
             {
-                return Task.Factory.StartNew(s => ((INumber)s).GetBigFloatAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBigFloatAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -196,7 +196,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static void PutBigDouble(this INumber operations, double numberBody)
             {
-                Task.Factory.StartNew(s => ((INumber)s).PutBigDoubleAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutBigDoubleAsync(numberBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -223,7 +223,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static double? GetBigDouble(this INumber operations)
             {
-                return Task.Factory.StartNew(s => ((INumber)s).GetBigDoubleAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBigDoubleAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -253,7 +253,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static void PutBigDoublePositiveDecimal(this INumber operations, double numberBody)
             {
-                Task.Factory.StartNew(s => ((INumber)s).PutBigDoublePositiveDecimalAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutBigDoublePositiveDecimalAsync(numberBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -280,7 +280,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static double? GetBigDoublePositiveDecimal(this INumber operations)
             {
-                return Task.Factory.StartNew(s => ((INumber)s).GetBigDoublePositiveDecimalAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBigDoublePositiveDecimalAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -310,7 +310,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static void PutBigDoubleNegativeDecimal(this INumber operations, double numberBody)
             {
-                Task.Factory.StartNew(s => ((INumber)s).PutBigDoubleNegativeDecimalAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutBigDoubleNegativeDecimalAsync(numberBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -337,7 +337,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static double? GetBigDoubleNegativeDecimal(this INumber operations)
             {
-                return Task.Factory.StartNew(s => ((INumber)s).GetBigDoubleNegativeDecimalAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBigDoubleNegativeDecimalAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -367,7 +367,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static void PutBigDecimal(this INumber operations, decimal numberBody)
             {
-                Task.Factory.StartNew(s => ((INumber)s).PutBigDecimalAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutBigDecimalAsync(numberBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -394,7 +394,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static decimal? GetBigDecimal(this INumber operations)
             {
-                return Task.Factory.StartNew(s => ((INumber)s).GetBigDecimalAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBigDecimalAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -424,7 +424,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static void PutBigDecimalPositiveDecimal(this INumber operations, decimal numberBody)
             {
-                Task.Factory.StartNew(s => ((INumber)s).PutBigDecimalPositiveDecimalAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutBigDecimalPositiveDecimalAsync(numberBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -451,7 +451,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static decimal? GetBigDecimalPositiveDecimal(this INumber operations)
             {
-                return Task.Factory.StartNew(s => ((INumber)s).GetBigDecimalPositiveDecimalAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBigDecimalPositiveDecimalAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -481,7 +481,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static void PutBigDecimalNegativeDecimal(this INumber operations, decimal numberBody)
             {
-                Task.Factory.StartNew(s => ((INumber)s).PutBigDecimalNegativeDecimalAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutBigDecimalNegativeDecimalAsync(numberBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -508,7 +508,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static decimal? GetBigDecimalNegativeDecimal(this INumber operations)
             {
-                return Task.Factory.StartNew(s => ((INumber)s).GetBigDecimalNegativeDecimalAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBigDecimalNegativeDecimalAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -538,7 +538,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static void PutSmallFloat(this INumber operations, double numberBody)
             {
-                Task.Factory.StartNew(s => ((INumber)s).PutSmallFloatAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutSmallFloatAsync(numberBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -565,7 +565,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static double? GetSmallFloat(this INumber operations)
             {
-                return Task.Factory.StartNew(s => ((INumber)s).GetSmallFloatAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetSmallFloatAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -595,7 +595,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static void PutSmallDouble(this INumber operations, double numberBody)
             {
-                Task.Factory.StartNew(s => ((INumber)s).PutSmallDoubleAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutSmallDoubleAsync(numberBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -622,7 +622,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static double? GetSmallDouble(this INumber operations)
             {
-                return Task.Factory.StartNew(s => ((INumber)s).GetSmallDoubleAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetSmallDoubleAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -652,7 +652,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static void PutSmallDecimal(this INumber operations, decimal numberBody)
             {
-                Task.Factory.StartNew(s => ((INumber)s).PutSmallDecimalAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutSmallDecimalAsync(numberBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -679,7 +679,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static decimal? GetSmallDecimal(this INumber operations)
             {
-                return Task.Factory.StartNew(s => ((INumber)s).GetSmallDecimalAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetSmallDecimalAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

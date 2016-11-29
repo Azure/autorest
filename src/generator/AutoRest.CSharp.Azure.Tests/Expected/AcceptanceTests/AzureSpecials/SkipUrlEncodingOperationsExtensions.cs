@@ -31,7 +31,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetMethodPathValid(this ISkipUrlEncodingOperations operations, string unencodedPathParam)
             {
-                Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetMethodPathValidAsync(unencodedPathParam), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetMethodPathValidAsync(unencodedPathParam).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -62,7 +62,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetPathPathValid(this ISkipUrlEncodingOperations operations, string unencodedPathParam)
             {
-                Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetPathPathValidAsync(unencodedPathParam), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetPathPathValidAsync(unencodedPathParam).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -90,7 +90,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetSwaggerPathValid(this ISkipUrlEncodingOperations operations)
             {
-                Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetSwaggerPathValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetSwaggerPathValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -119,7 +119,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetMethodQueryValid(this ISkipUrlEncodingOperations operations, string q1)
             {
-                Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetMethodQueryValidAsync(q1), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetMethodQueryValidAsync(q1).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -151,7 +151,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetMethodQueryNull(this ISkipUrlEncodingOperations operations, string q1 = default(string))
             {
-                Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetMethodQueryNullAsync(q1), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetMethodQueryNullAsync(q1).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -183,7 +183,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetPathQueryValid(this ISkipUrlEncodingOperations operations, string q1)
             {
-                Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetPathQueryValidAsync(q1), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetPathQueryValidAsync(q1).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -213,7 +213,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetSwaggerQueryValid(this ISkipUrlEncodingOperations operations)
             {
-                Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetSwaggerQueryValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetSwaggerQueryValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

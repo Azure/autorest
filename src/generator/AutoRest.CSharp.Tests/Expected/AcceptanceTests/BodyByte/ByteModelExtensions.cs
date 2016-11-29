@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             /// </param>
             public static byte[] GetNull(this IByteModel operations)
             {
-                return Task.Factory.StartNew(s => ((IByteModel)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             /// </param>
             public static byte[] GetEmpty(this IByteModel operations)
             {
-                return Task.Factory.StartNew(s => ((IByteModel)s).GetEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             /// </param>
             public static byte[] GetNonAscii(this IByteModel operations)
             {
-                return Task.Factory.StartNew(s => ((IByteModel)s).GetNonAsciiAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNonAsciiAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -112,7 +112,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             /// </param>
             public static void PutNonAscii(this IByteModel operations, byte[] byteBody)
             {
-                Task.Factory.StartNew(s => ((IByteModel)s).PutNonAsciiAsync(byteBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutNonAsciiAsync(byteBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -140,7 +140,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             /// </param>
             public static byte[] GetInvalid(this IByteModel operations)
             {
-                return Task.Factory.StartNew(s => ((IByteModel)s).GetInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

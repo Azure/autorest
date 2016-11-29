@@ -28,7 +28,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             /// </param>
             public static System.TimeSpan? GetNull(this IDurationOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IDurationOperations)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -58,7 +58,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             /// </param>
             public static void PutPositiveDuration(this IDurationOperations operations, System.TimeSpan durationBody)
             {
-                Task.Factory.StartNew(s => ((IDurationOperations)s).PutPositiveDurationAsync(durationBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutPositiveDurationAsync(durationBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -85,7 +85,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             /// </param>
             public static System.TimeSpan? GetPositiveDuration(this IDurationOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IDurationOperations)s).GetPositiveDurationAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetPositiveDurationAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -113,7 +113,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             /// </param>
             public static System.TimeSpan? GetInvalid(this IDurationOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IDurationOperations)s).GetInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

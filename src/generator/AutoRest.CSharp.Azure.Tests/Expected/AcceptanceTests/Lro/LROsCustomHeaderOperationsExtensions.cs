@@ -35,7 +35,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutAsyncRetrySucceeded(this ILROsCustomHeaderOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).PutAsyncRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PutAsyncRetrySucceededAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -77,7 +77,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product Put201CreatingSucceeded200(this ILROsCustomHeaderOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).Put201CreatingSucceeded200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Put201CreatingSucceeded200Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -118,7 +118,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsCustomHeaderPost202Retry200Headers Post202Retry200(this ILROsCustomHeaderOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).Post202Retry200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Post202Retry200Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -159,7 +159,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsCustomHeaderPostAsyncRetrySucceededHeaders PostAsyncRetrySucceeded(this ILROsCustomHeaderOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).PostAsyncRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostAsyncRetrySucceededAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -201,7 +201,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutAsyncRetrySucceeded(this ILROsCustomHeaderOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).BeginPutAsyncRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPutAsyncRetrySucceededAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -243,7 +243,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPut201CreatingSucceeded200(this ILROsCustomHeaderOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).BeginPut201CreatingSucceeded200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPut201CreatingSucceeded200Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -284,7 +284,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsCustomHeaderPost202Retry200Headers BeginPost202Retry200(this ILROsCustomHeaderOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).BeginPost202Retry200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPost202Retry200Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -325,7 +325,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROsCustomHeaderPostAsyncRetrySucceededHeaders BeginPostAsyncRetrySucceeded(this ILROsCustomHeaderOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).BeginPostAsyncRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPostAsyncRetrySucceededAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>

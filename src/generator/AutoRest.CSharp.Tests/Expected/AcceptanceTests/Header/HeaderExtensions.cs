@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static void ParamExistingKey(this IHeader operations, string userAgent)
             {
-                Task.Factory.StartNew(s => ((IHeader)s).ParamExistingKeyAsync(userAgent), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ParamExistingKeyAsync(userAgent).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -56,7 +56,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static HeaderResponseExistingKeyHeaders ResponseExistingKey(this IHeader operations)
             {
-                return Task.Factory.StartNew(s => ((IHeader)s).ResponseExistingKeyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ResponseExistingKeyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -87,7 +87,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static void ParamProtectedKey(this IHeader operations, string contentType)
             {
-                Task.Factory.StartNew(s => ((IHeader)s).ParamProtectedKeyAsync(contentType), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ParamProtectedKeyAsync(contentType).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -115,7 +115,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static HeaderResponseProtectedKeyHeaders ResponseProtectedKey(this IHeader operations)
             {
-                return Task.Factory.StartNew(s => ((IHeader)s).ResponseProtectedKeyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ResponseProtectedKeyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -150,7 +150,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static void ParamInteger(this IHeader operations, string scenario, int value)
             {
-                Task.Factory.StartNew(s => ((IHeader)s).ParamIntegerAsync(scenario, value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ParamIntegerAsync(scenario, value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -185,7 +185,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static HeaderResponseIntegerHeaders ResponseInteger(this IHeader operations, string scenario)
             {
-                return Task.Factory.StartNew(s => ((IHeader)s).ResponseIntegerAsync(scenario), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ResponseIntegerAsync(scenario).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -223,7 +223,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static void ParamLong(this IHeader operations, string scenario, long value)
             {
-                Task.Factory.StartNew(s => ((IHeader)s).ParamLongAsync(scenario, value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ParamLongAsync(scenario, value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -258,7 +258,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static HeaderResponseLongHeaders ResponseLong(this IHeader operations, string scenario)
             {
-                return Task.Factory.StartNew(s => ((IHeader)s).ResponseLongAsync(scenario), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ResponseLongAsync(scenario).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -296,7 +296,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static void ParamFloat(this IHeader operations, string scenario, double value)
             {
-                Task.Factory.StartNew(s => ((IHeader)s).ParamFloatAsync(scenario, value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ParamFloatAsync(scenario, value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -331,7 +331,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static HeaderResponseFloatHeaders ResponseFloat(this IHeader operations, string scenario)
             {
-                return Task.Factory.StartNew(s => ((IHeader)s).ResponseFloatAsync(scenario), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ResponseFloatAsync(scenario).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -369,7 +369,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static void ParamDouble(this IHeader operations, string scenario, double value)
             {
-                Task.Factory.StartNew(s => ((IHeader)s).ParamDoubleAsync(scenario, value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ParamDoubleAsync(scenario, value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -404,7 +404,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static HeaderResponseDoubleHeaders ResponseDouble(this IHeader operations, string scenario)
             {
-                return Task.Factory.StartNew(s => ((IHeader)s).ResponseDoubleAsync(scenario), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ResponseDoubleAsync(scenario).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -442,7 +442,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static void ParamBool(this IHeader operations, string scenario, bool value)
             {
-                Task.Factory.StartNew(s => ((IHeader)s).ParamBoolAsync(scenario, value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ParamBoolAsync(scenario, value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -477,7 +477,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static HeaderResponseBoolHeaders ResponseBool(this IHeader operations, string scenario)
             {
-                return Task.Factory.StartNew(s => ((IHeader)s).ResponseBoolAsync(scenario), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ResponseBoolAsync(scenario).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -518,7 +518,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static void ParamString(this IHeader operations, string scenario, string value = default(string))
             {
-                Task.Factory.StartNew(s => ((IHeader)s).ParamStringAsync(scenario, value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ParamStringAsync(scenario, value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -558,7 +558,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static HeaderResponseStringHeaders ResponseString(this IHeader operations, string scenario)
             {
-                return Task.Factory.StartNew(s => ((IHeader)s).ResponseStringAsync(scenario), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ResponseStringAsync(scenario).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -598,7 +598,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static void ParamDate(this IHeader operations, string scenario, System.DateTime value)
             {
-                Task.Factory.StartNew(s => ((IHeader)s).ParamDateAsync(scenario, value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ParamDateAsync(scenario, value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -633,7 +633,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static HeaderResponseDateHeaders ResponseDate(this IHeader operations, string scenario)
             {
-                return Task.Factory.StartNew(s => ((IHeader)s).ResponseDateAsync(scenario), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ResponseDateAsync(scenario).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -673,7 +673,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static void ParamDatetime(this IHeader operations, string scenario, System.DateTime value)
             {
-                Task.Factory.StartNew(s => ((IHeader)s).ParamDatetimeAsync(scenario, value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ParamDatetimeAsync(scenario, value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -711,7 +711,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static HeaderResponseDatetimeHeaders ResponseDatetime(this IHeader operations, string scenario)
             {
-                return Task.Factory.StartNew(s => ((IHeader)s).ResponseDatetimeAsync(scenario), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ResponseDatetimeAsync(scenario).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -752,7 +752,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static void ParamDatetimeRfc1123(this IHeader operations, string scenario, System.DateTime? value = default(System.DateTime?))
             {
-                Task.Factory.StartNew(s => ((IHeader)s).ParamDatetimeRfc1123Async(scenario, value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ParamDatetimeRfc1123Async(scenario, value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -790,7 +790,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static HeaderResponseDatetimeRfc1123Headers ResponseDatetimeRfc1123(this IHeader operations, string scenario)
             {
-                return Task.Factory.StartNew(s => ((IHeader)s).ResponseDatetimeRfc1123Async(scenario), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ResponseDatetimeRfc1123Async(scenario).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -829,7 +829,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static void ParamDuration(this IHeader operations, string scenario, System.TimeSpan value)
             {
-                Task.Factory.StartNew(s => ((IHeader)s).ParamDurationAsync(scenario, value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ParamDurationAsync(scenario, value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -864,7 +864,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static HeaderResponseDurationHeaders ResponseDuration(this IHeader operations, string scenario)
             {
-                return Task.Factory.StartNew(s => ((IHeader)s).ResponseDurationAsync(scenario), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ResponseDurationAsync(scenario).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -902,7 +902,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static void ParamByte(this IHeader operations, string scenario, byte[] value)
             {
-                Task.Factory.StartNew(s => ((IHeader)s).ParamByteAsync(scenario, value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ParamByteAsync(scenario, value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -937,7 +937,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static HeaderResponseByteHeaders ResponseByte(this IHeader operations, string scenario)
             {
-                return Task.Factory.StartNew(s => ((IHeader)s).ResponseByteAsync(scenario), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ResponseByteAsync(scenario).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -977,7 +977,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static void ParamEnum(this IHeader operations, string scenario, GreyscaleColors? value = default(GreyscaleColors?))
             {
-                Task.Factory.StartNew(s => ((IHeader)s).ParamEnumAsync(scenario, value), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ParamEnumAsync(scenario, value).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1015,7 +1015,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static HeaderResponseEnumHeaders ResponseEnum(this IHeader operations, string scenario)
             {
-                return Task.Factory.StartNew(s => ((IHeader)s).ResponseEnumAsync(scenario), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ResponseEnumAsync(scenario).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1048,7 +1048,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static void CustomRequestId(this IHeader operations)
             {
-                Task.Factory.StartNew(s => ((IHeader)s).CustomRequestIdAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.CustomRequestIdAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

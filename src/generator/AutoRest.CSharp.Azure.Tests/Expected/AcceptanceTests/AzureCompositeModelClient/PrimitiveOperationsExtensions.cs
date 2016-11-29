@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static IntWrapper GetInt(this IPrimitiveOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitiveOperations)s).GetIntAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetIntAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -58,7 +58,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutInt(this IPrimitiveOperations operations, IntWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitiveOperations)s).PutIntAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutIntAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -86,7 +86,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static LongWrapper GetLong(this IPrimitiveOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitiveOperations)s).GetLongAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetLongAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -117,7 +117,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutLong(this IPrimitiveOperations operations, LongWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitiveOperations)s).PutLongAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutLongAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -145,7 +145,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static FloatWrapper GetFloat(this IPrimitiveOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitiveOperations)s).GetFloatAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetFloatAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -176,7 +176,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutFloat(this IPrimitiveOperations operations, FloatWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitiveOperations)s).PutFloatAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutFloatAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -204,7 +204,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static DoubleWrapper GetDouble(this IPrimitiveOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitiveOperations)s).GetDoubleAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDoubleAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -236,7 +236,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutDouble(this IPrimitiveOperations operations, DoubleWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitiveOperations)s).PutDoubleAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDoubleAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -265,7 +265,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static BooleanWrapper GetBool(this IPrimitiveOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitiveOperations)s).GetBoolAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBoolAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -296,7 +296,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutBool(this IPrimitiveOperations operations, BooleanWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitiveOperations)s).PutBoolAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutBoolAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -324,7 +324,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static StringWrapper GetString(this IPrimitiveOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitiveOperations)s).GetStringAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetStringAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -355,7 +355,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutString(this IPrimitiveOperations operations, StringWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitiveOperations)s).PutStringAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutStringAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -383,7 +383,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static DateWrapper GetDate(this IPrimitiveOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitiveOperations)s).GetDateAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -414,7 +414,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutDate(this IPrimitiveOperations operations, DateWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitiveOperations)s).PutDateAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDateAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -442,7 +442,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static DatetimeWrapper GetDateTime(this IPrimitiveOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitiveOperations)s).GetDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -473,7 +473,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutDateTime(this IPrimitiveOperations operations, DatetimeWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitiveOperations)s).PutDateTimeAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDateTimeAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -501,7 +501,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static Datetimerfc1123Wrapper GetDateTimeRfc1123(this IPrimitiveOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitiveOperations)s).GetDateTimeRfc1123Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateTimeRfc1123Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -533,7 +533,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutDateTimeRfc1123(this IPrimitiveOperations operations, Datetimerfc1123Wrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitiveOperations)s).PutDateTimeRfc1123Async(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDateTimeRfc1123Async(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -562,7 +562,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static DurationWrapper GetDuration(this IPrimitiveOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitiveOperations)s).GetDurationAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDurationAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -592,7 +592,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutDuration(this IPrimitiveOperations operations, System.TimeSpan? field = default(System.TimeSpan?))
             {
-                Task.Factory.StartNew(s => ((IPrimitiveOperations)s).PutDurationAsync(field), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDurationAsync(field).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -619,7 +619,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static ByteWrapper GetByte(this IPrimitiveOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitiveOperations)s).GetByteAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetByteAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -649,7 +649,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutByte(this IPrimitiveOperations operations, byte[] field = default(byte[]))
             {
-                Task.Factory.StartNew(s => ((IPrimitiveOperations)s).PutByteAsync(field), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutByteAsync(field).GetAwaiter().GetResult();
             }
 
             /// <summary>

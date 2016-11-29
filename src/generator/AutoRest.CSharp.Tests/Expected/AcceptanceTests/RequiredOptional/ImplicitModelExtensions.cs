@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static Error GetRequiredPath(this IImplicitModel operations, string pathParameter)
             {
-                return Task.Factory.StartNew(s => ((IImplicitModel)s).GetRequiredPathAsync(pathParameter), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetRequiredPathAsync(pathParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -59,7 +59,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static void PutOptionalQuery(this IImplicitModel operations, string queryParameter = default(string))
             {
-                Task.Factory.StartNew(s => ((IImplicitModel)s).PutOptionalQueryAsync(queryParameter), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutOptionalQueryAsync(queryParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -88,7 +88,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static void PutOptionalHeader(this IImplicitModel operations, string queryParameter = default(string))
             {
-                Task.Factory.StartNew(s => ((IImplicitModel)s).PutOptionalHeaderAsync(queryParameter), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutOptionalHeaderAsync(queryParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -117,7 +117,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static void PutOptionalBody(this IImplicitModel operations, string bodyParameter = default(string))
             {
-                Task.Factory.StartNew(s => ((IImplicitModel)s).PutOptionalBodyAsync(bodyParameter), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutOptionalBodyAsync(bodyParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -144,7 +144,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static Error GetRequiredGlobalPath(this IImplicitModel operations)
             {
-                return Task.Factory.StartNew(s => ((IImplicitModel)s).GetRequiredGlobalPathAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetRequiredGlobalPathAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -172,7 +172,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static Error GetRequiredGlobalQuery(this IImplicitModel operations)
             {
-                return Task.Factory.StartNew(s => ((IImplicitModel)s).GetRequiredGlobalQueryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetRequiredGlobalQueryAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -200,7 +200,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static Error GetOptionalGlobalQuery(this IImplicitModel operations)
             {
-                return Task.Factory.StartNew(s => ((IImplicitModel)s).GetOptionalGlobalQueryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetOptionalGlobalQueryAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
