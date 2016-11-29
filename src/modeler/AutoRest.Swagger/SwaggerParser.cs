@@ -26,7 +26,7 @@ namespace AutoRest.Swagger
             var swaggerDocument = fileSystem.ReadFileAsText(path);
             if (path.EndsWith(".md"))
             {
-                swaggerDocument = new MarkdownYamlParser().ParseMarkdown(swaggerDocument);
+                swaggerDocument = new LiterateYamlParser().Parse(swaggerDocument);
             }
             swaggerDocument = swaggerDocument.EnsureYamlIsJson();
             return Parse(swaggerDocument);

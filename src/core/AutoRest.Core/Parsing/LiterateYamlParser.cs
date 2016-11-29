@@ -13,9 +13,9 @@ using YamlDotNet.Serialization;
 
 namespace AutoRest.Core.Parsing
 {
-    public class MarkdownYamlParser
+    public class LiterateYamlParser
     {
-        public string ParseMarkdown(string markdown)
+        public string Parse(string markdown)
         {
             // search code blocks
             var lines = markdown.Split(new[] {"\r\n", "\r", "\n"}, StringSplitOptions.None);
