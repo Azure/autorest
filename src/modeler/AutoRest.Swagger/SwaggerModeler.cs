@@ -273,8 +273,7 @@ namespace AutoRest.Swagger
                     // Otherwise, root it from the current path
                     filePath = Settings.FileSystem.MakePathRooted(Settings.InputFolder, filePath);
                 }
-                string externalDefinition = Settings.FileSystem.ReadFileAsText(filePath);
-                ServiceDefinition external = SwaggerParser.Parse(externalDefinition);
+                ServiceDefinition external = SwaggerParser.Load(filePath, Settings.FileSystem);
                 external.Definitions.ForEach(d => ServiceDefinition.Definitions[d.Key] = d.Value);
             }
 

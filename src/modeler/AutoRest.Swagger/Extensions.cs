@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using AutoRest.Core.Model;
+using AutoRest.Core.Parsing;
 using Newtonsoft.Json;
 using YamlDotNet.Serialization;
 
