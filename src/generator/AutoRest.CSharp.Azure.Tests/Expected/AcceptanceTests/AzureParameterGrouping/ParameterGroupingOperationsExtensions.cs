@@ -10,8 +10,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
 {
     using Azure;
     using Microsoft.Rest;
-   using Microsoft.Rest.Azure;
-   using Models;
+    using Microsoft.Rest.Azure;
+    using Models;
     using System.Threading;
     using System.Threading.Tasks;
 

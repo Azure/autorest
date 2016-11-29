@@ -1026,6 +1026,9 @@ namespace Petstore
         /// <exception cref="ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
@@ -1649,6 +1652,9 @@ namespace Petstore
         /// <exception cref="ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
@@ -1778,6 +1784,9 @@ namespace Petstore
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
         /// <return>
@@ -2452,6 +2461,9 @@ namespace Petstore
         /// <exception cref="ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
@@ -2585,6 +2597,9 @@ namespace Petstore
         /// <exception cref="ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
@@ -2702,6 +2717,9 @@ namespace Petstore
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
         /// <return>

@@ -10,7 +10,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
 {
     using Azure;
     using Microsoft.Rest;
-   using Microsoft.Rest.Azure;
+    using Microsoft.Rest.Azure;
     using System.Threading;
     using System.Threading.Tasks;
 
