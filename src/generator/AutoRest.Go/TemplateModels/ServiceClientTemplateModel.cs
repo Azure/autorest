@@ -120,6 +120,11 @@ namespace AutoRest.Go.TemplateModels
                         });
                 }
 
+                foreach (var p in Properties)
+                {
+                    p.Type.AddImports(imports);
+                }
+
                 if (validationImports)
                     imports.UnionWith(GoCodeNamer.ValidationImport);
                 return imports.OrderBy(i => i);

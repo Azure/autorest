@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using AutoRest.Core;
 using AutoRest.Core.ClientModel;
+using AutoRest.Extensions;
 using AutoRest.Go.TemplateModels;
 using AutoRest.Go.Templates;
 
@@ -45,6 +46,7 @@ namespace AutoRest.Go
         /// <param name="serviceClientModel"></param>
         public override void NormalizeClientModel(ServiceClient serviceClientModel)
         {
+            SwaggerExtensions.ProcessGlobalParameters(serviceClientModel);
             // Add the current package name as a reserved keyword
             _namingFramework.ReserveNamespace(Settings.Namespace);
             _namingFramework.NormalizeClientModel(serviceClientModel);
