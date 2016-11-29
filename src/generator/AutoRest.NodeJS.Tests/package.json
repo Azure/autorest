@@ -22,7 +22,7 @@
     "jshint": "2.8.0",
     "xunit-file": "0.0.5",
     "mocha": "2.2.5",
-    "moment": "^2.14.1",
+    "moment": "~2.16.0",
     "should": "5.2.0",
     "underscore": "*"
   },
