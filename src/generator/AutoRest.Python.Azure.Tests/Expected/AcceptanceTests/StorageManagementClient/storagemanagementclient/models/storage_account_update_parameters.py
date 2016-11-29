@@ -41,7 +41,7 @@ class StorageAccountUpdateParameters(Resource):
      the custom domain name property.
     :type custom_domain: :class:`CustomDomain
      <fixtures.acceptancetestsstoragemanagementclient.models.CustomDomain>`
-    """ 
+    """
 
     _validation = {
         'id': {'readonly': True},

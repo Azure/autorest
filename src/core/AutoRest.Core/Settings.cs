@@ -174,6 +174,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
         [SettingsAlias("name")]
         public string ClientName { get; set; }
 
+        [SettingsInfo("Disables post-codegeneration simplifier")]
+        public bool DisableSimplifier { get; set; }
+
         /// <summary>
         /// Gets or sets the maximum number of properties in the request body.
         /// If the number of properties in the request body is less than or

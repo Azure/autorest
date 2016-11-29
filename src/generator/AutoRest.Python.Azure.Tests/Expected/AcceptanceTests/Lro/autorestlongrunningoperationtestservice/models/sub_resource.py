@@ -20,7 +20,7 @@ class SubResource(Model):
 
     :ivar id: Sub Resource Id
     :vartype id: str
-    """ 
+    """
 
     _validation = {
         'id': {'readonly': True},

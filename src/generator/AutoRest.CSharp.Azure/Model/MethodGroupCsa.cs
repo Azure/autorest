@@ -38,7 +38,9 @@ namespace AutoRest.CSharp.Azure.Model
             {
                 yield return "Microsoft.Rest.Azure";
 
-                if (CodeModel.ModelTypes.Any(m => !m.Extensions.ContainsKey(AzureExtensions.ExternalExtension)) || CodeModel.HeaderTypes.Any())
+                if (CodeModel.ModelTypes.Any(m => !m.Extensions.ContainsKey(AzureExtensions.ExternalExtension)) || 
+                    CodeModel.HeaderTypes.Any() || 
+                    (CodeModel as CodeModelCsa).pageClasses.Any())
                 {
                     yield return CodeModel.ModelsName;
                 }

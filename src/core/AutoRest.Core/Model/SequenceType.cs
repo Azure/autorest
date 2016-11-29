@@ -43,31 +43,19 @@ namespace AutoRest.Core.Model
         }
 
         /// <summary>
-        /// Determines whether the specified object is equal to this object based on the ElementType.
+        /// Determines whether the specified model type is structurally equal to this object.
         /// </summary>
-        /// <param name="obj">The object to compare with this object.</param>
-        /// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
-        public override bool Equals(object obj)
+        /// <param name="other">The object to compare with this object.</param>
+        /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
+        public override bool StructurallyEquals(IModelType other)
         {
-            var sequenceType = obj as SequenceType;
-
-            if (sequenceType != null)
+            if (ReferenceEquals(other as SequenceType, null))
             {
-                return sequenceType.ElementType == ElementType;
+                return false;
             }
 
-            return false;
-        }
-
-        /// <summary>
-        /// Serves as a hash function based on ElementType.
-        /// </summary>
-        /// <returns>
-        /// A hash code for the current object.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return ElementType.GetHashCode();
+            return base.StructurallyEquals(other) && 
+                ElementType.StructurallyEquals((other as SequenceType).ElementType);
         }
     }
 }

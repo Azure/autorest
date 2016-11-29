@@ -25,6 +25,7 @@ namespace AutoRest.Swagger
 
         internal Dictionary<string, string> ExtendedTypes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         internal Dictionary<string, CompositeType> GeneratedTypes = new Dictionary<string, CompositeType>();
+        internal Dictionary<Schema, CompositeType> GeneratingTypes = new Dictionary<Schema, CompositeType>();
 
         public SwaggerModeler() 
         {
@@ -291,7 +292,7 @@ namespace AutoRest.Swagger
                         : ServiceDefinition.Definitions[schema.Extends.StripDefinitionPath()];
 
                     if (parent != null &&
-                        !AncestorsHaveProperties(parent.Properties, parent.Extends.StripDefinitionPath()))
+                        !AncestorsHaveProperties(parent.Properties, parent.Extends))
                     {
                         throw ErrorManager.CreateError(Resources.InvalidAncestors, schemaName);
                     }
@@ -318,6 +319,7 @@ namespace AutoRest.Swagger
                 return true;
             }
 
+            extends = extends.StripDefinitionPath();
             Debug.Assert(!string.IsNullOrEmpty(extends) && ServiceDefinition.Definitions.ContainsKey(extends));
             return AncestorsHaveProperties(ServiceDefinition.Definitions[extends].Properties,
                 ServiceDefinition.Definitions[extends].Extends.StripDefinitionPath());

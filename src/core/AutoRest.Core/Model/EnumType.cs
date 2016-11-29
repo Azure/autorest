@@ -84,31 +84,20 @@ namespace AutoRest.Core.Model
         }
 
         /// <summary>
-        /// Determines whether the specified object is equal to this object based on Name and Values.
+        /// Determines whether the specified model type is structurally equal to this object.
         /// </summary>
-        /// <param name="obj">The object to compare with this object.</param>
-        /// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
-        public override bool Equals(object obj)
+        /// <param name="other">The object to compare with this object.</param>
+        /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
+        public override bool StructurallyEquals(IModelType other)
         {
-            var enumType = obj as EnumType;
-
-            if (enumType != null)
+            if (ReferenceEquals(other as EnumType, null))
             {
-                return enumType.Name.RawValue == Name.RawValue &&
-                    enumType.Values.OrderBy(t => t).SequenceEqual(Values.OrderBy(t => t));
+                return false;
             }
-            return false;
-        }
 
-        /// <summary>
-        /// Serves as a hash function based on value count.
-        /// </summary>
-        /// <returns>
-        /// A hash code for the current object.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return Values.Count;
+            return base.StructurallyEquals(other) && 
+                Values.OrderBy(t => t).SequenceEqual(Values.OrderBy(t => t)) &&
+                ModelAsString == (other as EnumType).ModelAsString;
         }
 
         public override string ExtendedDocumentation

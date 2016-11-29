@@ -4,6 +4,7 @@ namespace Petstore
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// The Storage Management Client.
@@ -28,7 +29,7 @@ namespace Petstore
         /// <summary>
         /// Credentials needed for the client to connect to Azure.
         /// </summary>
-        Microsoft.Rest.ServiceClientCredentials Credentials { get; }
+        ServiceClientCredentials Credentials { get; }
 
         /// <summary>
         /// Gets subscription credentials which uniquely identify Microsoft
@@ -72,3 +73,4 @@ namespace Petstore
 
     }
 }
+

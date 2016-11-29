@@ -16,8 +16,8 @@ from .string_wrapper import StringWrapper
 from .string_optional_wrapper import StringOptionalWrapper
 from .array_wrapper import ArrayWrapper
 from .array_optional_wrapper import ArrayOptionalWrapper
-from .class_wrapper import ClassWrapper
 from .product import Product
+from .class_wrapper import ClassWrapper
 from .class_optional_wrapper import ClassOptionalWrapper
 
 __all__ = [
@@ -28,7 +28,7 @@ __all__ = [
     'StringOptionalWrapper',
     'ArrayWrapper',
     'ArrayOptionalWrapper',
-    'ClassWrapper',
     'Product',
+    'ClassWrapper',
     'ClassOptionalWrapper',
 ]

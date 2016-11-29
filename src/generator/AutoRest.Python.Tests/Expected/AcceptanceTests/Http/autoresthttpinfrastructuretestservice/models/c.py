@@ -17,7 +17,7 @@ class C(Model):
 
     :param http_code:
     :type http_code: str
-    """ 
+    """
 
     _attribute_map = {
         'http_code': {'key': 'httpCode', 'type': 'str'},

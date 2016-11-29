@@ -167,8 +167,19 @@ namespace AutoRest.Extensions
                 throw new ArgumentNullException("codeModel");
             }
 
+            // About "flattenDepth": flattening was not really deterministic and depended on order of specification
+            // Sorting by the following method enforces the right behavior
+            Func<IModelType, int, int> flattenDepth = null;
+            flattenDepth = (type, depth) =>
+            {
+                var ct = type as CompositeType;
+                if (ReferenceEquals(ct, null) || !ct.Properties.Any(p => p.ShouldBeFlattened()) || depth > 16)
+                    return 0;
+                return 1 + ct.Properties.Max(prop => flattenDepth(prop.ModelType, depth + 1));
+            };
+
             HashSet<string> typesToDelete = new HashSet<string>();
-            foreach (var compositeType in codeModel.ModelTypes)
+            foreach (var compositeType in codeModel.ModelTypes.OrderByDescending(type => flattenDepth(type, 0)))
             {
                 if (compositeType.Properties.Any(p => p.ShouldBeFlattened())
                     && !typesToDelete.Contains(compositeType.Name))

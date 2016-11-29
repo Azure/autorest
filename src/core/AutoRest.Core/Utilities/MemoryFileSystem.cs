@@ -44,8 +44,16 @@ namespace AutoRest.Core.Utilities
             {
                 throw new IOException(string.Format(CultureInfo.InvariantCulture, "Directory {0} does not exist.", directory));
             }
+            var result = new StringBuilder();
+            var lines = contents.Split(new[] {"\r\n", "\r", "\n"}, StringSplitOptions.None);
+            var eol = path.LineEnding();
 
-            VirtualStore[path] = new StringBuilder(contents);
+            foreach (var l in lines)
+            {
+                result.Append(l);
+                result.Append(eol);
+            }
+            VirtualStore[path] = result;
         }
 
         public string ReadFileAsText(string path)
@@ -204,9 +212,12 @@ namespace AutoRest.Core.Utilities
                 _virtualStore?.Clear();
             }
         }
-        public string GetCurrentDir()
+        public string CurrentDirectory
         {
-            return "";
+            get
+            {
+                return "";
+            }
         }
     }
 }

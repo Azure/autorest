@@ -1,0 +1,63 @@
+﻿swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+produces:
+  - application/json
+consumes:
+  - application/json
+paths:
+  /operation0:
+    post:
+      operationId: cowbell
+      responses:
+        200:
+          description: OK
+          schema: # generates CowbellOKResponseModel
+            properties:
+              propResponse:
+                type: string
+      parameters:
+        - name: cowbellOKResponse
+          in: body
+          schema: # wants to generate CowbellOKResponseModel (mismatch) --> disamb. CowbellOKResponseModel...
+            properties:
+              propParamInt:
+                type: integer
+  /operation1:
+    post:
+      operationId: cowbell
+      responses:
+        200:
+          description: OK
+      parameters:
+        - name: cowbellOKResponse
+          in: body
+          schema: # wants to generate CowbellOKResponseModel (mismatch) --> disamb. CowbellOKResponseModel... (mismatch) --> disamb. CowbellOKResponseModel.....
+            properties:
+              propParamBool:
+                type: boolean
+  /operation2:
+    post:
+      operationId: cowbell
+      responses:
+        200:
+          description: OK
+      parameters:
+        - name: cowbellOKResponse
+          in: body
+          schema: # sanity check: should generate nothing
+            type: integer
+  /operation3:
+    post:
+      operationId: cowbell
+      responses:
+        200:
+          description: OK
+      parameters:
+        - name: cowbellOKResponse
+          in: body
+          schema: # wants to generate CowbellOKResponseModel (mismatch) --> disamb. CowbellOKResponseModel... (mismatch) --> disamb. CowbellOKResponseModel..... (hit!)
+            properties:
+              propParamBool:
+                type: boolean

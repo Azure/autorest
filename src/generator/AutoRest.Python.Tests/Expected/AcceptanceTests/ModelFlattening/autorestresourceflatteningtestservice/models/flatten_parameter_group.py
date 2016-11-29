@@ -29,7 +29,7 @@ class FlattenParameterGroup(Model):
     :type generic_value: str
     :param odatavalue: URL value.
     :type odatavalue: str
-    """ 
+    """
 
     _validation = {
         'name': {'required': True},

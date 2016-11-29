@@ -1,122 +1,32 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+using System;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AutoRest.Core;
-using AutoRest.Core.Extensibility;
-using AutoRest.Core.Utilities;
-using Microsoft.CodeAnalysis;
-using Microsoft.CSharp;
-using Microsoft.Rest.CSharp.Compiler.Compilation;
 using ScintillaNET;
-using OutputKind = Microsoft.Rest.CSharp.Compiler.Compilation.OutputKind;
-using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRestPreview
+namespace AutoRest.Preview
 {
     public partial class AutoRestPreviewForm : Form
     {
-        private readonly string autoRestJson;
+        private SynchronizationContext ui;
+        private Linting linting;
 
         public AutoRestPreviewForm()
         {
             InitializeComponent();
-
-            autoRestJson = File.ReadAllText("AutoRest.json");
+            ui = SynchronizationContext.Current;
+            linting = new Linting(scintillaSrc);
         }
 
-        protected async Task<CompilationResult> Compile(IFileSystem fileSystem)
+        private async Task<string> RegenerateAsync(string swagger, string language, bool shortVersion)
         {
-            var compiler = new CSharpCompiler(
-                fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)
-                    .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(),
-                ManagedAssets.FrameworkAssemblies.Concat(
-                    AppDomain.CurrentDomain.GetAssemblies()
-                        .Where(each => !each.IsDynamic && !string.IsNullOrEmpty(each.Location))
-                        .Select(each => each.Location)
-                        .Concat(new[]
-                        {
-                            Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                "Microsoft.Rest.ClientRuntime.dll"),
-                            Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                "Microsoft.Rest.ClientRuntime.Azure.dll")
-                        })
-                ));
-
-            return await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);
-        }
-
-        private MemoryFileSystem GenerateCodeForTest(string json, string codeGenerator)
-        {
-            using (NewContext)
-            {
-                var fs = new MemoryFileSystem();
-                var settings = new Settings
-                {
-                    Modeler = "Swagger",
-                    CodeGenerator = codeGenerator,
-                    FileSystem = fs,
-                    OutputDirectory = "GeneratedCode",
-                    Namespace = "Test",
-                    Input = "input.json"
-                };
-
-                fs.WriteFile(settings.Input, json);
-                fs.WriteFile("AutoRest.json", autoRestJson);
-
-                return GenerateCodeInto(fs, settings);
-            }
-        }
-
-        private static MemoryFileSystem GenerateCodeInto(MemoryFileSystem fileSystem, Settings settings)
-        {
-            var plugin = ExtensionsLoader.GetPlugin();
-            var modeler = ExtensionsLoader.GetModeler();
-            var codeModel = modeler.Build();
-
-            // After swagger Parser
-            codeModel = AutoRestController.RunExtensions(Trigger.AfterModelCreation, codeModel);
-
-            // After swagger Parser
-            codeModel = AutoRestController.RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
-
-            using (plugin.Activate())
-            {
-                // load model into language-specific code model
-                codeModel = plugin.Serializer.Load(codeModel);
-
-                // we've loaded the model, run the extensions for after it's loaded
-                codeModel = AutoRestController.RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
-
-                // apply language-specific tranformation (more than just language-specific types)
-                // used to be called "NormalizeClientModel" . 
-                codeModel = plugin.Transformer.TransformCodeModel(codeModel);
-
-                // next set of extensions
-                codeModel = AutoRestController.RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
-
-                // next set of extensions
-                codeModel = AutoRestController.RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
-
-                // Generate code from CodeModel.
-                plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
-            }
-
-            return fileSystem;
-        }
-
-        internal static string[] SuppressWarnings = {"CS1701", "CS1591"};
-
-        private async Task<string> Regenerate(string swagger, string language = "CSharp", bool shortVersion = true)
-        {
-            using (var fileSystem = GenerateCodeForTest(swagger, language))
+            using (var fileSystem = AutoRestPipeline.GenerateCodeForTest(
+                                            swagger, 
+                                            language, 
+                                            messages => ui.Post(_ => linting.ProcessMessages(swagger, messages), null)))
             {
                 // concat all source
                 var allSources = string.Join("\n\n\n",
@@ -134,70 +44,16 @@ namespace AutoRestPreview
                 {
                     case "CSharp":
                     case "Azure.CSharp":
-                        // compile
-                        var result = await Compile(fileSystem);
+                        var types = await CSharpCompilerHelper.CompileTypes(fileSystem);
+                        return string.Join("\n\n", types.Select(type => type.CreateSummary(scintillaDst.TabWidth)));
 
-                        // filter the warnings
-                        var warnings = result.Messages.Where(
-                            each => each.Severity == DiagnosticSeverity.Warning
-                                    && !SuppressWarnings.Contains(each.Id)).ToArray();
-
-                        // filter the errors
-                        var errors = result.Messages.Where(each => each.Severity == DiagnosticSeverity.Error).ToArray();
-                        
-                        if (!result.Succeeded)
-                        {
-                            throw new Exception("compilation failed: " + string.Join(", ", errors.Concat(warnings)));
-                        }
-
-                        // try to load the assembly
-                        var asm = Assembly.Load(result.Output.GetBuffer());
-                        if (asm == null)
-                        {
-                            throw new Exception("could not load assembly");
-                        }
-
-                        var types = asm.ExportedTypes;
-                        return string.Join("\n\n", types.Select(CreateTypeSummary));
-                        
                     default:
                         return allSources;
                 }
             }
         }
 
-        private string GetSimpleName(Type type)
-        {
-            var compiler = new CSharpCodeProvider();
-            var result = compiler.GetTypeOutput(new CodeTypeReference(type));
-            result = Regex.Replace(result, @"[_A-Za-z0-9]+\.", "");
-            result = Regex.Replace(result, @"Nullable<(.+?)>", @"$1?");
-            return result;
-        }
-
-        private string CreateTypeSummary(Type type)
-        {
-            int indentLevel = scintillaDst.TabWidth;
-
-            var sb = new StringBuilder();
-            sb.Append("class ");
-            sb.Append(type.Name);
-            sb.AppendLine();
-            sb.AppendLine("{");
-            foreach (var member in type.GetProperties())
-            {
-                sb.Append(' ', indentLevel);
-                sb.Append(GetSimpleName(member.PropertyType));
-                sb.Append(' ');
-                sb.Append(member.Name);
-                sb.AppendLine(";");
-            }
-            sb.AppendLine("}");
-
-            return sb.ToString();
-        }
-
-        private void SetupCintilla(Scintilla scintilla)
+        private void SetupScintilla(Scintilla scintilla)
         {
             scintilla.StyleResetDefault();
             scintilla.Styles[Style.Default].Font = "Consolas";
@@ -223,6 +79,7 @@ namespace AutoRestPreview
             if (true)
             {
                 BackColor = Color.FromArgb(0, 0, 0);
+                this.progressBar.BackColor = BackColor;
                 scintilla.Styles[Style.Default].ForeColor = Color.Silver;
                 scintilla.Styles[Style.Default].BackColor = Color.FromArgb(30, 30, 30);
                 scintilla.CaretForeColor = Color.Silver;
@@ -254,30 +111,60 @@ namespace AutoRestPreview
             //scintilla.Margins[0].Width = 16;
         }
 
-        private async Task UpdatePreview()
-        {
-            try
-            {
-                string result = await Regenerate(scintillaSrc.Text, comboBoxTargetLang.SelectedItem as string ?? "CSharp", checkBoxShort.Checked);
-                int scrollStart = scintillaDst.FirstVisibleLine;
-                scintillaDst.ReadOnly = false;
-                scintillaDst.Text = result;
-                scintillaDst.ReadOnly = true;
-                scintillaDst.LineScroll(scrollStart, 0);
+        private bool regenerate = false;
+        private bool regenerating = false;
 
-                panelError.Visible = false;
-            }
-            catch (Exception ex)
+        private void UpdatePreview()
+        {
+            linting.Reset();
+
+            // immediate feedback
+            panelError.Visible = false;
+            panelProgress.Visible = true;
+
+            regenerate = true;
+        }
+
+        public async void regenerateTimer_Tick(object sender, EventArgs e)
+        {
+            while (regenerate && !regenerating)
             {
-                labelError.Text = $@"{ex.GetType().Name}: {ex.Message}";
-                panelError.Visible = true;
+                regenerate = false;
+                regenerating = true;
+
+                // start
+                panelError.Visible = false;
+                panelProgress.Visible = true;
+                try
+                {
+                    var swaggerText = scintillaSrc.Text;
+                    var generator = comboBoxTargetLang.SelectedItem as string ?? "CSharp";
+                    var shortOutput = checkBoxShort.Checked;
+
+                    string result = await Task.Run(() => RegenerateAsync(swaggerText, generator, shortOutput));
+
+                    int scrollStart = scintillaDst.FirstVisibleLine;
+                    scintillaDst.ReadOnly = false;
+                    scintillaDst.Text = result;
+                    scintillaDst.ReadOnly = true;
+                    scintillaDst.LineScroll(scrollStart, 0);
+                }
+                catch (Exception ex)
+                {
+                    labelError.Text = $@"{ex.GetType().Name}: {ex.Message}";
+                    panelError.Visible = true;
+                }
+                panelProgress.Visible = false;
+                // end
+
+                regenerating = false;
             }
         }
 
         private void AutoRestPreviewForm_Load(object sender, EventArgs ea)
         {
-            SetupCintilla(scintillaSrc);
-            SetupCintilla(scintillaDst);
+            SetupScintilla(scintillaSrc);
+            SetupScintilla(scintillaDst);
 
             scintillaSrc.InsertCheck += (o, e) =>
             {
@@ -300,19 +187,13 @@ namespace AutoRestPreview
             comboBoxTargetLang.SelectedItem = comboBoxTargetLang.Items[0];
         }
 
-        private async void scintillaSrc_TextChanged(object sender, EventArgs e)
-        {
-            await UpdatePreview();
-        }
+        private void scintillaSrc_TextChanged(object sender, EventArgs e)
+            => UpdatePreview();
 
-        private async void comboBoxTargetLang_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            await UpdatePreview();
-        }
+        private void comboBoxTargetLang_SelectedIndexChanged(object sender, EventArgs e)
+            => UpdatePreview();
 
-        private async void checkBoxShort_CheckedChanged(object sender, EventArgs e)
-        {
-            await UpdatePreview();
-        }
+        private void checkBoxShort_CheckedChanged(object sender, EventArgs e)
+            => UpdatePreview();
     }
 }

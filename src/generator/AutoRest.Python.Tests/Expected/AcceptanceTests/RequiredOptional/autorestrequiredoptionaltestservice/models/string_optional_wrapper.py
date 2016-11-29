@@ -17,7 +17,7 @@ class StringOptionalWrapper(Model):
 
     :param value:
     :type value: str
-    """ 
+    """
 
     _attribute_map = {
         'value': {'key': 'value', 'type': 'str'},

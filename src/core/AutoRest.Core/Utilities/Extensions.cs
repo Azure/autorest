@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
-
+#pragma warning disable CS3024 // Constraint type is not CLS-compliant
 namespace AutoRest.Core.Utilities
 {
     /// <summary>
@@ -245,7 +245,9 @@ namespace AutoRest.Core.Utilities
             return destination;
         }
 
+
         public static T? Get<T>(this IDictionary<string, object> dictionary, string key) where T : struct, IComparable, IConvertible
+
         {
             object value;
 
@@ -506,6 +508,8 @@ namespace AutoRest.Core.Utilities
             x.SetResult(result);
             return x.Task;
         }
-
+        private static string[] LFOnly = new[] { ".py", ".rb", ".ts", ".js" };
+        public static bool IsFileLineFeedOnly(this string filename) => LFOnly.Any(each => filename.EndsWith(each, StringComparison.OrdinalIgnoreCase));
+        public static string LineEnding(this string filename) => filename.IsFileLineFeedOnly() ? "\n" : "\r\n";
     }
 }

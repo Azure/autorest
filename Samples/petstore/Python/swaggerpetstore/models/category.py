@@ -12,7 +12,7 @@ class Category(Model):
     :type id: long
     :param name:
     :type name: str
-    """ 
+    """
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'long'},

@@ -30,7 +30,7 @@ class Sawshark(Shark):
     :type birthday: datetime
     :param picture:
     :type picture: bytearray
-    """ 
+    """
 
     _validation = {
         'length': {'required': True},

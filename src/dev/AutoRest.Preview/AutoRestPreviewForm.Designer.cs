@@ -1,6 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
-namespace AutoRestPreview
+namespace AutoRest.Preview
 {
     partial class AutoRestPreviewForm
     {
@@ -38,10 +41,13 @@ namespace AutoRestPreview
             this.labelTargetLang = new System.Windows.Forms.Label();
             this.comboBoxTargetLang = new System.Windows.Forms.ComboBox();
             this.panelError = new System.Windows.Forms.Panel();
+            this.panelProgress = new System.Windows.Forms.Panel();
             this.labelError = new System.Windows.Forms.Label();
             this.panelSrc = new System.Windows.Forms.Panel();
             this.scintillaSrc = new ScintillaNET.Scintilla();
             this.checkBoxShort = new System.Windows.Forms.CheckBox();
+            this.regenerateTimer = new System.Windows.Forms.Timer();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.tableLayoutPanel.SuspendLayout();
             this.panelDst.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -71,6 +77,7 @@ namespace AutoRestPreview
             this.panelDst.Controls.Add(this.scintillaDst);
             this.panelDst.Controls.Add(this.panel1);
             this.panelDst.Controls.Add(this.panelError);
+            this.panelDst.Controls.Add(this.panelProgress);
             this.panelDst.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDst.Location = new System.Drawing.Point(508, 7);
             this.panelDst.Name = "panelDst";
@@ -143,6 +150,16 @@ namespace AutoRestPreview
             this.panelError.Size = new System.Drawing.Size(496, 138);
             this.panelError.TabIndex = 7;
             // 
+            // panelProgress
+            // 
+            this.panelProgress.BackColor = System.Drawing.Color.Transparent;
+            this.panelProgress.Controls.Add(this.progressBar);
+            this.panelProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelProgress.Location = new System.Drawing.Point(0, 586);
+            this.panelProgress.Name = "panelProgress";
+            this.panelProgress.Size = new System.Drawing.Size(496, 50);
+            this.panelProgress.TabIndex = 7;
+            // 
             // labelError
             // 
             this.labelError.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -171,6 +188,7 @@ namespace AutoRestPreview
             this.scintillaSrc.IndentationGuides = ScintillaNET.IndentView.Real;
             this.scintillaSrc.Lexer = ScintillaNET.Lexer.Python;
             this.scintillaSrc.Location = new System.Drawing.Point(0, 0);
+            this.scintillaSrc.MouseDwellTime = 200;
             this.scintillaSrc.MouseSelectionRectangularSwitch = true;
             this.scintillaSrc.MultipleSelection = true;
             this.scintillaSrc.Name = "scintillaSrc";
@@ -193,6 +211,20 @@ namespace AutoRestPreview
             this.checkBoxShort.Text = "short output";
             this.checkBoxShort.UseVisualStyleBackColor = true;
             this.checkBoxShort.CheckedChanged += new System.EventHandler(this.checkBoxShort_CheckedChanged);
+            //
+            // regenerateTimer
+            //
+            this.regenerateTimer.Enabled = true;
+            this.regenerateTimer.Interval = 200;
+            this.regenerateTimer.Tick += new System.EventHandler(this.regenerateTimer_Tick);
+            //
+            // progressBar
+            //
+            this.progressBar.Value = 0;
+            this.progressBar.Minimum = 0;
+            this.progressBar.Maximum = 100;
+            this.progressBar.Style = ProgressBarStyle.Marquee;
+            this.progressBar.Dock = DockStyle.Fill;
             // 
             // AutoRestPreviewForm
             // 
@@ -210,6 +242,7 @@ namespace AutoRestPreview
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelError.ResumeLayout(false);
+            this.panelProgress.ResumeLayout(false);
             this.panelSrc.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -219,6 +252,7 @@ namespace AutoRestPreview
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private System.Windows.Forms.Panel panelDst;
         private System.Windows.Forms.Panel panelError;
+        private System.Windows.Forms.Panel panelProgress;
         private ScintillaNET.Scintilla scintillaDst;
         private System.Windows.Forms.Panel panelSrc;
         private ScintillaNET.Scintilla scintillaSrc;
@@ -227,6 +261,8 @@ namespace AutoRestPreview
         private System.Windows.Forms.Label labelTargetLang;
         private System.Windows.Forms.ComboBox comboBoxTargetLang;
         private System.Windows.Forms.CheckBox checkBoxShort;
+        private System.Windows.Forms.Timer regenerateTimer;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 

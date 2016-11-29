@@ -17,7 +17,7 @@ class ArrayWrapper(Model):
 
     :param value:
     :type value: list of str
-    """ 
+    """
 
     _validation = {
         'value': {'required': True},

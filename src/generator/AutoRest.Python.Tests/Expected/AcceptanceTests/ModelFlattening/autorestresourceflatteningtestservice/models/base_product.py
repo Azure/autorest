@@ -21,7 +21,7 @@ class BaseProduct(Model):
     :type product_id: str
     :param description: Description of product.
     :type description: str
-    """ 
+    """
 
     _validation = {
         'product_id': {'required': True},

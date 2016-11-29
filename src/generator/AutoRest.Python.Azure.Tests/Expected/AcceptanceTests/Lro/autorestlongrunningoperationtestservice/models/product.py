@@ -34,7 +34,7 @@ class Product(Resource):
      'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',
      'Updated', 'Deleting', 'Deleted', 'OK'
     :vartype provisioning_state_values: str
-    """ 
+    """
 
     _validation = {
         'id': {'readonly': True},

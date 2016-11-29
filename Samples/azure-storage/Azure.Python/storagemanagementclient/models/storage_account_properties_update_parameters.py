@@ -20,7 +20,7 @@ class StorageAccountPropertiesUpdateParameters(Model):
      at this time. To clear the existing custom domain, use an empty string for
      the custom domain name property.
     :type custom_domain: :class:`CustomDomain <petstore.models.CustomDomain>`
-    """ 
+    """
 
     _attribute_map = {
         'account_type': {'key': 'accountType', 'type': 'AccountType'},

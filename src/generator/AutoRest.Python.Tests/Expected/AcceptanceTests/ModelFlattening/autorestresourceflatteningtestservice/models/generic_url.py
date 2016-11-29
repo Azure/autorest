@@ -17,7 +17,7 @@ class GenericUrl(Model):
 
     :param generic_value: Generic URL value.
     :type generic_value: str
-    """ 
+    """
 
     _attribute_map = {
         'generic_value': {'key': 'generic_value', 'type': 'str'},
