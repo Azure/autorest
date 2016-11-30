@@ -1,4 +1,4 @@
-swagger: '2.0'
+﻿swagger: '2.0'
 info:
   description: >-
     This is a sample server Petstore server.  You can find out more about

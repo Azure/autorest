@@ -14,10 +14,7 @@
     "publicSign": false,
     "keyFile": "../../../Tools/MSSharedLibKey.snk",
     "compile": {
-      "exclude": [ "CSharpCodeNamingFrameworkTestsXX.*" ]
-    },
-    "copyToOutput": {
-      "include": [ "Swagger/swagger.2.0.example.v2.json", "Swagger/swagger.2.0.example.v2.yaml" ]
+     "exclude": [ "CSharpCodeNamingFrameworkTestsXX.*" ]
     }
   },
 
