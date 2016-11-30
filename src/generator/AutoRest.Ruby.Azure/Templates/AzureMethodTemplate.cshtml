@@ -67,6 +67,11 @@ end
 @WrapComment("# ", string.Format("@return [{0}] operation results.", Model.OperationReturnTypeString))@:
 @:#
 }
+else
+{
+@WrapComment("# ", string.Format("@return {0} operation results.", Model.Name))@:
+@:#
+}
 def @(Model.Name)(@(Model.MethodParameterDeclaration))
   @Model.ResponseGeneration()
 end
@@ -91,6 +96,10 @@ def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
     @if (Model.ReturnType.Body != null)
     {
       @:@(Model.DeserializePollingResponse("parsed_response", Model.ReturnType.Body))
+    }
+    else
+    {
+      @:parsed_response
     }
     end
 
