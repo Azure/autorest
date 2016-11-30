@@ -611,8 +611,10 @@ namespace AutoRest.Go
                 }
                 else if (property.ShouldBeFlattened())
                 {
-                    // embed as an anonymous struct
+                    // embed as an anonymous struct.  note that the ordering of this clause is
+                    // important, i.e. we don't want to flatten primary types like dictionaries.
                     indented.AppendFormat("*{0} {1}\n", property.Type.Name, property.JsonTag());
+                    property.Extensions[SwaggerExtensions.FlattenOriginalTypeName] = compositeType.Name;
                 }
                 else
                 {
@@ -810,27 +812,37 @@ namespace AutoRest.Go
                     var map = prop.Type as MapType;
                     var composite = prop.Type as CompositeType;
 
+
+                    // if this type was flattened use the name of the type instead of
+                    // the property name as it's been embedded as an anonymous field
+                    var propName = prop.Name;
+                    if (prop.WasFlattened())
+                        propName = prop.Type.Name;
+
                     if (primary != null || sequence != null || map != null)
-                        x.AddRange(prop.ValidateType($"{name}.{prop.Name}", method, true));
+                    {
+                        x.AddRange(prop.ValidateType($"{name}.{propName}", method, true));
+                    }
                     else if (composite != null)
                     {
                         if (ancestors.Contains(composite.Name))
                         {
-                            x.AddNullValidation($"{name}.{prop.Name}", p.IsRequired);
+                            x.AddNullValidation($"{name}.{propName}", p.IsRequired);
                         }
                         else
                         {
                             ancestors.Add(composite.Name);
-                            x.AddRange(prop.ValidateCompositeType($"{name}.{prop.Name}", method, ancestors, true));
+                            x.AddRange(prop.ValidateCompositeType($"{name}.{propName}", method, ancestors, true));
                             ancestors.Remove(composite.Name);
-                        }  
+                        }
                     }   
                 }
             }
 
             x.AddRange(from prop in ((CompositeType)p.Type).Properties
                        where prop.IsReadOnly
-                       select GetConstraint($"{name}.{prop.Name}", ReadOnlyConstraint, "true"));
+                       select GetConstraint(string.Format("{0}.{1}", name, prop.WasFlattened() ? prop.Type.Name : prop.Name),
+                                            ReadOnlyConstraint, "true"));
 
             List<string> y = new List<string>();
             if (x.Count > 0)
