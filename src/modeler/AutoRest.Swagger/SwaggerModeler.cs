@@ -56,19 +56,13 @@ namespace AutoRest.Swagger
         /// Default protocol when no protocol is specified in the schema
         /// </summary>
         public TransferProtocolScheme DefaultProtocol { get; set; }
-
-        public override CodeModel Build()
-        {
-            IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
-            return Build(out messages);
-        }
-
+        
         /// <summary>
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override CodeModel Build(out IEnumerable<ValidationMessage> messages)
+        public override CodeModel Build()
         {
             Logger.Log(Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input))
@@ -79,7 +73,10 @@ namespace AutoRest.Swagger
 
             // Look for semantic errors and warnings in the document.
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            messages = validator.GetValidationExceptions(ServiceDefinition).ToList();
+            foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
+            {
+                Logger.Log(validationEx.Severity, validationEx.ToString());
+            }
 
             Logger.Log(Resources.GeneratingClient);
             // Update settings

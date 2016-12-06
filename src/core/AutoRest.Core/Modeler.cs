@@ -15,8 +15,6 @@ namespace AutoRest.Core
 
         public abstract CodeModel Build();
 
-        public abstract CodeModel Build(out IEnumerable<ValidationMessage> messages);
-
         /// <summary>
         /// Copares two versions of the same service specification.
         /// </summary>

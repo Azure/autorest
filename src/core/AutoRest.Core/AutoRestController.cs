@@ -10,6 +10,7 @@ using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using System.Linq;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core
 {
@@ -47,26 +48,26 @@ namespace AutoRest.Core
 
             try
             {
-                IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
-
-                // generate model from swagger 
-                codeModel = modeler.Build(out messages);
-
-                // After swagger Parser
-                codeModel = RunExtensions(Trigger.AfterModelCreation, codeModel);
-
-                // After swagger Parser
-                codeModel = RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
-
-                foreach (var message in messages)
+                using (NewContext)
                 {
-                    Logger.Log(message.Severity, "Validation: {0}", message);
+                    bool validationErrorFound = false;
+                    Logger.AddListener(new SignalingLogListener(Settings.Instance.ValidationLevel, _ => validationErrorFound = true));
+
+                    // generate model from swagger 
+                    codeModel = modeler.Build();
+
+                    // After swagger Parser
+                    codeModel = RunExtensions(Trigger.AfterModelCreation, codeModel);
+
+                    // After swagger Parser
+                    codeModel = RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
+
+                    if (validationErrorFound)
+                    {
+                        throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, "Errors found during Swagger validation");
+                    }
                 }
 
-                if (messages.Any(entry => entry.Severity >= Settings.Instance.ValidationLevel))
-                {
-                    throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, "Errors found during Swagger validation");
-                }
             }
             catch (Exception exception)
             {
