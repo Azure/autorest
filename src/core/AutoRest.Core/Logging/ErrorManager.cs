@@ -22,7 +22,7 @@ namespace AutoRest.Core.Logging
         /// <returns></returns>
         public static CodeGenerationException CreateError(string message, params object[] args)
         {
-            Logger.Entries.Add(new LogEntry(LogEntrySeverity.Fatal, FormatMessageString(message, args)));
+            Logger.Log(LogEntrySeverity.Fatal, FormatMessageString(message, args));
             return new CodeGenerationException(FormatMessageString(message, args));
         }
 

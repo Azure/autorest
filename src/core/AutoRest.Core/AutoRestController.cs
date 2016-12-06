@@ -39,7 +39,6 @@ namespace AutoRest.Core
             {
                 throw new ArgumentNullException("settings");
             }
-            Logger.Entries.Clear();
             Logger.Log(Resources.AutoRestCore, Version);
             
             CodeModel codeModel = null;
@@ -61,7 +60,7 @@ namespace AutoRest.Core
 
                 foreach (var message in messages)
                 {
-                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
+                    Logger.Log(message.Severity, "Validation: {0}", message);
                 }
 
                 if (messages.Any(entry => entry.Severity >= Settings.Instance.ValidationLevel))
@@ -135,7 +134,6 @@ namespace AutoRest.Core
             {
                 throw new ArgumentNullException("settings");
             }
-            Logger.Entries.Clear();
             Logger.Log(Resources.AutoRestCore, Version);
             Modeler modeler = ExtensionsLoader.GetModeler();
 
@@ -145,9 +143,8 @@ namespace AutoRest.Core
 
                 foreach (var message in messages)
                 {
-                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
+                    Logger.Log(message.Severity, "Comparison: {0}", message);
                 }
-
             }
             catch (Exception exception)
             {

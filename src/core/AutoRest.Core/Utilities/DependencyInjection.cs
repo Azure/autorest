@@ -186,24 +186,49 @@ namespace AutoRest.Core.Utilities
             }
 
             /// <summary>
-            /// For retrieving singletons that are lists while also considering the list items of parent contexts.
-            /// Yields the list items starting with the current context, then traversing up.
+            /// Retrieves the singleton of this but also the parent contexts, if existing.
             /// </summary>
             public static IEnumerable<T> RecursiveInstances
             {
                 get
                 {
-                    Type key = typeof(IEnumerable<T>);
+                    Type key = typeof(T);
                     for (var c = Activation.Current; c != null; c = c.Parent)
                     {
                         if (c.Singletons.ContainsKey(key))
                         {
-                            foreach (T item in c.Singletons[key] as IEnumerable<T>)
-                            {
-                                yield return item;
-                            }
+                            yield return (T)c.Singletons[key];
                         }
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Convenience methods for singletons that are of type IEnumerable&lt;T&gt;
+        /// </summary>
+        public class SingletonList<T>
+        {
+            /// <summary>
+            /// Adds given item to the current context.
+            /// </summary>
+            public static void Add(T item)
+            {
+                if (Singleton<IEnumerable<T>>.Instance == null)
+                {
+                    Singleton<IEnumerable<T>>.Instance = Enumerable.Empty<T>();
+                }
+                Singleton<IEnumerable<T>>.Instance = Singleton<IEnumerable<T>>.Instance.Concat(new[] { item });
+            }
+
+            /// <summary>
+            /// For retrieving singletons that are lists while also considering the list items of parent contexts.
+            /// </summary>
+            public static IEnumerable<T> RecursiveInstances
+            {
+                get
+                {
+                    return Singleton<IEnumerable<T>>.RecursiveInstances.SelectMany(list => list);
                 }
             }
         }
