@@ -68,6 +68,19 @@ namespace AutoRest.Go
                                             !string.IsNullOrEmpty(Settings.PackageVersion)
                                                     ? Settings.PackageVersion
                                                     : "0.0.0");
+
+            // unfortunately there is an ordering issue here.  during model generation we might
+            // flatten some types (but not all depending on type).  then during client generation
+            // the validation codegen needs to know if a type was flattened so it can generate
+            // the correct code, so we need to generate models before clients.
+
+            // Models
+            var modelsTemplate = new ModelsTemplate
+            {
+                Model = new ModelsTemplateModel(serviceClient, packageName),
+            };
+            await Write(modelsTemplate, GoCodeNamer.FormatFileName("models"));
+
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate
             {
@@ -83,13 +96,6 @@ namespace AutoRest.Go
                 };
                 await Write(groupedMethodTemplate, GoCodeNamer.FormatFileName(methodGroupName.ToLowerInvariant()));
             }
-
-            // Models
-            var modelsTemplate = new ModelsTemplate
-            {
-                Model = new ModelsTemplateModel(serviceClient, packageName),
-            };
-            await Write(modelsTemplate, GoCodeNamer.FormatFileName("models"));
 
             // Version
             var versionTemplate = new VersionTemplate
