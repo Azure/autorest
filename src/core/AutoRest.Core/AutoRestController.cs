@@ -54,7 +54,7 @@ namespace AutoRest.Core
                     Logger.AddListener(new SignalingLogListener(Settings.Instance.ValidationLevel, _ => validationErrorFound = true));
 
                     // generate model from swagger 
-                    codeModel = modeler.Build();
+                    codeModel = modeler.Build(message => Logger.Log(message.Severity, message.ToString()));
 
                     // After swagger Parser
                     codeModel = RunExtensions(Trigger.AfterModelCreation, codeModel);

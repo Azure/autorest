@@ -3,6 +3,7 @@
 
 using AutoRest.Core.Model;
 using AutoRest.Core.Validation;
+using System;
 using System.Collections.Generic;
 
 namespace AutoRest.Core
@@ -13,7 +14,12 @@ namespace AutoRest.Core
 
         public Settings Settings => Settings.Instance;
 
-        public abstract CodeModel Build();
+        public CodeModel Build()
+        {
+            return Build(_ => { });
+        }
+
+        public abstract CodeModel Build(Action<ValidationMessage> messageCallback);
 
         /// <summary>
         /// Copares two versions of the same service specification.

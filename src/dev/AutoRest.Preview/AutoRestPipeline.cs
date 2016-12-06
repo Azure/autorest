@@ -42,10 +42,10 @@ namespace AutoRest
         {
             var plugin = ExtensionsLoader.GetPlugin();
             var modeler = ExtensionsLoader.GetModeler();
-            IEnumerable<ValidationMessage> messages = Enumerable.Empty<ValidationMessage>();
+            var messages = new List<ValidationMessage>();
             try
             {
-                var codeModel = modeler.Build(out messages);
+                var codeModel = modeler.Build(message => messages.Add(message));
 
                 // After swagger Parser
                 codeModel = AutoRestController.RunExtensions(Trigger.AfterModelCreation, codeModel);

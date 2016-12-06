@@ -30,9 +30,13 @@ namespace AutoRest.Core.Logging
         /// <param name="args">Optional arguments to use if message includes formatting.</param>
         public static void Log(LogEntrySeverity severity, string message, params object[] args)
         {
+            if (args != null && args.Length > 0)
+            {
+                message = string.Format(CultureInfo.InvariantCulture, message, args);
+            }
             foreach (var listener in SingletonList<ILogListener>.RecursiveInstances)
             {
-                listener.Log(severity, string.Format(CultureInfo.InvariantCulture, message, args));
+                listener.Log(severity, message);
             }
         }
 

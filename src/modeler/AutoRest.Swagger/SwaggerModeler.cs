@@ -62,7 +62,7 @@ namespace AutoRest.Swagger
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override CodeModel Build()
+        public override CodeModel Build(Action<ValidationMessage> messageCallback)
         {
             Logger.Log(Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input))
@@ -75,7 +75,7 @@ namespace AutoRest.Swagger
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
             foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
             {
-                Logger.Log(validationEx.Severity, validationEx.ToString());
+                messageCallback(validationEx);
             }
 
             Logger.Log(Resources.GeneratingClient);

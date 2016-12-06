@@ -52,13 +52,11 @@ namespace AutoRest.Swagger.Tests
                     Input = input
                 };
                 var modeler = new SwaggerModeler();
-                IEnumerable<ValidationMessage> messages;
-                modeler.Build(out messages);
+                var messages = new List<ValidationMessage>();
+                modeler.Build(message => messages.Add(message));
 
                 // remove debug-level messages
-                messages = messages.Where(each => each.Severity > LogEntrySeverity.Debug);
-
-                return messages;
+                return messages.Where(each => each.Severity > LogEntrySeverity.Debug);
             }
         }
 
