@@ -22,22 +22,27 @@ namespace AutoRest.Core.Logging
         {
             SingletonList<ILogListener>.Add(listener);
         }
+        
+        public static void Log(LogMessage message)
+        {
+            foreach (var listener in SingletonList<ILogListener>.RecursiveInstances)
+            {
+                listener.Log(message);
+            }
+        }
 
         /// <summary>
         /// Logs a message of specified severity.
         /// </summary>
         /// <param name="message">Message to log. May include formatting.</param>
         /// <param name="args">Optional arguments to use if message includes formatting.</param>
-        public static void Log(LogEntrySeverity severity, string message, params object[] args)
+        public static void Log(LogMessageSeverity severity, string message, params object[] args)
         {
             if (args != null && args.Length > 0)
             {
                 message = string.Format(CultureInfo.InvariantCulture, message, args);
             }
-            foreach (var listener in SingletonList<ILogListener>.RecursiveInstances)
-            {
-                listener.Log(severity, message);
-            }
+            Log(new LogMessage(severity, message));
         }
 
         /// <summary>
@@ -47,7 +52,7 @@ namespace AutoRest.Core.Logging
         /// <param name="args">Optional arguments to use if message includes formatting.</param>
         public static void Log(string message, params object[] args)
         {
-            Log(LogEntrySeverity.Info, message, args);
+            Log(LogMessageSeverity.Info, message, args);
         }
     }
 }

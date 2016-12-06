@@ -26,13 +26,13 @@ namespace AutoRest.Core.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public abstract LogEntrySeverity Severity { get; }
+        public abstract LogMessageSeverity Severity { get; }
 
         /// <summary>
         /// Returns the validation messages resulting from validating this object
         /// </summary>
         /// <param name="entity">The object to validate</param>
         /// <returns></returns>
-        public abstract IEnumerable<ValidationMessage> GetValidationMessages(object entity, RuleContext context);
+        public abstract IEnumerable<LogMessage> GetLogMessages(object entity, RuleContext context);
     }
 }

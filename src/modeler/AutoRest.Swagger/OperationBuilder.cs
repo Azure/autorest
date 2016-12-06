@@ -357,7 +357,7 @@ namespace AutoRest.Swagger
                     _swaggerModeler.Resolver.Unwrap(response.Schema).Properties;
                 if (unwrapedSchemaProperties != null && unwrapedSchemaProperties.Any())
                 {
-                    Logger.Log(LogEntrySeverity.Warning, Resources.NoProduceOperationWithBody,
+                    Logger.Log(LogMessageSeverity.Warning, Resources.NoProduceOperationWithBody,
                         methodName);
                 }
             }

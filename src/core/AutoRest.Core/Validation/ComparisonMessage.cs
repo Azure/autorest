@@ -14,7 +14,7 @@ namespace AutoRest.Core.Validation
     /// </summary>
     public class ComparisonMessage
     {
-        public ComparisonMessage(MessageTemplate template, string path, LogEntrySeverity severity)
+        public ComparisonMessage(MessageTemplate template, string path, LogMessageSeverity severity)
         {
             if (template == null)
                 throw new ArgumentNullException("template");
@@ -24,7 +24,7 @@ namespace AutoRest.Core.Validation
             Path = path;
             Message = template.Message;
         }
-        public ComparisonMessage(MessageTemplate template, string path, LogEntrySeverity severity, params object[] formatArguments)
+        public ComparisonMessage(MessageTemplate template, string path, LogMessageSeverity severity, params object[] formatArguments)
         {
             Severity = severity;
             Id = template.Id;
@@ -50,7 +50,7 @@ namespace AutoRest.Core.Validation
         /// <summary>
         /// The serverity of the validation message.
         /// </summary>
-        public LogEntrySeverity Severity { get; }
+        public LogMessageSeverity Severity { get; }
 
         public override string ToString() => $"{Id}: {Message}\n    Path: {Path}";
     }

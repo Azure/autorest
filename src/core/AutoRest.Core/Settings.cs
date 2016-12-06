@@ -67,7 +67,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             Header = string.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeader, AutoRestController.Version);
             CodeGenerator = "CSharp";
             Modeler = "Swagger";
-            ValidationLevel = LogEntrySeverity.Error;
+            ValidationLevel = LogMessageSeverity.Error;
             ModelsName = "Models";
         }
 
@@ -299,7 +299,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         [SettingsAlias("vl")]
         [SettingsAlias("validation")]
         [SettingsInfo("The input validation severity level that will prevent code generation")]
-        public LogEntrySeverity ValidationLevel { get; set; }
+        public LogMessageSeverity ValidationLevel { get; set; }
 
         /// <summary>
         /// Factory method to generate CodeGenerationSettings from command line arguments.
@@ -461,7 +461,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 var doc = property.GetCustomAttributes<SettingsInfoAttribute>().FirstOrDefault();
                 if (doc != null && doc.IsRequired && property.GetValue(this) == null)
                 {
-                    Logger.Log(LogEntrySeverity.Error, Resources.ParameterValueIsMissing, property.Name);
+                    Logger.Log(LogMessageSeverity.Error, Resources.ParameterValueIsMissing, property.Name);
                     throw new CodeGenerationException(string.Format(Resources.ParameterValueIsMissing, property.Name));
                 }
             }
@@ -470,7 +470,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             {
                 foreach (var unmatchedSetting in CustomSettings.Keys)
                 {
-                    Logger.Log(LogEntrySeverity.Warning, Resources.ParameterIsNotValid, unmatchedSetting);
+                    Logger.Log(LogMessageSeverity.Warning, Resources.ParameterIsNotValid, unmatchedSetting);
                 }
             }
         }

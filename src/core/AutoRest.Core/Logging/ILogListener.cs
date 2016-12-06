@@ -7,6 +7,6 @@ namespace AutoRest.Core.Logging
 {
     public interface ILogListener
     {
-        void Log(LogEntrySeverity severity, string message);
+        void Log(LogMessage message);
     }
 }

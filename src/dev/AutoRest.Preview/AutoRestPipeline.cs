@@ -7,6 +7,7 @@ using AutoRest.Core.Extensibility;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Validation;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Core.Logging;
 
 namespace AutoRest
 {
@@ -14,7 +15,7 @@ namespace AutoRest
     {
         private static readonly string autoRestJson = File.ReadAllText("AutoRest.json");
         
-        public static MemoryFileSystem GenerateCodeForTest(string json, string codeGenerator, Action<IEnumerable<ValidationMessage>> processMessages)
+        public static MemoryFileSystem GenerateCodeForTest(string json, string codeGenerator, Action<IEnumerable<LogMessage>> processMessages)
         {
             using (NewContext)
             {
@@ -38,46 +39,50 @@ namespace AutoRest
             }
         }
 
-        private static void GenerateCodeInto(Action<IEnumerable<ValidationMessage>> processMessages)
+        private static void GenerateCodeInto(Action<IEnumerable<LogMessage>> processMessages)
         {
-            var plugin = ExtensionsLoader.GetPlugin();
-            var modeler = ExtensionsLoader.GetModeler();
-            var messages = new List<ValidationMessage>();
-            try
+            using (NewContext)
             {
-                var codeModel = modeler.Build(message => messages.Add(message));
-
-                // After swagger Parser
-                codeModel = AutoRestController.RunExtensions(Trigger.AfterModelCreation, codeModel);
-
-                // After swagger Parser
-                codeModel = AutoRestController.RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
-
-                using (plugin.Activate())
+                var plugin = ExtensionsLoader.GetPlugin();
+                var modeler = ExtensionsLoader.GetModeler();
+                var messages = new List<LogMessage>();
+                Logger.AddListener(new SignalingLogListener(LogMessageSeverity.Info, message => messages.Add(message)));
+                try
                 {
-                    // load model into language-specific code model
-                    codeModel = plugin.Serializer.Load(codeModel);
+                    var codeModel = modeler.Build();
 
-                    // we've loaded the model, run the extensions for after it's loaded
-                    codeModel = AutoRestController.RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
+                    // After swagger Parser
+                    codeModel = AutoRestController.RunExtensions(Trigger.AfterModelCreation, codeModel);
 
-                    // apply language-specific tranformation (more than just language-specific types)
-                    // used to be called "NormalizeClientModel" . 
-                    codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+                    // After swagger Parser
+                    codeModel = AutoRestController.RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
 
-                    // next set of extensions
-                    codeModel = AutoRestController.RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
+                    using (plugin.Activate())
+                    {
+                        // load model into language-specific code model
+                        codeModel = plugin.Serializer.Load(codeModel);
 
-                    // next set of extensions
-                    codeModel = AutoRestController.RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
+                        // we've loaded the model, run the extensions for after it's loaded
+                        codeModel = AutoRestController.RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
 
-                    // Generate code from CodeModel.
-                    plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+                        // apply language-specific tranformation (more than just language-specific types)
+                        // used to be called "NormalizeClientModel" . 
+                        codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+
+                        // next set of extensions
+                        codeModel = AutoRestController.RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
+
+                        // next set of extensions
+                        codeModel = AutoRestController.RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
+
+                        // Generate code from CodeModel.
+                        plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+                    }
                 }
-            }
-            finally
-            {
-                processMessages(messages);
+                finally
+                {
+                    processMessages(messages);
+                }
             }
         }
     }

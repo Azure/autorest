@@ -13,13 +13,8 @@ namespace AutoRest.Core
         public abstract string Name { get; }
 
         public Settings Settings => Settings.Instance;
-
-        public CodeModel Build()
-        {
-            return Build(_ => { });
-        }
-
-        public abstract CodeModel Build(Action<ValidationMessage> messageCallback);
+        
+        public abstract CodeModel Build();
 
         /// <summary>
         /// Copares two versions of the same service specification.

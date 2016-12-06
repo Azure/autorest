@@ -8,16 +8,16 @@ namespace AutoRest.Core.Logging
 {
     public class ConsoleLogListener : ILogListener
     {
-        private static IDictionary<LogEntrySeverity, ConsoleColor> colors = new Dictionary<LogEntrySeverity, ConsoleColor>
+        private static IDictionary<LogMessageSeverity, ConsoleColor> colors = new Dictionary<LogMessageSeverity, ConsoleColor>
         {
-            { LogEntrySeverity.Debug, ConsoleColor.Gray },
-            { LogEntrySeverity.Fatal, ConsoleColor.Red },
-            { LogEntrySeverity.Error, ConsoleColor.Red },
-            { LogEntrySeverity.Warning, ConsoleColor.Yellow },
-            { LogEntrySeverity.Info, ConsoleColor.White },
+            { LogMessageSeverity.Debug, ConsoleColor.Gray },
+            { LogMessageSeverity.Fatal, ConsoleColor.Red },
+            { LogMessageSeverity.Error, ConsoleColor.Red },
+            { LogMessageSeverity.Warning, ConsoleColor.Yellow },
+            { LogMessageSeverity.Info, ConsoleColor.White },
         };
 
-        private static ConsoleColor GetColorForSeverity(LogEntrySeverity severity)
+        private static ConsoleColor GetColorForSeverity(LogMessageSeverity severity)
         {
             ConsoleColor color;
             if (!colors.TryGetValue(severity, out color))
@@ -28,26 +28,26 @@ namespace AutoRest.Core.Logging
         }
 
         public ConsoleLogListener(
-            LogEntrySeverity minSeverityForStdout = LogEntrySeverity.Info,
-            LogEntrySeverity minSeverityForStderr = LogEntrySeverity.Error)
+            LogMessageSeverity minSeverityForStdout = LogMessageSeverity.Info,
+            LogMessageSeverity minSeverityForStderr = LogMessageSeverity.Error)
         {
             MinSeverityForStdout = minSeverityForStdout;
             MinSeverityForStderr = minSeverityForStderr;
         }
 
-        public LogEntrySeverity MinSeverityForStdout { get; }
+        public LogMessageSeverity MinSeverityForStdout { get; }
 
-        public LogEntrySeverity MinSeverityForStderr { get; }
+        public LogMessageSeverity MinSeverityForStderr { get; }
 
-        public void Log(LogEntrySeverity severity, string message)
+        public void Log(LogMessage message)
         {
-            if (severity >= MinSeverityForStdout || severity >= MinSeverityForStderr)
+            if (message.Severity >= MinSeverityForStdout || message.Severity >= MinSeverityForStderr)
             {
                 var original = Console.ForegroundColor;
-                Console.ForegroundColor = GetColorForSeverity(severity);
+                Console.ForegroundColor = GetColorForSeverity(message.Severity);
                 // Write the severity and message to console
-                var logMessage = $"{severity.ToString().ToUpperInvariant()}: {message}";
-                if (severity >= MinSeverityForStderr)
+                var logMessage = $"{message.Severity.ToString().ToUpperInvariant()} - {message.Type?.Name ?? "generic"}: {message.Message}\n    Path: {string.Join("->", message.Path.Reverse())}";
+                if (message.Severity >= MinSeverityForStderr)
                 {
                     Console.Error.WriteLine(logMessage);
                 }

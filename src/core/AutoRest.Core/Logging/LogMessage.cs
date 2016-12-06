@@ -1,26 +1,45 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Validation;
 using System;
-using AutoRest.Core.Logging;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace AutoRest.Core.Validation
+namespace AutoRest.Core.Logging
 {
     /// <summary>
-    /// Represents a single validtion violation (can just a debug message, informational, warning, error, or fatal error)
+    /// Represents a log entry in tracing output.
     /// </summary>
-    public class ValidationMessage
+    public class LogMessage
     {
-        public ValidationMessage(Rule rule)
+        /// <summary>
+        /// Instantiates a new instance of the LogEntry class.
+        /// </summary>
+        public LogMessage()
+        {
+        }
+
+        /// <summary>
+        /// Instantiates a new instance of the LogEntry class
+        /// </summary>
+        /// <param name="severity">The LogEntrySeverity of the LogEntry instance.</param>
+        /// <param name="message">The message of the LogEntry instance.</param>
+        public LogMessage(LogMessageSeverity severity, string message)
+        {
+            Severity = severity;
+            Message = message;
+        }
+
+        public LogMessage(Rule rule)
         {
             Type = rule.GetType();
             Severity = rule.Severity;
-            Message = string.Empty;
+            Message = rule.MessageTemplate;
         }
-        public ValidationMessage(Rule rule, params object[] formatArguments)
+
+        public LogMessage(Rule rule, params object[] formatArguments)
         {
             Type = rule.GetType();
             Severity = rule.Severity;
@@ -33,14 +52,14 @@ namespace AutoRest.Core.Validation
         public Type Type { get; }
 
         /// <summary>
-        /// The formatted message text for the validation message
+        /// Gets or sets the LogEntrySeverity.
         /// </summary>
-        public string Message { get; }
+        public LogMessageSeverity Severity { get; set; }
 
         /// <summary>
-        /// The serverity of the validation message.
+        /// Gets or sets the Message.
         /// </summary>
-        public LogEntrySeverity Severity { get; }
+        public string Message { get; set; }
 
         /// <summary>
         /// The JSON document path to the element being validated.
@@ -52,12 +71,15 @@ namespace AutoRest.Core.Validation
         /// </summary>
         /// <param name="path">the string to add to the end of the Path collection</param>
         /// <returns>This ValidationMethod</returns>
-        public ValidationMessage AppendToPath(string path)
+        public LogMessage AppendToPath(string path)
         {
             Path.Add(path);
             return this;
         }
 
-        public override string ToString() => $"{Type.Name}: {Message}\n    Location: Path: {string.Join("->", Path.Reverse())}";
+        public override string ToString()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

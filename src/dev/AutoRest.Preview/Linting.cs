@@ -50,7 +50,7 @@ namespace AutoRest.Preview
         {
             highlights.Clear();
 
-            var severityNames = Enum.GetNames(typeof(LogEntrySeverity));
+            var severityNames = Enum.GetNames(typeof(LogMessageSeverity));
 
             for (int i = 0; i < severityNames.Length; ++i)
             {
@@ -70,7 +70,7 @@ namespace AutoRest.Preview
             }
         }
 
-        public void ProcessMessages(string swagger, IEnumerable<ValidationMessage> messages)
+        public void ProcessMessages(string swagger, IEnumerable<LogMessage> messages)
         {
             if (scintilla.Text != swagger)
                 return; // text was changed in the meantime
@@ -91,21 +91,18 @@ namespace AutoRest.Preview
             {
                 foreach (var message in messages)
                 {
-                    if (message.Severity > LogEntrySeverity.Debug)
+                    scintilla.IndicatorCurrent = INDICATOR_BASE + (int)message.Severity;
+                    var node = doc.ResolvePath(message.Path.Reverse().Skip(1));
+                    var start = node.Start.Index;
+                    var len = Math.Max(1, node.End.Index - start);
+                    scintilla.IndicatorFillRange(start, len);
+                    highlights.Add(new Highlight
                     {
-                        scintilla.IndicatorCurrent = INDICATOR_BASE + (int)message.Severity;
-                        var node = doc.ResolvePath(message.Path.Reverse().Skip(1));
-                        var start = node.Start.Index;
-                        var len = Math.Max(1, node.End.Index - start);
-                        scintilla.IndicatorFillRange(start, len);
-                        highlights.Add(new Highlight
-                        {
-                            Start = start,
-                            End = start + len,
-                            Message =
-                                $"{message.Severity}: [{string.Join("->", message.Path.Reverse())}] {message.Message}"
-                        });
-                    }
+                        Start = start,
+                        End = start + len,
+                        Message =
+                            $"{message.Severity}: [{string.Join("->", message.Path.Reverse())}] {message.Message}"
+                    });
                 }
             }
         }

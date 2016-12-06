@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Logging;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
 
@@ -18,13 +19,13 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override IEnumerable<ValidationMessage> GetValidationMessages(object entity, RuleContext context)
+        public override IEnumerable<LogMessage> GetLogMessages(object entity, RuleContext context)
         {
             object[] formatParams;
             // Only try to validate an object with this extension rule if the extension name matches the key
             if (context.Key == ExtensionName && !IsValid(entity, context, out formatParams))
             {
-                yield return new ValidationMessage(this, formatParams);
+                yield return new LogMessage(this, formatParams);
             }
         }
 

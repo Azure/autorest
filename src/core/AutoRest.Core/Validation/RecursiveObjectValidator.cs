@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using AutoRest.Core.Utilities.Collections;
 using System;
+using AutoRest.Core.Logging;
 
 namespace AutoRest.Core.Validation
 {
@@ -39,7 +40,7 @@ namespace AutoRest.Core.Validation
         /// Recursively validates <paramref name="entity"/> by traversing all of its properties
         /// </summary>
         /// <param name="entity">The object to validate</param>
-        public IEnumerable<ValidationMessage> GetValidationExceptions(object entity)
+        public IEnumerable<LogMessage> GetValidationExceptions(object entity)
         {
             return RecursiveValidate(entity, new RuleContext(entity), Enumerable.Empty<Rule>())
                 .Select(m => m.AppendToPath(ROOT_PATH_INDICATOR));
@@ -53,9 +54,9 @@ namespace AutoRest.Core.Validation
         /// <param name="rules">The set of rules from the parent object to apply to <paramref name="entity"/></param>
         /// <param name="traverseProperties">Whether or not to traverse this <paramref name="entity"/>'s properties</param>
         /// <returns></returns>
-        private IEnumerable<ValidationMessage> RecursiveValidate(object entity, RuleContext parentContext, IEnumerable<Rule> rules, bool traverseProperties = true)
+        private IEnumerable<LogMessage> RecursiveValidate(object entity, RuleContext parentContext, IEnumerable<Rule> rules, bool traverseProperties = true)
         {
-            var messages = Enumerable.Empty<ValidationMessage>();
+            var messages = Enumerable.Empty<LogMessage>();
             if (entity == null)
             {
                 return messages;
@@ -110,7 +111,7 @@ namespace AutoRest.Core.Validation
         /// <param name="collectionRules"></param>
         /// <param name="parentContext"></param>
         /// <returns></returns>
-        private IEnumerable<ValidationMessage> ValidateObjectValue(object entity,
+        private IEnumerable<LogMessage> ValidateObjectValue(object entity,
             IEnumerable<Rule> collectionRules, RuleContext parentContext)
         {
             // Get any rules defined for the class of the entity
@@ -120,10 +121,10 @@ namespace AutoRest.Core.Validation
             classRules = collectionRules.Concat(classRules);
 
             // Apply each rule for the entity
-            return classRules.SelectMany(rule => rule.GetValidationMessages(entity, parentContext));
+            return classRules.SelectMany(rule => rule.GetLogMessages(entity, parentContext));
         }
 
-        private IEnumerable<ValidationMessage> ValidateProperty(PropertyInfo prop, object value, RuleContext parentContext)
+        private IEnumerable<LogMessage> ValidateProperty(PropertyInfo prop, object value, RuleContext parentContext)
         {
             // Uses the property name resolver to get the name to use in the path of messages
             var propName = resolver(prop);
@@ -137,7 +138,7 @@ namespace AutoRest.Core.Validation
             var collectionRules = prop.GetValidationCollectionRules();
 
             // Validate the value of this property against any rules for it
-            var propertyMessages = propertyRules.SelectMany(r => r.GetValidationMessages(value, ruleContext));
+            var propertyMessages = propertyRules.SelectMany(r => r.GetLogMessages(value, ruleContext));
 
             // Recursively validate the property (e.g. its properties or any list/dictionary entries),
             // passing any rules that apply to this collection)

@@ -54,7 +54,7 @@ namespace AutoRest.Core
                     Logger.AddListener(new SignalingLogListener(Settings.Instance.ValidationLevel, _ => validationErrorFound = true));
 
                     // generate model from swagger 
-                    codeModel = modeler.Build(message => Logger.Log(message.Severity, message.ToString()));
+                    codeModel = modeler.Build();
 
                     // After swagger Parser
                     codeModel = RunExtensions(Trigger.AfterModelCreation, codeModel);
@@ -64,7 +64,7 @@ namespace AutoRest.Core
 
                     if (validationErrorFound)
                     {
-                        Logger.Log(LogEntrySeverity.Error, "Errors found during Swagger validation");
+                        Logger.Log(LogMessageSeverity.Error, "Errors found during Swagger validation");
                     }
                 }
 

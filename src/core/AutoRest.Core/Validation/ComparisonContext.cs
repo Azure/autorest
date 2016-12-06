@@ -45,17 +45,17 @@ namespace AutoRest.Core.Validation
 
         public void LogInfo(MessageTemplate template, params object[] formatArguments)
         {
-            _messages.Add(new ComparisonMessage(template, this.Path, Logging.LogEntrySeverity.Info, formatArguments));
+            _messages.Add(new ComparisonMessage(template, this.Path, Logging.LogMessageSeverity.Info, formatArguments));
         }
 
         public void LogError(MessageTemplate template, params object[] formatArguments)
         {
-            _messages.Add(new ComparisonMessage(template, this.Path, Logging.LogEntrySeverity.Error, formatArguments));
+            _messages.Add(new ComparisonMessage(template, this.Path, Logging.LogMessageSeverity.Error, formatArguments));
         }
 
         public void LogBreakingChange(MessageTemplate template, params object[] formatArguments)
         {
-            _messages.Add(new ComparisonMessage(template, this.Path, this.Strict ? Logging.LogEntrySeverity.Error : Logging.LogEntrySeverity.Warning, formatArguments));
+            _messages.Add(new ComparisonMessage(template, this.Path, this.Strict ? Logging.LogMessageSeverity.Error : Logging.LogMessageSeverity.Warning, formatArguments));
         }
 
         public IEnumerable<ComparisonMessage> Messages {  get { return _messages; } }

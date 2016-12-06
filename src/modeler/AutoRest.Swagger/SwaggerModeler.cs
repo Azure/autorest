@@ -62,7 +62,7 @@ namespace AutoRest.Swagger
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override CodeModel Build(Action<ValidationMessage> messageCallback)
+        public override CodeModel Build()
         {
             Logger.Log(Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input))
@@ -75,7 +75,7 @@ namespace AutoRest.Swagger
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
             foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
             {
-                messageCallback(validationEx);
+                Logger.Log(validationEx);
             }
 
             Logger.Log(Resources.GeneratingClient);
@@ -132,7 +132,7 @@ namespace AutoRest.Swagger
                     }
                     else
                     {
-                        Logger.Log(LogEntrySeverity.Warning, Resources.OptionsNotSupported);
+                        Logger.Log(LogMessageSeverity.Warning, Resources.OptionsNotSupported);
                     }
                 }
             }
@@ -174,15 +174,15 @@ namespace AutoRest.Swagger
 
             // Look for semantic errors and warnings in the new document.
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            var validationMessages = validator.GetValidationExceptions(newDefintion).ToList();
+            var LogMessages = validator.GetValidationExceptions(newDefintion).ToList();
 
             // Only compare versions if the new version is correct.
             var comparisonMessages = 
-                !validationMessages.Any(m => m.Severity > LogEntrySeverity.Error) ? 
+                !LogMessages.Any(m => m.Severity > LogMessageSeverity.Error) ? 
                 newDefintion.Compare(context, oldDefintion) : 
                 Enumerable.Empty<ComparisonMessage>();
 
-            return validationMessages
+            return LogMessages
                 .Select(msg => 
                     new ComparisonMessage(new MessageTemplate { Id = 0, Message = msg.Message }, string.Join("/", msg.Path), msg.Severity))
                 .Concat(comparisonMessages);

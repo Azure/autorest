@@ -31,7 +31,7 @@ namespace AutoRest.CompositeSwagger
             get { return "CompositeSwagger"; }
         }
 
-        public override CodeModel Build(Action<ValidationMessage> messageCallback)
+        public override CodeModel Build()
         {
             var compositeSwaggerModel = Parse(Settings.Input);
             if (compositeSwaggerModel == null)
@@ -68,7 +68,7 @@ namespace AutoRest.CompositeSwagger
                 {
                     Settings.Input = childSwaggerPath;
                     var swaggerModeler = new SwaggerModeler();
-                    var serviceClient = swaggerModeler.Build(messageCallback);
+                    var serviceClient = swaggerModeler.Build();
                     compositeClient = Merge(compositeClient, serviceClient);
                 }
             }

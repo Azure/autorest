@@ -17,11 +17,11 @@ namespace AutoRest
     {
         private static int Main(string[] args)
         {
-            using (NewContext)
-            {
-                int exitCode = (int) ExitCode.Error;
+            int exitCode = (int)ExitCode.Error;
 
-                try
+            try
+            {
+                using (NewContext)
                 {
                     bool generationFailed = false;
                     Settings settings = null;
@@ -30,9 +30,9 @@ namespace AutoRest
                         settings = Settings.Create(args);
                         // set up logging
                         Logger.AddListener(new ConsoleLogListener(
-                            settings.Debug ? LogEntrySeverity.Debug : LogEntrySeverity.Info,
+                            settings.Debug ? LogMessageSeverity.Debug : LogMessageSeverity.Info,
                             settings.ValidationLevel));
-                        Logger.AddListener(new SignalingLogListener(LogEntrySeverity.Error,  _ => generationFailed = true));
+                        Logger.AddListener(new SignalingLogListener(LogMessageSeverity.Error, _ => generationFailed = true));
 
                         string defCodeGen = (args.Where(arg => arg.ToLowerInvariant().Contains("codegenerator")).IsNullOrEmpty()) ? "" : settings.CodeGenerator;
                         if (settings.ShowHelp && IsShowMarkdownHelpIncluded(args))
@@ -52,7 +52,7 @@ namespace AutoRest
                         else
                         {
                             Core.AutoRestController.Generate();
-                            if (!Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1 )
+                            if (!Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
                             {
                                 new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
                             }
@@ -60,7 +60,7 @@ namespace AutoRest
                     }
                     catch (Exception exception)
                     {
-                        Logger.Log(LogEntrySeverity.Error, exception.Message); // FATAL?
+                        Logger.Log(LogMessageSeverity.Error, exception.Message);
                     }
                     finally
                     {
@@ -71,7 +71,7 @@ namespace AutoRest
                                 if (!"None".EqualsIgnoreCase(settings.CodeGenerator))
                                 {
                                     Logger.Log(Resources.GenerationFailed);
-                                    Logger.Log(LogEntrySeverity.Error, "{0} {1}",
+                                    Logger.Log(LogMessageSeverity.Error, "{0} {1}",
                                         typeof(Program).Assembly.ManifestModule.Name, string.Join(" ", args));
                                 }
                             }
@@ -82,18 +82,18 @@ namespace AutoRest
                                     Logger.Log(Resources.GenerationComplete,
                                         settings.CodeGenerator, settings.Input);
                                 }
-                                exitCode = (int) ExitCode.Success;
+                                exitCode = (int)ExitCode.Success;
                             }
                         }
                     }
                 }
-                catch (Exception exception)
-                {
-                    Console.Error.WriteLine(Resources.ConsoleErrorMessage, exception.Message);
-                    Console.Error.WriteLine(Resources.ConsoleErrorStackTrace, exception.StackTrace);
-                }
-                return exitCode;
             }
+            catch (Exception exception)
+            {
+                Console.Error.WriteLine(Resources.ConsoleErrorMessage, exception.Message);
+                Console.Error.WriteLine(Resources.ConsoleErrorStackTrace, exception.StackTrace);
+            }
+            return exitCode;
         }
 
         /// <summary>

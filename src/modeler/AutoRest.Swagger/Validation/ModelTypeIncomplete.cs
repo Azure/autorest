@@ -12,13 +12,13 @@ namespace AutoRest.Swagger.Validation
 {
     public class ModelTypeIncomplete : TypedRule<Schema>
     {
-        public override IEnumerable<ValidationMessage> GetValidationMessages(Schema schema, RuleContext context)
+        public override IEnumerable<LogMessage> GetLogMessages(Schema schema, RuleContext context)
         {
             if (schema != null && string.IsNullOrEmpty(schema.Reference) && schema.RepresentsCompositeType())
             {
                 if (schema.Description == null)
                 {
-                    yield return new ValidationMessage(this, "description");
+                    yield return new LogMessage(this, "description");
                 }
             }
         }
@@ -34,6 +34,6 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override LogEntrySeverity Severity => LogEntrySeverity.Warning;
+        public override LogMessageSeverity Severity => LogMessageSeverity.Warning;
     }
 }
