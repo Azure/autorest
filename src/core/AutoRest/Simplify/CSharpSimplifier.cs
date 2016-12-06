@@ -76,7 +76,7 @@ namespace AutoRest.Simplify
                     var newRoot = await document.GetSyntaxRootAsync();
 
                     // get the namespaces used in the file
-                    var names = new GetQualifiedNames().GetNames(newRoot);
+                    var names = new GetQualifiedNames().GetNames(newRoot).Where( each => each != "System.Security.Permissions").ToArray();
 
                     // add the usings that we found
                     newRoot = new AddUsingsRewriter(names).Visit(newRoot);
@@ -103,9 +103,9 @@ namespace AutoRest.Simplify
                         Replace("[Microsoft.Rest.Serialization.JsonTransformation]", "[JsonTransformation]").
                         Replace("[Newtonsoft.Json.JsonExtensionData]", "[JsonExtensionData]");
 
-                        // Write out the files back to their original location
-                        var output = Path.Combine(Settings.Instance.FileSystem.CurrentDirectory, document.Name);
-                        Settings.Instance.FileSystem.WriteFile(output, text);
+                    // Write out the files back to their original location
+                    var output = Path.Combine(Settings.Instance.FileSystem.CurrentDirectory, document.Name);
+                    Settings.Instance.FileSystem.WriteFile(output, text);
                 }
             }
         }
