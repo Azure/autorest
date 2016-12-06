@@ -19,7 +19,6 @@ namespace AutoRest.Core.Tests
 
         public CodeGeneratorsTests()
         {
-            Logger.Entries.Clear();
             SetupMock();
         }
 

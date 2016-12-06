@@ -178,9 +178,7 @@ namespace AutoRest.Core.Tests
                 catch (CodeGenerationException e)
                 {
                     Assert.NotNull(e.InnerExceptions);
-                    Assert.Equal(1, e.InnerExceptions.Count);
-                    Assert.True(e.InnerExceptions.Any(i =>
-                            i.Message.Equals(string.Format("Parameter '{0}' is required.", "Input"))));
+                    Assert.True(e.Message.Equals(string.Format("Parameter '{0}' is required.", "Input")));
                 }
             }
         }

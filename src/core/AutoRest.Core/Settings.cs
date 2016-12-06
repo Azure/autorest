@@ -462,6 +462,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 if (doc != null && doc.IsRequired && property.GetValue(this) == null)
                 {
                     Logger.Log(LogEntrySeverity.Error, Resources.ParameterValueIsMissing, property.Name);
+                    throw new CodeGenerationException(string.Format(Resources.ParameterValueIsMissing, property.Name));
                 }
             }
 
