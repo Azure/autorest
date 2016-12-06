@@ -40,7 +40,7 @@ namespace AutoRest.Core
                 throw new ArgumentNullException("settings");
             }
             Logger.Entries.Clear();
-            Logger.LogInfo(Resources.AutoRestCore, Version);
+            Logger.Log(Resources.AutoRestCore, Version);
             
             CodeModel codeModel = null;
             
@@ -66,12 +66,12 @@ namespace AutoRest.Core
 
                 if (messages.Any(entry => entry.Severity >= Settings.Instance.ValidationLevel))
                 {
-                    throw ErrorManager.CreateError(null, Resources.ErrorGeneratingClientModel, "Errors found during Swagger validation");
+                    throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, "Errors found during Swagger validation");
                 }
             }
             catch (Exception exception)
             {
-                throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
+                throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, exception);
             }
 
             var plugin = ExtensionsLoader.GetPlugin();
@@ -111,7 +111,7 @@ namespace AutoRest.Core
             }
             catch (Exception exception)
             {
-                throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                throw ErrorManager.CreateError(Resources.ErrorSavingGeneratedCode, exception);
             }
         }
 
@@ -135,7 +135,7 @@ namespace AutoRest.Core
                 throw new ArgumentNullException("settings");
             }
             Logger.Entries.Clear();
-            Logger.LogInfo(Resources.AutoRestCore, Version);
+            Logger.Log(Resources.AutoRestCore, Version);
             Modeler modeler = ExtensionsLoader.GetModeler();
 
             try
@@ -150,7 +150,7 @@ namespace AutoRest.Core
             }
             catch (Exception exception)
             {
-                throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
+                throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, exception);
             }
 
         }

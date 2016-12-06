@@ -94,9 +94,9 @@ namespace AutoRest.Core
             {
                 if (!IsSingleFileGenerationSupported)
                 {
-                    Logger.LogError(new ArgumentException(Settings.Instance.OutputFileName),
+                    Logger.Log(LogEntrySeverity.Error, // new ArgumentException(Settings.Instance.OutputFileName),
                         Resources.LanguageDoesNotSupportSingleFileGeneration, Settings.Instance.CodeGenerator);
-                    ErrorManager.ThrowErrors();
+                    return;
                 }
 
                 filePath = Path.Combine(Settings.Instance.OutputDirectory, Settings.Instance.OutputFileName);

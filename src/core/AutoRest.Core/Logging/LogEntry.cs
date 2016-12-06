@@ -37,10 +37,5 @@ namespace AutoRest.Core.Logging
         /// Gets or sets the Message.
         /// </summary>
         public string Message { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Exception to log.
-        /// </summary>
-        public Exception Exception { get; set; }
     }
 }

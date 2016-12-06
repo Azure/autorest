@@ -57,7 +57,7 @@ namespace AutoRest
                     }
                     catch (Exception exception)
                     {
-                        Logger.LogError(exception, exception.Message);
+                        Logger.Log(LogEntrySeverity.Error, exception.Message); // FATAL?
                     }
                     finally
                     {

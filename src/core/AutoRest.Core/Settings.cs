@@ -461,8 +461,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 var doc = property.GetCustomAttributes<SettingsInfoAttribute>().FirstOrDefault();
                 if (doc != null && doc.IsRequired && property.GetValue(this) == null)
                 {
-                    Logger.LogError(new ArgumentException(property.Name),
-                        Resources.ParameterValueIsMissing, property.Name);
+                    Logger.Log(LogEntrySeverity.Error, Resources.ParameterValueIsMissing, property.Name);
                 }
             }
 
@@ -470,10 +469,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
             {
                 foreach (var unmatchedSetting in CustomSettings.Keys)
                 {
-                    Logger.LogWarning(Resources.ParameterIsNotValid, unmatchedSetting);
+                    Logger.Log(LogEntrySeverity.Warning, Resources.ParameterIsNotValid, unmatchedSetting);
                 }
             }
-            ErrorManager.ThrowErrors();
         }
     }
 }
