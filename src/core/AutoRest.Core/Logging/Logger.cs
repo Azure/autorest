@@ -47,18 +47,6 @@ namespace AutoRest.Core.Logging
             Log(LogEntrySeverity.Info, message, args);
         }
 
-
-        /// <summary>
-        /// An abstraction for the core to output text (ie not err,warning, or info)
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="args"></param>
-        public static void WriteOutput(string message, params object[] args)
-        {
-            Console.ResetColor();
-            Console.WriteLine(message, args);
-        }
-
         public static void WriteMessages(TextWriter writer, LogEntrySeverity severity)
         {
             WriteMessages(writer, severity, false);

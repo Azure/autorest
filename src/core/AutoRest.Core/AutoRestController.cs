@@ -76,7 +76,8 @@ namespace AutoRest.Core
 
             var plugin = ExtensionsLoader.GetPlugin();
 
-            Logger.WriteOutput(plugin.CodeGenerator.UsageInstructions);
+            Console.ResetColor();
+            Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
 
             Settings.Instance.Validate();
             try
