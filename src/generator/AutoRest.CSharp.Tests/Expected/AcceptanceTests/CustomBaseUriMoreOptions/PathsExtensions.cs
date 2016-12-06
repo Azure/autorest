@@ -37,7 +37,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
             /// </param>
             public static void GetEmpty(this IPaths operations, string vault, string secret, string keyName, string keyVersion = "v1")
             {
-                Task.Factory.StartNew(s => ((IPaths)s).GetEmptyAsync(vault, secret, keyName, keyVersion), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetEmptyAsync(vault, secret, keyName, keyVersion).GetAwaiter().GetResult();
             }
 
             /// <summary>

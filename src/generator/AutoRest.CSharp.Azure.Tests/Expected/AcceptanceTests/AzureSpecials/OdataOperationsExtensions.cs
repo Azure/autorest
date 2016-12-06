@@ -33,7 +33,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void GetWithFilter(this IOdataOperations operations, ODataQuery<OdataFilter> odataQuery = default(ODataQuery<OdataFilter>))
             {
-                Task.Factory.StartNew(s => ((IOdataOperations)s).GetWithFilterAsync(odataQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetWithFilterAsync(odataQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>

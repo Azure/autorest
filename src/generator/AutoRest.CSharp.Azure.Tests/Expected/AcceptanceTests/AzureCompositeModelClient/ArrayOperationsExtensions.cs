@@ -29,7 +29,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static ArrayWrapper GetValid(this IArrayOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IArrayOperations)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -59,7 +59,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutValid(this IArrayOperations operations, IList<string> array = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IArrayOperations)s).PutValidAsync(array), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutValidAsync(array).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -86,7 +86,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static ArrayWrapper GetEmpty(this IArrayOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IArrayOperations)s).GetEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -116,7 +116,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutEmpty(this IArrayOperations operations, IList<string> array = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IArrayOperations)s).PutEmptyAsync(array), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutEmptyAsync(array).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -144,7 +144,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static ArrayWrapper GetNotProvided(this IArrayOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IArrayOperations)s).GetNotProvidedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNotProvidedAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

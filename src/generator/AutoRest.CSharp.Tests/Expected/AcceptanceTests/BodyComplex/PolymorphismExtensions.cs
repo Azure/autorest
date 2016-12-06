@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static Fish GetValid(this IPolymorphism operations)
             {
-                return Task.Factory.StartNew(s => ((IPolymorphism)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -88,7 +88,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutValid(this IPolymorphism operations, Fish complexBody)
             {
-                Task.Factory.StartNew(s => ((IPolymorphism)s).PutValidAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutValidAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -178,7 +178,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutValidMissingRequired(this IPolymorphism operations, Fish complexBody)
             {
-                Task.Factory.StartNew(s => ((IPolymorphism)s).PutValidMissingRequiredAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutValidMissingRequiredAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>

@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<int?> GetNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -55,7 +55,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<int?> GetInvalid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -83,7 +83,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<int?> GetEmpty(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -113,7 +113,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutEmpty(this IArray operations, IList<string> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutEmptyAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutEmptyAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -140,7 +140,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<bool?> GetBooleanTfft(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetBooleanTfftAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBooleanTfftAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -170,7 +170,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutBooleanTfft(this IArray operations, IList<bool?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutBooleanTfftAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutBooleanTfftAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -197,7 +197,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<bool?> GetBooleanInvalidNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetBooleanInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBooleanInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -225,7 +225,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<bool?> GetBooleanInvalidString(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetBooleanInvalidStringAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBooleanInvalidStringAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -253,7 +253,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<int?> GetIntegerValid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetIntegerValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetIntegerValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -283,7 +283,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutIntegerValid(this IArray operations, IList<int?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutIntegerValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutIntegerValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -310,7 +310,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<int?> GetIntInvalidNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetIntInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetIntInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -338,7 +338,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<int?> GetIntInvalidString(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetIntInvalidStringAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetIntInvalidStringAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -366,7 +366,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<long?> GetLongValid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetLongValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetLongValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -396,7 +396,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutLongValid(this IArray operations, IList<long?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutLongValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutLongValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -423,7 +423,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<long?> GetLongInvalidNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetLongInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetLongInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -451,7 +451,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<long?> GetLongInvalidString(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetLongInvalidStringAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetLongInvalidStringAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -479,7 +479,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<double?> GetFloatValid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetFloatValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetFloatValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -509,7 +509,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutFloatValid(this IArray operations, IList<double?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutFloatValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutFloatValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -536,7 +536,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<double?> GetFloatInvalidNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetFloatInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetFloatInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -564,7 +564,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<double?> GetFloatInvalidString(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetFloatInvalidStringAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetFloatInvalidStringAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -592,7 +592,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<double?> GetDoubleValid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDoubleValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDoubleValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -622,7 +622,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutDoubleValid(this IArray operations, IList<double?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutDoubleValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDoubleValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -649,7 +649,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<double?> GetDoubleInvalidNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDoubleInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDoubleInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -677,7 +677,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<double?> GetDoubleInvalidString(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDoubleInvalidStringAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDoubleInvalidStringAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -705,7 +705,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<string> GetStringValid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetStringValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetStringValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -735,7 +735,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutStringValid(this IArray operations, IList<string> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutStringValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutStringValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -762,7 +762,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<string> GetStringWithNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetStringWithNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetStringWithNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -790,7 +790,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<string> GetStringWithInvalid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetStringWithInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetStringWithInvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -820,7 +820,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<System.Guid?> GetUuidValid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetUuidValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUuidValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -854,7 +854,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutUuidValid(this IArray operations, IList<System.Guid?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutUuidValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutUuidValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -883,7 +883,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<System.Guid?> GetUuidInvalidChars(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetUuidInvalidCharsAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUuidInvalidCharsAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -911,7 +911,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<System.DateTime?> GetDateValid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDateValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -941,7 +941,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutDateValid(this IArray operations, IList<System.DateTime?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutDateValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDateValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -968,7 +968,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<System.DateTime?> GetDateInvalidNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDateInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -996,7 +996,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<System.DateTime?> GetDateInvalidChars(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDateInvalidCharsAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateInvalidCharsAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1025,7 +1025,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<System.DateTime?> GetDateTimeValid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDateTimeValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateTimeValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1057,7 +1057,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutDateTimeValid(this IArray operations, IList<System.DateTime?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutDateTimeValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDateTimeValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1085,7 +1085,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<System.DateTime?> GetDateTimeInvalidNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDateTimeInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateTimeInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1113,7 +1113,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<System.DateTime?> GetDateTimeInvalidChars(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDateTimeInvalidCharsAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateTimeInvalidCharsAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1142,7 +1142,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<System.DateTime?> GetDateTimeRfc1123Valid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDateTimeRfc1123ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateTimeRfc1123ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1174,7 +1174,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutDateTimeRfc1123Valid(this IArray operations, IList<System.DateTime?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutDateTimeRfc1123ValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDateTimeRfc1123ValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1202,7 +1202,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<System.TimeSpan?> GetDurationValid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDurationValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDurationValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1232,7 +1232,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutDurationValid(this IArray operations, IList<System.TimeSpan?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutDurationValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDurationValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1260,7 +1260,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<byte[]> GetByteValid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetByteValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetByteValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1292,7 +1292,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutByteValid(this IArray operations, IList<byte[]> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutByteValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutByteValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1321,7 +1321,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<byte[]> GetByteInvalidNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetByteInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetByteInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1351,7 +1351,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<byte[]> GetBase64Url(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetBase64UrlAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBase64UrlAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1380,7 +1380,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<Product> GetComplexNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetComplexNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetComplexNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1408,7 +1408,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<Product> GetComplexEmpty(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetComplexEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetComplexEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1437,7 +1437,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<Product> GetComplexItemNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetComplexItemNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetComplexItemNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1467,7 +1467,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<Product> GetComplexItemEmpty(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetComplexItemEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetComplexItemEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1497,7 +1497,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<Product> GetComplexValid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetComplexValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetComplexValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1529,7 +1529,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutComplexValid(this IArray operations, IList<Product> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutComplexValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutComplexValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1557,7 +1557,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<IList<string>> GetArrayNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetArrayNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetArrayNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1585,7 +1585,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<IList<string>> GetArrayEmpty(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetArrayEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetArrayEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1613,7 +1613,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<IList<string>> GetArrayItemNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetArrayItemNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetArrayItemNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1641,7 +1641,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<IList<string>> GetArrayItemEmpty(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetArrayItemEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetArrayItemEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1670,7 +1670,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<IList<string>> GetArrayValid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetArrayValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetArrayValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1702,7 +1702,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutArrayValid(this IArray operations, IList<IList<string>> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutArrayValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutArrayValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1730,7 +1730,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<IDictionary<string, string>> GetDictionaryNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDictionaryNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDictionaryNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1758,7 +1758,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<IDictionary<string, string>> GetDictionaryEmpty(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDictionaryEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDictionaryEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1788,7 +1788,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<IDictionary<string, string>> GetDictionaryItemNull(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDictionaryItemNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDictionaryItemNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1820,7 +1820,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<IDictionary<string, string>> GetDictionaryItemEmpty(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDictionaryItemEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDictionaryItemEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1852,7 +1852,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static IList<IDictionary<string, string>> GetDictionaryValid(this IArray operations)
             {
-                return Task.Factory.StartNew(s => ((IArray)s).GetDictionaryValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDictionaryValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1886,7 +1886,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static void PutDictionaryValid(this IArray operations, IList<IDictionary<string, string>> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutDictionaryValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDictionaryValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>

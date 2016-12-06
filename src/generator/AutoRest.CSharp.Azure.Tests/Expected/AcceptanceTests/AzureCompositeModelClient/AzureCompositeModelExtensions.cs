@@ -38,7 +38,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static CatalogArray List(this IAzureCompositeModel operations, string resourceGroupName)
             {
-                return Task.Factory.StartNew(s => ((IAzureCompositeModel)s).ListAsync(resourceGroupName), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ListAsync(resourceGroupName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -87,7 +87,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static CatalogDictionary Create(this IAzureCompositeModel operations, string subscriptionId, string resourceGroupName, IDictionary<string, IList<Product>> productDictionaryOfArray = default(IDictionary<string, IList<Product>>))
             {
-                return Task.Factory.StartNew(s => ((IAzureCompositeModel)s).CreateAsync(subscriptionId, resourceGroupName, productDictionaryOfArray), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.CreateAsync(subscriptionId, resourceGroupName, productDictionaryOfArray).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -139,7 +139,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static CatalogArray Update(this IAzureCompositeModel operations, string subscriptionId, string resourceGroupName, IList<IDictionary<string, Product>> productArrayOfDictionary = default(IList<IDictionary<string, Product>>))
             {
-                return Task.Factory.StartNew(s => ((IAzureCompositeModel)s).UpdateAsync(subscriptionId, resourceGroupName, productArrayOfDictionary), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.UpdateAsync(subscriptionId, resourceGroupName, productArrayOfDictionary).GetAwaiter().GetResult();
             }
 
             /// <summary>

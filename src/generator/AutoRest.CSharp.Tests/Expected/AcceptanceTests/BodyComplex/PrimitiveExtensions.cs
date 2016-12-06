@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static IntWrapper GetInt(this IPrimitive operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitive)s).GetIntAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetIntAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -56,7 +56,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutInt(this IPrimitive operations, IntWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitive)s).PutIntAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutIntAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -84,7 +84,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static LongWrapper GetLong(this IPrimitive operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitive)s).GetLongAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetLongAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -115,7 +115,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutLong(this IPrimitive operations, LongWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitive)s).PutLongAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutLongAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -143,7 +143,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static FloatWrapper GetFloat(this IPrimitive operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitive)s).GetFloatAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetFloatAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -174,7 +174,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutFloat(this IPrimitive operations, FloatWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitive)s).PutFloatAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutFloatAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -202,7 +202,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DoubleWrapper GetDouble(this IPrimitive operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitive)s).GetDoubleAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDoubleAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -234,7 +234,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutDouble(this IPrimitive operations, DoubleWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitive)s).PutDoubleAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDoubleAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -263,7 +263,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static BooleanWrapper GetBool(this IPrimitive operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitive)s).GetBoolAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBoolAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -294,7 +294,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutBool(this IPrimitive operations, BooleanWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitive)s).PutBoolAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutBoolAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -322,7 +322,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static StringWrapper GetString(this IPrimitive operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitive)s).GetStringAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetStringAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -353,7 +353,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutString(this IPrimitive operations, StringWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitive)s).PutStringAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutStringAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -381,7 +381,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DateWrapper GetDate(this IPrimitive operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitive)s).GetDateAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -412,7 +412,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutDate(this IPrimitive operations, DateWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitive)s).PutDateAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDateAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -440,7 +440,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DatetimeWrapper GetDateTime(this IPrimitive operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitive)s).GetDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -471,7 +471,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutDateTime(this IPrimitive operations, DatetimeWrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitive)s).PutDateTimeAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDateTimeAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -499,7 +499,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static Datetimerfc1123Wrapper GetDateTimeRfc1123(this IPrimitive operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitive)s).GetDateTimeRfc1123Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateTimeRfc1123Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -531,7 +531,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutDateTimeRfc1123(this IPrimitive operations, Datetimerfc1123Wrapper complexBody)
             {
-                Task.Factory.StartNew(s => ((IPrimitive)s).PutDateTimeRfc1123Async(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDateTimeRfc1123Async(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -560,7 +560,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DurationWrapper GetDuration(this IPrimitive operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitive)s).GetDurationAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDurationAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -590,7 +590,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutDuration(this IPrimitive operations, System.TimeSpan? field = default(System.TimeSpan?))
             {
-                Task.Factory.StartNew(s => ((IPrimitive)s).PutDurationAsync(field), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDurationAsync(field).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -617,7 +617,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static ByteWrapper GetByte(this IPrimitive operations)
             {
-                return Task.Factory.StartNew(s => ((IPrimitive)s).GetByteAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetByteAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -647,7 +647,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutByte(this IPrimitive operations, byte[] field = default(byte[]))
             {
-                Task.Factory.StartNew(s => ((IPrimitive)s).PutByteAsync(field), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutByteAsync(field).GetAwaiter().GetResult();
             }
 
             /// <summary>

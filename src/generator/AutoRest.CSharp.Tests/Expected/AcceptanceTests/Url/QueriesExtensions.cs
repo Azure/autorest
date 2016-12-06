@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetBooleanTrue(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).GetBooleanTrueAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetBooleanTrueAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -52,7 +52,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetBooleanFalse(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).GetBooleanFalseAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetBooleanFalseAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -80,7 +80,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetBooleanNull(this IQueries operations, bool? boolQuery = default(bool?))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).GetBooleanNullAsync(boolQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetBooleanNullAsync(boolQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -108,7 +108,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetIntOneMillion(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).GetIntOneMillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetIntOneMillionAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -133,7 +133,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetIntNegativeOneMillion(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).GetIntNegativeOneMillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetIntNegativeOneMillionAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -161,7 +161,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetIntNull(this IQueries operations, int? intQuery = default(int?))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).GetIntNullAsync(intQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetIntNullAsync(intQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -189,7 +189,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetTenBillion(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).GetTenBillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetTenBillionAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -214,7 +214,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetNegativeTenBillion(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).GetNegativeTenBillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetNegativeTenBillionAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -242,7 +242,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetLongNull(this IQueries operations, long? longQuery = default(long?))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).GetLongNullAsync(longQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetLongNullAsync(longQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -270,7 +270,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void FloatScientificPositive(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).FloatScientificPositiveAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.FloatScientificPositiveAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -295,7 +295,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void FloatScientificNegative(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).FloatScientificNegativeAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.FloatScientificNegativeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -323,7 +323,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void FloatNull(this IQueries operations, double? floatQuery = default(double?))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).FloatNullAsync(floatQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.FloatNullAsync(floatQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -351,7 +351,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DoubleDecimalPositive(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).DoubleDecimalPositiveAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DoubleDecimalPositiveAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -376,7 +376,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DoubleDecimalNegative(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).DoubleDecimalNegativeAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DoubleDecimalNegativeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -404,7 +404,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DoubleNull(this IQueries operations, double? doubleQuery = default(double?))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).DoubleNullAsync(doubleQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DoubleNullAsync(doubleQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -432,7 +432,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void StringUnicode(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).StringUnicodeAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.StringUnicodeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -457,7 +457,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void StringUrlEncoded(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).StringUrlEncodedAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.StringUrlEncodedAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -482,7 +482,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void StringEmpty(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).StringEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.StringEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -510,7 +510,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void StringNull(this IQueries operations, string stringQuery = default(string))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).StringNullAsync(stringQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.StringNullAsync(stringQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -542,7 +542,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void EnumValid(this IQueries operations, UriColor? enumQuery = default(UriColor?))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).EnumValidAsync(enumQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.EnumValidAsync(enumQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -575,7 +575,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void EnumNull(this IQueries operations, UriColor? enumQuery = default(UriColor?))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).EnumNullAsync(enumQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.EnumNullAsync(enumQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -607,7 +607,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ByteMultiByte(this IQueries operations, byte[] byteQuery = default(byte[]))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).ByteMultiByteAsync(byteQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ByteMultiByteAsync(byteQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -635,7 +635,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ByteEmpty(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).ByteEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ByteEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -663,7 +663,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ByteNull(this IQueries operations, byte[] byteQuery = default(byte[]))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).ByteNullAsync(byteQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ByteNullAsync(byteQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -691,7 +691,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DateValid(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).DateValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DateValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -719,7 +719,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DateNull(this IQueries operations, System.DateTime? dateQuery = default(System.DateTime?))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).DateNullAsync(dateQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DateNullAsync(dateQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -747,7 +747,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DateTimeValid(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).DateTimeValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DateTimeValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -775,7 +775,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void DateTimeNull(this IQueries operations, System.DateTime? dateTimeQuery = default(System.DateTime?))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).DateTimeNullAsync(dateTimeQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DateTimeNullAsync(dateTimeQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -808,7 +808,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ArrayStringCsvValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringCsvValidAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ArrayStringCsvValidAsync(arrayQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -841,7 +841,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ArrayStringCsvNull(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringCsvNullAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ArrayStringCsvNullAsync(arrayQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -872,7 +872,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ArrayStringCsvEmpty(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringCsvEmptyAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ArrayStringCsvEmptyAsync(arrayQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -905,7 +905,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ArrayStringSsvValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringSsvValidAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ArrayStringSsvValidAsync(arrayQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -940,7 +940,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ArrayStringTsvValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringTsvValidAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ArrayStringTsvValidAsync(arrayQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -975,7 +975,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void ArrayStringPipesValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringPipesValidAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ArrayStringPipesValidAsync(arrayQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>

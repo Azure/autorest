@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A Get200Model204NoModelDefaultError200Valid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200Model204NoModelDefaultError200ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200Model204NoModelDefaultError200ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A Get200Model204NoModelDefaultError204Valid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200Model204NoModelDefaultError204ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200Model204NoModelDefaultError204ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A Get200Model204NoModelDefaultError201Invalid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200Model204NoModelDefaultError201InvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200Model204NoModelDefaultError201InvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -109,7 +109,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A Get200Model204NoModelDefaultError202None(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200Model204NoModelDefaultError202NoneAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200Model204NoModelDefaultError202NoneAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -138,7 +138,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A Get200Model204NoModelDefaultError400Valid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200Model204NoModelDefaultError400ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200Model204NoModelDefaultError400ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -167,7 +167,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A Get200Model201ModelDefaultError200Valid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200Model201ModelDefaultError200ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200Model201ModelDefaultError200ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -196,7 +196,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A Get200Model201ModelDefaultError201Valid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200Model201ModelDefaultError201ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200Model201ModelDefaultError201ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -226,7 +226,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A Get200Model201ModelDefaultError400Valid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200Model201ModelDefaultError400ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200Model201ModelDefaultError400ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -255,7 +255,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static object Get200ModelA201ModelC404ModelDDefaultError200Valid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -283,7 +283,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static object Get200ModelA201ModelC404ModelDDefaultError201Valid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -311,7 +311,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static object Get200ModelA201ModelC404ModelDDefaultError404Valid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -340,7 +340,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static object Get200ModelA201ModelC404ModelDDefaultError400Valid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -369,7 +369,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Get202None204NoneDefaultError202None(this IMultipleResponses operations)
             {
-                Task.Factory.StartNew(s => ((IMultipleResponses)s).Get202None204NoneDefaultError202NoneAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Get202None204NoneDefaultError202NoneAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -394,7 +394,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Get202None204NoneDefaultError204None(this IMultipleResponses operations)
             {
-                Task.Factory.StartNew(s => ((IMultipleResponses)s).Get202None204NoneDefaultError204NoneAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Get202None204NoneDefaultError204NoneAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -420,7 +420,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Get202None204NoneDefaultError400Valid(this IMultipleResponses operations)
             {
-                Task.Factory.StartNew(s => ((IMultipleResponses)s).Get202None204NoneDefaultError400ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Get202None204NoneDefaultError400ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -446,7 +446,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Get202None204NoneDefaultNone202Invalid(this IMultipleResponses operations)
             {
-                Task.Factory.StartNew(s => ((IMultipleResponses)s).Get202None204NoneDefaultNone202InvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Get202None204NoneDefaultNone202InvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -471,7 +471,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Get202None204NoneDefaultNone204None(this IMultipleResponses operations)
             {
-                Task.Factory.StartNew(s => ((IMultipleResponses)s).Get202None204NoneDefaultNone204NoneAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Get202None204NoneDefaultNone204NoneAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -496,7 +496,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Get202None204NoneDefaultNone400None(this IMultipleResponses operations)
             {
-                Task.Factory.StartNew(s => ((IMultipleResponses)s).Get202None204NoneDefaultNone400NoneAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Get202None204NoneDefaultNone400NoneAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -521,7 +521,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void Get202None204NoneDefaultNone400Invalid(this IMultipleResponses operations)
             {
-                Task.Factory.StartNew(s => ((IMultipleResponses)s).Get202None204NoneDefaultNone400InvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Get202None204NoneDefaultNone400InvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -546,7 +546,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A GetDefaultModelA200Valid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).GetDefaultModelA200ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDefaultModelA200ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -574,7 +574,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A GetDefaultModelA200None(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).GetDefaultModelA200NoneAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDefaultModelA200NoneAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -602,7 +602,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A GetDefaultModelA400Valid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).GetDefaultModelA400ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDefaultModelA400ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -630,7 +630,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A GetDefaultModelA400None(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).GetDefaultModelA400NoneAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDefaultModelA400NoneAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -658,7 +658,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void GetDefaultNone200Invalid(this IMultipleResponses operations)
             {
-                Task.Factory.StartNew(s => ((IMultipleResponses)s).GetDefaultNone200InvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetDefaultNone200InvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -683,7 +683,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void GetDefaultNone200None(this IMultipleResponses operations)
             {
-                Task.Factory.StartNew(s => ((IMultipleResponses)s).GetDefaultNone200NoneAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetDefaultNone200NoneAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -708,7 +708,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void GetDefaultNone400Invalid(this IMultipleResponses operations)
             {
-                Task.Factory.StartNew(s => ((IMultipleResponses)s).GetDefaultNone400InvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetDefaultNone400InvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -733,7 +733,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static void GetDefaultNone400None(this IMultipleResponses operations)
             {
-                Task.Factory.StartNew(s => ((IMultipleResponses)s).GetDefaultNone400NoneAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetDefaultNone400NoneAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -759,7 +759,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A Get200ModelA200None(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200ModelA200NoneAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200ModelA200NoneAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -788,7 +788,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A Get200ModelA200Valid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200ModelA200ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200ModelA200ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -816,7 +816,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A Get200ModelA200Invalid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200ModelA200InvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200ModelA200InvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -845,7 +845,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A Get200ModelA400None(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200ModelA400NoneAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200ModelA400NoneAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -874,7 +874,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A Get200ModelA400Valid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200ModelA400ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200ModelA400ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -902,7 +902,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A Get200ModelA400Invalid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200ModelA400InvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200ModelA400InvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -930,7 +930,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static A Get200ModelA202Valid(this IMultipleResponses operations)
             {
-                return Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200ModelA202ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get200ModelA202ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

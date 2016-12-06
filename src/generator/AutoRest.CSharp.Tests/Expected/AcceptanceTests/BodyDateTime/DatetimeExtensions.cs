@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static System.DateTime? GetNull(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static System.DateTime? GetInvalid(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static System.DateTime? GetOverflow(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetOverflowAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetOverflowAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -109,7 +109,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static System.DateTime? GetUnderflow(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetUnderflowAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUnderflowAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -139,7 +139,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static void PutUtcMaxDateTime(this IDatetime operations, System.DateTime datetimeBody)
             {
-                Task.Factory.StartNew(s => ((IDatetime)s).PutUtcMaxDateTimeAsync(datetimeBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutUtcMaxDateTimeAsync(datetimeBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -166,7 +166,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static System.DateTime? GetUtcLowercaseMaxDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetUtcLowercaseMaxDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUtcLowercaseMaxDateTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -194,7 +194,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static System.DateTime? GetUtcUppercaseMaxDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetUtcUppercaseMaxDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUtcUppercaseMaxDateTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -225,7 +225,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static void PutLocalPositiveOffsetMaxDateTime(this IDatetime operations, System.DateTime datetimeBody)
             {
-                Task.Factory.StartNew(s => ((IDatetime)s).PutLocalPositiveOffsetMaxDateTimeAsync(datetimeBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutLocalPositiveOffsetMaxDateTimeAsync(datetimeBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -254,7 +254,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static System.DateTime? GetLocalPositiveOffsetLowercaseMaxDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetLocalPositiveOffsetLowercaseMaxDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetLocalPositiveOffsetLowercaseMaxDateTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -284,7 +284,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static System.DateTime? GetLocalPositiveOffsetUppercaseMaxDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetLocalPositiveOffsetUppercaseMaxDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetLocalPositiveOffsetUppercaseMaxDateTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -316,7 +316,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static void PutLocalNegativeOffsetMaxDateTime(this IDatetime operations, System.DateTime datetimeBody)
             {
-                Task.Factory.StartNew(s => ((IDatetime)s).PutLocalNegativeOffsetMaxDateTimeAsync(datetimeBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutLocalNegativeOffsetMaxDateTimeAsync(datetimeBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -345,7 +345,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static System.DateTime? GetLocalNegativeOffsetUppercaseMaxDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetLocalNegativeOffsetUppercaseMaxDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetLocalNegativeOffsetUppercaseMaxDateTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -375,7 +375,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static System.DateTime? GetLocalNegativeOffsetLowercaseMaxDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetLocalNegativeOffsetLowercaseMaxDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetLocalNegativeOffsetLowercaseMaxDateTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -406,7 +406,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static void PutUtcMinDateTime(this IDatetime operations, System.DateTime datetimeBody)
             {
-                Task.Factory.StartNew(s => ((IDatetime)s).PutUtcMinDateTimeAsync(datetimeBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutUtcMinDateTimeAsync(datetimeBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -433,7 +433,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static System.DateTime? GetUtcMinDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetUtcMinDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUtcMinDateTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -463,7 +463,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static void PutLocalPositiveOffsetMinDateTime(this IDatetime operations, System.DateTime datetimeBody)
             {
-                Task.Factory.StartNew(s => ((IDatetime)s).PutLocalPositiveOffsetMinDateTimeAsync(datetimeBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutLocalPositiveOffsetMinDateTimeAsync(datetimeBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -490,7 +490,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static System.DateTime? GetLocalPositiveOffsetMinDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetLocalPositiveOffsetMinDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetLocalPositiveOffsetMinDateTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -520,7 +520,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static void PutLocalNegativeOffsetMinDateTime(this IDatetime operations, System.DateTime datetimeBody)
             {
-                Task.Factory.StartNew(s => ((IDatetime)s).PutLocalNegativeOffsetMinDateTimeAsync(datetimeBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutLocalNegativeOffsetMinDateTimeAsync(datetimeBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -547,7 +547,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static System.DateTime? GetLocalNegativeOffsetMinDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetLocalNegativeOffsetMinDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetLocalNegativeOffsetMinDateTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

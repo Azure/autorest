@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static HttpRedirectsHead300Headers Head300(this IHttpRedirects operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpRedirects)s).Head300Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Head300Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -55,7 +55,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static IList<string> Get300(this IHttpRedirects operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpRedirects)s).Get300Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get300Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -83,7 +83,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static HttpRedirectsHead301Headers Head301(this IHttpRedirects operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpRedirects)s).Head301Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Head301Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -111,7 +111,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static HttpRedirectsGet301Headers Get301(this IHttpRedirects operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpRedirects)s).Get301Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get301Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -144,7 +144,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static HttpRedirectsPut301Headers Put301(this IHttpRedirects operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpRedirects)s).Put301Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Put301Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -177,7 +177,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static HttpRedirectsHead302Headers Head302(this IHttpRedirects operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpRedirects)s).Head302Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Head302Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -205,7 +205,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static HttpRedirectsGet302Headers Get302(this IHttpRedirects operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpRedirects)s).Get302Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get302Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -238,7 +238,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static HttpRedirectsPatch302Headers Patch302(this IHttpRedirects operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpRedirects)s).Patch302Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Patch302Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -276,7 +276,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static HttpRedirectsPost303Headers Post303(this IHttpRedirects operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpRedirects)s).Post303Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Post303Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -309,7 +309,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static HttpRedirectsHead307Headers Head307(this IHttpRedirects operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpRedirects)s).Head307Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Head307Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -337,7 +337,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static HttpRedirectsGet307Headers Get307(this IHttpRedirects operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpRedirects)s).Get307Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get307Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -368,7 +368,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static HttpRedirectsPut307Headers Put307(this IHttpRedirects operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpRedirects)s).Put307Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Put307Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -402,7 +402,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static HttpRedirectsPatch307Headers Patch307(this IHttpRedirects operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpRedirects)s).Patch307Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Patch307Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -436,7 +436,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static HttpRedirectsPost307Headers Post307(this IHttpRedirects operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpRedirects)s).Post307Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Post307Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -470,7 +470,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static HttpRedirectsDelete307Headers Delete307(this IHttpRedirects operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpRedirects)s).Delete307Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Delete307Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>

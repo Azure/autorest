@@ -27,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// </param>
             public static bool Head200(this IHttpSuccessOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpSuccessOperations)s).Head200Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Head200Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -55,7 +55,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// </param>
             public static bool Head204(this IHttpSuccessOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpSuccessOperations)s).Head204Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Head204Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -83,7 +83,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// </param>
             public static bool Head404(this IHttpSuccessOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpSuccessOperations)s).Head404Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Head404Async().GetAwaiter().GetResult();
             }
 
             /// <summary>

@@ -29,7 +29,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static DictionaryWrapper GetValid(this IDictionaryOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionaryOperations)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -59,7 +59,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutValid(this IDictionaryOperations operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>))
             {
-                Task.Factory.StartNew(s => ((IDictionaryOperations)s).PutValidAsync(defaultProgram), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutValidAsync(defaultProgram).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -86,7 +86,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static DictionaryWrapper GetEmpty(this IDictionaryOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionaryOperations)s).GetEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -116,7 +116,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutEmpty(this IDictionaryOperations operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>))
             {
-                Task.Factory.StartNew(s => ((IDictionaryOperations)s).PutEmptyAsync(defaultProgram), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutEmptyAsync(defaultProgram).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -143,7 +143,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static DictionaryWrapper GetNull(this IDictionaryOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionaryOperations)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -172,7 +172,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static DictionaryWrapper GetNotProvided(this IDictionaryOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionaryOperations)s).GetNotProvidedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNotProvidedAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

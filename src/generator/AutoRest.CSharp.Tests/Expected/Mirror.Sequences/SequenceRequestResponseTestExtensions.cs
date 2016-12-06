@@ -30,7 +30,7 @@ namespace Fixtures.MirrorSequences
             /// </param>
             public static IList<Pet> AddPet(this ISequenceRequestResponseTest operations, IList<Pet> pets)
             {
-                return Task.Factory.StartNew(s => ((ISequenceRequestResponseTest)s).AddPetAsync(pets), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.AddPetAsync(pets).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -64,7 +64,7 @@ namespace Fixtures.MirrorSequences
             /// </param>
             public static IList<int?> AddPetStyles(this ISequenceRequestResponseTest operations, IList<int?> petStyle)
             {
-                return Task.Factory.StartNew(s => ((ISequenceRequestResponseTest)s).AddPetStylesAsync(petStyle), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.AddPetStylesAsync(petStyle).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -98,7 +98,7 @@ namespace Fixtures.MirrorSequences
             /// </param>
             public static IList<int?> UpdatePetStyles(this ISequenceRequestResponseTest operations, IList<int?> petStyle)
             {
-                return Task.Factory.StartNew(s => ((ISequenceRequestResponseTest)s).UpdatePetStylesAsync(petStyle), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.UpdatePetStylesAsync(petStyle).GetAwaiter().GetResult();
             }
 
             /// <summary>

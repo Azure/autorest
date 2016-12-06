@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static Siamese GetValid(this IInheritanceOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IInheritanceOperations)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -60,7 +60,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutValid(this IInheritanceOperations operations, Siamese complexBody)
             {
-                Task.Factory.StartNew(s => ((IInheritanceOperations)s).PutValidAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutValidAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>

@@ -31,7 +31,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             /// </param>
             public static void PostRequired(this IParameterGroupingOperations operations, ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters)
             {
-                Task.Factory.StartNew(s => ((IParameterGroupingOperations)s).PostRequiredAsync(parameterGroupingPostRequiredParameters), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostRequiredAsync(parameterGroupingPostRequiredParameters).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -62,7 +62,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             /// </param>
             public static void PostOptional(this IParameterGroupingOperations operations, ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = default(ParameterGroupingPostOptionalParameters))
             {
-                Task.Factory.StartNew(s => ((IParameterGroupingOperations)s).PostOptionalAsync(parameterGroupingPostOptionalParameters), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostOptionalAsync(parameterGroupingPostOptionalParameters).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -96,7 +96,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             /// </param>
             public static void PostMultiParamGroups(this IParameterGroupingOperations operations, FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = default(ParameterGroupingPostMultiParamGroupsSecondParamGroup))
             {
-                Task.Factory.StartNew(s => ((IParameterGroupingOperations)s).PostMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -130,7 +130,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             /// </param>
             public static void PostSharedParameterGroupObject(this IParameterGroupingOperations operations, FirstParameterGroup firstParameterGroup = default(FirstParameterGroup))
             {
-                Task.Factory.StartNew(s => ((IParameterGroupingOperations)s).PostSharedParameterGroupObjectAsync(firstParameterGroup), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostSharedParameterGroupObjectAsync(firstParameterGroup).GetAwaiter().GetResult();
             }
 
             /// <summary>

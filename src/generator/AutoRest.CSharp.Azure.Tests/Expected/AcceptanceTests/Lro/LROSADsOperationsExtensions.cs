@@ -31,7 +31,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutNonRetry400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PutNonRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PutNonRetry400Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -66,7 +66,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutNonRetry201Creating400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PutNonRetry201Creating400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PutNonRetry201Creating400Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -102,7 +102,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutNonRetry201Creating400InvalidJson(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PutNonRetry201Creating400InvalidJsonAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PutNonRetry201Creating400InvalidJsonAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -139,7 +139,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutAsyncRelativeRetry400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PutAsyncRelativeRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PutAsyncRelativeRetry400Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -172,7 +172,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsDeleteNonRetry400Headers DeleteNonRetry400(this ILROSADsOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).DeleteNonRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.DeleteNonRetry400Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -200,7 +200,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsDelete202NonRetry400Headers Delete202NonRetry400(this ILROSADsOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).Delete202NonRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Delete202NonRetry400Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -230,7 +230,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsDeleteAsyncRelativeRetry400Headers DeleteAsyncRelativeRetry400(this ILROSADsOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).DeleteAsyncRelativeRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.DeleteAsyncRelativeRetry400Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -263,7 +263,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPostNonRetry400Headers PostNonRetry400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PostNonRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostNonRetry400Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -297,7 +297,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPost202NonRetry400Headers Post202NonRetry400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).Post202NonRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Post202NonRetry400Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -333,7 +333,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPostAsyncRelativeRetry400Headers PostAsyncRelativeRetry400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PostAsyncRelativeRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostAsyncRelativeRetry400Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -370,7 +370,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutError201NoProvisioningStatePayload(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PutError201NoProvisioningStatePayloadAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PutError201NoProvisioningStatePayloadAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -407,7 +407,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutAsyncRelativeRetryNoStatus(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PutAsyncRelativeRetryNoStatusAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PutAsyncRelativeRetryNoStatusAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -445,7 +445,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutAsyncRelativeRetryNoStatusPayload(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PutAsyncRelativeRetryNoStatusPayloadAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PutAsyncRelativeRetryNoStatusPayloadAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -479,7 +479,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static void Delete204Succeeded(this ILROSADsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).Delete204SucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Delete204SucceededAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -507,7 +507,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsDeleteAsyncRelativeRetryNoStatusHeaders DeleteAsyncRelativeRetryNoStatus(this ILROSADsOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).DeleteAsyncRelativeRetryNoStatusAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.DeleteAsyncRelativeRetryNoStatusAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -541,7 +541,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPost202NoLocationHeaders Post202NoLocation(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).Post202NoLocationAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Post202NoLocationAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -578,7 +578,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPostAsyncRelativeRetryNoPayloadHeaders PostAsyncRelativeRetryNoPayload(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PostAsyncRelativeRetryNoPayloadAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostAsyncRelativeRetryNoPayloadAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -615,7 +615,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product Put200InvalidJson(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).Put200InvalidJsonAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Put200InvalidJsonAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -652,7 +652,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutAsyncRelativeRetryInvalidHeader(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PutAsyncRelativeRetryInvalidHeaderAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PutAsyncRelativeRetryInvalidHeaderAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -690,7 +690,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product PutAsyncRelativeRetryInvalidJsonPolling(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PutAsyncRelativeRetryInvalidJsonPollingAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PutAsyncRelativeRetryInvalidJsonPollingAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -724,7 +724,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsDelete202RetryInvalidHeaderHeaders Delete202RetryInvalidHeader(this ILROSADsOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).Delete202RetryInvalidHeaderAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Delete202RetryInvalidHeaderAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -754,7 +754,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders DeleteAsyncRelativeRetryInvalidHeader(this ILROSADsOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).DeleteAsyncRelativeRetryInvalidHeaderAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.DeleteAsyncRelativeRetryInvalidHeaderAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -785,7 +785,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders DeleteAsyncRelativeRetryInvalidJsonPolling(this ILROSADsOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).DeleteAsyncRelativeRetryInvalidJsonPollingAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.DeleteAsyncRelativeRetryInvalidJsonPollingAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -819,7 +819,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPost202RetryInvalidHeaderHeaders Post202RetryInvalidHeader(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).Post202RetryInvalidHeaderAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Post202RetryInvalidHeaderAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -856,7 +856,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders PostAsyncRelativeRetryInvalidHeader(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PostAsyncRelativeRetryInvalidHeaderAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostAsyncRelativeRetryInvalidHeaderAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -894,7 +894,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders PostAsyncRelativeRetryInvalidJsonPolling(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PostAsyncRelativeRetryInvalidJsonPollingAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostAsyncRelativeRetryInvalidJsonPollingAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -930,7 +930,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutNonRetry400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPutNonRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPutNonRetry400Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -965,7 +965,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutNonRetry201Creating400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPutNonRetry201Creating400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPutNonRetry201Creating400Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1001,7 +1001,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutNonRetry201Creating400InvalidJson(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPutNonRetry201Creating400InvalidJsonAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPutNonRetry201Creating400InvalidJsonAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1038,7 +1038,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutAsyncRelativeRetry400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPutAsyncRelativeRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPutAsyncRelativeRetry400Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1071,7 +1071,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsDeleteNonRetry400Headers BeginDeleteNonRetry400(this ILROSADsOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDeleteNonRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginDeleteNonRetry400Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1099,7 +1099,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsDelete202NonRetry400Headers BeginDelete202NonRetry400(this ILROSADsOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDelete202NonRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginDelete202NonRetry400Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1129,7 +1129,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsDeleteAsyncRelativeRetry400Headers BeginDeleteAsyncRelativeRetry400(this ILROSADsOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDeleteAsyncRelativeRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginDeleteAsyncRelativeRetry400Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1162,7 +1162,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPostNonRetry400Headers BeginPostNonRetry400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPostNonRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPostNonRetry400Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1196,7 +1196,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPost202NonRetry400Headers BeginPost202NonRetry400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPost202NonRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPost202NonRetry400Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1232,7 +1232,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPostAsyncRelativeRetry400Headers BeginPostAsyncRelativeRetry400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPostAsyncRelativeRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPostAsyncRelativeRetry400Async(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1269,7 +1269,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutError201NoProvisioningStatePayload(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPutError201NoProvisioningStatePayloadAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPutError201NoProvisioningStatePayloadAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1306,7 +1306,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutAsyncRelativeRetryNoStatus(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPutAsyncRelativeRetryNoStatusAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPutAsyncRelativeRetryNoStatusAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1344,7 +1344,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutAsyncRelativeRetryNoStatusPayload(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPutAsyncRelativeRetryNoStatusPayloadAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPutAsyncRelativeRetryNoStatusPayloadAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1378,7 +1378,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static void BeginDelete204Succeeded(this ILROSADsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDelete204SucceededAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.BeginDelete204SucceededAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1406,7 +1406,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsDeleteAsyncRelativeRetryNoStatusHeaders BeginDeleteAsyncRelativeRetryNoStatus(this ILROSADsOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDeleteAsyncRelativeRetryNoStatusAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginDeleteAsyncRelativeRetryNoStatusAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1440,7 +1440,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPost202NoLocationHeaders BeginPost202NoLocation(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPost202NoLocationAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPost202NoLocationAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1477,7 +1477,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPostAsyncRelativeRetryNoPayloadHeaders BeginPostAsyncRelativeRetryNoPayload(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPostAsyncRelativeRetryNoPayloadAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPostAsyncRelativeRetryNoPayloadAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1514,7 +1514,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPut200InvalidJson(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPut200InvalidJsonAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPut200InvalidJsonAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1551,7 +1551,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutAsyncRelativeRetryInvalidHeader(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPutAsyncRelativeRetryInvalidHeaderAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPutAsyncRelativeRetryInvalidHeaderAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1589,7 +1589,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static Product BeginPutAsyncRelativeRetryInvalidJsonPolling(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPutAsyncRelativeRetryInvalidJsonPollingAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPutAsyncRelativeRetryInvalidJsonPollingAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1623,7 +1623,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsDelete202RetryInvalidHeaderHeaders BeginDelete202RetryInvalidHeader(this ILROSADsOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDelete202RetryInvalidHeaderAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginDelete202RetryInvalidHeaderAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1653,7 +1653,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders BeginDeleteAsyncRelativeRetryInvalidHeader(this ILROSADsOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDeleteAsyncRelativeRetryInvalidHeaderAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginDeleteAsyncRelativeRetryInvalidHeaderAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1684,7 +1684,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders BeginDeleteAsyncRelativeRetryInvalidJsonPolling(this ILROSADsOperations operations)
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginDeleteAsyncRelativeRetryInvalidJsonPollingAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1718,7 +1718,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPost202RetryInvalidHeaderHeaders BeginPost202RetryInvalidHeader(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPost202RetryInvalidHeaderAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPost202RetryInvalidHeaderAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1755,7 +1755,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders BeginPostAsyncRelativeRetryInvalidHeader(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPostAsyncRelativeRetryInvalidHeaderAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPostAsyncRelativeRetryInvalidHeaderAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1793,7 +1793,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders BeginPostAsyncRelativeRetryInvalidJsonPolling(this ILROSADsOperations operations, Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPostAsyncRelativeRetryInvalidJsonPollingAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginPostAsyncRelativeRetryInvalidJsonPollingAsync(product).GetAwaiter().GetResult();
             }
 
             /// <summary>

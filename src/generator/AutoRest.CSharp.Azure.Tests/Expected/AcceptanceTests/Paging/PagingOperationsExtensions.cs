@@ -28,7 +28,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetSinglePages(this IPagingOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetSinglePagesAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetSinglePagesAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -61,7 +61,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetMultiplePages(this IPagingOperations operations, string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions))
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesAsync(clientRequestId, pagingGetMultiplePagesOptions), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMultiplePagesAsync(clientRequestId, pagingGetMultiplePagesOptions).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -100,7 +100,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetOdataMultiplePages(this IPagingOperations operations, string clientRequestId = default(string), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions))
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetOdataMultiplePagesAsync(clientRequestId, pagingGetOdataMultiplePagesOptions), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetOdataMultiplePagesAsync(clientRequestId, pagingGetOdataMultiplePagesOptions).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -139,7 +139,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetMultiplePagesWithOffset(this IPagingOperations operations, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = default(string))
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesWithOffsetAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMultiplePagesWithOffsetAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -173,7 +173,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetMultiplePagesRetryFirst(this IPagingOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesRetryFirstAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMultiplePagesRetryFirstAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -204,7 +204,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetMultiplePagesRetrySecond(this IPagingOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesRetrySecondAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMultiplePagesRetrySecondAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -234,7 +234,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetSinglePagesFailure(this IPagingOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetSinglePagesFailureAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetSinglePagesFailureAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -262,7 +262,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetMultiplePagesFailure(this IPagingOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesFailureAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMultiplePagesFailureAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -290,7 +290,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetMultiplePagesFailureUri(this IPagingOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesFailureUriAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMultiplePagesFailureUriAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -324,7 +324,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetMultiplePagesFragmentNextLink(this IPagingOperations operations, string apiVersion, string tenant)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesFragmentNextLinkAsync(apiVersion, tenant), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMultiplePagesFragmentNextLinkAsync(apiVersion, tenant).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -362,7 +362,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetMultiplePagesFragmentWithGroupingNextLink(this IPagingOperations operations, CustomParameterGroup customParameterGroup)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesFragmentWithGroupingNextLinkAsync(customParameterGroup), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMultiplePagesFragmentWithGroupingNextLinkAsync(customParameterGroup).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -403,7 +403,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> NextFragment(this IPagingOperations operations, string apiVersion, string tenant, string nextLink)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).NextFragmentAsync(apiVersion, tenant, nextLink), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.NextFragmentAsync(apiVersion, tenant, nextLink).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -446,7 +446,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> NextFragmentWithGrouping(this IPagingOperations operations, string nextLink, CustomParameterGroup customParameterGroup)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).NextFragmentWithGroupingAsync(nextLink, customParameterGroup), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.NextFragmentWithGroupingAsync(nextLink, customParameterGroup).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -483,7 +483,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetSinglePagesNext(this IPagingOperations operations, string nextPageLink)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetSinglePagesNextAsync(nextPageLink), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetSinglePagesNextAsync(nextPageLink).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -522,7 +522,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetMultiplePagesNext(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions))
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesNextAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMultiplePagesNextAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -567,7 +567,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetOdataMultiplePagesNext(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions))
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetOdataMultiplePagesNextAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetOdataMultiplePagesNextAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -612,7 +612,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetMultiplePagesWithOffsetNext(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = default(PagingGetMultiplePagesWithOffsetNextOptions))
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesWithOffsetNextAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMultiplePagesWithOffsetNextAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -652,7 +652,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetMultiplePagesRetryFirstNext(this IPagingOperations operations, string nextPageLink)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesRetryFirstNextAsync(nextPageLink), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMultiplePagesRetryFirstNextAsync(nextPageLink).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -689,7 +689,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetMultiplePagesRetrySecondNext(this IPagingOperations operations, string nextPageLink)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesRetrySecondNextAsync(nextPageLink), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMultiplePagesRetrySecondNextAsync(nextPageLink).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -725,7 +725,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetSinglePagesFailureNext(this IPagingOperations operations, string nextPageLink)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetSinglePagesFailureNextAsync(nextPageLink), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetSinglePagesFailureNextAsync(nextPageLink).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -759,7 +759,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetMultiplePagesFailureNext(this IPagingOperations operations, string nextPageLink)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesFailureNextAsync(nextPageLink), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMultiplePagesFailureNextAsync(nextPageLink).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -793,7 +793,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static IPage<Product> GetMultiplePagesFailureUriNext(this IPagingOperations operations, string nextPageLink)
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesFailureUriNextAsync(nextPageLink), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMultiplePagesFailureUriNextAsync(nextPageLink).GetAwaiter().GetResult();
             }
 
             /// <summary>

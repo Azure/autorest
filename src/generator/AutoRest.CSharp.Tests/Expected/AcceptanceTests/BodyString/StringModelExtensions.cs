@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static string GetNull(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -56,7 +56,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static void PutNull(this IStringModel operations, string stringBody = default(string))
             {
-                Task.Factory.StartNew(s => ((IStringModel)s).PutNullAsync(stringBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutNullAsync(stringBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -84,7 +84,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static string GetEmpty(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -115,7 +115,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static void PutEmpty(this IStringModel operations, string stringBody)
             {
-                Task.Factory.StartNew(s => ((IStringModel)s).PutEmptyAsync(stringBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutEmptyAsync(stringBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -144,7 +144,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static string GetMbcs(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetMbcsAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetMbcsAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -178,7 +178,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static void PutMbcs(this IStringModel operations, string stringBody)
             {
-                Task.Factory.StartNew(s => ((IStringModel)s).PutMbcsAsync(stringBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutMbcsAsync(stringBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -210,7 +210,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static string GetWhitespace(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetWhitespaceAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetWhitespaceAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -246,7 +246,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static void PutWhitespace(this IStringModel operations, string stringBody)
             {
-                Task.Factory.StartNew(s => ((IStringModel)s).PutWhitespaceAsync(stringBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutWhitespaceAsync(stringBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -277,7 +277,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static string GetNotProvided(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetNotProvidedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNotProvidedAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -305,7 +305,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static byte[] GetBase64Encoded(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetBase64EncodedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBase64EncodedAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -333,7 +333,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static byte[] GetBase64UrlEncoded(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetBase64UrlEncodedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBase64UrlEncodedAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -363,7 +363,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static void PutBase64UrlEncoded(this IStringModel operations, byte[] stringBody)
             {
-                Task.Factory.StartNew(s => ((IStringModel)s).PutBase64UrlEncodedAsync(stringBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutBase64UrlEncodedAsync(stringBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -390,7 +390,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static byte[] GetNullBase64UrlEncoded(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetNullBase64UrlEncodedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullBase64UrlEncodedAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

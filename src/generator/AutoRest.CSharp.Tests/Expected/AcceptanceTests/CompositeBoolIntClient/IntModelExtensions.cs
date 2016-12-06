@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static int? GetNull(this IIntModel operations)
             {
-                return Task.Factory.StartNew(s => ((IIntModel)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static int? GetInvalid(this IIntModel operations)
             {
-                return Task.Factory.StartNew(s => ((IIntModel)s).GetInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static int? GetOverflowInt32(this IIntModel operations)
             {
-                return Task.Factory.StartNew(s => ((IIntModel)s).GetOverflowInt32Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetOverflowInt32Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -109,7 +109,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static int? GetUnderflowInt32(this IIntModel operations)
             {
-                return Task.Factory.StartNew(s => ((IIntModel)s).GetUnderflowInt32Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUnderflowInt32Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -137,7 +137,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static long? GetOverflowInt64(this IIntModel operations)
             {
-                return Task.Factory.StartNew(s => ((IIntModel)s).GetOverflowInt64Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetOverflowInt64Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,7 +165,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static long? GetUnderflowInt64(this IIntModel operations)
             {
-                return Task.Factory.StartNew(s => ((IIntModel)s).GetUnderflowInt64Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUnderflowInt64Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -195,7 +195,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static void PutMax32(this IIntModel operations, int intBody)
             {
-                Task.Factory.StartNew(s => ((IIntModel)s).PutMax32Async(intBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutMax32Async(intBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -224,7 +224,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static void PutMax64(this IIntModel operations, long intBody)
             {
-                Task.Factory.StartNew(s => ((IIntModel)s).PutMax64Async(intBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutMax64Async(intBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -253,7 +253,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static void PutMin32(this IIntModel operations, int intBody)
             {
-                Task.Factory.StartNew(s => ((IIntModel)s).PutMin32Async(intBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutMin32Async(intBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -282,7 +282,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static void PutMin64(this IIntModel operations, long intBody)
             {
-                Task.Factory.StartNew(s => ((IIntModel)s).PutMin64Async(intBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutMin64Async(intBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -309,7 +309,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static System.DateTime? GetUnixTime(this IIntModel operations)
             {
-                return Task.Factory.StartNew(s => ((IIntModel)s).GetUnixTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUnixTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -339,7 +339,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static void PutUnixTimeDate(this IIntModel operations, System.DateTime intBody)
             {
-                Task.Factory.StartNew(s => ((IIntModel)s).PutUnixTimeDateAsync(intBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutUnixTimeDateAsync(intBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -366,7 +366,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static System.DateTime? GetInvalidUnixTime(this IIntModel operations)
             {
-                return Task.Factory.StartNew(s => ((IIntModel)s).GetInvalidUnixTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInvalidUnixTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -394,7 +394,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static System.DateTime? GetNullUnixTime(this IIntModel operations)
             {
-                return Task.Factory.StartNew(s => ((IIntModel)s).GetNullUnixTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullUnixTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

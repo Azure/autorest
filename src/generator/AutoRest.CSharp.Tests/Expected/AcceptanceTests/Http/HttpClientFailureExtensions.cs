@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Head400(this IHttpClientFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Head400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Head400Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Get400(this IHttpClientFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Get400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get400Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -84,7 +84,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Put400(this IHttpClientFailure operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Put400Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Put400Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -118,7 +118,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Patch400(this IHttpClientFailure operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Patch400Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Patch400Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -152,7 +152,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Post400(this IHttpClientFailure operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Post400Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Post400Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -186,7 +186,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Delete400(this IHttpClientFailure operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Delete400Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Delete400Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -217,7 +217,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Head401(this IHttpClientFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Head401Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Head401Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -245,7 +245,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Get402(this IHttpClientFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Get402Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get402Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -273,7 +273,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Get403(this IHttpClientFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Get403Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get403Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -304,7 +304,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Put404(this IHttpClientFailure operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Put404Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Put404Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -338,7 +338,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Patch405(this IHttpClientFailure operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Patch405Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Patch405Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -372,7 +372,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Post406(this IHttpClientFailure operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Post406Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Post406Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -406,7 +406,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Delete407(this IHttpClientFailure operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Delete407Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Delete407Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -440,7 +440,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Put409(this IHttpClientFailure operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Put409Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Put409Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -471,7 +471,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Head410(this IHttpClientFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Head410Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Head410Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -499,7 +499,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Get411(this IHttpClientFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Get411Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get411Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -527,7 +527,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Get412(this IHttpClientFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Get412Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get412Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -558,7 +558,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Put413(this IHttpClientFailure operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Put413Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Put413Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -592,7 +592,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Patch414(this IHttpClientFailure operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Patch414Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Patch414Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -626,7 +626,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Post415(this IHttpClientFailure operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Post415Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Post415Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -657,7 +657,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Get416(this IHttpClientFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Get416Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Get416Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -688,7 +688,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Delete417(this IHttpClientFailure operations, bool? booleanValue = default(bool?))
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Delete417Async(booleanValue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Delete417Async(booleanValue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -719,7 +719,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static Error Head429(this IHttpClientFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpClientFailure)s).Head429Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.Head429Async().GetAwaiter().GetResult();
             }
 
             /// <summary>

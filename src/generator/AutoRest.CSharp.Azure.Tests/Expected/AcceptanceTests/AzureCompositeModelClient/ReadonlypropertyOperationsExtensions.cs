@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static ReadonlyObj GetValid(this IReadonlypropertyOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IReadonlypropertyOperations)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -57,7 +57,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutValid(this IReadonlypropertyOperations operations, int? size = default(int?))
             {
-                Task.Factory.StartNew(s => ((IReadonlypropertyOperations)s).PutValidAsync(size), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutValidAsync(size).GetAwaiter().GetResult();
             }
 
             /// <summary>

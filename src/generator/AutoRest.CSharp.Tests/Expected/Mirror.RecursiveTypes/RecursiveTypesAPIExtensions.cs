@@ -43,7 +43,7 @@ namespace Fixtures.MirrorRecursiveTypes
             /// </param>
             public static Product Post(this IRecursiveTypesAPI operations, string subscriptionId, string resourceGroupName, string apiVersion, Product body = default(Product))
             {
-                return Task.Factory.StartNew(s => ((IRecursiveTypesAPI)s).PostAsync(subscriptionId, resourceGroupName, apiVersion, body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostAsync(subscriptionId, resourceGroupName, apiVersion, body).GetAwaiter().GetResult();
             }
 
             /// <summary>

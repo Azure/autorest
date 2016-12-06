@@ -41,7 +41,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetAllWithValues(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string))
             {
-                Task.Factory.StartNew(s => ((IPathItems)s).GetAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -97,7 +97,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetGlobalQueryNull(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string))
             {
-                Task.Factory.StartNew(s => ((IPathItems)s).GetGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -152,7 +152,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetGlobalAndLocalQueryNull(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string))
             {
-                Task.Factory.StartNew(s => ((IPathItems)s).GetGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -207,7 +207,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetLocalPathItemQueryNull(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string))
             {
-                Task.Factory.StartNew(s => ((IPathItems)s).GetLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>

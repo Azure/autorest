@@ -27,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             /// </param>
             public static void Head200(this IHeadExceptionOperations operations)
             {
-                Task.Factory.StartNew(s => ((IHeadExceptionOperations)s).Head200Async(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Head200Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -52,7 +52,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             /// </param>
             public static void Head204(this IHeadExceptionOperations operations)
             {
-                Task.Factory.StartNew(s => ((IHeadExceptionOperations)s).Head204Async(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Head204Async().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -77,7 +77,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             /// </param>
             public static void Head404(this IHeadExceptionOperations operations)
             {
-                Task.Factory.StartNew(s => ((IHeadExceptionOperations)s).Head404Async(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.Head404Async().GetAwaiter().GetResult();
             }
 
             /// <summary>

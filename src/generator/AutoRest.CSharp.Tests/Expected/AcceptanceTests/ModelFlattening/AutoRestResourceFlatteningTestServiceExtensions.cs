@@ -31,7 +31,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// </param>
             public static void PutArray(this IAutoRestResourceFlatteningTestService operations, IList<Resource> resourceArray = default(IList<Resource>))
             {
-                Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutArrayAsync(resourceArray), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutArrayAsync(resourceArray).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -61,7 +61,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// </param>
             public static IList<FlattenedProduct> GetArray(this IAutoRestResourceFlatteningTestService operations)
             {
-                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).GetArrayAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetArrayAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -94,7 +94,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// </param>
             public static void PutDictionary(this IAutoRestResourceFlatteningTestService operations, IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>))
             {
-                Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutDictionaryAsync(resourceDictionary), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDictionaryAsync(resourceDictionary).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -124,7 +124,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// </param>
             public static IDictionary<string, FlattenedProduct> GetDictionary(this IAutoRestResourceFlatteningTestService operations)
             {
-                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).GetDictionaryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDictionaryAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -157,7 +157,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// </param>
             public static void PutResourceCollection(this IAutoRestResourceFlatteningTestService operations, ResourceCollection resourceComplexObject = default(ResourceCollection))
             {
-                Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutResourceCollectionAsync(resourceComplexObject), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutResourceCollectionAsync(resourceComplexObject).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -187,7 +187,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// </param>
             public static ResourceCollection GetResourceCollection(this IAutoRestResourceFlatteningTestService operations)
             {
-                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).GetResourceCollectionAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetResourceCollectionAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -220,7 +220,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// </param>
             public static SimpleProduct PutSimpleProduct(this IAutoRestResourceFlatteningTestService operations, SimpleProduct simpleBodyProduct = default(SimpleProduct))
             {
-                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutSimpleProductAsync(simpleBodyProduct), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PutSimpleProductAsync(simpleBodyProduct).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -270,7 +270,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// </param>
             public static SimpleProduct PostFlattenedSimpleProduct(this IAutoRestResourceFlatteningTestService operations, string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string))
             {
-                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PostFlattenedSimpleProductAsync(productId, maxProductDisplayName, description, genericValue, odatavalue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostFlattenedSimpleProductAsync(productId, maxProductDisplayName, description, genericValue, odatavalue).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -320,7 +320,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// </param>
             public static SimpleProduct PutSimpleProductWithGrouping(this IAutoRestResourceFlatteningTestService operations, FlattenParameterGroup flattenParameterGroup)
             {
-                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutSimpleProductWithGroupingAsync(flattenParameterGroup), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PutSimpleProductWithGroupingAsync(flattenParameterGroup).GetAwaiter().GetResult();
             }
 
             /// <summary>

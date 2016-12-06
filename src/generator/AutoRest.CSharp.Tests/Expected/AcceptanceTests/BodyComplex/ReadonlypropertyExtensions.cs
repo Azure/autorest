@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static ReadonlyObj GetValid(this IReadonlyproperty operations)
             {
-                return Task.Factory.StartNew(s => ((IReadonlyproperty)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -55,7 +55,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutValid(this IReadonlyproperty operations, int? size = default(int?))
             {
-                Task.Factory.StartNew(s => ((IReadonlyproperty)s).PutValidAsync(size), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutValidAsync(size).GetAwaiter().GetResult();
             }
 
             /// <summary>

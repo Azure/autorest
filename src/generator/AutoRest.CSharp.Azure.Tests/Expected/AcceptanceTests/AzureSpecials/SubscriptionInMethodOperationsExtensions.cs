@@ -32,7 +32,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostMethodLocalValid(this ISubscriptionInMethodOperations operations, string subscriptionId)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostMethodLocalValidAsync(subscriptionId), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostMethodLocalValidAsync(subscriptionId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -67,7 +67,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostMethodLocalNull(this ISubscriptionInMethodOperations operations, string subscriptionId)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostMethodLocalNullAsync(subscriptionId), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostMethodLocalNullAsync(subscriptionId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -102,7 +102,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostPathLocalValid(this ISubscriptionInMethodOperations operations, string subscriptionId)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostPathLocalValidAsync(subscriptionId), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostPathLocalValidAsync(subscriptionId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -136,7 +136,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostSwaggerLocalValid(this ISubscriptionInMethodOperations operations, string subscriptionId)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostSwaggerLocalValidAsync(subscriptionId), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostSwaggerLocalValidAsync(subscriptionId).GetAwaiter().GetResult();
             }
 
             /// <summary>

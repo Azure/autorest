@@ -40,15 +40,15 @@ if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == S
 @:{
     if (Model.ReturnType.Body != null)
     {
-    @:return System.Threading.Tasks.Task.Factory.StartNew(s => ((I@(Model.MethodGroup.TypeName))s).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+    @:return ((I@(Model.MethodGroup.TypeName))operations).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)).GetAwaiter().GetResult();
     }
     else if (Model.ReturnType.Headers != null)
     {
-    @:return System.Threading.Tasks.Task.Factory.StartNew(s => ((I@(Model.MethodGroup.TypeName))s).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+    @:return ((I@(Model.MethodGroup.TypeName))operations).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)).GetAwaiter().GetResult();
     }
     else
     {
-    @:System.Threading.Tasks.Task.Factory.StartNew(s => ((I@(Model.MethodGroup.TypeName))s).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+    @:((I@(Model.MethodGroup.TypeName))operations).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)).GetAwaiter().GetResult();
     }
 @:}
 @EmptyLine

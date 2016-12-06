@@ -26,7 +26,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
             /// </param>
             public static Stream GetFile(this IFiles operations)
             {
-                return Task.Factory.StartNew(s => ((IFiles)s).GetFileAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetFileAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
             /// </param>
             public static Stream GetFileLarge(this IFiles operations)
             {
-                return Task.Factory.StartNew(s => ((IFiles)s).GetFileLargeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetFileLargeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -80,7 +80,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
             /// </param>
             public static Stream GetEmptyFile(this IFiles operations)
             {
-                return Task.Factory.StartNew(s => ((IFiles)s).GetEmptyFileAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetEmptyFileAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

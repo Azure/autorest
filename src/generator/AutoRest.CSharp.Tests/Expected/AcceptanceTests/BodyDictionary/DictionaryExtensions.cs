@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, int?> GetNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -55,7 +55,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, int?> GetEmpty(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -85,7 +85,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static void PutEmpty(this IDictionary operations, IDictionary<string, string> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutEmptyAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutEmptyAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -112,7 +112,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, string> GetNullValue(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetNullValueAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullValueAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -140,7 +140,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, string> GetNullKey(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetNullKeyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullKeyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -168,7 +168,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, string> GetEmptyStringKey(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetEmptyStringKeyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetEmptyStringKeyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -196,7 +196,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, string> GetInvalid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -225,7 +225,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, bool?> GetBooleanTfft(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetBooleanTfftAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBooleanTfftAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -256,7 +256,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static void PutBooleanTfft(this IDictionary operations, IDictionary<string, bool?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutBooleanTfftAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutBooleanTfftAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -283,7 +283,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, bool?> GetBooleanInvalidNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetBooleanInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBooleanInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -311,7 +311,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, bool?> GetBooleanInvalidString(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetBooleanInvalidStringAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBooleanInvalidStringAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -339,7 +339,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, int?> GetIntegerValid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetIntegerValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetIntegerValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -369,7 +369,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static void PutIntegerValid(this IDictionary operations, IDictionary<string, int?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutIntegerValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutIntegerValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -396,7 +396,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, int?> GetIntInvalidNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetIntInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetIntInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -424,7 +424,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, int?> GetIntInvalidString(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetIntInvalidStringAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetIntInvalidStringAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -452,7 +452,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, long?> GetLongValid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetLongValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetLongValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -482,7 +482,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static void PutLongValid(this IDictionary operations, IDictionary<string, long?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutLongValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutLongValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -509,7 +509,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, long?> GetLongInvalidNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetLongInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetLongInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -537,7 +537,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, long?> GetLongInvalidString(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetLongInvalidStringAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetLongInvalidStringAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -565,7 +565,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, double?> GetFloatValid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetFloatValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetFloatValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -595,7 +595,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static void PutFloatValid(this IDictionary operations, IDictionary<string, double?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutFloatValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutFloatValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -622,7 +622,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, double?> GetFloatInvalidNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetFloatInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetFloatInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -650,7 +650,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, double?> GetFloatInvalidString(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetFloatInvalidStringAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetFloatInvalidStringAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -678,7 +678,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, double?> GetDoubleValid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDoubleValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDoubleValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -708,7 +708,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static void PutDoubleValid(this IDictionary operations, IDictionary<string, double?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutDoubleValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDoubleValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -735,7 +735,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, double?> GetDoubleInvalidNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDoubleInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDoubleInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -763,7 +763,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, double?> GetDoubleInvalidString(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDoubleInvalidStringAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDoubleInvalidStringAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -791,7 +791,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, string> GetStringValid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetStringValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetStringValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -821,7 +821,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static void PutStringValid(this IDictionary operations, IDictionary<string, string> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutStringValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutStringValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -848,7 +848,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, string> GetStringWithNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetStringWithNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetStringWithNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -876,7 +876,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, string> GetStringWithInvalid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetStringWithInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetStringWithInvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -905,7 +905,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, System.DateTime?> GetDateValid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDateValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -937,7 +937,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static void PutDateValid(this IDictionary operations, IDictionary<string, System.DateTime?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutDateValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDateValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -965,7 +965,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, System.DateTime?> GetDateInvalidNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDateInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -993,7 +993,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, System.DateTime?> GetDateInvalidChars(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDateInvalidCharsAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateInvalidCharsAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1022,7 +1022,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, System.DateTime?> GetDateTimeValid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDateTimeValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateTimeValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1054,7 +1054,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static void PutDateTimeValid(this IDictionary operations, IDictionary<string, System.DateTime?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutDateTimeValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDateTimeValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1082,7 +1082,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, System.DateTime?> GetDateTimeInvalidNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDateTimeInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateTimeInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1110,7 +1110,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, System.DateTime?> GetDateTimeInvalidChars(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDateTimeInvalidCharsAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateTimeInvalidCharsAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1140,7 +1140,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, System.DateTime?> GetDateTimeRfc1123Valid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDateTimeRfc1123ValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDateTimeRfc1123ValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1173,7 +1173,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static void PutDateTimeRfc1123Valid(this IDictionary operations, IDictionary<string, System.DateTime?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutDateTimeRfc1123ValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDateTimeRfc1123ValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1202,7 +1202,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, System.TimeSpan?> GetDurationValid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDurationValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDurationValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1233,7 +1233,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static void PutDurationValid(this IDictionary operations, IDictionary<string, System.TimeSpan?> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutDurationValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDurationValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1261,7 +1261,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, byte[]> GetByteValid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetByteValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetByteValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1293,7 +1293,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static void PutByteValid(this IDictionary operations, IDictionary<string, byte[]> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutByteValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutByteValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1322,7 +1322,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, byte[]> GetByteInvalidNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetByteInvalidNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetByteInvalidNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1352,7 +1352,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, byte[]> GetBase64Url(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetBase64UrlAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetBase64UrlAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1381,7 +1381,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, Widget> GetComplexNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetComplexNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetComplexNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1409,7 +1409,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, Widget> GetComplexEmpty(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetComplexEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetComplexEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1438,7 +1438,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, Widget> GetComplexItemNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetComplexItemNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetComplexItemNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1468,7 +1468,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, Widget> GetComplexItemEmpty(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetComplexItemEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetComplexItemEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1498,7 +1498,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, Widget> GetComplexValid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetComplexValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetComplexValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1531,7 +1531,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static void PutComplexValid(this IDictionary operations, IDictionary<string, Widget> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutComplexValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutComplexValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1560,7 +1560,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, IList<string>> GetArrayNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetArrayNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetArrayNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1588,7 +1588,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, IList<string>> GetArrayEmpty(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetArrayEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetArrayEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1617,7 +1617,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, IList<string>> GetArrayItemNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetArrayItemNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetArrayItemNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1647,7 +1647,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, IList<string>> GetArrayItemEmpty(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetArrayItemEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetArrayItemEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1677,7 +1677,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, IList<string>> GetArrayValid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetArrayValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetArrayValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1709,7 +1709,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static void PutArrayValid(this IDictionary operations, IDictionary<string, IList<string>> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutArrayValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutArrayValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1737,7 +1737,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, IDictionary<string, string>> GetDictionaryNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDictionaryNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDictionaryNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1766,7 +1766,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, IDictionary<string, string>> GetDictionaryEmpty(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDictionaryEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDictionaryEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1797,7 +1797,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, IDictionary<string, string>> GetDictionaryItemNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDictionaryItemNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDictionaryItemNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1829,7 +1829,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, IDictionary<string, string>> GetDictionaryItemEmpty(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDictionaryItemEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDictionaryItemEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1861,7 +1861,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static IDictionary<string, IDictionary<string, string>> GetDictionaryValid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetDictionaryValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetDictionaryValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1895,7 +1895,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static void PutDictionaryValid(this IDictionary operations, IDictionary<string, IDictionary<string, string>> arrayBody)
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutDictionaryValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutDictionaryValidAsync(arrayBody).GetAwaiter().GetResult();
             }
 
             /// <summary>

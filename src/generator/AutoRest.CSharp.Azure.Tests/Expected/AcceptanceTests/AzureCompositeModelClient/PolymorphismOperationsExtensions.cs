@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static Fish GetValid(this IPolymorphismOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IPolymorphismOperations)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -90,7 +90,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutValid(this IPolymorphismOperations operations, Fish complexBody)
             {
-                Task.Factory.StartNew(s => ((IPolymorphismOperations)s).PutValidAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutValidAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -180,7 +180,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static void PutValidMissingRequired(this IPolymorphismOperations operations, Fish complexBody)
             {
-                Task.Factory.StartNew(s => ((IPolymorphismOperations)s).PutValidMissingRequiredAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutValidMissingRequiredAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>

@@ -31,7 +31,7 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
             /// </param>
             public static void GetEmpty(this IPathsOperations operations, string accountName)
             {
-                Task.Factory.StartNew(s => ((IPathsOperations)s).GetEmptyAsync(accountName), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.GetEmptyAsync(accountName).GetAwaiter().GetResult();
             }
 
             /// <summary>

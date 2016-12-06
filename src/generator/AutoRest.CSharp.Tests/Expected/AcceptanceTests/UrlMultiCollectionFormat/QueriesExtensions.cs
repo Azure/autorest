@@ -30,7 +30,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             /// </param>
             public static void ArrayStringMultiNull(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringMultiNullAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ArrayStringMultiNullAsync(arrayQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -61,7 +61,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             /// </param>
             public static void ArrayStringMultiEmpty(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringMultiEmptyAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ArrayStringMultiEmptyAsync(arrayQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -94,7 +94,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             /// </param>
             public static void ArrayStringMultiValid(this IQueries operations, IList<string> arrayQuery = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IQueries)s).ArrayStringMultiValidAsync(arrayQuery), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.ArrayStringMultiValidAsync(arrayQuery).GetAwaiter().GetResult();
             }
 
             /// <summary>

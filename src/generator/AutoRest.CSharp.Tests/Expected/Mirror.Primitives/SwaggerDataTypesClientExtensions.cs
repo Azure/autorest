@@ -31,7 +31,7 @@ namespace Fixtures.MirrorPrimitives
             /// </param>
             public static Product GetProduct(this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerDataTypesClient)s).GetProductAsync(responseCode, product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetProductAsync(responseCode, product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -71,7 +71,7 @@ namespace Fixtures.MirrorPrimitives
             /// </param>
             public static Product PutProduct(this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerDataTypesClient)s).PutProductAsync(responseCode, product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PutProductAsync(responseCode, product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -111,7 +111,7 @@ namespace Fixtures.MirrorPrimitives
             /// </param>
             public static Product PostProduct(this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerDataTypesClient)s).PostProductAsync(responseCode, product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PostProductAsync(responseCode, product).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -151,7 +151,7 @@ namespace Fixtures.MirrorPrimitives
             /// </param>
             public static Product PatchProduct(this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerDataTypesClient)s).PatchProductAsync(responseCode, product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PatchProductAsync(responseCode, product).GetAwaiter().GetResult();
             }
 
             /// <summary>

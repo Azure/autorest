@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static bool? GetTrue(this IBoolModel operations)
             {
-                return Task.Factory.StartNew(s => ((IBoolModel)s).GetTrueAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetTrueAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -55,7 +55,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static void PutTrue(this IBoolModel operations, bool boolBody)
             {
-                Task.Factory.StartNew(s => ((IBoolModel)s).PutTrueAsync(boolBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutTrueAsync(boolBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -82,7 +82,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static bool? GetFalse(this IBoolModel operations)
             {
-                return Task.Factory.StartNew(s => ((IBoolModel)s).GetFalseAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetFalseAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -112,7 +112,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static void PutFalse(this IBoolModel operations, bool boolBody)
             {
-                Task.Factory.StartNew(s => ((IBoolModel)s).PutFalseAsync(boolBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutFalseAsync(boolBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -139,7 +139,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static bool? GetNull(this IBoolModel operations)
             {
-                return Task.Factory.StartNew(s => ((IBoolModel)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -167,7 +167,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static bool? GetInvalid(this IBoolModel operations)
             {
-                return Task.Factory.StartNew(s => ((IBoolModel)s).GetInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

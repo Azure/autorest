@@ -34,7 +34,7 @@ namespace Fixtures.MirrorPolymorphic
             /// </param>
             public static Animal CreateOrUpdatePolymorphicAnimals(this IPolymorphicAnimalStore operations, Animal animalCreateOrUpdateParameter = default(Animal))
             {
-                return Task.Factory.StartNew(s => ((IPolymorphicAnimalStore)s).CreateOrUpdatePolymorphicAnimalsAsync(animalCreateOrUpdateParameter), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.CreateOrUpdatePolymorphicAnimalsAsync(animalCreateOrUpdateParameter).GetAwaiter().GetResult();
             }
 
             /// <summary>

@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DictionaryWrapper GetValid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -57,7 +57,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutValid(this IDictionary operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>))
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutValidAsync(defaultProgram), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutValidAsync(defaultProgram).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -84,7 +84,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DictionaryWrapper GetEmpty(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetEmptyAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -114,7 +114,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutEmpty(this IDictionary operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>))
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutEmptyAsync(defaultProgram), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutEmptyAsync(defaultProgram).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -141,7 +141,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DictionaryWrapper GetNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -170,7 +170,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DictionaryWrapper GetNotProvided(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetNotProvidedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetNotProvidedAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

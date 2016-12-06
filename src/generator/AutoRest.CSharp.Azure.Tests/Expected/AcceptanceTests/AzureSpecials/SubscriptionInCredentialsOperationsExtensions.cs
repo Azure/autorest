@@ -29,7 +29,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostMethodGlobalValid(this ISubscriptionInCredentialsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInCredentialsOperations)s).PostMethodGlobalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostMethodGlobalValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -57,7 +57,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostMethodGlobalNull(this ISubscriptionInCredentialsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInCredentialsOperations)s).PostMethodGlobalNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostMethodGlobalNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -85,7 +85,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostMethodGlobalNotProvidedValid(this ISubscriptionInCredentialsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInCredentialsOperations)s).PostMethodGlobalNotProvidedValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostMethodGlobalNotProvidedValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -112,7 +112,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostPathGlobalValid(this ISubscriptionInCredentialsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInCredentialsOperations)s).PostPathGlobalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostPathGlobalValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -139,7 +139,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostSwaggerGlobalValid(this ISubscriptionInCredentialsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInCredentialsOperations)s).PostSwaggerGlobalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PostSwaggerGlobalValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>

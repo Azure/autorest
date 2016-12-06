@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static Siamese GetValid(this IInheritance operations)
             {
-                return Task.Factory.StartNew(s => ((IInheritance)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetValidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -58,7 +58,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutValid(this IInheritance operations, Siamese complexBody)
             {
-                Task.Factory.StartNew(s => ((IInheritance)s).PutValidAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.PutValidAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
