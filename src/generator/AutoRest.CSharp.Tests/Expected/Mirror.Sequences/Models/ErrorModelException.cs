@@ -13,7 +13,6 @@ namespace Fixtures.MirrorSequences.Models
     using System.Runtime;
     using System.Runtime.Serialization;
     using System.Security;
-    using System.Security.Permissions;
 
     /// <summary>
     /// Exception thrown for an invalid response with ErrorModel information.
@@ -83,7 +82,7 @@ namespace Fixtures.MirrorSequences.Models
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
