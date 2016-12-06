@@ -165,7 +165,7 @@ namespace AutoRest.Core.Utilities
                     {
                         if (c.Singletons.ContainsKey(typeof(T)))
                         {
-                            return (T) c.Singletons[typeof(T)];
+                            return (T)c.Singletons[typeof(T)];
                         }
                     }
 
@@ -183,6 +183,28 @@ namespace AutoRest.Core.Utilities
                     return default(T);
                 }
                 set { Activation.Default.Singletons.AddOrSet(typeof(T), value); }
+            }
+
+            /// <summary>
+            /// For retrieving singletons that are lists while also considering the list items of parent contexts.
+            /// Yields the list items starting with the current context, then traversing up.
+            /// </summary>
+            public static IEnumerable<T> RecursiveInstances
+            {
+                get
+                {
+                    Type key = typeof(IEnumerable<T>);
+                    for (var c = Activation.Current; c != null; c = c.Parent)
+                    {
+                        if (c.Singletons.ContainsKey(key))
+                        {
+                            foreach (T item in c.Singletons[key] as IEnumerable<T>)
+                            {
+                                yield return item;
+                            }
+                        }
+                    }
+                }
             }
         }
 
