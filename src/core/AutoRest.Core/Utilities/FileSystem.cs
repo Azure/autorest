@@ -56,6 +56,7 @@ namespace AutoRest.Core.Utilities
 
         public string ReadFileAsText(string path)
         {
+            path = path.AdjustGithubUrl();
             using (var client = new WebClient())
             {
                 client.Headers.Add("User-Agent: AutoRest");
