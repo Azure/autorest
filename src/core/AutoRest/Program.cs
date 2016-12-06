@@ -58,10 +58,6 @@ namespace AutoRest
                             }
                         }
                     }
-                    catch (CodeGenerationException)
-                    {
-                        // Do not add the CodeGenerationException again. Will be written in finally block
-                    }
                     catch (Exception exception)
                     {
                         Logger.Log(LogEntrySeverity.Error, exception.Message); // FATAL?

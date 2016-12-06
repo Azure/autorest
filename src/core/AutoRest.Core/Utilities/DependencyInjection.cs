@@ -214,11 +214,11 @@ namespace AutoRest.Core.Utilities
             /// </summary>
             public static void Add(T item)
             {
-                if (Singleton<IEnumerable<T>>.Instance == null)
+                if (!Activation.Current.Singletons.ContainsKey(typeof(IEnumerable<T>)))
                 {
-                    Singleton<IEnumerable<T>>.Instance = Enumerable.Empty<T>();
+                    Activation.Current.Singletons[typeof(IEnumerable<T>)] = Enumerable.Empty<T>();
                 }
-                Singleton<IEnumerable<T>>.Instance = Singleton<IEnumerable<T>>.Instance.Concat(new[] { item });
+                Activation.Current.Singletons[typeof(IEnumerable<T>)] = (Activation.Current.Singletons[typeof(IEnumerable<T>)] as IEnumerable<T>).Concat(new[] { item });
             }
 
             /// <summary>

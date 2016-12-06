@@ -64,7 +64,7 @@ namespace AutoRest.Core
 
                     if (validationErrorFound)
                     {
-                        throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, "Errors found during Swagger validation");
+                        Logger.Log(LogEntrySeverity.Error, "Errors found during Swagger validation");
                     }
                 }
 
