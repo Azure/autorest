@@ -9,7 +9,7 @@
 namespace Fixtures.PetstoreV2AllSync
 {
     using Microsoft.Rest;
-   using Models;
+    using Models;
     using System.Collections;
     using System.Collections.Generic;
     using System.IO;
