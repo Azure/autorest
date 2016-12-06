@@ -76,10 +76,5 @@ namespace AutoRest.Core.Logging
             Path.Add(path);
             return this;
         }
-
-        public override string ToString()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
