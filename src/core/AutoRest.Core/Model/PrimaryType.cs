@@ -74,18 +74,6 @@ namespace AutoRest.Core.Model
         }
 
         /// <summary>
-        ///     Returns a string representation of the PrimaryType object.
-        /// </summary>
-        /// <returns>
-        ///     A string representation of the PrimaryType object.
-        /// </returns>
-        public override string ToString()
-        {
-            throw new NotImplementedException();
-            return Name;
-        }
-
-        /// <summary>
         /// Determines whether the specified model type is structurally equal to this object.
         /// </summary>
         /// <param name="other">The object to compare with this object.</param>

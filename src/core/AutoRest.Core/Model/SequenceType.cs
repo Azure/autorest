@@ -30,20 +30,6 @@ namespace AutoRest.Core.Model
         /// </summary>
         public virtual IModelType ElementType { get; set; }
 
-       
-
-        /// <summary>
-        /// Returns a string representation of the SequenceType object.
-        /// </summary>
-        /// <returns>
-        /// A string representation of the SequenceType object.
-        /// </returns>
-        public override string ToString()
-        {
-            throw new NotImplementedException();
-            return Name;
-        }
-
         /// <summary>
         /// Determines whether the specified model type is structurally equal to this object.
         /// </summary>

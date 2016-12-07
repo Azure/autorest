@@ -65,18 +65,6 @@ namespace AutoRest.Core.Model
                 && Name.Equals(other.Name);
         }
 
-        /// <summary>
-        /// Returns a string representation of the Parameter object.
-        /// </summary>
-        /// <returns>
-        /// A string representation of the Parameter object.
-        /// </returns>
-        public override string ToString()
-        {
-            throw new NotImplementedException();
-            return $"{ModelType} {Name}";
-        }
-
         [JsonIgnore]
         public override IParent Parent
         {

@@ -27,28 +27,6 @@ namespace AutoRest.Core.Model
         /// </summary>
         public string OutputParameterProperty { get; set; }
 
-        /// <summary>
-        /// Returns a string representation of the ParameterMapping object.
-        /// </summary>
-        /// <returns>
-        /// A string representation of the ParameterMapping object.
-        /// </returns>
-        public override string ToString()
-        {
-            throw new NotImplementedException();
-            string outputPath = "";
-            if (OutputParameterProperty != null)
-            {
-                outputPath += "." + OutputParameterProperty;
-            }
-            string inputPath = InputParameter.Name;
-            if (InputParameterProperty != null)
-            {
-                inputPath += "." + InputParameterProperty;
-            }
-            return $"{outputPath} = {inputPath}";
-        }
-
         public string CreateCode(Parameter outputParameter)
         {
             string outputPath = outputParameter.Name;

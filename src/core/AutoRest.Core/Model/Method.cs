@@ -250,19 +250,6 @@ namespace AutoRest.Core.Model
                 && Parameters.SequenceEqual(other.Parameters, new Utilities.EqualityComparer<Parameter>((a, b) => a.StructurallyEquals(b)));
         }
 
-        /// <summary>
-        /// Returns a string representation of the Method object.
-        /// </summary>
-        /// <returns>
-        /// A string representation of the Method object.
-        /// </returns>
-        public override string ToString()
-        {
-            throw new NotImplementedException();
-            return string.Format(CultureInfo.InvariantCulture, "{0} {1} ({2})", ReturnType, Name,
-                string.Join(",", Parameters.Select(p => p.ToString())));
-        }
-
         [JsonIgnore]
         public IEnumerable<string> MyReservedNames => Name.Value.SingleItemAsEnumerable();
 

@@ -69,23 +69,6 @@ namespace AutoRest.Core.Model
         public override string DeclarationName => ModelAsString ? ModelAsStringType : base.DeclarationName;
 
         /// <summary>
-        /// Returns a string representation of the PrimaryType object.
-        /// </summary>
-        /// <returns>
-        /// A string representation of the PrimaryType object.
-        /// </returns>
-        public override string ToString()
-        {
-            throw new NotImplementedException();
-            if (string.IsNullOrEmpty(Name))
-            {
-                return "enum";
-            }
-
-            return Name;
-        }
-
-        /// <summary>
         /// Determines whether the specified model type is structurally equal to this object.
         /// </summary>
         /// <param name="other">The object to compare with this object.</param>

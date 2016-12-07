@@ -50,28 +50,5 @@ namespace AutoRest.Core.Model
             return (Body == null ? other.Body == null : Body.StructurallyEquals(other.Body))
                 && (Headers == null ? other.Headers == null : Headers.StructurallyEquals(other.Headers));
         }
-
-        public override string ToString()
-        {
-            throw new NotImplementedException();
-            if (Body != null && Headers != null)
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "HttpOperationResponse<{0},{1}>", Body, Headers);
-            }
-            else if (Body != null)
-            {
-                return Body.ToString();
-            }
-            else if (Headers != null)
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "HttpOperationResponse<object,{0}>", Headers);
-            }
-            else
-            {
-                return "void";
-            }
-        }
     }
 }
