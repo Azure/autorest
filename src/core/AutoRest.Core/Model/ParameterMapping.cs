@@ -35,7 +35,6 @@ namespace AutoRest.Core.Model
         /// </returns>
         public override string ToString()
         {
-            throw new NotImplementedException();
             string outputPath = "";
             if (OutputParameterProperty != null)
             {
@@ -46,7 +45,7 @@ namespace AutoRest.Core.Model
             {
                 inputPath += "." + InputParameterProperty;
             }
-            return string.Format(CultureInfo.InvariantCulture, "{0} = {1}", outputPath, inputPath);
+            return $"{outputPath} = {inputPath}";
         }
 
         /// <summary>

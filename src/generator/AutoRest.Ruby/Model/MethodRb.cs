@@ -436,21 +436,6 @@ namespace AutoRest.Ruby.Model
             return builder.ToString();
         }
 
-        private string CreateParameterMappingCode(ParameterMapping mapping)
-        {
-            string outputPath = "";
-            if (mapping.OutputParameterProperty != null)
-            {
-                outputPath += "." + mapping.OutputParameterProperty;
-            }
-            string inputPath = mapping.InputParameter.Name;
-            if (mapping.InputParameterProperty != null)
-            {
-                inputPath += "." + mapping.InputParameterProperty;
-            }
-            return $"{outputPath} = {inputPath}";
-        }
-
         /// <summary>
         /// Build parameter mapping from parameter grouping transformation.
         /// </summary>
@@ -494,7 +479,7 @@ namespace AutoRest.Ruby.Model
 
                     foreach (var mapping in transformation.ParameterMappings)
                     {
-                        builder.AppendLine("{0}{1}", transformation.OutputParameter.Name, CreateParameterMappingCode(mapping));
+                        builder.AppendLine("{0}{1}", transformation.OutputParameter.Name, mapping);
                     }
 
                     builder.Outdent().AppendLine("end");

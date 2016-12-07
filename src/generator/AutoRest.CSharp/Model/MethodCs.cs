@@ -440,21 +440,6 @@ namespace AutoRest.CSharp.Model
             return builder.ToString();
         }
 
-        private string CreateParameterMappingCode(ParameterMapping mapping)
-        {
-            string outputPath = "";
-            if (mapping.OutputParameterProperty != null)
-            {
-                outputPath += "." + mapping.OutputParameterProperty;
-            }
-            string inputPath = mapping.InputParameter.Name;
-            if (mapping.InputParameterProperty != null)
-            {
-                inputPath += "." + mapping.InputParameterProperty;
-            }
-            return $"{outputPath} = {inputPath}";
-        }
-
         /// <summary>
         /// Generates input mapping code block.
         /// </summary>
@@ -496,7 +481,7 @@ namespace AutoRest.CSharp.Model
                 {
                     builder.AppendLine("{0}{1};",
                         transformation.OutputParameter.Name,
-                        CreateParameterMappingCode(mapping));
+                        mapping);
                 }
 
                 if (!string.IsNullOrEmpty(nullCheck))
