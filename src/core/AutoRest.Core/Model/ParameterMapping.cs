@@ -35,7 +35,23 @@ namespace AutoRest.Core.Model
         /// </returns>
         public override string ToString()
         {
+            throw new NotImplementedException();
             string outputPath = "";
+            if (OutputParameterProperty != null)
+            {
+                outputPath += "." + OutputParameterProperty;
+            }
+            string inputPath = InputParameter.Name;
+            if (InputParameterProperty != null)
+            {
+                inputPath += "." + InputParameterProperty;
+            }
+            return $"{outputPath} = {inputPath}";
+        }
+
+        public string CreateCode(Parameter outputParameter)
+        {
+            string outputPath = outputParameter.Name;
             if (OutputParameterProperty != null)
             {
                 outputPath += "." + OutputParameterProperty;
@@ -54,7 +70,7 @@ namespace AutoRest.Core.Model
         /// <returns>A deep clone of current object.</returns>
         public object Clone()
         {
-            return  new ParameterMapping
+            return new ParameterMapping
             {
                 InputParameter = Duplicate(InputParameter),
                 InputParameterProperty = InputParameterProperty,

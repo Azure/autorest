@@ -479,7 +479,7 @@ namespace AutoRest.Ruby.Model
 
                     foreach (var mapping in transformation.ParameterMappings)
                     {
-                        builder.AppendLine("{0}{1}", transformation.OutputParameter.Name, mapping);
+                        builder.AppendLine(mapping.CreateCode(transformation.OutputParameter));
                     }
 
                     builder.Outdent().AppendLine("end");
