@@ -29,7 +29,7 @@ class Usage(Model):
     :param name: Gets the name of the type of usage.
     :type name: :class:`UsageName
      <fixtures.acceptancetestsstoragemanagementclient.models.UsageName>`
-    """ 
+    """
 
     _attribute_map = {
         'unit': {'key': 'unit', 'type': 'UsageUnit'},

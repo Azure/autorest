@@ -28,7 +28,7 @@ class Shark(Fish):
     :type age: int
     :param birthday:
     :type birthday: datetime
-    """ 
+    """
 
     _validation = {
         'length': {'required': True},

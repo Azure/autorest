@@ -13,7 +13,7 @@ class StorageAccountPropertiesCreateParameters(Model):
      'Premium_LRS'
     :type account_type: str or :class:`AccountType
      <petstore.models.AccountType>`
-    """ 
+    """
 
     _validation = {
         'account_type': {'required': True},

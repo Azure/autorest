@@ -20,7 +20,7 @@ class Usage(Model):
     :type limit: int
     :param name: Gets the name of the type of usage.
     :type name: :class:`UsageName <petstore.models.UsageName>`
-    """ 
+    """
 
     _validation = {
         'unit': {'required': True},

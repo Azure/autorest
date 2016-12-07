@@ -14,14 +14,58 @@ Unit tests need to be updated when core parts of AutoRest change, not when the l
   <dt><a href="../../../src/modeler/AutoRest.Swagger.Tests">\src\modeler\AutoRest.Swagger.Tests</a><br>
       <a href="../../../src/modeler/AutoRest.CompositeSwagger.Tests">\src\modeler\AutoRest.Swagger.Composite.Tests</a></dt>
   <dd>These need to be updated when there are changes to how AutoRest processes Swagger files</dd>
+  <dt><a href="../../../src/generator/AutoRest.CSharp.Unit.Tests/">\src\generator\AutoRest.CSharp.Unit.Tests</a></dt>
+  <dd>These need to be updated when there are changes to the C# generator, but are also useful if a change reflect all the way to generated code</dd>
 </dl>
+
+#### How to add unit tests
+In the unit test project (e.g. `AutoRest.CSharp.Unit.Tests`), there are two things to add:
+
+1. The Swagger file used for this test.
+   Place it in `Resource\<TestName>\<TestName>.[yaml/json]`, e.g. `Resource\Bug1560\Bug1560.yaml` for a test concerning Github issue <a href="https://github.com/Azure/autorest/issues/1560">1560</a>.
+2. The unit test file `<TestName>.cs`, e.g. `Bug1560.cs`.
+   This file should have the following layout:
+    ```C#
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    // Licensed under the MIT License. See License.txt in the project root for license information.
+    // 
+
+    using ...
+
+    namespace AutoRest.CSharp.Unit.Tests
+    {
+        public class TestName : BugTest
+        {
+            public TestName(ITestOutputHelper output) : base(output)
+            {
+            }
+
+            /// <summary>
+            /// Test description.
+            /// </summary>
+            [Fact]
+            public async Task SomeTestCase()
+            {
+                using (var fileSystem = GenerateCodeForTestFromSpec())
+                {
+                    /* inspect generated code */
+                }
+            }
+
+            /* further tests */
+        }
+    }
+    ```
+    `GenerateCodeForTestFromSpec` will automatically load and process the Swagger file if named as described previously.
+    Refer to existing unit tests for further assistance, including compilation of the generated source and inspection of the resulting assembly using reflection.
+   
 
 ### Acceptance tests (and test server)
 Acceptance tests are run against a Node.js test server (which uses [Express framework](http://expressjs.com/)). The code for the test server is checked in to the [\\src\\dev\\TestServer](../../../src/dev/TestServer/) folder in the repository.
 
 There are two main components to the test server: the Swagger definitions that describe the server and the code that handles requests to the server and responds with the appropriate status code, payload, etc. if the request is constructed correctly.
 
-## How to add acceptance tests for scenarios
+#### How to add acceptance tests for scenarios
 1. Add your scenarios to the Swagger files that describe the test server (located in the [\\src\\dev\\TestServer\\swagger](../../../src/dev/TestServer/swagger/) folder).
 2. Update the test server
    - Update the routes to generate appropriate responses for your scenarios at paths specified in the Swagger files in step 1. This code is located in the [\\src\\dev\\TestServer\\server\\routes\\*.js](../../../src/dev/TestServer/server/routes) files.

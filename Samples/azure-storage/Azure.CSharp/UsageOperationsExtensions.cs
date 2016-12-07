@@ -1,9 +1,13 @@
 
 namespace Petstore
 {
+    using Microsoft.Rest;
+    using Microsoft.Rest.Azure;
+    using Models;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Threading;
     using System.Threading.Tasks;
-   using Microsoft.Rest.Azure;
-   using Models;
 
     /// <summary>
     /// Extension methods for UsageOperations.
@@ -17,9 +21,9 @@ namespace Petstore
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IEnumerable<Usage> List(this IUsageOperations operations)
+            public static IEnumerable<Usage> List(this IUsageOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IUsageOperations)s).ListAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IUsageOperations)s).ListAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -32,7 +36,7 @@ namespace Petstore
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.Collections.Generic.IEnumerable<Usage>> ListAsync(this IUsageOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<IEnumerable<Usage>> ListAsync(this IUsageOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ListWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -42,3 +46,4 @@ namespace Petstore
 
     }
 }
+

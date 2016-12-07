@@ -19,7 +19,7 @@ class ParameterGroupingPostOptionalParameters(Model):
     :type custom_header: str
     :param query: Query parameter with default. Default value: 30 .
     :type query: int
-    """ 
+    """
 
     def __init__(self, custom_header=None, query=30):
         self.custom_header = custom_header

@@ -19,7 +19,7 @@ class Product(Model):
     :type integer: int
     :param string:
     :type string: str
-    """ 
+    """
 
     _attribute_map = {
         'integer': {'key': 'integer', 'type': 'int'},

@@ -1,0 +1,24 @@
+﻿swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+produces:
+  - application/json
+paths:
+  /operationInteger:
+    get:
+      operationId: test
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/query'
+    parameters:
+      - name: query
+        in: header
+        type: string
+
+definitions: 
+  query:
+    properties:
+      prop1:
+        type: integer

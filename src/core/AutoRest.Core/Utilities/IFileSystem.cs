@@ -34,7 +34,7 @@ namespace AutoRest.Core.Utilities
 
         string[] GetFiles(string startDirectory, string filePattern, SearchOption options);
 
-        string GetCurrentDir();
+        string CurrentDirectory { get; }
 
         string GetParentDir(string path);
     }

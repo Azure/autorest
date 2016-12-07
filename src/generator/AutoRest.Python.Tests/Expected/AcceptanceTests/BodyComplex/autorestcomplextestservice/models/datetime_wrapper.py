@@ -19,7 +19,7 @@ class DatetimeWrapper(Model):
     :type field: datetime
     :param now:
     :type now: datetime
-    """ 
+    """
 
     _attribute_map = {
         'field': {'key': 'field', 'type': 'iso-8601'},

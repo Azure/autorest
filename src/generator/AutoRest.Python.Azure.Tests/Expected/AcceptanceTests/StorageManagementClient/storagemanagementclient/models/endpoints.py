@@ -28,7 +28,7 @@ class Endpoints(Model):
     :param foo_point: Foo point
     :type foo_point: :class:`Foo
      <fixtures.acceptancetestsstoragemanagementclient.models.Foo>`
-    """ 
+    """
 
     _attribute_map = {
         'blob': {'key': 'blob', 'type': 'str'},

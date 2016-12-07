@@ -20,7 +20,7 @@ class CustomParameterGroup(Model):
     :type api_version: str
     :param tenant: Sets the tenant to use.
     :type tenant: str
-    """ 
+    """
 
     _validation = {
         'api_version': {'required': True},

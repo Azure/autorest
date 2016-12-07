@@ -1,6 +1,9 @@
 
 namespace Petstore.Models
 {
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -21,7 +24,7 @@ namespace Petstore.Models
         /// <param name="type">Resource type</param>
         /// <param name="location">Resource location</param>
         /// <param name="tags">Resource tags</param>
-        public StorageAccount(string id = default(string), string name = default(string), string type = default(string), string location = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), StorageAccountProperties properties = default(StorageAccountProperties))
+        public StorageAccount(string id = default(string), string name = default(string), string type = default(string), string location = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), StorageAccountProperties properties = default(StorageAccountProperties))
             : base(id, name, type, location, tags)
         {
             Properties = properties;
@@ -29,7 +32,7 @@ namespace Petstore.Models
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties")]
+        [JsonProperty(PropertyName = "properties")]
         public StorageAccountProperties Properties { get; set; }
 
         /// <summary>
@@ -40,10 +43,11 @@ namespace Petstore.Models
         /// </exception>
         public virtual void Validate()
         {
-            if (this.Properties != null)
+            if (Properties != null)
             {
-                this.Properties.Validate();
+                Properties.Validate();
             }
         }
     }
 }
+

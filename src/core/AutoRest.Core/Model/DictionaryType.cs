@@ -46,30 +46,20 @@ namespace AutoRest.Core.Model
         }
 
         /// <summary>
-        /// Determines whether the specified object is equal to this object based on the ValueType.
+        /// Determines whether the specified model type is structurally equal to this object.
         /// </summary>
-        /// <param name="obj">The object to compare with this object.</param>
-        /// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
-        public override bool Equals(object obj)
+        /// <param name="other">The object to compare with this object.</param>
+        /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
+        public override bool StructurallyEquals(IModelType other)
         {
-            var dictionaryType = obj as DictionaryType;
-
-            if (dictionaryType != null)
+            if (ReferenceEquals(other as DictionaryType, null))
             {
-                return dictionaryType.ValueType == ValueType;
+                return false;
             }
 
-            return false;
+            return base.StructurallyEquals(other) && 
+                   ValueType.StructurallyEquals((other as DictionaryType).ValueType) &&
+                   SupportsAdditionalProperties == (other as DictionaryType).SupportsAdditionalProperties;
         }
-
-        /// <summary>
-        /// Returns the hash code for this instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            return ValueType.GetHashCode();
-        }
-
     }
 }

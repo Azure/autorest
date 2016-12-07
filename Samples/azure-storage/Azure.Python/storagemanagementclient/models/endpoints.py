@@ -17,7 +17,7 @@ class Endpoints(Model):
     :type table: str
     :param file: Gets the file endpoint.
     :type file: str
-    """ 
+    """
 
     _attribute_map = {
         'blob': {'key': 'blob', 'type': 'str'},
