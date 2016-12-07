@@ -7,7 +7,6 @@ using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
 using System.Linq;
 using Newtonsoft.Json.Linq;
-using System;
 
 namespace AutoRest.Core.Model
 {

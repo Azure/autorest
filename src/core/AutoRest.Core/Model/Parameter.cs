@@ -9,7 +9,6 @@ using AutoRest.Core.Utilities.Collections;
 using AutoRest.Core.Validation;
 using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using System;
 
 namespace AutoRest.Core.Model
 {

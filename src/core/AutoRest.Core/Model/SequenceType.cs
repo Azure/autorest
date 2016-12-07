@@ -3,7 +3,6 @@
 
 using System.Globalization;
 using Newtonsoft.Json;
-using System;
 
 namespace AutoRest.Core.Model
 {
