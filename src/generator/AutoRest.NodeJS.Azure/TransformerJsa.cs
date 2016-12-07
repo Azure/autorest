@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -10,15 +11,15 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.NodeJS.Azure
 {
-    public class TransformerJsa : TransformerJs, ITransformer<CodeModelJsa>
+    public class TransformerJsa : TransformerJs, ITransformer<CodeModel, CodeModelJsa>
     {
 
-        public override CodeModelJs TransformCodeModel(CodeModel codeModel)
+        public override async Task<CodeModelJs> TransformAsync(CodeModel codeModel)
         {
-            return ((ITransformer<CodeModelJsa>)this).TransformCodeModel(codeModel);
+            return await ((ITransformer<CodeModel, CodeModelJsa>)this).TransformAsync(codeModel);
         }
 
-        CodeModelJsa ITransformer<CodeModelJsa>.TransformCodeModel(CodeModel cm)
+        async Task<CodeModelJsa> ITransformer<CodeModel, CodeModelJsa>.TransformAsync(CodeModel cm)
         {
             var codeModel = cm as CodeModelJsa;
             if (codeModel == null)
@@ -33,7 +34,7 @@ namespace AutoRest.NodeJS.Azure
 
             AzureExtensions.NormalizeAzureClientModel(codeModel);
 
-            base.TransformCodeModel(codeModel);
+            await base.TransformAsync(codeModel);
 
             NormalizePaginatedMethods(codeModel);
             ExtendAllResourcesToBaseResource(codeModel);

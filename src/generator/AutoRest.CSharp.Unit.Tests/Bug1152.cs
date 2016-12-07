@@ -11,10 +11,10 @@ namespace AutoRest.CSharp.Unit.Tests
         /// The C# code generator seems to needlessly escape backslashes when generating ///
         /// </summary>
         [Fact]
-        public void SummaryCommentsContainImproperlyEscapedBackslashes()
+        public async void SummaryCommentsContainImproperlyEscapedBackslashes()
         {
             // simplified test pattern for unit testing aspects of code generation
-            using (var fileSystem = "Bug1152".GenerateCodeInto(fileSystem : CreateMockFilesystem(), modeler : "Swagger"))
+            using (var fileSystem = await "Bug1152".GenerateCodeInto(fileSystem : CreateMockFilesystem(), modeler : "Swagger"))
             {
                 Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\TestObject.cs"));
                 var testObject = fileSystem.ReadFileAsText(@"GeneratedCode\Models\TestObject.cs");

@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task CheckForCorrectParameterType()
         {
-            using (var fileSystem = GenerateCodeForTestFromSpec())
+            using (var fileSystem = await GenerateCodeForTestFromSpec())
             {
                 // Expected Files
                 Assert.True(fileSystem.FileExists(@"GeneratedCode\SimpleAPI.cs"));

@@ -3,6 +3,7 @@
 // 
 
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.CSharp.Azure.Fluent.Model;
@@ -12,9 +13,9 @@ using AutoRest.Extensions.Azure;
 
 namespace AutoRest.CSharp.Azure.Fluent
 {
-    public class TransformerCsaf : TransformerCsa, ITransformer<CodeModelCsaf>
+    public class TransformerCsaf : TransformerCsa, ITransformer<CodeModel, CodeModelCsaf>
     {
-        CodeModelCsaf ITransformer<CodeModelCsaf>.TransformCodeModel(CodeModel cs)
+        Task<CodeModelCsaf> ITransformer<CodeModel, CodeModelCsaf>.TransformAsync(CodeModel cs)
         {
             var codeModel = cs as CodeModelCsaf;
 
@@ -33,7 +34,7 @@ namespace AutoRest.CSharp.Azure.Fluent
             NormalizePaginatedMethods(codeModel);
             NormalizeODataMethods(codeModel);
 
-            return codeModel;
+            return Task.FromResult(codeModel);
         }
 
         /// <summary>
@@ -42,9 +43,9 @@ namespace AutoRest.CSharp.Azure.Fluent
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override CodeModelCs TransformCodeModel(CodeModel codeModel)
+        public override async Task<CodeModelCs> TransformAsync(CodeModel codeModel)
         {
-            return ((ITransformer<CodeModelCsaf>) this).TransformCodeModel(codeModel);
+            return await ((ITransformer<CodeModel, CodeModelCsaf>) this).TransformAsync(codeModel);
         }
 
         public void NormalizeResourceTypes(CodeModelCsaf codeModel)

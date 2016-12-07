@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
@@ -56,37 +57,22 @@ namespace AutoRest.Swagger
         /// Default protocol when no protocol is specified in the schema
         /// </summary>
         public TransferProtocolScheme DefaultProtocol { get; set; }
-
-        public override CodeModel Build()
-        {
-            IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
-            return Build(out messages);
-        }
-
+        
         /// <summary>
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override CodeModel Build(out IEnumerable<ValidationMessage> messages)
+        public override async Task<CodeModel> TransformAsync(object serviceDefinition)
         {
-            Logger.LogInfo(Resources.ParsingSwagger);
-            if (string.IsNullOrWhiteSpace(Settings.Input))
-            {
-                throw ErrorManager.CreateError(Resources.InputRequired);
-            }
-            ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
-
-            // Look for semantic errors and warnings in the document.
-            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            messages = validator.GetValidationExceptions(ServiceDefinition).ToList();
+            ServiceDefinition = serviceDefinition as ServiceDefinition;
 
             Logger.LogInfo(Resources.GeneratingClient);
             // Update settings
             UpdateSettings();
 
             InitializeClientModel();
-            BuildCompositeTypes();
+            await BuildCompositeTypes();
 
             // Build client parameters
             foreach (var swaggerParameter in ServiceDefinition.Parameters.Values)
@@ -170,9 +156,10 @@ namespace AutoRest.Swagger
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
 
-            var oldDefintion = SwaggerParser.Load(Settings.Previous, Settings.FileSystem);
-            var newDefintion = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
-
+            var parser = new SwaggerParser();
+            var oldDefintion = parser.TransformAsync(Settings.FileSystem.ReadFileAsText(Settings.Previous)).Result;
+            var newDefintion = parser.TransformAsync(Settings.FileSystem.ReadFileAsText(Settings.Input)).Result;
+            
             var context = new ComparisonContext(oldDefintion, newDefintion);
 
             // Look for semantic errors and warnings in the new document.
@@ -259,7 +246,7 @@ namespace AutoRest.Swagger
         /// <summary>
         /// Build composite types from definitions
         /// </summary>
-        public virtual void BuildCompositeTypes()
+        public virtual async Task BuildCompositeTypes()
         {
             // Load any external references
             foreach (var reference in ServiceDefinition.ExternalReferences)
@@ -274,7 +261,8 @@ namespace AutoRest.Swagger
                     filePath = Settings.FileSystem.MakePathRooted(Settings.InputFolder, filePath);
                 }
                 string externalDefinition = Settings.FileSystem.ReadFileAsText(filePath);
-                ServiceDefinition external = SwaggerParser.Parse(externalDefinition);
+                var parser = new SwaggerParser();
+                ServiceDefinition external = await parser.TransformAsync(externalDefinition);
                 external.Definitions.ForEach(d => ServiceDefinition.Definitions[d.Key] = d.Value);
             }
 
@@ -421,6 +409,13 @@ namespace AutoRest.Swagger
         public SchemaResolver Resolver
         {
             get { return new SchemaResolver(this); }
+        }
+
+        public override CodeModel Build() // TODO: this is only for convenience
+        {
+            var input = Settings.FileSystem.ReadFileAsText(Settings.Input);
+            var serviceDefinition = new SwaggerParser().TransformAsync(input).GetAwaiter().GetResult();
+            return TransformAsync(serviceDefinition).GetAwaiter().GetResult();
         }
     }
 }

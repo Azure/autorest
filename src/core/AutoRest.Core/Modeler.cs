@@ -4,23 +4,21 @@
 using AutoRest.Core.Model;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using AutoRest.Core.Extensibility;
 
 namespace AutoRest.Core
 {
-    public abstract class Modeler
+    public abstract class Modeler : Transformer<object, CodeModel> // TODO: no more Modeler base class
     {
-        public abstract string Name { get; }
-
         public Settings Settings => Settings.Instance;
-
-        public abstract CodeModel Build();
-
-        public abstract CodeModel Build(out IEnumerable<ValidationMessage> messages);
 
         /// <summary>
         /// Copares two versions of the same service specification.
         /// </summary>
         /// <returns></returns>
         public abstract IEnumerable<ComparisonMessage> Compare();
+
+        public abstract CodeModel Build(); // TODO: this is only for compatibility
     }
 }

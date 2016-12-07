@@ -4,6 +4,7 @@
 
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -17,7 +18,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Ruby.Azure
 {
-    public class TransformerRba : TransformerRb, ITransformer<CodeModelRba>
+    public class TransformerRba : TransformerRb, ITransformer<CodeModel, CodeModelRba>
     {
         /// <summary>
         ///     A type-specific method for code model tranformation.
@@ -25,12 +26,12 @@ namespace AutoRest.Ruby.Azure
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override CodeModelRb TransformCodeModel(CodeModel codeModel)
+        public override async Task<CodeModelRb> TransformAsync(CodeModel codeModel)
         {
-            return ((ITransformer<CodeModelRba>) this).TransformCodeModel(codeModel);
+            return await ((ITransformer<CodeModel, CodeModelRba>) this).TransformAsync(codeModel);
         }
 
-        CodeModelRba ITransformer<CodeModelRba>.TransformCodeModel(CodeModel cs)
+        Task<CodeModelRba> ITransformer<CodeModel, CodeModelRba>.TransformAsync(CodeModel cs)
         {
             var codeModel = cs as CodeModelRba;
 
@@ -42,7 +43,7 @@ namespace AutoRest.Ruby.Azure
             AddRubyPageableMethod(codeModel);
             ApplyPagination(codeModel);
 
-            return codeModel;
+            return Task.FromResult(codeModel);
         }
 
         /// <summary>

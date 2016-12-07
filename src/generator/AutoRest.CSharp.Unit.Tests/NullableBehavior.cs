@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Unit.Tests
 
         private async Task<System.Type> GenerateModelType(string modelName)
         {
-            using (var fileSystem = GenerateCodeForTestFromSpec())
+            using (var fileSystem = await GenerateCodeForTestFromSpec())
             {
                 // Expected Files
                 Assert.True(fileSystem.FileExists($@"GeneratedCode\Models\{modelName}.cs"));

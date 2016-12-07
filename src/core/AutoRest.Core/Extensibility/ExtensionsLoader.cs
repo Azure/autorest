@@ -12,7 +12,7 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
-using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
+using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.ITransformer, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 namespace AutoRest.Core.Extensibility
 {
     public static class ExtensionsLoader
@@ -119,6 +119,51 @@ namespace AutoRest.Core.Extensibility
                 Settings.Instance.Modeler,
                 modeler.GetType().Assembly.GetName().Version);
             return modeler;
+        }
+
+        [Obsolete]
+        public static ITransformer GetParser()
+        {
+            // TODO: not necessary in final model
+            Logger.LogInfo(Resources.InitializingModeler);
+            if (Settings.Instance == null)
+            {
+                throw new ArgumentNullException("settings", "settings or settings.Modeler cannot be null.");
+            }
+
+            if (string.IsNullOrEmpty(Settings.Instance.Modeler))
+            {
+                throw new ArgumentException(
+                    string.Format(CultureInfo.InvariantCulture,
+                        Resources.ParameterValueIsMissing, "Modeler"));
+            }
+
+            ITransformer parser = null;
+
+            string configurationFile = GetConfigurationFileContent(Settings.Instance);
+
+            if (configurationFile != null)
+            {
+                try
+                {
+                    var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
+                    // HACK!
+                    parser = LoadTypeFromAssembly<ITransformer>(
+                        config.Modelers.ToDictionary(x => x.Key, x => new AutoRestProviderConfiguration { Settings = x.Value.Settings, TypeName = x.Value.TypeName.Replace("Modeler", "Parser") }), 
+                        Settings.Instance.Modeler);
+                    Settings.PopulateSettings(parser, Settings.Instance.CustomSettings);
+                }
+                catch (Exception ex)
+                {
+                    throw ErrorManager.CreateError(ex, Resources.ErrorParsingConfig);
+                }
+            }
+            else
+            {
+                throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
+            }
+            
+            return parser;
         }
 
         public static string GetConfigurationFileContent(Settings settings)

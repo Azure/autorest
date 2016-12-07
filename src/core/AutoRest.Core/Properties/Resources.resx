@@ -270,4 +270,10 @@
   <data name="UniqueResourcePathsWarning" xml:space="preserve">
     <value>More than one resource path is not allowed in a single spec</value>
   </data>
+  <data name="InputRequired" xml:space="preserve">
+    <value>Input parameter is required.</value>
+  </data>
+  <data name="TransformerError" xml:space="preserve">
+    <value>Error in transformer '{0}'. '{1}'.</value>
+  </data>
 </root>

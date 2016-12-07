@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Azure;
@@ -16,7 +17,7 @@ namespace AutoRest.Extensions.Azure.Tests
     public class CSharpAzureCodeNamingFrameworkTests
     {
         [Fact]
-        public void ConvertsPageResultsToPageTypeTest()
+        public async Task ConvertsPageResultsToPageTypeTest()
         {
             using (NewContext)
             {
@@ -30,7 +31,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var plugin = new PluginCsa();
                 using (plugin.Activate()) {
                     codeModel = plugin.Serializer.Load(codeModel);
-                    codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+                    codeModel = await plugin.Transformer.TransformAsync(codeModel);
 
                     Assert.Equal(7, codeModel.Methods.Count);
                     Assert.Equal(1, codeModel.Methods.Count(m => m.Name == "GetSinglePage"));

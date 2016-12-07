@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -20,7 +21,7 @@ namespace AutoRest.Python.Azure
 {
     public class TransformerPya : CodeModelTransformer<CodeModelPya, TransformerPy>
     {
-        public override CodeModelPya TransformCodeModel(CodeModel cm)
+        public override async Task<CodeModelPya> TransformAsync(CodeModel cm)
         {
             var codeModel = (CodeModelPya)cm;
             TransformPagingMethods(codeModel);
@@ -36,7 +37,7 @@ namespace AutoRest.Python.Azure
             AzureExtensions.SetDefaultResponses(codeModel);
             CorrectFilterParameters(codeModel);
 
-            Base.TransformCodeModel(codeModel);
+            await Base.TransformAsync(codeModel);
             
             NormalizePaginatedMethods(codeModel);
 

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -18,7 +19,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Azure
 {
-    public class TransformerCsa : TransformerCs, ITransformer<CodeModelCsa>
+    public class TransformerCsa : TransformerCs, ITransformer<CodeModel, CodeModelCsa>
     {
         /// <summary>
         /// A type-specific method for code model tranformation.
@@ -26,12 +27,12 @@ namespace AutoRest.CSharp.Azure
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override CodeModelCs TransformCodeModel(CodeModel codeModel)
+        public override async Task<CodeModelCs> TransformAsync(CodeModel codeModel)
         {
-            return ((ITransformer<CodeModelCsa>)this).TransformCodeModel(codeModel);
+            return await ((ITransformer<CodeModel, CodeModelCsa>)this).TransformAsync(codeModel);
         }
 
-        CodeModelCsa ITransformer<CodeModelCsa>.TransformCodeModel(CodeModel cs)
+        Task<CodeModelCsa> ITransformer<CodeModel, CodeModelCsa>.TransformAsync(CodeModel cs)
         {
             var codeModel = cs as CodeModelCsa;
 
@@ -60,7 +61,7 @@ namespace AutoRest.CSharp.Azure
                 }
             }
 
-            return codeModel;
+            return Task.FromResult(codeModel);
         }
 
         public virtual void NormalizeODataMethods(CodeModel client)

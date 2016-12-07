@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Unit.Tests
         public async Task EmptyPathObjectCodeGenerationTest()
         {
             // simplified test pattern for unit testing aspects of code generation
-            using (var fileSystem = GenerateCodeForTestFromSpec())
+            using (var fileSystem = await GenerateCodeForTestFromSpec())
             {
                 // check for the expected class.
                 Assert.True(fileSystem.FileExists(@"GeneratedCode\SimpleAPIwithemptyobjectpath.cs"));

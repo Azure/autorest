@@ -102,15 +102,15 @@ namespace AutoRest.CSharp.Unit.Tests
             return fs;
         }
 
-        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string codeGenerator = "CSharp", string modeler = "Swagger")
+        protected virtual async Task<MemoryFileSystem> GenerateCodeForTestFromSpec(string codeGenerator = "CSharp", string modeler = "Swagger")
         {
-           return GenerateCodeForTestFromSpec($"{GetType().Name}", codeGenerator, modeler);
+           return await GenerateCodeForTestFromSpec($"{GetType().Name}", codeGenerator, modeler);
         }
 
-        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator="CSharp", string modeler = "Swagger")
+        protected virtual async Task<MemoryFileSystem> GenerateCodeForTestFromSpec(string dirName, string codeGenerator="CSharp", string modeler = "Swagger")
         {
             var fs = CreateMockFilesystem();
-            dirName.GenerateCodeInto(fs, codeGenerator, modeler);
+            await dirName.GenerateCodeInto(fs, codeGenerator, modeler);
             return fs;
         }
 

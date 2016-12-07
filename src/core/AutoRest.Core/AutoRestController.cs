@@ -10,6 +10,8 @@ using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.ITransformer, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 
 namespace AutoRest.Core
 {
@@ -33,7 +35,7 @@ namespace AutoRest.Core
         /// <summary>
         /// Generates client using provided settings.
         /// </summary>
-        public static void Generate()
+        public static async Task Generate()
         {
             if (Settings.Instance == null)
             {
@@ -41,88 +43,49 @@ namespace AutoRest.Core
             }
             Logger.Entries.Clear();
             Logger.LogInfo(Resources.AutoRestCore, Version);
-            
-            CodeModel codeModel = null;
-            
-            var modeler = ExtensionsLoader.GetModeler();
-
-            try
-            {
-                IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
-
-                // generate model from swagger 
-                codeModel = modeler.Build(out messages);
-
-                // After swagger Parser
-                codeModel = RunExtensions(Trigger.AfterModelCreation, codeModel);
-
-                // After swagger Parser
-                codeModel = RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
-
-                foreach (var message in messages)
-                {
-                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
-                }
-
-                if (messages.Any(entry => entry.Severity >= Settings.Instance.ValidationLevel))
-                {
-                    throw ErrorManager.CreateError(null, Resources.ErrorGeneratingClientModel, "Errors found during Swagger validation");
-                }
-            }
-            catch (Exception exception)
-            {
-                throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
-            }
-
-            var plugin = ExtensionsLoader.GetPlugin();
-
-            Logger.WriteOutput(plugin.CodeGenerator.UsageInstructions);
-
             Settings.Instance.Validate();
-            try
+            if (string.IsNullOrWhiteSpace(Settings.Instance.Input))
             {
-                var genericSerializer = new ModelSerializer<CodeModel>();
-                var modelAsJson = genericSerializer.ToJson(codeModel);
+                throw ErrorManager.CreateError(Resources.InputRequired);
+            }
 
-                // ensure once we're doing language-specific work, that we're working
-                // in context provided by the language-specific transformer. 
-                using (plugin.Activate())
+            IAnyPlugin plugin = ExtensionsLoader.GetPlugin();
+            Logger.WriteOutput(plugin.CodeGenerator.UsageInstructions);
+            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+
+            // FIXED SCHEDULE
+            var messages = new List<ValidationMessage>();
+            var schedule = Schedule.FromLinearPipeline(
+                ExtensionsLoader.GetParser(),
+                new ActionTransformer<object>("SwaggerValidation", serviceDefinition => messages.AddRange(validator.GetValidationExceptions(serviceDefinition))),
+                new ActionTransformer<object>("Logging", codeModel =>
                 {
-                    // load model into language-specific code model
-                    codeModel = plugin.Serializer.Load(modelAsJson);
+                    foreach (var message in messages)
+                    {
+                        Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
+                    }
 
-                    // we've loaded the model, run the extensions for after it's loaded
-                    codeModel = RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
-     
-                    // apply language-specific tranformation (more than just language-specific types)
-                    // used to be called "NormalizeClientModel" . 
-                    codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+                    if (messages.Any(entry => entry.Severity >= Settings.Instance.ValidationLevel))
+                    {
+                        throw ErrorManager.CreateError(null, Resources.ErrorGeneratingClientModel,
+                            "Errors found during Swagger validation");
+                    }
+                }),
+                ExtensionsLoader.GetModeler(),
+                new ActionTransformer<CodeModel>("update plugin", _ => Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings)),
+                new FuncTransformer<CodeModel, string>("model2json", codeModel => new ModelSerializer<CodeModel>().ToJson(codeModel)),
+                new FuncTransformer<string, CodeModel>("json2model", json => plugin.Serializer.Load(json)).WithPlugin(plugin),
+                plugin.Transformer.WithPlugin(plugin),
+                new ActionTransformer<CodeModel>("generate code", plugin.CodeGenerator.Generate).WithPlugin(plugin)
+                // TODO: return MemoryFS containing code
+            );
 
-                    // next set of extensions
-                    codeModel = RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
+                    
+            //Logger.LogInfo(Resources.ParsingSwagger);
+            var input = Settings.Instance.FileSystem.ReadFileAsText(Settings.Instance.Input);
 
-
-                    // next set of extensions
-                    codeModel = RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
-
-                    // Generate code from CodeModel.
-                    plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
-                }
-            }
-            catch (Exception exception)
-            {
-                throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
-            }
-        }
-
-        public static CodeModel RunExtensions(Trigger trigger, CodeModel codeModel)
-        {
-            /*
-             foreach (var extension in extensions.Where(each => each.trigger == trugger).SortBy(each => each.Priority))
-                 codeModel = extension.Transform(codeModel);
-            */
-
-            return codeModel;
+            await schedule.Run(input);
+            // TODO: write MemoryFS out
         }
 
         /// <summary>

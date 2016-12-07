@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -16,7 +17,7 @@ namespace AutoRest.Python
 {
     public class TransformerPy : CodeModelTransformer<CodeModelPy>
     {
-        public override CodeModelPy TransformCodeModel(CodeModel cm)
+        public override Task<CodeModelPy> TransformAsync(CodeModel cm)
         {
             var codeModel = cm as CodeModelPy;
 
@@ -24,7 +25,7 @@ namespace AutoRest.Python
             PopulateAdditionalProperties(codeModel);
             Flattening(codeModel);
             GenerateConstantProperties(codeModel);
-            return codeModel;
+            return Task.FromResult(codeModel);
         }
 
         protected void Flattening(CodeModelPy codeModel)

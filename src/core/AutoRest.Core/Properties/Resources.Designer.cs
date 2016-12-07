@@ -267,6 +267,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Input parameter is required..
+        /// </summary>
+        public static string InputRequired {
+            get {
+                return ResourceManager.GetString("InputRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Constraint is not supported for this type and will be ignored..
         /// </summary>
         public static string InvalidConstraint {
@@ -479,6 +488,15 @@ namespace AutoRest.Core.Properties {
         public static string TooManyBodyParameters {
             get {
                 return ResourceManager.GetString("TooManyBodyParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Error in transformer &apos;{0}&apos;. &apos;{1}&apos;..
+        /// </summary>
+        public static string TransformerError {
+            get {
+                return ResourceManager.GetString("TransformerError", resourceCulture);
             }
         }
         

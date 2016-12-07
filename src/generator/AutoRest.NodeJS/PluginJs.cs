@@ -12,8 +12,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 namespace AutoRest.NodeJS
 {
     public sealed class PluginJs :
-        Plugin
-        <GeneratorSettingsJs, ModelSerializer<CodeModelJs>, TransformerJs, CodeGeneratorJs, CodeNamerJs, CodeModelJs>
+        Plugin<GeneratorSettingsJs, TransformerJs, CodeGeneratorJs, CodeNamerJs, CodeModelJs>
     {
         public PluginJs()
         {
