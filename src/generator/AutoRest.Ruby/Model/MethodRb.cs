@@ -606,6 +606,16 @@ namespace AutoRest.Ruby.Model
                 builder.AppendLine("{1} = @client.deserialize(result_mapper, {0}, '{1}')", responseVariable, valueReference);
             }
 
+            if (type is CompositeType)
+            {
+                var composite = type as CompositeType;
+                if (composite.BaseModelType != null && composite.BaseModelType.Name == "Resource")
+                {
+                    builder.AppendLine("{0}.resource_group = resource_group_name if defined?resource_group_name", valueReference);
+                    builder.AppendLine("{0}", valueReference);
+                }
+            }
+
             return builder.ToString();
         }
 
