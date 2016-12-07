@@ -277,5 +277,18 @@ function Regen
   finally {
     get-process devenv | resume-process
   }
-
 }
+
+function suspend-vs {
+  $processes = (get-process devenv).id |% { $devenv = $_ ;  ((Get-CimInstance win32_process) |? { $_.ParentProcessId -eq $devenv } ).ProcessId } |% { get-process -id $_ }
+  try {
+    write-host -fore green "[Suspending VS]"
+    $processes | suspend-process
+    & $args[0] ($args | select-object -skip 1)
+  } finally {
+    write-host -fore green "[Resuming VS]"
+    $processes | resume-process
+  }
+}
+
+set-alias /s suspend-vs 
