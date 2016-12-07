@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
     /// <summary>
     /// LROsCustomHeaderOperations operations.
     /// </summary>
-    internal partial class LROsCustomHeaderOperations : IServiceOperations<AutoRestLongRunningOperationTestService>, ILROsCustomHeaderOperations
+    internal partial class LROsCustomHeaderOperations : IServiceOperations<AutoRestLongRunningOperationTestServiceClient>, ILROsCustomHeaderOperations
     {
         /// <summary>
         /// Initializes a new instance of the LROsCustomHeaderOperations class.
@@ -35,7 +35,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal LROsCustomHeaderOperations(AutoRestLongRunningOperationTestService client)
+        internal LROsCustomHeaderOperations(AutoRestLongRunningOperationTestServiceClient client)
         {
             if (client == null)
             {
@@ -45,9 +45,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Gets a reference to the AutoRestLongRunningOperationTestService
+        /// Gets a reference to the AutoRestLongRunningOperationTestServiceClient
         /// </summary>
-        public AutoRestLongRunningOperationTestService Client { get; private set; }
+        public AutoRestLongRunningOperationTestServiceClient Client { get; private set; }
 
         /// <summary>
         /// x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required

@@ -23,7 +23,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
     /// <summary>
     /// HttpSuccessOperations operations.
     /// </summary>
-    internal partial class HttpSuccessOperations : IServiceOperations<AutoRestHeadTestService>, IHttpSuccessOperations
+    internal partial class HttpSuccessOperations : IServiceOperations<AutoRestHeadTestServiceClient>, IHttpSuccessOperations
     {
         /// <summary>
         /// Initializes a new instance of the HttpSuccessOperations class.
@@ -34,7 +34,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal HttpSuccessOperations(AutoRestHeadTestService client)
+        internal HttpSuccessOperations(AutoRestHeadTestServiceClient client)
         {
             if (client == null)
             {
@@ -44,9 +44,9 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         }
 
         /// <summary>
-        /// Gets a reference to the AutoRestHeadTestService
+        /// Gets a reference to the AutoRestHeadTestServiceClient
         /// </summary>
-        public AutoRestHeadTestService Client { get; private set; }
+        public AutoRestHeadTestServiceClient Client { get; private set; }
 
         /// <summary>
         /// Return 200 status code if successful

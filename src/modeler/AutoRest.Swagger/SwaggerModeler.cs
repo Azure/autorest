@@ -223,19 +223,13 @@ namespace AutoRest.Swagger
 
             CodeModel = New<CodeModel>();
 
-            if (string.IsNullOrWhiteSpace(Settings.ClientName))
+            if (string.IsNullOrWhiteSpace(Settings.ClientName) && ServiceDefinition.Info.Title == null)
             {
-                if (ServiceDefinition.Info.Title == null)
-                {
-                    throw ErrorManager.CreateError(Resources.TitleMissing);
-                }
+                throw ErrorManager.CreateError(Resources.TitleMissing);
+            }
 
-                CodeModel.Name = ServiceDefinition.Info.Title.Replace(" ", "");
-            }
-            else
-            {
-                CodeModel.Name = Settings.ClientName;
-            }
+            CodeModel.Name = ServiceDefinition.Info.Title?.Replace(" ", "");
+
             CodeModel.Namespace = Settings.Namespace;
             CodeModel.ModelsName = Settings.ModelsName;
             CodeModel.ApiVersion = ServiceDefinition.Info.Version;

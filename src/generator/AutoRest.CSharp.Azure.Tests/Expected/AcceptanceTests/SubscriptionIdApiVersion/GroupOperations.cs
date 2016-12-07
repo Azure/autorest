@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
     /// <summary>
     /// GroupOperations operations.
     /// </summary>
-    internal partial class GroupOperations : IServiceOperations<MicrosoftAzureTestUrl>, IGroupOperations
+    internal partial class GroupOperations : IServiceOperations<MicrosoftAzureTestUrlClient>, IGroupOperations
     {
         /// <summary>
         /// Initializes a new instance of the GroupOperations class.
@@ -35,7 +35,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal GroupOperations(MicrosoftAzureTestUrl client)
+        internal GroupOperations(MicrosoftAzureTestUrlClient client)
         {
             if (client == null)
             {
@@ -45,9 +45,9 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         }
 
         /// <summary>
-        /// Gets a reference to the MicrosoftAzureTestUrl
+        /// Gets a reference to the MicrosoftAzureTestUrlClient
         /// </summary>
-        public MicrosoftAzureTestUrl Client { get; private set; }
+        public MicrosoftAzureTestUrlClient Client { get; private set; }
 
         /// <summary>
         /// Provides a resouce group with name 'testgroup101' and location 'West US'.

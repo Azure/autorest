@@ -22,7 +22,7 @@ namespace AutoRest.Core.Model
         private string _documentation;
         private string _namespace;
         private string _modelsName;
-        private string _name;
+        private readonly Fixable<string> _name = new Fixable<string>();
 
         [JsonIgnore]
         public virtual bool IsAzure => false;
@@ -34,6 +34,8 @@ namespace AutoRest.Core.Model
         protected CodeModel()
         {
             InitializeCollections();
+
+            Name.OnGet += value => (Settings.Instance?.ClientName).Else(CodeNamer.Instance.GetClientName(value));
         }
 
         [JsonIgnore]
@@ -69,19 +71,13 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets or sets the non-canonical name of the client model.
         /// </summary>
-        public virtual string Name
+        public Fixable<string> Name
         {
             get { return _name; }
             set
             {
-                if (string.IsNullOrWhiteSpace(_name))
-                {
-                    if (value != _name)
-                    {
-                        _name = CodeNamer.Instance.GetClientName(value);
-                        Children.Disambiguate();
-                    }
-                }
+                _name.CopyFrom(value);
+                Children.Disambiguate();
             }
         }
 
