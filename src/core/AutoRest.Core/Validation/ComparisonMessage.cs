@@ -52,10 +52,6 @@ namespace AutoRest.Core.Validation
         /// </summary>
         public LogEntrySeverity Severity { get; }
 
-        public override string ToString()
-        {
-            throw new NotImplementedException();
-            return $"{Id}: {Message}\n    Path: {Path}";
-        }
+        public override string ToString() => $"{Id}: {Message}\n    Path: {Path}";
     }
 }
