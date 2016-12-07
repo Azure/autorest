@@ -3,6 +3,7 @@
 
 using System.Globalization;
 using Newtonsoft.Json;
+using System;
 
 namespace AutoRest.Core.Model
 {
@@ -14,7 +15,7 @@ namespace AutoRest.Core.Model
     {
         protected SequenceType()
         {
-            Name.OnGet+= v=> $"IList<{ElementType}>";
+            Name.OnGet+= v=> $"IList<{ElementType.Name}>";
         }
 
         public override string Qualifier => "Dictionary";
@@ -39,6 +40,7 @@ namespace AutoRest.Core.Model
         /// </returns>
         public override string ToString()
         {
+            throw new NotImplementedException();
             return Name;
         }
 

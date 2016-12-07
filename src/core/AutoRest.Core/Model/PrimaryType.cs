@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.Core.Utilities;
+using System;
 
 namespace AutoRest.Core.Model
 {
@@ -80,6 +81,7 @@ namespace AutoRest.Core.Model
         /// </returns>
         public override string ToString()
         {
+            throw new NotImplementedException();
             return Name;
         }
 

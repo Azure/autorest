@@ -189,6 +189,7 @@ namespace AutoRest.Core.Model
         /// </returns>
         public override string ToString()
         {
+            throw new NotImplementedException();
             return Name;
         }
 

@@ -227,7 +227,7 @@ namespace AutoRest.CompositeSwagger
                     apiVersionParameter.IsRequired = true;
                 }
 
-                var compositeClientMethod = compositeClient.Methods.FirstOrDefault(m => m.ToString() == subClientMethod.ToString()
+                var compositeClientMethod = compositeClient.Methods.FirstOrDefault(m => m.StructurallyEquals(subClientMethod)
                     && m.Group == subClientMethod.Group);
                 if (compositeClientMethod == null)
                 {

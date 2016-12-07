@@ -36,6 +36,7 @@ namespace AutoRest.Core.Model
         /// </returns>
         public override string ToString()
         {
+            throw new NotImplementedException();
             StringBuilder sb = new StringBuilder();
             if (OutputParameter != null)
             {

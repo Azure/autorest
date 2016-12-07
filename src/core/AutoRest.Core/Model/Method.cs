@@ -236,6 +236,21 @@ namespace AutoRest.Core.Model
         public bool Deprecated { get; set; }
 
         /// <summary>
+        /// Determines whether the specified method is structurally equal to this object.
+        /// </summary>
+        /// <param name="other">The object to compare with this object.</param>
+        public bool StructurallyEquals(Method other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            return ReturnType.StructurallyEquals(other.ReturnType)
+                && Name.Equals(other.Name)
+                && Parameters.SequenceEqual(other.Parameters, new Utilities.EqualityComparer<Parameter>((a, b) => a.StructurallyEquals(b)));
+        }
+
+        /// <summary>
         /// Returns a string representation of the Method object.
         /// </summary>
         /// <returns>
@@ -243,6 +258,7 @@ namespace AutoRest.Core.Model
         /// </returns>
         public override string ToString()
         {
+            throw new NotImplementedException();
             return string.Format(CultureInfo.InvariantCulture, "{0} {1} ({2})", ReturnType, Name,
                 string.Join(",", Parameters.Select(p => p.ToString())));
         }

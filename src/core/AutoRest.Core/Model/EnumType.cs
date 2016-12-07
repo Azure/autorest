@@ -28,6 +28,7 @@ namespace AutoRest.Core.Model
         protected EnumType()
         {
             Values = new List<EnumValue>();
+            Name.OnGet += s => string.IsNullOrEmpty(s) ? "enum" : s;
         }
 
         /// <summary>
@@ -75,6 +76,7 @@ namespace AutoRest.Core.Model
         /// </returns>
         public override string ToString()
         {
+            throw new NotImplementedException();
             if (string.IsNullOrEmpty(Name))
             {
                 return "enum";

@@ -160,6 +160,7 @@ namespace AutoRest.Core.Model
         /// </returns>
         public override string ToString()
         {
+            throw new NotImplementedException();
             var jsonSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
