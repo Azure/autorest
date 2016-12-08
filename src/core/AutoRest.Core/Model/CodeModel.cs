@@ -149,26 +149,6 @@ namespace AutoRest.Core.Model
         public Dictionary<string, object> Extensions { get; private set; } = new Dictionary<string, object>();
 
         /// <summary>
-        /// Returns a string representation of the CodeModel
-        /// </summary>
-        /// <returns>
-        /// A string representation of the CodeModel object.
-        /// </returns>
-        public override string ToString()
-        {
-            var jsonSettings = new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                NullValueHandling = NullValueHandling.Ignore,
-                ContractResolver = new CamelCaseContractResolver(),
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            };
-            jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
-
-            return JsonConvert.SerializeObject(this, jsonSettings);
-        }
-
-        /// <summary>
         /// Reference to the container of this type.
         /// </summary>
         CodeModel IParent.CodeModel => this;

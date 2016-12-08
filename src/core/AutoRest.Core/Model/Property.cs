@@ -90,14 +90,6 @@ namespace AutoRest.Core.Model
             set { _summary.CopyFrom(value); }
         }
 
-        /// <summary>
-        ///     Returns a string representation of the Property object.
-        /// </summary>
-        /// <returns>
-        ///     A string representation of the Property object.
-        /// </returns>
-        public override string ToString() => $"{ModelTypeName} {Name} {{get;{(IsReadOnly ? "" : "set;")}}}";
-
         public virtual bool IsPolymorphicDiscriminator => true == (Parent as CompositeType)?.BasePolymorphicDiscriminator?.EqualsIgnoreCase(Name.RawValue);
     }
 }

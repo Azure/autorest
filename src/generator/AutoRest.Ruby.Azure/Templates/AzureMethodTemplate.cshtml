@@ -30,7 +30,7 @@
 }
 @WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #
-@WrapComment("# ", string.Format("@return [{0}] which provide lazy access to pages of the response.", Model.ReturnType))
+@WrapComment("# ", string.Format("@return [{0}] which provide lazy access to pages of the response.", Model.OperationReturnTypeString))
 #
 def @(Model.Name)(@(Model.MethodParameterDeclaration))
   response = @(Model.Name.Value.Replace("_as_lazy",""))_async(@(Model.MethodParameterInvocation)).value!

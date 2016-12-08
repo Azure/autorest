@@ -14,7 +14,7 @@ namespace AutoRest.Core.Model
     {
         protected SequenceType()
         {
-            Name.OnGet+= v=> $"IList<{ElementType}>";
+            Name.OnGet+= v=> $"IList<{ElementType.Name}>";
         }
 
         public override string Qualifier => "Dictionary";
@@ -28,19 +28,6 @@ namespace AutoRest.Core.Model
         /// Gets or sets the element type of the collection.
         /// </summary>
         public virtual IModelType ElementType { get; set; }
-
-       
-
-        /// <summary>
-        /// Returns a string representation of the SequenceType object.
-        /// </summary>
-        /// <returns>
-        /// A string representation of the SequenceType object.
-        /// </returns>
-        public override string ToString()
-        {
-            return Name;
-        }
 
         /// <summary>
         /// Determines whether the specified model type is structurally equal to this object.

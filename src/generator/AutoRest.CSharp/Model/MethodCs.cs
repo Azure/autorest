@@ -479,9 +479,7 @@ namespace AutoRest.CSharp.Model
 
                 foreach (var mapping in transformation.ParameterMappings)
                 {
-                    builder.AppendLine("{0}{1};",
-                        transformation.OutputParameter.Name,
-                        mapping);
+                    builder.AppendLine("{0};", mapping.CreateCode(transformation.OutputParameter));
                 }
 
                 if (!string.IsNullOrEmpty(nullCheck))

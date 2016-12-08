@@ -13,12 +13,40 @@ using AutoRest.CSharp;
 using Newtonsoft.Json.Linq;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using System.Globalization;
 
 namespace AutoRest.Swagger.Tests
 {
     [Collection("AutoRest Tests")]
     public class SwaggerModelerTests
     {
+        private string CreateCSharpDeclarationString(Parameter parameter)
+        {
+            return $"{parameter.ModelType.Name} {parameter.Name}";
+        }
+
+        private string CreateCSharpResponseType(Response response)
+        {
+            if (response.Body != null && response.Headers != null)
+            {
+                return string.Format(CultureInfo.InvariantCulture,
+                    "HttpOperationResponse<{0},{1}>", response.Body, response.Headers);
+            }
+            else if (response.Body != null)
+            {
+                return response.Body.Name;
+            }
+            else if (response.Headers != null)
+            {
+                return string.Format(CultureInfo.InvariantCulture,
+                    "HttpOperationResponse<object,{0}>", response.Headers);
+            }
+            else
+            {
+                return "void";
+            }
+        }
+
         public static void Null(Fixable<string> str)
         {
             Assert.Null(str.Value);
@@ -66,7 +94,7 @@ namespace AutoRest.Swagger.Tests
                 Assert.Equal("Resource Group ID.", codeModel.Methods[0].Parameters[1].Documentation);
                 Assert.Equal(true, codeModel.Methods[0].Parameters[0].IsRequired);
                 Assert.Equal(ParameterLocation.Path, codeModel.Methods[0].Parameters[0].Location);
-                Assert.Equal("String", codeModel.Methods[0].Parameters[0].ModelType.ToString());
+                Assert.Equal("String", codeModel.Methods[0].Parameters[0].ModelType.Name);
                 Assert.Equal("Reset", codeModel.Methods[1].Name);
                 Assert.Equal("Product", codeModel.ModelTypes.First(m => m.Name == "Product").Name);
                 Assert.Equal("Product", codeModel.ModelTypes.First(m => m.Name == "Product").SerializedName);
@@ -254,7 +282,7 @@ namespace AutoRest.Swagger.Tests
                 Assert.Equal("Product", codeModel.ModelTypes.First(m => m.Name == "Product").Name);
                 Assert.Equal("ProductId", codeModel.ModelTypes.First(m => m.Name == "Product").Properties[0].Name);
                 Assert.Equal("String",
-                    codeModel.ModelTypes.First(m => m.Name == "Product").Properties[0].ModelType.ToString());
+                    codeModel.ModelTypes.First(m => m.Name == "Product").Properties[0].ModelType.Name);
             }
         }
 
@@ -335,19 +363,18 @@ namespace AutoRest.Swagger.Tests
 
                 Assert.NotNull(codeModel);
                 Assert.Equal("GetSameResponse", codeModel.Methods[0].Name);
-                Assert.Equal("IList<Pet>", codeModel.Methods[0].ReturnType.ToString());
-                Assert.Equal("IList<Pet>", codeModel.Methods[0].Responses[HttpStatusCode.OK].ToString());
-                Assert.Equal("IList<Pet>", codeModel.Methods[0].Responses[HttpStatusCode.Accepted].ToString());
+                Assert.Equal("IList<Pet>", CreateCSharpResponseType(codeModel.Methods[0].ReturnType));
+                Assert.Equal("IList<Pet>", CreateCSharpResponseType(codeModel.Methods[0].Responses[HttpStatusCode.OK]));
+                Assert.Equal("IList<Pet>", CreateCSharpResponseType(codeModel.Methods[0].Responses[HttpStatusCode.Accepted]));
 
                 Assert.Equal("PostInheretedTypes", codeModel.Methods[1].Name);
-                Assert.Equal("Pet", codeModel.Methods[1].ReturnType.ToString());
-                Assert.Equal("Dog", codeModel.Methods[1].Responses[HttpStatusCode.OK].ToString());
-                Assert.Equal("Cat", codeModel.Methods[1].Responses[HttpStatusCode.Accepted].ToString());
+                Assert.Equal("Pet", CreateCSharpResponseType(codeModel.Methods[1].ReturnType));
+                Assert.Equal("Dog", CreateCSharpResponseType(codeModel.Methods[1].Responses[HttpStatusCode.OK]));
+                Assert.Equal("Cat", CreateCSharpResponseType(codeModel.Methods[1].Responses[HttpStatusCode.Accepted]));
 
                 Assert.Equal("PatchDifferentStreamTypesNoContent", codeModel.Methods[6].Name);
-                Assert.Equal("VirtualMachineGetRemoteDesktopFileResponse", codeModel.Methods[6].ReturnType.ToString());
-                Assert.Equal("VirtualMachineGetRemoteDesktopFileResponse",
-                    codeModel.Methods[6].Responses[HttpStatusCode.OK].ToString());
+                Assert.Equal("VirtualMachineGetRemoteDesktopFileResponse", CreateCSharpResponseType(codeModel.Methods[6].ReturnType));
+                Assert.Equal("VirtualMachineGetRemoteDesktopFileResponse", CreateCSharpResponseType(codeModel.Methods[6].Responses[HttpStatusCode.OK]));
                 Assert.Null(codeModel.Methods[6].Responses[HttpStatusCode.NoContent].Body);
             }
         }
@@ -367,7 +394,7 @@ namespace AutoRest.Swagger.Tests
 
                 var retType = codeModel.Methods.First(m => m.Name == "PatchDefaultResponse");
 
-                Assert.Equal("Pet", retType.ReturnType.ToString());
+                Assert.Equal("Pet", CreateCSharpResponseType(retType.ReturnType));
             }
         }
 
@@ -405,21 +432,21 @@ namespace AutoRest.Swagger.Tests
                 Assert.NotNull(codeModel);
                 Assert.Equal("GetWithStreamFormData", codeModel.Methods[0].Name);
                 Assert.Equal("Stream", codeModel.Methods[0].Parameters[0].ModelType.Name);
-                Assert.Equal("Stream", codeModel.Methods[0].ReturnType.ToString());
-                Assert.Equal("Stream", codeModel.Methods[0].Responses[HttpStatusCode.OK].ToString());
+                Assert.Equal("Stream", CreateCSharpResponseType(codeModel.Methods[0].ReturnType));
+                Assert.Equal("Stream", CreateCSharpResponseType(codeModel.Methods[0].Responses[HttpStatusCode.OK]));
 
                 Assert.Equal("PostWithByteArrayFormData", codeModel.Methods[1].Name);
                 Assert.Equal("ByteArray", codeModel.Methods[1].Parameters[0].ModelType.Name);
-                Assert.Equal("ByteArray", codeModel.Methods[1].ReturnType.ToString());
-                Assert.Equal("ByteArray", codeModel.Methods[1].Responses[HttpStatusCode.OK].ToString());
+                Assert.Equal("ByteArray", CreateCSharpResponseType(codeModel.Methods[1].ReturnType));
+                Assert.Equal("ByteArray", CreateCSharpResponseType(codeModel.Methods[1].Responses[HttpStatusCode.OK]));
 
                 Assert.Equal("GetWithStream", codeModel.Methods[2].Name);
-                Assert.Equal("Stream", codeModel.Methods[2].ReturnType.ToString());
-                Assert.Equal("Stream", codeModel.Methods[2].Responses[HttpStatusCode.OK].ToString());
+                Assert.Equal("Stream", CreateCSharpResponseType(codeModel.Methods[2].ReturnType));
+                Assert.Equal("Stream", CreateCSharpResponseType(codeModel.Methods[2].Responses[HttpStatusCode.OK]));
 
                 Assert.Equal("PostWithByteArray", codeModel.Methods[3].Name);
-                Assert.Equal("ByteArray", codeModel.Methods[3].ReturnType.ToString());
-                Assert.Equal("ByteArray", codeModel.Methods[3].Responses[HttpStatusCode.OK].ToString());
+                Assert.Equal("ByteArray", CreateCSharpResponseType(codeModel.Methods[3].ReturnType));
+                Assert.Equal("ByteArray", CreateCSharpResponseType(codeModel.Methods[3].Responses[HttpStatusCode.OK]));
             }
         }
 
@@ -458,21 +485,21 @@ namespace AutoRest.Swagger.Tests
                 var codeModel = modeler.Build();
 
                 Assert.NotNull(codeModel);
-                Assert.Equal("Int integer", codeModel.Methods[0].Parameters[0].ToString());
-                Assert.Equal("Int int", codeModel.Methods[0].Parameters[1].ToString());
-                Assert.Equal("Long long", codeModel.Methods[0].Parameters[2].ToString());
-                Assert.Equal("Double number", codeModel.Methods[0].Parameters[3].ToString());
-                Assert.Equal("Double float", codeModel.Methods[0].Parameters[4].ToString());
-                Assert.Equal("Double double", codeModel.Methods[0].Parameters[5].ToString());
-                Assert.Equal("Decimal decimal", codeModel.Methods[0].Parameters[6].ToString());
-                Assert.Equal("String string", codeModel.Methods[0].Parameters[7].ToString());
-                Assert.Equal("enum color1", codeModel.Methods[0].Parameters[8].ToString());
-                Assert.Equal("ByteArray byte", codeModel.Methods[0].Parameters[9].ToString());
-                Assert.Equal("Boolean boolean", codeModel.Methods[0].Parameters[10].ToString());
-                Assert.Equal("Date date", codeModel.Methods[0].Parameters[11].ToString());
-                Assert.Equal("DateTime dateTime", codeModel.Methods[0].Parameters[12].ToString());
-                Assert.Equal("Base64Url base64url", codeModel.Methods[0].Parameters[13].ToString());
-                Assert.Equal("IList<String> array", codeModel.Methods[0].Parameters[14].ToString());
+                Assert.Equal("Int integer", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[0]));
+                Assert.Equal("Int int", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[1]));
+                Assert.Equal("Long long", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[2]));
+                Assert.Equal("Double number", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[3]));
+                Assert.Equal("Double float", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[4]));
+                Assert.Equal("Double double", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[5]));
+                Assert.Equal("Decimal decimal", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[6]));
+                Assert.Equal("String string", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[7]));
+                Assert.Equal("enum color1", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[8]));
+                Assert.Equal("ByteArray byte", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[9]));
+                Assert.Equal("Boolean boolean", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[10]));
+                Assert.Equal("Date date", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[11]));
+                Assert.Equal("DateTime dateTime", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[12]));
+                Assert.Equal("Base64Url base64url", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[13]));
+                Assert.Equal("IList<String> array", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[14]));
 
                 var variableEnumInPath =
                     codeModel.Methods.First(m => m.Name == "List" && m.Group .IsNullOrEmpty())
@@ -483,7 +510,7 @@ namespace AutoRest.Swagger.Tests
                     new[] {new EnumValue {Name = "red"}, new EnumValue {Name = "blue"}, new EnumValue {Name = "green"}}
                         .ToList());
                 Assert.True(variableEnumInPath.ModelAsString);
-                Assert.Empty(variableEnumInPath.Name.Value);
+                Assert.Empty(variableEnumInPath.Name.RawValue);
 
                 var variableEnumInQuery =
                     codeModel.Methods.First(m => m.Name == "List" && m.Group.IsNullOrEmpty())
@@ -497,7 +524,7 @@ namespace AutoRest.Swagger.Tests
                         new EnumValue {Name = "purple"}
                     }.ToList());
                 Assert.True(variableEnumInQuery.ModelAsString);
-                Assert.Empty(variableEnumInQuery.Name.Value);
+                Assert.Empty(variableEnumInQuery.Name.RawValue);
 
                 var differentEnum =
                     codeModel.Methods.First(m => m.Name == "List" && m.Group == "DiffEnums")
@@ -507,7 +534,7 @@ namespace AutoRest.Swagger.Tests
                 Assert.Equal(differentEnum.Values,
                     new[] {new EnumValue {Name = "cyan"}, new EnumValue {Name = "yellow"}}.ToList());
                 Assert.True(differentEnum.ModelAsString);
-                Assert.Empty(differentEnum.Name.Value);
+                Assert.Empty(differentEnum.Name.RawValue);
 
                 var sameEnum =
                     codeModel.Methods.First(m => m.Name == "Get" && m.Group == "SameEnums")
@@ -518,7 +545,7 @@ namespace AutoRest.Swagger.Tests
                     new[] {new EnumValue {Name = "blue"}, new EnumValue {Name = "green"}, new EnumValue {Name = "red"}}
                         .ToList());
                 Assert.True(sameEnum.ModelAsString);
-                Assert.Empty(sameEnum.Name.Value);
+                Assert.Empty(sameEnum.Name.RawValue);
 
                 var modelEnum =
                     codeModel.ModelTypes.First(m => m.Name == "Product")
@@ -529,7 +556,7 @@ namespace AutoRest.Swagger.Tests
                     new[] {new EnumValue {Name = "red"}, new EnumValue {Name = "blue"}, new EnumValue {Name = "green"}}
                         .ToList());
                 Assert.True(modelEnum.ModelAsString);
-                Assert.Empty(modelEnum.Name.Value);
+                Assert.Empty(modelEnum.Name.RawValue);
 
                 var fixedEnum =
                     codeModel.ModelTypes.First(m => m.Name == "Product")
@@ -679,7 +706,7 @@ namespace AutoRest.Swagger.Tests
                 Assert.Equal("0", codeModel.ModelTypes.First(m => m.Name == "Product").Properties[8].DefaultValue);
 
                 Assert.Equal("RefStrEnum", codeModel.ModelTypes.First(m => m.Name == "Product").Properties[9].Name);
-                Assert.Equal("enum", codeModel.ModelTypes.First(m => m.Name == "Product").Properties[9].ModelType.ToString());
+                Assert.Equal("enum", codeModel.ModelTypes.First(m => m.Name == "Product").Properties[9].ModelType.Name);
                 Assert.Equal(false, codeModel.ModelTypes.First(m => m.Name == "Product").Properties[9].IsConstant);
                 Assert.True(codeModel.ModelTypes.First(m => m.Name == "Product").Properties[9].DefaultValue.IsNullOrEmpty());
 

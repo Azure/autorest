@@ -29,26 +29,6 @@ namespace AutoRest.Core.Model
         public List<ParameterMapping> ParameterMappings { get; private set; }
 
         /// <summary>
-        /// Returns a string representation of the ParameterMapping object.
-        /// </summary>
-        /// <returns>
-        /// A string representation of the ParameterMapping object.
-        /// </returns>
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            if (OutputParameter != null)
-            {
-                sb.AppendLine("var " + OutputParameter.Name);
-                foreach (var mapping in ParameterMappings)
-                {
-                    sb.AppendLine(OutputParameter.Name + mapping.ToString());
-                }
-            }
-            return sb.ToString();
-        }
-
-        /// <summary>
         /// Performs a deep clone of a parameter transformation.
         /// </summary>
         /// <returns>A deep clone of current object.</returns>

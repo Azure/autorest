@@ -14,7 +14,7 @@ namespace AutoRest.Core.Model
     {
         protected DictionaryType()
         {
-            Name.OnGet += value => $"Dictionary<string,{ValueType}>";
+            Name.OnGet += value => $"Dictionary<string,{ValueType.Name}>";
         }
 
         /// <summary>
@@ -32,17 +32,6 @@ namespace AutoRest.Core.Model
         public override void Disambiguate()
         {
             // not needed, right?
-        }
-
-        /// <summary>
-        /// Returns a string representation of the DictionaryType object.
-        /// </summary>
-        /// <returns>
-        /// A string representation of the DictionaryType object.
-        /// </returns>
-        public override string ToString()
-        {
-            return Name;
         }
 
         /// <summary>

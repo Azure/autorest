@@ -51,7 +51,7 @@ module @(Settings.Namespace)
       #
       # Gets the rest of the items for the request, enabling auto-pagination.
       #
-      @WrapComment("# ", string.Format("@return [Array<{0}>] operation results.", Model.ItemType))
+      @WrapComment("# ", string.Format("@return [Array<{0}>] operation results.", Model.ItemType.Name))
       #
       def get_all_items
         items = @@@Model.ItemName
