@@ -37,11 +37,11 @@ namespace AutoRest.Core.Model
         private void InitializeProperties()
         {
             Name.OnGet += value => CodeNamer.Instance.GetMethodGroupName(value.Else(string.Empty));
-            NameForProperty.OnGet += value => CodeNamer.Instance.GetPropertyName(value.Else(value.Else(IsCodeModelMethodGroup ? CodeModel?.Name : Name.Value)));
-            NameForParameter.OnGet += value => CodeNamer.Instance.GetParameterName(value.Else(IsCodeModelMethodGroup ? CodeModel?.Name : Name.Value));    
-            NameForVariable.OnGet += value => CodeNamer.Instance.GetVariableName(value.Else(IsCodeModelMethodGroup ? CodeModel?.Name : Name.Value));
+            NameForProperty.OnGet += value => CodeNamer.Instance.GetPropertyName(value.Else(value.Else(IsCodeModelMethodGroup ? CodeModel?.Name.Value : Name.Value)));
+            NameForParameter.OnGet += value => CodeNamer.Instance.GetParameterName(value.Else(IsCodeModelMethodGroup ? CodeModel?.Name.Value : Name.Value));    
+            NameForVariable.OnGet += value => CodeNamer.Instance.GetVariableName(value.Else(IsCodeModelMethodGroup ? CodeModel?.Name.Value : Name.Value));
 
-            TypeName.OnGet += value => CodeNamer.Instance.GetTypeName(value.Else( IsCodeModelMethodGroup ? CodeModel?.Name : Name.Value));
+            TypeName.OnGet += value => CodeNamer.Instance.GetTypeName(value.Else( IsCodeModelMethodGroup ? CodeModel?.Name.Value : Name.Value));
         }
 
         protected MethodGroup(string name) : this()

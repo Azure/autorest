@@ -79,19 +79,12 @@ namespace AutoRest.CompositeSwagger
         {
             CodeModel compositeClient = New<CodeModel>();
 
-            if (string.IsNullOrWhiteSpace(Settings.ClientName))
+            if (string.IsNullOrWhiteSpace(Settings.ClientName) && compositeSwaggerModel.Info.Title == null )
             {
-                if (compositeSwaggerModel.Info.Title == null)
-                {
-                    throw ErrorManager.CreateError(Resources.TitleMissing);
-                }
-
-                compositeClient.Name = compositeSwaggerModel.Info.Title.Replace(" ", "");
+                throw ErrorManager.CreateError(Resources.TitleMissing);
             }
-            else
-            {
-                compositeClient.Name = Settings.ClientName;
-            }
+            compositeClient.Name = compositeSwaggerModel.Info.Title?.Replace(" ", "");
+            
             compositeClient.Namespace = Settings.Namespace;
             compositeClient.ModelsName = Settings.ModelsName;
             compositeClient.Documentation = compositeSwaggerModel.Info.Description;

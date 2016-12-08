@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
     /// <summary>
     /// LRORetrysOperations operations.
     /// </summary>
-    internal partial class LRORetrysOperations : IServiceOperations<AutoRestLongRunningOperationTestService>, ILRORetrysOperations
+    internal partial class LRORetrysOperations : IServiceOperations<AutoRestLongRunningOperationTestServiceClient>, ILRORetrysOperations
     {
         /// <summary>
         /// Initializes a new instance of the LRORetrysOperations class.
@@ -35,7 +35,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal LRORetrysOperations(AutoRestLongRunningOperationTestService client)
+        internal LRORetrysOperations(AutoRestLongRunningOperationTestServiceClient client)
         {
             if (client == null)
             {
@@ -45,9 +45,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Gets a reference to the AutoRestLongRunningOperationTestService
+        /// Gets a reference to the AutoRestLongRunningOperationTestServiceClient
         /// </summary>
-        public AutoRestLongRunningOperationTestService Client { get; private set; }
+        public AutoRestLongRunningOperationTestServiceClient Client { get; private set; }
 
         /// <summary>
         /// Long running put request, service returns a 500, then a 201 to the initial

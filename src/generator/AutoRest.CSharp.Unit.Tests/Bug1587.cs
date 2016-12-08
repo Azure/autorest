@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\SimpleAPI.cs"));
+                Assert.True(fileSystem.FileExists(@"GeneratedCode\SimpleAPIClient.cs"));
 
                 // compilation is key in this test, as `x-ms-long-running-operation: false`
                 // creates method that contains call to non-existent method.
@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.NotNull(asm);
 
                 // verify that correct methods exist.
-                var simpleApi = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.SimpleAPI");
+                var simpleApi = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.SimpleAPIClient");
                 Assert.NotNull(simpleApi);
                 Assert.NotNull(simpleApi.GetMethod("Lru0WithHttpMessagesAsync"));
                 Assert.NotNull(simpleApi.GetMethod("Lru1WithHttpMessagesAsync"));
