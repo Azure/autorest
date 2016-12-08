@@ -49,22 +49,22 @@ namespace AutoRest.Core.Logging
         /// <summary>
         /// The class of the Validation message
         /// </summary>
-        public Type Type { get; }
+        public Type Type { get; protected set; }
 
         /// <summary>
         /// Gets or sets the LogEntrySeverity.
         /// </summary>
-        public LogMessageSeverity Severity { get; set; }
+        public LogMessageSeverity Severity { get; protected set; }
 
         /// <summary>
         /// Gets or sets the Message.
         /// </summary>
-        public string Message { get; set; }
+        public string Message { get; protected set; }
 
         /// <summary>
         /// The JSON document path to the element being validated.
         /// </summary>
-        public IList<string> Path { get; } = new List<string>();
+        public IList<string> Path { get; protected set; } = new List<string>();
 
         /// <summary>
         /// A fluent interface to append a string to the path.

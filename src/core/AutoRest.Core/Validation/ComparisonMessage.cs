@@ -10,9 +10,9 @@ using System.Linq;
 namespace AutoRest.Core.Validation
 {
     /// <summary>
-    /// Represents a single validtion violation (can just a debug message, informational, warning, error, or fatal error)
+    /// Represents a single validation violation.
     /// </summary>
-    public class ComparisonMessage
+    public class ComparisonMessage : LogMessage
     {
         public ComparisonMessage(MessageTemplate template, string path, LogMessageSeverity severity)
         {
@@ -21,37 +21,20 @@ namespace AutoRest.Core.Validation
 
             Severity = severity;
             Id = template.Id;
-            Path = path;
-            Message = template.Message;
+            AppendToPath(path);
+            Message = $"Comparison: {template.Id}: {template.Message}";
         }
         public ComparisonMessage(MessageTemplate template, string path, LogMessageSeverity severity, params object[] formatArguments)
         {
             Severity = severity;
             Id = template.Id;
-            Path = path;
-            Message = string.Format(CultureInfo.CurrentCulture, template.Message, formatArguments);
+            AppendToPath(path);
+            Message = $"Comparison: {template.Id}: {string.Format(CultureInfo.CurrentCulture, template.Message, formatArguments)}";
         }
 
         /// <summary>
         /// The id of the validation message
         /// </summary>
         public int Id { get; private set; }
-
-        /// <summary>
-        /// The formatted message text for the validation message
-        /// </summary>
-        public string Message { get; private set; }
-
-        /// <summary>
-        /// The path is used to identify the Swagger element that a message refers to.
-        /// </summary>
-        public string Path { get; private set; }
-
-        /// <summary>
-        /// The serverity of the validation message.
-        /// </summary>
-        public LogMessageSeverity Severity { get; }
-
-        public override string ToString() => $"{Id}: {Message}\n    Path: {Path}";
     }
 }
