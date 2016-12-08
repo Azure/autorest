@@ -64,7 +64,7 @@ namespace AutoRest.Swagger
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public override CodeModel Build()
         {
-            Logger.Log(Resources.ParsingSwagger);
+            Logger.Instance.Log(Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input))
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
@@ -75,10 +75,10 @@ namespace AutoRest.Swagger
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
             foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
             {
-                Logger.Log(validationEx);
+                Logger.Instance.Log(validationEx);
             }
 
-            Logger.Log(Resources.GeneratingClient);
+            Logger.Instance.Log(Resources.GeneratingClient);
             // Update settings
             UpdateSettings();
 
@@ -132,7 +132,7 @@ namespace AutoRest.Swagger
                     }
                     else
                     {
-                        Logger.Log(LogMessageSeverity.Warning, Resources.OptionsNotSupported);
+                        Logger.Instance.Log(LogMessageSeverity.Warning, Resources.OptionsNotSupported);
                     }
                 }
             }
@@ -161,7 +161,7 @@ namespace AutoRest.Swagger
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public override IEnumerable<ComparisonMessage> Compare()
         {
-            Logger.Log(Resources.ParsingSwagger);
+            Logger.Instance.Log(Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input) || string.IsNullOrWhiteSpace(Settings.Previous))
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);

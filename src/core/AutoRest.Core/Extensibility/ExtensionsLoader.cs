@@ -25,7 +25,7 @@ namespace AutoRest.Core.Extensibility
 
         public static IAnyPlugin GetPlugin()
         {
-            Logger.Log(Resources.InitializingCodeGenerator);
+            Logger.Instance.Log(Resources.InitializingCodeGenerator);
             if (Settings.Instance == null)
             {
                 throw new ArgumentNullException("settings");
@@ -66,7 +66,7 @@ namespace AutoRest.Core.Extensibility
                     throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
                 }
             }
-            Logger.Log(Resources.GeneratorInitialized,
+            Logger.Instance.Log(Resources.GeneratorInitialized,
                 Settings.Instance.CodeGenerator,
                 plugin.GetType().Assembly.GetName().Version);
             return plugin;
@@ -80,7 +80,7 @@ namespace AutoRest.Core.Extensibility
         /// <returns>Modeler specified in Settings.Modeler</returns>
         public static Modeler GetModeler()
         {
-            Logger.Log(Resources.InitializingModeler);
+            Logger.Instance.Log(Resources.InitializingModeler);
             if (Settings.Instance == null)
             {
                 throw new ArgumentNullException("settings", "settings or settings.Modeler cannot be null.");
@@ -115,7 +115,7 @@ namespace AutoRest.Core.Extensibility
                 throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
             }
 
-            Logger.Log(Resources.ModelerInitialized,
+            Logger.Instance.Log(Resources.ModelerInitialized,
                 Settings.Instance.Modeler,
                 modeler.GetType().Assembly.GetName().Version);
             return modeler;

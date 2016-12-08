@@ -13,17 +13,17 @@ namespace AutoRest.Core.Logging
     /// <summary>
     /// Aggregator for error, warning, and trace messages.
     /// </summary>
-    public static class Logger
+    public class Logger : IsSingleton<Logger>
     {
         /// <summary>
         /// Adds given listener to the current context.
         /// </summary>
-        public static void AddListener(ILogListener listener)
+        public void AddListener(ILogListener listener)
         {
             SingletonList<ILogListener>.Add(listener);
         }
         
-        public static void Log(LogMessage message)
+        public void Log(LogMessage message)
         {
             foreach (var listener in SingletonList<ILogListener>.RecursiveInstances)
             {
@@ -36,7 +36,7 @@ namespace AutoRest.Core.Logging
         /// </summary>
         /// <param name="message">Message to log. May include formatting.</param>
         /// <param name="args">Optional arguments to use if message includes formatting.</param>
-        public static void Log(LogMessageSeverity severity, string message, params object[] args)
+        public void Log(LogMessageSeverity severity, string message, params object[] args)
         {
             if (args != null && args.Length > 0)
             {
@@ -50,7 +50,7 @@ namespace AutoRest.Core.Logging
         /// </summary>
         /// <param name="message">Message to log. May include formatting.</param>
         /// <param name="args">Optional arguments to use if message includes formatting.</param>
-        public static void Log(string message, params object[] args)
+        public void Log(string message, params object[] args)
         {
             Log(LogMessageSeverity.Info, message, args);
         }

@@ -112,7 +112,7 @@ namespace AutoRest.Extensions.Azure
                 }
                 else
                 {
-                    Logger.Log(string.Format(CultureInfo.InvariantCulture, Resources.HeadMethodPossibleIncorrectSpecification, method.Name));
+                    Logger.Instance.Log(string.Format(CultureInfo.InvariantCulture, Resources.HeadMethodPossibleIncorrectSpecification, method.Name));
                 }
             }
         }

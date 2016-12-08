@@ -40,7 +40,7 @@ namespace AutoRest.Core
             {
                 throw new ArgumentNullException("settings");
             }
-            Logger.Log(Resources.AutoRestCore, Version);
+            Logger.Instance.Log(Resources.AutoRestCore, Version);
             
             CodeModel codeModel = null;
             
@@ -51,7 +51,7 @@ namespace AutoRest.Core
                 using (NewContext)
                 {
                     bool validationErrorFound = false;
-                    Logger.AddListener(new SignalingLogListener(Settings.Instance.ValidationLevel, _ => validationErrorFound = true));
+                    Logger.Instance.AddListener(new SignalingLogListener(Settings.Instance.ValidationLevel, _ => validationErrorFound = true));
 
                     // generate model from swagger 
                     codeModel = modeler.Build();
@@ -64,7 +64,7 @@ namespace AutoRest.Core
 
                     if (validationErrorFound)
                     {
-                        Logger.Log(LogMessageSeverity.Error, "Errors found during Swagger validation");
+                        Logger.Instance.Log(LogMessageSeverity.Error, "Errors found during Swagger validation");
                     }
                 }
 
@@ -135,7 +135,7 @@ namespace AutoRest.Core
             {
                 throw new ArgumentNullException("settings");
             }
-            Logger.Log(Resources.AutoRestCore, Version);
+            Logger.Instance.Log(Resources.AutoRestCore, Version);
             Modeler modeler = ExtensionsLoader.GetModeler();
 
             try
@@ -144,7 +144,7 @@ namespace AutoRest.Core
 
                 foreach (var message in messages)
                 {
-                    Logger.Log(message.Severity, "Comparison: {0}", message);
+                    Logger.Instance.Log(message.Severity, "Comparison: {0}", message);
                 }
             }
             catch (Exception exception)
