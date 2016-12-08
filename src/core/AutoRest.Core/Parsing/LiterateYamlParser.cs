@@ -28,8 +28,6 @@ namespace AutoRest.Core.Parsing
 
             // parse and merge code blocks into single syntax tree
             var mergedYaml = new YamlMappingNode();
-            var d = new Deserializer();
-            d.NodeDeserializers.Insert(0, new YamlBoolDeserializer());
 
             for (int i = 0; i < splitLines.Count; i += 2)
             {

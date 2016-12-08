@@ -81,19 +81,5 @@ namespace AutoRest.Swagger
 
             return reference;
         }
-
-        public static string EnsureYamlIsJson(this string text)
-        {
-            using (var y = new StringReader(text))
-            {
-                using (var s = new StringWriter(CultureInfo.CurrentCulture))
-                {
-                    var d = new Deserializer();
-                    d.NodeDeserializers.Insert(0, new YamlBoolDeserializer());
-                    new JsonSerializer().Serialize(s, d.Deserialize(y));
-                    return s.ToString();
-                }
-            }
-        }
     }
 }

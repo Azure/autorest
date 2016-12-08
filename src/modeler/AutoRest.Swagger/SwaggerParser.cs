@@ -24,18 +24,20 @@ namespace AutoRest.Swagger
             }
 
             var swaggerDocument = fileSystem.ReadFileAsText(path);
-            if (path.EndsWith(".md"))
-            {
-                swaggerDocument = new LiterateYamlParser().Parse(swaggerDocument);
-            }
-            swaggerDocument = swaggerDocument.EnsureYamlIsJson();
             return Parse(swaggerDocument);
         }
 
-        private static ServiceDefinition Parse(string swaggerDocument)
+        public static ServiceDefinition Parse(string swaggerDocument)
         {
             try
             {
+                if (!swaggerDocument.IsYaml()) // try parse as markdown if it is not YAML
+                {
+                    swaggerDocument = new LiterateYamlParser().Parse(swaggerDocument);
+                }
+                // normalize YAML to JSON since that's what we process
+                swaggerDocument = swaggerDocument.EnsureYamlIsJson();
+
                 var settings = new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.None,
