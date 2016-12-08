@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using AutoRest.Core.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -58,8 +59,9 @@ namespace AutoRest.Core.Parsing
                 }
                 doc = yamlStream.Documents[0].RootNode;
             }
-            catch
+            catch (Exception e)
             {
+                Logger.LogInfo("Document is not valid YAML");
                 // parsing failed, return null
             }
             return doc;
