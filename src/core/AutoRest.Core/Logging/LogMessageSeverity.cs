@@ -6,7 +6,7 @@ namespace AutoRest.Core.Logging
     /// <summary>
     /// severity of the log message.
     /// </summary>
-    public enum LogMessageSeverity
+    public enum Category
     {
         Debug,
         Info,

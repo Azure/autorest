@@ -50,7 +50,7 @@ namespace AutoRest.Preview
         {
             highlights.Clear();
 
-            var severityNames = Enum.GetNames(typeof(LogMessageSeverity));
+            var severityNames = Enum.GetNames(typeof(Category));
 
             for (int i = 0; i < severityNames.Length; ++i)
             {

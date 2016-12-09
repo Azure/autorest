@@ -61,7 +61,7 @@ namespace AutoRest.Core.Parsing
             }
             catch
             {
-                Logger.Instance.Log(LogMessageSeverity.Warning, "Parsed document is not valid YAML");
+                Logger.Instance.Log(Category.Warning, "Parsed document is not valid YAML");
                 // parsing failed, return null
             }
             return doc;

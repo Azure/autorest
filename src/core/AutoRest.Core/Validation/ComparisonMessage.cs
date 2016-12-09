@@ -14,9 +14,9 @@ namespace AutoRest.Core.Validation
     /// </summary>
     public class ComparisonMessage : LogMessage
     {
-        public ComparisonMessage(MessageTemplate template, ObjectPath path, LogMessageSeverity severity)
+        public ComparisonMessage(MessageTemplate template, ObjectPath path, Category severity)
             : this(template, path, severity, new string[0]) { }
-        public ComparisonMessage(MessageTemplate template, ObjectPath path, LogMessageSeverity severity, params object[] formatArguments)
+        public ComparisonMessage(MessageTemplate template, ObjectPath path, Category severity, params object[] formatArguments)
             : base(severity, $"Comparison: {template.Id} - {string.Format(CultureInfo.CurrentCulture, template.Message, formatArguments)}", path)
         {
             Id = template.Id;

@@ -46,7 +46,7 @@ namespace AutoRest
                 var plugin = ExtensionsLoader.GetPlugin();
                 var modeler = ExtensionsLoader.GetModeler();
                 var messages = new List<LogMessage>();
-                Logger.Instance.AddListener(new SignalingLogListener(LogMessageSeverity.Info, message => messages.Add(message)));
+                Logger.Instance.AddListener(new SignalingLogListener(Category.Info, message => messages.Add(message)));
                 try
                 {
                     var codeModel = modeler.Build();

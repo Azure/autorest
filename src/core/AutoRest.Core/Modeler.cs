@@ -3,7 +3,6 @@
 
 using AutoRest.Core.Model;
 using AutoRest.Core.Validation;
-using System;
 using System.Collections.Generic;
 
 namespace AutoRest.Core
@@ -13,7 +12,7 @@ namespace AutoRest.Core
         public abstract string Name { get; }
 
         public Settings Settings => Settings.Instance;
-        
+
         public abstract CodeModel Build();
 
         /// <summary>

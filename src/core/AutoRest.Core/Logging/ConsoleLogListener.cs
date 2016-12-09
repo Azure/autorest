@@ -8,16 +8,16 @@ namespace AutoRest.Core.Logging
 {
     public class ConsoleLogListener : ILogListener
     {
-        private static IDictionary<LogMessageSeverity, ConsoleColor> colors = new Dictionary<LogMessageSeverity, ConsoleColor>
+        private static IDictionary<Category, ConsoleColor> colors = new Dictionary<Category, ConsoleColor>
         {
-            { LogMessageSeverity.Debug, ConsoleColor.Gray },
-            { LogMessageSeverity.Fatal, ConsoleColor.Red },
-            { LogMessageSeverity.Error, ConsoleColor.Red },
-            { LogMessageSeverity.Warning, ConsoleColor.Yellow },
-            { LogMessageSeverity.Info, ConsoleColor.White },
+            { Category.Debug, ConsoleColor.Gray },
+            { Category.Fatal, ConsoleColor.Red },
+            { Category.Error, ConsoleColor.Red },
+            { Category.Warning, ConsoleColor.Yellow },
+            { Category.Info, ConsoleColor.White },
         };
 
-        private static ConsoleColor GetColorForSeverity(LogMessageSeverity severity)
+        private static ConsoleColor GetColorForSeverity(Category severity)
         {
             ConsoleColor color;
             if (!colors.TryGetValue(severity, out color))
@@ -28,8 +28,8 @@ namespace AutoRest.Core.Logging
         }
 
         public ConsoleLogListener(
-            LogMessageSeverity minSeverityForStdout = LogMessageSeverity.Info,
-            LogMessageSeverity minSeverityForStderr = LogMessageSeverity.Error,
+            Category minSeverityForStdout = Category.Info,
+            Category minSeverityForStderr = Category.Error,
             bool verbose = false)
         {
             MinSeverityForStdout = minSeverityForStdout;
@@ -37,9 +37,9 @@ namespace AutoRest.Core.Logging
             Verbose = verbose;
         }
 
-        public LogMessageSeverity MinSeverityForStdout { get; }
+        public Category MinSeverityForStdout { get; }
 
-        public LogMessageSeverity MinSeverityForStderr { get; }
+        public Category MinSeverityForStderr { get; }
 
         public bool Verbose { get; }
 

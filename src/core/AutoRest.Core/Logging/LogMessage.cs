@@ -19,10 +19,10 @@ namespace AutoRest.Core.Logging
         /// </summary>
         /// <param name="severity">The LogEntrySeverity of the LogEntry instance.</param>
         /// <param name="message">The message of the LogEntry instance.</param>
-        public LogMessage(LogMessageSeverity severity, string message)
+        public LogMessage(Category severity, string message)
             : this(severity, message, ObjectPath.Empty) { }
 
-        public LogMessage(LogMessageSeverity severity, string message, ObjectPath path)
+        public LogMessage(Category severity, string message, ObjectPath path)
         {
             if (path == null)
             {
@@ -46,7 +46,7 @@ namespace AutoRest.Core.Logging
             }
         }
 
-        public LogMessageSeverity Severity { get; }
+        public Category Severity { get; }
 
         public string Message { get; }
 

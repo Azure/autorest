@@ -52,6 +52,6 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         ///     The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override LogMessageSeverity Severity => LogMessageSeverity.Error;
+        public override Category Severity => Category.Error;
     }
 }

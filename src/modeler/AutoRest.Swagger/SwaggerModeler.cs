@@ -64,7 +64,7 @@ namespace AutoRest.Swagger
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public override CodeModel Build()
         {
-            Logger.Instance.Log(LogMessageSeverity.Info, Resources.ParsingSwagger);
+            Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input))
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
@@ -78,7 +78,7 @@ namespace AutoRest.Swagger
                 Logger.Instance.Log(validationEx);
             }
 
-            Logger.Instance.Log(LogMessageSeverity.Info, Resources.GeneratingClient);
+            Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
             // Update settings
             UpdateSettings();
 
@@ -132,7 +132,7 @@ namespace AutoRest.Swagger
                     }
                     else
                     {
-                        Logger.Instance.Log(LogMessageSeverity.Warning, Resources.OptionsNotSupported);
+                        Logger.Instance.Log(Category.Warning, Resources.OptionsNotSupported);
                     }
                 }
             }
@@ -161,7 +161,7 @@ namespace AutoRest.Swagger
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public override IEnumerable<ComparisonMessage> Compare()
         {
-            Logger.Instance.Log(LogMessageSeverity.Info, Resources.ParsingSwagger);
+            Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input) || string.IsNullOrWhiteSpace(Settings.Previous))
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
@@ -178,7 +178,7 @@ namespace AutoRest.Swagger
 
             // Only compare versions if the new version is correct.
             var comparisonMessages = 
-                !LogMessages.Any(m => m.Severity > LogMessageSeverity.Error) ? 
+                !LogMessages.Any(m => m.Severity > Category.Error) ? 
                 newDefintion.Compare(context, oldDefintion) : 
                 Enumerable.Empty<ComparisonMessage>();
 

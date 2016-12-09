@@ -66,7 +66,7 @@ namespace AutoRest.Core
         /// <returns></returns>
         public async Task Write(ITemplate template, string fileName)
         {
-            Logger.Instance.Log(LogMessageSeverity.Info, $"[WRITING] {template.GetType().Name} => {fileName}");
+            Logger.Instance.Log(Category.Info, $"[WRITING] {template.GetType().Name} => {fileName}");
             template.Settings = Settings.Instance;
             var stringBuilder = new StringBuilder();
             using (template.TextWriter = new StringWriter(stringBuilder))
@@ -91,7 +91,7 @@ namespace AutoRest.Core
             {
                 if (!IsSingleFileGenerationSupported)
                 {
-                    Logger.Instance.Log(LogMessageSeverity.Error, // new ArgumentException(Settings.Instance.OutputFileName),
+                    Logger.Instance.Log(Category.Error, // new ArgumentException(Settings.Instance.OutputFileName),
                         Resources.LanguageDoesNotSupportSingleFileGeneration, Settings.Instance.CodeGenerator);
                     return;
                 }

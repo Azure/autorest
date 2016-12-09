@@ -26,7 +26,7 @@ namespace AutoRest.Core.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public abstract LogMessageSeverity Severity { get; }
+        public abstract Category Severity { get; }
 
         /// <summary>
         /// Returns the validation messages resulting from validating this object

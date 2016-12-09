@@ -9,14 +9,14 @@ namespace AutoRest.Core.Logging
     public class SignalingLogListener : ILogListener
     {
         public SignalingLogListener(
-            LogMessageSeverity minSeverityForSignal, 
+            Category minSeverityForSignal, 
             Action<LogMessage> signal)
         {
             MinSeverityForSignal = minSeverityForSignal;
             Signal = signal;
         }
 
-        public LogMessageSeverity MinSeverityForSignal { get; }
+        public Category MinSeverityForSignal { get; }
 
         public Action<LogMessage> Signal { get; }
 

@@ -61,7 +61,7 @@ namespace AutoRest.Core.Logging
         /// <param name="severity">Severity of the message.</param>
         /// <param name="message">Message to log. May include formatting.</param>
         /// <param name="args">Optional arguments to use if message includes formatting.</param>
-        public void Log(LogMessageSeverity severity, string message, params object[] args)
+        public void Log(Category severity, string message, params object[] args)
         {
             if (args != null && args.Length > 0)
             {

@@ -40,7 +40,7 @@ namespace AutoRest.Core
             {
                 throw new ArgumentNullException("settings");
             }
-            Logger.Instance.Log(LogMessageSeverity.Info, Resources.AutoRestCore, Version);
+            Logger.Instance.Log(Category.Info, Resources.AutoRestCore, Version);
             
             CodeModel codeModel = null;
             
@@ -64,7 +64,7 @@ namespace AutoRest.Core
 
                     if (validationErrorFound)
                     {
-                        Logger.Instance.Log(LogMessageSeverity.Error, "Errors found during Swagger validation");
+                        Logger.Instance.Log(Category.Error, "Errors found during Swagger validation");
                     }
                 }
 
@@ -135,7 +135,7 @@ namespace AutoRest.Core
             {
                 throw new ArgumentNullException("settings");
             }
-            Logger.Instance.Log(LogMessageSeverity.Info, Resources.AutoRestCore, Version);
+            Logger.Instance.Log(Category.Info, Resources.AutoRestCore, Version);
             Modeler modeler = ExtensionsLoader.GetModeler();
 
             try
