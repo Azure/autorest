@@ -6,7 +6,7 @@ using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
 
-namespace AutoRest.Swagger
+namespace AutoRest.Core.Parsing
 {
     public class YamlBoolDeserializer : INodeDeserializer
     {

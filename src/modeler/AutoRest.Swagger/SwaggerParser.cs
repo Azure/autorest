@@ -4,6 +4,7 @@
 using System;
 using System.Globalization;
 using AutoRest.Core.Logging;
+using AutoRest.Core.Parsing;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger.JsonConverters;
 using AutoRest.Swagger.Model;
@@ -22,14 +23,22 @@ namespace AutoRest.Swagger
                 throw new ArgumentNullException("fileSystem");
             }
 
-            return SwaggerParser.Parse(fileSystem.ReadFileAsText(path));
+            var swaggerDocument = fileSystem.ReadFileAsText(path);
+            return Parse(swaggerDocument);
         }
 
         public static ServiceDefinition Parse(string swaggerDocument)
         {
             try
             {
+                if (!swaggerDocument.IsYaml()) // try parse as markdown if it is not YAML
+                {
+                    Logger.LogInfo("Parsing as literate Swagger");
+                    swaggerDocument = new LiterateYamlParser().Parse(swaggerDocument, true);
+                }
+                // normalize YAML to JSON since that's what we process
                 swaggerDocument = swaggerDocument.EnsureYamlIsJson();
+
                 var settings = new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.None,
