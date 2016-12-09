@@ -12,13 +12,13 @@ namespace AutoRest.Swagger.Validation
 {
     public class ModelTypeIncomplete : TypedRule<Schema>
     {
-        public override IEnumerable<LogMessage> GetLogMessages(Schema schema, RuleContext context)
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Schema schema, RuleContext context)
         {
             if (schema != null && string.IsNullOrEmpty(schema.Reference) && schema.RepresentsCompositeType())
             {
                 if (schema.Description == null)
                 {
-                    yield return new LogMessage(context.Path, this, "description");
+                    yield return new ValidationMessage(context.Path, this, "description");
                 }
             }
         }

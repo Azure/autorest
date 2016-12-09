@@ -33,6 +33,6 @@ namespace AutoRest.Core.Validation
         /// </summary>
         /// <param name="entity">The object to validate</param>
         /// <returns></returns>
-        public abstract IEnumerable<LogMessage> GetLogMessages(object entity, RuleContext context);
+        public abstract IEnumerable<ValidationMessage> GetValidationMessages(object entity, RuleContext context);
     }
 }

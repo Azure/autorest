@@ -46,7 +46,7 @@ namespace AutoRest.Core.Logging
                 var original = Console.ForegroundColor;
                 Console.ForegroundColor = GetColorForSeverity(message.Severity);
                 // Write the severity and message to console
-                var logMessage = $"{message.Severity.ToString().ToUpperInvariant()} - {message.Type?.Name ?? "generic"}: {message.Message}\n    Path: {message.Path.PathStringThomasStyle}";
+                var logMessage = $"{message.Severity.ToString().ToUpperInvariant()}: {message.Message}\n    Path: {message.Path.PathStringThomasStyle}";
                 if (message.Severity >= MinSeverityForStderr)
                 {
                     Console.Error.WriteLine(logMessage);

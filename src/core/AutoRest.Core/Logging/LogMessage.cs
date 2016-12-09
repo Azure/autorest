@@ -33,20 +33,6 @@ namespace AutoRest.Core.Logging
             Path = path;
         }
 
-        public LogMessage(ObjectPath path, Rule rule)
-            : this(path, rule, new string[0]) { }
-
-        public LogMessage(ObjectPath path, Rule rule, params object[] formatArguments)
-            : this(rule.Severity, string.Format(CultureInfo.CurrentCulture, rule.MessageTemplate, formatArguments), path)
-        {
-            Type = rule.GetType();
-        }
-
-        /// <summary>
-        /// The class of the Validation message
-        /// </summary>
-        public Type Type { get; }
-
         /// <summary>
         /// Gets or sets the LogEntrySeverity.
         /// </summary>

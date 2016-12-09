@@ -116,7 +116,7 @@ namespace AutoRest.Core.Validation
             classRules = collectionRules.Concat(classRules);
 
             // Apply each rule for the entity
-            return classRules.SelectMany(rule => rule.GetLogMessages(entity, parentContext));
+            return classRules.SelectMany(rule => rule.GetValidationMessages(entity, parentContext));
         }
 
         private IEnumerable<LogMessage> ValidateProperty(PropertyInfo prop, object value, ObjectPath entityPath, RuleContext parentContext)
@@ -133,7 +133,7 @@ namespace AutoRest.Core.Validation
             var collectionRules = prop.GetValidationCollectionRules();
 
             // Validate the value of this property against any rules for it
-            var propertyMessages = propertyRules.SelectMany(r => r.GetLogMessages(value, ruleContext));
+            var propertyMessages = propertyRules.SelectMany(r => r.GetValidationMessages(value, ruleContext));
 
             // Recursively validate the property (e.g. its properties or any list/dictionary entries),
             // passing any rules that apply to this collection)

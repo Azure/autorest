@@ -19,13 +19,13 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override IEnumerable<LogMessage> GetLogMessages(object entity, RuleContext context)
+        public override IEnumerable<ValidationMessage> GetValidationMessages(object entity, RuleContext context)
         {
             object[] formatParams;
             // Only try to validate an object with this extension rule if the extension name matches the key
             if (context.Key == ExtensionName && !IsValid(entity, context, out formatParams))
             {
-                yield return new LogMessage(context.Path, this, formatParams);
+                yield return new ValidationMessage(context.Path, this, formatParams);
             }
         }
 

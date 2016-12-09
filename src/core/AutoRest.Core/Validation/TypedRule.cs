@@ -18,19 +18,19 @@ namespace AutoRest.Core.Validation
         {
         }
 
-        public sealed override IEnumerable<LogMessage> GetLogMessages(object entity, RuleContext context) => entity is T ? GetLogMessages((T)entity, context) : Enumerable.Empty<LogMessage>();
+        public sealed override IEnumerable<ValidationMessage> GetValidationMessages(object entity, RuleContext context) => entity is T ? GetValidationMessages((T)entity, context) : Enumerable.Empty<ValidationMessage>();
 
         /// <summary>
         /// Overridable method that lets a child rule return multiple validation messages for the <paramref name="entity"/>
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual IEnumerable<LogMessage> GetLogMessages(T entity, RuleContext context)
+        public virtual IEnumerable<ValidationMessage> GetValidationMessages(T entity, RuleContext context)
         {
             object[] formatParams;
             if (!IsValid(entity, context, out formatParams))
             {
-                yield return new LogMessage(context.Path, this, formatParams);
+                yield return new ValidationMessage(context.Path, this, formatParams);
             }
         }
 

@@ -17,22 +17,22 @@ namespace AutoRest.Swagger.Tests
 {
     internal static class AssertExtensions
     {
-        internal static void AssertOnlyValidationWarning(this IEnumerable<LogMessage> messages, Type validationType)
+        internal static void AssertOnlyValidationWarning(this IEnumerable<ValidationMessage> messages, Type validationType)
         {
-            AssertOnlyLogMessage(messages.Where(m => m.Severity == LogMessageSeverity.Warning), validationType);
+            AssertOnlyValidationMessage(messages.Where(m => m.Severity == LogMessageSeverity.Warning), validationType);
         }
 
-        internal static void AssertOnlyValidationWarning(this IEnumerable<LogMessage> messages, Type validationType, int count)
+        internal static void AssertOnlyValidationWarning(this IEnumerable<ValidationMessage> messages, Type validationType, int count)
         {
-            AssertOnlyLogMessage(messages.Where(m => m.Severity == LogMessageSeverity.Warning), validationType, count);
+            AssertOnlyValidationMessage(messages.Where(m => m.Severity == LogMessageSeverity.Warning), validationType, count);
         }
-        internal static void AssertOnlyLogMessage(this IEnumerable<LogMessage> messages, Type validationType)
+        internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, Type validationType)
         {
             // checks that the collection has one item, and that it is the correct message type.
-            AssertOnlyLogMessage(messages, validationType, 1);
+            AssertOnlyValidationMessage(messages, validationType, 1);
         }
 
-        internal static void AssertOnlyLogMessage(this IEnumerable<LogMessage> messages, Type validationType, int count)
+        internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, Type validationType, int count)
         {
             // checks that the collection has the right number of items and each is the correct type.
             Assert.Equal(count, messages.Count(message => message.Type == validationType));
@@ -42,7 +42,7 @@ namespace AutoRest.Swagger.Tests
     [Collection("Validation Tests")]
     public partial class SwaggerModelerValidationTests
     {
-        private IEnumerable<LogMessage> ValidateSwagger(string input)
+        private IEnumerable<ValidationMessage> ValidateSwagger(string input)
         {
             using (NewContext)
             {
@@ -55,7 +55,7 @@ namespace AutoRest.Swagger.Tests
                 var messages = new List<LogMessage>();
                 Logger.Instance.AddListener(new SignalingLogListener(LogMessageSeverity.Info, messages.Add));
                 modeler.Build();
-                return messages;
+                return messages.OfType<ValidationMessage>();
             }
         }
 
@@ -63,14 +63,14 @@ namespace AutoRest.Swagger.Tests
         public void MissingDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "definition-missing-description.json"));
-            messages.AssertOnlyLogMessage(typeof(ModelTypeIncomplete));
+            messages.AssertOnlyValidationMessage(typeof(ModelTypeIncomplete));
         }
 
         [Fact]
         public void AvoidMsdnReferencesValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "definition-contains-msdn-reference.json"));
-            messages.AssertOnlyLogMessage(typeof(AvoidMsdnReferences), 4);
+            messages.AssertOnlyValidationMessage(typeof(AvoidMsdnReferences), 4);
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "default-value-not-in-enum.json"));
 
-            messages.AssertOnlyLogMessage(typeof(DefaultMustBeInEnum));
+            messages.AssertOnlyValidationMessage(typeof(DefaultMustBeInEnum));
         }
 
         [Fact]
@@ -99,35 +99,35 @@ namespace AutoRest.Swagger.Tests
         public void AnonymousSchemasDiscouragedValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "anonymous-response-type.json"));
-            messages.AssertOnlyLogMessage(typeof(AvoidAnonymousTypes));
+            messages.AssertOnlyValidationMessage(typeof(AvoidAnonymousTypes));
         }
 
         [Fact]
         public void AnonymousParameterSchemaValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "anonymous-parameter-type.json"));
-            messages.AssertOnlyLogMessage(typeof(AnonymousParameterTypes));
+            messages.AssertOnlyValidationMessage(typeof(AnonymousParameterTypes));
         }
 
         [Fact]
         public void OperationParametersValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operations-invalid-parameters.json"));
-            messages.AssertOnlyLogMessage(typeof(OperationParametersValidation));
+            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation));
         }
         
         [Fact]
         public void ServiceDefinitionParametersValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "service-def-invalid-parameters.json"));
-            messages.AssertOnlyLogMessage(typeof(ServiceDefinitionParameters));
+            messages.AssertOnlyValidationMessage(typeof(ServiceDefinitionParameters));
         }
         
         [Fact]
         public void OperationGroupSingleUnderscoreValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operation-group-underscores.json"));
-            messages.AssertOnlyLogMessage(typeof(OneUnderscoreInOperationId));
+            messages.AssertOnlyValidationMessage(typeof(OneUnderscoreInOperationId));
         }
 
 
@@ -177,21 +177,21 @@ namespace AutoRest.Swagger.Tests
         public void NoResponsesValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operations-no-responses.json"));
-            messages.AssertOnlyLogMessage(typeof(ResponseRequired));
+            messages.AssertOnlyValidationMessage(typeof(ResponseRequired));
         }
 
         [Fact]
         public void XmsPathNotInPathsValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "xms-path-not-in-paths.json"));
-            messages.AssertOnlyLogMessage(typeof(XmsPathsMustOverloadPaths));
+            messages.AssertOnlyValidationMessage(typeof(XmsPathsMustOverloadPaths));
         }
 
         [Fact]
         public void InvalidFormatValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "invalid-format.json"));
-            messages.AssertOnlyLogMessage(typeof(ValidFormats));
+            messages.AssertOnlyValidationMessage(typeof(ValidFormats));
         }
 
         [Fact]
@@ -205,35 +205,35 @@ namespace AutoRest.Swagger.Tests
         public void NestedPropertiesValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "nested-properties.json"));
-            messages.AssertOnlyLogMessage(typeof(AvoidNestedProperties));
+            messages.AssertOnlyValidationMessage(typeof(AvoidNestedProperties));
         }
 
         [Fact]
         public void RequiredPropertiesValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "required-property-not-in-properties.json"));
-            messages.AssertOnlyLogMessage(typeof(RequiredPropertiesMustExist));
+            messages.AssertOnlyValidationMessage(typeof(RequiredPropertiesMustExist));
         }
 
         [Fact]
         public void OperationDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operation-missing-description.json"));
-            messages.AssertOnlyLogMessage(typeof(OperationDescriptionRequired));
+            messages.AssertOnlyValidationMessage(typeof(OperationDescriptionRequired));
         }
 
         [Fact]
         public void ParameterDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "parameter-missing-description.json"));
-            messages.AssertOnlyLogMessage(typeof(ParameterDescriptionRequired));
+            messages.AssertOnlyValidationMessage(typeof(ParameterDescriptionRequired));
         }
 
         [Fact]
         public void PageableNextLinkNotModeledValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "pageable-nextlink-not-modeled.json"));
-            messages.AssertOnlyLogMessage(typeof(NextLinkPropertyMustExist));
+            messages.AssertOnlyValidationMessage(typeof(NextLinkPropertyMustExist));
         }
 
         [Fact]
