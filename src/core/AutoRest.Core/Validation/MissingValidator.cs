@@ -31,6 +31,6 @@ namespace AutoRest.Core.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override LogEntrySeverity Severity => LogEntrySeverity.Debug;
+        public override Category Severity => Category.Debug;
     }
 }

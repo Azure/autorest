@@ -59,7 +59,7 @@ namespace AutoRest.Swagger.Model
 
             foreach (var header in headers)
             {
-                context.Push(header.Key);
+                context.PushProperty(header.Key);
 
                 Header oldHeader = null;
                 if (!priorHeaders.TryGetValue(header.Key, out oldHeader))
@@ -76,7 +76,7 @@ namespace AutoRest.Swagger.Model
 
             foreach (var header in priorHeaders)
             {
-                context.Push(header.Key);
+                context.PushProperty(header.Key);
 
                 Header newHeader = null;
                 if (!headers.TryGetValue(header.Key, out newHeader))

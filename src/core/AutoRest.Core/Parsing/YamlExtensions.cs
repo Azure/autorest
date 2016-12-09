@@ -59,9 +59,9 @@ namespace AutoRest.Core.Parsing
                 }
                 doc = yamlStream.Documents[0].RootNode;
             }
-            catch (Exception e)
+            catch
             {
-                Logger.LogInfo("Document is not valid YAML");
+                Logger.Instance.Log(Category.Warning, "Parsed document is not valid YAML");
                 // parsing failed, return null
             }
             return doc;
@@ -79,44 +79,7 @@ namespace AutoRest.Core.Parsing
             }
         }
 
-        public static YamlNode ResolvePath(this YamlNode node, IEnumerable<string> path)
-        {
-            if (!path.Any())
-                return node;
-
-            var next = path.First();
-            path = path.Skip(1);
-
-            var mnode = node as YamlMappingNode;
-            if (mnode != null)
-            {
-                var child = mnode.Children.FirstOrDefault(pair => pair.Key.ToString().Equals(next, StringComparison.InvariantCultureIgnoreCase));
-                if (child.Value != null)
-                {
-                    return path.Any()
-                        ? ResolvePath(child.Value, path)
-                        : child.Key;
-                }
-            }
-
-            var snode = node as YamlSequenceNode;
-            if (snode != null)
-            {
-                var indexStr = next.TrimStart('[').TrimEnd(']');
-                int index;
-                if (int.TryParse(indexStr, out index))
-                {
-                    if (0 <= index && index < snode.Children.Count)
-                    {
-                        return snode.Children[index];
-                    }
-                }
-            }
-
-            return node;
-        }
-
-        public static YamlMappingNode MergeYamlObjects(YamlMappingNode a, YamlMappingNode b, string path)
+        public static YamlMappingNode MergeYamlObjects(YamlMappingNode a, YamlMappingNode b, ObjectPath path)
         {
             if (a == null)
             {
@@ -132,7 +95,7 @@ namespace AutoRest.Core.Parsing
             var keys = a.Children.Keys.Concat(b.Children.Keys).Distinct();
             foreach (var key in keys)
             {
-                var subpath = path + "/" + key;
+                var subpath = path.AppendProperty(key.ToString());
 
                 // forward if only present in one of the nodes
                 if (!a.Children.ContainsKey(key))
@@ -160,7 +123,7 @@ namespace AutoRest.Core.Parsing
 
         public static YamlMappingNode MergeWith(this YamlMappingNode self, YamlMappingNode other)
         {
-            return MergeYamlObjects(self, other, "#");
+            return MergeYamlObjects(self, other, ObjectPath.Empty);
         }
     }
 }

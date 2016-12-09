@@ -19,17 +19,17 @@ namespace AutoRest.Swagger.Tests
     {
         internal static void AssertOnlyValidationWarning(this IEnumerable<ValidationMessage> messages, Type validationType)
         {
-            AssertOnlyValidationMessage(messages.Where(m => m.Severity == LogEntrySeverity.Warning), validationType);
+            AssertOnlyValidationMessage(messages.Where(m => m.Severity == Category.Warning), validationType);
         }
 
         internal static void AssertOnlyValidationWarning(this IEnumerable<ValidationMessage> messages, Type validationType, int count)
         {
-            AssertOnlyValidationMessage(messages.Where(m => m.Severity == LogEntrySeverity.Warning), validationType, count);
+            AssertOnlyValidationMessage(messages.Where(m => m.Severity == Category.Warning), validationType, count);
         }
         internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, Type validationType)
         {
             // checks that the collection has one item, and that it is the correct message type.
-            Assert.Collection(messages, message => Assert.Equal(validationType, message.Type));
+            AssertOnlyValidationMessage(messages, validationType, 1);
         }
 
         internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, Type validationType, int count)
@@ -52,13 +52,10 @@ namespace AutoRest.Swagger.Tests
                     Input = input
                 };
                 var modeler = new SwaggerModeler();
-                IEnumerable<ValidationMessage> messages;
-                modeler.Build(out messages);
-
-                // remove debug-level messages
-                messages = messages.Where(each => each.Severity > LogEntrySeverity.Debug);
-
-                return messages;
+                var messages = new List<LogMessage>();
+                Logger.Instance.AddListener(new SignalingLogListener(Category.Info, messages.Add));
+                modeler.Build();
+                return messages.OfType<ValidationMessage>();
             }
         }
 
@@ -258,7 +255,7 @@ namespace AutoRest.Swagger.Tests
         public void CleanFileValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "clean-complex-spec.json"));
-            Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Warning));
+            Assert.Empty(messages.Where(m => m.Severity >= Category.Warning));
         }
 
         /// <summary>
@@ -268,7 +265,7 @@ namespace AutoRest.Swagger.Tests
         public void RequiredPropertyDefinedAllOf()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "required-property-defined-allof.json"));
-            Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Warning));
+            Assert.Empty(messages.Where(m => m.Severity >= Category.Warning));
         }
 
         /// <summary>
@@ -278,7 +275,7 @@ namespace AutoRest.Swagger.Tests
         public void PageableNextLinkDefinedAllOf()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "pageable-nextlink-defined-allof.json"));
-            Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Warning));
+            Assert.Empty(messages.Where(m => m.Severity >= Category.Warning));
         }
     }
 

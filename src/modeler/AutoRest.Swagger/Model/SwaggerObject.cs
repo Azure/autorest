@@ -329,7 +329,7 @@ namespace AutoRest.Swagger.Model
             }
             else if (AdditionalProperties != null)
             {
-                context.Push("additionalProperties");
+                context.PushProperty("additionalProperties");
                 AdditionalProperties.Compare(context, prior.AdditionalProperties);
                 context.Pop();
             }
@@ -505,7 +505,7 @@ namespace AutoRest.Swagger.Model
 
             if (prior.Items != null && Items != null)
             {
-                context.Push("items");
+                context.PushProperty("items");
                 Items.Compare(context, prior.Items);
                 context.Pop();
             }

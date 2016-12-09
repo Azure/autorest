@@ -204,7 +204,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Error parsing AutoRest.json file.
+        ///    Looks up a localized string similar to Error parsing AutoRest.json file: {0}.
         /// </summary>
         public static string ErrorParsingConfig {
             get {

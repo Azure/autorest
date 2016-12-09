@@ -26,9 +26,8 @@ namespace AutoRest.Swagger.Tests
                         OutputDirectory = "X:\\Output",
                         Header = "MICROSOFT_MIT_NO_VERSION",
                         Modeler = modeler,
-                    PayloadFlatteningThreshold = 1,
-                    CodeGenerator =  plugin
-
+                        PayloadFlatteningThreshold = 1,
+                        CodeGenerator =  plugin
                     };
 
                 RunTests(resultFolder);

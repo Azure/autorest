@@ -145,7 +145,7 @@
     <value>Error loading {0} assembly: {1}</value>
   </data>
   <data name="ErrorParsingConfig" xml:space="preserve">
-    <value>Error parsing AutoRest.json file</value>
+    <value>Error parsing AutoRest.json file: {0}</value>
   </data>
   <data name="ErrorSavingGeneratedCode" xml:space="preserve">
     <value>Error saving generated code: {0}</value>

@@ -422,13 +422,6 @@ namespace AutoRest.CompositeSwagger
             }
         }
 
-        public override CodeModel Build(out IEnumerable<ValidationMessage> messages)
-        {
-            // No composite modeler validation messages yet
-            messages = new List<ValidationMessage>();
-            return Build();
-        }
-
         /// <summary>
         /// Copares two versions of the same service specification.
         /// </summary>

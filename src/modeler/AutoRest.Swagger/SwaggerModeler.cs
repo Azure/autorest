@@ -56,21 +56,15 @@ namespace AutoRest.Swagger
         /// Default protocol when no protocol is specified in the schema
         /// </summary>
         public TransferProtocolScheme DefaultProtocol { get; set; }
-
-        public override CodeModel Build()
-        {
-            IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
-            return Build(out messages);
-        }
-
+        
         /// <summary>
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override CodeModel Build(out IEnumerable<ValidationMessage> messages)
+        public override CodeModel Build()
         {
-            Logger.LogInfo(Resources.ParsingSwagger);
+            Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input))
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
@@ -79,9 +73,12 @@ namespace AutoRest.Swagger
 
             // Look for semantic errors and warnings in the document.
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            messages = validator.GetValidationExceptions(ServiceDefinition).ToList();
+            foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
+            {
+                Logger.Instance.Log(validationEx);
+            }
 
-            Logger.LogInfo(Resources.GeneratingClient);
+            Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
             // Update settings
             UpdateSettings();
 
@@ -135,7 +132,7 @@ namespace AutoRest.Swagger
                     }
                     else
                     {
-                        Logger.LogWarning(Resources.OptionsNotSupported);
+                        Logger.Instance.Log(Category.Warning, Resources.OptionsNotSupported);
                     }
                 }
             }
@@ -164,7 +161,7 @@ namespace AutoRest.Swagger
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public override IEnumerable<ComparisonMessage> Compare()
         {
-            Logger.LogInfo(Resources.ParsingSwagger);
+            Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input) || string.IsNullOrWhiteSpace(Settings.Previous))
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
@@ -177,17 +174,16 @@ namespace AutoRest.Swagger
 
             // Look for semantic errors and warnings in the new document.
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            var validationMessages = validator.GetValidationExceptions(newDefintion).ToList();
+            var LogMessages = validator.GetValidationExceptions(newDefintion).ToList();
 
             // Only compare versions if the new version is correct.
             var comparisonMessages = 
-                !validationMessages.Any(m => m.Severity > LogEntrySeverity.Error) ? 
+                !LogMessages.Any(m => m.Severity > Category.Error) ? 
                 newDefintion.Compare(context, oldDefintion) : 
                 Enumerable.Empty<ComparisonMessage>();
 
-            return validationMessages
-                .Select(msg => 
-                    new ComparisonMessage(new MessageTemplate { Id = 0, Message = msg.Message }, string.Join("/", msg.Path), msg.Severity))
+            return LogMessages
+                .Select(msg => new ComparisonMessage(new MessageTemplate { Id = 0, Message = msg.Message }, msg.Path, msg.Severity))
                 .Concat(comparisonMessages);
         }
 
