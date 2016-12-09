@@ -41,6 +41,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// Specifies the Swagger Specification version being used. 
         /// </summary>
+        [JsonProperty("swagger", Required = Required.Always)]
         public string Swagger { get; set; }
 
         /// <summary>
