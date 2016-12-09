@@ -15,15 +15,19 @@ namespace AutoRest.Core.Parsing
 {
     public class LiterateYamlParser
     {
-        public string Parse(string markdown)
+        public string Parse(string markdown, bool requireCodeBlocks = false)
         {
             // search code blocks
             var lines = markdown.Split(new[] {"\r\n", "\r", "\n"}, StringSplitOptions.None);
             var splitLines =
                 Enumerable.Range(0, lines.Length).Where(lineNo => lines[lineNo].Trim().StartsWith("```")).ToList();
-            if (splitLines.Count%2 != 0)
+            if (splitLines.Count % 2 != 0)
             {
                 throw new FormatException("Could not determine code blocks in provided markdown.");
+            }
+            if (requireCodeBlocks && splitLines.Count == 0)
+            {
+                throw new FormatException("Require at least one code block in provided markdown.");
             }
 
             // parse and merge code blocks into single syntax tree
