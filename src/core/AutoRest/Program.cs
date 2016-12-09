@@ -71,7 +71,7 @@ namespace AutoRest
                             {
                                 if (!"None".EqualsIgnoreCase(settings.CodeGenerator))
                                 {
-                                    Logger.Instance.Log(Resources.GenerationFailed);
+                                    Logger.Instance.Log(LogMessageSeverity.Error, Resources.GenerationFailed);
                                     Logger.Instance.Log(LogMessageSeverity.Error, "{0} {1}",
                                         typeof(Program).Assembly.ManifestModule.Name, string.Join(" ", args));
                                 }
@@ -80,7 +80,7 @@ namespace AutoRest
                             {
                                 if (!"None".EqualsIgnoreCase(settings.CodeGenerator))
                                 {
-                                    Logger.Instance.Log(Resources.GenerationComplete,
+                                    Logger.Instance.Log(LogMessageSeverity.Info, Resources.GenerationComplete,
                                         settings.CodeGenerator, settings.Input);
                                 }
                                 exitCode = (int)ExitCode.Success;

@@ -58,6 +58,7 @@ namespace AutoRest.Core.Logging
         /// <summary>
         /// Logs a message of specified severity.
         /// </summary>
+        /// <param name="severity">Severity of the message.</param>
         /// <param name="message">Message to log. May include formatting.</param>
         /// <param name="args">Optional arguments to use if message includes formatting.</param>
         public void Log(LogMessageSeverity severity, string message, params object[] args)
@@ -67,16 +68,6 @@ namespace AutoRest.Core.Logging
                 message = string.Format(CultureInfo.InvariantCulture, message, args);
             }
             Log(new LogMessage(severity, message));
-        }
-
-        /// <summary>
-        /// Logs an info message.
-        /// </summary>
-        /// <param name="message">Message to log. May include formatting.</param>
-        /// <param name="args">Optional arguments to use if message includes formatting.</param>
-        public void Log(string message, params object[] args)
-        {
-            Log(LogMessageSeverity.Info, message, args);
         }
     }
 }

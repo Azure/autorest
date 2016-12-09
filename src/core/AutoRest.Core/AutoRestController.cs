@@ -40,7 +40,7 @@ namespace AutoRest.Core
             {
                 throw new ArgumentNullException("settings");
             }
-            Logger.Instance.Log(Resources.AutoRestCore, Version);
+            Logger.Instance.Log(LogMessageSeverity.Info, Resources.AutoRestCore, Version);
             
             CodeModel codeModel = null;
             
@@ -135,7 +135,7 @@ namespace AutoRest.Core
             {
                 throw new ArgumentNullException("settings");
             }
-            Logger.Instance.Log(Resources.AutoRestCore, Version);
+            Logger.Instance.Log(LogMessageSeverity.Info, Resources.AutoRestCore, Version);
             Modeler modeler = ExtensionsLoader.GetModeler();
 
             try
