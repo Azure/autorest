@@ -32,7 +32,7 @@ namespace AutoRest.Core.Logging
             Message = message;
             Path = path;
 
-            if (Settings.Instance.Verbose)
+            if (true == Settings.Instance?.Verbose)
             {
                 var stackTrace = Environment.StackTrace;
 
