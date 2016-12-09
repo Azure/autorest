@@ -100,8 +100,7 @@ namespace AutoRest.Preview
                     {
                         Start = start,
                         End = start + len,
-                        Message =
-                            $"{message.Severity}: [{message.Path.PathStringThomasStyle}] {message.Message}"
+                        Message = $"{message.Severity}: [{message.Path.PathStringThomasStyle}] {message.Message}"
                     });
                 }
             }
