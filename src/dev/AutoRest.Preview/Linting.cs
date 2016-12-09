@@ -92,7 +92,7 @@ namespace AutoRest.Preview
                 foreach (var message in messages)
                 {
                     scintilla.IndicatorCurrent = INDICATOR_BASE + (int)message.Severity;
-                    var node = doc.ResolvePath(message.Path.Path);
+                    var node = message.Path.SelectNode(doc);
                     var start = node.Start.Index;
                     var len = Math.Max(1, node.End.Index - start);
                     scintilla.IndicatorFillRange(start, len);

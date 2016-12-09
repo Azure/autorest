@@ -77,7 +77,12 @@ namespace AutoRest.Core.Validation
         /// The value of the object
         /// </summary>
         public object Value { get; private set; }
-
-        public ObjectPath Path => Parent == null ? new ObjectPath() : Parent.Path.Append(Key ?? ("[" + Index + "]"));
+        
+        public ObjectPath Path => 
+            Parent == null
+                ? ObjectPath.Empty
+                : Key == null
+                    ? Parent.Path.AppendIndex(Index.Value)
+                    : Parent.Path.AppendProperty(Key);
     }
 }

@@ -20,7 +20,7 @@ namespace AutoRest.Core.Logging
         /// <param name="severity">The LogEntrySeverity of the LogEntry instance.</param>
         /// <param name="message">The message of the LogEntry instance.</param>
         public LogMessage(LogMessageSeverity severity, string message)
-            : this(severity, message, new ObjectPath()) { }
+            : this(severity, message, ObjectPath.Empty) { }
 
         public LogMessage(LogMessageSeverity severity, string message, ObjectPath path)
         {

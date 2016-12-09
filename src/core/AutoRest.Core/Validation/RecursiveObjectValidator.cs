@@ -40,7 +40,7 @@ namespace AutoRest.Core.Validation
         /// <param name="entity">The object to validate</param>
         public IEnumerable<LogMessage> GetValidationExceptions(object entity)
         {
-            return RecursiveValidate(entity, new ObjectPath(), new RuleContext(entity), Enumerable.Empty<Rule>());
+            return RecursiveValidate(entity, ObjectPath.Empty, new RuleContext(entity), Enumerable.Empty<Rule>());
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace AutoRest.Core.Validation
                 // Recursively validate each list item and add the 
                 // item index to the location of each validation message
                 var listMessages = list.SelectMany((item, index)
-                    => RecursiveValidate(item, entityPath.Append($"[{index}]"), parentContext.CreateChild(item, index), collectionRules));
+                    => RecursiveValidate(item, entityPath.AppendIndex(index), parentContext.CreateChild(item, index), collectionRules));
                 messages = messages.Concat(listMessages);
             }
 
@@ -81,7 +81,7 @@ namespace AutoRest.Core.Validation
                 // Recursively validate each dictionary entry and add the entry 
                 // key to the location of each validation message
                 var dictMessages = dictionary.SelectMany((key, value)
-                    => RecursiveValidate(value, entityPath.Append((string)key), parentContext.CreateChild(value, (string)key), collectionRules, shouldTraverseEntries));
+                    => RecursiveValidate(value, entityPath.AppendProperty((string)key), parentContext.CreateChild(value, (string)key), collectionRules, shouldTraverseEntries));
                 messages = messages.Concat(dictMessages);
             }
 
@@ -90,7 +90,7 @@ namespace AutoRest.Core.Validation
             {
                 // Validate each property of the object
                 var propertyMessages = entity.GetValidatableProperties()
-                    .SelectMany(p => ValidateProperty(p, p.GetValue(entity), entityPath.Append(p.Name), parentContext));
+                    .SelectMany(p => ValidateProperty(p, p.GetValue(entity), entityPath.AppendProperty(p.Name), parentContext));
                 messages = messages.Concat(propertyMessages);
             }
 

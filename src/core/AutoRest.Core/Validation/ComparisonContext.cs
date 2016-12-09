@@ -39,10 +39,11 @@ namespace AutoRest.Core.Validation
 
         public ObjectPath Path { get { return _path.Peek(); } }
 
-        public void Push(string element) {  _path.Push(Path.Append(element)); }
+        public void PushIndex(int index) { _path.Push(Path.AppendIndex(index)); }
+        public void PushProperty(string property) { _path.Push(Path.AppendProperty(property)); }
         public void Pop() { _path.Pop(); }
 
-        private Stack<ObjectPath> _path = new Stack<ObjectPath>(new [] { new ObjectPath() });
+        private Stack<ObjectPath> _path = new Stack<ObjectPath>(new [] { ObjectPath.Empty });
 
         public void LogInfo(MessageTemplate template, params object[] formatArguments)
         {
