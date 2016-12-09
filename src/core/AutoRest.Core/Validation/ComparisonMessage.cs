@@ -14,22 +14,12 @@ namespace AutoRest.Core.Validation
     /// </summary>
     public class ComparisonMessage : LogMessage
     {
-        public ComparisonMessage(MessageTemplate template, string path, LogMessageSeverity severity)
+        public ComparisonMessage(MessageTemplate template, ObjectPath path, LogMessageSeverity severity)
+            : this(template, path, severity, new string[0]) { }
+        public ComparisonMessage(MessageTemplate template, ObjectPath path, LogMessageSeverity severity, params object[] formatArguments)
+            : base(severity, $"Comparison: {template.Id} - {string.Format(CultureInfo.CurrentCulture, template.Message, formatArguments)}", path)
         {
-            if (template == null)
-                throw new ArgumentNullException("template");
-
-            Severity = severity;
             Id = template.Id;
-            AppendToPath(path);
-            Message = $"Comparison: {template.Id}: {template.Message}";
-        }
-        public ComparisonMessage(MessageTemplate template, string path, LogMessageSeverity severity, params object[] formatArguments)
-        {
-            Severity = severity;
-            Id = template.Id;
-            AppendToPath(path);
-            Message = $"Comparison: {template.Id}: {string.Format(CultureInfo.CurrentCulture, template.Message, formatArguments)}";
         }
 
         /// <summary>

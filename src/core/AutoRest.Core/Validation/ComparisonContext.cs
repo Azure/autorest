@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoRest.Core.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,26 +37,26 @@ namespace AutoRest.Core.Validation
 
         public DataDirection Direction { get; set; } = DataDirection.None;
 
-        public string Path { get { return string.Join("/", _path.Reverse()); } }
+        public ObjectPath Path { get { return _path.Peek(); } }
 
-        public void Push(string element) { _path.Push(element); }
+        public void Push(string element) {  _path.Push(Path.Append(element)); }
         public void Pop() { _path.Pop(); }
 
-        private Stack<string> _path = new Stack<string>();
+        private Stack<ObjectPath> _path = new Stack<ObjectPath>(new [] { new ObjectPath() });
 
         public void LogInfo(MessageTemplate template, params object[] formatArguments)
         {
-            _messages.Add(new ComparisonMessage(template, this.Path, Logging.LogMessageSeverity.Info, formatArguments));
+            _messages.Add(new ComparisonMessage(template, Path, LogMessageSeverity.Info, formatArguments));
         }
 
         public void LogError(MessageTemplate template, params object[] formatArguments)
         {
-            _messages.Add(new ComparisonMessage(template, this.Path, Logging.LogMessageSeverity.Error, formatArguments));
+            _messages.Add(new ComparisonMessage(template, Path, LogMessageSeverity.Error, formatArguments));
         }
 
         public void LogBreakingChange(MessageTemplate template, params object[] formatArguments)
         {
-            _messages.Add(new ComparisonMessage(template, this.Path, this.Strict ? Logging.LogMessageSeverity.Error : Logging.LogMessageSeverity.Warning, formatArguments));
+            _messages.Add(new ComparisonMessage(template, Path, Strict ? LogMessageSeverity.Error : LogMessageSeverity.Warning, formatArguments));
         }
 
         public IEnumerable<ComparisonMessage> Messages {  get { return _messages; } }

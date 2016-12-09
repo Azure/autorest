@@ -68,7 +68,7 @@ namespace AutoRest.Core
         {
             if (Settings.Instance.Verbose)
             {
-                Console.WriteLine($"[WRITING] {template.GetType().Name} => {fileName}");
+                Logger.Instance.Log($"[WRITING] {template.GetType().Name} => {fileName}");
             }
             template.Settings = Settings.Instance;
             var stringBuilder = new StringBuilder();

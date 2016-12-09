@@ -183,8 +183,7 @@ namespace AutoRest.Swagger
                 Enumerable.Empty<ComparisonMessage>();
 
             return LogMessages
-                .Select(msg => 
-                    new ComparisonMessage(new MessageTemplate { Id = 0, Message = msg.Message }, string.Join("/", msg.Path), msg.Severity))
+                .Select(msg => new ComparisonMessage(new MessageTemplate { Id = 0, Message = msg.Message }, msg.Path, msg.Severity))
                 .Concat(comparisonMessages);
         }
 

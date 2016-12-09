@@ -153,8 +153,6 @@ namespace AutoRest.Swagger.Model
             context.CurrentRoot = this;
             context.PreviousRoot = previous;
 
-            context.Push("#");
-
             base.Compare(context, previous);
 
             var previousDefinition = previous as ServiceDefinition;

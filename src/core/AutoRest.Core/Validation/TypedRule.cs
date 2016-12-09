@@ -30,7 +30,7 @@ namespace AutoRest.Core.Validation
             object[] formatParams;
             if (!IsValid(entity, context, out formatParams))
             {
-                yield return new LogMessage(this, formatParams);
+                yield return new LogMessage(context.Path, this, formatParams);
             }
         }
 

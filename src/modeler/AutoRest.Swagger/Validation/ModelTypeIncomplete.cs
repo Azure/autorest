@@ -18,7 +18,7 @@ namespace AutoRest.Swagger.Validation
             {
                 if (schema.Description == null)
                 {
-                    yield return new LogMessage(this, "description");
+                    yield return new LogMessage(context.Path, this, "description");
                 }
             }
         }

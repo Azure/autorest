@@ -16,8 +16,6 @@ namespace AutoRest.Core.Validation
     /// </summary>
     public class RecursiveObjectValidator
     {
-        private const string ROOT_PATH_INDICATOR = "#";
-
         private Func<PropertyInfo, string> resolver;
 
         /// <summary>
@@ -42,8 +40,7 @@ namespace AutoRest.Core.Validation
         /// <param name="entity">The object to validate</param>
         public IEnumerable<LogMessage> GetValidationExceptions(object entity)
         {
-            return RecursiveValidate(entity, new RuleContext(entity), Enumerable.Empty<Rule>())
-                .Select(m => m.AppendToPath(ROOT_PATH_INDICATOR));
+            return RecursiveValidate(entity, new ObjectPath(), new RuleContext(entity), Enumerable.Empty<Rule>());
         }
 
         /// <summary>
@@ -54,7 +51,7 @@ namespace AutoRest.Core.Validation
         /// <param name="rules">The set of rules from the parent object to apply to <paramref name="entity"/></param>
         /// <param name="traverseProperties">Whether or not to traverse this <paramref name="entity"/>'s properties</param>
         /// <returns></returns>
-        private IEnumerable<LogMessage> RecursiveValidate(object entity, RuleContext parentContext, IEnumerable<Rule> rules, bool traverseProperties = true)
+        private IEnumerable<LogMessage> RecursiveValidate(object entity, ObjectPath entityPath, RuleContext parentContext, IEnumerable<Rule> rules, bool traverseProperties = true)
         {
             var messages = Enumerable.Empty<LogMessage>();
             if (entity == null)
@@ -72,8 +69,7 @@ namespace AutoRest.Core.Validation
                 // Recursively validate each list item and add the 
                 // item index to the location of each validation message
                 var listMessages = list.SelectMany((item, index)
-                    => RecursiveValidate(item, parentContext.CreateChild(item, index), collectionRules).Select(each
-                        => each.AppendToPath($"[{index}]")));
+                    => RecursiveValidate(item, entityPath.Append($"[{index}]"), parentContext.CreateChild(item, index), collectionRules));
                 messages = messages.Concat(listMessages);
             }
 
@@ -85,8 +81,7 @@ namespace AutoRest.Core.Validation
                 // Recursively validate each dictionary entry and add the entry 
                 // key to the location of each validation message
                 var dictMessages = dictionary.SelectMany((key, value)
-                    => RecursiveValidate(value, parentContext.CreateChild(value, (string)key), collectionRules, shouldTraverseEntries).Select(each
-                        => each.AppendToPath((string)key)));
+                    => RecursiveValidate(value, entityPath.Append((string)key), parentContext.CreateChild(value, (string)key), collectionRules, shouldTraverseEntries));
                 messages = messages.Concat(dictMessages);
             }
 
@@ -95,7 +90,7 @@ namespace AutoRest.Core.Validation
             {
                 // Validate each property of the object
                 var propertyMessages = entity.GetValidatableProperties()
-                    .SelectMany(p => ValidateProperty(p, p.GetValue(entity), parentContext));
+                    .SelectMany(p => ValidateProperty(p, p.GetValue(entity), entityPath.Append(p.Name), parentContext));
                 messages = messages.Concat(propertyMessages);
             }
 
@@ -124,7 +119,7 @@ namespace AutoRest.Core.Validation
             return classRules.SelectMany(rule => rule.GetLogMessages(entity, parentContext));
         }
 
-        private IEnumerable<LogMessage> ValidateProperty(PropertyInfo prop, object value, RuleContext parentContext)
+        private IEnumerable<LogMessage> ValidateProperty(PropertyInfo prop, object value, ObjectPath entityPath, RuleContext parentContext)
         {
             // Uses the property name resolver to get the name to use in the path of messages
             var propName = resolver(prop);
@@ -142,10 +137,9 @@ namespace AutoRest.Core.Validation
 
             // Recursively validate the property (e.g. its properties or any list/dictionary entries),
             // passing any rules that apply to this collection)
-            var childrenMessages = RecursiveValidate(value, ruleContext, collectionRules, shouldTraverseObject);
+            var childrenMessages = RecursiveValidate(value, entityPath, ruleContext, collectionRules, shouldTraverseObject);
 
-            return propertyMessages.Concat(childrenMessages)
-                .Select(e => e.AppendToPath(propName));
+            return propertyMessages.Concat(childrenMessages);
         }
     }
 }

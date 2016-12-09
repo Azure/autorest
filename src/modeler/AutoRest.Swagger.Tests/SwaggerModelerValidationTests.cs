@@ -53,7 +53,7 @@ namespace AutoRest.Swagger.Tests
                 };
                 var modeler = new SwaggerModeler();
                 var messages = new List<LogMessage>();
-                Logger.AddListener(new SignalingLogListener(LogMessageSeverity.Info, messages.Add));
+                Logger.Instance.AddListener(new SignalingLogListener(LogMessageSeverity.Info, messages.Add));
                 modeler.Build();
                 return messages;
             }

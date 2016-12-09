@@ -144,7 +144,7 @@ namespace AutoRest.Core
 
                 foreach (var message in messages)
                 {
-                    Logger.Instance.Log(message.Severity, "Comparison: {0}", message);
+                    Logger.Instance.Log(message);
                 }
             }
             catch (Exception exception)

@@ -15,66 +15,51 @@ namespace AutoRest.Core.Logging
     public class LogMessage
     {
         /// <summary>
-        /// Instantiates a new instance of the LogEntry class.
-        /// </summary>
-        public LogMessage()
-        {
-        }
-
-        /// <summary>
         /// Instantiates a new instance of the LogEntry class
         /// </summary>
         /// <param name="severity">The LogEntrySeverity of the LogEntry instance.</param>
         /// <param name="message">The message of the LogEntry instance.</param>
         public LogMessage(LogMessageSeverity severity, string message)
+            : this(severity, message, new ObjectPath()) { }
+
+        public LogMessage(LogMessageSeverity severity, string message, ObjectPath path)
         {
+            if (path == null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
             Severity = severity;
             Message = message;
+            Path = path;
         }
 
-        public LogMessage(Rule rule)
-        {
-            Type = rule.GetType();
-            Severity = rule.Severity;
-            Message = rule.MessageTemplate;
-        }
+        public LogMessage(ObjectPath path, Rule rule)
+            : this(path, rule, new string[0]) { }
 
-        public LogMessage(Rule rule, params object[] formatArguments)
+        public LogMessage(ObjectPath path, Rule rule, params object[] formatArguments)
+            : this(rule.Severity, string.Format(CultureInfo.CurrentCulture, rule.MessageTemplate, formatArguments), path)
         {
             Type = rule.GetType();
-            Severity = rule.Severity;
-            Message = string.Format(CultureInfo.CurrentCulture, rule.MessageTemplate, formatArguments);
         }
 
         /// <summary>
         /// The class of the Validation message
         /// </summary>
-        public Type Type { get; protected set; }
+        public Type Type { get; }
 
         /// <summary>
         /// Gets or sets the LogEntrySeverity.
         /// </summary>
-        public LogMessageSeverity Severity { get; protected set; }
+        public LogMessageSeverity Severity { get; }
 
         /// <summary>
         /// Gets or sets the Message.
         /// </summary>
-        public string Message { get; protected set; }
+        public string Message { get; }
 
         /// <summary>
         /// The JSON document path to the element being validated.
         /// </summary>
-        public IList<string> Path { get; protected set; } = new List<string>();
-
-        /// <summary>
-        /// A fluent interface to append a string to the path.
-        /// </summary>
-        /// <param name="path">the string to add to the end of the Path collection</param>
-        /// <returns>This ValidationMethod</returns>
-        public LogMessage AppendToPath(string path)
-        {
-            Path.Add(path);
-            return this;
-        }
+        public ObjectPath Path { get; }
     }
 }

@@ -1,4 +1,6 @@
 ﻿
+using AutoRest.Core.Logging;
+
 namespace AutoRest.Core.Validation
 {
     /// <summary>
@@ -75,5 +77,7 @@ namespace AutoRest.Core.Validation
         /// The value of the object
         /// </summary>
         public object Value { get; private set; }
+
+        public ObjectPath Path => Parent == null ? new ObjectPath() : Parent.Path.Append(Key ?? ("[" + Index + "]"));
     }
 }

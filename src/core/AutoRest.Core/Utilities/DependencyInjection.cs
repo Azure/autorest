@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using AutoRest.Core.Utilities.Collections;
+using AutoRest.Core.Logging;
 
 namespace AutoRest.Core.Utilities
 {
@@ -86,7 +87,7 @@ namespace AutoRest.Core.Utilities
                     // implementation in factory?
                     foreach( var missingConstructor in factory.TargetTypeConstructors.Where( each => factory.GetConstructorImplementation(each.ParameterTypes()) == null ) )
                     {
-                        Console.WriteLine($"Factory for type {factory.TargetType.FullName} does not have a constructor for parameters ({missingConstructor.ParameterTypes().ToTypesString()})");
+                        Logger.Instance.Log(LogMessageSeverity.Warning, $"Factory for type {factory.TargetType.FullName} does not have a constructor for parameters ({missingConstructor.ParameterTypes().ToTypesString()})");
                     }
 
                 }
@@ -340,7 +341,7 @@ namespace AutoRest.Core.Utilities
             }
             catch (Exception e)
             {
-                Console.WriteLine($"FATAL: New<{typeof(T)}() threw exception {e.GetType().Name} - {e.Message}");
+                Logger.Instance.Log(LogMessageSeverity.Fatal, $"New<{typeof(T)}() threw exception {e.GetType().Name} - {e.Message}");
                 throw;
             }
         }
@@ -393,7 +394,7 @@ namespace AutoRest.Core.Utilities
             }
             catch (Exception e)
             {
-                Console.WriteLine($"FATAL: New<{typeof(T)}({arguments.Select( each => each?.ToString() ).Aggregate((cur,each) => $"{cur}, {each}")}) threw exception {e.GetType().Name} - {e.Message}");
+                Logger.Instance.Log(LogMessageSeverity.Fatal, $"New<{typeof(T)}({arguments.Select(each => each?.ToString()).Aggregate((cur, each) => $"{cur}, {each}")}) threw exception {e.GetType().Name} - {e.Message}");
                 throw;
             }
 

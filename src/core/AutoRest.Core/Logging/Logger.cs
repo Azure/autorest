@@ -13,8 +13,32 @@ namespace AutoRest.Core.Logging
     /// <summary>
     /// Aggregator for error, warning, and trace messages.
     /// </summary>
-    public class Logger : IsSingleton<Logger>
+    public class Logger
     {
+        public static Logger Instance
+        {
+            get
+            {
+                if (!Singleton<Logger>.HasInstance)
+                {
+                    Singleton<Logger>.Instance = new Logger();
+                }
+                return Singleton<Logger>.Instance;
+            }
+        }
+
+        protected Logger()
+        {
+            if (!Context.IsActive)
+            {
+                throw new Exception("A context must be active before creating a logger.");
+            }
+            if (Singleton<Logger>.HasInstanceInCurrentActivation)
+            {
+                throw new Exception("The current context already has a logger. (Did you mean to create a nested context?)");
+            }
+        }
+
         /// <summary>
         /// Adds given listener to the current context.
         /// </summary>

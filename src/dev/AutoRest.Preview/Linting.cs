@@ -92,7 +92,7 @@ namespace AutoRest.Preview
                 foreach (var message in messages)
                 {
                     scintilla.IndicatorCurrent = INDICATOR_BASE + (int)message.Severity;
-                    var node = doc.ResolvePath(message.Path.Reverse().Skip(1));
+                    var node = doc.ResolvePath(message.Path.Path);
                     var start = node.Start.Index;
                     var len = Math.Max(1, node.End.Index - start);
                     scintilla.IndicatorFillRange(start, len);
@@ -101,7 +101,7 @@ namespace AutoRest.Preview
                         Start = start,
                         End = start + len,
                         Message =
-                            $"{message.Severity}: [{string.Join("->", message.Path.Reverse())}] {message.Message}"
+                            $"{message.Severity}: [{message.Path.PathStringThomasStyle}] {message.Message}"
                     });
                 }
             }
