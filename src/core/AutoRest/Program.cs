@@ -31,7 +31,8 @@ namespace AutoRest
                         // set up logging
                         Logger.Instance.AddListener(new ConsoleLogListener(
                             settings.Debug ? LogMessageSeverity.Debug : LogMessageSeverity.Info,
-                            settings.ValidationLevel));
+                            settings.ValidationLevel,
+                            settings.Verbose));
                         Logger.Instance.AddListener(new SignalingLogListener(LogMessageSeverity.Error, _ => generationFailed = true));
 
                         string defCodeGen = (args.Where(arg => arg.ToLowerInvariant().Contains("codegenerator")).IsNullOrEmpty()) ? "" : settings.CodeGenerator;

@@ -66,10 +66,7 @@ namespace AutoRest.Core
         /// <returns></returns>
         public async Task Write(ITemplate template, string fileName)
         {
-            if (Settings.Instance.Verbose)
-            {
-                Logger.Instance.Log($"[WRITING] {template.GetType().Name} => {fileName}");
-            }
+            Logger.Instance.Log($"[WRITING] {template.GetType().Name} => {fileName}");
             template.Settings = Settings.Instance;
             var stringBuilder = new StringBuilder();
             using (template.TextWriter = new StringWriter(stringBuilder))

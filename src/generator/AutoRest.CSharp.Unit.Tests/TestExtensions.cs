@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 var settings = new Settings
                 {
                     Modeler = modeler,
-                    CodeGenerator =codeGenerator,
+                    CodeGenerator = codeGenerator,
                     FileSystem = fileSystem,
                     OutputDirectory = "GeneratedCode",
                     Namespace = "Test"

@@ -31,21 +31,33 @@ namespace AutoRest.Core.Logging
             Severity = severity;
             Message = message;
             Path = path;
+
+            if (Settings.Instance.Verbose)
+            {
+                var stackTrace = Environment.StackTrace;
+
+                // cut away logging part
+                var lastMention = stackTrace.LastIndexOf(typeof(LogMessage).Namespace);
+                stackTrace = stackTrace.Substring(lastMention);
+                // skip to next stack frame
+                stackTrace = stackTrace.Substring(stackTrace.IndexOf('\n') + 1);
+
+                VerboseData = stackTrace;
+            }
         }
 
-        /// <summary>
-        /// Gets or sets the LogEntrySeverity.
-        /// </summary>
         public LogMessageSeverity Severity { get; }
 
-        /// <summary>
-        /// Gets or sets the Message.
-        /// </summary>
         public string Message { get; }
 
         /// <summary>
         /// The JSON document path to the element being validated.
         /// </summary>
         public ObjectPath Path { get; }
+
+        /// <summary>
+        /// Additional data, set only if `Settings.Instance.Verbose` is set.
+        /// </summary>
+        public string VerboseData { get; } = null;
     }
 }

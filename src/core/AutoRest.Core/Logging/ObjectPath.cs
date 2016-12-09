@@ -34,9 +34,7 @@ namespace AutoRest.Core.Logging
         }
 
         public IEnumerable<ObjectPathPart> Path { get; }
-
-        public string PathStringThomasStyle => "#" + string.Concat(Path.Select(p => p.PathStringThomasStyle));
-
+        
         public string XPath => "#" + string.Concat(Path.Select(p => p.XPath));
 
         public YamlNode SelectNode(YamlNode node)
@@ -52,8 +50,6 @@ namespace AutoRest.Core.Logging
 
     public abstract class ObjectPathPart
     {
-        public abstract string PathStringThomasStyle { get; }
-
         public abstract string XPath { get; }
 
         /// <summary>
@@ -72,8 +68,6 @@ namespace AutoRest.Core.Logging
 
         public int Index { get; }
 
-        public override string PathStringThomasStyle => $"->[{Index}]";
-
         public override string XPath => $"[{Index + 1}]";
 
         public override YamlNode SelectNode(ref YamlNode node)
@@ -88,6 +82,8 @@ namespace AutoRest.Core.Logging
 
     public class ObjectPathPartProperty : ObjectPathPart
     {
+        private static string SanitizeXPathProperty(string property) => property.Replace("/", "~1");
+
         public ObjectPathPartProperty(string property)
         {
             Property = property;
@@ -95,9 +91,7 @@ namespace AutoRest.Core.Logging
 
         public string Property { get; }
 
-        public override string PathStringThomasStyle => $"->{Property}";
-
-        public override string XPath => $"/{Property}";
+        public override string XPath => $"/{SanitizeXPathProperty(Property)}";
 
         public override YamlNode SelectNode(ref YamlNode node)
         {

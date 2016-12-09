@@ -29,15 +29,19 @@ namespace AutoRest.Core.Logging
 
         public ConsoleLogListener(
             LogMessageSeverity minSeverityForStdout = LogMessageSeverity.Info,
-            LogMessageSeverity minSeverityForStderr = LogMessageSeverity.Error)
+            LogMessageSeverity minSeverityForStderr = LogMessageSeverity.Error,
+            bool verbose = false)
         {
             MinSeverityForStdout = minSeverityForStdout;
             MinSeverityForStderr = minSeverityForStderr;
+            Verbose = verbose;
         }
 
         public LogMessageSeverity MinSeverityForStdout { get; }
 
         public LogMessageSeverity MinSeverityForStderr { get; }
+
+        public bool Verbose { get; }
 
         public void Log(LogMessage message)
         {
@@ -46,14 +50,14 @@ namespace AutoRest.Core.Logging
                 var original = Console.ForegroundColor;
                 Console.ForegroundColor = GetColorForSeverity(message.Severity);
                 // Write the severity and message to console
-                var logMessage = $"{message.Severity.ToString().ToUpperInvariant()}: {message.Message}\n    Path: {message.Path.PathStringThomasStyle}";
-                if (message.Severity >= MinSeverityForStderr)
+                var targetStream = message.Severity >= MinSeverityForStderr ? Console.Error : Console.Out;
+
+                targetStream.WriteLine($"{message.Severity.ToString().ToUpperInvariant()}: {message.Message}");
+                targetStream.WriteLine($"\tPath: {message.Path.XPath}");
+                if (message.VerboseData != null)
                 {
-                    Console.Error.WriteLine(logMessage);
-                }
-                else
-                {
-                    Console.WriteLine(logMessage);
+                    targetStream.WriteLine(message.VerboseData);
+                    targetStream.WriteLine();
                 }
                 Console.ForegroundColor = original;
             }
