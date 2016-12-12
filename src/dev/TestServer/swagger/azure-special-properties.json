@@ -67,7 +67,7 @@
         ],
         "parameters": [
           {
-            "$ref": "globalSubscriptionId"
+            "$ref": "#/parameters/globalSubscriptionId"
           }
         ],
         "responses": {
@@ -92,7 +92,7 @@
         ],
         "parameters": [
           {
-            "$ref": "globalSubscriptionId"
+            "$ref": "#/parameters/globalSubscriptionId"
           }
         ],
         "responses": {
@@ -117,10 +117,10 @@
         ],
         "parameters": [
           {
-            "$ref": "globalSubscriptionId"
+            "$ref": "#/parameters/globalSubscriptionId"
           },
           {
-            "$ref": "globalApiVersion"
+            "$ref": "#/parameters/globalApiVersion"
           }
         ],
         "responses": {
@@ -197,7 +197,7 @@
     "/azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}": {
       "parameters": [
         {
-            "$ref": "globalSubscriptionId"
+          "$ref": "#/parameters/globalSubscriptionId"
         }
       ],
       "post": {
@@ -413,7 +413,7 @@
     "/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview": {
       "parameters": [
         {
-          "$ref": "globalApiVersion"
+          "$ref": "#/parameters/globalApiVersion"
         }
       ],
       "get": {

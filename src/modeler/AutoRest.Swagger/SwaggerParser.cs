@@ -85,6 +85,10 @@ namespace AutoRest.Swagger
                 entityType = entityPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[1];
                 modelName = entityPath.StripDefinitionPath();
 
+                if (currentDoc[entityType] == null)
+                {
+                    currentDoc[entityType] = new JObject();
+                }
                 if (currentDoc[entityType][modelName] == null && !visitedEntities.Contains(modelName))
                 {
                     visitedEntities.Add(modelName);

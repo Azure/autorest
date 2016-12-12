@@ -671,7 +671,7 @@
       },
       "allOf": [
         {
-          "$ref": "Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Class representing a Traffic Manager profile."

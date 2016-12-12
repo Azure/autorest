@@ -28,18 +28,18 @@ paths:
           description: Resource Group ID.
           required: true
           type: string
-        - $ref: ApiVersionParameter
+        - $ref: '#/definitions/ApiVersionParameter'
       tags:
         - Redis
       responses:
         '200':
           description: A list of caches
           schema:
-            $ref: Product
+            $ref: '#/definitions/Product'
         default:
           description: Unexpected error
           schema:
-            $ref: Error
+            $ref: '#/definitions/Error'
     post:
       operationId: reset
       summary: Resets products
@@ -77,7 +77,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: Error
+            $ref: '#/definitions/Error'
 definitions:
   Product:
     description: The product documentation.
