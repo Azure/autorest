@@ -311,7 +311,7 @@
         ],
         "parameters": [
           {
-            "$ref" : "globalApiVersion"
+            "$ref": "#/parameters/globalApiVersion"
           }
         ],
         "responses": {
@@ -336,7 +336,7 @@
         ],
         "parameters": [
           {
-            "$ref" : "globalApiVersion"
+            "$ref": "#/parameters/globalApiVersion"
           }
         ],
         "responses": {

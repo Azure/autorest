@@ -106,18 +106,6 @@ namespace AutoRest.Swagger
                     }
                     
                 }
-
-                //var refModelName = path.StripDefinitionPath();
-                //if (!visitedModels.Contains(refModelName))
-                //{
-                //    visitedModels.Add(refModelName);
-                //    if (currentDoc[entityType][refModelName] == null)
-                //    {
-                //        currentDoc[entityType][refModelName] = externalDoc[entityType][refModelName];
-                //    }
-                //    //recursively check if the model is completely defined.
-                //    EnsureCompleteDefinitionIsPresent(entityType, refModelName, visitedModels, currentDoc, externalDoc);
-                //}
             }
             return;
         }
@@ -149,17 +137,6 @@ namespace AutoRest.Swagger
                 settings.Converters.Add(new SchemaRequiredItemConverter());
                 settings.Converters.Add(new SecurityDefinitionConverter());
                 var swaggerService = JsonConvert.DeserializeObject<ServiceDefinition>(swaggerDocument, settings);
-
-                // Extract all external references
-                //JObject jObject = JObject.Parse(swaggerDocument);
-                //foreach (JValue value in jObject.SelectTokens("$..$ref"))
-                //{
-                //    var path = (string)value;
-                //    if (path != null && path.Split(new[] {'#'}, StringSplitOptions.RemoveEmptyEntries).Length == 2)
-                //    {
-                //        swaggerService.ExternalReferences.Add(path);
-                //    }
-                //}
 
                 return swaggerService;
             }

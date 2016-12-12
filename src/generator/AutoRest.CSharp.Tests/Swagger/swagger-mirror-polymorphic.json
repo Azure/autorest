@@ -50,7 +50,7 @@
                         "description": "Unexpected error",
                         "schema":
                         {
-                            "$ref": "Error2"
+                            "$ref": "#/definitions/Error2"
                         }
                     }
                 }
@@ -91,7 +91,7 @@
         {
             "AllOf": [
             {
-                "$ref":  "Animal"
+                "$ref": "#/definitions/Animal"
             }
             ],
             "properties":
@@ -108,7 +108,7 @@
         {
             "AllOf": [
             {
-                "$ref":  "BaseCat"
+                "$ref": "#/definitions/BaseCat"
             }
             ],
             "properties":
@@ -125,7 +125,7 @@
         {
             "AllOf": [
             {
-                "$ref":  "SiameseCat"
+                "$ref": "#/definitions/SiameseCat"
             }
             ],
             "properties":
@@ -142,7 +142,7 @@
         {
             "AllOf": [
             {
-                "$ref":  "SiameseCat"
+                "$ref": "#/definitions/SiameseCat"
             }
             ],
             "properties":
@@ -159,7 +159,7 @@
         {
             "AllOf": [
             {
-                "$ref":  "BaseCat"
+                "$ref": "#/definitions/BaseCat"
             }
             ],
             "properties":
@@ -195,7 +195,7 @@
             "id": "Horse",
             "AllOf": [
             {
-                "$ref":  "Animal"
+                "$ref": "#/definitions/Animal"
             }
             ],
             "properties":
