@@ -28,7 +28,7 @@ paths:
           description: Resource Group ID.
           required: true
           type: string
-        - $ref: '#/definitions/ApiVersionParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
       tags:
         - Redis
       responses:
