@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
+using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Model;
 using AutoRest.CSharp.Templates;
@@ -25,24 +26,21 @@ namespace AutoRest.CSharp
             Properties.Resources.UsageInformation, ClientRuntimePackage);
 
         public override string ImplementationFileExtension => ".cs";
-        
-        /// <summary>
-        /// Generates C# code for service client.
-        /// </summary>
-        /// <param name="cm"></param>
-        /// <returns></returns>
-        public override async Task Generate(CodeModel cm)
-        {
-            // get c# specific codeModel
-            var codeModel = cm as CodeModelCs;
-            if (codeModel == null)
-            {
-                throw new InvalidCastException("CodeModel is not a c# CodeModel");
-            }
 
+        private async Task GenerateServerSideCode(CodeModelCs codeModel)
+        {
+            /*
+            // Service server
+            var serviceServerTemplate = new ServiceServerTemplate { Model = codeModel };
+            await Write(serviceServerTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
+            */
+        }
+
+        private async Task GenerateClientSideCode(CodeModelCs codeModel)
+        {
             // Service client
-            var serviceClientTemplate = new ServiceClientTemplate{ Model = codeModel };
-            await Write(serviceClientTemplate, $"{codeModel.Name}{ImplementationFileExtension}" );
+            var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
+            await Write(serviceClientTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
 
             // Service client interface
             var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = codeModel };
@@ -51,7 +49,8 @@ namespace AutoRest.CSharp
             // operations
             foreach (MethodGroupCs methodGroup in codeModel.Operations)
             {
-                if(!methodGroup.Name.IsNullOrEmpty()) { 
+                if (!methodGroup.Name.IsNullOrEmpty())
+                {
                     // Operation
                     var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
                     await Write(operationsTemplate, $"{operationsTemplate.Model.TypeName}{ImplementationFileExtension}");
@@ -68,7 +67,7 @@ namespace AutoRest.CSharp
             // Models
             foreach (CompositeTypeCs model in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
             {
-                var modelTemplate = new ModelTemplate{ Model = model };
+                var modelTemplate = new ModelTemplate { Model = model };
                 await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}"));
             }
 
@@ -85,6 +84,39 @@ namespace AutoRest.CSharp
                 var exceptionTemplate = new ExceptionTemplate { Model = exceptionType, };
                 await Write(exceptionTemplate, Path.Combine(Settings.Instance.ModelsName, $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
             }
+
+        }
+
+        /// <summary>
+        /// Generates C# code for service client.
+        /// </summary>
+        /// <param name="cm"></param>
+        /// <returns></returns>
+        public override async Task Generate(CodeModel cm)
+        {
+            // get c# specific codeModel
+            var codeModel = cm as CodeModelCs;
+            if (codeModel == null)
+            {
+                throw new InvalidCastException("CodeModel is not a c# CodeModel");
+            }
+            if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("client") || Settings.Instance.CodeGenerationMode.IsNullOrEmpty())
+            {
+                Logger.Instance.Log(Category.Debug, "Generating client side Code");
+                await GenerateClientSideCode(codeModel);
+            }
+            else if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("server"))
+            {
+                Logger.Instance.Log(Category.Debug, "Generating server side Code");
+                await GenerateServerSideCode(codeModel);
+            }
+            else
+            {
+                throw new ArgumentException(
+                    string.Format(CultureInfo.InvariantCulture,
+                        string.Format(AutoRest.Core.Properties.Resources.ParameterValueIsNotValid, Settings.Instance.CodeGenerationMode, "server/client"), "CodeGenerator"));
+            }
+            
         }
     }
 }
