@@ -28,11 +28,11 @@ namespace @Settings.Namespace
     @:/// </summary>
  }
 
-    public partial class @Model.Name + "Controller" : Controller
+    public partial class @(Model.Name+"Controller : Controller")
     {
+        
+        @(Include(new ServiceServerBodyTemplate(), Model))
         @*
-        @(Include(new ServiceClientBodyTemplate(), Model))
-
         /// <summary>
             /// An optional partial-method to perform custom initialization.
             ///

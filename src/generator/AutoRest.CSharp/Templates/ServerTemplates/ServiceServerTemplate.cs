@@ -113,11 +113,17 @@ Write(EmptyLine);
 
             WriteLiteral("\r\n    public partial class ");
 #line 31 "ServiceServerTemplate.cshtml"
-                    Write(Model.Name);
+                     Write(Model.Name+"Controller : Controller");
 
 #line default
 #line hidden
-            WriteLiteral(" + \"Controller\" : Controller\r\n    {\r\n        \r\n    }\r\n}\r\n");
+            WriteLiteral("\r\n    {\r\n        \r\n        ");
+#line 34 "ServiceServerTemplate.cshtml"
+    Write(Include(new ServiceServerBodyTemplate(), Model));
+
+#line default
+#line hidden
+            WriteLiteral("\r\n        \r\n    }\r\n}\r\n");
         }
         #pragma warning restore 1998
     }
