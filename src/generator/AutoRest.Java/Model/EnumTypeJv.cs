@@ -2,10 +2,11 @@
 using System.Globalization;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
+using System;
 
 namespace AutoRest.Java.Model
 {
-    public class EnumTypeJv : EnumType
+    public class EnumTypeJv : EnumType, IModelTypeJv
     {
         public string ModelsPackage => (this.CodeModel as CodeModelJv).ModelsPackage;
         
@@ -18,5 +19,7 @@ namespace AutoRest.Java.Model
                     "models", Name);
             }
         }
+
+        public IModelTypeJv ResponseVariant => this;
     }
 }

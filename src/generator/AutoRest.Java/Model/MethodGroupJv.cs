@@ -12,6 +12,7 @@ namespace AutoRest.Java.Model
     public class MethodGroupJv : MethodGroup
     {
         public MethodGroupJv() { }
+        public MethodGroupJv(string name) : base(name) { }
 
         public string MethodGroupFullType
         {

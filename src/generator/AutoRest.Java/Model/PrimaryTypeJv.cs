@@ -7,8 +7,8 @@ namespace AutoRest.Java.Model
 {
     public class PrimaryTypeJv : PrimaryType, IModelTypeJv
     {
-        private List<string> _imports;
-        
+        private List<string> _imports = new List<string>();
+
         public PrimaryTypeJv()
         {
         }
@@ -16,7 +16,6 @@ namespace AutoRest.Java.Model
         public PrimaryTypeJv(KnownPrimaryType type)
             : base(type)
         {
-            _imports = new List<string>();
             Initialize(type);
         }
 

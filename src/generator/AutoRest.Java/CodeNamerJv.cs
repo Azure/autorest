@@ -453,7 +453,7 @@ namespace AutoRest.Java
                 case "InterruptedException":
                     return null;
                 default:
-                    return cm.Namespace.ToLower(CultureInfo.InvariantCulture)
+                    return (cm.Namespace?.ToLower(CultureInfo.InvariantCulture) ?? "fallbackNamespaceOrWhatTODO")
                         + ".models." + exception;
             }
         }
