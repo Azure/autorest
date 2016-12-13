@@ -55,7 +55,7 @@
       "type": "AzureNodeJSCodeGenerator, AutoRest.NodeJS.Azure"
     },
     "Java": {
-      "type": "JavaCodeGenerator, AutoRest.Java"
+      "type": "CodeGeneratorJv, AutoRest.Java"
     },
     "Azure.Java": {
       "type": "AzureJavaCodeGenerator, AutoRest.Java.Azure"

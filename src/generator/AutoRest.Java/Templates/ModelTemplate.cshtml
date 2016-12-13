@@ -1,10 +1,10 @@
 ﻿@using System.Linq
 @using System.Collections.Generic
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
 @using AutoRest.Java
-@using AutoRest.Java.TypeModels
-@inherits AutoRest.Core.Template<AutoRest.Java.TemplateModels.ModelTemplateModel>
+@using AutoRest.Java.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Model.CompositeTypeJv>
 /**
 @Header(" * ").TrimMultilineHeader()
  */
@@ -32,7 +32,7 @@ else
  */
 @if (Model.IsPolymorphic)
 {
-@:@@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@(Model.EvaluatedPolymorphicDiscriminator)")
+@:@@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@(Model.PolymorphicDiscriminator)")
 @:@@JsonTypeName("@(Model.SerializedName)")
 var types = Model.SubTypes.ToList();
 if (types.Any())
@@ -70,7 +70,7 @@ if (!jsonSetting.IsNullOrEmpty())
 {
 @:    @@JsonProperty(@(jsonSetting))
 }
-@:    private @property.Type @property.Name;
+@:    private @property.ModelType @property.Name;
 @EmptyLine
 }
 
@@ -83,8 +83,8 @@ if (!jsonSetting.IsNullOrEmpty())
     public @(Model.Name)() {
     @foreach (var property in Model.Properties.Where(p => p.IsConstant))
     {
-        if (property.Type is CompositeType) {
-        @:@(property.Name) = new @(property.Type.Name)();
+        if (property.ModelType is CompositeType) {
+        @:@(property.Name) = new @(property.ModelType.Name)();
         }
         else
         {
@@ -96,15 +96,15 @@ if (!jsonSetting.IsNullOrEmpty())
 </text>
 }
 
-@foreach (PropertyModel property in Model.PropertyModels)
+@foreach (PropertyJv property in Model.Properties)
 {
 @:    /**
 @:     * Get the @property.Name value.
 @:     *
 @:     * @@return the @property.Name value
 @:     */
-@:    public @(((ITypeModel)property.Type).ResponseVariant) @(property.Name.ToCamelCase())() {
-if (property.Type.Name != ((ITypeModel) property.Type).ResponseVariant.Name)
+@:    public @(((IModelTypeJv)property.ModelType).ResponseVariant) @(property.Name.ToCamelCase())() {
+if (property.ModelType.Name != ((IModelTypeJv) property.ModelType).ResponseVariant.Name)
 {
 @:        if (this.@(property.Name) == null) {
 @:            return null;
@@ -125,8 +125,8 @@ if (!property.IsReadOnly)
 @:     * @@param @property.Name the @property.Name value to set
 @:     * @@return the @(Model.Name) object itself.
 @:     */
-@:    public @(Model.Name) with@(property.Name.ToPascalCase())(@(((ITypeModel)property.Type).ResponseVariant) @property.Name) {
-if (property.Type.Name != ((ITypeModel)property.Type).ResponseVariant.Name)
+@:    public @(Model.Name) with@(property.Name.ToPascalCase())(@(((IModelTypeJv)property.ModelType).ResponseVariant) @property.Name) {
+if (property.ModelType.Name != ((IModelTypeJv)property.ModelType).ResponseVariant.Name)
 {
 @:        if (@property.Name == null) {
 @:            this.@(property.Name) = null;

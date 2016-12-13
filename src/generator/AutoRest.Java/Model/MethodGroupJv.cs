@@ -4,25 +4,25 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Model;
 
-namespace AutoRest.Java.TemplateModels
+namespace AutoRest.Java.Model
 {
-    public class MethodGroupTemplateModel : ServiceClient
+    public class MethodGroupJv : MethodGroup
     {
-        public MethodGroupTemplateModel(ServiceClient serviceClient, string methodGroupName)
+        public MethodGroupJv(CodeModel serviceClient, string methodGroupName)
         {
             this.LoadFrom(serviceClient);
-            MethodTemplateModels = new List<MethodTemplateModel>();
+            MethodTemplateModels = new List<MethodJv>();
             // MethodGroup name and type are always the same but can be 
             // changed in derived classes
             MethodGroupName = methodGroupName;
             MethodGroupType = methodGroupName.ToPascalCase();
             Methods.Where(m => m.Group == MethodGroupName)
-                .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
+                .ForEach(m => MethodTemplateModels.Add(m as MethodJv));
         }
-        public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
+        public List<MethodJv> MethodTemplateModels { get; private set; }
 
         public string MethodGroupName { get; set; }
 
@@ -32,7 +32,7 @@ namespace AutoRest.Java.TemplateModels
         {
             get
             {
-                return Namespace.ToLower(CultureInfo.InvariantCulture) + "." + MethodGroupType;
+                return CodeModel.Namespace.ToLower(CultureInfo.InvariantCulture) + "." + MethodGroupType;
             }
         }
 
@@ -94,7 +94,7 @@ namespace AutoRest.Java.TemplateModels
         {
             get
             {
-                return JavaCodeNamer.GetServiceName(MethodGroupName.ToPascalCase());
+                return CodeNamerJv.GetServiceName(MethodGroupName.ToPascalCase());
             }
         }
 

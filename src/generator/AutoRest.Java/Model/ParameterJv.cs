@@ -1,24 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Model;
 
-namespace AutoRest.Java.TypeModels
+namespace AutoRest.Java.Model
 {
-    public class ParameterModel : Parameter
+    public class ParameterJv : Parameter
     {
-        private Method _method;
-
-        public ParameterModel(Parameter parameter, Method method)
+        public ParameterJv()
             : base()
         {
-            this.LoadFrom(parameter);
-            this._method = method;
-            // Use instance type for optional parameters
-            if (!this.IsRequired)
-            {
-                this.Type = ((ITypeModel) Type).InstanceType();
-            }
             _wireName = this.Name.ToCamelCase();
             if (NeedsConversion)
             {
@@ -27,29 +18,34 @@ namespace AutoRest.Java.TypeModels
             _implImports = new List<string>();
         }
 
-        public ITypeModel ClientType
+        public IModelTypeJv ClientType
         {
             get
             {
-                return ((ITypeModel) Type).ParameterVariant;
+                return ((IModelTypeJv)ModelType);
             }
         }
 
-        public ITypeModel WireType
+        public IModelTypeJv WireType
         {
             get
             {
-                if (Type.IsPrimaryType(KnownPrimaryType.Stream))
+                if (ModelType.IsPrimaryType(KnownPrimaryType.Stream))
                 {
-                    return new PrimaryTypeModel(KnownPrimaryType.Stream) { Name = "RequestBody" };
+                    var res = new PrimaryTypeJv(KnownPrimaryType.Stream);
+                    res.Name.CopyFrom("RequestBody");
+                    return res;
                 }
-                else if (!Type.IsPrimaryType(KnownPrimaryType.Base64Url) && Location != ParameterLocation.Body && Location != ParameterLocation.FormData && NeedsSpecialSerialization(ClientType))
+                else if (!ModelType.IsPrimaryType(KnownPrimaryType.Base64Url) && 
+                    Location != Core.Model.ParameterLocation.Body &&
+                    Location != Core.Model.ParameterLocation.FormData && 
+                    NeedsSpecialSerialization(ClientType))
                 {
-                    return new PrimaryTypeModel(KnownPrimaryType.String);
+                    return new PrimaryTypeJv(KnownPrimaryType.String);
                 }
                 else
                 {
-                    return (ITypeModel) Type;
+                    return (IModelTypeJv) ModelType;
                 }
             }
         }
@@ -74,10 +70,12 @@ namespace AutoRest.Java.TypeModels
 
         public string ConvertToWireType(string source, string clientReference)
         {
-            if (Location != ParameterLocation.Body && Location != ParameterLocation.FormData && NeedsSpecialSerialization(ClientType))
+            if (Location != Core.Model.ParameterLocation.Body && 
+                Location != Core.Model.ParameterLocation.FormData && 
+                NeedsSpecialSerialization(ModelType))
             {
-                var primary = ClientType as PrimaryTypeModel;
-                var sequence = ClientType as SequenceTypeModel;
+                var primary = ClientType as PrimaryTypeJv;
+                var sequence = ClientType as SequenceTypeJv;
                 if (primary != null && primary.IsPrimaryType(KnownPrimaryType.ByteArray))
                 {
                     if (WireType.IsPrimaryType(KnownPrimaryType.String))
@@ -104,14 +102,14 @@ namespace AutoRest.Java.TypeModels
             return convertClientTypeToWireType(WireType, source, _wireName, clientReference);
         }
 
-        private string convertClientTypeToWireType(ITypeModel wireType, string source, string target, string clientReference, int level = 0)
+        private string convertClientTypeToWireType(IModelTypeJv wireType, string source, string target, string clientReference, int level = 0)
         {
             IndentedStringBuilder builder = new IndentedStringBuilder();
             if (wireType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("DateTimeRfc1123 {0} = {1};", target, wireType.DefaultValue(_method))
+                    builder.AppendLine("DateTimeRfc1123 {0} = {1};", target, wireType.DefaultValue)
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 builder.AppendLine("{0}{1} = new DateTimeRfc1123({2});", IsRequired ? "DateTimeRfc1123 " : "", target, source);
@@ -124,7 +122,7 @@ namespace AutoRest.Java.TypeModels
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("Long {0} = {1};", target, wireType.DefaultValue(_method))
+                    builder.AppendLine("Long {0} = {1};", target, wireType.DefaultValue)
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 builder.AppendLine("{0}{1} = {2}.toDateTime(DateTimeZone.UTC).getMillis() / 1000;", IsRequired ? "Long " : "", target, source);
@@ -133,7 +131,7 @@ namespace AutoRest.Java.TypeModels
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("Base64Url {0} = {1};", target, wireType.DefaultValue(_method))
+                    builder.AppendLine("Base64Url {0} = {1};", target, wireType.DefaultValue)
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 builder.AppendLine("{0}{1} = Base64Url.encode({2});", IsRequired ? "Base64Url " : "", target, source);
@@ -146,29 +144,29 @@ namespace AutoRest.Java.TypeModels
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("RequestBody {0} = {1};", target, wireType.DefaultValue(_method))
+                    builder.AppendLine("RequestBody {0} = {1};", target, wireType.DefaultValue)
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 builder.AppendLine("{0}{1} = RequestBody.create(MediaType.parse(\"{2}\"), {3});",
-                    IsRequired ? "RequestBody " : "", target, _method.RequestContentType, source);
+                    IsRequired ? "RequestBody " : "", target, Method.RequestContentType, source);
                 if (!IsRequired)
                 {
                     builder.Outdent().AppendLine("}");
                 }
             }
-            else if (wireType is SequenceTypeModel)
+            else if (wireType is SequenceTypeJv)
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("{0} {1} = {2};", WireType.Name, target, wireType.DefaultValue(_method))
+                    builder.AppendLine("{0} {1} = {2};", WireType.Name, target, wireType.DefaultValue)
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
-                var sequenceType = wireType as SequenceTypeModel;
-                var elementType = sequenceType.ElementTypeModel;
+                var sequenceType = wireType as SequenceTypeJv;
+                var elementType = sequenceType.ElementType as IModelTypeJv;
                 var itemName = string.Format(CultureInfo.InvariantCulture, "item{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 builder.AppendLine("{0}{1} = new ArrayList<{2}>();", IsRequired ? wireType.Name + " " : "", target, elementType.Name)
-                    .AppendLine("for ({0} {1} : {2}) {{", elementType.ParameterVariant.Name, itemName, source)
+                    .AppendLine("for ({0} {1} : {2}) {{", elementType.Name, itemName, source)
                     .Indent().AppendLine(convertClientTypeToWireType(elementType, itemName, itemTarget, clientReference, level + 1))
                         .AppendLine("{0}.add({1});", target, itemTarget)
                     .Outdent().Append("}");
@@ -178,19 +176,19 @@ namespace AutoRest.Java.TypeModels
                     builder.Outdent().AppendLine("}");
                 }
             }
-            else if (wireType is DictionaryTypeModel)
+            else if (wireType is DictionaryTypeJv)
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("{0} {1} = {2};", WireType.Name, target, wireType.DefaultValue(_method))
+                    builder.AppendLine("{0} {1} = {2};", WireType.Name, target, wireType.DefaultValue)
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
-                var dictionaryType = wireType as DictionaryTypeModel;
-                var valueType = dictionaryType.ValueTypeModel;
+                var dictionaryType = wireType as DictionaryTypeJv;
+                var valueType = dictionaryType.ValueType as IModelTypeJv;
                 var itemName = string.Format(CultureInfo.InvariantCulture, "entry{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 builder.AppendLine("{0}{1} = new HashMap<String, {2}>();", IsRequired ? wireType.Name + " " : "", target, valueType.Name)
-                    .AppendLine("for (Map.Entry<String, {0}> {1} : {2}.entrySet()) {{", valueType.ParameterVariant.Name, itemName, source)
+                    .AppendLine("for (Map.Entry<String, {0}> {1} : {2}.entrySet()) {{", valueType.Name, itemName, source)
                     .Indent().AppendLine(convertClientTypeToWireType(valueType, itemName + ".getValue()", itemTarget, clientReference, level + 1))
                         .AppendLine("{0}.put({1}.getKey(), {2});", target, itemName, itemTarget)
                     .Outdent().Append("}");
@@ -217,7 +215,7 @@ namespace AutoRest.Java.TypeModels
             {
                 var imports = new List<string>();
                 // type imports
-                if (this.Location == ParameterLocation.Body || !NeedsSpecialSerialization(Type))
+                if (this.Location == Core.Model.ParameterLocation.Body || !NeedsSpecialSerialization(ModelType))
                 {
                     imports.AddRange(WireType.Imports);
                 }
@@ -242,18 +240,18 @@ namespace AutoRest.Java.TypeModels
             get
             {
                 var imports = new List<string>(WireType.Imports);
-                if (Location != ParameterLocation.Body)
+                if (Location != Core.Model.ParameterLocation.Body)
                 {
-                    if (this.Type.IsPrimaryType(KnownPrimaryType.ByteArray))
+                    if (this.ModelType.IsPrimaryType(KnownPrimaryType.ByteArray))
                     {
                         imports.Add("org.apache.commons.codec.binary.Base64");
                     }
-                    else if (this.Type is SequenceType)
+                    else if (this.ModelType is SequenceType)
                     {
                         imports.Add("com.microsoft.rest.serializer.CollectionFormat");
                     }
                 }
-                if (Type.IsPrimaryType(KnownPrimaryType.Stream) && Location == ParameterLocation.Body)
+                if (ModelType.IsPrimaryType(KnownPrimaryType.Stream) && Location == Core.Model.ParameterLocation.Body)
                 {
                     imports.Add("okhttp3.RequestBody");
                     imports.Add("okhttp3.MediaType");
@@ -264,11 +262,11 @@ namespace AutoRest.Java.TypeModels
 
         private string LocationImport(ParameterLocation parameterLocation)
         {
-            if (parameterLocation == ParameterLocation.FormData)
+            if (parameterLocation == Core.Model.ParameterLocation.FormData)
             {
                 return "retrofit2.http.Part";
             }
-            else if (parameterLocation != ParameterLocation.None)
+            else if (parameterLocation != Core.Model.ParameterLocation.None)
             {
                 return "retrofit2.http." + parameterLocation.ToString();
             }
@@ -278,7 +276,7 @@ namespace AutoRest.Java.TypeModels
             }
         }
 
-        private bool NeedsSpecialSerialization(IType type)
+        private bool NeedsSpecialSerialization(IModelType type)
         {
             var known = type as PrimaryType;
             return known != null &&

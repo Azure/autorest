@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Model;
 
-namespace AutoRest.Java.TypeModels
+namespace AutoRest.Java.Model
 {
-    public class PropertyModel : Property
+    public class PropertyJv : Property
     {
         protected string _package;
 
-        public PropertyModel(Property property, string package)
+        public PropertyJv(Property property, string package)
             : base()
         {
             this.LoadFrom(property);
@@ -22,17 +22,17 @@ namespace AutoRest.Java.TypeModels
         {
             get
             {
-                if (Type.IsPrimaryType(KnownPrimaryType.Base64Url))
+                if (ModelType.IsPrimaryType(KnownPrimaryType.Base64Url))
                 {
                     return string.Format("this.{0}.getDecodedBytes()", Name, CultureInfo.InvariantCulture);
                 }
-                else if (Type.IsPrimaryType(KnownPrimaryType.UnixTime))
+                else if (ModelType.IsPrimaryType(KnownPrimaryType.UnixTime))
                 {
                     return "new DateTime(this." + Name + " * 1000L, DateTimeZone.UTC)";
                 }
-                else if (Type.Name != ((ITypeModel) Type).ResponseVariant.Name)
+                else if (ModelType.Name != ((IModelTypeJv)ModelType).ResponseVariant.Name)
                 {
-                    return string.Format("this.{0}.get{1}()", Name, ((ITypeModel)Type).ResponseVariant, CultureInfo.InvariantCulture);
+                    return string.Format("this.{0}.get{1}()", Name, ((IModelTypeJv)ModelType).ResponseVariant, CultureInfo.InvariantCulture);
                 }
                 else
                 {
@@ -45,17 +45,17 @@ namespace AutoRest.Java.TypeModels
         {
             get
             {
-                if (Type.IsPrimaryType(KnownPrimaryType.Base64Url))
+                if (ModelType.IsPrimaryType(KnownPrimaryType.Base64Url))
                 {
                     return string.Format("Base64Url.encode({0})", Name, CultureInfo.InvariantCulture);
                 }
-                else if (Type.IsPrimaryType(KnownPrimaryType.UnixTime))
+                else if (ModelType.IsPrimaryType(KnownPrimaryType.UnixTime))
                 {
                     return string.Format("{0}.toDateTime(DateTimeZone.UTC).getMillis() / 1000", Name, CultureInfo.InvariantCulture);
                 }
-                else if (Type.Name != ((ITypeModel)Type).ResponseVariant.Name)
+                else if (ModelType.Name != ((IModelTypeJv)ModelType).ResponseVariant.Name)
                 {
-                    return string.Format("new {0}({1})", Type.Name, Name, CultureInfo.InvariantCulture);
+                    return string.Format("new {0}({1})", ModelType.Name, Name, CultureInfo.InvariantCulture);
                 }
                 else
                 {
@@ -68,15 +68,15 @@ namespace AutoRest.Java.TypeModels
         {
             get
             {
-                var imports = new List<string>(Type.ImportSafe()
+                var imports = new List<string>(ModelType.ImportSafe()
                         .Where(c => !c.StartsWith(
                             string.Join(".", _package, "models"),
                             StringComparison.OrdinalIgnoreCase)));
-                if (Type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123)
-                    || Type.IsPrimaryType(KnownPrimaryType.Base64Url))
+                if (ModelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123)
+                    || ModelType.IsPrimaryType(KnownPrimaryType.Base64Url))
                 {
-                    imports.AddRange(Type.ImportSafe());
-                    imports.AddRange(((ITypeModel) Type).ResponseVariant.ImportSafe());
+                    imports.AddRange(ModelType.ImportSafe());
+                    imports.AddRange(((IModelTypeJv)ModelType).ResponseVariant.ImportSafe());
                 }
                 return imports;
             }

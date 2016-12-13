@@ -3,7 +3,8 @@
 @using System.Linq
 @using AutoRest.Core.Utilities
 @using AutoRest.Java
-@inherits AutoRest.Core.Template<AutoRest.Java.TemplateModels.ServiceClientTemplateModel>
+@using AutoRest.Java.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Model.CodeModelJv>
 /**
 @Header(" * ").TrimMultilineHeader()
  */
@@ -33,7 +34,7 @@ public interface @Model.Name {
 @:     *
 @:     * @@return the @(property.Name) value.
 @:     */
-@:    @property.Type @(property.Name.ToCamelCase())();
+@:    @property.ModelType @(property.Name.ToCamelCase())();
 if(!property.IsReadOnly)
 {
 @EmptyLine
@@ -43,7 +44,7 @@ if(!property.IsReadOnly)
 @:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
 @:     * @@return the service client itself
 @:     */
-@:    @(Model.Name) with@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase()));
+@:    @(Model.Name) with@(property.Name.ToPascalCase())(@(property.ModelType) @(property.Name.ToCamelCase()));
 }
 }
 
@@ -51,16 +52,16 @@ if(!property.IsReadOnly)
 {
 @EmptyLine
 @:    /**
-@:     * Gets the @(operation.MethodGroupType) object to access its operations.
-@:     * @@return the @(operation.MethodGroupType) object.
+@:     * Gets the @(operation.TypeName) object to access its operations.
+@:     * @@return the @(operation.TypeName) object.
 @:     */
-@:    @(operation.MethodGroupType) @(operation.MethodGroupName)();
+@:    @(operation.TypeName) @(operation.Name)();
 }
 @EmptyLine
-@if (Model.MethodTemplateModels.Any())
+@if (Model.Methods.Any())
 {
 <text>
-    @foreach (var method in Model.MethodTemplateModels)
+    @foreach (MethodJv method in Model.Methods)
     {
     @:@Include(new MethodInterfaceTemplate(), method)
     @EmptyLine

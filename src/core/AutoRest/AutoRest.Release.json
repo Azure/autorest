@@ -24,6 +24,12 @@
         "Azure.Python": {
             "type": "PluginPya, AutoRest.Python.Azure"
         },
+        "Java": {
+            "type": "PluginJv, AutoRest.Java"
+        },
+        "Azure.Java": {
+            "type": "PluginJva, AutoRest.Java.Azure"
+        },
         "AzureResourceSchema": {
             "type": "PluginArs, AutoRest.AzureResourceSchema"
         },
@@ -51,10 +57,10 @@
       "type": "AzureNodeJSCodeGenerator, AutoRest.NodeJS.Azure"
     },
     "Java": {
-      "type": "JavaCodeGenerator, AutoRest.Java"
+      "type": "CodeGeneratorJv, AutoRest.Java"
     },
     "Azure.Java": {
-      "type": "AzureJavaCodeGenerator, AutoRest.Java.Azure"
+      "type": "AzureCodeGeneratorJv, AutoRest.Java.Azure"
     },
     "Azure.Java.Fluent": {
       "type": "AzureJavaFluentCodeGenerator, AutoRest.Java.Azure.Fluent"

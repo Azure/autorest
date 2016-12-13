@@ -1,47 +1,31 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Model;
 
-namespace AutoRest.Java.TypeModels
+namespace AutoRest.Java.Model
 {
-    public class ResponseModel
+    public class ResponseJv : Response
     {
         protected Response _response;
         protected List<string> _interfaceImports;
         protected List<string> _implImports;
 
-        public ResponseModel(Response response)
+        public ResponseJv(Response response)
         {
             this._response = response;
             this._interfaceImports = new List<string>();
             this._implImports = new List<string>();
         }
 
-        public ResponseModel(ITypeModel body, ITypeModel headers)
+        public ResponseJv(IModelTypeJv body, IModelTypeJv headers)
             : this(new Response(body, headers))
         {
         }
 
         #region types
-
-        public ITypeModel Body
-        {
-            get
-            {
-                return (ITypeModel)_response.Body;
-            }
-        }
-
-        public ITypeModel Headers
-        {
-            get
-            {
-                return (ITypeModel)_response.Headers;
-            }
-        }
-
+        
         public bool NeedsConversion
         {
             get
@@ -51,7 +35,7 @@ namespace AutoRest.Java.TypeModels
             }
         }
 
-        public virtual ITypeModel BodyClientType
+        public virtual IModelTypeJv BodyClientType
         {
             get
             {
@@ -59,9 +43,9 @@ namespace AutoRest.Java.TypeModels
             }
         }
 
-        private ITypeModel _bodyWireType;
+        private IModelTypeJv _bodyWireType;
 
-        public ITypeModel BodyWireType
+        public IModelTypeJv BodyWireType
         {
             get
             {
@@ -69,18 +53,18 @@ namespace AutoRest.Java.TypeModels
                 {
                     if (Body == null)
                     {
-                        _bodyWireType = new PrimaryTypeModel(KnownPrimaryType.None) { Name = "void" };
+                        _bodyWireType = new PrimaryTypeJv(KnownPrimaryType.None);
                     }
                     else
                     {
-                        _bodyWireType = (ITypeModel) Body;
+                        _bodyWireType = (IModelTypeJv) Body;
                     }
                 }
                 return _bodyWireType;
             }
         }
 
-        public ITypeModel HeaderClientType
+        public IModelTypeJv HeaderClientType
         {
             get
             {
@@ -95,7 +79,7 @@ namespace AutoRest.Java.TypeModels
             }
         }
 
-        public ITypeModel HeaderWireType
+        public IModelTypeJv HeaderWireType
         {
             get
             {
@@ -103,7 +87,7 @@ namespace AutoRest.Java.TypeModels
                 {
                     return null;
                 }
-                return (ITypeModel)Headers;
+                return (IModelTypeJv)Headers;
             }
         }
 
@@ -191,7 +175,7 @@ namespace AutoRest.Java.TypeModels
         {
             get
             {
-                return BodyClientType.InstanceType().ResponseVariant.Name;
+                return BodyClientType.ResponseVariant.Name;
             }
         }
 
@@ -231,7 +215,7 @@ namespace AutoRest.Java.TypeModels
         {
             get
             {
-                return HeaderClientType.InstanceType().ResponseVariant.Name;
+                return HeaderClientType.ResponseVariant.Name;
             }
         }
 
@@ -239,7 +223,7 @@ namespace AutoRest.Java.TypeModels
         {
             get
             {
-                return BodyWireType.InstanceType().Name;
+                return BodyWireType.Name;
             }
         }
 
@@ -255,7 +239,7 @@ namespace AutoRest.Java.TypeModels
         {
             get
             {
-                return HeaderWireType.InstanceType().Name;
+                return HeaderWireType.Name;
             }
         }
 
@@ -263,8 +247,8 @@ namespace AutoRest.Java.TypeModels
         {
             get
             {
-                SequenceTypeModel sequenceType = (SequenceTypeModel) Body;
-                return sequenceType != null ? sequenceType.ElementTypeModel.InstanceType().Name : "Void";
+                var sequenceType = (SequenceTypeJv) Body;
+                return sequenceType != null ? sequenceType.ElementType.Name.ToString() : "Void";
             }
         }
 
@@ -311,7 +295,7 @@ namespace AutoRest.Java.TypeModels
             }
         }
 
-        private string convertToClientType(ITypeModel type, string source, string target, int level = 0)
+        private string convertToClientType(IModelTypeJv type, string source, string target, int level = 0)
         {
             if (type == null)
             {
@@ -320,12 +304,12 @@ namespace AutoRest.Java.TypeModels
             
             IndentedStringBuilder builder = new IndentedStringBuilder();
 
-            SequenceTypeModel sequenceType = type as SequenceTypeModel;
-            DictionaryTypeModel dictionaryType = type as DictionaryTypeModel;
+            var sequenceType = type as SequenceTypeJv;
+            var dictionaryType = type as DictionaryTypeJv;
 
             if (sequenceType != null)
             {
-                var elementType = sequenceType.ElementTypeModel;
+                var elementType = sequenceType.ElementType as IModelTypeJv;
                 var itemName = string.Format(CultureInfo.InvariantCulture, "item{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 builder.AppendLine("{0} = new ArrayList<{1}>();", target, elementType.ResponseVariant.Name)
@@ -339,7 +323,7 @@ namespace AutoRest.Java.TypeModels
             }
             else if (dictionaryType != null)
             {
-                var valueType = dictionaryType.ValueTypeModel;
+                var valueType = dictionaryType.ValueType as IModelTypeJv;
                 var itemName = string.Format(CultureInfo.InvariantCulture, "entry{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 builder.AppendLine("{0} = new HashMap<String, {1}>();", target, valueType.ResponseVariant.Name)

@@ -200,7 +200,7 @@ gulp.task('regenerate:expected', function(cb){
       'regenerate:expected:python',
       'regenerate:expected:pythonazure',
       'regenerate:expected:samples',
-//      'regenerate:expected:java',
+      'regenerate:expected:java',
 //      'regenerate:expected:javaazure',
 //      'regenerate:expected:javaazurefluent',
 //      'regenerate:expected:go'
@@ -216,7 +216,7 @@ gulp.task('regenerate:delete', function(cb){
     'src/generator/AutoRest.NodeJS.Azure.Tests/Expected',
     'src/generator/AutoRest.Python.Tests/Expected',
     'src/generator/AutoRest.Python.Azure.Tests/Expected',
-    //'src/generator/AutoRest.Java.Tests/src/main/java',
+    'src/generator/AutoRest.Java.Tests/src/main/java',
     //'src/generator/AutoRest.Java.Azure.Tests/src/main/java',
     //'src/generator/AutoRest.Java.Azure.Fluent.Tests/src/main/java',
     //'src/generator/AutoRest.Go.Tests/src/tests/generated'
@@ -362,6 +362,7 @@ gulp.task('regenerate:expected:javaazurefluent', function(cb){
     'nsPrefix': 'Fixtures'
   }, cb);
 })
+*/
 
 gulp.task('test:clientruntime:java:init', ['test:java:init'], function(){
   return gulp.src('./').pipe(shell(basePathOrThrow() + '/gradlew :client-runtime:check'));
@@ -394,7 +395,6 @@ gulp.task('regenerate:expected:java', function(cb){
     'nsPrefix': 'Fixtures'
   }, cb);
 })
-*/
 
 gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite','regenerate:expected:csazureallsync', 'regenerate:expected:csazurenosync'], function (cb) {
   mappings = mergeOptions({
@@ -806,10 +806,8 @@ gulp.task('test:ruby:azure', ['regenerate:expected:rubyazure'], shell.task('ruby
 gulp.task('test:python', function(cb){ runAsync('tox', {cwd: './src/generator/AutoRest.Python.Tests/'}, cb) });
 gulp.task('test:python:azure', function(cb){ runAsync('tox', {cwd: './src/generator/AutoRest.Python.Azure.Tests/'}, cb) });
 
-/* Until JAVA is back in master
 gulp.task('test:java', ['test:java:init', 'test:clientruntime:java:init', 'test:clientruntime:javaazure:init'], shell.task(basePathOrThrow() + '/gradlew :codegen-tests:check', {cwd: './', verbosity: 3}));
 gulp.task('test:java:azure', shell.task(basePathOrThrow() + '/gradlew :azure-codegen-tests:check', {cwd: './', verbosity: 3}));
-*/
 
 /*
 gulp.task('test:go', ['regenerate:expected:go'], shell.task([
@@ -924,8 +922,8 @@ gulp.task('test', function(cb){
       'test:ruby:azure',
       'test:python',
       'test:python:azure',
+      'test:java',
 // DISABLING TESTS FOR LANGUAGES UNTIL MERGED INTO NEW MODEL
-//      'test:java',
 //      'test:java:azure',
 //      'test:go',
       cb);
@@ -938,9 +936,9 @@ gulp.task('test', function(cb){
       'test:ruby:azure',
       'test:python',
       'test:python:azure',
+      'test:java',
 // DISABLING TESTS FOR LANGUAGES UNTIL MERGED INTO NEW MODEL    
 // and solve issues with linux building...
-//      'test:java',
 //      'test:java:azure',
 //      'test:go',
       cb);

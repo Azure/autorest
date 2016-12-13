@@ -8,69 +8,20 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using AutoRest.Core;
-using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
-using AutoRest.Java.TypeModels;
+using AutoRest.Core.Model;
+using Newtonsoft.Json;
 
-namespace AutoRest.Java.TemplateModels
+namespace AutoRest.Java.Model
 {
-    public class MethodTemplateModel : Method
+    public class MethodJv : Method
     {
-        private ResponseModel _returnTypeModel;
-        private Dictionary<HttpStatusCode, ResponseModel> _responseModels;
+        public List<ParameterJv> ParameterModels { get; private set; }
 
-        public MethodTemplateModel(Method source, ServiceClient serviceClient)
-        {
-            this.LoadFrom(source);
-            ParameterModels = new List<ParameterModel>();
-            LogicalParameterModels = new List<ParameterModel>();
-            source.Parameters.Where(p => p.Location == ParameterLocation.Path).ForEach(p => ParameterModels.Add(new ParameterModel(p, this)));
-            source.Parameters.Where(p => p.Location != ParameterLocation.Path).ForEach(p => ParameterModels.Add(new ParameterModel(p, this)));
-            source.LogicalParameters.ForEach(p => LogicalParameterModels.Add(new ParameterModel(p, this)));
-            ServiceClient = serviceClient;
-            if (source.Group != null)
-            {
-                OperationName = source.Group.ToPascalCase();
-                ClientReference = "this.client";
-            }
-            else
-            {
-                OperationName = serviceClient.Name;
-                ClientReference = "this";
-            }
-            _returnTypeModel = new ResponseModel(ReturnType);
-            _responseModels = new Dictionary<HttpStatusCode,ResponseModel>();
-            Responses.ForEach(r => _responseModels.Add(r.Key, new ResponseModel(r.Value)));
-        }
+        public List<ParameterJv> LogicalParameterModels { get; private set; }
 
-        public string ClientReference { get; set; }
-
-        public string OperationName { get; set; }
-
-        public ServiceClient ServiceClient { get; set; }
-
-        public List<ParameterModel> ParameterModels { get; private set; }
-
-        public List<ParameterModel> LogicalParameterModels { get; private set; }
-
-        public virtual ResponseModel ReturnTypeModel
-        {
-            get
-            {
-                return _returnTypeModel;
-            }
-        }
-
-        public virtual Dictionary<HttpStatusCode, ResponseModel> ResponseModels
-        {
-            get
-            {
-                return _responseModels;
-            }
-        }
-
-        public virtual IEnumerable<ParameterModel> RetrofitParameters
+        public virtual IEnumerable<ParameterJv> RetrofitParameters
         {
             get
             {
@@ -78,20 +29,20 @@ namespace AutoRest.Java.TemplateModels
                     .Where(p => !p.Extensions.ContainsKey("hostParameter")).ToList();
                 if (IsParameterizedHost)
                 {
-                    parameters.Add(new ParameterModel(new Parameter
+                    parameters.Add(new ParameterJv
                     {
                         Name = "parameterizedHost",
                         SerializedName = "x-ms-parameterized-host",
                         Location = ParameterLocation.Header,
                         IsRequired = true,
-                        Type = new PrimaryTypeModel(KnownPrimaryType.String)
-                    }, this));
+                        ModelType = new PrimaryTypeJv(KnownPrimaryType.String)
+                    });
                 }
                 return parameters;
             }
         }
 
-        public IEnumerable<ParameterModel> OrderedRetrofitParameters
+        public IEnumerable<ParameterJv> OrderedRetrofitParameters
         {
             get
             {
@@ -108,7 +59,7 @@ namespace AutoRest.Java.TemplateModels
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in OrderedRetrofitParameters)
+                foreach (ParameterJv parameter in OrderedRetrofitParameters)
                 {
                     StringBuilder declarationBuilder = new StringBuilder();
                     if (Url.Contains("{" + parameter.Name + "}"))
@@ -126,8 +77,8 @@ namespace AutoRest.Java.TemplateModels
                     }
                     else if (parameter.Location == ParameterLocation.Body)
                     {
-                        declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture, 
-                            "@{0} ", 
+                        declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
+                            "@{0} ",
                             parameter.Location.ToString()));
                     }
                     else if (parameter.Location == ParameterLocation.FormData)
@@ -154,7 +105,7 @@ namespace AutoRest.Java.TemplateModels
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters.Where(p => !p.IsConstant))
                 {
-                    declarations.Add(parameter.ClientType.ParameterVariant + " " + parameter.Name);
+                    declarations.Add(parameter.ClientType + " " + parameter.Name);
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -169,7 +120,7 @@ namespace AutoRest.Java.TemplateModels
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                 {
-                    declarations.Add(parameter.ClientType.ParameterVariant + " " + parameter.Name);
+                    declarations.Add(parameter.ClientType + " " + parameter.Name);
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -262,13 +213,13 @@ namespace AutoRest.Java.TemplateModels
             }
         }
 
-        public virtual bool IsParameterizedHost
-        {
-            get
-            {
-                return ServiceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
-            }
-        }
+        public virtual bool IsParameterizedHost => Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
+        
+        /// <summary>
+        /// Generate a reference to the ServiceClient
+        /// </summary>
+        [JsonIgnore]
+        public string ClientReference => Group.IsNullOrEmpty() ? "this" : "this.Client";
 
         public string ParameterConversion
         {
@@ -316,25 +267,25 @@ namespace AutoRest.Java.TemplateModels
                 if (conditionalAssignment)
                 {
                     builder.AppendLine("{0} {1} = null;",
-                            ((ParameterModel) transformation.OutputParameter).ClientType.ParameterVariant,
+                            ((ParameterJv) transformation.OutputParameter).ClientType,
                             transformation.OutputParameter.Name);
                     builder.AppendLine("if ({0}) {{", nullCheck).Indent();
                 }
 
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
-                    transformation.OutputParameter.Type is CompositeType)
+                    transformation.OutputParameter.ModelType is CompositeType)
                 {
                     builder.AppendLine("{0}{1} = new {2}();",
-                        !conditionalAssignment ? ((ParameterModel)transformation.OutputParameter).ClientType.ParameterVariant + " " : "",
+                        !conditionalAssignment ? ((ParameterJv)transformation.OutputParameter).ClientType + " " : "",
                         transformation.OutputParameter.Name,
-                        transformation.OutputParameter.Type.Name);
+                        transformation.OutputParameter.ModelType.Name);
                 }
 
                 foreach (var mapping in transformation.ParameterMappings)
                 {
                     builder.AppendLine("{0}{1}{2};",
-                        !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ?
-                            ((ParameterModel)transformation.OutputParameter).ClientType.ParameterVariant + " " : "",
+                        !conditionalAssignment && !(transformation.OutputParameter.ModelType is CompositeType) ?
+                            ((ParameterJv)transformation.OutputParameter).ClientType + " " : "",
                         transformation.OutputParameter.Name,
                         GetMapping(mapping, filterRequired));
                 }
@@ -354,7 +305,7 @@ namespace AutoRest.Java.TemplateModels
             string inputPath = mapping.InputParameter.Name;
             if (mapping.InputParameterProperty != null)
             {
-                inputPath += "." + CodeNamer.CamelCase(mapping.InputParameterProperty) + "()";
+                inputPath += "." + CodeNamer.Instance.CamelCase(mapping.InputParameterProperty) + "()";
             }
             if (filterRequired && !mapping.InputParameter.IsRequired)
             {
@@ -364,7 +315,7 @@ namespace AutoRest.Java.TemplateModels
             string outputPath = "";
             if (mapping.OutputParameterProperty != null)
             {
-                outputPath += ".with" + CodeNamer.PascalCase(mapping.OutputParameterProperty);
+                outputPath += ".with" + CodeNamer.Instance.PascalCase(mapping.OutputParameterProperty);
                 return string.Format(CultureInfo.InvariantCulture, "{0}({1})", outputPath, inputPath);
             }
             else
@@ -386,17 +337,17 @@ namespace AutoRest.Java.TemplateModels
                     .Select(m => m.InputParameter.Name + " != null"));
         }
 
-        public IEnumerable<ParameterModel> RequiredNullableParameters
+        public IEnumerable<ParameterJv> RequiredNullableParameters
         {
             get
             {
                 foreach (var param in ParameterModels)
                 {
-                    if (!param.Type.IsPrimaryType(KnownPrimaryType.Int) &&
-                        !param.Type.IsPrimaryType(KnownPrimaryType.Double) &&
-                        !param.Type.IsPrimaryType(KnownPrimaryType.Boolean) &&
-                        !param.Type.IsPrimaryType(KnownPrimaryType.Long) &&
-                        !param.Type.IsPrimaryType(KnownPrimaryType.UnixTime) &&
+                    if (!param.ModelType.IsPrimaryType(KnownPrimaryType.Int) &&
+                        !param.ModelType.IsPrimaryType(KnownPrimaryType.Double) &&
+                        !param.ModelType.IsPrimaryType(KnownPrimaryType.Boolean) &&
+                        !param.ModelType.IsPrimaryType(KnownPrimaryType.Long) &&
+                        !param.ModelType.IsPrimaryType(KnownPrimaryType.UnixTime) &&
                         !param.IsConstant && param.IsRequired)
                     {
                         yield return param;
@@ -405,14 +356,14 @@ namespace AutoRest.Java.TemplateModels
             }
         }
 
-        public IEnumerable<ParameterModel> ParametersToValidate
+        public IEnumerable<ParameterJv> ParametersToValidate
         {
             get
             {
                 foreach (var param in ParameterModels)
                 {
-                    if (param.Type is PrimaryType ||
-                        param.Type is EnumType ||
+                    if (param.ModelType is PrimaryType ||
+                        param.ModelType is EnumType ||
                         param.IsConstant)
                     {
                         continue;
@@ -443,7 +394,7 @@ namespace AutoRest.Java.TemplateModels
                     parameters += ", ";
                 }
                 parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
-                    ReturnTypeModel.GenericBodyClientTypeString);
+                    ReturnTypeJv.GenericBodyClientTypeString);
                 return parameters;
             }
         }
@@ -458,7 +409,7 @@ namespace AutoRest.Java.TemplateModels
                     parameters += ", ";
                 }
                 parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
-                    ReturnTypeModel.GenericBodyClientTypeString);
+                    ReturnTypeJv.GenericBodyClientTypeString);
                 return parameters;
             }
         }
@@ -495,7 +446,7 @@ namespace AutoRest.Java.TemplateModels
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters
         /// </summary>
-        public IEnumerable<ParameterModel> LocalParameters
+        public IEnumerable<ParameterJv> LocalParameters
         {
             get
             {
@@ -528,8 +479,8 @@ namespace AutoRest.Java.TemplateModels
             {
                 if (this.DefaultResponse.Body is CompositeType)
                 {
-                    CompositeType type = this.DefaultResponse.Body as CompositeType;
-                    return new ModelTemplateModel(type, ServiceClient).ExceptionTypeDefinitionName;
+                    var type = this.DefaultResponse.Body as CompositeTypeJv;
+                    return type.ExceptionTypeDefinitionName;
                 }
                 else
                 {
@@ -620,16 +571,18 @@ namespace AutoRest.Java.TemplateModels
             }
         }
 
+        public ResponseJv ReturnTypeJv => ReturnType as ResponseJv;
+
         public virtual string ResponseGeneration(bool filterRequired = false)
         {
-            if (ReturnTypeModel.NeedsConversion)
+            if (ReturnTypeJv.NeedsConversion)
             {
                 IndentedStringBuilder builder= new IndentedStringBuilder();
                 builder.AppendLine("ServiceResponse<{0}> response = {1}Delegate(call.execute());",
-                    ReturnTypeModel.GenericBodyWireTypeString, this.Name.ToCamelCase());
-                builder.AppendLine("{0} body = null;", ReturnTypeModel.BodyClientType.Name)
+                    ReturnTypeJv.GenericBodyWireTypeString, this.Name.ToCamelCase());
+                builder.AppendLine("{0} body = null;", ReturnTypeJv.BodyClientType.Name)
                     .AppendLine("if (response.getBody() != null) {")
-                    .Indent().AppendLine("{0}", ReturnTypeModel.ConvertBodyToClientType("response.getBody()", "body"))
+                    .Indent().AppendLine("{0}", ReturnTypeJv.ConvertBodyToClientType("response.getBody()", "body"))
                     .Outdent().AppendLine("}");
                 return builder.ToString();
             }
@@ -640,9 +593,9 @@ namespace AutoRest.Java.TemplateModels
         {
             get
             {
-                if (ReturnTypeModel.NeedsConversion)
+                if (ReturnTypeJv.NeedsConversion)
                 {
-                    return "new ServiceResponse<" + ReturnTypeModel.GenericBodyClientTypeString + ">(body, response.getResponse())";
+                    return "new ServiceResponse<" + ReturnTypeJv.GenericBodyClientTypeString + ">(body, response.getResponse())";
                 }
                 return this.Name + "Delegate(call.execute())";
             }
@@ -651,23 +604,23 @@ namespace AutoRest.Java.TemplateModels
         public virtual string SuccessCallback(bool filterRequired = false)
         {
             IndentedStringBuilder builder = new IndentedStringBuilder();
-            if (ReturnTypeModel.NeedsConversion)
+            if (ReturnTypeJv.NeedsConversion)
             {
-                builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeModel.GenericBodyWireTypeString, this.Name);
-                builder.AppendLine("{0} body = null;", ReturnTypeModel.BodyClientType)
+                builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeJv.GenericBodyWireTypeString, this.Name);
+                builder.AppendLine("{0} body = null;", ReturnTypeJv.BodyClientType)
                     .AppendLine("if (result.getBody() != null) {")
-                    .Indent().AppendLine("{0}", ReturnTypeModel.ConvertBodyToClientType("result.getBody()", "body"))
+                    .Indent().AppendLine("{0}", ReturnTypeJv.ConvertBodyToClientType("result.getBody()", "body"))
                     .Outdent().AppendLine("}");
                 builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(body, result.getResponse());",
-                    ReturnTypeModel.GenericBodyClientTypeString);
+                    ReturnTypeJv.GenericBodyClientTypeString);
                 builder.AppendLine("if (serviceCallback != null) {")
-                    .Indent().AppendLine("serviceCallback.success(clientResponse);", ReturnTypeModel.GenericBodyClientTypeString)
+                    .Indent().AppendLine("serviceCallback.success(clientResponse);", ReturnTypeJv.GenericBodyClientTypeString)
                     .Outdent().AppendLine("}");
                 builder.AppendLine("serviceCall.success(clientResponse);");
             }
             else
             {
-                builder.AppendLine("{0} clientResponse = {1}Delegate(response);", ReturnTypeModel.WireResponseTypeString, this.Name);
+                builder.AppendLine("{0} clientResponse = {1}Delegate(response);", ReturnTypeJv.WireResponseTypeString, this.Name);
                 builder.AppendLine("if (serviceCallback != null) {")
                     .Indent().AppendLine("serviceCallback.success(clientResponse);", this.Name)
                     .Outdent().AppendLine("}");
@@ -679,19 +632,19 @@ namespace AutoRest.Java.TemplateModels
         public virtual string ClientResponse(bool filterRequired = false)
         {
             IndentedStringBuilder builder = new IndentedStringBuilder();
-            if (ReturnTypeModel.NeedsConversion)
+            if (ReturnTypeJv.NeedsConversion)
             {
-                builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeModel.GenericBodyWireTypeString, this.Name);
-                builder.AppendLine("{0} body = null;", ReturnTypeModel.BodyClientType)
+                builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeJv.GenericBodyWireTypeString, this.Name);
+                builder.AppendLine("{0} body = null;", ReturnTypeJv.BodyClientType)
                     .AppendLine("if (result.getBody() != null) {")
-                    .Indent().AppendLine("{0}", ReturnTypeModel.ConvertBodyToClientType("result.getBody()", "body"))
+                    .Indent().AppendLine("{0}", ReturnTypeJv.ConvertBodyToClientType("result.getBody()", "body"))
                     .Outdent().AppendLine("}");
                 builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(body, result.getResponse());",
-                    ReturnTypeModel.GenericBodyClientTypeString);
+                    ReturnTypeJv.GenericBodyClientTypeString);
             }
             else
             {
-                builder.AppendLine("{0} clientResponse = {1}Delegate(response);", ReturnTypeModel.WireResponseTypeString, this.Name);
+                builder.AppendLine("{0} clientResponse = {1}Delegate(response);", ReturnTypeJv.WireResponseTypeString, this.Name);
             }
             return builder.ToString();
         }
@@ -702,7 +655,7 @@ namespace AutoRest.Java.TemplateModels
             {
                 return string.Format(CultureInfo.InvariantCulture,
                     "final ServiceCall<{0}> serviceCall = ServiceCall.{1}(call);",
-                    ReturnTypeModel.GenericBodyClientTypeString, ServiceCallFactoryMethod);
+                    ReturnTypeJv.GenericBodyClientTypeString, ServiceCallFactoryMethod);
             }
         }
 
@@ -735,12 +688,12 @@ namespace AutoRest.Java.TemplateModels
                 // static imports
                 imports.Add("rx.Observable");
                 imports.Add("com.microsoft.rest.ServiceCall");
-                imports.Add("com.microsoft.rest." + ReturnTypeModel.ClientResponseType);
+                imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
                 this.ParameterModels.ForEach(p => imports.AddRange(p.InterfaceImports));
                 // return type
-                imports.AddRange(this.ReturnTypeModel.InterfaceImports);
+                imports.AddRange(this.ReturnTypeJv.InterfaceImports);
                 return imports.ToList();
             }
         }
@@ -767,10 +720,10 @@ namespace AutoRest.Java.TemplateModels
                     imports.Add("okhttp3.ResponseBody");
                 }
                 imports.Add("com.microsoft.rest.ServiceCall");
-                imports.Add("com.microsoft.rest." + ReturnTypeModel.ClientResponseType);
+                imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
                 imports.Add(RuntimeBasePackage + "." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceCallback");
-                this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));
+//                this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));
                 // Http verb annotations
                 imports.Add(this.HttpMethod.ImportFrom());
                 // response type conversion
@@ -786,21 +739,21 @@ namespace AutoRest.Java.TemplateModels
                 // parameters
                 this.LocalParameters.Concat(this.LogicalParameterModels)
                     .ForEach(p => imports.AddRange(p.ClientImplImports));
-                this.RetrofitParameters.ForEach(p => imports.AddRange(p.WireImplImports));
+//                this.RetrofitParameters.ForEach(p => imports.AddRange(p.WireImplImports));
                 // return type
-                imports.AddRange(this.ReturnTypeModel.ImplImports);
+                imports.AddRange(this.ReturnTypeJv.ImplImports);
                 if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
                 {
                     imports.Add("retrofit2.http.Streaming");
                 }
                 // response type (can be different from return type)
-                this.ResponseModels.ForEach(r => imports.AddRange(r.Value.ImplImports));
+                this.Responses.ForEach(r => imports.AddRange((r.Value as ResponseJv).ImplImports));
                 // exceptions
                 this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex =>
                     {
-                        string exceptionImport = JavaCodeNamer.GetJavaException(ex, ServiceClient);
-                        if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex, ServiceClient));
+                        string exceptionImport = CodeNamerJv.GetJavaException(ex, CodeModel);
+                        if (exceptionImport != null) imports.Add(CodeNamerJv.GetJavaException(ex, CodeModel));
                     });
                 // parameterized host
                 if (IsParameterizedHost)
