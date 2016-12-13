@@ -29,7 +29,11 @@ namespace AutoRest.CSharp
 
         private async Task GenerateServerSideCode(CodeModelCs codeModel)
         {
-          
+            /*
+            // Service server
+            var serviceServerTemplate = new ServiceServerTemplate { Model = codeModel };
+            await Write(serviceServerTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
+            */
         }
 
         private async Task GenerateClientSideCode(CodeModelCs codeModel)
