@@ -22,19 +22,16 @@ namespace AutoRest.Java
         public static HashSet<string> PrimaryTypes { get; private set; }
 
         public static HashSet<string> JavaBuiltInTypes { get; private set; }
-
-        protected string _package;
-
+        
         #region constructor
 
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
         /// </summary>
-        public CodeNamerJv(string nameSpace)
+        public CodeNamerJv()
         {
             // List retrieved from 
             // http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
-            _package = nameSpace != null ? nameSpace.ToLower(CultureInfo.InvariantCulture) : string.Empty;
             ReservedWords.AddRange(new []
             {
                 "abstract", "assert",   "boolean",  "break",    "byte",
