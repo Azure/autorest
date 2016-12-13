@@ -189,6 +189,17 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public int PayloadFlatteningThreshold { get; set; }
 
         /// <summary>
+        /// Gets or sets the code generation mode (Server or Client)
+        /// If the CodeGenerationMode is Server, AutoRest generates the server code for given spec
+        /// else generates (by default) the client code for spec
+        /// </summary>
+        [SettingsInfo("The code generation mode. " +
+                      "Possible values: Client, Server. " +
+                      "Determines whether AutoRest generates " +
+                      "the client or server side code for given spec.")]
+        public string  CodeGenerationMode{ get; set; }
+
+        /// <summary>
         /// Gets or sets a comment header to include in each generated file.
         /// </summary>
         [SettingsInfo("Text to include as a header comment in generated files. " +
