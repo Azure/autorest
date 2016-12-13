@@ -30,6 +30,8 @@ namespace AutoRest.Java.Model
 
         public string ModelsPackage => ".models";
 
+        public IEnumerable<Method> RootMethods => Methods.Where(m => m.Group.IsNullOrEmpty());
+
         public virtual IEnumerable<string> ImplImports
         {
             get

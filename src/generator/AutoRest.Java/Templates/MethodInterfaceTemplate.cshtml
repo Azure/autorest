@@ -25,7 +25,7 @@
 @: * @@return the @Model.ReturnType.Body.Name.EscapeXmlComment() object if successful.
 }
  */
-@(Model.ReturnType.Body as IModelTypeJv).ResponseVariant.Name @(Model.Name)(@Model.MethodRequiredParameterDeclaration);
+@((Model.ReturnType as ResponseJv).BodyWireType.ResponseVariant.Name) @(Model.Name)(@Model.MethodRequiredParameterDeclaration);
 @EmptyLine
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
@@ -116,7 +116,7 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterStringWrapped> @(M
 @: * @@return the @Model.ReturnType.Body.Name.EscapeXmlComment() object if successful.
 }
  */
-@(Model.ReturnType.Body as IModelTypeJv).ResponseVariant.Name @(Model.Name)(@Model.MethodParameterDeclaration);
+@((Model.ReturnType as ResponseJv).BodyWireType.ResponseVariant.Name) @(Model.Name)(@Model.MethodParameterDeclaration);
 @EmptyLine
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))

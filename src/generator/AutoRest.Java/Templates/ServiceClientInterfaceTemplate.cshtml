@@ -58,10 +58,10 @@ if(!property.IsReadOnly)
 @:    @(operation.TypeName) @(operation.Name)();
 }
 @EmptyLine
-@if (Model.Methods.Any())
+@if (Model.RootMethods.Any())
 {
 <text>
-    @foreach (MethodJv method in Model.Methods)
+    @foreach (MethodJv method in Model.RootMethods)
     {
     @:@Include(new MethodInterfaceTemplate(), method)
     @EmptyLine

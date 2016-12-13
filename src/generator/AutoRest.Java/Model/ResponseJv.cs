@@ -20,6 +20,8 @@ namespace AutoRest.Java.Model
         public ResponseJv(IModelTypeJv body, IModelTypeJv headers)
             : base(body, headers)
         {
+            this._interfaceImports = new List<string>();
+            this._implImports = new List<string>();
         }
 
         #region types

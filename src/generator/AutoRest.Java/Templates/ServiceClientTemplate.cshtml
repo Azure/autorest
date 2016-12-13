@@ -23,7 +23,7 @@ package @(Settings.Namespace?.ToLower() ?? "fallbackNamespaceOrWhatTODO").@(Mode
  * Initializes a new instance of the @Model.Name class.
  */
 public final class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
-@if (Model.Methods.Any())
+@if (Model.RootMethods.Any())
 {
 @:    /**
 @:     * The Retrofit service to perform REST calls.
@@ -73,7 +73,7 @@ if(!property.IsReadOnly)
 @:     * @@return the @(operation.TypeName) object.
 @:     */
 @:    public @(operation.TypeName) @(operation.Name)() {
-@:        return this.@(operation.TypeName);
+@:        return this.@(operation.Name);
 @:    }
 }
 @EmptyLine
@@ -129,13 +129,13 @@ if(!property.IsReadOnly)
 {
 @:        this.@(operation.Name) = new @(operation.TypeName)Impl(retrofit(), this);
 }
-@if (Model.Methods.Any())
+@if (Model.RootMethods.Any())
 {
 @:        initializeService();
 }
     }
 
-@if (Model.Methods.Any())
+@if (Model.RootMethods.Any())
 {
 @EmptyLine
 <text>
@@ -144,13 +144,13 @@ if(!property.IsReadOnly)
     }
 </text>
 @EmptyLine
-if (Model.Methods.Any())
+@if (Model.RootMethods.Any())
 {
 @:    @Include(new ServiceClientRetrofitTemplate(), Model)
 @EmptyLine
 }
 <text>
-@foreach (MethodJv method in Model.Methods)
+@foreach (MethodJv method in Model.RootMethods)
 {
     @:@(Include(new MethodTemplate(), method))
     @EmptyLine
