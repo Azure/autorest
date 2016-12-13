@@ -24,6 +24,12 @@
     "Azure.Python": {
         "type": "PluginPya, AutoRest.Python.Azure"
     },
+    "Java": {
+      "type": "PluginJv, AutoRest.Java"
+    },
+    "Azure.Java": {
+      "type": "PluginJva, AutoRest.Java.Azure"
+    },
     "AzureResourceSchema": {
         "type": "PluginArs, AutoRest.AzureResourceSchema"
     },
