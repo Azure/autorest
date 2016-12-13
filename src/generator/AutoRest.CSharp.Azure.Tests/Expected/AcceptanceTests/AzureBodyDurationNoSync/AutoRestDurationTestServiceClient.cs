@@ -8,21 +8,15 @@
 
 namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
 {
+    using System.Linq;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
-    using Microsoft.Rest.Serialization;
     using Models;
-    using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net;
-    using System.Net.Http;
 
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial class AutoRestDurationTestServiceClient : ServiceClient<AutoRestDurationTestServiceClient>, IAutoRestDurationTestServiceClient, IAzureClient
+    public partial class AutoRestDurationTestServiceClient : Microsoft.Rest.ServiceClient<AutoRestDurationTestServiceClient>, IAutoRestDurationTestServiceClient, IAzureClient
     {
         /// <summary>
         /// The base URI of the service.
@@ -42,7 +36,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
         /// <summary>
         /// Credentials needed for the client to connect to Azure.
         /// </summary>
-        public ServiceClientCredentials Credentials { get; private set; }
+        public Microsoft.Rest.ServiceClientCredentials Credentials { get; private set; }
 
         /// <summary>
         /// Gets or sets the preferred language for the response.
@@ -74,7 +68,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
         /// </param>
         protected AutoRestDurationTestServiceClient(params System.Net.Http.DelegatingHandler[] handlers) : base(handlers)
         {
-            Initialize();
+            this.Initialize();
         }
 
         /// <summary>
@@ -88,7 +82,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
         /// </param>
         protected AutoRestDurationTestServiceClient(System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
-            Initialize();
+            this.Initialize();
         }
 
         /// <summary>
@@ -109,7 +103,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
             {
                 throw new System.ArgumentNullException("baseUri");
             }
-            BaseUri = baseUri;
+            this.BaseUri = baseUri;
         }
 
         /// <summary>
@@ -133,7 +127,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
             {
                 throw new System.ArgumentNullException("baseUri");
             }
-            BaseUri = baseUri;
+            this.BaseUri = baseUri;
         }
 
         /// <summary>
@@ -148,16 +142,16 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public AutoRestDurationTestServiceClient(ServiceClientCredentials credentials, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestDurationTestServiceClient(Microsoft.Rest.ServiceClientCredentials credentials, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
             {
                 throw new System.ArgumentNullException("credentials");
             }
-            Credentials = credentials;
-            if (Credentials != null)
+            this.Credentials = credentials;
+            if (this.Credentials != null)
             {
-                Credentials.InitializeServiceClient(this);
+                this.Credentials.InitializeServiceClient(this);
             }
         }
 
@@ -176,16 +170,16 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public AutoRestDurationTestServiceClient(ServiceClientCredentials credentials, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public AutoRestDurationTestServiceClient(Microsoft.Rest.ServiceClientCredentials credentials, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (credentials == null)
             {
                 throw new System.ArgumentNullException("credentials");
             }
-            Credentials = credentials;
-            if (Credentials != null)
+            this.Credentials = credentials;
+            if (this.Credentials != null)
             {
-                Credentials.InitializeServiceClient(this);
+                this.Credentials.InitializeServiceClient(this);
             }
         }
 
@@ -204,7 +198,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public AutoRestDurationTestServiceClient(System.Uri baseUri, ServiceClientCredentials credentials, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestDurationTestServiceClient(System.Uri baseUri, Microsoft.Rest.ServiceClientCredentials credentials, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -214,11 +208,11 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
             {
                 throw new System.ArgumentNullException("credentials");
             }
-            BaseUri = baseUri;
-            Credentials = credentials;
-            if (Credentials != null)
+            this.BaseUri = baseUri;
+            this.Credentials = credentials;
+            if (this.Credentials != null)
             {
-                Credentials.InitializeServiceClient(this);
+                this.Credentials.InitializeServiceClient(this);
             }
         }
 
@@ -240,7 +234,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public AutoRestDurationTestServiceClient(System.Uri baseUri, ServiceClientCredentials credentials, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public AutoRestDurationTestServiceClient(System.Uri baseUri, Microsoft.Rest.ServiceClientCredentials credentials, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {
@@ -250,11 +244,11 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
             {
                 throw new System.ArgumentNullException("credentials");
             }
-            BaseUri = baseUri;
-            Credentials = credentials;
-            if (Credentials != null)
+            this.BaseUri = baseUri;
+            this.Credentials = credentials;
+            if (this.Credentials != null)
             {
-                Credentials.InitializeServiceClient(this);
+                this.Credentials.InitializeServiceClient(this);
             }
         }
 
@@ -267,11 +261,11 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
         /// </summary>
         private void Initialize()
         {
-            Duration = new DurationOperations(this);
-            BaseUri = new System.Uri("https://localhost");
-            AcceptLanguage = "en-US";
-            LongRunningOperationRetryTimeout = 30;
-            GenerateClientRequestId = true;
+            this.Duration = new DurationOperations(this);
+            this.BaseUri = new System.Uri("https://localhost");
+            this.AcceptLanguage = "en-US";
+            this.LongRunningOperationRetryTimeout = 30;
+            this.GenerateClientRequestId = true;
             SerializationSettings = new Newtonsoft.Json.JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,
@@ -279,10 +273,10 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
                 DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver(),
+                ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver(),
                 Converters = new System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
                     {
-                        new Iso8601TimeSpanConverter()
+                        new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
                     }
             };
             DeserializationSettings = new Newtonsoft.Json.JsonSerializerSettings
@@ -291,15 +285,14 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
                 DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver(),
+                ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver(),
                 Converters = new System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
                     {
-                        new Iso8601TimeSpanConverter()
+                        new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
                     }
             };
             CustomInitialize();
-            DeserializationSettings.Converters.Add(new CloudErrorJsonConverter());
+            DeserializationSettings.Converters.Add(new Microsoft.Rest.Azure.CloudErrorJsonConverter());
         }
     }
 }
-
