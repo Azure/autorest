@@ -11,7 +11,7 @@
 package fixtures.bodycomplex.implementation;
 
 import fixtures.bodycomplex.AutoRestComplexTestService;
-import fixtures.bodycomplex.Basics;
+import fixtures.bodycomplex.BasicOperations;
 import fixtures.bodycomplex.Primitives;
 import fixtures.bodycomplex.Arrays;
 import fixtures.bodycomplex.Dictionarys;
@@ -52,15 +52,15 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
     }
 
     /**
-     * The Basics object to access its operations.
+     * The BasicOperations object to access its operations.
      */
-    private Basics basics;
+    private BasicOperations basics;
 
     /**
-     * Gets the Basics object to access its operations.
-     * @return the Basics object.
+     * Gets the BasicOperations object to access its operations.
+     * @return the BasicOperations object.
      */
-    public Basics basics() {
+    public BasicOperations basics() {
         return this.basics;
     }
 
@@ -197,7 +197,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
 
     private void initialize() {
         this.apiVersion = "2014-04-01-preview";
-        this.basics = new BasicsImpl(retrofit(), this);
+        this.basics = new BasicOperationsImpl(retrofit(), this);
         this.primitives = new PrimitivesImpl(retrofit(), this);
         this.arrays = new ArraysImpl(retrofit(), this);
         this.dictionarys = new DictionarysImpl(retrofit(), this);
