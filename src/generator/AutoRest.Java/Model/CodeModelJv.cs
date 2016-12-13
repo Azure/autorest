@@ -30,7 +30,7 @@ namespace AutoRest.Java.Model
 
         public string ModelsPackage => ".models";
 
-        public IEnumerable<Method> RootMethods => Methods.Where(m => m.Group.IsNullOrEmpty());
+        public IEnumerable<MethodJv> RootMethods => Methods.Where(m => m.Group.IsNullOrEmpty()).OfType<MethodJv>();
 
         public virtual IEnumerable<string> ImplImports
         {
@@ -52,7 +52,7 @@ namespace AutoRest.Java.Model
                         "retrofit2.Retrofit"
                     });
 
-                classes.AddRange(this.AllOperations
+                classes.AddRange(RootMethods
                     .SelectMany(m => m.ImplImports)
                     .OrderBy(i => i));
 
@@ -66,7 +66,7 @@ namespace AutoRest.Java.Model
             {
                 HashSet<string> classes = new HashSet<string>();
                 
-                classes.AddRange(this.AllOperations
+                classes.AddRange(RootMethods
                     .SelectMany(m => m.InterfaceImports)
                     .OrderBy(i => i).Distinct());
 
