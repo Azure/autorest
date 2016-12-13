@@ -60,7 +60,7 @@ if(!property.IsReadOnly)
 }
 }
 
-@foreach (var operation in Model.Operations)
+@foreach (var operation in Model.AllOperations)
 {
 @EmptyLine
 @:    /**
@@ -125,7 +125,7 @@ if(!property.IsReadOnly)
 {
 @:        this.@(property.Name) = @(property.DefaultValue);
 }
-@foreach (var operation in Model.Operations)
+@foreach (var operation in Model.AllOperations)
 {
 @:        this.@(operation.Name) = new @(operation.TypeName)Impl(retrofit(), this);
 }

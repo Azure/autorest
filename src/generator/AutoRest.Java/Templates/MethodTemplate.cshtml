@@ -132,7 +132,7 @@ public Observable<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Wit
     }
     if (parameter.IsConstant)
     {
-@:    final @(parameter.ClientType) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.DefaultValue);
 
     }
 }

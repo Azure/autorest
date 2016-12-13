@@ -78,18 +78,15 @@ namespace AutoRest.Java
             await Write(serviceClientInterfaceTemplate, $"{cm.Name.ToPascalCase()}{ImplementationFileExtension}");
             
             // operations
-            foreach (MethodGroupJv methodGroup in codeModel.Operations)
+            foreach (MethodGroupJv methodGroup in codeModel.AllOperations)
             {
-                if (!methodGroup.Name.IsNullOrEmpty())
-                {
-                    // Operation
-                    var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
-                    await Write(operationsTemplate, $"{Path.Combine("implementation", methodGroup.TypeName.ToPascalCase())}{ImplementationFileExtension}");
+                // Operation
+                var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
+                await Write(operationsTemplate, $"{Path.Combine("implementation", methodGroup.TypeName.ToPascalCase())}{ImplementationFileExtension}");
 
-                    // Operation interface
-                    var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
-                    await Write(operationsInterfaceTemplate, $"I{methodGroup.TypeName.ToPascalCase()}{ImplementationFileExtension}");
-                }
+                // Operation interface
+                var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
+                await Write(operationsInterfaceTemplate, $"I{methodGroup.TypeName.ToPascalCase()}{ImplementationFileExtension}");
             }
 
             //Models
