@@ -306,6 +306,9 @@
         },
         "x-ms-request-id": {
           "$ref": "#/definitions/xmsRequestId"
+        },
+        "x-ms-examples": {
+          "$ref": "#/definitions/xmsExamples"
         }
       }
     },
@@ -1589,6 +1592,51 @@
         "enum": ["create", "read", "update"]
       },
       "uniqueItems": true
+    },
+    "xmsResponseExample": {
+      "type": "object",
+      "description": "Provides the format of specifying an example response in the x-ms-examples extension.",
+      "properties": {
+        "headers": {
+          "type": "object",
+          "description": "Examples of response headers like 'location', 'azure-asyncoperation', 'retry-after', etc.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "body":{
+          "type": ["object", "number", "array", "integer", "string", "boolean", "null"],
+          "description": "Example of the response body if applicable for the operation."
+        }
+      }
+    },
+    "xmsExampleObject": {
+      "type": "object",
+      "required": ["parameters", "responses"],
+      "description": "Describes the format of an example defined in the x-ms-examples extension.",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "description": "A dictionary of parameter names and their sample values for a particular operation.",
+          "additionalProperties": {
+            "type": ["object", "number", "array", "integer", "string", "boolean", "null"]
+          }
+        },
+        "responses":{
+          "type": "object",
+          "description": "A dictionary of {possible HTTP status codes (as the dictionary key)} that can be recieved from that operation and {examples (as the dictionary value)} of response {body} and {headers (for long running operations)}.",
+          "additionalProperties": {
+            "$ref": "#/definitions/xmsResponseExample"
+          }
+        }
+      }
+    },
+    "xmsExamples": {
+      "type": "object",
+      "description": "Describes the 'x-ms-examples' extension.",
+      "additionalProperties": {
+        "$ref": "#/definitions/xmsExampleObject"
+      }
     }
   }
 }
