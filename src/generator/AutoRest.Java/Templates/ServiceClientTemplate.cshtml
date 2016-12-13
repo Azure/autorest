@@ -34,14 +34,14 @@ public final class @(Model.Name)Impl extends ServiceClient implements @Model.Nam
 {
 @EmptyLine
 @:    /** @(property.Documentation.ToString().Period()) */
-@:    private @(property.ModelType) @(property.Name.ToCamelCase());
+@:    private @(property.ModelType.Name) @(property.Name.ToCamelCase());
 @EmptyLine
 @:    /**
 @:     * Gets @(property.Documentation.ToString().Period())
 @:     *
 @:     * @@return the @(property.Name) value.
 @:     */
-@:    public @(property.ModelType) @(property.Name.ToCamelCase())() {
+@:    public @(property.ModelType.Name) @(property.Name.ToCamelCase())() {
 @:        return this.@(property.Name.ToCamelCase());
 @:    }
 if(!property.IsReadOnly)
@@ -53,7 +53,7 @@ if(!property.IsReadOnly)
 @:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
 @:     * @@return the service client itself
 @:     */
-@:    public @(Model.Name)Impl with@(property.Name.ToPascalCase())(@(property.ModelType) @(property.Name.ToCamelCase())) {
+@:    public @(Model.Name)Impl with@(property.Name.ToPascalCase())(@(property.ModelType.Name) @(property.Name.ToCamelCase())) {
 @:        this.@(property.Name.ToCamelCase()) = @(property.Name.ToCamelCase());
 @:        return this;
 @:    }

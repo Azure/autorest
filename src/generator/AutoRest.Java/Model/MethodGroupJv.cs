@@ -11,8 +11,14 @@ namespace AutoRest.Java.Model
 {
     public class MethodGroupJv : MethodGroup
     {
-        public MethodGroupJv() { }
-        public MethodGroupJv(string name) : base(name) { }
+        public MethodGroupJv()
+        {
+            Name.OnGet += Core.Utilities.Extensions.ToCamelCase;
+        }
+        public MethodGroupJv(string name) : base(name)
+        {
+            Name.OnGet += Core.Utilities.Extensions.ToCamelCase;
+        }
 
         public string MethodGroupFullType
         {

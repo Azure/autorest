@@ -133,11 +133,6 @@ namespace AutoRest.Java.Model
 
         public IModelTypeJv NonNullableVariant => this;
 
-        public IModelTypeJv InstanceType()
-        {
-            return this;
-        }
-
         private IEnumerable<IModelTypeJv> ParseGenericType()
         {
             string name = Name;

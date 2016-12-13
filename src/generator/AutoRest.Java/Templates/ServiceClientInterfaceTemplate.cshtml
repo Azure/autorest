@@ -34,7 +34,7 @@ public interface @Model.Name {
 @:     *
 @:     * @@return the @(property.Name) value.
 @:     */
-@:    @property.ModelType @(property.Name.ToCamelCase())();
+@:    @property.ModelType.Name @(property.Name.ToCamelCase())();
 if(!property.IsReadOnly)
 {
 @EmptyLine
@@ -44,7 +44,7 @@ if(!property.IsReadOnly)
 @:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
 @:     * @@return the service client itself
 @:     */
-@:    @(Model.Name) with@(property.Name.ToPascalCase())(@(property.ModelType) @(property.Name.ToCamelCase()));
+@:    @(Model.Name) with@(property.Name.ToPascalCase())(@(property.ModelType.Name) @(property.Name.ToCamelCase()));
 }
 }
 
