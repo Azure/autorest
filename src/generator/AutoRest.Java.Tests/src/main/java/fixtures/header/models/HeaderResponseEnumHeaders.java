@@ -16,8 +16,7 @@ package fixtures.header.models;
  */
 public class HeaderResponseEnumHeaders {
     /**
-     * response with header values "GREY" or null. Possible values include:
-     * 'White', 'black', 'GREY'.
+     * response with header values "GREY" or null.
      */
     private GreyscaleColors value;
 

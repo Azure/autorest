@@ -21,8 +21,10 @@ public class Basic {
     private Integer id;
 
     /**
-     * Name property with a very long description that does not fit on a single
-     * line and a line break.
+     * Name property with a very
+     * long description that
+     * does not fit on a single line
+     * and a line break.
      */
     private String name;
 

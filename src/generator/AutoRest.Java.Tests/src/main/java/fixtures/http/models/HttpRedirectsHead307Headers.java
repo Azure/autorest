@@ -17,8 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class HttpRedirectsHead307Headers {
     /**
-     * The redirect location for this request. Possible values include:
-     * '/http/success/head/200'.
+     * The redirect location for this request.
      */
     @JsonProperty(value = "Location")
     private String location;
