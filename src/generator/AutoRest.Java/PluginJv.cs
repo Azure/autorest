@@ -30,7 +30,8 @@ namespace AutoRest.Java
                 new Factory<SequenceType, SequenceTypeJv>(),
                 new Factory<MethodGroup, MethodGroupJv>(),
                 new Factory<EnumType, EnumTypeJv>(),
-                new Factory<PrimaryType, PrimaryTypeJv>()
+                new Factory<PrimaryType, PrimaryTypeJv>(),
+                new Factory<Response, ResponseJv>()
             };
         }
     }

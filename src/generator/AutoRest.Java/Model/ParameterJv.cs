@@ -10,11 +10,6 @@ namespace AutoRest.Java.Model
         public ParameterJv()
             : base()
         {
-            _wireName = this.Name.ToCamelCase();
-            if (NeedsConversion)
-            {
-                _wireName += "Converted";
-            }
             _implImports = new List<string>();
         }
 
@@ -50,13 +45,11 @@ namespace AutoRest.Java.Model
             }
         }
 
-        private string _wireName;
-
         public string WireName
         {
             get
             {
-                return _wireName;
+                return this.Name.ToCamelCase() + "Converted";
             }
         }
 
@@ -80,11 +73,11 @@ namespace AutoRest.Java.Model
                 {
                     if (WireType.IsPrimaryType(KnownPrimaryType.String))
                     {
-                        return string.Format(CultureInfo.InvariantCulture, "{0} {1} = Base64.encodeBase64String({2});", WireType.Name, _wireName, source);
+                        return string.Format(CultureInfo.InvariantCulture, "{0} {1} = Base64.encodeBase64String({2});", WireType.Name, WireName, source);
                     }
                     else
                     {
-                        return string.Format(CultureInfo.InvariantCulture, "{0} {1} = Base64Url.encode({2});", WireType.Name, _wireName, source);
+                        return string.Format(CultureInfo.InvariantCulture, "{0} {1} = Base64Url.encode({2});", WireType.Name, WireName, source);
                     }
                 }
                 else if (sequence != null)
@@ -92,14 +85,14 @@ namespace AutoRest.Java.Model
                     return string.Format(CultureInfo.InvariantCulture,
                         "{0} {1} = {2}.mapperAdapter().serializeList({3}, CollectionFormat.{4});",
                         WireType.Name,
-                        _wireName,
+                        WireName,
                         clientReference,
                         source,
                         CollectionFormat.ToString().ToUpper(CultureInfo.InvariantCulture));
                 }
             }
             
-            return convertClientTypeToWireType(WireType, source, _wireName, clientReference);
+            return convertClientTypeToWireType(WireType, source, WireName, clientReference);
         }
 
         private string convertClientTypeToWireType(IModelTypeJv wireType, string source, string target, string clientReference, int level = 0)

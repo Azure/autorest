@@ -8,19 +8,17 @@ namespace AutoRest.Java.Model
 {
     public class ResponseJv : Response
     {
-        protected Response _response;
         protected List<string> _interfaceImports;
         protected List<string> _implImports;
 
-        public ResponseJv(Response response)
+        public ResponseJv()
         {
-            this._response = response;
             this._interfaceImports = new List<string>();
             this._implImports = new List<string>();
         }
 
         public ResponseJv(IModelTypeJv body, IModelTypeJv headers)
-            : this(new Response(body, headers))
+            : base(body, headers)
         {
         }
 

@@ -17,15 +17,11 @@ namespace AutoRest.Java.Model
 {
     public class MethodJv : Method
     {
-        public List<ParameterJv> ParameterModels { get; private set; }
-
-        public List<ParameterJv> LogicalParameterModels { get; private set; }
-
         public virtual IEnumerable<ParameterJv> RetrofitParameters
         {
             get
             {
-                var parameters = LogicalParameterModels.Where(p => p.Location != ParameterLocation.None)
+                var parameters = LogicalParameters.OfType<ParameterJv>().Where(p => p.Location != ParameterLocation.None)
                     .Where(p => !p.Extensions.ContainsKey("hostParameter")).ToList();
                 if (IsParameterizedHost)
                 {
@@ -341,7 +337,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                foreach (var param in ParameterModels)
+                foreach (ParameterJv param in Parameters)
                 {
                     if (!param.ModelType.IsPrimaryType(KnownPrimaryType.Int) &&
                         !param.ModelType.IsPrimaryType(KnownPrimaryType.Double) &&
@@ -360,7 +356,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                foreach (var param in ParameterModels)
+                foreach (ParameterJv param in Parameters)
                 {
                     if (param.ModelType is PrimaryType ||
                         param.ModelType is EnumType ||
@@ -451,8 +447,9 @@ namespace AutoRest.Java.Model
             get
             {
                 //Omit parameter-group properties for now since Java doesn't support them yet
-                return ParameterModels.Where(
-                    p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
+                return Parameters
+                    .OfType<ParameterJv>()
+                    .Where(p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
                     .OrderBy(item => !item.IsRequired);
             }
         }
@@ -691,7 +688,7 @@ namespace AutoRest.Java.Model
                 imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
-                this.ParameterModels.ForEach(p => imports.AddRange(p.InterfaceImports));
+                this.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
                 // return type
                 imports.AddRange(this.ReturnTypeJv.InterfaceImports);
                 return imports.ToList();
@@ -737,7 +734,7 @@ namespace AutoRest.Java.Model
                     imports.Add("com.microsoft.rest.Validator");
                 }
                 // parameters
-                this.LocalParameters.Concat(this.LogicalParameterModels)
+                this.LocalParameters.Concat(this.LogicalParameters.OfType<ParameterJv>())
                     .ForEach(p => imports.AddRange(p.ClientImplImports));
 //                this.RetrofitParameters.ForEach(p => imports.AddRange(p.WireImplImports));
                 // return type

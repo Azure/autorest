@@ -2,13 +2,14 @@
 @using AutoRest.Java.Templates
 @using System.Linq;
 @using AutoRest.Java
+@using AutoRest.Java.Model
 @inherits AutoRest.Core.Template<AutoRest.Java.Model.MethodGroupJv>
 /**
 @Header(" * ").TrimMultilineHeader()
  */
 @EmptyLine
 
-package @(Settings.Namespace.ToLower()).@(Model.ImplPackage);
+package @(Settings.Namespace?.ToLower() ?? "fallbackNamespaceOrWhatTODO").@(Model.ImplPackage);
 @EmptyLine
 @foreach (var importClass in Model.ImplImports)
 {
@@ -18,7 +19,7 @@ package @(Settings.Namespace.ToLower()).@(Model.ImplPackage);
 
 /**
  * An instance of this class provides access to all the operations defined
- * in @(Model.MethodGroupType).
+ * in @(Model.TypeName).
  */
 public final class @(Model.MethodGroupImplType)@(Model.ParentDeclaration) {
     /** The Retrofit service to perform REST calls. */
@@ -27,7 +28,7 @@ public final class @(Model.MethodGroupImplType)@(Model.ParentDeclaration) {
     private @(Model.ServiceClientType) client;
     @EmptyLine
     /**
-     * Initializes an instance of @(Model.MethodGroupType).
+     * Initializes an instance of @(Model.TypeName).
      *
      * @@param retrofit the Retrofit instance built from a Retrofit Builder.
      * @@param client the instance of the service client containing this operation class.
@@ -42,7 +43,7 @@ public final class @(Model.MethodGroupImplType)@(Model.ParentDeclaration) {
 
     @EmptyLine
 
-    @foreach (var method in Model.MethodTemplateModels)
+    @foreach (MethodJv method in Model.Methods)
     {
     @:@(Include(new MethodTemplate(), method))
     @EmptyLine

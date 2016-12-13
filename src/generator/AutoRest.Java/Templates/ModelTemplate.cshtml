@@ -10,7 +10,7 @@
  */
 @EmptyLine
 
-package @(Settings.Namespace.ToLower())@Model.ModelsPackage;
+package @(Settings.Namespace?.ToLower() ?? "fallbackNamespaceOrWhatTODO")@Model.ModelsPackage;
 @EmptyLine
 
 @foreach (var importClass in Model.ImportList)

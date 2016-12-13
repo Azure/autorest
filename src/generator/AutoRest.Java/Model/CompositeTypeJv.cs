@@ -10,20 +10,15 @@ namespace AutoRest.Java.Model
 {
     public class CompositeTypeJv : CompositeType, IModelTypeJv
     {
-        protected string _package;
         public const string ExternalExtension = "x-ms-external";
         protected string _runtimePackage = "com.microsoft.rest";
 
-        public CompositeTypeJv(CompositeType compositeType, string package)
-            : this(package)
+        public CompositeTypeJv()
         {
-            this.LoadFrom(compositeType);
         }
 
-        public CompositeTypeJv(string package)
-            : base()
+        public CompositeTypeJv(string name) : base(name)
         {
-            this._package = package.ToLower(CultureInfo.InvariantCulture);
         }
 
         public string ModelsPackage => (this.CodeModel as CodeModelJv).ModelsPackage;
@@ -40,7 +35,7 @@ namespace AutoRest.Java.Model
                 {
                     return string.Join(
                         ".",
-                        _package,
+                        //_package, // TODO
                         "models");
                 }
             }
@@ -149,7 +144,7 @@ namespace AutoRest.Java.Model
             {
                 if (!CodeNamerJv.PrimaryTypes.Contains(innerType.Trim()))
                 {
-                    yield return new CompositeTypeJv(_package) { Name = innerType.Trim() };
+                    yield return new CompositeTypeJv { Name = innerType.Trim() };
                 }
             }
         }

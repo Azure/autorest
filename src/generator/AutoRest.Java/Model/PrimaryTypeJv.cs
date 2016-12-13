@@ -9,6 +9,10 @@ namespace AutoRest.Java.Model
     {
         private List<string> _imports;
         
+        public PrimaryTypeJv()
+        {
+        }
+
         public PrimaryTypeJv(KnownPrimaryType type)
             : base(type)
         {

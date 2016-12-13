@@ -7,7 +7,7 @@
  */
 @EmptyLine
 
-package @(Settings.Namespace.ToLower())@Model.ModelsPackage;
+package @(Settings.Namespace?.ToLower() ?? "fallbackNamespaceOrWhatTODO")@Model.ModelsPackage;
 @EmptyLine
 
 import com.microsoft.rest.RestException;

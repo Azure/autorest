@@ -9,15 +9,6 @@ namespace AutoRest.Java.Model
 {
     public class PropertyJv : Property
     {
-        protected string _package;
-
-        public PropertyJv(Property property, string package)
-            : base()
-        {
-            this.LoadFrom(property);
-            this._package = package.ToLower(CultureInfo.InvariantCulture);
-        }
-
         public string ClientForm
         {
             get
@@ -70,7 +61,10 @@ namespace AutoRest.Java.Model
             {
                 var imports = new List<string>(ModelType.ImportSafe()
                         .Where(c => !c.StartsWith(
-                            string.Join(".", _package, "models"),
+                            string.Join(
+                                ".", 
+                                // _package, // TODO
+                                "models"),
                             StringComparison.OrdinalIgnoreCase)));
                 if (ModelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123)
                     || ModelType.IsPrimaryType(KnownPrimaryType.Base64Url))

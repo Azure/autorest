@@ -11,28 +11,13 @@ namespace AutoRest.Java.Model
 {
     public class MethodGroupJv : MethodGroup
     {
-        public MethodGroupJv(CodeModel serviceClient, string methodGroupName)
-        {
-            this.LoadFrom(serviceClient);
-            MethodTemplateModels = new List<MethodJv>();
-            // MethodGroup name and type are always the same but can be 
-            // changed in derived classes
-            MethodGroupName = methodGroupName;
-            MethodGroupType = methodGroupName.ToPascalCase();
-            Methods.Where(m => m.Group == MethodGroupName)
-                .ForEach(m => MethodTemplateModels.Add(m as MethodJv));
-        }
-        public List<MethodJv> MethodTemplateModels { get; private set; }
-
-        public string MethodGroupName { get; set; }
-
-        public string MethodGroupType { get; set; }
+        public MethodGroupJv() { }
 
         public string MethodGroupFullType
         {
             get
             {
-                return CodeModel.Namespace.ToLower(CultureInfo.InvariantCulture) + "." + MethodGroupType;
+                return (CodeModel.Namespace?.ToLower(CultureInfo.InvariantCulture) ?? "fallbackNamespaceOrWhatTODO") + "." + TypeName;
             }
         }
 
@@ -40,7 +25,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return MethodGroupType;
+                return TypeName;
             }
         }
 
@@ -48,7 +33,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return MethodGroupType + ImplClassSuffix;
+                return TypeName + ImplClassSuffix;
             }
         }
 
@@ -80,13 +65,14 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                if (this.MethodTemplateModels
+                if (this.Methods
+                    .OfType<MethodJv>()
                     .SelectMany(m => m.ImplImports)
-                    .Any(i => i.Split('.').LastOrDefault() == MethodGroupType))
+                    .Any(i => i.Split('.').LastOrDefault() == TypeName))
                 {
                     return MethodGroupFullType;
                 }
-                return MethodGroupType;
+                return TypeName;
             }
         }
 
@@ -94,7 +80,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return CodeNamerJv.GetServiceName(MethodGroupName.ToPascalCase());
+                return CodeNamerJv.GetServiceName(Name.ToPascalCase());
             }
         }
 
@@ -112,11 +98,12 @@ namespace AutoRest.Java.Model
             {
                 var imports = new List<string>();
                 imports.Add("retrofit2.Retrofit");
-                if (MethodGroupTypeString == MethodGroupType)
+                if (MethodGroupTypeString == TypeName)
                 {
                     imports.Add(MethodGroupFullType);
                 }
-                imports.AddRange(this.MethodTemplateModels
+                imports.AddRange(this.Methods
+                    .OfType<MethodJv>()
                     .SelectMany(m => m.ImplImports)
                     .OrderBy(i => i).Distinct());
                 return imports;
@@ -127,7 +114,8 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return this.MethodTemplateModels
+                return this.Methods
+                    .OfType<MethodJv>()
                     .SelectMany(m => m.InterfaceImports)
                     .OrderBy(i => i).Distinct();
             }

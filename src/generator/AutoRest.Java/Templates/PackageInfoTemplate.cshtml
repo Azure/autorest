@@ -21,9 +21,9 @@ else
 
 @if (string.IsNullOrEmpty(Model.SubPackage))
 {
-@:package @(Settings.Namespace.ToLower());
+@:package @(Settings.Namespace?.ToLower() ?? "fallbackNamespaceOrWhatTODO");
 }
 else
 {
-@:package @(Settings.Namespace.ToLower()).@(Model.SubPackage);
+@:package @(Settings.Namespace?.ToLower() ?? "fallbackNamespaceOrWhatTODO").@(Model.SubPackage);
 }
