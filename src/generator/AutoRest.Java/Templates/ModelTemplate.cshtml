@@ -30,9 +30,9 @@ else
 @:@WrapComment(" * ", Model.Documentation.EscapeXmlComment().Period())
 }
  */
-@if (Model.IsPolymorphic)
+@if (Model.BaseIsPolymorphic)
 {
-@:@@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@(Model.PolymorphicDiscriminator)")
+@:@@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@(Model.BasePolymorphicDiscriminator)")
 @:@@JsonTypeName("@(Model.SerializedName)")
 var types = Model.SubTypes.ToList();
 if (types.Any())
@@ -52,7 +52,7 @@ var type = types[i];
 @:@@JsonFlatten
 }
 public class @(Model.Name)@(Model.BaseModelType != null ? " extends " + Model.BaseModelType.Name.ToPascalCase() : "") {
-@foreach (var property in Model.Properties)
+@foreach (PropertyJv property in Model.Properties)
 {
 @:    /**
 if (string.IsNullOrEmpty(property.Summary) && string.IsNullOrEmpty(property.Documentation))

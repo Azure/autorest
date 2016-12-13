@@ -45,7 +45,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                if (IsPolymorphic)
+                if (BaseIsPolymorphic)
                 {
                     foreach (CompositeType type in CodeModel.ModelTypes)
                     {
@@ -111,7 +111,7 @@ namespace AutoRest.Java.Model
                     classes.Add("com.fasterxml.jackson.annotation.JsonProperty");
                 }
                 // For polymorphism
-                if (IsPolymorphic)
+                if (BaseIsPolymorphic)
                 {
                     classes.Add("com.fasterxml.jackson.annotation.JsonTypeInfo");
                     classes.Add("com.fasterxml.jackson.annotation.JsonTypeName");

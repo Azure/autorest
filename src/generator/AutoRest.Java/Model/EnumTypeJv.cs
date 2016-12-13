@@ -8,6 +8,12 @@ namespace AutoRest.Java.Model
 {
     public class EnumTypeJv : EnumType, IModelTypeJv
     {
+        public EnumTypeJv()
+        {
+            // TODO
+            Name.OnGet += name => string.IsNullOrEmpty(name) || name == "enum" ? "String" : name;
+        }
+
         public string ModelsPackage => (this.CodeModel as CodeModelJv).ModelsPackage;
         
         public virtual IEnumerable<string> Imports

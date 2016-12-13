@@ -7,6 +7,11 @@ namespace AutoRest.Java.Model
 {
     public class SequenceTypeJv : SequenceType, IModelTypeJv
     {
+        public SequenceTypeJv()
+        {
+            Name.OnGet += v => $"List<{ElementType.Name}>";
+        }
+
         public IModelTypeJv ResponseVariant
         {
             get

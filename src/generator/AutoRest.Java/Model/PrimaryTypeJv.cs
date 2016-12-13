@@ -18,7 +18,28 @@ namespace AutoRest.Java.Model
             Name.OnGet += v => ImplementationName;
         }
 
-        public bool Nullable { get; private set; } = true;
+        public bool WantNullable { get; private set; } = true;
+        public bool Nullable // TODO: refactor
+        {
+            get
+            {
+                if (WantNullable)
+                {
+                    return true;
+                }
+                switch (KnownPrimaryType)
+                {
+                    case KnownPrimaryType.None:
+                    case KnownPrimaryType.Boolean:
+                    case KnownPrimaryType.Double:
+                    case KnownPrimaryType.Int:
+                    case KnownPrimaryType.Long:
+                    case KnownPrimaryType.UnixTime:
+                        return false;
+                }
+                return true;
+            }
+        }
 
         public override string DefaultValue
         {
@@ -144,7 +165,7 @@ namespace AutoRest.Java.Model
             {
                 KnownPrimaryType = KnownPrimaryType,
                 Format = Format,
-                Nullable = false
+                WantNullable = false
             };
 
         public virtual string ImplementationName
@@ -154,11 +175,11 @@ namespace AutoRest.Java.Model
                 switch (KnownPrimaryType)
                 {
                     case KnownPrimaryType.None:
-                        return Nullable ? "Void" : "void";
+                        return WantNullable ? "Void" : "void";
                     case KnownPrimaryType.Base64Url:
                         return "Base64Url";
                     case KnownPrimaryType.Boolean:
-                        return Nullable ? "Boolean" : "boolean";
+                        return WantNullable ? "Boolean" : "boolean";
                     case KnownPrimaryType.ByteArray:
                         return "byte[]";
                     case KnownPrimaryType.Date:
@@ -168,13 +189,13 @@ namespace AutoRest.Java.Model
                     case KnownPrimaryType.DateTimeRfc1123:
                         return "DateTimeRfc1123";
                     case KnownPrimaryType.Double:
-                        return Nullable ? "Double" : "double";
+                        return WantNullable ? "Double" : "double";
                     case KnownPrimaryType.Decimal:
                         return "BigDecimal";
                     case KnownPrimaryType.Int:
-                        return Nullable ? "Integer" : "int";
+                        return WantNullable ? "Integer" : "int";
                     case KnownPrimaryType.Long:
-                        return Nullable ? "Long" : "long";
+                        return WantNullable ? "Long" : "long";
                     case KnownPrimaryType.Stream:
                         return "InputStream";
                     case KnownPrimaryType.String:
@@ -182,7 +203,7 @@ namespace AutoRest.Java.Model
                     case KnownPrimaryType.TimeSpan:
                         return "Period";
                     case KnownPrimaryType.UnixTime:
-                        return Nullable ? "Long" : "long";
+                        return WantNullable ? "Long" : "long";
                     case KnownPrimaryType.Uuid:
                         return "UUID";
                     case KnownPrimaryType.Object:

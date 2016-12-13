@@ -9,6 +9,26 @@ namespace AutoRest.Java.Model
 {
     public class PropertyJv : Property
     {
+        public bool WantNullable => IsXNullable ?? !IsRequired;
+
+        public override IModelType ModelType
+        {
+            get
+            {
+                if (base.ModelType == null)
+                {
+                    return null;
+                }
+                return WantNullable 
+                    ? base.ModelType 
+                    : (base.ModelType as IModelTypeJv).NonNullableVariant;
+            }
+            set
+            {
+                base.ModelType = value;
+            }
+        }
+
         public string ClientForm
         {
             get
@@ -23,7 +43,7 @@ namespace AutoRest.Java.Model
                 }
                 else if (ModelType.Name != ((IModelTypeJv)ModelType).ResponseVariant.Name)
                 {
-                    return string.Format("this.{0}.get{1}()", Name, ((IModelTypeJv)ModelType).ResponseVariant, CultureInfo.InvariantCulture);
+                    return string.Format("this.{0}.get{1}()", Name, ((IModelTypeJv)ModelType).ResponseVariant.Name, CultureInfo.InvariantCulture);
                 }
                 else
                 {

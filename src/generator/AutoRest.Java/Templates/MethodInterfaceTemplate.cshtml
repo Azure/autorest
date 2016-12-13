@@ -18,7 +18,7 @@
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @((param.Documentation ?? "the " + param.ModelType.ToString() + " value").EscapeXmlComment())
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.ModelType.Name + " value").EscapeXmlComment())
 }
 @if (Model.ReturnType.Body != null)
 {
@@ -39,7 +39,7 @@
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @((param.Documentation ?? "the " + param.ModelType.ToString() + " value").EscapeXmlComment())
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.ModelType.Name + " value").EscapeXmlComment())
 }
 @Model.CallbackDocumentation
  * @@return the {@@link ServiceCall} object
@@ -58,7 +58,7 @@ ServiceCall<@Model.ReturnTypeJv.ServiceCallGenericParameterString> @(Model.Name)
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.ToString() + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
+@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
 }
 @if (Model.ReturnType.Body != null)
 {
@@ -83,7 +83,7 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Na
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.ToString() + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
+@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
 }
 @if (Model.ReturnType.Body != null)
 {
@@ -109,7 +109,7 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterStringWrapped> @(M
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @((param.Documentation ?? "the " + param.ModelType.ToString() + " value").EscapeXmlComment())
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.ModelType.Name + " value").EscapeXmlComment())
 }
 @if (Model.ReturnType.Body != null)
 {
@@ -130,7 +130,7 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterStringWrapped> @(M
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @((param.Documentation ?? "the " + param.ModelType.ToString() + " value").EscapeXmlComment())
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.ModelType.Name + " value").EscapeXmlComment())
 }
 @Model.CallbackDocumentation
  * @@return the {@@link ServiceCall} object
@@ -149,7 +149,7 @@ ServiceCall<@Model.ReturnTypeJv.ServiceCallGenericParameterString> @(Model.Name)
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.ToString() + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
+@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
 }
 @if (Model.ReturnType.Body != null)
 {
@@ -174,7 +174,7 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Na
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.ToString() + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
+@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
 }
 @if (Model.ReturnType.Body != null)
 {

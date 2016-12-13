@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class HttpRedirectsPatch302Headers {
     /**
-     * The redirect location for this request.
+     * The redirect location for this request. Possible values include:
+     * '/http/failure/500'.
      */
     @JsonProperty(value = "Location")
     private String location;

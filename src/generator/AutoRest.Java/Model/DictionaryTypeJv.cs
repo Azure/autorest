@@ -8,6 +8,11 @@ namespace AutoRest.Java.Model
 {
     public class DictionaryTypeJv : DictionaryType, IModelTypeJv
     {
+        public DictionaryTypeJv()
+        {
+            Name.OnGet += value => $"Map<String, {ValueType.Name}>";
+        }
+
         public IEnumerable<string> Imports
         {
             get
