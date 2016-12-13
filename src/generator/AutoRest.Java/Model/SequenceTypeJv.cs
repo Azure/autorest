@@ -27,5 +27,7 @@ namespace AutoRest.Java.Model
                 return imports.Concat(((IModelTypeJv) this.ElementType).Imports);
             }
         }
+
+        public IModelTypeJv NonNullableVariant => this;
     }
 }

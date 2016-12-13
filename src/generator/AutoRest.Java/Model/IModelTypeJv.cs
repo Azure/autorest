@@ -8,5 +8,7 @@ namespace AutoRest.Java.Model
         IEnumerable<string> Imports { get; }
 
         IModelTypeJv ResponseVariant { get; }
+
+        IModelTypeJv NonNullableVariant { get; }
     }
 }

@@ -21,5 +21,7 @@ namespace AutoRest.Java.Model
         }
 
         public IModelTypeJv ResponseVariant => this;
+
+        public IModelTypeJv NonNullableVariant => this;
     }
 }

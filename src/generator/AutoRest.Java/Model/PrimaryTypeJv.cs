@@ -7,17 +7,18 @@ namespace AutoRest.Java.Model
 {
     public class PrimaryTypeJv : PrimaryType, IModelTypeJv
     {
-        private List<string> _imports = new List<string>();
-
         public PrimaryTypeJv()
         {
+            Name.OnGet += v => ImplementationName;
         }
 
         public PrimaryTypeJv(KnownPrimaryType type)
             : base(type)
         {
-            Initialize(type);
+            Name.OnGet += v => ImplementationName;
         }
+
+        public bool Nullable { get; private set; } = true;
 
         public override string DefaultValue
         {
@@ -35,7 +36,7 @@ namespace AutoRest.Java.Model
                 //{
                 //    return "RequestBody.create(MediaType.parse(\"" + base.method.RequestContentType + "\"), new byte[0])";
                 //}
-                else if (IsInstanceType)
+                else if (Nullable)
                 // instance type
                 {
                     return "null";
@@ -101,133 +102,95 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return _imports;
+                switch (KnownPrimaryType)
+                {
+                    case KnownPrimaryType.Base64Url:
+                        yield return "com.microsoft.rest.Base64Url";
+                        break;
+                    case KnownPrimaryType.Date:
+                        yield return "org.joda.time.LocalDate";
+                        break;
+                    case KnownPrimaryType.DateTime:
+                        yield return "org.joda.time.DateTime";
+                        break;
+                    case KnownPrimaryType.DateTimeRfc1123:
+                        yield return "com.microsoft.rest.DateTimeRfc1123";
+                        break;
+                    case KnownPrimaryType.Decimal:
+                        yield return "java.math.BigDecimal";
+                        break;
+                    case KnownPrimaryType.Stream:
+                        yield return "java.io.InputStream";
+                        break;
+                    case KnownPrimaryType.TimeSpan:
+                        yield return "org.joda.time.Period";
+                        break;
+                    case KnownPrimaryType.UnixTime:
+                        yield return "org.joda.time.DateTime";
+                        yield return "org.joda.time.DateTimeZone";
+                        break;
+                    case KnownPrimaryType.Uuid:
+                        yield return "java.util.UUID";
+                        break;
+                    case KnownPrimaryType.Credentials:
+                        yield return "com.microsoft.rest.ServiceClientCredentials";
+                        break;
+                }
             }
         }
 
-        private bool IsInstanceType
+        public IModelTypeJv NonNullableVariant => 
+            new PrimaryTypeJv
+            {
+                KnownPrimaryType = KnownPrimaryType,
+                Format = Format,
+                Nullable = false
+            };
+
+        public virtual string ImplementationName
         {
             get
             {
-                return this.Name.ToString()[0] >= 'A' && this.Name.ToString()[0] <= 'Z';
-            }
-        }
-
-        public IModelTypeJv InstanceType()
-        {
-            if (this.IsInstanceType)
-            {
-                return this;
-            }
-
-            var instanceType = new PrimaryTypeJv(this.KnownPrimaryType);
-            if (instanceType.Name == "boolean")
-            {
-                instanceType.Name = "Boolean";
-            }
-            else if (instanceType.Name == "double")
-            {
-                instanceType.Name = "Double";
-            }
-            else if (instanceType.Name == "int")
-            {
-                instanceType.Name = "Integer";
-            }
-            else if (instanceType.Name == "long")
-            {
-                instanceType.Name = "Long";
-            }
-            else if (instanceType.Name == "void")
-            {
-                instanceType.Name = "Void";
-            }
-            return instanceType;
-        }
-
-        private void Initialize(KnownPrimaryType primaryType)
-        {
-            if (primaryType == KnownPrimaryType.None)
-            {
-                Name = "void";
-            }
-            else if (primaryType == KnownPrimaryType.Base64Url)
-            {
-                Name = "Base64Url";
-                _imports.Add("com.microsoft.rest.Base64Url");
-            }
-            else if (primaryType == KnownPrimaryType.Boolean)
-            {
-                Name = "boolean";
-            }
-            else if (primaryType == KnownPrimaryType.ByteArray)
-            {
-                Name = "byte[]";
-            }
-            else if (primaryType == KnownPrimaryType.Date)
-            {
-                Name = "LocalDate";
-                _imports.Add("org.joda.time.LocalDate");
-            }
-            else if (primaryType == KnownPrimaryType.DateTime)
-            {
-                Name = "DateTime";
-                _imports.Add("org.joda.time.DateTime");
-            }
-            else if (primaryType == KnownPrimaryType.DateTimeRfc1123)
-            {
-                Name = "DateTimeRfc1123";
-                _imports.Add("com.microsoft.rest.DateTimeRfc1123");
-            }
-            else if (primaryType == KnownPrimaryType.Double)
-            {
-                Name = "double";
-            }
-            else if (primaryType == KnownPrimaryType.Decimal)
-            {
-                Name = "BigDecimal";
-                _imports.Add("java.math.BigDecimal");
-            }
-            else if (primaryType == KnownPrimaryType.Int)
-            {
-                Name = "int";
-            }
-            else if (primaryType == KnownPrimaryType.Long)
-            {
-                Name = "long";
-            }
-            else if (primaryType == KnownPrimaryType.Stream)
-            {
-                Name = "InputStream";
-                _imports.Add("java.io.InputStream");
-            }
-            else if (primaryType == KnownPrimaryType.String)
-            {
-                Name = "String";
-            }
-            else if (primaryType == KnownPrimaryType.TimeSpan)
-            {
-                Name = "Period";
-                _imports.Add("org.joda.time.Period");
-            }
-            else if (primaryType == KnownPrimaryType.UnixTime)
-            {
-                Name = "long";
-                _imports.Add("org.joda.time.DateTime");
-                _imports.Add("org.joda.time.DateTimeZone");
-            }
-            else if (primaryType == KnownPrimaryType.Uuid)
-            {
-                Name = "UUID";
-                _imports.Add("java.util.UUID");
-            }
-            else if (primaryType == KnownPrimaryType.Object)
-            {
-                Name = "Object";
-            }
-            else if (primaryType == KnownPrimaryType.Credentials)
-            {
-                Name = "ServiceClientCredentials";
-                _imports.Add("com.microsoft.rest.ServiceClientCredentials");
+                switch (KnownPrimaryType)
+                {
+                    case KnownPrimaryType.None:
+                        return Nullable ? "Void" : "void";
+                    case KnownPrimaryType.Base64Url:
+                        return "Base64Url";
+                    case KnownPrimaryType.Boolean:
+                        return Nullable ? "Boolean" : "boolean";
+                    case KnownPrimaryType.ByteArray:
+                        return "byte[]";
+                    case KnownPrimaryType.Date:
+                        return "LocalDate";
+                    case KnownPrimaryType.DateTime:
+                        return "DateTime";
+                    case KnownPrimaryType.DateTimeRfc1123:
+                        return "DateTimeRfc1123";
+                    case KnownPrimaryType.Double:
+                        return Nullable ? "Double" : "double";
+                    case KnownPrimaryType.Decimal:
+                        return "BigDecimal";
+                    case KnownPrimaryType.Int:
+                        return Nullable ? "Integer" : "int";
+                    case KnownPrimaryType.Long:
+                        return Nullable ? "Long" : "long";
+                    case KnownPrimaryType.Stream:
+                        return "InputStream";
+                    case KnownPrimaryType.String:
+                        return "String";
+                    case KnownPrimaryType.TimeSpan:
+                        return "Period";
+                    case KnownPrimaryType.UnixTime:
+                        return Nullable ? "Long" : "long";
+                    case KnownPrimaryType.Uuid:
+                        return "UUID";
+                    case KnownPrimaryType.Object:
+                        return "Object";
+                    case KnownPrimaryType.Credentials:
+                        return "ServiceClientCredentials";
+                }
+                throw new NotImplementedException($"Primary type {KnownPrimaryType} is not implemented in {GetType().Name}");
             }
         }
     }

@@ -70,7 +70,7 @@ if (!jsonSetting.IsNullOrEmpty())
 {
 @:    @@JsonProperty(@(jsonSetting))
 }
-@:    private @property.ModelType @property.Name;
+@:    private @property.ModelType.Name @property.Name;
 @EmptyLine
 }
 
@@ -103,7 +103,7 @@ if (!jsonSetting.IsNullOrEmpty())
 @:     *
 @:     * @@return the @property.Name value
 @:     */
-@:    public @(((IModelTypeJv)property.ModelType).ResponseVariant) @(property.Name.ToCamelCase())() {
+@:    public @(((IModelTypeJv)property.ModelType).ResponseVariant.Name) @(property.Name.ToCamelCase())() {
 if (property.ModelType.Name != ((IModelTypeJv) property.ModelType).ResponseVariant.Name)
 {
 @:        if (this.@(property.Name) == null) {
@@ -125,7 +125,7 @@ if (!property.IsReadOnly)
 @:     * @@param @property.Name the @property.Name value to set
 @:     * @@return the @(Model.Name) object itself.
 @:     */
-@:    public @(Model.Name) with@(property.Name.ToPascalCase())(@(((IModelTypeJv)property.ModelType).ResponseVariant) @property.Name) {
+@:    public @(Model.Name) with@(property.Name.ToPascalCase())(@(((IModelTypeJv)property.ModelType).ResponseVariant.Name) @property.Name) {
 if (property.ModelType.Name != ((IModelTypeJv)property.ModelType).ResponseVariant.Name)
 {
 @:        if (@property.Name == null) {
