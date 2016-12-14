@@ -6,64 +6,31 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
-using AutoRest.Java.Azure.TypeModels;
-using AutoRest.Java.TemplateModels;
-using AutoRest.Java.TypeModels;
+using AutoRest.Java.Azure.Model;
+using AutoRest.Java.Model;
 
-namespace AutoRest.Java.Azure.TemplateModels
+namespace AutoRest.Java.Azure.Model
 {
-    public class AzureMethodTemplateModel : MethodTemplateModel
+    public class MethodJva : MethodJv
     {
-        private AzureJavaCodeNamer _namer;
-        private AzureResponseModel _returnTypeModel;
-        private Dictionary<HttpStatusCode, ResponseModel> _responseModels;
-        private string pageClassName;
+        //private string pageClassName;
 
-        public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
-            : base(source, serviceClient)
-        {
-            if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
+        //public MethodJva()
+        //{
+        //    if (this.IsPagingOperation || this.IsPagingNextOperation)
+        //    {
+        //        var ext = this.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+        //        pageClassName = (string)ext["className"] ?? "PageImpl";
+        //    }
+        //}
 
-            this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
-            this.RequestIdString = AzureExtensions.GetRequestIdString(source);
-            _namer = new AzureJavaCodeNamer(serviceClient.Namespace);
-            _returnTypeModel = new AzureResponseModel(ReturnType, this);
-            _responseModels = new Dictionary<HttpStatusCode, ResponseModel>();
-            Responses.ForEach(r => _responseModels.Add(r.Key, new AzureResponseModel(r.Value, this)));
+        public string ClientRequestIdString => AzureExtensions.GetClientRequestIdString(this);
 
-            if (this.IsPagingOperation || this.IsPagingNextOperation)
-            {
-                var ext = this.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
-                pageClassName = (string)ext["className"] ?? "PageImpl";
-            }
-        }
-
-        public string ClientRequestIdString { get; private set; }
-
-        public string RequestIdString { get; private set; }
-
-        public override ResponseModel ReturnTypeModel
-        {
-            get
-            {
-                return _returnTypeModel;
-            }
-        }
-
-        public override Dictionary<HttpStatusCode, ResponseModel> ResponseModels
-        {
-            get
-            {
-                return _responseModels;
-            }
-        }
+        public string RequestIdString => AzureExtensions.GetRequestIdString(this);
 
         /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.
@@ -78,25 +45,15 @@ namespace AutoRest.Java.Azure.TemplateModels
             get { return Extensions.ContainsKey("nextLinkMethod") && (bool) Extensions["nextLinkMethod"]; }
         }
 
-        public bool IsPagingOperation
-        {
-            get
-            {
-                return Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
+        public bool IsPagingOperation => Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
                     Extensions[AzureExtensions.PageableExtension] != null &&
                     !IsPagingNextOperation;
-            }
-        }
 
-        public bool IsPagingNonPollingOperation
-        {
-            get
-            {
-                return Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
+        public bool IsPagingNonPollingOperation => Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
                     Extensions[AzureExtensions.PageableExtension] == null &&
                     !IsPagingNextOperation;
-            }
-        }
+
+        public ResponseJva ReturnTypeJva => ReturnType as ResponseJva;
 
         /// <summary>
         /// Get the type for operation exception.
@@ -111,8 +68,8 @@ namespace AutoRest.Java.Azure.TemplateModels
                 }
                 else if (this.DefaultResponse.Body is CompositeType)
                 {
-                    CompositeType type = this.DefaultResponse.Body as CompositeType;
-                    return new AzureModelTemplateModel(type, ServiceClient).ExceptionTypeDefinitionName;
+                    CompositeTypeJva type = this.DefaultResponse.Body as CompositeTypeJva;
+                    return type.ExceptionTypeDefinitionName;
                 }
                 else
                 {
@@ -121,22 +78,22 @@ namespace AutoRest.Java.Azure.TemplateModels
             }
         }
 
-        public override IEnumerable<ParameterModel> RetrofitParameters
+        public override IEnumerable<ParameterJv> RetrofitParameters
         {
             get
             {
-                List<ParameterModel> parameters = base.RetrofitParameters.ToList();
-                parameters.Add(new ParameterModel(new Parameter
+                List<ParameterJv> parameters = base.RetrofitParameters.ToList();
+                parameters.Add(new ParameterJv
                 {
                     Name = Group == null ? "this.userAgent()" : "this.client.userAgent()",
                     SerializedName = "User-Agent",
                     Location = ParameterLocation.Header,
-                    Type = new PrimaryTypeModel(KnownPrimaryType.String),
-                    ClientProperty = new PropertyModel(new Property
+                    ModelType = new PrimaryTypeJv(KnownPrimaryType.String),
+                    ClientProperty = new PropertyJv
                     {
                         Name = "userAgent"
-                    }, ServiceClient.Namespace)
-                }, this));
+                    }
+                });
                 return parameters;
             }
         }
@@ -215,16 +172,16 @@ namespace AutoRest.Java.Azure.TemplateModels
                 if (this.IsPagingOperation)
                 {
                     parameters += string.Format(CultureInfo.InvariantCulture, "final ListOperationCallback<{0}> serviceCallback",
-                        ReturnTypeModel.SequenceElementTypeString);
+                        ReturnTypeJva.SequenceElementTypeString);
                 }
                 else if (this.IsPagingNextOperation)
                 {
                     parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCall<{0}> serviceCall, final ListOperationCallback<{1}> serviceCallback",
-                        ReturnTypeModel.ServiceCallGenericParameterString, ReturnTypeModel.SequenceElementTypeString);
+                        ReturnTypeJva.ServiceCallGenericParameterString, ReturnTypeJva.SequenceElementTypeString);
                 }
                 else
                 {
-                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback", ReturnTypeModel.GenericBodyClientTypeString);
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback", ReturnTypeJva.GenericBodyClientTypeString);
                 }
                 
                 return parameters;
@@ -243,16 +200,16 @@ namespace AutoRest.Java.Azure.TemplateModels
                 if (this.IsPagingOperation)
                 {
                     parameters += string.Format(CultureInfo.InvariantCulture, "final ListOperationCallback<{0}> serviceCallback",
-                        ReturnTypeModel.SequenceElementTypeString);
+                        ReturnTypeJva.SequenceElementTypeString);
                 }
                 else if (this.IsPagingNextOperation)
                 {
                     parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCall<{0}> serviceCall, final ListOperationCallback<{1}> serviceCallback",
-                        ReturnTypeModel.ServiceCallGenericParameterString, ReturnTypeModel.SequenceElementTypeString);
+                        ReturnTypeJva.ServiceCallGenericParameterString, ReturnTypeJva.SequenceElementTypeString);
                 }
                 else
                 {
-                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback", ReturnTypeModel.GenericBodyClientTypeString);
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback", ReturnTypeJva.GenericBodyClientTypeString);
                 }
 
                 return parameters;
@@ -283,14 +240,7 @@ namespace AutoRest.Java.Azure.TemplateModels
             }
         }
 
-        public override bool IsParameterizedHost
-        {
-            get
-            {
-                return ServiceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension)
-                    && !IsPagingNextOperation;
-            }
-        }
+        public override bool IsParameterizedHost => CodeModel.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension) && !IsPagingNextOperation;
 
         public override IEnumerable<string> Exceptions
         {
@@ -347,10 +297,10 @@ namespace AutoRest.Java.Azure.TemplateModels
         {
             get
             {
-                string args = "new TypeToken<" + ReturnTypeModel.GenericBodyClientTypeString + ">() { }.getType()";
+                string args = "new TypeToken<" + ReturnTypeJva.GenericBodyClientTypeString + ">() { }.getType()";
                 if (ReturnType.Headers != null)
                 {
-                    args += ", " + ReturnTypeModel.HeaderWireType + ".class";
+                    args += ", " + ReturnTypeJva.HeaderWireType + ".class";
                 }
                 return args;
             }
@@ -370,7 +320,7 @@ namespace AutoRest.Java.Azure.TemplateModels
             if (IsPagingOperation)
             {
                 string invocation;
-                AzureMethodTemplateModel nextMethod = GetPagingNextMethodWithInvocation(out invocation);
+                MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation);
                 TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
             }
             return builder.ToString();
@@ -379,7 +329,7 @@ namespace AutoRest.Java.Azure.TemplateModels
         public string NextMethodParameterInvocation(bool filterRequired = false)
         {
             string invocation;
-            AzureMethodTemplateModel nextMethod = GetPagingNextMethodWithInvocation(out invocation);
+            MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation);
             if (filterRequired)
             {
                 if (this.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
@@ -417,8 +367,8 @@ namespace AutoRest.Java.Azure.TemplateModels
             get
             {
                 string invocation;
-                AzureMethodTemplateModel nextMethod = GetPagingNextMethodWithInvocation(out invocation);
-                return nextMethod.ParameterModels.First(p => p.Name.StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name;
+                MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation);
+                return nextMethod.Parameters.First(p => p.Name.ToString().StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name;
             }
         }
 
@@ -428,16 +378,16 @@ namespace AutoRest.Java.Azure.TemplateModels
             {
                 var builder = new IndentedStringBuilder();
                 builder.AppendLine("{0} response = {1}Delegate(call.execute());",
-                    ReturnTypeModel.WireResponseTypeString, this.Name);
+                    ReturnTypeJva.WireResponseTypeString, this.Name);
                     
                 string invocation;
-                AzureMethodTemplateModel nextMethod = GetPagingNextMethodWithInvocation(out invocation);
+                MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation);
 
                 builder.AppendLine("PagedList<{0}> result = new PagedList<{0}>(response.getBody()) {{", ((SequenceType)ReturnType.Body).ElementType.Name)
                     .Indent().AppendLine("@Override")
                     .AppendLine("public Page<{0}> nextPage(String {1}) throws {2}, IOException {{",
                         ((SequenceType)ReturnType.Body).ElementType.Name,
-                        nextMethod.ParameterModels.First(p => p.Name.StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name,
+                        nextMethod.Parameters.First(p => p.Name.ToString().StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name,
                         OperationExceptionTypeString)
                         .Indent();
                         TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
@@ -449,10 +399,10 @@ namespace AutoRest.Java.Azure.TemplateModels
             }
             else if (this.IsPagingNonPollingOperation)
             {
-                var returnTypeBody = ReturnType.Body as AzureSequenceTypeModel;
+                var returnTypeBody = ReturnType.Body as SequenceTypeJva;
                 var builder = new IndentedStringBuilder();
                 builder.AppendLine("{0}<{1}<{2}>> response = {3}Delegate(call.execute());",
-                    ReturnTypeModel.ClientResponseType, returnTypeBody.PageImplType, returnTypeBody.ElementType.Name, this.Name.ToCamelCase());
+                    ReturnTypeJva.ClientResponseType, returnTypeBody.PageImplType, returnTypeBody.ElementType.Name, this.Name.ToCamelCase());
                 builder.AppendLine("{0} result = response.getBody().getItems();", this.ReturnType.Body.Name);
                 return builder.ToString();
             }
@@ -471,12 +421,12 @@ namespace AutoRest.Java.Azure.TemplateModels
                     if (ReturnType.Headers != null)
                     {
                         return string.Format(CultureInfo.InvariantCulture, "new {0}<>(result, response.getHeaders(), response.getResponse())",
-                            ReturnTypeModel.ClientResponseType);
+                            ReturnTypeJva.ClientResponseType);
                     }
                     else
                     {
                         return string.Format(CultureInfo.InvariantCulture, "new {0}<>(result, response.getResponse())",
-                            ReturnTypeModel.ClientResponseType);
+                            ReturnTypeJva.ClientResponseType);
                     }
                 }
                 else
@@ -492,44 +442,44 @@ namespace AutoRest.Java.Azure.TemplateModels
             {
                 var builder = new IndentedStringBuilder();
                 builder.AppendLine("{0} result = {1}Delegate(response);",
-                    ReturnTypeModel.WireResponseTypeString, this.Name);
+                    ReturnTypeJva.WireResponseTypeString, this.Name);
                 builder.AppendLine("if (serviceCallback != null) {").Indent();
                 builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
                 builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent()
                     .AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
                 string invocation;
-                AzureMethodTemplateModel nextMethod = GetPagingNextMethodWithInvocation(out invocation, true);
+                MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation, true);
                 TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
                 var nextCall = string.Format(CultureInfo.InvariantCulture, "{0}(result.getBody().getNextPageLink(), {1});",
                     invocation,
                     filterRequired ? nextMethod.MethodRequiredParameterInvocationWithCallback : nextMethod.MethodParameterInvocationWithCallback);
                 builder.AppendLine(nextCall.Replace(
-                    string.Format(", {0}", nextMethod.ParameterModels.First(p => p.Name.StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name),
+                    string.Format(", {0}", nextMethod.Parameters.First(p => p.Name.ToString().StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name),
                     "")).Outdent();
                 builder.AppendLine("} else {").Indent();
                 if (ReturnType.Headers == null)
                 {
-                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
+                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeJva.ClientResponseType);
                 }
                 else
                 {
-                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
+                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeJva.ClientResponseType);
                 }
                 builder.Outdent().AppendLine("}").Outdent().AppendLine("}");
                 if (ReturnType.Headers == null)
                 {
-                builder.AppendLine("serviceCall.success(new {0}<>(result.getBody().getItems(), response));", ReturnTypeModel.ClientResponseType);
+                builder.AppendLine("serviceCall.success(new {0}<>(result.getBody().getItems(), response));", ReturnTypeJva.ClientResponseType);
                 }
                 else
                 {
-                    builder.AppendLine("serviceCall.success(new {0}<>(result.getBody().getItems(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
+                    builder.AppendLine("serviceCall.success(new {0}<>(result.getBody().getItems(), result.getHeaders(), result.getResponse()));", ReturnTypeJva.ClientResponseType);
                 }
                 return builder.ToString();
             }
             else if (this.IsPagingNextOperation)
             {
                 var builder = new IndentedStringBuilder();
-                builder.AppendLine("{0} result = {1}Delegate(response);", ReturnTypeModel.WireResponseTypeString, this.Name);
+                builder.AppendLine("{0} result = {1}Delegate(response);", ReturnTypeJva.WireResponseTypeString, this.Name);
                 builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
                 builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent();
                 builder.AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
@@ -537,40 +487,40 @@ namespace AutoRest.Java.Azure.TemplateModels
                     this.Name,
                     filterRequired ? MethodRequiredParameterInvocationWithCallback : MethodParameterInvocationWithCallback);
                 builder.AppendLine(nextCall.Replace(
-                    string.Format(", {0}", ParameterModels.First(p => p.Name.StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name),
+                    string.Format(", {0}", Parameters.First(p => p.Name.ToString().StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name),
                     "")).Outdent();
                 builder.AppendLine("} else {").Indent();
                 if (ReturnType.Headers == null)
                 {
-                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
+                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeJva.ClientResponseType);
                 }
                 else
                 {
-                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
+                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeJva.ClientResponseType);
                 }
                 builder.Outdent().AppendLine("}");
                 return builder.ToString();
             }
             else if (this.IsPagingNonPollingOperation)
             {
-                var returnTypeBody = ReturnType.Body as AzureSequenceTypeModel;
+                var returnTypeBody = ReturnType.Body as SequenceTypeJva;
                 var builder = new IndentedStringBuilder();
                 builder.AppendLine("{0}<{1}<{2}>> result = {3}Delegate(response);",
-                    ReturnTypeModel.ClientResponseType, returnTypeBody.PageImplType, returnTypeBody.ElementType.Name, this.Name.ToCamelCase());
+                    ReturnTypeJva.ClientResponseType, returnTypeBody.PageImplType, returnTypeBody.ElementType.Name, this.Name.ToCamelCase());
                 if (ReturnType.Headers == null)
                 {
-                    builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
+                    builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getResponse()));", ReturnTypeJva.ClientResponseType);
                 }
                 else
                 {
-                    builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
+                    builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getHeaders(), result.getResponse()));", ReturnTypeJva.ClientResponseType);
                 }
                 return builder.ToString();
             }
             return base.SuccessCallback();
         }
 
-        private AzureMethodTemplateModel GetPagingNextMethodWithInvocation(out string invocation, bool async = false, bool singlePage = true)
+        private MethodJva GetPagingNextMethodWithInvocation(out string invocation, bool async = false, bool singlePage = true)
         {
             String methodSuffixString = "WithServiceResponse";
             if (singlePage)
@@ -583,18 +533,18 @@ namespace AutoRest.Java.Azure.TemplateModels
                 return this;
             }
             string name = ((string)this.Extensions["nextMethodName"]).ToCamelCase();
-            string group = _namer.GetMethodGroupName((string)this.Extensions["nextMethodGroup"]);
-            var methodModel = new AzureMethodTemplateModel(
-                ServiceClient.Methods.FirstOrDefault(m =>
+            string group = CodeNamerJva.Instance.GetMethodGroupName((string)this.Extensions["nextMethodGroup"]);
+            var methodModel =
+                CodeModel.Methods.FirstOrDefault(m =>
                     (group == null ? m.Group == null : group.Equals(m.Group, StringComparison.OrdinalIgnoreCase))
-                    && m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)), ServiceClient);
+                    && m.Name.ToString().Equals(name, StringComparison.OrdinalIgnoreCase)) as MethodJva;
             group = group.ToPascalCase();
             name = name + methodSuffixString;
             if (async)
             {
                 name = name + "Async";
             }
-            if (group == null || this.OperationName == methodModel.OperationName)
+            if (group == null || this.Name == methodModel.Name)// || this.OperationName == methodModel.OperationName)
             {
                 invocation = name;
             }
@@ -612,7 +562,7 @@ namespace AutoRest.Java.Azure.TemplateModels
             return invocation;
         }
 
-        protected virtual void TransformPagingGroupedParameter(IndentedStringBuilder builder, AzureMethodTemplateModel nextMethod, bool filterRequired = false)
+        protected virtual void TransformPagingGroupedParameter(IndentedStringBuilder builder, MethodJva nextMethod, bool filterRequired = false)
         {
             if (this.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
             {
@@ -624,7 +574,7 @@ namespace AutoRest.Java.Azure.TemplateModels
             {
                 return;
             }
-            var nextGroupTypeName = _namer.GetTypeName(nextGroupType.Name);
+            var nextGroupTypeName = CodeNamerJva.Instance.GetTypeName(nextGroupType.Name);
             if (filterRequired && !groupedType.IsRequired)
             {
                 return;
@@ -660,10 +610,10 @@ namespace AutoRest.Java.Azure.TemplateModels
                 }
                 else if (this.IsPagingOperation)
                 {
-                    SequenceTypeModel sequenceType = (SequenceTypeModel)ReturnType.Body;
+                    var sequenceType = ReturnType.Body as SequenceTypeJva;
                     return string.Format(CultureInfo.InvariantCulture,
                         "final ServiceCall<List<{0}>> serviceCall = ServiceCall.create(call);",
-                        sequenceType != null ? sequenceType.ElementTypeModel.InstanceType().Name : "Void");
+                        sequenceType != null ? sequenceType.ElementType.Name.ToString() : "Void");
                 }
                 return base.ServiceCallConstruction;
             }
@@ -674,21 +624,21 @@ namespace AutoRest.Java.Azure.TemplateModels
             if (this.IsPagingOperation || this.IsPagingNextOperation)
             {
                 IndentedStringBuilder builder = new IndentedStringBuilder();
-                builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeModel.GenericBodyWireTypeString, this.Name);
-                builder.AppendLine("{0} body = null;", ReturnTypeModel.ServiceCallGenericParameterString)
+                builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeJva.GenericBodyWireTypeString, this.Name);
+                builder.AppendLine("{0} body = null;", ReturnTypeJva.ServiceCallGenericParameterString)
                     .AppendLine("if (result.getBody() != null) {")
-                    .Indent().AppendLine("{0}", ReturnTypeModel.ConvertBodyToClientType("result.getBody()", "body"))
+                    .Indent().AppendLine("{0}", ReturnTypeJva.ConvertBodyToClientType("result.getBody()", "body"))
                     .Outdent().AppendLine("}");
                 builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(body, result.getResponse());",
-                    ReturnTypeModel.ServiceCallGenericParameterString);
+                    ReturnTypeJva.ServiceCallGenericParameterString);
                 return builder.ToString();
             }
             else if (this.IsPagingNonPollingOperation)
             {
                 IndentedStringBuilder builder = new IndentedStringBuilder();
-                builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeModel.GenericBodyWireTypeString, this.Name);
+                builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeJva.GenericBodyWireTypeString, this.Name);
                 builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(result.getBody().getItems(), result.getResponse());",
-                    ReturnTypeModel.ServiceCallGenericParameterString);
+                    ReturnTypeJva.ServiceCallGenericParameterString);
                 return builder.ToString();
             }
             else
@@ -745,13 +695,15 @@ namespace AutoRest.Java.Azure.TemplateModels
                     imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
                     imports.Remove("com.microsoft.rest.ServiceResponseCallback");
                     imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
-                    this.Responses.Select(r => r.Value.Body).Concat(new IType[] { DefaultResponse.Body })
+                    this.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { DefaultResponse.Body })
                         .SelectMany(t => t.ImportSafe())
-                        .Where(i => !this.Parameters.Any(p => p.Type.ImportSafe().Contains(i)))
+                        .Where(i => !this.Parameters.Any(p => p.ModelType.ImportSafe().Contains(i)))
                         .ForEach(i => imports.Remove(i));
                     // return type may have been removed as a side effect
-                    imports.AddRange(this.ReturnTypeModel.ImplImports);
+                    imports.AddRange(ReturnTypeJva.ImplImports);
                 }
+                var ctype = new CompositeTypeJva();
+                ctype.Name.CopyFrom((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType);
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
                     imports.Remove("java.util.ArrayList");
@@ -760,11 +712,11 @@ namespace AutoRest.Java.Azure.TemplateModels
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
                     imports.Add("com.microsoft.azure.AzureServiceCall");
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe());
+                    imports.AddRange(ctype.ImportSafe());
                 }
                 if (this.IsPagingNonPollingOperation)
                 {
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe());
+                    imports.AddRange(ctype.ImportSafe());
                 }
                 return imports;
             }

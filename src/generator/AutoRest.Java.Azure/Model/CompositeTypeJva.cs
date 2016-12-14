@@ -1,33 +1,25 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
-using System;
+﻿using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
+using AutoRest.Extensions;
+using AutoRest.Extensions.Azure;
+using AutoRest.Java.Model;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.Core.ClientModel;
-using AutoRest.Extensions;
-using AutoRest.Java.TemplateModels;
 
-namespace AutoRest.Java.Azure.TemplateModels
+namespace AutoRest.Java.Azure.Model
 {
-    public class AzureModelTemplateModel : ModelTemplateModel
+    public class CompositeTypeJva : CompositeTypeJv
     {
-        private AzureJavaCodeNamer _namer;
+        protected string _azureRuntimePackage = "com.microsoft.azure";
 
-        public AzureModelTemplateModel(CompositeType source, ServiceClient serviceClient)
-            : base(source, serviceClient)
-        {
-            _namer = new AzureJavaCodeNamer(serviceClient.Namespace);
-        }
+        public override string Package => IsResource
+            ? _azureRuntimePackage
+            : base.Package.Replace(".models", "");
 
-        protected override JavaCodeNamer Namer
-        {
-            get
-            {
-                return _namer;
-            }
-        }
-
+        public bool IsResource =>
+            (Name == "Resource" || Name == "SubResource") &&
+            Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) && (bool)Extensions[AzureExtensions.AzureResourceExtension];
+        
         public override string ExceptionTypeDefinitionName
         {
             get
@@ -44,15 +36,16 @@ namespace AutoRest.Java.Azure.TemplateModels
             }
         }
 
-        public override IEnumerable<String> ImportList {
+        public override IEnumerable<string> ImportList
+        {
             get
             {
                 var imports = base.ImportList.ToList();
                 foreach (var property in this.Properties)
                 {
-                    if (property.Type.IsResource())
+                    if (property.ModelType.IsResource())
                     {
-                        imports.Add("com.microsoft.azure." + property.Type.Name);
+                        imports.Add("com.microsoft.azure." + property.ModelType.Name);
                     }
                 }
                 if (this.BaseModelType != null && (this.BaseModelType.Name == "Resource" || this.BaseModelType.Name == "SubResource"))

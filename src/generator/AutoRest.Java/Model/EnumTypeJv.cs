@@ -14,7 +14,7 @@ namespace AutoRest.Java.Model
             Name.OnGet += name => string.IsNullOrEmpty(name) || name == "enum" ? "String" : name;
         }
 
-        public string ModelsPackage => (this.CodeModel as CodeModelJv).ModelsPackage;
+        public virtual string ModelsPackage => (this.CodeModel as CodeModelJv).ModelsPackage;
         
         public virtual IEnumerable<string> Imports
         {

@@ -1,37 +1,27 @@
 ﻿using System.Globalization;
-using AutoRest.Core.ClientModel;
-using AutoRest.Java.Azure.TemplateModels;
-using AutoRest.Java.TypeModels;
+using AutoRest.Core.Model;
+using AutoRest.Java.Azure.Model;
+using AutoRest.Java.Model;
 
-namespace AutoRest.Java.Azure.TypeModels
+namespace AutoRest.Java.Azure.Model
 {
-    public class AzureResponseModel : ResponseModel
+    public class ResponseJva : ResponseJv
     {
-        private AzureMethodTemplateModel _method;
+        private MethodJva _method;
 
-        public AzureResponseModel(Response response, AzureMethodTemplateModel method)
-            : base (response)
-        {
-            this._response = response;
-            this._method = method;
-        }
-
-        public AzureResponseModel(ITypeModel body, ITypeModel headers, AzureMethodTemplateModel method)
-            : this(new Response(body, headers), method)
-        {
-        }
-
-        public override ITypeModel BodyClientType
+        public override IModelTypeJv BodyClientType
         {
             get
             {
-                var bodySequenceType = base.BodyClientType as AzureSequenceTypeModel;
+                var bodySequenceType = base.BodyClientType as SequenceTypeJva;
                 if (bodySequenceType != null && (_method.IsPagingOperation || _method.IsPagingNextOperation))
                 {
-                    return new AzureSequenceTypeModel(new SequenceType { NameFormat = "PagedList<{0}>", ElementType = bodySequenceType.ElementType })
+                    var result = new SequenceTypeJva
                     {
+                        ElementType = bodySequenceType.ElementType,
                         PageImplType = bodySequenceType.PageImplType
                     };
+                    result.Name.OnGet += name => $"PagedList<{name}>";
                 }
                 return base.BodyClientType;
             }
@@ -41,7 +31,7 @@ namespace AutoRest.Java.Azure.TypeModels
         {
             get
             {
-                var bodySequenceType = BodyClientType as AzureSequenceTypeModel;
+                var bodySequenceType = BodyClientType as SequenceTypeJva;
                 if (bodySequenceType != null && (_method.IsPagingOperation || _method.IsPagingNextOperation))
                 {
                     return string.Format(CultureInfo.InvariantCulture, "PagedList<{0}>", bodySequenceType.ElementType);
@@ -54,7 +44,7 @@ namespace AutoRest.Java.Azure.TypeModels
         {
             get
             {
-                var bodySequenceType = BodyClientType as AzureSequenceTypeModel;
+                var bodySequenceType = BodyClientType as SequenceTypeJva;
                 if (bodySequenceType != null && (_method.IsPagingNextOperation || _method.IsPagingOperation))
                 {
                     return string.Format(CultureInfo.InvariantCulture, "List<{0}>", bodySequenceType.ElementType);
@@ -67,7 +57,7 @@ namespace AutoRest.Java.Azure.TypeModels
         {
             get
             {
-                var bodySequenceType = BodyClientType as AzureSequenceTypeModel;
+                var bodySequenceType = BodyClientType as SequenceTypeJva;
                 if (bodySequenceType != null && (_method.IsPagingNextOperation || _method.IsPagingOperation))
                 {
                     return string.Format(CultureInfo.InvariantCulture, "Page<{0}>", bodySequenceType.ElementType);
@@ -80,10 +70,10 @@ namespace AutoRest.Java.Azure.TypeModels
         {
             get
             {
-                var sequenceType = BodyWireType as AzureSequenceTypeModel;
+                var sequenceType = BodyWireType as SequenceTypeJva;
                 if (sequenceType != null && (_method.IsPagingOperation || _method.IsPagingNextOperation || _method.IsPagingNonPollingOperation))
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", sequenceType.PageImplType, sequenceType.ElementTypeModel.InstanceType());
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", sequenceType.PageImplType, sequenceType.ElementType);
                 }
                 return base.GenericBodyWireTypeString;
             }
@@ -96,7 +86,7 @@ namespace AutoRest.Java.Azure.TypeModels
                 if (Body is SequenceType &&
                     (_method.IsPagingOperation || _method.IsPagingNextOperation))
                 {
-                    return BodyClientType.InstanceType().Name;
+                    return BodyClientType.Name;
                 }
                 return base.ClientCallbackTypeString;
             }
@@ -106,7 +96,7 @@ namespace AutoRest.Java.Azure.TypeModels
         {
             get
             {
-                return HeaderWireType.InstanceType().Name;
+                return HeaderWireType.Name;
             }
         }
 

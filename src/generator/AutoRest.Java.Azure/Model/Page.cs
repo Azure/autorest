@@ -4,11 +4,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AutoRest.Java.Azure.TemplateModels
+namespace AutoRest.Java.Azure.Model
 {
-    public class PageTemplateModel
+    public class Page
     {
-        public PageTemplateModel(string typeDefinitionName, string nextLinkName, string itemName)
+        public Page(string typeDefinitionName, string nextLinkName, string itemName)
         {
             this.TypeDefinitionName = typeDefinitionName;
             this.NextLinkName = nextLinkName;

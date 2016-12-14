@@ -3,43 +3,22 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.TemplateModels;
+using AutoRest.Java.Model;
 using System.Globalization;
+using AutoRest.Core.Utilities.Collections;
 
-namespace AutoRest.Java.Azure.TemplateModels
+namespace AutoRest.Java.Azure.Model
 {
-    public class AzureServiceClientTemplateModel : ServiceClientTemplateModel
+    public class CodeModelJva : CodeModelJv
     {
+        public IDictionary<KeyValuePair<string, string>, string> pageClasses =
+            new Dictionary<KeyValuePair<string, string>, string>();
+
         public const string ExternalExtension = "x-ms-external";
 
-        public AzureServiceClientTemplateModel(ServiceClient serviceClient)
-            : base(serviceClient)
-        {
-            Properties.Remove(Properties.Find(p => p.Type.Name == "ServiceClientCredentials"));
-            MethodTemplateModels.Clear();
-            Methods.Where(m => m.Group == null)
-                .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
-            ModelTemplateModels.Clear();
-            ModelTypes.ForEach(m => ModelTemplateModels.Add(new AzureModelTemplateModel(m, serviceClient)));
-        }
-
-        public override IEnumerable<MethodGroupTemplateModel> MethodGroupModels
-        {
-            get
-            {
-                return MethodGroups.Select(mg => new AzureMethodGroupTemplateModel(this, mg));
-            }
-        }
-
-        public override IEnumerable<MethodGroupTemplateModel> Operations
-        {
-            get
-            {
-                return MethodGroups.Select(mg => new AzureMethodGroupTemplateModel(this, mg));
-            }
-        }
+        public override IEnumerableWithIndex<Property> Properties => new ReEnumerable<Property>(base.Properties.Where(p => p.ModelType.Name != "ServiceClientCredentials"));
 
         public virtual string ParentDeclaration
         {

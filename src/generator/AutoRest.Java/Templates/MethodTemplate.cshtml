@@ -27,7 +27,7 @@
 }
  */
 public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodRequiredParameterDeclaration) {
-@if (@Model.ReturnTypeJv.BodyClientType.ResponseVariant.Name == "void")
+@if (@Model.ReturnTypeResponseName == "void")
 {
 @:    @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single().getBody();
 }
@@ -179,7 +179,7 @@ public Observable<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Wit
 }
  */
 public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodParameterDeclaration) {
-@if (@Model.ReturnTypeJv.BodyClientType.ResponseVariant.Name == "void")
+@if (@Model.ReturnTypeResponseName == "void")
 {
 @:    @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().single().getBody();
 }

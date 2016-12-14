@@ -5,21 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
-using AutoRest.Java.Azure.TypeModels;
-using AutoRest.Java.TypeModels;
+using AutoRest.Java.Azure.Model;
+using AutoRest.Java.Model;
 
 namespace AutoRest.Java.Azure
 {
-    public class AzureJavaCodeNamer : JavaCodeNamer
+    public class CodeNamerJva : CodeNamerJv
     {
-        public AzureJavaCodeNamer(string nameSpace)
-            : base(nameSpace)
-        {
-        }
-
         #region normalization
         
         private static string GetPagingSetting(Dictionary<string, object> extensions, IDictionary<KeyValuePair<string, string>, string> pageClasses, out string nextLinkName)
@@ -62,14 +57,14 @@ namespace AutoRest.Java.Azure
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <param name="pageClasses"></param>
-        public virtual void NormalizePaginatedMethods(ServiceClient serviceClient, IDictionary<KeyValuePair<string, string>, string> pageClasses)
+        public virtual void NormalizePaginatedMethods(CodeModel serviceClient, IDictionary<KeyValuePair<string, string>, string> pageClasses)
         {
             if (serviceClient == null)
             {
                 throw new ArgumentNullException("serviceClient");
             }
 
-            var convertedTypes = new Dictionary<ITypeModel, ITypeModel>();
+            var convertedTypes = new Dictionary<IModelType, IModelType>();
 
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
@@ -84,40 +79,40 @@ namespace AutoRest.Java.Azure
                     method.Extensions[AzureExtensions.PageableExtension] = null;
                 }
 
-                foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeTypeModel).Select(s => s.Key).ToArray())
+                foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeTypeJva).Select(s => s.Key).ToArray())
                 {
-                    var compositType = (CompositeTypeModel)method.Responses[responseStatus].Body;
-                    var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceTypeModel) as SequenceTypeModel;
+                    var compositType = (CompositeTypeJva)method.Responses[responseStatus].Body;
+                    var sequenceType = compositType.Properties.Select(p => p.ModelType).FirstOrDefault(t => t is SequenceTypeJva) as SequenceTypeJva;
 
                     // if the type is a wrapper over page-able response
                     if (sequenceType != null)
                     {
-                        ITypeModel pagedResult;
-                        pagedResult = new AzureSequenceTypeModel
+                        IModelType pagedResult;
+                        pagedResult = new SequenceTypeJva
                         {
                             ElementType = sequenceType.ElementType,
-                            NameFormat = "List<{0}>",
                             PageImplType = pageClassName
                         };
+                        pagedResult.Name.OnGet += name => $"List<{name}>";
 
-                        convertedTypes[(ITypeModel)method.Responses[responseStatus].Body] = pagedResult;
+                        convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
                         method.Responses[responseStatus] = new Response(pagedResult, method.Responses[responseStatus].Headers);
                     }
                 }
 
-                if (convertedTypes.ContainsKey((ITypeModel) method.ReturnType.Body))
+                if (convertedTypes.ContainsKey(method.ReturnType.Body))
                 {
-                    method.ReturnType = new Response(convertedTypes[(ITypeModel)method.ReturnType.Body], method.ReturnType.Headers);
+                    method.ReturnType = new Response(convertedTypes[method.ReturnType.Body], method.ReturnType.Headers);
                 }
             }
 
-            SwaggerExtensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeTypeModel>().Select(t => t.Name)));
+            SwaggerExtensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeTypeJva>().Select(t => t.Name.ToString())));
         }
 
-        protected override CompositeTypeModel NewCompositeTypeModel(CompositeType compositeType)
-        {
-            return new AzureCompositeTypeModel(compositeType, _package);
-        }
+        //protected override CompositeTypeJva NewCompositeTypeModel(CompositeType compositeType)
+        //{
+        //    return new AzureCompositeTypeModel(compositeType, _package);
+        //}
 
         #endregion
     }
