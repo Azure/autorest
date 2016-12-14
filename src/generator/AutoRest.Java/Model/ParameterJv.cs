@@ -11,6 +11,12 @@ namespace AutoRest.Java.Model
             : base()
         {
             _implImports = new List<string>();
+            Name.OnGet += name => ClientProperty == null 
+                ? name
+                : string.Format(CultureInfo.InvariantCulture,
+                        "{0}.{1}()",
+                        Method.Group.IsNullOrEmpty() ? "this" : "this.client",
+                        ClientProperty.Name.ToCamelCase());
         }
 
         public bool WantNullable => IsXNullable ?? !IsRequired;

@@ -209,7 +209,7 @@ namespace AutoRest.Java.Model
             }
         }
 
-        public virtual bool IsParameterizedHost => Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
+        public virtual bool IsParameterizedHost => CodeModel.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
         
         /// <summary>
         /// Generate a reference to the ServiceClient
