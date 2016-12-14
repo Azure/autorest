@@ -82,8 +82,8 @@ namespace AutoRest.Java.Model
                 var imports = new List<string>(ModelType.ImportSafe()
                         .Where(c => !c.StartsWith(
                             string.Join(
-                                ".", 
-                                // _package, // TODO
+                                ".",
+                                Parent?.CodeModel?.Namespace?.ToLower(CultureInfo.InvariantCulture) ?? "fallbackNamespaceOrWhatTODO",
                                 "models"),
                             StringComparison.OrdinalIgnoreCase)));
                 if (ModelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123)

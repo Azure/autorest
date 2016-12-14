@@ -49,7 +49,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return this.Name.ToCamelCase() + "Converted";
+                return this.Name; //.ToCamelCase() + "Converted";
             }
         }
 
@@ -102,7 +102,7 @@ namespace AutoRest.Java.Model
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("DateTimeRfc1123 {0} = {1};", target, wireType.DefaultValue)
+                    builder.AppendLine("DateTimeRfc1123 {0} = {1};", target, wireType.DefaultValue ?? "null")
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 builder.AppendLine("{0}{1} = new DateTimeRfc1123({2});", IsRequired ? "DateTimeRfc1123 " : "", target, source);
@@ -115,7 +115,7 @@ namespace AutoRest.Java.Model
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("Long {0} = {1};", target, wireType.DefaultValue)
+                    builder.AppendLine("Long {0} = {1};", target, wireType.DefaultValue ?? "null")
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 builder.AppendLine("{0}{1} = {2}.toDateTime(DateTimeZone.UTC).getMillis() / 1000;", IsRequired ? "Long " : "", target, source);
@@ -124,7 +124,7 @@ namespace AutoRest.Java.Model
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("Base64Url {0} = {1};", target, wireType.DefaultValue)
+                    builder.AppendLine("Base64Url {0} = {1};", target, wireType.DefaultValue ?? "null")
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 builder.AppendLine("{0}{1} = Base64Url.encode({2});", IsRequired ? "Base64Url " : "", target, source);
@@ -137,7 +137,7 @@ namespace AutoRest.Java.Model
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("RequestBody {0} = {1};", target, wireType.DefaultValue)
+                    builder.AppendLine("RequestBody {0} = {1};", target, wireType.DefaultValue ?? "null")
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 builder.AppendLine("{0}{1} = RequestBody.create(MediaType.parse(\"{2}\"), {3});",
@@ -151,7 +151,7 @@ namespace AutoRest.Java.Model
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("{0} {1} = {2};", WireType.Name, target, wireType.DefaultValue)
+                    builder.AppendLine("{0} {1} = {2};", WireType.Name, target, wireType.DefaultValue ?? "null")
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 var sequenceType = wireType as SequenceTypeJv;
@@ -173,7 +173,7 @@ namespace AutoRest.Java.Model
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("{0} {1} = {2};", WireType.Name, target, wireType.DefaultValue)
+                    builder.AppendLine("{0} {1} = {2};", WireType.Name, target, wireType.DefaultValue ?? "null")
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 var dictionaryType = wireType as DictionaryTypeJv;

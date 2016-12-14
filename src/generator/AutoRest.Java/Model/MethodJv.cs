@@ -272,7 +272,7 @@ namespace AutoRest.Java.Model
                     transformation.OutputParameter.ModelType is CompositeType)
                 {
                     builder.AppendLine("{0}{1} = new {2}();",
-                        !conditionalAssignment ? ((ParameterJv)transformation.OutputParameter).ClientType + " " : "",
+                        !conditionalAssignment ? ((ParameterJv)transformation.OutputParameter).ClientType.Name + " " : "",
                         transformation.OutputParameter.Name,
                         transformation.OutputParameter.ModelType.Name);
                 }
@@ -720,7 +720,7 @@ namespace AutoRest.Java.Model
                 imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
                 imports.Add(RuntimeBasePackage + "." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceCallback");
-//                this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));
+                this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));
                 // Http verb annotations
                 imports.Add(this.HttpMethod.ImportFrom());
                 // response type conversion
@@ -736,7 +736,7 @@ namespace AutoRest.Java.Model
                 // parameters
                 this.LocalParameters.Concat(this.LogicalParameters.OfType<ParameterJv>())
                     .ForEach(p => imports.AddRange(p.ClientImplImports));
-//                this.RetrofitParameters.ForEach(p => imports.AddRange(p.WireImplImports));
+                this.RetrofitParameters.ForEach(p => imports.AddRange(p.WireImplImports));
                 // return type
                 imports.AddRange(this.ReturnTypeJv.ImplImports);
                 if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))

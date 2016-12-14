@@ -13,6 +13,22 @@ namespace AutoRest.Java.Model
 {
     public class CodeModelJv : CodeModel
     {
+        public override string BaseUrl
+        {
+            get
+            {
+                if (!base.BaseUrl.Contains("://"))
+                {
+                    return $"https://{base.BaseUrl}";
+                }
+                return base.BaseUrl;
+            }
+            set
+            {
+                base.BaseUrl = value;
+            }
+        }
+
         [JsonIgnore]
         public IEnumerable<MethodGroupJv> AllOperations => Operations.Where(operation => !operation.Name.IsNullOrEmpty()).Cast<MethodGroupJv>();
 

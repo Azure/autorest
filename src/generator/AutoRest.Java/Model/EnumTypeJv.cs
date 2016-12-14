@@ -21,7 +21,7 @@ namespace AutoRest.Java.Model
             get
             {
                 yield return string.Join(".",
-                    // _package, // TODO 
+                    CodeModel?.Namespace?.ToLower(CultureInfo.InvariantCulture) ?? "fallbackNamespaceOrWhatTODO",
                     "models", Name);
             }
         }

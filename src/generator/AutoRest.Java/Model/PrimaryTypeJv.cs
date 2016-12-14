@@ -58,9 +58,8 @@ namespace AutoRest.Java.Model
                 //    return "RequestBody.create(MediaType.parse(\"" + base.method.RequestContentType + "\"), new byte[0])";
                 //}
                 else if (Nullable)
-                // instance type
                 {
-                    return "null";
+                    return null;
                 }
                 else
                 {
@@ -100,6 +99,10 @@ namespace AutoRest.Java.Model
         {
             get
             {
+                if (KnownPrimaryType == KnownPrimaryType.None)
+                {
+                    return this.NonNullableVariant;
+                }
                 if (KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
                 {
                     return new PrimaryTypeJv(KnownPrimaryType.DateTime);

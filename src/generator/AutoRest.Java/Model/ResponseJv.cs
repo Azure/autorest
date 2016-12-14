@@ -39,7 +39,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return BodyWireType.ResponseVariant;
+                return BodyWireType;
             }
         }
 
@@ -175,7 +175,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return BodyClientType.ResponseVariant.Name;
+                return BodyClientType.Name;
             }
         }
 

@@ -128,7 +128,7 @@ public Observable<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Wit
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.ClientType.DefaultValue);
+@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.ClientType.DefaultValue ?? "null");
     }
     if (parameter.IsConstant)
     {
@@ -309,7 +309,7 @@ private @Model.ReturnTypeJv.WireResponseTypeString @(Model.Name)Delegate(Respons
 @foreach (var response in Model.Responses)
 {
 
-            @:.register(@((int)response.Key), new TypeToken<@(response.Value as ResponseJv).GenericBodyWireTypeString>() { }.getType())
+            @:.register(@((int)response.Key), new TypeToken<@((response.Value as ResponseJv).GenericBodyWireTypeString)>() { }.getType())
 }
 @if (Model.DefaultResponse.Body != null)
 {
