@@ -25,6 +25,19 @@ namespace AutoRest.Java.Model
             }
         }
 
+        public IModelTypeJv ParameterVariant
+        {
+            get
+            {
+                var respvariant = (ElementType as IModelTypeJv).ParameterVariant;
+                if (respvariant != ElementType && (respvariant as PrimaryTypeJv)?.Nullable != false)
+                {
+                    return new SequenceTypeJv { ElementType = respvariant };
+                }
+                return this;
+            }
+        }
+
         public IEnumerable<string> Imports
         {
             get

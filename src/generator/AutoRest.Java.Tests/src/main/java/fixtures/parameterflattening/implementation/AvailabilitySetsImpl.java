@@ -59,7 +59,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
     interface AvailabilitySetsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @PATCH("parameterFlattening/{resourceGroupName}/{availabilitySetName}")
-        Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("availabilitySetName") String avset, @Body AvailabilitySetUpdateParameters tags1);
+        Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("availabilitySetName") String avset, @Body AvailabilitySetUpdateParameters tags);
 
     }
 
@@ -123,9 +123,9 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
             throw new IllegalArgumentException("Parameter tags is required and cannot be null.");
         }
         Validator.validate(tags);
-        AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
-        tags1.withTags(tags);
-        return service.update(resourceGroupName, avset, tags1)
+        AvailabilitySetUpdateParameters tags = new AvailabilitySetUpdateParameters();
+        tags.withTags(tags);
+        return service.update(resourceGroupName, avset, tags)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {

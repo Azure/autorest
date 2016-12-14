@@ -21,8 +21,33 @@ namespace AutoRest.Java.Model
                 return imports.Concat((this.ValueType as IModelTypeJv)?.Imports ?? Enumerable.Empty<string>());
             }
         }
+        
+        public IModelTypeJv ResponseVariant
+        {
+            get
+            {
+                var respvariant = (ValueType as IModelTypeJv).ResponseVariant;
+                if (respvariant != ValueType && (respvariant as PrimaryTypeJv)?.Nullable != false)
+                {
+                    return new DictionaryTypeJv { ValueType = respvariant };
+                }
+                return this;
+            }
+        }
 
-        public IModelTypeJv ResponseVariant => this;
+        public IModelTypeJv ParameterVariant
+        {
+            get
+            {
+                var respvariant = (ValueType as IModelTypeJv).ParameterVariant;
+                if (respvariant != ValueType && (respvariant as PrimaryTypeJv)?.Nullable != false)
+                {
+                    return new DictionaryTypeJv { ValueType = respvariant };
+                }
+                return this;
+            }
+        }
+        
         public IModelTypeJv NonNullableVariant => this;
     }
 }

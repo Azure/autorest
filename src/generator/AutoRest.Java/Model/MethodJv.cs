@@ -101,7 +101,7 @@ namespace AutoRest.Java.Model
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters.Where(p => !p.IsConstant))
                 {
-                    declarations.Add(parameter.ClientType.Name + " " + parameter.Name);
+                    declarations.Add(parameter.ClientType.ParameterVariant.Name + " " + parameter.Name);
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -116,7 +116,7 @@ namespace AutoRest.Java.Model
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                 {
-                    declarations.Add(parameter.ClientType.Name + " " + parameter.Name);
+                    declarations.Add(parameter.ClientType.ParameterVariant.Name + " " + parameter.Name);
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -263,7 +263,7 @@ namespace AutoRest.Java.Model
                 if (conditionalAssignment)
                 {
                     builder.AppendLine("{0} {1} = null;",
-                            ((ParameterJv) transformation.OutputParameter).ClientType.Name,
+                            ((ParameterJv) transformation.OutputParameter).ClientType.ParameterVariant.Name,
                             transformation.OutputParameter.Name);
                     builder.AppendLine("if ({0}) {{", nullCheck).Indent();
                 }
@@ -272,7 +272,7 @@ namespace AutoRest.Java.Model
                     transformation.OutputParameter.ModelType is CompositeType)
                 {
                     builder.AppendLine("{0}{1} = new {2}();",
-                        !conditionalAssignment ? ((ParameterJv)transformation.OutputParameter).ClientType.Name + " " : "",
+                        !conditionalAssignment ? ((ParameterJv)transformation.OutputParameter).ClientType.ParameterVariant.Name + " " : "",
                         transformation.OutputParameter.Name,
                         transformation.OutputParameter.ModelType.Name);
                 }
@@ -281,7 +281,7 @@ namespace AutoRest.Java.Model
                 {
                     builder.AppendLine("{0}{1}{2};",
                         !conditionalAssignment && !(transformation.OutputParameter.ModelType is CompositeType) ?
-                            ((ParameterJv)transformation.OutputParameter).ClientType.Name + " " : "",
+                            ((ParameterJv)transformation.OutputParameter).ClientType.ParameterVariant.Name + " " : "",
                         transformation.OutputParameter.Name,
                         GetMapping(mapping, filterRequired));
                 }

@@ -102,7 +102,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get true Boolean value.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<Boolean> getTrueAsync() {
         return getTrueWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
@@ -116,7 +116,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get true Boolean value.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> getTrueWithServiceResponseAsync() {
         return service.getTrue()
@@ -225,7 +225,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get false Boolean value.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<Boolean> getFalseAsync() {
         return getFalseWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
@@ -239,7 +239,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get false Boolean value.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> getFalseWithServiceResponseAsync() {
         return service.getFalse()
@@ -348,7 +348,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get null Boolean value.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<Boolean> getNullAsync() {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
@@ -362,7 +362,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get null Boolean value.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> getNullWithServiceResponseAsync() {
         return service.getNull()
@@ -408,7 +408,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<Boolean> getInvalidAsync() {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
@@ -422,7 +422,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> getInvalidWithServiceResponseAsync() {
         return service.getInvalid()

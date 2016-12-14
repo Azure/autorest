@@ -20,7 +20,7 @@
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment())
 }
-@if (Model.ReturnTypeResponseName != null)
+@if (Model.ReturnTypeResponseName.Else("void") != "void")
 {
 @: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
 }
@@ -60,7 +60,7 @@ ServiceCall<@Model.ReturnTypeJv.ServiceCallGenericParameterString> @(Model.Name)
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
 }
-@if (Model.ReturnTypeResponseName != null)
+@if (Model.ReturnTypeResponseName.Else("void") != "void")
 {
 @: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
 }
@@ -85,7 +85,7 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Na
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
 }
-@if (Model.ReturnTypeResponseName != null)
+@if (Model.ReturnTypeResponseName.Else("void") != "void")
 {
 @: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
 }
@@ -111,7 +111,7 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterStringWrapped> @(M
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment())
 }
-@if (Model.ReturnTypeResponseName != null)
+@if (Model.ReturnTypeResponseName.Else("void") != "void")
 {
 @: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
 }
@@ -151,7 +151,7 @@ ServiceCall<@Model.ReturnTypeJv.ServiceCallGenericParameterString> @(Model.Name)
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
 }
-@if (Model.ReturnTypeResponseName != null)
+@if (Model.ReturnTypeResponseName.Else("void") != "void")
 {
 @: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
 }
@@ -176,7 +176,7 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Na
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
 }
-@if (Model.ReturnTypeResponseName != null)
+@if (Model.ReturnTypeResponseName.Else("void") != "void")
 {
 @: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
 }

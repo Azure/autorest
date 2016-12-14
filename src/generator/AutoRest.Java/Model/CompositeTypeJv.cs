@@ -131,6 +131,8 @@ namespace AutoRest.Java.Model
 
         public IModelTypeJv ResponseVariant => this;
 
+        public IModelTypeJv ParameterVariant => this;
+
         public IModelTypeJv NonNullableVariant => this;
 
         private IEnumerable<IModelTypeJv> ParseGenericType()
