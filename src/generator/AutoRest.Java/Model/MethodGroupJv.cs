@@ -95,7 +95,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return this.Name + "Impl";
+                return CodeModel.Name + "Impl";
             }
         }
 

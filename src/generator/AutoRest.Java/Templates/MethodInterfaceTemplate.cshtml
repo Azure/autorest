@@ -20,12 +20,12 @@
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment())
 }
-@if (Model.ReturnTypeName != null)
+@if (Model.ReturnTypeResponseName != null)
 {
-@: * @@return the @Model.ReturnTypeName.EscapeXmlComment() object if successful.
+@: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
 }
  */
-@(Model.ReturnTypeName) @(Model.Name)(@Model.MethodRequiredParameterDeclaration);
+@(Model.ReturnTypeResponseName) @(Model.Name)(@Model.MethodRequiredParameterDeclaration);
 @EmptyLine
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
@@ -60,9 +60,9 @@ ServiceCall<@Model.ReturnTypeJv.ServiceCallGenericParameterString> @(Model.Name)
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
 }
-@if (Model.ReturnTypeName != null)
+@if (Model.ReturnTypeResponseName != null)
 {
-@: * @@return the observable to the @Model.ReturnTypeName.EscapeXmlComment() object
+@: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
 }
 else
 {
@@ -85,9 +85,9 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Na
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
 }
-@if (Model.ReturnTypeName != null)
+@if (Model.ReturnTypeResponseName != null)
 {
-@: * @@return the observable to the @Model.ReturnTypeName.EscapeXmlComment() object
+@: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
 }
 else
 {
@@ -111,9 +111,9 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterStringWrapped> @(M
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment())
 }
-@if (Model.ReturnTypeName != null)
+@if (Model.ReturnTypeResponseName != null)
 {
-@: * @@return the @Model.ReturnTypeName.EscapeXmlComment() object if successful.
+@: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
 }
  */
 @((Model.ReturnType as ResponseJv).BodyWireType.ResponseVariant.Name) @(Model.Name)(@Model.MethodParameterDeclaration);
@@ -151,9 +151,9 @@ ServiceCall<@Model.ReturnTypeJv.ServiceCallGenericParameterString> @(Model.Name)
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
 }
-@if (Model.ReturnTypeName != null)
+@if (Model.ReturnTypeResponseName != null)
 {
-@: * @@return the observable to the @Model.ReturnTypeName.EscapeXmlComment() object
+@: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
 }
 else
 {
@@ -176,9 +176,9 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Na
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
 }
-@if (Model.ReturnTypeName != null)
+@if (Model.ReturnTypeResponseName != null)
 {
-@: * @@return the observable to the @Model.ReturnTypeName.EscapeXmlComment() object
+@: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
 }
 else
 {

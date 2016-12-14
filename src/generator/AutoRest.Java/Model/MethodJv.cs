@@ -215,7 +215,7 @@ namespace AutoRest.Java.Model
         /// Generate a reference to the ServiceClient
         /// </summary>
         [JsonIgnore]
-        public string ClientReference => Group.IsNullOrEmpty() ? "this" : "this.Client";
+        public string ClientReference => Group.IsNullOrEmpty() ? "this" : "this.client";
 
         public string ParameterConversion
         {
@@ -570,7 +570,7 @@ namespace AutoRest.Java.Model
 
         public ResponseJv ReturnTypeJv => ReturnType as ResponseJv;
 
-        public string ReturnTypeName => ReturnTypeJv?.BodyWireType?.ResponseVariant?.Name;
+        public string ReturnTypeResponseName => ReturnTypeJv?.BodyWireType?.ResponseVariant?.Name;
 
         public virtual string ResponseGeneration(bool filterRequired = false)
         {

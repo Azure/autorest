@@ -13,6 +13,26 @@ namespace AutoRest.Java.Model
             _implImports = new List<string>();
         }
 
+        public bool WantNullable => IsXNullable ?? !IsRequired;
+
+        public override IModelType ModelType
+        {
+            get
+            {
+                if (base.ModelType == null)
+                {
+                    return null;
+                }
+                return WantNullable
+                    ? base.ModelType
+                    : (base.ModelType as IModelTypeJv).NonNullableVariant;
+            }
+            set
+            {
+                base.ModelType = value;
+            }
+        }
+
         public IModelTypeJv ClientType
         {
             get
