@@ -25,13 +25,13 @@ namespace @Settings.Namespace
 {
     @:/// <summary>
     @:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
-    @:/// </summary>
+    @:/// </summary>`
  }
-
+    [Route("@Model.BaseUrl")]
     public partial class @(Model.Name+"Controller : Controller")
     {
         
-        @(Include(new ServiceServerBodyTemplate(), Model))
+        @* @(Include(new ServiceServerBodyTemplate(), Model)) *@
         @*
         /// <summary>
             /// An optional partial-method to perform custom initialization.
@@ -109,13 +109,13 @@ namespace @Settings.Namespace
             }
 
                 }
-
-                @foreach (MethodCs method in Model.Methods.Where(m => m.Group.IsNullOrEmpty()))
-                {
-                    @:@(Include(new MethodTemplate(), method))
-                    @EmptyLine
-                    @:
+            *@
+        @foreach (MethodCs method in Model.Methods.Where(m=>(m.MethodGroup.Name==Model.Name)))
+        {
+            @:@(Include(new ServerMethodTemplate(), method))
+            @EmptyLine
+            @:
         }
-        *@
+        
     }
 }

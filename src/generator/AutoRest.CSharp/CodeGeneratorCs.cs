@@ -12,6 +12,7 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Model;
 using AutoRest.CSharp.Templates;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp
 {
@@ -29,9 +30,16 @@ namespace AutoRest.CSharp
 
         private async Task GenerateServerSideCode(CodeModelCs codeModel)
         {
-            // Service server
-            var serviceServerTemplate = new ServiceServerTemplate { Model = codeModel };
-            await Write(serviceServerTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
+            foreach (string methodGrp in codeModel.MethodGroupNames)
+            {
+                using (NewContext)
+                {
+                    codeModel.Name = methodGrp;
+                    // Service server
+                    var serviceServerControllerTemplate = new ServiceServerControllerTemplate { Model = codeModel };
+                    await Write(serviceServerControllerTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
+                }
+            }
         }
 
         private async Task GenerateClientSideCode(CodeModelCs codeModel)
