@@ -30,8 +30,9 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return (BodyWireType != BodyClientType && BodyClientType.Name != "void") ||
-                    HeaderWireType != HeaderClientType;
+                return 
+                    ((BodyWireType == null ? BodyClientType != null : !BodyWireType.StructurallyEquals(BodyClientType)) && BodyClientType.Name != "void") ||
+                    (HeaderWireType == null ? HeaderClientType != null : !HeaderWireType.StructurallyEquals(HeaderClientType));
             }
         }
 

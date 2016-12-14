@@ -117,9 +117,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
-     * @return the int object if successful.
+     * @return the Integer object if successful.
      */
-    public int getNull() {
+    public Integer getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -136,7 +136,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
-     * @return the observable to the int object
+     * @return the observable to the Integer object
      */
     public Observable<Integer> getNullAsync() {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Integer>, Integer>() {
@@ -150,7 +150,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
-     * @return the observable to the int object
+     * @return the observable to the Integer object
      */
     public Observable<ServiceResponse<Integer>> getNullWithServiceResponseAsync() {
         return service.getNull()
@@ -177,9 +177,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
-     * @return the int object if successful.
+     * @return the Integer object if successful.
      */
-    public int getInvalid() {
+    public Integer getInvalid() {
         return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -196,7 +196,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
-     * @return the observable to the int object
+     * @return the observable to the Integer object
      */
     public Observable<Integer> getInvalidAsync() {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Integer>, Integer>() {
@@ -210,7 +210,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
-     * @return the observable to the int object
+     * @return the observable to the Integer object
      */
     public Observable<ServiceResponse<Integer>> getInvalidWithServiceResponseAsync() {
         return service.getInvalid()
@@ -237,9 +237,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @return the int object if successful.
+     * @return the Integer object if successful.
      */
-    public int getOverflowInt32() {
+    public Integer getOverflowInt32() {
         return getOverflowInt32WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -256,7 +256,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @return the observable to the int object
+     * @return the observable to the Integer object
      */
     public Observable<Integer> getOverflowInt32Async() {
         return getOverflowInt32WithServiceResponseAsync().map(new Func1<ServiceResponse<Integer>, Integer>() {
@@ -270,7 +270,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @return the observable to the int object
+     * @return the observable to the Integer object
      */
     public Observable<ServiceResponse<Integer>> getOverflowInt32WithServiceResponseAsync() {
         return service.getOverflowInt32()
@@ -297,9 +297,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @return the int object if successful.
+     * @return the Integer object if successful.
      */
-    public int getUnderflowInt32() {
+    public Integer getUnderflowInt32() {
         return getUnderflowInt32WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -316,7 +316,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @return the observable to the int object
+     * @return the observable to the Integer object
      */
     public Observable<Integer> getUnderflowInt32Async() {
         return getUnderflowInt32WithServiceResponseAsync().map(new Func1<ServiceResponse<Integer>, Integer>() {
@@ -330,7 +330,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @return the observable to the int object
+     * @return the observable to the Integer object
      */
     public Observable<ServiceResponse<Integer>> getUnderflowInt32WithServiceResponseAsync() {
         return service.getUnderflowInt32()
@@ -357,9 +357,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @return the long object if successful.
+     * @return the Long object if successful.
      */
-    public long getOverflowInt64() {
+    public Long getOverflowInt64() {
         return getOverflowInt64WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -376,7 +376,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @return the observable to the long object
+     * @return the observable to the Long object
      */
     public Observable<Long> getOverflowInt64Async() {
         return getOverflowInt64WithServiceResponseAsync().map(new Func1<ServiceResponse<Long>, Long>() {
@@ -390,7 +390,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @return the observable to the long object
+     * @return the observable to the Long object
      */
     public Observable<ServiceResponse<Long>> getOverflowInt64WithServiceResponseAsync() {
         return service.getOverflowInt64()
@@ -417,9 +417,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @return the long object if successful.
+     * @return the Long object if successful.
      */
-    public long getUnderflowInt64() {
+    public Long getUnderflowInt64() {
         return getUnderflowInt64WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -436,7 +436,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @return the observable to the long object
+     * @return the observable to the Long object
      */
     public Observable<Long> getUnderflowInt64Async() {
         return getUnderflowInt64WithServiceResponseAsync().map(new Func1<ServiceResponse<Long>, Long>() {
@@ -450,7 +450,7 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @return the observable to the long object
+     * @return the observable to the Long object
      */
     public Observable<ServiceResponse<Long>> getUnderflowInt64WithServiceResponseAsync() {
         return service.getUnderflowInt64()

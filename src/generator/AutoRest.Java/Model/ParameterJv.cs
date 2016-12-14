@@ -37,7 +37,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return ((IModelTypeJv)ModelType);
+                return ((IModelTypeJv)ModelType).ParameterVariant;
             }
         }
 
@@ -48,7 +48,7 @@ namespace AutoRest.Java.Model
                 if (ModelType.IsPrimaryType(KnownPrimaryType.Stream))
                 {
                     var res = new PrimaryTypeJv(KnownPrimaryType.Stream);
-                    res.Name.CopyFrom("RequestBody");
+                    res.Name.FixedValue = "RequestBody";
                     return res;
                 }
                 else if (!ModelType.IsPrimaryType(KnownPrimaryType.Base64Url) && 
@@ -65,21 +65,9 @@ namespace AutoRest.Java.Model
             }
         }
 
-        public string WireName
-        {
-            get
-            {
-                return this.Name; //.ToCamelCase() + "Converted";
-            }
-        }
+        public string WireName => NeedsConversion ? this.Name.ToCamelCase() + "Converted" : this.Name.ToString();
 
-        public bool NeedsConversion
-        {
-            get
-            {
-                return ClientType != WireType;
-            }
-        }
+        public bool NeedsConversion => !ClientType.StructurallyEquals(WireType);
 
         public string ConvertToWireType(string source, string clientReference)
         {
