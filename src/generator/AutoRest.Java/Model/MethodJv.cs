@@ -258,13 +258,19 @@ namespace AutoRest.Java.Model
             var builder = new IndentedStringBuilder();
             foreach (var transformation in InputParameterTransformation)
             {
+                var outParamName = transformation.OutputParameter.Name;
+                while (Parameters.Any(p => p.Name == outParamName))
+                {
+                    outParamName += "1";
+                }
+                transformation.OutputParameter.Name = outParamName;
                 var nullCheck = BuildNullCheckExpression(transformation);
                 bool conditionalAssignment = !string.IsNullOrEmpty(nullCheck) && !transformation.OutputParameter.IsRequired && !filterRequired;
                 if (conditionalAssignment)
                 {
                     builder.AppendLine("{0} {1} = null;",
                             ((ParameterJv) transformation.OutputParameter).ClientType.ParameterVariant.Name,
-                            transformation.OutputParameter.Name);
+                            outParamName);
                     builder.AppendLine("if ({0}) {{", nullCheck).Indent();
                 }
 
@@ -273,7 +279,7 @@ namespace AutoRest.Java.Model
                 {
                     builder.AppendLine("{0}{1} = new {2}();",
                         !conditionalAssignment ? ((ParameterJv)transformation.OutputParameter).ClientType.ParameterVariant.Name + " " : "",
-                        transformation.OutputParameter.Name,
+                        outParamName,
                         transformation.OutputParameter.ModelType.Name);
                 }
 
@@ -282,7 +288,7 @@ namespace AutoRest.Java.Model
                     builder.AppendLine("{0}{1}{2};",
                         !conditionalAssignment && !(transformation.OutputParameter.ModelType is CompositeType) ?
                             ((ParameterJv)transformation.OutputParameter).ClientType.ParameterVariant.Name + " " : "",
-                        transformation.OutputParameter.Name,
+                        outParamName,
                         GetMapping(mapping, filterRequired));
                 }
 

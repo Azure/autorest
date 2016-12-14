@@ -123,9 +123,9 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
             throw new IllegalArgumentException("Parameter tags is required and cannot be null.");
         }
         Validator.validate(tags);
-        AvailabilitySetUpdateParameters tags = new AvailabilitySetUpdateParameters();
-        tags.withTags(tags);
-        return service.update(resourceGroupName, avset, tags)
+        AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
+        tags1.withTags(tags);
+        return service.update(resourceGroupName, avset, tags1)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
