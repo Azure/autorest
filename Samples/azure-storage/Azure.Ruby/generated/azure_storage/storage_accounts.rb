@@ -171,6 +171,8 @@ module Petstore
         deserialize_method = lambda do |parsed_response|
           result_mapper = StorageAccount.mapper()
           parsed_response = @client.deserialize(result_mapper, parsed_response, 'parsed_response')
+          parsed_response.resource_group = resource_group_name if defined?resource_group_name
+          parsed_response
         end
 
         # Waiting for response.
@@ -364,6 +366,8 @@ module Petstore
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
             result_mapper = StorageAccount.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
+            result.body.resource_group = resource_group_name if defined?resource_group_name
+            result.body
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -516,6 +520,8 @@ module Petstore
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
             result_mapper = StorageAccount.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
+            result.body.resource_group = resource_group_name if defined?resource_group_name
+            result.body
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -1030,6 +1036,8 @@ module Petstore
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
             result_mapper = StorageAccount.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
+            result.body.resource_group = resource_group_name if defined?resource_group_name
+            result.body
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
