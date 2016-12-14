@@ -110,10 +110,6 @@ namespace AutoRest.Swagger
             return;
         }
 
-        public static void EnsureCompleteDefinitionIsPresent2(HashSet<string> visitedModels, Dictionary<string, JObject> externalFiles, JToken currentDoc, JToken externalDoc)
-        {
-
-        }
         public static ServiceDefinition Parse(string swaggerDocument)
         {
             try
