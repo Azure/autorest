@@ -82,11 +82,11 @@ namespace AutoRest.Java
             {
                 // Operation
                 var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
-                await Write(operationsTemplate, $"{Path.Combine("implementation", methodGroup.TypeName.ToPascalCase())}{ImplementationFileExtension}");
+                await Write(operationsTemplate, $"{Path.Combine("implementation", methodGroup.TypeName.ToPascalCase())}Impl{ImplementationFileExtension}");
 
                 // Operation interface
                 var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
-                await Write(operationsInterfaceTemplate, $"I{methodGroup.TypeName.ToPascalCase()}{ImplementationFileExtension}");
+                await Write(operationsInterfaceTemplate, $"{methodGroup.TypeName.ToPascalCase()}{ImplementationFileExtension}");
             }
 
             //Models

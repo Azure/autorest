@@ -16,9 +16,10 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                if ((ElementType as IModelTypeJv).ResponseVariant != ElementType)
+                var respvariant = (ElementType as IModelTypeJv).ResponseVariant;
+                if (respvariant != ElementType && (respvariant as PrimaryTypeJv)?.Nullable != false)
                 {
-                    return new SequenceTypeJv { ElementType = (ElementType as IModelTypeJv).ResponseVariant };
+                    return new SequenceTypeJv { ElementType = respvariant };
                 }
                 return this;
             }

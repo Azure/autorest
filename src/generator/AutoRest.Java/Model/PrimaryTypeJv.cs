@@ -99,10 +99,6 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                if (KnownPrimaryType == KnownPrimaryType.None)
-                {
-                    return this.NonNullableVariant;
-                }
                 if (KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
                 {
                     return new PrimaryTypeJv(KnownPrimaryType.DateTime);
@@ -117,7 +113,7 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    return this;
+                    return NonNullableVariant;
                 }
             }
         }
