@@ -201,7 +201,7 @@ gulp.task('regenerate:expected', function(cb){
       'regenerate:expected:pythonazure',
       'regenerate:expected:samples',
       'regenerate:expected:java',
-//      'regenerate:expected:javaazure',
+      'regenerate:expected:javaazure',
 //      'regenerate:expected:javaazurefluent',
 //      'regenerate:expected:go'
     ],
@@ -332,7 +332,6 @@ gulp.task('regenerate:expected:ruby', function(cb){
   }, cb);
 })
 
-/* Until JAVA is back in master
 gulp.task('regenerate:expected:javaazure', function(cb){
   mappings = {};
   for (var key in defaultAzureMappings) {
@@ -348,6 +347,7 @@ gulp.task('regenerate:expected:javaazure', function(cb){
   }, cb);
 })
 
+/* Until JAVA is back in master
 gulp.task('regenerate:expected:javaazurefluent', function(cb){
   mappings = {};
   for (var key in defaultAzureMappings) {
