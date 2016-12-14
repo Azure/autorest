@@ -270,5 +270,32 @@ namespace AutoRest.Ruby.Azure.Model
                 return base.OperationReturnTypeString;
             }
         }
+
+        /// <summary>
+        /// Creates deserialization logic for the given <paramref name="type"/>.
+        /// </summary>
+        /// <param name="type">Type for which deserialization logic being constructed.</param>
+        /// <param name="valueReference">Reference variable name.</param>
+        /// <param name="responseVariable">Response variable name.</param>
+        /// <returns>Deserialization logic for the given <paramref name="type"/> as string.</returns>
+        public override string GetDeserializationString(IModelType type, string valueReference = "result", string responseVariable = "parsed_response")
+        {
+            var builder = new IndentedStringBuilder("  ");
+
+            string deserializedString = base.GetDeserializationString(type, valueReference, responseVariable);
+            builder.AppendLine(deserializedString);
+
+            if (type is CompositeType)
+            {
+                var composite = type as CompositeType;
+                if (composite.BaseModelType != null && composite.BaseModelType.Name == "Resource")
+                {
+                    builder.AppendLine("{0}.resource_group = resource_group_name if defined?resource_group_name", valueReference);
+                    builder.AppendLine("{0}", valueReference);
+                }
+            }
+
+            return builder.ToString();
+        }
     }
 }

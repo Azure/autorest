@@ -581,7 +581,7 @@ namespace AutoRest.Ruby.Model
         /// <param name="responseVariable">Response variable name.</param>
         /// <returns>Deserialization logic for the given <paramref name="type"/> as string.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a required parameter is null.</exception>
-        public string GetDeserializationString(IModelType type, string valueReference = "result", string responseVariable = "parsed_response")
+        public virtual string GetDeserializationString(IModelType type, string valueReference = "result", string responseVariable = "parsed_response")
         {
             if (type == null)
             {
@@ -604,16 +604,6 @@ namespace AutoRest.Ruby.Model
             else
             {
                 builder.AppendLine("{1} = @client.deserialize(result_mapper, {0}, '{1}')", responseVariable, valueReference);
-            }
-
-            if (type is CompositeType)
-            {
-                var composite = type as CompositeType;
-                if (composite.BaseModelType != null && composite.BaseModelType.Name == "Resource")
-                {
-                    builder.AppendLine("{0}.resource_group = resource_group_name if defined?resource_group_name", valueReference);
-                    builder.AppendLine("{0}", valueReference);
-                }
             }
 
             return builder.ToString();
