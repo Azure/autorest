@@ -82,7 +82,7 @@
       }
     },
     "Cat": {
-      "AllOf": [ { "$ref": "#/definitions/Pet" } ],
+      "allOf": [ { "$ref": "#/definitions/Pet" } ],
       "properties": {
         "color": {
           "type": "string",
@@ -91,7 +91,7 @@
       }
     },
     "Seamise": {
-      "AllOf": [ { "$ref": "#/definitions/Cat" } ],
+      "allOf": [ { "$ref": "#/definitions/Cat" } ],
       "properties": {
         "length": {
           "type": "integer",
@@ -100,7 +100,7 @@
       }
     },
     "Burmese": {
-      "AllOf": [ { "$ref": "#/definitions/Seamise" } ],
+      "allOf": [ { "$ref": "#/definitions/Seamise" } ],
       "properties": {
         "nickName": {
           "type": "integer",
@@ -109,7 +109,7 @@
       }
     },
     "Himalayan": {
-      "AllOf": [ { "$ref": "#/definitions/Seamise" } ],
+      "allOf": [ { "$ref": "#/definitions/Seamise" } ],
       "properties": {
         "hairLength": {
           "type": "integer",
@@ -118,7 +118,7 @@
       }
     },
     "Persian": {
-      "AllOf": [ { "$ref": "#/definitions/Cat" } ],
+      "allOf": [ { "$ref": "#/definitions/Cat" } ],
       "properties": {
         "size": {
           "type": "integer",
@@ -128,7 +128,7 @@
     },
     "Dog": {
       "id": "Dog",
-      "AllOf": [ { "$ref": "#/definitions/Pet" } ],
+      "allOf": [ { "$ref": "#/definitions/Pet" } ],
       "properties": {
         "name": {
           "type": "string",
@@ -138,7 +138,7 @@
     },
     "Horse": {
       "id": "Horse",
-      "AllOf": [ { "$ref": "#/definitions/Pet" } ],
+      "allOf": [ { "$ref": "#/definitions/Pet" } ],
       "properties": {
         "breed": {
           "type": "string",
@@ -148,7 +148,7 @@
     },
     "Lizard": {
       "x-ms-discriminator-value": "lzd",
-      "AllOf": [ { "$ref": "#/definitions/Pet" } ],
+      "allOf": [ { "$ref": "#/definitions/Pet" } ],
       "properties": {
         "tailSize": {
           "type": "number",

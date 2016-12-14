@@ -89,7 +89,7 @@
         ,
         "BaseCat":
         {
-            "AllOf": [
+            "allOf": [
             {
                 "$ref": "#/definitions/Animal"
             }
@@ -106,7 +106,7 @@
         ,
         "SiameseCat":
         {
-            "AllOf": [
+            "allOf": [
             {
                 "$ref": "#/definitions/BaseCat"
             }
@@ -123,7 +123,7 @@
         ,
         "BurmeseCat":
         {
-            "AllOf": [
+            "allOf": [
             {
                 "$ref": "#/definitions/SiameseCat"
             }
@@ -140,7 +140,7 @@
         ,
         "HimalayanCat":
         {
-            "AllOf": [
+            "allOf": [
             {
                 "$ref": "#/definitions/SiameseCat"
             }
@@ -157,7 +157,7 @@
         ,
         "PersianCat":
         {
-            "AllOf": [
+            "allOf": [
             {
                 "$ref": "#/definitions/BaseCat"
             }
@@ -175,7 +175,7 @@
         "Doggy":
         {
             "id": "Dog",
-            "AllOf": [
+            "allOf": [
             {
                 "$ref":  "#/definitions/Animal"
             }
@@ -193,7 +193,7 @@
         "Horsey":
         {
             "id": "Horse",
-            "AllOf": [
+            "allOf": [
             {
                 "$ref": "#/definitions/Animal"
             }
