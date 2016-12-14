@@ -189,7 +189,7 @@ public final class BasicOperationsImpl implements BasicOperations {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putValid(complexBody, apiVersion)
+        return service.putValid(complexBody, this.client.apiVersion())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
