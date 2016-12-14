@@ -606,7 +606,7 @@ namespace AutoRest.Java.Model
             if (ReturnTypeJv.NeedsConversion)
             {
                 builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeJv.GenericBodyWireTypeString, this.Name);
-                builder.AppendLine("{0} body = null;", ReturnTypeJv.BodyClientType)
+                builder.AppendLine("{0} body = null;", ReturnTypeJv.BodyClientType.Name)
                     .AppendLine("if (result.getBody() != null) {")
                     .Indent().AppendLine("{0}", ReturnTypeJv.ConvertBodyToClientType("result.getBody()", "body"))
                     .Outdent().AppendLine("}");
@@ -634,7 +634,7 @@ namespace AutoRest.Java.Model
             if (ReturnTypeJv.NeedsConversion)
             {
                 builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeJv.GenericBodyWireTypeString, this.Name);
-                builder.AppendLine("{0} body = null;", ReturnTypeJv.BodyClientType)
+                builder.AppendLine("{0} body = null;", ReturnTypeJv.BodyClientType.Name)
                     .AppendLine("if (result.getBody() != null) {")
                     .Indent().AppendLine("{0}", ReturnTypeJv.ConvertBodyToClientType("result.getBody()", "body"))
                     .Outdent().AppendLine("}");

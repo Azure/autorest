@@ -111,10 +111,11 @@ namespace AutoRest.Java.Model
                 {
                     return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
                 }
-                else
+                else if (KnownPrimaryType == KnownPrimaryType.None)
                 {
                     return NonNullableVariant;
                 }
+                return this;
             }
         }
 

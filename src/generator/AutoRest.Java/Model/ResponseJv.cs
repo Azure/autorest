@@ -30,7 +30,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return BodyWireType != BodyClientType ||
+                return (BodyWireType != BodyClientType && BodyClientType.Name != "void") ||
                     HeaderWireType != HeaderClientType;
             }
         }
@@ -39,7 +39,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return BodyWireType;
+                return BodyWireType.ResponseVariant;
             }
         }
 
@@ -175,7 +175,12 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return BodyClientType.Name;
+                var respvariant = BodyWireType.ResponseVariant;
+                if ((respvariant as PrimaryTypeJv)?.Nullable != false)
+                {
+                    return respvariant.Name;
+                }
+                return BodyWireType.Name;
             }
         }
 

@@ -70,9 +70,9 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the boolean object if successful.
+     * @return the Boolean object if successful.
      */
-    public boolean getEmptyError() {
+    public Boolean getEmptyError() {
         return getEmptyErrorWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -89,7 +89,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<Boolean> getEmptyErrorAsync() {
         return getEmptyErrorWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
@@ -103,7 +103,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> getEmptyErrorWithServiceResponseAsync() {
         return service.getEmptyError()
@@ -130,9 +130,9 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the boolean object if successful.
+     * @return the Boolean object if successful.
      */
-    public boolean getNoModelError() {
+    public Boolean getNoModelError() {
         return getNoModelErrorWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -149,7 +149,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<Boolean> getNoModelErrorAsync() {
         return getNoModelErrorWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
@@ -163,7 +163,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> getNoModelErrorWithServiceResponseAsync() {
         return service.getNoModelError()
@@ -189,9 +189,9 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @return the boolean object if successful.
+     * @return the Boolean object if successful.
      */
-    public boolean getNoModelEmpty() {
+    public Boolean getNoModelEmpty() {
         return getNoModelEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -208,7 +208,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<Boolean> getNoModelEmptyAsync() {
         return getNoModelEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
@@ -222,7 +222,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> getNoModelEmptyWithServiceResponseAsync() {
         return service.getNoModelEmpty()

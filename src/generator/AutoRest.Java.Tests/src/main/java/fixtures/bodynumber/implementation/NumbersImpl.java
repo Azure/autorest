@@ -156,9 +156,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get null Number value.
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      */
-    public double getNull() {
+    public Double getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -175,7 +175,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get null Number value.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<Double> getNullAsync() {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
@@ -189,7 +189,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get null Number value.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<ServiceResponse<Double>> getNullWithServiceResponseAsync() {
         return service.getNull()
@@ -216,9 +216,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid float Number value.
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      */
-    public double getInvalidFloat() {
+    public Double getInvalidFloat() {
         return getInvalidFloatWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -235,7 +235,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid float Number value.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<Double> getInvalidFloatAsync() {
         return getInvalidFloatWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
@@ -249,7 +249,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid float Number value.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<ServiceResponse<Double>> getInvalidFloatWithServiceResponseAsync() {
         return service.getInvalidFloat()
@@ -276,9 +276,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid double Number value.
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      */
-    public double getInvalidDouble() {
+    public Double getInvalidDouble() {
         return getInvalidDoubleWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -295,7 +295,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid double Number value.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<Double> getInvalidDoubleAsync() {
         return getInvalidDoubleWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
@@ -309,7 +309,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid double Number value.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<ServiceResponse<Double>> getInvalidDoubleWithServiceResponseAsync() {
         return service.getInvalidDouble()
@@ -459,9 +459,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      */
-    public double getBigFloat() {
+    public Double getBigFloat() {
         return getBigFloatWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -478,7 +478,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<Double> getBigFloatAsync() {
         return getBigFloatWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
@@ -492,7 +492,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<ServiceResponse<Double>> getBigFloatWithServiceResponseAsync() {
         return service.getBigFloat()
@@ -582,9 +582,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      */
-    public double getBigDouble() {
+    public Double getBigDouble() {
         return getBigDoubleWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -601,7 +601,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<Double> getBigDoubleAsync() {
         return getBigDoubleWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
@@ -615,7 +615,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<ServiceResponse<Double>> getBigDoubleWithServiceResponseAsync() {
         return service.getBigDouble()
@@ -705,9 +705,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 99999999.99.
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      */
-    public double getBigDoublePositiveDecimal() {
+    public Double getBigDoublePositiveDecimal() {
         return getBigDoublePositiveDecimalWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -724,7 +724,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 99999999.99.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<Double> getBigDoublePositiveDecimalAsync() {
         return getBigDoublePositiveDecimalWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
@@ -738,7 +738,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 99999999.99.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<ServiceResponse<Double>> getBigDoublePositiveDecimalWithServiceResponseAsync() {
         return service.getBigDoublePositiveDecimal()
@@ -828,9 +828,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value -99999999.99.
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      */
-    public double getBigDoubleNegativeDecimal() {
+    public Double getBigDoubleNegativeDecimal() {
         return getBigDoubleNegativeDecimalWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -847,7 +847,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value -99999999.99.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<Double> getBigDoubleNegativeDecimalAsync() {
         return getBigDoubleNegativeDecimalWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
@@ -861,7 +861,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value -99999999.99.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<ServiceResponse<Double>> getBigDoubleNegativeDecimalWithServiceResponseAsync() {
         return service.getBigDoubleNegativeDecimal()
@@ -1329,9 +1329,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      */
-    public double getSmallFloat() {
+    public Double getSmallFloat() {
         return getSmallFloatWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1348,7 +1348,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<Double> getSmallFloatAsync() {
         return getSmallFloatWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
@@ -1362,7 +1362,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<ServiceResponse<Double>> getSmallFloatWithServiceResponseAsync() {
         return service.getSmallFloat()
@@ -1452,9 +1452,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @return the double object if successful.
+     * @return the Double object if successful.
      */
-    public double getSmallDouble() {
+    public Double getSmallDouble() {
         return getSmallDoubleWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1471,7 +1471,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<Double> getSmallDoubleAsync() {
         return getSmallDoubleWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
@@ -1485,7 +1485,7 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @return the observable to the double object
+     * @return the observable to the Double object
      */
     public Observable<ServiceResponse<Double>> getSmallDoubleWithServiceResponseAsync() {
         return service.getSmallDouble()

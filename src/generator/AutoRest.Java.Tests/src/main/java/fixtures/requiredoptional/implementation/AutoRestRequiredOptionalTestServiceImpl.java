@@ -69,14 +69,14 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
     }
 
     /** number of items to skip. */
-    private int optionalGlobalQuery;
+    private Integer optionalGlobalQuery;
 
     /**
      * Gets number of items to skip.
      *
      * @return the optionalGlobalQuery value.
      */
-    public int optionalGlobalQuery() {
+    public Integer optionalGlobalQuery() {
         return this.optionalGlobalQuery;
     }
 
@@ -86,7 +86,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      * @param optionalGlobalQuery the optionalGlobalQuery value.
      * @return the service client itself
      */
-    public AutoRestRequiredOptionalTestServiceImpl withOptionalGlobalQuery(int optionalGlobalQuery) {
+    public AutoRestRequiredOptionalTestServiceImpl withOptionalGlobalQuery(Integer optionalGlobalQuery) {
         this.optionalGlobalQuery = optionalGlobalQuery;
         return this;
     }
