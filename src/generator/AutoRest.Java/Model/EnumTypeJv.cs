@@ -20,9 +20,12 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                yield return string.Join(".",
-                    CodeModel?.Namespace?.ToLower(CultureInfo.InvariantCulture) ?? "fallbackNamespaceOrWhatTODO",
-                    "models", Name);
+                if (Name != "String") // TODO: refactor this madness
+                {
+                    yield return string.Join(".",
+                        CodeModel?.Namespace?.ToLower(CultureInfo.InvariantCulture) ?? "fallbackNamespaceOrWhatTODO",
+                        "models", Name);
+                }
             }
         }
 
