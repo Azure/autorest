@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using AutoRest.Core.Utilities.Collections;
+using AutoRest.Core.Logging;
 
 namespace AutoRest.Core.Utilities
 {
@@ -86,7 +87,7 @@ namespace AutoRest.Core.Utilities
                     // implementation in factory?
                     foreach( var missingConstructor in factory.TargetTypeConstructors.Where( each => factory.GetConstructorImplementation(each.ParameterTypes()) == null ) )
                     {
-                        Console.WriteLine($"Factory for type {factory.TargetType.FullName} does not have a constructor for parameters ({missingConstructor.ParameterTypes().ToTypesString()})");
+                        Logger.Instance.Log(Category.Warning, $"Factory for type {factory.TargetType.FullName} does not have a constructor for parameters ({missingConstructor.ParameterTypes().ToTypesString()})");
                     }
 
                 }
@@ -165,7 +166,7 @@ namespace AutoRest.Core.Utilities
                     {
                         if (c.Singletons.ContainsKey(typeof(T)))
                         {
-                            return (T) c.Singletons[typeof(T)];
+                            return (T)c.Singletons[typeof(T)];
                         }
                     }
 
@@ -183,6 +184,53 @@ namespace AutoRest.Core.Utilities
                     return default(T);
                 }
                 set { Activation.Default.Singletons.AddOrSet(typeof(T), value); }
+            }
+
+            /// <summary>
+            /// Retrieves the singleton of this but also the parent contexts, if existing.
+            /// </summary>
+            public static IEnumerable<T> RecursiveInstances
+            {
+                get
+                {
+                    Type key = typeof(T);
+                    for (var c = Activation.Current; c != null; c = c.Parent)
+                    {
+                        if (c.Singletons.ContainsKey(key))
+                        {
+                            yield return (T)c.Singletons[key];
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Convenience methods for singletons that are of type IEnumerable&lt;T&gt;
+        /// </summary>
+        public class SingletonList<T>
+        {
+            /// <summary>
+            /// Adds given item to the current context.
+            /// </summary>
+            public static void Add(T item)
+            {
+                if (!Activation.Current.Singletons.ContainsKey(typeof(IEnumerable<T>)))
+                {
+                    Activation.Current.Singletons[typeof(IEnumerable<T>)] = Enumerable.Empty<T>();
+                }
+                Activation.Current.Singletons[typeof(IEnumerable<T>)] = (Activation.Current.Singletons[typeof(IEnumerable<T>)] as IEnumerable<T>).Concat(new[] { item });
+            }
+
+            /// <summary>
+            /// For retrieving singletons that are lists while also considering the list items of parent contexts.
+            /// </summary>
+            public static IEnumerable<T> RecursiveInstances
+            {
+                get
+                {
+                    return Singleton<IEnumerable<T>>.RecursiveInstances.SelectMany(list => list);
+                }
             }
         }
 
@@ -293,7 +341,7 @@ namespace AutoRest.Core.Utilities
             }
             catch (Exception e)
             {
-                Console.WriteLine($"FATAL: New<{typeof(T)}() threw exception {e.GetType().Name} - {e.Message}");
+                Logger.Instance.Log(Category.Fatal, $"New<{typeof(T)}() threw exception {e.GetType().Name} - {e.Message}");
                 throw;
             }
         }
@@ -346,7 +394,7 @@ namespace AutoRest.Core.Utilities
             }
             catch (Exception e)
             {
-                Console.WriteLine($"FATAL: New<{typeof(T)}({arguments.Select( each => each?.ToString() ).Aggregate((cur,each) => $"{cur}, {each}")}) threw exception {e.GetType().Name} - {e.Message}");
+                Logger.Instance.Log(Category.Fatal, $"New<{typeof(T)}({arguments.Select(each => each?.ToString()).Aggregate((cur, each) => $"{cur}, {each}")}) threw exception {e.GetType().Name} - {e.Message}");
                 throw;
             }
 

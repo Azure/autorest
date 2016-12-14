@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
     /// <summary>
     /// DurationOperations operations.
     /// </summary>
-    internal partial class DurationOperations : IServiceOperations<AutoRestDurationTestService>, IDurationOperations
+    internal partial class DurationOperations : IServiceOperations<AutoRestDurationTestServiceClient>, IDurationOperations
     {
         /// <summary>
         /// Initializes a new instance of the DurationOperations class.
@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal DurationOperations(AutoRestDurationTestService client)
+        internal DurationOperations(AutoRestDurationTestServiceClient client)
         {
             if (client == null)
             {
@@ -44,9 +44,9 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
         }
 
         /// <summary>
-        /// Gets a reference to the AutoRestDurationTestService
+        /// Gets a reference to the AutoRestDurationTestServiceClient
         /// </summary>
-        public AutoRestDurationTestService Client { get; private set; }
+        public AutoRestDurationTestServiceClient Client { get; private set; }
 
         /// <summary>
         /// Get null duration value

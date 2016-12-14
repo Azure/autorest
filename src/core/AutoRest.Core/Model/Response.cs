@@ -35,27 +35,19 @@ namespace AutoRest.Core.Model
         /// Gets or sets the headers type.
         /// </summary>
         public IModelType Headers { get; set; }
-        
-        public override string ToString()
+
+        /// <summary>
+        /// Determines whether the specified response is structurally equal to this object.
+        /// </summary>
+        /// <param name="other">The object to compare with this object.</param>
+        public bool StructurallyEquals(Response other)
         {
-            if (Body != null && Headers != null)
+            if (other == null)
             {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "HttpOperationResponse<{0},{1}>", Body, Headers);
+                return false;
             }
-            else if (Body != null)
-            {
-                return Body.ToString();
-            }
-            else if (Headers != null)
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "HttpOperationResponse<object,{0}>", Headers);
-            }
-            else
-            {
-                return "void";
-            }
+            return (Body == null ? other.Body == null : Body.StructurallyEquals(other.Body))
+                && (Headers == null ? other.Headers == null : Headers.StructurallyEquals(other.Headers));
         }
     }
 }

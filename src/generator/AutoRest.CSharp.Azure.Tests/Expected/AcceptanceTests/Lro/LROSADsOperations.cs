@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
     /// <summary>
     /// LROSADsOperations operations.
     /// </summary>
-    internal partial class LROSADsOperations : IServiceOperations<AutoRestLongRunningOperationTestService>, ILROSADsOperations
+    internal partial class LROSADsOperations : IServiceOperations<AutoRestLongRunningOperationTestServiceClient>, ILROSADsOperations
     {
         /// <summary>
         /// Initializes a new instance of the LROSADsOperations class.
@@ -35,7 +35,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal LROSADsOperations(AutoRestLongRunningOperationTestService client)
+        internal LROSADsOperations(AutoRestLongRunningOperationTestServiceClient client)
         {
             if (client == null)
             {
@@ -45,9 +45,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Gets a reference to the AutoRestLongRunningOperationTestService
+        /// Gets a reference to the AutoRestLongRunningOperationTestServiceClient
         /// </summary>
-        public AutoRestLongRunningOperationTestService Client { get; private set; }
+        public AutoRestLongRunningOperationTestServiceClient Client { get; private set; }
 
         /// <summary>
         /// Long running put request, service returns a 400 to the initial request

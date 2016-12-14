@@ -79,19 +79,12 @@ namespace AutoRest.CompositeSwagger
         {
             CodeModel compositeClient = New<CodeModel>();
 
-            if (string.IsNullOrWhiteSpace(Settings.ClientName))
+            if (string.IsNullOrWhiteSpace(Settings.ClientName) && compositeSwaggerModel.Info.Title == null )
             {
-                if (compositeSwaggerModel.Info.Title == null)
-                {
-                    throw ErrorManager.CreateError(Resources.TitleMissing);
-                }
-
-                compositeClient.Name = compositeSwaggerModel.Info.Title.Replace(" ", "");
+                throw ErrorManager.CreateError(Resources.TitleMissing);
             }
-            else
-            {
-                compositeClient.Name = Settings.ClientName;
-            }
+            compositeClient.Name = compositeSwaggerModel.Info.Title?.Replace(" ", "");
+            
             compositeClient.Namespace = Settings.Namespace;
             compositeClient.ModelsName = Settings.ModelsName;
             compositeClient.Documentation = compositeSwaggerModel.Info.Description;
@@ -227,7 +220,7 @@ namespace AutoRest.CompositeSwagger
                     apiVersionParameter.IsRequired = true;
                 }
 
-                var compositeClientMethod = compositeClient.Methods.FirstOrDefault(m => m.ToString() == subClientMethod.ToString()
+                var compositeClientMethod = compositeClient.Methods.FirstOrDefault(m => m.StructurallyEquals(subClientMethod)
                     && m.Group == subClientMethod.Group);
                 if (compositeClientMethod == null)
                 {
@@ -427,13 +420,6 @@ namespace AutoRest.CompositeSwagger
                         propertyName));
                 }
             }
-        }
-
-        public override CodeModel Build(out IEnumerable<ValidationMessage> messages)
-        {
-            // No composite modeler validation messages yet
-            messages = new List<ValidationMessage>();
-            return Build();
         }
 
         /// <summary>

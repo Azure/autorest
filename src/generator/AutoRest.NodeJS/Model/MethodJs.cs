@@ -22,7 +22,7 @@ namespace AutoRest.NodeJS.Model
             // methods that have no group name get the client name as their name
             Group.OnGet += groupName =>
             {
-                return groupName.IsNullOrEmpty() ? CodeModel?.Name : groupName;
+                return groupName.IsNullOrEmpty() ? CodeModel?.Name.Value : groupName;
             };
 
             OptionsParameterTemplateModel = (ParameterJs)New<Parameter>(new
@@ -804,9 +804,7 @@ namespace AutoRest.NodeJS.Model
 
                 foreach (var mapping in transformation.ParameterMappings)
                 {
-                    builder.AppendLine("{0}{1};",
-                        transformation.OutputParameter.Name,
-                        mapping);
+                    builder.AppendLine("{0};", mapping.CreateCode(transformation.OutputParameter));
                 }
 
                 builder.Outdent()
@@ -860,9 +858,7 @@ namespace AutoRest.NodeJS.Model
 
                     foreach (var mapping in transformation.ParameterMappings)
                     {
-                        builder.AppendLine("{0}{1};",
-                            transformation.OutputParameter.Name,
-                            mapping);
+                        builder.AppendLine("{0};", mapping.CreateCode(transformation.OutputParameter));
                         if (noCompositeTypeInitialized)
                         {
                             // If composite type is initialized based on the above logic then it should not be validated.

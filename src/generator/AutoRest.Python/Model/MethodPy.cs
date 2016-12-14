@@ -647,9 +647,7 @@ namespace AutoRest.Python.Model
                        .Indent();
                     foreach (var mapping in transformation.ParameterMappings)
                     {
-                        builder.AppendLine("{0}{1}",
-                            transformation.OutputParameter.Name,
-                            mapping);
+                        builder.AppendLine(mapping.CreateCode(transformation.OutputParameter));
                     }
                     builder.Outdent();
                 }

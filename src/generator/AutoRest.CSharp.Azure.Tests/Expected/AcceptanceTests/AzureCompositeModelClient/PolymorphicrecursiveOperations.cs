@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     /// <summary>
     /// PolymorphicrecursiveOperations operations.
     /// </summary>
-    internal partial class PolymorphicrecursiveOperations : IServiceOperations<AzureCompositeModel>, IPolymorphicrecursiveOperations
+    internal partial class PolymorphicrecursiveOperations : IServiceOperations<AzureCompositeModelClient>, IPolymorphicrecursiveOperations
     {
         /// <summary>
         /// Initializes a new instance of the PolymorphicrecursiveOperations class.
@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal PolymorphicrecursiveOperations(AzureCompositeModel client)
+        internal PolymorphicrecursiveOperations(AzureCompositeModelClient client)
         {
             if (client == null)
             {
@@ -44,9 +44,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         }
 
         /// <summary>
-        /// Gets a reference to the AzureCompositeModel
+        /// Gets a reference to the AzureCompositeModelClient
         /// </summary>
-        public AzureCompositeModel Client { get; private set; }
+        public AzureCompositeModelClient Client { get; private set; }
 
         /// <summary>
         /// Get complex types that are polymorphic and have recursive references

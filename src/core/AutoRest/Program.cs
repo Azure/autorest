@@ -17,16 +17,24 @@ namespace AutoRest
     {
         private static int Main(string[] args)
         {
-            using (NewContext)
-            {
-                int exitCode = (int) ExitCode.Error;
+            int exitCode = (int)ExitCode.Error;
 
-                try
+            try
+            {
+                using (NewContext)
                 {
+                    bool generationFailed = false;
                     Settings settings = null;
                     try
                     {
                         settings = Settings.Create(args);
+                        // set up logging
+                        Logger.Instance.AddListener(new ConsoleLogListener(
+                            settings.Debug ? Category.Debug : Category.Info,
+                            settings.ValidationLevel,
+                            settings.Verbose));
+                        Logger.Instance.AddListener(new SignalingLogListener(Category.Error, _ => generationFailed = true));
+
                         string defCodeGen = (args.Where(arg => arg.ToLowerInvariant().Contains("codegenerator")).IsNullOrEmpty()) ? "" : settings.CodeGenerator;
                         if (settings.ShowHelp && IsShowMarkdownHelpIncluded(args))
                         {
@@ -45,88 +53,48 @@ namespace AutoRest
                         else
                         {
                             Core.AutoRestController.Generate();
-                            if (!Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1 )
+                            if (!Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
                             {
                                 new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
                             }
                         }
                     }
-                    catch (CodeGenerationException)
-                    {
-                        // Do not add the CodeGenerationException again. Will be written in finally block
-                    }
                     catch (Exception exception)
                     {
-                        Logger.LogError(exception, exception.Message);
+                        Logger.Instance.Log(Category.Error, exception.Message);
                     }
                     finally
                     {
-                        if (
-                            Logger.Entries.Any(
-                                e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                        }
-                        else if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Warning))
-                        {
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                        }
-
                         if (settings != null && !settings.ShowHelp)
                         {
-                            if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
+                            if (generationFailed)
                             {
                                 if (!"None".EqualsIgnoreCase(settings.CodeGenerator))
                                 {
-                                    Console.WriteLine(Resources.GenerationFailed);
-                                    Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}",
-                                        typeof(Program).Assembly.ManifestModule.Name,
-                                        string.Join(" ", args)));
+                                    Logger.Instance.Log(Category.Error, Resources.GenerationFailed);
+                                    Logger.Instance.Log(Category.Error, "{0} {1}",
+                                        typeof(Program).Assembly.ManifestModule.Name, string.Join(" ", args));
                                 }
                             }
                             else
                             {
                                 if (!"None".EqualsIgnoreCase(settings.CodeGenerator))
                                 {
-                                    Console.WriteLine(Resources.GenerationComplete,
+                                    Logger.Instance.Log(Category.Info, Resources.GenerationComplete,
                                         settings.CodeGenerator, settings.Input);
                                 }
-                                exitCode = (int) ExitCode.Success;
+                                exitCode = (int)ExitCode.Success;
                             }
                         }
-
-                        // Write all messages to Console
-                        var validationLevel = settings?.ValidationLevel ?? LogEntrySeverity.Error;
-                        var shouldShowVerbose = settings?.Verbose ?? false;
-                        var shouldShowDebug = settings?.Debug ?? false;
-                        foreach (var severity in (LogEntrySeverity[]) Enum.GetValues(typeof(LogEntrySeverity)))
-                        {
-                            if (severity == LogEntrySeverity.Debug && !shouldShowDebug)
-                            {
-                                continue;
-                            }
-
-                            // Determine if this severity of messages should be treated as errors
-                            bool isErrorMessage = severity >= validationLevel;
-                            // Set the output stream based on if the severity should be an error or not
-                            var outputStream = isErrorMessage ? Console.Error : Console.Out;
-                            // If it's an error level severity or we want to see all output, write to console
-                            if (isErrorMessage || shouldShowVerbose)
-                            {
-                                // write out the message
-                                Logger.WriteMessages(outputStream, severity, shouldShowVerbose, severity.GetColorForSeverity());
-                            }
-                        }
-                        Console.ResetColor();
                     }
                 }
-                catch (Exception exception)
-                {
-                    Console.Error.WriteLine(Resources.ConsoleErrorMessage, exception.Message);
-                    Console.Error.WriteLine(Resources.ConsoleErrorStackTrace, exception.StackTrace);
-                }
-                return exitCode;
             }
+            catch (Exception exception)
+            {
+                Console.Error.WriteLine(Resources.ConsoleErrorMessage, exception.Message);
+                Console.Error.WriteLine(Resources.ConsoleErrorStackTrace, exception.StackTrace);
+            }
+            return exitCode;
         }
 
         /// <summary>

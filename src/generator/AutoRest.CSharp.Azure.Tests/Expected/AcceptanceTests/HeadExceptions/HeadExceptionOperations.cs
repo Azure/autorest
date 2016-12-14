@@ -22,7 +22,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
     /// <summary>
     /// HeadExceptionOperations operations.
     /// </summary>
-    internal partial class HeadExceptionOperations : IServiceOperations<AutoRestHeadExceptionTestService>, IHeadExceptionOperations
+    internal partial class HeadExceptionOperations : IServiceOperations<AutoRestHeadExceptionTestServiceClient>, IHeadExceptionOperations
     {
         /// <summary>
         /// Initializes a new instance of the HeadExceptionOperations class.
@@ -33,7 +33,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal HeadExceptionOperations(AutoRestHeadExceptionTestService client)
+        internal HeadExceptionOperations(AutoRestHeadExceptionTestServiceClient client)
         {
             if (client == null)
             {
@@ -43,9 +43,9 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
         }
 
         /// <summary>
-        /// Gets a reference to the AutoRestHeadExceptionTestService
+        /// Gets a reference to the AutoRestHeadExceptionTestServiceClient
         /// </summary>
-        public AutoRestHeadExceptionTestService Client { get; private set; }
+        public AutoRestHeadExceptionTestServiceClient Client { get; private set; }
 
         /// <summary>
         /// Return 200 status code if successful

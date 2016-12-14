@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     /// <summary>
     /// ArrayOperations operations.
     /// </summary>
-    internal partial class ArrayOperations : IServiceOperations<AzureCompositeModel>, IArrayOperations
+    internal partial class ArrayOperations : IServiceOperations<AzureCompositeModelClient>, IArrayOperations
     {
         /// <summary>
         /// Initializes a new instance of the ArrayOperations class.
@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal ArrayOperations(AzureCompositeModel client)
+        internal ArrayOperations(AzureCompositeModelClient client)
         {
             if (client == null)
             {
@@ -44,9 +44,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         }
 
         /// <summary>
-        /// Gets a reference to the AzureCompositeModel
+        /// Gets a reference to the AzureCompositeModelClient
         /// </summary>
-        public AzureCompositeModel Client { get; private set; }
+        public AzureCompositeModelClient Client { get; private set; }
 
         /// <summary>
         /// Get complex types with array property

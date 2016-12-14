@@ -28,6 +28,7 @@ namespace AutoRest.Core.Model
         protected EnumType()
         {
             Values = new List<EnumValue>();
+            Name.OnGet += s => string.IsNullOrEmpty(s) ? "enum" : s;
         }
 
         /// <summary>
@@ -66,22 +67,6 @@ namespace AutoRest.Core.Model
         public bool ModelAsString { get; set; }
 
         public override string DeclarationName => ModelAsString ? ModelAsStringType : base.DeclarationName;
-
-        /// <summary>
-        /// Returns a string representation of the PrimaryType object.
-        /// </summary>
-        /// <returns>
-        /// A string representation of the PrimaryType object.
-        /// </returns>
-        public override string ToString()
-        {
-            if (string.IsNullOrEmpty(Name))
-            {
-                return "enum";
-            }
-
-            return Name;
-        }
 
         /// <summary>
         /// Determines whether the specified model type is structurally equal to this object.

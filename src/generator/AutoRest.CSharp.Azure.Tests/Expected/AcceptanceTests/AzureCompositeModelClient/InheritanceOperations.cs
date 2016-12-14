@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     /// <summary>
     /// InheritanceOperations operations.
     /// </summary>
-    internal partial class InheritanceOperations : IServiceOperations<AzureCompositeModel>, IInheritanceOperations
+    internal partial class InheritanceOperations : IServiceOperations<AzureCompositeModelClient>, IInheritanceOperations
     {
         /// <summary>
         /// Initializes a new instance of the InheritanceOperations class.
@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal InheritanceOperations(AzureCompositeModel client)
+        internal InheritanceOperations(AzureCompositeModelClient client)
         {
             if (client == null)
             {
@@ -44,9 +44,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         }
 
         /// <summary>
-        /// Gets a reference to the AzureCompositeModel
+        /// Gets a reference to the AzureCompositeModelClient
         /// </summary>
-        public AzureCompositeModel Client { get; private set; }
+        public AzureCompositeModelClient Client { get; private set; }
 
         /// <summary>
         /// Get complex types that extend others

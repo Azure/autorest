@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
     /// <summary>
     /// PagingOperations operations.
     /// </summary>
-    internal partial class PagingOperations : IServiceOperations<AutoRestPagingTestService>, IPagingOperations
+    internal partial class PagingOperations : IServiceOperations<AutoRestPagingTestServiceClient>, IPagingOperations
     {
         /// <summary>
         /// Initializes a new instance of the PagingOperations class.
@@ -35,7 +35,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal PagingOperations(AutoRestPagingTestService client)
+        internal PagingOperations(AutoRestPagingTestServiceClient client)
         {
             if (client == null)
             {
@@ -45,9 +45,9 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
-        /// Gets a reference to the AutoRestPagingTestService
+        /// Gets a reference to the AutoRestPagingTestServiceClient
         /// </summary>
-        public AutoRestPagingTestService Client { get; private set; }
+        public AutoRestPagingTestServiceClient Client { get; private set; }
 
         /// <summary>
         /// A paging operation that finishes on the first call without a nextlink

@@ -10,6 +10,7 @@ using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using System.Linq;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core
 {
@@ -39,8 +40,7 @@ namespace AutoRest.Core
             {
                 throw new ArgumentNullException("settings");
             }
-            Logger.Entries.Clear();
-            Logger.LogInfo(Resources.AutoRestCore, Version);
+            Logger.Instance.Log(Category.Info, Resources.AutoRestCore, Version);
             
             CodeModel codeModel = null;
             
@@ -48,35 +48,36 @@ namespace AutoRest.Core
 
             try
             {
-                IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
-
-                // generate model from swagger 
-                codeModel = modeler.Build(out messages);
-
-                // After swagger Parser
-                codeModel = RunExtensions(Trigger.AfterModelCreation, codeModel);
-
-                // After swagger Parser
-                codeModel = RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
-
-                foreach (var message in messages)
+                using (NewContext)
                 {
-                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
+                    bool validationErrorFound = false;
+                    Logger.Instance.AddListener(new SignalingLogListener(Settings.Instance.ValidationLevel, _ => validationErrorFound = true));
+
+                    // generate model from swagger 
+                    codeModel = modeler.Build();
+
+                    // After swagger Parser
+                    codeModel = RunExtensions(Trigger.AfterModelCreation, codeModel);
+
+                    // After swagger Parser
+                    codeModel = RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
+
+                    if (validationErrorFound)
+                    {
+                        Logger.Instance.Log(Category.Error, "Errors found during Swagger validation");
+                    }
                 }
 
-                if (messages.Any(entry => entry.Severity >= Settings.Instance.ValidationLevel))
-                {
-                    throw ErrorManager.CreateError(null, Resources.ErrorGeneratingClientModel, "Errors found during Swagger validation");
-                }
             }
             catch (Exception exception)
             {
-                throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
+                throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, exception);
             }
 
             var plugin = ExtensionsLoader.GetPlugin();
 
-            Logger.WriteOutput(plugin.CodeGenerator.UsageInstructions);
+            Console.ResetColor();
+            Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
 
             Settings.Instance.Validate();
             try
@@ -111,7 +112,7 @@ namespace AutoRest.Core
             }
             catch (Exception exception)
             {
-                throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                throw ErrorManager.CreateError(Resources.ErrorSavingGeneratedCode, exception);
             }
         }
 
@@ -134,8 +135,7 @@ namespace AutoRest.Core
             {
                 throw new ArgumentNullException("settings");
             }
-            Logger.Entries.Clear();
-            Logger.LogInfo(Resources.AutoRestCore, Version);
+            Logger.Instance.Log(Category.Info, Resources.AutoRestCore, Version);
             Modeler modeler = ExtensionsLoader.GetModeler();
 
             try
@@ -144,13 +144,12 @@ namespace AutoRest.Core
 
                 foreach (var message in messages)
                 {
-                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
+                    Logger.Instance.Log(message);
                 }
-
             }
             catch (Exception exception)
             {
-                throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
+                throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, exception);
             }
 
         }
