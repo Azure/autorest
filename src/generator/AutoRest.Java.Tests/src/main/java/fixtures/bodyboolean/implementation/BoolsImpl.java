@@ -83,9 +83,9 @@ public final class BoolsImpl implements Bools {
     /**
      * Get true Boolean value.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    public Boolean getTrue() {
+    public boolean getTrue() {
         return getTrueWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -206,9 +206,9 @@ public final class BoolsImpl implements Bools {
     /**
      * Get false Boolean value.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    public Boolean getFalse() {
+    public boolean getFalse() {
         return getFalseWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -329,9 +329,9 @@ public final class BoolsImpl implements Bools {
     /**
      * Get null Boolean value.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    public Boolean getNull() {
+    public boolean getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -389,9 +389,9 @@ public final class BoolsImpl implements Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    public Boolean getInvalid() {
+    public boolean getInvalid() {
         return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

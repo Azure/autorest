@@ -574,9 +574,10 @@ namespace AutoRest.Java.Model
             }
         }
 
-        public ResponseJv ReturnTypeJv => ReturnType as ResponseJv;
+        public ResponseJv ReturnTypeJv => (ReturnType as ResponseJv);
 
-        public string ReturnTypeResponseName => ReturnTypeJv?.BodyWireType?.ResponseVariant?.Name;
+        //public string ReturnTypeResponseName => ReturnTypeJv?.BodyWireType?.ResponseVariant?.Name;
+        public string ReturnTypeResponseName => ReturnTypeJv?.BodyWireType?.ServiceResponseVariant()?.Name;
 
         public virtual string ResponseGeneration(bool filterRequired = false)
         {

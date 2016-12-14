@@ -24,9 +24,9 @@ public interface Ints {
     /**
      * Get null Int value.
      *
-     * @return the Integer object if successful.
+     * @return the int object if successful.
      */
-    Integer getNull();
+    int getNull();
 
     /**
      * Get null Int value.
@@ -39,23 +39,23 @@ public interface Ints {
     /**
      * Get null Int value.
      *
-     * @return the observable to the Integer object
+     * @return the observable to the int object
      */
     Observable<Integer> getNullAsync();
 
     /**
      * Get null Int value.
      *
-     * @return the observable to the Integer object
+     * @return the observable to the int object
      */
     Observable<ServiceResponse<Integer>> getNullWithServiceResponseAsync();
 
     /**
      * Get invalid Int value.
      *
-     * @return the Integer object if successful.
+     * @return the int object if successful.
      */
-    Integer getInvalid();
+    int getInvalid();
 
     /**
      * Get invalid Int value.
@@ -68,23 +68,23 @@ public interface Ints {
     /**
      * Get invalid Int value.
      *
-     * @return the observable to the Integer object
+     * @return the observable to the int object
      */
     Observable<Integer> getInvalidAsync();
 
     /**
      * Get invalid Int value.
      *
-     * @return the observable to the Integer object
+     * @return the observable to the int object
      */
     Observable<ServiceResponse<Integer>> getInvalidWithServiceResponseAsync();
 
     /**
      * Get overflow Int32 value.
      *
-     * @return the Integer object if successful.
+     * @return the int object if successful.
      */
-    Integer getOverflowInt32();
+    int getOverflowInt32();
 
     /**
      * Get overflow Int32 value.
@@ -97,23 +97,23 @@ public interface Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @return the observable to the Integer object
+     * @return the observable to the int object
      */
     Observable<Integer> getOverflowInt32Async();
 
     /**
      * Get overflow Int32 value.
      *
-     * @return the observable to the Integer object
+     * @return the observable to the int object
      */
     Observable<ServiceResponse<Integer>> getOverflowInt32WithServiceResponseAsync();
 
     /**
      * Get underflow Int32 value.
      *
-     * @return the Integer object if successful.
+     * @return the int object if successful.
      */
-    Integer getUnderflowInt32();
+    int getUnderflowInt32();
 
     /**
      * Get underflow Int32 value.
@@ -126,23 +126,23 @@ public interface Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @return the observable to the Integer object
+     * @return the observable to the int object
      */
     Observable<Integer> getUnderflowInt32Async();
 
     /**
      * Get underflow Int32 value.
      *
-     * @return the observable to the Integer object
+     * @return the observable to the int object
      */
     Observable<ServiceResponse<Integer>> getUnderflowInt32WithServiceResponseAsync();
 
     /**
      * Get overflow Int64 value.
      *
-     * @return the Long object if successful.
+     * @return the long object if successful.
      */
-    Long getOverflowInt64();
+    long getOverflowInt64();
 
     /**
      * Get overflow Int64 value.
@@ -155,23 +155,23 @@ public interface Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @return the observable to the Long object
+     * @return the observable to the long object
      */
     Observable<Long> getOverflowInt64Async();
 
     /**
      * Get overflow Int64 value.
      *
-     * @return the observable to the Long object
+     * @return the observable to the long object
      */
     Observable<ServiceResponse<Long>> getOverflowInt64WithServiceResponseAsync();
 
     /**
      * Get underflow Int64 value.
      *
-     * @return the Long object if successful.
+     * @return the long object if successful.
      */
-    Long getUnderflowInt64();
+    long getUnderflowInt64();
 
     /**
      * Get underflow Int64 value.
@@ -184,14 +184,14 @@ public interface Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @return the observable to the Long object
+     * @return the observable to the long object
      */
     Observable<Long> getUnderflowInt64Async();
 
     /**
      * Get underflow Int64 value.
      *
-     * @return the observable to the Long object
+     * @return the observable to the long object
      */
     Observable<ServiceResponse<Long>> getUnderflowInt64WithServiceResponseAsync();
 

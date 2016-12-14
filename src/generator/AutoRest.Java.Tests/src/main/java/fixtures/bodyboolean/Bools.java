@@ -23,9 +23,9 @@ public interface Bools {
     /**
      * Get true Boolean value.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    Boolean getTrue();
+    boolean getTrue();
 
     /**
      * Get true Boolean value.
@@ -38,14 +38,14 @@ public interface Bools {
     /**
      * Get true Boolean value.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<Boolean> getTrueAsync();
 
     /**
      * Get true Boolean value.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<ServiceResponse<Boolean>> getTrueWithServiceResponseAsync();
 
@@ -84,9 +84,9 @@ public interface Bools {
     /**
      * Get false Boolean value.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    Boolean getFalse();
+    boolean getFalse();
 
     /**
      * Get false Boolean value.
@@ -99,14 +99,14 @@ public interface Bools {
     /**
      * Get false Boolean value.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<Boolean> getFalseAsync();
 
     /**
      * Get false Boolean value.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<ServiceResponse<Boolean>> getFalseWithServiceResponseAsync();
 
@@ -145,9 +145,9 @@ public interface Bools {
     /**
      * Get null Boolean value.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    Boolean getNull();
+    boolean getNull();
 
     /**
      * Get null Boolean value.
@@ -160,23 +160,23 @@ public interface Bools {
     /**
      * Get null Boolean value.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<Boolean> getNullAsync();
 
     /**
      * Get null Boolean value.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<ServiceResponse<Boolean>> getNullWithServiceResponseAsync();
 
     /**
      * Get invalid Boolean value.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    Boolean getInvalid();
+    boolean getInvalid();
 
     /**
      * Get invalid Boolean value.
@@ -189,14 +189,14 @@ public interface Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<Boolean> getInvalidAsync();
 
     /**
      * Get invalid Boolean value.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<ServiceResponse<Boolean>> getInvalidWithServiceResponseAsync();
 

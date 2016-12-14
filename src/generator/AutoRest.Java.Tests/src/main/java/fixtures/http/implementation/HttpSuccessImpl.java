@@ -194,9 +194,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Get 200 success.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    public Boolean get200() {
+    public boolean get200() {
         return get200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 

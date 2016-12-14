@@ -70,9 +70,9 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    public Boolean getEmptyError() {
+    public boolean getEmptyError() {
         return getEmptyErrorWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -130,9 +130,9 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    public Boolean getNoModelError() {
+    public boolean getNoModelError() {
         return getNoModelErrorWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -189,9 +189,9 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    public Boolean getNoModelEmpty() {
+    public boolean getNoModelEmpty() {
         return getNoModelEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

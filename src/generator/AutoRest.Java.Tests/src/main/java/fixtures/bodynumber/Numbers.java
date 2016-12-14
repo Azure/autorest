@@ -24,9 +24,9 @@ public interface Numbers {
     /**
      * Get null Number value.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    Double getNull();
+    double getNull();
 
     /**
      * Get null Number value.
@@ -39,23 +39,23 @@ public interface Numbers {
     /**
      * Get null Number value.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<Double> getNullAsync();
 
     /**
      * Get null Number value.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getNullWithServiceResponseAsync();
 
     /**
      * Get invalid float Number value.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    Double getInvalidFloat();
+    double getInvalidFloat();
 
     /**
      * Get invalid float Number value.
@@ -68,23 +68,23 @@ public interface Numbers {
     /**
      * Get invalid float Number value.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<Double> getInvalidFloatAsync();
 
     /**
      * Get invalid float Number value.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getInvalidFloatWithServiceResponseAsync();
 
     /**
      * Get invalid double Number value.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    Double getInvalidDouble();
+    double getInvalidDouble();
 
     /**
      * Get invalid double Number value.
@@ -97,14 +97,14 @@ public interface Numbers {
     /**
      * Get invalid double Number value.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<Double> getInvalidDoubleAsync();
 
     /**
      * Get invalid double Number value.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getInvalidDoubleWithServiceResponseAsync();
 
@@ -172,9 +172,9 @@ public interface Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    Double getBigFloat();
+    double getBigFloat();
 
     /**
      * Get big float value 3.402823e+20.
@@ -187,14 +187,14 @@ public interface Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<Double> getBigFloatAsync();
 
     /**
      * Get big float value 3.402823e+20.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getBigFloatWithServiceResponseAsync();
 
@@ -233,9 +233,9 @@ public interface Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    Double getBigDouble();
+    double getBigDouble();
 
     /**
      * Get big double value 2.5976931e+101.
@@ -248,14 +248,14 @@ public interface Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<Double> getBigDoubleAsync();
 
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getBigDoubleWithServiceResponseAsync();
 
@@ -294,9 +294,9 @@ public interface Numbers {
     /**
      * Get big double value 99999999.99.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    Double getBigDoublePositiveDecimal();
+    double getBigDoublePositiveDecimal();
 
     /**
      * Get big double value 99999999.99.
@@ -309,14 +309,14 @@ public interface Numbers {
     /**
      * Get big double value 99999999.99.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<Double> getBigDoublePositiveDecimalAsync();
 
     /**
      * Get big double value 99999999.99.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getBigDoublePositiveDecimalWithServiceResponseAsync();
 
@@ -355,9 +355,9 @@ public interface Numbers {
     /**
      * Get big double value -99999999.99.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    Double getBigDoubleNegativeDecimal();
+    double getBigDoubleNegativeDecimal();
 
     /**
      * Get big double value -99999999.99.
@@ -370,14 +370,14 @@ public interface Numbers {
     /**
      * Get big double value -99999999.99.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<Double> getBigDoubleNegativeDecimalAsync();
 
     /**
      * Get big double value -99999999.99.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getBigDoubleNegativeDecimalWithServiceResponseAsync();
 
@@ -599,9 +599,9 @@ public interface Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    Double getSmallFloat();
+    double getSmallFloat();
 
     /**
      * Get big double value 3.402823e-20.
@@ -614,14 +614,14 @@ public interface Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<Double> getSmallFloatAsync();
 
     /**
      * Get big double value 3.402823e-20.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getSmallFloatWithServiceResponseAsync();
 
@@ -660,9 +660,9 @@ public interface Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    Double getSmallDouble();
+    double getSmallDouble();
 
     /**
      * Get big double value 2.5976931e-101.
@@ -675,14 +675,14 @@ public interface Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<Double> getSmallDoubleAsync();
 
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @return the observable to the Double object
+     * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getSmallDoubleWithServiceResponseAsync();
 

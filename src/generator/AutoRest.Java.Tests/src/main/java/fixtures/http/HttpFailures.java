@@ -23,9 +23,9 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    Boolean getEmptyError();
+    boolean getEmptyError();
 
     /**
      * Get empty error form server.
@@ -38,23 +38,23 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<Boolean> getEmptyErrorAsync();
 
     /**
      * Get empty error form server.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<ServiceResponse<Boolean>> getEmptyErrorWithServiceResponseAsync();
 
     /**
      * Get empty error form server.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    Boolean getNoModelError();
+    boolean getNoModelError();
 
     /**
      * Get empty error form server.
@@ -67,23 +67,23 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<Boolean> getNoModelErrorAsync();
 
     /**
      * Get empty error form server.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<ServiceResponse<Boolean>> getNoModelErrorWithServiceResponseAsync();
 
     /**
      * Get empty response from server.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    Boolean getNoModelEmpty();
+    boolean getNoModelEmpty();
 
     /**
      * Get empty response from server.
@@ -96,14 +96,14 @@ public interface HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<Boolean> getNoModelEmptyAsync();
 
     /**
      * Get empty response from server.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<ServiceResponse<Boolean>> getNoModelEmptyWithServiceResponseAsync();
 

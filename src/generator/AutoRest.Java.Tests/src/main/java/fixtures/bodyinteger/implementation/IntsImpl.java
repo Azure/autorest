@@ -117,9 +117,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
-     * @return the Integer object if successful.
+     * @return the int object if successful.
      */
-    public Integer getNull() {
+    public int getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -177,9 +177,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
-     * @return the Integer object if successful.
+     * @return the int object if successful.
      */
-    public Integer getInvalid() {
+    public int getInvalid() {
         return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -237,9 +237,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @return the Integer object if successful.
+     * @return the int object if successful.
      */
-    public Integer getOverflowInt32() {
+    public int getOverflowInt32() {
         return getOverflowInt32WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -297,9 +297,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @return the Integer object if successful.
+     * @return the int object if successful.
      */
-    public Integer getUnderflowInt32() {
+    public int getUnderflowInt32() {
         return getUnderflowInt32WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -357,9 +357,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @return the Long object if successful.
+     * @return the long object if successful.
      */
-    public Long getOverflowInt64() {
+    public long getOverflowInt64() {
         return getOverflowInt64WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -417,9 +417,9 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @return the Long object if successful.
+     * @return the long object if successful.
      */
-    public Long getUnderflowInt64() {
+    public long getUnderflowInt64() {
         return getUnderflowInt64WithServiceResponseAsync().toBlocking().single().getBody();
     }
 

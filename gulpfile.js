@@ -217,7 +217,7 @@ gulp.task('regenerate:delete', function(cb){
     'src/generator/AutoRest.Python.Tests/Expected',
     'src/generator/AutoRest.Python.Azure.Tests/Expected',
     'src/generator/AutoRest.Java.Tests/src/main/java',
-    //'src/generator/AutoRest.Java.Azure.Tests/src/main/java',
+    'src/generator/AutoRest.Java.Azure.Tests/src/main/java',
     //'src/generator/AutoRest.Java.Azure.Fluent.Tests/src/main/java',
     //'src/generator/AutoRest.Go.Tests/src/tests/generated'
   ],

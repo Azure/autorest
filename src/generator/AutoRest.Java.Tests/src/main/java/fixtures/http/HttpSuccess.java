@@ -51,9 +51,9 @@ public interface HttpSuccess {
     /**
      * Get 200 success.
      *
-     * @return the Boolean object if successful.
+     * @return the boolean object if successful.
      */
-    Boolean get200();
+    boolean get200();
 
     /**
      * Get 200 success.
@@ -66,14 +66,14 @@ public interface HttpSuccess {
     /**
      * Get 200 success.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<Boolean> get200Async();
 
     /**
      * Get 200 success.
      *
-     * @return the observable to the Boolean object
+     * @return the observable to the boolean object
      */
     Observable<ServiceResponse<Boolean>> get200WithServiceResponseAsync();
 

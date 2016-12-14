@@ -156,9 +156,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get null Number value.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    public Double getNull() {
+    public double getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -216,9 +216,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid float Number value.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    public Double getInvalidFloat() {
+    public double getInvalidFloat() {
         return getInvalidFloatWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -276,9 +276,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid double Number value.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    public Double getInvalidDouble() {
+    public double getInvalidDouble() {
         return getInvalidDoubleWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -459,9 +459,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    public Double getBigFloat() {
+    public double getBigFloat() {
         return getBigFloatWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -582,9 +582,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    public Double getBigDouble() {
+    public double getBigDouble() {
         return getBigDoubleWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -705,9 +705,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 99999999.99.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    public Double getBigDoublePositiveDecimal() {
+    public double getBigDoublePositiveDecimal() {
         return getBigDoublePositiveDecimalWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -828,9 +828,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value -99999999.99.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    public Double getBigDoubleNegativeDecimal() {
+    public double getBigDoubleNegativeDecimal() {
         return getBigDoubleNegativeDecimalWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1329,9 +1329,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    public Double getSmallFloat() {
+    public double getSmallFloat() {
         return getSmallFloatWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -1452,9 +1452,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @return the Double object if successful.
+     * @return the double object if successful.
      */
-    public Double getSmallDouble() {
+    public double getSmallDouble() {
         return getSmallDoubleWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

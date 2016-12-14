@@ -55,7 +55,7 @@ public interface AutoRestRequiredOptionalTestService {
      *
      * @return the optionalGlobalQuery value.
      */
-    Integer optionalGlobalQuery();
+    int optionalGlobalQuery();
 
     /**
      * Sets number of items to skip.
@@ -63,7 +63,7 @@ public interface AutoRestRequiredOptionalTestService {
      * @param optionalGlobalQuery the optionalGlobalQuery value.
      * @return the service client itself
      */
-    AutoRestRequiredOptionalTestService withOptionalGlobalQuery(Integer optionalGlobalQuery);
+    AutoRestRequiredOptionalTestService withOptionalGlobalQuery(int optionalGlobalQuery);
 
     /**
      * Gets the Implicits object to access its operations.

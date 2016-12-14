@@ -23,10 +23,10 @@
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeJv.BodyClientType.ResponseVariant.Name.EscapeXmlComment() object if successful.
+@: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
 }
  */
-public @Model.ReturnTypeJv.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodRequiredParameterDeclaration) {
+public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodRequiredParameterDeclaration) {
 @if (@Model.ReturnTypeJv.BodyClientType.ResponseVariant.Name == "void")
 {
 @:    @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single().getBody();
@@ -175,10 +175,10 @@ public Observable<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Wit
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeJv.BodyClientType.ResponseVariant.Name.EscapeXmlComment() object if successful.
+@: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
 }
  */
-public @Model.ReturnTypeJv.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodParameterDeclaration) {
+public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodParameterDeclaration) {
 @if (@Model.ReturnTypeJv.BodyClientType.ResponseVariant.Name == "void")
 {
 @:    @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().single().getBody();
