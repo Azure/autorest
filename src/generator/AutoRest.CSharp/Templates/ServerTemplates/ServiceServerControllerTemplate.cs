@@ -123,14 +123,14 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n    {\r\n        \r\n        \r\n        \r\n");
-#line 113 "ServiceServerControllerTemplate.cshtml"
+            WriteLiteral("\r\n    {\r\n        \r\n");
+#line 34 "ServiceServerControllerTemplate.cshtml"
     
 
 #line default
 #line hidden
 
-#line 113 "ServiceServerControllerTemplate.cshtml"
+#line 34 "ServiceServerControllerTemplate.cshtml"
      foreach (MethodCs method in Model.Methods.Where(m=>(m.MethodGroup.Name==Model.Name)))
     {
 
@@ -138,31 +138,31 @@ Write(EmptyLine);
 #line hidden
 
             WriteLiteral("        ");
-#line 115 "ServiceServerControllerTemplate.cshtml"
+#line 36 "ServiceServerControllerTemplate.cshtml"
       Write(Include(new ServerMethodTemplate(), method));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
-#line 116 "ServiceServerControllerTemplate.cshtml"
+#line 37 "ServiceServerControllerTemplate.cshtml"
         
 
 #line default
 #line hidden
 
-#line 116 "ServiceServerControllerTemplate.cshtml"
+#line 37 "ServiceServerControllerTemplate.cshtml"
    Write(EmptyLine);
 
 #line default
 #line hidden
-#line 116 "ServiceServerControllerTemplate.cshtml"
+#line 37 "ServiceServerControllerTemplate.cshtml"
                   
 
 #line default
 #line hidden
 
             WriteLiteral("        \r\n");
-#line 118 "ServiceServerControllerTemplate.cshtml"
+#line 39 "ServiceServerControllerTemplate.cshtml"
     }
 
 #line default

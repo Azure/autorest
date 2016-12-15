@@ -183,7 +183,58 @@ Write(EmptyLine);
 
 #line default
 #line hidden
-            WriteLiteral("\r\n}\r\n ");
+            WriteLiteral("\r\n");
+#line 46 "ServerMethodTemplate.cshtml"
+ foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
+{
+if (parameter.IsRequired && parameter.IsNullable())
+{
+
+#line default
+#line hidden
+
+            WriteLiteral("    if (");
+#line 50 "ServerMethodTemplate.cshtml"
+      Write(parameter.Name);
+
+#line default
+#line hidden
+            WriteLiteral(" == null)\r\n    {\r\n        throw new Microsoft.Rest.ValidationException(Microsoft." +
+"Rest.ValidationRules.CannotBeNull, \"");
+#line 52 "ServerMethodTemplate.cshtml"
+                                                                                                 Write(parameter.Name);
+
+#line default
+#line hidden
+            WriteLiteral("\");\r\n    }\r\n    \r\n");
+#line 55 "ServerMethodTemplate.cshtml"
+}
+if (parameter.CanBeValidated && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
+{
+
+#line default
+#line hidden
+
+            WriteLiteral("    ");
+#line 58 "ServerMethodTemplate.cshtml"
+  Write(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints));
+
+#line default
+#line hidden
+            WriteLiteral("\r\n");
+#line 59 "ServerMethodTemplate.cshtml"
+}
+}
+
+#line default
+#line hidden
+
+#line 61 "ServerMethodTemplate.cshtml"
+Write(EmptyLine);
+
+#line default
+#line hidden
+            WriteLiteral("\r\n}\r\n\r\n ");
         }
         #pragma warning restore 1998
     }

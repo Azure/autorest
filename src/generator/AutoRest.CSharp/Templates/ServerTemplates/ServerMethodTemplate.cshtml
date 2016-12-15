@@ -43,105 +43,26 @@
 @methodSignature
 {
 @EmptyLine
+@foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
+{
+if (parameter.IsRequired && parameter.IsNullable())
+{
+    @:if (@(parameter.Name) == null)
+    @:{
+        @:throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "@(parameter.Name)");
+    @:}
+    @:
 }
+if (parameter.CanBeValidated && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
+{
+    @:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
+}
+}
+@EmptyLine
+}
+
  @*
-  @:/// <summary>
-        @:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
-    if (!string.IsNullOrEmpty(Model.ExternalDocsUrl))
-    {
-        @:/// <see href="@Model.ExternalDocsUrl" />
-    }
-    @:///
-</summary>
-}
-@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
-{
-    @:/// <remarks>
-        @:@WrapComment("/// ", Model.Description.EscapeXmlComment())
-        @:///
-    </remarks>
-}
-@foreach (var parameter in Model.LocalParameters)
-{
-    @:/// <param name='@parameter.Name'>
-    @WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
-    @:/// </param>
-}
-/// <param name='customHeaders'>
-/// Headers that will be added to request.
-/// </param>
-/// <param name='cancellationToken'>
-/// The cancellation token.
-/// </param>
-/// <exception cref="@(Model.OperationExceptionTypeString)">
-    /// Thrown when the operation returned an invalid status code
-    ///
-</exception>
-@if (Model.Responses.Where(r => r.Value.Body != null).Any())
-{
-    @:/// <exception cref="Microsoft.Rest.SerializationException">
-        @:/// Thrown when unable to deserialize the response
-        @:///
-    </exception>
-}
-@if (Model.Parameters.Cast<ParameterCs>().Any(p => !p.IsConstant && p.IsRequired && p.IsNullable()))
-{
-    @:/// <exception cref="Microsoft.Rest.ValidationException">
-        @:/// Thrown when a required parameter is null
-        @:///
-    </exception>
-    @:/// <exception cref="System.ArgumentNullException">
-        @:/// Thrown when a required parameter is null
-        @:///
-    </exception>
-    }
-/// <return>
-    /// A response object containing the response body and response headers.
-    ///
-</return>
-@if (Model.Deprecated)
-{
-    @:[System.Obsolete()]
-}
-public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)>
-    @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
-    {
-    @foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
-    {
-        if (parameter.IsRequired && parameter.IsNullable())
-        {
-            @:if (@(parameter.Name) == null)
-            @:{
-            @:throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "@(parameter.Name)");
-            @:}
-            @:
-        }
-        if (parameter.CanBeValidated && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
-        {
-            @:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
-        }
-    }
 
-    @foreach (ParameterCs parameter in Model.Parameters)
-    {
-        if (parameter.IsConstant && !parameter.IsClientProperty)
-        {
-            @:@(parameter.ModelTypeName) @(parameter.Name) = @(parameter.DefaultValue);
-        }
-
-        if (parameter.ModelType is CompositeType
-            && !parameter.IsConstant
-            && parameter.IsRequired
-            && !parameter.IsClientProperty
-            && ((CompositeType)parameter.ModelType).ContainsConstantProperties)
-        {
-            @:if (@(parameter.Name) == null)
-            @:{
-            @:    @(parameter.Name) = new @(parameter.ModelTypeName)();
-            @:}
-        }
-
-    }
     @Model.BuildInputMappings()
     // Tracing
     bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
