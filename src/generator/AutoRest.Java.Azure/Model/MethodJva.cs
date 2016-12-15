@@ -316,6 +316,9 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        public override string ReturnTypeResponseName => 
+            ReturnTypeJv?.BodyClientType?.ServiceResponseVariant()?.Name;
+
         public string PagingGroupedParameterTransformation(bool filterRequired = false)
         {
             var builder = new IndentedStringBuilder();

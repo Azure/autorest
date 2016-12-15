@@ -156,7 +156,7 @@ namespace AutoRest.Java.Azure
                             ElementType = sequenceType.ElementType,
                             PageImplType = pageClassName
                         };
-                        pagedResult.Name.OnGet += name => $"List<{name}>";
+                        //pagedResult.Name.OnGet += name => $"List<{name}>";
 
                         convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
                         var resp = New<Response>(pagedResult, method.Responses[responseStatus].Headers) as ResponseJva;
@@ -224,75 +224,6 @@ namespace AutoRest.Java.Azure
             }
         }
 
-        /// <summary>
-        ///     Changes paginated method signatures to return Page type.
-        /// </summary>
-        /// <param name="codeModel"></param>
-        /// <param name="pageClasses"></param>
-        public virtual void NormalizePaginatedMethods(CodeModelJva codeModel)
-        {
-            var convertedTypes = new Dictionary<IModelType, CompositeType>();
-
-            foreach (
-                var method in
-                codeModel.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
-            {
-                string nextLinkString;
-                var pageClassName = GetPagingSetting(method.Extensions, codeModel.pageClasses, out nextLinkString);
-                if (string.IsNullOrEmpty(pageClassName))
-                {
-                    continue;
-                }
-                var pageTypeFormat = "{0}<{1}>";
-                var ipageTypeFormat = "Microsoft.Rest.Azure.IPage<{0}>";
-                if (string.IsNullOrWhiteSpace(nextLinkString))
-                {
-                    ipageTypeFormat = "System.Collections.Generic.IEnumerable<{0}>";
-                }
-
-                foreach (var responseStatus in method.Responses
-                    .Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
-                {
-                    var compositType = (CompositeType)method.Responses[responseStatus].Body;
-                    var sequenceType =
-                        compositType.Properties.Select(p => p.ModelType).FirstOrDefault(t => t is SequenceType) as
-                            SequenceTypeJva;
-
-                    // if the type is a wrapper over page-able response
-                    if (sequenceType != null)
-                    {
-                        //var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, pageClassName,
-                        //    sequenceType.ElementType.AsNullableType(!sequenceType.ElementType.IsValueType() || (sequenceType.IsXNullable ?? true)));
-                        //var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat,
-                        //    sequenceType.ElementType.AsNullableType(!sequenceType.ElementType.IsValueType() || (sequenceType.IsXNullable ?? true)));
-                        var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, pageClassName,
-                            sequenceType.ElementType.Name);
-                        var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat,
-                            sequenceType.ElementType.Name);
-
-                        var pagedResult = New<CompositeType>();
-                        pagedResult.Name.FixedValue = pagableTypeName;
-
-                        pagedResult.Extensions[AzureExtensions.ExternalExtension] = true;
-                        pagedResult.Extensions[AzureExtensions.PageableExtension] = ipagableTypeName;
-
-                        convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
-                        method.Responses[responseStatus] = New<Response>(pagedResult,
-                            method.Responses[responseStatus].Headers);
-                    }
-                }
-
-                if (convertedTypes.ContainsKey(method.ReturnType.Body))
-                {
-                    method.ReturnType = New<Response>(convertedTypes[method.ReturnType.Body],
-                        method.ReturnType.Headers);
-                }
-            }
-
-            SwaggerExtensions.RemoveUnreferencedTypes(codeModel,
-                new HashSet<string>(convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name.Value)));
-        }
-
         private static string GetPagingSetting(Dictionary<string, object> extensions,
             IDictionary<KeyValuePair<string, string>, string> pageClasses, out string nextLinkName)
         {
@@ -315,11 +246,11 @@ namespace AutoRest.Java.Azure
                 {
                     if (pageClasses.Count > 0)
                     {
-                        className = string.Format(CultureInfo.InvariantCulture, "Page{0}", pageClasses.Count);
+                        className = string.Format(CultureInfo.InvariantCulture, "PageImpl{0}", pageClasses.Count);
                     }
                     else
                     {
-                        className = "Page";
+                        className = "PageImpl";
                     }
                 }
                 pageClasses.Add(keypair, className);

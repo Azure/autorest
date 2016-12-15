@@ -32,7 +32,8 @@ namespace AutoRest.Java.Azure.Model
                         ElementType = bodySequenceType.ElementType,
                         PageImplType = bodySequenceType.PageImplType
                     };
-                    result.Name.OnGet += name => $"PagedList<{name}>";
+                    result.Name.OnGet += name => $"Paged{name}";
+                    return result;
                 }
                 return base.BodyClientType;
             }
