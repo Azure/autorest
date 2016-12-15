@@ -111,13 +111,13 @@ Write(EmptyLine);
 #line default
 #line hidden
 
-            WriteLiteral("    [Route(");
+            WriteLiteral("    [Route(\"");
 #line 30 "ServiceServerControllerTemplate.cshtml"
-      Write(Model.BaseUrl);
+       Write(Model.BaseUrl);
 
 #line default
 #line hidden
-            WriteLiteral(")]\r\n    public partial class ");
+            WriteLiteral("\")]\r\n    public partial class ");
 #line 31 "ServiceServerControllerTemplate.cshtml"
                      Write(Model.Name+"Controller : Controller");
 
@@ -125,45 +125,45 @@ Write(EmptyLine);
 #line hidden
             WriteLiteral("\r\n    {\r\n        \r\n        \r\n        \r\n");
 #line 113 "ServiceServerControllerTemplate.cshtml"
-        
+    
 
 #line default
 #line hidden
 
 #line 113 "ServiceServerControllerTemplate.cshtml"
-         foreach (MethodCs method in Model.Methods)
-        {
+     foreach (MethodCs method in Model.Methods.Where(m=>(m.MethodGroup.Name==Model.Name)))
+    {
 
 #line default
 #line hidden
 
-            WriteLiteral("            ");
+            WriteLiteral("        ");
 #line 115 "ServiceServerControllerTemplate.cshtml"
-          Write(Include(new ServerMethodTemplate(), method));
+      Write(Include(new ServerMethodTemplate(), method));
 
 #line default
 #line hidden
             WriteLiteral("\r\n");
 #line 116 "ServiceServerControllerTemplate.cshtml"
-            
+        
 
 #line default
 #line hidden
 
 #line 116 "ServiceServerControllerTemplate.cshtml"
-       Write(EmptyLine);
+   Write(EmptyLine);
 
 #line default
 #line hidden
 #line 116 "ServiceServerControllerTemplate.cshtml"
-                      
+                  
 
 #line default
 #line hidden
 
-            WriteLiteral("            \r\n");
+            WriteLiteral("        \r\n");
 #line 118 "ServiceServerControllerTemplate.cshtml"
-        }
+    }
 
 #line default
 #line hidden

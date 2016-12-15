@@ -40,6 +40,12 @@ namespace AutoRest.CSharp
                     await Write(serviceServerControllerTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
                 }
             }
+            // Models
+            foreach (CompositeTypeCs model in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
+            {
+                var modelTemplate = new ModelTemplate { Model = model };
+                await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}"));
+            }
         }
 
         private async Task GenerateClientSideCode(CodeModelCs codeModel)
