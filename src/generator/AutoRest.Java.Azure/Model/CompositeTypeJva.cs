@@ -54,7 +54,14 @@ namespace AutoRest.Java.Azure.Model
                 }
                 else
                 {
-                    imports.Add(string.Join(".", Package, "models", Name));
+                    if (IsResource)
+                    {
+                        imports.Add(string.Join(".", Package, Name));
+                    }
+                    else
+                    {
+                        imports.Add(string.Join(".", Package, "models", Name));
+                    }
                 }
                 return imports;
             }

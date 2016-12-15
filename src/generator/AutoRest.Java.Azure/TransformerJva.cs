@@ -60,29 +60,15 @@ namespace AutoRest.Java.Azure
                 mg.Name.OnGet += name => name.IsNullOrEmpty() || name.EndsWith("s", StringComparison.OrdinalIgnoreCase) ? name : $"{name}s";
             }
 
-            //CodeNamerJva.Instance.NormalizeClientModel(codeModel);
-            //CodeNamerJva.Instance.ResolveNameCollisions(codeModel, Settings.Namespace,
-            //    Settings.Namespace + ".Models");
-            //CodeNamerJva.Instance.NormalizePaginatedMethods(codeModel, pageClasses);
+            //(CodeNamerJva.Instance as CodeNamerJva).NormalizeClientModel(codeModel);
+            //(CodeNamerJva.Instance as CodeNamerJva).ResolveNameCollisions(codeModel, Settings.Namespace, Settings.Namespace + ".Models");
+            NormalizePaginatedMethods(codeModel);
 
             //// Do parameter transformations
             //TransformParameters(codeModel);
-
-            //// todo: these should be turned into individual transformers
-            //AzureExtensions.NormalizeAzureClientModel(codeModel);
-
+            
             //NormalizePaginatedMethods(codeModel);
             //NormalizeODataMethods(codeModel);
-
-            //foreach (var model in codeModel.ModelTypes)
-            //{
-            //    if (model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
-            //        (bool)model.Extensions[AzureExtensions.AzureResourceExtension])
-            //    {
-            //        model.BaseModelType = New<ILiteralType>("Microsoft.Rest.Azure.IResource",
-            //            new { SerializedName = "Microsoft.Rest.Azure.IResource" }) as CompositeType;
-            //    }
-            //}
 
             return codeModel;
         }
@@ -143,66 +129,66 @@ namespace AutoRest.Java.Azure
         /// <param name="pageClasses"></param>
         public virtual void NormalizePaginatedMethods(CodeModelJva codeModel)
         {
-            //if (codeModel == null)
-            //{
-            //    throw new ArgumentNullException($"serviceClient");
-            //}
+            var convertedTypes = new Dictionary<IModelType, CompositeType>();
 
-            //var convertedTypes = new Dictionary<IModelType, CompositeType>();
+            foreach (
+                var method in
+                codeModel.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
+            {
+                string nextLinkString;
+                var pageClassName = GetPagingSetting(method.Extensions, codeModel.pageClasses, out nextLinkString);
+                if (string.IsNullOrEmpty(pageClassName))
+                {
+                    continue;
+                }
+                var pageTypeFormat = "{0}<{1}>";
+                var ipageTypeFormat = "Microsoft.Rest.Azure.IPage<{0}>";
+                if (string.IsNullOrWhiteSpace(nextLinkString))
+                {
+                    ipageTypeFormat = "System.Collections.Generic.IEnumerable<{0}>";
+                }
 
-            //foreach (
-            //    var method in
-            //    codeModel.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
-            //{
-            //    string nextLinkString;
-            //    var pageClassName = GetPagingSetting(method.Extensions, codeModel.pageClasses, out nextLinkString);
-            //    if (string.IsNullOrEmpty(pageClassName))
-            //    {
-            //        continue;
-            //    }
-            //    var pageTypeFormat = "{0}<{1}>";
-            //    var ipageTypeFormat = "Microsoft.Rest.Azure.IPage<{0}>";
-            //    if (string.IsNullOrWhiteSpace(nextLinkString))
-            //    {
-            //        ipageTypeFormat = "System.Collections.Generic.IEnumerable<{0}>";
-            //    }
+                foreach (var responseStatus in method.Responses
+                    .Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
+                {
+                    var compositType = (CompositeType)method.Responses[responseStatus].Body;
+                    var sequenceType =
+                        compositType.Properties.Select(p => p.ModelType).FirstOrDefault(t => t is SequenceType) as
+                            SequenceTypeJva;
 
-            //    foreach (var responseStatus in method.Responses
-            //        .Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
-            //    {
-            //        var compositType = (CompositeType)method.Responses[responseStatus].Body;
-            //        var sequenceType =
-            //            compositType.Properties.Select(p => p.ModelType).FirstOrDefault(t => t is SequenceType) as
-            //                SequenceTypeJva;
+                    // if the type is a wrapper over page-able response
+                    if (sequenceType != null)
+                    {
+                        //var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, pageClassName,
+                        //    sequenceType.ElementType.AsNullableType(!sequenceType.ElementType.IsValueType() || (sequenceType.IsXNullable ?? true)));
+                        //var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat,
+                        //    sequenceType.ElementType.AsNullableType(!sequenceType.ElementType.IsValueType() || (sequenceType.IsXNullable ?? true)));
+                        var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, pageClassName,
+                            sequenceType.ElementType.Name);
+                        var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat,
+                            sequenceType.ElementType.Name);
 
-            //        // if the type is a wrapper over page-able response
-            //        if (sequenceType != null)
-            //        {
-            //            var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, pageClassName,
-            //                sequenceType.ElementType.AsNullableType(!sequenceType.ElementType.IsValueType() || (sequenceType.IsXNullable ?? true)));
-            //            var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat,
-            //                sequenceType.ElementType.AsNullableType(!sequenceType.ElementType.IsValueType() || (sequenceType.IsXNullable ?? true)));
+                        var pagedResult = New<CompositeType>();
+                        pagedResult.Name.FixedValue = pagableTypeName;
 
-            //            var pagedResult = New<ILiteralType>(pagableTypeName) as CompositeType;
+                        pagedResult.Extensions[AzureExtensions.ExternalExtension] = true;
+                        pagedResult.Extensions[AzureExtensions.PageableExtension] = ipagableTypeName;
 
-            //            pagedResult.Extensions[AzureExtensions.ExternalExtension] = true;
-            //            pagedResult.Extensions[AzureExtensions.PageableExtension] = ipagableTypeName;
+                        convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
+                        method.Responses[responseStatus] = New<Response>(pagedResult,
+                            method.Responses[responseStatus].Headers);
+                    }
+                }
 
-            //            convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
-            //            method.Responses[responseStatus] = new Response(pagedResult,
-            //                method.Responses[responseStatus].Headers);
-            //        }
-            //    }
+                if (convertedTypes.ContainsKey(method.ReturnType.Body))
+                {
+                    method.ReturnType = New<Response>(convertedTypes[method.ReturnType.Body],
+                        method.ReturnType.Headers);
+                }
+            }
 
-            //    if (convertedTypes.ContainsKey(method.ReturnType.Body))
-            //    {
-            //        method.ReturnType = new Response(convertedTypes[method.ReturnType.Body],
-            //            method.ReturnType.Headers);
-            //    }
-            //}
-
-            //SwaggerExtensions.RemoveUnreferencedTypes(codeModel,
-            //    new HashSet<string>(convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name.Value)));
+            SwaggerExtensions.RemoveUnreferencedTypes(codeModel,
+                new HashSet<string>(convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name.Value)));
         }
 
         private static string GetPagingSetting(Dictionary<string, object> extensions,

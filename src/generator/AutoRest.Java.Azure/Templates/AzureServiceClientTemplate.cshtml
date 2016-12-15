@@ -164,7 +164,7 @@ else
 {
         @:this.@(property.Name) = @(property.DefaultValue);
 }
-@foreach (MethodGroupJva operation in Model.Operations)
+@foreach (MethodGroupJva operation in Model.AllOperations)
 {
 @:        this.@(operation.Name) = new @(operation.MethodGroupImplType)(restClient().retrofit(), this);
 }

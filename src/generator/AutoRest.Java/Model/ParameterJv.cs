@@ -15,7 +15,7 @@ namespace AutoRest.Java.Model
                 ? name
                 : string.Format(CultureInfo.InvariantCulture,
                         "{0}.{1}()",
-                        true == Method?.Group.IsNullOrEmpty() ? "this" : "this.client",
+                        Method != null && true == Method.Group.IsNullOrEmpty() ? "this" : "this.client",
                         ClientProperty.Name.ToCamelCase());
         }
 

@@ -10,6 +10,7 @@ using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
 using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java.Azure
 {
@@ -96,13 +97,13 @@ namespace AutoRest.Java.Azure
                         pagedResult.Name.OnGet += name => $"List<{name}>";
 
                         convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
-                        method.Responses[responseStatus] = new Response(pagedResult, method.Responses[responseStatus].Headers);
+                        method.Responses[responseStatus] = New<Response>(pagedResult, method.Responses[responseStatus].Headers);
                     }
                 }
 
                 if (convertedTypes.ContainsKey(method.ReturnType.Body))
                 {
-                    method.ReturnType = new Response(convertedTypes[method.ReturnType.Body], method.ReturnType.Headers);
+                    method.ReturnType = New<Response>(convertedTypes[method.ReturnType.Body], method.ReturnType.Headers);
                 }
             }
 
