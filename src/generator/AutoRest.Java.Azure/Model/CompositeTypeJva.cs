@@ -10,6 +10,14 @@ namespace AutoRest.Java.Azure.Model
 {
     public class CompositeTypeJva : CompositeTypeJv
     {
+        public CompositeTypeJva()
+        {
+        }
+
+        public CompositeTypeJva(string name) : base(name)
+        {
+        }
+
         protected string _azureRuntimePackage = "com.microsoft.azure";
 
         public override string Package => IsResource

@@ -8,20 +8,16 @@ namespace AutoRest.Java.Model
 {
     public class ResponseJv : Response
     {
-        protected List<string> _interfaceImports;
-        protected List<string> _implImports;
+        protected List<string> _interfaceImports = new List<string>();
+        protected List<string> _implImports = new List<string>();
 
         public ResponseJv()
         {
-            this._interfaceImports = new List<string>();
-            this._implImports = new List<string>();
         }
 
         public ResponseJv(IModelTypeJv body, IModelTypeJv headers)
             : base(body, headers)
         {
-            this._interfaceImports = new List<string>();
-            this._implImports = new List<string>();
         }
 
         #region types
@@ -253,7 +249,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                var sequenceType = (SequenceTypeJv) Body;
+                var sequenceType = Body as SequenceTypeJv;
                 return sequenceType != null ? sequenceType.ElementType.Name.ToString() : "Void";
             }
         }

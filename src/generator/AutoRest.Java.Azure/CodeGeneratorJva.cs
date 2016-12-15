@@ -21,7 +21,6 @@ namespace AutoRest.Java.Azure
 {
     public class CodeGeneratorJva : CodeGeneratorJv
     {
-        private readonly CodeNamerJva _namer;
         private const string ClientRuntimePackage = "com.microsoft.rest:azure-client-runtime:1.0.0-SNAPSHOT from snapshot repo http://adxsnapshots.azurewebsites.net/";
         private const string _packageInfoFileName = "package-info.java";
         
@@ -29,28 +28,6 @@ namespace AutoRest.Java.Azure
 
         public override string UsageInstructions => string.Format(CultureInfo.InvariantCulture, Properties.Resources.UsageInformation, ClientRuntimePackage);
         
-        //public override void NormalizeClientModel(CodeModel serviceClient)
-        //{
-        //    Settings.Instance.AddCredentials = true;
-
-        //    // This extension from general extensions must be run prior to Azure specific extensions.
-        //    AzureExtensions.ProcessParameterizedHost(serviceClient);
-        //    AzureExtensions.ProcessClientRequestIdExtension(serviceClient);
-        //    AzureExtensions.UpdateHeadMethods(serviceClient);
-        //    AzureExtensions.ProcessGlobalParameters(serviceClient);
-        //    AzureExtensions.FlattenModels(serviceClient);
-        //    AzureExtensions.FlattenMethodParameters(serviceClient);
-        //    ParameterGroupExtensionHelper.AddParameterGroups(serviceClient);
-        //    AzureExtensions.AddLongRunningOperations(serviceClient);
-        //    AzureExtensions.AddAzureProperties(serviceClient);
-        //    AzureExtensions.SetDefaultResponses(serviceClient);
-        //    AzureExtensions.AddPageableMethod(serviceClient);
-        //    _namer.NormalizeClientModel(serviceClient);
-        //    _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
-        //        Settings.Namespace + ".Models");
-        //    _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
-        //}
-
         /// <summary>
         /// Generates Azure Java code for service client.
         /// </summary>

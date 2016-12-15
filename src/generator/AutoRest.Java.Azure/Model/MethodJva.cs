@@ -240,7 +240,9 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
-        public override bool IsParameterizedHost => CodeModel.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension) && !IsPagingNextOperation;
+        public override bool IsParameterizedHost => 
+            (CodeModel?.Extensions?.ContainsKey(SwaggerExtensions.ParameterizedHostExtension) ?? false) && 
+            !IsPagingNextOperation;
 
         public override IEnumerable<string> Exceptions
         {
@@ -532,8 +534,9 @@ namespace AutoRest.Java.Azure.Model
                 invocation = Name + methodSuffixString + (async ? "Async" : "");
                 return this;
             }
-            string name = ((string)this.Extensions["nextMethodName"]).ToCamelCase();
-            string group = CodeNamerJva.Instance.GetMethodGroupName((string)this.Extensions["nextMethodGroup"]);
+            string name = this.Extensions.GetValue<Fixable<string>>("nextMethodName")?.ToCamelCase();
+            string group = this.Extensions.GetValue<Fixable<string>>("nextMethodGroup")?.ToCamelCase();
+            group = CodeNamerJva.Instance.GetMethodGroupName(group);
             var methodModel =
                 CodeModel.Methods.FirstOrDefault(m =>
                     (group == null ? m.Group == null : group.Equals(m.Group, StringComparison.OrdinalIgnoreCase))
@@ -702,8 +705,13 @@ namespace AutoRest.Java.Azure.Model
                     // return type may have been removed as a side effect
                     imports.AddRange(ReturnTypeJva.ImplImports);
                 }
-                var ctype = new CompositeTypeJva();
-                ctype.Name.CopyFrom((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType);
+                var typeName = (ReturnTypeJva.BodyClientType as SequenceTypeJva)?.PageImplType;
+                CompositeTypeJva ctype = null;
+                if (typeName != null)
+                {
+                    ctype = new CompositeTypeJva();
+                    ctype.Name.CopyFrom(typeName);
+                }
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
                     imports.Remove("java.util.ArrayList");

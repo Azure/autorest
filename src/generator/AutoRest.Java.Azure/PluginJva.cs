@@ -22,17 +22,17 @@ namespace AutoRest.Java.Azure
                 Context,
 
                 // set code model implementations our own implementations 
-                new Factory<CodeModel, CodeModelJv>(),
-                new Factory<Method, MethodJv>(),
-                new Factory<CompositeType, CompositeTypeJv>(),
+                new Factory<CodeModel, CodeModelJva>(),
+                new Factory<Method, MethodJva>(),
+                new Factory<CompositeType, CompositeTypeJva>(),
                 new Factory<Property, PropertyJv>(),
                 new Factory<Parameter, ParameterJv>(),
                 new Factory<DictionaryType, DictionaryTypeJv>(),
-                new Factory<SequenceType, SequenceTypeJv>(),
-                new Factory<MethodGroup, MethodGroupJv>(),
-                new Factory<EnumType, EnumTypeJv>(),
+                new Factory<SequenceType, SequenceTypeJva>(),
+                new Factory<MethodGroup, MethodGroupJva>(),
+                new Factory<EnumType, EnumTypeJva>(),
                 new Factory<PrimaryType, PrimaryTypeJv>(),
-                new Factory<Response, ResponseJv>()
+                new Factory<Response, ResponseJva>()
             };
         }
     }

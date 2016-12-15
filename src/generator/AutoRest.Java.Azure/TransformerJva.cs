@@ -38,27 +38,43 @@ namespace AutoRest.Java.Azure
             // we're guaranteed to be in our language-specific context here.
             Settings.Instance.AddCredentials = true;
 
-            // add the Credentials
-            // PopulateAdditionalProperties(codeModel);
+            PopulateAdditionalProperties(codeModel);
 
-            // Do parameter transformations
-            TransformParameters(codeModel);
+            // This extension from general extensions must be run prior to Azure specific extensions.
+            AzureExtensions.ProcessParameterizedHost(codeModel);
+            AzureExtensions.ProcessClientRequestIdExtension(codeModel);
+            AzureExtensions.UpdateHeadMethods(codeModel);
+            AzureExtensions.ProcessGlobalParameters(codeModel);
+            AzureExtensions.FlattenModels(codeModel);
+            AzureExtensions.FlattenMethodParameters(codeModel);
+            ParameterGroupExtensionHelper.AddParameterGroups(codeModel);
+            AzureExtensions.AddLongRunningOperations(codeModel);
+            AzureExtensions.AddAzureProperties(codeModel);
+            AzureExtensions.SetDefaultResponses(codeModel);
+            AzureExtensions.AddPageableMethod(codeModel);
+            //CodeNamerJva.Instance.NormalizeClientModel(codeModel);
+            //CodeNamerJva.Instance.ResolveNameCollisions(codeModel, Settings.Namespace,
+            //    Settings.Namespace + ".Models");
+            //CodeNamerJva.Instance.NormalizePaginatedMethods(codeModel, pageClasses);
+            
+            //// Do parameter transformations
+            //TransformParameters(codeModel);
 
-            // todo: these should be turned into individual transformers
-            AzureExtensions.NormalizeAzureClientModel(codeModel);
+            //// todo: these should be turned into individual transformers
+            //AzureExtensions.NormalizeAzureClientModel(codeModel);
 
-            NormalizePaginatedMethods(codeModel);
-            NormalizeODataMethods(codeModel);
+            //NormalizePaginatedMethods(codeModel);
+            //NormalizeODataMethods(codeModel);
 
-            foreach (var model in codeModel.ModelTypes)
-            {
-                if (model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
-                    (bool)model.Extensions[AzureExtensions.AzureResourceExtension])
-                {
-                    model.BaseModelType = New<ILiteralType>("Microsoft.Rest.Azure.IResource",
-                        new { SerializedName = "Microsoft.Rest.Azure.IResource" }) as CompositeType;
-                }
-            }
+            //foreach (var model in codeModel.ModelTypes)
+            //{
+            //    if (model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
+            //        (bool)model.Extensions[AzureExtensions.AzureResourceExtension])
+            //    {
+            //        model.BaseModelType = New<ILiteralType>("Microsoft.Rest.Azure.IResource",
+            //            new { SerializedName = "Microsoft.Rest.Azure.IResource" }) as CompositeType;
+            //    }
+            //}
 
             return codeModel;
         }

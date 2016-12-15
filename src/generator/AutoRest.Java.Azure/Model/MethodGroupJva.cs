@@ -11,5 +11,12 @@ namespace AutoRest.Java.Azure.Model
     public class MethodGroupJva : MethodGroupJv
     {
         public const string ExternalExtension = "x-ms-external";
+
+        public MethodGroupJva()
+        {
+        }
+        public MethodGroupJva(string name) : base(name)
+        {
+        }
     }
 }
