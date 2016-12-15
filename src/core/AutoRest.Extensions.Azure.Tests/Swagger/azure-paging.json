@@ -164,9 +164,9 @@
       }
     },
     "ProductChild": {
-      "AllOf": [
+      "allOf": [
         {
-          "$ref": "Product"
+          "$ref": "#/definitions/Product"
         }
       ],
       "properties": {

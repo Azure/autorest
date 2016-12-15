@@ -251,22 +251,6 @@ namespace AutoRest.Swagger
         /// </summary>
         public virtual void BuildCompositeTypes()
         {
-            // Load any external references
-            foreach (var reference in ServiceDefinition.ExternalReferences)
-            {
-                string[] splitReference = reference.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
-                Debug.Assert(splitReference.Length == 2);
-                string filePath = splitReference[0];
-                // Make sure the filePath is either an absolute uri, or a rooted path
-                if (!Settings.FileSystem.IsCompletePath(filePath))
-                {
-                    // Otherwise, root it from the current path
-                    filePath = Settings.FileSystem.MakePathRooted(Settings.InputFolder, filePath);
-                }
-                ServiceDefinition external = SwaggerParser.Load(filePath, Settings.FileSystem);
-                external.Definitions.ForEach(d => ServiceDefinition.Definitions[d.Key] = d.Value);
-            }
-
             // Build service types and validate allOf
             if (ServiceDefinition.Definitions != null)
             {
