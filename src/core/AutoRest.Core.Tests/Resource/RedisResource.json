@@ -386,7 +386,7 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "RedisResponseProperties"
+          "$ref": "#/definitions/RedisResponseProperties"
         }
       }
     },
@@ -421,7 +421,7 @@
     "RedisResponseProperties": {
       "properties": {
         "sku": {
-          "$ref": "CacheSku"
+          "$ref": "#/definitions/CacheSku"
         },
         "hostName": {
           "type": "string"
@@ -476,10 +476,10 @@
     "RedisResponsePropertiesWithAccessKey": {
       "properties": {
         "accessKeys": {
-          "$ref": "RedisAccessKeys"
+          "$ref": "#/definitions/RedisAccessKeys"
         },
         "sku": {
-          "$ref": "CacheSku"
+          "$ref": "#/definitions/CacheSku"
         },
         "hostName": {
           "type": "string"
@@ -534,7 +534,7 @@
     "CreateRedisRequest": {
       "properties": {
         "properties": {
-          "$ref": "CreateRedisProperties"
+          "$ref": "#/definitions/CreateRedisProperties"
         },
         "location": {
           "type": "string"
@@ -556,14 +556,14 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "RedisResponsePropertiesWithAccessKey"
+          "$ref": "#/definitions/RedisResponsePropertiesWithAccessKey"
         }
       }
     },
     "CreateRedisProperties": {
       "properties": {
         "sku": {
-          "$ref": "CacheSku"
+          "$ref": "#/definitions/CacheSku"
         },
         "redisVersion": {
           "type": "string"
@@ -585,7 +585,7 @@
       "properties": {
         "value": {
           "items": {
-            "$ref": "RedisResourceResponse"
+            "$ref": "#/definitions/RedisResourceResponse"
           },
           "type": "array"
         },
