@@ -1593,86 +1593,13 @@
       },
       "uniqueItems": true
     },
-    "xmsParametersExample": {
-      "type": "object",
-      "description": "A dictionary of parameter names and their sample values for a particular operation. Commonly used parameters like 'api-version', 'subscriptionId' and 'resourceGroupName' have been defined as optional properties for ease of use. Please add other parameters as applicable.",
-      "additionalProperties": true,
-      "properties": {
-        "api-version": {
-          "type": "string",
-          "description": "The api-version used in the request."
-        },
-        "subcriptionId": {
-          "type": "string",
-          "description": "The subcriptionId used in the request."
-        },
-        "resourceGroupName": {
-          "type": "string",
-          "description": "The resourceGroupName used in the request."
-        }
-      }
-    },
-    "xmsResponseHeaderExample": {
-      "type": "object",
-      "description": "Examples of response headers like 'location', 'azure-asyncoperation', 'retry-after', etc.",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "An example of the location header sent by the server, if applicable."
-        },
-        "azure-asyncoperation": {
-          "type": "string",
-          "description": "An example of the azure-asyncoperation header sent by the server, if applicable."
-        },
-        "retry-after": {
-          "type": "string",
-          "description": "An example of the retry-after header sent by the server, if applicable."
-        }
-      },
-      "additionalProperties": true
-    },
-    "xmsResponseExample": {
-      "type": "object",
-      "description": "Describes headers and body of an example HTTP response, in the context of the x-ms-examples extension.",
-      "properties": {
-        "headers": {
-          "$ref": "#/definitions/xmsResponseHeaderExample"
-        },
-        "body": {
-          "type": [ "object", "number", "array", "integer", "string", "boolean", "null" ],
-          "description": "Example of the response body if applicable for the operation. Don't specify the body if the server is not sending a response body. The outcome from `JSON.parse()`, needs to be described over here)."
-        }
-      }
-    },
-    "xmsExampleObject": {
-      "type": "object",
-      "required": [ "parameters", "responses" ],
-      "description": "Describes the format of an example defined in the x-ms-examples extension.",
-      "additionalProperties": false,
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/xmsParametersExample"
-        },
-        "responses": {
-          "type": "object",
-          "description": "A dictionary of {possible HTTP status codes (as the dictionary key)} that can be received from that operation and {examples (as the dictionary value)} of response {body} and {headers (for long running operations)}.",
-          "minProperties": 1,
-          "additionalProperties": false,
-          "patternProperties": {
-            "^([0-9]{3})$|^(default)$": {
-              "$ref": "#/definitions/xmsResponseExample"
-            }
-          }
-        }
-      }
-    },
     "xmsExamples": {
       "type": "object",
       "description": "Describes the 'x-ms-examples' extension.",
       "additionalProperties": {
         "oneOf": [
           {
-            "$ref": "#/definitions/xmsExampleObject"
+            "$ref": "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json#"
           },
           {
             "$ref": "#/definitions/jsonReference"
