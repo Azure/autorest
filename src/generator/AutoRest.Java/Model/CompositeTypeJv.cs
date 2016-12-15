@@ -83,7 +83,7 @@ namespace AutoRest.Java.Model
             }
         }
 
-        public IEnumerable<string> Imports
+        public virtual IEnumerable<string> Imports
         {
             get
             {
@@ -135,7 +135,7 @@ namespace AutoRest.Java.Model
 
         public IModelTypeJv NonNullableVariant => this;
 
-        private IEnumerable<IModelTypeJv> ParseGenericType()
+        protected IEnumerable<IModelTypeJv> ParseGenericType()
         {
             string name = Name;
             string[] types = Name.ToString().Split(new String[] { "<", ">", ",", ", " }, StringSplitOptions.RemoveEmptyEntries);

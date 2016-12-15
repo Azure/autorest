@@ -109,6 +109,18 @@ namespace AutoRest.Java.Azure
             SwaggerExtensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeTypeJva>().Select(t => t.Name.ToString())));
         }
 
+        // TODO: ask the cowboy - some parts rely on singular, later parts on plural!
+        public override string GetMethodGroupName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            name = PascalCase(name);
+            //no pluralization yet
+            return name;
+        }
+
         #endregion
     }
 }

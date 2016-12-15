@@ -43,6 +43,22 @@ namespace AutoRest.Java.Azure.Model
                 return this.Name + "Exception";
             }
         }
+        public override IEnumerable<string> Imports
+        {
+            get
+            {
+                var imports = new List<string>();
+                if (Name.Contains('<'))
+                {
+                    imports.AddRange(ParseGenericType().SelectMany(t => t.Imports));
+                }
+                else
+                {
+                    imports.Add(string.Join(".", Package, "models", Name));
+                }
+                return imports;
+            }
+        }
 
         public override IEnumerable<string> ImportList
         {

@@ -164,9 +164,9 @@ else
 {
         @:this.@(property.Name) = @(property.DefaultValue);
 }
-@foreach (var operation in Model.Operations)
+@foreach (MethodGroupJva operation in Model.Operations)
 {
-@:        this.@(operation.Name) = new @(operation.TypeName)(restClient().retrofit(), this);
+@:        this.@(operation.Name) = new @(operation.MethodGroupImplType)(restClient().retrofit(), this);
 }
         @Model.SetDefaultHeaders
         this.azureClient = new AzureClient(this);

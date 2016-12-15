@@ -52,11 +52,19 @@ namespace AutoRest.Java.Azure
             AzureExtensions.AddAzureProperties(codeModel);
             AzureExtensions.SetDefaultResponses(codeModel);
             AzureExtensions.AddPageableMethod(codeModel);
+            
+            // TODO: ask the cowboy - some parts rely on singular, later parts on plural!
+            // pluralize method groups
+            foreach (var mg in codeModel.Operations)
+            {
+                mg.Name.OnGet += name => name.IsNullOrEmpty() || name.EndsWith("s", StringComparison.OrdinalIgnoreCase) ? name : $"{name}s";
+            }
+
             //CodeNamerJva.Instance.NormalizeClientModel(codeModel);
             //CodeNamerJva.Instance.ResolveNameCollisions(codeModel, Settings.Namespace,
             //    Settings.Namespace + ".Models");
             //CodeNamerJva.Instance.NormalizePaginatedMethods(codeModel, pageClasses);
-            
+
             //// Do parameter transformations
             //TransformParameters(codeModel);
 
