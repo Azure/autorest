@@ -1670,7 +1670,14 @@
       "type": "object",
       "description": "Describes the 'x-ms-examples' extension.",
       "additionalProperties": {
-        "$ref": "#/definitions/xmsExampleObject"
+        "oneOf": [
+          {
+            "$ref": "#/definitions/xmsExampleObject"
+          },
+          {
+            "$ref": "#/definitions/jsonReference"
+          }
+        ]
       }
     }
   }
