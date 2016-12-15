@@ -73,9 +73,8 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 List<ParameterJv> parameters = base.RetrofitParameters.ToList();
-                parameters.Add(new ParameterJv
+                var par = new ParameterJv
                 {
-                    Name = Group == null ? "this.userAgent()" : "this.client.userAgent()",
                     SerializedName = "User-Agent",
                     Location = ParameterLocation.Header,
                     ModelType = new PrimaryTypeJv(KnownPrimaryType.String),
@@ -83,7 +82,9 @@ namespace AutoRest.Java.Azure.Model
                     {
                         Name = "userAgent"
                     }
-                });
+                };
+                par.Name.FixedValue = Group.IsNullOrEmpty() ? "this.userAgent()" : "this.client.userAgent()";
+                parameters.Add(par);
                 return parameters;
             }
         }
