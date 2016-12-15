@@ -123,11 +123,11 @@ public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)Wi
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.WireType.Name) @(parameter.WireName) = @(parameter.WireType.DefaultValue);
+@:    final @(parameter.WireType.Name) @(parameter.WireName) = @(parameter.WireType.DefaultValue ?? "null");
     }
     if (parameter.IsConstant)
     {
-@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.DefaultValue ?? "null");
     }
 }
     @Model.BuildInputMappings(true)
@@ -245,7 +245,7 @@ public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)Wi
 {
     if (parameter.IsConstant)
     {
-@:    final @(parameter.ModelType.Name) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.ModelType.Name) @(parameter.Name) = @(parameter.DefaultValue ?? "null");
     }
 }
     @Model.BuildInputMappings()

@@ -132,7 +132,7 @@ public Observable<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Wit
     }
     if (parameter.IsConstant)
     {
-@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.DefaultValue ?? "null");
 
     }
 }
@@ -280,7 +280,7 @@ public Observable<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Wit
 {
     if (parameter.IsConstant)
     {
-@:    final @(parameter.ModelType.Name) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.ModelType.Name) @(parameter.Name) = @(parameter.DefaultValue ?? "null");
     }
 }
     @Model.BuildInputMappings()

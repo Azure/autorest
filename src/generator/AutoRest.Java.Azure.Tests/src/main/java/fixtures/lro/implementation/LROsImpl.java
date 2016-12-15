@@ -377,7 +377,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product put200Succeeded() {
         return put200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
@@ -588,7 +588,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product put200SucceededNoState() {
         return put200SucceededNoStateWithServiceResponseAsync().toBlocking().last().getBody();
@@ -798,7 +798,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product put202Retry200() {
         return put202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
@@ -1008,7 +1008,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200() {
         return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().getBody();
@@ -1219,7 +1219,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product put200UpdatingSucceeded204() {
         return put200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().last().getBody();
@@ -1429,7 +1429,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product put201CreatingFailed200() {
         return put201CreatingFailed200WithServiceResponseAsync().toBlocking().last().getBody();
@@ -1640,7 +1640,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product put200Acceptedcanceled200() {
         return put200Acceptedcanceled200WithServiceResponseAsync().toBlocking().last().getBody();
@@ -1850,7 +1850,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product putNoHeaderInRetry() {
         return putNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
@@ -2060,7 +2060,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product putAsyncRetrySucceeded() {
         return putAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
@@ -2270,7 +2270,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product putAsyncNoRetrySucceeded() {
         return putAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
@@ -2480,7 +2480,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product putAsyncRetryFailed() {
         return putAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
@@ -2690,7 +2690,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product putAsyncNoRetrycanceled() {
         return putAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
@@ -2900,7 +2900,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product putAsyncNoHeaderInRetry() {
         return putAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
@@ -3110,7 +3110,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @return the Sku object  if successful.
+     * @return the Sku object if successful.
      */
     public Sku putNonResource() {
         return putNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
@@ -3320,7 +3320,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @return the Sku object  if successful.
+     * @return the Sku object if successful.
      */
     public Sku putAsyncNonResource() {
         return putAsyncNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
@@ -3530,7 +3530,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @return the SubProduct object  if successful.
+     * @return the SubProduct object if successful.
      */
     public SubProduct putSubResource() {
         return putSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
@@ -3740,7 +3740,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @return the SubProduct object  if successful.
+     * @return the SubProduct object if successful.
      */
     public SubProduct putAsyncSubResource() {
         return putAsyncSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
@@ -5489,7 +5489,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product post202NoRetry204() {
         return post202NoRetry204WithServiceResponseAsync().toBlocking().last().getBody();
@@ -5699,7 +5699,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product postAsyncRetrySucceeded() {
         return postAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
@@ -5910,7 +5910,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product postAsyncNoRetrySucceeded() {
         return postAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();

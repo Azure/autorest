@@ -6,14 +6,15 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.Azure.Model;
-using AutoRest.Java.Model;
+using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
-using Newtonsoft.Json.Linq;
+using AutoRest.Java.Azure.Model;
+using AutoRest.Java.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java.Azure
@@ -30,6 +31,36 @@ namespace AutoRest.Java.Azure
         {
             return ((ITransformer<CodeModelJv>)this).TransformCodeModel(codeModel);
         }
+
+        public static void AddLongRunningOperations(CodeModel codeModel)
+        {
+            if (codeModel == null)
+            {
+                throw new ArgumentNullException("codeModel");
+            }
+
+            foreach (var operation in codeModel.Operations)
+            {
+                var methods = operation.Methods.ToArray();
+                operation.ClearMethods();
+                foreach (var method in methods)
+                {
+                    operation.Add(method);
+                    if (true == method.Extensions.Get<bool>(AzureExtensions.LongRunningExtension))
+                    {
+                        // copy the method 
+                        var m = Duplicate(method);
+
+                        // change the name, remove the extension.
+                        m.Name = "Begin" + m.Name.ToPascalCase();
+                        m.Extensions.Remove(AzureExtensions.LongRunningExtension);
+
+                        operation.Add(m);
+                    }
+                }
+            }
+        }
+        
 
         CodeModelJva ITransformer<CodeModelJva>.TransformCodeModel(CodeModel cs)
         {
@@ -48,7 +79,7 @@ namespace AutoRest.Java.Azure
             AzureExtensions.FlattenModels(codeModel);
             AzureExtensions.FlattenMethodParameters(codeModel);
             ParameterGroupExtensionHelper.AddParameterGroups(codeModel);
-            AzureExtensions.AddLongRunningOperations(codeModel);
+            AddLongRunningOperations(codeModel);
             AzureExtensions.AddAzureProperties(codeModel);
             AzureExtensions.SetDefaultResponses(codeModel);
             AzureExtensions.AddPageableMethod(codeModel);

@@ -302,7 +302,7 @@ namespace AutoRest.Java.Azure.Model
                 string args = "new TypeToken<" + ReturnTypeJva.GenericBodyClientTypeString + ">() { }.getType()";
                 if (ReturnType.Headers != null)
                 {
-                    args += ", " + ReturnTypeJva.HeaderWireType + ".class";
+                    args += ", " + ReturnTypeJva.HeaderWireType.Name + ".class";
                 }
                 return args;
             }
