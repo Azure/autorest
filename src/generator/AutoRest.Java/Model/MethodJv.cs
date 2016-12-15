@@ -453,10 +453,18 @@ namespace AutoRest.Java.Model
             get
             {
                 //Omit parameter-group properties for now since Java doesn't support them yet
-                return Parameters
+                var par = Parameters
                     .OfType<ParameterJv>()
                     .Where(p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
-                    .OrderBy(item => !item.IsRequired);
+                    .OrderBy(item => !item.IsRequired)
+                    .ToList();
+                var apiVersion = par.FirstOrDefault(p => p.Name == "apiVersion");
+                if (apiVersion != null)
+                {
+                    par.Remove(apiVersion);
+                    par.Add(apiVersion);
+                }
+                return par;
             }
         }
 
