@@ -59,7 +59,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return Name.ToString().EndsWith("Inner", StringComparison.Ordinal);
+                return true == Name?.ToString()?.EndsWith("Inner", StringComparison.Ordinal);
             }
         }
 

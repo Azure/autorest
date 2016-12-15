@@ -16,10 +16,20 @@ using AutoRest.Extensions.Azure;
 using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Java.Azure.Fluent.Model;
 
 namespace AutoRest.Java.Azure
 {
-    public class TransformerJvaf : TransformerJva, ITransformer<CodeModelJv>
+    public class TransformerJvaf : TransformerJva, ITransformer<CodeModelJvaf>
     {
+        public override CodeModelJv TransformCodeModel(CodeModel codeModel)
+        {
+            return base.TransformCodeModel(codeModel);
+        }
+
+        CodeModelJvaf ITransformer<CodeModelJvaf>.TransformCodeModel(CodeModel cm)
+        {
+            return TransformCodeModel(cm) as CodeModelJvaf;
+        }
     }
 }

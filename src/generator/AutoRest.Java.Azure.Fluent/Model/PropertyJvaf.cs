@@ -9,12 +9,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class PropertyJvaf : PropertyJv
     {
-        public bool IsInnerModel { get; set; }
-
-        public PropertyJvaf(bool isInnerModel)
-        {
-            this.IsInnerModel = isInnerModel;
-        }
+        public bool IsInnerModel { get; set; } = false;
 
         public override IEnumerable<string> Imports
         {

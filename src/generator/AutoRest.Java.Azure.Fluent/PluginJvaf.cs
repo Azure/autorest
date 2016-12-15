@@ -6,13 +6,14 @@ using AutoRest.Core;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Java.Azure.Fluent.Model;
 using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java.Azure
 {
-    public sealed class PluginJvaf : Plugin<GeneratorSettingsJva, ModelSerializer<CodeModelJva>, TransformerJva, CodeGeneratorJva, CodeNamerJva, CodeModelJva>
+    public sealed class PluginJvaf : Plugin<GeneratorSettingsJvaf, ModelSerializer<CodeModelJvaf>, TransformerJvaf, CodeGeneratorJva, CodeNamerJva, CodeModelJvaf>
     {
         public PluginJvaf()
         {
@@ -22,15 +23,15 @@ namespace AutoRest.Java.Azure
                 Context,
 
                 // set code model implementations our own implementations 
-                new Factory<CodeModel, CodeModelJva>(),
-                new Factory<Method, MethodJva>(),
-                new Factory<CompositeType, CompositeTypeJva>(),
-                new Factory<Property, PropertyJv>(),
+                new Factory<CodeModel, CodeModelJvaf>(),
+                new Factory<Method, MethodJvaf>(),
+                new Factory<CompositeType, CompositeTypeJvaf>(),
+                new Factory<Property, PropertyJvaf>(),
                 new Factory<Parameter, ParameterJv>(),
                 new Factory<DictionaryType, DictionaryTypeJv>(),
                 new Factory<SequenceType, SequenceTypeJva>(),
-                new Factory<MethodGroup, MethodGroupJva>(),
-                new Factory<EnumType, EnumTypeJva>(),
+                new Factory<MethodGroup, MethodGroupJvaf>(),
+                new Factory<EnumType, EnumTypeJvaf>(),
                 new Factory<PrimaryType, PrimaryTypeJv>(),
                 new Factory<Response, ResponseJva>()
             };

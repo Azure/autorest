@@ -20,9 +20,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 List<ParameterJv> parameters = base.RetrofitParameters.ToList();
 
                 parameters.First(p => p.SerializedName == "User-Agent")
-                    .ClientProperty = new PropertyJvaf(false)
+                    .ClientProperty = new PropertyJvaf
                     {
-                        Name = "userAgent",
+                        Name = "userAgent"
                     };
                 return parameters;
             }
@@ -76,7 +76,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.AddRange(new CompositeTypeJvaf((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType).ImportSafe());
+                    var pageType = ReturnTypeJva.BodyClientType as SequenceTypeJva;
+                    if (pageType != null)
+                    {
+                        imports.AddRange(new CompositeTypeJvaf(pageType.PageImplType).ImportSafe());
+                    }
                 }
                 return imports;
             }
@@ -86,6 +90,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
+                var pageType = ReturnTypeJva.BodyClientType as SequenceTypeJva;
+
                 var imports = base.ImplImports;
                 if (OperationExceptionTypeString != "CloudException" && OperationExceptionTypeString != "ServiceException")
                 {
@@ -110,9 +116,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.RemoveAll(i => new CompositeTypeJvaf((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType).ImportSafe().Contains(i));
+                    if (pageType != null)
+                    {
+                        imports.RemoveAll(i => new CompositeTypeJvaf((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType).ImportSafe().Contains(i));
+                    }
                 }
-                if (this.IsPagingNonPollingOperation)
+                if (this.IsPagingNonPollingOperation && pageType != null)
                 {
                     imports.RemoveAll(i => new CompositeTypeJvaf((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType).ImportSafe().Contains(i));
                 }
