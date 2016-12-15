@@ -177,11 +177,11 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrap
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.ClientType.DefaultValue);
+@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.ClientType.DefaultValue ?? "null");
     }
     if (parameter.IsConstant)
     {
-@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.DefaultValue ?? "null");
 
     }
 }
@@ -378,7 +378,7 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrap
 {
     if (parameter.IsConstant)
     {
-@:    final @(parameter.ModelType.Name) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.ModelType.Name) @(parameter.Name) = @(parameter.DefaultValue ?? "null");
     }
 }
     @Model.BuildInputMappings()

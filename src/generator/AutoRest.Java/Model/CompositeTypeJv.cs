@@ -143,7 +143,7 @@ namespace AutoRest.Java.Model
             {
                 if (!CodeNamerJv.PrimaryTypes.Contains(innerType.Trim()))
                 {
-                    yield return new CompositeTypeJv { Name = innerType.Trim() };
+                    yield return new CompositeTypeJv { Name = innerType.Trim(), CodeModel = CodeModel };
                 }
             }
         }

@@ -83,6 +83,8 @@ namespace AutoRest.Java.Azure
             AzureExtensions.AddAzureProperties(codeModel);
             AzureExtensions.SetDefaultResponses(codeModel);
 
+
+
             // set Parent on responses (required for pageable)
             foreach (MethodJva method in codeModel.Methods)
             {
@@ -111,6 +113,22 @@ namespace AutoRest.Java.Azure
             
             NormalizePaginatedMethods(codeModel, codeModel.pageClasses);
             //NormalizeODataMethods(codeModel);
+
+            // param order (PATH first)
+            foreach (MethodJva method in codeModel.Methods)
+            {
+                var list = method.Parameters as ListEx<Parameter>;
+                var ps = list.ToList();
+                list.Clear();
+                foreach (var p in ps.Where(x => x.Location == ParameterLocation.Path))
+                {
+                    list.Add(p);
+                }
+                foreach (var p in ps.Where(x => x.Location != ParameterLocation.Path))
+                {
+                    list.Add(p);
+                }
+            }
 
             return codeModel;
         }

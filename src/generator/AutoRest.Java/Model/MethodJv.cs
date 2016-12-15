@@ -12,6 +12,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
+using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.Java.Model
 {
@@ -458,12 +459,6 @@ namespace AutoRest.Java.Model
                     .Where(p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
                     .OrderBy(item => !item.IsRequired)
                     .ToList();
-                var apiVersion = par.FirstOrDefault(p => p.Name == "apiVersion");
-                if (apiVersion != null)
-                {
-                    par.Remove(apiVersion);
-                    par.Add(apiVersion);
-                }
                 return par;
             }
         }

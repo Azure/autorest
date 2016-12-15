@@ -12,22 +12,12 @@ using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
 using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
+using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.Java.Azure.Model
 {
     public class MethodJva : MethodJv
     {
-        //private string pageClassName;
-
-        //public MethodJva()
-        //{
-        //    if (this.IsPagingOperation || this.IsPagingNextOperation)
-        //    {
-        //        var ext = this.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
-        //        pageClassName = (string)ext["className"] ?? "PageImpl";
-        //    }
-        //}
-
         public string ClientRequestIdString => AzureExtensions.GetClientRequestIdString(this);
 
         public string RequestIdString => AzureExtensions.GetRequestIdString(this);
@@ -544,13 +534,13 @@ namespace AutoRest.Java.Azure.Model
                 CodeModel.Methods.FirstOrDefault(m =>
                     (group == null ? m.Group == null : group.Equals(m.Group, StringComparison.OrdinalIgnoreCase))
                     && m.Name.ToString().Equals(name, StringComparison.OrdinalIgnoreCase)) as MethodJva;
-            group = group.ToPascalCase();
+            group = group.ToPascalCase(); // TODO: LOOK AT THIS MADNESS: first camel case, then pascal case...
             name = name + methodSuffixString;
             if (async)
             {
                 name = name + "Async";
             }
-            if (group == null || this.Name == methodModel.Name)// || this.OperationName == methodModel.OperationName)
+            if (group == null || this.Group == methodModel.Group)
             {
                 invocation = name;
             }
@@ -714,6 +704,7 @@ namespace AutoRest.Java.Azure.Model
                 {
                     ctype = new CompositeTypeJva();
                     ctype.Name.CopyFrom(typeName);
+                    ctype.CodeModel = CodeModel;
                 }
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
