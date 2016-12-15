@@ -131,7 +131,7 @@ namespace AutoRest.Java.Azure.Model
                     List<string> declarations = new List<string>();
                     foreach (var parameter in LocalParameters.Where(p => !p.IsConstant))
                     {
-                        declarations.Add("final " + parameter.ClientType.ParameterVariant + " " + parameter.Name);
+                        declarations.Add("final " + parameter.ClientType.ParameterVariant.Name + " " + parameter.Name);
                     }
 
                     var declaration = string.Join(", ", declarations);
@@ -150,7 +150,7 @@ namespace AutoRest.Java.Azure.Model
                     List<string> declarations = new List<string>();
                     foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                     {
-                        declarations.Add("final " + parameter.ClientType.ParameterVariant + " " + parameter.Name);
+                        declarations.Add("final " + parameter.ClientType.ParameterVariant.Name + " " + parameter.Name);
                     }
 
                     var declaration = string.Join(", ", declarations);

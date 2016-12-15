@@ -82,6 +82,17 @@ namespace AutoRest.Java.Azure
             AddLongRunningOperations(codeModel);
             AzureExtensions.AddAzureProperties(codeModel);
             AzureExtensions.SetDefaultResponses(codeModel);
+
+            // set Parent on responses (required for pageable)
+            foreach (MethodJva method in codeModel.Methods)
+            {
+                foreach (ResponseJva response in method.Responses.Values)
+                {
+                    response.Parent = method;
+                }
+                (method.DefaultResponse as ResponseJva).Parent = method;
+                method.ReturnTypeJva.Parent = method;
+            }
             AzureExtensions.AddPageableMethod(codeModel);
             
             // TODO: ask the cowboy - some parts rely on singular, later parts on plural!
@@ -93,15 +104,76 @@ namespace AutoRest.Java.Azure
 
             //(CodeNamerJva.Instance as CodeNamerJva).NormalizeClientModel(codeModel);
             //(CodeNamerJva.Instance as CodeNamerJva).ResolveNameCollisions(codeModel, Settings.Namespace, Settings.Namespace + ".Models");
-            NormalizePaginatedMethods(codeModel);
+            //NormalizePaginatedMethods(codeModel);
 
             //// Do parameter transformations
             //TransformParameters(codeModel);
             
-            //NormalizePaginatedMethods(codeModel);
+            NormalizePaginatedMethods(codeModel, codeModel.pageClasses);
             //NormalizeODataMethods(codeModel);
 
             return codeModel;
+        }
+
+        /// <summary>
+        /// Changes paginated method signatures to return Page type.
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        /// <param name="pageClasses"></param>
+        public void NormalizePaginatedMethods(CodeModel serviceClient, IDictionary<KeyValuePair<string, string>, string> pageClasses)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            var convertedTypes = new Dictionary<IModelType, IModelType>();
+
+            foreach (MethodJva method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
+            {
+                string nextLinkString;
+                string pageClassName = GetPagingSetting(method.Extensions, pageClasses, out nextLinkString);
+                if (string.IsNullOrEmpty(pageClassName))
+                {
+                    continue;
+                }
+                if (string.IsNullOrEmpty(nextLinkString))
+                {
+                    method.Extensions[AzureExtensions.PageableExtension] = null;
+                }
+
+                foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeTypeJva).Select(s => s.Key).ToArray())
+                {
+                    var compositType = (CompositeTypeJva)method.Responses[responseStatus].Body;
+                    var sequenceType = compositType.Properties.Select(p => p.ModelType).FirstOrDefault(t => t is SequenceTypeJva) as SequenceTypeJva;
+
+                    // if the type is a wrapper over page-able response
+                    if (sequenceType != null)
+                    {
+                        IModelType pagedResult;
+                        pagedResult = new SequenceTypeJva
+                        {
+                            ElementType = sequenceType.ElementType,
+                            PageImplType = pageClassName
+                        };
+                        pagedResult.Name.OnGet += name => $"List<{name}>";
+
+                        convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
+                        var resp = New<Response>(pagedResult, method.Responses[responseStatus].Headers) as ResponseJva;
+                        resp.Parent = method;
+                        method.Responses[responseStatus] = resp;
+                    }
+                }
+
+                if (convertedTypes.ContainsKey(method.ReturnType.Body))
+                {
+                    var resp = New<Response>(convertedTypes[method.ReturnType.Body], method.ReturnType.Headers) as ResponseJva;
+                    resp.Parent = method;
+                    method.ReturnType = resp;
+                }
+            }
+
+            SwaggerExtensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeTypeJva>().Select(t => t.Name.ToString())));
         }
 
         public virtual void NormalizeODataMethods(CodeModel client)
@@ -138,10 +210,9 @@ namespace AutoRest.Java.Azure
                     {
                         SerializedName = "$filter",
                         Name = "odataQuery",
-                        // ModelType = New<CompositeType>($"Microsoft.Rest.Azure.OData.ODataQuery<{odataFilter.ModelType.Name}>"),
+                        ModelType = New<CompositeType>($"Microsoft.Rest.Azure.OData.ODataQuery<{odataFilter.ModelType.Name}>"),
                         // ModelType = New<CompositeType>(new { Name = new Fixable<string>(){FixedValue = $"Microsoft.Rest.Azure.OData.ODataQuery<{odataFilter.ModelType.Name}>"} } ),
-                        ModelType =
-                        New<ILiteralType>($"Microsoft.Rest.Azure.OData.ODataQuery<{odataFilter.ModelType.Name}>"),
+                        // ModelType = New<ILiteralType>($"Microsoft.Rest.Azure.OData.ODataQuery<{odataFilter.ModelType.Name}>"),
                         Documentation = "OData parameters to apply to the operation.",
                         Location = ParameterLocation.Query,
                         odataFilter.IsRequired
