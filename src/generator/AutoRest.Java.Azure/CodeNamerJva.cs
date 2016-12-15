@@ -109,11 +109,6 @@ namespace AutoRest.Java.Azure
             SwaggerExtensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeTypeJva>().Select(t => t.Name.ToString())));
         }
 
-        //protected override CompositeTypeJva NewCompositeTypeModel(CompositeType compositeType)
-        //{
-        //    return new AzureCompositeTypeModel(compositeType, _package);
-        //}
-
         #endregion
     }
 }

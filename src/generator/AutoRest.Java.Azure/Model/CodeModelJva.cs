@@ -18,7 +18,15 @@ namespace AutoRest.Java.Azure.Model
 
         public const string ExternalExtension = "x-ms-external";
 
-        // public override IEnumerableWithIndex<Property> Properties => new ReEnumerable<Property>(base.Properties.Where(p => p.ModelType.Name != "ServiceClientCredentials"));
+        public override IEnumerableWithIndex<Property> Properties
+        {
+            get
+            {
+                var props = base.Properties as ListEx<Property>;
+                props.RemoveAll(p => p.ModelType.Name == "ServiceClientCredentials");
+                return props;
+            }
+        }
 
         public virtual string ParentDeclaration
         {
