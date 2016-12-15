@@ -5,20 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.Azure.TemplateModels;
+using AutoRest.Java.Azure.Model;
 
-namespace AutoRest.Java.Azure.Fluent.TemplateModels
+namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class AzureFluentMethodGroupTemplateModel : AzureMethodGroupTemplateModel
+    public class MethodGroupJvaf : MethodGroupJva
     {
-        public AzureFluentMethodGroupTemplateModel(ServiceClient serviceClient, string methodGroupName)
-            : base(serviceClient, methodGroupName)
+        public MethodGroupJvaf()
         {
-            MethodTemplateModels.Clear();
-            Methods.Where(m => m.Group == methodGroupName)
-                .ForEach(m => MethodTemplateModels.Add(new AzureFluentMethodTemplateModel(m, serviceClient)));
+        }
+        public MethodGroupJvaf(string name) : base(name)
+        {
         }
 
         public override string MethodGroupDeclarationType
@@ -66,14 +65,14 @@ namespace AutoRest.Java.Azure.Fluent.TemplateModels
             get
             {
                 var imports = new List<string>();
-                var ns = Namespace.ToLower(CultureInfo.InvariantCulture);
+                var ns = CodeModel.Namespace.ToLower(CultureInfo.InvariantCulture);
                 foreach (var i in base.ImplImports.ToList())
                 {
                     if (i.StartsWith(ns + "." + ImplPackage, StringComparison.OrdinalIgnoreCase))
                     {
                         // Same package, do nothing
                     }
-                    else if (i == ns + "." + this.MethodGroupType)
+                    else if (i == ns + "." + this.TypeName)
                     {
                         // do nothing
                     }

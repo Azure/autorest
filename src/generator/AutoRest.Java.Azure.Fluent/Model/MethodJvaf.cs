@@ -3,41 +3,32 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.Azure.Fluent.TypeModels;
-using AutoRest.Java.Azure.TemplateModels;
-using AutoRest.Java.Azure.TypeModels;
-using AutoRest.Java.TypeModels;
+using AutoRest.Java.Azure.Fluent.Model;
+using AutoRest.Java.Azure.Model;
+using AutoRest.Java.Model;
 
-namespace AutoRest.Java.Azure.Fluent.TemplateModels
+namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class AzureFluentMethodTemplateModel : AzureMethodTemplateModel
+    public class MethodJvaf : MethodJva
     {
-        private AzureJavaFluentCodeNamer _namer;
-
-        public AzureFluentMethodTemplateModel(Method source, ServiceClient serviceClient)
-            : base(source, serviceClient)
-        {
-            _namer = new AzureJavaFluentCodeNamer(serviceClient.Namespace);
-        }
-
-        public override IEnumerable<ParameterModel> RetrofitParameters
+        public override IEnumerable<ParameterJv> RetrofitParameters
         {
             get
             {
-                List<ParameterModel> parameters = base.RetrofitParameters.ToList();
+                List<ParameterJv> parameters = base.RetrofitParameters.ToList();
 
                 parameters.First(p => p.SerializedName == "User-Agent")
-                    .ClientProperty = new FluentPropertyModel(new Property
+                    .ClientProperty = new PropertyJvaf(false)
                     {
-                        Name = "userAgent"
-                    }, ServiceClient.Namespace, false);
+                        Name = "userAgent",
+                    };
                 return parameters;
             }
         }
 
-        protected override void TransformPagingGroupedParameter(IndentedStringBuilder builder, AzureMethodTemplateModel nextMethod, bool filterRequired = false)
+        protected override void TransformPagingGroupedParameter(IndentedStringBuilder builder, MethodJva nextMethod, bool filterRequired = false)
         {
             if (this.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
             {
@@ -49,7 +40,7 @@ namespace AutoRest.Java.Azure.Fluent.TemplateModels
             {
                 return;
             }
-            var nextGroupTypeName = _namer.GetTypeName(nextGroupType.Name) + "Inner";
+            var nextGroupTypeName = CodeNamerJvaf.Instance.GetTypeName(nextGroupType.Name) + "Inner";
             if (filterRequired && !groupedType.IsRequired)
             {
                 return;
@@ -85,7 +76,7 @@ namespace AutoRest.Java.Azure.Fluent.TemplateModels
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel) ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe());
+                    imports.AddRange(new CompositeTypeJvaf((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType).ImportSafe());
                 }
                 return imports;
             }
@@ -98,20 +89,20 @@ namespace AutoRest.Java.Azure.Fluent.TemplateModels
                 var imports = base.ImplImports;
                 if (OperationExceptionTypeString != "CloudException" && OperationExceptionTypeString != "ServiceException")
                 {
-                    imports.RemoveAll(i => new CompositeTypeModel(ServiceClient.Namespace) { Name = OperationExceptionTypeString }.ImportSafe().Contains(i));
-                    imports.AddRange(new FluentCompositeTypeModel(ServiceClient.Namespace) { Name = OperationExceptionTypeString }.ImportSafe());
+                    imports.RemoveAll(i => new CompositeTypeJva(OperationExceptionTypeString).ImportSafe().Contains(i));
+                    imports.AddRange(new CompositeTypeJvaf(OperationExceptionTypeString).ImportSafe());
                 }
                 if (this.IsLongRunningOperation)
                 {
                     imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
                     imports.Remove("com.microsoft.rest.ServiceResponseCallback");
                     imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
-                    this.Responses.Select(r => r.Value.Body).Concat(new IType[]{ DefaultResponse.Body })
+                    this.Responses.Select(r => r.Value.Body).Concat(new IModelType[]{ DefaultResponse.Body })
                         .SelectMany(t => t.ImportSafe())
-                        .Where(i => !this.Parameters.Any(p => p.Type.ImportSafe().Contains(i)))
+                        .Where(i => !this.Parameters.Any(p => p.ModelType.ImportSafe().Contains(i)))
                         .ForEach(i => imports.Remove(i));
                     // return type may have been removed as a side effect
-                    imports.AddRange(this.ReturnTypeModel.ImplImports);
+                    imports.AddRange(this.ReturnTypeJva.ImplImports);
                 }
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
@@ -119,11 +110,11 @@ namespace AutoRest.Java.Azure.Fluent.TemplateModels
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.RemoveAll(i => new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe().Contains(i));
+                    imports.RemoveAll(i => new CompositeTypeJvaf((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType).ImportSafe().Contains(i));
                 }
                 if (this.IsPagingNonPollingOperation)
                 {
-                    imports.RemoveAll(i => new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe().Contains(i));
+                    imports.RemoveAll(i => new CompositeTypeJvaf((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType).ImportSafe().Contains(i));
                 }
                 return imports;
             }

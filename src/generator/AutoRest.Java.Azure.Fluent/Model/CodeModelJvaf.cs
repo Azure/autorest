@@ -5,41 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.Azure.TemplateModels;
-using AutoRest.Java.TemplateModels;
+using AutoRest.Java.Azure.Model;
+using AutoRest.Java.Model;
 
-namespace AutoRest.Java.Azure.Fluent.TemplateModels
+namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class AzureFluentServiceClientTemplateModel : AzureServiceClientTemplateModel
+    public class CodeModelJvaf : CodeModelJva
     {
-        public AzureFluentServiceClientTemplateModel(ServiceClient serviceClient)
-            : base(serviceClient)
-        {
-            MethodTemplateModels.Clear();
-            Methods.Where(m => m.Group == null)
-                .ForEach(m => MethodTemplateModels.Add(new AzureFluentMethodTemplateModel(m, serviceClient)));
-            ModelTemplateModels.Clear();
-            ModelTypes.ForEach(m => ModelTemplateModels.Add(new AzureFluentModelTemplateModel(m, serviceClient)));
-        }
-
-        public override IEnumerable<MethodGroupTemplateModel> MethodGroupModels
-        {
-            get
-            {
-                return MethodGroups.Select(mg => new AzureFluentMethodGroupTemplateModel(this, mg));
-            }
-        }
-
-        public override IEnumerable<MethodGroupTemplateModel> Operations
-        {
-            get
-            {
-                return MethodGroups.Select(mg => new AzureFluentMethodGroupTemplateModel(this, mg));
-            }
-        }
-
         public override string ImplPackage
         {
             get
@@ -78,7 +52,7 @@ namespace AutoRest.Java.Azure.Fluent.TemplateModels
                     {
                         // Same package, do nothing
                     }
-                    else if (MethodGroupModels.Any(m => i.EndsWith(m.MethodGroupType, StringComparison.OrdinalIgnoreCase)))
+                    else if (Operations.Any(m => i.EndsWith(m.TypeName, StringComparison.OrdinalIgnoreCase)))
                     {
                         // do nothing
                     }

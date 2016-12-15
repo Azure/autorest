@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace AutoRest.Java.Azure.Model
 {
-    public class Page
+    public class PageJva
     {
-        public Page(string typeDefinitionName, string nextLinkName, string itemName)
+        public PageJva(string typeDefinitionName, string nextLinkName, string itemName)
         {
             this.TypeDefinitionName = typeDefinitionName;
             this.NextLinkName = nextLinkName;

@@ -202,7 +202,7 @@ gulp.task('regenerate:expected', function(cb){
       'regenerate:expected:samples',
       'regenerate:expected:java',
       'regenerate:expected:javaazure',
-//      'regenerate:expected:javaazurefluent',
+      'regenerate:expected:javaazurefluent',
 //      'regenerate:expected:go'
     ],
     cb);
@@ -218,7 +218,7 @@ gulp.task('regenerate:delete', function(cb){
     'src/generator/AutoRest.Python.Azure.Tests/Expected',
     'src/generator/AutoRest.Java.Tests/src/main/java',
     'src/generator/AutoRest.Java.Azure.Tests/src/main/java',
-    //'src/generator/AutoRest.Java.Azure.Fluent.Tests/src/main/java',
+    'src/generator/AutoRest.Java.Azure.Fluent.Tests/src/main/java',
     //'src/generator/AutoRest.Go.Tests/src/tests/generated'
   ],
   cb);
@@ -347,7 +347,6 @@ gulp.task('regenerate:expected:javaazure', function(cb){
   }, cb);
 })
 
-/* Until JAVA is back in master
 gulp.task('regenerate:expected:javaazurefluent', function(cb){
   mappings = {};
   for (var key in defaultAzureMappings) {
@@ -362,7 +361,6 @@ gulp.task('regenerate:expected:javaazurefluent', function(cb){
     'nsPrefix': 'Fixtures'
   }, cb);
 })
-*/
 
 gulp.task('test:clientruntime:java:init', ['test:java:init'], function(){
   return gulp.src('./').pipe(shell(basePathOrThrow() + '/gradlew :client-runtime:check'));
@@ -923,8 +921,8 @@ gulp.task('test', function(cb){
       'test:python',
       'test:python:azure',
       'test:java',
+      'test:java:azure',
 // DISABLING TESTS FOR LANGUAGES UNTIL MERGED INTO NEW MODEL
-//      'test:java:azure',
 //      'test:go',
       cb);
   } else {
@@ -937,9 +935,9 @@ gulp.task('test', function(cb){
       'test:python',
       'test:python:azure',
       'test:java',
+      'test:java:azure',
 // DISABLING TESTS FOR LANGUAGES UNTIL MERGED INTO NEW MODEL    
 // and solve issues with linux building...
-//      'test:java:azure',
 //      'test:go',
       cb);
   }

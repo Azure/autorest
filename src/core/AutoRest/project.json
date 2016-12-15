@@ -55,6 +55,7 @@
     "AutoRest.Python.Azure": { "target": "project", "type": "build" },
     "AutoRest.Java": { "target": "project", "type": "build" },
     "AutoRest.Java.Azure": { "target": "project", "type": "build" },
+    "AutoRest.Java.Azure.Fluent": { "target": "project", "type": "build" },
     "AutoRest.AzureResourceSchema": { "target": "project", "type": "build" },
     "AutoRest.CSharp.Azure.Fluent": { "target": "project", "type": "build" },
   
@@ -71,8 +72,6 @@
   },
 
   "disabled_dependencies": {
-    "AutoRest.Java.Azure.Fluent": { "target": "project", "type": "build" },
-    "AutoRest.Java": { "target": "project", "type": "build" },
     "AutoRest.Go": { "target": "project", "type": "build" }
   }
 }

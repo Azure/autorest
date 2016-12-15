@@ -3,27 +3,21 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.Core.ClientModel;
-using AutoRest.Java.Azure.Fluent.TypeModels;
-using AutoRest.Java.TypeModels;
+using AutoRest.Core.Model;
+using AutoRest.Java.Azure.Fluent.Model;
+using AutoRest.Java.Model;
 
 namespace AutoRest.Java.Azure.Fluent
 {
-    public class AzureJavaFluentCodeNamer : AzureJavaCodeNamer
+    public class CodeNamerJvaf : CodeNamerJva
     {
-        private HashSet<CompositeType> _innerTypes;
-
-        public AzureJavaFluentCodeNamer(string nameSpace)
-            : base(nameSpace)
-        {
-            _innerTypes = new HashSet<CompositeType>();
-        }
-
-        public void NormalizeTopLevelTypes(ServiceClient serviceClient)
+        private HashSet<CompositeType> _innerTypes = new HashSet<CompositeType>();
+        
+        public void NormalizeTopLevelTypes(CodeModel serviceClient)
         {
             foreach (var param in serviceClient.Methods.SelectMany(m => m.Parameters))
             {
-                AppendInnerToTopLevelType(param.Type, serviceClient);
+                AppendInnerToTopLevelType(param.ModelType, serviceClient);
             }
             foreach (var response in serviceClient.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
             {
@@ -37,7 +31,7 @@ namespace AutoRest.Java.Azure.Fluent
             }
         }
 
-        private void AppendInnerToTopLevelType(IType type, ServiceClient serviceClient)
+        private void AppendInnerToTopLevelType(IModelType type, CodeModel serviceClient)
         {
             if (type == null)
             {
@@ -48,7 +42,7 @@ namespace AutoRest.Java.Azure.Fluent
             DictionaryType dictionaryType = type as DictionaryType;
             if (compositeType != null && !_innerTypes.Contains(compositeType))
             {
-                compositeType.Name += "Inner";
+                compositeType.Name.OnGet += name => name + "Inner";
                 _innerTypes.Add(compositeType);
             }
             else if (sequenceType != null)
@@ -59,16 +53,6 @@ namespace AutoRest.Java.Azure.Fluent
             {
                 AppendInnerToTopLevelType(dictionaryType.ValueType, serviceClient);
             }
-        }
-
-        protected override CompositeTypeModel NewCompositeTypeModel(CompositeType compositeType)
-        {
-            return new FluentCompositeTypeModel(compositeType, _package);
-        }
-
-        protected override EnumTypeModel NewEnumTypeModel(EnumType enumType)
-        {
-            return new FluentEnumTypeModel(enumType, _package);
         }
     }
 }

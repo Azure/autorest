@@ -42,7 +42,7 @@ namespace AutoRest.Java.Model
             }
         }
 
-        public string ImplPackage => "implementation";
+        public virtual string ImplPackage => "implementation";
 
         public string ModelsPackage => ".models";
 

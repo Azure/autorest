@@ -21,7 +21,7 @@ namespace AutoRest.Java.Model
         {
         }
 
-        public string ModelsPackage => (this.CodeModel as CodeModelJv).ModelsPackage;
+        public virtual string ModelsPackage => (this.CodeModel as CodeModelJv).ModelsPackage;
 
         public virtual string Package
         {

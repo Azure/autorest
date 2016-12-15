@@ -11,35 +11,35 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
-using AutoRest.Java.Azure.Model;
+using AutoRest.Java.Azure.Fluent.Model;
 using AutoRest.Java.Azure.Templates;
 using AutoRest.Java.Model;
 using AutoRest.Java.Templates;
 using System;
 
-namespace AutoRest.Java.Azure
+namespace AutoRest.Java.Azure.Fluent
 {
-    public class CodeGeneratorJva : CodeGeneratorJv
+    public class CodeGeneratorJvaf : CodeGeneratorJva
     {
-        private const string ClientRuntimePackage = "com.microsoft.rest:azure-client-runtime:1.0.0-SNAPSHOT from snapshot repo http://adxsnapshots.azurewebsites.net/";
+        private const string ClientRuntimePackage = "com.microsoft.azure:azure-client-runtime:0.0.1-SNAPSHOT";
         private const string _packageInfoFileName = "package-info.java";
-        
-        public override bool IsSingleFileGenerationSupported => true;
 
-        public override string UsageInstructions => string.Format(CultureInfo.InvariantCulture, Properties.Resources.UsageInformation, ClientRuntimePackage);
+        public override bool IsSingleFileGenerationSupported => true;
         
+        public override string UsageInstructions => string.Format(CultureInfo.InvariantCulture, Properties.Resources.UsageInformation, ClientRuntimePackage);
+
         /// <summary>
-        /// Generates Azure Java code for service client.
+        /// Generates C# code for service client.
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
             // get Azure Java specific codeModel
-            var codeModel = cm as CodeModelJva;
+            var codeModel = cm as CodeModelJvaf;
             if (codeModel == null)
             {
-                throw new InvalidCastException("CodeModel is not a Azure Java CodeModel");
+                throw new InvalidCastException("CodeModel is not a Azure Java Fluent CodeModel");
             }
 
             // Service client
@@ -51,19 +51,15 @@ namespace AutoRest.Java.Azure
             await Write(serviceClientInterfaceTemplate, $"{cm.Name.ToPascalCase()}{ImplementationFileExtension}");
 
             // operations
-            foreach (MethodGroupJva methodGroup in codeModel.AllOperations)
+            foreach (MethodGroupJvaf methodGroup in codeModel.AllOperations)
             {
                 // Operation
                 var operationsTemplate = new AzureMethodGroupTemplate { Model = methodGroup };
-                await Write(operationsTemplate, $"{Path.Combine("implementation", methodGroup.TypeName.ToPascalCase())}Impl{ImplementationFileExtension}");
-                
-                // Operation interface
-                var operationsInterfaceTemplate = new AzureMethodGroupInterfaceTemplate { Model = methodGroup };
-                await Write(operationsInterfaceTemplate, $"{methodGroup.TypeName.ToPascalCase()}{ImplementationFileExtension}");
+                await Write(operationsTemplate, $"{Path.Combine("implementation", methodGroup.TypeName.ToPascalCase())}Inner{ImplementationFileExtension}");
             }
 
             //Models
-            foreach (CompositeTypeJva modelType in cm.ModelTypes.Concat(codeModel.HeaderTypes))
+            foreach (CompositeTypeJvaf modelType in cm.ModelTypes.Concat(codeModel.HeaderTypes))
             {
                 if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
                     (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
@@ -80,7 +76,7 @@ namespace AutoRest.Java.Azure
             }
 
             //Enums
-            foreach (EnumTypeJva enumType in cm.EnumTypes)
+            foreach (EnumTypeJvaf enumType in cm.EnumTypes)
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
                 await Write(enumTemplate, Path.Combine("models", $"{enumTemplate.Model.Name.ToPascalCase()}{ImplementationFileExtension}"));
@@ -91,7 +87,7 @@ namespace AutoRest.Java.Azure
             {
                 var pageTemplate = new PageTemplate
                 {
-                    Model = new PageJva(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
+                    Model = new PageJvaf(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
                 };
                 await Write(pageTemplate, Path.Combine("models", $"{pageTemplate.Model.TypeDefinitionName.ToPascalCase()}{ImplementationFileExtension}"));
             }
@@ -117,10 +113,6 @@ namespace AutoRest.Java.Azure
             {
                 Model = new PackageInfoTemplateModel(cm, "implementation")
             }, Path.Combine("implementation", _packageInfoFileName));
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(cm, "models")
-            }, Path.Combine("models", _packageInfoFileName));
         }
     }
 }
