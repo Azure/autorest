@@ -142,12 +142,9 @@ namespace AutoRest.Core.Model
         /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
         public virtual bool StructurallyEquals(IModelType other)
         {
-            if (ReferenceEquals(other, null))
-            {
-                return false;
-            }
-
-            return GetType() == other.GetType() && Name.Equals(other.Name);
+            var ta = JsonConvert.SerializeObject(this);
+            var tb = JsonConvert.SerializeObject(other);
+            return ta == tb;
         }
 
         /// <summary>

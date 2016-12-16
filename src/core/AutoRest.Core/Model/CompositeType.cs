@@ -180,33 +180,7 @@ namespace AutoRest.Core.Model
 
         [JsonIgnore]
         public override bool IsConstant => ComposedProperties.Any() && ComposedProperties.All(p => p.IsConstant);
-
-        /// <summary>
-        /// Determines whether the specified model type is structurally equal to this object.
-        /// </summary>
-        /// <param name="other">The object to compare with this object.</param>
-        /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
-        public override bool StructurallyEquals(IModelType other)
-        {
-            if (ReferenceEquals(other as CompositeType, null))
-            {
-                return false;
-            }
-            if (ReferenceEquals(other as CompositeType, this))
-            {
-                return true;
-            }
-
-            return base.StructurallyEquals(other) &&
-                ComposedProperties.SequenceEqual((other as CompositeType).ComposedProperties, 
-                new Utilities.EqualityComparer<Property>((a, b) => 
-                    a.Name == b.Name && 
-                    a.ModelType.StructurallyEquals(b.ModelType) && 
-                    a.IsReadOnly == b.IsReadOnly && 
-                    a.IsConstant == b.IsConstant && 
-                    a.IsRequired == b.IsRequired));
-        }
-
+        
         [JsonIgnore]
         public override IEnumerable<IChild> Children => Properties;
 
