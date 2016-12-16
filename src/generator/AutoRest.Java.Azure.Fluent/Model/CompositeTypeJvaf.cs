@@ -12,15 +12,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         public CompositeTypeJvaf()
         {
-            Name.OnGet += nam => nam.IsNullOrEmpty() || !IsParameterGroupType ? nam : nam + "Inner";
+            Name.OnGet += nam => nam.IsNullOrEmpty() || IsSpecialType ? nam : nam + "Inner";
         }
 
         public CompositeTypeJvaf(string name) : base(name)
         {
-            Name.OnGet += nam => nam.IsNullOrEmpty() || !IsParameterGroupType ? nam : nam + "Inner";
+            Name.OnGet += nam => nam.IsNullOrEmpty() || IsSpecialType ? nam : nam + "Inner";
         }
 
-        public bool IsParameterGroupType { get; set; } = false;
+        public bool IsSpecialType { get; set; } = false;
 
         public override IEnumerableWithIndex<Property> Properties
         {

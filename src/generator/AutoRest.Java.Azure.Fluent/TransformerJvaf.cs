@@ -25,6 +25,15 @@ namespace AutoRest.Java.Azure
         public override CodeModelJv TransformCodeModel(CodeModel cm)
         {
             var codeModel = cm as CodeModelJva;
+            
+            foreach (CompositeTypeJvaf compType in codeModel.ErrorTypes) // TODO
+            {
+                compType.IsSpecialType = true;
+            }
+            foreach (CompositeTypeJvaf compType in codeModel.ModelTypes.Where(mt => mt.Name.RawValue == "OdataFilter")) // TODO
+            {
+                compType.IsSpecialType = true;
+            }
 
             // we're guaranteed to be in our language-specific context here.
             Settings.Instance.AddCredentials = true;
@@ -38,20 +47,15 @@ namespace AutoRest.Java.Azure
             AzureExtensions.ProcessGlobalParameters(codeModel);
             AzureExtensions.FlattenModels(codeModel);
             AzureExtensions.FlattenMethodParameters(codeModel);
-            // TODO: revise
-            var before = codeModel.ModelTypes.ToList();
             ParameterGroupExtensionHelper.AddParameterGroups(codeModel);
-            foreach (CompositeTypeJvaf compType in codeModel.ModelTypes.Where(ct => !before.Contains(ct)))
-            {
-                compType.IsParameterGroupType = true;
-            }
-            foreach (CompositeTypeJvaf compType in codeModel.HeaderTypes)
-            {
-                compType.IsParameterGroupType = true; // TODO
-            }
             AddLongRunningOperations(codeModel);
             AzureExtensions.AddAzureProperties(codeModel);
             AzureExtensions.SetDefaultResponses(codeModel);
+
+            foreach (CompositeTypeJvaf compType in codeModel.ModelTypes.Where(mt => mt.Name.RawValue == "cloudError")) // TODO
+            {
+                compType.IsSpecialType = true;
+            }
 
             // set Parent on responses (required for pageable)
             foreach (MethodJva method in codeModel.Methods)

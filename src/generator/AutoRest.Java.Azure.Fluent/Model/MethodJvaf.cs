@@ -96,7 +96,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (OperationExceptionTypeString != "CloudException" && OperationExceptionTypeString != "ServiceException")
                 {
                     imports.RemoveAll(i => new CompositeTypeJva(OperationExceptionTypeString) { CodeModel = CodeModel }.ImportSafe().Contains(i));
-                    imports.AddRange(new CompositeTypeJvaf(OperationExceptionTypeString) { CodeModel = CodeModel }.ImportSafe());
+                    imports.AddRange(new CompositeTypeJvaf(OperationExceptionTypeString) { CodeModel = CodeModel, IsSpecialType = true }.ImportSafe());
                 }
                 if (this.IsLongRunningOperation)
                 {
