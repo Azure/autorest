@@ -25,7 +25,7 @@ namespace AutoRest.Java.Azure.Model
             : base.Package.Replace(".models", "");
 
         public bool IsResource =>
-            (Name == "Resource" || Name == "SubResource") &&
+            (Name.RawValue == "Resource" || Name.RawValue == "SubResource") &&
             Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) && (bool)Extensions[AzureExtensions.AzureResourceExtension];
         
         public override string ExceptionTypeDefinitionName

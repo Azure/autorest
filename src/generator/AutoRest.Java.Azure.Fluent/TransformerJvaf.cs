@@ -56,6 +56,10 @@ namespace AutoRest.Java.Azure
             {
                 compType.IsSpecialType = true;
             }
+            foreach (CompositeTypeJvaf compType in codeModel.ModelTypes.Where(mt => (mt as CompositeTypeJvaf).IsResource)) // TODO
+            {
+                compType.IsSpecialType = true;
+            }
 
             // set Parent on responses (required for pageable)
             foreach (MethodJva method in codeModel.Methods)

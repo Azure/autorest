@@ -118,7 +118,7 @@ public final class LRORetrysInner {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200() {
         return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().getBody();
@@ -329,7 +329,7 @@ public final class LRORetrysInner {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRelativeRetrySucceeded() {
         return putAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
