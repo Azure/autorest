@@ -40,7 +40,7 @@ public final class @(Model.Name)Impl@(Model.ParentDeclaration) {
     public AzureClient getAzureClient() {
         return this.azureClient;
     }
-@foreach (var property in Model.Properties)
+@foreach (var property in Model.PropertiesEx)
 {
 @EmptyLine
 @:    /** @(property.Documentation.ToString().Period()) */
@@ -160,7 +160,7 @@ else
 </text>
 }
     protected void initialize() {
-@foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+@foreach (var property in Model.PropertiesEx.Where(p => p.DefaultValue != null))
 {
         @:this.@(property.Name) = @(property.DefaultValue);
 }

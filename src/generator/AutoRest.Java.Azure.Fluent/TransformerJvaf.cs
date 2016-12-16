@@ -92,16 +92,15 @@ namespace AutoRest.Java.Azure
             // param order (PATH first)
             foreach (MethodJva method in codeModel.Methods)
             {
-                var list = method.Parameters as ListEx<Parameter>;
-                var ps = list.ToList();
-                list.Clear();
+                var ps = method.Parameters.ToList();
+                method.ClearParameters();
                 foreach (var p in ps.Where(x => x.Location == ParameterLocation.Path))
                 {
-                    list.Add(p);
+                    method.Add(p);
                 }
                 foreach (var p in ps.Where(x => x.Location != ParameterLocation.Path))
                 {
-                    list.Add(p);
+                    method.Add(p);
                 }
             }
 
