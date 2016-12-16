@@ -23,7 +23,7 @@ class Pet(Model):
     :type tags: list of :class:`Tag <petstore.models.Tag>`
     :param status: pet status in the store. Possible values include:
      'available', 'pending', 'sold'
-    :type status: str
+    :type status: str or :class:`enum <petstore.models.enum>`
     """
 
     _validation = {

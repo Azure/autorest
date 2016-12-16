@@ -24,8 +24,8 @@ module Petstore
       # @return [Array<Tag>]
       attr_accessor :tags
 
-      # @return pet status in the store. Possible values include: 'available',
-      # 'pending', 'sold'
+      # @return [Enum] pet status in the store. Possible values include:
+      # 'available', 'pending', 'sold'
       attr_accessor :status
 
 
