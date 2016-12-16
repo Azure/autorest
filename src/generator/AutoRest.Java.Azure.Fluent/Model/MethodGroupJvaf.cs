@@ -15,9 +15,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         public MethodGroupJvaf()
         {
+            //TypeName.OnGet += nam => nam.IsNullOrEmpty() ? nam : nam + "Inner";
         }
         public MethodGroupJvaf(string name) : base(name)
         {
+            //TypeName.OnGet += nam => nam.IsNullOrEmpty() ? nam : nam + "Inner";
         }
 
         public override string MethodGroupDeclarationType
@@ -48,7 +50,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Name + "Impl";
+                return CodeModel.Name + "Impl";
             }
         }
 

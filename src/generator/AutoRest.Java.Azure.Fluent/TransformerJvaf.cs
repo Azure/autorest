@@ -22,9 +22,75 @@ namespace AutoRest.Java.Azure
 {
     public class TransformerJvaf : TransformerJva, ITransformer<CodeModelJvaf>
     {
-        public override CodeModelJv TransformCodeModel(CodeModel codeModel)
+        public override CodeModelJv TransformCodeModel(CodeModel cm)
         {
-            return base.TransformCodeModel(codeModel);
+            var codeModel = cm as CodeModelJva;
+
+            // we're guaranteed to be in our language-specific context here.
+            Settings.Instance.AddCredentials = true;
+
+            PopulateAdditionalProperties(codeModel);
+
+            // This extension from general extensions must be run prior to Azure specific extensions.
+            AzureExtensions.ProcessParameterizedHost(codeModel);
+            AzureExtensions.ProcessClientRequestIdExtension(codeModel);
+            AzureExtensions.UpdateHeadMethods(codeModel);
+            AzureExtensions.ProcessGlobalParameters(codeModel);
+            AzureExtensions.FlattenModels(codeModel);
+            AzureExtensions.FlattenMethodParameters(codeModel);
+            ParameterGroupExtensionHelper.AddParameterGroups(codeModel);
+            AddLongRunningOperations(codeModel);
+            AzureExtensions.AddAzureProperties(codeModel);
+            AzureExtensions.SetDefaultResponses(codeModel);
+
+
+
+            // set Parent on responses (required for pageable)
+            foreach (MethodJva method in codeModel.Methods)
+            {
+                foreach (ResponseJva response in method.Responses.Values)
+                {
+                    response.Parent = method;
+                }
+                (method.DefaultResponse as ResponseJva).Parent = method;
+                method.ReturnTypeJva.Parent = method;
+            }
+            AzureExtensions.AddPageableMethod(codeModel);
+
+            // TODO: ask the cowboy - some parts rely on singular, later parts on plural!
+            // pluralize method groups
+            foreach (var mg in codeModel.Operations)
+            {
+                mg.Name.OnGet += name => name.IsNullOrEmpty() || name.EndsWith("s", StringComparison.OrdinalIgnoreCase) ? $"{name}" : $"{name}s";
+            }
+
+            //(CodeNamerJva.Instance as CodeNamerJva).NormalizeClientModel(codeModel);
+            //(CodeNamerJva.Instance as CodeNamerJva).ResolveNameCollisions(codeModel, Settings.Namespace, Settings.Namespace + ".Models");
+            //NormalizePaginatedMethods(codeModel);
+
+            //// Do parameter transformations
+            //TransformParameters(codeModel);
+
+            NormalizePaginatedMethods(codeModel, codeModel.pageClasses);
+            //NormalizeODataMethods(codeModel);
+
+            // param order (PATH first)
+            foreach (MethodJva method in codeModel.Methods)
+            {
+                var list = method.Parameters as ListEx<Parameter>;
+                var ps = list.ToList();
+                list.Clear();
+                foreach (var p in ps.Where(x => x.Location == ParameterLocation.Path))
+                {
+                    list.Add(p);
+                }
+                foreach (var p in ps.Where(x => x.Location != ParameterLocation.Path))
+                {
+                    list.Add(p);
+                }
+            }
+
+            return codeModel;
         }
 
         CodeModelJvaf ITransformer<CodeModelJvaf>.TransformCodeModel(CodeModel cm)

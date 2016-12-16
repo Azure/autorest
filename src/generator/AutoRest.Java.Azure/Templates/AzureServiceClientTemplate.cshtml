@@ -74,15 +74,15 @@ if(!property.IsReadOnly)
 {
 @EmptyLine
 @:    /**
-@:     * The @(operation.TypeName) object to access its operations.
+@:     * The @(operation.MethodGroupDeclarationType) object to access its operations.
 @:     */
-@:    private @(operation.TypeName) @(operation.Name);
+@:    private @(operation.MethodGroupDeclarationType) @(operation.Name);
 @EmptyLine
 @:    /**
-@:     * Gets the @(operation.TypeName) object to access its operations.
-@:     * @@return the @(operation.TypeName) object.
+@:     * Gets the @(operation.MethodGroupDeclarationType) object to access its operations.
+@:     * @@return the @(operation.MethodGroupDeclarationType) object.
 @:     */
-@:    public @(operation.TypeName) @(operation.Name)() {
+@:    public @(operation.MethodGroupDeclarationType) @(operation.Name)() {
 @:        return this.@(operation.Name);
 @:    }
 }

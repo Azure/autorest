@@ -31,6 +31,11 @@ namespace AutoRest.Java.Azure.Fluent
             }
         }
 
+        //public override string GetMethodGroupName(string name)
+        //{
+        //    return base.GetMethodGroupName(name); + "Inner";
+        //}
+
         private void AppendInnerToTopLevelType(IModelType type, CodeModel serviceClient)
         {
             if (type == null)
