@@ -142,8 +142,17 @@ namespace AutoRest.Core.Model
         /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
         public virtual bool StructurallyEquals(IModelType other)
         {
-            var ta = JsonConvert.SerializeObject(this);
-            var tb = JsonConvert.SerializeObject(other);
+            if (ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (ReferenceEquals(other, this))
+            {
+                return true;
+            }
+
+            var ta = JsonConvert.SerializeObject(this, CodeModelSettings.SerializerSettings);
+            var tb = JsonConvert.SerializeObject(other, CodeModelSettings.SerializerSettings);
             return ta == tb;
         }
 
