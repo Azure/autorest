@@ -423,12 +423,12 @@
       "type": "object",
       "properties": {
         "Content": {
-          "$ref": "Content"
+          "$ref": "#/definitions/Content"
         },
         "Properties": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "Object"
+            "$ref": "#/definitions/Object"
           }
         }
       }

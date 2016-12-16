@@ -2188,7 +2188,7 @@
       },
       "allOf": [
         {
-          "$ref": "WorkflowParameter"
+          "$ref": "#/definitions/WorkflowParameter"
         }
       ]
     },
