@@ -62,7 +62,7 @@ namespace AutoRest.Java.Azure.Fluent
                 {
                     continue;
                 }
-                if (modelType.IsResource())
+                if (modelType.IsResource)
                 {
                     continue;
                 }

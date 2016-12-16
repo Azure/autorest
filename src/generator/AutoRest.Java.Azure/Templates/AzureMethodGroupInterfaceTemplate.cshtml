@@ -11,7 +11,7 @@
  */
 @EmptyLine
 
-package @(Settings.Namespace?.ToLower() ?? "fallbackNamespaceOrWhatTODO");
+package @(Settings.Namespace.ToLower());
 @EmptyLine
 @foreach (var importClass in Model.InterfaceImports)
 {

@@ -19,7 +19,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java.Azure
 {
-    public class TransformerJva : TransformerJv, ITransformer<CodeModelJva> // TODO: ADJUST
+    public class TransformerJva : TransformerJv, ITransformer<CodeModelJva>
     {
         /// <summary>
         /// A type-specific method for code model tranformation.
@@ -61,8 +61,7 @@ namespace AutoRest.Java.Azure
                 method.ReturnTypeJva.Parent = method;
             }
             AzureExtensions.AddPageableMethod(codeModel);
-
-            // TODO: ask the cowboy - some parts rely on singular, later parts on plural!
+            
             // pluralize method groups
             foreach (var mg in codeModel.Operations)
             {

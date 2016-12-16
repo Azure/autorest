@@ -26,11 +26,11 @@ namespace AutoRest.Java.Azure
         {
             var codeModel = cm as CodeModelJva;
             
-            foreach (CompositeTypeJvaf compType in codeModel.ErrorTypes) // TODO
+            foreach (CompositeTypeJvaf compType in codeModel.ErrorTypes)
             {
                 compType.IsSpecialType = true;
             }
-            foreach (CompositeTypeJvaf compType in codeModel.ModelTypes.Where(mt => mt.Name.RawValue == "OdataFilter")) // TODO
+            foreach (CompositeTypeJvaf compType in codeModel.ModelTypes.Where(mt => mt.Name.RawValue == "OdataFilter"))
             {
                 compType.IsSpecialType = true;
             }
@@ -52,11 +52,11 @@ namespace AutoRest.Java.Azure
             AzureExtensions.AddAzureProperties(codeModel);
             AzureExtensions.SetDefaultResponses(codeModel);
 
-            foreach (CompositeTypeJvaf compType in codeModel.ModelTypes.Where(mt => mt.Name.RawValue == "cloudError")) // TODO
+            foreach (CompositeTypeJvaf compType in codeModel.ModelTypes.Where(mt => mt.Name.RawValue == "cloudError"))
             {
                 compType.IsSpecialType = true;
             }
-            foreach (CompositeTypeJvaf compType in codeModel.ModelTypes.Where(mt => (mt as CompositeTypeJvaf).IsResource)) // TODO
+            foreach (CompositeTypeJvaf compType in codeModel.ModelTypes.Where(mt => (mt as CompositeTypeJvaf).IsResource))
             {
                 compType.IsSpecialType = true;
             }
@@ -73,7 +73,6 @@ namespace AutoRest.Java.Azure
             }
             AzureExtensions.AddPageableMethod(codeModel);
 
-            // TODO: ask the cowboy - some parts rely on singular, later parts on plural!
             // pluralize method groups
             foreach (var mg in codeModel.Operations)
             {

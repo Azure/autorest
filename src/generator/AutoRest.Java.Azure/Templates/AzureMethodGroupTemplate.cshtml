@@ -9,7 +9,7 @@
  */
 @EmptyLine
 
-package @(Settings.Namespace?.ToLower() ?? "fallbackNamespaceOrWhatTODO").@(Model.ImplPackage);
+package @(Settings.Namespace.ToLower()).@(Model.ImplPackage);
 @EmptyLine
 @foreach (var importClass in Model.ImplImports)
 {

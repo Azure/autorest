@@ -52,8 +52,7 @@ namespace AutoRest.Java.Azure
 
             return pageClasses[keypair];
         }
-
-        // TODO: ask the cowboy - some parts rely on singular, later parts on plural!
+        
         public override string GetMethodGroupName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -61,7 +60,6 @@ namespace AutoRest.Java.Azure
                 return name;
             }
             name = PascalCase(name);
-            //no pluralization yet
             return name;
         }
 

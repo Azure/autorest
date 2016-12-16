@@ -6,7 +6,7 @@
  */
 @EmptyLine
 
-package @(Settings.Namespace?.ToLower() ?? "fallbackNamespaceOrWhatTODO")@Model.ModelsPackage;
+package @(Settings.Namespace.ToLower())@Model.ModelsPackage;
 @EmptyLine
 @if (!Model.ModelAsString)
 {

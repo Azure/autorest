@@ -70,7 +70,7 @@ namespace AutoRest.Java.Azure
                 {
                     continue;
                 }
-                if (modelType.IsResource())
+                if (modelType.IsResource)
                 {
                     continue;
                 }

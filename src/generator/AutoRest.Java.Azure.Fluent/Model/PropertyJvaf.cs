@@ -16,7 +16,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 var imports = new List<string>(ModelType.ImportSafe()
-                        .Where(c => //!c.StartsWith(CodeModel?.Namespace?.ToLower(CultureInfo.InvariantCulture) ?? "fallbackNamespaceOrWhatTODO", StringComparison.Ordinal) || 
+                        .Where(c => //!c.StartsWith(CodeModel?.Namespace.ToLower(CultureInfo.InvariantCulture), StringComparison.Ordinal) || 
                             c.EndsWith("Inner", StringComparison.Ordinal) ^ IsInnerModel));
                 if (ModelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
                 {

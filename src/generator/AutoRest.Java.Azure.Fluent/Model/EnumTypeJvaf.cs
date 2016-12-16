@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using AutoRest.Core.Model;
-using AutoRest.Java.Model;
 using AutoRest.Java.Azure.Model;
 
 namespace AutoRest.Java.Azure.Fluent.Model
@@ -12,10 +10,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                if (Name != "String") // TODO: refactor this madness
+                if (Name != "String")
                 {
                     yield return string.Join(".",
-                        (CodeModel?.Namespace?.ToLower(CultureInfo.InvariantCulture) ?? "fallbackNamespaceOrWhatTODO") + (Name.ToString().EndsWith("Inner") ? ".implementation" : ""),
+                        (CodeModel?.Namespace.ToLower(CultureInfo.InvariantCulture)) + (Name.ToString().EndsWith("Inner") ? ".implementation" : ""),
                         Name);
                 }
             }

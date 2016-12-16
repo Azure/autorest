@@ -6,7 +6,6 @@ using System.Linq;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Java.Model;
-using System.Globalization;
 using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.Java.Azure.Model

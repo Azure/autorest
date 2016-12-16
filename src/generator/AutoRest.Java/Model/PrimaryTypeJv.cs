@@ -19,7 +19,7 @@ namespace AutoRest.Java.Model
         }
 
         public bool WantNullable { get; private set; } = true;
-        public bool Nullable // TODO: refactor
+        public bool Nullable
         {
             get
             {

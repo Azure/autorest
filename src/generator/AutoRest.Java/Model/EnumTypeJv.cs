@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
-using System;
 
 namespace AutoRest.Java.Model
 {
@@ -10,7 +8,6 @@ namespace AutoRest.Java.Model
     {
         public EnumTypeJv()
         {
-            // TODO
             Name.OnGet += name => string.IsNullOrEmpty(name) || name == "enum" ? "String" : name;
         }
 
@@ -20,10 +17,10 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                if (Name != "String") // TODO: refactor this madness
+                if (Name != "String")
                 {
                     yield return string.Join(".",
-                        CodeModel?.Namespace?.ToLower(CultureInfo.InvariantCulture) ?? "fallbackNamespaceOrWhatTODO",
+                        CodeModel?.Namespace.ToLower(CultureInfo.InvariantCulture),
                         "models", Name);
                 }
             }

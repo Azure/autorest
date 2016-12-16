@@ -535,7 +535,7 @@ namespace AutoRest.Java.Azure.Model
                 CodeModel.Methods.FirstOrDefault(m =>
                     (group == null ? m.Group == null : group.Equals(m.Group, StringComparison.OrdinalIgnoreCase))
                     && m.Name.ToString().Equals(name, StringComparison.OrdinalIgnoreCase)) as MethodJva;
-            group = group.ToPascalCase(); // TODO: LOOK AT THIS MADNESS: first camel case, then pascal case...
+            group = group.ToPascalCase();
             name = name + methodSuffixString;
             if (async)
             {

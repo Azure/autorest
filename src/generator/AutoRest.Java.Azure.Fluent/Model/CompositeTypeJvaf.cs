@@ -47,11 +47,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else if (Name.ToString().EndsWith("Inner", StringComparison.Ordinal))
                 {
-                    return (CodeModel?.Namespace?.ToLower(CultureInfo.InvariantCulture) ?? "fallbackNamespaceOrWhatTODO") + ".implementation";
+                    return (CodeModel?.Namespace.ToLower(CultureInfo.InvariantCulture)) + ".implementation";
                 }
                 else
                 {
-                    return (CodeModel?.Namespace?.ToLower(CultureInfo.InvariantCulture) ?? "fallbackNamespaceOrWhatTODO");
+                    return (CodeModel?.Namespace.ToLower(CultureInfo.InvariantCulture));
                 }
             }
         }

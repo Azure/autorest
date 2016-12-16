@@ -35,7 +35,7 @@ namespace AutoRest.Java.Model
                 {
                     return string.Join(
                         ".",
-                        CodeModel?.Namespace?.ToLower(CultureInfo.InvariantCulture) ?? "fallbackNamespaceOrWhatTODO",
+                        CodeModel?.Namespace.ToLower(CultureInfo.InvariantCulture),
                         "models");
                 }
             }
