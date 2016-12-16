@@ -30,7 +30,7 @@ namespace AutoRest
                         settings = Settings.Create(args);
                         // set up logging
                         Logger.Instance.AddListener(new ConsoleLogListener(
-                            settings.Debug ? Category.Debug : Category.Info,
+                            settings.Debug ? Category.Debug : Category.Warning,
                             settings.ValidationLevel,
                             settings.Verbose));
                         Logger.Instance.AddListener(new SignalingLogListener(Category.Error, _ => generationFailed = true));

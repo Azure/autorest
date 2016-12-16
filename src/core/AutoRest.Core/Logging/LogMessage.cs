@@ -14,15 +14,7 @@ namespace AutoRest.Core.Logging
     /// </summary>
     public class LogMessage
     {
-        /// <summary>
-        /// Instantiates a new instance of the LogEntry class
-        /// </summary>
-        /// <param name="severity">The LogEntrySeverity of the LogEntry instance.</param>
-        /// <param name="message">The message of the LogEntry instance.</param>
-        public LogMessage(Category severity, string message)
-            : this(severity, message, ObjectPath.Empty) { }
-
-        public LogMessage(Category severity, string message, ObjectPath path)
+        public LogMessage(Category severity, string message, ObjectPath path = null)
         {
             if (path == null)
             {
