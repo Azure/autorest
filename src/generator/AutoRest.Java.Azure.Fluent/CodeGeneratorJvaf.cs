@@ -68,14 +68,14 @@ namespace AutoRest.Java.Azure.Fluent
                 }
 
                 var modelTemplate = new ModelTemplate { Model = modelType };
-                await Write(modelTemplate, Path.Combine(modelType.ModelsPackage, $"{modelType.Name.ToPascalCase()}{ImplementationFileExtension}"));
+                await Write(modelTemplate, Path.Combine(modelType.ModelsPackage.Trim('.'), $"{modelType.Name.ToPascalCase()}{ImplementationFileExtension}"));
             }
 
             //Enums
             foreach (EnumTypeJvaf enumType in cm.EnumTypes)
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine(enumType.ModelsPackage, $"{enumTemplate.Model.Name.ToPascalCase()}{ImplementationFileExtension}"));
+                await Write(enumTemplate, Path.Combine(enumType.ModelsPackage.Trim('.'), $"{enumTemplate.Model.Name.ToPascalCase()}{ImplementationFileExtension}"));
             }
 
             // Page class
@@ -97,7 +97,7 @@ namespace AutoRest.Java.Azure.Fluent
                 }
 
                 var exceptionTemplate = new ExceptionTemplate { Model = exceptionType };
-                await Write(exceptionTemplate, Path.Combine(exceptionType.ModelsPackage, $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
+                await Write(exceptionTemplate, Path.Combine(exceptionType.ModelsPackage.Trim('.'), $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
             }
 
             // package-info.java

@@ -38,12 +38,20 @@ namespace AutoRest.Java.Azure
             AzureExtensions.ProcessGlobalParameters(codeModel);
             AzureExtensions.FlattenModels(codeModel);
             AzureExtensions.FlattenMethodParameters(codeModel);
+            // TODO: revise
+            var before = codeModel.ModelTypes.ToList();
             ParameterGroupExtensionHelper.AddParameterGroups(codeModel);
+            foreach (CompositeTypeJvaf compType in codeModel.ModelTypes.Where(ct => !before.Contains(ct)))
+            {
+                compType.IsParameterGroupType = true;
+            }
+            foreach (CompositeTypeJvaf compType in codeModel.HeaderTypes)
+            {
+                compType.IsParameterGroupType = true; // TODO
+            }
             AddLongRunningOperations(codeModel);
             AzureExtensions.AddAzureProperties(codeModel);
             AzureExtensions.SetDefaultResponses(codeModel);
-
-
 
             // set Parent on responses (required for pageable)
             foreach (MethodJva method in codeModel.Methods)

@@ -12,11 +12,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         public CompositeTypeJvaf()
         {
+            Name.OnGet += nam => nam.IsNullOrEmpty() || !IsParameterGroupType ? nam : nam + "Inner";
         }
 
         public CompositeTypeJvaf(string name) : base(name)
         {
+            Name.OnGet += nam => nam.IsNullOrEmpty() || !IsParameterGroupType ? nam : nam + "Inner";
         }
+
+        public bool IsParameterGroupType { get; set; } = false;
 
         public override IEnumerableWithIndex<Property> Properties
         {
@@ -60,6 +64,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return true == Name?.ToString()?.EndsWith("Inner", StringComparison.Ordinal);
+            }
+        }
+        public override IEnumerable<string> Imports
+        {
+            get
+            {
+                var imports = new List<string>();
+                if (Name.Contains('<'))
+                {
+                    imports.AddRange(ParseGenericType().SelectMany(t => t.Imports));
+                }
+                else
+                {
+                    imports.Add(string.Join(".", Package, Name));
+                }
+                return imports;
             }
         }
 
