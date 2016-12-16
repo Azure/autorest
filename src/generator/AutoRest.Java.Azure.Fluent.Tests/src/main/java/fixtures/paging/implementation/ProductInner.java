@@ -10,6 +10,7 @@
 
 package fixtures.paging.implementation;
 
+import fixtures.paging.ProductProperties;
 
 /**
  * The ProductInner model.
@@ -18,14 +19,14 @@ public class ProductInner {
     /**
      * The properties property.
      */
-    private ProductPropertiesInner properties;
+    private ProductProperties properties;
 
     /**
      * Get the properties value.
      *
      * @return the properties value
      */
-    public ProductPropertiesInner properties() {
+    public ProductProperties properties() {
         return this.properties;
     }
 
@@ -35,7 +36,7 @@ public class ProductInner {
      * @param properties the properties value to set
      * @return the ProductInner object itself.
      */
-    public ProductInner withProperties(ProductPropertiesInner properties) {
+    public ProductInner withProperties(ProductProperties properties) {
         this.properties = properties;
         return this;
     }

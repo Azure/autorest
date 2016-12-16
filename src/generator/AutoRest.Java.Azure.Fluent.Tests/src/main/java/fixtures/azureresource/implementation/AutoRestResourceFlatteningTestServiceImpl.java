@@ -14,7 +14,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.AzureServiceResponseBuilder;
-import com.microsoft.azure.Resource;
 import com.microsoft.azure.RestClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceCall;
@@ -184,7 +183,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     interface AutoRestResourceFlatteningTestServiceService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("azure/resource-flatten/array")
-        Observable<Response<ResponseBody>> putArray(@Body List<Resource> resourceArray, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> putArray(@Body List<ResourceInner> resourceArray, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azure/resource-flatten/array")
@@ -246,7 +245,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync() {
-        final List<Resource> resourceArray = null;
+        final List<ResourceInner> resourceArray = null;
         return service.putArray(resourceArray, this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -266,7 +265,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param resourceArray External Resource as an Array to put
      */
-    public void putArray(List<Resource> resourceArray) {
+    public void putArray(List<ResourceInner> resourceArray) {
         putArrayWithServiceResponseAsync(resourceArray).toBlocking().single().getBody();
     }
 
@@ -277,7 +276,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putArrayAsync(List<ResourceInner> resourceArray, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putArrayWithServiceResponseAsync(resourceArray), serviceCallback);
     }
 
@@ -287,7 +286,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param resourceArray External Resource as an Array to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putArrayAsync(List<Resource> resourceArray) {
+    public Observable<Void> putArrayAsync(List<ResourceInner> resourceArray) {
         return putArrayWithServiceResponseAsync(resourceArray).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
@@ -302,7 +301,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param resourceArray External Resource as an Array to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(List<Resource> resourceArray) {
+    public Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(List<ResourceInner> resourceArray) {
         Validator.validate(resourceArray);
         return service.putArray(resourceArray, this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {

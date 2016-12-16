@@ -8,40 +8,40 @@
  * regenerated.
  */
 
-package fixtures.azureparametergrouping;
+package fixtures.lro;
 
 
 /**
- * The Error model.
+ * The OperationResultError model.
  */
-public class Error {
+public class OperationResultError {
     /**
-     * The status property.
+     * The error code for an operation failure.
      */
-    private Integer status;
+    private Integer code;
 
     /**
-     * The message property.
+     * The detailed arror message.
      */
     private String message;
 
     /**
-     * Get the status value.
+     * Get the code value.
      *
-     * @return the status value
+     * @return the code value
      */
-    public Integer status() {
-        return this.status;
+    public Integer code() {
+        return this.code;
     }
 
     /**
-     * Set the status value.
+     * Set the code value.
      *
-     * @param status the status value to set
-     * @return the Error object itself.
+     * @param code the code value to set
+     * @return the OperationResultError object itself.
      */
-    public Error withStatus(Integer status) {
-        this.status = status;
+    public OperationResultError withCode(Integer code) {
+        this.code = code;
         return this;
     }
 
@@ -58,9 +58,9 @@ public class Error {
      * Set the message value.
      *
      * @param message the message value to set
-     * @return the Error object itself.
+     * @return the OperationResultError object itself.
      */
-    public Error withMessage(String message) {
+    public OperationResultError withMessage(String message) {
         this.message = message;
         return this;
     }

@@ -8,13 +8,13 @@
  * regenerated.
  */
 
-package fixtures.azurespecials;
+package fixtures.paging;
 
 
 /**
- * The OdataFilter model.
+ * The ProductProperties model.
  */
-public class OdataFilter {
+public class ProductProperties {
     /**
      * The id property.
      */
@@ -38,9 +38,9 @@ public class OdataFilter {
      * Set the id value.
      *
      * @param id the id value to set
-     * @return the OdataFilter object itself.
+     * @return the ProductProperties object itself.
      */
-    public OdataFilter withId(Integer id) {
+    public ProductProperties withId(Integer id) {
         this.id = id;
         return this;
     }
@@ -58,9 +58,9 @@ public class OdataFilter {
      * Set the name value.
      *
      * @param name the name value to set
-     * @return the OdataFilter object itself.
+     * @return the ProductProperties object itself.
      */
-    public OdataFilter withName(String name) {
+    public ProductProperties withName(String name) {
         this.name = name;
         return this;
     }
