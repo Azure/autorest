@@ -16,10 +16,6 @@ namespace AutoRest.Core.Logging
     {
         public LogMessage(Category severity, string message, ObjectPath path = null)
         {
-            if (path == null)
-            {
-                throw new ArgumentNullException(nameof(path));
-            }
             Severity = severity;
             Message = message;
             Path = path;
