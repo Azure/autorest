@@ -28,33 +28,6 @@ namespace AutoRest.Java
 
         public override string ImplementationFileExtension => ".java";
 
-        ///// <summary>
-        ///// Normalizes client model by updating names and types to be language specific.
-        ///// </summary>
-        ///// <param name="serviceClient"></param>
-        //public override void NormalizeClientModel(ServiceClient serviceClient)
-        //{
-        //    PopulateAdditionalProperties(serviceClient);
-        //    SwaggerExtensions.NormalizeClientModel(serviceClient, Settings);
-        //    Namer.NormalizeClientModel(serviceClient);
-        //    Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
-        //        Settings.Namespace + ".Models");
-        //}
-
-        //private void PopulateAdditionalProperties(ServiceClient serviceClient)
-        //{
-        //    if (Settings.AddCredentials)
-        //    {
-        //        serviceClient.Properties.Add(new Property
-        //        {
-        //            Name = "credentials",
-        //            Type = new PrimaryType(KnownPrimaryType.Credentials),
-        //            IsRequired = true,
-        //            Documentation = "Subscription credentials which uniquely identify client subscription."
-        //        });
-        //    }
-        //}
-
         /// <summary>
         /// Generate Java client code for given ServiceClient.
         /// </summary>

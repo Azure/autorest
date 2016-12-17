@@ -29,8 +29,6 @@ namespace AutoRest.Java.Azure
             // we're guaranteed to be in our language-specific context here.
             Settings.Instance.AddCredentials = true;
 
-            PopulateAdditionalProperties(codeModel);
-
             // This extension from general extensions must be run prior to Azure specific extensions.
             AzureExtensions.ProcessParameterizedHost(codeModel);
             AzureExtensions.ProcessClientRequestIdExtension(codeModel);

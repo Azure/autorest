@@ -34,8 +34,6 @@ namespace AutoRest.Java.Azure
             // we're guaranteed to be in our language-specific context here.
             Settings.Instance.AddCredentials = true;
 
-            PopulateAdditionalProperties(codeModel);
-
             // This extension from general extensions must be run prior to Azure specific extensions.
             AzureExtensions.ProcessParameterizedHost(codeModel);
             AzureExtensions.ProcessClientRequestIdExtension(codeModel);
@@ -67,16 +65,8 @@ namespace AutoRest.Java.Azure
             {
                 mg.Name.OnGet += name => name.IsNullOrEmpty() || name.EndsWith("s", StringComparison.OrdinalIgnoreCase) ? name : $"{name}s";
             }
-
-            //(CodeNamerJva.Instance as CodeNamerJva).NormalizeClientModel(codeModel);
-            //(CodeNamerJva.Instance as CodeNamerJva).ResolveNameCollisions(codeModel, Settings.Namespace, Settings.Namespace + ".Models");
-            //NormalizePaginatedMethods(codeModel);
-
-            //// Do parameter transformations
-            //TransformParameters(codeModel);
-
+            
             NormalizePaginatedMethods(codeModel, codeModel.pageClasses);
-            //NormalizeODataMethods(codeModel);
 
             // param order (PATH first)
             foreach (MethodJva method in codeModel.Methods)
@@ -172,7 +162,6 @@ namespace AutoRest.Java.Azure
                             ElementType = sequenceType.ElementType,
                             PageImplType = pageClassName
                         };
-                        //pagedResult.Name.OnGet += name => $"List<{name}>";
 
                         convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
                         var resp = New<Response>(pagedResult, method.Responses[responseStatus].Headers) as ResponseJva;
@@ -227,8 +216,6 @@ namespace AutoRest.Java.Azure
                         SerializedName = "$filter",
                         Name = "odataQuery",
                         ModelType = New<CompositeType>($"Microsoft.Rest.Azure.OData.ODataQuery<{odataFilter.ModelType.Name}>"),
-                        // ModelType = New<CompositeType>(new { Name = new Fixable<string>(){FixedValue = $"Microsoft.Rest.Azure.OData.ODataQuery<{odataFilter.ModelType.Name}>"} } ),
-                        // ModelType = New<ILiteralType>($"Microsoft.Rest.Azure.OData.ODataQuery<{odataFilter.ModelType.Name}>"),
                         Documentation = "OData parameters to apply to the operation.",
                         Location = ParameterLocation.Query,
                         odataFilter.IsRequired

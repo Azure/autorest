@@ -53,10 +53,6 @@ namespace AutoRest.Java.Model
                 {
                     return "new Byte[0]";
                 }
-                //else if (Name == "RequestBody")
-                //{
-                //    return "RequestBody.create(MediaType.parse(\"" + base.method.RequestContentType + "\"), new byte[0])";
-                //}
                 else if (Nullable)
                 {
                     return null;
