@@ -103,14 +103,6 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
-        //public override string GenericHeaderWireTypeString
-        //{
-        //    get
-        //    {
-        //        return HeaderWireType.Name;
-        //    }
-        //}
-
         public override string ObservableClientResponseTypeString
         {
             get

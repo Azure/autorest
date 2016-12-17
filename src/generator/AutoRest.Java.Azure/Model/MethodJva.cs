@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
@@ -13,6 +12,7 @@ using AutoRest.Extensions.Azure;
 using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using AutoRest.Core.Utilities.Collections;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java.Azure.Model
 {
@@ -700,7 +700,7 @@ namespace AutoRest.Java.Azure.Model
                     imports.AddRange(ReturnTypeJva.ImplImports);
                 }
                 var typeName = (ReturnTypeJva.BodyClientType as SequenceTypeJva)?.PageImplType;
-                CompositeTypeJva ctype = null;
+                CompositeType ctype = null;
                 if (typeName != null)
                 {
                     ctype = new CompositeTypeJva();

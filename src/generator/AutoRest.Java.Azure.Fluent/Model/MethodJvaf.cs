@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.Azure.Fluent.Model;
 using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
+using AutoRest.Core;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -40,7 +40,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 return;
             }
-            var nextGroupTypeName = CodeNamerJvaf.Instance.GetTypeName(nextGroupType.Name) + "Inner";
+            var nextGroupTypeName = CodeNamer.Instance.GetTypeName(nextGroupType.Name) + "Inner";
             if (filterRequired && !groupedType.IsRequired)
             {
                 return;
@@ -118,12 +118,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     imports.Add("com.microsoft.azure.PagedList");
                     if (pageType != null)
                     {
-                        imports.RemoveAll(i => new CompositeTypeJvaf((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType).ImportSafe().Contains(i));
+                        imports.RemoveAll(i => new CompositeTypeJva((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType) { CodeModel = CodeModel }.ImportSafe().Contains(i));
                     }
                 }
                 if (this.IsPagingNonPollingOperation && pageType != null)
                 {
-                    imports.RemoveAll(i => new CompositeTypeJvaf((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType).ImportSafe().Contains(i));
+                    imports.RemoveAll(i => new CompositeTypeJva((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType) { CodeModel = CodeModel }.ImportSafe().Contains(i));
                 }
                 return imports;
             }

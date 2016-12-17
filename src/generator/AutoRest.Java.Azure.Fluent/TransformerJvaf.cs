@@ -43,21 +43,6 @@ namespace AutoRest.Java.Azure
             AzureExtensions.AddAzureProperties(codeModel);
             AzureExtensions.SetDefaultResponses(codeModel);
 
-            Action<IModelType> markAsInner = null;
-            markAsInner = mt =>
-            {
-                var modelType = mt as CompositeTypeJvaf;
-                if (modelType != null)
-                {
-                    modelType.IsInnerModel = true;
-                }
-                var sequenceType = mt as SequenceType;
-                if (sequenceType != null)
-                {
-                    markAsInner(sequenceType.ElementType);
-                }
-            };
-
             // set Parent on responses (required for pageable)
             foreach (MethodJva method in codeModel.Methods)
             {
@@ -79,26 +64,7 @@ namespace AutoRest.Java.Azure
             NormalizePaginatedMethods(codeModel, codeModel.pageClasses);
 
             // determine inner models
-            foreach (var compType in codeModel.ModelTypes.Where(mt => (mt.BaseModelType as CompositeTypeJvaf)?.IsResource == true))
-            {
-                markAsInner(compType);
-            }
-            foreach (MethodJvaf method in codeModel.Methods)
-            {
-                //markAsInner(method.ReturnTypeJva.Body);
-                //markAsInner(method.ReturnTypeJva.Headers);
-                //markAsInner(method.DefaultResponse.Body);
-                //markAsInner(method.DefaultResponse.Headers);
-                foreach (var response in method.Responses)
-                {
-                    markAsInner(response.Value.Body);
-                    markAsInner(response.Value.Headers);
-                }
-                foreach (var parameter in method.Parameters)
-                {
-                    markAsInner(parameter.ModelType);
-                }
-            }
+            NormalizeTopLevelTypes(codeModel);
 
             // param order (PATH first)
             foreach (MethodJva method in codeModel.Methods)
@@ -121,6 +87,47 @@ namespace AutoRest.Java.Azure
         CodeModelJvaf ITransformer<CodeModelJvaf>.TransformCodeModel(CodeModel cm)
         {
             return TransformCodeModel(cm) as CodeModelJvaf;
+        }
+
+        public void NormalizeTopLevelTypes(CodeModel serviceClient)
+        {
+            foreach (var param in serviceClient.Methods.SelectMany(m => m.Parameters))
+            {
+                AppendInnerToTopLevelType(param.ModelType, serviceClient);
+            }
+            foreach (var response in serviceClient.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
+            {
+                AppendInnerToTopLevelType(response.Body, serviceClient);
+                AppendInnerToTopLevelType(response.Headers, serviceClient);
+            }
+            foreach (var model in serviceClient.ModelTypes)
+            {
+                if (model.BaseModelType != null && (model.BaseModelType.Name == "Resource" || model.BaseModelType.Name == "SubResource"))
+                    AppendInnerToTopLevelType(model, serviceClient);
+            }
+        }
+
+        private void AppendInnerToTopLevelType(IModelType type, CodeModel serviceClient)
+        {
+            if (type == null)
+            {
+                return;
+            }
+            CompositeTypeJvaf compositeType = type as CompositeTypeJvaf;
+            SequenceType sequenceType = type as SequenceType;
+            DictionaryType dictionaryType = type as DictionaryType;
+            if (compositeType != null && !compositeType.IsResource)
+            {
+                compositeType.IsInnerModel = true;
+            }
+            else if (sequenceType != null)
+            {
+                AppendInnerToTopLevelType(sequenceType.ElementType, serviceClient);
+            }
+            else if (dictionaryType != null)
+            {
+                AppendInnerToTopLevelType(dictionaryType.ValueType, serviceClient);
+            }
         }
     }
 }

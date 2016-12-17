@@ -15,52 +15,20 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         public MethodGroupJvaf()
         {
-            //TypeName.OnGet += nam => nam.IsNullOrEmpty() ? nam : nam + "Inner";
         }
         public MethodGroupJvaf(string name) : base(name)
         {
-            //TypeName.OnGet += nam => nam.IsNullOrEmpty() ? nam : nam + "Inner";
         }
 
-        public override string MethodGroupDeclarationType
-        {
-            get
-            {
-                return MethodGroupImplType;
-            }
-        }
+        public override string MethodGroupDeclarationType => MethodGroupImplType;
 
-        public override string ImplClassSuffix
-        {
-            get
-            {
-                return "Inner";
-            }
-        }
+        public override string ImplClassSuffix => "Inner";
 
-        public override string ParentDeclaration
-        {
-            get
-            {
-                return "";
-            }
-        }
+        public override string ParentDeclaration => "";
 
-        public override string ServiceClientType
-        {
-            get
-            {
-                return CodeModel.Name + "Impl";
-            }
-        }
+        public override string ServiceClientType => CodeModel.Name + "Impl";
 
-        public override string ImplPackage
-        {
-            get
-            {
-                return "implementation";
-            }
-        }
+        public override string ImplPackage => "implementation";
 
         public override IEnumerable<string> ImplImports
         {
