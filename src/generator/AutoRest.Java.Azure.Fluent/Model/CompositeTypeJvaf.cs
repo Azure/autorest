@@ -12,15 +12,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         public CompositeTypeJvaf()
         {
-            Name.OnGet += nam => nam.IsNullOrEmpty() || IsSpecialType ? nam : nam + "Inner";
+            Name.OnGet += nam => nam.IsNullOrEmpty() || !IsInnerModel ? nam : nam + "Inner";
         }
 
         public CompositeTypeJvaf(string name) : base(name)
         {
-            Name.OnGet += nam => nam.IsNullOrEmpty() || IsSpecialType ? nam : nam + "Inner";
+            Name.OnGet += nam => nam.IsNullOrEmpty() || !IsInnerModel ? nam : nam + "Inner";
         }
-
-        public bool IsSpecialType { get; set; } = false;
 
         public override IEnumerableWithIndex<Property> Properties
         {
@@ -59,13 +57,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public override string ModelsPackage => IsInnerModel ? ".implementation" : "";
 
-        public bool IsInnerModel
-        {
-            get
-            {
-                return true == Name?.ToString()?.EndsWith("Inner", StringComparison.Ordinal);
-            }
-        }
+        public bool IsInnerModel { get; set; } = false;
+
         public override IEnumerable<string> Imports
         {
             get

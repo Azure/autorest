@@ -350,7 +350,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put200Succeeded() {
         return put200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
@@ -561,7 +561,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put200SucceededNoState() {
         return put200SucceededNoStateWithServiceResponseAsync().toBlocking().last().getBody();
@@ -771,7 +771,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put202Retry200() {
         return put202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
@@ -981,7 +981,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200() {
         return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().getBody();
@@ -1192,7 +1192,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put200UpdatingSucceeded204() {
         return put200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().last().getBody();
@@ -1402,7 +1402,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingFailed200() {
         return put201CreatingFailed200WithServiceResponseAsync().toBlocking().last().getBody();
@@ -1613,7 +1613,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put200Acceptedcanceled200() {
         return put200Acceptedcanceled200WithServiceResponseAsync().toBlocking().last().getBody();
@@ -1823,7 +1823,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner putNoHeaderInRetry() {
         return putNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
@@ -2033,7 +2033,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetrySucceeded() {
         return putAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
@@ -2243,7 +2243,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrySucceeded() {
         return putAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
@@ -2453,7 +2453,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetryFailed() {
         return putAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
@@ -2663,7 +2663,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrycanceled() {
         return putAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
@@ -2873,7 +2873,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoHeaderInRetry() {
         return putAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
@@ -3083,7 +3083,7 @@ public final class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @return the SkuInner object  if successful.
+     * @return the SkuInner object if successful.
      */
     public SkuInner putNonResource() {
         return putNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
@@ -3293,7 +3293,7 @@ public final class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @return the SkuInner object  if successful.
+     * @return the SkuInner object if successful.
      */
     public SkuInner putAsyncNonResource() {
         return putAsyncNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
@@ -3503,7 +3503,7 @@ public final class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @return the SubProductInner object  if successful.
+     * @return the SubProductInner object if successful.
      */
     public SubProductInner putSubResource() {
         return putSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
@@ -3713,7 +3713,7 @@ public final class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @return the SubProductInner object  if successful.
+     * @return the SubProductInner object if successful.
      */
     public SubProductInner putAsyncSubResource() {
         return putAsyncSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
@@ -5462,7 +5462,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner post202NoRetry204() {
         return post202NoRetry204WithServiceResponseAsync().toBlocking().last().getBody();
@@ -5672,7 +5672,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncRetrySucceeded() {
         return postAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
@@ -5883,7 +5883,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncNoRetrySucceeded() {
         return postAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();

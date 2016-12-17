@@ -25,15 +25,6 @@ namespace AutoRest.Java.Azure
         public override CodeModelJv TransformCodeModel(CodeModel cm)
         {
             var codeModel = cm as CodeModelJva;
-            
-            foreach (CompositeTypeJvaf compType in codeModel.ErrorTypes)
-            {
-                compType.IsSpecialType = true;
-            }
-            foreach (CompositeTypeJvaf compType in codeModel.ModelTypes.Where(mt => mt.Name.RawValue == "OdataFilter"))
-            {
-                compType.IsSpecialType = true;
-            }
 
             // we're guaranteed to be in our language-specific context here.
             Settings.Instance.AddCredentials = true;
@@ -52,14 +43,20 @@ namespace AutoRest.Java.Azure
             AzureExtensions.AddAzureProperties(codeModel);
             AzureExtensions.SetDefaultResponses(codeModel);
 
-            foreach (CompositeTypeJvaf compType in codeModel.ModelTypes.Where(mt => mt.Name.RawValue == "cloudError"))
+            Action<IModelType> markAsInner = null;
+            markAsInner = mt =>
             {
-                compType.IsSpecialType = true;
-            }
-            foreach (CompositeTypeJvaf compType in codeModel.ModelTypes.Where(mt => (mt as CompositeTypeJvaf).IsResource))
-            {
-                compType.IsSpecialType = true;
-            }
+                var modelType = mt as CompositeTypeJvaf;
+                if (modelType != null)
+                {
+                    modelType.IsInnerModel = true;
+                }
+                var sequenceType = mt as SequenceType;
+                if (sequenceType != null)
+                {
+                    markAsInner(sequenceType.ElementType);
+                }
+            };
 
             // set Parent on responses (required for pageable)
             foreach (MethodJva method in codeModel.Methods)
@@ -79,15 +76,29 @@ namespace AutoRest.Java.Azure
                 mg.Name.OnGet += name => name.IsNullOrEmpty() || name.EndsWith("s", StringComparison.OrdinalIgnoreCase) ? $"{name}" : $"{name}s";
             }
 
-            //(CodeNamerJva.Instance as CodeNamerJva).NormalizeClientModel(codeModel);
-            //(CodeNamerJva.Instance as CodeNamerJva).ResolveNameCollisions(codeModel, Settings.Namespace, Settings.Namespace + ".Models");
-            //NormalizePaginatedMethods(codeModel);
-
-            //// Do parameter transformations
-            //TransformParameters(codeModel);
-
             NormalizePaginatedMethods(codeModel, codeModel.pageClasses);
-            //NormalizeODataMethods(codeModel);
+
+            // determine inner models
+            foreach (var compType in codeModel.ModelTypes.Where(mt => (mt.BaseModelType as CompositeTypeJvaf)?.IsResource == true))
+            {
+                markAsInner(compType);
+            }
+            foreach (MethodJvaf method in codeModel.Methods)
+            {
+                //markAsInner(method.ReturnTypeJva.Body);
+                //markAsInner(method.ReturnTypeJva.Headers);
+                //markAsInner(method.DefaultResponse.Body);
+                //markAsInner(method.DefaultResponse.Headers);
+                foreach (var response in method.Responses)
+                {
+                    markAsInner(response.Value.Body);
+                    markAsInner(response.Value.Headers);
+                }
+                foreach (var parameter in method.Parameters)
+                {
+                    markAsInner(parameter.ModelType);
+                }
+            }
 
             // param order (PATH first)
             foreach (MethodJva method in codeModel.Methods)

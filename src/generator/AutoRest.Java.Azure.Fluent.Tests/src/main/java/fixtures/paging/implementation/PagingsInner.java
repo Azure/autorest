@@ -21,6 +21,8 @@ import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
+import fixtures.paging.models.PageImpl;
+import fixtures.paging.models.PageImpl1;
 import java.io.IOException;
 import java.util.List;
 import okhttp3.ResponseBody;
