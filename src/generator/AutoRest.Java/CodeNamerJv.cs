@@ -16,9 +16,7 @@ namespace AutoRest.Java
     public class CodeNamerJv : CodeNamer
     {
         private Dictionary<IModelType, IModelType> _visited = new Dictionary<IModelType, IModelType>();
-
-        public const string ExternalExtension = "x-ms-external";
-
+        
         public static HashSet<string> PrimaryTypes { get; private set; }
         
         #region constructor

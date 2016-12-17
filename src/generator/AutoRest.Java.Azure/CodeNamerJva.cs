@@ -16,43 +16,6 @@ namespace AutoRest.Java.Azure
 {
     public class CodeNamerJva : CodeNamerJv
     {
-        #region normalization
-        
-        private static string GetPagingSetting(Dictionary<string, object> extensions, IDictionary<KeyValuePair<string, string>, string> pageClasses, out string nextLinkName)
-        {
-            // default value
-            nextLinkName = null;
-            var ext = extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
-            if (ext == null)
-            {
-                return null;
-            }
-
-            nextLinkName = (string)ext["nextLinkName"];
-            string itemName = (string)ext["itemName"] ?? "value";
-
-            var keypair = new KeyValuePair<string, string>(nextLinkName, itemName);
-            if (!pageClasses.ContainsKey(keypair))
-            {
-                string className = (string)ext["className"];
-                if (string.IsNullOrEmpty(className))
-                {
-                    if (pageClasses.Count > 0)
-                    {
-                        className = String.Format(CultureInfo.InvariantCulture, "PageImpl{0}", pageClasses.Count);
-                    }
-                    else
-                    {
-                        className = "PageImpl";
-                    }
-                }
-                pageClasses.Add(keypair, className);
-            }
-            ext["className"] = pageClasses[keypair];
-
-            return pageClasses[keypair];
-        }
-        
         public override string GetMethodGroupName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -62,7 +25,5 @@ namespace AutoRest.Java.Azure
             name = PascalCase(name);
             return name;
         }
-
-        #endregion
     }
 }
