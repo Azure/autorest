@@ -83,7 +83,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         {
             get
             {
-                if (_inputFolder == null)
+                if (_inputFolder == null && Input != null)
                 {
                     var isBasePathUri = Uri.IsWellFormedUriString(Input, UriKind.Absolute);
                     if (isBasePathUri)
