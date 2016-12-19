@@ -71,11 +71,14 @@ namespace AutoRest.Swagger
             }
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
 
-            // Look for semantic errors and warnings in the document.
-            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
+            if (!Settings.SkipValidation)
             {
-                Logger.Instance.Log(validationEx);
+                // Look for semantic errors and warnings in the document.
+                var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
+                {
+                    Logger.Instance.Log(validationEx);
+                }
             }
 
             Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
