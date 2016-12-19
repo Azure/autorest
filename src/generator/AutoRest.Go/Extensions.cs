@@ -29,7 +29,8 @@ namespace AutoRest.Go
 
         private static Dictionary<string, string> plural = new Dictionary<string, string>()
         {
-            { "eventhub", "eventhubs" }
+            { "eventhub", "eventhubs" },
+            { "containerservice", "containerservices" }
         };
 
         /////////////////////////////////////////////////////////////////////////////////////////
