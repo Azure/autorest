@@ -123,11 +123,11 @@ public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)Wi
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.WireType.Name) @(parameter.WireName) = @(parameter.WireType.DefaultValue ?? "null");
+@:    final @(parameter.WireType.Name) @(parameter.WireName) = @(parameter.WireType.GetDefaultValue(Model) ?? "null");
     }
     if (parameter.IsConstant)
     {
-@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.DefaultValue ?? "null");
+@:    final @(parameter.ClientType.ParameterVariant.Name) @(parameter.Name) = @(parameter.DefaultValue ?? "null");
     }
 }
     @Model.BuildInputMappings(true)

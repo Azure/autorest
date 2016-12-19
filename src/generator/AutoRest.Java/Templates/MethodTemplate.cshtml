@@ -128,7 +128,7 @@ public Observable<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Wit
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.ClientType.DefaultValue ?? "null");
+@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.ClientType.GetDefaultValue(Model) ?? "null");
     }
     if (parameter.IsConstant)
     {

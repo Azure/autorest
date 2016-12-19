@@ -46,8 +46,6 @@ namespace AutoRest.Java.Azure
             AzureExtensions.AddAzureProperties(codeModel);
             AzureExtensions.SetDefaultResponses(codeModel);
 
-
-
             // set Parent on responses (required for pageable)
             foreach (MethodJva method in codeModel.Methods)
             {

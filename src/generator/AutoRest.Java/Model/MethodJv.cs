@@ -456,7 +456,7 @@ namespace AutoRest.Java.Model
                 //Omit parameter-group properties for now since Java doesn't support them yet
                 var par = Parameters
                     .OfType<ParameterJv>()
-                    .Where(p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
+                    .Where(p => p != null && !p.IsClientProperty && !string.IsNullOrWhiteSpace(p.Name))
                     .OrderBy(item => !item.IsRequired)
                     .ToList();
                 return par;

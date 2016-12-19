@@ -23,5 +23,12 @@ namespace AutoRest.Java.Model
             }
             return (original as IModelTypeJv)?.ResponseVariant?.NonNullableVariant ?? original;
         }
+
+        public static string GetDefaultValue(this IModelType type, Method parent)
+        {
+            return type is PrimaryTypeJv && type.Name == "RequestBody"
+                ? "RequestBody.create(MediaType.parse(\"" + parent.RequestContentType + "\"), new byte[0])"
+                : type.DefaultValue;
+        }
     }
 }
