@@ -27,7 +27,7 @@
 }
 
 [@("Http" + @Model.HttpMethod)("@Model.Url")]
-@{ var methodSignature = "public " + @Model.ReturnTypeString + " " + @Model.HttpMethod + "("; }
+@{ var methodSignature = "public IActionResult " + @Model.HttpMethod + "("; }
 
 @foreach (var param in @Model.LocalParameters)
 {
@@ -49,16 +49,26 @@ if (parameter.IsRequired && parameter.IsNullable())
 {
     @:if (@(parameter.Name) == null)
     @:{
-        @:throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "@(parameter.Name)");
+        @:BadRequestException();
     @:}
     @:
 }
 if (parameter.CanBeValidated && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
 {
-    @:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
+    @:try
+    @:{
+        @:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
+    @:}
+    @:catch(Exception e)
+    @:{
+        @:BadRequestException();
+    @:}
+
 }
 }
 @EmptyLine
+    return OK();
+
 }
 
  @*
