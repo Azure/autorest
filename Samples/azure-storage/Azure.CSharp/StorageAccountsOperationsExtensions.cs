@@ -27,7 +27,7 @@ namespace Petstore
             /// </param>
             public static CheckNameAvailabilityResult CheckNameAvailability(this IStorageAccountsOperations operations, StorageAccountCheckNameAvailabilityParameters accountName)
             {
-                return Task.Factory.StartNew(s => ((IStorageAccountsOperations)s).CheckNameAvailabilityAsync(accountName), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.CheckNameAvailabilityAsync(accountName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -75,7 +75,7 @@ namespace Petstore
             /// </param>
             public static StorageAccount Create(this IStorageAccountsOperations operations, string resourceGroupName, string accountName, StorageAccountCreateParameters parameters)
             {
-                return Task.Factory.StartNew(s => ((IStorageAccountsOperations)s).CreateAsync(resourceGroupName, accountName, parameters), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.CreateAsync(resourceGroupName, accountName, parameters).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -126,7 +126,7 @@ namespace Petstore
             /// </param>
             public static void Delete(this IStorageAccountsOperations operations, string resourceGroupName, string accountName)
             {
-                Task.Factory.StartNew(s => ((IStorageAccountsOperations)s).DeleteAsync(resourceGroupName, accountName), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DeleteAsync(resourceGroupName, accountName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -169,7 +169,7 @@ namespace Petstore
             /// </param>
             public static StorageAccount GetProperties(this IStorageAccountsOperations operations, string resourceGroupName, string accountName)
             {
-                return Task.Factory.StartNew(s => ((IStorageAccountsOperations)s).GetPropertiesAsync(resourceGroupName, accountName), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetPropertiesAsync(resourceGroupName, accountName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -230,7 +230,7 @@ namespace Petstore
             /// </param>
             public static StorageAccount Update(this IStorageAccountsOperations operations, string resourceGroupName, string accountName, StorageAccountUpdateParameters parameters)
             {
-                return Task.Factory.StartNew(s => ((IStorageAccountsOperations)s).UpdateAsync(resourceGroupName, accountName, parameters), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.UpdateAsync(resourceGroupName, accountName, parameters).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -287,7 +287,7 @@ namespace Petstore
             /// </param>
             public static StorageAccountKeys ListKeys(this IStorageAccountsOperations operations, string resourceGroupName, string accountName)
             {
-                return Task.Factory.StartNew(s => ((IStorageAccountsOperations)s).ListKeysAsync(resourceGroupName, accountName), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ListKeysAsync(resourceGroupName, accountName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -322,7 +322,7 @@ namespace Petstore
             /// </param>
             public static IEnumerable<StorageAccount> List(this IStorageAccountsOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IStorageAccountsOperations)s).ListAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ListAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -356,7 +356,7 @@ namespace Petstore
             /// </param>
             public static IEnumerable<StorageAccount> ListByResourceGroup(this IStorageAccountsOperations operations, string resourceGroupName)
             {
-                return Task.Factory.StartNew(s => ((IStorageAccountsOperations)s).ListByResourceGroupAsync(resourceGroupName), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ListByResourceGroupAsync(resourceGroupName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -401,7 +401,7 @@ namespace Petstore
             /// </param>
             public static StorageAccountKeys RegenerateKey(this IStorageAccountsOperations operations, string resourceGroupName, string accountName, StorageAccountRegenerateKeyParameters regenerateKey)
             {
-                return Task.Factory.StartNew(s => ((IStorageAccountsOperations)s).RegenerateKeyAsync(resourceGroupName, accountName, regenerateKey), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.RegenerateKeyAsync(resourceGroupName, accountName, regenerateKey).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -456,7 +456,7 @@ namespace Petstore
             /// </param>
             public static StorageAccount BeginCreate(this IStorageAccountsOperations operations, string resourceGroupName, string accountName, StorageAccountCreateParameters parameters)
             {
-                return Task.Factory.StartNew(s => ((IStorageAccountsOperations)s).BeginCreateAsync(resourceGroupName, accountName, parameters), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginCreateAsync(resourceGroupName, accountName, parameters).GetAwaiter().GetResult();
             }
 
             /// <summary>

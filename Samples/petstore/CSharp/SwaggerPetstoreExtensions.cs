@@ -25,7 +25,7 @@ namespace Petstore
             /// </param>
             public static void AddPetUsingByteArray(this ISwaggerPetstore operations, string body = default(string))
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstore)s).AddPetUsingByteArrayAsync(body), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.AddPetUsingByteArrayAsync(body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -61,7 +61,7 @@ namespace Petstore
             /// </param>
             public static void AddPet(this ISwaggerPetstore operations, Pet body = default(Pet))
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstore)s).AddPetAsync(body), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.AddPetAsync(body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -96,7 +96,7 @@ namespace Petstore
             /// </param>
             public static void UpdatePet(this ISwaggerPetstore operations, Pet body = default(Pet))
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstore)s).UpdatePetAsync(body), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.UpdatePetAsync(body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -130,7 +130,7 @@ namespace Petstore
             /// </param>
             public static IList<Pet> FindPetsByStatus(this ISwaggerPetstore operations, IList<string> status = default(IList<string>))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstore)s).FindPetsByStatusAsync(status), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.FindPetsByStatusAsync(status).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -171,7 +171,7 @@ namespace Petstore
             /// </param>
             public static IList<Pet> FindPetsByTags(this ISwaggerPetstore operations, IList<string> tags = default(IList<string>))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstore)s).FindPetsByTagsAsync(tags), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.FindPetsByTagsAsync(tags).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -213,7 +213,7 @@ namespace Petstore
             /// </param>
             public static string FindPetsWithByteArray(this ISwaggerPetstore operations, long petId)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstore)s).FindPetsWithByteArrayAsync(petId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.FindPetsWithByteArrayAsync(petId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -255,7 +255,7 @@ namespace Petstore
             /// </param>
             public static Pet GetPetById(this ISwaggerPetstore operations, long petId)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstore)s).GetPetByIdAsync(petId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetPetByIdAsync(petId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -299,7 +299,7 @@ namespace Petstore
             /// </param>
             public static void UpdatePetWithForm(this ISwaggerPetstore operations, string petId, string name = default(string), string status = default(string))
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstore)s).UpdatePetWithFormAsync(petId, name, status), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.UpdatePetWithFormAsync(petId, name, status).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -338,7 +338,7 @@ namespace Petstore
             /// </param>
             public static void DeletePet(this ISwaggerPetstore operations, long petId, string apiKey = default(string))
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstore)s).DeletePetAsync(petId, apiKey), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DeletePetAsync(petId, apiKey).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -377,7 +377,7 @@ namespace Petstore
             /// </param>
             public static void UploadFile(this ISwaggerPetstore operations, long petId, string additionalMetadata = default(string), Stream file = default(Stream))
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstore)s).UploadFileAsync(petId, additionalMetadata, file), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.UploadFileAsync(petId, additionalMetadata, file).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -414,7 +414,7 @@ namespace Petstore
             /// </param>
             public static IDictionary<string, int?> GetInventory(this ISwaggerPetstore operations)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstore)s).GetInventoryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetInventoryAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -448,7 +448,7 @@ namespace Petstore
             /// </param>
             public static Order PlaceOrder(this ISwaggerPetstore operations, Order body = default(Order))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstore)s).PlaceOrderAsync(body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.PlaceOrderAsync(body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -486,7 +486,7 @@ namespace Petstore
             /// </param>
             public static Order GetOrderById(this ISwaggerPetstore operations, string orderId)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstore)s).GetOrderByIdAsync(orderId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetOrderByIdAsync(orderId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -528,7 +528,7 @@ namespace Petstore
             /// </param>
             public static void DeleteOrder(this ISwaggerPetstore operations, string orderId)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstore)s).DeleteOrderAsync(orderId), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DeleteOrderAsync(orderId).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -566,7 +566,7 @@ namespace Petstore
             /// </param>
             public static void CreateUser(this ISwaggerPetstore operations, User body = default(User))
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstore)s).CreateUserAsync(body), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.CreateUserAsync(body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -600,7 +600,7 @@ namespace Petstore
             /// </param>
             public static void CreateUsersWithArrayInput(this ISwaggerPetstore operations, IList<User> body = default(IList<User>))
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstore)s).CreateUsersWithArrayInputAsync(body), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.CreateUsersWithArrayInputAsync(body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -631,7 +631,7 @@ namespace Petstore
             /// </param>
             public static void CreateUsersWithListInput(this ISwaggerPetstore operations, IList<User> body = default(IList<User>))
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstore)s).CreateUsersWithListInputAsync(body), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.CreateUsersWithListInputAsync(body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -665,7 +665,7 @@ namespace Petstore
             /// </param>
             public static string LoginUser(this ISwaggerPetstore operations, string username = default(string), string password = default(string))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstore)s).LoginUserAsync(username, password), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.LoginUserAsync(username, password).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -699,7 +699,7 @@ namespace Petstore
             /// </param>
             public static void LogoutUser(this ISwaggerPetstore operations)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstore)s).LogoutUserAsync(), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.LogoutUserAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -727,7 +727,7 @@ namespace Petstore
             /// </param>
             public static User GetUserByName(this ISwaggerPetstore operations, string username)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstore)s).GetUserByNameAsync(username), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetUserByNameAsync(username).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -767,7 +767,7 @@ namespace Petstore
             /// </param>
             public static void UpdateUser(this ISwaggerPetstore operations, string username, User body = default(User))
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstore)s).UpdateUserAsync(username, body), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.UpdateUserAsync(username, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -807,7 +807,7 @@ namespace Petstore
             /// </param>
             public static void DeleteUser(this ISwaggerPetstore operations, string username)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstore)s).DeleteUserAsync(username), operations, CancellationToken.None, TaskCreationOptions.None,  TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DeleteUserAsync(username).GetAwaiter().GetResult();
             }
 
             /// <summary>
