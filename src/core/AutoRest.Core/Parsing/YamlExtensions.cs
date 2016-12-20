@@ -123,7 +123,7 @@ namespace AutoRest.Core.Parsing
                     var bMemberMapping = bMember as YamlMappingNode;
                     if (aMemberMapping == null || bMemberMapping == null)
                     {
-                        throw new FormatException($"{subpath.XPath} has incomaptible types.");
+                        throw new Exception($"{subpath.XPath} has incomaptible values ({aMember}, {bMember}).");
                     }
                     result.Children.Add(key, MergeYamlObjects(aMemberMapping, bMemberMapping, subpath));
                 }

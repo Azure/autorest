@@ -67,7 +67,7 @@ namespace AutoRest.CompositeSwagger
             var mergedSwagger = new YamlMappingNode();
             mergedSwagger.Set("swagger", new YamlScalarNode("2.0"));
             mergedSwagger.Set("info", (Settings.FileSystem.ReadFileAsText(Settings.Input).ParseYaml() as YamlMappingNode)?.Get("info") as YamlMappingNode);
-            mergedSwagger.Set("host", new YamlScalarNode("management.azure.com"));
+            //mergedSwagger.Set("host", new YamlScalarNode("management.azure.com"));
             mergedSwagger.Set("schemes", new YamlSequenceNode(new YamlScalarNode("https")));
 
             // merge child swaggers
@@ -89,10 +89,12 @@ namespace AutoRest.CompositeSwagger
                 var apiVersionParamName = (apiVersionParam?.Key as YamlScalarNode)?.Value;
                 if (apiVersionParamName != null)
                 {
-                    var apiVersionParams = (childSwagger.Get("paths") as YamlMappingNode).Children.Values.OfType<YamlMappingNode>()
-                        .SelectMany(path => path.Children.Values.OfType<YamlMappingNode>())
-                        .SelectMany(method => (method.Get("parameters") as YamlSequenceNode).Children.OfType<YamlMappingNode>())
-                        .Where(param => (param.Get("$ref") as YamlScalarNode)?.Value == $"#/parameters/{apiVersionParamName}");
+                    var paths =
+                        ((childSwagger.Get("paths") as YamlMappingNode)?.Children?.Values ?? Enumerable.Empty<YamlNode>()).Concat
+                        ((childSwagger.Get("x-ms-paths") as YamlMappingNode)?.Children?.Values ?? Enumerable.Empty<YamlNode>());
+                    var methods = paths.OfType<YamlMappingNode>().SelectMany(path => path.Children.Values.OfType<YamlMappingNode>());
+                    var parameters = methods.SelectMany(method => (method.Get("parameters") as YamlSequenceNode)?.Children?.OfType<YamlMappingNode>() ?? Enumerable.Empty<YamlMappingNode>());
+                    var apiVersionParams = parameters.Where(param => (param.Get("$ref") as YamlScalarNode)?.Value == $"#/parameters/{apiVersionParamName}");
                     foreach (var param in apiVersionParams)
                     {
                         param.Remove("$ref");
