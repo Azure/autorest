@@ -123,9 +123,16 @@ namespace AutoRest.Core.Utilities
 
         public string CurrentDirectory => Directory.GetCurrentDirectory();
 
-        public string GetParentDir(string path)
+        public Uri GetParentDir(string path)
         {
-            return Directory.GetParent(Path.Combine(Directory.GetCurrentDirectory(), path)).FullName;
+            if (IsCompletePath(path))
+            {
+                return new Uri(new Uri(path), ".");
+            }
+            else
+            {
+                return new Uri(Directory.GetParent(Path.Combine(Directory.GetCurrentDirectory(), path)).FullName, UriKind.Relative);
+            }
         }
     }
 }

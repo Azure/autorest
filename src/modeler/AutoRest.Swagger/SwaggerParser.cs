@@ -73,8 +73,7 @@ namespace AutoRest.Swagger
                     if (!Settings.FileSystem.IsCompletePath(filePath))
                     {
                         // Otherwise, root it from the directory (one level up) of the current swagger file path
-                        var currentSwaggerDirectory = new Uri(new Uri(currentFilePath), ".");
-                        filePath = Settings.FileSystem.MakePathRooted(currentSwaggerDirectory, filePath);
+                        filePath = Settings.FileSystem.MakePathRooted(Settings.FileSystem.GetParentDir(currentFilePath), filePath);
                     }
                     if (!externalFiles.ContainsKey(filePath))
                     {
