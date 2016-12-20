@@ -65,10 +65,7 @@ namespace AutoRest.CompositeSwagger
 
             // construct merged swagger document
             var mergedSwagger = new YamlMappingNode();
-            mergedSwagger.Set("swagger", new YamlScalarNode("2.0"));
             mergedSwagger.Set("info", (Settings.FileSystem.ReadFileAsText(Settings.Input).ParseYaml() as YamlMappingNode)?.Get("info") as YamlMappingNode);
-            //mergedSwagger.Set("host", new YamlScalarNode("management.azure.com"));
-            mergedSwagger.Set("schemes", new YamlSequenceNode(new YamlScalarNode("https")));
 
             // merge child swaggers
             foreach (var childSwaggerPath in compositeSwaggerModel.Documents)
@@ -82,7 +79,9 @@ namespace AutoRest.CompositeSwagger
                 // remove info
                 var info = childSwagger.Get("info") as YamlMappingNode;
                 var version = info.Get("version");
-                childSwagger.Remove("info");
+                info.Remove("title");
+                info.Remove("description");
+                info.Remove("version");
 
                 // fix up api version
                 var apiVersionParam = (childSwagger.Get("parameters") as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
@@ -111,7 +110,7 @@ namespace AutoRest.CompositeSwagger
             }
             // remove apiVersion client property
             var mergedSwaggerApiVersionParam = (mergedSwagger.Get("parameters") as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
-            var mergedSwaggerApiVersionParamName = (mergedSwaggerApiVersionParam?.Key as YamlScalarNode).Value;
+            var mergedSwaggerApiVersionParamName = (mergedSwaggerApiVersionParam?.Key as YamlScalarNode)?.Value;
             if (mergedSwaggerApiVersionParamName != null)
             {
                 (mergedSwagger.Get("parameters") as YamlMappingNode).Remove(mergedSwaggerApiVersionParamName);

@@ -4,6 +4,8 @@ using AutoRest.Core;
 using AutoRest.Core.Logging;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using System;
+
 namespace AutoRest.CompositeSwagger.Tests
 {
     [Collection("AutoRest Tests")]
@@ -86,7 +88,7 @@ namespace AutoRest.CompositeSwagger.Tests
                     Input = Path.Combine("Swagger", "composite-swagger-conflict-in-global-param.json")
                 };
                 Modeler modeler = new CompositeSwaggerModeler();
-                Assert.Throws<CodeGenerationException>(() => modeler.Build());
+                Assert.Throws<Exception>(() => modeler.Build());
             }
         }
 
@@ -101,7 +103,7 @@ namespace AutoRest.CompositeSwagger.Tests
                     Input = Path.Combine("Swagger", "composite-swagger-conflict-in-model.json")
                 };
                 Modeler modeler = new CompositeSwaggerModeler();
-                Assert.Throws<CodeGenerationException>(() => modeler.Build());
+                Assert.Throws<Exception>(() => modeler.Build());
             }
         }
 
@@ -116,7 +118,7 @@ namespace AutoRest.CompositeSwagger.Tests
                     Input = Path.Combine("Swagger", "composite-swagger-conflict-in-settings.json")
                 };
                 Modeler modeler = new CompositeSwaggerModeler();
-                Assert.Throws<CodeGenerationException>(() => modeler.Build());
+                Assert.Throws<Exception>(() => modeler.Build());
             }
         }
 

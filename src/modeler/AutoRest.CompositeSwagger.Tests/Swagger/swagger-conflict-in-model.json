@@ -56,7 +56,7 @@
         },
         "description": {
           "type": "string",
-          "description": "Description of product."
+          "description": "Description of the product."
         },
         "count": {
           "type": "number",
