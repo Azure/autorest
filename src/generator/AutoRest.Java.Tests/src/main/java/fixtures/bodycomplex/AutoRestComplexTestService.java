@@ -36,10 +36,10 @@ public interface AutoRestComplexTestService {
     AutoRestComplexTestService withApiVersion(String apiVersion);
 
     /**
-     * Gets the BasicOperations object to access its operations.
-     * @return the BasicOperations object.
+     * Gets the Basics object to access its operations.
+     * @return the Basics object.
      */
-    BasicOperations basics();
+    Basics basics();
 
     /**
      * Gets the Primitives object to access its operations.
