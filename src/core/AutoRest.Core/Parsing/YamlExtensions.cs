@@ -138,7 +138,7 @@ namespace AutoRest.Core.Parsing
             => self.Children[new YamlScalarNode(key)] = value;
 
         public static YamlNode Get(this YamlMappingNode self, string key)
-            => self.Children[new YamlScalarNode(key)];
+            => self.Children.ContainsKey(new YamlScalarNode(key)) ? self.Children[new YamlScalarNode(key)] : null;
 
         public static void Remove(this YamlMappingNode self, string key)
             => self.Children.Remove(new YamlScalarNode(key));
