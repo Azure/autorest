@@ -54,7 +54,7 @@ namespace AutoRest.Java.Azure.Model
                 }
                 else
                 {
-                    if (IsResource)
+                    if (IsResource || Extensions.Get<bool>(ExternalExtension) == true)
                     {
                         imports.Add(string.Join(".", Package, Name));
                     }

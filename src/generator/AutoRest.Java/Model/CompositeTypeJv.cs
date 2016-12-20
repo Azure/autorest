@@ -27,8 +27,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                if (Extensions.ContainsKey(ExternalExtension) &&
-                    (bool)Extensions[ExternalExtension]) {
+                if (Extensions.Get<bool>(ExternalExtension) == true) {
                     return _runtimePackage;
                 }
                 else
