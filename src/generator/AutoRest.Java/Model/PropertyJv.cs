@@ -4,11 +4,17 @@ using System.Globalization;
 using System.Linq;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
+using AutoRest.Extensions;
 
 namespace AutoRest.Java.Model
 {
     public class PropertyJv : Property
     {
+        public PropertyJv()
+        {
+            SerializedName.OnGet += serializedName => (this.Extensions.ContainsKey(SwaggerExtensions.FlattenOriginalTypeName) ? serializedName : serializedName?.Replace(".", "\\\\."));
+        }
+
         public bool WantNullable => IsXNullable ?? !IsRequired;
 
         public override IModelType ModelType

@@ -529,6 +529,12 @@ namespace AutoRest.Core
                 return true;
             }
 
+            // special case: method groups win 
+            if (whoIsAsking is MethodGroup)
+            {
+                return true;
+            }
+
             return false;
         }
 

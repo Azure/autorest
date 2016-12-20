@@ -168,5 +168,22 @@ namespace AutoRest.Python
             }
             return parsedDefault;
         }
+
+        public override bool IsSpecialCase(IIdentifier whoIsAsking, IIdentifier reservedName)
+        {
+            // special case: properties can actually have the same name as a composite type 
+            if (whoIsAsking is Property && reservedName is CompositeType)
+            {
+                return true;
+            }
+
+            // special case: parameters can actually have the same name as a method 
+            if (whoIsAsking is Parameter && reservedName is Method)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
