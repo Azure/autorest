@@ -119,11 +119,11 @@ namespace AutoRest.Core.Parsing
                 }
                 else
                 {
-                    var aMemberMapping = a.Children[key] as YamlMappingNode;
-                    var bMemberMapping = b.Children[key] as YamlMappingNode;
-                    if (aMember == null || bMember == null)
+                    var aMemberMapping = aMember as YamlMappingNode;
+                    var bMemberMapping = bMember as YamlMappingNode;
+                    if (aMemberMapping == null || bMemberMapping == null)
                     {
-                        throw new FormatException($"{subpath} has incomaptible types.");
+                        throw new FormatException($"{subpath.XPath} has incomaptible types.");
                     }
                     result.Children.Add(key, MergeYamlObjects(aMemberMapping, bMemberMapping, subpath));
                 }

@@ -85,26 +85,34 @@ namespace AutoRest.CompositeSwagger
                 childSwagger.Remove("info");
 
                 // fix up api version
-                var apiVersionParam = (childSwagger.Get("parameters") as YamlMappingNode).Children.First(param => ((param.Value as YamlMappingNode).Get("name") as YamlScalarNode).Value == "api-version");
-                // TODO: add checks with meaningful errors instead of NRE exceptions...
-                var apiVersionParamName = (apiVersionParam.Key as YamlScalarNode).Value;
-                var apiVersionParams = (childSwagger.Get("paths") as YamlMappingNode).Children.Values.OfType<YamlMappingNode>()
-                    .SelectMany(path => path.Children.Values.OfType<YamlMappingNode>())
-                    .SelectMany(method => (method.Get("parameters") as YamlSequenceNode).Children.OfType<YamlMappingNode>())
-                    .Where(param => (param.Get("$ref") as YamlScalarNode)?.Value == $"#/parameters/{apiVersionParamName}");
-                foreach (var param in apiVersionParams)
+                var apiVersionParam = (childSwagger.Get("parameters") as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
+                var apiVersionParamName = (apiVersionParam?.Key as YamlScalarNode)?.Value;
+                if (apiVersionParamName != null)
                 {
-                    param.Remove("$ref");
-                    foreach (var child in (apiVersionParam.Value as YamlMappingNode).Children)
+                    var apiVersionParams = (childSwagger.Get("paths") as YamlMappingNode).Children.Values.OfType<YamlMappingNode>()
+                        .SelectMany(path => path.Children.Values.OfType<YamlMappingNode>())
+                        .SelectMany(method => (method.Get("parameters") as YamlSequenceNode).Children.OfType<YamlMappingNode>())
+                        .Where(param => (param.Get("$ref") as YamlScalarNode)?.Value == $"#/parameters/{apiVersionParamName}");
+                    foreach (var param in apiVersionParams)
                     {
-                        param.Children.Add(child);
+                        param.Remove("$ref");
+                        foreach (var child in (apiVersionParam?.Value as YamlMappingNode).Children)
+                        {
+                            param.Children.Add(child);
+                        }
+                        param.Set("enum", new YamlSequenceNode(version));
                     }
-                    param.Set("enum", new YamlSequenceNode(version));
                 }
 
                 // merge
                 mergedSwagger = mergedSwagger.MergeWith(childSwagger);
-                (mergedSwagger.Get("parameters") as YamlMappingNode).Remove(apiVersionParamName);
+            }
+            // remove apiVersion client property
+            var mergedSwaggerApiVersionParam = (mergedSwagger.Get("parameters") as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
+            var mergedSwaggerApiVersionParamName = (mergedSwaggerApiVersionParam?.Key as YamlScalarNode).Value;
+            if (mergedSwaggerApiVersionParamName != null)
+            {
+                (mergedSwagger.Get("parameters") as YamlMappingNode).Remove(mergedSwaggerApiVersionParamName);
             }
 
             // CodeModel compositeClient = InitializeServiceClient(compositeSwaggerModel);
