@@ -120,7 +120,7 @@ namespace AutoRest.CompositeSwagger
             using (NewContext)
             {
                 var swaggerModeler = new SwaggerModeler();
-                return swaggerModeler.Build(SwaggerParser.Parse(mergedSwagger.Serialize()));
+                return swaggerModeler.Build(SwaggerParser.Parse(Settings.Input, mergedSwagger.Serialize()));
             }
         }
         
