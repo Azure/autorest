@@ -270,4 +270,7 @@
   <data name="UniqueResourcePathsWarning" xml:space="preserve">
     <value>More than one resource path is not allowed in a single spec</value>
   </data>
+  <data name="PathCannotBeNullOrEmpty" xml:space="preserve">
+    <value>path cannot be null or an empty string or a string with white spaces while getting the parent directory</value>
+  </data>
 </root>

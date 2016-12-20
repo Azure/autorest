@@ -456,6 +456,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to path cannot be null or an empty string or a string with white spaces while getting the parent directory.
+        /// </summary>
+        public static string PathCannotBeNullOrEmpty {
+            get {
+                return ResourceManager.GetString("PathCannotBeNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Parameters &quot;subscriptionId&quot; or &quot;api-version&quot; are referenced but not defined in the parameters section of Service Definition.
         /// </summary>
         public static string ServiceDefinitionParametersMissingMessage {
