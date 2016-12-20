@@ -32,9 +32,20 @@ namespace AutoRest.Core.Utilities
             return (new Uri(Path.Combine(rootPath.ToString(), relativePath).ToString(), UriKind.Relative)).ToString();
         }
 
-        public string GetParentDir(string path)
+        public Uri GetParentDir(string path)
         {
-           return (path == "") ? "" : Path.GetDirectoryName(path);
+            if (IsCompletePath(path))
+            {
+                return new Uri(new Uri(path), ".");
+            }
+            else if (path != "")
+            {
+                return new Uri(Path.GetDirectoryName(path), UriKind.Relative);
+            }
+            else
+            {
+                return new Uri(Directory.GetParent(Path.Combine(Directory.GetCurrentDirectory(), path)).FullName, UriKind.Relative);
+            }
         }
         
         public void WriteFile(string path, string contents)

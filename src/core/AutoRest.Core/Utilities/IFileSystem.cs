@@ -36,6 +36,6 @@ namespace AutoRest.Core.Utilities
 
         string CurrentDirectory { get; }
 
-        string GetParentDir(string path);
+        Uri GetParentDir(string path);
     }
 }
