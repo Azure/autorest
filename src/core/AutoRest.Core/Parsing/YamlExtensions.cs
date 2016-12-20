@@ -110,20 +110,37 @@ namespace AutoRest.Core.Parsing
                 }
 
                 // try merge objects otherwise
-                var aMember = a.Children[key] as YamlMappingNode;
-                var bMember = b.Children[key] as YamlMappingNode;
-                if (aMember == null || bMember == null)
+                var aMember = a.Children[key];
+                var bMember = b.Children[key];
+                if (aMember.Equals(bMember))
                 {
-                    throw new FormatException($"{subpath} has incomaptible types.");
+                    // objects identical
+                    result.Children.Add(key, aMember);
                 }
-                result.Children.Add(key, MergeYamlObjects(aMember, bMember, subpath));
+                else
+                {
+                    var aMemberMapping = a.Children[key] as YamlMappingNode;
+                    var bMemberMapping = b.Children[key] as YamlMappingNode;
+                    if (aMember == null || bMember == null)
+                    {
+                        throw new FormatException($"{subpath} has incomaptible types.");
+                    }
+                    result.Children.Add(key, MergeYamlObjects(aMemberMapping, bMemberMapping, subpath));
+                }
             }
             return result;
         }
 
         public static YamlMappingNode MergeWith(this YamlMappingNode self, YamlMappingNode other)
-        {
-            return MergeYamlObjects(self, other, ObjectPath.Empty);
-        }
+            => MergeYamlObjects(self, other, ObjectPath.Empty);
+
+        public static void Set(this YamlMappingNode self, string key, YamlNode value)
+            => self.Children[new YamlScalarNode(key)] = value;
+
+        public static YamlNode Get(this YamlMappingNode self, string key)
+            => self.Children[new YamlScalarNode(key)];
+
+        public static void Remove(this YamlMappingNode self, string key)
+            => self.Children.Remove(new YamlScalarNode(key));
     }
 }

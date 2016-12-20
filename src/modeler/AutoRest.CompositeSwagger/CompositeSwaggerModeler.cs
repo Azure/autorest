@@ -17,6 +17,8 @@ using Newtonsoft.Json.Converters;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using YamlDotNet.RepresentationModel;
+using AutoRest.Core.Parsing;
 
 namespace AutoRest.CompositeSwagger
 {
@@ -61,18 +63,32 @@ namespace AutoRest.CompositeSwagger
                 }
             }
 
-            CodeModel compositeClient = InitializeServiceClient(compositeSwaggerModel);
+            // construct merged swagger document
+            var mergedSwagger = new YamlMappingNode();
+            mergedSwagger.Set("swagger", new YamlScalarNode("2.0"));
+            mergedSwagger.Set("info", (Settings.FileSystem.ReadFileAsText(Settings.Input).ParseYaml() as YamlMappingNode)?.Get("info"));
+            mergedSwagger.Set("host", new YamlScalarNode("management.azure.com"));
+            mergedSwagger.Set("schemes", new YamlSequenceNode(new YamlScalarNode("https")));
+
+            // merge
+            foreach (var childSwaggerPath in compositeSwaggerModel.Documents)
+            {
+                var childSwagger = Settings.FileSystem.ReadFileAsText(childSwaggerPath).ParseYaml() as YamlMappingNode;
+                if (childSwagger == null)
+                {
+                    throw ErrorManager.CreateError("Failed parsing referenced Swagger file {0}.", childSwaggerPath);
+                }
+                var info = childSwagger.Get("info");
+                childSwagger.Remove("info");
+                mergedSwagger = mergedSwagger.MergeWith(childSwagger);
+            }
+
+            // CodeModel compositeClient = InitializeServiceClient(compositeSwaggerModel);
             using (NewContext)
             {
-                foreach (var childSwaggerPath in compositeSwaggerModel.Documents)
-                {
-                    Settings.Input = childSwaggerPath;
-                    var swaggerModeler = new SwaggerModeler();
-                    var serviceClient = swaggerModeler.Build();
-                    compositeClient = Merge(compositeClient, serviceClient);
-                }
+                var swaggerModeler = new SwaggerModeler();
+                return swaggerModeler.Build(SwaggerParser.Parse(mergedSwagger.Serialize()));
             }
-            return compositeClient;
         }
 
         private CodeModel InitializeServiceClient(CompositeServiceDefinition compositeSwaggerModel)
