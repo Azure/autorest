@@ -78,8 +78,16 @@ namespace AutoRest.Core.Parsing
                 return writer.ToString();
             }
         }
-
-        public static YamlMappingNode MergeYamlObjects(YamlMappingNode a, YamlMappingNode b, ObjectPath path)
+        
+        /// <summary>
+        /// Merges to Yaml mapping nodes (~ dictionaries) as follows:
+        /// - members existing only in one node will be present in the result
+        /// - members existing in both nodes will
+        ///     - be present in the result, if they are identical
+        ///     - be merged if they are mapping or sequence nodes
+        ///     - THROW an exception otherwise
+        /// </summary>
+        public static T MergeYamlObjects<T>(T a, T b, ObjectPath path) where T : YamlNode
         {
             if (a == null)
             {
@@ -90,45 +98,54 @@ namespace AutoRest.Core.Parsing
                 throw new ArgumentNullException(nameof(b));
             }
 
-            // iterate all members
-            var result = new YamlMappingNode();
-            var keys = a.Children.Keys.Concat(b.Children.Keys).Distinct();
-            foreach (var key in keys)
+            // trivial case
+            if (a.Equals(b))
             {
-                var subpath = path.AppendProperty(key.ToString());
-
-                // forward if only present in one of the nodes
-                if (!a.Children.ContainsKey(key))
-                {
-                    result.Children.Add(key, b.Children[key]);
-                    continue;
-                }
-                if (!b.Children.ContainsKey(key))
-                {
-                    result.Children.Add(key, a.Children[key]);
-                    continue;
-                }
-
-                // try merge objects otherwise
-                var aMember = a.Children[key];
-                var bMember = b.Children[key];
-                if (aMember.Equals(bMember))
-                {
-                    // objects identical
-                    result.Children.Add(key, aMember);
-                }
-                else
-                {
-                    var aMemberMapping = aMember as YamlMappingNode;
-                    var bMemberMapping = bMember as YamlMappingNode;
-                    if (aMemberMapping == null || bMemberMapping == null)
-                    {
-                        throw new Exception($"{subpath.XPath} has incomaptible values ({aMember}, {bMember}).");
-                    }
-                    result.Children.Add(key, MergeYamlObjects(aMemberMapping, bMemberMapping, subpath));
-                }
+                return a;
             }
-            return result;
+
+            // mapping nodes
+            var aMapping = a as YamlMappingNode;
+            var bMapping = b as YamlMappingNode;
+            if (aMapping != null && bMapping != null)
+            {
+                // iterate all members
+                var result = new YamlMappingNode();
+                var keys = aMapping.Children.Keys.Concat(bMapping.Children.Keys).Distinct();
+                foreach (var key in keys)
+                {
+                    var subpath = path.AppendProperty(key.ToString());
+
+                    // forward if only present in one of the nodes
+                    if (!aMapping.Children.ContainsKey(key))
+                    {
+                        result.Children.Add(key, bMapping.Children[key]);
+                        continue;
+                    }
+                    if (!bMapping.Children.ContainsKey(key))
+                    {
+                        result.Children.Add(key, aMapping.Children[key]);
+                        continue;
+                    }
+
+                    // try merge objects otherwise
+                    var aMember = aMapping.Children[key];
+                    var bMember = bMapping.Children[key];
+                    result.Children.Add(key, MergeYamlObjects(aMember, bMember, subpath));
+                }
+                return result as T;
+            }
+
+            // sequence nodes
+            var aSequence = a as YamlSequenceNode;
+            var bSequence = b as YamlSequenceNode;
+            if (aSequence != null && bSequence != null)
+            {
+                return new YamlSequenceNode(aSequence.Children.Concat(bSequence.Children).Distinct()) as T;
+            }
+
+            // nothing worked
+            throw new Exception($"{path.XPath} has incomaptible values ({a}, {b}).");
         }
 
         public static YamlMappingNode MergeWith(this YamlMappingNode self, YamlMappingNode other)
