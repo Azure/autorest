@@ -68,8 +68,11 @@ namespace AutoRest.CSharp
             // Models
             foreach (CompositeTypeCs model in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
             {
-                var modelTemplate = new ModelTemplate{ Model = model };
+                var modelTemplate = new ModelTemplate { Model = model };
                 await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}"));
+
+                var xmlSerializer = new ModelXmlSerializerTemplate { Model = model };
+                await Write(xmlSerializer, Path.Combine(Settings.Instance.ModelsName, $"{model.Name}XmlSerializer{ImplementationFileExtension}"));
             }
 
             // Enums

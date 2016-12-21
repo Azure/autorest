@@ -1,0 +1,152 @@
+﻿@using System.Linq
+@using System.Runtime.Remoting.Messaging
+@using AutoRest.Core
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp
+@using AutoRest.CSharp.Model
+@using AutoRest.Extensions
+@inherits Template<global::AutoRest.CSharp.Model.CompositeTypeCs>
+@Header("// ")
+@EmptyLine
+namespace @(Settings.Namespace).@(Settings.ModelsName)
+{
+    using System.Linq;
+    internal static class @(Model.Name)XmlSerializer
+    {
+        <text>
+        /// <summary>            
+        /// Deserializes the content from an XML string
+        /// </summary>
+        internal static @Model.Name Deserialize( string xmlText ) 
+        {
+            return Deserialize( System.Xml.XElement.Parse(xmlText) )
+        }
+        
+        /// <summary>
+        /// Deserializes the content from an XML element
+        /// </summary>
+        internal static @Model.Name Deserialize(System.Xml.XElement xmlElement ) 
+        {
+            var result = new @(Model.Name)(); 
+            
+            return result;
+        }
+
+        /// <summary>
+        /// Deserializes the content from an XML string
+        /// </summary>
+        internal static IEnumerable<@Model.Name> DeserializeSequence(string xmlText ) =>
+             DeserializeSequence( System.Xml.XElement.Parse(xmlText) );
+
+        
+        /// <summary>
+        /// Deserializes the content from an XML element
+        /// </summary>
+        internal static IEnumerable<@Model.Name> DeserializeSequence(System.Xml.XElement xmlElement) 
+        {
+            return null;
+        }
+    
+        /// <summary>
+        /// Deserializes a dictionary of @Model.Name objects from an XML string
+        /// </summary>
+        internal static IDictionary<string, @Model.Name> DeserializeDictionary(string xmlText ) =>
+             DeserializeDictionary( System.Xml.XElement.Parse(xmlText) );
+
+
+        /// <summary>
+        /// Deserializes a dictionary of @Model.Name objects from an XML node
+        /// </summary>
+        internal static IDictionary<string, @Model.Name> DeserializeDictionary(System.Xml.XElement xmlElement ) 
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Serializes the object to an XML node
+        /// </summary>
+        internal static System.Xml.XElement Serialize(this @Model.Name object, string elementName = null )
+        {
+            var result = System.Xml.XElement( elementName ?? "@Model.XmlName" );
+
+            @foreach (var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened()))
+            {
+                @:// serialize the property @property
+                if (@property.IsNullable())
+                {
+                @:if( @(property.Name) != null )
+                @:{  
+                }
+                if (property.ModelType is CompositeType ) {
+                @:  // serialize a nested model type
+                @:  result.Add(@(property.Name).Serialize("@(property.XmlName)"));
+                }
+                else if (property.ModelType is DictionaryType)
+                {
+                    var vt = ((DictionaryType)property.ModelType).ValueType;
+                    if (vt is DictionaryType || vt is SequenceType) {
+                        // do nothing right now. 
+                    }
+                    if (vt is CompositeType) {
+                        @:  var dict = System.Xml.XElement("@property.XmlName");
+                        @:  foreach( var key in @(property.Name).Keys ){
+                        @:     dict.Add(@(property.Name)[key].Serialize(key) );
+                        @:  }  
+                        @:  result.Add(dict);
+                    }
+                    else
+                    {
+                        @:  var dict = System.Xml.XElement("@property.XmlName");
+                        @:  foreach( var key in @(property.Name).Keys ){
+                        @:     dict.Add(new System.Xml.XElement( key, @(property.Name)[key] ) );
+                        @:  }
+                        @:  result.Add(dict);
+                    }
+                }
+                else if (property.ModelType is SequenceType)
+                {
+                    var et = ((SequenceType)property.ModelType).ElementType;
+                    if (et is DictionaryType || et is SequenceType) {
+                        // do nothing right now. 
+                    }
+                    if (et is CompositeType) {
+                        // todo: handle iswrapped 
+                        @:  var seq = System.Xml.XElement("@property.XmlName");
+                        @:  foreach( var value in @(property.Name) ){
+                        @:     seq.Add(@(property.Name)[key].Serialize(@property.XmlName) );
+                        @:  }  
+                        @:  result.Add(seq);
+                    }
+                    else
+                    {
+                        @:  var seq = System.Xml.XElement("@property.XmlName");
+                        @:  foreach( var value in @(property.Name) ){
+                        @:     seq.Add(new System.Xml.XElement( "@property.XmlName", value ) );
+                        @:  }
+                        @:  result.Add(seq);
+                    }
+                } else
+                {
+                @:  // serialize it as a primitive/value type.
+                @:  result.Add( new System.Xml.XElement( "@property.Name", @(property.Name) ) );
+                }
+                if (@property.IsNullable())
+                {
+                @:}
+                }
+            }
+        }
+        
+        internal static IEnumerable<System.Xml.XElement> Serialize(this IEnumerable<@Model.Name> sequence, string elementName = null ) {
+            return null;
+        }
+
+
+        internal static System.Xml.XElement Serialize(this IDictionary<string, @Model.Name> dictionary, string elementName = null ) {
+            return null;
+        }
+    
+        </text>
+    }
+}

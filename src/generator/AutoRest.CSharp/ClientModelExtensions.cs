@@ -46,6 +46,10 @@ namespace AutoRest.CSharp
             return string.Format(CultureInfo.InvariantCulture, "HttpMethod.{0}", method);
         }
 
+        public static bool ShouldImplementXml(this IModelType model) {
+            return true;
+        }
+
         public static bool ShouldValidateChain(this IModelType model)
         {
             if (model == null)
