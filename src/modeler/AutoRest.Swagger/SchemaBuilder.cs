@@ -42,7 +42,10 @@ namespace AutoRest.Swagger
             var primaryType = _schema.GetSimplePrimaryType();
             if (primaryType != KnownPrimaryType.None)
             {
-                return New<PrimaryType>(primaryType);
+                var result = New<PrimaryType>(primaryType);
+                // xml properties
+                result.XmlProperties = _schema.Xml;
+                return result;
             }
 
             // Otherwise create new object type
@@ -82,7 +85,8 @@ namespace AutoRest.Swagger
                 {
                     Name = name,
                     ModelType = propertyType,
-                    Documentation = "Unmatched properties from the message are deserialized this collection"
+                    Documentation = "Unmatched properties from the message are deserialized this collection",
+                    XmlProperties = _schema.AdditionalProperties.Xml
                 }));
             }
 
@@ -135,7 +139,8 @@ namespace AutoRest.Swagger
                             SerializedName = name,
                             ModelType = propertyType,
                             IsReadOnly = property.Value.ReadOnly,
-                            Summary = property.Value.Title
+                            Summary = property.Value.Title,
+                            XmlProperties = property.Value.Xml
                         });
                         PopulateParameter(propertyObj, refSchema != null ? refSchema : property.Value);
                         var propertyCompositeType = propertyType as CompositeType;
@@ -190,6 +195,8 @@ namespace AutoRest.Swagger
             }
             Modeler.GeneratedTypes[localName] = objectType;
 
+            // xml properties
+            objectType.XmlProperties = _schema.Xml;
             return objectType;
         }
 

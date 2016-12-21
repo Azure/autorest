@@ -92,17 +92,17 @@ namespace AutoRest.Core.Model
 
         public virtual bool IsPolymorphicDiscriminator => true == (Parent as CompositeType)?.BasePolymorphicDiscriminator?.EqualsIgnoreCase(Name.RawValue);
 
-        /// <summary>
-        ///  Xml Properties...
-        /// </summary>
-        public virtual string XmlName => SerializedName;
+        public XmlProperties XmlProperties { get; set; }
 
-        public virtual bool XmlIsWrapped => false;
-
-        public virtual string XmlPrefix => "";
-
-        public virtual string XmlNamespace => "";
-
-        public virtual bool XmlIsAttribute => false;
+        [JsonIgnore]
+        public string XmlName => XmlProperties?.Name ?? Name;
+        [JsonIgnore]
+        public string XmlNamespace => XmlProperties?.Namespace ?? ModelType.XmlNamespace;
+        [JsonIgnore]
+        public string XmlPrefix => XmlProperties?.Prefix ?? ModelType.XmlPrefix;
+        [JsonIgnore]
+        public bool XmlIsWrapped => XmlProperties?.Wrapped ?? ModelType.XmlIsWrapped;
+        [JsonIgnore]
+        public bool XmlIsAttribute => XmlProperties?.Attribute ?? ModelType.XmlIsAttribute;
     }
 }

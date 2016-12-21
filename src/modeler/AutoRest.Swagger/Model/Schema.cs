@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Globalization;
 
+using AutoRest.Core.Model;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Validation;
 using System.Collections.Generic;
@@ -70,7 +71,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// A metadata object that allows for more fine-tuned XML model definitions.
         /// </summary>
-        public XmlObject Xml { get; set; }
+        public XmlProperties Xml { get; set; }
 
         [JsonIgnore]
         internal bool IsReferenced { get; set; }

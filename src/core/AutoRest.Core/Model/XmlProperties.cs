@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AutoRest.Swagger.Model
+namespace AutoRest.Core.Model
 {
-    public class XmlObject
+    public class XmlProperties
     {
         /// <summary>
         /// Replaces the name of the element/attribute used for the described schema property.
@@ -29,13 +29,13 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// Declares whether the property definition translates to an attribute instead of an element.
         /// </summary>
-        public bool Attribute { get; set; } = false;
+        public bool Attribute { get; set; }
 
         /// <summary>
         /// MAY be used only for an array definition.
         /// Signifies whether the array is wrapped (for example, `<books><book/><book/></books>`) or unwrapped (`<book/><book/>`).
         /// The definition takes effect only when defined alongside type being array (outside the items).
         /// </summary>
-        public bool Wrapped { get; set; } = false;
+        public bool Wrapped { get; set; }
     }
 }
