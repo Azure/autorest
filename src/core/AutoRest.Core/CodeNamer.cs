@@ -322,38 +322,6 @@ namespace AutoRest.Core
         }
 
         /// <summary>
-        ///     Returns language specific type reference name.
-        /// </summary>
-        /// <param name="typePair"></param>
-        /// <returns></returns>
-        public virtual Response NormalizeTypeReference(Response typePair)
-        {
-            return new Response(NormalizeTypeReference(typePair.Body),
-                NormalizeTypeReference(typePair.Headers));
-        }
-
-        /// <summary>
-        ///     Returns language specific type reference name.
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public virtual IModelType NormalizeTypeReference(IModelType type)
-        {
-            return type;
-        }
-
-        /// <summary>
-        ///     Returns language specific type declaration name.
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public virtual IModelType NormalizeTypeDeclaration(IModelType type)
-        {
-            return type;
-        }
-
-
-        /// <summary>
         ///     Formats a string as upper or lower case. Two-letter inputs that are all upper case are both lowered.
         ///     Example: ID = > id,  Ex => ex
         /// </summary>

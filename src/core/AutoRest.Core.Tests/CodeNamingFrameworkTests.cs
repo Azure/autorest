@@ -9,16 +9,6 @@ namespace AutoRest.Core.Tests
 {
     public class FakeCodeNamer : CodeNamer
     {
-        public override IModelType NormalizeTypeReference(IModelType type)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IModelType NormalizeTypeDeclaration(IModelType type)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public override string EscapeDefaultValue(string value, IModelType type)
         {
             throw new NotImplementedException();

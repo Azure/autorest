@@ -161,26 +161,6 @@ namespace AutoRest.Java
 
         #endregion
 
-        #region normalization
-
-        public override IModelType NormalizeTypeReference(IModelType type)
-        {
-            if (type == null)
-            {
-                return null;
-            }
-
-            var enumType = type as EnumType;
-            if (enumType != null && enumType.ModelAsString && enumType.Name.IsNullOrEmpty())
-            {
-                type = new PrimaryTypeJv(KnownPrimaryType.String);
-            }
-
-            return NormalizeTypeDeclaration(type);
-        }
-
-        #endregion
-
         #region type handling
 
         public static string GetJavaException(string exception, CodeModel cm)
