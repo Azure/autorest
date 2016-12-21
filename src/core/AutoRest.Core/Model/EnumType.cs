@@ -80,8 +80,8 @@ namespace AutoRest.Core.Model
                 return false;
             }
 
-            return base.StructurallyEquals(other) && 
-                Values.OrderBy(t => t).SequenceEqual(Values.OrderBy(t => t)) &&
+            return Name == other.Name &&
+                Values.OrderBy(t => t).SequenceEqual((other as EnumType).Values.OrderBy(t => t), new Utilities.EqualityComparer<EnumValue>((a, b) => a.Name == b.Name)) &&
                 ModelAsString == (other as EnumType).ModelAsString;
         }
 

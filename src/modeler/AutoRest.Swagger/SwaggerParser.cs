@@ -51,7 +51,7 @@ namespace AutoRest.Swagger
             if (entityType == null && modelName == null)
             {
                 //first call to the recursive function. Hence we will process file references only.
-                references = currentDoc.SelectTokens("$..$ref").Where(p => !((string)p).StartsWith("#"));
+                references = currentDoc.SelectTokens("$..$ref").Where(p => !((string)p).StartsWith("#") && !((string)p).Contains("/example"));
             }
             else
             {

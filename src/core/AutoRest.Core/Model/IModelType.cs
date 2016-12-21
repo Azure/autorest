@@ -146,8 +146,14 @@ namespace AutoRest.Core.Model
             {
                 return false;
             }
+            if (ReferenceEquals(other, this))
+            {
+                return true;
+            }
 
-            return GetType() == other.GetType() && Name.Equals(other.Name);
+            var ta = JsonConvert.SerializeObject(this, CodeModelSettings.SerializerSettings);
+            var tb = JsonConvert.SerializeObject(other, CodeModelSettings.SerializerSettings);
+            return ta == tb;
         }
 
         /// <summary>
