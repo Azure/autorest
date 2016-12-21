@@ -32,7 +32,6 @@ namespace AutoRest.Extensions.Azure
         public const string AzureResourceExtension = "x-ms-azure-resource";
         public const string ODataExtension = "x-ms-odata";
         public const string ClientRequestIdExtension = "x-ms-client-request-id";
-        public const string ExternalExtension = "x-ms-external";
 
         //TODO: Ideally this would be the same extension as the ClientRequestIdExtension and have it specified on the response headers,
         //TODO: But the response headers aren't currently used at all so we put an extension on the operation for now
