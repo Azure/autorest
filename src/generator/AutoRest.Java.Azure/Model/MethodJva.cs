@@ -13,41 +13,50 @@ using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using AutoRest.Core.Utilities.Collections;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Azure.Model
 {
     public class MethodJva : MethodJv
     {
+        [JsonIgnore]
         public string ClientRequestIdString => AzureExtensions.GetClientRequestIdString(this);
 
+        [JsonIgnore]
         public string RequestIdString => AzureExtensions.GetRequestIdString(this);
 
         /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.
         /// </summary>
+        [JsonIgnore]
         public bool IsLongRunningOperation
         {
             get { return Extensions.ContainsKey(AzureExtensions.LongRunningExtension); }
         }
 
+        [JsonIgnore]
         public bool IsPagingNextOperation
         {
             get { return Extensions.ContainsKey("nextLinkMethod") && (bool) Extensions["nextLinkMethod"]; }
         }
 
+        [JsonIgnore]
         public bool IsPagingOperation => Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
                     Extensions[AzureExtensions.PageableExtension] != null &&
                     !IsPagingNextOperation;
 
+        [JsonIgnore]
         public bool IsPagingNonPollingOperation => Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
                     Extensions[AzureExtensions.PageableExtension] == null &&
                     !IsPagingNextOperation;
 
+        [JsonIgnore]
         public ResponseJva ReturnTypeJva => ReturnType as ResponseJva;
 
         /// <summary>
         /// Get the type for operation exception.
         /// </summary>
+        [JsonIgnore]
         public override string OperationExceptionTypeString
         {
             get
@@ -68,6 +77,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override IEnumerable<ParameterJv> RetrofitParameters
         {
             get
@@ -89,6 +99,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string MethodParameterApiDeclaration
         {
             get
@@ -113,6 +124,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string MethodParameterDeclaration
         {
             get
@@ -132,6 +144,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string MethodRequiredParameterDeclaration
         {
             get
@@ -151,6 +164,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string MethodParameterDeclarationWithCallback
         {
             get
@@ -179,6 +193,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string MethodRequiredParameterDeclarationWithCallback
         {
             get
@@ -207,6 +222,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string MethodParameterInvocationWithCallback
         {
             get
@@ -219,6 +235,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string MethodRequiredParameterInvocationWithCallback
         {
             get
@@ -231,10 +248,12 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override bool IsParameterizedHost => 
             (CodeModel?.Extensions?.ContainsKey(SwaggerExtensions.ParameterizedHostExtension) ?? false) && 
             !IsPagingNextOperation;
 
+        [JsonIgnore]
         public override IEnumerable<string> Exceptions
         {
             get
@@ -248,6 +267,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override List<string> ExceptionStatements
         {
             get
@@ -261,6 +281,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public string PollingMethod
         {
             get
@@ -286,6 +307,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public string PollingResourceTypeArgs
         {
             get
@@ -299,6 +321,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string ResponseBuilder
         {
             get
@@ -307,6 +330,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string ReturnTypeResponseName => 
             ReturnTypeJv?.BodyClientType?.ServiceResponseVariant()?.Name;
 
@@ -358,6 +382,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public string PagingNextPageLinkParameterName
         {
             get
@@ -408,6 +433,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string ReturnValue
         {
             get
@@ -597,6 +623,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string ServiceCallConstruction
         {
             get
@@ -644,6 +671,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string CallbackDocumentation
         {
             get
@@ -658,6 +686,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string RuntimeBasePackage
         {
             get
@@ -666,6 +695,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override List<string> InterfaceImports
         {
             get
@@ -682,6 +712,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override List<string> ImplImports
         {
             get

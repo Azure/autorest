@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,6 +22,7 @@ namespace AutoRest.Java.Azure.Model
 
         public string TypeDefinitionName { get; private set; }
 
+        [JsonIgnore]
         public IEnumerable<string> ImportList
         {
             get
@@ -33,6 +35,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string ModelsPackage
         {
             get

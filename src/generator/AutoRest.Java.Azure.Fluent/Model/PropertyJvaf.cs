@@ -4,6 +4,7 @@ using System.Linq;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Java.Model;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -11,6 +12,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         public bool IsInnerModel { get; set; } = false;
 
+        [JsonIgnore]
         public override IEnumerable<string> Imports
         {
             get

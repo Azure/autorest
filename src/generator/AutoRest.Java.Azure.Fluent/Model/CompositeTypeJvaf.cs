@@ -5,6 +5,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Java.Azure.Model;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -20,6 +21,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             Name.OnGet += nam => nam.IsNullOrEmpty() || !IsInnerModel ? nam : nam + "Inner";
         }
 
+        [JsonIgnore]
         public override IEnumerableWithIndex<Property> Properties
         {
             get
@@ -30,6 +32,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        [JsonIgnore]
         public override string Package
         {
             get
@@ -53,12 +56,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
             }
         }
-
-
+        
+        [JsonIgnore]
         public override string ModelsPackage => IsInnerModel ? ".implementation" : "";
 
         public bool IsInnerModel { get; set; } = false;
 
+        [JsonIgnore]
         public override IEnumerable<string> Imports
         {
             get
@@ -76,6 +80,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        [JsonIgnore]
         public override IEnumerable<string> ImportList
         {
             get

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using AutoRest.Core.Model;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Model
 {
@@ -11,8 +12,10 @@ namespace AutoRest.Java.Model
             Name.OnGet += name => string.IsNullOrEmpty(name) || name == "enum" ? "String" : name;
         }
 
+        [JsonIgnore]
         public virtual string ModelsPackage => (this.CodeModel as CodeModelJv).ModelsPackage;
-        
+
+        [JsonIgnore]
         public virtual IEnumerable<string> Imports
         {
             get
@@ -26,10 +29,13 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IModelTypeJv ResponseVariant => this;
 
+        [JsonIgnore]
         public IModelTypeJv ParameterVariant => this;
 
+        [JsonIgnore]
         public IModelTypeJv NonNullableVariant => this;
     }
 }

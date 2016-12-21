@@ -7,6 +7,7 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Java.Model;
 using AutoRest.Core.Utilities.Collections;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Azure.Model
 {
@@ -17,8 +18,10 @@ namespace AutoRest.Java.Azure.Model
 
         public const string ExternalExtension = "x-ms-external";
 
+        [JsonIgnore]
         public IEnumerable<Property> PropertiesEx => Properties.Where(p => p.ModelType.Name != "ServiceClientCredentials");
 
+        [JsonIgnore]
         public virtual string ParentDeclaration
         {
             get
@@ -27,6 +30,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override List<string> InterfaceImports
         {
             get
@@ -38,6 +42,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override IEnumerable<string> ImplImports
         {
             get
@@ -53,6 +58,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public string SetDefaultHeaders
         {
             get

@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Model
 {
@@ -20,6 +21,7 @@ namespace AutoRest.Java.Model
             Name.OnGet += Core.Utilities.Extensions.ToCamelCase;
         }
 
+        [JsonIgnore]
         public string MethodGroupFullType
         {
             get
@@ -28,6 +30,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string MethodGroupDeclarationType
         {
             get
@@ -36,6 +39,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string MethodGroupImplType
         {
             get
@@ -44,6 +48,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string ImplClassSuffix
         {
             get
@@ -52,6 +57,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string ParentDeclaration
         {
             get
@@ -60,6 +66,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string ImplPackage
         {
             get
@@ -68,6 +75,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string MethodGroupTypeString
         {
             get
@@ -83,6 +91,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string MethodGroupServiceType
         {
             get
@@ -91,6 +100,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string ServiceClientType
         {
             get
@@ -99,6 +109,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual IEnumerable<string> ImplImports
         {
             get
@@ -117,6 +128,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual IEnumerable<string> InterfaceImports
         {
             get

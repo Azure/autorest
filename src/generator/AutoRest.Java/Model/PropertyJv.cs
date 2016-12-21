@@ -5,6 +5,7 @@ using System.Linq;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
 using AutoRest.Extensions;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Model
 {
@@ -15,6 +16,7 @@ namespace AutoRest.Java.Model
             SerializedName.OnGet += serializedName => (this.Extensions.ContainsKey(SwaggerExtensions.FlattenOriginalTypeName) ? serializedName : serializedName?.Replace(".", "\\\\."));
         }
 
+        [JsonIgnore]
         public bool WantNullable => IsXNullable ?? !IsRequired;
 
         public override IModelType ModelType
@@ -35,6 +37,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string ClientForm
         {
             get
@@ -58,6 +61,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string FromClientForm
         {
             get
@@ -81,6 +85,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual IEnumerable<string> Imports
         {
             get

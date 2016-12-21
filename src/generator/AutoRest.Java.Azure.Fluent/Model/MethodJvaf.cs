@@ -8,11 +8,13 @@ using AutoRest.Core.Utilities;
 using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using AutoRest.Core;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class MethodJvaf : MethodJva
     {
+        [JsonIgnore]
         public override IEnumerable<ParameterJv> RetrofitParameters
         {
             get
@@ -66,6 +68,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        [JsonIgnore]
         public override List<string> InterfaceImports
         {
             get
@@ -86,6 +89,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        [JsonIgnore]
         public override List<string> ImplImports
         {
             get

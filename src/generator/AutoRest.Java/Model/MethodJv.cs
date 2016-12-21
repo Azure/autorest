@@ -18,6 +18,7 @@ namespace AutoRest.Java.Model
 {
     public class MethodJv : Method
     {
+        [JsonIgnore]
         public virtual IEnumerable<ParameterJv> RetrofitParameters
         {
             get
@@ -39,6 +40,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<ParameterJv> OrderedRetrofitParameters
         {
             get
@@ -51,6 +53,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Generate the method parameter declarations for a method
         /// </summary>
+        [JsonIgnore]
         public virtual string MethodParameterApiDeclaration
         {
             get
@@ -95,6 +98,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string MethodParameterDeclaration
         {
             get
@@ -110,6 +114,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string MethodRequiredParameterDeclaration
         {
             get
@@ -125,6 +130,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string MethodParameterInvocation
         {
             get
@@ -140,6 +146,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string MethodDefaultParameterInvocation
         {
             get
@@ -162,6 +169,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string MethodRequiredParameterInvocation
         {
             get
@@ -180,6 +188,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string MethodParameterApiInvocation
         {
             get
@@ -195,6 +204,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string MethodRequiredParameterApiInvocation
         {
             get
@@ -210,6 +220,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual bool IsParameterizedHost => CodeModel.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
         
         /// <summary>
@@ -218,6 +229,7 @@ namespace AutoRest.Java.Model
         [JsonIgnore]
         public string ClientReference => Group.IsNullOrEmpty() ? "this" : "this.client";
 
+        [JsonIgnore]
         public string ParameterConversion
         {
             get
@@ -234,6 +246,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string RequiredParameterConversion
         {
             get
@@ -340,6 +353,7 @@ namespace AutoRest.Java.Model
                     .Select(m => m.InputParameter.Name + " != null"));
         }
 
+        [JsonIgnore]
         public IEnumerable<ParameterJv> RequiredNullableParameters
         {
             get
@@ -359,6 +373,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<ParameterJv> ParametersToValidate
         {
             get
@@ -379,6 +394,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Gets the expression for response body initialization 
         /// </summary>
+        [JsonIgnore]
         public virtual string InitializeResponseBody
         {
             get
@@ -387,6 +403,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string MethodParameterDeclarationWithCallback
         {
             get
@@ -402,6 +419,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string MethodRequiredParameterDeclarationWithCallback
         {
             get
@@ -417,6 +435,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string MethodParameterInvocationWithCallback
         {
             get
@@ -431,6 +450,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string MethodRequiredParameterInvocationWithCallback
         {
             get
@@ -449,6 +469,7 @@ namespace AutoRest.Java.Model
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters
         /// </summary>
+        [JsonIgnore]
         public IEnumerable<ParameterJv> LocalParameters
         {
             get
@@ -463,6 +484,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string HostParameterReplacementArgs
         {
             get
@@ -479,6 +501,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the type for operation exception
         /// </summary>
+        [JsonIgnore]
         public virtual string OperationExceptionTypeString
         {
             get
@@ -495,6 +518,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual IEnumerable<string> Exceptions
         {
             get
@@ -508,6 +532,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string ExceptionString
         {
             get
@@ -516,6 +541,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual List<string> ExceptionStatements
         {
             get
@@ -531,6 +557,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string CallType
         {
             get
@@ -546,6 +573,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string InternalCallback
         {
             get
@@ -561,6 +589,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string ResponseBuilder
         {
             get
@@ -569,6 +598,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string RuntimeBasePackage
         {
             get
@@ -577,8 +607,10 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public ResponseJv ReturnTypeJv => ReturnType as ResponseJv;
 
+        [JsonIgnore]
         public virtual string ReturnTypeResponseName => ReturnTypeJv?.BodyClientType?.ServiceResponseVariant()?.Name;
 
         public virtual string ResponseGeneration(bool filterRequired = false)
@@ -597,6 +629,7 @@ namespace AutoRest.Java.Model
             return "";
         }
 
+        [JsonIgnore]
         public virtual string ReturnValue
         {
             get
@@ -657,6 +690,7 @@ namespace AutoRest.Java.Model
             return builder.ToString();
         }
 
+        [JsonIgnore]
         public virtual string ServiceCallConstruction
         {
             get
@@ -667,6 +701,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string ServiceCallFactoryMethod
         {
             get
@@ -680,6 +715,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string CallbackDocumentation
         {
             get
@@ -688,6 +724,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual List<string> InterfaceImports
         {
             get
@@ -706,6 +743,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual List<string> ImplImports
         {
             get

@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Java.Azure.Model;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -11,6 +12,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             : base(typeDefinitionName, nextLinkName, itemName) {
         }
 
+        [JsonIgnore]
         public override string ModelsPackage
         {
             get

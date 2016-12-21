@@ -3,6 +3,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
 using AutoRest.Java.Model;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,14 +21,17 @@ namespace AutoRest.Java.Azure.Model
 
         protected string _azureRuntimePackage = "com.microsoft.azure";
 
+        [JsonIgnore]
         public override string Package => IsResource
             ? _azureRuntimePackage
             : base.Package.Replace(".models", "");
 
+        [JsonIgnore]
         public bool IsResource =>
             (Name.RawValue == "Resource" || Name.RawValue == "SubResource") &&
             Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) && (bool)Extensions[AzureExtensions.AzureResourceExtension];
-        
+
+        [JsonIgnore]
         public override string ExceptionTypeDefinitionName
         {
             get
@@ -43,6 +47,8 @@ namespace AutoRest.Java.Azure.Model
                 return this.Name + "Exception";
             }
         }
+
+        [JsonIgnore]
         public override IEnumerable<string> Imports
         {
             get
@@ -67,6 +73,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override IEnumerable<string> ImportList
         {
             get

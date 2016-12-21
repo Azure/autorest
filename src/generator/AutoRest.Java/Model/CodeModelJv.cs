@@ -32,8 +32,10 @@ namespace AutoRest.Java.Model
         [JsonIgnore]
         public IEnumerable<MethodGroupJv> AllOperations => Operations.Where(operation => !operation.Name.IsNullOrEmpty()).Cast<MethodGroupJv>();
 
+        [JsonIgnore]
         public bool IsCustomBaseUri => Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
-        
+
+        [JsonIgnore]
         public string ServiceClientServiceType
         {
             get
@@ -42,12 +44,16 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string ImplPackage => "implementation";
 
+        [JsonIgnore]
         public string ModelsPackage => ".models";
 
+        [JsonIgnore]
         public IEnumerable<MethodJv> RootMethods => Methods.Where(m => m.Group.IsNullOrEmpty()).OfType<MethodJv>();
 
+        [JsonIgnore]
         public virtual IEnumerable<string> ImplImports
         {
             get
@@ -76,6 +82,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual List<string> InterfaceImports
         {
             get

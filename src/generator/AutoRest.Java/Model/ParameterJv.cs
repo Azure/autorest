@@ -2,6 +2,7 @@
 using System.Globalization;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Model
 {
@@ -19,6 +20,7 @@ namespace AutoRest.Java.Model
                         ClientProperty.Name.ToCamelCase());
         }
 
+        [JsonIgnore]
         public bool WantNullable => IsXNullable ?? !IsRequired;
 
         public override IModelType ModelType
@@ -39,6 +41,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IModelTypeJv ClientType
         {
             get
@@ -47,6 +50,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IModelTypeJv WireType
         {
             get
@@ -71,8 +75,10 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string WireName => NeedsConversion ? this.Name.ToCamelCase() + "Converted" : this.Name.ToString();
 
+        [JsonIgnore]
         public bool NeedsConversion => !ClientType.StructurallyEquals(WireType);
 
         public string ConvertToWireType(string source, string clientReference)
@@ -208,6 +214,7 @@ namespace AutoRest.Java.Model
             return builder.ToString();
         }
 
+        [JsonIgnore]
         public IEnumerable<string> InterfaceImports
         {
             get
@@ -216,6 +223,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<string> RetrofitImports
         {
             get
@@ -233,7 +241,8 @@ namespace AutoRest.Java.Model
         }
 
         private List<string> _implImports;
-        
+
+        [JsonIgnore]
         public IEnumerable<string> ClientImplImports
         {
             get
@@ -242,6 +251,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<string> WireImplImports
         {
             get

@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Model
 {
@@ -21,7 +22,8 @@ namespace AutoRest.Java.Model
         }
 
         #region types
-        
+
+        [JsonIgnore]
         public bool NeedsConversion
         {
             get
@@ -32,6 +34,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual IModelTypeJv BodyClientType
         {
             get
@@ -42,6 +45,7 @@ namespace AutoRest.Java.Model
 
         private IModelTypeJv _bodyWireType;
 
+        [JsonIgnore]
         public IModelTypeJv BodyWireType
         {
             get
@@ -61,6 +65,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IModelTypeJv HeaderClientType
         {
             get
@@ -76,6 +81,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IModelTypeJv HeaderWireType
         {
             get
@@ -102,6 +108,7 @@ namespace AutoRest.Java.Model
 
         #region template strings
 
+        [JsonIgnore]
         public string ClientResponseType
         {
             get
@@ -129,6 +136,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string ClientResponseTypeString
         {
             get
@@ -137,6 +145,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string ObservableClientResponseTypeString
         {
             get
@@ -145,6 +154,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string ClientCallbackTypeString
         {
             get
@@ -153,6 +163,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string WireResponseTypeString
         {
             get
@@ -168,6 +179,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string GenericBodyClientTypeString
         {
             get
@@ -181,6 +193,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string GenericBodyClientTypeStringWrapped
         {
             get
@@ -189,6 +202,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string ServiceCallGenericParameterString
         {
             get
@@ -197,6 +211,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string ServiceResponseGenericParameterString
         {
             get
@@ -205,6 +220,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string ServiceResponseGenericParameterStringWrapped
         {
             get
@@ -213,6 +229,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string GenericHeaderClientTypeString
         {
             get
@@ -221,6 +238,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string GenericBodyWireTypeString
         {
             get
@@ -229,6 +247,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public string GenericBodyWireTypeStringWrapped
         {
             get
@@ -237,6 +256,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string GenericHeaderWireTypeString
         {
             get
@@ -245,6 +265,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string SequenceElementTypeString
         {
             get
@@ -270,6 +291,7 @@ namespace AutoRest.Java.Model
 
         #endregion
 
+        [JsonIgnore]
         public IEnumerable<string> InterfaceImports
         {
             get
@@ -278,6 +300,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<string> ImplImports
         {
             get

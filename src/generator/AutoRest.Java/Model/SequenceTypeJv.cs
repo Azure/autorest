@@ -2,6 +2,7 @@
 using System.Linq;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Model
 {
@@ -12,6 +13,7 @@ namespace AutoRest.Java.Model
             Name.OnGet += v => $"List<{ElementType.Name}>";
         }
 
+        [JsonIgnore]
         public IModelTypeJv ResponseVariant
         {
             get
@@ -25,6 +27,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IModelTypeJv ParameterVariant
         {
             get
@@ -38,6 +41,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<string> Imports
         {
             get
@@ -47,6 +51,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IModelTypeJv NonNullableVariant => this;
     }
 }

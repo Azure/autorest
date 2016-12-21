@@ -9,11 +9,13 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class CodeModelJvaf : CodeModelJva
     {
+        [JsonIgnore]
         public override string ImplPackage
         {
             get
@@ -22,6 +24,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        [JsonIgnore]
         public override string ParentDeclaration
         {
             get
@@ -30,6 +33,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        [JsonIgnore]
         public override List<string> InterfaceImports
         {
             get
@@ -40,6 +44,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        [JsonIgnore]
         public override IEnumerable<string> ImplImports
         {
             get

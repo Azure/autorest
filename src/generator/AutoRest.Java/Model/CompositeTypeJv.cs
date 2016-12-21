@@ -5,6 +5,7 @@ using System.Linq;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
 using AutoRest.Extensions;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Model
 {
@@ -21,8 +22,10 @@ namespace AutoRest.Java.Model
         {
         }
 
+        [JsonIgnore]
         public virtual string ModelsPackage => (this.CodeModel as CodeModelJv).ModelsPackage;
 
+        [JsonIgnore]
         public virtual string Package
         {
             get
@@ -40,6 +43,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<CompositeType> SubTypes
         {
             get
@@ -58,6 +62,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual string ExceptionTypeDefinitionName
         {
             get
@@ -74,6 +79,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public bool NeedsFlatten
         {
             get
@@ -82,6 +88,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual IEnumerable<string> Imports
         {
             get
@@ -99,6 +106,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public virtual IEnumerable<String> ImportList
         {
             get
@@ -128,10 +136,13 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IModelTypeJv ResponseVariant => this;
 
+        [JsonIgnore]
         public IModelTypeJv ParameterVariant => this;
 
+        [JsonIgnore]
         public IModelTypeJv NonNullableVariant => this;
 
         protected IEnumerable<IModelTypeJv> ParseGenericType()

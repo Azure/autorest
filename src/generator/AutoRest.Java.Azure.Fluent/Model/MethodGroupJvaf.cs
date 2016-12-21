@@ -8,6 +8,7 @@ using System.Linq;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Java.Azure.Model;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -20,16 +21,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
         }
 
+        [JsonIgnore]
         public override string MethodGroupDeclarationType => MethodGroupImplType;
 
+        [JsonIgnore]
         public override string ImplClassSuffix => "Inner";
 
+        [JsonIgnore]
         public override string ParentDeclaration => "";
 
+        [JsonIgnore]
         public override string ServiceClientType => CodeModel.Name + "Impl";
 
+        [JsonIgnore]
         public override string ImplPackage => "implementation";
 
+        [JsonIgnore]
         public override IEnumerable<string> ImplImports
         {
             get

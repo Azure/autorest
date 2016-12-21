@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Model
 {
@@ -19,6 +20,8 @@ namespace AutoRest.Java.Model
         }
 
         public bool WantNullable { get; private set; } = true;
+
+        [JsonIgnore]
         public bool Nullable
         {
             get
@@ -41,6 +44,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public override string DefaultValue
         {
             get
@@ -64,6 +68,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IModelTypeJv ParameterVariant
         {
             get
@@ -91,6 +96,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IModelTypeJv ResponseVariant
         {
             get
@@ -115,6 +121,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IEnumerable<string> Imports
         {
             get
@@ -156,6 +163,7 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
         public IModelTypeJv NonNullableVariant => 
             new PrimaryTypeJv
             {
@@ -164,6 +172,7 @@ namespace AutoRest.Java.Model
                 WantNullable = false
             };
 
+        [JsonIgnore]
         public virtual string ImplementationName
         {
             get

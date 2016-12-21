@@ -2,6 +2,7 @@
 using AutoRest.Core.Model;
 using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
+using Newtonsoft.Json;
 
 namespace AutoRest.Java.Azure.Model
 {
@@ -18,8 +19,10 @@ namespace AutoRest.Java.Azure.Model
 
         public MethodJva Parent { get; set; }
 
+        [JsonIgnore]
         public bool IsPagedResponse => Parent.IsPagingNextOperation || Parent.IsPagingOperation;
 
+        [JsonIgnore]
         public override IModelTypeJv BodyClientType
         {
             get
@@ -39,6 +42,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string GenericBodyClientTypeString
         {
             get
@@ -52,6 +56,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string ServiceCallGenericParameterString
         {
             get
@@ -65,6 +70,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string ServiceResponseGenericParameterString
         {
             get
@@ -78,6 +84,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string GenericBodyWireTypeString
         {
             get
@@ -91,6 +98,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string ClientCallbackTypeString
         {
             get
@@ -103,6 +111,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [JsonIgnore]
         public override string ObservableClientResponseTypeString
         {
             get
