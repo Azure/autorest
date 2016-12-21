@@ -27,7 +27,7 @@
 }
 
 [@("Http" + @Model.HttpMethod)("@Model.Url")]
-@{ var methodSignature = "public IActionResult " + @Model.HttpMethod + "("; }
+@{ var methodSignature = "public " + Model.ReturnTypeString +" "+ @Model.HttpMethod + "("; }
 
 @foreach (var param in @Model.LocalParameters)
 {
@@ -49,26 +49,19 @@ if (parameter.IsRequired && parameter.IsNullable())
 {
     @:if (@(parameter.Name) == null)
     @:{
-        @:BadRequestException();
+        @:throw new System.ArgumentNullException();
     @:}
     @:
 }
 if (parameter.CanBeValidated && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
 {
-    @:try
-    @:{
-        @:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
-    @:}
-    @:catch(Exception e)
-    @:{
-        @:BadRequestException();
-    @:}
-
+    @:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
 }
 }
 @EmptyLine
-    return OK();
-
+@if (Model.HttpMethod == HttpMethod.Get)
+{
+    @:return new @{@Model.ReturnTypeString}();
 }
 
  @*
