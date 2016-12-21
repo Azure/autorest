@@ -21,7 +21,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             Name.OnGet += nam => nam.IsNullOrEmpty() || !IsInnerModel ? nam : nam + "Inner";
         }
 
-        [JsonIgnore]
         public override IEnumerableWithIndex<Property> Properties
         {
             get
@@ -56,7 +55,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
             }
         }
-        
+
+
         [JsonIgnore]
         public override string ModelsPackage => IsInnerModel ? ".implementation" : "";
 
