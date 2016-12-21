@@ -33,7 +33,7 @@
     "additionalProperties": false,
     "patternProperties": {
       "^x-(?!ms-).*$": {
-        "$ref": "#/definitions/vendorExtension"
+        "$ref": "#/vendorExtension"
       }
     },
     "properties": {
@@ -85,7 +85,7 @@
     },
     "patternProperties": {
       "^x-(?!ms-).*$": {
-        "$ref": "#/definitions/vendorExtension"
+        "$ref": "#/vendorExtension"
       }
     }
   },
@@ -108,7 +108,7 @@
     },
     "patternProperties": {
       "^x-(?!ms-).*$": {
-        "$ref": "#/definitions/vendorExtension"
+        "$ref": "#/vendorExtension"
       }
     }
   },
