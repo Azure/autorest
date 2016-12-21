@@ -89,7 +89,7 @@ namespace AutoRest.Preview
             // process messages
             if (doc != null)
             {
-                foreach (var message in messages)
+                foreach (var message in messages.Where(m => m.Path != null))
                 {
                     scintilla.IndicatorCurrent = INDICATOR_BASE + (int)message.Severity;
                     var node = message.Path.SelectNode(doc);
