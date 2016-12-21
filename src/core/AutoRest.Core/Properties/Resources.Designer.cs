@@ -69,6 +69,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview..
+        /// </summary>
+        public static string APIVersionFormatIsNotValid {
+            get {
+                return ResourceManager.GetString("APIVersionFormatIsNotValid", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///    Looks up a localized string similar to AutoRest Core {0}.
         /// </summary>
         public static string AutoRestCore {
