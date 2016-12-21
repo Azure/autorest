@@ -35,7 +35,8 @@ class FlattenedProduct(Resource):
     :ivar provisioning_state_values: Possible values include: 'Succeeded',
      'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',
      'Updated', 'Deleting', 'Deleted', 'OK'
-    :vartype provisioning_state_values: str
+    :vartype provisioning_state_values: str or :class:`enum
+     <fixtures.acceptancetestsmodelflattening.models.enum>`
     :param provisioning_state:
     :type provisioning_state: str
     """

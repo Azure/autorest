@@ -25,7 +25,8 @@ class SubProduct(SubResource):
     :ivar provisioning_state_values: Possible values include: 'Succeeded',
      'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',
      'Updated', 'Deleting', 'Deleted', 'OK'
-    :vartype provisioning_state_values: str
+    :vartype provisioning_state_values: str or :class:`enum
+     <fixtures.acceptancetestslro.models.enum>`
     """
 
     _validation = {

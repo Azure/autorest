@@ -525,7 +525,7 @@ public interface SwaggerPetstore {
      * Deletes a pet.
      *
      * @param petId Pet id to delete
-     * @param apiKey 
+     * @param apiKey the String value
      */
     void deletePet(long petId, String apiKey);
 
@@ -533,7 +533,7 @@ public interface SwaggerPetstore {
      * Deletes a pet.
      *
      * @param petId Pet id to delete
-     * @param apiKey 
+     * @param apiKey the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
@@ -1076,7 +1076,7 @@ public interface SwaggerPetstore {
     /**
      * Get user by user name.
      *
-     * @param username The name that needs to be fetched. Use user1 for testing. 
+     * @param username The name that needs to be fetched. Use user1 for testing.
      * @return the User object if successful.
      */
     User getUserByName(String username);
@@ -1084,7 +1084,7 @@ public interface SwaggerPetstore {
     /**
      * Get user by user name.
      *
-     * @param username The name that needs to be fetched. Use user1 for testing. 
+     * @param username The name that needs to be fetched. Use user1 for testing.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
