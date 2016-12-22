@@ -59,10 +59,10 @@ namespace AutoRest.Core.Parsing
                 }
                 doc = yamlStream.Documents[0].RootNode;
             }
-            catch
+            catch (Exception e)
             {
-                Logger.Instance.Log(Category.Warning, "Parsed document is not valid YAML");
-                // parsing failed, return null
+                Logger.Instance.Log(Category.Warning, "Parsed document is not valid YAML/JSON.");
+                Logger.Instance.Log(Category.Warning, e.ToString());
             }
             return doc;
         }
