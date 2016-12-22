@@ -483,6 +483,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to The id, name, type, location and tags properties of the Resource must be present with id, name and type as rad-only.
+        /// </summary>
+        public static string ResourceModelIsNotValid {
+            get {
+                return ResourceManager.GetString("ResourceModelIsNotValid", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///    Looks up a localized string similar to Parameters &quot;subscriptionId&quot; or &quot;api-version&quot; are referenced but not defined in the parameters section of Service Definition.
         /// </summary>
         public static string ServiceDefinitionParametersMissingMessage {
