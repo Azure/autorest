@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Test Infrastructure for AutoRest
@@ -35,7 +36,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
         /// <summary>
         /// Credentials needed for the client to connect to Azure.
         /// </summary>
-        Microsoft.Rest.ServiceClientCredentials Credentials { get; }
+        ServiceClientCredentials Credentials { get; }
 
         /// <summary>
         /// Gets or sets the preferred language for the response.
@@ -62,3 +63,4 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
 
     }
 }
+
