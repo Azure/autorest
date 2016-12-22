@@ -31,7 +31,7 @@ namespace @Settings.Namespace
     public partial class @(Model.Name+"Controller : Controller")
     {
         
-    @foreach (MethodCs method in Model.Methods.Where(m=>(m.MethodGroup.Name==Model.Name)))
+    @foreach (MethodCs method in Model.Methods.Where(m=>(m.MethodGroup.Name==Model.Name || m.MethodGroup.Name + "Operations" == Model.Name)))
     {
         @:@(Include(new ServerMethodTemplate(), method))
         @EmptyLine
