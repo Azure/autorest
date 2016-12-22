@@ -12,7 +12,7 @@ namespace AutoRest.Swagger.Validation
 {
     public class APIVersionPattern : TypedRule<string>
     {
-        private static readonly Regex VersionRegex = new Regex(@"(20\d{2})-(0[1-9]|1[0-2])-((0[1-9])|[12][0-9]|3[01])(-(preview|alpha|beta|rc|privatepreview))?$");
+        private static readonly Regex VersionRegex = new Regex(@"^(20\d{2})-(0[1-9]|1[0-2])-((0[1-9])|[12][0-9]|3[01])(-(preview|alpha|beta|rc|privatepreview))?$");
 
         /// <summary>
         /// The template message for this Rule. 
