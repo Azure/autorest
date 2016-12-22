@@ -198,6 +198,9 @@
   <data name="APIVersionFormatIsNotValid" xml:space="preserve">
     <value>API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.</value>
   </data>
+  <data name="HttpVerbIsNotValid" xml:space="preserve">
+    <value>Permissible values for HTTP Verb are delete,get,put,patch,head,options,post. </value>
+  </data>
   <data name="BodyMustHaveSchema" xml:space="preserve">
     <value>Each body parameter must have a schema</value>
   </data>

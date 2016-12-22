@@ -258,6 +258,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Permissible values for HTTP Verb are delete,get,put,patch,head,options,post. .
+        /// </summary>
+        public static string HttpVerbIsNotValid {
+            get {
+                return ResourceManager.GetString("HttpVerbIsNotValid", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///    Looks up a localized string similar to Initializing code generator..
         /// </summary>
         public static string InitializingCodeGenerator {
