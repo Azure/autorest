@@ -39,11 +39,11 @@ namespace AutoRest.Swagger.Validation
                     if (resourceSchema == null || resourceSchema.Properties.Count == 0)
                         return false;
 
-                    if (this.validateSchemaProperty(resourceSchema, "id", true)   ||
-                        this.validateSchemaProperty(resourceSchema, "name", true) ||
-                        this.validateSchemaProperty(resourceSchema, "type", true) ||
-                        this.validateSchemaProperty(resourceSchema, "location", false) ||
-                        this.validateSchemaProperty(resourceSchema, "tags", false))
+                    if (!this.validateSchemaProperty(resourceSchema, "id", true)   ||
+                        !this.validateSchemaProperty(resourceSchema, "name", true) ||
+                        !this.validateSchemaProperty(resourceSchema, "type", true) ||
+                        !this.validateSchemaProperty(resourceSchema, "location", false) ||
+                        !this.validateSchemaProperty(resourceSchema, "tags", false))
                         return false;
                 }
             }
