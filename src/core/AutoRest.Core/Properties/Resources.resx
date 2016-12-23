@@ -204,6 +204,9 @@
   <data name="ResourceModelIsNotValid" xml:space="preserve">
     <value>The id, name, type, location and tags properties of the Resource must be present with id, name and type as rad-only</value>
   </data>
+  <data name="ResourceIsMsResourceNotValid" xml:space="preserve">
+    <value>A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true.</value>
+  </data>
   <data name="BodyMustHaveSchema" xml:space="preserve">
     <value>Each body parameter must have a schema</value>
   </data>

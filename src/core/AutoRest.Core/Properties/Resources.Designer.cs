@@ -483,6 +483,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to A &apos;Resource&apos; definition must have x-ms-azure-resource extension enabled and set to true..
+        /// </summary>
+        public static string ResourceIsMsResourceNotValid {
+            get {
+                return ResourceManager.GetString("ResourceIsMsResourceNotValid", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///    Looks up a localized string similar to The id, name, type, location and tags properties of the Resource must be present with id, name and type as rad-only.
         /// </summary>
         public static string ResourceModelIsNotValid {

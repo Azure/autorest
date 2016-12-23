@@ -9,15 +9,17 @@ using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class ResourceModelValidation: TypedRule<Dictionary<string, Schema>>
+    public class ResourceIsMsResourceValidation : TypedRule<Dictionary<string, Schema>>
     {
+        private static readonly string requiredExtension = "x-ms-azure-resource";
+
         /// <summary>
         /// The template message for this Rule. 
         /// </summary>
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.ResourceModelIsNotValid;
+        public override string MessageTemplate => Resources.ResourceIsMsResourceNotValid;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
@@ -31,30 +33,21 @@ namespace AutoRest.Swagger.Validation
         /// <returns></returns>
         public override bool IsValid(Dictionary<string, Schema> definitions)
         {
-            foreach(string key in definitions.Keys)
+            foreach (string key in definitions.Keys)
             {
                 if (key.ToLower().Equals("resource"))
                 {
                     Schema resourceSchema = definitions.GetValueOrNull(key);
-                    if (resourceSchema == null || resourceSchema.Properties.Count == 0)
+                    if (resourceSchema == null ||
+                        resourceSchema.Extensions == null ||
+                        resourceSchema.Extensions.Count <= 0 ||
+                        resourceSchema.Extensions.GetValueOrNull(requiredExtension) == null ||
+                        (bool)resourceSchema.Extensions.GetValueOrNull(requiredExtension) == false)
+                    {
                         return false;
-
-                    if (this.validateSchemaProperty(resourceSchema, "id", true)   ||
-                        this.validateSchemaProperty(resourceSchema, "name", true) ||
-                        this.validateSchemaProperty(resourceSchema, "type", true) ||
-                        this.validateSchemaProperty(resourceSchema, "location", false) ||
-                        this.validateSchemaProperty(resourceSchema, "tags", false))
-                        return false;
+                    }
                 }
             }
-            return true;
-        }
-
-        private bool validateSchemaProperty(Schema resourceSchema, string propertyName, bool checkForReadOnly)
-        {
-            Schema resultSchema = resourceSchema.Properties.GetValueOrNull(propertyName);
-            if (resultSchema == null || (checkForReadOnly && !resultSchema.ReadOnly))
-                return false;
             return true;
         }
     }
