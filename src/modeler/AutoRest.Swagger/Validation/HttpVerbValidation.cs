@@ -25,14 +25,14 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Error;
+        public override Category Severity => Category.Warning;
 
         /// <summary>
         /// An <paramref name="operationDefinition"/> fails this rule if it does not have the correct HTTP Verb.
         /// </summary>
         /// <param name="operationDefinition">Operation Definition to validate</param>
         /// <returns></returns>
-        public override bool IsValid(Dictionary<string, Operation> operationDefinition)
+        public override bool IsValid(Dictionary<string, Operation> operationDefinition, RuleContext context)
         {
             foreach(string httpVerb in operationDefinition.Keys)
             {

@@ -21,7 +21,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="paths"></param>
         /// <returns></returns>
-        public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths) 
+        public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context) 
             => paths.Keys.Select(path => 
                     { return apiRegExp.Match(path).Success ? apiRegExp.Match(path).Groups?[0]?.Value.ToString().ToLowerInvariant() : null; })
                                       .Where(p=>p!=null).Distinct().Count() <= 1;

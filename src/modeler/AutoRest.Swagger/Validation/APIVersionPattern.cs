@@ -23,14 +23,14 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Error;
+        public override Category Severity => Category.Warning;
 
         /// <summary>
         /// An <paramref name="version"/> fails this rule if it does not have the required format.
         /// </summary>
         /// <param name="version">Version to validate</param>
         /// <returns></returns>
-        public override bool IsValid(string version) => !string.IsNullOrEmpty(version) && VersionRegex.IsMatch(version);
+        public override bool IsValid(string version, RuleContext context) => !string.IsNullOrEmpty(version) && VersionRegex.IsMatch(version);
     }
 
 

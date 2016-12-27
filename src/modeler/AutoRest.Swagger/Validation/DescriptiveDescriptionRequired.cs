@@ -33,7 +33,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="description"></param>
         /// <returns></returns>
-        public override bool IsValid(string description)
+        public override bool IsValid(string description, RuleContext context)
             => !string.IsNullOrWhiteSpace(description) && !description.IsImpermissibleValue();
 
         /// <summary>

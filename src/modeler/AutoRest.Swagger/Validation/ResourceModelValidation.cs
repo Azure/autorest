@@ -22,14 +22,14 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Error;
+        public override Category Severity => Category.Warning;
 
         /// <summary>
         /// An <paramref name="definitions"/> fails this rule if it does not have all valid properties.
         /// </summary>
         /// <param name="definitions">Operation Definition to validate</param>
         /// <returns></returns>
-        public override bool IsValid(Dictionary<string, Schema> definitions)
+        public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context)
         {
             foreach(string key in definitions.Keys)
             {

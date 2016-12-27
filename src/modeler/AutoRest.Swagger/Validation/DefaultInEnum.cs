@@ -38,7 +38,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override bool IsValid(SwaggerObject entity) =>
+        public override bool IsValid(SwaggerObject entity, RuleContext context) =>
             entity == null || !entity.HasDefaultAndEnum() || entity.EnumContainsDefault();
 
         /// <summary>

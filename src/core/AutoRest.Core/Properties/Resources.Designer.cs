@@ -159,6 +159,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to &apos;Delete&apos; operation cannot have parameters in body..
+        /// </summary>
+        public static string DeleteMustHaveEmptyBody {
+            get {
+                return ResourceManager.GetString("DeleteMustHaveEmptyBody", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///    Looks up a localized string similar to The value provided for description is not descriptive enough..
         /// </summary>
         public static string DescriptionNotDescriptive {
@@ -492,7 +501,7 @@ namespace AutoRest.Core.Properties {
         }
 
         /// <summary>
-        ///    Looks up a localized string similar to The id, name, type, location and tags properties of the Resource must be present with id, name and type as rad-only.
+        ///    Looks up a localized string similar to The id, name, type, location and tags properties of the Resource must be present with id, name and type as read-only.
         /// </summary>
         public static string ResourceModelIsNotValid {
             get {
