@@ -28,5 +28,19 @@ namespace AutoRest.Core.Model
         /// Gets or sets the element type of the collection.
         /// </summary>
         public virtual IModelType ElementType { get; set; }
+
+        /// <summary>
+        ///  Xml Properties...
+        /// </summary>
+        public XmlProperties ElementXmlProperties { get; set; }
+
+        [JsonIgnore]
+        public string ElementXmlName => ElementXmlProperties?.Name ?? XmlName;
+        [JsonIgnore]
+        public string ElementXmlNamespace => ElementXmlProperties?.Namespace ?? ElementType.XmlNamespace;
+        [JsonIgnore]
+        public string ElementXmlPrefix => ElementXmlProperties?.Prefix ?? ElementType.XmlPrefix;
+        [JsonIgnore]
+        public bool ElementXmlIsWrapped => ElementXmlProperties?.Wrapped ?? ElementType.XmlIsWrapped;
     }
 }
