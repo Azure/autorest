@@ -8,13 +8,9 @@
 
 namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
 {
-    using Microsoft.Rest;
+    using System.Threading.Tasks;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for DurationOperations.
@@ -29,7 +25,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
             /// </param>
             public static System.TimeSpan? GetNull(this IDurationOperations operations)
             {
-                return operations.GetNullAsync().GetAwaiter().GetResult();
+                return ((IDurationOperations)operations).GetNullAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -41,7 +37,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.TimeSpan?> GetNullAsync(this IDurationOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.TimeSpan?> GetNullAsync(this IDurationOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -58,9 +54,9 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static AzureOperationResponse<System.TimeSpan?> GetNullWithHttpMessages(this IDurationOperations operations, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.Azure.AzureOperationResponse<System.TimeSpan?> GetNullWithHttpMessages(this IDurationOperations operations, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.GetNullWithHttpMessagesAsync(customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetNullWithHttpMessagesAsync(customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -73,7 +69,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
             /// </param>
             public static void PutPositiveDuration(this IDurationOperations operations, System.TimeSpan durationBody)
             {
-                operations.PutPositiveDurationAsync(durationBody).GetAwaiter().GetResult();
+                ((IDurationOperations)operations).PutPositiveDurationAsync(durationBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -87,7 +83,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutPositiveDurationAsync(this IDurationOperations operations, System.TimeSpan durationBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutPositiveDurationAsync(this IDurationOperations operations, System.TimeSpan durationBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutPositiveDurationWithHttpMessagesAsync(durationBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -103,9 +99,9 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static AzureOperationResponse PutPositiveDurationWithHttpMessages(this IDurationOperations operations, System.TimeSpan durationBody, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.Azure.AzureOperationResponse PutPositiveDurationWithHttpMessages(this IDurationOperations operations, System.TimeSpan durationBody, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.PutPositiveDurationWithHttpMessagesAsync(durationBody, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.PutPositiveDurationWithHttpMessagesAsync(durationBody, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -116,7 +112,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
             /// </param>
             public static System.TimeSpan? GetPositiveDuration(this IDurationOperations operations)
             {
-                return operations.GetPositiveDurationAsync().GetAwaiter().GetResult();
+                return ((IDurationOperations)operations).GetPositiveDurationAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -128,7 +124,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.TimeSpan?> GetPositiveDurationAsync(this IDurationOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.TimeSpan?> GetPositiveDurationAsync(this IDurationOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetPositiveDurationWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -145,9 +141,9 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static AzureOperationResponse<System.TimeSpan?> GetPositiveDurationWithHttpMessages(this IDurationOperations operations, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.Azure.AzureOperationResponse<System.TimeSpan?> GetPositiveDurationWithHttpMessages(this IDurationOperations operations, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.GetPositiveDurationWithHttpMessagesAsync(customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetPositiveDurationWithHttpMessagesAsync(customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -158,7 +154,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
             /// </param>
             public static System.TimeSpan? GetInvalid(this IDurationOperations operations)
             {
-                return operations.GetInvalidAsync().GetAwaiter().GetResult();
+                return ((IDurationOperations)operations).GetInvalidAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -170,7 +166,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.TimeSpan?> GetInvalidAsync(this IDurationOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.TimeSpan?> GetInvalidAsync(this IDurationOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -187,11 +183,10 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static AzureOperationResponse<System.TimeSpan?> GetInvalidWithHttpMessages(this IDurationOperations operations, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.Azure.AzureOperationResponse<System.TimeSpan?> GetInvalidWithHttpMessages(this IDurationOperations operations, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.GetInvalidWithHttpMessagesAsync(customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetInvalidWithHttpMessagesAsync(customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }
 }
-

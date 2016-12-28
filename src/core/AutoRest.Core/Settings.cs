@@ -83,17 +83,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
         {
             get
             {
-                if (_inputFolder == null)
+                if (_inputFolder == null && Input != null)
                 {
-                    var isBasePathUri = Uri.IsWellFormedUriString(Input, UriKind.Absolute);
-                    if (isBasePathUri)
-                    {
-                        _inputFolder = new Uri(new Uri(Input), ".");
-                    }
-                    else
-                    {
-                        _inputFolder = new Uri(this.FileSystem.GetParentDir(Input), UriKind.Relative);
-                    }
+                    _inputFolder = this.FileSystem.GetParentDir(Input);
                 }
                 return _inputFolder;
             }
@@ -257,6 +249,11 @@ Licensed under the MIT License. See License.txt in the project root for license 
             "But, will not necessarily be according to latest best practices..")]
         public bool QuirksMode { get; set; } = true;
 
+        /// <summary>
+        /// If set to true, skips the validation step. (WILL BE REMOVED)
+        /// </summary>
+        [SettingsAlias("skipvalidation")]
+        public bool SkipValidation { get; set; }
 
         /// <summary>
         /// If set, will cause generated code to be output to a single file. Not supported by all code generators.
@@ -274,7 +271,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public bool ShowHelp { get; set; }
 
         /// <summary>
-        /// If set to true, print out all messages.
+        /// If set to true, collect and print out more detailed messages.
         /// </summary>
         [SettingsAlias("verbose")]
         public bool Verbose { get; set; }

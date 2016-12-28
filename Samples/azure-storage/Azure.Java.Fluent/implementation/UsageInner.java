@@ -12,8 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class UsageInner {
     /**
-     * Gets the unit of measurement. Possible values include: 'Count',
-     * 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond'.
+     * Gets the unit of measurement. Possible values include: 'Count', 'Bytes',
+     * 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond'.
      */
     @JsonProperty(required = true)
     private UsageUnit unit;

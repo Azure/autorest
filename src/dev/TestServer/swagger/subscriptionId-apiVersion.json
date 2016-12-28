@@ -35,7 +35,7 @@
         "description": "Provides a resouce group with name 'testgroup101' and location 'West US'.",
         "parameters": [
           {
-            "$ref": "subscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "name": "resourceGroupName",
@@ -45,20 +45,20 @@
             "type": "string"
           },
           {
-            "$ref" : "apiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "A sample resource group",
             "schema": {
-              "$ref": "SampleResourceGroup"
+              "$ref": "#/definitions/SampleResourceGroup"
             }
           },
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "Error"
+              "$ref": "#/definitions/Error"
             }
           }
         }

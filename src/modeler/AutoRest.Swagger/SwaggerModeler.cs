@@ -56,12 +56,11 @@ namespace AutoRest.Swagger
         /// Default protocol when no protocol is specified in the schema
         /// </summary>
         public TransferProtocolScheme DefaultProtocol { get; set; }
-        
+
         /// <summary>
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public override CodeModel Build()
         {
             Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
@@ -69,13 +68,22 @@ namespace AutoRest.Swagger
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
-            ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+            var serviceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+            return Build(serviceDefinition);
+        }
 
-            // Look for semantic errors and warnings in the document.
-            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
+        public CodeModel Build(ServiceDefinition serviceDefinition)
+        {
+            ServiceDefinition = serviceDefinition;
+            if (!Settings.SkipValidation)
             {
-                Logger.Instance.Log(validationEx);
+                // Look for semantic errors and warnings in the document.
+                var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
+                {
+                    Logger.Instance.Log(validationEx);
+                }
             }
 
             Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
@@ -251,22 +259,6 @@ namespace AutoRest.Swagger
         /// </summary>
         public virtual void BuildCompositeTypes()
         {
-            // Load any external references
-            foreach (var reference in ServiceDefinition.ExternalReferences)
-            {
-                string[] splitReference = reference.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
-                Debug.Assert(splitReference.Length == 2);
-                string filePath = splitReference[0];
-                // Make sure the filePath is either an absolute uri, or a rooted path
-                if (!Settings.FileSystem.IsCompletePath(filePath))
-                {
-                    // Otherwise, root it from the current path
-                    filePath = Settings.FileSystem.MakePathRooted(Settings.InputFolder, filePath);
-                }
-                ServiceDefinition external = SwaggerParser.Load(filePath, Settings.FileSystem);
-                external.Definitions.ForEach(d => ServiceDefinition.Definitions[d.Key] = d.Value);
-            }
-
             // Build service types and validate allOf
             if (ServiceDefinition.Definitions != null)
             {

@@ -111,7 +111,7 @@
   },
   "definitions": {
     "ChildProduct": {
-      "AllOf": [ { "$ref": "./swagger-external-def.json#/definitions/Product" } ],
+      "allOf": [ { "$ref": "./swagger-external-def.json#/definitions/Product" } ],
       "properties": {
         "size": {
           "type": "integer",

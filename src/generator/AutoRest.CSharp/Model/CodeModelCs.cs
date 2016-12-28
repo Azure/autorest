@@ -19,12 +19,14 @@ namespace AutoRest.CSharp.Model
         public IEnumerable<MethodGroupCs> AllOperations => Operations.Where( operation => !operation.Name.IsNullOrEmpty()).Cast<MethodGroupCs>();
 
         public bool IsCustomBaseUri => Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
-      
+
+        public virtual bool HaveModelNamespace => ModelTypes.Concat(HeaderTypes).Any(m => !m.Extensions.ContainsKey(SwaggerExtensions.ExternalExtension));
+
         public virtual IEnumerable<string> Usings
         {
             get
             {
-                if (ModelTypes.Any() || HeaderTypes.Any())
+                if (HaveModelNamespace)
                 {
                     yield return ModelsName;
                 }

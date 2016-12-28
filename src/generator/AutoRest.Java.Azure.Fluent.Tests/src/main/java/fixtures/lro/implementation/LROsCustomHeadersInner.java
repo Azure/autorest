@@ -93,7 +93,7 @@ public final class LROsCustomHeadersInner {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetrySucceeded() {
         return putAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
@@ -303,7 +303,7 @@ public final class LROsCustomHeadersInner {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200() {
         return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().getBody();

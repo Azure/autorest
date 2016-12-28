@@ -188,29 +188,33 @@ namespace AutoRest.CSharp.Tests
         {
             using (NewContext)
             {
-                var codeModel = New<CodeModel>(new
+                new Settings();
+                using (new PluginCs().Context.Activate())
                 {
-                    Name = "AzureAlwaysRocksClient"
-                });
+                    var codeModel = New<CodeModel>(new
+                    {
+                        Name = "AzureAlwaysRocksClient"
+                    });
 
-                var customObjectType = New<CompositeType>("AzureAlwaysRocks");
+                    var customObjectType = New<CompositeType>("AzureAlwaysRocks");
 
-                var baseType = New<CompositeType>("AzureAlwaysRocks");
+                    var baseType = New<CompositeType>("AzureAlwaysRocks");
 
-                codeModel.Add(customObjectType);
-                codeModel.Add(baseType);
+                    codeModel.Add(customObjectType);
+                    codeModel.Add(baseType);
 
-                codeModel.Add(New<Method>(new
-                {
-                    Name = "AzureAlwaysRocks",
-                    Group = "AzureAlwaysRocks",
-                    ReturnType = new Response(customObjectType, null)
-                }));
+                    codeModel.Add(New<Method>(new
+                    {
+                        Name = "AzureAlwaysRocks",
+                        Group = "AzureAlwaysRocks",
+                        ReturnType = new Response(customObjectType, null)
+                    }));
 
-                Assert.Equal("AzureAlwaysRocksClient", codeModel.Name);
-                Assert.Equal("AzureAlwaysRocksOperations", codeModel.Operations.First().TypeName);
-                Assert.Equal("AzureAlwaysRocksMethod", codeModel.Methods[0].Name);
-                Assert.Equal("AzureAlwaysRocks", codeModel.ModelTypes.First(m => m.Name == "AzureAlwaysRocks").Name);
+                    Assert.Equal("AzureAlwaysRocksClient", codeModel.Name);
+                    Assert.Equal("AzureAlwaysRocksOperations", codeModel.Operations.First().TypeName);
+                    Assert.Equal("AzureAlwaysRocksMethod", codeModel.Methods[0].Name);
+                    Assert.Equal("AzureAlwaysRocks", codeModel.ModelTypes.First(m => m.Name == "AzureAlwaysRocks").Name);
+                }
             }
         }
 

@@ -30,7 +30,7 @@
             "type": "string"
           },
           {
-            "$ref": "ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "tags": [
@@ -40,13 +40,13 @@
           "200": {
             "description": "A list of caches",
             "schema": {
-              "$ref": "Product"
+              "$ref": "#/definitions/Product"
             }
           },
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "Error"
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -103,7 +103,7 @@
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "Error"
+              "$ref": "#/definitions/Error"
             }
           }
         }
