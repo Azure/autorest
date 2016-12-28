@@ -12,7 +12,8 @@ using AutoRest.CSharp.Azure.Model;
 using AutoRest.CSharp.Azure.Templates;
 using AutoRest.CSharp.Model;
 
-using AutoRest.CSharp.Templates;
+using AutoRest.CSharp.Templates.Rest.Client;
+using AutoRest.CSharp.Templates.Rest.Common;
 using AutoRest.Extensions.Azure;
 
 namespace AutoRest.CSharp.Azure.Fluent
