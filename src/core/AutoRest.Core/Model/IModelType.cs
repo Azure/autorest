@@ -51,6 +51,19 @@ namespace AutoRest.Core.Model
         /// <param name="other">The object to compare with this object.</param>
         /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
         bool StructurallyEquals(IModelType other);
+        
+        XmlProperties XmlProperties { get; set; }
+
+        [JsonIgnore]
+        string XmlName { get; }
+        [JsonIgnore]
+        string XmlNamespace { get; }
+        [JsonIgnore]
+        string XmlPrefix { get; }
+        [JsonIgnore]
+        bool XmlIsWrapped { get; }
+        [JsonIgnore]
+        bool XmlIsAttribute { get; }
     }
 
     /// <summary>
@@ -179,7 +192,19 @@ namespace AutoRest.Core.Model
         public virtual IEnumerable<IIdentifier> IdentifiersInScope => this.SingleItemConcat(Parent?.IdentifiersInScope);
         [JsonIgnore]
         public virtual IEnumerable<IChild> Children => Enumerable.Empty<IChild>();
+        
+        public XmlProperties XmlProperties { get; set; }
 
+        [JsonIgnore]
+        public string XmlName => XmlProperties?.Name ?? Name.RawValue;
+        [JsonIgnore]
+        public string XmlNamespace => XmlProperties?.Namespace;
+        [JsonIgnore]
+        public string XmlPrefix => XmlProperties?.Prefix;
+        [JsonIgnore]
+        public bool XmlIsWrapped => XmlProperties?.Wrapped ?? false;
+        [JsonIgnore]
+        public bool XmlIsAttribute => XmlProperties?.Attribute ?? false;
     }
 
 }

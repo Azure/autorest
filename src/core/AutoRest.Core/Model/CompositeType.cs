@@ -46,19 +46,6 @@ namespace AutoRest.Core.Model
             Name = name;
         }
 
-        /// <summary>
-        ///  Xml Properties...
-        /// </summary>
-        public string XmlName => SerializedName;
-
-        public bool XmlIsWrapped => false;
-
-        public string XmlPrefix => "";
-
-        public string XmlNamespace => "";
-
-        public bool XmlIsAttribute => false;
-
         /// <Summary>
         /// Backing field for <code>SerializedName</code> property. 
         /// </Summary>

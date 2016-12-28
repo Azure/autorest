@@ -106,6 +106,7 @@ namespace AutoRest.Swagger
             var headerType = New<CompositeType>(headerTypeName, new
             {
                 SerializedName = headerTypeName,
+                RealPath = new string[] { headerTypeName },
                 Documentation = string.Format(CultureInfo.InvariantCulture, "Defines headers for {0} operation.", methodName)
             });
             responseHeaders.ForEach(h =>
@@ -114,6 +115,7 @@ namespace AutoRest.Swagger
                 {
                     Name = h.Key,
                     SerializedName = h.Key,
+                    RealPath = new string[] { h.Key },
                     ModelType = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key),
                     Documentation = h.Value.Description
                 });
