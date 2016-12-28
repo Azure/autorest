@@ -100,6 +100,28 @@ namespace AutoRest.CSharp
 
         }
 
+        private async Task GenerateRestCode(CodeModelCs codeModel)
+        {
+            if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("rest") || Settings.Instance.CodeGenerationMode.IsNullOrEmpty())
+            {
+                Logger.Instance.Log(Category.Info, "Generating client side Code");
+                await GenerateClientSideCode(codeModel);
+                Logger.Instance.Log(Category.Info, "Generating server side Code");
+                await GenerateServerSideCode(codeModel);
+            }
+            else if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("rest-client"))
+            {
+                Logger.Instance.Log(Category.Info, "Generating client side Code");
+                await GenerateClientSideCode(codeModel);
+            }
+            else if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("rest-server"))
+            {
+                Logger.Instance.Log(Category.Info, "Generating server side Code");
+                await GenerateServerSideCode(codeModel);
+            }
+
+        }
+
         /// <summary>
         /// Generates C# code for service client.
         /// </summary>
@@ -113,15 +135,10 @@ namespace AutoRest.CSharp
             {
                 throw new InvalidCastException("CodeModel is not a c# CodeModel");
             }
-            if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("client") || Settings.Instance.CodeGenerationMode.IsNullOrEmpty())
+            if (Settings.Instance.CodeGenerationMode.ToLower().StartsWith("rest") || Settings.Instance.CodeGenerationMode.IsNullOrEmpty())
             {
-                Logger.Instance.Log(Category.Debug, "Generating client side Code");
-                await GenerateClientSideCode(codeModel);
-            }
-            else if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("server"))
-            {
-                Logger.Instance.Log(Category.Debug, "Generating server side Code");
-                await GenerateServerSideCode(codeModel);
+                Logger.Instance.Log(Category.Info, "Generating Rest Code");
+                await GenerateRestCode(codeModel);
             }
             else
             {
