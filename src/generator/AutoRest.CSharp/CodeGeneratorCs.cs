@@ -11,7 +11,8 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Model;
-using AutoRest.CSharp.Templates;
+using AutoRest.CSharp.Templates.Rest.Client;
+using AutoRest.CSharp.Templates.Rest.Common;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp
@@ -36,8 +37,8 @@ namespace AutoRest.CSharp
                 {
                     codeModel.Name = methodGrp;
                     // Service server
-                    var serviceServerControllerTemplate = new ServiceServerControllerTemplate { Model = codeModel };
-                    await Write(serviceServerControllerTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
+                    var serviceControllerTemplate = new AutoRest.CSharp.Templates.Rest.Server.ServiceControllerTemplate { Model = codeModel };
+                    await Write(serviceControllerTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
                 }
             }
             // Models
