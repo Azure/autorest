@@ -62,5 +62,36 @@ namespace AutoRest.Swagger.Tests
                 }
             }
         }
+
+        [Fact]
+        public void TestRealPathIrregular()
+        {
+            using (NewContext)
+            {
+                new Settings
+                {
+                    Namespace = "Test",
+                    Input = Path.Combine("Swagger", "swagger-xml-paths.yaml")
+                };
+                Modeler modeler = new SwaggerModeler();
+                var codeModel = modeler.Build();
+                foreach (var property in codeModel.ModelTypes.SelectMany(m => m.Properties))
+                {
+                    var expectedRealPath = property.Documentation.StartsWith("CUSTOM_")
+                                         ? property.Documentation.Substring("CUSTOM_".Length)
+                                         : null;
+                    var expectedRealXmlPath = property.Summary;
+
+                    if (expectedRealPath != null)
+                    {
+                        Assert.Equal(expectedRealPath, string.Join(".", property.RealPath));
+                    }
+                    if (expectedRealXmlPath != null)
+                    {
+                        Assert.Equal(expectedRealXmlPath, string.Join(".", property.RealXmlPath));
+                    }
+                }
+            }
+        }
     }
 }
