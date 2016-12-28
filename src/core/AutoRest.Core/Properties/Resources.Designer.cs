@@ -564,6 +564,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to &apos;x-ms-client-name&apos; cannot be the same as the property/model name..
+        /// </summary>
+        public static string XmsClientNameInValid {
+            get {
+                return ResourceManager.GetString("XmsClientNameInValid", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///    Looks up a localized string similar to Paths in x-ms-paths must overload a normal path in the paths section..
         /// </summary>
         public static string XMSPathBaseNotInPaths {

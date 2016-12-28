@@ -207,6 +207,9 @@
   <data name="ResourceIsMsResourceNotValid" xml:space="preserve">
     <value>A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true.</value>
   </data>
+  <data name="XmsClientNameInValid" xml:space="preserve">
+    <value>'x-ms-client-name' cannot be the same as the property/model name.</value>
+  </data>
   <data name="DeleteMustHaveEmptyBody" xml:space="preserve">
     <value>'Delete' operation cannot have parameters in body.</value>
   </data>
