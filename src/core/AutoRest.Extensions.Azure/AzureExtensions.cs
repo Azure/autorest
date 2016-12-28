@@ -107,7 +107,7 @@ namespace AutoRest.Extensions.Azure
                     successStatusCode != default(HttpStatusCode) &&
                     method.Responses.ContainsKey(HttpStatusCode.NotFound))
                 {
-                    method.ReturnType = new Response(New<PrimaryType>(KnownPrimaryType.Boolean), method.ReturnType.Headers);
+                    method.ReturnType = New<Response>(New<PrimaryType>(KnownPrimaryType.Boolean), method.ReturnType.Headers);
                 }
                 else
                 {
@@ -145,7 +145,7 @@ namespace AutoRest.Extensions.Azure
             {
                 if (method.DefaultResponse.Body == null && method.ReturnType.Body != null)
                 {
-                    method.DefaultResponse = new Response(cloudError, method.ReturnType.Headers);
+                    method.DefaultResponse = New<Response>(cloudError, method.ReturnType.Headers);
                 }                
             }
         }

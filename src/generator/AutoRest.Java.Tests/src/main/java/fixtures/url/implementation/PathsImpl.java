@@ -159,7 +159,7 @@ public final class PathsImpl implements Paths {
         Observable<Response<ResponseBody>> base64Url(@Path("base64UrlPath") Base64Url base64UrlPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath:commaSeparated}")
+        @GET("paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
         Observable<Response<ResponseBody>> arrayCsvInPath(@Path("arrayPath") String arrayPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
