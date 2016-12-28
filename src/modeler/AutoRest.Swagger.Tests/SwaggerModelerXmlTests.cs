@@ -42,5 +42,25 @@ namespace AutoRest.Swagger.Tests
                 }
             }
         }
+
+        [Fact]
+        public void TestRealPathRegular()
+        {
+            using (NewContext)
+            {
+                new Settings
+                {
+                    Namespace = "Test",
+                    Input = Path.Combine("Swagger", "swagger-xml.yaml")
+                };
+                Modeler modeler = new SwaggerModeler();
+                var codeModel = modeler.Build();
+                foreach (var property in codeModel.ModelTypes.SelectMany(m => m.Properties))
+                {
+                    Assert.Equal(property.Name, string.Join(".", property.RealPath));
+                    Assert.Equal(property.XmlName, string.Join(".", property.RealXmlPath));
+                }
+            }
+        }
     }
 }

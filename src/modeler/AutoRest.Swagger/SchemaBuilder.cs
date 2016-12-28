@@ -9,6 +9,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using System.Linq;
 
 namespace AutoRest.Swagger
 {
@@ -86,7 +87,8 @@ namespace AutoRest.Swagger
                     Name = name,
                     ModelType = propertyType,
                     Documentation = "Unmatched properties from the message are deserialized this collection",
-                    XmlProperties = _schema.AdditionalProperties.Xml
+                    XmlProperties = _schema.AdditionalProperties.Xml,
+                    RealPath = new string[0]
                 }));
             }
 
@@ -137,6 +139,7 @@ namespace AutoRest.Swagger
                         {
                             Name = name,
                             SerializedName = name,
+                            RealPath = new string[] { name },
                             ModelType = propertyType,
                             IsReadOnly = property.Value.ReadOnly,
                             Summary = property.Value.Title,
