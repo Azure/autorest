@@ -1,0 +1,32 @@
+﻿swagger: "2.0"
+info:
+  title: Xml Tests
+  version: 1.0.0
+schemes:
+- http
+consumes:
+- application/xml
+- application/json
+produces:
+- application/xml
+- application/json
+definitions:
+  ModelComplex:
+    type: object
+    properties:
+      PropertySimple:
+        description: CUSTOM_PropertySimple # description ~ RealPath    (need prefix since "description" is sometimes overridden by something "better" by the modeler)
+        summary: PropertyOverride          # summary     ~ RealXmlPath
+        type: string
+        xml:
+          name: PropertyOverride
+      PropertyArray:
+        description: CUSTOM_PropertyArray
+        summary: 
+        type: array
+        items:
+          type: string
+    additionalProperties:
+      type: string
+      description: CUSTOM_
+      summary: 
