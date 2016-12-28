@@ -17,10 +17,8 @@ class Basic(Model):
 
     :param id: Basic Id
     :type id: int
-    :param name: Name property with a very
-     long description that
-     does not fit on a single line
-     and a line break.
+    :param name: Name property with a very long description that does not fit
+     on a single line and a line break.
     :type name: str
     :param color: Possible values include: 'cyan', 'Magenta', 'YELLOW',
      'blacK'

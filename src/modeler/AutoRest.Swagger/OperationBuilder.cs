@@ -52,17 +52,17 @@ namespace AutoRest.Swagger
         {
             EnsureUniqueMethodName(methodName, methodGroup);
 
-            var method = New<Method>(new 
+            var method = New<Method>(new
             {
                 HttpMethod = httpMethod,
                 Url = url,
                 Name = methodName,
                 SerializedName = _operation.OperationId
             });
-            
+
             // assume that without specifying Consumes, that a service will consume JSON
             method.RequestContentType = _effectiveConsumes.FirstOrDefault() ?? APP_JSON_MIME;
-            
+
             // does the method Consume JSON or XML?
             string serviceConsumes = _effectiveConsumes.FirstOrDefault(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase)) ?? _effectiveConsumes.FirstOrDefault(s => s.StartsWith(APP_XML_MIME, StringComparison.OrdinalIgnoreCase));
             if (!string.IsNullOrEmpty(serviceConsumes))
@@ -70,10 +70,10 @@ namespace AutoRest.Swagger
                 method.RequestContentType = serviceConsumes;
             }
 
-            
+
             // if they accept JSON or XML, and don't specify the charset, lets default to utf-8
-            if ((method.RequestContentType.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase) || 
-                method.RequestContentType.StartsWith(APP_XML_MIME, StringComparison.OrdinalIgnoreCase) ) &&
+            if ((method.RequestContentType.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase) ||
+                method.RequestContentType.StartsWith(APP_XML_MIME, StringComparison.OrdinalIgnoreCase)) &&
                 method.RequestContentType.IndexOf("charset=", StringComparison.OrdinalIgnoreCase) == -1)
             {
                 // Enable UTF-8 charset
@@ -103,7 +103,7 @@ namespace AutoRest.Swagger
 
             var headerTypeName = string.Format(CultureInfo.InvariantCulture,
                 "{0}-{1}-Headers", methodGroup, methodName).Trim('-');
-            var headerType = New<CompositeType>(headerTypeName,new
+            var headerType = New<CompositeType>(headerTypeName, new
             {
                 SerializedName = headerTypeName,
                 Documentation = string.Format(CultureInfo.InvariantCulture, "Defines headers for {0} operation.", methodName)
@@ -411,7 +411,8 @@ namespace AutoRest.Swagger
             return handled;
         }
 
-        private bool SwaggerOperationProducesSomethingDeserializable() {
+        private bool SwaggerOperationProducesSomethingDeserializable()
+        {
             return true == _effectiveProduces?.Any(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase) || s.StartsWith(APP_XML_MIME, StringComparison.OrdinalIgnoreCase));
         }
 

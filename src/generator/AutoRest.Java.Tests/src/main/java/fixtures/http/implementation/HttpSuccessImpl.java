@@ -213,7 +213,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Get 200 success.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<Boolean> get200Async() {
         return get200WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
@@ -227,7 +227,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Get 200 success.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> get200WithServiceResponseAsync() {
         return service.get200()

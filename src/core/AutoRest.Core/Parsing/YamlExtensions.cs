@@ -59,10 +59,10 @@ namespace AutoRest.Core.Parsing
                 }
                 doc = yamlStream.Documents[0].RootNode;
             }
-            catch
+            catch (Exception e)
             {
-                Logger.Instance.Log(Category.Warning, "Parsed document is not valid YAML");
-                // parsing failed, return null
+                Logger.Instance.Log(Category.Warning, "Parsed document is not valid YAML/JSON.");
+                Logger.Instance.Log(Category.Warning, e.ToString());
             }
             return doc;
         }
@@ -78,8 +78,16 @@ namespace AutoRest.Core.Parsing
                 return writer.ToString();
             }
         }
-
-        public static YamlMappingNode MergeYamlObjects(YamlMappingNode a, YamlMappingNode b, ObjectPath path)
+        
+        /// <summary>
+        /// Merges to Yaml mapping nodes (~ dictionaries) as follows:
+        /// - members existing only in one node will be present in the result
+        /// - members existing in both nodes will
+        ///     - be present in the result, if they are identical
+        ///     - be merged if they are mapping or sequence nodes
+        ///     - THROW an exception otherwise
+        /// </summary>
+        public static T MergeYamlObjects<T>(T a, T b, ObjectPath path) where T : YamlNode
         {
             if (a == null)
             {
@@ -90,40 +98,66 @@ namespace AutoRest.Core.Parsing
                 throw new ArgumentNullException(nameof(b));
             }
 
-            // iterate all members
-            var result = new YamlMappingNode();
-            var keys = a.Children.Keys.Concat(b.Children.Keys).Distinct();
-            foreach (var key in keys)
+            // trivial case
+            if (a.Equals(b))
             {
-                var subpath = path.AppendProperty(key.ToString());
-
-                // forward if only present in one of the nodes
-                if (!a.Children.ContainsKey(key))
-                {
-                    result.Children.Add(key, b.Children[key]);
-                    continue;
-                }
-                if (!b.Children.ContainsKey(key))
-                {
-                    result.Children.Add(key, a.Children[key]);
-                    continue;
-                }
-
-                // try merge objects otherwise
-                var aMember = a.Children[key] as YamlMappingNode;
-                var bMember = b.Children[key] as YamlMappingNode;
-                if (aMember == null || bMember == null)
-                {
-                    throw new FormatException($"{subpath} has incomaptible types.");
-                }
-                result.Children.Add(key, MergeYamlObjects(aMember, bMember, subpath));
+                return a;
             }
-            return result;
+
+            // mapping nodes
+            var aMapping = a as YamlMappingNode;
+            var bMapping = b as YamlMappingNode;
+            if (aMapping != null && bMapping != null)
+            {
+                // iterate all members
+                var result = new YamlMappingNode();
+                var keys = aMapping.Children.Keys.Concat(bMapping.Children.Keys).Distinct();
+                foreach (var key in keys)
+                {
+                    var subpath = path.AppendProperty(key.ToString());
+
+                    // forward if only present in one of the nodes
+                    if (!aMapping.Children.ContainsKey(key))
+                    {
+                        result.Children.Add(key, bMapping.Children[key]);
+                        continue;
+                    }
+                    if (!bMapping.Children.ContainsKey(key))
+                    {
+                        result.Children.Add(key, aMapping.Children[key]);
+                        continue;
+                    }
+
+                    // try merge objects otherwise
+                    var aMember = aMapping.Children[key];
+                    var bMember = bMapping.Children[key];
+                    result.Children.Add(key, MergeYamlObjects(aMember, bMember, subpath));
+                }
+                return result as T;
+            }
+
+            // sequence nodes
+            var aSequence = a as YamlSequenceNode;
+            var bSequence = b as YamlSequenceNode;
+            if (aSequence != null && bSequence != null)
+            {
+                return new YamlSequenceNode(aSequence.Children.Concat(bSequence.Children).Distinct()) as T;
+            }
+
+            // nothing worked
+            throw new Exception($"{path.XPath} has incomaptible values ({a}, {b}).");
         }
 
         public static YamlMappingNode MergeWith(this YamlMappingNode self, YamlMappingNode other)
-        {
-            return MergeYamlObjects(self, other, ObjectPath.Empty);
-        }
+            => MergeYamlObjects(self, other, ObjectPath.Empty);
+
+        public static void Set(this YamlMappingNode self, string key, YamlNode value)
+            => self.Children[new YamlScalarNode(key)] = value;
+
+        public static YamlNode Get(this YamlMappingNode self, string key)
+            => self.Children.ContainsKey(new YamlScalarNode(key)) ? self.Children[new YamlScalarNode(key)] : null;
+
+        public static void Remove(this YamlMappingNode self, string key)
+            => self.Children.Remove(new YamlScalarNode(key));
     }
 }

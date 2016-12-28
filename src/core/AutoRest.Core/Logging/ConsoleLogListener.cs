@@ -62,6 +62,8 @@ namespace AutoRest.Core.Logging
                     targetStream.WriteLine(message.VerboseData);
                     targetStream.WriteLine();
                 }
+                targetStream.Flush();
+
                 Console.ForegroundColor = original;
             }
         }

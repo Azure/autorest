@@ -14,7 +14,6 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     using System.Linq;
     internal static class @(Model.Name)XmlSerializer
     {
-        <text>
         /// <summary>            
         /// Deserializes the content from an XML string
         /// </summary>
@@ -62,25 +61,22 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         {
             return null;
         }
-
+    
         /// <summary>
         /// Serializes the object to an XML node
         /// </summary>
-        internal static System.Xml.XElement Serialize(this @Model.Name object, string elementName = null )
+        internal static System.Xml.XElement Serialize(this @Model.Name instance, System.Xml.XElement result)
         {
-            var result = System.Xml.XElement( elementName ?? "@Model.XmlName" );
-
-            @foreach (var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened()))
-            {
-                @:// serialize the property @property
+            @foreach (var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened())) {
+                @:// serialize the property '@property.Name'
                 if (@property.IsNullable())
                 {
-                @:if( @(property.Name) != null )
+                @:if( instance.@(property.Name) != null )
                 @:{  
                 }
                 if (property.ModelType is CompositeType ) {
                 @:  // serialize a nested model type
-                @:  result.Add(@(property.Name).Serialize("@(property.XmlName)"));
+                @:  result.Add(instance.@(property.Name).Serialize(new System.Xml.XElement( @(property.XmlName)" )));
                 }
                 else if (property.ModelType is DictionaryType)
                 {
@@ -90,16 +86,16 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                     }
                     if (vt is CompositeType) {
                         @:  var dict = System.Xml.XElement("@property.XmlName");
-                        @:  foreach( var key in @(property.Name).Keys ){
-                        @:     dict.Add(@(property.Name)[key].Serialize(key) );
+                        @:  foreach( var key in instance.@(property.Name).Keys ){
+                        @:     dict.Add(instance.@(property.Name)[key].Serialize(new System.Xml.XElement(key) ) );
                         @:  }  
                         @:  result.Add(dict);
                     }
                     else
                     {
                         @:  var dict = System.Xml.XElement("@property.XmlName");
-                        @:  foreach( var key in @(property.Name).Keys ){
-                        @:     dict.Add(new System.Xml.XElement( key, @(property.Name)[key] ) );
+                        @:  foreach( var key in instance.@(property.Name).Keys ){
+                        @:     dict.Add(new System.Xml.XElement( key, instance.@(property.Name)[key] ) );
                         @:  }
                         @:  result.Add(dict);
                     }
@@ -113,15 +109,15 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                     if (et is CompositeType) {
                         // todo: handle iswrapped 
                         @:  var seq = System.Xml.XElement("@property.XmlName");
-                        @:  foreach( var value in @(property.Name) ){
-                        @:     seq.Add(@(property.Name)[key].Serialize(@property.XmlName) );
+                        @:  foreach( var value in instance.@(property.Name) ){
+                        @:     seq.Add(instance.@(property.Name)[key].Serialize( new System.Xml.XElement( "@property.XmlName") ) );
                         @:  }  
                         @:  result.Add(seq);
                     }
                     else
                     {
                         @:  var seq = System.Xml.XElement("@property.XmlName");
-                        @:  foreach( var value in @(property.Name) ){
+                        @:  foreach( var value in instance.@(property.Name) ){
                         @:     seq.Add(new System.Xml.XElement( "@property.XmlName", value ) );
                         @:  }
                         @:  result.Add(seq);
@@ -129,24 +125,14 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 } else
                 {
                 @:  // serialize it as a primitive/value type.
-                @:  result.Add( new System.Xml.XElement( "@property.Name", @(property.Name) ) );
+                @:  result.Add( new System.Xml.XElement( "@property.Name", instance.@(property.Name) ) );
                 }
                 if (@property.IsNullable())
                 {
                 @:}
                 }
             }
+            return result;
         }
-        
-        internal static IEnumerable<System.Xml.XElement> Serialize(this IEnumerable<@Model.Name> sequence, string elementName = null ) {
-            return null;
-        }
-
-
-        internal static System.Xml.XElement Serialize(this IDictionary<string, @Model.Name> dictionary, string elementName = null ) {
-            return null;
-        }
-    
-        </text>
     }
 }

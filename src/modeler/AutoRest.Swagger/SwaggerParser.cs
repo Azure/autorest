@@ -29,25 +29,25 @@ namespace AutoRest.Swagger
             }
 
             var swaggerDocument = fileSystem.ReadFileAsText(path);
-            return Parse(swaggerDocument);
+            return Parse(path, swaggerDocument);
         }
 
-        public static string ResolveExternalReferencesInJson(this string swaggerDocument)
+        public static string ResolveExternalReferencesInJson(this string path, string swaggerDocument)
         {
             string result = null;
             JObject swaggerObject = JObject.Parse(swaggerDocument);
             var externalFiles = new Dictionary<string, JObject>();
-            externalFiles["currentDocument"] = swaggerObject;
+            externalFiles[path] = swaggerObject;
             HashSet<string> visitedEntities = new HashSet<string>();
-            EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles);
+            EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, path);
             result = swaggerObject.ToString();
             return result;
         }
 
-        public static void EnsureCompleteDefinitionIsPresent(HashSet<string> visitedEntities, Dictionary<string, JObject> externalFiles, string entityType = null, string modelName = null, JToken externalDoc = null)
+        public static void EnsureCompleteDefinitionIsPresent(HashSet<string> visitedEntities, Dictionary<string, JObject> externalFiles, string currentFilePath, string entityType = null, string modelName = null, JToken externalDoc = null)
         {
             IEnumerable<JToken> references;
-            var currentDoc = externalFiles["currentDocument"];
+            var currentDoc = externalFiles[currentFilePath];
             if (entityType == null && modelName == null)
             {
                 //first call to the recursive function. Hence we will process file references only.
@@ -72,8 +72,8 @@ namespace AutoRest.Swagger
                     // Make sure the filePath is either an absolute uri, or a rooted path
                     if (!Settings.FileSystem.IsCompletePath(filePath))
                     {
-                        // Otherwise, root it from the current path
-                        filePath = Settings.FileSystem.MakePathRooted(Settings.InputFolder, filePath);
+                        // Otherwise, root it from the directory (one level up) of the current swagger file path
+                        filePath = Settings.FileSystem.MakePathRooted(Settings.FileSystem.GetParentDir(currentFilePath), filePath);
                     }
                     if (!externalFiles.ContainsKey(filePath))
                     {
@@ -96,13 +96,13 @@ namespace AutoRest.Swagger
                     {
                         currentDoc[entityType][modelName] = externalFiles[filePath][entityType][modelName];
                         //recursively check if the model is completely defined.
-                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, entityType, modelName, externalFiles[filePath]);
+                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, currentFilePath, entityType, modelName, externalFiles[filePath]);
                     }
                     else
                     {
                         currentDoc[entityType][modelName] = externalDoc[entityType][modelName];
                         //recursively check if the model is completely defined.
-                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, entityType, modelName, externalDoc);
+                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, currentFilePath, entityType, modelName, externalDoc);
                     }
                     
                 }
@@ -110,18 +110,24 @@ namespace AutoRest.Swagger
             return;
         }
 
-        public static ServiceDefinition Parse(string swaggerDocument)
+        public static string Normalize(string path, string swaggerDocument)
+        {
+            if (!swaggerDocument.IsYaml()) // try parse as markdown if it is not YAML
+            {
+                Logger.Instance.Log(Category.Info, "Parsing as literate Swagger");
+                swaggerDocument = new LiterateYamlParser().Parse(swaggerDocument, true);
+            }
+            // normalize YAML to JSON since that's what we process
+            swaggerDocument = swaggerDocument.EnsureYamlIsJson();
+            swaggerDocument = ResolveExternalReferencesInJson(path, swaggerDocument);
+            return swaggerDocument;
+        }
+
+        public static ServiceDefinition Parse(string path, string swaggerDocument)
         {
             try
             {
-                if (!swaggerDocument.IsYaml()) // try parse as markdown if it is not YAML
-                {
-                    Logger.Instance.Log(Category.Info, "Parsing as literate Swagger");
-                    swaggerDocument = new LiterateYamlParser().Parse(swaggerDocument, true);
-                }
-                // normalize YAML to JSON since that's what we process
-                swaggerDocument = swaggerDocument.EnsureYamlIsJson();
-                swaggerDocument = ResolveExternalReferencesInJson(swaggerDocument);
+                swaggerDocument = Normalize(path, swaggerDocument);
                 var settings = new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.None,

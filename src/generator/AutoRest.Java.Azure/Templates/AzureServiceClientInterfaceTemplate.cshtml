@@ -4,7 +4,8 @@
 @using System.Linq
 @using AutoRest.Core.Utilities
 @using AutoRest.Java
-@inherits AutoRest.Core.Template<AutoRest.Java.Azure.TemplateModels.AzureServiceClientTemplateModel>
+@using AutoRest.Java.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Model.CodeModelJva>
 /**
 @Header(" * ").TrimMultilineHeader()
  */
@@ -41,7 +42,7 @@ public interface @Model.Name {
      * @@return the user agent string.
      */
     String userAgent();
-@foreach (var property in Model.Properties)
+@foreach (var property in Model.PropertiesEx)
 {
 @EmptyLine
 @:    /**
@@ -49,7 +50,7 @@ public interface @Model.Name {
 @:     *
 @:     * @@return the @(property.Name) value.
 @:     */
-@:    @property.Type @(property.Name.ToCamelCase())();
+@:    @property.ModelType.ServiceResponseVariant().Name @(property.Name.ToCamelCase())();
 if(!property.IsReadOnly)
 {
 @EmptyLine
@@ -59,24 +60,24 @@ if(!property.IsReadOnly)
 @:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
 @:     * @@return the service client itself
 @:     */
-@:    @(Model.Name) with@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase()));
+@:    @(Model.Name) with@(property.Name.ToPascalCase())(@(property.ModelType.ServiceResponseVariant().Name) @(property.Name.ToCamelCase()));
 }
 }
 
-@foreach (var operation in Model.Operations)
+@foreach (var operation in Model.AllOperations)
 {
 @EmptyLine
 @:    /**
-@:     * Gets the @(operation.MethodGroupType) object to access its operations.
-@:     * @@return the @(operation.MethodGroupType) object.
+@:     * Gets the @(operation.TypeName) object to access its operations.
+@:     * @@return the @(operation.TypeName) object.
 @:     */
-@:    @(operation.MethodGroupType) @(operation.MethodGroupType.ToCamelCase())();
+@:    @(operation.TypeName) @(operation.Name.ToCamelCase())();
 }
 @EmptyLine
-@if (Model.MethodTemplateModels.Any())
+@if (Model.RootMethods.Any())
 {
 <text>
-    @foreach (var method in Model.MethodTemplateModels)
+    @foreach (MethodJv method in Model.RootMethods)
     {
     @:@Include(new MethodInterfaceTemplate(), method)
     @EmptyLine

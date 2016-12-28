@@ -28,7 +28,7 @@ $null = mkdir -ea 0 $newRoot
 if( -not $lastAutorest  ) {
   # install last nightly build.
   write-host -fore green "Installing latest nightly autorest."
-  $null = &"$PSScriptRoot\NuGet.exe" install autorest -source https://www.myget.org/F/autorest/api/v3/index.json -prerelease -outputdirectory $baseFolder
+  $null = &"$PSScriptRoot\NuGet.exe" install autorest -source https://www.myget.org/F/autorest/api/v3/index.json -prerelease -Version 0.17.3-Nightly20161101 -outputdirectory $baseFolder
 
   # get autorest nightly exe
   $lastAutoRest = (dir "$baseFolder\autorest*\tools\AutoRest.exe").FullName
@@ -80,13 +80,13 @@ $scrp = {
         $cur = $ref -replace "\\Last\\","\New\"
         
         if( (test-path $ref ) -and (test-path $cur) ) {  
-          $r = get-content $ref
-          $c = get-content $cur
+          $r = (get-content $ref |% { $_ -replace "Code generated .*", "" })
+          $c = (get-content $cur |% { $_ -replace "Code generated .*", "" })
           if( $r -and $c ) {
             $v = compare-object $r $c 
             if( !$v )  {
-              # erase $ref
-              # erase $cur
+              erase $ref
+              erase $cur
             }
           }
         }
@@ -95,8 +95,8 @@ $scrp = {
   }
 }
 
-# @("Azure.NodeJS", "Azure.CSharp") |% {
- @("Azure.Python" ) |% {
+# @("Azure.CSharp", "Azure.Python", "Azure.NodeJS", "Azure.CSharp") |% {
+ @("Azure.Java", "Azure.Java.Fluent" ) |% {
   $gen = $_;
  
 
@@ -156,7 +156,6 @@ Get-Job |% {
   remove-job $_ 
 }
 
-<#
 try {
   $app = New-Object -ComObject "Merge70.Application"
   if( $app )  { 
@@ -191,4 +190,4 @@ try {
   }
 } catch { 
   write-host -fore red "Araxis Merge not installed (report skipped)"
-}#>
+}

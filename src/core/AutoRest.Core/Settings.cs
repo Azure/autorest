@@ -85,15 +85,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             {
                 if (_inputFolder == null && Input != null)
                 {
-                    var isBasePathUri = Uri.IsWellFormedUriString(Input, UriKind.Absolute);
-                    if (isBasePathUri)
-                    {
-                        _inputFolder = new Uri(new Uri(Input), ".");
-                    }
-                    else
-                    {
-                        _inputFolder = new Uri(this.FileSystem.GetParentDir(Input), UriKind.Relative);
-                    }
+                    _inputFolder = this.FileSystem.GetParentDir(Input);
                 }
                 return _inputFolder;
             }

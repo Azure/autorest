@@ -199,21 +199,21 @@ else
         }
         else
         {
-            if (!Model.RequestBody.IsNullable())
+            if (!Model.RequestBody.IsNullable() || Model.RequestBody.Name != null )
             {
-    @:_requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.ModelType)));
+                if (Model.RequestContentType.StartsWith("application/xml"))
+                {
+                    // add xml support
+                    @:_requestContent = @(Model.Name)XmlSerializer.Serialize(@(Model.RequestBody.Name), new System.Xml.XElement("@(Model.RequestBody.Name)" ) ).ToString();
+                }
+            else
+            {
+                @:_requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.ModelType)));
+                }
     @:_httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
     @:_httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
             }
-            else
-            {
-    @:if(@(Model.RequestBody.Name) != null)
-    @:{
-    @:    _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.ModelType)));
-    @:    _httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
-    @:    _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
-    @:}
-            }
+            
         }
     }
     else if (Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData).Any())
