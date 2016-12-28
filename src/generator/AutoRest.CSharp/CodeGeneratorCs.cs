@@ -11,6 +11,7 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Model;
 using AutoRest.CSharp.Templates;
+using AutoRest.Extensions;
 
 namespace AutoRest.CSharp
 {
@@ -68,6 +69,12 @@ namespace AutoRest.CSharp
             // Models
             foreach (CompositeTypeCs model in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
             {
+                if (model.Extensions.ContainsKey(SwaggerExtensions.ExternalExtension) &&
+                    (bool)model.Extensions[SwaggerExtensions.ExternalExtension])
+                {
+                    continue;
+                }
+
                 var modelTemplate = new ModelTemplate{ Model = model };
                 await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}"));
             }

@@ -3,6 +3,7 @@ using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Model
 {
@@ -57,6 +58,17 @@ namespace AutoRest.CSharp.Model
         {
             get { return _extensionTypeName; }
             set { _extensionTypeName.CopyFrom(value); }
+        }
+
+        public override IEnumerable<string> Usings
+        {
+            get
+            {
+                if ((CodeModel as CodeModelCs).HaveModelNamespace)
+                {
+                    yield return CodeModel.ModelsName;
+                }
+            }
         }
     }
 }
