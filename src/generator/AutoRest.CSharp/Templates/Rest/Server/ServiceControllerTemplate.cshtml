@@ -2,7 +2,7 @@
 @using System.Linq
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp.Model
-@using AutoRest.CSharp.Templates
+@using AutoRest.CSharp.Templates.Server
 @inherits AutoRest.Core.Template<CodeModelCs>
 @Header("// ")
 @EmptyLine
@@ -33,7 +33,7 @@ namespace @Settings.Namespace
         
     @foreach (MethodCs method in Model.Methods.Where(m=>(m.MethodGroup.Name==Model.Name || m.MethodGroup.Name + "Operations" == Model.Name)))
     {
-        @:@(Include(new ServerMethodTemplate(), method))
+        @:@(Include(new ServiceMethodTemplate(), method))
         @EmptyLine
         @:
     }
