@@ -3,6 +3,7 @@ package fixtures.paging;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 
+import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,7 +24,7 @@ public class PagingTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestPagingTestServiceImpl("http://localhost:3000", null);
+        client = new AutoRestPagingTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
     }
 
     @Test

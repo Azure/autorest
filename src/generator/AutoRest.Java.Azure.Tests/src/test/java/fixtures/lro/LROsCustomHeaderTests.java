@@ -2,6 +2,7 @@ package fixtures.lro;
 
 import com.microsoft.azure.CustomHeaderInterceptor;
 
+import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -19,7 +20,7 @@ public class LROsCustomHeaderTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost:3000", null);
+        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
         client.restClient().headers().addHeader("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
         client.getAzureClient().withLongRunningOperationRetryTimeout(0);
     }

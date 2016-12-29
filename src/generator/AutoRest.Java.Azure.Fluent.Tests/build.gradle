@@ -22,7 +22,7 @@ checkstyle {
 
 dependencies {
     compile 'commons-codec:commons-codec:1.10'
-    compile 'com.microsoft.azure:azure-client-runtime:1.0.0-SNAPSHOT'
+    compile 'com.microsoft.azure:azure-client-runtime:1.0.0-beta5-SNAPSHOT'
     compile 'joda-time:joda-time:2.8.2'
     compile 'javax.validation:validation-api:1.1.0.Final'
     compile 'io.reactivex:rxjava:1.1.8'

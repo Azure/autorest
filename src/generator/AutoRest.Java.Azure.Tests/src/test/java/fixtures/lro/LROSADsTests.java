@@ -2,6 +2,7 @@ package fixtures.lro;
 
 import com.microsoft.azure.CloudException;
 
+import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,7 +17,7 @@ public class LROSADsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost:3000", null);
+        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
         client.getAzureClient().withLongRunningOperationRetryTimeout(0);
     }
 

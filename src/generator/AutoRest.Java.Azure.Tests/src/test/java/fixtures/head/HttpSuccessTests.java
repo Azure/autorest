@@ -1,5 +1,6 @@
 package fixtures.head;
 
+import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,7 +12,7 @@ public class HttpSuccessTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHeadTestServiceImpl("http://localhost:3000", null);
+        client = new AutoRestHeadTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
     }
 
     @Test

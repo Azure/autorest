@@ -20,66 +20,20 @@ subprojects {
     }
 }
 
-project(':client-runtime') {
-    apply plugin: 'java'
-    group = 'com.microsoft.rest'
-    sourceCompatibility = 1.7
-    targetCompatibility = 1.7
-}
-
-project(':azure-client-runtime') {
-    apply plugin: 'java'
-    group = 'com.microsoft.azure'
-    sourceCompatibility = 1.7
-    targetCompatibility = 1.7
-    dependencies {
-        compile project(':client-runtime')
-    }
-}
-
-project(':azure-client-authentication') {
-    apply plugin: 'java'
-    group = 'com.microsoft.azure'
-    sourceCompatibility = 1.7
-    targetCompatibility = 1.7
-    dependencies {
-        compile project(':azure-client-runtime')
-    }
-}
-
-project(':azure-android-client-authentication') {
-    apply plugin: 'com.android.library'
-    group = 'com.microsoft.azure'
-    dependencies {
-        compile project(':azure-client-runtime')
-    }
-}
-
 project(':codegen-tests') {
     apply plugin: 'java'
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
-    dependencies {
-        compile project(':client-runtime')
-    }
 }
 
 project(':azure-codegen-tests') {
     apply plugin: 'java'
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
-    dependencies {
-        compile project(':client-runtime')
-        compile project(':azure-client-runtime')
-    }
 }
 
 project(':azure-fluent-codegen-tests') {
     apply plugin: 'java'
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
-    dependencies {
-        compile project(':client-runtime')
-        compile project(':azure-client-runtime')
-    }
 }

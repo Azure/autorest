@@ -20,10 +20,9 @@ checkstyle {
     reportsDir = new File("$rootDir/Tools/checkstyle/reports")
 }
 
-
 dependencies {
     compile 'commons-codec:commons-codec:1.10'
-    compile 'com.microsoft.rest:client-runtime:1.0.0-SNAPSHOT'
+    compile 'com.microsoft.rest:client-runtime:1.0.0-beta5-SNAPSHOT'
     compile 'joda-time:joda-time:2.8.2'
     compile 'javax.validation:validation-api:1.1.0.Final'
     compile 'com.google.guava:guava:18.0'
