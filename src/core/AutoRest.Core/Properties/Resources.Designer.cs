@@ -490,7 +490,16 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("PathCannotBeNullOrEmpty", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///    Looks up a localized string similar to The PUT/GET/PATCH operations must have same schema response..
+        /// </summary>
+        public static string PutGetPatchResponseInvalid {
+            get {
+                return ResourceManager.GetString("PutGetPatchResponseInvalid", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///    Looks up a localized string similar to A &apos;Resource&apos; definition must have x-ms-azure-resource extension enabled and set to true..
         /// </summary>
