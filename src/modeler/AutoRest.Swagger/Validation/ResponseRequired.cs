@@ -17,7 +17,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override bool IsValid(IDictionary<string, OperationResponse> entity, RuleContext context)
+        public override bool IsValid(IDictionary<string, OperationResponse> entity)
             => entity != null && entity.Any();
 
         /// <summary>

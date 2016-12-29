@@ -15,7 +15,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override bool IsValid(string entity, RuleContext context)
+        public override bool IsValid(string entity)
             => entity != null && entity.Count(c => c == '_') <= 1;
 
         /// <summary>

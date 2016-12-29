@@ -29,7 +29,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="definitions">Operation Definition to validate</param>
         /// <returns></returns>
-        public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context)
+        public override bool IsValid(Dictionary<string, Schema> definitions)
         {
             foreach(string key in definitions.Keys)
             {

@@ -15,7 +15,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override bool IsValid(string entity, RuleContext context)
+        public override bool IsValid(string entity)
             => (entity.ToLowerInvariant().StartsWith(AppJsonType));
         
         /// <summary>

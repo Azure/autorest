@@ -18,7 +18,7 @@ namespace AutoRest.Core.Validation
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override bool IsValid(string entity, RuleContext context) => false;
+        public override bool IsValid(string entity) => false;
 
         /// <summary>
         /// The template message for this Rule. 

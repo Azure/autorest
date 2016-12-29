@@ -35,7 +35,7 @@ namespace AutoRest.Core.Validation
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override bool IsValid(string entity, RuleContext context)
+        public override bool IsValid(string entity)
             => IsStartChar(entity[0]) && entity.All(IsIdentifierChar);
 
         /// <summary>

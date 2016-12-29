@@ -18,7 +18,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="entity">The entity to validate</param>
         /// <returns></returns>
-        public override bool IsValid(string entity, RuleContext context) => string.IsNullOrEmpty(entity) || !MsdnRegex.IsMatch(entity);
+        public override bool IsValid(string entity) => string.IsNullOrEmpty(entity) || !MsdnRegex.IsMatch(entity);
 
         /// <summary>
         /// The template message for this Rule. 

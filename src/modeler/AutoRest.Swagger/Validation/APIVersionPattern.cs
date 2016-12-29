@@ -30,7 +30,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="version">Version to validate</param>
         /// <returns></returns>
-        public override bool IsValid(string version, RuleContext context) => !string.IsNullOrEmpty(version) && VersionRegex.IsMatch(version);
+        public override bool IsValid(string version) => !string.IsNullOrEmpty(version) && VersionRegex.IsMatch(version);
     }
 
 

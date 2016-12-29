@@ -17,7 +17,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override bool IsValid(SwaggerParameter entity, RuleContext context) =>
+        public override bool IsValid(SwaggerParameter entity) =>
             entity == null || entity.Schema == null || AnonymousTypesRule.IsValid(entity.Schema);
 
         /// <summary>

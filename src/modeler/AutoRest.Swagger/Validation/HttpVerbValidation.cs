@@ -32,7 +32,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="operationDefinition">Operation Definition to validate</param>
         /// <returns></returns>
-        public override bool IsValid(Dictionary<string, Operation> operationDefinition, RuleContext context)
+        public override bool IsValid(Dictionary<string, Operation> operationDefinition)
         {
             foreach(string httpVerb in operationDefinition.Keys)
             {
