@@ -77,9 +77,6 @@ namespace AutoRest.CSharp
 
                 var modelTemplate = new ModelTemplate{ Model = model };
                 await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}"));
-
-                var xmlSerializer = new ModelXmlSerializerTemplate { Model = model };
-                await Write(xmlSerializer, Path.Combine(Settings.Instance.ModelsName, $"{model.Name}XmlSerializer{ImplementationFileExtension}"));
             }
 
             // Enums

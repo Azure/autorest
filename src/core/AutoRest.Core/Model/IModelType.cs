@@ -64,6 +64,11 @@ namespace AutoRest.Core.Model
         bool XmlIsWrapped { get; }
         [JsonIgnore]
         bool XmlIsAttribute { get; }
+
+        [JsonIgnore]
+        bool ShouldGenerateXmlDeserialize { get; }
+        [JsonIgnore]
+        bool ShouldGenerateXmlSerialize { get; }
     }
 
     /// <summary>
@@ -205,6 +210,11 @@ namespace AutoRest.Core.Model
         public bool XmlIsWrapped => XmlProperties?.Wrapped ?? false;
         [JsonIgnore]
         public bool XmlIsAttribute => XmlProperties?.Attribute ?? false;
+
+        [JsonIgnore]
+        public virtual bool ShouldGenerateXmlDeserialize => false;
+        [JsonIgnore]
+        public virtual bool ShouldGenerateXmlSerialize => false;
     }
 
 }

@@ -62,6 +62,7 @@ namespace AutoRest.Swagger
 
             // assume that without specifying Consumes, that a service will consume JSON
             method.RequestContentType = _effectiveConsumes.FirstOrDefault() ?? APP_JSON_MIME;
+            
 
             // does the method Consume JSON or XML?
             string serviceConsumes = _effectiveConsumes.FirstOrDefault(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase)) ?? _effectiveConsumes.FirstOrDefault(s => s.StartsWith(APP_XML_MIME, StringComparison.OrdinalIgnoreCase));
@@ -79,6 +80,9 @@ namespace AutoRest.Swagger
                 // Enable UTF-8 charset
                 method.RequestContentType += "; charset=utf-8";
             }
+
+            // if the method produces xml, make sure that the method knows that.
+            method.ResponseContentTypes = _effectiveProduces.ToArray();
 
             method.Description = _operation.Description;
             method.Summary = _operation.Summary;

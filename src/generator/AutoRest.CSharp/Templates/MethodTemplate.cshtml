@@ -199,28 +199,21 @@ else
         }
         else
         {
-            if (!Model.RequestBody.IsNullable() || Model.RequestBody.Name != null )
-            {
-                if (Model.RequestContentType.StartsWith("application/xml"))
-                {
-                    // add xml support
-                    @:_requestContent = @(Model.Name)XmlSerializer.Serialize(@(Model.RequestBody.Name), new System.Xml.XElement("@(Model.RequestBody.Name)" ) ).ToString();
-                }
-            else
-            {
-                @:_requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.ModelType)));
-                }
+            if (!Model.RequestBody.IsNullable() || Model.RequestBody.Name != null) {
+    @:if(! @(Model.RequestBody.Name).TrySerializePayload( "@Model.RequestContentType", out _requestContent ) ) 
+    @:{
+        @:_requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.ModelType)));
+    @:}
     @:_httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
     @:_httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
             }
             
         }
     }
-    else if (Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData).Any())
+    else if (Model.LogicalParameters.Any(p => p.Location == ParameterLocation.FormData))
     {
-        <text>
-    System.Net.Http.MultipartFormDataContent _multiPartContent = new System.Net.Http.MultipartFormDataContent();
-        </text>
+    @:System.Net.Http.MultipartFormDataContent _multiPartContent = new System.Net.Http.MultipartFormDataContent();
+        
         foreach (ParameterCs parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData))
         {
     @:if (@(parameter.Name) != null)

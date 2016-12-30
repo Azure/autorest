@@ -227,6 +227,255 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             @://Nothing to validate
             }
         @:}
-        }
 }
+
+        /// <summary>
+        /// Deserialize a string payload into a instance of the class 
+        /// </summary>
+        internal static bool TryDeserializePayload( string mediaType, string payload, out @Model.Name result )
+        {
+            result = null;
+
+            // check for a mediaType first
+            if( string.IsNullOrWhiteSpace(mediaType)) 
+            {
+                return false;
+            }
+
+            // first, call see if the deserialization is being pre-empted.
+            bool isHandled = false;
+            TryDeserialize(mediaType, payload, ref result, ref isHandled );
+            if( isHandled ) 
+            {
+                return true;
+            }
+
+            @if (Model.ShouldGenerateXmlDeserialize) {<text>
+            // special case: handle xml deserialization 
+            if( mediaType.StartsWith("application/xml") ) 
+            {
+                result = @(Model.Name).XmlDeserialize( payload );
+                return true;
+            }</text>}
+
+            return false;
+        }
+
+        /// <summary>
+        /// Serialize the @Model.Name into a string for passing across the wire.
+        /// </summary>
+        internal bool TrySerializePayload( string mediaType, out string result )
+        {
+            result = null;
+        
+            // check for a mediaType first
+            if( string.IsNullOrWhiteSpace(mediaType)) 
+            {
+                return false;
+            }
+        
+            // first, call see if the serialization is being pre-empted.
+            bool isHandled = false;
+            TrySerialize(mediaType, ref result, ref isHandled );
+            if( isHandled ) 
+            {
+                return true;
+            }
+
+            @if (Model.ShouldGenerateXmlSerialize) {<text>
+            // special case: handle xml serialization 
+            if( mediaType.StartsWith("application/xml") ) 
+            {
+                var xml = XmlSerialize( new System.Xml.Linq.XElement("@Model.XmlName") );
+                result = xml.ToString();
+                return true;
+            }</text>}
+
+            return false;
+        }
+
+        /// <summary>
+        /// Extensibility point for customizing deserialization of payload based on mediaType.
+        /// </summary>
+        static partial void TryDeserialize(string mediaType, string payload, ref @Model.Name result, ref bool isHandled );
+
+        /// <summary>
+        /// Extensibility point for customizing serialization of payload based on mediaType.
+        /// </summary>
+        partial void TrySerialize(string mediaType, ref string result, ref bool isHandled );
+
+    @if (Model.ShouldGenerateXmlSerialize) {<text>
+        /// <summary>
+        /// Serializes the object to an XML node
+        /// </summary>
+        internal System.Xml.Linq.XElement XmlSerialize(System.Xml.Linq.XElement result)
+        {</text>
+        foreach(var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened())) {<text>
+            // serialize the property '@property.Name'
+        @if (property.IsNullable()) {<text>
+            if( null != @(property.Name) ) 
+            {</text>}
+                @if (property.ModelType is CompositeType) {<text>
+                result.Add(@(property.Name).XmlSerialize(new System.Xml.Linq.XElement( "@(property.XmlName)" )));</text>
+                }
+                else if (property.ModelType is DictionaryType)
+                {
+                    var vt = ((DictionaryType)property.ModelType).ValueType;
+                    if (vt is DictionaryType || vt is SequenceType)
+                    {
+                        // todo: nothing right now.
+                    } else if (vt is CompositeType) {<text>
+                var dict = new System.Xml.Linq.XElement("@property.XmlName");
+                foreach( var key in @(property.Name).Keys ) {
+                    dict.Add(@(property.Name)[key].XmlSerialize(new System.Xml.Linq.XElement(key) ) );
+                }
+                result.Add(dict);</text>
+                } else {<text>
+                var dict = new System.Xml.Linq.XElement("@property.XmlName");
+                foreach( var key in @(property.Name).Keys ){
+                    dict.Add(new System.Xml.Linq.XElement( key, @(property.Name)[key] ) );
+                }
+                result.Add(dict);</text>}
+                }
+                else if (property.ModelType is SequenceType)
+                {
+                    var et = ((SequenceType)property.ModelType).ElementType;
+                    if (et is DictionaryType || et is SequenceType)
+                    {
+                        // todo: nothing right now.
+                    } else if (et is CompositeType) {<text>
+                // todo: handle iswrapped
+                var seq = new System.Xml.Linq.XElement("@property.XmlName");
+                foreach( var value in @(property.Name) ){
+                    seq.Add(value.XmlSerialize( new System.Xml.Linq.XElement( "@property.XmlName") ) );
+                }
+                result.Add(seq);</text>} else {<text>
+                // todo: handle iswrapped
+                var seq = new System.Xml.Linq.XElement("@property.XmlName");
+                foreach( var value in @(property.Name) ){
+                    seq.Add(new System.Xml.Linq.XElement( "@property.XmlName", value ) );
+                }
+                result.Add(seq);</text>}
+                } else { 
+                    // serialize it as a primitive/value type.
+                    if (property.XmlIsAttribute) {<text>
+                result.Add(new System.Xml.Linq.XAttribute("@property.XmlName", @(property.Name)) );</text>
+                    } else {<text>
+                result.Add(new System.Xml.Linq.XElement("@property.XmlName", @(property.Name)) );</text>
+                    }
+                }
+        @if (property.IsNullable()) {<text>
+            }
+        </text>}
+    </text>}
+    <text>
+            return result;
+        }
+    </text>}
+
+    @if (Model.ShouldGenerateXmlDeserialize) {<text>
+        /// <summary>
+        /// Deserializes an XML node to an instance of @Model.Name
+        /// </summary>
+        internal static @Model.Name XmlDeserialize(string payload) 
+        {
+            // deserialize to xml and use the overload to do the work
+            return XmlDeserialize( System.Xml.Linq.XElement.Parse( payload ) );
+        }    
+
+        internal static @Model.Name XmlDeserialize(System.Xml.Linq.XElement payload) 
+        {
+            var result = new @(Model.Name)();
+            System.Xml.Linq.XAttribute attribute;
+            System.Xml.Linq.XElement element;
+
+        @foreach(var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened())) {<text>
+            // deserialize the property '@property.Name'
+            @if (property.XmlIsAttribute) {<text>
+            if( null != (attribute = payload.Attribute("@property.XmlName")))
+            {
+                @if (property.ModelType is EnumType && !((EnumType)property.ModelType).ModelAsString) {<text>
+                @property.ModelType.Name enumValue;
+                if (System.Enum.TryParse(attribute.Value, true, out enumValue)) 
+                {
+                    result.@(property.Name) = enumValue;
+                }
+                </text>} else {<text> 
+                result.@(property.Name) = (@property.ModelTypeName)attribute;
+                </text>}
+            }
+            </text>
+                continue;
+            }
+            
+            if( null != (element = payload.Element("@Model.XmlName"))) 
+            {
+                @if (property.ModelType is CompositeType) {<text>
+                result.@(property.Name) = @(property.ModelTypeName).XmlDeserialize(element);
+                </text>} else if (property.ModelType is DictionaryType) {
+                    var vt = ((DictionaryType)property.ModelType).ValueType;
+                    if (vt is DictionaryType || vt is SequenceType) {<text>
+                    // todo: nothing right now. (not handling dictionaries of sequences)
+                    </text>} else if (vt is CompositeType) {<text>
+                    result.@property.Name = element.Elements().ToDictionary( each => each.Name.ToString(), each => @(vt.Name).XmlDeserialize(each));
+                    </text>} else {<text>
+                    result.@property.Name = element.Elements().ToDictionary( each => each.Name.ToString(), each => (@vt.Name)each);
+                    </text>}
+                } else if (property.ModelType is SequenceType) {
+                    var et = ((SequenceType)property.ModelType).ElementType;
+                    if (et is DictionaryType || et is SequenceType) {<text>
+                    // todo: nothing right now. (not handling sequences of dictionaries)
+                    </text>} else if (et is CompositeType) {<text>
+                    // todo: handle iswrapped
+                    result.@property.Name = element.Elements().Select( each => @(et.Name).XmlDeserialize(each) ).ToList();
+                    </text>} else {<text>
+                    // todo: handle iswrapped
+                    result.@property.Name = element.Elements().Select( each => (@et.Name)each ).ToList() 
+                    </text>}
+                } else if (property.ModelType is EnumType && !((EnumType)property.ModelType).ModelAsString) {<text>
+                @property.ModelType.Name enumValue;
+                if (System.Enum.TryParse(element.Value, true, out enumValue)) 
+                {
+                    result.@(property.Name) = enumValue;
+                }
+                </text>} else {<text> 
+                result.@(property.Name) = (@property.ModelTypeName)element;
+                </text>}
+
+            }</text> 
+        }
+            return result;
+        } 
+    </text>}
+    
+    }
+@if (Model.ShouldGenerateXmlSerialize) {<text>
+    public static class @(Model.Name)Extensions  
+    {
+        internal static bool TrySerializePayload( this System.Collections.Generic.IEnumerable<@(Model.Name)> sequence , string mediaType, out string result ) 
+        {
+            result = null;
+        
+            // check for a mediaType first
+            if( string.IsNullOrWhiteSpace(mediaType)) 
+            {
+                return false;
+            }
+        
+            result = string.Empty;
+
+            foreach( var item in sequence ) 
+            {
+                // special case: handle xml serialization 
+                if( mediaType.StartsWith("application/xml") ) 
+                {
+                    var xml = item.XmlSerialize( new System.Xml.Linq.XElement("@Model.XmlName") );
+                    result += xml.ToString() + "\n";
+                }
+                return true;
+            }
+            return false;
+        }
+    }
+</text>}
 }
