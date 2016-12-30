@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
 import fixtures.url.Paths;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.Base64Url;
-import com.microsoft.rest.serializer.CollectionFormat;
+import com.microsoft.rest.protocol.CollectionFormat;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;

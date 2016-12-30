@@ -265,7 +265,7 @@ namespace AutoRest.Java.Model
                     }
                     else if (this.ModelType is SequenceType)
                     {
-                        imports.Add("com.microsoft.rest.serializer.CollectionFormat");
+                        imports.Add("com.microsoft.rest.protocol.CollectionFormat");
                     }
                 }
                 if (ModelType.IsPrimaryType(KnownPrimaryType.Stream) && Location == Core.Model.ParameterLocation.Body)
