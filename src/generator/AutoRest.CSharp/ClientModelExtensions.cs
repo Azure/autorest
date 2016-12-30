@@ -11,6 +11,9 @@ using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Model;
 using AutoRest.Extensions;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using System.IO;
+using System.CodeDom.Compiler;
+using System.CodeDom;
 
 namespace AutoRest.CSharp
 {
@@ -383,6 +386,20 @@ namespace AutoRest.CSharp
             return null;
         }
 
+        /// <summary>
+        /// Generates a C# string literal for given string, fully escaped and such.
+        /// </summary>
+        private static string ToLiteral(string input)
+        {
+            using (var writer = new StringWriter())
+            {
+                using (var provider = CodeDomProvider.CreateProvider("CSharp"))
+                {
+                    provider.GenerateCodeFromExpression(new CodePrimitiveExpression(input), writer, null);
+                    return writer.ToString();
+                }
+            }
+        }
 
         private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb, KnownFormat format)
         {
@@ -420,7 +437,7 @@ namespace AutoRest.CSharp
                         constraintCheck = $"{valueReference} % {constraintValue} != 0";
                         break;
                     case Constraint.Pattern:
-                        constraintValue = $"\"{constraintValue.Replace("\\", "\\\\")}\"";
+                        constraintValue = ToLiteral(constraintValue);
                         constraintCheck = $"!System.Text.RegularExpressions.Regex.IsMatch({valueReference}, {constraintValue})";
                         break;
                     case Constraint.UniqueItems:
