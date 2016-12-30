@@ -127,7 +127,7 @@ public final class ApiVersionDefaultsInner {
     }
 
     private ServiceResponse<Void> getMethodGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -189,7 +189,7 @@ public final class ApiVersionDefaultsInner {
     }
 
     private ServiceResponse<Void> getMethodGlobalNotProvidedValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -251,7 +251,7 @@ public final class ApiVersionDefaultsInner {
     }
 
     private ServiceResponse<Void> getPathGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -313,7 +313,7 @@ public final class ApiVersionDefaultsInner {
     }
 
     private ServiceResponse<Void> getSwaggerGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

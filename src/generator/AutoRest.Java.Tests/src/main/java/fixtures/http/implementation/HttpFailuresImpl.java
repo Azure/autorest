@@ -121,7 +121,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     }
 
     private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -181,7 +181,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     }
 
     private ServiceResponse<Boolean> getNoModelErrorDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Boolean, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Boolean, ServiceException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .build(response);
     }
@@ -240,7 +240,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     }
 
     private ServiceResponse<Boolean> getNoModelEmptyDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Boolean, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Boolean, ServiceException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .build(response);
     }

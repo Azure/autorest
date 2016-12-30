@@ -145,7 +145,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getMethodPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -211,7 +211,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getPathPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -271,7 +271,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getSwaggerPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -337,7 +337,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getMethodQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -453,7 +453,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getMethodQueryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -519,7 +519,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getPathQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -579,7 +579,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

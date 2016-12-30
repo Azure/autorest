@@ -12,8 +12,8 @@ package fixtures.custombaseuri.implementation;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.azure.RestClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.RestClient;
 import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
 import fixtures.custombaseuri.Paths;
 

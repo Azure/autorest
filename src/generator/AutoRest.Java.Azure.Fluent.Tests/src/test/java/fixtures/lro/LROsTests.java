@@ -1,7 +1,8 @@
 package fixtures.lro;
 
 import com.microsoft.azure.CloudException;
-import com.microsoft.azure.RestClient;
+import com.microsoft.rest.LogLevel;
+import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCallback;
 
 import org.junit.Assert;
@@ -29,7 +30,7 @@ public class LROsTests {
     public static void setup() {
         RestClient restClient = new RestClient.Builder()
             .withBaseUrl("http://localhost:3000")
-            .withLogLevel(HttpLoggingInterceptor.Level.NONE)
+            .withLogLevel(LogLevel.NONE)
             .build();
         client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
         client.getAzureClient().withLongRunningOperationRetryTimeout(0);

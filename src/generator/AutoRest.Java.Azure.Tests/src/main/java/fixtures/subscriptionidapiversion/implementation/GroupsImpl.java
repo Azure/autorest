@@ -129,7 +129,7 @@ public final class GroupsImpl implements Groups {
     }
 
     private ServiceResponse<SampleResourceGroup> getSampleResourceGroupDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<SampleResourceGroup, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<SampleResourceGroup, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<SampleResourceGroup>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

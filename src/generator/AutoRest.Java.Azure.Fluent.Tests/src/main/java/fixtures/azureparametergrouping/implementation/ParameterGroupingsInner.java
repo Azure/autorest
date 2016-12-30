@@ -139,7 +139,7 @@ public final class ParameterGroupingsInner {
     }
 
     private ServiceResponse<Void> postRequiredDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -266,7 +266,7 @@ public final class ParameterGroupingsInner {
     }
 
     private ServiceResponse<Void> postOptionalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -409,7 +409,7 @@ public final class ParameterGroupingsInner {
     }
 
     private ServiceResponse<Void> postMultiParamGroupsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -536,7 +536,7 @@ public final class ParameterGroupingsInner {
     }
 
     private ServiceResponse<Void> postSharedParameterGroupObjectDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

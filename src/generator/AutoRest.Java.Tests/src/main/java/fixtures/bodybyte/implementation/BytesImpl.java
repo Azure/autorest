@@ -130,7 +130,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -190,7 +190,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -250,7 +250,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getNonAsciiDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -316,7 +316,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<Void> putNonAsciiDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -376,7 +376,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

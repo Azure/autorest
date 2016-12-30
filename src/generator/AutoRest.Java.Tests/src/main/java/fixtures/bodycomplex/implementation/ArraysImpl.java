@@ -132,7 +132,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<ArrayWrapper> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -199,7 +199,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -259,7 +259,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<ArrayWrapper> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -326,7 +326,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -386,7 +386,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<ArrayWrapper> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

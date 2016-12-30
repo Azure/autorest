@@ -120,7 +120,7 @@ public final class InheritancesImpl implements Inheritances {
     }
 
     private ServiceResponse<Siamese> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Siamese, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Siamese, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Siamese>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -187,7 +187,7 @@ public final class InheritancesImpl implements Inheritances {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

@@ -12,8 +12,8 @@ package fixtures.head.implementation;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.azure.RestClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.RestClient;
 
 /**
  * Initializes a new instance of the AutoRestHeadTestServiceImpl class.

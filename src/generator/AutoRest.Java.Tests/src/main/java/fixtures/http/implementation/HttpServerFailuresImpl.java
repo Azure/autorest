@@ -128,7 +128,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> head501Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .buildEmpty(response);
     }
@@ -187,7 +187,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> get501Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -304,7 +304,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> post505Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -421,7 +421,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> delete505Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }

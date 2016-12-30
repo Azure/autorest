@@ -125,7 +125,7 @@ public final class FilesImpl implements Files {
     }
 
     private ServiceResponse<InputStream> getFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -185,7 +185,7 @@ public final class FilesImpl implements Files {
     }
 
     private ServiceResponse<InputStream> getFileLargeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -245,7 +245,7 @@ public final class FilesImpl implements Files {
     }
 
     private ServiceResponse<InputStream> getEmptyFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

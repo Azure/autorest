@@ -151,7 +151,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
     }
 
     private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.mapperAdapter())
+        return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

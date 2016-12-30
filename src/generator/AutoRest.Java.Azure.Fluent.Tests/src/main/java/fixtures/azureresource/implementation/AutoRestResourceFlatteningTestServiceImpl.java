@@ -15,8 +15,8 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.Resource;
-import com.microsoft.azure.RestClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -319,7 +319,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -379,7 +379,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<List<FlattenedProductInner>> getArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<List<FlattenedProductInner>, ErrorException>(this.mapperAdapter())
+        return new AzureServiceResponseBuilder<List<FlattenedProductInner>, ErrorException>(this.serializerAdapter())
                 .register(200, new TypeToken<List<FlattenedProductInner>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -496,7 +496,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Void> putDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -556,7 +556,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Map<String, FlattenedProductInner>> getDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Map<String, FlattenedProductInner>, ErrorException>(this.mapperAdapter())
+        return new AzureServiceResponseBuilder<Map<String, FlattenedProductInner>, ErrorException>(this.serializerAdapter())
                 .register(200, new TypeToken<Map<String, FlattenedProductInner>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -673,7 +673,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Void> putResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -733,7 +733,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<ResourceCollectionInner> getResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<ResourceCollectionInner, ErrorException>(this.mapperAdapter())
+        return new AzureServiceResponseBuilder<ResourceCollectionInner, ErrorException>(this.serializerAdapter())
                 .register(200, new TypeToken<ResourceCollectionInner>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

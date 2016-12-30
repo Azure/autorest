@@ -127,7 +127,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Period> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Period, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Period, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -193,7 +193,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Void> putPositiveDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -253,7 +253,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Period> getPositiveDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Period, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Period, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -313,7 +313,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Period> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Period, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Period, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

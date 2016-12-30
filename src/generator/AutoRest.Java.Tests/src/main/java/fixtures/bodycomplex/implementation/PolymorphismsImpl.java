@@ -124,7 +124,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
     }
 
     private ServiceResponse<Fish> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Fish, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Fish, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Fish>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -319,7 +319,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -486,7 +486,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
     }
 
     private ServiceResponse<Void> putValidMissingRequiredDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

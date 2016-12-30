@@ -126,7 +126,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> customNamedRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderCustomNamedRequestIdHeaders.class);
@@ -194,7 +194,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders> customNamedRequestIdParamGroupingDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderCustomNamedRequestIdParamGroupingHeaders.class);

@@ -137,7 +137,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -204,7 +204,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -264,7 +264,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -324,7 +324,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -384,7 +384,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -444,7 +444,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

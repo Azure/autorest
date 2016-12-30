@@ -141,7 +141,7 @@ public final class FormdatasImpl implements Formdatas {
     }
 
     private ServiceResponse<InputStream> uploadFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -209,7 +209,7 @@ public final class FormdatasImpl implements Formdatas {
     }
 
     private ServiceResponse<InputStream> uploadFileViaBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

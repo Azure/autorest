@@ -153,7 +153,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -218,7 +218,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -283,7 +283,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getOverflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -348,7 +348,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUnderflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -415,7 +415,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<Void> putUtcMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -480,7 +480,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUtcLowercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -545,7 +545,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUtcUppercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -612,7 +612,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<Void> putUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -677,7 +677,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

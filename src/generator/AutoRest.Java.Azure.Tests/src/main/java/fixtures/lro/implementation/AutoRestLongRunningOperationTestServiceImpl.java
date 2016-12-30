@@ -12,8 +12,8 @@ package fixtures.lro.implementation;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.azure.RestClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.RestClient;
 import fixtures.lro.AutoRestLongRunningOperationTestService;
 import fixtures.lro.LRORetrys;
 import fixtures.lro.LROs;

@@ -103,7 +103,7 @@ namespace AutoRest.Java.Model
                 else if (sequence != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "{0} {1} = {2}.mapperAdapter().serializeList({3}, CollectionFormat.{4});",
+                        "{0} {1} = {2}.serializerAdapter().serializeList({3}, CollectionFormat.{4});",
                         WireType.Name,
                         WireName,
                         clientReference,

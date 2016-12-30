@@ -215,7 +215,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredIntegerParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -330,7 +330,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalIntegerParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -398,7 +398,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredIntegerPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -514,7 +514,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalIntegerPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -578,7 +578,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredIntegerHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -693,7 +693,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalIntegerHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -760,7 +760,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredStringParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -875,7 +875,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalStringParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -943,7 +943,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredStringPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1059,7 +1059,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalStringPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1126,7 +1126,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredStringHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1241,7 +1241,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalStringHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1309,7 +1309,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredClassParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1425,7 +1425,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalClassParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1493,7 +1493,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredClassPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1609,7 +1609,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalClassPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1677,7 +1677,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredArrayParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1793,7 +1793,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalArrayParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1861,7 +1861,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredArrayPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1977,7 +1977,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalArrayPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2030,7 +2030,7 @@ public final class ExplicitsImpl implements Explicits {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
         Validator.validate(headerParameter);
-        String headerParameterConverted = this.client.mapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postRequiredArrayHeader(headerParameterConverted)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -2046,7 +2046,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredArrayHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -2090,7 +2090,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Observable<ServiceResponse<Void>> postOptionalArrayHeaderWithServiceResponseAsync() {
         final List<String> headerParameter = null;
-        String headerParameterConverted = this.client.mapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postOptionalArrayHeader(headerParameterConverted)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -2148,7 +2148,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Observable<ServiceResponse<Void>> postOptionalArrayHeaderWithServiceResponseAsync(List<String> headerParameter) {
         Validator.validate(headerParameter);
-        String headerParameterConverted = this.client.mapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postOptionalArrayHeader(headerParameterConverted)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -2164,7 +2164,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalArrayHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

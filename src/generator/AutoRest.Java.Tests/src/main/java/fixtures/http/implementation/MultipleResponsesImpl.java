@@ -250,7 +250,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError200ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -311,7 +311,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError204ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -372,7 +372,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError201InvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -433,7 +433,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError202NoneDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -494,7 +494,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -555,7 +555,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model201ModelDefaultError200ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<B>() { }.getType())
                 .registerError(ErrorException.class)
@@ -616,7 +616,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model201ModelDefaultError201ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<B>() { }.getType())
                 .registerError(ErrorException.class)
@@ -677,7 +677,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model201ModelDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<B>() { }.getType())
                 .registerError(ErrorException.class)
@@ -738,7 +738,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Object, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Object, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<C>() { }.getType())
                 .register(404, new TypeToken<D>() { }.getType())
@@ -800,7 +800,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Object, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Object, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<C>() { }.getType())
                 .register(404, new TypeToken<D>() { }.getType())
@@ -862,7 +862,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Object, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Object, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<C>() { }.getType())
                 .register(404, new TypeToken<D>() { }.getType())
@@ -924,7 +924,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Object, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Object, ErrorException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<C>() { }.getType())
                 .register(404, new TypeToken<D>() { }.getType())
@@ -985,7 +985,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultError202NoneDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -1045,7 +1045,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultError204NoneDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -1105,7 +1105,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -1165,7 +1165,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultNone202InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ServiceException>(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -1224,7 +1224,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultNone204NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ServiceException>(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -1283,7 +1283,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultNone400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ServiceException>(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -1342,7 +1342,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ServiceException>(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -1402,7 +1402,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> getDefaultModelA200ValidDelegate(Response<ResponseBody> response) throws MyException, IOException {
-        return new ServiceResponseBuilder<A, MyException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, MyException>(this.client.serializerAdapter())
                 .registerError(MyException.class)
                 .build(response);
     }
@@ -1461,7 +1461,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> getDefaultModelA200NoneDelegate(Response<ResponseBody> response) throws MyException, IOException {
-        return new ServiceResponseBuilder<A, MyException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, MyException>(this.client.serializerAdapter())
                 .registerError(MyException.class)
                 .build(response);
     }
@@ -1520,7 +1520,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> getDefaultModelA400ValidDelegate(Response<ResponseBody> response) throws MyException, IOException {
-        return new ServiceResponseBuilder<A, MyException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, MyException>(this.client.serializerAdapter())
                 .registerError(MyException.class)
                 .build(response);
     }
@@ -1579,7 +1579,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> getDefaultModelA400NoneDelegate(Response<ResponseBody> response) throws MyException, IOException {
-        return new ServiceResponseBuilder<A, MyException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, MyException>(this.client.serializerAdapter())
                 .registerError(MyException.class)
                 .build(response);
     }
@@ -1637,7 +1637,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Void> getDefaultNone200InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ServiceException>(this.client.serializerAdapter())
                 .build(response);
     }
 
@@ -1694,7 +1694,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Void> getDefaultNone200NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ServiceException>(this.client.serializerAdapter())
                 .build(response);
     }
 
@@ -1751,7 +1751,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Void> getDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ServiceException>(this.client.serializerAdapter())
                 .build(response);
     }
 
@@ -1808,7 +1808,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Void> getDefaultNone400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<Void, ServiceException>(this.client.serializerAdapter())
                 .build(response);
     }
 
@@ -1866,7 +1866,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200ModelA200NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<A, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, ServiceException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -1925,7 +1925,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200ModelA200ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<A, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, ServiceException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -1984,7 +1984,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200ModelA200InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<A, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, ServiceException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -2043,7 +2043,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200ModelA400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<A, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, ServiceException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -2102,7 +2102,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200ModelA400ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<A, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, ServiceException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -2161,7 +2161,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200ModelA400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<A, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, ServiceException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -2220,7 +2220,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200ModelA202ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<A, ServiceException>(this.client.mapperAdapter())
+        return new ServiceResponseBuilder<A, ServiceException>(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
