@@ -14,6 +14,7 @@ import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
 import fixtures.requiredoptional.Implicits;
 import fixtures.requiredoptional.Explicits;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
@@ -154,6 +155,16 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      */
     public AutoRestRequiredOptionalTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestRequiredOptionalTestService client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestRequiredOptionalTestServiceImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

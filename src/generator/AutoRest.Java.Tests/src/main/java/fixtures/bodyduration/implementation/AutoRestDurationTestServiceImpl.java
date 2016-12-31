@@ -13,6 +13,7 @@ package fixtures.bodyduration.implementation;
 import fixtures.bodyduration.AutoRestDurationTestService;
 import fixtures.bodyduration.Durations;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
@@ -71,6 +72,16 @@ public final class AutoRestDurationTestServiceImpl extends ServiceClient impleme
      */
     public AutoRestDurationTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestDurationTestService client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestDurationTestServiceImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

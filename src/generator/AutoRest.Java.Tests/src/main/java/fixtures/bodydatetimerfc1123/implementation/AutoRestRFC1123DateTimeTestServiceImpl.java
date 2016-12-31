@@ -13,6 +13,7 @@ package fixtures.bodydatetimerfc1123.implementation;
 import fixtures.bodydatetimerfc1123.AutoRestRFC1123DateTimeTestService;
 import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
@@ -71,6 +72,16 @@ public final class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient 
      */
     public AutoRestRFC1123DateTimeTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestRFC1123DateTimeTestService client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestRFC1123DateTimeTestServiceImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

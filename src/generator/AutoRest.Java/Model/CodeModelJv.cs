@@ -70,6 +70,7 @@ namespace AutoRest.Java.Model
                 }
                 classes.AddRange(new[]{
                         "com.microsoft.rest.ServiceClient",
+                        "com.microsoft.rest.RestClient",
                         "okhttp3.OkHttpClient",
                         "retrofit2.Retrofit"
                     });
@@ -92,6 +93,8 @@ namespace AutoRest.Java.Model
                 classes.AddRange(RootMethods
                     .SelectMany(m => m.InterfaceImports)
                     .OrderBy(i => i).Distinct());
+
+                classes.Add("com.microsoft.rest.RestClient");
 
                 return classes.ToList();
             }

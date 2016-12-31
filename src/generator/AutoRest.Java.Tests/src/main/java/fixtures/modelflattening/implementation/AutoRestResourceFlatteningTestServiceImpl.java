@@ -12,6 +12,7 @@ package fixtures.modelflattening.implementation;
 
 import fixtures.modelflattening.AutoRestResourceFlatteningTestService;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
@@ -86,6 +87,16 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public AutoRestResourceFlatteningTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestResourceFlatteningTestService client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestResourceFlatteningTestServiceImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

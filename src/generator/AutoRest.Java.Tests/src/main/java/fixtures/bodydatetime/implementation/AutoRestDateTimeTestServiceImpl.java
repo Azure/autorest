@@ -13,6 +13,7 @@ package fixtures.bodydatetime.implementation;
 import fixtures.bodydatetime.AutoRestDateTimeTestService;
 import fixtures.bodydatetime.Datetimes;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
@@ -71,6 +72,16 @@ public final class AutoRestDateTimeTestServiceImpl extends ServiceClient impleme
      */
     public AutoRestDateTimeTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestDateTimeTestService client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestDateTimeTestServiceImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

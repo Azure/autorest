@@ -13,6 +13,7 @@ package fixtures.custombaseurimoreoptions.implementation;
 import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
 import fixtures.custombaseurimoreoptions.Paths;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
@@ -117,6 +118,16 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      */
     private AutoRestParameterizedCustomHostTestClientImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestParameterizedCustomHostTestClientImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

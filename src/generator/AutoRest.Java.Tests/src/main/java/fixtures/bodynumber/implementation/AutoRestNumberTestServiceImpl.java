@@ -13,6 +13,7 @@ package fixtures.bodynumber.implementation;
 import fixtures.bodynumber.AutoRestNumberTestService;
 import fixtures.bodynumber.Numbers;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
@@ -71,6 +72,16 @@ public final class AutoRestNumberTestServiceImpl extends ServiceClient implement
      */
     public AutoRestNumberTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestNumberTestService client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestNumberTestServiceImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

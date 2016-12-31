@@ -13,6 +13,7 @@ package fixtures.header.implementation;
 import fixtures.header.AutoRestSwaggerBATHeaderService;
 import fixtures.header.Headers;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
@@ -71,6 +72,16 @@ public final class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient imp
      */
     public AutoRestSwaggerBATHeaderServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestSwaggerBATHeaderService client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestSwaggerBATHeaderServiceImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

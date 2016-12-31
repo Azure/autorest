@@ -13,6 +13,7 @@ package fixtures.bodyfile.implementation;
 import fixtures.bodyfile.AutoRestSwaggerBATFileService;
 import fixtures.bodyfile.Files;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
@@ -71,6 +72,16 @@ public final class AutoRestSwaggerBATFileServiceImpl extends ServiceClient imple
      */
     public AutoRestSwaggerBATFileServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestSwaggerBATFileService client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestSwaggerBATFileServiceImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

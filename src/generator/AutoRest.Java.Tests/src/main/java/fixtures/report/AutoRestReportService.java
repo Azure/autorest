@@ -15,11 +15,19 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import java.util.Map;
 import rx.Observable;
+import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestReportService class.
  */
 public interface AutoRestReportService {
+    /**
+     * Gets the REST client.
+     *
+     * @return the {@link RestClient} object.
+    */
+    RestClient restClient();
+
     /**
      * The default base URL.
      */

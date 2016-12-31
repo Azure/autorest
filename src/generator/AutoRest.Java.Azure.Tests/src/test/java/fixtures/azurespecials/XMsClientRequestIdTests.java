@@ -1,5 +1,6 @@
 package fixtures.azurespecials;
 
+import com.microsoft.rest.LogLevel;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.credentials.TokenCredentials;
 
@@ -17,6 +18,7 @@ public class XMsClientRequestIdTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestAzureSpecialParametersTestClientImpl("http://localhost:3000", new TokenCredentials(null, UUID.randomUUID().toString()));
+        client.restClient().withLogLevel(LogLevel.BODY);
         client.withSubscriptionId("1234-5678-9012-3456");
     }
 

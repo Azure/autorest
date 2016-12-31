@@ -12,6 +12,7 @@ package fixtures.validation.implementation;
 
 import fixtures.validation.AutoRestValidationTest;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
@@ -128,6 +129,16 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public AutoRestValidationTestImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestValidationTest client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestValidationTestImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

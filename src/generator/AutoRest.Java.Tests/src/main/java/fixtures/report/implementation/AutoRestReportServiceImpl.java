@@ -12,6 +12,7 @@ package fixtures.report.implementation;
 
 import fixtures.report.AutoRestReportService;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
@@ -75,6 +76,16 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      */
     public AutoRestReportServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestReportService client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestReportServiceImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

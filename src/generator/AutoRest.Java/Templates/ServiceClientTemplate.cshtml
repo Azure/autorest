@@ -118,6 +118,16 @@ if(!property.IsReadOnly)
         super(baseUrl, clientBuilder, restBuilder);
         initialize();
     }
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param restClient the REST client containing pre-configured settings
+     */
+    public @(Model.Name)Impl(RestClient restClient) {
+        super(restClient);
+        initialize();
+    }
 
 @EmptyLine
     private void initialize() {
