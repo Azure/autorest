@@ -109,7 +109,7 @@ namespace AutoRest.CSharp
 
         private async Task GenerateRestCode(CodeModelCs codeModel)
         {
-            if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("rest") || Settings.Instance.CodeGenerationMode.IsNullOrEmpty())
+            if (Settings.Instance.CodeGenerationMode.IsNullOrEmpty() || Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("rest"))
             {
                 Logger.Instance.Log(Category.Info, "Generating client side Code");
                 await GenerateClientSideCode(codeModel);
@@ -142,7 +142,7 @@ namespace AutoRest.CSharp
             {
                 throw new InvalidCastException("CodeModel is not a c# CodeModel");
             }
-            if (Settings.Instance.CodeGenerationMode.ToLower().StartsWith("rest") || Settings.Instance.CodeGenerationMode.IsNullOrEmpty())
+            if (Settings.Instance.CodeGenerationMode.IsNullOrEmpty() || Settings.Instance.CodeGenerationMode.ToLower().StartsWith("rest"))
             {
                 Logger.Instance.Log(Category.Info, "Generating Rest Code");
                 await GenerateRestCode(codeModel);
