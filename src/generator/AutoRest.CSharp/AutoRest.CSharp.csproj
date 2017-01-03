@@ -28,7 +28,5 @@
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Extensions/AutoRest.Extensions.csproj" />
     <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <DotNetCliToolReference Include="dotnet-razor" Version="1.0.0" />
-  </ItemGroup>
+  
 </Project>
