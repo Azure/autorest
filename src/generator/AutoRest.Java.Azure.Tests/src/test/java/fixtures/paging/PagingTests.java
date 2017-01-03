@@ -3,6 +3,7 @@ package fixtures.paging;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 
+import com.microsoft.rest.LogLevel;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -25,6 +26,7 @@ public class PagingTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestPagingTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
+        client.restClient().withLogLevel(LogLevel.BODY);
     }
 
     @Test
@@ -130,12 +132,7 @@ public class PagingTests {
 
     @Test
     public void getMultiplePagesFailureUri() throws Exception {
-        try {
-            List<Product> response = client.pagings().getMultiplePagesFailureUri();
-            response.size();
-            fail();
-        } catch (CloudException ex) {
-            Assert.assertNotNull(ex.getResponse());
-        }
+        List<Product> response = client.pagings().getMultiplePagesFailureUri();
+        Assert.assertEquals(1, response.size());
     }
 }
