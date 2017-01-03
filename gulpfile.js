@@ -406,7 +406,8 @@ gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite'
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp',
     'nsPrefix': 'Fixtures.Azure',
-    'flatteningThreshold': '1'
+    'flatteningThreshold': '1',
+    'codeGenerationMode': 'rest-client'
   }, cb);
 });
 
@@ -448,7 +449,8 @@ gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds', 'regener
     'outputDir': 'Expected',
     'codeGenerator': 'CSharp',
     'nsPrefix': 'Fixtures',
-    'flatteningThreshold': '1'
+    'flatteningThreshold': '1',
+    'codeGenerationMode': 'rest-client'
   }, cb);
 });
 
@@ -466,7 +468,8 @@ gulp.task('regenerate:expected:cswithcreds', function(cb){
     'codeGenerator': 'CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
-    'addCredentials': true
+    'addCredentials': true,
+    'codeGenerationMode': 'rest-client'
   }, cb);
 });
 
@@ -484,7 +487,8 @@ gulp.task('regenerate:expected:csallsync', function(cb){
     'codeGenerator': 'CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
-    'syncMethods': 'all'
+    'syncMethods': 'all',
+    'codeGenerationMode': 'rest-client'
   }, cb);
 });
 
@@ -502,7 +506,8 @@ gulp.task('regenerate:expected:csnosync', function(cb){
     'codeGenerator': 'CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
-    'syncMethods': 'none'
+    'syncMethods': 'none',
+    'codeGenerationMode': 'rest-client'
   }, cb);
 });
 
@@ -520,7 +525,8 @@ gulp.task('regenerate:expected:csazureallsync', function(cb){
     'codeGenerator': 'Azure.CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
-    'syncMethods': 'all'
+    'syncMethods': 'all',
+    'codeGenerationMode': 'rest-client'
   }, cb);
 });
 
@@ -558,7 +564,8 @@ gulp.task('regenerate:expected:csazurenosync', function(cb){
     'codeGenerator': 'Azure.CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
-    'syncMethods': 'none'
+    'syncMethods': 'none',
+    'codeGenerationMode': 'rest-client'
   }, cb);
 });
 
@@ -591,7 +598,8 @@ gulp.task('regenerate:expected:cscomposite', function (cb) {
     'outputDir': 'Expected',
     'codeGenerator': 'CSharp',
     'nsPrefix': 'Fixtures',
-    'flatteningThreshold': '1'
+    'flatteningThreshold': '1',
+    'codeGenerationMode': 'rest-client'
   }, cb);
 });
 
@@ -604,7 +612,8 @@ gulp.task('regenerate:expected:csazurecomposite', function (cb) {
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp',
     'nsPrefix': 'Fixtures',
-    'flatteningThreshold': '1'
+    'flatteningThreshold': '1',
+    'codeGenerationMode': 'rest-client'
   }, cb);
 });
 

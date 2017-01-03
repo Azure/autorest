@@ -113,7 +113,6 @@ namespace AutoRest.Core
                 {
                     throw new Exception($"Duplicate File Generation: {filePath}");
                 }
-                Console.WriteLine("file to save "+filePath);
                 FileList.Add(filePath);
                 Settings.Instance.FileSystem.DeleteFile(filePath);
             }
