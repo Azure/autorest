@@ -1,9 +1,0 @@
-final PROJECT_ROOT = '.'
-final TEST_ROOT = "$PROJECT_ROOT/src/generator"
-include \
-        'codegen-tests',
-        'azure-codegen-tests',
-        'azure-fluent-codegen-tests'
-project(':codegen-tests').projectDir = new File("$TEST_ROOT/AutoRest.Java.Tests")
-project(':azure-codegen-tests').projectDir = new File("$TEST_ROOT/AutoRest.Java.Azure.Tests")
-project(':azure-fluent-codegen-tests').projectDir = new File("$TEST_ROOT/AutoRest.Java.Azure.Fluent.Tests")
