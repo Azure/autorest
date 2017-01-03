@@ -1,0 +1,6 @@
+<Project ToolsVersion="15.0">
+  <PropertyGroup Condition="$(Common) == '*Undefined*' OR $(Common) == '' " >
+    <Common>$(MsBuildThisFileDirectory)</Common>
+    <SolutionDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory),AutoRest.sln))/</SolutionDir>
+  </PropertyGroup>
+</Project>

@@ -9,7 +9,6 @@ using AutoRest.Swagger.Validation;
 
 namespace AutoRest.Swagger.Model
 {
-    [Serializable]
     public abstract class SwaggerBase
     {
         public SwaggerBase()

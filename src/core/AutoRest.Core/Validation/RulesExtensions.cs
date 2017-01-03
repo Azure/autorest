@@ -44,7 +44,7 @@ namespace AutoRest.Core.Validation
             // Dictionaries of type <string, object> cannot be traversed, because the object could be infinitely deep.
             // We only want to validate objects that have strong typing for the value type
             var dictType = entity.GetType();
-            return dictType.IsGenericType &&
+            return dictType.IsGenericType() &&
                    dictType.GenericTypeArguments.Count() >= 2 &&
                    dictType.GenericTypeArguments[1] != typeof(object);
         }

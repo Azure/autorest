@@ -14,7 +14,7 @@ namespace Microsoft.Rest.CSharp.Compiler.Compilation
 {
     public static class ManagedAssets
     {
-        public static string RuntimeDirectory => RuntimeEnvironment.GetRuntimeDirectory();
+        public static string RuntimeDirectory => AppContext.BaseDirectory;
 
         public static IEnumerable<string> FrameworkAssemblies => new[]
         {
@@ -34,7 +34,7 @@ namespace Microsoft.Rest.CSharp.Compiler.Compilation
         // Framework assemblies
         private static readonly IEnumerable<MetadataReference> frameworkAssemblies =
             LoadReferences(
-                RuntimeEnvironment.GetRuntimeDirectory(),
+                AppContext.BaseDirectory,
                 "mscorlib.dll",
                 "System.dll",
                 "System.Core.dll",

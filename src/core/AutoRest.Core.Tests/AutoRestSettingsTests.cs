@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using AutoRest.Core.Logging;
+using AutoRest.Core.Utilities;
 using Newtonsoft.Json.Linq;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
@@ -58,10 +59,9 @@ namespace AutoRest.Core.Tests
         {
             using (NewContext)
             {
-                var codeBaseUrl = new Uri(Assembly.GetExecutingAssembly().CodeBase);
+                var codeBaseUrl = new Uri(Utilities.Extensions.CodeBaseDirectory);
                 var codeBasePath = Uri.UnescapeDataString(codeBaseUrl.AbsolutePath);
-                var dirPath = Path.GetDirectoryName(codeBasePath);
-                var settingsFile = Path.Combine(dirPath, "Resource\\SampleSettings.json");
+                var settingsFile = Path.Combine(codeBasePath, "Resource\\SampleSettings.json");
                 var settings = Settings.Create(new[] {"-cgs", settingsFile});
                 Assert.False((bool) settings.CustomSettings["sampleSwitchFalse"]);
                 Assert.True((bool) settings.CustomSettings["sampleSwitchTrue"]);

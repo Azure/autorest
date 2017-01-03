@@ -57,11 +57,25 @@ namespace AutoRest.Core.Utilities
         public string ReadFileAsText(string path)
         {
             path = path.AdjustGithubUrl();
-            using (var client = new WebClient())
+
+            Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out Uri uri);
+
+            if (!uri.IsAbsoluteUri)
             {
-                client.Headers.Add("User-Agent: AutoRest");
-                client.Encoding = Encoding.UTF8;
-                return client.DownloadString(path);
+                return ReadFileAsText(Path.Combine(CurrentDirectory, path));
+            }
+
+            if (uri.IsFile)
+            {
+                return File.ReadAllText(uri.LocalPath, Encoding.UTF8);
+            }
+            
+            using (var client = new System.Net.Http.HttpClient( ))
+            {
+                client.DefaultRequestHeaders.Add("User-Agent","AutoRest");
+                // client.Encoding = Encoding.UTF8;
+                return client.GetAsync(path).Result.Content.ReadAsStringAsync().Result;
+                //return client.DownloadString(path);
             }
         }
 
@@ -72,7 +86,7 @@ namespace AutoRest.Core.Utilities
                 return File.AppendText(path);
             }
             // ensure that we're being very very explicit: NO BYTE ORDER MARK. 
-            return new StreamWriter(path, false, new UTF8Encoding(false, true));
+            return new StreamWriter(new FileStream( path,FileMode.Create), new UTF8Encoding(false, true));
         }
 
         public bool FileExists(string path)

@@ -11,7 +11,6 @@ namespace AutoRest.Swagger.Model
     /// <summary>
     /// Allows referencing an external resource for extended documentation.
     /// </summary>
-    [Serializable]
     public class ExternalDoc
     {
         private string _description;

@@ -61,7 +61,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             Singleton<Settings>.Instance = this;
 
             FileSystem = new FileSystem();
-            OutputDirectory = Path.Combine(Environment.CurrentDirectory, "Generated");
+            OutputDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Generated");
             CustomSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             Header = string.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeader, AutoRestController.Version);
             CodeGenerator = "CSharp";
@@ -410,7 +410,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                             {
                                 property.SetValue(entityToPopulate, true);
                             }
-                            else if (property.PropertyType.IsEnum)
+                            else if (property.PropertyType.IsEnum())
                             {
                                 property.SetValue(entityToPopulate, Enum.Parse(property.PropertyType, setting.Value.ToString(), true));
                             }

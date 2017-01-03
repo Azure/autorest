@@ -1,0 +1,121 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+
+  <PropertyGroup>
+    <Authors>Microsoft;Azure-SDK</Authors>
+    <TargetFramework>net451</TargetFramework>
+    <RuntimeIdentifiers>win7-x64;win7-x86;osx.10.10-x64;osx.10.11-x64;ubuntu.14.04-x64;ubuntu.16.04-x64;centos.7-x64;rhel.7.2-x64;debian.8-x64;fedora.23-x64;opensuse.13.2-x64</RuntimeIdentifiers>
+    <DelaySign>true</DelaySign>
+    <AssemblyName>AutoRest</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <AssemblyOriginatorKeyFile>../../../Tools/MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <PackageTags>Microsoft AutoRest Generator</PackageTags>
+    <PackageIconUrl>https://cdn.rawgit.com/Azure/AutoRest/7c1576dfb56974176223545cfac5762d168ded5f/Documentation/images/autorest-small-flat.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/Azure/AutoRest</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateNeutralResourcesLanguageAttribute>false</GenerateNeutralResourcesLanguageAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="**\*.cs" />
+    <EmbeddedResource Include="**\*.resx" />
+    <EmbeddedResource Include="compiler\resources\**\*" />
+    <Content Include="AutoRest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Autorest.Release.json">
+      <PackagePath>tools</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="bin\release\net451\win7-x64\*.exe;bin\release\net451\win7-x64\*.dll" Exclude="**\*.pdb">
+      <PackagePath>tools/</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AutoRest.Core\AutoRest.Core.csproj" />
+    <ProjectReference Include="..\..\modeler\AutoRest.Swagger\AutoRest.Swagger.csproj" />
+    <ProjectReference Include="..\..\modeler\AutoRest.CompositeSwagger\AutoRest.CompositeSwagger.csproj" />
+    <ProjectReference Include="..\..\generator\AutoRest.CSharp\AutoRest.CSharp.csproj" />
+    <ProjectReference Include="..\..\generator\AutoRest.CSharp.Azure\AutoRest.CSharp.Azure.csproj" />
+    <ProjectReference Include="..\..\generator\AutoRest.NodeJS\AutoRest.NodeJS.csproj" />
+    <ProjectReference Include="..\..\generator\AutoRest.NodeJS.Azure\AutoRest.NodeJS.Azure.csproj" />
+    <ProjectReference Include="..\..\generator\AutoRest.Ruby\AutoRest.Ruby.csproj" />
+    <ProjectReference Include="..\..\generator\AutoRest.Ruby.Azure\AutoRest.Ruby.Azure.csproj" />
+    <ProjectReference Include="..\..\generator\AutoRest.Python\AutoRest.Python.csproj" />
+    <ProjectReference Include="..\..\generator\AutoRest.Python.Azure\AutoRest.Python.Azure.csproj" />
+    <ProjectReference Include="..\..\generator\AutoRest.AzureResourceSchema\AutoRest.AzureResourceSchema.csproj" />
+    <ProjectReference Include="..\..\generator\AutoRest.CSharp.Azure.Fluent\AutoRest.CSharp.Azure.Fluent.csproj" />
+    <ProjectReference Include="..\AutoRest.Extensions\AutoRest.Extensions.csproj">
+      <FromP2P>true</FromP2P>
+    </ProjectReference>
+    <ProjectReference Include="..\AutoRest.Extensions.Azure\AutoRest.Extensions.Azure.csproj">
+      <FromP2P>true</FromP2P>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>[9.0.1,10.0)</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers">
+      <Version>1.0.0</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.Common">
+      <Version>1.0.0</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp">
+      <Version>1.0.0</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces">
+      <Version>1.0.0</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common">
+      <Version>1.0.0</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Composition">
+      <Version>1.0.27</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Rest.ClientRuntime">
+      <Version>2.3.2</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure">
+      <Version>3.3.2</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="System.Collections.Immutable">
+      <Version>1.1.36</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="System.Reflection.Metadata">
+      <Version>1.0.21</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+  </PropertyGroup>
+
+</Project>

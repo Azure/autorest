@@ -6,16 +6,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
+
 #pragma warning disable CS3024 // Constraint type is not CLS-compliant
 namespace AutoRest.Core.Utilities
 {
@@ -125,7 +125,26 @@ namespace AutoRest.Core.Utilities
             => property.GetCustomAttributes(typeof(T), true).Any();
 
         public static bool IsGenericOf(this Type type, Type genericType)
-            => type.IsGenericType && type.GetGenericTypeDefinition() == genericType;
+            => type.IsGenericType() && type.GetGenericTypeDefinition() == genericType;
+#if !LEGACY
+        public static bool IsValueType(this Type type) => type.GetTypeInfo().IsValueType;
+        public static bool IsEnum(this Type type) => type.GetTypeInfo().IsEnum;
+        public static IEnumerable<T> GetCustomAttributes<T>(this Type type, bool inherit) where T : Attribute => type.GetTypeInfo().GetCustomAttributes<T>(inherit);
+        public static Type BaseType(this Type type) => type.GetTypeInfo().BaseType;
+        public static bool IsGenericType(this Type type) => type.GetTypeInfo().IsGenericType;
+        public static IEnumerable<CustomAttributeData> CustomAttributes(this Type type) => type.GetTypeInfo().CustomAttributes;
+        public static bool IsClass(this Type type) => type.GetTypeInfo().IsClass;
+        public static Assembly GetAssembly(this Type type) => type.GetTypeInfo().Assembly;
+
+        public static string CodeBaseDirectory
+        {
+            get
+            {
+                dynamic a = typeof(Settings).GetAssembly();
+                return Directory.GetParent(a.Location.ToString()).ToString();
+            }
+        }
+#endif 
 
         public static string ToTypesString(this Type[] types) => types?.Aggregate("", (current, type) => $"{current}, {type?.FullName ?? "«null»" }").Trim(',') ?? "";
 
@@ -228,7 +247,7 @@ namespace AutoRest.Core.Utilities
                     
 
                     // this is a pretty weak assumption... (although, most of our collections should be ICopyFrom now.
-                    if (destinationType.IsGenericType && sourceValue is IEnumerable)
+                    if (destinationType.IsGenericType() && sourceValue is IEnumerable)
                     {
                         var ctor = destinationType.GetConstructor(new[] { destinationType });
                         if (ctor != null)
@@ -245,15 +264,12 @@ namespace AutoRest.Core.Utilities
             return destination;
         }
 
-
         public static T? Get<T>(this IDictionary<string, object> dictionary, string key) where T : struct, IComparable, IConvertible
 
         {
-            object value;
-
-            if (dictionary.TryGetValue(key, out value))
+            if (dictionary.TryGetValue(key, out object value))
             {
-                if (typeof(T).IsEnum)
+                if (typeof(T).IsEnum())
                 {
                     return (T)Enum.Parse(typeof(T), value.ToString(), true);
                 }
@@ -277,8 +293,7 @@ namespace AutoRest.Core.Utilities
 
         public static T GetValue<T>(this IDictionary<string, object> dictionary, string key) where T:class
         {
-            object value;
-            if (dictionary.TryGetValue(key, out value))
+            if (dictionary.TryGetValue(key, out object value))
             {
                 if (value is T)
                 {
@@ -296,7 +311,7 @@ namespace AutoRest.Core.Utilities
             return null;
         }
 
-        private const BindingFlags AnyPropertyFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy | BindingFlags.GetProperty | BindingFlags.Instance;
+        private const BindingFlags AnyPropertyFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy /* | BindingFlags.GetProperty */ | BindingFlags.Instance;
 
         private static PropertyInfo GetReadableProperty(this Type type, string propertyName)
         {
@@ -306,7 +321,7 @@ namespace AutoRest.Core.Utilities
             }
 
             var pi = type.GetProperty(propertyName,AnyPropertyFlags);
-            return true == pi?.CanRead ? pi : GetReadableProperty(type.BaseType, propertyName);
+            return true == pi?.CanRead ? pi : GetReadableProperty(type.BaseType(), propertyName);
         }
 
         private static IEnumerable<PropertyInfo> GetWriteableProperties(this Type type)
@@ -328,9 +343,8 @@ namespace AutoRest.Core.Utilities
             {
                 return pi;
             }
-            return true == pi?.CanWrite ? pi : GetWriteableProperty(type.BaseType, propertyName);
+            return true == pi?.CanWrite ? pi : GetWriteableProperty(type.BaseType(), propertyName);
         }
-        
 
         /// <summary>
         /// Converts the specified string to a camel cased string.
@@ -440,11 +454,11 @@ namespace AutoRest.Core.Utilities
             // if it's only one character
             if (input.Length == 1)
             {
-                return input.ToUpper(CultureInfo.CurrentCulture);
+                return input.ToUpper();
             }
 
             //otherwise the first letter as uppercase, and the rest of the string unaltered.
-            return $"{char.ToUpper(input[0], CultureInfo.CurrentCulture)}{input.Substring(1)}";
+            return $"{char.ToUpper(input[0])}{input.Substring(1)}";
         }
 
         public static bool Equals(this Fixable<string> s1, string s2, StringComparison comparison) => ReferenceEquals(s1.Value, s2) || s1.Value.Equals(s2, comparison);

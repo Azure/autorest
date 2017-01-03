@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
@@ -68,7 +69,7 @@ namespace AutoRest.Core.Extensibility
             }
             Logger.Instance.Log(Category.Info, Resources.GeneratorInitialized,
                 Settings.Instance.CodeGenerator,
-                plugin.GetType().Assembly.GetName().Version);
+                plugin.GetType().GetAssembly().GetName().Version);
             return plugin;
 
         }
@@ -117,7 +118,7 @@ namespace AutoRest.Core.Extensibility
 
             Logger.Instance.Log(Category.Info, Resources.ModelerInitialized,
                 Settings.Instance.Modeler,
-                modeler.GetType().Assembly.GetName().Version);
+                modeler.GetType().GetAssembly().GetName().Version);
             return modeler;
         }
 
@@ -140,8 +141,7 @@ namespace AutoRest.Core.Extensibility
 
             if (!settings.FileSystem.FileExists(path))
             {
-                path = Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(typeof(Settings)).Location),
-                    ConfigurationFileName);
+                path = Path.Combine(Path.GetDirectoryName(AppContext.BaseDirectory),ConfigurationFileName);
             }
 
             if (!settings.FileSystem.FileExists(path))
@@ -175,14 +175,14 @@ namespace AutoRest.Core.Extensibility
 
                 try
                 {
-                    Assembly loadedAssembly;
+                    Assembly loadedAssembly = null;
                     try
                     {
-                        loadedAssembly = Assembly.Load(assemblyName);
+                        loadedAssembly = Assembly.Load(new AssemblyName(assemblyName));
                     }
                     catch (FileNotFoundException)
                     {
-                        loadedAssembly = Assembly.LoadFrom(assemblyName + ".dll");
+                        // loadedAssembly = Assembly.LoadFrom(assemblyName + ".dll");
                         if (loadedAssembly == null)
                         {
                             throw;

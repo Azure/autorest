@@ -239,7 +239,7 @@ namespace AutoRest.Swagger
                 ServiceDefinition.Host = "localhost";
             }
             CodeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
-                ServiceDefinition.Schemes[0].ToString().ToLower(CultureInfo.InvariantCulture),
+                ServiceDefinition.Schemes[0].ToString().ToLower(),
                 ServiceDefinition.Host, ServiceDefinition.BasePath);
 
             // Copy extensions
