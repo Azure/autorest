@@ -17,7 +17,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
     /// <summary>
     /// Exception thrown for an invalid response with Error information.
     /// </summary>
-#if !PORTABLE
+#if LEGACY
     [System.Serializable]
 #endif
     public class ErrorException : RestException
@@ -63,7 +63,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         {
         }
 
-#if !PORTABLE
+#if LEGACY
         /// <summary>
         /// Initializes a new instance of the ErrorException class.
         /// </summary>

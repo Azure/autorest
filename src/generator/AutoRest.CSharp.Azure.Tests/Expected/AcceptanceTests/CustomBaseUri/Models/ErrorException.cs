@@ -18,7 +18,7 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri.Models
     /// <summary>
     /// Exception thrown for an invalid response with Error information.
     /// </summary>
-#if !PORTABLE
+#if !NETCOREAPP1_0
     [System.Serializable]
 #endif
     public class ErrorException : RestException
@@ -64,7 +64,7 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri.Models
         {
         }
 
-#if !PORTABLE
+#if !NETCOREAPP1_0
         /// <summary>
         /// Initializes a new instance of the ErrorException class.
         /// </summary>

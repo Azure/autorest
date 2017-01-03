@@ -12,7 +12,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync.Models
     /// <summary>
     /// Exception thrown for an invalid response with Error information.
     /// </summary>
-#if !PORTABLE 
+#if !NETCOREAPP1_0 
     [System.Serializable]
 #endif
     public class ErrorException : Microsoft.Rest.RestException
@@ -58,7 +58,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync.Models
         {
         }
 
-#if !PORTABLE 
+#if !NETCOREAPP1_0 
         /// <summary>
         /// Initializes a new instance of the ErrorException class.
         /// </summary>

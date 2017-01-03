@@ -17,7 +17,7 @@ namespace Fixtures.MirrorSequences.Models
     /// <summary>
     /// Exception thrown for an invalid response with ErrorModel information.
     /// </summary>
-#if !PORTABLE
+#if LEGACY
     [System.Serializable]
 #endif
     public class ErrorModelException : RestException
@@ -63,7 +63,7 @@ namespace Fixtures.MirrorSequences.Models
         {
         }
 
-#if !PORTABLE
+#if LEGACY
         /// <summary>
         /// Initializes a new instance of the ErrorModelException class.
         /// </summary>
