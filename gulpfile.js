@@ -406,8 +406,7 @@ gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite'
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp',
     'nsPrefix': 'Fixtures.Azure',
-    'flatteningThreshold': '1',
-    'codeGenerationMode': 'rest-client'
+    'flatteningThreshold': '1'
   }, cb);
 });
 
@@ -449,8 +448,7 @@ gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds', 'regener
     'outputDir': 'Expected',
     'codeGenerator': 'CSharp',
     'nsPrefix': 'Fixtures',
-    'flatteningThreshold': '1',
-    'codeGenerationMode': 'rest-client'
+    'flatteningThreshold': '1'
   }, cb);
 });
 
@@ -468,8 +466,7 @@ gulp.task('regenerate:expected:cswithcreds', function(cb){
     'codeGenerator': 'CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
-    'addCredentials': true,
-    'codeGenerationMode': 'rest-client'
+    'addCredentials': true
   }, cb);
 });
 
@@ -487,8 +484,7 @@ gulp.task('regenerate:expected:csallsync', function(cb){
     'codeGenerator': 'CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
-    'syncMethods': 'all',
-    'codeGenerationMode': 'rest-client'
+    'syncMethods': 'all'
   }, cb);
 });
 
@@ -506,8 +502,7 @@ gulp.task('regenerate:expected:csnosync', function(cb){
     'codeGenerator': 'CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
-    'syncMethods': 'none',
-    'codeGenerationMode': 'rest-client'
+    'syncMethods': 'none'
   }, cb);
 });
 
@@ -525,8 +520,7 @@ gulp.task('regenerate:expected:csazureallsync', function(cb){
     'codeGenerator': 'Azure.CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
-    'syncMethods': 'all',
-    'codeGenerationMode': 'rest-client'
+    'syncMethods': 'all'
   }, cb);
 });
 
@@ -564,8 +558,7 @@ gulp.task('regenerate:expected:csazurenosync', function(cb){
     'codeGenerator': 'Azure.CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
-    'syncMethods': 'none',
-    'codeGenerationMode': 'rest-client'
+    'syncMethods': 'none'
   }, cb);
 });
 
@@ -598,8 +591,7 @@ gulp.task('regenerate:expected:cscomposite', function (cb) {
     'outputDir': 'Expected',
     'codeGenerator': 'CSharp',
     'nsPrefix': 'Fixtures',
-    'flatteningThreshold': '1',
-    'codeGenerationMode': 'rest-client'
+    'flatteningThreshold': '1'
   }, cb);
 });
 
@@ -612,8 +604,7 @@ gulp.task('regenerate:expected:csazurecomposite', function (cb) {
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp',
     'nsPrefix': 'Fixtures',
-    'flatteningThreshold': '1',
-    'codeGenerationMode': 'rest-client'
+    'flatteningThreshold': '1'
   }, cb);
 });
 
@@ -654,7 +645,7 @@ gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], 
   var autorestConfig = JSON.parse(content);
   for (var lang in autorestConfig.plugins) {
     if (!lang.match(/^Azure\..+/) && lang != 'Azure.CSharp.Fluent' ) {
-      var generateCmd = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/petstore/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/petstore/petstore.json') + ' -Header NONE -CodeGenerationMode rest-client';
+      var generateCmd = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/petstore/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/petstore/petstore.json') + ' -Header NONE';
       exec(clrCmd(generateCmd), function(err, stdout, stderr) {
         console.log(stdout);
         console.error(stderr);
@@ -672,7 +663,7 @@ gulp.task('regenerate:expected:samples:azure', function(){
   var autorestConfig = JSON.parse(content);
   for (var lang in autorestConfig.plugins) {
     if (lang.match(/^Azure\..+/) && lang != 'Azure.CSharp.Fluent') {
-      var generateCmd = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/azure-storage/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/azure-storage/azure-storage.json') + ' -Header NONE -CodeGenerationMode rest-client';
+      var generateCmd = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/azure-storage/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/azure-storage/azure-storage.json') + ' -Header NONE';
       exec(clrCmd(generateCmd), function(err, stdout, stderr) {
         console.log(stdout);
         console.error(stderr);
@@ -897,7 +888,7 @@ var autoRestExe = function(){
 }
 
 gulp.task('test:nugetPackages:generate:csharp', ['test:nugetPackages:restore', 'test:nugetPackages:clean'], function(){
-  var csharp = autoRestExe() + ' -Modeler Swagger -CodeGenerator CSharp -OutputDirectory ' + path.join(nugetTestProjDir, '/Generated/CSharp') + ' -Namespace Fixtures.Bodynumber -Input <%= file.path %> -Header NONE -CodeGenerationMode rest-client';
+  var csharp = autoRestExe() + ' -Modeler Swagger -CodeGenerator CSharp -OutputDirectory ' + path.join(nugetTestProjDir, '/Generated/CSharp') + ' -Namespace Fixtures.Bodynumber -Input <%= file.path %> -Header NONE';
   return gulp.src('src/dev/TestServer/swagger/body-number.json').pipe(execClrCmd(csharp, {verbosity: 3}));
 });
 
