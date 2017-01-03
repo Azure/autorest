@@ -101,13 +101,13 @@ namespace AutoRest.NodeJS
                 throw new ArgumentNullException(nameof(type));
             }
 
-            if (true == (type as EnumType)?.ModelAsString)
+            if (type is EnumType)
             {
                 if (!defaultValue.IsNullOrEmpty())
                 {
                     return Instance.QuoteValue(defaultValue, "'");
                 }
-                return defaultValue;
+                return null;
             }
 
             var primaryType = type as PrimaryType;
