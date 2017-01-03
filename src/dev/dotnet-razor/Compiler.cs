@@ -12,7 +12,6 @@ namespace Microsoft.Rest.RazorCompiler
     {
         public Compiler()
         {
-            Namespace = "Microsoft.Rest.Generators";
             CopyrightHeader = @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.";
         }
@@ -23,16 +22,10 @@ namespace Microsoft.Rest.RazorCompiler
         public string CopyrightHeader { get; set; }
 
         /// <summary>
-        /// Specifies the base namespace for the razor-generated compilable outputs. 
-        /// Defaults to Microsoft.Rest.Generators.
-        /// </summary>
-        public string Namespace { get; set; }
-
-        /// <summary>
         /// Generates code files for every razor template in the given directory.
         /// </summary>
         /// <param name="directory">Directory containing razor templates.</param>
-        public void Compile(string directory)
+        public void Compile(string directory, string Namespace)
         {
             if (Directory.Exists(directory))
             {
@@ -40,6 +33,12 @@ namespace Microsoft.Rest.RazorCompiler
                 {
                     GenerateCodeFile(file, Namespace);
                 }
+                
+                foreach (var dir in Directory.EnumerateDirectories(directory) )
+                {
+                    Compile( dir, $"{Namespace}.{ dir.Substring(dir.LastIndexOf("\\") + 1)}" );
+                }
+
             }
         }
 
@@ -102,7 +101,15 @@ namespace Microsoft.Rest.RazorCompiler
                              source.Substring(endIndex + endMatch.Length);
                     startIndex = startIndex + replacement.Length;
                 }
-                File.WriteAllText(Path.Combine(basePath, string.Format("{0}.cs", fileNameNoExtension)), source);
+                var fname = Path.Combine(basePath, string.Format("{0}.cs", fileNameNoExtension));
+                if( File.Exists(fname) ) { 
+                    var oldFile = File.ReadAllText(fname);    
+                    if( oldFile == source ) {
+                        return;
+                    }
+                }
+                
+                File.WriteAllText(fname, source);
             }
         }
     }

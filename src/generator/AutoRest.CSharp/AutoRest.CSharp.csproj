@@ -1,18 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj"  />
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj" />
   <Import Project="$(common)fix-resgen.proj" />
   <Import Project="$(common)package-info.proj" />
   <Import Project="$(common)package-fallback.proj" />
+  <Import Project="$(common)compile-cshtml.proj" />
+  <Import Project="$(common)eval-csharp-targets.proj" />
+  
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
     <AssemblyName>AutoRest.CSharp</AssemblyName>
     <PackageTags>Microsoft AutoRest CSharpGenerator</PackageTags>
   </PropertyGroup>
-  <ItemGroup>
+  
+  <ItemGroup Condition="$(DesignTimeBuild) == true">
     <Compile Include="**\*.cs" />
+    <None Include="**\*.cshtml" />
     <EmbeddedResource Include="**\*.resx" />
     <EmbeddedResource Include="compiler\resources\**\*" />
   </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="NETStandard.Library" Version="1.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
@@ -21,9 +27,8 @@
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Core/AutoRest.Core.csproj" />
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Extensions/AutoRest.Extensions.csproj" />
     <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
-    
   </ItemGroup>
   <ItemGroup>
-    <DotNetCliToolReference Include="dotnet-razor" />
+    <DotNetCliToolReference Include="dotnet-razor" Version="1.0.0" />
   </ItemGroup>
 </Project>

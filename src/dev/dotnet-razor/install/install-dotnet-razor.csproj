@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+    <AssemblyName>install-dotnet-razor</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="**\*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NETStandard.Library" Version="1.6.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="dotnet-razor" Version="1.0.0"/>
+  </ItemGroup>
+</Project>

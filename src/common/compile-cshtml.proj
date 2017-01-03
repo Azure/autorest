@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" InitialTargets="CompileCshtml">
+  <Target Name="CompileCshtml" >
+    <Message Text="Ensuring cshtml files are generated into .cs files [$(MSBuildProjectName) for $()]" Importance="high" />
+    <Exec Condition="$(SolutionDir) != '' " Command="dotnet razor . $(RootNamespace)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
+  </Target>
+</Project>

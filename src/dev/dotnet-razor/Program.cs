@@ -16,13 +16,7 @@ Usage: dotnet-razor <directory path> [<namespace>]");
             }
             else
             {
-                var compiler = new Compiler();
-                string directory = args[0];
-                if (args.Length == 2)
-                {
-                    compiler.Namespace = args[1];
-                }
-                compiler.Compile(directory);
+                new Compiler().Compile(args[0], args.Length > 1 ?args[1] :"Microsoft.Rest.Generators" );
             }
         }
     }

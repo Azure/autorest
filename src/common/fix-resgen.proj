@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" >
+<Project ToolsVersion="4.0"  >
   <!-- Place this line at the top of any msbuild script (ie, csproj, etc) -->
   <PropertyGroup><PowerShell># 2>nul || type %~df0|find /v "setlocal"|find /v "errorlevel"|powershell.exe -noninteractive -&amp; exit %errorlevel% || #</PowerShell></PropertyGroup>
 
   <Target Name="UpdateResources" BeforeTargets="BeforeBuild" >
-    <Message Text="Updating generated resources files" Importance="high" />
+    <Message Text="Ensuring resources .cs files are netframework compatible [$(MSBuildProjectName)]" Importance="high" />
     <PropertyGroup>
       <ResGenFix>$(Powershell)
         #
