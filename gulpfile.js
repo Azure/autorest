@@ -645,7 +645,7 @@ gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], 
   var autorestConfig = JSON.parse(content);
   for (var lang in autorestConfig.plugins) {
     if (!lang.match(/^Azure\..+/) && lang != 'Azure.CSharp.Fluent' ) {
-      var generateCmd = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/petstore/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/petstore/petstore.json') + ' -Header NONE';
+      var generateCmd = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/petstore/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/petstore/petstore.json') + ' -Header NONE -CodeGenerationMode rest-client';
       exec(clrCmd(generateCmd), function(err, stdout, stderr) {
         console.log(stdout);
         console.error(stderr);
@@ -663,7 +663,7 @@ gulp.task('regenerate:expected:samples:azure', function(){
   var autorestConfig = JSON.parse(content);
   for (var lang in autorestConfig.plugins) {
     if (lang.match(/^Azure\..+/) && lang != 'Azure.CSharp.Fluent') {
-      var generateCmd = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/azure-storage/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/azure-storage/azure-storage.json') + ' -Header NONE';
+      var generateCmd = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/azure-storage/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/azure-storage/azure-storage.json') + ' -Header NONE -CodeGenerationMode rest-client';
       exec(clrCmd(generateCmd), function(err, stdout, stderr) {
         console.log(stdout);
         console.error(stderr);
@@ -888,7 +888,7 @@ var autoRestExe = function(){
 }
 
 gulp.task('test:nugetPackages:generate:csharp', ['test:nugetPackages:restore', 'test:nugetPackages:clean'], function(){
-  var csharp = autoRestExe() + ' -Modeler Swagger -CodeGenerator CSharp -OutputDirectory ' + path.join(nugetTestProjDir, '/Generated/CSharp') + ' -Namespace Fixtures.Bodynumber -Input <%= file.path %> -Header NONE';
+  var csharp = autoRestExe() + ' -Modeler Swagger -CodeGenerator CSharp -OutputDirectory ' + path.join(nugetTestProjDir, '/Generated/CSharp') + ' -Namespace Fixtures.Bodynumber -Input <%= file.path %> -Header NONE -CodeGenerationMode rest-client';
   return gulp.src('src/dev/TestServer/swagger/body-number.json').pipe(execClrCmd(csharp, {verbosity: 3}));
 });
 
