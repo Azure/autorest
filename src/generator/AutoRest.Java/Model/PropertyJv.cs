@@ -94,7 +94,7 @@ namespace AutoRest.Java.Model
                         .Where(c => !c.StartsWith(
                             string.Join(
                                 ".",
-                                Parent?.CodeModel?.Namespace.ToLower(CultureInfo.InvariantCulture),
+                                Parent?.CodeModel?.Namespace.ToLowerInvariant(),
                                 "models"),
                             StringComparison.OrdinalIgnoreCase)));
                 if (ModelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123)

@@ -137,7 +137,7 @@ namespace AutoRest.Java
                     }
                 }
             }
-            return result.ToUpper(CultureInfo.InvariantCulture);
+            return result.ToUpperInvariant();
         }
 
         public override string GetParameterName(string name)
@@ -179,7 +179,7 @@ namespace AutoRest.Java
                 case "InterruptedException":
                     return null;
                 default:
-                    return (cm.Namespace.ToLower(CultureInfo.InvariantCulture))
+                    return (cm.Namespace.ToLowerInvariant())
                         + ".models." + exception;
             }
         }

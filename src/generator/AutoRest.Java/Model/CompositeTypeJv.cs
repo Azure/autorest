@@ -37,7 +37,7 @@ namespace AutoRest.Java.Model
                 {
                     return string.Join(
                         ".",
-                        CodeModel?.Namespace.ToLower(CultureInfo.InvariantCulture),
+                        CodeModel?.Namespace.ToLowerInvariant(),
                         "models");
                 }
             }
