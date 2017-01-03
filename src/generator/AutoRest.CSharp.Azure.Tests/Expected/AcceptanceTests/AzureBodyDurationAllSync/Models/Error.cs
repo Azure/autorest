@@ -8,6 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync.Models
 {
+    using AcceptanceTestsAzureBodyDurationAllSync;
+    using Newtonsoft.Json;
     using System.Linq;
 
     public partial class Error
@@ -28,13 +30,14 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync.Models
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
+        [JsonProperty(PropertyName = "status")]
         public int? Status { get; set; }
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
+        [JsonProperty(PropertyName = "message")]
         public string Message { get; set; }
 
     }
 }
+
