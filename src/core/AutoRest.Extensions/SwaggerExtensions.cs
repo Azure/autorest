@@ -36,6 +36,7 @@ namespace AutoRest.Extensions
         public const string UseSchemePrefix = "useSchemePrefix";
         public const string PositionInOperation = "positionInOperation";
         public const string ParameterLocationExtension = "x-ms-parameter-location";
+        public const string ExternalExtension = "x-ms-external";
 
         private static bool hostChecked = false;
 

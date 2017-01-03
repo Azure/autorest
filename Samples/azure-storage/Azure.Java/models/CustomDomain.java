@@ -17,8 +17,8 @@ public class CustomDomain {
     private String name;
 
     /**
-     * Indicates whether indirect CName validation is enabled. Default value
-     * is false. This should only be set on updates.
+     * Indicates whether indirect CName validation is enabled. Default value is
+     * false. This should only be set on updates.
      */
     private Boolean useSubDomain;
 

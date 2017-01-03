@@ -34,7 +34,6 @@ namespace AutoRest.Swagger.Model
             SecurityDefinitions = new Dictionary<string, SecurityDefinition>();
             Security = new List<Dictionary<string, List<string>>>();
             Tags = new List<Tag>();
-            ExternalReferences = new List<string>();
         }
 
         /// <summary>
@@ -132,11 +131,6 @@ namespace AutoRest.Swagger.Model
         /// Additional external documentation
         /// </summary>
         public ExternalDoc ExternalDocs { get; set; }
-
-        /// <summary>
-        /// A list of all external references listed in the service.
-        /// </summary>
-        public IList<string> ExternalReferences { get; set; }
 
         /// <summary>
         /// Compare a modified document node (this) to a previous one and look for breaking as well as non-breaking changes.

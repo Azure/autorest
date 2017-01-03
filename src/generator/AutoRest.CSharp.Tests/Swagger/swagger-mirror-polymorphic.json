@@ -50,7 +50,7 @@
                         "description": "Unexpected error",
                         "schema":
                         {
-                            "$ref": "Error2"
+                            "$ref": "#/definitions/Error2"
                         }
                     }
                 }
@@ -89,9 +89,9 @@
         ,
         "BaseCat":
         {
-            "AllOf": [
+            "allOf": [
             {
-                "$ref":  "Animal"
+                "$ref": "#/definitions/Animal"
             }
             ],
             "properties":
@@ -106,9 +106,9 @@
         ,
         "SiameseCat":
         {
-            "AllOf": [
+            "allOf": [
             {
-                "$ref":  "BaseCat"
+                "$ref": "#/definitions/BaseCat"
             }
             ],
             "properties":
@@ -123,9 +123,9 @@
         ,
         "BurmeseCat":
         {
-            "AllOf": [
+            "allOf": [
             {
-                "$ref":  "SiameseCat"
+                "$ref": "#/definitions/SiameseCat"
             }
             ],
             "properties":
@@ -140,9 +140,9 @@
         ,
         "HimalayanCat":
         {
-            "AllOf": [
+            "allOf": [
             {
-                "$ref":  "SiameseCat"
+                "$ref": "#/definitions/SiameseCat"
             }
             ],
             "properties":
@@ -157,9 +157,9 @@
         ,
         "PersianCat":
         {
-            "AllOf": [
+            "allOf": [
             {
-                "$ref":  "BaseCat"
+                "$ref": "#/definitions/BaseCat"
             }
             ],
             "properties":
@@ -175,7 +175,7 @@
         "Doggy":
         {
             "id": "Dog",
-            "AllOf": [
+            "allOf": [
             {
                 "$ref":  "#/definitions/Animal"
             }
@@ -193,9 +193,9 @@
         "Horsey":
         {
             "id": "Horse",
-            "AllOf": [
+            "allOf": [
             {
-                "$ref":  "Animal"
+                "$ref": "#/definitions/Animal"
             }
             ],
             "properties":

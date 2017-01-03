@@ -53,12 +53,17 @@ namespace AutoRest.Core.Logging
                 var targetStream = message.Severity >= MinSeverityForStderr ? Console.Error : Console.Out;
 
                 targetStream.WriteLine($"{message.Severity.ToString().ToUpperInvariant()}: {message.Message}");
-                targetStream.WriteLine($"\tPath: {message.Path.XPath}");
+                if (message.Path != null)
+                {
+                    targetStream.WriteLine($"\tPath: {message.Path.XPath}");
+                }
                 if (message.VerboseData != null)
                 {
                     targetStream.WriteLine(message.VerboseData);
                     targetStream.WriteLine();
                 }
+                targetStream.Flush();
+
                 Console.ForegroundColor = original;
             }
         }

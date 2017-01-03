@@ -10,6 +10,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Properties;
 using AutoRest.Simplify;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using System.IO;
 
 namespace AutoRest
 {
@@ -28,12 +29,30 @@ namespace AutoRest
                     try
                     {
                         settings = Settings.Create(args);
+
                         // set up logging
                         Logger.Instance.AddListener(new ConsoleLogListener(
-                            settings.Debug ? Category.Debug : Category.Info,
+                            settings.Debug ? Category.Debug : Category.Warning,
                             settings.ValidationLevel,
                             settings.Verbose));
                         Logger.Instance.AddListener(new SignalingLogListener(Category.Error, _ => generationFailed = true));
+
+                        // determine some reasonable default namespace
+                        if (settings.Namespace == null)
+                        {
+                            if (settings.Input != null)
+                            {
+                                settings.Namespace = Path.GetFileNameWithoutExtension(settings.Input);
+                            }
+                            else if (settings.InputFolder != null)
+                            {
+                                settings.Namespace = Path.GetFileNameWithoutExtension(settings.InputFolder.Segments.Last().Trim('/'));
+                            }
+                            else
+                            {
+                                settings.Namespace = "default";
+                            }
+                        }
 
                         string defCodeGen = (args.Where(arg => arg.ToLowerInvariant().Contains("codegenerator")).IsNullOrEmpty()) ? "" : settings.CodeGenerator;
                         if (settings.ShowHelp && IsShowMarkdownHelpIncluded(args))

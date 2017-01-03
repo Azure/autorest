@@ -3,7 +3,8 @@
 @using System.Linq
 @using AutoRest.Core.Utilities
 @using AutoRest.Java
-@inherits AutoRest.Core.Template<AutoRest.Java.TemplateModels.ServiceClientTemplateModel>
+@using AutoRest.Java.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Model.CodeModelJv>
 /**
 @Header(" * ").TrimMultilineHeader()
  */
@@ -22,7 +23,7 @@ package @(Settings.Namespace.ToLower()).@(Model.ImplPackage);
  * Initializes a new instance of the @Model.Name class.
  */
 public final class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
-@if (Model.MethodTemplateModels.Any())
+@if (Model.RootMethods.Any())
 {
 @:    /**
 @:     * The Retrofit service to perform REST calls.
@@ -32,47 +33,47 @@ public final class @(Model.Name)Impl extends ServiceClient implements @Model.Nam
 @foreach (var property in Model.Properties)
 {
 @EmptyLine
-@:    /** @(property.Documentation.Period()) */
-@:    private @(property.Type) @(property.Name.ToCamelCase());
+@:    /** @(property.Documentation.ToString().Period()) */
+@:    private @(property.ModelType.ServiceResponseVariant().Name) @(property.Name.ToCamelCase());
 @EmptyLine
 @:    /**
-@:     * Gets @(property.Documentation.Period())
+@:     * Gets @(property.Documentation.ToString().Period())
 @:     *
 @:     * @@return the @(property.Name) value.
 @:     */
-@:    public @(property.Type) @(property.Name.ToCamelCase())() {
+@:    public @(property.ModelType.ServiceResponseVariant().Name) @(property.Name.ToCamelCase())() {
 @:        return this.@(property.Name.ToCamelCase());
 @:    }
 if(!property.IsReadOnly)
 {
 @EmptyLine
 @:    /**
-@:     * Sets @(property.Documentation.Period())
+@:     * Sets @(property.Documentation.ToString().Period())
 @:     *
 @:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
 @:     * @@return the service client itself
 @:     */
-@:    public @(Model.Name)Impl with@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase())) {
+@:    public @(Model.Name)Impl with@(property.Name.ToPascalCase())(@(property.ModelType.ServiceResponseVariant().Name) @(property.Name.ToCamelCase())) {
 @:        this.@(property.Name.ToCamelCase()) = @(property.Name.ToCamelCase());
 @:        return this;
 @:    }
 }
 }
 
-@foreach (var operation in Model.Operations)
+@foreach (var operation in Model.AllOperations)
 {
 @EmptyLine
 @:    /**
-@:     * The @(operation.MethodGroupType) object to access its operations.
+@:     * The @(operation.TypeName) object to access its operations.
 @:     */
-@:    private @(operation.MethodGroupType) @(operation.MethodGroupName);
+@:    private @(operation.TypeName) @(operation.Name);
 @EmptyLine
 @:    /**
-@:     * Gets the @(operation.MethodGroupType) object to access its operations.
-@:     * @@return the @(operation.MethodGroupType) object.
+@:     * Gets the @(operation.TypeName) object to access its operations.
+@:     * @@return the @(operation.TypeName) object.
 @:     */
-@:    public @(operation.MethodGroupType) @(operation.MethodGroupName)() {
-@:        return this.@(operation.MethodGroupName);
+@:    public @(operation.TypeName) @(operation.Name)() {
+@:        return this.@(operation.Name);
 @:    }
 }
 @EmptyLine
@@ -124,17 +125,17 @@ if(!property.IsReadOnly)
 {
 @:        this.@(property.Name) = @(property.DefaultValue);
 }
-@foreach (var operation in Model.Operations)
+@foreach (var operation in Model.AllOperations)
 {
-@:        this.@(operation.MethodGroupName) = new @(operation.MethodGroupType)Impl(retrofit(), this);
+@:        this.@(operation.Name) = new @(operation.TypeName)Impl(retrofit(), this);
 }
-@if (Model.MethodTemplateModels.Any())
+@if (Model.RootMethods.Any())
 {
 @:        initializeService();
 }
     }
 
-@if (Model.MethodTemplateModels.Any())
+@if (Model.RootMethods.Any())
 {
 @EmptyLine
 <text>
@@ -143,13 +144,13 @@ if(!property.IsReadOnly)
     }
 </text>
 @EmptyLine
-if (Model.MethodTemplateModels.Any())
+@if (Model.RootMethods.Any())
 {
 @:    @Include(new ServiceClientRetrofitTemplate(), Model)
 @EmptyLine
 }
 <text>
-@foreach (var method in Model.MethodTemplateModels)
+@foreach (MethodJv method in Model.RootMethods)
 {
     @:@(Include(new MethodTemplate(), method))
     @EmptyLine

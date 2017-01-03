@@ -154,8 +154,7 @@ namespace AutoRest.CSharp.Azure.Model
             {
                 if (!string.IsNullOrEmpty(ReturnTypePageInterfaceName))
                 {
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "Task<{0}>", ReturnTypePageInterfaceName);
+                    return $"System.Threading.Tasks.Task<{ReturnTypePageInterfaceName}>";
                 }
                 return base.TaskExtensionReturnTypeString;
             }

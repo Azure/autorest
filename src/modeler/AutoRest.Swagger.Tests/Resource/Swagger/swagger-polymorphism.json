@@ -22,13 +22,13 @@
           "200": {
             "description": "A list of caches",
             "schema": {
-              "$ref": "Pet"
+              "$ref": "#/definitions/Pet"
             }
           },
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "Error"
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -54,7 +54,7 @@
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "Error"
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -82,7 +82,7 @@
       }
     },
     "Cat": {
-      "AllOf": [ { "$ref": "Pet" } ],
+      "allOf": [ { "$ref": "#/definitions/Pet" } ],
       "properties": {
         "color": {
           "type": "string",
@@ -91,7 +91,7 @@
       }
     },
     "Seamise": {
-      "AllOf": [ { "$ref": "Cat" } ],
+      "allOf": [ { "$ref": "#/definitions/Cat" } ],
       "properties": {
         "length": {
           "type": "integer",
@@ -100,7 +100,7 @@
       }
     },
     "Burmese": {
-      "AllOf": [ { "$ref": "Seamise" } ],
+      "allOf": [ { "$ref": "#/definitions/Seamise" } ],
       "properties": {
         "nickName": {
           "type": "integer",
@@ -109,7 +109,7 @@
       }
     },
     "Himalayan": {
-      "AllOf": [ { "$ref": "Seamise" } ],
+      "allOf": [ { "$ref": "#/definitions/Seamise" } ],
       "properties": {
         "hairLength": {
           "type": "integer",
@@ -118,7 +118,7 @@
       }
     },
     "Persian": {
-      "AllOf": [ { "$ref": "Cat" } ],
+      "allOf": [ { "$ref": "#/definitions/Cat" } ],
       "properties": {
         "size": {
           "type": "integer",
@@ -128,7 +128,7 @@
     },
     "Dog": {
       "id": "Dog",
-      "AllOf": [ { "$ref": "#/definitions/Pet" } ],
+      "allOf": [ { "$ref": "#/definitions/Pet" } ],
       "properties": {
         "name": {
           "type": "string",
@@ -138,7 +138,7 @@
     },
     "Horse": {
       "id": "Horse",
-      "AllOf": [ { "$ref": "Pet" } ],
+      "allOf": [ { "$ref": "#/definitions/Pet" } ],
       "properties": {
         "breed": {
           "type": "string",
@@ -148,7 +148,7 @@
     },
     "Lizard": {
       "x-ms-discriminator-value": "lzd",
-      "AllOf": [ { "$ref": "Pet" } ],
+      "allOf": [ { "$ref": "#/definitions/Pet" } ],
       "properties": {
         "tailSize": {
           "type": "number",

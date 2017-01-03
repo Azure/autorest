@@ -16,10 +16,8 @@
  * @constructor
  * @member {number} [id] Basic Id
  *
- * @member {string} [name] Name property with a very
- * long description that
- * does not fit on a single line
- * and a line break.
+ * @member {string} [name] Name property with a very long description that does
+ * not fit on a single line and a line break.
  *
  * @member {string} [color] Possible values include: 'cyan', 'Magenta',
  * 'YELLOW', 'blacK'

@@ -59,7 +59,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
     interface AvailabilitySetsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @PATCH("parameterFlattening/{resourceGroupName}/{availabilitySetName}")
-        Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("availabilitySetName") String avset, @Body AvailabilitySetUpdateParameters tags1);
+        Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("availabilitySetName") String avset, @Body AvailabilitySetUpdateParameters tags);
 
     }
 

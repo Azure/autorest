@@ -8,6 +8,7 @@ using System.Linq;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Extensions;
 
 namespace AutoRest.NodeJS.Model
 {
@@ -297,6 +298,6 @@ namespace AutoRest.NodeJS.Model
             }
 
             return typeName.ToLower(CultureInfo.InvariantCulture);
-        } 
+        }
     }
 }

@@ -187,13 +187,13 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets or sets the default response.
         /// </summary>
-        public Response DefaultResponse { get; set; } = new Response();
+        public Response DefaultResponse { get; set; } = New<Response>();
 
         /// <summary>
         /// Gets or sets the method return type. The tuple contains a body
         /// and headers.
         /// </summary>
-        public Response ReturnType { get; set; } = new Response();
+        public Response ReturnType { get; set; } = New<Response>();
 
         /// <summary>
         /// Gets or sets the description.

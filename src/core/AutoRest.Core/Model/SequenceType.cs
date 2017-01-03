@@ -28,21 +28,5 @@ namespace AutoRest.Core.Model
         /// Gets or sets the element type of the collection.
         /// </summary>
         public virtual IModelType ElementType { get; set; }
-
-        /// <summary>
-        /// Determines whether the specified model type is structurally equal to this object.
-        /// </summary>
-        /// <param name="other">The object to compare with this object.</param>
-        /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
-        public override bool StructurallyEquals(IModelType other)
-        {
-            if (ReferenceEquals(other as SequenceType, null))
-            {
-                return false;
-            }
-
-            return base.StructurallyEquals(other) && 
-                ElementType.StructurallyEquals((other as SequenceType).ElementType);
-        }
     }
 }
