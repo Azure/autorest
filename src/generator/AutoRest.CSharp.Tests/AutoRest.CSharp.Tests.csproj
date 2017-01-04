@@ -13,6 +13,7 @@
     <EmbeddedResource Include="compiler\resources\**\*" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resource\AutoRest.json" />
     <Content Include="Resource\swagger-payload-flatten.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

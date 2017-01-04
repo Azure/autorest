@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj"  />
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj" />
   <Import Project="$(common)fix-resgen.proj" />
   <Import Project="$(common)copy-resource-to-output.proj" />
   <Import Project="$(common)package-fallback.proj" />
@@ -16,5 +16,8 @@
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Core/AutoRest.Core.csproj" />
     <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
     <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.CompositeSwagger/AutoRest.CompositeSwagger.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resource\Swagger\" />
   </ItemGroup>
 </Project>
