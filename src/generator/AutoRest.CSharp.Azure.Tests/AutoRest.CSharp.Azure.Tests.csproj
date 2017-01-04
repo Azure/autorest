@@ -1,77 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
-
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj" />
+  <Import Project="$(common)copy-resource-to-output.proj" />
+  <Import Project="$(common)package-fallback.proj" />
+  <Import Project="$(common)xunit-test-project.proj" />
   <PropertyGroup>
-    <Authors>Microsoft</Authors>
-    <TargetFramework>net451</TargetFramework>
-    <RuntimeIdentifiers>win7-x64;win7-x86;osx.10.10-x64;osx.10.11-x64;ubuntu.14.04-x64;ubuntu.16.04-x64;centos.7-x64;rhel.7.2-x64;debian.8-x64;fedora.23-x64;opensuse.13.2-x64</RuntimeIdentifiers>
-    <DelaySign>true</DelaySign>
-    <AssemblyName>AutoRest.CSharp.Azure.Tests</AssemblyName>
-    <AssemblyOriginatorKeyFile>../../../Tools/MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
-    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <PackageTags>Microsoft AutoRest ClientRuntime REST</PackageTags>
-    <PackageProjectUrl>https://github.com/Azure/AutoRest</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</PackageLicenseUrl>
-    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
-    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
-    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
-    <GenerateNeutralResourcesLanguageAttribute>false</GenerateNeutralResourcesLanguageAttribute>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp1.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <Compile Include="**\*.cs" Exclude="CSharpAzureCodeNamingFrameworkTestsXX.*;bin\**;obj\**;**\*.xproj;packages\**" />
+    <Compile Include="**\*.cs" Exclude="obj\**" />
     <EmbeddedResource Include="**\*.resx" />
     <EmbeddedResource Include="compiler\resources\**\*" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\AutoRest.CSharp.Tests\AutoRest.CSharp.Tests.csproj" />
-    <ProjectReference Include="..\..\core\AutoRest.Core\AutoRest.Core.csproj">
-      <FromP2P>true</FromP2P>
-    </ProjectReference>
-    <ProjectReference Include="..\AutoRest.CSharp\AutoRest.CSharp.csproj">
-      <FromP2P>true</FromP2P>
-    </ProjectReference>
-    <ProjectReference Include="..\..\core\AutoRest.Extensions\AutoRest.Extensions.csproj">
-      <FromP2P>true</FromP2P>
-    </ProjectReference>
-    <ProjectReference Include="..\..\modeler\AutoRest.Swagger\AutoRest.Swagger.csproj">
-      <FromP2P>true</FromP2P>
-    </ProjectReference>
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.2" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.0.0" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk">
-      <Version>15.0.0-preview-20161024-02</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.runner.visualstudio">
-      <Version>2.2.0-beta4-build1194</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.NETCore.Platforms">
-      <Version>1.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure">
-      <Version>3.3.2</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime">
-      <Version>2.3.2</Version>
-    </PackageReference>
-    <PackageReference Include="xunit">
-      <Version>2.2.0-beta4-build3444</Version>
-    </PackageReference>
+    <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Core/AutoRest.Core.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Extensions/AutoRest.Extensions.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Extensions.Azure/AutoRest.Extensions.Azure.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp/AutoRest.CSharp.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp.Azure/AutoRest.CSharp.Azure.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp.Tests/AutoRest.CSharp.Tests.csproj" />
   </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
-  </PropertyGroup>
-
 </Project>

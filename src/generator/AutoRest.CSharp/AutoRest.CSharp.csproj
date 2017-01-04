@@ -9,7 +9,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
     <AssemblyName>AutoRest.CSharp</AssemblyName>
-    <PackageTags>Microsoft AutoRest CSharpGenerator</PackageTags>
+    <PackageTags>Microsoft AutoRest CSharp Generator</PackageTags>
   </PropertyGroup>
   
   <ItemGroup Condition="$(DesignTimeBuild) == true">
@@ -29,6 +29,16 @@
     <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <DotNetCliToolReference Include="dotnet-razor" Version="1.0.0" />
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

@@ -59,7 +59,7 @@ namespace AutoRest.Java.Model
             get
             {
                 HashSet<string> classes = new HashSet<string>();
-                classes.Add(Namespace.ToLower(CultureInfo.InvariantCulture) + "." + this.Name);
+                classes.Add(Namespace.ToLowerInvariant() + "." + this.Name);
                 foreach(var methodGroupFullType in this.AllOperations.Select(op => op.MethodGroupFullType).Distinct())
                 {
                     classes.Add(methodGroupFullType);

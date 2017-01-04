@@ -1,7 +1,7 @@
 <Project ToolsVersion="4.0" InitialTargets="eval_targets">
- <Target Name="eval_targets" >
-   <ItemGroup>
-    <Compile Include="**\*.cs" />
+ <Target Name="eval_targets" Condition="$(DesignTimeBuild) != true" >
+   <ItemGroup Condition="$(DesignTimeBuild) != true">
+    <Compile Include="**\*.cs" Exclude="obj\**" />
     <EmbeddedResource Include="**\*.resx" />
     <EmbeddedResource Include="compiler\resources\**\*" />
    </ItemGroup>

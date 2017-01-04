@@ -64,7 +64,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-simple-spec.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-simple-spec.json")
                 };
                 Modeler modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -131,7 +131,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-external-ref-no-definitions.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-external-ref-no-definitions.json")
                 };
                 Modeler modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -149,7 +149,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-external-ref.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-external-ref.json")
                 };
                 Modeler modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -169,7 +169,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-external-ref.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-external-ref.json")
                 };
                 Modeler modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -208,7 +208,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-allOf.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-allOf.json")
                 };
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -233,7 +233,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-polymorphism.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-polymorphism.json")
                 };
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -260,7 +260,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-allOf-circular.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-allOf-circular.json")
                 };
                 var modeler = new SwaggerModeler();
                 var ex = Assert.Throws<InvalidOperationException>(() => modeler.Build());
@@ -277,7 +277,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-recursive-type.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-recursive-type.json")
                 };
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -298,7 +298,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-ref-allOf-inheritance.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-ref-allOf-inheritance.json")
                 };
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -339,7 +339,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = @"Resource\Swagger\swagger-no-content.json"
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-no-content.json")
                 };
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -360,7 +360,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-multiple-response-schemas.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-multiple-response-schemas.json")
                 };
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -391,7 +391,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-multiple-response-schemas.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-multiple-response-schemas.json")
                 };
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -410,7 +410,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-global-responses.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-global-responses.json")
                 };
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -428,7 +428,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-streaming.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-streaming.json")
                 };
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -462,7 +462,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = @"Resource\Swagger\swagger-optional-params.json"
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-optional-params.json")
                 };
 
                 var modeler = new SwaggerModeler();
@@ -483,7 +483,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-data-types.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-data-types.json")
                 };
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -604,7 +604,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = @"Resource\Swagger\swagger-validation.json"
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-validation.json")
                 };
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -674,7 +674,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = @"Resource\Swagger\swagger-validation.json"
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-validation.json")
                 };
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -732,7 +732,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-composite-constants.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-composite-constants.json")
                 };
                 var modeler = new SwaggerModeler();
 
@@ -750,7 +750,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-response-headers.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-response-headers.json")
                 };
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -783,7 +783,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-x-ms-paths.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-x-ms-paths.json")
                 };
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -804,7 +804,7 @@ namespace AutoRest.Swagger.Tests
                     Namespace = "Test",
                     Modeler = "Swagger",
                     CodeGenerator = "CSharp",
-                    Input = Path.Combine("Resource","Swagger", "swagger-x-ms-code-generation-settings.json"),
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-x-ms-code-generation-settings.json"),
                     Header = "NONE"
                 };
                 var modeler = ExtensionsLoader.GetModeler();
@@ -829,7 +829,7 @@ namespace AutoRest.Swagger.Tests
                     Namespace = "Test",
                     Modeler = "Swagger",
                     CodeGenerator = "CSharp",
-                    Input = Path.Combine("Resource","Swagger", "swagger-x-ms-parameterized-host.json"),
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-x-ms-parameterized-host.json"),
                     Header = "NONE"
                 };
 
@@ -857,7 +857,7 @@ namespace AutoRest.Swagger.Tests
                 var settings = new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-simple-spec.yaml")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-simple-spec.yaml")
                 };
 
                 Modeler modeler = new SwaggerModeler();
@@ -875,7 +875,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-additional-properties.yaml")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-additional-properties.yaml")
                 };
 
                 Modeler modeler = new SwaggerModeler();

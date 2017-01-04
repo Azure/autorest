@@ -17,7 +17,7 @@ namespace Fixtures.MirrorPolymorphic.Models
     /// <summary>
     /// Exception thrown for an invalid response with Error2 information.
     /// </summary>
-#if !PORTABLE
+#if LEGACY
     [System.Serializable]
 #endif
     public class Error2Exception : RestException
@@ -63,7 +63,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         {
         }
 
-#if !PORTABLE
+#if LEGACY
         /// <summary>
         /// Initializes a new instance of the Error2Exception class.
         /// </summary>

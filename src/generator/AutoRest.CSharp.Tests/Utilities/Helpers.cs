@@ -3,7 +3,7 @@
 
 using System;
 
-namespace AutoRest.Extensions.Tests
+namespace AutoRest.CSharp.Tests.Utilities
 {
     public static class Helpers
     {

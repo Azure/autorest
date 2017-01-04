@@ -150,7 +150,7 @@ namespace AutoRest.NodeJS
         private static IndentedStringBuilder ConstructValidationCheck(IndentedStringBuilder builder, string errorMessage, string valueReference, string typeName)
         {
             var escapedValueReference = valueReference.EscapeSingleQuotes();
-            var lowercaseTypeName = typeName.ToLower(CultureInfo.InvariantCulture);
+            var lowercaseTypeName = typeName.ToLowerInvariant();
 
             return builder.Indent()
                             .AppendLine(errorMessage, escapedValueReference, lowercaseTypeName)

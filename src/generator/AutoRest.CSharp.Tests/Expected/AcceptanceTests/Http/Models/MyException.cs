@@ -17,7 +17,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
     /// <summary>
     /// Exception thrown for an invalid response with A information.
     /// </summary>
-#if !PORTABLE
+#if LEGACY
     [System.Serializable]
 #endif
     public class MyException : RestException
@@ -63,7 +63,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         {
         }
 
-#if !PORTABLE
+#if LEGACY
         /// <summary>
         /// Initializes a new instance of the MyException class.
         /// </summary>
