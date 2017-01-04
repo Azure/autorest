@@ -92,7 +92,7 @@ namespace AutoRest
                                 {
                                     Logger.Instance.Log(Category.Error, Resources.GenerationFailed);
                                     Logger.Instance.Log(Category.Error, "{0} {1}",
-                                        typeof(Program).Assembly.ManifestModule.Name, string.Join(" ", args));
+                                        typeof(Program).GetAssembly().ManifestModule.Name, string.Join(" ", args));
                                 }
                             }
                             else

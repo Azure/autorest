@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.Rest;
 using Microsoft.Rest.Azure;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Simplify
 {
@@ -25,7 +26,7 @@ namespace AutoRest.Simplify
             {
                 if (mscorlib == null)
                 {
-                    mscorlib = MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
+                    mscorlib = MetadataReference.CreateFromFile(typeof(object).GetAssembly().Location);
                 }
 
                 return mscorlib;
@@ -45,21 +46,12 @@ namespace AutoRest.Simplify
             var solution = new AdhocWorkspace().CurrentSolution
                 .AddProject(projectId, "MyProject", "MyProject", LanguageNames.CSharp)
                 .AddMetadataReference(projectId, Mscorlib)
-                .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(
-                        a =>
-                            string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime.Azure",
-                                StringComparison.OrdinalIgnoreCase) == 0)
-                    .Select(a => MetadataReference.CreateFromFile(a.Location)).Single())
-                .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(
-                        a =>
-                            string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime",
-                                StringComparison.OrdinalIgnoreCase) == 0)
-                    .Select(a => MetadataReference.CreateFromFile(a.Location)).Single())
-                .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(a => string.Compare(a.GetName().Name, "System", StringComparison.OrdinalIgnoreCase) == 0)
-                    .Select(a => MetadataReference.CreateFromFile(a.Location)).Single());
+                // Microsoft.Rest.ClientRuntime.Azure.dll
+                .AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(IAzureClient).GetAssembly().Location))
+                // Microsoft.Rest.ClientRuntime.dll
+                .AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(RestException).GetAssembly().Location))
+                // System.dll
+                .AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(Uri).GetAssembly().Location));
 
             // Add existing files
             foreach (var file in files.Keys)
