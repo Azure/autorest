@@ -25,8 +25,8 @@ var _ = chk.Suite(&StringSuite{})
 var stringClient = getStringClient()
 var enumClient = getEnumClient()
 
-func getStringClient() OperationsClient {
-	c := NewOperationsClient()
+func getStringClient() Client {
+	c := NewClient()
 	c.BaseURI = utils.GetBaseURI()
 	return c
 }

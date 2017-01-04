@@ -4,27 +4,41 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using AutoRest.Core.Model;
 
-using AutoRest.Core.ClientModel;
 
-namespace AutoRest.Go
+namespace AutoRest.Go.Model
 {
     /// <summary>
     /// Defines a synthetic type used to hold an array or dictionary method response.
     /// </summary>
-    public class MapType : DictionaryType
+    public class DictionaryTypeGo : DictionaryType
     {
-        public string FieldNameFormat { get; set; }
-
-        public string FieldName { get { return string.Format(CultureInfo.InvariantCulture, FieldNameFormat, ValueType.Name); } }
-
-        public MapType(IType type)
-        {
-            ValueType = type;
-            NameFormat = "map[string]{0}";
-            FieldNameFormat = ValueType.CanBeNull()
-                                ? NameFormat
+        // if value type can be implicitly null
+        // then don't emit it as a pointer type.
+        private string FieldNameFormat => ValueType.CanBeNull()
+                                ? "map[string]{0}"
                                 : "map[string]*{0}";
+
+        public DictionaryTypeGo()
+        {
+            Name.OnGet += value => string.Format(CultureInfo.InvariantCulture, FieldNameFormat, ValueType.Name);
+        }
+
+        /// <summary>
+        /// Add imports for dictionary type.
+        /// </summary>
+        /// <param name="imports"></param>
+        public void AddImports(HashSet<string> imports)
+        {
+            ValueType.AddImports(imports);
+        }
+
+        public string GetEmptyCheck(string valueReference, bool asEmpty)
+        {
+            return string.Format(asEmpty
+                                    ? "{0} == nil || len({0}) == 0"
+                                    : "{0} != nil && len({0}) > 0", valueReference);
         }
 
         /// <summary>
@@ -34,7 +48,7 @@ namespace AutoRest.Go
         /// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            var mapType = obj as MapType;
+            var mapType = obj as DictionaryTypeGo;
 
             if (mapType != null)
             {

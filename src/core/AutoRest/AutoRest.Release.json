@@ -24,6 +24,9 @@
         "Azure.Python": {
             "type": "PluginPya, AutoRest.Python.Azure"
         },
+        "Go": {
+            "type": "PluginGo, AutoRest.Go"
+        },
         "Java": {
             "type": "PluginJv, AutoRest.Java"
         },
@@ -64,6 +67,9 @@
     },
     "Azure.Java.Fluent": {
       "type": "AzureJavaFluentCodeGenerator, AutoRest.Java.Azure.Fluent"
+    },
+    "Go": {
+      "type": "GoCodeGenerator, AutoRest.Go"
     },
     "Python": {
       "type": "PythonCodeGenerator, AutoRest.Python"
