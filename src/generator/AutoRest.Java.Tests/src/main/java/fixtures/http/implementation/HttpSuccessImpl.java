@@ -146,7 +146,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -206,7 +206,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> get200Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(get200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -265,7 +265,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -320,7 +320,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put200WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(put200WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -381,7 +381,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(patch200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -436,7 +436,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch200WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(patch200WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -497,7 +497,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -552,7 +552,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post200WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(post200WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -613,7 +613,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -668,7 +668,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete200WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(delete200WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -729,7 +729,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put201Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put201WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put201WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -784,7 +784,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put201WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(put201WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -845,7 +845,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post201Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post201WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post201WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -900,7 +900,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post201WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(post201WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -961,7 +961,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put202WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put202WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1016,7 +1016,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put202WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(put202WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1077,7 +1077,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch202WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(patch202WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1132,7 +1132,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch202WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(patch202WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1193,7 +1193,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post202WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post202WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1248,7 +1248,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post202WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(post202WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1309,7 +1309,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete202WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete202WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1364,7 +1364,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete202WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(delete202WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1425,7 +1425,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1484,7 +1484,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1539,7 +1539,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put204WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(put204WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1600,7 +1600,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(patch204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1655,7 +1655,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch204WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(patch204WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1716,7 +1716,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1771,7 +1771,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post204WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(post204WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1832,7 +1832,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1887,7 +1887,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete204WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(delete204WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1948,7 +1948,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head404WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head404WithServiceResponseAsync(), serviceCallback);
     }
 
     /**

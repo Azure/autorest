@@ -23,7 +23,8 @@ public class ArrayTests {
     private static AutoRestSwaggerBATArrayService client;
 
     @BeforeClass
-    public static void setup() {
+    public static void setup() throws Exception {
+        Thread.sleep(10000);
         client = new AutoRestSwaggerBATArrayServiceImpl("http://localhost:3000");
     }
 

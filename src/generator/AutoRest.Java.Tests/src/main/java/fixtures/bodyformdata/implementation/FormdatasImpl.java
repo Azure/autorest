@@ -91,7 +91,7 @@ public final class FormdatasImpl implements Formdatas {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.create(uploadFileWithServiceResponseAsync(fileContent, fileName), serviceCallback);
+        return ServiceCall.fromResponse(uploadFileWithServiceResponseAsync(fileContent, fileName), serviceCallback);
     }
 
     /**
@@ -164,7 +164,7 @@ public final class FormdatasImpl implements Formdatas {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.create(uploadFileViaBodyWithServiceResponseAsync(fileContent), serviceCallback);
+        return ServiceCall.fromResponse(uploadFileViaBodyWithServiceResponseAsync(fileContent), serviceCallback);
     }
 
     /**

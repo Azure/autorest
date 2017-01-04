@@ -88,7 +88,7 @@ public final class DurationsImpl implements Durations {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Period> getNullAsync(final ServiceCallback<Period> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -149,7 +149,7 @@ public final class DurationsImpl implements Durations {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putPositiveDurationWithServiceResponseAsync(durationBody), serviceCallback);
+        return ServiceCall.fromResponse(putPositiveDurationWithServiceResponseAsync(durationBody), serviceCallback);
     }
 
     /**
@@ -214,7 +214,7 @@ public final class DurationsImpl implements Durations {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
-        return ServiceCall.create(getPositiveDurationWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getPositiveDurationWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -274,7 +274,7 @@ public final class DurationsImpl implements Durations {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
-        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

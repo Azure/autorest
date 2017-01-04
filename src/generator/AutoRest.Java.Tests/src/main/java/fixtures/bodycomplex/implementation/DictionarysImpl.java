@@ -97,7 +97,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        return ServiceCall.create(getValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -158,7 +158,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -224,7 +224,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -285,7 +285,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putEmptyWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putEmptyWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -351,7 +351,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -411,7 +411,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        return ServiceCall.create(getNotProvidedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNotProvidedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

@@ -691,25 +691,14 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public virtual string ServiceCallConstruction
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "final ServiceCall<{0}> serviceCall = ServiceCall.{1}(call);",
-                    ReturnTypeJv.GenericBodyClientTypeString, ServiceCallFactoryMethod);
-            }
-        }
-
-        [JsonIgnore]
         public virtual string ServiceCallFactoryMethod
         {
             get
             {
-                string factoryMethod = "create";
+                string factoryMethod = "fromResponse";
                 if (ReturnType.Headers != null)
                 {
-                    factoryMethod = "createWithHeaders";
+                    factoryMethod = "fromHeaderResponse";
                 }
                 return factoryMethod;
             }

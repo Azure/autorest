@@ -170,7 +170,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getSinglePagesAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getSinglePagesSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -264,7 +264,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -359,7 +359,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -468,7 +468,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getOdataMultiplePagesAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getOdataMultiplePagesSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -563,7 +563,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getOdataMultiplePagesAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -677,7 +677,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -788,7 +788,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -901,7 +901,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesRetryFirstAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesRetryFirstSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -995,7 +995,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesRetrySecondAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesRetrySecondSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1089,7 +1089,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getSinglePagesFailureAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getSinglePagesFailureSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1183,7 +1183,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesFailureAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesFailureSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1277,7 +1277,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesFailureUriAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesFailureUriSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1375,7 +1375,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesFragmentNextLinkAsync(final String tenant, final String apiVersion, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, apiVersion),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1483,7 +1483,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesFragmentWithGroupingNextLinkAsync(final CustomParameterGroupInner customParameterGroup, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(customParameterGroup),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1593,7 +1593,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> nextFragmentAsync(final String tenant, final String nextLink, final String apiVersion, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             nextFragmentSinglePageAsync(tenant, nextLink, apiVersion),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1710,7 +1710,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> nextFragmentWithGroupingAsync(final String nextLink, final CustomParameterGroupInner customParameterGroup, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1822,7 +1822,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getSinglePagesNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getSinglePagesNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1925,7 +1925,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2029,7 +2029,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2147,7 +2147,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getOdataMultiplePagesNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getOdataMultiplePagesNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2251,7 +2251,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2369,7 +2369,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2473,7 +2473,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2591,7 +2591,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesRetryFirstNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2694,7 +2694,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesRetrySecondNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2797,7 +2797,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getSinglePagesFailureNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getSinglePagesFailureNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2900,7 +2900,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesFailureNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesFailureNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -3003,7 +3003,7 @@ public final class PagingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<ProductInner>> getMultiplePagesFailureUriNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.create(
+        return AzureServiceCall.fromPageResponse(
             getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override

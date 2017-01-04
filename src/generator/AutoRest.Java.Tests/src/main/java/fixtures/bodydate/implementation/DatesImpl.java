@@ -104,7 +104,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getNullAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -164,7 +164,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.create(getInvalidDateWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -224,7 +224,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.create(getOverflowDateWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getOverflowDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -284,7 +284,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.create(getUnderflowDateWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUnderflowDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -345,7 +345,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putMaxDateWithServiceResponseAsync(dateBody), serviceCallback);
+        return ServiceCall.fromResponse(putMaxDateWithServiceResponseAsync(dateBody), serviceCallback);
     }
 
     /**
@@ -410,7 +410,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.create(getMaxDateWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getMaxDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -471,7 +471,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putMinDateWithServiceResponseAsync(dateBody), serviceCallback);
+        return ServiceCall.fromResponse(putMinDateWithServiceResponseAsync(dateBody), serviceCallback);
     }
 
     /**
@@ -536,7 +536,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.create(getMinDateWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getMinDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

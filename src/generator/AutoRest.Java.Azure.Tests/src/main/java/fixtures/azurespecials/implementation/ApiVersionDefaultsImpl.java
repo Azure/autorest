@@ -86,7 +86,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -148,7 +148,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -210,7 +210,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getPathGlobalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getPathGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -272,7 +272,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

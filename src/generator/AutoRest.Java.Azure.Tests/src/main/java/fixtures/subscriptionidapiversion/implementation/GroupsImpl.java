@@ -79,7 +79,7 @@ public final class GroupsImpl implements Groups {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback) {
-        return ServiceCall.create(getSampleResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
+        return ServiceCall.fromResponse(getSampleResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
     }
 
     /**

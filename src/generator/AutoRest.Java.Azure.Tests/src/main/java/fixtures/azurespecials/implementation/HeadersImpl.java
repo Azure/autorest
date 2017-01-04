@@ -82,7 +82,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(customNamedRequestIdWithServiceResponseAsync(fooClientRequestId), serviceCallback);
+        return ServiceCall.fromHeaderResponse(customNamedRequestIdWithServiceResponseAsync(fooClientRequestId), serviceCallback);
     }
 
     /**
@@ -148,7 +148,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
+        return ServiceCall.fromHeaderResponse(customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
     }
 
     /**

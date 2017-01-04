@@ -81,7 +81,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) {
-        return ServiceCall.create(getValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -142,7 +142,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**

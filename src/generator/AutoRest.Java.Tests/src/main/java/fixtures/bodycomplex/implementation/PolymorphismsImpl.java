@@ -85,7 +85,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
-        return ServiceCall.create(getValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -210,7 +210,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -391,7 +391,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidMissingRequiredWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putValidMissingRequiredWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**

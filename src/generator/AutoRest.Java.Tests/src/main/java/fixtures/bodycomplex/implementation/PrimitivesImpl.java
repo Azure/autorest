@@ -171,7 +171,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<IntWrapper> getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
-        return ServiceCall.create(getIntWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -232,7 +232,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putIntWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putIntWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -298,7 +298,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<LongWrapper> getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
-        return ServiceCall.create(getLongWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLongWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -359,7 +359,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLongWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putLongWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -425,7 +425,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<FloatWrapper> getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
-        return ServiceCall.create(getFloatWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFloatWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -486,7 +486,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putFloatWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putFloatWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -552,7 +552,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DoubleWrapper> getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
-        return ServiceCall.create(getDoubleWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDoubleWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -613,7 +613,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDoubleWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putDoubleWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -679,7 +679,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<BooleanWrapper> getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
-        return ServiceCall.create(getBoolWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBoolWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -740,7 +740,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putBoolWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putBoolWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -806,7 +806,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<StringWrapper> getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
-        return ServiceCall.create(getStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -867,7 +867,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putStringWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putStringWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -933,7 +933,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateWrapper> getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
-        return ServiceCall.create(getDateWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -994,7 +994,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putDateWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -1060,7 +1060,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DatetimeWrapper> getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
-        return ServiceCall.create(getDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1121,7 +1121,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateTimeWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putDateTimeWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -1187,7 +1187,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
-        return ServiceCall.create(getDateTimeRfc1123WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateTimeRfc1123WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1248,7 +1248,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateTimeRfc1123WithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putDateTimeRfc1123WithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -1314,7 +1314,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DurationWrapper> getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback) {
-        return ServiceCall.create(getDurationWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDurationWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1375,7 +1375,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDurationWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putDurationWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -1441,7 +1441,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ByteWrapper> getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
-        return ServiceCall.create(getByteWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getByteWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1502,7 +1502,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putByteWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putByteWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**

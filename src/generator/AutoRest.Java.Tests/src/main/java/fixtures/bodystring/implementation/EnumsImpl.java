@@ -98,7 +98,7 @@ public final class EnumsImpl implements Enums {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Colors> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
-        return ServiceCall.create(getNotExpandableWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNotExpandableWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -159,7 +159,7 @@ public final class EnumsImpl implements Enums {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putNotExpandableWithServiceResponseAsync(stringBody), serviceCallback);
+        return ServiceCall.fromResponse(putNotExpandableWithServiceResponseAsync(stringBody), serviceCallback);
     }
 
     /**
@@ -224,7 +224,7 @@ public final class EnumsImpl implements Enums {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Colors> getReferencedAsync(final ServiceCallback<Colors> serviceCallback) {
-        return ServiceCall.create(getReferencedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getReferencedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -285,7 +285,7 @@ public final class EnumsImpl implements Enums {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putReferencedAsync(Colors enumStringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putReferencedWithServiceResponseAsync(enumStringBody), serviceCallback);
+        return ServiceCall.fromResponse(putReferencedWithServiceResponseAsync(enumStringBody), serviceCallback);
     }
 
     /**
@@ -350,7 +350,7 @@ public final class EnumsImpl implements Enums {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<RefColorConstant> getReferencedConstantAsync(final ServiceCallback<RefColorConstant> serviceCallback) {
-        return ServiceCall.create(getReferencedConstantWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getReferencedConstantWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -411,7 +411,7 @@ public final class EnumsImpl implements Enums {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putReferencedConstantAsync(RefColorConstant enumStringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putReferencedConstantWithServiceResponseAsync(enumStringBody), serviceCallback);
+        return ServiceCall.fromResponse(putReferencedConstantWithServiceResponseAsync(enumStringBody), serviceCallback);
     }
 
     /**

@@ -86,7 +86,7 @@ public final class FilesImpl implements Files {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.create(getFileWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFileWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -146,7 +146,7 @@ public final class FilesImpl implements Files {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.create(getFileLargeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFileLargeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -206,7 +206,7 @@ public final class FilesImpl implements Files {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.create(getEmptyFileWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyFileWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

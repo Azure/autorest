@@ -90,7 +90,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
+        return ServiceCall.fromResponse(getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -165,7 +165,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+        return ServiceCall.fromResponse(getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**
@@ -245,7 +245,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
+        return ServiceCall.fromResponse(getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -320,7 +320,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+        return ServiceCall.fromResponse(getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**
@@ -400,7 +400,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
+        return ServiceCall.fromResponse(getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -475,7 +475,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+        return ServiceCall.fromResponse(getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**
@@ -555,7 +555,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
+        return ServiceCall.fromResponse(getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -630,7 +630,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+        return ServiceCall.fromResponse(getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**

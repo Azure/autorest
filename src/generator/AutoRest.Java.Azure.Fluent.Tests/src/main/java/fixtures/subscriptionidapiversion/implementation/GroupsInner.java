@@ -77,7 +77,7 @@ public final class GroupsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroupInner> serviceCallback) {
-        return ServiceCall.create(getSampleResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
+        return ServiceCall.fromResponse(getSampleResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
     }
 
     /**

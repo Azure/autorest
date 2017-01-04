@@ -342,7 +342,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -402,7 +402,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -462,7 +462,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -523,7 +523,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putEmptyWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putEmptyWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -589,7 +589,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Boolean>> getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
-        return ServiceCall.create(getBooleanTfftWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanTfftWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -650,7 +650,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putBooleanTfftWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putBooleanTfftWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -716,7 +716,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Boolean>> getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
-        return ServiceCall.create(getBooleanInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -776,7 +776,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Boolean>> getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
-        return ServiceCall.create(getBooleanInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -836,7 +836,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getIntegerValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntegerValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -897,7 +897,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putIntegerValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putIntegerValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -963,7 +963,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getIntInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1023,7 +1023,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getIntInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1083,7 +1083,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Long>> getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback) {
-        return ServiceCall.create(getLongValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLongValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1144,7 +1144,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLongValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putLongValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1210,7 +1210,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Long>> getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback) {
-        return ServiceCall.create(getLongInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLongInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1270,7 +1270,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Long>> getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback) {
-        return ServiceCall.create(getLongInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLongInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1330,7 +1330,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getFloatValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFloatValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1391,7 +1391,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putFloatValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putFloatValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1457,7 +1457,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getFloatInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFloatInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1517,7 +1517,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getFloatInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFloatInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1577,7 +1577,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getDoubleValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDoubleValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1638,7 +1638,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDoubleValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDoubleValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1704,7 +1704,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getDoubleInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDoubleInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1764,7 +1764,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getDoubleInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDoubleInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1824,7 +1824,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<String>> getStringValidAsync(final ServiceCallback<List<String>> serviceCallback) {
-        return ServiceCall.create(getStringValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getStringValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1885,7 +1885,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putStringValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putStringValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1951,7 +1951,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<String>> getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback) {
-        return ServiceCall.create(getStringWithNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getStringWithNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2011,7 +2011,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<String>> getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) {
-        return ServiceCall.create(getStringWithInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getStringWithInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2071,7 +2071,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<UUID>> getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback) {
-        return ServiceCall.create(getUuidValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUuidValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2132,7 +2132,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putUuidValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putUuidValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2198,7 +2198,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<UUID>> getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback) {
-        return ServiceCall.create(getUuidInvalidCharsWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUuidInvalidCharsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2258,7 +2258,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<LocalDate>> getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
-        return ServiceCall.create(getDateValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2319,7 +2319,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDateValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2385,7 +2385,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<LocalDate>> getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
-        return ServiceCall.create(getDateInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2445,7 +2445,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<LocalDate>> getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
-        return ServiceCall.create(getDateInvalidCharsWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateInvalidCharsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2505,7 +2505,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateTimeValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2566,7 +2566,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateTimeValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDateTimeValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2632,7 +2632,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateTimeInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2692,7 +2692,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeInvalidCharsWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateTimeInvalidCharsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2752,7 +2752,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeRfc1123ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateTimeRfc1123ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2823,7 +2823,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2894,7 +2894,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Period>> getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback) {
-        return ServiceCall.create(getDurationValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDurationValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2955,7 +2955,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDurationValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDurationValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3021,7 +3021,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<byte[]>> getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
-        return ServiceCall.create(getByteValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getByteValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3082,7 +3082,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putByteValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putByteValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3148,7 +3148,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<byte[]>> getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
-        return ServiceCall.create(getByteInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getByteInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3208,7 +3208,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<byte[]>> getBase64UrlAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
-        return ServiceCall.create(getBase64UrlWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBase64UrlWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3278,7 +3278,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        return ServiceCall.create(getComplexNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getComplexNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3338,7 +3338,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        return ServiceCall.create(getComplexEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getComplexEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3398,7 +3398,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        return ServiceCall.create(getComplexItemNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getComplexItemNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3458,7 +3458,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        return ServiceCall.create(getComplexItemEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getComplexItemEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3518,7 +3518,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        return ServiceCall.create(getComplexValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getComplexValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3579,7 +3579,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putComplexValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putComplexValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3645,7 +3645,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3705,7 +3705,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3765,7 +3765,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayItemNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayItemNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3825,7 +3825,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayItemEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayItemEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3885,7 +3885,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3946,7 +3946,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putArrayValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putArrayValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -4012,7 +4012,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4072,7 +4072,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4132,7 +4132,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryItemNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryItemNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4192,7 +4192,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryItemEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryItemEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4252,7 +4252,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4313,7 +4313,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDictionaryValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDictionaryValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**

@@ -77,7 +77,7 @@ public final class XMsClientRequestIdsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -137,7 +137,7 @@ public final class XMsClientRequestIdsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramGetWithServiceResponseAsync(xMsClientRequestId), serviceCallback);
+        return ServiceCall.fromResponse(paramGetWithServiceResponseAsync(xMsClientRequestId), serviceCallback);
     }
 
     /**

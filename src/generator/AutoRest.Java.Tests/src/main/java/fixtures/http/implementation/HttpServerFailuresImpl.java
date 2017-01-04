@@ -89,7 +89,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> head501Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(head501WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head501WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -148,7 +148,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get501Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(get501WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get501WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -207,7 +207,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post505Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post505WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post505WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -263,7 +263,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post505WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(post505WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -324,7 +324,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete505Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete505WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete505WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -380,7 +380,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete505WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(delete505WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**

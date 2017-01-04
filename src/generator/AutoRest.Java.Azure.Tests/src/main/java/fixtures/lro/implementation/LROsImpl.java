@@ -389,7 +389,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -434,7 +434,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put200SucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put200SucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -480,7 +480,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -536,7 +536,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut200SucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200SucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -600,7 +600,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200SucceededNoStateAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put200SucceededNoStateWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put200SucceededNoStateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -645,7 +645,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put200SucceededNoStateWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put200SucceededNoStateWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -691,7 +691,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200SucceededNoStateAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut200SucceededNoStateWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200SucceededNoStateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -747,7 +747,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut200SucceededNoStateWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200SucceededNoStateWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -810,7 +810,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put202Retry200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -855,7 +855,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -901,7 +901,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut202Retry200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -957,7 +957,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1020,7 +1020,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1065,7 +1065,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1111,7 +1111,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1167,7 +1167,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1231,7 +1231,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200UpdatingSucceeded204Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put200UpdatingSucceeded204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put200UpdatingSucceeded204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1276,7 +1276,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put200UpdatingSucceeded204WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put200UpdatingSucceeded204WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1322,7 +1322,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200UpdatingSucceeded204Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut200UpdatingSucceeded204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200UpdatingSucceeded204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1378,7 +1378,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut200UpdatingSucceeded204WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200UpdatingSucceeded204WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1441,7 +1441,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingFailed200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put201CreatingFailed200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingFailed200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1486,7 +1486,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put201CreatingFailed200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingFailed200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1532,7 +1532,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut201CreatingFailed200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingFailed200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingFailed200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1588,7 +1588,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingFailed200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingFailed200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1652,7 +1652,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200Acceptedcanceled200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put200Acceptedcanceled200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put200Acceptedcanceled200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1697,7 +1697,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put200Acceptedcanceled200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put200Acceptedcanceled200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1743,7 +1743,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200Acceptedcanceled200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut200Acceptedcanceled200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200Acceptedcanceled200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1799,7 +1799,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut200Acceptedcanceled200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200Acceptedcanceled200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1862,7 +1862,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1907,7 +1907,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1953,7 +1953,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2009,7 +2009,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2072,7 +2072,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2117,7 +2117,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2163,7 +2163,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2219,7 +2219,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2282,7 +2282,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2327,7 +2327,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2373,7 +2373,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2429,7 +2429,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2492,7 +2492,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRetryFailedAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2537,7 +2537,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2583,7 +2583,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncRetryFailedAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2639,7 +2639,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2702,7 +2702,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncNoRetrycanceledAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2747,7 +2747,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoRetrycanceledWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoRetrycanceledWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2793,7 +2793,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncNoRetrycanceledAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2849,7 +2849,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2912,7 +2912,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2957,7 +2957,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3003,7 +3003,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3059,7 +3059,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3122,7 +3122,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> putNonResourceAsync(final ServiceCallback<Sku> serviceCallback) {
-        return ServiceCall.create(putNonResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putNonResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3167,7 +3167,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> putNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) {
-        return ServiceCall.create(putNonResourceWithServiceResponseAsync(sku), serviceCallback);
+        return ServiceCall.fromResponse(putNonResourceWithServiceResponseAsync(sku), serviceCallback);
     }
 
     /**
@@ -3213,7 +3213,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> beginPutNonResourceAsync(final ServiceCallback<Sku> serviceCallback) {
-        return ServiceCall.create(beginPutNonResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutNonResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3269,7 +3269,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> beginPutNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) {
-        return ServiceCall.create(beginPutNonResourceWithServiceResponseAsync(sku), serviceCallback);
+        return ServiceCall.fromResponse(beginPutNonResourceWithServiceResponseAsync(sku), serviceCallback);
     }
 
     /**
@@ -3332,7 +3332,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> putAsyncNonResourceAsync(final ServiceCallback<Sku> serviceCallback) {
-        return ServiceCall.create(putAsyncNonResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putAsyncNonResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3377,7 +3377,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> putAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) {
-        return ServiceCall.create(putAsyncNonResourceWithServiceResponseAsync(sku), serviceCallback);
+        return ServiceCall.fromResponse(putAsyncNonResourceWithServiceResponseAsync(sku), serviceCallback);
     }
 
     /**
@@ -3423,7 +3423,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> beginPutAsyncNonResourceAsync(final ServiceCallback<Sku> serviceCallback) {
-        return ServiceCall.create(beginPutAsyncNonResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutAsyncNonResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3479,7 +3479,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> beginPutAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) {
-        return ServiceCall.create(beginPutAsyncNonResourceWithServiceResponseAsync(sku), serviceCallback);
+        return ServiceCall.fromResponse(beginPutAsyncNonResourceWithServiceResponseAsync(sku), serviceCallback);
     }
 
     /**
@@ -3542,7 +3542,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> putSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) {
-        return ServiceCall.create(putSubResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putSubResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3587,7 +3587,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> putSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) {
-        return ServiceCall.create(putSubResourceWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(putSubResourceWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3633,7 +3633,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> beginPutSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) {
-        return ServiceCall.create(beginPutSubResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutSubResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3689,7 +3689,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> beginPutSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) {
-        return ServiceCall.create(beginPutSubResourceWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPutSubResourceWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3752,7 +3752,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> putAsyncSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) {
-        return ServiceCall.create(putAsyncSubResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putAsyncSubResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3797,7 +3797,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> putAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) {
-        return ServiceCall.create(putAsyncSubResourceWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(putAsyncSubResourceWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3843,7 +3843,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> beginPutAsyncSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) {
-        return ServiceCall.create(beginPutAsyncSubResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutAsyncSubResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3899,7 +3899,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> beginPutAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) {
-        return ServiceCall.create(beginPutAsyncSubResourceWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPutAsyncSubResourceWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3962,7 +3962,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4005,7 +4005,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4066,7 +4066,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> deleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteProvisioning202DeletingFailed200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteProvisioning202DeletingFailed200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4109,7 +4109,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4170,7 +4170,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> deleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteProvisioning202Deletingcanceled200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteProvisioning202Deletingcanceled200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4213,7 +4213,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4273,7 +4273,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete204SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete204SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4315,7 +4315,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(beginDelete204SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginDelete204SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4375,7 +4375,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> delete202Retry200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(delete202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(delete202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4418,7 +4418,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginDelete202Retry200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDelete202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDelete202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4479,7 +4479,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> delete202NoRetry204Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(delete202NoRetry204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(delete202NoRetry204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4522,7 +4522,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginDelete202NoRetry204Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDelete202NoRetry204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDelete202NoRetry204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4582,7 +4582,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4624,7 +4624,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4684,7 +4684,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4726,7 +4726,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4786,7 +4786,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4828,7 +4828,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4887,7 +4887,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4929,7 +4929,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4988,7 +4988,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5030,7 +5030,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5089,7 +5089,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5131,7 +5131,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5191,7 +5191,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> post200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback) {
-        return ServiceCall.create(post200WithPayloadWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post200WithPayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5234,7 +5234,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> beginPost200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback) {
-        return ServiceCall.create(beginPost200WithPayloadWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPost200WithPayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5294,7 +5294,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5338,7 +5338,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5383,7 +5383,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5438,7 +5438,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5501,7 +5501,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> post202NoRetry204Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202NoRetry204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202NoRetry204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5546,7 +5546,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> post202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202NoRetry204WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202NoRetry204WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5592,7 +5592,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPost202NoRetry204Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202NoRetry204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202NoRetry204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5648,7 +5648,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPost202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202NoRetry204WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202NoRetry204WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5711,7 +5711,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5756,7 +5756,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5802,7 +5802,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPostAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5858,7 +5858,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5922,7 +5922,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5967,7 +5967,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -6013,7 +6013,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPostAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -6069,7 +6069,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPostAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -6132,7 +6132,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -6176,7 +6176,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -6221,7 +6221,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -6276,7 +6276,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -6338,7 +6338,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -6382,7 +6382,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrycanceledWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrycanceledWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -6427,7 +6427,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -6482,7 +6482,7 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrycanceledWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrycanceledWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**

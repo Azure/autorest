@@ -98,7 +98,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getValidAsync(final ServiceCallback<Basic> serviceCallback) {
-        return ServiceCall.create(getValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -159,7 +159,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -225,7 +225,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
-        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -285,7 +285,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -345,7 +345,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getNullAsync(final ServiceCallback<Basic> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -405,7 +405,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
-        return ServiceCall.create(getNotProvidedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNotProvidedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

@@ -82,7 +82,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(vault, secret, keyName), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(vault, secret, keyName), serviceCallback);
     }
 
     /**
@@ -165,7 +165,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion), serviceCallback);
     }
 
     /**

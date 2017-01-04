@@ -91,7 +91,7 @@ public final class BytesImpl implements Bytes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -151,7 +151,7 @@ public final class BytesImpl implements Bytes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -211,7 +211,7 @@ public final class BytesImpl implements Bytes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.create(getNonAsciiWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNonAsciiWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -272,7 +272,7 @@ public final class BytesImpl implements Bytes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putNonAsciiWithServiceResponseAsync(byteBody), serviceCallback);
+        return ServiceCall.fromResponse(putNonAsciiWithServiceResponseAsync(byteBody), serviceCallback);
     }
 
     /**
@@ -337,7 +337,7 @@ public final class BytesImpl implements Bytes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

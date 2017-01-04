@@ -79,7 +79,7 @@ public final class HeadersInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(customNamedRequestIdWithServiceResponseAsync(fooClientRequestId), serviceCallback);
+        return ServiceCall.fromHeaderResponse(customNamedRequestIdWithServiceResponseAsync(fooClientRequestId), serviceCallback);
     }
 
     /**
@@ -145,7 +145,7 @@ public final class HeadersInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
+        return ServiceCall.fromHeaderResponse(customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
     }
 
     /**

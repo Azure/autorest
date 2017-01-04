@@ -148,7 +148,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -208,7 +208,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -268,7 +268,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getOverflowWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getOverflowWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -328,7 +328,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUnderflowWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUnderflowWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -389,7 +389,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+        return ServiceCall.fromResponse(putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -454,7 +454,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUtcLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUtcLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -514,7 +514,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUtcUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUtcUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -575,7 +575,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLocalPositiveOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+        return ServiceCall.fromResponse(putLocalPositiveOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -640,7 +640,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalPositiveOffsetLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLocalPositiveOffsetLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -700,7 +700,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalPositiveOffsetUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLocalPositiveOffsetUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -761,7 +761,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLocalNegativeOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+        return ServiceCall.fromResponse(putLocalNegativeOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -826,7 +826,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalNegativeOffsetUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLocalNegativeOffsetUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -886,7 +886,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalNegativeOffsetLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLocalNegativeOffsetLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -947,7 +947,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putUtcMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+        return ServiceCall.fromResponse(putUtcMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -1012,7 +1012,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUtcMinDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUtcMinDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1073,7 +1073,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLocalPositiveOffsetMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+        return ServiceCall.fromResponse(putLocalPositiveOffsetMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -1138,7 +1138,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalPositiveOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalPositiveOffsetMinDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLocalPositiveOffsetMinDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1199,7 +1199,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLocalNegativeOffsetMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+        return ServiceCall.fromResponse(putLocalNegativeOffsetMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -1264,7 +1264,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalNegativeOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalNegativeOffsetMinDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLocalNegativeOffsetMinDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

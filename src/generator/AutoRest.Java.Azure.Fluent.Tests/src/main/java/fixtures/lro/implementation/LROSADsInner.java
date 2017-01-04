@@ -282,7 +282,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putNonRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(putNonRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putNonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -327,7 +327,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putNonRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(putNonRetry400WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(putNonRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -373,7 +373,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutNonRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutNonRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutNonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -429,7 +429,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutNonRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutNonRetry400WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPutNonRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -493,7 +493,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putNonRetry201Creating400Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(putNonRetry201Creating400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putNonRetry201Creating400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -538,7 +538,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putNonRetry201Creating400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(putNonRetry201Creating400WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(putNonRetry201Creating400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -584,7 +584,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutNonRetry201Creating400Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutNonRetry201Creating400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutNonRetry201Creating400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -640,7 +640,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutNonRetry201Creating400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutNonRetry201Creating400WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPutNonRetry201Creating400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -704,7 +704,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(putNonRetry201Creating400InvalidJsonWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putNonRetry201Creating400InvalidJsonWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -749,7 +749,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putNonRetry201Creating400InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(putNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(putNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -795,7 +795,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -851,7 +851,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutNonRetry201Creating400InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -915,7 +915,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRelativeRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -960,7 +960,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1006,7 +1006,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRelativeRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1062,7 +1062,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1124,7 +1124,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteNonRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteNonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1166,7 +1166,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteNonRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteNonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1225,7 +1225,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(delete202NonRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(delete202NonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1267,7 +1267,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDelete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDelete202NonRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDelete202NonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1326,7 +1326,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1368,7 +1368,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1427,7 +1427,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postNonRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postNonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1471,7 +1471,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postNonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postNonRetry400WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postNonRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1516,7 +1516,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostNonRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostNonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1571,7 +1571,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostNonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostNonRetry400WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostNonRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1633,7 +1633,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202NonRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202NonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1677,7 +1677,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202NonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202NonRetry400WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202NonRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1722,7 +1722,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202NonRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202NonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1777,7 +1777,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202NonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202NonRetry400WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202NonRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1839,7 +1839,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1883,7 +1883,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1928,7 +1928,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1983,7 +1983,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2046,7 +2046,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putError201NoProvisioningStatePayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(putError201NoProvisioningStatePayloadWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putError201NoProvisioningStatePayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2091,7 +2091,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putError201NoProvisioningStatePayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(putError201NoProvisioningStatePayloadWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(putError201NoProvisioningStatePayloadWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2137,7 +2137,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutError201NoProvisioningStatePayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2193,7 +2193,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutError201NoProvisioningStatePayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2257,7 +2257,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRelativeRetryNoStatusAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2302,7 +2302,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRelativeRetryNoStatusAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRelativeRetryNoStatusWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryNoStatusWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2348,7 +2348,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRelativeRetryNoStatusAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2404,7 +2404,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRelativeRetryNoStatusAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2467,7 +2467,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2512,7 +2512,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2558,7 +2558,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2614,7 +2614,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2676,7 +2676,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete204SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete204SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2718,7 +2718,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(beginDelete204SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginDelete204SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2777,7 +2777,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2819,7 +2819,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2878,7 +2878,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202NoLocationAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202NoLocationWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202NoLocationWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2922,7 +2922,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202NoLocationAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202NoLocationWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202NoLocationWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2967,7 +2967,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202NoLocationAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202NoLocationWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202NoLocationWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3022,7 +3022,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202NoLocationAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202NoLocationWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202NoLocationWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3084,7 +3084,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRelativeRetryNoPayloadWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetryNoPayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3128,7 +3128,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetryNoPayloadAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3173,7 +3173,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3228,7 +3228,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRelativeRetryNoPayloadAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3291,7 +3291,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200InvalidJsonWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put200InvalidJsonWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3336,7 +3336,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200InvalidJsonWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put200InvalidJsonWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3382,7 +3382,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200InvalidJsonWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200InvalidJsonWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3438,7 +3438,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200InvalidJsonWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200InvalidJsonWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3502,7 +3502,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3547,7 +3547,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3593,7 +3593,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3649,7 +3649,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3712,7 +3712,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3757,7 +3757,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3803,7 +3803,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3859,7 +3859,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3921,7 +3921,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(delete202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(delete202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3963,7 +3963,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDelete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDelete202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDelete202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4022,7 +4022,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4064,7 +4064,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4123,7 +4123,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4165,7 +4165,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4224,7 +4224,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4268,7 +4268,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202RetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202RetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202RetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -4313,7 +4313,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4368,7 +4368,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202RetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202RetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202RetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -4430,7 +4430,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4474,7 +4474,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -4519,7 +4519,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4574,7 +4574,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -4636,7 +4636,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4680,7 +4680,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -4725,7 +4725,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4780,7 +4780,7 @@ public final class LROSADsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**

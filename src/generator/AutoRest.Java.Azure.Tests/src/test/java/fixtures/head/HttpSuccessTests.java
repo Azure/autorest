@@ -12,7 +12,7 @@ public class HttpSuccessTests {
     private static AutoRestHeadTestServiceImpl client;
 
     @BeforeClass
-    public static void setup() {
+    public static void setup() throws Exception {
         client = new AutoRestHeadTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
     }
 

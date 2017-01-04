@@ -212,7 +212,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getBooleanTrueWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanTrueWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -272,7 +272,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getBooleanFalseWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanFalseWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -332,7 +332,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getBooleanNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getBooleanNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -387,7 +387,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getBooleanNullAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getBooleanNullWithServiceResponseAsync(boolQuery), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanNullWithServiceResponseAsync(boolQuery), serviceCallback);
     }
 
     /**
@@ -448,7 +448,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getIntOneMillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntOneMillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -508,7 +508,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getIntNegativeOneMillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntNegativeOneMillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -568,7 +568,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getIntNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getIntNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -623,7 +623,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getIntNullAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getIntNullWithServiceResponseAsync(intQuery), serviceCallback);
+        return ServiceCall.fromResponse(getIntNullWithServiceResponseAsync(intQuery), serviceCallback);
     }
 
     /**
@@ -684,7 +684,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getTenBillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getTenBillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -744,7 +744,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getNegativeTenBillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNegativeTenBillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -804,7 +804,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getLongNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getLongNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLongNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -859,7 +859,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getLongNullAsync(Long longQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getLongNullWithServiceResponseAsync(longQuery), serviceCallback);
+        return ServiceCall.fromResponse(getLongNullWithServiceResponseAsync(longQuery), serviceCallback);
     }
 
     /**
@@ -920,7 +920,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(floatScientificPositiveWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(floatScientificPositiveWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -980,7 +980,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(floatScientificNegativeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(floatScientificNegativeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1040,7 +1040,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> floatNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(floatNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(floatNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1095,7 +1095,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> floatNullAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(floatNullWithServiceResponseAsync(floatQuery), serviceCallback);
+        return ServiceCall.fromResponse(floatNullWithServiceResponseAsync(floatQuery), serviceCallback);
     }
 
     /**
@@ -1156,7 +1156,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(doubleDecimalPositiveWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(doubleDecimalPositiveWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1216,7 +1216,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(doubleDecimalNegativeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(doubleDecimalNegativeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1276,7 +1276,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> doubleNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(doubleNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(doubleNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1331,7 +1331,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> doubleNullAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(doubleNullWithServiceResponseAsync(doubleQuery), serviceCallback);
+        return ServiceCall.fromResponse(doubleNullWithServiceResponseAsync(doubleQuery), serviceCallback);
     }
 
     /**
@@ -1392,7 +1392,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringUnicodeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(stringUnicodeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1452,7 +1452,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringUrlEncodedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(stringUrlEncodedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1512,7 +1512,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(stringEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1572,7 +1572,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(stringNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1627,7 +1627,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringNullWithServiceResponseAsync(stringQuery), serviceCallback);
+        return ServiceCall.fromResponse(stringNullWithServiceResponseAsync(stringQuery), serviceCallback);
     }
 
     /**
@@ -1688,7 +1688,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> enumValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(enumValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(enumValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1743,7 +1743,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(enumValidWithServiceResponseAsync(enumQuery), serviceCallback);
+        return ServiceCall.fromResponse(enumValidWithServiceResponseAsync(enumQuery), serviceCallback);
     }
 
     /**
@@ -1804,7 +1804,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> enumNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(enumNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(enumNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1859,7 +1859,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(enumNullWithServiceResponseAsync(enumQuery), serviceCallback);
+        return ServiceCall.fromResponse(enumNullWithServiceResponseAsync(enumQuery), serviceCallback);
     }
 
     /**
@@ -1920,7 +1920,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteMultiByteAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(byteMultiByteWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(byteMultiByteWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1976,7 +1976,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(byteMultiByteWithServiceResponseAsync(byteQuery), serviceCallback);
+        return ServiceCall.fromResponse(byteMultiByteWithServiceResponseAsync(byteQuery), serviceCallback);
     }
 
     /**
@@ -2038,7 +2038,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(byteEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(byteEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2099,7 +2099,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(byteNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(byteNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2155,7 +2155,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(byteNullWithServiceResponseAsync(byteQuery), serviceCallback);
+        return ServiceCall.fromResponse(byteNullWithServiceResponseAsync(byteQuery), serviceCallback);
     }
 
     /**
@@ -2217,7 +2217,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(dateValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2277,7 +2277,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(dateNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2332,7 +2332,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateNullWithServiceResponseAsync(dateQuery), serviceCallback);
+        return ServiceCall.fromResponse(dateNullWithServiceResponseAsync(dateQuery), serviceCallback);
     }
 
     /**
@@ -2393,7 +2393,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateTimeValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(dateTimeValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2453,7 +2453,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateTimeNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateTimeNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(dateTimeNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2508,7 +2508,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateTimeNullWithServiceResponseAsync(dateTimeQuery), serviceCallback);
+        return ServiceCall.fromResponse(dateTimeNullWithServiceResponseAsync(dateTimeQuery), serviceCallback);
     }
 
     /**
@@ -2569,7 +2569,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayStringCsvValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(arrayStringCsvValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(arrayStringCsvValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2625,7 +2625,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(arrayStringCsvValidWithServiceResponseAsync(arrayQuery), serviceCallback);
+        return ServiceCall.fromResponse(arrayStringCsvValidWithServiceResponseAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -2688,7 +2688,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayStringCsvNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(arrayStringCsvNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(arrayStringCsvNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2744,7 +2744,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(arrayStringCsvNullWithServiceResponseAsync(arrayQuery), serviceCallback);
+        return ServiceCall.fromResponse(arrayStringCsvNullWithServiceResponseAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -2807,7 +2807,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayStringCsvEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(arrayStringCsvEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(arrayStringCsvEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2863,7 +2863,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(arrayStringCsvEmptyWithServiceResponseAsync(arrayQuery), serviceCallback);
+        return ServiceCall.fromResponse(arrayStringCsvEmptyWithServiceResponseAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -2926,7 +2926,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayStringSsvValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(arrayStringSsvValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(arrayStringSsvValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2982,7 +2982,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(arrayStringSsvValidWithServiceResponseAsync(arrayQuery), serviceCallback);
+        return ServiceCall.fromResponse(arrayStringSsvValidWithServiceResponseAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -3045,7 +3045,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayStringTsvValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(arrayStringTsvValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(arrayStringTsvValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3101,7 +3101,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(arrayStringTsvValidWithServiceResponseAsync(arrayQuery), serviceCallback);
+        return ServiceCall.fromResponse(arrayStringTsvValidWithServiceResponseAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -3164,7 +3164,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayStringPipesValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(arrayStringPipesValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(arrayStringPipesValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3220,7 +3220,7 @@ public final class QueriesImpl implements Queries {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(arrayStringPipesValidWithServiceResponseAsync(arrayQuery), serviceCallback);
+        return ServiceCall.fromResponse(arrayStringPipesValidWithServiceResponseAsync(arrayQuery), serviceCallback);
     }
 
     /**

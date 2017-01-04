@@ -79,7 +79,7 @@ public final class HeadExceptionsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -137,7 +137,7 @@ public final class HeadExceptionsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -195,7 +195,7 @@ public final class HeadExceptionsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head404WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head404WithServiceResponseAsync(), serviceCallback);
     }
 
     /**

@@ -110,7 +110,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -155,7 +155,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -201,7 +201,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -257,7 +257,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -320,7 +320,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -365,7 +365,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -411,7 +411,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -467,7 +467,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -530,7 +530,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -574,7 +574,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -619,7 +619,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -674,7 +674,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -736,7 +736,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -780,7 +780,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -825,7 +825,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -880,7 +880,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**

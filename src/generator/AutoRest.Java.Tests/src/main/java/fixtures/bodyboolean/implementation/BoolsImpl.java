@@ -95,7 +95,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getTrueWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getTrueWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -156,7 +156,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putTrueWithServiceResponseAsync(boolBody), serviceCallback);
+        return ServiceCall.fromResponse(putTrueWithServiceResponseAsync(boolBody), serviceCallback);
     }
 
     /**
@@ -218,7 +218,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getFalseWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFalseWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -279,7 +279,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putFalseWithServiceResponseAsync(boolBody), serviceCallback);
+        return ServiceCall.fromResponse(putFalseWithServiceResponseAsync(boolBody), serviceCallback);
     }
 
     /**
@@ -341,7 +341,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -401,7 +401,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

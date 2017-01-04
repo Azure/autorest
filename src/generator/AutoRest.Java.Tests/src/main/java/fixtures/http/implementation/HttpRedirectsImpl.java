@@ -150,7 +150,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head300Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(head300WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(head300WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -211,7 +211,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<String>> get300Async(final ServiceCallback<List<String>> serviceCallback) {
-        return ServiceCall.createWithHeaders(get300WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(get300WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -271,7 +271,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head301Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(head301WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(head301WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -331,7 +331,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get301Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(get301WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(get301WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -391,7 +391,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put301Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(put301WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(put301WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -446,7 +446,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put301Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(put301WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromHeaderResponse(put301WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -507,7 +507,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head302Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(head302WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(head302WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -567,7 +567,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get302Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(get302WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(get302WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -627,7 +627,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch302Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(patch302WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(patch302WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -682,7 +682,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(patch302WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromHeaderResponse(patch302WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -743,7 +743,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post303Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post303WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post303WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -798,7 +798,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post303Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post303WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post303WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -860,7 +860,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(head307WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(head307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -920,7 +920,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(get307WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(get307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -980,7 +980,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(put307WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(put307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1035,7 +1035,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(put307WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromHeaderResponse(put307WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1097,7 +1097,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(patch307WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(patch307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1152,7 +1152,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(patch307WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromHeaderResponse(patch307WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1214,7 +1214,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post307WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1269,7 +1269,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post307WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post307WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1331,7 +1331,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(delete307WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(delete307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1386,7 +1386,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(delete307WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromHeaderResponse(delete307WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**

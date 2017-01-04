@@ -88,7 +88,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMethodLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
+        return ServiceCall.fromResponse(postMethodLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**
@@ -154,7 +154,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMethodLocalNullWithServiceResponseAsync(subscriptionId), serviceCallback);
+        return ServiceCall.fromResponse(postMethodLocalNullWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**
@@ -220,7 +220,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postPathLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
+        return ServiceCall.fromResponse(postPathLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**
@@ -286,7 +286,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postSwaggerLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
+        return ServiceCall.fromResponse(postSwaggerLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**

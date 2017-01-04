@@ -167,7 +167,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> head400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(head400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -226,7 +226,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(get400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -285,7 +285,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -341,7 +341,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put400WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(put400WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -402,7 +402,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> patch400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(patch400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(patch400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -458,7 +458,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(patch400WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(patch400WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -519,7 +519,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -575,7 +575,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post400WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(post400WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -636,7 +636,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete400WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -692,7 +692,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete400WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(delete400WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -753,7 +753,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> head401Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(head401WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head401WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -812,7 +812,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get402Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(get402WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get402WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -871,7 +871,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get403Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(get403WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get403WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -930,7 +930,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put404Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put404WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put404WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -986,7 +986,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put404WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(put404WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1047,7 +1047,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> patch405Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(patch405WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(patch405WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1103,7 +1103,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(patch405WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(patch405WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1164,7 +1164,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post406Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post406WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post406WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1220,7 +1220,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post406WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(post406WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1281,7 +1281,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete407Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete407WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete407WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1337,7 +1337,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete407WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(delete407WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1398,7 +1398,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put409Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put409WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put409WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1454,7 +1454,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put409WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(put409WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1515,7 +1515,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> head410Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(head410WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head410WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1574,7 +1574,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get411Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(get411WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get411WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1633,7 +1633,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get412Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(get412WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get412WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1692,7 +1692,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put413Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put413WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put413WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1748,7 +1748,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put413WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(put413WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1809,7 +1809,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> patch414Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(patch414WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(patch414WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1865,7 +1865,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(patch414WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(patch414WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1926,7 +1926,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post415Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post415WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post415WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1982,7 +1982,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post415WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(post415WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -2043,7 +2043,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get416Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(get416WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get416WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2102,7 +2102,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete417Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete417WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete417WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2158,7 +2158,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete417WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(delete417WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -2219,7 +2219,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> head429Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(head429WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head429WithServiceResponseAsync(), serviceCallback);
     }
 
     /**

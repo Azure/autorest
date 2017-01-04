@@ -182,7 +182,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getBooleanTrueWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanTrueWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -242,7 +242,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getBooleanFalseWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanFalseWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -302,7 +302,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getIntOneMillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntOneMillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -362,7 +362,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getIntNegativeOneMillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntNegativeOneMillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -422,7 +422,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getTenBillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getTenBillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -482,7 +482,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getNegativeTenBillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNegativeTenBillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -542,7 +542,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(floatScientificPositiveWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(floatScientificPositiveWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -602,7 +602,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(floatScientificNegativeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(floatScientificNegativeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -662,7 +662,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(doubleDecimalPositiveWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(doubleDecimalPositiveWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -722,7 +722,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(doubleDecimalNegativeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(doubleDecimalNegativeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -782,7 +782,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringUnicodeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(stringUnicodeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -842,7 +842,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringUrlEncodedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(stringUrlEncodedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -902,7 +902,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(stringEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -964,7 +964,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringNullWithServiceResponseAsync(stringPath), serviceCallback);
+        return ServiceCall.fromResponse(stringNullWithServiceResponseAsync(stringPath), serviceCallback);
     }
 
     /**
@@ -1030,7 +1030,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(enumValidWithServiceResponseAsync(enumPath), serviceCallback);
+        return ServiceCall.fromResponse(enumValidWithServiceResponseAsync(enumPath), serviceCallback);
     }
 
     /**
@@ -1096,7 +1096,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(enumNullWithServiceResponseAsync(enumPath), serviceCallback);
+        return ServiceCall.fromResponse(enumNullWithServiceResponseAsync(enumPath), serviceCallback);
     }
 
     /**
@@ -1162,7 +1162,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(byteMultiByteWithServiceResponseAsync(bytePath), serviceCallback);
+        return ServiceCall.fromResponse(byteMultiByteWithServiceResponseAsync(bytePath), serviceCallback);
     }
 
     /**
@@ -1227,7 +1227,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(byteEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(byteEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1290,7 +1290,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(byteNullWithServiceResponseAsync(bytePath), serviceCallback);
+        return ServiceCall.fromResponse(byteNullWithServiceResponseAsync(bytePath), serviceCallback);
     }
 
     /**
@@ -1355,7 +1355,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(dateValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1417,7 +1417,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateNullWithServiceResponseAsync(datePath), serviceCallback);
+        return ServiceCall.fromResponse(dateNullWithServiceResponseAsync(datePath), serviceCallback);
     }
 
     /**
@@ -1481,7 +1481,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateTimeValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(dateTimeValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1543,7 +1543,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateTimeNullWithServiceResponseAsync(dateTimePath), serviceCallback);
+        return ServiceCall.fromResponse(dateTimeNullWithServiceResponseAsync(dateTimePath), serviceCallback);
     }
 
     /**
@@ -1609,7 +1609,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> base64UrlAsync(byte[] base64UrlPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(base64UrlWithServiceResponseAsync(base64UrlPath), serviceCallback);
+        return ServiceCall.fromResponse(base64UrlWithServiceResponseAsync(base64UrlPath), serviceCallback);
     }
 
     /**
@@ -1676,7 +1676,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayCsvInPathAsync(List<String> arrayPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(arrayCsvInPathWithServiceResponseAsync(arrayPath), serviceCallback);
+        return ServiceCall.fromResponse(arrayCsvInPathWithServiceResponseAsync(arrayPath), serviceCallback);
     }
 
     /**
@@ -1744,7 +1744,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath), serviceCallback);
+        return ServiceCall.fromResponse(unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath), serviceCallback);
     }
 
     /**

@@ -211,7 +211,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model204NoModelDefaultError200ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model204NoModelDefaultError200ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -272,7 +272,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError204ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model204NoModelDefaultError204ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model204NoModelDefaultError204ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -333,7 +333,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError201InvalidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model204NoModelDefaultError201InvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model204NoModelDefaultError201InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -394,7 +394,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model204NoModelDefaultError202NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model204NoModelDefaultError202NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -455,7 +455,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model204NoModelDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model204NoModelDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -516,7 +516,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model201ModelDefaultError200ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model201ModelDefaultError200ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -577,7 +577,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model201ModelDefaultError201ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model201ModelDefaultError201ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -638,7 +638,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model201ModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model201ModelDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model201ModelDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -699,7 +699,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError200ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA201ModelC404ModelDDefaultError200ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -761,7 +761,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError201ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA201ModelC404ModelDDefaultError201ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -823,7 +823,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError404ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA201ModelC404ModelDDefaultError404ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -885,7 +885,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA201ModelC404ModelDDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -946,7 +946,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultError202NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultError202NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get202None204NoneDefaultError202NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1006,7 +1006,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultError204NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get202None204NoneDefaultError204NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1066,7 +1066,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultError400ValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get202None204NoneDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1126,7 +1126,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone202InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultNone202InvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get202None204NoneDefaultNone202InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1185,7 +1185,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone204NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultNone204NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get202None204NoneDefaultNone204NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1244,7 +1244,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultNone400NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get202None204NoneDefaultNone400NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1303,7 +1303,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultNone400InvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get202None204NoneDefaultNone400InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1363,7 +1363,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(getDefaultModelA200ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultModelA200ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1422,7 +1422,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(getDefaultModelA200NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultModelA200NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1481,7 +1481,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(getDefaultModelA400ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultModelA400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1540,7 +1540,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(getDefaultModelA400NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultModelA400NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1598,7 +1598,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone200InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getDefaultNone200InvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultNone200InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1655,7 +1655,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone200NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getDefaultNone200NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultNone200NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1712,7 +1712,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getDefaultNone400InvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultNone400InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1769,7 +1769,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getDefaultNone400NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultNone400NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1827,7 +1827,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA200NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA200NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1886,7 +1886,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA200ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA200ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1945,7 +1945,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA200InvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA200InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2004,7 +2004,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA400NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA400NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2063,7 +2063,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA400ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2122,7 +2122,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA400InvalidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA400InvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA400InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2181,7 +2181,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA202ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA202ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA202ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

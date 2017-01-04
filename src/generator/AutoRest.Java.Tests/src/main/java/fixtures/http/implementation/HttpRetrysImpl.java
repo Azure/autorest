@@ -106,7 +106,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head408Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head408WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head408WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -165,7 +165,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put500Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put500WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put500WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -220,7 +220,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put500WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(put500WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -281,7 +281,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch500Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch500WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(patch500WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -336,7 +336,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch500WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(patch500WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -397,7 +397,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get502Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get502WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get502WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -456,7 +456,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post503Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post503WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post503WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -511,7 +511,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post503WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(post503WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -572,7 +572,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete503Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete503WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete503WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -627,7 +627,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete503WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(delete503WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -688,7 +688,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put504Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put504WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put504WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -743,7 +743,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put504WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(put504WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -804,7 +804,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch504Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch504WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(patch504WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -859,7 +859,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch504WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(patch504WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**

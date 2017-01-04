@@ -623,26 +623,6 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
-        [JsonIgnore]
-        public override string ServiceCallConstruction
-        {
-            get
-            {
-                if (this.IsPagingNextOperation)
-                {
-                    return "serviceCall.newCall(call);";
-                }
-                else if (this.IsPagingOperation)
-                {
-                    var sequenceType = ReturnType.Body as SequenceTypeJva;
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "final ServiceCall<List<{0}>> serviceCall = ServiceCall.create(call);",
-                        sequenceType != null ? sequenceType.ElementType.Name.ToString() : "Void");
-                }
-                return base.ServiceCallConstruction;
-            }
-        }
-
         public override string ClientResponse(bool filterRequired = false)
         {
             if (this.IsPagingOperation || this.IsPagingNextOperation)
@@ -668,6 +648,29 @@ namespace AutoRest.Java.Azure.Model
             else
             {
                 return base.ClientResponse(filterRequired);
+            }
+        }
+
+        [JsonIgnore]
+        public override string ServiceCallFactoryMethod
+        {
+            get
+            {
+                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                {
+                    if (ReturnType.Headers == null)
+                    {
+                        return "fromPageResponse";
+                    }
+                    else
+                    {
+                        return "fromHeaderPageResponse";
+                    }
+                }
+                else
+                {
+                    return base.ServiceCallFactoryMethod;
+                }
             }
         }
 

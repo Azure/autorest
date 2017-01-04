@@ -207,7 +207,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramExistingKeyWithServiceResponseAsync(userAgent), serviceCallback);
+        return ServiceCall.fromResponse(paramExistingKeyWithServiceResponseAsync(userAgent), serviceCallback);
     }
 
     /**
@@ -271,7 +271,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseExistingKeyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseExistingKeyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -332,7 +332,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramProtectedKeyWithServiceResponseAsync(contentType), serviceCallback);
+        return ServiceCall.fromResponse(paramProtectedKeyWithServiceResponseAsync(contentType), serviceCallback);
     }
 
     /**
@@ -396,7 +396,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseProtectedKeyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseProtectedKeyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -459,7 +459,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramIntegerWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramIntegerWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -527,7 +527,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseIntegerWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseIntegerWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -595,7 +595,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramLongWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramLongWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -663,7 +663,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseLongWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseLongWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -731,7 +731,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramFloatWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramFloatWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -799,7 +799,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseFloatWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseFloatWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -867,7 +867,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDoubleWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramDoubleWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -935,7 +935,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseDoubleWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseDoubleWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1003,7 +1003,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramBoolWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramBoolWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1071,7 +1071,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseBoolWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseBoolWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1137,7 +1137,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramStringWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromResponse(paramStringWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1199,7 +1199,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramStringWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramStringWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1267,7 +1267,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseStringWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseStringWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1335,7 +1335,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDateWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramDateWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1406,7 +1406,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseDateWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseDateWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1474,7 +1474,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDatetimeWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramDatetimeWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1545,7 +1545,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseDatetimeWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseDatetimeWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1611,7 +1611,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDatetimeRfc1123WithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromResponse(paramDatetimeRfc1123WithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1677,7 +1677,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDatetimeRfc1123Async(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDatetimeRfc1123WithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramDatetimeRfc1123WithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1749,7 +1749,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseDatetimeRfc1123WithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseDatetimeRfc1123WithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1817,7 +1817,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDurationWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramDurationWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1888,7 +1888,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseDurationWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseDurationWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1956,7 +1956,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramByteWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramByteWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -2028,7 +2028,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseByteWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseByteWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -2094,7 +2094,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramEnumWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromResponse(paramEnumWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -2156,7 +2156,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramEnumWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramEnumWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -2224,7 +2224,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseEnumWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseEnumWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -2288,7 +2288,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(customRequestIdWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(customRequestIdWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

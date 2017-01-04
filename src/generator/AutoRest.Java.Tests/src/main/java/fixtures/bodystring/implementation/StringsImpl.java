@@ -124,7 +124,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<String> getNullAsync(final ServiceCallback<String> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -183,7 +183,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -238,7 +238,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putNullWithServiceResponseAsync(stringBody), serviceCallback);
+        return ServiceCall.fromResponse(putNullWithServiceResponseAsync(stringBody), serviceCallback);
     }
 
     /**
@@ -300,7 +300,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<String> getEmptyAsync(final ServiceCallback<String> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -361,7 +361,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putEmptyWithServiceResponseAsync(stringBody), serviceCallback);
+        return ServiceCall.fromResponse(putEmptyWithServiceResponseAsync(stringBody), serviceCallback);
     }
 
     /**
@@ -426,7 +426,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<String> getMbcsAsync(final ServiceCallback<String> serviceCallback) {
-        return ServiceCall.create(getMbcsWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getMbcsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -487,7 +487,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putMbcsWithServiceResponseAsync(stringBody), serviceCallback);
+        return ServiceCall.fromResponse(putMbcsWithServiceResponseAsync(stringBody), serviceCallback);
     }
 
     /**
@@ -552,7 +552,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<String> getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
-        return ServiceCall.create(getWhitespaceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getWhitespaceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -613,7 +613,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putWhitespaceWithServiceResponseAsync(stringBody), serviceCallback);
+        return ServiceCall.fromResponse(putWhitespaceWithServiceResponseAsync(stringBody), serviceCallback);
     }
 
     /**
@@ -678,7 +678,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<String> getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
-        return ServiceCall.create(getNotProvidedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNotProvidedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -738,7 +738,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.create(getBase64EncodedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBase64EncodedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -803,7 +803,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.create(getBase64UrlEncodedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBase64UrlEncodedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -869,7 +869,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putBase64UrlEncodedWithServiceResponseAsync(stringBody), serviceCallback);
+        return ServiceCall.fromResponse(putBase64UrlEncodedWithServiceResponseAsync(stringBody), serviceCallback);
     }
 
     /**
@@ -935,7 +935,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.create(getNullBase64UrlEncodedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullBase64UrlEncodedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

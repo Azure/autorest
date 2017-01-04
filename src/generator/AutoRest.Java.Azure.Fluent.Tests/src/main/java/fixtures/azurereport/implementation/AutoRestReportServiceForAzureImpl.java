@@ -197,7 +197,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.create(getReportWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getReportWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

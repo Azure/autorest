@@ -362,7 +362,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -407,7 +407,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200SucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200SucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put200SucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -453,7 +453,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -509,7 +509,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200SucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200SucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200SucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -573,7 +573,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200SucceededNoStateAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200SucceededNoStateWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put200SucceededNoStateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -618,7 +618,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200SucceededNoStateAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200SucceededNoStateWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put200SucceededNoStateWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -664,7 +664,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200SucceededNoStateAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200SucceededNoStateWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200SucceededNoStateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -720,7 +720,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200SucceededNoStateAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200SucceededNoStateWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200SucceededNoStateWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -783,7 +783,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -828,7 +828,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put202Retry200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -874,7 +874,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -930,7 +930,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut202Retry200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -993,7 +993,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1038,7 +1038,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1084,7 +1084,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1140,7 +1140,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1204,7 +1204,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200UpdatingSucceeded204Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200UpdatingSucceeded204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put200UpdatingSucceeded204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1249,7 +1249,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200UpdatingSucceeded204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200UpdatingSucceeded204WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put200UpdatingSucceeded204WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1295,7 +1295,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200UpdatingSucceeded204Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200UpdatingSucceeded204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200UpdatingSucceeded204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1351,7 +1351,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200UpdatingSucceeded204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200UpdatingSucceeded204WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200UpdatingSucceeded204WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1414,7 +1414,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put201CreatingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put201CreatingFailed200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingFailed200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1459,7 +1459,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put201CreatingFailed200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put201CreatingFailed200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingFailed200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1505,7 +1505,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingFailed200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingFailed200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1561,7 +1561,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingFailed200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingFailed200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingFailed200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1625,7 +1625,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200Acceptedcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200Acceptedcanceled200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put200Acceptedcanceled200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1670,7 +1670,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200Acceptedcanceled200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200Acceptedcanceled200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put200Acceptedcanceled200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1716,7 +1716,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200Acceptedcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200Acceptedcanceled200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200Acceptedcanceled200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1772,7 +1772,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200Acceptedcanceled200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200Acceptedcanceled200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200Acceptedcanceled200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1835,7 +1835,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1880,7 +1880,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1926,7 +1926,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1982,7 +1982,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2045,7 +2045,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2090,7 +2090,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2136,7 +2136,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2192,7 +2192,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2255,7 +2255,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2300,7 +2300,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2346,7 +2346,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2402,7 +2402,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2465,7 +2465,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRetryFailedAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2510,7 +2510,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2556,7 +2556,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRetryFailedAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2612,7 +2612,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2675,7 +2675,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncNoRetrycanceledAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2720,7 +2720,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncNoRetrycanceledAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoRetrycanceledWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoRetrycanceledWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2766,7 +2766,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoRetrycanceledAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2822,7 +2822,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoRetrycanceledAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2885,7 +2885,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2930,7 +2930,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2976,7 +2976,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3032,7 +3032,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3095,7 +3095,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> putNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(putNonResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putNonResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3140,7 +3140,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> putNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(putNonResourceWithServiceResponseAsync(sku), serviceCallback);
+        return ServiceCall.fromResponse(putNonResourceWithServiceResponseAsync(sku), serviceCallback);
     }
 
     /**
@@ -3186,7 +3186,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> beginPutNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(beginPutNonResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutNonResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3242,7 +3242,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> beginPutNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(beginPutNonResourceWithServiceResponseAsync(sku), serviceCallback);
+        return ServiceCall.fromResponse(beginPutNonResourceWithServiceResponseAsync(sku), serviceCallback);
     }
 
     /**
@@ -3305,7 +3305,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> putAsyncNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(putAsyncNonResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putAsyncNonResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3350,7 +3350,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> putAsyncNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(putAsyncNonResourceWithServiceResponseAsync(sku), serviceCallback);
+        return ServiceCall.fromResponse(putAsyncNonResourceWithServiceResponseAsync(sku), serviceCallback);
     }
 
     /**
@@ -3396,7 +3396,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> beginPutAsyncNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(beginPutAsyncNonResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutAsyncNonResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3452,7 +3452,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> beginPutAsyncNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(beginPutAsyncNonResourceWithServiceResponseAsync(sku), serviceCallback);
+        return ServiceCall.fromResponse(beginPutAsyncNonResourceWithServiceResponseAsync(sku), serviceCallback);
     }
 
     /**
@@ -3515,7 +3515,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> putSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(putSubResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putSubResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3560,7 +3560,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> putSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(putSubResourceWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(putSubResourceWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3606,7 +3606,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> beginPutSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutSubResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutSubResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3662,7 +3662,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> beginPutSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutSubResourceWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPutSubResourceWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3725,7 +3725,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> putAsyncSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(putAsyncSubResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putAsyncSubResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3770,7 +3770,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> putAsyncSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(putAsyncSubResourceWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(putAsyncSubResourceWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3816,7 +3816,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> beginPutAsyncSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutAsyncSubResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutAsyncSubResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3872,7 +3872,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> beginPutAsyncSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutAsyncSubResourceWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPutAsyncSubResourceWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3935,7 +3935,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3978,7 +3978,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4039,7 +4039,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> deleteProvisioning202DeletingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteProvisioning202DeletingFailed200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteProvisioning202DeletingFailed200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4082,7 +4082,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4143,7 +4143,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> deleteProvisioning202Deletingcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteProvisioning202Deletingcanceled200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteProvisioning202Deletingcanceled200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4186,7 +4186,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4246,7 +4246,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete204SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete204SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4288,7 +4288,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(beginDelete204SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginDelete204SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4348,7 +4348,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> delete202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(delete202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(delete202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4391,7 +4391,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDelete202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDelete202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDelete202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4452,7 +4452,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> delete202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(delete202NoRetry204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(delete202NoRetry204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4495,7 +4495,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDelete202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDelete202NoRetry204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDelete202NoRetry204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4555,7 +4555,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4597,7 +4597,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4657,7 +4657,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4699,7 +4699,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4759,7 +4759,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4801,7 +4801,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4860,7 +4860,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4902,7 +4902,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4961,7 +4961,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5003,7 +5003,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5062,7 +5062,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5104,7 +5104,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5164,7 +5164,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> post200WithPayloadAsync(final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(post200WithPayloadWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post200WithPayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5207,7 +5207,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> beginPost200WithPayloadAsync(final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(beginPost200WithPayloadWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPost200WithPayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5267,7 +5267,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5311,7 +5311,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5356,7 +5356,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5411,7 +5411,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5474,7 +5474,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> post202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202NoRetry204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202NoRetry204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5519,7 +5519,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> post202NoRetry204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202NoRetry204WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202NoRetry204WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5565,7 +5565,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPost202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202NoRetry204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202NoRetry204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5621,7 +5621,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPost202NoRetry204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202NoRetry204WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202NoRetry204WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5684,7 +5684,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> postAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5729,7 +5729,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> postAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5775,7 +5775,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPostAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5831,7 +5831,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPostAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5895,7 +5895,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> postAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5940,7 +5940,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> postAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5986,7 +5986,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPostAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -6042,7 +6042,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPostAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -6105,7 +6105,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -6149,7 +6149,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -6194,7 +6194,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -6249,7 +6249,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -6311,7 +6311,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -6355,7 +6355,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetrycanceledAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrycanceledWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrycanceledWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -6400,7 +6400,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -6455,7 +6455,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetrycanceledAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrycanceledWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrycanceledWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**

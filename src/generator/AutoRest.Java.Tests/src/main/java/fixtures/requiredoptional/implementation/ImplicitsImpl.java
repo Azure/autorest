@@ -105,7 +105,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(getRequiredPathWithServiceResponseAsync(pathParameter), serviceCallback);
+        return ServiceCall.fromResponse(getRequiredPathWithServiceResponseAsync(pathParameter), serviceCallback);
     }
 
     /**
@@ -168,7 +168,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putOptionalQueryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putOptionalQueryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -223,7 +223,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putOptionalQueryWithServiceResponseAsync(queryParameter), serviceCallback);
+        return ServiceCall.fromResponse(putOptionalQueryWithServiceResponseAsync(queryParameter), serviceCallback);
     }
 
     /**
@@ -284,7 +284,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putOptionalHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putOptionalHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -339,7 +339,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putOptionalHeaderWithServiceResponseAsync(queryParameter), serviceCallback);
+        return ServiceCall.fromResponse(putOptionalHeaderWithServiceResponseAsync(queryParameter), serviceCallback);
     }
 
     /**
@@ -400,7 +400,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putOptionalBodyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putOptionalBodyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -455,7 +455,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putOptionalBodyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(putOptionalBodyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -517,7 +517,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(getRequiredGlobalPathWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getRequiredGlobalPathWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -579,7 +579,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(getRequiredGlobalQueryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getRequiredGlobalQueryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -641,7 +641,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(getOptionalGlobalQueryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getOptionalGlobalQueryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

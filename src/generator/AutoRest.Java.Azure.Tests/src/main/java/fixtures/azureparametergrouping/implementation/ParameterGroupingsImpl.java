@@ -95,7 +95,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters), serviceCallback);
     }
 
     /**
@@ -164,7 +164,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -221,7 +221,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters), serviceCallback);
     }
 
     /**
@@ -291,7 +291,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMultiParamGroupsWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postMultiParamGroupsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -353,7 +353,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), serviceCallback);
+        return ServiceCall.fromResponse(postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), serviceCallback);
     }
 
     /**
@@ -434,7 +434,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postSharedParameterGroupObjectWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postSharedParameterGroupObjectWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -491,7 +491,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup), serviceCallback);
+        return ServiceCall.fromResponse(postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup), serviceCallback);
     }
 
     /**

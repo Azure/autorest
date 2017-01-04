@@ -168,7 +168,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Double> getNullAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -228,7 +228,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Double> getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceCall.create(getInvalidFloatWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidFloatWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -288,7 +288,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Double> getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceCall.create(getInvalidDoubleWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidDoubleWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -348,7 +348,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<BigDecimal> getInvalidDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
-        return ServiceCall.create(getInvalidDecimalWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidDecimalWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -409,7 +409,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putBigFloatWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceCall.fromResponse(putBigFloatWithServiceResponseAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -471,7 +471,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Double> getBigFloatAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceCall.create(getBigFloatWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBigFloatWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -532,7 +532,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putBigDoubleWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceCall.fromResponse(putBigDoubleWithServiceResponseAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -594,7 +594,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Double> getBigDoubleAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceCall.create(getBigDoubleWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBigDoubleWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -655,7 +655,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putBigDoublePositiveDecimalWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceCall.fromResponse(putBigDoublePositiveDecimalWithServiceResponseAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -717,7 +717,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Double> getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceCall.create(getBigDoublePositiveDecimalWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBigDoublePositiveDecimalWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -778,7 +778,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putBigDoubleNegativeDecimalWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceCall.fromResponse(putBigDoubleNegativeDecimalWithServiceResponseAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -840,7 +840,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Double> getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceCall.create(getBigDoubleNegativeDecimalWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBigDoubleNegativeDecimalWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -901,7 +901,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBigDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putBigDecimalWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceCall.fromResponse(putBigDecimalWithServiceResponseAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -966,7 +966,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<BigDecimal> getBigDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
-        return ServiceCall.create(getBigDecimalWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBigDecimalWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1027,7 +1027,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putBigDecimalPositiveDecimalWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceCall.fromResponse(putBigDecimalPositiveDecimalWithServiceResponseAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -1092,7 +1092,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<BigDecimal> getBigDecimalPositiveDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
-        return ServiceCall.create(getBigDecimalPositiveDecimalWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBigDecimalPositiveDecimalWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1153,7 +1153,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putBigDecimalNegativeDecimalWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceCall.fromResponse(putBigDecimalNegativeDecimalWithServiceResponseAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -1218,7 +1218,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<BigDecimal> getBigDecimalNegativeDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
-        return ServiceCall.create(getBigDecimalNegativeDecimalWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBigDecimalNegativeDecimalWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1279,7 +1279,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putSmallFloatWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceCall.fromResponse(putSmallFloatWithServiceResponseAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -1341,7 +1341,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Double> getSmallFloatAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceCall.create(getSmallFloatWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getSmallFloatWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1402,7 +1402,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putSmallDoubleWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceCall.fromResponse(putSmallDoubleWithServiceResponseAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -1464,7 +1464,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Double> getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceCall.create(getSmallDoubleWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getSmallDoubleWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1525,7 +1525,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putSmallDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putSmallDecimalWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceCall.fromResponse(putSmallDecimalWithServiceResponseAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -1590,7 +1590,7 @@ public final class NumbersImpl implements Numbers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<BigDecimal> getSmallDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
-        return ServiceCall.create(getSmallDecimalWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getSmallDecimalWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

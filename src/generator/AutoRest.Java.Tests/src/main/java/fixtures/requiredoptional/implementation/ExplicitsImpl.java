@@ -174,7 +174,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredIntegerParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredIntegerParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -234,7 +234,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalIntegerParameterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalIntegerParameterWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalIntegerParameterWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -289,7 +289,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalIntegerParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalIntegerParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -353,7 +353,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredIntegerPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredIntegerPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -417,7 +417,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalIntegerPropertyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalIntegerPropertyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalIntegerPropertyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -472,7 +472,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalIntegerPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalIntegerPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -537,7 +537,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredIntegerHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredIntegerHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
     }
 
     /**
@@ -597,7 +597,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalIntegerHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalIntegerHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalIntegerHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -652,7 +652,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalIntegerHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalIntegerHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
     }
 
     /**
@@ -716,7 +716,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredStringParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredStringParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -779,7 +779,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalStringParameterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalStringParameterWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalStringParameterWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -834,7 +834,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalStringParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalStringParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -898,7 +898,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredStringPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredStringPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -962,7 +962,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalStringPropertyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalStringPropertyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalStringPropertyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1017,7 +1017,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalStringPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalStringPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1082,7 +1082,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredStringHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredStringHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
     }
 
     /**
@@ -1145,7 +1145,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalStringHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalStringHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalStringHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1200,7 +1200,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalStringHeaderWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalStringHeaderWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1264,7 +1264,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredClassParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredClassParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1328,7 +1328,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalClassParameterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalClassParameterWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalClassParameterWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1383,7 +1383,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalClassParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalClassParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1448,7 +1448,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredClassPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredClassPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1512,7 +1512,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalClassPropertyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalClassPropertyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalClassPropertyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1567,7 +1567,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalClassPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalClassPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1632,7 +1632,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredArrayParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredArrayParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1696,7 +1696,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalArrayParameterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalArrayParameterWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalArrayParameterWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1751,7 +1751,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalArrayParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalArrayParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1816,7 +1816,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredArrayPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredArrayPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1880,7 +1880,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalArrayPropertyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalArrayPropertyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalArrayPropertyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1935,7 +1935,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalArrayPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalArrayPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -2000,7 +2000,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredArrayHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredArrayHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
     }
 
     /**
@@ -2065,7 +2065,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalArrayHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalArrayHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalArrayHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2121,7 +2121,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalArrayHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalArrayHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
     }
 
     /**

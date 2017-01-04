@@ -192,7 +192,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(validationOfMethodParametersWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
+        return ServiceCall.fromResponse(validationOfMethodParametersWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
     }
 
     /**
@@ -269,7 +269,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(validationOfBodyWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
+        return ServiceCall.fromResponse(validationOfBodyWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
     }
 
     /**
@@ -342,7 +342,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(validationOfBodyWithServiceResponseAsync(resourceGroupName, id, body), serviceCallback);
+        return ServiceCall.fromResponse(validationOfBodyWithServiceResponseAsync(resourceGroupName, id, body), serviceCallback);
     }
 
     /**
@@ -415,7 +415,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getWithConstantInPathWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getWithConstantInPathWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -471,7 +471,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(postWithConstantInBodyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postWithConstantInBodyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -524,7 +524,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(postWithConstantInBodyWithServiceResponseAsync(body), serviceCallback);
+        return ServiceCall.fromResponse(postWithConstantInBodyWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**

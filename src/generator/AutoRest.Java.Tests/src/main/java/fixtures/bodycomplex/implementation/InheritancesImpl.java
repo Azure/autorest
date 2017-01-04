@@ -81,7 +81,7 @@ public final class InheritancesImpl implements Inheritances {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback) {
-        return ServiceCall.create(getValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -142,7 +142,7 @@ public final class InheritancesImpl implements Inheritances {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**

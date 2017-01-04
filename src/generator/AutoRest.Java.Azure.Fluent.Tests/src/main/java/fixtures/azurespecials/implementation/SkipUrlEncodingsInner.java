@@ -100,7 +100,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodPathValidWithServiceResponseAsync(unencodedPathParam), serviceCallback);
+        return ServiceCall.fromResponse(getMethodPathValidWithServiceResponseAsync(unencodedPathParam), serviceCallback);
     }
 
     /**
@@ -166,7 +166,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getPathPathValidWithServiceResponseAsync(unencodedPathParam), serviceCallback);
+        return ServiceCall.fromResponse(getPathPathValidWithServiceResponseAsync(unencodedPathParam), serviceCallback);
     }
 
     /**
@@ -230,7 +230,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerPathValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getSwaggerPathValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getSwaggerPathValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -292,7 +292,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodQueryValidWithServiceResponseAsync(q1), serviceCallback);
+        return ServiceCall.fromResponse(getMethodQueryValidWithServiceResponseAsync(q1), serviceCallback);
     }
 
     /**
@@ -356,7 +356,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodQueryNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodQueryNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getMethodQueryNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -411,7 +411,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodQueryNullWithServiceResponseAsync(q1), serviceCallback);
+        return ServiceCall.fromResponse(getMethodQueryNullWithServiceResponseAsync(q1), serviceCallback);
     }
 
     /**
@@ -474,7 +474,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getPathQueryValidWithServiceResponseAsync(q1), serviceCallback);
+        return ServiceCall.fromResponse(getPathQueryValidWithServiceResponseAsync(q1), serviceCallback);
     }
 
     /**
@@ -538,7 +538,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerQueryValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getSwaggerQueryValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getSwaggerQueryValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

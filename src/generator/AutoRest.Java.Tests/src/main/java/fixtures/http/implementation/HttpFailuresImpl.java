@@ -82,7 +82,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getEmptyErrorWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyErrorWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -142,7 +142,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getNoModelErrorWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNoModelErrorWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -201,7 +201,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getNoModelEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNoModelEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

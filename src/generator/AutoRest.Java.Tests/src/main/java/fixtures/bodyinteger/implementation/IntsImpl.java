@@ -129,7 +129,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Integer> getNullAsync(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -189,7 +189,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Integer> getInvalidAsync(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -249,7 +249,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Integer> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceCall.create(getOverflowInt32WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getOverflowInt32WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -309,7 +309,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Integer> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceCall.create(getUnderflowInt32WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUnderflowInt32WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -369,7 +369,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Long> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) {
-        return ServiceCall.create(getOverflowInt64WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getOverflowInt64WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -429,7 +429,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Long> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) {
-        return ServiceCall.create(getUnderflowInt64WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUnderflowInt64WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -490,7 +490,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putMax32WithServiceResponseAsync(intBody), serviceCallback);
+        return ServiceCall.fromResponse(putMax32WithServiceResponseAsync(intBody), serviceCallback);
     }
 
     /**
@@ -553,7 +553,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putMax64WithServiceResponseAsync(intBody), serviceCallback);
+        return ServiceCall.fromResponse(putMax64WithServiceResponseAsync(intBody), serviceCallback);
     }
 
     /**
@@ -616,7 +616,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putMin32WithServiceResponseAsync(intBody), serviceCallback);
+        return ServiceCall.fromResponse(putMin32WithServiceResponseAsync(intBody), serviceCallback);
     }
 
     /**
@@ -679,7 +679,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putMin64WithServiceResponseAsync(intBody), serviceCallback);
+        return ServiceCall.fromResponse(putMin64WithServiceResponseAsync(intBody), serviceCallback);
     }
 
     /**
@@ -741,7 +741,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUnixTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUnixTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -807,7 +807,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putUnixTimeDateWithServiceResponseAsync(intBody), serviceCallback);
+        return ServiceCall.fromResponse(putUnixTimeDateWithServiceResponseAsync(intBody), serviceCallback);
     }
 
     /**
@@ -870,7 +870,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getInvalidUnixTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidUnixTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -935,7 +935,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getNullUnixTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullUnixTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

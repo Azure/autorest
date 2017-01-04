@@ -85,7 +85,7 @@ public final class ApiVersionLocalsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodLocalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getMethodLocalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -145,7 +145,7 @@ public final class ApiVersionLocalsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodLocalNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getMethodLocalNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -200,7 +200,7 @@ public final class ApiVersionLocalsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodLocalNullWithServiceResponseAsync(apiVersion), serviceCallback);
+        return ServiceCall.fromResponse(getMethodLocalNullWithServiceResponseAsync(apiVersion), serviceCallback);
     }
 
     /**
@@ -261,7 +261,7 @@ public final class ApiVersionLocalsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getPathLocalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getPathLocalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -321,7 +321,7 @@ public final class ApiVersionLocalsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getSwaggerLocalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getSwaggerLocalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

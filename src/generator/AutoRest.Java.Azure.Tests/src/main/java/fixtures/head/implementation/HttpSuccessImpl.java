@@ -81,7 +81,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(head200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -142,7 +142,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(head204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -203,7 +203,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(head404WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head404WithServiceResponseAsync(), serviceCallback);
     }
 
     /**

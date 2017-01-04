@@ -83,7 +83,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(updateWithServiceResponseAsync(resourceGroupName, avset, tags), serviceCallback);
+        return ServiceCall.fromResponse(updateWithServiceResponseAsync(resourceGroupName, avset, tags), serviceCallback);
     }
 
     /**

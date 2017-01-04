@@ -76,7 +76,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(accountName), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(accountName), serviceCallback);
     }
 
     /**

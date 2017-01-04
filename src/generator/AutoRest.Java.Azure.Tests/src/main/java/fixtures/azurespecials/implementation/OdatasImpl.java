@@ -74,7 +74,7 @@ public final class OdatasImpl implements Odatas {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getWithFilterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getWithFilterWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getWithFilterWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -135,7 +135,7 @@ public final class OdatasImpl implements Odatas {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getWithFilterAsync(String filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getWithFilterWithServiceResponseAsync(filter, top, orderby), serviceCallback);
+        return ServiceCall.fromResponse(getWithFilterWithServiceResponseAsync(filter, top, orderby), serviceCallback);
     }
 
     /**

@@ -90,7 +90,7 @@ public final class SubscriptionInCredentialsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -152,7 +152,7 @@ public final class SubscriptionInCredentialsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMethodGlobalNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postMethodGlobalNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -214,7 +214,7 @@ public final class SubscriptionInCredentialsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -279,7 +279,7 @@ public final class SubscriptionInCredentialsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postPathGlobalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postPathGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -341,7 +341,7 @@ public final class SubscriptionInCredentialsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
