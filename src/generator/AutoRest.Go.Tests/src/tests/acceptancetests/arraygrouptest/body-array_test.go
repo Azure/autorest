@@ -23,6 +23,10 @@ var _ = chk.Suite(&ArrayGroupSuite{})
 
 var arrayClient = getArrayClient()
 
+var one, two, three = "one", "two", "three"
+var four, five, six = "four", "five", "six"
+var seven, eight, nine = "seven", "eight", "nine"
+
 func getArrayClient() ArrayClient {
 	c := NewArrayClient()
 	c.BaseURI = utils.GetBaseURI()
@@ -32,7 +36,7 @@ func getArrayClient() ArrayClient {
 func (s *ArrayGroupSuite) TestGetDictionaryEmptyArray(c *chk.C) {
 	res, err := arrayClient.GetDictionaryEmpty()
 	c.Assert(err, chk.IsNil)
-	c.Assert(*res.Value, chk.DeepEquals, []map[string]string{})
+	c.Assert(*res.Value, chk.DeepEquals, []map[string]*string{})
 }
 
 func (s *ArrayGroupSuite) TestGetArrayEmpty(c *chk.C) {
@@ -44,20 +48,20 @@ func (s *ArrayGroupSuite) TestGetArrayEmpty(c *chk.C) {
 func (s *ArrayGroupSuite) TestGetDictionaryItemEmptyArray(c *chk.C) {
 	res, err := arrayClient.GetDictionaryItemEmpty()
 	c.Assert(err, chk.IsNil)
-	c.Assert(*res.Value, chk.DeepEquals, []map[string]string{
-		{"1": "one", "2": "two", "3": "three"},
-		map[string]string{},
-		{"7": "seven", "8": "eight", "9": "nine"},
+	c.Assert(*res.Value, chk.DeepEquals, []map[string]*string{
+		{"1": &one, "2": &two, "3": &three},
+		map[string]*string{},
+		{"7": &seven, "8": &eight, "9": &nine},
 	})
 }
 
 func (s *ArrayGroupSuite) TestGetDictionaryItemNullArray(c *chk.C) {
 	res, err := arrayClient.GetDictionaryItemNull()
 	c.Assert(err, chk.IsNil)
-	c.Assert(*res.Value, chk.DeepEquals, []map[string]string{
-		{"1": "one", "2": "two", "3": "three"},
+	c.Assert(*res.Value, chk.DeepEquals, []map[string]*string{
+		{"1": &one, "2": &two, "3": &three},
 		nil,
-		{"7": "seven", "8": "eight", "9": "nine"},
+		{"7": &seven, "8": &eight, "9": &nine},
 	})
 }
 
@@ -143,10 +147,10 @@ func (s *ArrayGroupSuite) TestGetByteInvalidNullArray(c *chk.C) {
 func (s *ArrayGroupSuite) TestGetDictionaryValid(c *chk.C) {
 	res, err := arrayClient.GetDictionaryValid()
 	c.Assert(err, chk.IsNil)
-	c.Assert(*res.Value, chk.DeepEquals, []map[string]string{
-		{"1": "one", "2": "two", "3": "three"},
-		{"4": "four", "5": "five", "6": "six"},
-		{"7": "seven", "8": "eight", "9": "nine"},
+	c.Assert(*res.Value, chk.DeepEquals, []map[string]*string{
+		{"1": &one, "2": &two, "3": &three},
+		{"4": &four, "5": &five, "6": &six},
+		{"7": &seven, "8": &eight, "9": &nine},
 	})
 }
 
@@ -375,10 +379,10 @@ func (s *ArrayGroupSuite) TestPutEmptyArray(c *chk.C) {
 }
 
 func (s *ArrayGroupSuite) TestPutDictionaryValid(c *chk.C) {
-	_, err := arrayClient.PutDictionaryValid([]map[string]string{
-		{"1": "one", "2": "two", "3": "three"},
-		{"4": "four", "5": "five", "6": "six"},
-		{"7": "seven", "8": "eight", "9": "nine"},
+	_, err := arrayClient.PutDictionaryValid([]map[string]*string{
+		{"1": &one, "2": &two, "3": &three},
+		{"4": &four, "5": &five, "6": &six},
+		{"7": &seven, "8": &eight, "9": &nine},
 	})
 	c.Assert(err, chk.IsNil)
 }
