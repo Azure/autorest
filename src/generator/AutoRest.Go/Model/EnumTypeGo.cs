@@ -3,28 +3,37 @@
 
 using System.Collections.Generic;
 using System.Linq;
-
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 
-namespace AutoRest.Go.TemplateModels
+namespace AutoRest.Go.Model
 {
-    public class EnumTemplateModel : EnumType
+    public class EnumTypeGo : EnumType
     {
         public bool HasUniqueNames { get; set; }
         
-        public EnumTemplateModel(EnumType source)
+        public EnumTypeGo()
         {
-            this.LoadFrom(source);
+            // the default value for unnamed enums is "enum"
+            Name.OnGet += v => v == "enum" ? "string" : v;
 
             // Assume members have unique names
             HasUniqueNames = true;
-
-            if (string.IsNullOrEmpty(Documentation))
-            {
-                Documentation = string.Format("{0} enumerates the values for {1}.", Name, Name.ToPhrase());
-            }
         }
+
+        public EnumTypeGo(EnumType source) : this()
+        {
+            this.LoadFrom(source);
+        }
+
+        public string GetEmptyCheck(string valueReference, bool asEmpty)
+        {
+            return string.Format(asEmpty
+                                    ? "len(string({0})) == 0"
+                                    : "len(string({0})) > 0", valueReference);
+        }
+
+        public bool IsNamed => Name != "string" && Values.Any();
 
         public IDictionary<string, string> Constants
         {
