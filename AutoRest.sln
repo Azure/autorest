@@ -122,6 +122,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Go", "src\generato
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CSharp.Azure.Fluent", "src\generator\AutoRest.CSharp.Azure.Fluent\AutoRest.CSharp.Azure.Fluent.xproj", "{8464A22C-0C8D-4C84-85A8-0ACE787BDC75}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CSharp.Azure.Fluent.Tests", "src\generator\AutoRest.CSharp.Azure.Fluent.Tests\AutoRest.CSharp.Azure.Fluent.Tests.xproj", "{8464A22C-0C8E-4C84-85A8-0ACE787BDC75}"
+EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Java", "src\generator\AutoRest.Java\AutoRest.Java.xproj", "{34B82690-0083-4F4C-8ABF-2D2A09304915}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Java.Azure", "src\generator\AutoRest.Java.Azure\AutoRest.Java.Azure.xproj", "{AFD3F1C4-5C59-4018-B0BB-030E0DA57C5C}"
