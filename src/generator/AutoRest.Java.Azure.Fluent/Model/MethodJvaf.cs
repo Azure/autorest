@@ -104,8 +104,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 if (this.IsLongRunningOperation)
                 {
-                    imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
-                    imports.Remove("com.microsoft.rest.ServiceResponseCallback");
                     imports.Remove("com.microsoft.azure.AzureResponseBuilder");
                     this.Responses.Select(r => r.Value.Body).Concat(new IModelType[]{ DefaultResponse.Body })
                         .SelectMany(t => t.ImportSafe())

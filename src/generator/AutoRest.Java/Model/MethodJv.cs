@@ -574,22 +574,6 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public string InternalCallback
-        {
-            get
-            {
-                if (this.HttpMethod == HttpMethod.Head)
-                {
-                    return "ServiceResponseEmptyCallback";
-                }
-                else
-                {
-                    return "ServiceResponseCallback";
-                }
-            }
-        }
-
-        [JsonIgnore]
         public virtual string ResponseBuilder
         {
             get
