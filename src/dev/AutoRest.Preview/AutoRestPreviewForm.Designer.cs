@@ -128,6 +128,8 @@ namespace AutoRest.Preview
             this.comboBoxTargetLang.Items.AddRange(new object[] {
             "CSharp",
             "Azure.CSharp",
+            "Java",
+            "Azure.Java",
             "Ruby",
             "Azure.Ruby",
             "NodeJS",
