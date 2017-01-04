@@ -403,7 +403,7 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrap
 }
 @EmptyLine
 private @Model.ReturnTypeJva.WireResponseTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
-    return new @Model.ResponseBuilder<@Model.ReturnTypeJva.GenericBodyWireTypeString, @Model.OperationExceptionTypeString>(@(Model.ClientReference).serializerAdapter())
+    return @(Model.ClientReference).restClient().responseBuilderFactory().newInstance(@(Model.ReturnTypeJva.GenericBodyWireTypeString).class, @(Model.OperationExceptionTypeString).class)
 @foreach (var response in Model.Responses)
 {
 

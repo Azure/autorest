@@ -12,7 +12,6 @@ package fixtures.lro.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -471,7 +470,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponse<ProductInner> beginPutNonRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(ProductInner.class, CloudException.class)
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(201, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -682,7 +681,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponse<ProductInner> beginPutNonRetry201Creating400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(ProductInner.class, CloudException.class)
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(201, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -893,7 +892,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponse<ProductInner> beginPutNonRetry201Creating400InvalidJsonDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(ProductInner.class, CloudException.class)
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(201, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -1104,7 +1103,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetry400HeadersInner> beginPutAsyncRelativeRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(ProductInner.class, CloudException.class)
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPutAsyncRelativeRetry400HeadersInner.class);
@@ -1205,7 +1204,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400HeadersInner> beginDeleteNonRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsDeleteNonRetry400HeadersInner.class);
@@ -1306,7 +1305,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400HeadersInner> beginDelete202NonRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsDelete202NonRetry400HeadersInner.class);
@@ -1407,7 +1406,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400HeadersInner> beginDeleteAsyncRelativeRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsDeleteAsyncRelativeRetry400HeadersInner.class);
@@ -1613,7 +1612,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400HeadersInner> beginPostNonRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPostNonRetry400HeadersInner.class);
@@ -1819,7 +1818,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400HeadersInner> beginPost202NonRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPost202NonRetry400HeadersInner.class);
@@ -2025,7 +2024,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400HeadersInner> beginPostAsyncRelativeRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPostAsyncRelativeRetry400HeadersInner.class);
@@ -2235,7 +2234,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponse<ProductInner> beginPutError201NoProvisioningStatePayloadDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(ProductInner.class, CloudException.class)
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(201, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -2446,7 +2445,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusHeadersInner> beginPutAsyncRelativeRetryNoStatusDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(ProductInner.class, CloudException.class)
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPutAsyncRelativeRetryNoStatusHeadersInner.class);
@@ -2656,7 +2655,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner> beginPutAsyncRelativeRetryNoStatusPayloadDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(ProductInner.class, CloudException.class)
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner.class);
@@ -2757,7 +2756,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponse<Void> beginDelete204SucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -2858,7 +2857,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner> beginDeleteAsyncRelativeRetryNoStatusDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner.class);
@@ -3064,7 +3063,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeadersInner> beginPost202NoLocationDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPost202NoLocationHeadersInner.class);
@@ -3270,7 +3269,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner> beginPostAsyncRelativeRetryNoPayloadDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner.class);
@@ -3480,7 +3479,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponse<ProductInner> beginPut200InvalidJsonDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(ProductInner.class, CloudException.class)
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -3691,7 +3690,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner> beginPutAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(ProductInner.class, CloudException.class)
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner.class);
@@ -3901,7 +3900,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner> beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(ProductInner.class, CloudException.class)
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner.class);
@@ -4002,7 +4001,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeadersInner> beginDelete202RetryInvalidHeaderDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsDelete202RetryInvalidHeaderHeadersInner.class);
@@ -4103,7 +4102,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner> beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner.class);
@@ -4204,7 +4203,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner> beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner.class);
@@ -4410,7 +4409,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeadersInner> beginPost202RetryInvalidHeaderDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPost202RetryInvalidHeaderHeadersInner.class);
@@ -4616,7 +4615,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner> beginPostAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner.class);
@@ -4822,7 +4821,7 @@ public final class LROSADsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner> beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner.class);

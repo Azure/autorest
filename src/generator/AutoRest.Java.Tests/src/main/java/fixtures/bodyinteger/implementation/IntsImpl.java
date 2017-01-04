@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -168,7 +167,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Integer> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Integer.class, ErrorException.class)
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -228,7 +227,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Integer> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Integer.class, ErrorException.class)
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -288,7 +287,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Integer> getOverflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Integer.class, ErrorException.class)
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -348,7 +347,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Integer> getUnderflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Integer.class, ErrorException.class)
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -408,7 +407,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Long> getOverflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Long.class, ErrorException.class)
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -468,7 +467,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Long> getUnderflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Long.class, ErrorException.class)
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -531,7 +530,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Void> putMax32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -594,7 +593,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Void> putMax64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -657,7 +656,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Void> putMin32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -720,7 +719,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Void> putMin64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -785,7 +784,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Long> getUnixTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Long.class, ErrorException.class)
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -849,7 +848,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Void> putUnixTimeDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -914,7 +913,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Long> getInvalidUnixTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Long.class, ErrorException.class)
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -979,7 +978,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Long> getNullUnixTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Long.class, ErrorException.class)
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

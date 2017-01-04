@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
@@ -136,7 +135,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<DictionaryWrapper> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(DictionaryWrapper.class, ErrorException.class)
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -203,7 +202,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -263,7 +262,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<DictionaryWrapper> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(DictionaryWrapper.class, ErrorException.class)
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -330,7 +329,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -390,7 +389,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<DictionaryWrapper> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(DictionaryWrapper.class, ErrorException.class)
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -450,7 +449,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<DictionaryWrapper> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(DictionaryWrapper.class, ErrorException.class)
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

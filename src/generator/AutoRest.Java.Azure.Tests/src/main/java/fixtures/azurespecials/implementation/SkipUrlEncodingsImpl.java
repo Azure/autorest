@@ -13,7 +13,6 @@ package fixtures.azurespecials.implementation;
 import retrofit2.Retrofit;
 import fixtures.azurespecials.SkipUrlEncodings;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -145,7 +144,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getMethodPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -211,7 +210,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getPathPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -271,7 +270,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getSwaggerPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -337,7 +336,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getMethodQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -453,7 +452,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getMethodQueryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -519,7 +518,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getPathQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -579,7 +578,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

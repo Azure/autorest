@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.bodydate.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -143,7 +142,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<LocalDate> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(LocalDate.class, ErrorException.class)
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -203,7 +202,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<LocalDate> getInvalidDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(LocalDate.class, ErrorException.class)
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -263,7 +262,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<LocalDate> getOverflowDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(LocalDate.class, ErrorException.class)
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -323,7 +322,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<LocalDate> getUnderflowDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(LocalDate.class, ErrorException.class)
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -389,7 +388,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<Void> putMaxDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -449,7 +448,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<LocalDate> getMaxDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(LocalDate.class, ErrorException.class)
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -515,7 +514,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<Void> putMinDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -575,7 +574,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<LocalDate> getMinDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(LocalDate.class, ErrorException.class)
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

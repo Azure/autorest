@@ -12,7 +12,6 @@ package fixtures.headexceptions.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -118,7 +117,7 @@ public final class HeadExceptionsInner {
     }
 
     private ServiceResponse<Void> head200Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .buildEmpty(response);
     }
@@ -176,7 +175,7 @@ public final class HeadExceptionsInner {
     }
 
     private ServiceResponse<Void> head204Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(204, new TypeToken<Void>() { }.getType())
                 .buildEmpty(response);
     }
@@ -234,7 +233,7 @@ public final class HeadExceptionsInner {
     }
 
     private ServiceResponse<Void> head404Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, CloudException.class)
                 .register(204, new TypeToken<Void>() { }.getType())
                 .buildEmpty(response);
     }

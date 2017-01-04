@@ -20,7 +20,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
@@ -244,7 +243,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     private ServiceResponse<Product> validationOfMethodParametersDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Product, ErrorException>(this.serializerAdapter())
+        return this.restClient().responseBuilderFactory().newInstance(Product.class, ErrorException.class)
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -397,7 +396,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     private ServiceResponse<Product> validationOfBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Product, ErrorException>(this.serializerAdapter())
+        return this.restClient().responseBuilderFactory().newInstance(Product.class, ErrorException.class)
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -453,7 +452,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     private ServiceResponse<Void> getWithConstantInPathDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.serializerAdapter())
+        return this.restClient().responseBuilderFactory().newInstance(Void.class, ServiceException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
@@ -565,7 +564,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     private ServiceResponse<Product> postWithConstantInBodyDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Product, ServiceException>(this.serializerAdapter())
+        return this.restClient().responseBuilderFactory().newInstance(Product.class, ServiceException.class)
                 .register(200, new TypeToken<Product>() { }.getType())
                 .build(response);
     }

@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
@@ -137,7 +136,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Basic.class, ErrorException.class)
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -204,7 +203,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -264,7 +263,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Basic.class, ErrorException.class)
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -324,7 +323,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Basic.class, ErrorException.class)
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -384,7 +383,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Basic.class, ErrorException.class)
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -444,7 +443,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Basic.class, ErrorException.class)
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

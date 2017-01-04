@@ -767,7 +767,6 @@ namespace AutoRest.Java.Model
                 }
                 imports.Add("com.microsoft.rest.ServiceCall");
                 imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
-                imports.Add(RuntimeBasePackage + "." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));
                 // Http verb annotations

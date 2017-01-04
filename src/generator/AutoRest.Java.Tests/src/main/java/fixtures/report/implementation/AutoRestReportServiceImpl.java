@@ -19,7 +19,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.report.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
@@ -162,7 +161,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
     }
 
     private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.serializerAdapter())
+        return this.restClient().responseBuilderFactory().newInstance(Map<String, Integer>.class, ErrorException.class)
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

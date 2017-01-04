@@ -13,7 +13,6 @@ package fixtures.head.implementation;
 import retrofit2.Retrofit;
 import fixtures.head.HttpSuccess;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -120,7 +119,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Boolean> head200Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Boolean.class, CloudException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -181,7 +180,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Boolean> head204Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Boolean.class, CloudException.class)
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -242,7 +241,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Boolean> head404Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Boolean.class, CloudException.class)
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)

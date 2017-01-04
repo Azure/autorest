@@ -2,9 +2,11 @@ package fixtures.paging;
 
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
-
-import com.microsoft.rest.LogLevel;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
+import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
+import fixtures.paging.models.Product;
+import fixtures.paging.models.ProductProperties;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,11 +14,6 @@ import org.junit.Test;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
-import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
-import fixtures.paging.models.Product;
-import fixtures.paging.models.ProductProperties;
 
 import static org.junit.Assert.fail;
 
@@ -26,7 +23,6 @@ public class PagingTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestPagingTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
-        client.restClient().withLogLevel(LogLevel.BODY);
     }
 
     @Test

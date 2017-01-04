@@ -15,7 +15,6 @@ import fixtures.http.HttpServerFailures;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
@@ -128,7 +127,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> head501Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Error.class, ErrorException.class)
                 .registerError(ErrorException.class)
                 .buildEmpty(response);
     }
@@ -187,7 +186,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> get501Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Error.class, ErrorException.class)
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -304,7 +303,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> post505Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Error.class, ErrorException.class)
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -421,7 +420,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> delete505Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Error.class, ErrorException.class)
                 .registerError(ErrorException.class)
                 .build(response);
     }

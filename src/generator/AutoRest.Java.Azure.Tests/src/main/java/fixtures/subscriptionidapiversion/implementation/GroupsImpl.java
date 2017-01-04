@@ -13,7 +13,6 @@ package fixtures.subscriptionidapiversion.implementation;
 import retrofit2.Retrofit;
 import fixtures.subscriptionidapiversion.Groups;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -129,7 +128,7 @@ public final class GroupsImpl implements Groups {
     }
 
     private ServiceResponse<SampleResourceGroup> getSampleResourceGroupDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<SampleResourceGroup, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(SampleResourceGroup.class, ErrorException.class)
                 .register(200, new TypeToken<SampleResourceGroup>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

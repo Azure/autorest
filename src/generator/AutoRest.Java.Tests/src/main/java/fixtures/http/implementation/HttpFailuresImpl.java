@@ -17,7 +17,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -121,7 +120,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     }
 
     private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Boolean.class, ErrorException.class)
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -181,7 +180,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     }
 
     private ServiceResponse<Boolean> getNoModelErrorDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Boolean, ServiceException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Boolean.class, ServiceException.class)
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .build(response);
     }
@@ -240,7 +239,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     }
 
     private ServiceResponse<Boolean> getNoModelEmptyDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Boolean, ServiceException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Boolean.class, ServiceException.class)
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .build(response);
     }

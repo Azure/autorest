@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.bodybyte.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -130,7 +129,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(byte[].class, ErrorException.class)
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -190,7 +189,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(byte[].class, ErrorException.class)
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -250,7 +249,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getNonAsciiDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(byte[].class, ErrorException.class)
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -316,7 +315,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<Void> putNonAsciiDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -376,7 +375,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.serializerAdapter())
+        return this.client.restClient().responseBuilderFactory().newInstance(byte[].class, ErrorException.class)
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

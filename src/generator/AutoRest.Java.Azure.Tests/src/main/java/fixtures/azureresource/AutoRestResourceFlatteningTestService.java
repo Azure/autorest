@@ -13,6 +13,7 @@ package fixtures.azureresource;
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.Resource;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;

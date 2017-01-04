@@ -12,6 +12,7 @@ package fixtures.lro;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestLongRunningOperationTestService class.
