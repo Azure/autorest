@@ -261,7 +261,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -321,7 +321,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.restClient().responseBuilderFactory().newInstance(List<FlattenedProduct>.class, ErrorException.class)
+        return this.restClient().responseBuilderFactory().<List<FlattenedProduct>, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<List<FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -438,7 +438,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<Void> putDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -498,7 +498,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<Map<String, FlattenedProduct>> getDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.restClient().responseBuilderFactory().newInstance(Map<String, FlattenedProduct>.class, ErrorException.class)
+        return this.restClient().responseBuilderFactory().<Map<String, FlattenedProduct>, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Map<String, FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -615,7 +615,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<Void> putResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -675,7 +675,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<ResourceCollection> getResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.restClient().responseBuilderFactory().newInstance(ResourceCollection.class, ErrorException.class)
+        return this.restClient().responseBuilderFactory().<ResourceCollection, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<ResourceCollection>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -794,7 +794,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<SimpleProduct> putSimpleProductDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.restClient().responseBuilderFactory().newInstance(SimpleProduct.class, ErrorException.class)
+        return this.restClient().responseBuilderFactory().<SimpleProduct, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<SimpleProduct>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -965,7 +965,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<SimpleProduct> postFlattenedSimpleProductDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.restClient().responseBuilderFactory().newInstance(SimpleProduct.class, ErrorException.class)
+        return this.restClient().responseBuilderFactory().<SimpleProduct, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<SimpleProduct>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1048,7 +1048,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<SimpleProduct> putSimpleProductWithGroupingDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.restClient().responseBuilderFactory().newInstance(SimpleProduct.class, ErrorException.class)
+        return this.restClient().responseBuilderFactory().<SimpleProduct, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<SimpleProduct>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

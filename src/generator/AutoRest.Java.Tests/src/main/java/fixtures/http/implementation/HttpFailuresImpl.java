@@ -120,7 +120,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     }
 
     private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Boolean.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -180,7 +180,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     }
 
     private ServiceResponse<Boolean> getNoModelErrorDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Boolean.class, ServiceException.class)
+        return this.client.restClient().responseBuilderFactory().<Boolean, ServiceException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .build(response);
     }
@@ -239,7 +239,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     }
 
     private ServiceResponse<Boolean> getNoModelEmptyDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Boolean.class, ServiceException.class)
+        return this.client.restClient().responseBuilderFactory().<Boolean, ServiceException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .build(response);
     }

@@ -126,7 +126,7 @@ public final class GroupsInner {
     }
 
     private ServiceResponse<SampleResourceGroupInner> getSampleResourceGroupDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(SampleResourceGroupInner.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<SampleResourceGroupInner, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<SampleResourceGroupInner>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

@@ -1,10 +1,12 @@
 package fixtures.lro;
 
 import com.microsoft.azure.CloudException;
-import com.microsoft.rest.LogLevel;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCallback;
-
+import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
+import fixtures.lro.models.Product;
+import fixtures.lro.models.Sku;
+import fixtures.lro.models.SubProduct;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -12,12 +14,6 @@ import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.models.Product;
-import fixtures.lro.models.Sku;
-import fixtures.lro.models.SubProduct;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 import static org.junit.Assert.fail;
 
@@ -28,8 +24,7 @@ public class LROsTests {
     public static void setup() {
         RestClient restClient = new RestClient.Builder()
             .withBaseUrl("http://localhost:3000")
-            .withLogLevel(LogLevel.NONE)
-            .build();
+                .build();
         client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
         client.getAzureClient().withLongRunningOperationRetryTimeout(0);
     }

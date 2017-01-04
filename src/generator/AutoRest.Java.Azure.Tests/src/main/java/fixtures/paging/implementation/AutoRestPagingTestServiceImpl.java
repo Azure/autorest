@@ -131,10 +131,8 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient impl
      * @param credentials the management credentials for Azure
      */
     public AutoRestPagingTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
-        this(new RestClient.Builder()
-                .withBaseUrl(baseUrl)
-                .withCredentials(credentials)
-                .build());
+        super(baseUrl, credentials);
+        initialize();
     }
 
     /**

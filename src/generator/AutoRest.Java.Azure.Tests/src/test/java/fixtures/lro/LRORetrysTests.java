@@ -1,15 +1,11 @@
 package fixtures.lro;
 
-import com.microsoft.rest.LogLevel;
 import com.microsoft.rest.RestClient;
-
+import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
+import fixtures.lro.models.Product;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.models.Product;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 public class LRORetrysTests {
     private static AutoRestLongRunningOperationTestServiceImpl client;
@@ -18,7 +14,6 @@ public class LRORetrysTests {
     public static void setup() {
         RestClient restClient = new RestClient.Builder()
             .withBaseUrl("http://localhost:3000")
-            .withLogLevel(LogLevel.NONE)
             .build();
         client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
         client.getAzureClient().withLongRunningOperationRetryTimeout(0);

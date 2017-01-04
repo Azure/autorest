@@ -305,7 +305,7 @@ public Observable<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Wit
 }
 @EmptyLine
 private @Model.ReturnTypeJv.WireResponseTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
-    return @(Model.ClientReference).restClient().responseBuilderFactory().newInstance(@(Model.ReturnTypeJv.GenericBodyWireTypeString).class, @(Model.OperationExceptionTypeString).class)
+    return @(Model.ClientReference).restClient().responseBuilderFactory().<@Model.ReturnTypeJv.GenericBodyWireTypeString, @Model.OperationExceptionTypeString>newInstance(@(Model.ClientReference).serializerAdapter())
 @foreach (var response in Model.Responses)
 {
 

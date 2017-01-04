@@ -129,10 +129,8 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
      * @param credentials the management credentials for Azure
      */
     public AutoRestHeadExceptionTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
-        this(new RestClient.Builder()
-                .withBaseUrl(baseUrl)
-                .withCredentials(credentials)
-                .build());
+        super(baseUrl, credentials);
+        initialize();
     }
 
     /**

@@ -128,7 +128,7 @@ public final class GroupsImpl implements Groups {
     }
 
     private ServiceResponse<SampleResourceGroup> getSampleResourceGroupDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(SampleResourceGroup.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<SampleResourceGroup, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<SampleResourceGroup>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

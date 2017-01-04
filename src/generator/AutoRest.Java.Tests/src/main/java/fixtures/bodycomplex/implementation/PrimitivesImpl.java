@@ -209,7 +209,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<IntWrapper> getIntDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(IntWrapper.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<IntWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<IntWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -276,7 +276,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<Void> putIntDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -336,7 +336,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<LongWrapper> getLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(LongWrapper.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<LongWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<LongWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -403,7 +403,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<Void> putLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -463,7 +463,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<FloatWrapper> getFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(FloatWrapper.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<FloatWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<FloatWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -530,7 +530,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<Void> putFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -590,7 +590,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<DoubleWrapper> getDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(DoubleWrapper.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<DoubleWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DoubleWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -657,7 +657,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<Void> putDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -717,7 +717,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<BooleanWrapper> getBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(BooleanWrapper.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<BooleanWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<BooleanWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -784,7 +784,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<Void> putBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -844,7 +844,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<StringWrapper> getStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(StringWrapper.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<StringWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<StringWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -911,7 +911,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<Void> putStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -971,7 +971,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<DateWrapper> getDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(DateWrapper.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<DateWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1038,7 +1038,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<Void> putDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1098,7 +1098,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<DatetimeWrapper> getDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(DatetimeWrapper.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<DatetimeWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DatetimeWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1165,7 +1165,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<Void> putDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1225,7 +1225,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Datetimerfc1123Wrapper.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Datetimerfc1123Wrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Datetimerfc1123Wrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1292,7 +1292,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<Void> putDateTimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1352,7 +1352,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<DurationWrapper> getDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(DurationWrapper.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<DurationWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DurationWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1419,7 +1419,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<Void> putDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1479,7 +1479,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<ByteWrapper> getByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(ByteWrapper.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<ByteWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ByteWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1546,7 +1546,7 @@ public final class PrimitivesImpl implements Primitives {
     }
 
     private ServiceResponse<Void> putByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

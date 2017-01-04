@@ -173,10 +173,8 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      * @param credentials the management credentials for Azure
      */
     public AutoRestLongRunningOperationTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
-        this(new RestClient.Builder()
-                .withBaseUrl(baseUrl)
-                .withCredentials(credentials)
-                .build());
+        super(baseUrl, credentials);
+        initialize();
     }
 
     /**

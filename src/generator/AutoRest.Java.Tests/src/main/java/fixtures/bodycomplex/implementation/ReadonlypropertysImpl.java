@@ -119,7 +119,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
     }
 
     private ServiceResponse<ReadonlyObj> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(ReadonlyObj.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<ReadonlyObj, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ReadonlyObj>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -186,7 +186,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

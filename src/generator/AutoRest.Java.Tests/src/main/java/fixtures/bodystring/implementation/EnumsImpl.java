@@ -136,7 +136,7 @@ public final class EnumsImpl implements Enums {
     }
 
     private ServiceResponse<Colors> getNotExpandableDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Colors.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Colors, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Colors>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -202,7 +202,7 @@ public final class EnumsImpl implements Enums {
     }
 
     private ServiceResponse<Void> putNotExpandableDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -262,7 +262,7 @@ public final class EnumsImpl implements Enums {
     }
 
     private ServiceResponse<Colors> getReferencedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Colors.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Colors, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Colors>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -328,7 +328,7 @@ public final class EnumsImpl implements Enums {
     }
 
     private ServiceResponse<Void> putReferencedDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -388,7 +388,7 @@ public final class EnumsImpl implements Enums {
     }
 
     private ServiceResponse<RefColorConstant> getReferencedConstantDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(RefColorConstant.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<RefColorConstant, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<RefColorConstant>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -455,7 +455,7 @@ public final class EnumsImpl implements Enums {
     }
 
     private ServiceResponse<Void> putReferencedConstantDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

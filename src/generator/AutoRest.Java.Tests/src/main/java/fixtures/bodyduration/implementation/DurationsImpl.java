@@ -126,7 +126,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Period> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Period.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Period, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -192,7 +192,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Void> putPositiveDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -252,7 +252,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Period> getPositiveDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Period.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Period, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -312,7 +312,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Period> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Period.class, ErrorException.class)
+        return this.client.restClient().responseBuilderFactory().<Period, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

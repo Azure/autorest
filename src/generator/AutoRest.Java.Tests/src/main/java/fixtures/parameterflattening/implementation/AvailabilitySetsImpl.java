@@ -139,7 +139,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
     }
 
     private ServiceResponse<Void> updateDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().newInstance(Void.class, ServiceException.class)
+        return this.client.restClient().responseBuilderFactory().<Void, ServiceException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
