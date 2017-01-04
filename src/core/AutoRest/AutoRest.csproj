@@ -32,6 +32,7 @@
   </ItemGroup>
   
   <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.App" Version="1.0.1" />
     <PackageReference Include="NETStandard.Library" Version="1.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="1.0.0" />
