@@ -4,10 +4,7 @@ src/generator/AutoRest.NodeJS.Tests/AcceptanceTests/*.js
 
 ## Ignore user-specific files, temporary files, build results, etc.
 AutoRest/**/Templates/*.cs
-src/**/Templates/*.cs
-src/generator/**/Templates/Rest/Common/*.cs
-src/generator/**/Templates/Rest/Client/*.cs
-src/generator/**/Templates/Rest/Server/*.cs
+src/**/Templates/**/*.cs
 compare-results/*
 
 # User-specific files

@@ -1,30 +1,27 @@
 using AutoRest.Core.Model;
-using System.Collections.Generic;
 namespace AutoRest.CSharp.Model
 {
 
     static class ControllerToModelBinderMapping
     {
-        static Dictionary<ParameterLocation, string> _dict = new Dictionary<ParameterLocation, string>
-        {
-            { ParameterLocation.None, "" },
-            { ParameterLocation.Query, "FromQuery" },
-            { ParameterLocation.Header, "FromHeader" },
-            { ParameterLocation.Path, "FromRoute" },
-            { ParameterLocation.FormData, "FromForm" },
-            { ParameterLocation.Body, "FromBody" }
-        };
-
         public static string GetModelBinder(ParameterLocation loc)
         {
-            string result;
-            if (_dict.TryGetValue(loc, out result))
+            switch(loc)
             {
-                return result;
-            }
-            else
-            {
-                return null;
+                case ParameterLocation.None:
+                    return string.Empty;
+                case ParameterLocation.Query:
+                    return "FromQuery";
+                case ParameterLocation.Header:
+                    return "FromHeader";
+                case ParameterLocation.Path:
+                    return "FromRoute";
+                case ParameterLocation.FormData:
+                    return "FromForm";
+                case ParameterLocation.Body:
+                    return "FromBody";
+                default:
+                    return string.Empty;
             }
         }
     }

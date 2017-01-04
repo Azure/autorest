@@ -10,10 +10,10 @@
 @if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrEmpty(Model.Summary))
 {
 @:/// <summary>
-    @:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
     if (!string.IsNullOrEmpty(Model.ExternalDocsUrl))
     {
-    @:/// <see href="@Model.ExternalDocsUrl" />
+@:/// <see href="@Model.ExternalDocsUrl" />
     }
 @:/// </summary>
 }
@@ -42,7 +42,6 @@
 @{ methodSignature += ")"; }
 @methodSignature
 {
-@EmptyLine
 @foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
 {
     if (parameter.IsRequired && parameter.IsNullable())
@@ -58,7 +57,6 @@
     @:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
 }
 }
-@EmptyLine
 @if (Model.HttpMethod == HttpMethod.Get)
 {
     @:return new @{@Model.ReturnTypeString}();
