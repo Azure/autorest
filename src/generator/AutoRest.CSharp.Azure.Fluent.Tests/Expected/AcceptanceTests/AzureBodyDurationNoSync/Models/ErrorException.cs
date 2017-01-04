@@ -12,7 +12,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync.Models
     /// <summary>
     /// Exception thrown for an invalid response with Error information.
     /// </summary>
-#if !NETCOREAPP1_0 
+#if LEGACY 
     [System.Serializable]
 #endif
     public class ErrorException : Microsoft.Rest.RestException
@@ -58,7 +58,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync.Models
         {
         }
 
-#if !NETCOREAPP1_0 
+#if LEGACY 
         /// <summary>
         /// Initializes a new instance of the ErrorException class.
         /// </summary>

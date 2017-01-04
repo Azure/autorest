@@ -344,7 +344,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Throws<CloudException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidJsonPolling(new Product { Location = "West US" }));
 
-#if !NETCOREAPP1_0
+#if LEGACY
                 Assert.Throws<SerializationException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidHeader(new Product { Location = "West US" }));
 

@@ -18,7 +18,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport.Models
     /// <summary>
     /// Exception thrown for an invalid response with Error information.
     /// </summary>
-#if !NETCOREAPP1_0
+#if LEGACY
     [System.Serializable]
 #endif
     public class ErrorException : RestException
@@ -64,7 +64,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport.Models
         {
         }
 
-#if !NETCOREAPP1_0
+#if LEGACY
         /// <summary>
         /// Initializes a new instance of the ErrorException class.
         /// </summary>
