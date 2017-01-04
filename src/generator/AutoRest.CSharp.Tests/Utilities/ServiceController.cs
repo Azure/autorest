@@ -2,14 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using Microsoft.Extensions.Logging;
-#if PORTABLE
-
-#endif
 
 namespace AutoRest.CSharp.Tests.Utilities
 {
@@ -32,7 +28,7 @@ namespace AutoRest.CSharp.Tests.Utilities
             EnsureService();
         }
 
-#if PORTABLE
+#if !LEGACY
         private static readonly ILogger _logger;
         static ServiceController()
         {
@@ -211,7 +207,7 @@ namespace AutoRest.CSharp.Tests.Utilities
             startInfo.UseShellExecute = false;
             startInfo.FileName = path;
             startInfo.Arguments = arguments;
-#if PORTABLE
+#if !LEGACY
             startInfo.Environment["PORT"] = Port.ToString(CultureInfo.InvariantCulture);
 #else
             startInfo.EnvironmentVariables["PORT"] = Port.ToString(CultureInfo.InvariantCulture);

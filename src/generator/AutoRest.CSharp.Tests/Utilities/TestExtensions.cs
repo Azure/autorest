@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Tests.Utilities
         {
             try
             {
-                currentDirectory = currentDirectory ?? Environment.CurrentDirectory;
+                currentDirectory = currentDirectory ?? Directory.GetCurrentDirectory();
                 if (!string.IsNullOrEmpty(currentDirectory))
                 {
                     try
