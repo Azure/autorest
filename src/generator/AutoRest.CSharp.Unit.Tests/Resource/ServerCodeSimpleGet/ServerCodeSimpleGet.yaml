@@ -1,0 +1,30 @@
+---
+swagger: '2.0'
+info:
+  title: SimpleAPI
+  description: very simple api
+  version: 0.0.0
+paths:
+  "/SimpleAPI/getVal/{id}":
+    get:
+      operationId: Value_GetByID
+      description: Get value by id
+      parameters:
+      - in: path
+        name: id
+        description: val to put
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: some value added
+          schema:
+            "$ref": "#/definitions/SimpleModel"
+definitions:
+  SimpleModel:
+    description: simple value to add
+    properties:
+      value:
+        type: string

@@ -17,7 +17,7 @@ namespace @Settings.Namespace
     
 @foreach (var usingString in Model.Usings)
 {
-    @:using @usingString;
+    @:using @Settings.Namespace.@usingString;
 }
 @EmptyLine
 @if (!string.IsNullOrWhiteSpace(Model.Documentation))
