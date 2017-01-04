@@ -11,7 +11,7 @@ using AutoRest.Swagger;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.Extensions.Azure.Tests
+namespace AutoRest.CSharp.Azure.Tests
 {
     public class CSharpAzureCodeNamingFrameworkTests
     {
@@ -22,7 +22,7 @@ namespace AutoRest.Extensions.Azure.Tests
             {
                 var settings = new Settings
                 {
-                    Input = Path.Combine("Swagger", "azure-paging.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "azure-paging.json")
                 };
 
                 var modeler = new SwaggerModeler();

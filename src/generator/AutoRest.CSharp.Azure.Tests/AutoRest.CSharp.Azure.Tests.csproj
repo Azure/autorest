@@ -22,8 +22,10 @@
   <ItemGroup>
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Core/AutoRest.Core.csproj" />
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Extensions/AutoRest.Extensions.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Extensions.Azure/AutoRest.Extensions.Azure.csproj" />
     <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp/AutoRest.CSharp.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp.Azure/AutoRest.CSharp.Azure.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp.Tests/AutoRest.CSharp.Tests.csproj" />
   </ItemGroup>
 </Project>
