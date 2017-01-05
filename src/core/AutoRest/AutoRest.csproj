@@ -1,19 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj" />
   <Import Project="$(common)fix-resgen.proj" />
   <Import Project="$(common)package-info.proj" />
   <Import Project="$(common)package-fallback.proj" />
-  <Import Project="$(common)compile-cshtml.proj" />
   <Import Project="$(common)eval-csharp-targets.proj" />
-  
   <PropertyGroup>
-    <!--<SignAssembly>true</SignAssembly>-->
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp1.0</TargetFramework>
     <AssemblyName>AutoRest</AssemblyName>
     <PackageTags>Microsoft AutoRest Generator</PackageTags>
   </PropertyGroup>
-  
   <ItemGroup Condition="$(DesignTimeBuild) == true">
     <Compile Include="**\*.cs" />
     <None Include="**\*.cshtml" />
@@ -22,20 +18,12 @@
     <Content Include="AutoRest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <!--<Content Include="Autorest.Release.json">
-      <PackagePath>tools</PackagePath>
-      <Pack>true</Pack>
-    </Content>
-    <Content Include="bin\release\net451\win7-x64\*.exe;bin\release\net451\win7-x64\*.dll" Exclude="**\*.pdb">
-      <PackagePath>tools/</PackagePath>
-      <Pack>true</Pack>
-    </Content>-->
   </ItemGroup>
-  
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.App" Version="1.0.1" />
     <PackageReference Include="NETStandard.Library" Version="1.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="2.0.0-rc2" />
     <PackageReference Include="Microsoft.Composition" Version="1.0.27" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.2" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.2" />
@@ -44,10 +32,12 @@
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Core/AutoRest.Core.csproj" />
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Extensions/AutoRest.Extensions.csproj" />
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Extensions.Azure/AutoRest.Extensions.Azure.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/dev/AutoRest.Tooling.CSharp.Compiler/AutoRest.Tooling.CSharp.Compiler.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.AzureResourceSchema/AutoRest.AzureResourceSchema.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp/AutoRest.CSharp.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp.Azure/AutoRest.CSharp.Azure.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp.Azure.Fluent/AutoRest.CSharp.Azure.Fluent.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Go/AutoRest.Go.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Java/AutoRest.Java.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Java.Azure/AutoRest.Java.Azure.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Java.Azure.Fluent/AutoRest.Java.Azure.Fluent.csproj" />
