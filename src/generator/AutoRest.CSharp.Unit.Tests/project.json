@@ -26,11 +26,11 @@
   },
 
   "dependencies": {
-    "Microsoft.NETCore.Platforms": "1.0.1",
+    "Microsoft.NETCore.Platforms": "1.1.0",
     "Microsoft.Rest.ClientRuntime": "2.3.2",
     "Microsoft.Rest.ClientRuntime.Azure": "3.3.2",
-    "Microsoft.Extensions.Logging": "1.0.0",
-    "Microsoft.Extensions.Logging.Console": "1.0.0",
+    "Microsoft.Extensions.Logging": "1.1.0",
+    "Microsoft.Extensions.Logging.Console": "1.1.0",
     "Microsoft.Extensions.Logging.Filter": "1.0.0",
     "Microsoft.AspNetCore": "1.1.0",
     "Microsoft.AspNetCore.Mvc": "1.1.0",
