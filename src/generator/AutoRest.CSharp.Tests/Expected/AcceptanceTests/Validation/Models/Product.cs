@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsValidation.Models
 {
-    using AcceptanceTestsValidation;
+    using Fixtures.AcceptanceTestsValidation;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
@@ -142,9 +142,9 @@ namespace Fixtures.AcceptanceTestsValidation.Models
             }
             if (Image != null)
             {
-                if (!System.Text.RegularExpressions.Regex.IsMatch(Image, "http://\\w+"))
+                if (!System.Text.RegularExpressions.Regex.IsMatch(Image, http://\\w+))
                 {
-                    throw new ValidationException(ValidationRules.Pattern, "Image", "http://\\w+");
+                    throw new ValidationException(ValidationRules.Pattern, "Image", http://\\w+);
                 }
             }
         }

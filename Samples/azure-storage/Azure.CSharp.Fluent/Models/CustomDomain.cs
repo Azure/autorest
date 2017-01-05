@@ -1,6 +1,8 @@
 
 namespace Petstore.Models
 {
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -31,7 +33,7 @@ namespace Petstore.Models
         /// <summary>
         /// Gets or sets the custom domain name. Name is the CNAME source.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -39,7 +41,7 @@ namespace Petstore.Models
         /// enabled. Default value is false. This should only be set on
         /// updates
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "useSubDomain")]
+        [JsonProperty(PropertyName = "useSubDomain")]
         public bool? UseSubDomain { get; set; }
 
         /// <summary>
@@ -57,3 +59,4 @@ namespace Petstore.Models
         }
     }
 }
+

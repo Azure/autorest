@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions.Models
 {
-    using AcceptanceTestsCustomBaseUriMoreOptions;
+    using Fixtures.AcceptanceTestsCustomBaseUriMoreOptions;
     using Newtonsoft.Json;
     using System.Linq;
 

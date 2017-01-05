@@ -54,6 +54,11 @@ namespace Microsoft.Rest.RazorCompiler
             var fileNameNoExtension = Path.GetFileNameWithoutExtension(fileName);
             var codeLang = new CSharpRazorCodeLanguage();
             var host = new RazorEngineHost(codeLang);
+            var fname = Path.Combine(basePath, string.Format("{0}.cs", fileNameNoExtension));
+            if (File.GetLastWriteTimeUtc(fname) >= File.GetLastWriteTimeUtc(cshtmlFilePath))
+            {
+                return;
+            }
             host.GeneratedClassContext = new GeneratedClassContext(
                 executeMethodName: GeneratedClassContext.DefaultExecuteMethodName,
                 writeMethodName: GeneratedClassContext.DefaultWriteMethodName,
@@ -65,7 +70,9 @@ namespace Microsoft.Rest.RazorCompiler
                 generatedTagHelperContext: new GeneratedTagHelperContext());
             var engine = new RazorTemplateEngine(host);
 
-            using (var fileStream = File.OpenText(cshtmlFilePath))
+            var file = File.ReadAllText(cshtmlFilePath);
+            file = file.Replace("<exception", "«exception");
+            using (var fileStream = new StringReader(file))
             {
                 var code = engine.GenerateCode(
                     input: fileStream,
@@ -74,6 +81,7 @@ namespace Microsoft.Rest.RazorCompiler
                     sourceFileName: fileName);
 
                 var source = code.GeneratedCode;
+                source = source.Replace("«exception", "<exception");
                 source = CopyrightHeader + "\r\n\r\n" + source;
                 var startIndex = 0;
                 while (startIndex < source.Length)
@@ -101,7 +109,6 @@ namespace Microsoft.Rest.RazorCompiler
                              source.Substring(endIndex + endMatch.Length);
                     startIndex = startIndex + replacement.Length;
                 }
-                var fname = Path.Combine(basePath, string.Format("{0}.cs", fileNameNoExtension));
                 if( File.Exists(fname) ) { 
                     var oldFile = File.ReadAllText(fname);    
                     if( oldFile == source ) {

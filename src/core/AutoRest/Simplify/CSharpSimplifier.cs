@@ -13,6 +13,7 @@ using Microsoft.CodeAnalysis.Text;
 using Microsoft.Rest;
 using Microsoft.Rest.Azure;
 using AutoRest.Core.Utilities;
+using System.Net;
 
 namespace AutoRest.Simplify
 {
@@ -51,7 +52,11 @@ namespace AutoRest.Simplify
                 // Microsoft.Rest.ClientRuntime.dll
                 .AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(RestException).GetAssembly().Location))
                 // System.dll
-                .AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(Uri).GetAssembly().Location));
+                .AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(Uri).GetAssembly().Location))
+                // System.IO.dll
+                .AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(File).GetAssembly().Location))
+                // System.Net.Primitives.dll
+                .AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(HttpStatusCode).GetAssembly().Location));
 
             // Add existing files
             foreach (var file in files.Keys)

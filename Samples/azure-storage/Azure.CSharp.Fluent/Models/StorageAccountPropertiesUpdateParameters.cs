@@ -1,6 +1,7 @@
 
 namespace Petstore.Models
 {
+    using Newtonsoft.Json;
     using System.Linq;
 
     public partial class StorageAccountPropertiesUpdateParameters
@@ -39,7 +40,7 @@ namespace Petstore.Models
         /// PremiumLRS. Possible values include: 'Standard_LRS',
         /// 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "accountType")]
+        [JsonProperty(PropertyName = "accountType")]
         public AccountType? AccountType { get; set; }
 
         /// <summary>
@@ -48,7 +49,7 @@ namespace Petstore.Models
         /// account at this time. To clear the existing custom domain, use an
         /// empty string for the custom domain name property.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "customDomain")]
+        [JsonProperty(PropertyName = "customDomain")]
         public CustomDomain CustomDomain { get; set; }
 
         /// <summary>
@@ -66,3 +67,4 @@ namespace Petstore.Models
         }
     }
 }
+

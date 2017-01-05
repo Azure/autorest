@@ -8,11 +8,8 @@
 
 namespace Fixtures.MirrorPolymorphic.Models
 {
-    using MirrorPolymorphic;
+    using Fixtures.MirrorPolymorphic;
     using Microsoft.Rest;
-    using System.Runtime;
-    using System.Runtime.Serialization;
-    using System.Security;
 
     /// <summary>
     /// Exception thrown for an invalid response with Error2 information.
@@ -69,7 +66,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>
-        protected Error2Exception(SerializationInfo info, StreamingContext context)
+        protected Error2Exception(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
             : base(info, context)
         {
         }
@@ -83,7 +80,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// Thrown when a required parameter is null
         /// </exception>
         [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
         {
             base.GetObjectData(info, context);
             if (info == null)

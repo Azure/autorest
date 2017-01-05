@@ -8,7 +8,7 @@
 
 namespace Fixtures.PetstoreV2.Models
 {
-    using PetstoreV2;
+    using Fixtures.PetstoreV2;
     using Newtonsoft.Json;
     using System.Linq;
 

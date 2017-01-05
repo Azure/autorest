@@ -138,7 +138,7 @@ namespace Fixtures.AcceptanceTestsValidation
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new  System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
+                Converters = new  List<Newtonsoft.Json.JsonConverter>
                     {
                         new Iso8601TimeSpanConverter()
                     }
@@ -150,7 +150,7 @@ namespace Fixtures.AcceptanceTestsValidation
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
+                Converters = new List<Newtonsoft.Json.JsonConverter>
                     {
                         new Iso8601TimeSpanConverter()
                     }
@@ -207,9 +207,9 @@ namespace Fixtures.AcceptanceTestsValidation
                 {
                     throw new ValidationException(ValidationRules.MinLength, "resourceGroupName", 3);
                 }
-                if (!System.Text.RegularExpressions.Regex.IsMatch(resourceGroupName, "[a-zA-Z0-9]+"))
+                if (!System.Text.RegularExpressions.Regex.IsMatch(resourceGroupName, [a-zA-Z0-9]+))
                 {
-                    throw new ValidationException(ValidationRules.Pattern, "resourceGroupName", "[a-zA-Z0-9]+");
+                    throw new ValidationException(ValidationRules.Pattern, "resourceGroupName", [a-zA-Z0-9]+);
                 }
             }
             if (id > 1000)
@@ -230,9 +230,9 @@ namespace Fixtures.AcceptanceTestsValidation
             }
             if (ApiVersion != null)
             {
-                if (!System.Text.RegularExpressions.Regex.IsMatch(ApiVersion, "\\d{2}-\\d{2}-\\d{4}"))
+                if (!System.Text.RegularExpressions.Regex.IsMatch(ApiVersion, \\d{2}-\\d{2}-\\d{4}))
                 {
-                    throw new ValidationException(ValidationRules.Pattern, "ApiVersion", "\\d{2}-\\d{2}-\\d{4}");
+                    throw new ValidationException(ValidationRules.Pattern, "ApiVersion", \\d{2}-\\d{2}-\\d{4});
                 }
             }
             // Tracing
@@ -406,9 +406,9 @@ namespace Fixtures.AcceptanceTestsValidation
                 {
                     throw new ValidationException(ValidationRules.MinLength, "resourceGroupName", 3);
                 }
-                if (!System.Text.RegularExpressions.Regex.IsMatch(resourceGroupName, "[a-zA-Z0-9]+"))
+                if (!System.Text.RegularExpressions.Regex.IsMatch(resourceGroupName, [a-zA-Z0-9]+))
                 {
-                    throw new ValidationException(ValidationRules.Pattern, "resourceGroupName", "[a-zA-Z0-9]+");
+                    throw new ValidationException(ValidationRules.Pattern, "resourceGroupName", [a-zA-Z0-9]+);
                 }
             }
             if (id > 1000)
@@ -433,9 +433,9 @@ namespace Fixtures.AcceptanceTestsValidation
             }
             if (ApiVersion != null)
             {
-                if (!System.Text.RegularExpressions.Regex.IsMatch(ApiVersion, "\\d{2}-\\d{2}-\\d{4}"))
+                if (!System.Text.RegularExpressions.Regex.IsMatch(ApiVersion, \\d{2}-\\d{2}-\\d{4}))
                 {
-                    throw new ValidationException(ValidationRules.Pattern, "ApiVersion", "\\d{2}-\\d{2}-\\d{4}");
+                    throw new ValidationException(ValidationRules.Pattern, "ApiVersion", \\d{2}-\\d{2}-\\d{4});
                 }
             }
             // Tracing

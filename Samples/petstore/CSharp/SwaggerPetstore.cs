@@ -126,7 +126,7 @@ namespace Petstore
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new  System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
+                Converters = new  List<Newtonsoft.Json.JsonConverter>
                     {
                         new Iso8601TimeSpanConverter()
                     }
@@ -138,7 +138,7 @@ namespace Petstore
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
+                Converters = new List<Newtonsoft.Json.JsonConverter>
                     {
                         new Iso8601TimeSpanConverter()
                     }
@@ -1076,7 +1076,7 @@ namespace Petstore
             // Serialize Request
             string _requestContent = null;
             System.Net.Http.MultipartFormDataContent _multiPartContent = new System.Net.Http.MultipartFormDataContent();
-            if (name != null)
+                    if (name != null)
             {
                 System.Net.Http.StringContent _name = new System.Net.Http.StringContent(name, System.Text.Encoding.UTF8);
                 _multiPartContent.Add(_name, "name");
@@ -1311,7 +1311,7 @@ namespace Petstore
             // Serialize Request
             string _requestContent = null;
             System.Net.Http.MultipartFormDataContent _multiPartContent = new System.Net.Http.MultipartFormDataContent();
-            if (additionalMetadata != null)
+                    if (additionalMetadata != null)
             {
                 System.Net.Http.StringContent _additionalMetadata = new System.Net.Http.StringContent(additionalMetadata, System.Text.Encoding.UTF8);
                 _multiPartContent.Add(_additionalMetadata, "additionalMetadata");
@@ -1328,7 +1328,7 @@ namespace Petstore
                     _contentDispositionHeaderValue.FileName = _fileAsFileStream.Name;
                     _file.Headers.ContentDisposition = _contentDispositionHeaderValue;
                 }
-                _multiPartContent.Add(_file, "file");
+                        _multiPartContent.Add(_file, "file");
             }
             _httpRequest.Content = _multiPartContent;
             // Send Request

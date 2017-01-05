@@ -8,11 +8,8 @@
 
 namespace Fixtures.MirrorPrimitives.Models
 {
-    using MirrorPrimitives;
+    using Fixtures.MirrorPrimitives;
     using Microsoft.Rest;
-    using System.Runtime;
-    using System.Runtime.Serialization;
-    using System.Security;
 
     /// <summary>
     /// Exception thrown for an invalid response with Error information.
@@ -69,7 +66,7 @@ namespace Fixtures.MirrorPrimitives.Models
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>
-        protected ErrorException(SerializationInfo info, StreamingContext context)
+        protected ErrorException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
             : base(info, context)
         {
         }
@@ -83,7 +80,7 @@ namespace Fixtures.MirrorPrimitives.Models
         /// Thrown when a required parameter is null
         /// </exception>
         [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
         {
             base.GetObjectData(info, context);
             if (info == null)
