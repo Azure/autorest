@@ -33,7 +33,7 @@
     <Exec Condition="$(SolutionDir) != '' " Command="$(InstallRazor)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
   
   </Target>
-  <Target Name="CompileCshtml"  Condition="$(RestoreRecursive) != true" >
+  <Target Name="CompileCshtml" >
     <Message Text="Ensuring cshtml files are generated into .cs files [$(MSBuildProjectName)]" Importance="high" />
     <Exec Condition="$(SolutionDir) != '' " Command="dotnet razor . $(RootNamespace)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
   </Target>
