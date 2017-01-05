@@ -68,6 +68,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             Modeler = "Swagger";
             ValidationLevel = Category.Error;
             ModelsName = "Models";
+            CodeGenerationMode = "rest-client";
         }
 
         /// <summary>

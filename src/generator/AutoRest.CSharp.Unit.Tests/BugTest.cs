@@ -169,18 +169,13 @@ namespace AutoRest.CSharp.Unit.Tests
 
         protected async Task<CompilationResult> Compile(IFileSystem fileSystem)
         {
+            string dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var assemblies = new[]
                         {
-                            Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                "Microsoft.Rest.ClientRuntime.dll"),
-                            Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                "Microsoft.Rest.ClientRuntime.Azure.dll")
+                            Path.Combine(dllPath, "Microsoft.Rest.ClientRuntime.dll"),
+                            Path.Combine(dllPath, "Microsoft.Rest.ClientRuntime.Azure.dll")
                         };
-            if (Settings.Instance.CodeGenerationMode == "rest-server")
-            {
-                string dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                assemblies = System.IO.Directory.GetFiles(dllPath, "*.dll", System.IO.SearchOption.TopDirectoryOnly).Where(f => Path.GetFileName(f).StartsWith("Microsoft.AspNetCore.")).ToArray();
-            }
+            assemblies = assemblies.ToList().Concat(System.IO.Directory.GetFiles(dllPath, "*.dll", System.IO.SearchOption.TopDirectoryOnly).Where(f => Path.GetFileName(f).StartsWith("Microsoft.AspNetCore."))).ToArray();
                 
             var compiler = new CSharpCompiler(
                 fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)

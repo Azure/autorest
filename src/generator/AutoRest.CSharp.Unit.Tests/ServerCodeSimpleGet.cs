@@ -74,7 +74,6 @@ namespace AutoRest.CSharp.Unit.Tests
                     // Verify the server controller
                     var simpleApi = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.ValueController");
                     Assert.NotNull(simpleApi);
-                    Assert.Equal(simpleApi.GetMethods().Length, 1);
                     Assert.NotNull(simpleApi.GetMethod("Get"));
                     Assert.Equal(simpleApi.GetMethod("Get").ReturnType.Name, "SimpleModel");
                     Assert.NotEmpty(simpleApi.GetMethod("Get").CustomAttributes.Where(a => a.AttributeType.Name == "HttpGetAttribute"));

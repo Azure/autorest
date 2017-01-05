@@ -34,13 +34,14 @@
     "Microsoft.Extensions.Logging.Filter": "1.0.0",
     "Microsoft.AspNetCore": "1.1.0",
     "Microsoft.AspNetCore.Mvc": "1.1.0",
+    "Microsoft.DotNet.InternalAbstractions": "1.0.0",
     "xunit": "2.2.0-beta2-build3300",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
 
     "AutoRest.Core": { "target": "project" },
     "AutoRest.Tooling.CSharp.Compiler": { "target": "project" },
     "AutoRest.CSharp": { "target": "project" },
-    "AutoRest.CompositeSwagger": {"target": "project"},
+    "AutoRest.CompositeSwagger": { "target": "project" },
     "AutoRest.CSharp.Azure": { "target": "project" }
   }
 }
