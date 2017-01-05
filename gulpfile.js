@@ -190,7 +190,7 @@ gulp.task('regenerate:expected', function(cb){
     [
       'regenerate:expected:cs',
       'regenerate:expected:csazure',
-//      'regenerate:expected:csazurefluent',
+      'regenerate:expected:csazurefluent',
       'regenerate:expected:node',
       'regenerate:expected:nodeazure',
       'regenerate:expected:ruby',
@@ -408,8 +408,6 @@ gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite'
   }, cb);
 });
 
-/* Disable CSFluent for now.
-
 gulp.task('regenerate:expected:csazurefluent', ['regenerate:expected:csazurefluentcomposite','regenerate:expected:csazurefluentallsync', 'regenerate:expected:csazurefluentnosync'], function (cb) {
   mappings = mergeOptions({
     'AcceptanceTests/AzureBodyDuration': '../../dev/TestServer/swagger/body-duration.json'
@@ -425,7 +423,6 @@ gulp.task('regenerate:expected:csazurefluent', ['regenerate:expected:csazureflue
     'flatteningThreshold': '1'
   }, cb);
 });
-*/
 
 gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds', 'regenerate:expected:cscomposite', 'regenerate:expected:csallsync', 'regenerate:expected:csnosync'], function (cb) {
   mappings = mergeOptions({
@@ -522,7 +519,6 @@ gulp.task('regenerate:expected:csazureallsync', function(cb){
   }, cb);
 });
 
-/* Disable CSFluent for now.
 gulp.task('regenerate:expected:csazurefluentallsync', function(cb){    
   mappings = mergeOptions(
   {
@@ -540,7 +536,6 @@ gulp.task('regenerate:expected:csazurefluentallsync', function(cb){
     'syncMethods': 'all'
   }, cb);
 });
-*/
 
 gulp.task('regenerate:expected:csazurenosync', function(cb){  
   mappings = mergeOptions(
@@ -560,7 +555,6 @@ gulp.task('regenerate:expected:csazurenosync', function(cb){
   }, cb);
 });
 
-/* Disable CSFluent for now.
 gulp.task('regenerate:expected:csazurefluentnosync', function(cb){  
   mappings = mergeOptions(
   {
@@ -578,7 +572,6 @@ gulp.task('regenerate:expected:csazurefluentnosync', function(cb){
     'syncMethods': 'none'
   }, cb);
 });
-*/
 
 gulp.task('regenerate:expected:cscomposite', function (cb) {
   regenExpected({
@@ -617,7 +610,6 @@ gulp.task('regenerate:expected:go', function(cb){
   process.env.GOPATH = __dirname + '/src/generator/AutoRest.Go.Tests';
 })
 
-/* Disable CSFluent for now.
 gulp.task('regenerate:expected:csazurefluentcomposite', function (cb) {
   regenExpected({
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
@@ -631,7 +623,6 @@ gulp.task('regenerate:expected:csazurefluentcomposite', function (cb) {
   }, cb);
 });
 
-*/
 gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], function(){
   var autorestConfigPath = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.json');
   var content = fs.readFileSync(autorestConfigPath).toString();
