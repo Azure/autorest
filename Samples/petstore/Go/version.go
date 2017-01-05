@@ -1,4 +1,4 @@
-package Petstore
+package petstore
 
 
 import (
@@ -17,7 +17,7 @@ const (
 
 // UserAgent returns the UserAgent string to use when sending http.Requests.
 func UserAgent() string {
-    return fmt.Sprintf(userAgentFormat, Version(), "Petstore", "1.0.0")
+    return fmt.Sprintf(userAgentFormat, Version(), "petstore", "1.0.0")
 }
 
 // Version returns the semantic version (see http://semver.org) of the client.

@@ -1,10 +1,10 @@
-package Petstore
+package petstore
 
 
 import (
     "github.com/Azure/go-autorest/autorest"
     "github.com/Azure/go-autorest/autorest/date"
-)    
+)
 
 // Status enumerates the values for status.
 type Status string
@@ -19,16 +19,16 @@ const (
 )
 
 
-// Status enumerates the values for status.
-type Status string
+// Status1 enumerates the values for status 1.
+type Status1 string
 
 const (
-    // Approved specifies the approved state for status.
-    Approved Status = "approved"
-    // Delivered specifies the delivered state for status.
-    Delivered Status = "delivered"
-    // Placed specifies the placed state for status.
-    Placed Status = "placed"
+    // Approved specifies the approved state for status 1.
+    Approved Status1 = "approved"
+    // Delivered specifies the delivered state for status 1.
+    Delivered Status1 = "delivered"
+    // Placed specifies the placed state for status 1.
+    Placed Status1 = "placed"
 )
 
 
