@@ -13,7 +13,7 @@ var isMac = (process.platform.lastIndexOf('darwin') === 0);
 
 function GetAutoRestFolder() {
   if (isWindows) {
-    return "src/core/AutoRest/bin/Debug/net451/win7-x64/";
+    return "src/core/AutoRest/bin/Debug/netcoreapp1.0/win7-x64/publish/";
   }
   if (isMac) {
     var mac_os_10_11 = "src/core/AutoRest/bin/Debug/net451/osx.10.11-x64/";

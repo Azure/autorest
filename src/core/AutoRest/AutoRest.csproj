@@ -5,6 +5,8 @@
   <Import Project="$(common)package-fallback.proj" />
   <Import Project="$(common)eval-csharp-targets.proj" />
   <PropertyGroup>
+    <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
+    <RuntimeIdentifiers>win7-x64;ubuntu.14.04-x64</RuntimeIdentifiers>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp1.0</TargetFramework>
     <AssemblyName>AutoRest</AssemblyName>
@@ -15,14 +17,17 @@
     <None Include="**\*.cshtml" />
     <EmbeddedResource Include="**\*.resx" />
     <EmbeddedResource Include="compiler\resources\**\*" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="AutoRest.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.App" Version="1.0.1" />
     <PackageReference Include="NETStandard.Library" Version="1.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="2.0.0-rc2" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="2.0.0-rc2" />
     <PackageReference Include="Microsoft.Composition" Version="1.0.27" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.2" />

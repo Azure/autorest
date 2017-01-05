@@ -30,7 +30,7 @@ process.env.MSBUILDDISABLENODEREUSE = 1;
 
 function GetAutoRestFolder() {
   if (isWindows) {
-    return "src/core/AutoRest/bin/Debug/net451/win7-x64/";
+    return "src/core/AutoRest/bin/Debug/netcoreapp1.0/win7-x64/publish/";
   }
   if (isMac) {
     var mac_os_10_11 = "src/core/AutoRest/bin/Debug/net451/osx.10.11-x64/";
@@ -208,8 +208,9 @@ gulp.task('regenerate:expected', function(cb){
 
 gulp.task('regenerate:delete', function(cb){
   del([
-    'src/generator/AutoRest.CSharp.Azure.Tests/Expected',
     'src/generator/AutoRest.CSharp.Tests/Expected',
+    'src/generator/AutoRest.CSharp.Azure.Tests/Expected',
+    'src/generator/AutoRest.CSharp.Azure.Fluent.Tests/Expected',
     'src/generator/AutoRest.NodeJS.Tests/Expected',
     'src/generator/AutoRest.NodeJS.Azure.Tests/Expected',
     'src/generator/AutoRest.Python.Tests/Expected',
@@ -810,6 +811,7 @@ var xunitNetCoreXproj = [
   'src/core/AutoRest.Extensions.Azure.Tests/project.json',
   'src/core/AutoRest.Extensions.Tests/project.json',
   'src/generator/AutoRest.AzureResourceSchema.Tests/project.json',
+  'src/generator/AutoRest.CSharp.Azure.Fluent.Tests/project.json',
   'src/generator/AutoRest.CSharp.Azure.Tests/project.json',
   'src/generator/AutoRest.CSharp.Tests/project.json',
   'src/generator/AutoRest.CSharp.Unit.Tests/project.json',
