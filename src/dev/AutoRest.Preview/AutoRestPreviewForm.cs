@@ -44,6 +44,7 @@ namespace AutoRest.Preview
                 {
                     case "CSharp":
                     case "Azure.CSharp":
+                    case "Azure.CSharp.Fluent":
                         var types = await CSharpCompilerHelper.CompileTypes(fileSystem);
                         return string.Join("\n\n", types.Select(type => type.CreateSummary(scintillaDst.TabWidth)));
 

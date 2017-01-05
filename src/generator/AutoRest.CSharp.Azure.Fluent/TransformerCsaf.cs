@@ -17,6 +17,7 @@ namespace AutoRest.CSharp.Azure.Fluent
         CodeModelCsaf ITransformer<CodeModelCsaf>.TransformCodeModel(CodeModel cs)
         {
             var codeModel = cs as CodeModelCsaf;
+            Settings.Instance.AddCredentials = true;
 
             // Do parameter transformations
             TransformParameters(codeModel);
@@ -101,7 +102,7 @@ namespace AutoRest.CSharp.Azure.Fluent
             var dictionaryType = type as DictionaryType;
             if ((compositeType != null) && !codeModel._innerTypes.Contains(compositeType))
             {
-                compositeType.Name.FixedValue += compositeType.Name + "Inner";
+                compositeType.Name.FixedValue = compositeType.Name + "Inner";
                 codeModel._innerTypes.Add(compositeType);
             }
             else if (sequenceType != null)
