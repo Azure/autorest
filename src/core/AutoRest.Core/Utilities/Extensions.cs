@@ -522,7 +522,7 @@ namespace AutoRest.Core.Utilities
             x.SetResult(result);
             return x.Task;
         }
-        private static string[] LFOnly = new[] { ".py", ".rb", ".ts", ".js", ".java" };
+        private static string[] LFOnly = new[] { ".py", ".rb", ".ts", ".js", ".java", ".go" };
         public static bool IsFileLineFeedOnly(this string filename) => LFOnly.Any(each => filename.EndsWith(each, StringComparison.OrdinalIgnoreCase));
         public static string LineEnding(this string filename) => filename.IsFileLineFeedOnly() ? "\n" : "\r\n";
 

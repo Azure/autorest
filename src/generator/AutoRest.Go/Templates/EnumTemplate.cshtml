@@ -2,11 +2,11 @@
 
 @using AutoRest.Go;
 
-@inherits AutoRest.Go.Template<AutoRest.Go.TemplateModels.EnumTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.Go.Model.EnumTypeGo>
 @{
     var constants = Model.Constants.Keys.OrderBy(v => v);
-    var modelName = GoCodeNamer.CamelCase(Model.Name);
-    var modelPhrase = Model.Name.ToPhrase();
+    var modelName = CodeNamerGo.Instance.CamelCase(Model.Name);
+    var modelPhrase = Model.Name.FixedValue.ToPhrase();
 }
 
 @WrapComment("// ", Model.Documentation)
