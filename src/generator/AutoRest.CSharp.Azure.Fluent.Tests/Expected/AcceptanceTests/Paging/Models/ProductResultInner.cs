@@ -8,6 +8,11 @@
 
 namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 {
+    using Azure;
+    using AcceptanceTestsPaging;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     public partial class ProductResultInner
@@ -20,7 +25,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// <summary>
         /// Initializes a new instance of the ProductResultInner class.
         /// </summary>
-        public ProductResultInner(System.Collections.Generic.IList<Product> values = default(System.Collections.Generic.IList<Product>), string nextLink = default(string))
+        public ProductResultInner(IList<Product> values = default(IList<Product>), string nextLink = default(string))
         {
             Values = values;
             NextLink = nextLink;
@@ -28,13 +33,14 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "values")]
-        public System.Collections.Generic.IList<Product> Values { get; set; }
+        [JsonProperty(PropertyName = "values")]
+        public IList<Product> Values { get; set; }
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "nextLink")]
+        [JsonProperty(PropertyName = "nextLink")]
         public string NextLink { get; set; }
 
     }
 }
+

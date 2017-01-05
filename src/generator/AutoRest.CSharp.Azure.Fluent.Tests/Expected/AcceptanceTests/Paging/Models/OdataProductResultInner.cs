@@ -8,6 +8,11 @@
 
 namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 {
+    using Azure;
+    using AcceptanceTestsPaging;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     public partial class OdataProductResultInner
@@ -20,7 +25,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// <summary>
         /// Initializes a new instance of the OdataProductResultInner class.
         /// </summary>
-        public OdataProductResultInner(System.Collections.Generic.IList<Product> values = default(System.Collections.Generic.IList<Product>), string odatanextLink = default(string))
+        public OdataProductResultInner(IList<Product> values = default(IList<Product>), string odatanextLink = default(string))
         {
             Values = values;
             OdatanextLink = odatanextLink;
@@ -28,13 +33,14 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "values")]
-        public System.Collections.Generic.IList<Product> Values { get; set; }
+        [JsonProperty(PropertyName = "values")]
+        public IList<Product> Values { get; set; }
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "odata.nextLink")]
+        [JsonProperty(PropertyName = "odata.nextLink")]
         public string OdatanextLink { get; set; }
 
     }
 }
+

@@ -8,13 +8,16 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 {
-    using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
+    using Azure;
+    using AcceptanceTestsAzureSpecials;
     using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
     using Microsoft.Rest.Azure;
+    using Microsoft.Rest.Serialization;
+    using Newtonsoft.Json;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Additional parameters for the header_customNamedRequestIdParamGrouping
@@ -59,3 +62,4 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         }
     }
 }
+

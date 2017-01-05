@@ -8,13 +8,15 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
+    using AcceptanceTestsAzureCompositeModelClient;
     using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
     using Microsoft.Rest.Azure;
+    using Microsoft.Rest.Serialization;
+    using Newtonsoft.Json;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// The product documentation.
@@ -82,3 +84,4 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     }
 }
+
