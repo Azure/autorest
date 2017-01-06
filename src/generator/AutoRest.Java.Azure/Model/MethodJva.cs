@@ -14,6 +14,8 @@ using AutoRest.Java.Model;
 using AutoRest.Core.Utilities.Collections;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
+using System.Text;
 
 namespace AutoRest.Java.Azure.Model
 {
@@ -701,6 +703,24 @@ namespace AutoRest.Java.Azure.Model
                 }
                 builder.Append(" * @param serviceCallback the async ServiceCallback to handle successful and failed responses.");
                 return builder.ToString();
+            }
+        }
+
+        [JsonIgnore]
+        public string NextUrlConstruction
+        {
+            get
+            {
+                var builder = new StringBuilder("String.format(");
+                var regex = new Regex("{\\w+}");
+                var matches = regex.Matches(Url);
+                builder.Append("\"").Append(regex.Replace(Url, "%s").TrimStart('/')).Append("\"");
+                foreach (Match match in matches)
+                {
+                    var sn = match.Value.Trim('{', '}');
+                    builder.Append(", " + base.RetrofitParameters.First(p => p.SerializedName == sn).WireName);
+                }
+                return builder.Append(")").ToString();
             }
         }
 

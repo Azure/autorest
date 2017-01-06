@@ -114,47 +114,47 @@ public final class PagingsImpl implements Pagings {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Observable<Response<ResponseBody>> nextFragment(@Path("tenant") String tenant, @Url String nextLink, @Query("api_version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> nextFragment(@Url String nextUrl, @Query("api_version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Observable<Response<ResponseBody>> nextFragmentWithGrouping(@Url String nextLink, @Path("tenant") String tenant, @Header("accept-language") String acceptLanguage, @Query("api_version") String apiVersion, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> nextFragmentWithGrouping(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Query("api_version") String apiVersion, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Observable<Response<ResponseBody>> getSinglePagesNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getSinglePagesNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Observable<Response<ResponseBody>> getMultiplePagesNext(@Url String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getMultiplePagesNext(@Url String nextUrl, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Observable<Response<ResponseBody>> getOdataMultiplePagesNext(@Url String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getOdataMultiplePagesNext(@Url String nextUrl, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Observable<Response<ResponseBody>> getMultiplePagesWithOffsetNext(@Url String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getMultiplePagesWithOffsetNext(@Url String nextUrl, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Observable<Response<ResponseBody>> getMultiplePagesRetryFirstNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getMultiplePagesRetryFirstNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Observable<Response<ResponseBody>> getMultiplePagesRetrySecondNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getMultiplePagesRetrySecondNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Observable<Response<ResponseBody>> getSinglePagesFailureNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getSinglePagesFailureNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Observable<Response<ResponseBody>> getMultiplePagesFailureNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getMultiplePagesFailureNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Observable<Response<ResponseBody>> getMultiplePagesFailureUriNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getMultiplePagesFailureUriNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -1672,7 +1672,8 @@ public final class PagingsImpl implements Pagings {
         if (apiVersion == null) {
             throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
         }
-        return service.nextFragment(tenant, nextLink, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+        String nextUrl = String.format("paging/multiple/fragment/%s/%s", tenant, nextLink);
+        return service.nextFragment(nextUrl, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
@@ -1786,7 +1787,8 @@ public final class PagingsImpl implements Pagings {
         Validator.validate(customParameterGroup);
         String apiVersion = customParameterGroup.apiVersion();
         String tenant = customParameterGroup.tenant();
-        return service.nextFragmentWithGrouping(nextLink, tenant, this.client.acceptLanguage(), apiVersion, this.client.userAgent())
+        String nextUrl = String.format("paging/multiple/fragmentwithgrouping/%s/%s", tenant, nextLink);
+        return service.nextFragmentWithGrouping(nextUrl, this.client.acceptLanguage(), apiVersion, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
@@ -1889,7 +1891,8 @@ public final class PagingsImpl implements Pagings {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        return service.getSinglePagesNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent())
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.getSinglePagesNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
@@ -1996,7 +1999,8 @@ public final class PagingsImpl implements Pagings {
         final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        return service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
@@ -2111,7 +2115,8 @@ public final class PagingsImpl implements Pagings {
         if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
-        return service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
@@ -2218,7 +2223,8 @@ public final class PagingsImpl implements Pagings {
         final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        return service.getOdataMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
@@ -2333,7 +2339,8 @@ public final class PagingsImpl implements Pagings {
         if (pagingGetOdataMultiplePagesOptions != null) {
             timeout = pagingGetOdataMultiplePagesOptions.timeout();
         }
-        return service.getOdataMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
@@ -2440,7 +2447,8 @@ public final class PagingsImpl implements Pagings {
         final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        return service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
@@ -2555,7 +2563,8 @@ public final class PagingsImpl implements Pagings {
         if (pagingGetMultiplePagesWithOffsetNextOptions != null) {
             timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout();
         }
-        return service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
@@ -2658,7 +2667,8 @@ public final class PagingsImpl implements Pagings {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        return service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent())
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.getMultiplePagesRetryFirstNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
@@ -2761,7 +2771,8 @@ public final class PagingsImpl implements Pagings {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        return service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent())
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.getMultiplePagesRetrySecondNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
@@ -2864,7 +2875,8 @@ public final class PagingsImpl implements Pagings {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        return service.getSinglePagesFailureNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent())
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.getSinglePagesFailureNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
@@ -2967,7 +2979,8 @@ public final class PagingsImpl implements Pagings {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        return service.getMultiplePagesFailureNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent())
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.getMultiplePagesFailureNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
@@ -3070,7 +3083,8 @@ public final class PagingsImpl implements Pagings {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        return service.getMultiplePagesFailureUriNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent())
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.getMultiplePagesFailureUriNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {

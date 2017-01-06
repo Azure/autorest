@@ -131,4 +131,10 @@ public class PagingTests {
         List<Product> response = client.pagings().getMultiplePagesFailureUri();
         Assert.assertEquals(1, response.size());
     }
+
+    @Test
+    public void newTest() throws Exception {
+        List<Product> response = client.pagings().getMultiplePagesFragmentNextLink("test_user", "1.6");
+        Assert.assertEquals(10, response.size());
+    }
 }

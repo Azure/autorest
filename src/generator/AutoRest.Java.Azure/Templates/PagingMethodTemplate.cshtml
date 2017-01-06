@@ -192,6 +192,10 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrap
 @:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
     @Model.ParameterConversion
+@if (Model.IsPagingNextOperation)
+{
+@:    String nextUrl = @(Model.NextUrlConstruction);
+}
     return service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation)
         .flatMap(new Func1<Response<@Model.CallType>, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>>() {
             @@Override
@@ -388,6 +392,10 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrap
 @:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
     @Model.ParameterConversion
+@if (Model.IsPagingNextOperation)
+{
+@:    String nextUrl = @(Model.NextUrlConstruction);
+}
     return service.@(Model.Name)(@Model.MethodParameterApiInvocation)
         .flatMap(new Func1<Response<@Model.CallType>, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>>() {
             @@Override
