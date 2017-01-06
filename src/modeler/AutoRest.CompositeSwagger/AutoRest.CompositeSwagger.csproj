@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj"  />
+  <Import Project="$(common)common-imports.proj" />
+  <Import Project="$(common)target-framework-library.proj" />
   <Import Project="$(common)fix-resgen.proj" />
   <Import Project="$(common)package-info.proj" />
   <Import Project="$(common)package-fallback.proj" />
   <PropertyGroup>
-    <TargetFramework>netstandard1.4</TargetFramework>
     <AssemblyName>AutoRest.CompositeSwagger</AssemblyName>
     <PackageTags>Microsoft AutoRest Generator Extensions</PackageTags>
   </PropertyGroup>
@@ -14,7 +15,6 @@
     <EmbeddedResource Include="compiler\resources\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NETStandard.Library" Version="1.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
   <ItemGroup>

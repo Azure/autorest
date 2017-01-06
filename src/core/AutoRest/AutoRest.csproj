@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj" />
+  <Import Project="$(common)common-imports.proj" />
   <Import Project="$(common)fix-resgen.proj" />
   <Import Project="$(common)package-info.proj" />
   <Import Project="$(common)package-fallback.proj" />
@@ -9,6 +10,8 @@
     <RuntimeIdentifiers>win7-x64;ubuntu.14.04-x64</RuntimeIdentifiers>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp1.0;net461</TargetFrameworks>
+    <!--<TargetFramework>net461</TargetFramework>-->
+    <TargetFramework>netcoreapp1.0</TargetFramework>
     <AssemblyName>AutoRest</AssemblyName>
     <PackageTags>Microsoft AutoRest Generator</PackageTags>
   </PropertyGroup>
@@ -24,14 +27,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.App" Version="1.0.1" Condition="$(TargetFramework)=='netcoreapp1.0'" />
-    <PackageReference Include="NETStandard.Library" Version="1.6.0" />
+    <PackageReference Include="Microsoft.NETCore.App" Version="1.1.0" Condition="$(TargetFramework)=='netcoreapp1.0'" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="2.0.0-rc2" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="2.0.0-rc2" />
-    <PackageReference Include="Microsoft.Composition" Version="1.0.27" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.2" />
-    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.2" />
+    <PackageReference Include="Microsoft.Composition" Version="1.0.30" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.4" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.4" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Core/AutoRest.Core.csproj" />
