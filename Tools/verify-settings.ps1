@@ -239,7 +239,7 @@ find-orAdd "gulp.cmd" -hint "maybe use 'npm install -g gulp'" -folders @("${env:
 
 find-orAdd "ruby.exe" (@() +  ((dir -ea 0 c:\ruby*).fullname) + @( "${env:ProgramFiles(x86)}","${env:ProgramFiles}","c:\tools")) -hint "see http://rubyinstaller.org/downloads/"
 
-find-orAdd "gradle.bat" ( @( "${env:ProgramFiles(x86)}","${env:ProgramFiles}","c:\tools")) -hint "see http://gradle.org/gradle-download/"
+find-orAdd "mvn.bat" ( @( "${env:ProgramFiles(x86)}","${env:ProgramFiles}","c:\tools")) -hint "see https://maven.apache.org/download.cgi"
 
 find-orAdd "python.exe" (@() +  ((dir -ea 0 c:\python*).fullname) + @( "${env:ProgramFiles(x86)}","${env:ProgramFiles}","c:\tools")) -hint "https://www.python.org/downloads/"
 find-orAdd "tox.exe" (@() +  ((dir -ea 0 c:\python*).fullname) + @( "${env:ProgramFiles(x86)}","${env:ProgramFiles}","c:\tools"))   -hint "maybe use 'pip install tox'"

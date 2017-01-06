@@ -307,19 +307,19 @@ if( !(get-command -ea 0 tox.exe) ) {
     if( !(get-command -ea 0 tox.exe) ) { return write-error "No TOX  in PATH." }
 }
 
-# install gradle
-if( !(get-command -ea 0 gradle.bat) ) { 
-    write-host -fore cyan "Info: Downloading Gradle"
-    (New-Object System.Net.WebClient).DownloadFile("https://services.gradle.org/distributions/gradle-3.1-all.zip", "c:\tmp\gradle-3.1-all.zip" )
-    if( !(test-path -ea 0  "c:\tmp\gradle-3.1-all.zip") ) { return write-error "Unable to download Gradle" }
-    write-host -fore darkcyan "      Unpacking Gradle."
-    Expand-Archive C:\tmp\gradle-3.1-all.zip -DestinationPath c:\
-    write-host -fore darkcyan "      Adding gradle to system PATH."
+# install maven
+if( !(get-command -ea 0 mvn.bat) ) { 
+    write-host -fore cyan "Info: Downloading Maven"
+    (New-Object System.Net.WebClient).DownloadFile("http://www-eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip", "c:\tmp\apache-maven-3.3.9-bin.zip" )
+    if( !(test-path -ea 0  "c:\tmp\apache-maven-3.3.9-bin.zip") ) { return write-error "Unable to download Maven" }
+    write-host -fore darkcyan "      Unpacking Maven."
+    Expand-Archive C:\tmp\apache-maven-3.3.9-bin.zip -DestinationPath c:\
+    write-host -fore darkcyan "      Adding mvn to system PATH."
     $p = ([System.Environment]::GetEnvironmentVariable( "path", 'Machine'))
-    $p = "$p;c:\gradle-3.1\bin"
+    $p = "$p;c:\apache-maven-3.3.9\bin"
     ([System.Environment]::SetEnvironmentVariable( "path", $p,  'Machine'))
     ReloadPathFromRegistry
-    if( !(get-command -ea 0 gradle.bat) ) { return write-error "No Gradle in PATH." }
+    if( !(get-command -ea 0 mvn.bat) ) { return write-error "No Maven in PATH." }
 }
 
 #install go 
