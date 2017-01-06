@@ -420,7 +420,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to &apos;GET&apos; operation must use method name &apos;Get&apos;, &apos;PUT&apos; operation must use method name &apos;Create&apos;, &apos;PATCH&apos; operation must use method name &apos;Update&apos; and &apos;DELETE&apos; operation must use method name &apos;Delete&apos;..
+        ///    Looks up a localized string similar to &apos;GET&apos; operation must use method name &apos;Get&apos; or Method name start with &apos;List&apos;, &apos;PUT&apos; operation must use method name &apos;Create&apos;, &apos;PATCH&apos; operation must use method name &apos;Update&apos; and &apos;DELETE&apos; operation must use method name &apos;Delete&apos;..
         /// </summary>
         public static string OperationNameNotValid {
             get {

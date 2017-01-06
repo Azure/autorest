@@ -23,13 +23,24 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
+        /// <remarks>
+        /// This rule corresponds to M1005, M1006, M1007 & M1009.
+        /// </remarks>
         public override Category Severity => Category.Warning;
 
         /// <summary>
-        /// An <paramref name="operationDefinition"/> fails this rule if it does not have the correct HTTP Verb.
+        /// This rule passes if the operation id of HTTP Method confirms to M1005, M1006, M1007 & M1009.
+        ///   e.g. For Get method User_Get or User_List
+        ///     or For Put method User_Create
+        ///     or For Patch method User_Update
+        ///     or For Delete method User_Delete
+        ///     are valid names.
         /// </summary>
-        /// <param name="operationDefinition">Operation Definition to validate</param>
-        /// <returns></returns>
+        /// <param name="operationDefinition">Dictionary of the path and respective operations.</param>
+        /// <returns><c>true</c> if operation name confimes to above rules, otherwise <c>false</c>.</returns>
+        /// <remarks>
+        /// Message will be shown at the path level.
+        /// </remarks>
         public override bool IsValid(Dictionary<string, Operation> operationDefinition)
         {
             bool areAllOperationNameValid = true;
