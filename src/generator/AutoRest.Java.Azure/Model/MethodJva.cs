@@ -95,6 +95,21 @@ namespace AutoRest.Java.Azure.Model
                 };
                 par.Name.FixedValue = Group.IsNullOrEmpty() ? "this.userAgent()" : "this.client.userAgent()";
                 parameters.Add(par);
+
+                if (IsPagingNextOperation)
+                {
+                    parameters.RemoveAll(p => p.Location == ParameterLocation.Path);
+                    parameters.Insert(0, new ParameterJv
+                    {
+                        Name = "nextUrl",
+                        SerializedName = "nextUrl",
+                        ModelType = New<PrimaryType>(KnownPrimaryType.String),
+                        Documentation = "The URL to get the next page of items.",
+                        Location = ParameterLocation.Path,
+                        IsRequired = true
+                    });
+                }
+
                 return parameters;
             }
         }
@@ -105,6 +120,10 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 var declaration = base.MethodParameterApiDeclaration;
+                if (IsPagingNextOperation)
+                {
+                    declaration = declaration.Replace("@Path(\"nextUrl\")", "@Url");
+                }
                 foreach (var parameter in RetrofitParameters.Where(p => 
                     p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Query))
                 {
@@ -115,10 +134,6 @@ namespace AutoRest.Java.Azure.Model
                             string.Format(CultureInfo.InvariantCulture, "@{0}(\"{1}\")", parameter.Location.ToString(), parameter.SerializedName),
                             string.Format(CultureInfo.InvariantCulture, "@{0}(value = \"{1}\", encoded = true)", parameter.Location.ToString(), parameter.SerializedName));
                     }
-                }
-                if (IsPagingNextOperation)
-                {
-                    declaration = declaration.Replace("@Path(\"nextLink\")", "@Url");
                 }
                 return declaration;
             }
@@ -748,6 +763,11 @@ namespace AutoRest.Java.Azure.Model
                     imports.Add("com.microsoft.azure.PagedList");
                     imports.Add("com.microsoft.azure.AzureServiceCall");
                     imports.AddRange(ctype.ImportSafe());
+                }
+                if (this.IsPagingNextOperation)
+                {
+                    imports.Remove("retrofit2.http.Path");
+                    imports.Add("retrofit2.http.Url");
                 }
                 if (this.IsPagingNonPollingOperation)
                 {
