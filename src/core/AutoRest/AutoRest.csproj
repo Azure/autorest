@@ -8,7 +8,7 @@
     <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
     <RuntimeIdentifiers>win7-x64;ubuntu.14.04-x64</RuntimeIdentifiers>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <TargetFrameworks>netcoreapp1.0;net461</TargetFrameworks>
     <AssemblyName>AutoRest</AssemblyName>
     <PackageTags>Microsoft AutoRest Generator</PackageTags>
   </PropertyGroup>
@@ -24,7 +24,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.App" Version="1.0.1" />
+    <PackageReference Include="Microsoft.NETCore.App" Version="1.0.1" Condition="$(TargetFramework)=='netcoreapp1.0'" />
     <PackageReference Include="NETStandard.Library" Version="1.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="2.0.0-rc2" />
