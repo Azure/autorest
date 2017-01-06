@@ -100,7 +100,7 @@ namespace AutoRest.AzureResourceSchema.Tests
             RunSwaggerTest("DNS", "2016-04-01", "dns.json");
         }
 
-        [Fact]
+        [Fact(Skip = "invalid Swagger spec, nowadays AutoRest complains")]
         public static void Logic_2015_02_01_preview()
         {
             RunSwaggerTest("Logic", "2015-02-01-preview", "logic.json");
