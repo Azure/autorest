@@ -4,6 +4,7 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
+import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.Product;
 import fixtures.paging.models.ProductProperties;
@@ -133,8 +134,14 @@ public class PagingTests {
     }
 
     @Test
-    public void newTest() throws Exception {
+    public void getMultiplePagesFragmentNextLink() throws Exception {
         List<Product> response = client.pagings().getMultiplePagesFragmentNextLink("test_user", "1.6");
+        Assert.assertEquals(10, response.size());
+    }
+
+    @Test
+    public void getMultiplePagesFragmentWithGroupingNextLink() throws Exception {
+        List<Product> response = client.pagings().getMultiplePagesFragmentWithGroupingNextLink(new CustomParameterGroup().withTenant("test_user").withApiVersion("1.6"));
         Assert.assertEquals(10, response.size());
     }
 }
