@@ -31,7 +31,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="operationDefinition">Operation Definition to validate</param>
         /// <returns></returns>
-        public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context)
+        public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths)
         {
             foreach(KeyValuePair<string, Dictionary<string, Operation>> pathCombination in paths)
             {
