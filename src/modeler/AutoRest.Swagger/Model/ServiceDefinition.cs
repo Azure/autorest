@@ -96,6 +96,7 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         [Rule(typeof(ResourceModelValidation))]
         [Rule(typeof(ResourceIsMsResourceValidation))]
+        [Rule(typeof(GuidValidation))]
         public Dictionary<string, Schema> Definitions { get; set; }
 
         /// <summary>

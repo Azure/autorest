@@ -6,7 +6,6 @@ using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Model;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace AutoRest.Swagger.Validation
 {

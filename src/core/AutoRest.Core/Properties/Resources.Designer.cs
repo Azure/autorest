@@ -258,6 +258,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Usage of Guid is not recommanded.
+        /// </summary>
+        public static string GuidUsageNotValid {
+            get {
+                return ResourceManager.GetString("GuidUsageNotValid", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///    Looks up a localized string similar to Each header parameter should have an explicit client name defined for improved code generation output quality..
         /// </summary>
         public static string HeaderShouldHaveClientName {
@@ -490,7 +499,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("PathCannotBeNullOrEmpty", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The PUT/GET/PATCH operations must have same schema response..
         /// </summary>

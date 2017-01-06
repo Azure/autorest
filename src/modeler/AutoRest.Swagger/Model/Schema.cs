@@ -223,7 +223,7 @@ namespace AutoRest.Swagger.Model
             }
         }
 
-        private static Schema FindReferencedSchema(string reference, IDictionary<string, Schema> definitions)
+        public static Schema FindReferencedSchema(string reference, IDictionary<string, Schema> definitions)
         {
             if (reference != null && reference.StartsWith("#", StringComparison.Ordinal))
             {

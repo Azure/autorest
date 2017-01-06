@@ -294,4 +294,7 @@
   <data name="PathCannotBeNullOrEmpty" xml:space="preserve">
     <value>path cannot be null or an empty string or a string with white spaces while getting the parent directory</value>
   </data>
+  <data name="GuidUsageNotValid" xml:space="preserve">
+    <value>Usage of Guid is not recommanded</value>
+  </data>
 </root>
