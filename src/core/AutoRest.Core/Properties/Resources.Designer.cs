@@ -420,6 +420,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to &apos;GET&apos; operation must use method name &apos;Get&apos;, &apos;PUT&apos; operation must use method name &apos;Create&apos;, &apos;PATCH&apos; operation must use method name &apos;Update&apos; and &apos;DELETE&apos; operation must use method name &apos;Delete&apos;..
+        /// </summary>
+        public static string OperationNameNotValid {
+            get {
+                return ResourceManager.GetString("OperationNameNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Parameters &quot;subscriptionId&quot; and &quot;api-version&quot; are not allowed in the operations section.
         /// </summary>
         public static string OperationParametersNotAllowedMessage {
