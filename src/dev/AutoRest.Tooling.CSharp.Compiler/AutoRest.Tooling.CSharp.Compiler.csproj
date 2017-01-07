@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj"  />
+  <Import Project="$(common)common-imports.proj" />
+  <Import Project="$(common)target-framework-library.proj" />
   <Import Project="$(common)package-info.proj" />
   <Import Project="$(common)package-fallback.proj" />
   <PropertyGroup>
     <AssemblyName>AutoRest.Tooling.CSharp.Compiler</AssemblyName>
-    <TargetFramework>netstandard1.4</TargetFramework>
     <PackageTags>Microsoft AutoRest Tooling</PackageTags>
   </PropertyGroup>
   <ItemGroup>
@@ -13,7 +14,6 @@
     <EmbeddedResource Include="compiler\resources\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NETStandard.Library" Version="1.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <PackageReference Include="YamlDotNet.Signed" Version="3.8.0" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />

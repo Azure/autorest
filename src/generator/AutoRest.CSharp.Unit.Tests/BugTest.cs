@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
-
+using AutoRest.Core;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -169,6 +169,14 @@ namespace AutoRest.CSharp.Unit.Tests
 
         protected async Task<CompilationResult> Compile(IFileSystem fileSystem)
         {
+            string dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var assemblies = new[]
+                        {
+                            Path.Combine(dllPath, "Microsoft.Rest.ClientRuntime.dll"),
+                            Path.Combine(dllPath, "Microsoft.Rest.ClientRuntime.Azure.dll")
+                        };
+            assemblies = assemblies.ToList().Concat(System.IO.Directory.GetFiles(dllPath, "*.dll", System.IO.SearchOption.TopDirectoryOnly).Where(f => Path.GetFileName(f).StartsWith("Microsoft.AspNetCore."))).ToArray();
+                
             var compiler = new CSharpCompiler(
                 fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)
                     .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(),
@@ -176,13 +184,7 @@ namespace AutoRest.CSharp.Unit.Tests
                     AppDomain.CurrentDomain.GetAssemblies()
                         .Where(each => !each.IsDynamic && !string.IsNullOrEmpty(each.Location) )
                         .Select(each => each.Location)
-                        .Concat(new[]
-                        {
-                            Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                "Microsoft.Rest.ClientRuntime.dll"),
-                            Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                "Microsoft.Rest.ClientRuntime.Azure.dll")
-                        })
+                        .Concat(assemblies)
                     ));
             var result = await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);
             

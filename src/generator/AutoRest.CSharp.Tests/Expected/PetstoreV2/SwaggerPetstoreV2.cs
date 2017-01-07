@@ -260,7 +260,7 @@ namespace Fixtures.PetstoreV2
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new  System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
+                Converters = new  List<Newtonsoft.Json.JsonConverter>
                     {
                         new Iso8601TimeSpanConverter()
                     }
@@ -272,7 +272,7 @@ namespace Fixtures.PetstoreV2
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
+                Converters = new List<Newtonsoft.Json.JsonConverter>
                     {
                         new Iso8601TimeSpanConverter()
                     }

@@ -19,29 +19,28 @@ namespace AutoRest.CSharp.Azure.Fluent.Model
         {
             _innerTypes = new HashSet<CompositeType>();
 
-            _resourceType = New<CompositeType>(new
-            {
-                Name = "Microsoft.Rest.Azure.Resource",
-                SerializedName = "Resource",
-            });
-
-            var stringType = New<PrimaryType>(KnownPrimaryType.String,new
+            var stringType = New<PrimaryType>(KnownPrimaryType.String, new
             {
                 Name = "string"
             });
 
-            _resourceType.Add(New <Property>(new { Name = "location", SerializedName = "location", Type = stringType }));
-            _resourceType.Add(New <Property>(new { Name = "id", SerializedName = "id", Type = stringType }));
-            _resourceType.Add(New <Property>(new { Name = "name", SerializedName = "name", Type = stringType }));
-            _resourceType.Add(New <Property>(new { Name = "type", SerializedName = "type", Type = stringType }));
-            _resourceType.Add(New <Property>(new { Name = "tags", SerializedName = "tags", Type = New<DictionaryType>(new { ValueType = stringType, NameFormat = "System.Collections.Generic.IDictionary<string, {0}>" }) }));
+            _resourceType = New<CompositeType>(new
+            {
+                SerializedName = "Resource",
+            });
+            _resourceType.Name.FixedValue = "Microsoft.Rest.Azure.Resource";
+            _resourceType.Add(New <Property>(new { Name = "location", SerializedName = "location", ModelType = stringType }));
+            _resourceType.Add(New <Property>(new { Name = "id", SerializedName = "id", ModelType = stringType }));
+            _resourceType.Add(New <Property>(new { Name = "name", SerializedName = "name", ModelType = stringType }));
+            _resourceType.Add(New <Property>(new { Name = "type", SerializedName = "type", ModelType = stringType }));
+            _resourceType.Add(New <Property>(new { Name = "tags", SerializedName = "tags", ModelType = New<DictionaryType>(new { ValueType = stringType, NameFormat = "System.Collections.Generic.IDictionary<string, {0}>" }) }));
 
             _subResourceType = New<CompositeType>(new
             {
-                Name = "Microsoft.Rest.Azure.SubResource",
                 SerializedName = "SubResource"
             });
-            _subResourceType.Add(New<Property>(new { Name = "id", SerializedName = "id", Type = stringType }));
+            _subResourceType.Name.FixedValue = "Microsoft.Rest.Azure.SubResource";
+            _subResourceType.Add(New<Property>(new { Name = "id", SerializedName = "id", ModelType = stringType }));
         }
     }
 }

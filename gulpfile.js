@@ -30,7 +30,7 @@ process.env.MSBUILDDISABLENODEREUSE = 1;
 
 function GetAutoRestFolder() {
   if (isWindows) {
-    return "src/core/AutoRest/bin/Debug/net451/win7-x64/";
+    return "src/core/AutoRest/bin/Debug/netcoreapp1.0/win7-x64/publish/";
   }
   if (isMac) {
     var mac_os_10_11 = "src/core/AutoRest/bin/Debug/net451/osx.10.11-x64/";
@@ -116,7 +116,6 @@ var rubyMappings = {
   'custom_base_uri_more':['../../dev/TestServer/swagger/custom-baseUrl-more-options.json', 'CustomBaseUriMoreModule']
 };
 
-/* Until GO is back in the main branch
 var goMappings = {
   'body-array':['../../dev/TestServer/swagger/body-array.json','arraygroup'],
   'body-boolean':['../../dev/TestServer/swagger/body-boolean.json', 'booleangroup'],
@@ -143,7 +142,6 @@ var goMappings = {
   'paging':['../../dev/TestServer/swagger/paging.json', 'paginggroup'],
   'azurereport':['../../dev/TestServer/swagger/azure-report.json', 'azurereport']
 };
-*/
 
 
 var defaultAzureMappings = {
@@ -192,7 +190,7 @@ gulp.task('regenerate:expected', function(cb){
     [
       'regenerate:expected:cs',
       'regenerate:expected:csazure',
-//      'regenerate:expected:csazurefluent',
+      'regenerate:expected:csazurefluent',
       'regenerate:expected:node',
       'regenerate:expected:nodeazure',
       'regenerate:expected:ruby',
@@ -203,15 +201,16 @@ gulp.task('regenerate:expected', function(cb){
       'regenerate:expected:java',
       'regenerate:expected:javaazure',
       'regenerate:expected:javaazurefluent',
-//      'regenerate:expected:go'
+      'regenerate:expected:go'
     ],
     cb);
 });
 
 gulp.task('regenerate:delete', function(cb){
   del([
-    'src/generator/AutoRest.CSharp.Azure.Tests/Expected',
     'src/generator/AutoRest.CSharp.Tests/Expected',
+    'src/generator/AutoRest.CSharp.Azure.Tests/Expected',
+    'src/generator/AutoRest.CSharp.Azure.Fluent.Tests/Expected',
     'src/generator/AutoRest.NodeJS.Tests/Expected',
     'src/generator/AutoRest.NodeJS.Azure.Tests/Expected',
     'src/generator/AutoRest.Python.Tests/Expected',
@@ -219,7 +218,7 @@ gulp.task('regenerate:delete', function(cb){
     'src/generator/AutoRest.Java.Tests/src/main/java',
     'src/generator/AutoRest.Java.Azure.Tests/src/main/java',
     'src/generator/AutoRest.Java.Azure.Fluent.Tests/src/main/java',
-    //'src/generator/AutoRest.Go.Tests/src/tests/generated'
+    'src/generator/AutoRest.Go.Tests/src/tests/generated'
   ],
   cb);
 });
@@ -410,8 +409,6 @@ gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite'
   }, cb);
 });
 
-/* Disable CSFluent for now.
-
 gulp.task('regenerate:expected:csazurefluent', ['regenerate:expected:csazurefluentcomposite','regenerate:expected:csazurefluentallsync', 'regenerate:expected:csazurefluentnosync'], function (cb) {
   mappings = mergeOptions({
     'AcceptanceTests/AzureBodyDuration': '../../dev/TestServer/swagger/body-duration.json'
@@ -427,7 +424,6 @@ gulp.task('regenerate:expected:csazurefluent', ['regenerate:expected:csazureflue
     'flatteningThreshold': '1'
   }, cb);
 });
-*/
 
 gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds', 'regenerate:expected:cscomposite', 'regenerate:expected:csallsync', 'regenerate:expected:csnosync'], function (cb) {
   mappings = mergeOptions({
@@ -524,7 +520,6 @@ gulp.task('regenerate:expected:csazureallsync', function(cb){
   }, cb);
 });
 
-/* Disable CSFluent for now.
 gulp.task('regenerate:expected:csazurefluentallsync', function(cb){    
   mappings = mergeOptions(
   {
@@ -542,7 +537,6 @@ gulp.task('regenerate:expected:csazurefluentallsync', function(cb){
     'syncMethods': 'all'
   }, cb);
 });
-*/
 
 gulp.task('regenerate:expected:csazurenosync', function(cb){  
   mappings = mergeOptions(
@@ -562,7 +556,6 @@ gulp.task('regenerate:expected:csazurenosync', function(cb){
   }, cb);
 });
 
-/* Disable CSFluent for now.
 gulp.task('regenerate:expected:csazurefluentnosync', function(cb){  
   mappings = mergeOptions(
   {
@@ -580,7 +573,6 @@ gulp.task('regenerate:expected:csazurefluentnosync', function(cb){
     'syncMethods': 'none'
   }, cb);
 });
-*/
 
 gulp.task('regenerate:expected:cscomposite', function (cb) {
   regenExpected({
@@ -608,7 +600,6 @@ gulp.task('regenerate:expected:csazurecomposite', function (cb) {
   }, cb);
 });
 
-/* Until GO is back in master branch
 gulp.task('regenerate:expected:go', function(cb){
   regenExpected({
     'outputBaseDir': 'src/generator/AutoRest.Go.Tests',
@@ -619,9 +610,7 @@ gulp.task('regenerate:expected:go', function(cb){
   }, cb);
   process.env.GOPATH = __dirname + '/src/generator/AutoRest.Go.Tests';
 })
-*/
 
-/* Disable CSFluent for now.
 gulp.task('regenerate:expected:csazurefluentcomposite', function (cb) {
   regenExpected({
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
@@ -635,7 +624,6 @@ gulp.task('regenerate:expected:csazurefluentcomposite', function (cb) {
   }, cb);
 });
 
-*/
 gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], function(){
   var autorestConfigPath = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.json');
   var content = fs.readFileSync(autorestConfigPath).toString();
@@ -807,14 +795,12 @@ gulp.task('test:python:azure', function(cb){ runAsync('tox', {cwd: './src/genera
 gulp.task('test:java', ['test:java:init', 'test:clientruntime:java:init', 'test:clientruntime:javaazure:init'], shell.task(basePathOrThrow() + '/gradlew :codegen-tests:check', {cwd: './', verbosity: 3}));
 gulp.task('test:java:azure', shell.task(basePathOrThrow() + '/gradlew :azure-codegen-tests:check', {cwd: './', verbosity: 3}));
 
-/*
 gulp.task('test:go', ['regenerate:expected:go'], shell.task([
     'glide up',
     'go fmt ./generated/...',
     'go run ./runner.go'
     ], {cwd: './src/generator/AutoRest.Go.Tests/src/tests', verbosity: 3})
 );
-*/
 
 
 var xunitTestsDlls = [
@@ -825,6 +811,7 @@ var xunitNetCoreXproj = [
   'src/core/AutoRest.Extensions.Azure.Tests/project.json',
   'src/core/AutoRest.Extensions.Tests/project.json',
   'src/generator/AutoRest.AzureResourceSchema.Tests/project.json',
+  'src/generator/AutoRest.CSharp.Azure.Fluent.Tests/project.json',
   'src/generator/AutoRest.CSharp.Azure.Tests/project.json',
   'src/generator/AutoRest.CSharp.Tests/project.json',
   'src/generator/AutoRest.CSharp.Unit.Tests/project.json',
@@ -922,8 +909,7 @@ gulp.task('test', function(cb){
       'test:python:azure',
       'test:java',
       'test:java:azure',
-// DISABLING TESTS FOR LANGUAGES UNTIL MERGED INTO NEW MODEL
-//      'test:go',
+      'test:go',
       cb);
   } else {
     runSequence(
@@ -936,9 +922,7 @@ gulp.task('test', function(cb){
       'test:python:azure',
       'test:java',
       'test:java:azure',
-// DISABLING TESTS FOR LANGUAGES UNTIL MERGED INTO NEW MODEL    
-// and solve issues with linux building...
-//      'test:go',
+      'test:go',
       cb);
   }
 });

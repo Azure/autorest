@@ -22,6 +22,10 @@ var _ = chk.Suite(&DictionaryGroupSuite{})
 
 var dictionaryClient = getDictionaryClient()
 
+var one, two, three = "one", "two", "three"
+var four, five, six = "four", "five", "six"
+var seven, eight, nine = "seven", "eight", "nine"
+
 func getDictionaryClient() DictionaryClient {
 	c := NewDictionaryClient()
 	c.BaseURI = utils.GetBaseURI()
@@ -217,26 +221,26 @@ func (s *DictionaryGroupSuite) TestGetDateValidDictionary(c *chk.C) {
 func (s *DictionaryGroupSuite) TestGetDictionaryEmptyDictionary(c *chk.C) {
 	res, err := dictionaryClient.GetDictionaryEmpty()
 	c.Assert(err, chk.IsNil)
-	c.Assert(*res.Value, chk.DeepEquals, map[string]map[string]string{})
+	c.Assert(*res.Value, chk.DeepEquals, map[string]map[string]*string{})
 }
 
 func (s *DictionaryGroupSuite) TestGetDictionaryItemEmptyDictionary(c *chk.C) {
 	res, err := dictionaryClient.GetDictionaryItemEmpty()
 	c.Assert(err, chk.IsNil)
-	c.Assert(*res.Value, chk.DeepEquals, map[string]map[string]string{
-		"0": {"1": "one", "2": "two", "3": "three"},
+	c.Assert(*res.Value, chk.DeepEquals, map[string]map[string]*string{
+		"0": {"1": &one, "2": &two, "3": &three},
 		"1": {},
-		"2": {"7": "seven", "8": "eight", "9": "nine"},
+		"2": {"7": &seven, "8": &eight, "9": &nine},
 	})
 }
 
 func (s *DictionaryGroupSuite) TestGetDictionaryItemNullDictionary(c *chk.C) {
 	res, err := dictionaryClient.GetDictionaryItemNull()
 	c.Assert(err, chk.IsNil)
-	c.Assert(*res.Value, chk.DeepEquals, map[string]map[string]string{
-		"0": {"1": "one", "2": "two", "3": "three"},
+	c.Assert(*res.Value, chk.DeepEquals, map[string]map[string]*string{
+		"0": {"1": &one, "2": &two, "3": &three},
 		"1": nil,
-		"2": {"7": "seven", "8": "eight", "9": "nine"},
+		"2": {"7": &seven, "8": &eight, "9": &nine},
 	})
 }
 
@@ -249,10 +253,10 @@ func (s *DictionaryGroupSuite) TestGetDictionaryNullDictionary(c *chk.C) {
 func (s *DictionaryGroupSuite) TestGetDictionaryValidDictionary(c *chk.C) {
 	res, err := dictionaryClient.GetDictionaryValid()
 	c.Assert(err, chk.IsNil)
-	c.Assert(*res.Value, chk.DeepEquals, map[string]map[string]string{
-		"0": {"1": "one", "2": "two", "3": "three"},
-		"1": {"4": "four", "5": "five", "6": "six"},
-		"2": {"7": "seven", "8": "eight", "9": "nine"},
+	c.Assert(*res.Value, chk.DeepEquals, map[string]map[string]*string{
+		"0": {"1": &one, "2": &two, "3": &three},
+		"1": {"4": &four, "5": &five, "6": &six},
+		"2": {"7": &seven, "8": &eight, "9": &nine},
 	})
 }
 
@@ -404,10 +408,12 @@ func (s *DictionaryGroupSuite) TestPutArrayValidDictionary(c *chk.C) {
 }
 
 func (s *DictionaryGroupSuite) TestPutBooleanTfftDictionary(c *chk.C) {
-	_, err := dictionaryClient.PutBooleanTfft(map[string]bool{"0": true,
-		"1": false,
-		"2": false,
-		"3": true})
+	t, f := true, false
+	_, err := dictionaryClient.PutBooleanTfft(map[string]*bool{
+		"0": &t,
+		"1": &f,
+		"2": &f,
+		"3": &t})
 	c.Assert(err, chk.IsNil)
 }
 
@@ -424,60 +430,65 @@ func (s *DictionaryGroupSuite) TestPutDateTimeRfc1123ValidDictionary(c *chk.C) {
 	dt1, _ := time.Parse(time.RFC1123, "Fri, 01 Dec 2000 00:00:01 GMT")
 	dt2, _ := time.Parse(time.RFC1123, "Wed, 02 Jan 1980 00:11:35 GMT")
 	dt3, _ := time.Parse(time.RFC1123, "Wed, 12 Oct 1492 10:15:01 GMT")
-	_, err := dictionaryClient.PutDateTimeRfc1123Valid(map[string]date.TimeRFC1123{
-		"0": date.TimeRFC1123{dt1},
-		"1": date.TimeRFC1123{dt2},
-		"2": date.TimeRFC1123{dt3},
+	_, err := dictionaryClient.PutDateTimeRfc1123Valid(map[string]*date.TimeRFC1123{
+		"0": &date.TimeRFC1123{dt1},
+		"1": &date.TimeRFC1123{dt2},
+		"2": &date.TimeRFC1123{dt3},
 	})
 	c.Assert(err, chk.IsNil)
 }
 
 func (s *DictionaryGroupSuite) TestPutLongValidDictionary(c *chk.C) {
-	_, err := dictionaryClient.PutLongValid(map[string]int64{
-		"0": 1,
-		"1": -1,
-		"2": 3,
-		"3": 300})
+	v1, v2, v3, v4 := int64(1), int64(-1), int64(3), int64(300)
+	_, err := dictionaryClient.PutLongValid(map[string]*int64{
+		"0": &v1,
+		"1": &v2,
+		"2": &v3,
+		"3": &v4})
 	c.Assert(err, chk.IsNil)
 }
 
 func (s *DictionaryGroupSuite) TestPutIntegerValidDictionary(c *chk.C) {
-	_, err := dictionaryClient.PutIntegerValid(map[string]int32{
-		"0": 1,
-		"1": -1,
-		"2": 3,
-		"3": 300})
+	v1, v2, v3, v4 := int32(1), int32(-1), int32(3), int32(300)
+	_, err := dictionaryClient.PutIntegerValid(map[string]*int32{
+		"0": &v1,
+		"1": &v2,
+		"2": &v3,
+		"3": &v4})
 	c.Assert(err, chk.IsNil)
 }
 
 func (s *DictionaryGroupSuite) TestPutFloatValidDictionary(c *chk.C) {
-	_, err := dictionaryClient.PutFloatValid(map[string]float64{
-		"0": 0.0,
-		"1": -0.01,
-		"2": -1.2e20})
+	f1, f2, f3 := float64(0.0), float64(-0.01), float64(-1.2e20)
+	_, err := dictionaryClient.PutFloatValid(map[string]*float64{
+		"0": &f1,
+		"1": &f2,
+		"2": &f3})
 	c.Assert(err, chk.IsNil)
 }
 
 func (s *DictionaryGroupSuite) TestPutDurationValidDictionary(c *chk.C) {
-	_, err := dictionaryClient.PutDurationValid(map[string]string{
-		"0": "P123DT22H14M12.011S",
-		"1": "P5DT1H"})
+	v1, v2 := "P123DT22H14M12.011S", "P5DT1H"
+	_, err := dictionaryClient.PutDurationValid(map[string]*string{
+		"0": &v1,
+		"1": &v2})
 	c.Assert(err, chk.IsNil)
 }
 
 func (s *DictionaryGroupSuite) TestPutDoubleValidDictionary(c *chk.C) {
-	_, err := dictionaryClient.PutDoubleValid(map[string]float64{
-		"0": 0.0,
-		"1": -0.01,
-		"2": -1.2e20})
+	f1, f2, f3 := float64(0.0), float64(-0.01), float64(-1.2e20)
+	_, err := dictionaryClient.PutDoubleValid(map[string]*float64{
+		"0": &f1,
+		"1": &f2,
+		"2": &f3})
 	c.Assert(err, chk.IsNil)
 }
 
 func (s *DictionaryGroupSuite) TestPutDictionaryValidDictionary(c *chk.C) {
-	_, err := dictionaryClient.PutDictionaryValid(map[string]map[string]string{
-		"0": {"1": "one", "2": "two", "3": "three"},
-		"1": {"4": "four", "5": "five", "6": "six"},
-		"2": {"7": "seven", "8": "eight", "9": "nine"},
+	_, err := dictionaryClient.PutDictionaryValid(map[string]map[string]*string{
+		"0": {"1": &one, "2": &two, "3": &three},
+		"1": {"4": &four, "5": &five, "6": &six},
+		"2": {"7": &seven, "8": &eight, "9": &nine},
 	})
 	c.Assert(err, chk.IsNil)
 }
@@ -486,42 +497,43 @@ func (s *DictionaryGroupSuite) TestPutDateTimeValidDictionary(c *chk.C) {
 	dt1, _ := time.Parse(time.RFC3339, "2000-12-01T00:00:01Z")
 	dt2, _ := time.Parse(time.RFC3339, "1980-01-01T23:11:35Z")
 	dt3, _ := time.Parse(time.RFC3339, "1492-10-12T18:15:01Z")
-	dic := map[string]date.Time{
-		"0": date.Time{dt1},
-		"1": date.Time{dt2},
-		"2": date.Time{dt3},
+	dic := map[string]*date.Time{
+		"0": &date.Time{dt1},
+		"1": &date.Time{dt2},
+		"2": &date.Time{dt3},
 	}
 	_, err := dictionaryClient.PutDateTimeValid(dic)
 	c.Assert(err, chk.IsNil)
 }
 
 func (s *DictionaryGroupSuite) TestPutDateValidDictionary(c *chk.C) {
-	_, err := dictionaryClient.PutDateValid(map[string]date.Date{
-		"0": date.Date{time.Date(2000, time.December, 01, 0, 0, 0, 0, time.UTC)},
-		"1": date.Date{time.Date(1980, time.January, 02, 0, 0, 0, 0, time.UTC)},
-		"2": date.Date{time.Date(1492, time.October, 12, 0, 0, 0, 0, time.UTC)},
+	_, err := dictionaryClient.PutDateValid(map[string]*date.Date{
+		"0": &date.Date{time.Date(2000, time.December, 01, 0, 0, 0, 0, time.UTC)},
+		"1": &date.Date{time.Date(1980, time.January, 02, 0, 0, 0, 0, time.UTC)},
+		"2": &date.Date{time.Date(1492, time.October, 12, 0, 0, 0, 0, time.UTC)},
 	})
 	c.Assert(err, chk.IsNil)
 }
 
 func (s *DictionaryGroupSuite) TestPutStringValidDictionary(c *chk.C) {
-	dic := map[string]string{"0": "foo1", "1": "foo2", "2": "foo3"}
+	foo1, foo2, foo3 := "foo1", "foo2", "foo3"
+	dic := map[string]*string{"0": &foo1, "1": &foo2, "2": &foo3}
 	_, err := dictionaryClient.PutStringValid(dic)
 	c.Assert(err, chk.IsNil)
 }
 
 func (s *DictionaryGroupSuite) TestPutEmptyDictionary(c *chk.C) {
-	_, err := dictionaryClient.PutEmpty(map[string]string{})
+	_, err := dictionaryClient.PutEmpty(map[string]*string{})
 	c.Assert(err, chk.IsNil)
 }
 
 func (s *DictionaryGroupSuite) TestPutComplexValidDictionary(c *chk.C) {
 	var i0, i1, i2 int32 = 1, 3, 5
 	var str0, str1, str2 = "2", "4", "6"
-	_, err := dictionaryClient.PutComplexValid(map[string]Widget{
-		"0": Widget{&i0, &str0},
-		"1": Widget{&i1, &str1},
-		"2": Widget{&i2, &str2},
+	_, err := dictionaryClient.PutComplexValid(map[string]*Widget{
+		"0": &Widget{&i0, &str0},
+		"1": &Widget{&i1, &str1},
+		"2": &Widget{&i2, &str2},
 	})
 	c.Assert(err, chk.IsNil)
 }

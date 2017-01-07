@@ -401,7 +401,7 @@ namespace AutoRest.CSharp
                 }
             }
 #else 
-            return input.Replace("\\","\\\\").Replace("\"","\\\"" );
+            return "\"" + input.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
 #endif             
         }
 

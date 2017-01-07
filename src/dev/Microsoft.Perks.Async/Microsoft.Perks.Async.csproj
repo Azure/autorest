@@ -1,12 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj"  />
+  <Import Project="$(common)common-imports.proj" />
+  <Import Project="$(common)target-framework-library.proj" />
   <Import Project="$(common)fix-resgen.proj" />
   <Import Project="$(common)package-info.proj" />
   <Import Project="$(common)package-fallback.proj" />
-
-  <PropertyGroup>
-    <TargetFramework>netstandard1.4</TargetFramework>
-  </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="**\*.cs" />
@@ -14,8 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NETStandard.Library" Version="1.6" />
-    
     <ProjectReference Include="../Microsoft.Perks/Microsoft.Perks.csproj" />  
     <ProjectReference Include="../Microsoft.Perks.Linq/Microsoft.Perks.Linq.csproj" />  
   </ItemGroup>

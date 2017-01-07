@@ -1,6 +1,9 @@
 
 namespace Petstore.Models
 {
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -28,8 +31,9 @@ namespace Petstore.Models
         /// <summary>
         /// Gets the list of storage accounts and their properties.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
+        [JsonProperty(PropertyName = "value")]
         public System.Collections.Generic.IList<StorageAccountInner> Value { get; set; }
 
     }
 }
+

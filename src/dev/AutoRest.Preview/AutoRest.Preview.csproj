@@ -1,85 +1,78 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
-
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj" />
+  <Import Project="$(common)common-imports.proj" />
+  <Import Project="$(common)package-info.proj" />
+  <Import Project="$(common)package-fallback.proj" />
+  <Import Project="$(common)eval-csharp-targets.proj" />
   <PropertyGroup>
-    <Authors>Microsoft;Azure-SDK</Authors>
-    <TargetFramework>net451</TargetFramework>
-    <RuntimeIdentifiers>win7-x64;win7-x86;osx.10.10-x64;osx.10.11-x64;ubuntu.14.04-x64;ubuntu.16.04-x64;centos.7-x64;rhel.7.2-x64;debian.8-x64;fedora.23-x64;opensuse.13.2-x64</RuntimeIdentifiers>
-    <DelaySign>true</DelaySign>
-    <AssemblyName>AutoRest.Preview</AssemblyName>
+    <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
     <OutputType>Exe</OutputType>
-    <AssemblyOriginatorKeyFile>../../../Tools/MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
+    <TargetFramework>net461</TargetFramework>
+    <AssemblyName>AutoRest.Preview</AssemblyName>
     <PackageTags>Microsoft AutoRest Generator Previewer</PackageTags>
-    <PackageIconUrl>https://cdn.rawgit.com/Azure/AutoRest/7c1576dfb56974176223545cfac5762d168ded5f/Documentation/images/autorest-small-flat.png</PackageIconUrl>
-    <PackageProjectUrl>https://github.com/Azure/AutoRest</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</PackageLicenseUrl>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
-
-  <ItemGroup>
+  <ItemGroup Condition="$(DesignTimeBuild) == true">
     <Compile Include="**\*.cs" />
+    <None Include="**\*.cshtml" />
     <EmbeddedResource Include="**\*.resx" />
     <EmbeddedResource Include="compiler\resources\**\*" />
-    <Content Include="AutoRest.json;default.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\core\AutoRest\Autorest.Release.json">
-      <PackagePath>tools</PackagePath>
-      <Pack>true</Pack>
-    </Content>
-    <Content Include="bin\release\net451\win7-x64\*.exe;bin\release\net451\win7-x64\*.dll" Exclude="**\*.pdb">
-      <PackagePath>tools/</PackagePath>
-      <Pack>true</Pack>
-    </Content>
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\core\AutoRest.Core\AutoRest.Core.csproj" />
-    <ProjectReference Include="..\..\modeler\AutoRest.Swagger\AutoRest.Swagger.csproj" />
-    <ProjectReference Include="..\..\modeler\AutoRest.CompositeSwagger\AutoRest.CompositeSwagger.csproj" />
-    <ProjectReference Include="..\..\generator\AutoRest.CSharp\AutoRest.CSharp.csproj" />
-    <ProjectReference Include="..\..\generator\AutoRest.CSharp.Azure\AutoRest.CSharp.Azure.csproj" />
-    <ProjectReference Include="..\..\generator\AutoRest.NodeJS\AutoRest.NodeJS.csproj" />
-    <ProjectReference Include="..\..\generator\AutoRest.NodeJS.Azure\AutoRest.NodeJS.Azure.csproj" />
-    <ProjectReference Include="..\..\generator\AutoRest.Ruby\AutoRest.Ruby.csproj" />
-    <ProjectReference Include="..\..\generator\AutoRest.Ruby.Azure\AutoRest.Ruby.Azure.csproj" />
-    <ProjectReference Include="..\..\generator\AutoRest.Python\AutoRest.Python.csproj" />
-    <ProjectReference Include="..\..\generator\AutoRest.Python.Azure\AutoRest.Python.Azure.csproj" />
-    <ProjectReference Include="..\..\generator\AutoRest.AzureResourceSchema\AutoRest.AzureResourceSchema.csproj" />
-    <ProjectReference Include="..\AutoRest.Tooling.CSharp.Compiler\AutoRest.Tooling.CSharp.Compiler.csproj" />
-    <ProjectReference Include="..\..\core\AutoRest.Extensions\AutoRest.Extensions.csproj">
-      <FromP2P>true</FromP2P>
-    </ProjectReference>
-    <ProjectReference Include="..\..\core\AutoRest.Extensions.Azure\AutoRest.Extensions.Azure.csproj">
-      <FromP2P>true</FromP2P>
-    </ProjectReference>
+    <Content Include="AutoRest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>[9.0.1,10.0)</Version>
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime">
-      <Version>2.3.2</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure">
-      <Version>3.3.2</Version>
-    </PackageReference>
-    <PackageReference Include="jacobslusser.ScintillaNET.Signed">
-      <Version>3.5.10</Version>
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Drawing" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
-  </PropertyGroup>
-
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.2" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.2" />
+    <PackageReference Include="jacobslusser.ScintillaNET.Signed" Version="3.5.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Core/AutoRest.Core.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Extensions/AutoRest.Extensions.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Extensions.Azure/AutoRest.Extensions.Azure.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/dev/AutoRest.Tooling.CSharp.Compiler/AutoRest.Tooling.CSharp.Compiler.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.AzureResourceSchema/AutoRest.AzureResourceSchema.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp/AutoRest.CSharp.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp.Azure/AutoRest.CSharp.Azure.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp.Azure.Fluent/AutoRest.CSharp.Azure.Fluent.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Go/AutoRest.Go.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Java/AutoRest.Java.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Java.Azure/AutoRest.Java.Azure.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Java.Azure.Fluent/AutoRest.Java.Azure.Fluent.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.NodeJS/AutoRest.NodeJS.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.NodeJS.Azure/AutoRest.NodeJS.Azure.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Python/AutoRest.Python.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Python.Azure/AutoRest.Python.Azure.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Ruby/AutoRest.Ruby.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Ruby.Azure/AutoRest.Ruby.Azure.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.CompositeSwagger/AutoRest.CompositeSwagger.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="AutoRestPreviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AutoRestPreviewForm.Designer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration.Models
 {
-    using Azure;
-    using AcceptanceTestsAzureBodyDuration;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsAzureBodyDuration;
     using Newtonsoft.Json;
     using System.Linq;
 

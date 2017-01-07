@@ -32,6 +32,9 @@
      </PropertyGroup>
     <!-- Compile razor template. -->
     <Exec Command="$(RazorCommand) &quot;$(MSBuildProjectDirectory)\Templates&quot; $(RootNamespace).Templates" />
+    <Exec Command="$(RazorCommand) &quot;$(MSBuildProjectDirectory)\Templates\Rest\Client&quot; $(RootNamespace).Templates.Rest.Client" />
+    <Exec Command="$(RazorCommand) &quot;$(MSBuildProjectDirectory)\Templates\Rest\Common&quot; $(RootNamespace).Templates.Rest.Common" />
+    <Exec Command="$(RazorCommand) &quot;$(MSBuildProjectDirectory)\Templates\Rest\Server&quot; $(RootNamespace).Templates.Rest.Server" />
   </Target>
 
   <Target Name="Build" Condition=" '$(OS)' != 'Windows_NT'">

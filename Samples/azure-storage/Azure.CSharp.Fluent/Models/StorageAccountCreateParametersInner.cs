@@ -1,6 +1,10 @@
 
 namespace Petstore.Models
 {
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -30,18 +34,18 @@ namespace Petstore.Models
         /// <summary>
         /// Gets or sets resource location
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "location")]
+        [JsonProperty(PropertyName = "location")]
         public string Location { get; set; }
 
         /// <summary>
         /// Gets or sets resource tags
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "tags")]
+        [JsonProperty(PropertyName = "tags")]
         public System.Collections.Generic.IDictionary<string, string> Tags { get; set; }
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties")]
+        [JsonProperty(PropertyName = "properties")]
         public StorageAccountPropertiesCreateParameters Properties { get; set; }
 
         /// <summary>
@@ -63,3 +67,4 @@ namespace Petstore.Models
         }
     }
 }
+
