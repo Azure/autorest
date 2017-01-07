@@ -2,9 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
 using System.IO;
 using Microsoft.AspNetCore.Razor;
 using Microsoft.AspNetCore.Razor.CodeGenerators;
+using System.Threading.Tasks;
 
 namespace Microsoft.Rest.RazorCompiler
 {
@@ -29,16 +31,16 @@ namespace Microsoft.Rest.RazorCompiler
         {
             if (Directory.Exists(directory))
             {
-                foreach (string file in Directory.EnumerateFiles(directory, "*.cshtml"))
-                {
-                    GenerateCodeFile(file, Namespace);
-                }
-                
-                foreach (var dir in Directory.EnumerateDirectories(directory) )
-                {
-                    Compile( dir, $"{Namespace}.{ dir.Substring(dir.LastIndexOf("\\") + 1)}" );
-                }
+                var dirs = Directory.EnumerateDirectories(directory).Select( dir  =>  
+                    Task.Factory.StartNew(() => {Compile( dir, $"{Namespace}.{ dir.Substring(dir.LastIndexOf("\\") + 1)}" ); })
+                );
 
+                var all = Directory.EnumerateFiles(directory, "*.cshtml").Select( file =>  
+                    Task.Factory.StartNew(() => { GenerateCodeFile(file, Namespace); })
+                );
+
+                Task.WaitAll( all.Concat(dirs).ToArray());
+               
             }
         }
 
@@ -55,7 +57,7 @@ namespace Microsoft.Rest.RazorCompiler
             var codeLang = new CSharpRazorCodeLanguage();
             var host = new RazorEngineHost(codeLang);
             var fname = Path.Combine(basePath, string.Format("{0}.cs", fileNameNoExtension));
-            if (File.GetLastWriteTimeUtc(fname) >= File.GetLastWriteTimeUtc(cshtmlFilePath))
+            if (File.Exists(fname) && File.GetLastWriteTimeUtc(fname) >= File.GetLastWriteTimeUtc(cshtmlFilePath))
             {
                 return;
             }

@@ -35,7 +35,7 @@
   </Target>
   <Target Name="CompileCshtml" >
     <Message Text="Ensuring cshtml files are generated into .cs files [$(MSBuildProjectName)]" Importance="high" />
-    <Exec Condition="$(SolutionDir) != '' " Command="dotnet razor . $(RootNamespace)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
+    <Exec Condition="$(SolutionDir) != '' " Command="dotnet razor $(MSBuildProjectDirectory) $(RootNamespace)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
   </Target>
 
   <ItemGroup>
