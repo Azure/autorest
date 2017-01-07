@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using AutoRest.Core.Validation;
 using AutoRest.Core.Logging;
 using AutoRest.Core;
-using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Validation;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -248,6 +247,27 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operation-name-not-valid.json"));
             messages.AssertOnlyValidationMessage(typeof(OperationNameValidation), 3);
+        }
+
+        [Fact]
+        public void LongRunningResponseForPutValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "long-running-invalid-response-put.json"));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
+        }
+
+        [Fact]
+        public void LongRunningResponseForPostValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "long-running-invalid-response-post.json"));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
+        }
+
+        [Fact]
+        public void LongRunningResponseForDeleteValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "long-running-invalid-response-delete.json"));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
         }
     }
 
