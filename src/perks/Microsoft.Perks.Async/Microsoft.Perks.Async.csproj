@@ -5,8 +5,9 @@
   <Import Project="$(common)fix-resgen.proj" />
   <Import Project="$(common)package-info.proj" />
   <Import Project="$(common)package-fallback.proj" />
+  <Import Project="$(common)eval-csharp-targets.proj" />
 
-  <ItemGroup>
+  <ItemGroup Condition="$(DesignTimeBuild) == true">
     <Compile Include="**\*.cs" />
     <EmbeddedResource Include="**\*.resx" />
   </ItemGroup>

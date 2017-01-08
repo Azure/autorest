@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" InitialTargets="InstallRazor;CompileCshtml">
+<Project ToolsVersion="4.0" InitialTargets="InstallRazor"> <!--  ;CompileCshtml -->
   <!-- Place this line at the top of any msbuild script (ie, csproj, etc) -->
   <PropertyGroup><PowerShell># 2>nul || type %~df0|C:\Windows\system32\find.exe /v "setlocal"|C:\Windows\system32\find.exe /v "errorlevel"|powershell.exe -noninteractive -&amp; exit %errorlevel% || #</PowerShell></PropertyGroup>
 
-  <Target Name="InstallRazor"  Condition="$(RestoreRecursive) AND !Exists('$(USERPROFILE)/.nuget/packages/.tools/dotnet-razor')" >
+  <Target Name="InstallRazor"  Condition="$(_ProjectRestoreType) == 'NETCore' AND !Exists('$(USERPROFILE)/.nuget/packages/.tools/dotnet-razor')" >
     <!-- When doing a dotnet restore, we want to ensure that the dotnet-razor tool gets installed -->
-        <Message Text="Making sure we have dotnet-razor" Importance="high" />
+    <Message Text="Making sure we have dotnet-razor" Importance="high" />
     <PropertyGroup>
       <InstallRazor>$(Powershell)
         #
@@ -33,9 +33,9 @@
     <Exec Condition="$(SolutionDir) != '' " Command="$(InstallRazor)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
   
   </Target>
-  <Target Name="CompileCshtml" >
-    <Message Text="Ensuring cshtml files are generated into .cs files [$(MSBuildProjectName)]" Importance="high" />
-    <Exec Condition="$(SolutionDir) != '' " Command="dotnet razor $(MSBuildProjectDirectory) $(RootNamespace)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
+  <Target Name="CompileCshtml" BeforeTargets="EnumerateCompileAndEmbeddedResource" >
+    <Message Text="Ensuring cshtml files are generated into .cs files [$(MSBuildProjectName)]" Importance="high" Condition="$(_ProjectRestoreType) != 'NETCore'" />
+    <Exec Condition="$(SolutionDir) != ''" Command="dotnet razor $(MSBuildProjectDirectory) $(RootNamespace)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" IgnoreExitCode="true" /> 
   </Target>
 
   <ItemGroup>

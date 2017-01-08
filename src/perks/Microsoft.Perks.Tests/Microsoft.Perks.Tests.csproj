@@ -9,7 +9,7 @@
     <TargetFramework>netcoreapp1.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="$(DesignTimeBuild) == true">
     <Compile Include="**\*.cs" />
     <EmbeddedResource Include="**\*.resx" />
   </ItemGroup>
