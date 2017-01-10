@@ -70,7 +70,7 @@ namespace AutoRest.Swagger.Validation
                 return false;
             }
 
-            if (resolver.Unwrap(response200.Schema) == null && resolver.Unwrap(response201.Schema) == null)
+            if (resolver.Unwrap(response200?.Schema) == null && resolver.Unwrap(response201?.Schema) == null)
             {
                 return false;
             }
@@ -120,7 +120,7 @@ namespace AutoRest.Swagger.Validation
                 return false;
             }
 
-            if (resolver.Unwrap(response200.Schema) == null && resolver.Unwrap(response204.Schema) == null)
+            if (resolver.Unwrap(response200?.Schema) == null && resolver.Unwrap(response204?.Schema) == null)
             {
                 return false;
             }
