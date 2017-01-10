@@ -2,15 +2,18 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Globalization;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Validation;
 using AutoRest.Properties;
 using AutoRest.Simplify;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using System.IO;
+using Newtonsoft.Json;
+using AutoRest.Core.Parsing;
 
 namespace AutoRest
 {
@@ -31,11 +34,21 @@ namespace AutoRest
                         settings = Settings.Create(args);
 
                         // set up logging
+                        var suppressions = new List<Suppression>();
                         Logger.Instance.AddListener(new ConsoleLogListener(
                             settings.Debug ? Category.Debug : Category.Warning,
                             settings.ValidationLevel,
-                            settings.Verbose));
+                            settings.Verbose,
+                            suppressions));
                         Logger.Instance.AddListener(new SignalingLogListener(Category.Error, _ => generationFailed = true));
+
+                        // check for suppressions
+                        if (settings.FileSystem.FileExists(settings.Input + ".suppressions"))
+                        {
+                            var suppressionsRaw = settings.FileSystem.ReadFileAsText(settings.Input + ".suppressions");
+                            suppressionsRaw = suppressionsRaw.EnsureYamlIsJson();
+                            suppressions.AddRange(JsonConvert.DeserializeObject<Suppression[]>(suppressionsRaw));
+                        }
 
                         // determine some reasonable default namespace
                         if (settings.Namespace == null)
