@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoRest.Core.Validation;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -30,11 +31,13 @@ namespace AutoRest.Core.Logging
         public ConsoleLogListener(
             Category minSeverityForStdout = Category.Info,
             Category minSeverityForStderr = Category.Error,
-            bool verbose = false)
+            bool verbose = false,
+            IEnumerable<Suppression> suppressions = null)
         {
             MinSeverityForStdout = minSeverityForStdout;
             MinSeverityForStderr = minSeverityForStderr;
             Verbose = verbose;
+            Suppressions = suppressions?.AsEnumerable() ?? Enumerable.Empty<Suppression>();
         }
 
         public Category MinSeverityForStdout { get; }
@@ -43,8 +46,16 @@ namespace AutoRest.Core.Logging
 
         public bool Verbose { get; }
 
+        public IEnumerable<Suppression> Suppressions { get; }
+
         public void Log(LogMessage message)
         {
+            // check for suppression
+            if (Suppressions.Any(s => s.Matches(message)))
+            {
+                return;
+            }
+
             if (message.Severity >= MinSeverityForStdout || message.Severity >= MinSeverityForStderr)
             {
                 var original = Console.ForegroundColor;
