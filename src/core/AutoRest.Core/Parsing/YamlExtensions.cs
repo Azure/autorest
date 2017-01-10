@@ -74,7 +74,7 @@ namespace AutoRest.Core.Parsing
         {
             using (var writer = new StringWriter())
             {
-                new YamlStream(new YamlDocument(node)).Save(writer);
+                new YamlStream(new YamlDocument(node)).Save(writer, false);
                 return writer.ToString();
             }
         }

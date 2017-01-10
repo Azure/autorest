@@ -310,6 +310,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public Category ValidationLevel { get; set; }
 
         /// <summary>
+        /// If set, preprocesses a swagger file by expanding and resolving some advanced convenience syntax.
+        /// </summary>
+        [SettingsAlias("preprocessor")]
+        public bool Preprocessor { get; set; }
+
+        /// <summary>
         /// Factory method to generate CodeGenerationSettings from command line arguments.
         /// Matches dictionary keys to the settings properties.
         /// </summary>
