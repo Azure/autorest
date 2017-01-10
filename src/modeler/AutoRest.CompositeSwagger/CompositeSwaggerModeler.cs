@@ -70,9 +70,7 @@ namespace AutoRest.CompositeSwagger
             // merge child swaggers
             foreach (var childSwaggerPath in compositeSwaggerModel.Documents)
             {
-                var childSwaggerRaw = Settings.FileSystem.ReadFileAsText(childSwaggerPath);
-                childSwaggerRaw = SwaggerParser.Normalize(childSwaggerPath, childSwaggerRaw);
-                var childSwagger = childSwaggerRaw.ParseYaml() as YamlMappingNode;
+                var childSwagger = Settings.FileSystem.ReadFileAsText(childSwaggerPath).ParseYaml() as YamlMappingNode;
                 if (childSwagger == null)
                 {
                     throw ErrorManager.CreateError("Failed parsing referenced Swagger file {0}.", childSwaggerPath);
