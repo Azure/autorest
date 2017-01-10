@@ -57,139 +57,139 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * used by Retrofit to perform actually REST calls.
      */
     interface MultipleResponsesService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError200Valid" })
         @GET("http/payloads/200/A/204/none/default/Error/response/200/valid")
         Observable<Response<ResponseBody>> get200Model204NoModelDefaultError200Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError204Valid" })
         @GET("http/payloads/200/A/204/none/default/Error/response/204/none")
         Observable<Response<ResponseBody>> get200Model204NoModelDefaultError204Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError201Invalid" })
         @GET("http/payloads/200/A/204/none/default/Error/response/201/valid")
         Observable<Response<ResponseBody>> get200Model204NoModelDefaultError201Invalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError202None" })
         @GET("http/payloads/200/A/204/none/default/Error/response/202/none")
         Observable<Response<ResponseBody>> get200Model204NoModelDefaultError202None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError400Valid" })
         @GET("http/payloads/200/A/204/none/default/Error/response/400/valid")
         Observable<Response<ResponseBody>> get200Model204NoModelDefaultError400Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model201ModelDefaultError200Valid" })
         @GET("http/payloads/200/A/201/B/default/Error/response/200/valid")
         Observable<Response<ResponseBody>> get200Model201ModelDefaultError200Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model201ModelDefaultError201Valid" })
         @GET("http/payloads/200/A/201/B/default/Error/response/201/valid")
         Observable<Response<ResponseBody>> get200Model201ModelDefaultError201Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model201ModelDefaultError400Valid" })
         @GET("http/payloads/200/A/201/B/default/Error/response/400/valid")
         Observable<Response<ResponseBody>> get200Model201ModelDefaultError400Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA201ModelC404ModelDDefaultError200Valid" })
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
         Observable<Response<ResponseBody>> get200ModelA201ModelC404ModelDDefaultError200Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA201ModelC404ModelDDefaultError201Valid" })
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
         Observable<Response<ResponseBody>> get200ModelA201ModelC404ModelDDefaultError201Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA201ModelC404ModelDDefaultError404Valid" })
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
         Observable<Response<ResponseBody>> get200ModelA201ModelC404ModelDDefaultError404Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA201ModelC404ModelDDefaultError400Valid" })
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
         Observable<Response<ResponseBody>> get200ModelA201ModelC404ModelDDefaultError400Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultError202None" })
         @GET("http/payloads/202/none/204/none/default/Error/response/202/none")
         Observable<Response<ResponseBody>> get202None204NoneDefaultError202None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultError204None" })
         @GET("http/payloads/202/none/204/none/default/Error/response/204/none")
         Observable<Response<ResponseBody>> get202None204NoneDefaultError204None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultError400Valid" })
         @GET("http/payloads/202/none/204/none/default/Error/response/400/valid")
         Observable<Response<ResponseBody>> get202None204NoneDefaultError400Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultNone202Invalid" })
         @GET("http/payloads/202/none/204/none/default/none/response/202/invalid")
         Observable<Response<ResponseBody>> get202None204NoneDefaultNone202Invalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultNone204None" })
         @GET("http/payloads/202/none/204/none/default/none/response/204/none")
         Observable<Response<ResponseBody>> get202None204NoneDefaultNone204None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultNone400None" })
         @GET("http/payloads/202/none/204/none/default/none/response/400/none")
         Observable<Response<ResponseBody>> get202None204NoneDefaultNone400None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultNone400Invalid" })
         @GET("http/payloads/202/none/204/none/default/none/response/400/invalid")
         Observable<Response<ResponseBody>> get202None204NoneDefaultNone400Invalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA200Valid" })
         @GET("http/payloads/default/A/response/200/valid")
         Observable<Response<ResponseBody>> getDefaultModelA200Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA200None" })
         @GET("http/payloads/default/A/response/200/none")
         Observable<Response<ResponseBody>> getDefaultModelA200None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA400Valid" })
         @GET("http/payloads/default/A/response/400/valid")
         Observable<Response<ResponseBody>> getDefaultModelA400Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA400None" })
         @GET("http/payloads/default/A/response/400/none")
         Observable<Response<ResponseBody>> getDefaultModelA400None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone200Invalid" })
         @GET("http/payloads/default/none/response/200/invalid")
         Observable<Response<ResponseBody>> getDefaultNone200Invalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone200None" })
         @GET("http/payloads/default/none/response/200/none")
         Observable<Response<ResponseBody>> getDefaultNone200None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone400Invalid" })
         @GET("http/payloads/default/none/response/400/invalid")
         Observable<Response<ResponseBody>> getDefaultNone400Invalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone400None" })
         @GET("http/payloads/default/none/response/400/none")
         Observable<Response<ResponseBody>> getDefaultNone400None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA200None" })
         @GET("http/payloads/200/A/response/200/none")
         Observable<Response<ResponseBody>> get200ModelA200None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA200Valid" })
         @GET("http/payloads/200/A/response/200/valid")
         Observable<Response<ResponseBody>> get200ModelA200Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA200Invalid" })
         @GET("http/payloads/200/A/response/200/invalid")
         Observable<Response<ResponseBody>> get200ModelA200Invalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA400None" })
         @GET("http/payloads/200/A/response/400/none")
         Observable<Response<ResponseBody>> get200ModelA400None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA400Valid" })
         @GET("http/payloads/200/A/response/400/valid")
         Observable<Response<ResponseBody>> get200ModelA400Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA400Invalid" })
         @GET("http/payloads/200/A/response/400/invalid")
         Observable<Response<ResponseBody>> get200ModelA400Invalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA202Valid" })
         @GET("http/payloads/200/A/response/202/valid")
         Observable<Response<ResponseBody>> get200ModelA202Valid();
 

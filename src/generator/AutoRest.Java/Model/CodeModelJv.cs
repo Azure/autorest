@@ -54,12 +54,15 @@ namespace AutoRest.Java.Model
         public IEnumerable<MethodJv> RootMethods => Methods.Where(m => m.Group.IsNullOrEmpty()).OfType<MethodJv>();
 
         [JsonIgnore]
+        public string FullyQualifiedDomainName => Namespace.ToLower(CultureInfo.InvariantCulture) + "." + this.Name;
+
+        [JsonIgnore]
         public virtual IEnumerable<string> ImplImports
         {
             get
             {
                 HashSet<string> classes = new HashSet<string>();
-                classes.Add(Namespace.ToLower(CultureInfo.InvariantCulture) + "." + this.Name);
+                classes.Add(FullyQualifiedDomainName);
                 foreach(var methodGroupFullType in this.AllOperations.Select(op => op.MethodGroupFullType).Distinct())
                 {
                     classes.Add(methodGroupFullType);

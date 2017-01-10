@@ -1,6 +1,6 @@
 package fixtures.azurespecials;
 
-import com.microsoft.rest.RequestIdHeaderInterceptor;
+import com.microsoft.rest.interceptors.RequestIdHeaderInterceptor;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.credentials.TokenCredentials;
 

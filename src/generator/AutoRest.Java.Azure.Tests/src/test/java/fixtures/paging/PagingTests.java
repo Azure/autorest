@@ -1,13 +1,19 @@
 package fixtures.paging;
 
+import com.microsoft.azure.AzureResponseBuilder;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
+import com.microsoft.azure.serializer.AzureJacksonAdapter;
+import com.microsoft.rest.LogLevel;
+import com.microsoft.rest.RestClient;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.interceptors.LoggingInterceptor;
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.Product;
 import fixtures.paging.models.ProductProperties;
+import okhttp3.logging.HttpLoggingInterceptor;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,7 +29,13 @@ public class PagingTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestPagingTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
+        RestClient restClient = new RestClient.Builder()
+                .withBaseUrl("http://localhost:3000")
+                .withInterceptor(new LoggingInterceptor(LogLevel.BODY_AND_HEADERS))
+                .withSerializerAdapter(new AzureJacksonAdapter())
+                .withResponseBuilderFactory(new AzureResponseBuilder.Factory())
+                .build();
+        client = new AutoRestPagingTestServiceImpl(restClient);;
     }
 
     @Test

@@ -54,35 +54,35 @@ public final class DatesImpl implements Dates {
      * used by Retrofit to perform actually REST calls.
      */
     interface DatesService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates getNull" })
         @GET("date/null")
         Observable<Response<ResponseBody>> getNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates getInvalidDate" })
         @GET("date/invaliddate")
         Observable<Response<ResponseBody>> getInvalidDate();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates getOverflowDate" })
         @GET("date/overflowdate")
         Observable<Response<ResponseBody>> getOverflowDate();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates getUnderflowDate" })
         @GET("date/underflowdate")
         Observable<Response<ResponseBody>> getUnderflowDate();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates putMaxDate" })
         @PUT("date/max")
         Observable<Response<ResponseBody>> putMaxDate(@Body LocalDate dateBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates getMaxDate" })
         @GET("date/max")
         Observable<Response<ResponseBody>> getMaxDate();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates putMinDate" })
         @PUT("date/min")
         Observable<Response<ResponseBody>> putMinDate(@Body LocalDate dateBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates getMinDate" })
         @GET("date/min")
         Observable<Response<ResponseBody>> getMinDate();
 

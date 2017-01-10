@@ -55,15 +55,15 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * used by Retrofit to perform actually REST calls.
      */
     interface PolymorphismsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms getValid" })
         @GET("complex/polymorphism/valid")
         Observable<Response<ResponseBody>> getValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValid" })
         @PUT("complex/polymorphism/valid")
         Observable<Response<ResponseBody>> putValid(@Body Fish complexBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValidMissingRequired" })
         @PUT("complex/polymorphism/missingrequired/invalid")
         Observable<Response<ResponseBody>> putValidMissingRequired(@Body Fish complexBody);
 

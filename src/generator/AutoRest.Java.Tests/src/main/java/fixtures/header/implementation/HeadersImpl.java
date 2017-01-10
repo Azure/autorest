@@ -72,119 +72,119 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * used by Retrofit to perform actually REST calls.
      */
     interface HeadersService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramExistingKey" })
         @POST("header/param/existingkey")
         Observable<Response<ResponseBody>> paramExistingKey(@Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseExistingKey" })
         @POST("header/response/existingkey")
         Observable<Response<ResponseBody>> responseExistingKey();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramProtectedKey" })
         @POST("header/param/protectedkey")
         Observable<Response<ResponseBody>> paramProtectedKey(@Header("Content-Type") String contentType);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseProtectedKey" })
         @POST("header/response/protectedkey")
         Observable<Response<ResponseBody>> responseProtectedKey();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramInteger" })
         @POST("header/param/prim/integer")
         Observable<Response<ResponseBody>> paramInteger(@Header("scenario") String scenario, @Header("value") int value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseInteger" })
         @POST("header/response/prim/integer")
         Observable<Response<ResponseBody>> responseInteger(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramLong" })
         @POST("header/param/prim/long")
         Observable<Response<ResponseBody>> paramLong(@Header("scenario") String scenario, @Header("value") long value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseLong" })
         @POST("header/response/prim/long")
         Observable<Response<ResponseBody>> responseLong(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramFloat" })
         @POST("header/param/prim/float")
         Observable<Response<ResponseBody>> paramFloat(@Header("scenario") String scenario, @Header("value") double value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseFloat" })
         @POST("header/response/prim/float")
         Observable<Response<ResponseBody>> responseFloat(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramDouble" })
         @POST("header/param/prim/double")
         Observable<Response<ResponseBody>> paramDouble(@Header("scenario") String scenario, @Header("value") double value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseDouble" })
         @POST("header/response/prim/double")
         Observable<Response<ResponseBody>> responseDouble(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramBool" })
         @POST("header/param/prim/bool")
         Observable<Response<ResponseBody>> paramBool(@Header("scenario") String scenario, @Header("value") boolean value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseBool" })
         @POST("header/response/prim/bool")
         Observable<Response<ResponseBody>> responseBool(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramString" })
         @POST("header/param/prim/string")
         Observable<Response<ResponseBody>> paramString(@Header("scenario") String scenario, @Header("value") String value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseString" })
         @POST("header/response/prim/string")
         Observable<Response<ResponseBody>> responseString(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramDate" })
         @POST("header/param/prim/date")
         Observable<Response<ResponseBody>> paramDate(@Header("scenario") String scenario, @Header("value") LocalDate value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseDate" })
         @POST("header/response/prim/date")
         Observable<Response<ResponseBody>> responseDate(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramDatetime" })
         @POST("header/param/prim/datetime")
         Observable<Response<ResponseBody>> paramDatetime(@Header("scenario") String scenario, @Header("value") DateTime value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseDatetime" })
         @POST("header/response/prim/datetime")
         Observable<Response<ResponseBody>> responseDatetime(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramDatetimeRfc1123" })
         @POST("header/param/prim/datetimerfc1123")
         Observable<Response<ResponseBody>> paramDatetimeRfc1123(@Header("scenario") String scenario, @Header("value") DateTimeRfc1123 value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseDatetimeRfc1123" })
         @POST("header/response/prim/datetimerfc1123")
         Observable<Response<ResponseBody>> responseDatetimeRfc1123(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramDuration" })
         @POST("header/param/prim/duration")
         Observable<Response<ResponseBody>> paramDuration(@Header("scenario") String scenario, @Header("value") Period value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseDuration" })
         @POST("header/response/prim/duration")
         Observable<Response<ResponseBody>> responseDuration(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramByte" })
         @POST("header/param/prim/byte")
         Observable<Response<ResponseBody>> paramByte(@Header("scenario") String scenario, @Header("value") String value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseByte" })
         @POST("header/response/prim/byte")
         Observable<Response<ResponseBody>> responseByte(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramEnum" })
         @POST("header/param/prim/enum")
         Observable<Response<ResponseBody>> paramEnum(@Header("scenario") String scenario, @Header("value") GreyscaleColors value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseEnum" })
         @POST("header/response/prim/enum")
         Observable<Response<ResponseBody>> responseEnum(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers customRequestId" })
         @POST("header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
         Observable<Response<ResponseBody>> customRequestId();
 

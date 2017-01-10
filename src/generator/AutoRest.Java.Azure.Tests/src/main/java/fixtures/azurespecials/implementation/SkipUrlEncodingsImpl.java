@@ -54,31 +54,31 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * used by Retrofit to perform actually REST calls.
      */
     interface SkipUrlEncodingsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getMethodPathValid" })
         @GET("azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
         Observable<Response<ResponseBody>> getMethodPathValid(@Path(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getPathPathValid" })
         @GET("azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}")
         Observable<Response<ResponseBody>> getPathPathValid(@Path(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getSwaggerPathValid" })
         @GET("azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}")
         Observable<Response<ResponseBody>> getSwaggerPathValid(@Path(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getMethodQueryValid" })
         @GET("azurespecials/skipUrlEncoding/method/query/valid")
         Observable<Response<ResponseBody>> getMethodQueryValid(@Query(value = "q1", encoded = true) String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getMethodQueryNull" })
         @GET("azurespecials/skipUrlEncoding/method/query/null")
         Observable<Response<ResponseBody>> getMethodQueryNull(@Query(value = "q1", encoded = true) String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getPathQueryValid" })
         @GET("azurespecials/skipUrlEncoding/path/query/valid")
         Observable<Response<ResponseBody>> getPathQueryValid(@Query(value = "q1", encoded = true) String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getSwaggerQueryValid" })
         @GET("azurespecials/skipUrlEncoding/swagger/query/valid")
         Observable<Response<ResponseBody>> getSwaggerQueryValid(@Query(value = "q1", encoded = true) String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 

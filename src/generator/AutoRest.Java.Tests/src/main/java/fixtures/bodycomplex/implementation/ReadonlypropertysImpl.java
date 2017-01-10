@@ -55,11 +55,11 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * used by Retrofit to perform actually REST calls.
      */
     interface ReadonlypropertysService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Readonlypropertys getValid" })
         @GET("complex/readonlyproperty/valid")
         Observable<Response<ResponseBody>> getValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Readonlypropertys putValid" })
         @PUT("complex/readonlyproperty/valid")
         Observable<Response<ResponseBody>> putValid(@Body ReadonlyObj complexBody);
 

@@ -101,7 +101,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestReportServiceService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.report.AutoRestReportService getReport" })
         @GET("report")
         Observable<Response<ResponseBody>> getReport();
 

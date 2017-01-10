@@ -57,31 +57,31 @@ public final class ImplicitsImpl implements Implicits {
      * used by Retrofit to perform actually REST calls.
      */
     interface ImplicitsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredPath" })
         @GET("reqopt/implicit/required/path/{pathParameter}")
         Observable<Response<ResponseBody>> getRequiredPath(@Path("pathParameter") String pathParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits putOptionalQuery" })
         @PUT("reqopt/implicit/optional/query")
         Observable<Response<ResponseBody>> putOptionalQuery(@Query("queryParameter") String queryParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits putOptionalHeader" })
         @PUT("reqopt/implicit/optional/header")
         Observable<Response<ResponseBody>> putOptionalHeader(@Header("queryParameter") String queryParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits putOptionalBody" })
         @PUT("reqopt/implicit/optional/body")
         Observable<Response<ResponseBody>> putOptionalBody(@Body String bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredGlobalPath" })
         @GET("reqopt/global/required/path/{required-global-path}")
         Observable<Response<ResponseBody>> getRequiredGlobalPath(@Path("required-global-path") String requiredGlobalPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredGlobalQuery" })
         @GET("reqopt/global/required/query")
         Observable<Response<ResponseBody>> getRequiredGlobalQuery(@Query("required-global-query") String requiredGlobalQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits getOptionalGlobalQuery" })
         @GET("reqopt/global/optional/query")
         Observable<Response<ResponseBody>> getOptionalGlobalQuery(@Query("optional-global-query") Integer optionalGlobalQuery);
 

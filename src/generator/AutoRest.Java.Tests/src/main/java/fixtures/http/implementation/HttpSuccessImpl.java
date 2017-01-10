@@ -57,75 +57,75 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpSuccessService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess head200" })
         @HEAD("http/success/200")
         Observable<Response<Void>> head200();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess get200" })
         @GET("http/success/200")
         Observable<Response<ResponseBody>> get200();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess put200" })
         @PUT("http/success/200")
         Observable<Response<ResponseBody>> put200(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess patch200" })
         @PATCH("http/success/200")
         Observable<Response<ResponseBody>> patch200(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess post200" })
         @POST("http/success/200")
         Observable<Response<ResponseBody>> post200(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess delete200" })
         @HTTP(path = "http/success/200", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete200(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess put201" })
         @PUT("http/success/201")
         Observable<Response<ResponseBody>> put201(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess post201" })
         @POST("http/success/201")
         Observable<Response<ResponseBody>> post201(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess put202" })
         @PUT("http/success/202")
         Observable<Response<ResponseBody>> put202(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess patch202" })
         @PATCH("http/success/202")
         Observable<Response<ResponseBody>> patch202(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess post202" })
         @POST("http/success/202")
         Observable<Response<ResponseBody>> post202(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess delete202" })
         @HTTP(path = "http/success/202", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete202(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess head204" })
         @HEAD("http/success/204")
         Observable<Response<Void>> head204();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess put204" })
         @PUT("http/success/204")
         Observable<Response<ResponseBody>> put204(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess patch204" })
         @PATCH("http/success/204")
         Observable<Response<ResponseBody>> patch204(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess post204" })
         @POST("http/success/204")
         Observable<Response<ResponseBody>> post204(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess delete204" })
         @HTTP(path = "http/success/204", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete204(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess head404" })
         @HEAD("http/success/404")
         Observable<Response<Void>> head404();
 

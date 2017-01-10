@@ -53,27 +53,27 @@ public final class BoolsImpl implements Bools {
      * used by Retrofit to perform actually REST calls.
      */
     interface BoolsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getTrue" })
         @GET("bool/true")
         Observable<Response<ResponseBody>> getTrue();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools putTrue" })
         @PUT("bool/true")
         Observable<Response<ResponseBody>> putTrue(@Body boolean boolBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getFalse" })
         @GET("bool/false")
         Observable<Response<ResponseBody>> getFalse();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools putFalse" })
         @PUT("bool/false")
         Observable<Response<ResponseBody>> putFalse(@Body boolean boolBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getNull" })
         @GET("bool/null")
         Observable<Response<ResponseBody>> getNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getInvalid" })
         @GET("bool/invalid")
         Observable<Response<ResponseBody>> getInvalid();
 

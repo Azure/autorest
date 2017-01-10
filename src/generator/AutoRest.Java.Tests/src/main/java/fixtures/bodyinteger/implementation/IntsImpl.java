@@ -55,59 +55,59 @@ public final class IntsImpl implements Ints {
      * used by Retrofit to perform actually REST calls.
      */
     interface IntsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getNull" })
         @GET("int/null")
         Observable<Response<ResponseBody>> getNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getInvalid" })
         @GET("int/invalid")
         Observable<Response<ResponseBody>> getInvalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getOverflowInt32" })
         @GET("int/overflowint32")
         Observable<Response<ResponseBody>> getOverflowInt32();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getUnderflowInt32" })
         @GET("int/underflowint32")
         Observable<Response<ResponseBody>> getUnderflowInt32();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getOverflowInt64" })
         @GET("int/overflowint64")
         Observable<Response<ResponseBody>> getOverflowInt64();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getUnderflowInt64" })
         @GET("int/underflowint64")
         Observable<Response<ResponseBody>> getUnderflowInt64();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints putMax32" })
         @PUT("int/max/32")
         Observable<Response<ResponseBody>> putMax32(@Body int intBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints putMax64" })
         @PUT("int/max/64")
         Observable<Response<ResponseBody>> putMax64(@Body long intBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints putMin32" })
         @PUT("int/min/32")
         Observable<Response<ResponseBody>> putMin32(@Body int intBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints putMin64" })
         @PUT("int/min/64")
         Observable<Response<ResponseBody>> putMin64(@Body long intBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getUnixTime" })
         @GET("int/unixtime")
         Observable<Response<ResponseBody>> getUnixTime();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints putUnixTimeDate" })
         @PUT("int/unixtime")
         Observable<Response<ResponseBody>> putUnixTimeDate(@Body long intBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getInvalidUnixTime" })
         @GET("int/invalidunixtime")
         Observable<Response<ResponseBody>> getInvalidUnixTime();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getNullUnixTime" })
         @GET("int/nullunixtime")
         Observable<Response<ResponseBody>> getNullUnixTime();
 

@@ -176,7 +176,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestReportServiceForAzureService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurereport.AutoRestReportServiceForAzure getReport" })
         @GET("report/azure")
         Observable<Response<ResponseBody>> getReport(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 

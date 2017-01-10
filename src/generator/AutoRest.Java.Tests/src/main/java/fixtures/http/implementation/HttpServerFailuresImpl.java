@@ -55,19 +55,19 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpServerFailuresService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpServerFailures head501" })
         @HEAD("http/failure/server/501")
         Observable<Response<Void>> head501();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpServerFailures get501" })
         @GET("http/failure/server/501")
         Observable<Response<ResponseBody>> get501();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpServerFailures post505" })
         @POST("http/failure/server/505")
         Observable<Response<ResponseBody>> post505(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpServerFailures delete505" })
         @HTTP(path = "http/failure/server/505", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete505(@Body Boolean booleanValue);
 

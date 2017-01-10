@@ -57,95 +57,95 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpClientFailuresService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures head400" })
         @HEAD("http/failure/client/400")
         Observable<Response<Void>> head400();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures get400" })
         @GET("http/failure/client/400")
         Observable<Response<ResponseBody>> get400();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures put400" })
         @PUT("http/failure/client/400")
         Observable<Response<ResponseBody>> put400(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures patch400" })
         @PATCH("http/failure/client/400")
         Observable<Response<ResponseBody>> patch400(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures post400" })
         @POST("http/failure/client/400")
         Observable<Response<ResponseBody>> post400(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures delete400" })
         @HTTP(path = "http/failure/client/400", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete400(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures head401" })
         @HEAD("http/failure/client/401")
         Observable<Response<Void>> head401();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures get402" })
         @GET("http/failure/client/402")
         Observable<Response<ResponseBody>> get402();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures get403" })
         @GET("http/failure/client/403")
         Observable<Response<ResponseBody>> get403();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures put404" })
         @PUT("http/failure/client/404")
         Observable<Response<ResponseBody>> put404(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures patch405" })
         @PATCH("http/failure/client/405")
         Observable<Response<ResponseBody>> patch405(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures post406" })
         @POST("http/failure/client/406")
         Observable<Response<ResponseBody>> post406(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures delete407" })
         @HTTP(path = "http/failure/client/407", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete407(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures put409" })
         @PUT("http/failure/client/409")
         Observable<Response<ResponseBody>> put409(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures head410" })
         @HEAD("http/failure/client/410")
         Observable<Response<Void>> head410();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures get411" })
         @GET("http/failure/client/411")
         Observable<Response<ResponseBody>> get411();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures get412" })
         @GET("http/failure/client/412")
         Observable<Response<ResponseBody>> get412();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures put413" })
         @PUT("http/failure/client/413")
         Observable<Response<ResponseBody>> put413(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures patch414" })
         @PATCH("http/failure/client/414")
         Observable<Response<ResponseBody>> patch414(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures post415" })
         @POST("http/failure/client/415")
         Observable<Response<ResponseBody>> post415(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures get416" })
         @GET("http/failure/client/416")
         Observable<Response<ResponseBody>> get416();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures delete417" })
         @HTTP(path = "http/failure/client/417", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete417(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpClientFailures head429" })
         @HEAD("http/failure/client/429")
         Observable<Response<Void>> head429();
 

@@ -55,27 +55,27 @@ public final class DictionarysImpl implements Dictionarys {
      * used by Retrofit to perform actually REST calls.
      */
     interface DictionarysService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Dictionarys getValid" })
         @GET("complex/dictionary/typed/valid")
         Observable<Response<ResponseBody>> getValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Dictionarys putValid" })
         @PUT("complex/dictionary/typed/valid")
         Observable<Response<ResponseBody>> putValid(@Body DictionaryWrapper complexBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Dictionarys getEmpty" })
         @GET("complex/dictionary/typed/empty")
         Observable<Response<ResponseBody>> getEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Dictionarys putEmpty" })
         @PUT("complex/dictionary/typed/empty")
         Observable<Response<ResponseBody>> putEmpty(@Body DictionaryWrapper complexBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Dictionarys getNull" })
         @GET("complex/dictionary/typed/null")
         Observable<Response<ResponseBody>> getNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Dictionarys getNotProvided" })
         @GET("complex/dictionary/typed/notprovided")
         Observable<Response<ResponseBody>> getNotProvided();
 

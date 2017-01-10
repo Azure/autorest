@@ -64,7 +64,7 @@ public final class FormdatasImpl implements Formdatas {
         @Streaming
         Observable<Response<ResponseBody>> uploadFile(@Part("fileContent") RequestBody fileContent, @Part("fileName") String fileName);
 
-        @Headers("Content-Type: application/octet-stream")
+        @Headers({ "Content-Type: application/octet-stream", "x-ms-logging-context: fixtures.bodyformdata.Formdatas uploadFileViaBody" })
         @PUT("formdata/stream/uploadfile")
         @Streaming
         Observable<Response<ResponseBody>> uploadFileViaBody(@Body RequestBody fileContent);

@@ -55,11 +55,11 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * used by Retrofit to perform actually REST calls.
      */
     interface PolymorphicrecursivesService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphicrecursives getValid" })
         @GET("complex/polymorphicrecursive/valid")
         Observable<Response<ResponseBody>> getValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphicrecursives putValid" })
         @PUT("complex/polymorphicrecursive/valid")
         Observable<Response<ResponseBody>> putValid(@Body Fish complexBody);
 

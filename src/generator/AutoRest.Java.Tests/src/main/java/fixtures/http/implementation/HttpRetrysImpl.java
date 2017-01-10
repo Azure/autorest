@@ -57,35 +57,35 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpRetrysService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys head408" })
         @HEAD("http/retry/408")
         Observable<Response<Void>> head408();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys put500" })
         @PUT("http/retry/500")
         Observable<Response<ResponseBody>> put500(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys patch500" })
         @PATCH("http/retry/500")
         Observable<Response<ResponseBody>> patch500(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys get502" })
         @GET("http/retry/502")
         Observable<Response<ResponseBody>> get502();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys post503" })
         @POST("http/retry/503")
         Observable<Response<ResponseBody>> post503(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys delete503" })
         @HTTP(path = "http/retry/503", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete503(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys put504" })
         @PUT("http/retry/504")
         Observable<Response<ResponseBody>> put504(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys patch504" })
         @PATCH("http/retry/504")
         Observable<Response<ResponseBody>> patch504(@Body Boolean booleanValue);
 

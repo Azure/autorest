@@ -55,23 +55,23 @@ public final class ArraysImpl implements Arrays {
      * used by Retrofit to perform actually REST calls.
      */
     interface ArraysService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Arrays getValid" })
         @GET("complex/array/valid")
         Observable<Response<ResponseBody>> getValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Arrays putValid" })
         @PUT("complex/array/valid")
         Observable<Response<ResponseBody>> putValid(@Body ArrayWrapper complexBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Arrays getEmpty" })
         @GET("complex/array/empty")
         Observable<Response<ResponseBody>> getEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Arrays putEmpty" })
         @PUT("complex/array/empty")
         Observable<Response<ResponseBody>> putEmpty(@Body ArrayWrapper complexBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Arrays getNotProvided" })
         @GET("complex/array/notprovided")
         Observable<Response<ResponseBody>> getNotProvided();
 

@@ -55,7 +55,7 @@ public final class PathsImpl implements Paths {
      * used by Retrofit to perform actually REST calls.
      */
     interface PathsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.custombaseurimoreoptions.Paths getEmpty" })
         @GET("customuri/{subscriptionId}/{keyName}")
         Observable<Response<ResponseBody>> getEmpty(@Path("keyName") String keyName, @Path("subscriptionId") String subscriptionId, @Query("keyVersion") String keyVersion, @Header("x-ms-parameterized-host") String parameterizedHost);
 

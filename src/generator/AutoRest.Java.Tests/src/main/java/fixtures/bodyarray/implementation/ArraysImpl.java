@@ -64,263 +64,263 @@ public final class ArraysImpl implements Arrays {
      * used by Retrofit to perform actually REST calls.
      */
     interface ArraysService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getNull" })
         @GET("array/null")
         Observable<Response<ResponseBody>> getNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getInvalid" })
         @GET("array/invalid")
         Observable<Response<ResponseBody>> getInvalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getEmpty" })
         @GET("array/empty")
         Observable<Response<ResponseBody>> getEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putEmpty" })
         @PUT("array/empty")
         Observable<Response<ResponseBody>> putEmpty(@Body List<String> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getBooleanTfft" })
         @GET("array/prim/boolean/tfft")
         Observable<Response<ResponseBody>> getBooleanTfft();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putBooleanTfft" })
         @PUT("array/prim/boolean/tfft")
         Observable<Response<ResponseBody>> putBooleanTfft(@Body List<Boolean> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getBooleanInvalidNull" })
         @GET("array/prim/boolean/true.null.false")
         Observable<Response<ResponseBody>> getBooleanInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getBooleanInvalidString" })
         @GET("array/prim/boolean/true.boolean.false")
         Observable<Response<ResponseBody>> getBooleanInvalidString();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getIntegerValid" })
         @GET("array/prim/integer/1.-1.3.300")
         Observable<Response<ResponseBody>> getIntegerValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putIntegerValid" })
         @PUT("array/prim/integer/1.-1.3.300")
         Observable<Response<ResponseBody>> putIntegerValid(@Body List<Integer> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getIntInvalidNull" })
         @GET("array/prim/integer/1.null.zero")
         Observable<Response<ResponseBody>> getIntInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getIntInvalidString" })
         @GET("array/prim/integer/1.integer.0")
         Observable<Response<ResponseBody>> getIntInvalidString();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getLongValid" })
         @GET("array/prim/long/1.-1.3.300")
         Observable<Response<ResponseBody>> getLongValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putLongValid" })
         @PUT("array/prim/long/1.-1.3.300")
         Observable<Response<ResponseBody>> putLongValid(@Body List<Long> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getLongInvalidNull" })
         @GET("array/prim/long/1.null.zero")
         Observable<Response<ResponseBody>> getLongInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getLongInvalidString" })
         @GET("array/prim/long/1.integer.0")
         Observable<Response<ResponseBody>> getLongInvalidString();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getFloatValid" })
         @GET("array/prim/float/0--0.01-1.2e20")
         Observable<Response<ResponseBody>> getFloatValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putFloatValid" })
         @PUT("array/prim/float/0--0.01-1.2e20")
         Observable<Response<ResponseBody>> putFloatValid(@Body List<Double> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getFloatInvalidNull" })
         @GET("array/prim/float/0.0-null-1.2e20")
         Observable<Response<ResponseBody>> getFloatInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getFloatInvalidString" })
         @GET("array/prim/float/1.number.0")
         Observable<Response<ResponseBody>> getFloatInvalidString();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDoubleValid" })
         @GET("array/prim/double/0--0.01-1.2e20")
         Observable<Response<ResponseBody>> getDoubleValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDoubleValid" })
         @PUT("array/prim/double/0--0.01-1.2e20")
         Observable<Response<ResponseBody>> putDoubleValid(@Body List<Double> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDoubleInvalidNull" })
         @GET("array/prim/double/0.0-null-1.2e20")
         Observable<Response<ResponseBody>> getDoubleInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDoubleInvalidString" })
         @GET("array/prim/double/1.number.0")
         Observable<Response<ResponseBody>> getDoubleInvalidString();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getStringValid" })
         @GET("array/prim/string/foo1.foo2.foo3")
         Observable<Response<ResponseBody>> getStringValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putStringValid" })
         @PUT("array/prim/string/foo1.foo2.foo3")
         Observable<Response<ResponseBody>> putStringValid(@Body List<String> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getStringWithNull" })
         @GET("array/prim/string/foo.null.foo2")
         Observable<Response<ResponseBody>> getStringWithNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getStringWithInvalid" })
         @GET("array/prim/string/foo.123.foo2")
         Observable<Response<ResponseBody>> getStringWithInvalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getUuidValid" })
         @GET("array/prim/uuid/valid")
         Observable<Response<ResponseBody>> getUuidValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putUuidValid" })
         @PUT("array/prim/uuid/valid")
         Observable<Response<ResponseBody>> putUuidValid(@Body List<UUID> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getUuidInvalidChars" })
         @GET("array/prim/uuid/invalidchars")
         Observable<Response<ResponseBody>> getUuidInvalidChars();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateValid" })
         @GET("array/prim/date/valid")
         Observable<Response<ResponseBody>> getDateValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDateValid" })
         @PUT("array/prim/date/valid")
         Observable<Response<ResponseBody>> putDateValid(@Body List<LocalDate> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateInvalidNull" })
         @GET("array/prim/date/invalidnull")
         Observable<Response<ResponseBody>> getDateInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateInvalidChars" })
         @GET("array/prim/date/invalidchars")
         Observable<Response<ResponseBody>> getDateInvalidChars();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeValid" })
         @GET("array/prim/date-time/valid")
         Observable<Response<ResponseBody>> getDateTimeValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDateTimeValid" })
         @PUT("array/prim/date-time/valid")
         Observable<Response<ResponseBody>> putDateTimeValid(@Body List<DateTime> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeInvalidNull" })
         @GET("array/prim/date-time/invalidnull")
         Observable<Response<ResponseBody>> getDateTimeInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeInvalidChars" })
         @GET("array/prim/date-time/invalidchars")
         Observable<Response<ResponseBody>> getDateTimeInvalidChars();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeRfc1123Valid" })
         @GET("array/prim/date-time-rfc1123/valid")
         Observable<Response<ResponseBody>> getDateTimeRfc1123Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDateTimeRfc1123Valid" })
         @PUT("array/prim/date-time-rfc1123/valid")
         Observable<Response<ResponseBody>> putDateTimeRfc1123Valid(@Body List<DateTimeRfc1123> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDurationValid" })
         @GET("array/prim/duration/valid")
         Observable<Response<ResponseBody>> getDurationValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDurationValid" })
         @PUT("array/prim/duration/valid")
         Observable<Response<ResponseBody>> putDurationValid(@Body List<Period> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getByteValid" })
         @GET("array/prim/byte/valid")
         Observable<Response<ResponseBody>> getByteValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putByteValid" })
         @PUT("array/prim/byte/valid")
         Observable<Response<ResponseBody>> putByteValid(@Body List<byte[]> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getByteInvalidNull" })
         @GET("array/prim/byte/invalidnull")
         Observable<Response<ResponseBody>> getByteInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getBase64Url" })
         @GET("array/prim/base64url/valid")
         Observable<Response<ResponseBody>> getBase64Url();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexNull" })
         @GET("array/complex/null")
         Observable<Response<ResponseBody>> getComplexNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexEmpty" })
         @GET("array/complex/empty")
         Observable<Response<ResponseBody>> getComplexEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexItemNull" })
         @GET("array/complex/itemnull")
         Observable<Response<ResponseBody>> getComplexItemNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexItemEmpty" })
         @GET("array/complex/itemempty")
         Observable<Response<ResponseBody>> getComplexItemEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexValid" })
         @GET("array/complex/valid")
         Observable<Response<ResponseBody>> getComplexValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putComplexValid" })
         @PUT("array/complex/valid")
         Observable<Response<ResponseBody>> putComplexValid(@Body List<Product> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayNull" })
         @GET("array/array/null")
         Observable<Response<ResponseBody>> getArrayNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayEmpty" })
         @GET("array/array/empty")
         Observable<Response<ResponseBody>> getArrayEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayItemNull" })
         @GET("array/array/itemnull")
         Observable<Response<ResponseBody>> getArrayItemNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayItemEmpty" })
         @GET("array/array/itemempty")
         Observable<Response<ResponseBody>> getArrayItemEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayValid" })
         @GET("array/array/valid")
         Observable<Response<ResponseBody>> getArrayValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putArrayValid" })
         @PUT("array/array/valid")
         Observable<Response<ResponseBody>> putArrayValid(@Body List<List<String>> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryNull" })
         @GET("array/dictionary/null")
         Observable<Response<ResponseBody>> getDictionaryNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryEmpty" })
         @GET("array/dictionary/empty")
         Observable<Response<ResponseBody>> getDictionaryEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryItemNull" })
         @GET("array/dictionary/itemnull")
         Observable<Response<ResponseBody>> getDictionaryItemNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryItemEmpty" })
         @GET("array/dictionary/itemempty")
         Observable<Response<ResponseBody>> getDictionaryItemEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryValid" })
         @GET("array/dictionary/valid")
         Observable<Response<ResponseBody>> getDictionaryValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDictionaryValid" })
         @PUT("array/dictionary/valid")
         Observable<Response<ResponseBody>> putDictionaryValid(@Body List<Map<String, String>> arrayBody);
 

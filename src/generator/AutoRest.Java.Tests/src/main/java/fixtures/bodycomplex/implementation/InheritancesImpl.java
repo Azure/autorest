@@ -55,11 +55,11 @@ public final class InheritancesImpl implements Inheritances {
      * used by Retrofit to perform actually REST calls.
      */
     interface InheritancesService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Inheritances getValid" })
         @GET("complex/inheritance/valid")
         Observable<Response<ResponseBody>> getValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Inheritances putValid" })
         @PUT("complex/inheritance/valid")
         Observable<Response<ResponseBody>> putValid(@Body Siamese complexBody);
 

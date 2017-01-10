@@ -59,139 +59,139 @@ public final class QueriesImpl implements Queries {
      * used by Retrofit to perform actually REST calls.
      */
     interface QueriesService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getBooleanTrue" })
         @GET("queries/bool/true")
         Observable<Response<ResponseBody>> getBooleanTrue(@Query("boolQuery") boolean boolQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getBooleanFalse" })
         @GET("queries/bool/false")
         Observable<Response<ResponseBody>> getBooleanFalse(@Query("boolQuery") boolean boolQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getBooleanNull" })
         @GET("queries/bool/null")
         Observable<Response<ResponseBody>> getBooleanNull(@Query("boolQuery") Boolean boolQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getIntOneMillion" })
         @GET("queries/int/1000000")
         Observable<Response<ResponseBody>> getIntOneMillion(@Query("intQuery") int intQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getIntNegativeOneMillion" })
         @GET("queries/int/-1000000")
         Observable<Response<ResponseBody>> getIntNegativeOneMillion(@Query("intQuery") int intQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getIntNull" })
         @GET("queries/int/null")
         Observable<Response<ResponseBody>> getIntNull(@Query("intQuery") Integer intQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getTenBillion" })
         @GET("queries/long/10000000000")
         Observable<Response<ResponseBody>> getTenBillion(@Query("longQuery") long longQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getNegativeTenBillion" })
         @GET("queries/long/-10000000000")
         Observable<Response<ResponseBody>> getNegativeTenBillion(@Query("longQuery") long longQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getLongNull" })
         @GET("queries/long/null")
         Observable<Response<ResponseBody>> getLongNull(@Query("longQuery") Long longQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries floatScientificPositive" })
         @GET("queries/float/1.034E+20")
         Observable<Response<ResponseBody>> floatScientificPositive(@Query("floatQuery") double floatQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries floatScientificNegative" })
         @GET("queries/float/-1.034E-20")
         Observable<Response<ResponseBody>> floatScientificNegative(@Query("floatQuery") double floatQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries floatNull" })
         @GET("queries/float/null")
         Observable<Response<ResponseBody>> floatNull(@Query("floatQuery") Double floatQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries doubleDecimalPositive" })
         @GET("queries/double/9999999.999")
         Observable<Response<ResponseBody>> doubleDecimalPositive(@Query("doubleQuery") double doubleQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries doubleDecimalNegative" })
         @GET("queries/double/-9999999.999")
         Observable<Response<ResponseBody>> doubleDecimalNegative(@Query("doubleQuery") double doubleQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries doubleNull" })
         @GET("queries/double/null")
         Observable<Response<ResponseBody>> doubleNull(@Query("doubleQuery") Double doubleQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries stringUnicode" })
         @GET("queries/string/unicode/")
         Observable<Response<ResponseBody>> stringUnicode(@Query("stringQuery") String stringQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries stringUrlEncoded" })
         @GET("queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
         Observable<Response<ResponseBody>> stringUrlEncoded(@Query("stringQuery") String stringQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries stringEmpty" })
         @GET("queries/string/empty")
         Observable<Response<ResponseBody>> stringEmpty(@Query("stringQuery") String stringQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries stringNull" })
         @GET("queries/string/null")
         Observable<Response<ResponseBody>> stringNull(@Query("stringQuery") String stringQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries enumValid" })
         @GET("queries/enum/green%20color")
         Observable<Response<ResponseBody>> enumValid(@Query("enumQuery") UriColor enumQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries enumNull" })
         @GET("queries/enum/null")
         Observable<Response<ResponseBody>> enumNull(@Query("enumQuery") UriColor enumQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries byteMultiByte" })
         @GET("queries/byte/multibyte")
         Observable<Response<ResponseBody>> byteMultiByte(@Query("byteQuery") String byteQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries byteEmpty" })
         @GET("queries/byte/empty")
         Observable<Response<ResponseBody>> byteEmpty(@Query("byteQuery") String byteQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries byteNull" })
         @GET("queries/byte/null")
         Observable<Response<ResponseBody>> byteNull(@Query("byteQuery") String byteQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries dateValid" })
         @GET("queries/date/2012-01-01")
         Observable<Response<ResponseBody>> dateValid(@Query("dateQuery") LocalDate dateQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries dateNull" })
         @GET("queries/date/null")
         Observable<Response<ResponseBody>> dateNull(@Query("dateQuery") LocalDate dateQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries dateTimeValid" })
         @GET("queries/datetime/2012-01-01T01%3A01%3A01Z")
         Observable<Response<ResponseBody>> dateTimeValid(@Query("dateTimeQuery") DateTime dateTimeQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries dateTimeNull" })
         @GET("queries/datetime/null")
         Observable<Response<ResponseBody>> dateTimeNull(@Query("dateTimeQuery") DateTime dateTimeQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringCsvValid" })
         @GET("queries/array/csv/string/valid")
         Observable<Response<ResponseBody>> arrayStringCsvValid(@Query("arrayQuery") String arrayQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringCsvNull" })
         @GET("queries/array/csv/string/null")
         Observable<Response<ResponseBody>> arrayStringCsvNull(@Query("arrayQuery") String arrayQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringCsvEmpty" })
         @GET("queries/array/csv/string/empty")
         Observable<Response<ResponseBody>> arrayStringCsvEmpty(@Query("arrayQuery") String arrayQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringSsvValid" })
         @GET("queries/array/ssv/string/valid")
         Observable<Response<ResponseBody>> arrayStringSsvValid(@Query("arrayQuery") String arrayQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringTsvValid" })
         @GET("queries/array/tsv/string/valid")
         Observable<Response<ResponseBody>> arrayStringTsvValid(@Query("arrayQuery") String arrayQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringPipesValid" })
         @GET("queries/array/pipes/string/valid")
         Observable<Response<ResponseBody>> arrayStringPipesValid(@Query("arrayQuery") String arrayQuery);
 

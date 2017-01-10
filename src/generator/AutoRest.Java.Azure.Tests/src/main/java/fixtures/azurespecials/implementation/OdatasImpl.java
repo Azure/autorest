@@ -53,7 +53,7 @@ public final class OdatasImpl implements Odatas {
      * used by Retrofit to perform actually REST calls.
      */
     interface OdatasService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Odatas getWithFilter" })
         @GET("azurespecials/odata/filter")
         Observable<Response<ResponseBody>> getWithFilter(@Query("$filter") String filter, @Query("$top") Integer top, @Query("$orderby") String orderby, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 

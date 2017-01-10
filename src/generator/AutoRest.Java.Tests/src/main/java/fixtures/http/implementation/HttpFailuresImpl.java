@@ -52,15 +52,15 @@ public final class HttpFailuresImpl implements HttpFailures {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpFailuresService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpFailures getEmptyError" })
         @GET("http/failure/emptybody/error")
         Observable<Response<ResponseBody>> getEmptyError();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpFailures getNoModelError" })
         @GET("http/failure/nomodel/error")
         Observable<Response<ResponseBody>> getNoModelError();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpFailures getNoModelEmpty" })
         @GET("http/failure/nomodel/empty")
         Observable<Response<ResponseBody>> getNoModelEmpty();
 

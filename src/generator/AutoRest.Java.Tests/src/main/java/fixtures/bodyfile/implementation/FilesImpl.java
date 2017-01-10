@@ -53,17 +53,17 @@ public final class FilesImpl implements Files {
      * used by Retrofit to perform actually REST calls.
      */
     interface FilesService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyfile.Files getFile" })
         @GET("files/stream/nonempty")
         @Streaming
         Observable<Response<ResponseBody>> getFile();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyfile.Files getFileLarge" })
         @GET("files/stream/verylarge")
         @Streaming
         Observable<Response<ResponseBody>> getFileLarge();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyfile.Files getEmptyFile" })
         @GET("files/stream/empty")
         @Streaming
         Observable<Response<ResponseBody>> getEmptyFile();

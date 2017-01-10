@@ -16,7 +16,7 @@ if (method.RequestContentType == "multipart/form-data" || method.RequestContentT
 }
 else
 {
-@:    @@Headers("Content-Type: @method.RequestContentType")
+@:    @@Headers({ "Content-Type: @method.RequestContentType", "x-ms-logging-context: @Model.FullyQualifiedDomainName @method.Name" })
 }
 if (method.HttpMethod == HttpMethod.Delete)
 {
