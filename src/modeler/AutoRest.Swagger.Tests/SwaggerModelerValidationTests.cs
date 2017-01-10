@@ -243,6 +243,7 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+<<<<<<< 4ba43929de05245bff3b39037de802bc1dd3c3b0
         public void OperationNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operation-name-not-valid.json"));
@@ -268,6 +269,20 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "long-running-invalid-response-delete.json"));
             messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
+        }
+
+        [Fact]
+        public void MutabilityNotModeledValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "mutability-invalid-values.json"));
+            messages.AssertOnlyValidationMessage(typeof(MutabilityValidValuesRule), 2);
+        }
+
+        [Fact]
+        public void MutabilityNotModeledWithReadOnlyValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "mutability-invalid-values-for-readonly.json"));
+            messages.AssertOnlyValidationMessage(typeof(MutabilityWithReadOnlyRule), 2);
         }
     }
 
