@@ -10,8 +10,10 @@ using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class OperationNameValidation : TypedRule<Dictionary<string, Operation>>
+    public class OperationNameValidation : TypedRule<string>
     {
+        private const string NOUN_VERB_PATTERN = "^(\\w+)?_(\\w+)$";
+
         /// <summary>
         /// The template message for this Rule. 
         /// </summary>
@@ -41,44 +43,30 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// Message will be shown at the path level.
         /// </remarks>
-        public override bool IsValid(Dictionary<string, Operation> operationDefinition)
+        public override bool IsValid(string entity, RuleContext context)
         {
-            bool areAllOperationNameValid = true;
-            foreach (KeyValuePair<string, Operation> entry in operationDefinition)
+            bool isOperationNameValid = true;
+            string httpVerb = context?.Parent?.Key;
+
+            if (httpVerb.Equals("GET", StringComparison.InvariantCultureIgnoreCase))
             {
-                bool isOperationNameValid = true;
-                string httpVerb = entry.Key;
-                string operationId = entry.Value.OperationId;
-
-                if (httpVerb.Equals("GET", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    isOperationNameValid = operationId.EndsWith("_Get") || operationId.Contains("_List");
-                }
-                else if (httpVerb.Equals("PUT", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    isOperationNameValid = operationId.EndsWith("_Create");
-                }
-                else if (httpVerb.Equals("PATCH", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    isOperationNameValid = operationId.EndsWith("_Update");
-                }
-                else if (httpVerb.Equals("DELETE", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    isOperationNameValid = operationId.EndsWith("_Delete");
-                }
-                else
-                {
-                    continue;
-                }
-
-                // If any of the operation name under the path is invalid, then areAllOperationNameValid is false
-                if (!isOperationNameValid && areAllOperationNameValid)
-                {
-                    areAllOperationNameValid = isOperationNameValid;
-                }
+                isOperationNameValid = (entity.Contains("_") && (entity.EndsWith("_Get") || entity.Contains("_List"))) || 
+                    (entity.StartsWith("get") || entity.StartsWith("list"));
+            }
+            else if (httpVerb.Equals("PUT", StringComparison.InvariantCultureIgnoreCase))
+            {
+                isOperationNameValid = (entity.Contains("_") && entity.EndsWith("_Create")) || entity.StartsWith("create");
+            }
+            else if (httpVerb.Equals("PATCH", StringComparison.InvariantCultureIgnoreCase))
+            {
+                isOperationNameValid = (entity.Contains("_") && entity.EndsWith("_Update")) || entity.StartsWith("update");
+            }
+            else if (httpVerb.Equals("DELETE", StringComparison.InvariantCultureIgnoreCase))
+            {
+                isOperationNameValid = (entity.Contains("_") && entity.EndsWith("_Delete")) || entity.StartsWith("update");
             }
 
-            return areAllOperationNameValid;
+            return isOperationNameValid;
         }
     }
 }
