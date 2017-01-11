@@ -304,6 +304,16 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "pageable-nextlink-defined-allof.json"));
             Assert.Empty(messages.Where(m => m.Severity >= Category.Warning));
         }
+
+        /// <summary>
+        /// Verifies that a x-ms-long-running extension response modeled correctly
+        /// </summary>
+        [Fact]
+        public void LongRunningResponseDefined()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "long-running-valid-response.json"));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation), 0);
+        }
     }
 
     #endregion
