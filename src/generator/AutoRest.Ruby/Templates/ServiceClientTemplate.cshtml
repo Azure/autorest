@@ -47,11 +47,11 @@ module @Settings.Namespace
     #
     @if (!Model.IsCustomBaseUri)
     {
-    @:def initialize(credentials, base_url = nil, options = nil)
+    @:def initialize(credentials = nil, base_url = nil, options = nil)
     }
     else
     {
-    @:def initialize(credentials, options = nil)
+    @:def initialize(credentials = nil, options = nil)
     }
       super(credentials, options)
       @if (!Model.IsCustomBaseUri)
@@ -63,8 +63,7 @@ module @Settings.Namespace
       @:@@base_url = '@Model.BaseUrl'
       }
       @EmptyLine
-      fail ArgumentError, 'credentials is nil' if credentials.nil?
-      fail ArgumentError, 'invalid type of credentials input parameter' unless credentials.is_a?(MsRest::ServiceClientCredentials)
+      fail ArgumentError, 'invalid type of credentials input parameter' unless credentials.is_a?(MsRest::ServiceClientCredentials) unless credentials.nil?
       @@credentials = credentials
       @EmptyLine
       @foreach (var operation in Model.Operations.Where( each => !each.IsCodeModelMethodGroup))
