@@ -1,6 +1,6 @@
-﻿@using AutoRest.CSharp.Azure.TemplateModels
+﻿@using AutoRest.CSharp.Azure.Model
 @using AutoRest.CSharp.Azure.Templates
-@inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.TemplateModels.AzureMethodGroupTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodGroupCs>
 @Header("// ")
 @EmptyLine
 namespace @Settings.Namespace
@@ -12,12 +12,12 @@ namespace @Settings.Namespace
 }
 @EmptyLine
     /// <summary>
-    /// @(Model.MethodGroupType) operations.
+    /// @(Model.TypeName) operations.
     /// </summary>
-    internal partial class @(Model.MethodGroupType) : Microsoft.Rest.IServiceOperations<@(Model.Name)>, I@(Model.MethodGroupType)
+    internal partial class @(Model.TypeName) : Microsoft.Rest.IServiceOperations<@Model.CodeModel.Name>, I@(Model.TypeName)
     {
         /// <summary>
-        /// Initializes a new instance of the @(Model.MethodGroupType) class.
+        /// Initializes a new instance of the @(Model.TypeName) class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
@@ -25,7 +25,7 @@ namespace @Settings.Namespace
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal @(Model.MethodGroupType)(@(Model.Name) client)
+        internal @(Model.TypeName)(@Model.CodeModel.Name client)
         {
             if (client == null) 
             {
@@ -35,13 +35,13 @@ namespace @Settings.Namespace
         }
         @EmptyLine
         /// <summary>
-        /// Gets a reference to the @(Model.Name)
+        /// Gets a reference to the @Model.CodeModel.Name
         /// </summary>
-        public @(Model.Name) Client { get; private set; }
+        public @Model.CodeModel.Name Client { get; private set; }
         @EmptyLine
-        @foreach (var method in Model.MethodTemplateModels)
+        @foreach (var method in Model.Methods)
         {
-        @:@(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
+        @:@(Include(new AzureMethodTemplate(), (MethodCsa)method))
         @EmptyLine
         }
     }

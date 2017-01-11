@@ -27,7 +27,7 @@
           "200": {
             "description": "A list of caches",
             "schema": {
-              "$ref": "Product"
+              "$ref": "#/definitions/Product"
             },
             "headers": {
               "X-Rate-Limit-Limit": {
@@ -88,7 +88,7 @@
           "200": {
             "description": "A list of caches",
             "schema": {
-              "$ref": "Product"
+              "$ref": "#/definitions/Product"
             },
             "headers": {
               "X-Rate-Limit-Limit": {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoRest.Core.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,26 +37,27 @@ namespace AutoRest.Core.Validation
 
         public DataDirection Direction { get; set; } = DataDirection.None;
 
-        public string Path { get { return string.Join("/", _path.Reverse()); } }
+        public ObjectPath Path { get { return _path.Peek(); } }
 
-        public void Push(string element) { _path.Push(element); }
+        public void PushIndex(int index) { _path.Push(Path.AppendIndex(index)); }
+        public void PushProperty(string property) { _path.Push(Path.AppendProperty(property)); }
         public void Pop() { _path.Pop(); }
 
-        private Stack<string> _path = new Stack<string>();
+        private Stack<ObjectPath> _path = new Stack<ObjectPath>(new [] { ObjectPath.Empty });
 
         public void LogInfo(MessageTemplate template, params object[] formatArguments)
         {
-            _messages.Add(new ComparisonMessage(template, this.Path, Logging.LogEntrySeverity.Info, formatArguments));
+            _messages.Add(new ComparisonMessage(template, Path, Category.Info, formatArguments));
         }
 
         public void LogError(MessageTemplate template, params object[] formatArguments)
         {
-            _messages.Add(new ComparisonMessage(template, this.Path, Logging.LogEntrySeverity.Error, formatArguments));
+            _messages.Add(new ComparisonMessage(template, Path, Category.Error, formatArguments));
         }
 
         public void LogBreakingChange(MessageTemplate template, params object[] formatArguments)
         {
-            _messages.Add(new ComparisonMessage(template, this.Path, this.Strict ? Logging.LogEntrySeverity.Error : Logging.LogEntrySeverity.Warning, formatArguments));
+            _messages.Add(new ComparisonMessage(template, Path, Strict ? Category.Error : Category.Warning, formatArguments));
         }
 
         public IEnumerable<ComparisonMessage> Messages {  get { return _messages; } }

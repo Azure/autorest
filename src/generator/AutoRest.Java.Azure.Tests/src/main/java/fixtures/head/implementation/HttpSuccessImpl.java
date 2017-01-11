@@ -88,7 +88,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<Boolean> head200Async() {
         return head200WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
@@ -102,7 +102,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> head200WithServiceResponseAsync() {
         return service.head200(this.client.acceptLanguage(), this.client.userAgent())
@@ -149,7 +149,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<Boolean> head204Async() {
         return head204WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
@@ -163,7 +163,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> head204WithServiceResponseAsync() {
         return service.head204(this.client.acceptLanguage(), this.client.userAgent())
@@ -210,7 +210,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 404 status code if successful.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<Boolean> head404Async() {
         return head404WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
@@ -224,7 +224,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 404 status code if successful.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> head404WithServiceResponseAsync() {
         return service.head404(this.client.acceptLanguage(), this.client.userAgent())

@@ -27,10 +27,10 @@ function UsageOperations(client) {
  * subscription.
  *
  * @param {object} [options] Optional Parameters.
- * 
+ *
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- * 
+ *
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -124,7 +124,7 @@ UsageOperations.prototype.list = function (options, callback) {
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
                          '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }

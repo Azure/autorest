@@ -1,0 +1,31 @@
+﻿swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  /operation:
+    get:
+      operationId: deprecated_operation
+      deprecated: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResultObject'
+
+  /operation2:
+    get:
+      operationId: approved_operation
+      deprecated: false
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResultObject'
+
+definitions:
+  ResultObject:
+    properties:
+      Message:
+        type: string
+        description: 'This is a response.'

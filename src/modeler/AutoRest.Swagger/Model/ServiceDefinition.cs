@@ -35,7 +35,6 @@ namespace AutoRest.Swagger.Model
             SecurityDefinitions = new Dictionary<string, SecurityDefinition>();
             Security = new List<Dictionary<string, List<string>>>();
             Tags = new List<Tag>();
-            ExternalReferences = new List<string>();
         }
 
         /// <summary>
@@ -135,11 +134,6 @@ namespace AutoRest.Swagger.Model
         public ExternalDoc ExternalDocs { get; set; }
 
         /// <summary>
-        /// A list of all external references listed in the service.
-        /// </summary>
-        public IList<string> ExternalReferences { get; set; }
-
-        /// <summary>
         /// Compare a modified document node (this) to a previous one and look for breaking as well as non-breaking changes.
         /// </summary>
         /// <param name="context">The modified document context.</param>
@@ -153,8 +147,6 @@ namespace AutoRest.Swagger.Model
             context.CurrentRoot = this;
             context.PreviousRoot = previous;
 
-            context.Push("#");
-
             base.Compare(context, previous);
 
             var previousDefinition = previous as ServiceDefinition;
@@ -164,10 +156,12 @@ namespace AutoRest.Swagger.Model
 
             if (Info != null && previousDefinition.Info != null)
             {
-                context.Push("info/version");
+                context.PushProperty("info");
+                context.PushProperty("version");
 
-               CompareVersions(context, Info.Version, previousDefinition.Info.Version);
+                CompareVersions(context, Info.Version, previousDefinition.Info.Version);
 
+                context.Pop();
                 context.Pop();
             }
 
@@ -179,7 +173,7 @@ namespace AutoRest.Swagger.Model
 
             // Check that all the protocols of the old version are supported by the new version.
 
-            context.Push("schemes");
+            context.PushProperty("schemes");
             foreach (var scheme in previousDefinition.Schemes)
             {
                 if (!Schemes.Contains(scheme))
@@ -191,7 +185,7 @@ namespace AutoRest.Swagger.Model
 
             // Check that all the request body formats that were accepted still are.
 
-            context.Push("consumes");
+            context.PushProperty("consumes");
             foreach (var format in previousDefinition.Consumes)
             {
                 if (!Consumes.Contains(format))
@@ -203,7 +197,7 @@ namespace AutoRest.Swagger.Model
 
             // Check that all the response body formats were also supported by the old version.
 
-            context.Push("produces");
+            context.PushProperty("produces");
             foreach (var format in Produces)
             {
                 if (!previousDefinition.Produces.Contains(format))
@@ -217,12 +211,12 @@ namespace AutoRest.Swagger.Model
 
             var newPaths = RemovePathVariables(Paths);
 
-            context.Push("paths");
+            context.PushProperty("paths");
             foreach (var path in previousDefinition.Paths.Keys)
             {
                 var p = Regex.Replace(path, @"\{\w*\}", @"{}");
 
-                context.Push(path);
+                context.PushProperty(path);
 
                 Dictionary<string, Operation> operations = null;
                 if (!newPaths.TryGetValue(p, out operations))
@@ -246,7 +240,7 @@ namespace AutoRest.Swagger.Model
                         Operation previousOperation = null;
                         if (previousDefinition.Paths[path].TryGetValue(operation.Key, out previousOperation))
                         {
-                            context.Push(operation.Key);
+                            context.PushProperty(operation.Key);
                             operation.Value.Compare(context, previousOperation);
                             context.Pop();
                         }
@@ -258,12 +252,12 @@ namespace AutoRest.Swagger.Model
 
             newPaths = RemovePathVariables(CustomPaths);
 
-            context.Push("x-ms-paths");
+            context.PushProperty("x-ms-paths");
             foreach (var path in previousDefinition.CustomPaths.Keys)
             {
                 var p = Regex.Replace(path, @"\{\w*\}", @"{}");
 
-                context.Push(path);
+                context.PushProperty(path);
 
                 Dictionary<string, Operation> operations = null;
                 if (!newPaths.TryGetValue(p, out operations))
@@ -287,7 +281,7 @@ namespace AutoRest.Swagger.Model
                         Operation previousOperation = null;
                         if (previousDefinition.CustomPaths[path].TryGetValue(operation.Key, out previousOperation))
                         {
-                            context.Push(operation.Key);
+                            context.PushProperty(operation.Key);
                             operation.Value.Compare(context, previousOperation);
                             context.Pop();
                         }
@@ -300,7 +294,7 @@ namespace AutoRest.Swagger.Model
             ReferenceTrackSchemas(this);
             ReferenceTrackSchemas(previousDefinition);
 
-            context.Push("parameters");
+            context.PushProperty("parameters");
             foreach (var def in previousDefinition.Parameters.Keys)
             {
                 SwaggerParameter parameter = null;
@@ -310,14 +304,14 @@ namespace AutoRest.Swagger.Model
                 }
                 else
                 {
-                    context.Push(def);
+                    context.PushProperty(def);
                     parameter.Compare(context, previousDefinition.Parameters[def]);
                     context.Pop();
                 }
             }
             context.Pop();
 
-            context.Push("responses");
+            context.PushProperty("responses");
             foreach (var def in previousDefinition.Responses.Keys)
             {
                 OperationResponse response = null;
@@ -327,14 +321,14 @@ namespace AutoRest.Swagger.Model
                 }
                 else
                 {
-                    context.Push(def);
+                    context.PushProperty(def);
                     response.Compare(context, previousDefinition.Responses[def]);
                     context.Pop();
                 }
             }
             context.Pop();
 
-            context.Push("definitions");
+            context.PushProperty("definitions");
             foreach (var def in previousDefinition.Definitions.Keys)
             {
                 Schema schema = null;
@@ -348,7 +342,7 @@ namespace AutoRest.Swagger.Model
                 }
                 else if (schema.IsReferenced && oldSchema.IsReferenced)
                 {
-                    context.Push(def);
+                    context.PushProperty(def);
                     schema.Compare(context, previousDefinition.Definitions[def]);
                     context.Pop();
                 }

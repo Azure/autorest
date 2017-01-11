@@ -4,14 +4,14 @@
 
 from .user import User
 from .category import Category
-from .pet import Pet
 from .tag import Tag
+from .pet import Pet
 from .order import Order
 
 __all__ = [
     'User',
     'Category',
-    'Pet',
     'Tag',
+    'Pet',
     'Order',
 ]

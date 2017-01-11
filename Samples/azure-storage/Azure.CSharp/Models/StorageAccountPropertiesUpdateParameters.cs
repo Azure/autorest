@@ -1,6 +1,7 @@
 
 namespace Petstore.Models
 {
+    using Newtonsoft.Json;
     using System.Linq;
 
     public partial class StorageAccountPropertiesUpdateParameters
@@ -18,8 +19,8 @@ namespace Petstore.Models
         /// <param name="accountType">Gets or sets the account type. Note that
         /// StandardZRS and PremiumLRS accounts cannot be changed to other
         /// account types, and other account types cannot be changed to
-        /// StandardZRS or PremiumLRS. Possible values include:
-        /// 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
+        /// StandardZRS or PremiumLRS. Possible values include: 'Standard_LRS',
+        /// 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
         /// 'Premium_LRS'</param>
         /// <param name="customDomain">User domain assigned to the storage
         /// account. Name is the CNAME source. Only one custom domain is
@@ -33,13 +34,13 @@ namespace Petstore.Models
         }
 
         /// <summary>
-        /// Gets or sets the account type. Note that StandardZRS and
-        /// PremiumLRS accounts cannot be changed to other account types, and
-        /// other account types cannot be changed to StandardZRS or
-        /// PremiumLRS. Possible values include: 'Standard_LRS',
-        /// 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
+        /// Gets or sets the account type. Note that StandardZRS and PremiumLRS
+        /// accounts cannot be changed to other account types, and other
+        /// account types cannot be changed to StandardZRS or PremiumLRS.
+        /// Possible values include: 'Standard_LRS', 'Standard_ZRS',
+        /// 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "accountType")]
+        [JsonProperty(PropertyName = "accountType")]
         public AccountType? AccountType { get; set; }
 
         /// <summary>
@@ -48,7 +49,7 @@ namespace Petstore.Models
         /// account at this time. To clear the existing custom domain, use an
         /// empty string for the custom domain name property.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "customDomain")]
+        [JsonProperty(PropertyName = "customDomain")]
         public CustomDomain CustomDomain { get; set; }
 
         /// <summary>
@@ -59,10 +60,11 @@ namespace Petstore.Models
         /// </exception>
         public virtual void Validate()
         {
-            if (this.CustomDomain != null)
+            if (CustomDomain != null)
             {
-                this.CustomDomain.Validate();
+                CustomDomain.Validate();
             }
         }
     }
 }
+

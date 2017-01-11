@@ -81,7 +81,7 @@
     "/pets/{petId}": {
       "get": {
         "summary": "Info for a specific pet",
-        "operationId": "showPetById",
+        "operationId": "getPetById",
         "description": "foo",
         "tags": [
           "pets"

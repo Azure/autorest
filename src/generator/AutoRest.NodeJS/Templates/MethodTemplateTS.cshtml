@@ -1,8 +1,8 @@
 ﻿@using System;
 @using System.Linq;
 @using AutoRest.Core.Utilities
-@using AutoRest.NodeJS.TemplateModels
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.MethodTemplateModel>
+@using AutoRest.NodeJS.Model
+@inherits AutoRest.Core.Template<MethodJs>
 
 /**
 @if (!String.IsNullOrEmpty(Model.Summary)) {
@@ -14,10 +14,10 @@
 @: *
 }
 @foreach (var parameter in Model.DocumentationParameters) {
-    @MethodTemplateModel.ConstructParameterDocumentation(
+    @MethodJs.ConstructParameterDocumentation(
                       WrapComment(" * ", "@param {"
-                                        + MethodTemplateModel.GetParameterDocumentationType(parameter)
-                                        + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
+                                        + MethodJs.GetParameterDocumentationType(parameter)
+                                        + "} " + MethodJs.GetParameterDocumentationName(parameter)
                                         + " " + parameter.Documentation))
 }
 @WrapComment(" * ", " @param {ServiceCallback} [callback] callback function; see ServiceCallback doc in ms-rest index.d.ts for details")

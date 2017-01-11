@@ -14,14 +14,14 @@ from msrest.serialization import Model
 
 class FirstParameterGroup(Model):
     """Additional parameters for a set of operations, such as:
-    parameterGrouping_postMultiParamGroups,
-    parameterGrouping_postSharedParameterGroupObject.
+    ParameterGrouping_post_multi_param_groups,
+    ParameterGrouping_post_shared_parameter_group_object.
 
     :param header_one:
     :type header_one: str
     :param query_one: Query parameter with default. Default value: 30 .
     :type query_one: int
-    """ 
+    """
 
     def __init__(self, header_one=None, query_one=30):
         self.header_one = header_one

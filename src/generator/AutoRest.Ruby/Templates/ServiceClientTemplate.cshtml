@@ -1,7 +1,7 @@
 ﻿@using AutoRest.Ruby.Templates
 @using System.Linq
 @using AutoRest.Ruby
-@inherits AutoRest.Core.Template<AutoRest.Ruby.TemplateModels.ServiceClientTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.Ruby.Model.CodeModelRb>
 # encoding: utf-8
 @Header("# ")
 @EmptyLine
@@ -24,15 +24,15 @@ module @Settings.Namespace
 
 @foreach (var property in Model.Properties)
 {
-    @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), property.Documentation))
+    @:@WrapComment("# ", string.Format("@return {0}{1}", property.ModelType.GetYardDocumentation(), property.Documentation))
     @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name
 @EmptyLine
 }
 
-@foreach (var operation in Model.MethodGroups)
+@foreach (var operation in Model.Operations.Where(each => !each.IsCodeModelMethodGroup))
 {
-    @:@WrapComment("# ", string.Format("@return [{0}] {1}", operation, RubyCodeNamer.UnderscoreCase(operation)))
-    @:attr_reader :@(RubyCodeNamer.UnderscoreCase(operation))
+    @:@WrapComment("# ", string.Format("@return [{0}] {1}", operation.TypeName, Model.CodeNamer.UnderscoreCase(operation.TypeName)))
+    @:attr_reader :@(Model.CodeNamer.UnderscoreCase(operation.TypeName))
 @EmptyLine
 }
 
@@ -47,11 +47,11 @@ module @Settings.Namespace
     #
     @if (!Model.IsCustomBaseUri)
     {
-    @:def initialize(credentials, base_url = nil, options = nil)
+    @:def initialize(credentials = nil, base_url = nil, options = nil)
     }
     else
     {
-    @:def initialize(credentials, options = nil)
+    @:def initialize(credentials = nil, options = nil)
     }
       super(credentials, options)
       @if (!Model.IsCustomBaseUri)
@@ -63,19 +63,19 @@ module @Settings.Namespace
       @:@@base_url = '@Model.BaseUrl'
       }
       @EmptyLine
-      fail ArgumentError, 'credentials is nil' if credentials.nil?
-      fail ArgumentError, 'invalid type of credentials input parameter' unless credentials.is_a?(MsRest::ServiceClientCredentials)
+      fail ArgumentError, 'invalid type of credentials input parameter' unless credentials.is_a?(MsRest::ServiceClientCredentials) unless credentials.nil?
       @@credentials = credentials
       @EmptyLine
-      @foreach (var operation in Model.MethodGroups)
+      @foreach (var operation in Model.Operations.Where( each => !each.IsCodeModelMethodGroup))
       {
-      @:@@@(RubyCodeNamer.UnderscoreCase(operation)) = @(operation).new(self)
+      @:@@@(Model.CodeNamer.UnderscoreCase(operation.TypeName)) = @(operation.TypeName).new(self)
       }
 
       @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
       {
       @:@@@(property.Name) = @(property.DefaultValue)
       }
+      add_telemetry
     end
 
     @EmptyLine
@@ -146,5 +146,18 @@ module @Settings.Namespace
     @EmptyLine
     @:
     }
+
+    @EmptyLine
+    private
+    #
+    # Adds telemetry information.
+    #
+    def add_telemetry
+        sdk_information = '@GeneratorSettingsRb.Instance.sdkPath'
+        if defined? @Settings.Namespace::VERSION
+          sdk_information = "#{sdk_information}/#{@Settings.Namespace::VERSION}" 
+        end
+        add_user_agent_information(sdk_information)
+    end
   end
 end

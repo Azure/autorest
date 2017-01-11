@@ -92,11 +92,11 @@ class AutoRestValidationTest(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Product
-         <Fixtures.AcceptanceTestsValidation.models.Product>`
+         <fixtures.acceptancetestsvalidation.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsValidation.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsvalidation.models.ErrorException>`
         """
         # Construct URL
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}'
@@ -146,18 +146,18 @@ class AutoRestValidationTest(object):
         :type id: int
         :param body:
         :type body: :class:`Product
-         <Fixtures.AcceptanceTestsValidation.models.Product>`
+         <fixtures.acceptancetestsvalidation.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Product
-         <Fixtures.AcceptanceTestsValidation.models.Product>`
+         <fixtures.acceptancetestsvalidation.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsValidation.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsvalidation.models.ErrorException>`
         """
         # Construct URL
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}'
@@ -253,14 +253,14 @@ class AutoRestValidationTest(object):
 
         :param body:
         :type body: :class:`Product
-         <Fixtures.AcceptanceTestsValidation.models.Product>`
+         <fixtures.acceptancetestsvalidation.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Product
-         <Fixtures.AcceptanceTestsValidation.models.Product>`
+         <fixtures.acceptancetestsvalidation.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:

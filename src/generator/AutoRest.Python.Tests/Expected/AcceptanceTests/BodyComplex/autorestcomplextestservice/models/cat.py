@@ -23,8 +23,8 @@ class Cat(Pet):
     :type color: str
     :param hates:
     :type hates: list of :class:`Dog
-     <Fixtures.AcceptanceTestsBodyComplex.models.Dog>`
-    """ 
+     <fixtures.acceptancetestsbodycomplex.models.Dog>`
+    """
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},

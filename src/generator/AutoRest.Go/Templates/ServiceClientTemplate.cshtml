@@ -1,17 +1,18 @@
 ﻿@using AutoRest.Go
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
 @using AutoRest.Go.Templates
-@using AutoRest.Go.TemplateModels
+@using AutoRest.Go.Model
 @using AutoRest.Core.Utilities
 @using System.Linq
 
-@inherits AutoRest.Go.Template<AutoRest.Go.TemplateModels.ServiceClientTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.Go.Model.CodeModelGo>
 @{
-    var imports = Model.Imports;
-    var modelName = GoCodeNamer.CamelCase(Model.Name);
+    var imports = Model.ClientImports;
+    var modelName = CodeNamerGo.Instance.CamelCase(Model.Name);
+    var methods = Model.ClientMethods.OrderBy(m => m.Name.Value);
 }
-@WrapComment("// ", Model.Documentation)
-package @Model.PackageName
+@WrapComment("// ", Model.GetDocumentation())
+package @Model.Namespace
 @EmptyLine
 @Header("// ")
 
@@ -34,47 +35,47 @@ const (
 
 @EmptyLine
 @WrapComment("// ", Model.ClientDocumentation)
-type @(Model.ClientName) struct {
+type @(Model.BaseClient) struct {
     autorest.Client
     BaseURI string
     APIVersion string
     @foreach (var p in Model.Properties)
     {
-    if (!p.SerializedName.IsApiVersion())
+    if (!p.SerializedName.FixedValue.IsApiVersion())
     {
-    @:@(string.Format((p.IsRequired || p.Type.CanBeEmpty()
+    @:@(string.Format((p.IsRequired || p.ModelType.CanBeEmpty()
                                     ? "{0} {1}": "{0} *{1}"),
-                                    p.Name, p.Type.Name))
+                                    p.Name, p.ModelType.Name))
     }
     }
 }
 
 @EmptyLine
-@WrapComment("// ", string.Format("New creates an instance of the {0} client.", Model.ClientName))
-func New(@(Model.GlobalParameters))@(Model.ClientName) {
+@WrapComment("// ", string.Format("New creates an instance of the {0} client.", Model.BaseClient))
+func New(@(Model.GlobalParameters))@(Model.BaseClient) {
     return NewWithBaseURI(DefaultBaseURI, @(Model.HelperGlobalParameters))
 }
 
 @EmptyLine
-@WrapComment("// ", string.Format("NewWithBaseURI creates an instance of the {0} client.", Model.ClientName))
-func NewWithBaseURI(baseURI string, @(Model.GlobalParameters)) @(Model.ClientName) {
-   return @(Model.ClientName){
+@WrapComment("// ", string.Format("NewWithBaseURI creates an instance of the {0} client.", Model.BaseClient))
+func NewWithBaseURI(baseURI string, @(Model.GlobalParameters)) @(Model.BaseClient) {
+   return @(Model.BaseClient){
         Client: autorest.NewClientWithUserAgent(UserAgent()),
         BaseURI: baseURI,
         APIVersion: APIVersion,
         @foreach (var p in Model.Properties)
         {
-        if (!p.SerializedName.IsApiVersion())
+        if (!p.SerializedName.Value.IsApiVersion())
         {
-        @:@(string.Format("{0}: {1},", p.Name, p.Name.ToSentence()))
+        @:@(string.Format("{0}: {1},", p.Name, p.Name.Value.ToSentence()))
         }
         }
     }
 }
 
 @EmptyLine
-@foreach (var method in Model.MethodTemplateModels)
+@foreach (var method in methods)
 {
-@:@(Include<MethodTemplate, MethodTemplateModel>(new MethodTemplate(), method))
-@:@EmptyLine
+    @:@(Include(new MethodTemplate(), method))
+    @:@EmptyLine
 }

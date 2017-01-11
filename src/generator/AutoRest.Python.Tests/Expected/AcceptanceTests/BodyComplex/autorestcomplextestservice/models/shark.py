@@ -21,14 +21,14 @@ class Shark(Fish):
     :type length: float
     :param siblings:
     :type siblings: list of :class:`Fish
-     <Fixtures.AcceptanceTestsBodyComplex.models.Fish>`
+     <fixtures.acceptancetestsbodycomplex.models.Fish>`
     :param fishtype: Polymorphic Discriminator
     :type fishtype: str
     :param age:
     :type age: int
     :param birthday:
     :type birthday: datetime
-    """ 
+    """
 
     _validation = {
         'length': {'required': True},

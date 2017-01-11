@@ -108,7 +108,7 @@ class AutoRestReportServiceForAzure(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureReport.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsazurereport.models.ErrorException>`
         """
         # Construct URL
         url = '/report/azure'

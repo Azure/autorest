@@ -3,42 +3,43 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using Xunit;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.AzureResourceSchema.Tests
 {
     public class ResourceSchemaParserTests
     {
         [Fact]
-        public void ParseWithServiceClientWithCreateResourceMethod()
+        public void ParseWithCodeModelWithCreateResourceMethod()
         {
-            ServiceClient serviceClient = new ServiceClient();
+            CodeModel codeModel = New<CodeModel>();
 
-            serviceClient.ApiVersion = "2016-01-01";
+            codeModel.ApiVersion = "2016-01-01";
 
-            Parameter body = new Parameter()
+            Parameter body = New<Parameter>(new
             {
                 Location = ParameterLocation.Body,
-                Type = new CompositeType(),
-            };
+                Type = New<CompositeType>(),
+            });
 
-            CompositeType responseBody = new CompositeType();
+            CompositeType responseBody = New<CompositeType>();
             responseBody.Extensions.Add("x-ms-azure-resource", true);
 
             const string url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Mock.Provider/mockResourceNames/{mockResourceName}";
 
-            Method method = new Method()
+            Method method = New<Method>(new
             {
                 HttpMethod = HttpMethod.Put,
                 ReturnType = new Response(responseBody, null),
                 Url = url,
-            };
-            method.Parameters.Add(body);
+            });
+            method.Add(body);
 
-            serviceClient.Methods.Add(method);
+            codeModel.Add(method);
 
-            IDictionary<string, ResourceSchema> schemas = ResourceSchemaParser.Parse(serviceClient);
+            IDictionary<string, ResourceSchema> schemas = ResourceSchemaParser.Parse(codeModel);
             Assert.NotNull(schemas);
             Assert.Equal(1, schemas.Count);
 

@@ -15,11 +15,19 @@ function GetAutoRestFolder() {
   if (isWindows) {
     return "src/core/AutoRest/bin/Debug/net451/win7-x64/";
   }
-  if( isMac ) {
-	return "src/core/AutoRest/bin/Debug/net451/osx.10.11-x64/";
+  if (isMac) {
+    var mac_os_10_11 = "src/core/AutoRest/bin/Debug/net451/osx.10.11-x64/";
+    var mac_os_10_12 = "src/core/AutoRest/bin/Debug/net451/osx.10.12-x64/";
+    if (fs.existsSync(mac_os_10_11)) {
+      return mac_os_10_11;
+    }
+    if (fs.existsSync(mac_os_10_12)) {
+      return mac_os_10_12;
+    }
+    throw new Error("Unknown Mac Darwin OS version.");
   } 
-  if( isLinux ) { 
-	return "src/core/AutoRest/bin/Debug/net451/ubuntu.14.04-x64/"
+  if (isLinux) { 
+    return "src/core/AutoRest/bin/Debug/net451/ubuntu.14.04-x64/"
   }
    throw new Error("Unknown platform?");
 }
@@ -76,6 +84,7 @@ function gulpRegenerateExpected(options, done) {
     var mappingBaseDir = optsMappingsValue instanceof Array ? optsMappingsValue[0] : optsMappingsValue;
     var args = [
       GetAutoRestFolder()+'AutoRest.exe',
+//      '-verbose',
       '-Modeler', opts.modeler,
       '-CodeGenerator', opts.codeGenerator,
       '-PayloadFlatteningThreshold', opts.flatteningThreshold,

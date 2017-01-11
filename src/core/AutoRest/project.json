@@ -1,7 +1,7 @@
 {
-  "version": "0.17.1-*",
+  "version": "1.0.0-*",
   "authors": [ "Microsoft", "Azure-SDK" ],
- 
+
   "packOptions": {
     "owners": [ "Microsoft", "Azure-SDK" ],
     "summary": "AutoRest code generation of REST API client libraries.",
@@ -22,7 +22,7 @@
       }
     }
   },
-  
+
   "buildOptions": {
     "emitEntryPoint": true,
     "delaySign": true,
@@ -47,17 +47,31 @@
     "AutoRest.CompositeSwagger": { "target": "project", "type": "build" },
     "AutoRest.CSharp": { "target": "project", "type": "build" },
     "AutoRest.CSharp.Azure": { "target": "project", "type": "build" },
-    "AutoRest.Java.Azure": { "target": "project", "type": "build" },
-    "AutoRest.NodeJS.Azure": { "target": "project", "type": "build" },
-    "AutoRest.Python.Azure": { "target": "project", "type": "build" },
-    "AutoRest.Ruby.Azure": { "target": "project", "type": "build" },
-    "AutoRest.AzureResourceSchema": { "target": "project", "type": "build" },
-    "AutoRest.Java.Azure.Fluent": { "target": "project", "type": "build" },
-    "AutoRest.Java": { "target": "project", "type": "build" },
     "AutoRest.NodeJS": { "target": "project", "type": "build" },
-    "AutoRest.Python": { "target": "project", "type": "build" },
+    "AutoRest.NodeJS.Azure": { "target": "project", "type": "build" },
     "AutoRest.Ruby": { "target": "project", "type": "build" },
+    "AutoRest.Ruby.Azure": { "target": "project", "type": "build" },
+    "AutoRest.Python": { "target": "project", "type": "build" },
+    "AutoRest.Python.Azure": { "target": "project", "type": "build" },
     "AutoRest.Go": { "target": "project", "type": "build" },
-    "AutoRest.CSharp.Azure.Fluent": { "target": "project", "type": "build" }
+    "AutoRest.Java": { "target": "project", "type": "build" },
+    "AutoRest.Java.Azure": { "target": "project", "type": "build" },
+    "AutoRest.Java.Azure.Fluent": { "target": "project", "type": "build" },
+    "AutoRest.AzureResourceSchema": { "target": "project", "type": "build" },
+    "AutoRest.CSharp.Azure.Fluent": { "target": "project", "type": "build" },
+  
+  "Microsoft.CodeAnalysis.Analyzers" : { "version":"1.0.0" ,"type": "build"},
+  "Microsoft.CodeAnalysis.Common": { "version":"1.0.0","type": "build"},
+  "Microsoft.CodeAnalysis.CSharp" : {"version":"1.0.0","type": "build" },
+  "Microsoft.CodeAnalysis.CSharp.Workspaces": { "version":"1.0.0","type": "build"},
+  "Microsoft.CodeAnalysis.Workspaces.Common" : {"version":"1.0.0","type": "build" },
+  "Microsoft.Composition" : {"version":"1.0.27","type": "build"},
+  "Microsoft.Rest.ClientRuntime": { "version":"2.3.2","type": "build" },
+  "Microsoft.Rest.ClientRuntime.Azure": { "version":"3.3.2" ,"type": "build"},
+  "System.Collections.Immutable" : { "version":"1.1.36" ,"type": "build"},
+  "System.Reflection.Metadata" : { "version":"1.0.21","type": "build" }
+  },
+
+  "disabled_dependencies": {
   }
 }

@@ -8,12 +8,14 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
+
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger
 {
@@ -49,13 +51,13 @@ namespace AutoRest.Swagger
         {
             EnsureUniqueMethodName(methodName, methodGroup);
 
-            var method = new Method
+            var method = New<Method>(new 
             {
                 HttpMethod = httpMethod,
                 Url = url,
                 Name = methodName,
                 SerializedName = _operation.OperationId
-            };
+            });
             
             method.RequestContentType = _effectiveConsumes.FirstOrDefault() ?? APP_JSON_MIME;
             string produce = _effectiveConsumes.FirstOrDefault(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase));
@@ -94,22 +96,22 @@ namespace AutoRest.Swagger
 
             var headerTypeName = string.Format(CultureInfo.InvariantCulture,
                 "{0}-{1}-Headers", methodGroup, methodName).Trim('-');
-            var headerType = new CompositeType
+            var headerType = New<CompositeType>(headerTypeName,new
             {
-                Name = headerTypeName,
                 SerializedName = headerTypeName,
                 Documentation = string.Format(CultureInfo.InvariantCulture, "Defines headers for {0} operation.", methodName)
-            };
+            });
             responseHeaders.ForEach(h =>
             {
-                var property = new Property
+                
+                var property = New<Property>(new
                 {
                     Name = h.Key,
                     SerializedName = h.Key,
-                    Type = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key),
+                    ModelType = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key),
                     Documentation = h.Value.Description
-                };
-                headerType.Properties.Add(property);
+                });
+                headerType.Add(property);
             });
 
             if (!headerType.Properties.Any())
@@ -118,7 +120,7 @@ namespace AutoRest.Swagger
             }
 
             // Response format
-            List<Stack<IType>> typesList = BuildResponses(method, headerType);
+            List<Stack<IModelType>> typesList = BuildResponses(method, headerType);
 
             method.ReturnType = BuildMethodReturnType(typesList, headerType);
             if (method.Responses.Count == 0)
@@ -128,7 +130,7 @@ namespace AutoRest.Swagger
 
             if (method.ReturnType.Headers != null)
             {
-                _swaggerModeler.ServiceClient.HeaderTypes.Add(method.ReturnType.Headers as CompositeType);
+                _swaggerModeler.CodeModel.AddHeader(method.ReturnType.Headers as CompositeType);
             }
 
             // Copy extensions
@@ -158,7 +160,7 @@ namespace AutoRest.Swagger
                     // if parameter with same name exists in Query and Path, make Query one required
                     if (s.In == ParameterLocation.Query &&
                         parameters.Any(t => t.In == ParameterLocation.Path &&
-                                            string.Equals(t.Name, s.Name, StringComparison.OrdinalIgnoreCase)))
+                                            t.Name.EqualsIgnoreCase(s.Name)))
                     {
                         s.IsRequired = true;
                     }
@@ -167,9 +169,9 @@ namespace AutoRest.Swagger
                 });
         }
 
-        private static void BuildMethodReturnTypeStack(IType type, List<Stack<IType>> types)
+        private static void BuildMethodReturnTypeStack(IModelType type, List<Stack<IModelType>> types)
         {
-            var typeStack = new Stack<IType>();
+            var typeStack = new Stack<IModelType>();
             typeStack.Push(type);
             types.Add(typeStack);
         }
@@ -179,7 +181,7 @@ namespace AutoRest.Swagger
             foreach (var swaggerParameter in DeduplicateParameters(_operation.Parameters))
             {
                 var parameter = ((ParameterBuilder)swaggerParameter.GetBuilder(_swaggerModeler)).Build();
-                method.Parameters.Add(parameter);
+                method.Add(parameter);
 
                 StringBuilder parameterName = new StringBuilder(parameter.Name);
                 parameterName = CollectionFormatBuilder.OnBuildMethodParameter(method, swaggerParameter,
@@ -193,13 +195,13 @@ namespace AutoRest.Swagger
             }
         }
 
-        private List<Stack<IType>> BuildResponses(Method method, CompositeType headerType)
+        private List<Stack<IModelType>> BuildResponses(Method method, CompositeType headerType)
         {
             string methodName = method.Name;
-            var typesList = new List<Stack<IType>>();
+            var typesList = new List<Stack<IModelType>>();
             foreach (var response in _operation.Responses)
             {
-                if (string.Equals(response.Key, "default", StringComparison.OrdinalIgnoreCase))
+                if (response.Key.EqualsIgnoreCase("default"))
                 {
                     TryBuildDefaultResponse(methodName, response.Value, method, headerType);
                 }
@@ -224,9 +226,9 @@ namespace AutoRest.Swagger
             return typesList;
         }
 
-        private Response BuildMethodReturnType(List<Stack<IType>> types, IType headerType)
+        private Response BuildMethodReturnType(List<Stack<IModelType>> types, IModelType headerType)
         {
-            IType baseType = new PrimaryType(KnownPrimaryType.Object);
+            IModelType baseType = New<PrimaryType>(KnownPrimaryType.Object);
             // Return null if no response is specified
             if (types.Count == 0)
             {
@@ -241,12 +243,12 @@ namespace AutoRest.Swagger
             // BuildParameter up type inheritance tree
             types.ForEach(typeStack =>
             {
-                IType type = typeStack.Peek();
+                IModelType type = typeStack.Peek();
                 while (!Equals(type, baseType))
                 {
-                    if (type is CompositeType && _swaggerModeler.ExtendedTypes.ContainsKey(type.Name))
+                    if (type is CompositeType && _swaggerModeler.ExtendedTypes.ContainsKey(type.Name.RawValue))
                     {
-                        type = _swaggerModeler.GeneratedTypes[_swaggerModeler.ExtendedTypes[type.Name]];
+                        type = _swaggerModeler.GeneratedTypes[_swaggerModeler.ExtendedTypes[type.Name.RawValue]];
                     }
                     else
                     {
@@ -259,11 +261,11 @@ namespace AutoRest.Swagger
             // Eliminate commonly shared base classes
             while (!types.First().IsNullOrEmpty())
             {
-                IType currentType = types.First().Peek();
+                IModelType currentType = types.First().Peek();
                 foreach (var typeStack in types)
                 {
-                    IType t = typeStack.Pop();
-                    if (!Equals(t, currentType))
+                    IModelType t = typeStack.Pop();
+                    if (!t.StructurallyEquals(currentType))
                     {
                         return new Response(baseType, headerType);
                     }
@@ -275,14 +277,14 @@ namespace AutoRest.Swagger
         }
 
         private bool TryBuildStreamResponse(HttpStatusCode responseStatusCode, OperationResponse response,
-            Method method, List<Stack<IType>> types, IType headerType)
+            Method method, List<Stack<IModelType>> types, IModelType headerType)
         {
             bool handled = false;
             if (SwaggerOperationProducesNotEmpty())
             {
                 if (response.Schema != null)
                 {
-                    IType serviceType = response.Schema.GetBuilder(_swaggerModeler)
+                    IModelType serviceType = response.Schema.GetBuilder(_swaggerModeler)
                         .BuildServiceType(response.Schema.Reference.StripDefinitionPath());
 
                     Debug.Assert(serviceType != null);
@@ -303,9 +305,9 @@ namespace AutoRest.Swagger
 
         private void VerifyFirstPropertyIsByteArray(CompositeType serviceType)
         {
-            var referenceKey = serviceType.Name;
+            var referenceKey = serviceType.Name.RawValue;
             var responseType = _swaggerModeler.GeneratedTypes[referenceKey];
-            var property = responseType.Properties.FirstOrDefault(p => p.Type is PrimaryType && ((PrimaryType)p.Type).Type == KnownPrimaryType.ByteArray);
+            var property = responseType.Properties.FirstOrDefault(p => p.ModelType is PrimaryType && ((PrimaryType)p.ModelType).KnownPrimaryType == KnownPrimaryType.ByteArray);
             if (property == null)
             {
                 throw new KeyNotFoundException(
@@ -314,10 +316,10 @@ namespace AutoRest.Swagger
         }
 
         private bool TryBuildResponse(string methodName, HttpStatusCode responseStatusCode,
-            OperationResponse response, Method method, List<Stack<IType>> types, IType headerType)
+            OperationResponse response, Method method, List<Stack<IModelType>> types, IModelType headerType)
         {
             bool handled = false;
-            IType serviceType;
+            IModelType serviceType;
             if (SwaggerOperationProducesJson())
             {
                 if (TryBuildResponseBody(methodName, response,
@@ -333,7 +335,7 @@ namespace AutoRest.Swagger
         }
 
         private bool TryBuildEmptyResponse(string methodName, HttpStatusCode responseStatusCode,
-            OperationResponse response, Method method, List<Stack<IType>> types, IType headerType)
+            OperationResponse response, Method method, List<Stack<IModelType>> types, IModelType headerType)
         {
             bool handled = false;
 
@@ -346,8 +348,8 @@ namespace AutoRest.Swagger
             {
                 if (_operation.Produces.IsNullOrEmpty())
                 {
-                    method.Responses[responseStatusCode] = new Response(new PrimaryType(KnownPrimaryType.Object), headerType);
-                    BuildMethodReturnTypeStack(new PrimaryType(KnownPrimaryType.Object), types);
+                    method.Responses[responseStatusCode] = new Response(New<PrimaryType>(KnownPrimaryType.Object), headerType);
+                    BuildMethodReturnTypeStack(New<PrimaryType>(KnownPrimaryType.Object), types);
                     handled = true;
                 }
 
@@ -355,7 +357,7 @@ namespace AutoRest.Swagger
                     _swaggerModeler.Resolver.Unwrap(response.Schema).Properties;
                 if (unwrapedSchemaProperties != null && unwrapedSchemaProperties.Any())
                 {
-                    Logger.LogWarning(Resources.NoProduceOperationWithBody,
+                    Logger.Instance.Log(Category.Warning, Resources.NoProduceOperationWithBody,
                         methodName);
                 }
             }
@@ -363,9 +365,9 @@ namespace AutoRest.Swagger
             return handled;
         }
 
-        private void TryBuildDefaultResponse(string methodName, OperationResponse response, Method method, IType headerType)
+        private void TryBuildDefaultResponse(string methodName, OperationResponse response, Method method, IModelType headerType)
         {
-            IType errorModel = null;
+            IModelType errorModel = null;
             if (SwaggerOperationProducesJson())
             {
                 if (TryBuildResponseBody(methodName, response, s => GenerateErrorModelName(s), out errorModel))
@@ -376,7 +378,7 @@ namespace AutoRest.Swagger
         }
 
         private bool TryBuildResponseBody(string methodName, OperationResponse response,
-            Func<string, string> typeNamer, out IType responseType)
+            Func<string, string> typeNamer, out IModelType responseType)
         {
             bool handled = false;
             responseType = null;
@@ -423,7 +425,7 @@ namespace AutoRest.Swagger
                 serviceOperationPrefix = methodGroup + "_";
             }
 
-            if (_swaggerModeler.ServiceClient.Methods.Any(m => m.Group == methodGroup && m.Name == methodName))
+            if (_swaggerModeler.CodeModel.Methods.Any(m => m.Group == methodGroup && m.Name == methodName))
             {
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture,
                     Resources.DuplicateOperationIdException,

@@ -48,7 +48,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/customNamedRequestId'
@@ -90,7 +90,7 @@ class HeaderOperations(object):
          Additional parameters for the operation
         :type header_custom_named_request_id_param_grouping_parameters:
          :class:`HeaderCustomNamedRequestIdParamGroupingParameters
-         <Fixtures.AcceptanceTestsAzureSpecials.models.HeaderCustomNamedRequestIdParamGroupingParameters>`
+         <fixtures.acceptancetestsazurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -100,7 +100,7 @@ class HeaderOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         foo_client_request_id = None
         if header_custom_named_request_id_param_grouping_parameters is not None:

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Xunit;
 using Xunit.Abstractions;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Unit.Tests
 {
@@ -26,60 +27,64 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task SupportModelsNameOverride()
         {
-            string modelsName = "MyModels";
-
-            MemoryFileSystem fileSystem = CreateMockFilesystem();
-
-            var settings = new Settings
+            using (NewContext)
             {
-                Modeler = "Swagger",
-                CodeGenerator = "CSharp",
-                FileSystem = fileSystem,
-                OutputDirectory = "GeneratedCode",
-                Namespace = "Test",
-                ModelsName = modelsName
-            };
+                string modelsName = "MyModels";
 
-            using (fileSystem = $"{GetType().Name}.yaml".GenerateCodeInto(fileSystem, settings))
-            {
-                // Expected Files
-                Assert.True(fileSystem.FileExists($@"{settings.OutputDirectory}\{modelsName}\ResultObject.cs"));
+                MemoryFileSystem fileSystem = CreateMockFilesystem();
 
-                var result = await Compile(fileSystem);
+                var settings = new Settings
+                {
+                    Modeler = "Swagger",
+                    CodeGenerator = "CSharp",
+                    FileSystem = fileSystem,
+                    OutputDirectory = "GeneratedCode",
+                    Namespace = "Test",
+                    ModelsName = modelsName
+                };
 
-                // filter the warnings
-                var warnings = result.Messages.Where(
-                    each => each.Severity == DiagnosticSeverity.Warning
-                            && !SuppressWarnings.Contains(each.Id)).ToArray();
+                using (fileSystem = $"{GetType().Name}".GenerateCodeInto(fileSystem, settings))
+                {
+                    // Expected Files
+                    Assert.True(fileSystem.FileExists($@"{settings.OutputDirectory}\{modelsName}\ResultObject.cs"));
 
-                // use this to dump the files to disk for examination
-                // fileSystem.SaveFilesToTemp($"{GetType().Name}");
+                    var result = await Compile(fileSystem);
 
-                // filter the errors
-                var errors = result.Messages.Where(each => each.Severity == DiagnosticSeverity.Error).ToArray();
+                    // filter the warnings
+                    var warnings = result.Messages.Where(
+                        each => each.Severity == DiagnosticSeverity.Warning
+                                && !SuppressWarnings.Contains(each.Id)).ToArray();
 
-                Write(warnings, fileSystem);
-                Write(errors, fileSystem);
+                    // use this to dump the files to disk for examination
+                    // fileSystem.SaveFilesToTemp($"{GetType().Name}");
 
-                // use this to write out all the messages, even hidden ones.
-                // Write(result.Messages, fileSystem);
+                    // filter the errors
+                    var errors = result.Messages.Where(each => each.Severity == DiagnosticSeverity.Error).ToArray();
 
-                // Don't proceed unless we have zero Warnings.
-                Assert.Empty(warnings);
+                    Write(warnings, fileSystem);
+                    Write(errors, fileSystem);
 
-                // Don't proceed unless we have zero Errors.
-                Assert.Empty(errors);
+                    // use this to write out all the messages, even hidden ones.
+                    // Write(result.Messages, fileSystem);
 
-                // Should also succeed.
-                Assert.True(result.Succeeded);
+                    // Don't proceed unless we have zero Warnings.
+                    Assert.Empty(warnings);
 
-                // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
-                Assert.NotNull(asm);
+                    // Don't proceed unless we have zero Errors.
+                    Assert.Empty(errors);
 
-                // verify that we have the class we expected
-                var resultObject = asm.ExportedTypes.FirstOrDefault(each => each.FullName == $"Test.{modelsName}.ResultObject");
-                Assert.NotNull(resultObject);
+                    // Should also succeed.
+                    Assert.True(result.Succeeded);
+
+                    // try to load the assembly
+                    var asm = Assembly.Load(result.Output.GetBuffer());
+                    Assert.NotNull(asm);
+
+                    // verify that we have the class we expected
+                    var resultObject =
+                        asm.ExportedTypes.FirstOrDefault(each => each.FullName == $"Test.{modelsName}.ResultObject");
+                    Assert.NotNull(resultObject);
+                }
             }
         }
     }

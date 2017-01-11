@@ -1,4 +1,4 @@
-﻿{
+{
   "id": "http://schema.management.azure.com/schemas/2015-08-01/Microsoft.Web.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.Web",
@@ -2696,8 +2696,7 @@
         "order": {
           "oneOf": [
             {
-              "type": "integer",
-              "format": "int32"
+              "type": "integer"
             },
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
@@ -2803,8 +2802,7 @@
         "port": {
           "oneOf": [
             {
-              "type": "integer",
-              "format": "int32"
+              "type": "integer"
             },
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"

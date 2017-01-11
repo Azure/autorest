@@ -8,8 +8,8 @@ module Petstore
     # A group of properties representing a pet.
     #
     class Pet
-      # @return [Integer] The id of the pet. A more detailed description of
-      # the id of the pet.
+      # @return [Integer] The id of the pet. A more detailed description of the
+      # id of the pet.
       attr_accessor :id
 
       # @return [Category]
@@ -24,8 +24,8 @@ module Petstore
       # @return [Array<Tag>]
       attr_accessor :tags
 
-      # @return pet status in the store. Possible values include: 'available',
-      # 'pending', 'sold'
+      # @return [Enum] pet status in the store. Possible values include:
+      # 'available', 'pending', 'sold'
       attr_accessor :status
 
 

@@ -21,10 +21,10 @@ class Order(Model):
     :type ship_date: datetime
     :param status: Order Status. Possible values include: 'placed',
      'approved', 'delivered'
-    :type status: str
+    :type status: str or :class:`enum <petstore.models.enum>`
     :param complete:
     :type complete: bool
-    """ 
+    """
 
     _validation = {
         'id': {'readonly': True},

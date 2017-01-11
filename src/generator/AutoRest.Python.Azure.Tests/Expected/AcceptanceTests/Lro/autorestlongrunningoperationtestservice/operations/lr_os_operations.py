@@ -36,19 +36,19 @@ class LROsOperations(object):
 
     def put200_succeeded(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that contains ProvisioningState=’Succeeded’.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that contains ProvisioningState=’Succeeded’.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -121,20 +121,19 @@ class LROsOperations(object):
 
     def put200_succeeded_no_state(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that does not contain
-        ProvisioningState=’Succeeded’.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that does not contain ProvisioningState=’Succeeded’.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -207,20 +206,20 @@ class LROsOperations(object):
 
     def put202_retry200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 202 to the initial
-        request, with a location header that points to a polling URL that
-        returns a 200 and an entity that doesn't contains ProvisioningState.
+        """Long running put request, service returns a 202 to the initial request,
+        with a location header that points to a polling URL that returns a 200
+        and an entity that doesn't contains ProvisioningState.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -293,21 +292,21 @@ class LROsOperations(object):
 
     def put201_creating_succeeded200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 201 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        Polls return this value until the last poll returns a ‘200’ with
+        """Long running put request, service returns a 201 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’.  Polls
+        return this value until the last poll returns a ‘200’ with
         ProvisioningState=’Succeeded’.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -382,21 +381,21 @@ class LROsOperations(object):
 
     def put200_updating_succeeded204(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 201 to the initial
-        request, with an entity that contains ProvisioningState=’Updating’.
-        Polls return this value until the last poll returns a ‘200’ with
+        """Long running put request, service returns a 201 to the initial request,
+        with an entity that contains ProvisioningState=’Updating’.  Polls
+        return this value until the last poll returns a ‘200’ with
         ProvisioningState=’Succeeded’.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -469,21 +468,21 @@ class LROsOperations(object):
 
     def put201_creating_failed200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 201 to the initial
-        request, with an entity that contains ProvisioningState=’Created’.
-        Polls return this value until the last poll returns a ‘200’ with
+        """Long running put request, service returns a 201 to the initial request,
+        with an entity that contains ProvisioningState=’Created’.  Polls return
+        this value until the last poll returns a ‘200’ with
         ProvisioningState=’Failed’.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -558,21 +557,21 @@ class LROsOperations(object):
 
     def put200_acceptedcanceled200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 201 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        Polls return this value until the last poll returns a ‘200’ with
+        """Long running put request, service returns a 201 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’.  Polls
+        return this value until the last poll returns a ‘200’ with
         ProvisioningState=’Canceled’.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -651,14 +650,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -736,21 +735,21 @@ class LROsOperations(object):
 
     def put_async_retry_succeeded(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        Poll the endpoint indicated in the Azure-AsyncOperation header for
-        operation status.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’. Poll the
+        endpoint indicated in the Azure-AsyncOperation header for operation
+        status.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -830,21 +829,21 @@ class LROsOperations(object):
 
     def put_async_no_retry_succeeded(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        Poll the endpoint indicated in the Azure-AsyncOperation header for
-        operation status.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’. Poll the
+        endpoint indicated in the Azure-AsyncOperation header for operation
+        status.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -923,21 +922,21 @@ class LROsOperations(object):
 
     def put_async_retry_failed(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        Poll the endpoint indicated in the Azure-AsyncOperation header for
-        operation status.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’. Poll the
+        endpoint indicated in the Azure-AsyncOperation header for operation
+        status.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1017,21 +1016,21 @@ class LROsOperations(object):
 
     def put_async_no_retrycanceled(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        Poll the endpoint indicated in the Azure-AsyncOperation header for
-        operation status.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’. Poll the
+        endpoint indicated in the Azure-AsyncOperation header for operation
+        status.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1111,19 +1110,19 @@ class LROsOperations(object):
     def put_async_no_header_in_retry(
             self, product=None, custom_headers=None, raw=False, **operation_config):
         """Long running put request, service returns a 202 to the initial request
-        with Azure-AsyncOperation header. Subsequent calls to operation
-        status do not contain Azure-AsyncOperation header.
+        with Azure-AsyncOperation header. Subsequent calls to operation status
+        do not contain Azure-AsyncOperation header.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1204,14 +1203,14 @@ class LROsOperations(object):
         """Long running put request with non resource.
 
         :param sku: sku to put
-        :type sku: :class:`Sku <Fixtures.AcceptanceTestsLro.models.Sku>`
+        :type sku: :class:`Sku <fixtures.acceptancetestslro.models.Sku>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Sku
-         <Fixtures.AcceptanceTestsLro.models.Sku>`
+         <fixtures.acceptancetestslro.models.Sku>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1287,14 +1286,14 @@ class LROsOperations(object):
         """Long running put request with non resource.
 
         :param sku: Sku to put
-        :type sku: :class:`Sku <Fixtures.AcceptanceTestsLro.models.Sku>`
+        :type sku: :class:`Sku <fixtures.acceptancetestslro.models.Sku>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Sku
-         <Fixtures.AcceptanceTestsLro.models.Sku>`
+         <fixtures.acceptancetestslro.models.Sku>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1366,23 +1365,26 @@ class LROsOperations(object):
             get_long_running_status, long_running_operation_timeout)
 
     def put_sub_resource(
-            self, product=None, custom_headers=None, raw=False, **operation_config):
+            self, provisioning_state=None, custom_headers=None, raw=False, **operation_config):
         """Long running put request with sub resource.
 
-        :param product: Sub Product to put
-        :type product: :class:`SubProduct
-         <Fixtures.AcceptanceTestsLro.models.SubProduct>`
+        :param provisioning_state:
+        :type provisioning_state: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`SubProduct
-         <Fixtures.AcceptanceTestsLro.models.SubProduct>`
+         <fixtures.acceptancetestslro.models.SubProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
+        product = None
+        if provisioning_state is not None:
+            product = models.SubProduct(provisioning_state=provisioning_state)
+
         # Construct URL
         url = '/lro/putsubresource/202/200'
 
@@ -1450,23 +1452,26 @@ class LROsOperations(object):
             get_long_running_status, long_running_operation_timeout)
 
     def put_async_sub_resource(
-            self, product=None, custom_headers=None, raw=False, **operation_config):
+            self, provisioning_state=None, custom_headers=None, raw=False, **operation_config):
         """Long running put request with sub resource.
 
-        :param product: Sub Product to put
-        :type product: :class:`SubProduct
-         <Fixtures.AcceptanceTestsLro.models.SubProduct>`
+        :param provisioning_state:
+        :type provisioning_state: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`SubProduct
-         <Fixtures.AcceptanceTestsLro.models.SubProduct>`
+         <fixtures.acceptancetestslro.models.SubProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
+        product = None
+        if provisioning_state is not None:
+            product = models.SubProduct(provisioning_state=provisioning_state)
+
         # Construct URL
         url = '/lro/putsubresourceasync/202/200'
 
@@ -1546,7 +1551,7 @@ class LROsOperations(object):
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1635,7 +1640,7 @@ class LROsOperations(object):
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1724,7 +1729,7 @@ class LROsOperations(object):
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1878,7 +1883,7 @@ class LROsOperations(object):
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1960,7 +1965,7 @@ class LROsOperations(object):
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -2104,8 +2109,8 @@ class LROsOperations(object):
     def delete_async_no_header_in_retry(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns an Azure-AsyncOperation
-        header in the initial request. Subsequent calls to operation status
-        do not contain Azure-AsyncOperation header.
+        header in the initial request. Subsequent calls to operation status do
+        not contain Azure-AsyncOperation header.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2175,8 +2180,8 @@ class LROsOperations(object):
     def delete_async_retry_succeeded(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request. Poll the endpoint indicated in the Azure-AsyncOperation
-        header for operation status.
+        request. Poll the endpoint indicated in the Azure-AsyncOperation header
+        for operation status.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2248,8 +2253,8 @@ class LROsOperations(object):
     def delete_async_no_retry_succeeded(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request. Poll the endpoint indicated in the Azure-AsyncOperation
-        header for operation status.
+        request. Poll the endpoint indicated in the Azure-AsyncOperation header
+        for operation status.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2321,8 +2326,8 @@ class LROsOperations(object):
     def delete_async_retry_failed(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request. Poll the endpoint indicated in the Azure-AsyncOperation
-        header for operation status.
+        request. Poll the endpoint indicated in the Azure-AsyncOperation header
+        for operation status.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2394,8 +2399,8 @@ class LROsOperations(object):
     def delete_async_retrycanceled(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request. Poll the endpoint indicated in the Azure-AsyncOperation
-        header for operation status.
+        request. Poll the endpoint indicated in the Azure-AsyncOperation header
+        for operation status.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2476,7 +2481,7 @@ class LROsOperations(object):
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Sku
-         <Fixtures.AcceptanceTestsLro.models.Sku>`
+         <fixtures.acceptancetestslro.models.Sku>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -2545,12 +2550,12 @@ class LROsOperations(object):
     def post202_retry200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
         """Long running post request, service returns a 202 to the initial
-        request, with 'Location' and 'Retry-After' headers, Polls return a
-        200 with a response body after success.
+        request, with 'Location' and 'Retry-After' headers, Polls return a 200
+        with a response body after success.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -2632,14 +2637,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -2725,14 +2730,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -2819,14 +2824,14 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -2913,7 +2918,7 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -2997,7 +3002,7 @@ class LROsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response

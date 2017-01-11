@@ -295,9 +295,9 @@ namespace AutoRest.AzureResourceSchema.Tests
 
         private static void RunSwaggerTest(string resourceType, string apiVersion, string swaggerFileName)
         {
-            SwaggerSpecHelper.RunTests<AzureResourceSchemaCodeGenerator>(
+            SwaggerSpecHelper.RunTests(
                 Path.Combine("Swagger", resourceType, apiVersion, swaggerFileName),
-                Path.Combine("Expected", resourceType, apiVersion));
+                Path.Combine("Expected", resourceType, apiVersion),plugin:"AzureResourceSchema");
         }
     }
 }

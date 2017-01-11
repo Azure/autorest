@@ -7,9 +7,11 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using AutoRest.Core;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Model;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger
 {
@@ -28,7 +30,7 @@ namespace AutoRest.Swagger
             Modeler = modeler;
         }
 
-        public virtual IType ParentBuildServiceType(string serviceTypeName)
+        public virtual IModelType ParentBuildServiceType(string serviceTypeName)
         {
             // Should not try to get parent from generic swagger object builder
             throw new InvalidOperationException();
@@ -40,26 +42,26 @@ namespace AutoRest.Swagger
         /// </summary>
         /// <param name="serviceTypeName">name for the service type</param>
         /// <returns>built service type</returns>
-        public virtual IType BuildServiceType(string serviceTypeName)
+        public virtual IModelType BuildServiceType(string serviceTypeName)
         {
             PrimaryType type = SwaggerObject.ToType();
             Debug.Assert(type != null);
 
-            if (type.Type == KnownPrimaryType.Object && "file".Equals(SwaggerObject.Format, StringComparison.OrdinalIgnoreCase))
+            if (type.KnownPrimaryType == KnownPrimaryType.Object && SwaggerObject.KnownFormat == KnownFormat.file )
             {
-                type = new PrimaryType(KnownPrimaryType.Stream);
+                type = New<PrimaryType>(KnownPrimaryType.Stream);
             }
             type.Format = SwaggerObject.Format;
-            if (SwaggerObject.Enum != null && type.Type == KnownPrimaryType.String && !(IsSwaggerObjectConstant(SwaggerObject)))
+            if (SwaggerObject.Enum != null && type.KnownPrimaryType == KnownPrimaryType.String && !(IsSwaggerObjectConstant(SwaggerObject)))
             {
-                var enumType = new EnumType();
+                var enumType = New<EnumType>();
                 SwaggerObject.Enum.ForEach(v => enumType.Values.Add(new EnumValue { Name = v, SerializedName = v }));
-                if (SwaggerObject.Extensions.ContainsKey(CodeGenerator.EnumObject))
+                if (SwaggerObject.Extensions.ContainsKey(Core.Model.XmsExtensions.Enum.Name))
                 {
-                    var enumObject = SwaggerObject.Extensions[CodeGenerator.EnumObject] as Newtonsoft.Json.Linq.JContainer;
+                    var enumObject = SwaggerObject.Extensions[Core.Model.XmsExtensions.Enum.Name] as Newtonsoft.Json.Linq.JContainer;
                     if (enumObject != null)
                     {
-                        enumType.Name= enumObject["name"].ToString();
+                        enumType.SetName( enumObject["name"].ToString() );
                         if (enumObject["modelAsString"] != null)
                         {
                             enumType.ModelAsString = bool.Parse(enumObject["modelAsString"].ToString());
@@ -70,32 +72,34 @@ namespace AutoRest.Swagger
                     {
                         throw new InvalidOperationException(
                             string.Format(CultureInfo.InvariantCulture, 
-                                "{0} extension needs to specify an enum name.", 
-                                CodeGenerator.EnumObject));
+                                "{0} extension needs to specify an enum name.",
+                                Core.Model.XmsExtensions.Enum.Name));
                     }
                     var existingEnum =
-                        Modeler.ServiceClient.EnumTypes.FirstOrDefault(
-                            e => e.Name.Equals(enumType.Name, StringComparison.OrdinalIgnoreCase));
+                        Modeler.CodeModel.EnumTypes.FirstOrDefault(
+                            e => e.Name.RawValue.EqualsIgnoreCase(enumType.Name.RawValue));
                     if (existingEnum != null)
                     {
-                        if (!existingEnum.Equals(enumType))
+                        if (!existingEnum.StructurallyEquals(enumType))
                         {
                             throw new InvalidOperationException(
                                 string.Format(CultureInfo.InvariantCulture,
                                     "Swagger document contains two or more {0} extensions with the same name '{1}' and different values.",
-                                    CodeGenerator.EnumObject,
+                                    Core.Model.XmsExtensions.Enum.Name,
                                     enumType.Name));
                         }
+                        // Use the existing one!
+                        enumType = existingEnum;
                     }
                     else
                     {
-                        Modeler.ServiceClient.EnumTypes.Add(enumType);
+                        Modeler.CodeModel.Add(enumType);
                     }
                 }
                 else
                 {
                     enumType.ModelAsString = true;
-                    enumType.Name = string.Empty;
+                    enumType.SetName( string.Empty);
                     enumType.SerializedName = string.Empty;
                 }
                 return enumType;
@@ -114,10 +118,11 @@ namespace AutoRest.Swagger
 
                 var elementType =
                     SwaggerObject.Items.GetBuilder(Modeler).BuildServiceType(itemServiceTypeName);
-                return new SequenceType
+                return New<SequenceType>(new 
                 {
-                    ElementType = elementType
-                };
+                    ElementType = elementType,
+                    Extensions = SwaggerObject.Items.Extensions
+                });
             }
             if (SwaggerObject.AdditionalProperties != null)
             {
@@ -130,18 +135,19 @@ namespace AutoRest.Swagger
                 {
                     dictionaryValueServiceTypeName = serviceTypeName + "Value";
                 }
-                return new DictionaryType
+                return New<DictionaryType>(new 
                 {
                     ValueType =
                         SwaggerObject.AdditionalProperties.GetBuilder(Modeler)
-                            .BuildServiceType((dictionaryValueServiceTypeName))
-                };
+                            .BuildServiceType((dictionaryValueServiceTypeName)),
+                    Extensions = SwaggerObject.AdditionalProperties.Extensions
+                });
             }
 
             return type;
         }
 
-        public static void PopulateParameter(IParameter parameter, SwaggerObject swaggerObject)
+        public static void PopulateParameter(IVariable parameter, SwaggerObject swaggerObject)
         {
             if (swaggerObject == null)
             {
@@ -160,36 +166,11 @@ namespace AutoRest.Swagger
                 parameter.IsConstant = true;
             }
 
-            var compositeType = parameter.Type as CompositeType;
-            if (compositeType != null && compositeType.ComposedProperties.Any())
-            {
-                if (compositeType.ComposedProperties.All(p => p.IsConstant))
-                {
-                    parameter.DefaultValue = "{}";
-                    parameter.IsConstant = true;
-                }
-            }
-
-
             parameter.Documentation = swaggerObject.Description;
             parameter.CollectionFormat = swaggerObject.CollectionFormat;
-            var enumType = parameter.Type as EnumType;
-            if (enumType != null)
-            {
-                if (parameter.Documentation == null)
-                {
-                    parameter.Documentation = string.Empty;
-                }
-                else
-                {
-                    parameter.Documentation = parameter.Documentation.TrimEnd('.') + ". ";
-                }
-                parameter.Documentation += "Possible values include: " +
-                                           string.Join(", ", enumType.Values.Select(v =>
-                                               string.Format(CultureInfo.InvariantCulture,
-                                               "'{0}'", v.Name)));
-            }
-            swaggerObject.Extensions.ForEach(e => parameter.Extensions[e.Key] = e.Value);
+
+            // tag the paramter with all the extensions from the swagger object
+            parameter.Extensions.AddRange(swaggerObject.Extensions);
 
             SetConstraints(parameter.Constraints, swaggerObject);
         }

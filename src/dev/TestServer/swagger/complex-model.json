@@ -29,7 +29,7 @@
             "type": "string"
           },
           {
-            "$ref": "ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "tags": [
@@ -79,7 +79,7 @@
             }
           },
           {
-            "$ref": "ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "tags": [
@@ -129,7 +129,7 @@
             }
           },
           {
-            "$ref": "ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "tags": [

@@ -1,15 +1,15 @@
 @using System
 @using AutoRest.CSharp.Azure.Templates
 @using System.Linq
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
-@using AutoRest.CSharp.TemplateModels
-@using AutoRest.CSharp.Templates
-@inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.TemplateModels.AzureMethodTemplateModel>
+@using AutoRest.CSharp.Model
+@using AutoRest.CSharp.Templates.Rest.Client
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.Model.MethodCsa>
 
 @if (!Model.IsLongRunningOperation)
 {
-@:@(Include(new MethodTemplate(), (MethodTemplateModel)Model))
+@:@(Include(new MethodTemplate(), (MethodCs)Model))
 }
 else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
 {
@@ -42,13 +42,16 @@ foreach (var parameter in Model.LocalParameters)
 @:/// The cancellation token.
 @:/// </param>
 <text>
+@if (Model.Deprecated)
+{
+@:[System.Obsolete()]
+}
 public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send request
-    @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)WithHttpMessagesAsync(
-        @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
+    @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("customHeaders"))).ConfigureAwait(false);
 
-    return await @(Model.ClientReference).GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken);
+    return await @(Model.ClientReference).GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
 }
 </text>
 }
@@ -83,15 +86,16 @@ foreach (var parameter in Model.LocalParameters)
 @:/// The cancellation token.
 @:/// </param>
 <text>
+@if (Model.Deprecated)
+{
+@:[System.Obsolete()]
+}
 public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send Request
-    @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)WithHttpMessagesAsync(
-        @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
+    @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("customHeaders"))).ConfigureAwait(false);
 
-    return await @(Model.ClientReference).GetPutOrPatchOperationResultAsync(_response,
-        customHeaders,
-        cancellationToken);
+    return await @(Model.ClientReference).GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
 }
 </text>
 }

@@ -13,15 +13,14 @@ from msrest.serialization import Model
 
 
 class CustomParameterGroup(Model):
-    """Additional parameters for a set of operations, such as:
-    Paging_getMultiplePagesFragmentWithGroupingNextLink,
-    Paging_nextFragmentWithGrouping.
+    """Additional parameters for the
+    Paging_get_multiple_pages_fragment_with_grouping_next_link operation.
 
     :param api_version: Sets the api version to use.
     :type api_version: str
     :param tenant: Sets the tenant to use.
     :type tenant: str
-    """ 
+    """
 
     _validation = {
         'api_version': {'required': True},

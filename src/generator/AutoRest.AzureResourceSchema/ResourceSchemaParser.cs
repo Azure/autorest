@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 
 namespace AutoRest.AzureResourceSchema
 {
@@ -23,7 +23,7 @@ namespace AutoRest.AzureResourceSchema
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <returns></returns>
-        public static IDictionary<string, ResourceSchema> Parse(ServiceClient serviceClient)
+        public static IDictionary<string, ResourceSchema> Parse(CodeModel serviceClient)
         {
             if (serviceClient == null)
             {
@@ -42,13 +42,13 @@ namespace AutoRest.AzureResourceSchema
             {
                 if (method.HttpMethod != HttpMethod.Put ||
                     string.IsNullOrWhiteSpace(method.Url) ||
-                    !method.Url.StartsWith(resourceMethodPrefix, StringComparison.OrdinalIgnoreCase) ||
-                    !method.Url.EndsWith("}", StringComparison.OrdinalIgnoreCase))
+                    !method.Url.Value.StartsWith(resourceMethodPrefix, StringComparison.OrdinalIgnoreCase) ||
+                    !method.Url.Value.EndsWith("}", StringComparison.OrdinalIgnoreCase))
                 {
                     continue;
                 }
 
-                string afterPrefix = method.Url.Substring(resourceMethodPrefix.Length);
+                string afterPrefix = method.Url.Value.Substring(resourceMethodPrefix.Length);
                 int forwardSlashIndexAfterProvider = afterPrefix.IndexOf('/');
                 string resourceProvider = afterPrefix.Substring(0, forwardSlashIndexAfterProvider);
 
@@ -82,23 +82,24 @@ namespace AutoRest.AzureResourceSchema
                     JsonSchema resourceDefinition = new JsonSchema();
                     resourceDefinition.JsonType = "object";
 
+                    resourceDefinition.ResourceType = resourceType;
                     resourceDefinition.AddProperty("type", JsonSchema.CreateStringEnum(resourceType), true);
                     resourceDefinition.AddProperty("apiVersion", JsonSchema.CreateStringEnum(apiVersion), true);
 
                     if (method.Body != null)
                     {
-                        CompositeType body = method.Body.Type as CompositeType;
-                        Debug.Assert(body != null, "The create resource method's body must be a CompositeType and cannot be null.");
+                        CompositeType body = method.Body.ModelType as CompositeType;
+                        // Debug.Assert(body != null, "The create resource method's body must be a CompositeType and cannot be null.");
                         if (body != null)
                         {
                             foreach (Property property in body.ComposedProperties)
                             {
-                                if (!resourceDefinition.Properties.Keys.Contains(property.Name))
+                                if (!resourceDefinition.Properties.Keys.Contains(property.Name.RawValue))
                                 {
-                                    JsonSchema propertyDefinition = ParseType(property, property.Type, resourceSchema.Definitions, serviceClient.ModelTypes);
+                                    JsonSchema propertyDefinition = ParseType(property, property.ModelType, resourceSchema.Definitions, serviceClient.ModelTypes);
                                     if (propertyDefinition != null)
                                     {
-                                        resourceDefinition.AddProperty(property.Name, propertyDefinition, property.IsRequired || property.Name == "properties");
+                                        resourceDefinition.AddProperty(property.Name.RawValue, propertyDefinition, property.IsRequired || property.Name.RawValue == "properties");
                                     }
                                 }
                             }
@@ -184,18 +185,18 @@ namespace AutoRest.AzureResourceSchema
                 if (IsPathVariable(pathSegment))
                 {
                     string parameterName = pathSegment.Substring(1, pathSegment.Length - 2);
-                    Parameter parameter = method.Parameters.FirstOrDefault(methodParameter => methodParameter.Name == parameterName);
+                    Parameter parameter = method.Parameters.FirstOrDefault(methodParameter => methodParameter.Name.RawValue == parameterName);
                     if (parameter == null)
                     {
                         throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Found undefined parameter reference {0} in create resource method \"{1}/{2}/{3}\".", pathSegment, resourceMethodPrefix, resourceProvider, methodUrlPathAfterProvider));
                     }
 
-                    if (parameter.Type == null)
+                    if (parameter.ModelType == null)
                     {
                         throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Parameter reference {0} has no defined type.", pathSegment));
                     }
 
-                    EnumType parameterType = parameter.Type as EnumType;
+                    EnumType parameterType = parameter.ModelType as EnumType;
                     if (parameterType == null)
                     {
                         // If we encounter a parameter in the URL that isn't an enumeration, then
@@ -233,7 +234,7 @@ namespace AutoRest.AzureResourceSchema
             return resourceTypes.ToArray();
         }
 
-        private static JsonSchema ParseType(Property property, IType type, IDictionary<string, JsonSchema> definitions, IEnumerable<CompositeType> modelTypes)
+        private static JsonSchema ParseType(Property property, IModelType type, IDictionary<string, JsonSchema> definitions, IEnumerable<CompositeType> modelTypes)
         {
             JsonSchema result = null;
 
@@ -296,7 +297,7 @@ namespace AutoRest.AzureResourceSchema
 
         private static JsonSchema ParseCompositeType(Property property, CompositeType compositeType, bool includeBaseModelTypeProperties, IDictionary<string, JsonSchema> definitions, IEnumerable<CompositeType> modelTypes)
         {
-            string definitionName = compositeType.Name;
+            string definitionName = compositeType.Name.RawValue;
 
             if (!definitions.ContainsKey(definitionName))
             {
@@ -369,10 +370,10 @@ namespace AutoRest.AzureResourceSchema
                 IEnumerable<Property> compositeTypeProperties = includeBaseModelTypeProperties ? compositeType.ComposedProperties : compositeType.Properties;
                 foreach (Property subProperty in compositeTypeProperties)
                 {
-                    JsonSchema subPropertyDefinition = ParseType(subProperty, subProperty.Type, definitions, modelTypes);
+                    JsonSchema subPropertyDefinition = ParseType(subProperty, subProperty.ModelType, definitions, modelTypes);
                     if (subPropertyDefinition != null)
                     {
-                        baseTypeDefinition.AddProperty(subProperty.Name, subPropertyDefinition, subProperty.IsRequired);
+                        baseTypeDefinition.AddProperty(subProperty.Name.RawValue, subPropertyDefinition, subProperty.IsRequired);
                     }
                 }
             }
@@ -433,7 +434,7 @@ namespace AutoRest.AzureResourceSchema
                 Format = primaryType.Format
             };
 
-            switch (primaryType.Type)
+            switch (primaryType.KnownPrimaryType)
             {
                 case KnownPrimaryType.Boolean:
                     result.JsonType = "boolean";
@@ -458,8 +459,13 @@ namespace AutoRest.AzureResourceSchema
                     result.JsonType = "string";
                     break;
 
+                case KnownPrimaryType.Uuid:
+                    result.JsonType = "string";
+                    result.Pattern = @"^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$";
+                    break;
+
                 default:
-                    Debug.Assert(false, "Unrecognized known property type: " + primaryType.Type);
+                    Debug.Assert(false, "Unrecognized known property type: " + primaryType.KnownPrimaryType);
                     break;
             }
 

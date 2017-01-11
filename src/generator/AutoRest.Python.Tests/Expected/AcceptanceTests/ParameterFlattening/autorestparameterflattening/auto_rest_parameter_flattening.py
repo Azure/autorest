@@ -12,6 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
+from msrest.exceptions import HttpOperationError
 from .operations.availability_sets_operations import AvailabilitySetsOperations
 from . import models
 

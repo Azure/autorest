@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Ruby.Model;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Ruby
 {
@@ -22,7 +24,7 @@ namespace AutoRest.Ruby
         /// </summary>
         /// <param name="type">The type to check.</param>
         /// <returns>True if null can be assigned, otherwise false.</returns>
-        public static bool IsNullable(this IType type)
+        public static bool IsNullable(this IModelType type)
         {
             return true;
         }
@@ -33,23 +35,23 @@ namespace AutoRest.Ruby
         /// <param name="type">The type to convert</param>
         /// <param name="reference">a reference to an instance of the type</param>
         /// <returns></returns>
-        public static string ToString(this IType type, string reference)
+        public static string ToString(this IModelType type, string reference)
         {
             var known = type as PrimaryType;
-            string result = string.Format("{0}.to_s", reference);
+            string result = $"{reference}.to_s";
             if (known != null)
             {
-                if (known.Type == KnownPrimaryType.String)
+                if (known.KnownPrimaryType == KnownPrimaryType.String)
                 {
                     result = reference;
                 }
-                else if (known.Type == KnownPrimaryType.DateTime)
+                else if (known.KnownPrimaryType == KnownPrimaryType.DateTime)
                 {
-                    result = string.Format("{0}.new_offset(0).strftime('%FT%TZ')", reference);
+                    result = $"{reference}.new_offset(0).strftime('%FT%TZ')";
                 }
-                else if (known.Type == KnownPrimaryType.DateTimeRfc1123)
+                else if (known.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
                 {
-                    result = string.Format("{0}.strftime('%a, %d %b %Y %H:%M:%S GMT')", reference);
+                    result = $"{reference}.strftime('%a, %d %b %Y %H:%M:%S GMT')";
                 }
             }
 
@@ -61,7 +63,7 @@ namespace AutoRest.Ruby
         /// </summary>
         /// <param name="type">The type doc needs to be generated for.</param>
         /// <returns>Doc in form of string.</returns>
-        private static string PrepareTypeForDocRecursively(IType type)
+        private static string PrepareTypeForDocRecursively(IModelType type)
         {
             var sequenceType = type as SequenceType;
             var compositeType = type as CompositeType;
@@ -71,47 +73,47 @@ namespace AutoRest.Ruby
 
             if (primaryType != null)
             {
-                if (primaryType.Type == KnownPrimaryType.String)
+                if (primaryType.KnownPrimaryType == KnownPrimaryType.String)
                 {
                     return "String";
                 }
 
-                if (primaryType.Type == KnownPrimaryType.Int || primaryType.Type == KnownPrimaryType.Long)
+                if (primaryType.KnownPrimaryType == KnownPrimaryType.Int || primaryType.KnownPrimaryType == KnownPrimaryType.Long)
                 {
                     return "Integer";
                 }
 
-                if (primaryType.Type == KnownPrimaryType.Boolean)
+                if (primaryType.KnownPrimaryType == KnownPrimaryType.Boolean)
                 {
                     return "Boolean";
                 }
 
-                if (primaryType.Type == KnownPrimaryType.Double)
+                if (primaryType.KnownPrimaryType == KnownPrimaryType.Double)
                 {
                     return "Float";
                 }
 
-                if (primaryType.Type == KnownPrimaryType.Date)
+                if (primaryType.KnownPrimaryType == KnownPrimaryType.Date)
                 {
                     return "Date";
                 }
 
-                if (primaryType.Type == KnownPrimaryType.DateTime)
+                if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTime)
                 {
                     return "DateTime";
                 }
 
-                if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
+                if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
                 {
                     return "DateTime";
                 }
 
-                if (primaryType.Type == KnownPrimaryType.ByteArray)
+                if (primaryType.KnownPrimaryType == KnownPrimaryType.ByteArray)
                 {
                     return "Array<Integer>";
                 }
 
-                if (primaryType.Type == KnownPrimaryType.TimeSpan)
+                if (primaryType.KnownPrimaryType == KnownPrimaryType.TimeSpan)
                 {
                     return "Duration"; //TODO: Is this a real Ruby type...?
                 }
@@ -124,7 +126,7 @@ namespace AutoRest.Ruby
 
             if (enumType != null)
             {
-                return enumType.Name;
+                return ((EnumTypeRb)enumType).ModuleName;
             }
 
             if (sequenceType != null)
@@ -133,7 +135,7 @@ namespace AutoRest.Ruby
 
                 if (!string.IsNullOrEmpty(internalString))
                 {
-                    return string.Format("Array<{0}>", internalString);
+                    return $"Array<{internalString}>";
                 }
 
                 return string.Empty;
@@ -145,7 +147,7 @@ namespace AutoRest.Ruby
 
                 if (!string.IsNullOrEmpty(internalString))
                 {
-                    return string.Format("Hash{{String => {0}}}", internalString);
+                    return $"Hash{{String => {internalString}}}";
                 }
 
                 return string.Empty;
@@ -172,7 +174,7 @@ namespace AutoRest.Ruby
                 case CollectionFormat.Tsv:
                     return "\t";
                 default:
-                    throw new NotSupportedException(string.Format("Collection format {0} is not supported.", format));
+                    throw new NotSupportedException($"Collection format {format} is not supported.");
             }
         }
 
@@ -183,7 +185,7 @@ namespace AutoRest.Ruby
         /// <returns>A reference to the formatted parameter value.</returns>
         public static string GetFormattedReferenceValue(this Parameter parameter)
         {
-            SequenceType sequence = parameter.Type as SequenceType;
+            SequenceType sequence = parameter.ModelType as SequenceType;
             if (sequence == null)
             {
                 return parameter.Name;
@@ -193,14 +195,13 @@ namespace AutoRest.Ruby
             EnumType enumType = sequence.ElementType as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                primaryType = new PrimaryType(KnownPrimaryType.String);
+                primaryType = New<PrimaryType>(KnownPrimaryType.String);
             }
 
-            if (primaryType == null || primaryType.Type != KnownPrimaryType.String)
+            if (primaryType == null || primaryType.KnownPrimaryType != KnownPrimaryType.String)
             {
                 throw new InvalidOperationException(
-                    string.Format("Cannot generate a formatted sequence from a " +
-                                  "non-string array parameter {0}", parameter));
+                    "Cannot generate a formatted sequence from a " + $"non-string array parameter {parameter}");
             }
 
             return string.Format("{0}.nil? ? nil : {0}.join('{1}')", parameter.Name, parameter.CollectionFormat.GetSeparator());
@@ -211,7 +212,7 @@ namespace AutoRest.Ruby
         /// </summary>
         /// <param name="type">The type doc needs to be generated for.</param>
         /// <returns>Doc in form of string.</returns>
-        public static string GetYardDocumentation(this IType type)
+        public static string GetYardDocumentation(this IModelType type)
         {
             string typeForDoc = PrepareTypeForDocRecursively(type);
 
@@ -220,7 +221,7 @@ namespace AutoRest.Ruby
                 return string.Empty;
             }
 
-            return string.Format("[{0}] ", typeForDoc);
+            return $"[{typeForDoc}] ";
         }
 
         /// <summary>
@@ -230,7 +231,7 @@ namespace AutoRest.Ruby
         /// <param name="scope">A scope provider for generating variable names as necessary.</param>
         /// <param name="valueReference">A reference to the value being validated.</param>
         /// <returns>The code to validate the reference of the given type.</returns>
-        public static string ValidateType(this IType type, IScopeProvider scope, string valueReference)
+        public static string ValidateType(this IModelType type, IIdentifier scope, string valueReference)
         {
             CompositeType model = type as CompositeType;
             SequenceType sequence = type as SequenceType;
@@ -253,19 +254,9 @@ namespace AutoRest.Ruby
         /// Determine whether a model should be serializable.
         /// </summary>
         /// <param name="type">The type to check.</param>
-        public static bool IsSerializable(this IType type)
+        public static bool IsSerializable(this IModelType type)
         {
             return !type.IsPrimaryType(KnownPrimaryType.Object);
-        }
-
-        /// <summary>
-        /// Verifies whether client includes model types.
-        /// </summary>
-        /// <param name="client">The client.</param>
-        /// <returns>True if client contain model types, false otherwise.</returns>
-        public static bool HasModelTypes(this ServiceClient client)
-        {
-            return client.ModelTypes.Any();
         }
 
         /// <summary>
@@ -337,7 +328,7 @@ namespace AutoRest.Ruby
         ///   }
         /// }
         /// </example>
-        public static string ConstructMapper(this IType type, string serializedName, IParameter parameter, bool expandComposite)
+        public static string ConstructMapper(this IModelType type, string serializedName, IVariable parameter, bool expandComposite)
         {
             if (type == null)
             {
@@ -353,7 +344,7 @@ namespace AutoRest.Ruby
             EnumType enumType = type as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                primary = new PrimaryType(KnownPrimaryType.String);
+                primary = New<PrimaryType>(KnownPrimaryType.String);
             }
             builder.AppendLine("").Indent();
 
@@ -365,7 +356,7 @@ namespace AutoRest.Ruby
             }
             else if (enumType != null && enumType.Name != null)
             {
-                builder.AppendLine(enumType.ContructMapperForEnumType());
+                builder.AppendLine(((EnumTypeRb)enumType).ContructMapperForEnumType());
             }
             else if (sequence != null)
             {
@@ -395,7 +386,7 @@ namespace AutoRest.Ruby
         /// <returns>Metadata as string.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a required parameter is null.</exception>
         /// <example>
-        /// The below example shows possible mapper string for IParameter for IType.
+        /// The below example shows possible mapper string for IParameter for IModelType.
         /// required: true | false,                         -- whether this property is required or not
         /// read_only: true | false,                        -- whether this property is read only or not. Default is false
         /// is_constant: true | false,                      -- whether this property is constant or not. Default is false
@@ -406,7 +397,7 @@ namespace AutoRest.Ruby
         ///   ***: *****
         /// }
         /// </example>
-        private static string AddMetaData(this IType type, string serializedName, IParameter parameter)
+        private static string AddMetaData(this IModelType type, string serializedName, IVariable parameter)
         {
             if (type == null)
             {
@@ -512,62 +503,62 @@ namespace AutoRest.Ruby
 
             IndentedStringBuilder builder = new IndentedStringBuilder("  ");
 
-            if (primary.Type == KnownPrimaryType.Boolean)
+            if (primary.KnownPrimaryType == KnownPrimaryType.Boolean)
             {
                 builder.AppendLine("type: {").Indent().AppendLine("name: 'Boolean'").Outdent().AppendLine("}");
             }
-            else if (primary.Type == KnownPrimaryType.Double)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.Double)
             {
                 builder.AppendLine("type: {").Indent().AppendLine("name: 'Double'").Outdent().AppendLine("}");
             }
-            else if (primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long ||
-                primary.Type == KnownPrimaryType.Decimal)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.Int || primary.KnownPrimaryType == KnownPrimaryType.Long ||
+                primary.KnownPrimaryType == KnownPrimaryType.Decimal)
             {
                 builder.AppendLine("type: {").Indent().AppendLine("name: 'Number'").Outdent().AppendLine("}");
             }
-            else if (primary.Type == KnownPrimaryType.String || primary.Type == KnownPrimaryType.Uuid)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.String || primary.KnownPrimaryType == KnownPrimaryType.Uuid)
             {
                 builder.AppendLine("type: {").Indent().AppendLine("name: 'String'").Outdent().AppendLine("}");
             }
-            else if (primary.Type == KnownPrimaryType.ByteArray)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.ByteArray)
             {
                 builder.AppendLine("type: {").Indent().AppendLine("name: 'ByteArray'").Outdent().AppendLine("}");
             }
-            else if (primary.Type == KnownPrimaryType.Base64Url)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.Base64Url)
             {
                 builder.AppendLine("type: {").Indent().AppendLine("name: 'Base64Url'").Outdent().AppendLine("}");
             }
-            else if (primary.Type == KnownPrimaryType.Date)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.Date)
             {
                 builder.AppendLine("type: {").Indent().AppendLine("name: 'Date'").Outdent().AppendLine("}");
             }
-            else if (primary.Type == KnownPrimaryType.DateTime)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.DateTime)
             {
                 builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTime'").Outdent().AppendLine("}");
             }
-            else if (primary.Type == KnownPrimaryType.DateTimeRfc1123)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
             {
                 builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTimeRfc1123'").Outdent().AppendLine("}");
             }
-            else if (primary.Type == KnownPrimaryType.TimeSpan)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.TimeSpan)
             {
                 builder.AppendLine("type: {").Indent().AppendLine("name: 'TimeSpan'").Outdent().AppendLine("}");
             }
-            else if (primary.Type == KnownPrimaryType.UnixTime)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.UnixTime)
             {
                 builder.AppendLine("type: {").Indent().AppendLine("name: 'UnixTime'").Outdent().AppendLine("}");
             }
-            else if (primary.Type == KnownPrimaryType.Object)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.Object)
             {
                 builder.AppendLine("type: {").Indent().AppendLine("name: 'Object'").Outdent().AppendLine("}");
             }
-            else if (primary.Type == KnownPrimaryType.Stream)
+            else if (primary.KnownPrimaryType == KnownPrimaryType.Stream)
             {
                 builder.AppendLine("type: {").Indent().AppendLine("name: 'Stream'").Outdent().AppendLine("}");
             }
             else
             {
-                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, "{0} is not a supported primary Type for {1}.", primary.Type, primary.SerializedName));
+                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, "{0} is not a supported primary Type for {1}.", primary.KnownPrimaryType, primary.SerializedName));
             }
 
             return builder.ToString();
@@ -586,7 +577,7 @@ namespace AutoRest.Ruby
         ///   module: 'module_name'                         -- name of the module to be looked for enum values
         /// }
         /// </example>
-        private static string ContructMapperForEnumType(this EnumType enumeration)
+        private static string ContructMapperForEnumType(this EnumTypeRb enumeration)
         {
             if (enumeration == null)
             {
@@ -597,7 +588,7 @@ namespace AutoRest.Ruby
 
             builder.AppendLine("type: {").Indent()
                 .AppendLine("name: 'Enum',")
-                .AppendLine("module: '{0}'", enumeration.Name).Outdent()
+                .AppendLine("module: '{0}'", enumeration.ModuleName).Outdent()
                 .AppendLine("}");
 
             return builder.ToString();
@@ -614,7 +605,7 @@ namespace AutoRest.Ruby
         /// type: {
         ///   name: 'Sequence',
         ///   element: {
-        ///     ***                                         -- mapper of the IType from the sequence element
+        ///     ***                                         -- mapper of the IModelType from the sequence element
         ///   }
         /// }
         /// </example>
@@ -648,7 +639,7 @@ namespace AutoRest.Ruby
         /// type: {
         ///   name: 'Dictionary',
         ///   value: {
-        ///     ***                                         -- mapper of the IType from the value type of dictionary
+        ///     ***                                         -- mapper of the IModelType from the value type of dictionary
         ///   }
         /// }
         /// </example>
@@ -691,7 +682,7 @@ namespace AutoRest.Ruby
         ///   model_properties: {                           -- expanded properties of the model
         ///                                                      Used when <paramref name="expandComposite"/> is true
         ///     property_name : {                           -- name of the property of this composite type
-        ///         ***                                     -- mapper of the IType from the type of the property
+        ///         ***                                     -- mapper of the IModelType from the type of the property
         ///     }
         ///   }
         /// }
@@ -708,7 +699,7 @@ namespace AutoRest.Ruby
             builder.AppendLine("type: {").Indent()
                 .AppendLine("name: 'Composite',");
 
-            if (composite.PolymorphicDiscriminator != null)
+            if (composite.IsPolymorphic)
             {
                 builder.AppendLine("polymorphic_discriminator: '{0}',", composite.PolymorphicDiscriminator);
                 var polymorphicType = composite;
@@ -726,19 +717,24 @@ namespace AutoRest.Ruby
             {
                 builder.AppendLine("class_name: '{0}',", composite.Name)
                        .AppendLine("model_properties: {").Indent();
-                var composedPropertyList = new List<Property>(composite.ComposedProperties);
+
+                // if the type is the base type, it doesn't get the the polymorphic discriminator here
+                var composedPropertyList = composite.IsPolymorphic ? 
+                    new List<Property>(composite.ComposedProperties.Where(each => !each.IsPolymorphicDiscriminator)) :
+                    new List<Property>(composite.ComposedProperties);
+
                 for (var i = 0; i < composedPropertyList.Count; i++)
                 {
                     var prop = composedPropertyList[i];
-                    var serializedPropertyName = prop.SerializedName;
+                    var serializedPropertyName = prop.SerializedName.Value;
 
                     if (i != composedPropertyList.Count - 1)
                     {
-                        builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop, false));
+                        builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.ModelType.ConstructMapper(serializedPropertyName, prop, false));
                     }
                     else
                     {
-                        builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop, false));
+                        builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.ModelType.ConstructMapper(serializedPropertyName, prop, false));
                     }
                 }
                 // end of modelProperties and type

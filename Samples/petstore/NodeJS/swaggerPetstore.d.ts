@@ -25,16 +25,16 @@ declare class SwaggerPetstore {
     constructor(baseUri: string, options: ServiceClientOptions);
 
             /**
-         * @summary Fake endpoint to test byte array in body parameter for adding a
-         * new pet to the store
+         * @summary Fake endpoint to test byte array in body parameter for adding a new
+         * pet to the store
          *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {string} [options.body] Pet object in the form of byte array
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -48,31 +48,31 @@ declare class SwaggerPetstore {
          * pet is invalid.
          *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {object} [options.body] Pet object that needs to be added to the
          * store
-         * 
+         *
          * @param {number} [options.body.id] The id of the pet. A more detailed
          * description of the id of the pet.
-         * 
+         *
          * @param {object} [options.body.category]
-         * 
+         *
          * @param {number} [options.body.category.id]
-         * 
+         *
          * @param {string} [options.body.category.name]
-         * 
+         *
          * @param {string} options.body.name
-         * 
+         *
          * @param {array} options.body.photoUrls
-         * 
+         *
          * @param {array} [options.body.tags]
-         * 
+         *
          * @param {string} [options.body.status] pet status in the store. Possible
          * values include: 'available', 'pending', 'sold'
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -83,31 +83,31 @@ declare class SwaggerPetstore {
          * @summary Update an existing pet
          *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {object} [options.body] Pet object that needs to be added to the
          * store
-         * 
+         *
          * @param {number} [options.body.id] The id of the pet. A more detailed
          * description of the id of the pet.
-         * 
+         *
          * @param {object} [options.body.category]
-         * 
+         *
          * @param {number} [options.body.category.id]
-         * 
+         *
          * @param {string} [options.body.category.name]
-         * 
+         *
          * @param {string} options.body.name
-         * 
+         *
          * @param {array} options.body.photoUrls
-         * 
+         *
          * @param {array} [options.body.tags]
-         * 
+         *
          * @param {string} [options.body.status] pet status in the store. Possible
          * values include: 'available', 'pending', 'sold'
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -120,13 +120,13 @@ declare class SwaggerPetstore {
          * Multiple status values can be provided with comma seperated strings
          *
          * @param {object} [options] Optional Parameters.
-         * 
-         * @param {array} [options.status] Status values that need to be considered
-         * for filter
-         * 
+         *
+         * @param {array} [options.status] Status values that need to be considered for
+         * filter
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -140,12 +140,12 @@ declare class SwaggerPetstore {
          * tag3 for testing.
          *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {array} [options.tags] Tags to filter by
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -159,12 +159,12 @@ declare class SwaggerPetstore {
          * conditions
          *
          * @param {number} petId ID of pet that needs to be fetched
-         * 
+         *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -178,12 +178,12 @@ declare class SwaggerPetstore {
          * conditions
          *
          * @param {number} petId ID of pet that needs to be fetched
-         * 
+         *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -194,16 +194,16 @@ declare class SwaggerPetstore {
          * @summary Updates a pet in the store with form data
          *
          * @param {string} petId ID of pet that needs to be updated
-         * 
+         *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {string} [options.name] Updated name of the pet
-         * 
+         *
          * @param {string} [options.status] Updated status of the pet
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -214,14 +214,14 @@ declare class SwaggerPetstore {
          * @summary Deletes a pet
          *
          * @param {number} petId Pet id to delete
-         * 
+         *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {string} [options.apiKey]
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -232,17 +232,17 @@ declare class SwaggerPetstore {
          * @summary uploads an image
          *
          * @param {number} petId ID of pet to update
-         * 
+         *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {string} [options.additionalMetadata] Additional data to pass to
          * server
-         * 
+         *
          * @param {object} [options.file] file to upload
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -255,10 +255,10 @@ declare class SwaggerPetstore {
          * Returns a map of status codes to quantities
          *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -269,23 +269,23 @@ declare class SwaggerPetstore {
          * @summary Place an order for a pet
          *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {object} [options.body] order placed for purchasing the pet
-         * 
+         *
          * @param {number} [options.body.petId]
-         * 
+         *
          * @param {number} [options.body.quantity]
-         * 
+         *
          * @param {date} [options.body.shipDate]
-         * 
-         * @param {string} [options.body.status] Order Status. Possible values
-         * include: 'placed', 'approved', 'delivered'
-         * 
+         *
+         * @param {string} [options.body.status] Order Status. Possible values include:
+         * 'placed', 'approved', 'delivered'
+         *
          * @param {boolean} [options.body.complete]
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -299,12 +299,12 @@ declare class SwaggerPetstore {
          * will generated exceptions
          *
          * @param {string} orderId ID of pet that needs to be fetched
-         * 
+         *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -314,16 +314,16 @@ declare class SwaggerPetstore {
         /**
          * @summary Delete purchase order by ID
          *
-         * For valid response try integer IDs with value < 1000. Anything above 1000
-         * or nonintegers will generate API errors
+         * For valid response try integer IDs with value < 1000. Anything above 1000 or
+         * nonintegers will generate API errors
          *
          * @param {string} orderId ID of the order that needs to be deleted
-         * 
+         *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -336,28 +336,28 @@ declare class SwaggerPetstore {
          * This can only be done by the logged in user.
          *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {object} [options.body] Created user object
-         * 
+         *
          * @param {number} [options.body.id]
-         * 
+         *
          * @param {string} [options.body.username]
-         * 
+         *
          * @param {string} [options.body.firstName]
-         * 
+         *
          * @param {string} [options.body.lastName]
-         * 
+         *
          * @param {string} [options.body.email]
-         * 
+         *
          * @param {string} [options.body.password]
-         * 
+         *
          * @param {string} [options.body.phone]
-         * 
+         *
          * @param {number} [options.body.userStatus] User Status
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -368,12 +368,12 @@ declare class SwaggerPetstore {
          * @summary Creates list of users with given input array
          *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {array} [options.body] List of user object
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -384,12 +384,12 @@ declare class SwaggerPetstore {
          * @summary Creates list of users with given input array
          *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {array} [options.body] List of user object
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -400,14 +400,14 @@ declare class SwaggerPetstore {
          * @summary Logs user into the system
          *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {string} [options.username] The user name for login
-         * 
+         *
          * @param {string} [options.password] The password for login in clear text
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -418,10 +418,10 @@ declare class SwaggerPetstore {
          * @summary Logs out current logged in user session
          *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -433,12 +433,12 @@ declare class SwaggerPetstore {
          *
          * @param {string} username The name that needs to be fetched. Use user1 for
          * testing.
-         * 
+         *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -451,30 +451,30 @@ declare class SwaggerPetstore {
          * This can only be done by the logged in user.
          *
          * @param {string} username name that need to be deleted
-         * 
+         *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {object} [options.body] Updated user object
-         * 
+         *
          * @param {number} [options.body.id]
-         * 
+         *
          * @param {string} [options.body.username]
-         * 
+         *
          * @param {string} [options.body.firstName]
-         * 
+         *
          * @param {string} [options.body.lastName]
-         * 
+         *
          * @param {string} [options.body.email]
-         * 
+         *
          * @param {string} [options.body.password]
-         * 
+         *
          * @param {string} [options.body.phone]
-         * 
+         *
          * @param {number} [options.body.userStatus] User Status
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -487,12 +487,12 @@ declare class SwaggerPetstore {
          * This can only be done by the logged in user.
          *
          * @param {string} username The name that needs to be deleted
-         * 
+         *
          * @param {object} [options] Optional Parameters.
-         * 
+         *
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         * 
+         *
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */

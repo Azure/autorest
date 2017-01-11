@@ -3,7 +3,8 @@
 
 
 using System;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Extensions
 {
@@ -17,7 +18,7 @@ namespace AutoRest.Extensions
         /// </summary>
         /// <param name="propertyToCheck">Property to check.</param>
         /// <returns></returns>
-        public static bool ShouldBeFlattened(this IParameter propertyToCheck)
+        public static bool ShouldBeFlattened(this IVariable propertyToCheck)
         {
             if (propertyToCheck == null)
             {
@@ -33,7 +34,7 @@ namespace AutoRest.Extensions
         /// </summary>
         /// <param name="propertyToCheck">Property to check.</param>
         /// <returns></returns>
-        public static bool WasFlattened(this IParameter propertyToCheck)
+        public static bool WasFlattened(this IVariable propertyToCheck)
         {
             if (propertyToCheck == null)
             {
@@ -46,19 +47,14 @@ namespace AutoRest.Extensions
         /// <summary>
         /// Gets or sets the parameter client (explicitly defined code generation) name.
         /// </summary>
-        public static string GetClientName(this IParameter parameter)
+        public static string GetClientName(this IVariable parameter)
         {
             if (parameter == null)
             {
                 throw new ArgumentNullException("parameter");
             }
 
-            object clientName = null;
-            if (parameter.Extensions.TryGetValue("x-ms-client-name", out clientName))
-            {
-                return clientName as string;
-            }
-            return parameter.Name;
+            return parameter.Extensions.GetValue<string>("x-ms-client-name").Else(parameter.Name);
         }
     }
 }

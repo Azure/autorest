@@ -49,7 +49,7 @@ class FilesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyFile.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyfile.models.ErrorException>`
         """
         # Construct URL
         url = '/files/stream/nonempty'
@@ -99,7 +99,7 @@ class FilesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyFile.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyfile.models.ErrorException>`
         """
         # Construct URL
         url = '/files/stream/verylarge'
@@ -149,7 +149,7 @@ class FilesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyFile.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodyfile.models.ErrorException>`
         """
         # Construct URL
         url = '/files/stream/empty'

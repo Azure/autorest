@@ -21,7 +21,7 @@ class QueriesOperations(object):
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
     :param deserializer: An object model deserializer.
-    :ivar byte_query: '' as byte array. Constant value: bytearray("", encoding="utf-8").
+    :ivar byte_query: '' as byte array
     :ivar date_query: '2012-01-01' as date. Constant value: "2012-01-01".
     :ivar date_time_query: '2012-01-01T01:01:01Z' as date-time. Constant value: "2012-01-01T01:01:01Z".
     """
@@ -50,7 +50,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         bool_query = True
 
@@ -91,7 +91,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         bool_query = False
 
@@ -134,7 +134,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/bool/null'
@@ -174,7 +174,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         int_query = 1000000
 
@@ -215,7 +215,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         int_query = -1000000
 
@@ -258,7 +258,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/int/null'
@@ -298,7 +298,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         long_query = 10000000000
 
@@ -339,7 +339,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         long_query = -10000000000
 
@@ -382,7 +382,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/long/null'
@@ -422,7 +422,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         float_query = 1.034E+20
 
@@ -463,7 +463,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         float_query = -1.034E-20
 
@@ -506,7 +506,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/float/null'
@@ -546,7 +546,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         double_query = 9999999.999
 
@@ -587,7 +587,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         double_query = -9999999.999
 
@@ -630,7 +630,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/double/null'
@@ -670,7 +670,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         string_query = "啊齄丂狛狜隣郎隣兀﨩"
 
@@ -711,7 +711,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         string_query = "begin!*'();:@ &=+$,/?#[]end"
 
@@ -752,7 +752,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         string_query = ""
 
@@ -795,7 +795,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/string/null'
@@ -829,7 +829,7 @@ class QueriesOperations(object):
         :param enum_query: 'green color' enum value. Possible values include:
          'red color', 'green color', 'blue color'
         :type enum_query: str or :class:`UriColor
-         <Fixtures.AcceptanceTestsUrl.models.UriColor>`
+         <fixtures.acceptancetestsurl.models.UriColor>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -839,7 +839,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/enum/green%20color'
@@ -873,7 +873,7 @@ class QueriesOperations(object):
         :param enum_query: null string value. Possible values include: 'red
          color', 'green color', 'blue color'
         :type enum_query: str or :class:`UriColor
-         <Fixtures.AcceptanceTestsUrl.models.UriColor>`
+         <fixtures.acceptancetestsurl.models.UriColor>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -883,7 +883,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/enum/null'
@@ -926,7 +926,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/byte/multibyte'
@@ -966,7 +966,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/byte/empty'
@@ -1007,7 +1007,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/byte/null'
@@ -1047,7 +1047,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/date/2012-01-01'
@@ -1088,7 +1088,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/date/null'
@@ -1128,7 +1128,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/datetime/2012-01-01T01%3A01%3A01Z'
@@ -1169,7 +1169,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/datetime/null'
@@ -1213,7 +1213,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/array/csv/string/valid'
@@ -1255,7 +1255,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/array/csv/string/null'
@@ -1298,7 +1298,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/array/csv/string/empty'
@@ -1342,7 +1342,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/array/ssv/string/valid'
@@ -1386,7 +1386,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/array/tsv/string/valid'
@@ -1430,7 +1430,7 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsUrl.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsurl.models.ErrorException>`
         """
         # Construct URL
         url = '/queries/array/pipes/string/valid'

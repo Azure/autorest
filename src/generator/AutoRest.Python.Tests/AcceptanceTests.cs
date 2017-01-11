@@ -23,8 +23,8 @@ namespace AutoRest.Python.Tests
         [Fact]
         public static void SampleTestForGeneratingPython()
         {
-            SwaggerSpecHelper.RunTests<PythonCodeGenerator>(
-                SwaggerPath("body-complex.json"), ExpectedPath("BodyComplex"));
+            SwaggerSpecHelper.RunTests(
+                SwaggerPath("body-complex.json"), ExpectedPath("BodyComplex"), plugin:"Python");
         }
     }
 }

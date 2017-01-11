@@ -20,27 +20,10 @@ namespace AutoRest.Core.Logging
         /// <param name="message">Error message. May include formatting.</param>
         /// <param name="args">Optional args if the message includes formatting.</param>
         /// <returns></returns>
-        public static CodeGenerationException CreateError(Exception exception, string message, params object[] args)
+        public static CodeGenerationException CreateError(string message, params object[] args)
         {
-            // Rethrow if caught CodeGenerationException
-            var codeGenerationException = exception as CodeGenerationException;
-            if (codeGenerationException != null)
-            {
-                return codeGenerationException;
-            }
-
-            var errors =
-                Logger.Entries.Where(e => e.Severity == LogEntrySeverity.Error).Select(e => e.Exception).Where(e => e != null).ToList();
-            Logger.Entries.Add(new LogEntry(LogEntrySeverity.Fatal, FormatMessageString(message, args))
-            {
-                Exception = exception
-            });
-            if (exception != null)
-            {
-                errors.Insert(0, exception);
-                return new CodeGenerationException(FormatMessageString(message, args), errors.ToArray());
-            }
-            return new CodeGenerationException(FormatMessageString(message, args), errors.ToArray());
+            Logger.Instance.Log(Category.Fatal, FormatMessageString(message, args));
+            return new CodeGenerationException(FormatMessageString(message, args));
         }
 
         /// <summary>
@@ -58,30 +41,6 @@ namespace AutoRest.Core.Logging
             else
             {
                 return message;
-            }
-        }
-
-        /// <summary>
-        /// Logs error and returns CodeGenerationException.
-        /// </summary>
-        /// <param name="message">Error message. May include formatting.</param>
-        /// <param name="parameters">Optional args if the message includes formatting.</param>
-        /// <returns></returns>
-        public static CodeGenerationException CreateError(string message, params object[] parameters)
-        {
-            return CreateError(null, message, parameters);
-        }
-
-        /// <summary>
-        /// Throws CodeGenerationException if any errors have been logged.
-        /// </summary>
-        public static void ThrowErrors()
-        {
-            var errors =
-                Logger.Entries.Where(e => e.Severity == LogEntrySeverity.Error).Select(e => e.Exception).ToArray();
-            if (errors.Length > 0)
-            {
-                throw new CodeGenerationException(Resources.CodeGenerationFailed, errors);
             }
         }
     }

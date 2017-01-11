@@ -1,6 +1,6 @@
 ﻿@using System.Linq
 @using AutoRest.NodeJS.Templates
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.ServiceClientTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Model.CodeModelJs>
 /*
 @Header(" * ")
 */
@@ -22,8 +22,7 @@ break;
 break;
 }
 }
-
-@if (Model.ModelTypes.Any()) {
+@if (Model.ModelTypes.Any() || Model.IsAzure) {
 @:import * as models from '../models';
 }
 @EmptyLine

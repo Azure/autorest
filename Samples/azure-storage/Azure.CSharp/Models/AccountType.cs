@@ -1,22 +1,27 @@
 
 namespace Petstore.Models
 {
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// Defines values for AccountType.
     /// </summary>
-    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum AccountType
     {
-        [System.Runtime.Serialization.EnumMember(Value = "Standard_LRS")]
+        [EnumMember(Value = "Standard_LRS")]
         StandardLRS,
-        [System.Runtime.Serialization.EnumMember(Value = "Standard_ZRS")]
+        [EnumMember(Value = "Standard_ZRS")]
         StandardZRS,
-        [System.Runtime.Serialization.EnumMember(Value = "Standard_GRS")]
+        [EnumMember(Value = "Standard_GRS")]
         StandardGRS,
-        [System.Runtime.Serialization.EnumMember(Value = "Standard_RAGRS")]
+        [EnumMember(Value = "Standard_RAGRS")]
         StandardRAGRS,
-        [System.Runtime.Serialization.EnumMember(Value = "Premium_LRS")]
+        [EnumMember(Value = "Premium_LRS")]
         PremiumLRS
     }
 }
+

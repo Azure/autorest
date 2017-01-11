@@ -1,8 +1,9 @@
 ﻿@using System
 @using System.Linq
+@using AutoRest.Core.Utilities
 @using AutoRest.Ruby
-@using AutoRest.Ruby.TemplateModels
-@inherits AutoRest.Core.Template<AutoRest.Ruby.TemplateModels.ModelTemplateModel>
+@using AutoRest.Ruby.Model
+@inherits AutoRest.Core.Template<AutoRest.Ruby.Model.CompositeTypeRb>
 # encoding: utf-8
 @Header("# ")
 @EmptyLine
@@ -22,7 +23,7 @@ module @(Settings.Namespace)
       @EmptyLine
     }
     
-    @if (Model.IsPolymorphic && Model.BaseModelType == null)
+    @if (Model.BaseIsPolymorphic && Model.BaseModelType == null)
     {
       @:@@@@discriminatorMap = Hash.new
       foreach (var derivedType in Model.DerivedTypes)
@@ -31,20 +32,20 @@ module @(Settings.Namespace)
       }
     }
     
-    @if (Model.IsPolymorphic)
+    @if (Model.BaseIsPolymorphic)
     {
     @EmptyLine
       @:def initialize
-      @:  @@@Model.PolymorphicDiscriminatorProperty = "@Model.SerializedName"
+      @:  @@@Model.PolymorphicDiscriminatorProperty.Name = "@Model.SerializedName"
       @:end
     @EmptyLine
-      @:attr_accessor :@Model.PolymorphicDiscriminatorProperty
+      @:attr_accessor :@Model.PolymorphicDiscriminatorProperty.Name
     @EmptyLine
     }
     
-    @foreach (var property in Model.PropertyTemplateModels)
+    @foreach (var property in Model.PropertyTemplateModels.Where( each => !each.IsPolymorphicDiscriminator))
     {
-      @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), ModelTemplateModel.GetPropertyDocumentationString(property)))
+      @:@WrapComment("# ", string.Format("@return {0}{1}", property.ModelType.GetYardDocumentation(), CompositeTypeRb.GetPropertyDocumentationString(property)))
       // @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name
       @:attr_accessor :@property.Name
       @EmptyLine

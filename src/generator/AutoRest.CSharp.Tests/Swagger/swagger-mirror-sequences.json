@@ -240,7 +240,7 @@
                     "type": "array",
                     "items":
                     {
-                        "$ref": "pet-style"
+                        "$ref": "#/definitions/pet-style"
                     }
                 }
                 ,

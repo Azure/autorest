@@ -63,7 +63,7 @@ class AutoRestResourceFlatteningTestService(object):
 
         :param resource_array: External Resource as an Array to put
         :type resource_array: list of :class:`Resource
-         <Fixtures.AcceptanceTestsModelFlattening.models.Resource>`
+         <fixtures.acceptancetestsmodelflattening.models.Resource>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -73,7 +73,7 @@ class AutoRestResourceFlatteningTestService(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsmodelflattening.models.ErrorException>`
         """
         # Construct URL
         url = '/model-flatten/array'
@@ -115,11 +115,11 @@ class AutoRestResourceFlatteningTestService(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: list of :class:`FlattenedProduct
-         <Fixtures.AcceptanceTestsModelFlattening.models.FlattenedProduct>`
+         <fixtures.acceptancetestsmodelflattening.models.FlattenedProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsmodelflattening.models.ErrorException>`
         """
         # Construct URL
         url = '/model-flatten/array'
@@ -166,7 +166,7 @@ class AutoRestResourceFlatteningTestService(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsmodelflattening.models.ErrorException>`
         """
         # Construct URL
         url = '/model-flatten/dictionary'
@@ -211,7 +211,7 @@ class AutoRestResourceFlatteningTestService(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsmodelflattening.models.ErrorException>`
         """
         # Construct URL
         url = '/model-flatten/dictionary'
@@ -250,7 +250,7 @@ class AutoRestResourceFlatteningTestService(object):
         :param resource_complex_object: External Resource as a
          ResourceCollection to put
         :type resource_complex_object: :class:`ResourceCollection
-         <Fixtures.AcceptanceTestsModelFlattening.models.ResourceCollection>`
+         <fixtures.acceptancetestsmodelflattening.models.ResourceCollection>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -260,7 +260,7 @@ class AutoRestResourceFlatteningTestService(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsmodelflattening.models.ErrorException>`
         """
         # Construct URL
         url = '/model-flatten/resourcecollection'
@@ -302,11 +302,11 @@ class AutoRestResourceFlatteningTestService(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ResourceCollection
-         <Fixtures.AcceptanceTestsModelFlattening.models.ResourceCollection>`
+         <fixtures.acceptancetestsmodelflattening.models.ResourceCollection>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsmodelflattening.models.ErrorException>`
         """
         # Construct URL
         url = '/model-flatten/resourcecollection'
@@ -344,18 +344,18 @@ class AutoRestResourceFlatteningTestService(object):
 
         :param simple_body_product: Simple body product to put
         :type simple_body_product: :class:`SimpleProduct
-         <Fixtures.AcceptanceTestsModelFlattening.models.SimpleProduct>`
+         <fixtures.acceptancetestsmodelflattening.models.SimpleProduct>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`SimpleProduct
-         <Fixtures.AcceptanceTestsModelFlattening.models.SimpleProduct>`
+         <fixtures.acceptancetestsmodelflattening.models.SimpleProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsmodelflattening.models.ErrorException>`
         """
         # Construct URL
         url = '/model-flatten/customFlattening'
@@ -400,8 +400,8 @@ class AutoRestResourceFlatteningTestService(object):
         parameter.
 
         :param product_id: Unique identifier representing a specific product
-         for a given latitude & longitude. For example, uberX in San
-         Francisco will have a different product_id than uberX in Los Angeles.
+         for a given latitude & longitude. For example, uberX in San Francisco
+         will have a different product_id than uberX in Los Angeles.
         :type product_id: str
         :param max_product_display_name: Display name of product.
         :type max_product_display_name: str
@@ -417,11 +417,11 @@ class AutoRestResourceFlatteningTestService(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`SimpleProduct
-         <Fixtures.AcceptanceTestsModelFlattening.models.SimpleProduct>`
+         <fixtures.acceptancetestsmodelflattening.models.SimpleProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsmodelflattening.models.ErrorException>`
         """
         simple_body_product = None
         if product_id is not None or description is not None or max_product_display_name is not None or generic_value is not None or odatavalue is not None:
@@ -471,18 +471,18 @@ class AutoRestResourceFlatteningTestService(object):
         :param flatten_parameter_group: Additional parameters for the
          operation
         :type flatten_parameter_group: :class:`FlattenParameterGroup
-         <Fixtures.AcceptanceTestsModelFlattening.models.FlattenParameterGroup>`
+         <fixtures.acceptancetestsmodelflattening.models.FlattenParameterGroup>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`SimpleProduct
-         <Fixtures.AcceptanceTestsModelFlattening.models.SimpleProduct>`
+         <fixtures.acceptancetestsmodelflattening.models.SimpleProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsModelFlattening.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsmodelflattening.models.ErrorException>`
         """
         name = None
         if flatten_parameter_group is not None:

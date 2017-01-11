@@ -90,14 +90,14 @@
               "type":  "array",
               "description":  "A list of widgets",
               "items":  {
-                "$ref": "Widget"
+                "$ref": "#/definitions/Widget"
               }
             }
           },
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "Error"
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -178,13 +178,13 @@
           "200": {
             "description": "The returned product",
             "schema": {
-              "$ref": "Widget"
+              "$ref": "#/definitions/Widget"
             }
           },
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "Error"
+              "$ref": "#/definitions/Error"
             }
           }
         }

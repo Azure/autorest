@@ -8,10 +8,9 @@
  * Initializes a new instance of the StorageAccountCheckNameAvailabilityParameters class.
  * @constructor
  * @member {string} name
- * 
- * @member {string} [type]  Default value: 'Microsoft.Storage/storageAccounts'
- * .
- * 
+ *
+ * @member {string} [type] Default value: 'Microsoft.Storage/storageAccounts' .
+ *
  */
 function StorageAccountCheckNameAvailabilityParameters() {
 }

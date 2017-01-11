@@ -306,6 +306,9 @@
         },
         "x-ms-request-id": {
           "$ref": "#/definitions/xmsRequestId"
+        },
+        "x-ms-examples": {
+          "$ref": "#/definitions/xmsExamples"
         }
       }
     },
@@ -1580,15 +1583,29 @@
     },
     "xmsParameterLocation": {
       "type": "string",
-      "enum": ["client", "method"]
+      "enum": [ "client", "method" ]
     },
     "xmsMutability": {
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["create", "read", "update"]
+        "enum": [ "create", "read", "update" ]
       },
       "uniqueItems": true
+    },
+    "xmsExamples": {
+      "type": "object",
+      "description": "Describes the 'x-ms-examples' extension.",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "$ref": "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json#"
+          },
+          {
+            "$ref": "#/definitions/jsonReference"
+          }
+        ]
+      }
     }
   }
 }

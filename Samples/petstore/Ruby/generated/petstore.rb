@@ -19,10 +19,10 @@ module Petstore
   autoload :SwaggerPetstore,                                    'generated/petstore/swagger_petstore.rb'
 
   module Models
-    autoload :User,                                               'generated/petstore/models/user.rb'
-    autoload :Category,                                           'generated/petstore/models/category.rb'
-    autoload :Pet,                                                'generated/petstore/models/pet.rb'
     autoload :Tag,                                                'generated/petstore/models/tag.rb'
+    autoload :User,                                               'generated/petstore/models/user.rb'
+    autoload :Pet,                                                'generated/petstore/models/pet.rb'
+    autoload :Category,                                           'generated/petstore/models/category.rb'
     autoload :Order,                                              'generated/petstore/models/order.rb'
   end
 end

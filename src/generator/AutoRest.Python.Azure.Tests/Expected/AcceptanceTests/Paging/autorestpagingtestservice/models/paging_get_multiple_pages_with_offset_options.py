@@ -13,18 +13,18 @@ from msrest.serialization import Model
 
 
 class PagingGetMultiplePagesWithOffsetOptions(Model):
-    """Additional parameters for the Paging_getMultiplePagesWithOffset operation.
+    """Additional parameters for the Paging_get_multiple_pages_with_offset
+    operation.
 
     :param maxresults: Sets the maximum number of items to return in the
      response.
     :type maxresults: int
     :param offset: Offset of return value
     :type offset: int
-    :param timeout: Sets the maximum time that the server can spend
-     processing the request, in seconds. The default is 30 seconds. Default
-     value: 30 .
+    :param timeout: Sets the maximum time that the server can spend processing
+     the request, in seconds. The default is 30 seconds. Default value: 30 .
     :type timeout: int
-    """ 
+    """
 
     _validation = {
         'offset': {'required': True},

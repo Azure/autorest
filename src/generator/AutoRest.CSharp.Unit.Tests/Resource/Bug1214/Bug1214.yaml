@@ -1,0 +1,27 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  /operation:
+    get:
+      operationId: approved_operation
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/TestObject'
+
+definitions:
+  TestObject:
+    type: object
+    properties:
+      _name:
+        type: string
+        description: 'prop starting with an underscore'
+      Name:
+        type: string
+        description: 'prop without underscore'
+      _namE:
+        type: string
+        description: 'same string diff case'

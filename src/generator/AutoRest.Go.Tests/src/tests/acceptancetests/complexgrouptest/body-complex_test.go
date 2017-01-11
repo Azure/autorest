@@ -33,8 +33,8 @@ func getArrayComplexClient() ArrayClient {
 	return c
 }
 
-func getBasicOperationsClient() BasicOperationsClient {
-	c := NewBasicOperationsClient()
+func getBasicOperationsClient() BasicClient {
+	c := NewBasicClient()
 	c.BaseURI = utils.GetBaseURI()
 	return c
 }

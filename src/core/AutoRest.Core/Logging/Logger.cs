@@ -6,138 +6,68 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core.Logging
 {
     /// <summary>
     /// Aggregator for error, warning, and trace messages.
     /// </summary>
-    public static class Logger
+    public class Logger
     {
-        /// <summary>
-        /// Instantiates a new instance of the LogEntry class.
-        /// </summary>
-        static Logger()
+        public static Logger Instance
         {
-            Entries = new List<LogEntry>();
+            get
+            {
+                if (!Singleton<Logger>.HasInstance)
+                {
+                    Singleton<Logger>.Instance = new Logger();
+                }
+                return Singleton<Logger>.Instance;
+            }
+        }
+
+        protected Logger()
+        {
+            if (!Context.IsActive)
+            {
+                throw new Exception("A context must be active before creating a logger.");
+            }
+            if (Singleton<Logger>.HasInstanceInCurrentActivation)
+            {
+                throw new Exception("The current context already has a logger. (Did you mean to create a nested context?)");
+            }
         }
 
         /// <summary>
-        /// Gets a list of LogEntries.
+        /// Adds given listener to the current context.
         /// </summary>
-        public static IList<LogEntry> Entries { get; private set; }
+        public void AddListener(ILogListener listener)
+        {
+            SingletonList<ILogListener>.Add(listener);
+        }
+        
+        public void Log(LogMessage message)
+        {
+            foreach (var listener in SingletonList<ILogListener>.RecursiveInstances)
+            {
+                listener.Log(message);
+            }
+        }
 
         /// <summary>
-        /// Logs a message of severity LogEntrySeverity.Info.
+        /// Logs a message of specified severity.
         /// </summary>
+        /// <param name="severity">Severity of the message.</param>
         /// <param name="message">Message to log. May include formatting.</param>
         /// <param name="args">Optional arguments to use if message includes formatting.</param>
-        public static void LogInfo(string message, params object[] args)
+        public void Log(Category severity, string message, params object[] args)
         {
-          lock( typeof( Logger ) ) {
-            Entries.Add(new LogEntry(LogEntrySeverity.Info, string.Format(CultureInfo.InvariantCulture, message, args)));
-          }
-        }
-
-        /// <summary>
-        /// An abstraction for the core to output text (ie not err,warning, or info)
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="args"></param>
-        public static void WriteOutput(string message, params object[] args)
-        {
-            Console.ResetColor();
-            Console.WriteLine(message, args);
-        }
-
-        /// <summary>
-        /// Logs a message of severity LogEntrySeverity.Warning.
-        /// </summary>
-        /// <param name="text">Message to log. May include formatting.</param>
-        /// <param name="args">Optional arguments to use if the message includes formatting.</param>
-        public static void LogWarning(string text, params object[] args)
-        {
-            Entries.Add(new LogEntry(LogEntrySeverity.Warning, string.Format(CultureInfo.InvariantCulture, text, args)));
-        }
-
-        /// <summary>
-        /// Logs a message of severity LogEntrySeverity.Error.
-        /// </summary>
-        /// <param name="exception">Exception that corresponds to an error</param>
-        /// <param name="message">Message to log. May include formatting.</param>
-        /// <param name="args">Optional arguments to use if the message includes formatting.</param>
-        public static void LogError(Exception exception, string message, params object[] args)
-        {
-            string formattedMessage = String.Format(CultureInfo.InvariantCulture, message, args);
-            Entries.Add(exception != null
-                ? new LogEntry(LogEntrySeverity.Error, formattedMessage)
-                {
-                    Exception = new InvalidOperationException(formattedMessage, exception)
-                }
-                : new LogEntry(LogEntrySeverity.Error, formattedMessage)
-                {
-                    Exception = new InvalidOperationException(formattedMessage)
-                });
+            if (args != null && args.Length > 0)
             {
+                message = string.Format(CultureInfo.InvariantCulture, message, args);
             }
-        }
-
-        /// <summary>
-        /// Logs a message of severity LogEntrySeverity.Error.
-        /// </summary>
-        /// <param name="message">Message to log. May include formatting.</param>
-        /// <param name="args">Optional arguments to use if the message includes formatting.</param>
-        public static void LogError(string message, params object[] args)
-        {
-            LogError(null, message, args);
-        }
-
-        public static void WriteMessages(TextWriter writer, LogEntrySeverity severity)
-        {
-            WriteMessages(writer, severity, false);
-        }
-
-        public static void WriteMessages(TextWriter writer, LogEntrySeverity severity, bool verbose)
-        {
-            if (writer == null)
-            {
-                throw new ArgumentNullException("writer");
-            }
-            foreach (var logEntry in Entries.Where(e => e.Severity == severity))
-            {
-                // Write the severity and message to console
-                writer.WriteLine("{0}: {1}",
-                    logEntry.Severity.ToString().ToUpperInvariant(),
-                    logEntry.Message);
-                // If verbose is on and the entry has an exception, show it
-                if (logEntry.Exception != null && verbose)
-                {
-                    writer.WriteLine("{0}", logEntry.Exception);
-                }
-            }
-        }
-
-        public static void WriteMessages(TextWriter writer, LogEntrySeverity severity, bool verbose,ConsoleColor color)
-        {
-            if (writer == null)
-            {
-                throw new ArgumentNullException("writer");
-            }
-            foreach (var logEntry in Entries.Where(e => e.Severity == severity))
-            {
-                var original = Console.ForegroundColor;
-                Console.ForegroundColor = color;
-                // Write the severity and message to console
-                writer.WriteLine("{0}: {1}",
-                    logEntry.Severity.ToString().ToUpperInvariant(),
-                    logEntry.Message);
-                // If verbose is on and the entry has an exception, show it
-                if (logEntry.Exception != null && verbose)
-                {
-                    writer.WriteLine("{0}", logEntry.Exception);
-                }
-                Console.ForegroundColor = original;
-            }
+            Log(new LogMessage(severity, message));
         }
     }
 }

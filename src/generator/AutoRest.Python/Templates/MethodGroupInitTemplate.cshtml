@@ -1,7 +1,7 @@
 ﻿@using AutoRest.Python.Templates
 @using System.Linq
 @using AutoRest.Python
-@inherits AutoRest.Core.Template<AutoRest.Python.TemplateModels.ServiceClientTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.Python.Model.CodeModelPy>
 # coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ").TrimMultilineHeader()
@@ -12,13 +12,13 @@
   {
     foreach (var modelGroupType in Model.MethodGroupModels)
     {
-@:from .@(modelGroupType.MethodGroupType.ToPythonCase()) import @modelGroupType.MethodGroupType
+@:from .@( modelGroupType.TypeName.ToPythonCase()) import @modelGroupType.TypeName
     }
 @EmptyLine
 @:__all__ = [
     foreach (var modelGroupType in Model.MethodGroupModels)
     {
-@:    '@modelGroupType.MethodGroupType',
+@:    '@modelGroupType.TypeName.Value',
     }
 @:]
   }

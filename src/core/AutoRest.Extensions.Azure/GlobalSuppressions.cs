@@ -9,4 +9,4 @@
 // You do not need to add suppressions to this file manually.
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", 
-    Scope = "member", Target = "AutoRest.Extensions.Azure.AzureExtensions.#AddPageableMethod(AutoRest.Core.ClientModel.ServiceClient,Microsoft.Rest.Generator.CodeNamer)")]
+    Scope = "member", Target = "AutoRest.Extensions.Azure.AzureExtensions.#AddPageableMethod(AutoRest.Core.Model.ServiceClient,Microsoft.Rest.Generator.CodeNamer)")]

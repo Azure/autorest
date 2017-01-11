@@ -30,20 +30,20 @@
             "type": "string"
           },
           {
-            "$ref": "ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "A list of caches",
             "schema": {
-              "$ref": "Product"
+              "$ref": "#/definitions/Product"
             }
           },
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "Error"
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -79,13 +79,13 @@
           "200": {
             "description": "A list of caches",
             "schema": {
-              "$ref": "ProductProperties"
+              "$ref": "#/definitions/ProductProperties"
             }
           },
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "Error"
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -104,7 +104,7 @@
       },
       "allOf": [
         {
-          "$ref": "Resource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },

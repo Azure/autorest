@@ -25,8 +25,8 @@ public class StorageAccountProperties {
 
     /**
      * Gets the URLs that are used to perform a retrieval of a public blob,
-     * queue or table object.Note that StandardZRS and PremiumLRS accounts
-     * only return the blob endpoint.
+     * queue or table object.Note that StandardZRS and PremiumLRS accounts only
+     * return the blob endpoint.
      */
     private Endpoints primaryEndpoints;
 
@@ -58,10 +58,10 @@ public class StorageAccountProperties {
     private String secondaryLocation;
 
     /**
-     * Gets the status indicating whether the secondary location of the
-     * storage account is available or unavailable. Only available if the
-     * accountType is StandardGRS or StandardRAGRS. Possible values include:
-     * 'Available', 'Unavailable'.
+     * Gets the status indicating whether the secondary location of the storage
+     * account is available or unavailable. Only available if the accountType
+     * is StandardGRS or StandardRAGRS. Possible values include: 'Available',
+     * 'Unavailable'.
      */
     private AccountStatus statusOfSecondary;
 

@@ -1,17 +1,17 @@
 ﻿@using System.Linq
-@using AutoRest.NodeJS.Azure.TemplateModels
+@using AutoRest.NodeJS.Azure.Model
 @using AutoRest.NodeJS.Azure.Templates
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.TemplateModels.AzureMethodGroupTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Model.MethodGroupJs>
 /**
  * @@class
- * @Model.MethodGroupType
+ * @Model.TypeName
  * __NOTE__: An instance of this class is automatically created for an
- * instance of the @Model.Name.
+ * instance of the @Model.CodeModel.Name.
  */
-export interface @(Model.MethodGroupType) {
+export interface @(Model.TypeName) {
     @foreach (var method in Model.MethodTemplateModels)
     {
     @EmptyLine
-    @:@(Include(new AzureMethodTemplateTS(), method as AzureMethodTemplateModel))
+    @:@(Include(new AzureMethodTemplateTS(), method as MethodJsa))
     }
 }

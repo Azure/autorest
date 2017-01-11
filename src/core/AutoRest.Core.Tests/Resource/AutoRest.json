@@ -1,18 +1,39 @@
 ﻿{
-  "codeGenerators": {
-    "Angular": {
-      "type": "JavaScriptAngularCodeGenerator, AutoRest.JavaScript.Angular"
+    "plugins": {
+        "CSharp": {
+            "type": "PluginCs, AutoRest.CSharp"
+        },
+        "Azure.CSharp": {
+            "type": "PluginCsa, AutoRest.CSharp.Azure"
+        },
+        "Ruby": {
+            "type": "PluginRb, AutoRest.Ruby"
+        },
+        "Azure.Ruby": {
+            "type": "PluginRba, AutoRest.Ruby.Azure"
+        },
+        "NodeJS": {
+            "type": "PluginJs, AutoRest.NodeJS"
+        },
+        "Azure.NodeJS": {
+            "type": "PluginJsa, AutoRest.NodeJS.Azure"
+        },
+        "Python": {
+            "type": "PluginPy, AutoRest.Python"
+        },
+        "Azure.Python": {
+            "type": "PluginPya, AutoRest.Python.Azure"
+        },
+        "Go": {
+            "type": "PluginGo, AutoRest.Go"
+        },
+        "AzureResourceSchema": {
+            "type": "PluginArs, AutoRest.AzureResourceSchema"
+        },
+        "Azure.CSharp.Fluent": {
+          "type": "PluginCsaf, AutoRest.CSharp.Azure.Fluent"
+        }
     },
-    "CSharp": {
-      "type": "CSharpCodeGenerator, AutoRest.CSharp"
-    },
-    "NodeJS": {
-      "type": "NodeJSCodeGenerator, AutoRest.NodeJS",
-      "settings": {
-        "disableTypeScriptGeneration": true
-      }
-    }
-  },
   "modelers": {
     "Swagger": {
       "type": "SwaggerModeler, AutoRest.Swagger"

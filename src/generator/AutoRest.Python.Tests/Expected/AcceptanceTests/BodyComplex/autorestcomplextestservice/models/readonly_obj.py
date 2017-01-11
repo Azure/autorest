@@ -22,7 +22,7 @@ class ReadonlyObj(Model):
     :vartype id: str
     :param size:
     :type size: int
-    """ 
+    """
 
     _validation = {
         'id': {'readonly': True},

@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task VerifySignature()
         {
-            using (var fileSystem = $"{GetType().Name}.yaml".GenerateCodeInto(CreateMockFilesystem()))
+            using (var fileSystem = $"{GetType().Name}".GenerateCodeInto(fileSystem: CreateMockFilesystem(), modeler: "Swagger"))
             {
                 // Expected Files
                 Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\ResultObject.cs"));

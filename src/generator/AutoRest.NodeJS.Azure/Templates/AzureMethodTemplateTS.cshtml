@@ -1,12 +1,12 @@
 @using System
 @using System.Linq
-@using AutoRest.NodeJS.TemplateModels
+@using AutoRest.NodeJS.Model
 @using AutoRest.NodeJS.Templates
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.TemplateModels.AzureMethodTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.Model.MethodJsa>
 
 @if (!Model.IsLongRunningOperation)
 {
-@:@(Include( new MethodTemplateTS(), Model as MethodTemplateModel))
+@:@(Include( new MethodTemplateTS(), Model as MethodJs))
 }
 else
 {
@@ -25,10 +25,10 @@ else
 }
 @foreach (var parameter in Model.DocumentationParameters)
 {
- @MethodTemplateModel.ConstructParameterDocumentation(
+ @MethodJs.ConstructParameterDocumentation(
                       WrapComment(" * ", "@param {"
-                                        + MethodTemplateModel.GetParameterDocumentationType(parameter)
-                                        + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
+                                        + MethodJs.GetParameterDocumentationType(parameter)
+                                        + "} " + MethodJs.GetParameterDocumentationName(parameter)
                                         + " " + parameter.Documentation))
 }
 @WrapComment(" * ", " @param {ServiceCallback} [callback] callback function; see ServiceCallback doc in ms-rest index.d.ts for details")

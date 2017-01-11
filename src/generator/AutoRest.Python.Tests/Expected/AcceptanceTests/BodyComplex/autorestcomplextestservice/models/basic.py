@@ -17,16 +17,14 @@ class Basic(Model):
 
     :param id: Basic Id
     :type id: int
-    :param name: Name property with a very
-     long description that
-     does not fit on a single line
-     and a line break.
+    :param name: Name property with a very long description that does not fit
+     on a single line and a line break.
     :type name: str
     :param color: Possible values include: 'cyan', 'Magenta', 'YELLOW',
      'blacK'
     :type color: str or :class:`CMYKColors
-     <Fixtures.AcceptanceTestsBodyComplex.models.CMYKColors>`
-    """ 
+     <fixtures.acceptancetestsbodycomplex.models.CMYKColors>`
+    """
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},

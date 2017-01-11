@@ -1,0 +1,38 @@
+﻿<#  
+	var model = new { 
+		Namespace = "AutoRest.Core.Model",
+		Classes= new[] {
+			new {
+				Class = "CodeModel",
+				Properties = new[] {
+					new {Name= "Properties", Type = "Property", ParentReference= "Parent" , Suffix="", Order= -1 , OrContains= ""},
+					new {Name= "Operations", Type = "MethodGroup", ParentReference= "CodeModel" , Suffix="", Order= -1, OrContains= ""},
+					// new {Name= "Methods", Type= "Method" ,ParentReference= "Parent", Suffix="" ,Order= -2 , OrContains= ""},
+					new {Name= "EnumTypes", Type= "EnumType" , ParentReference="CodeModel" , Suffix="" ,Order= -3, OrContains= ""},
+					new {Name= "ModelTypes", Type= "CompositeType" , ParentReference="CodeModel", Suffix=""  ,Order= -6, OrContains= "" },
+					new {Name= "ErrorTypes", Type= "CompositeType", ParentReference="CodeModel" , Suffix="Error" ,Order= -5,OrContains= "" }, //, OrContains= "ModelTypes" 
+					new {Name= "HeaderTypes", Type= "CompositeType" , ParentReference="CodeModel", Suffix="Header"  ,Order= -4 , OrContains= "ModelTypes" },
+				}
+			},
+            new {
+				Class = "MethodGroup",
+				Properties = new[] {
+					new {Name= "Methods", Type = "Method", ParentReference= "MethodGroup" , Suffix="", Order= -1, OrContains= ""},
+				}
+			},
+			new { 
+				Class = "CompositeType", 
+				Properties= new[] {
+					new {Name= "Properties", Type = "Property" , ParentReference="Parent", Suffix="",Order= -1, OrContains= ""},
+				}
+			},
+			new { 
+				Class = "Method",
+				Properties= new[] {
+					new {Name= "Parameters", Type = "Parameter" , ParentReference="Method", Suffix="",Order= -1, OrContains= ""},
+				}
+			},
+		}, 
+	};
+#>
+<#@ include file="..\Templates\PartialClassProps.ttinclude" once="true" #>
