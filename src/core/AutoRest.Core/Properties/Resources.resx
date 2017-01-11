@@ -276,4 +276,7 @@
   <data name="OperationNameNotValid" xml:space="preserve">
     <value>'GET' operation must use method name 'Get' or Method name start with 'List', 'PUT' operation must use method name 'Create', 'PATCH' operation must use method name 'Update' and 'DELETE' operation must use method name 'Delete'.</value>
   </data>
+  <data name="LongRunningResponseNotValid" xml:space="preserve">
+    <value>An operation with x-ms-long-running-operation extension must have a valid terminal success status code. 200 or 201 for Put/Patch. 200, 201 or 204 for Post. 200 or 204 or both for Delete.</value>
+  </data>
 </root>
