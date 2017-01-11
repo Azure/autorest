@@ -107,7 +107,7 @@ namespace AutoRest.CompositeSwagger.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "TEMP, see #1713")]
         public void CompositeModelWithConflictInSettings()
         {
             using (NewContext)
