@@ -40,7 +40,6 @@ namespace AutoRest.Swagger.Validation
                     break;
                 default:
                     break;
-
             }
 
             return isPutPatchResponseCodesValid && isPostResponseCodesValid && isDeleteResponseCodesValid;
