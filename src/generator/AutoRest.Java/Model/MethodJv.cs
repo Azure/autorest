@@ -513,7 +513,7 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    return "ServiceException";
+                    return "RestException";
                 }
             }
         }

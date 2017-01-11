@@ -74,7 +74,7 @@ namespace AutoRest.Java.Azure.Model
                 }
                 else
                 {
-                    return "ServiceException";
+                    return "RestException";
                 }
             }
         }

@@ -13,9 +13,9 @@ package fixtures.http.implementation;
 import retrofit2.Retrofit;
 import fixtures.http.MultipleResponses;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.A;
 import fixtures.http.models.B;
@@ -1163,8 +1163,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone202InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> get202None204NoneDefaultNone202InvalidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -1222,8 +1222,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone204NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> get202None204NoneDefaultNone204NoneDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -1281,8 +1281,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> get202None204NoneDefaultNone400NoneDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -1340,8 +1340,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> get202None204NoneDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -1635,8 +1635,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> getDefaultNone200InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> getDefaultNone200InvalidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .build(response);
     }
 
@@ -1692,8 +1692,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> getDefaultNone200NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> getDefaultNone200NoneDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .build(response);
     }
 
@@ -1749,8 +1749,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> getDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> getDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .build(response);
     }
 
@@ -1806,8 +1806,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> getDefaultNone400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> getDefaultNone400NoneDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .build(response);
     }
 
@@ -1864,8 +1864,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> get200ModelA200NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<A, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<A> get200ModelA200NoneDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -1923,8 +1923,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> get200ModelA200ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<A, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<A> get200ModelA200ValidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -1982,8 +1982,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> get200ModelA200InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<A, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<A> get200ModelA200InvalidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -2041,8 +2041,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> get200ModelA400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<A, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<A> get200ModelA400NoneDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -2100,8 +2100,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> get200ModelA400ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<A, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<A> get200ModelA400ValidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -2159,8 +2159,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> get200ModelA400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<A, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<A> get200ModelA400InvalidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -2218,8 +2218,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> get200ModelA202ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<A, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<A> get200ModelA202ValidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }

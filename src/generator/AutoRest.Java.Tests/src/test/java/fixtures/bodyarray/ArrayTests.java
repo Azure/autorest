@@ -24,7 +24,6 @@ public class ArrayTests {
 
     @BeforeClass
     public static void setup() throws Exception {
-        Thread.sleep(10000);
         client = new AutoRestSwaggerBATArrayServiceImpl("http://localhost:3000");
     }
 

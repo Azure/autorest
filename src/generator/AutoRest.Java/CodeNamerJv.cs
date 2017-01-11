@@ -168,8 +168,6 @@ namespace AutoRest.Java
             switch (exception) {
                 case "IOException":
                     return "java.io.IOException";
-                case "ServiceException":
-                    return "com.microsoft.rest.ServiceException";
                 case "CloudException":
                     return "com.microsoft.azure.CloudException";
                 case "RestException":

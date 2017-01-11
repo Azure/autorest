@@ -124,7 +124,7 @@ public class PagingTests {
             List<Product> response = client.pagings().getSinglePagesFailure();
             fail();
         } catch (CloudException ex) {
-            Assert.assertNotNull(ex.getResponse());
+            Assert.assertNotNull(ex.response());
         }
     }
 
@@ -135,7 +135,7 @@ public class PagingTests {
             response.size();
             fail();
         } catch (CloudException ex) {
-            Assert.assertNotNull(ex.getResponse());
+            Assert.assertNotNull(ex.response());
         }
     }
 

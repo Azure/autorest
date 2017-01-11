@@ -97,7 +97,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 var pageType = ReturnTypeJva.BodyClientType as SequenceTypeJva;
 
                 var imports = base.ImplImports;
-                if (OperationExceptionTypeString != "CloudException" && OperationExceptionTypeString != "ServiceException")
+                if (OperationExceptionTypeString != "CloudException" && OperationExceptionTypeString != "RestException")
                 {
                     imports.RemoveAll(i => new CompositeTypeJva(OperationExceptionTypeString) { CodeModel = CodeModel }.ImportSafe().Contains(i));
                     imports.AddRange(new CompositeTypeJvaf(OperationExceptionTypeString) { CodeModel = CodeModel }.ImportSafe());

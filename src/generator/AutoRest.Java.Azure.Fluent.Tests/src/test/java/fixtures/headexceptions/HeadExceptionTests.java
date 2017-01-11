@@ -1,11 +1,10 @@
 package fixtures.headexceptions;
 
-import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.RestException;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import fixtures.headexceptions.implementation.AutoRestHeadExceptionTestServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import fixtures.headexceptions.implementation.AutoRestHeadExceptionTestServiceImpl;
 
 public class HeadExceptionTests {
     private static AutoRestHeadExceptionTestServiceImpl client;
@@ -25,7 +24,7 @@ public class HeadExceptionTests {
         client.headExceptions().head204();
     }
 
-    @Test(expected = ServiceException.class)
+    @Test(expected = RestException.class)
     public void headException404() throws Exception {
         client.headExceptions().head404();
     }

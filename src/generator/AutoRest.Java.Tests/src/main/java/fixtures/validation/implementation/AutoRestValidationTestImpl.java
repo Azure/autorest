@@ -16,9 +16,9 @@ import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.validation.models.ErrorException;
@@ -451,8 +451,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             });
     }
 
-    private ServiceResponse<Void> getWithConstantInPathDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.restClient().responseBuilderFactory().<Void, ServiceException>newInstance(this.serializerAdapter())
+    private ServiceResponse<Void> getWithConstantInPathDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
@@ -563,8 +563,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             });
     }
 
-    private ServiceResponse<Product> postWithConstantInBodyDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.restClient().responseBuilderFactory().<Product, ServiceException>newInstance(this.serializerAdapter())
+    private ServiceResponse<Product> postWithConstantInBodyDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.restClient().responseBuilderFactory().<Product, RestException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .build(response);
     }

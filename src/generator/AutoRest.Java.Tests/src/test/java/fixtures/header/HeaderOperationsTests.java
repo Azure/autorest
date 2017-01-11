@@ -78,7 +78,7 @@ public class HeaderOperationsTests {
     public void paramProtectedKey() throws Exception {
         try {
             client.headers().paramProtectedKey("text/html");
-        } catch (ErrorException ex) {
+        } catch (RuntimeException ex) {
             // OkHttp can actually overwrite header "Content-Type"
         }
     }

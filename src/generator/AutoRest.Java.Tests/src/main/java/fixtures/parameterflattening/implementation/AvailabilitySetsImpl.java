@@ -13,9 +13,9 @@ package fixtures.parameterflattening.implementation;
 import retrofit2.Retrofit;
 import fixtures.parameterflattening.AvailabilitySets;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
@@ -138,8 +138,8 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
             });
     }
 
-    private ServiceResponse<Void> updateDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Void> updateDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .build(response);
     }

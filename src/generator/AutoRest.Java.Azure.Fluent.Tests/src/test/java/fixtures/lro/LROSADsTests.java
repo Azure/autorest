@@ -1,14 +1,12 @@
 package fixtures.lro;
 
 import com.microsoft.azure.CloudException;
-
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
+import fixtures.lro.implementation.ProductInner;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.implementation.ProductInner;
 
 import static org.junit.Assert.fail;
 
@@ -29,7 +27,7 @@ public class LROSADsTests {
             client.lROSADs().putNonRetry400(product);
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(400, ex.getResponse().code());
+            Assert.assertEquals(400, ex.response().code());
         }
     }
 
@@ -41,7 +39,7 @@ public class LROSADsTests {
             client.lROSADs().putNonRetry201Creating400(product);
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(400, ex.getResponse().code());
+            Assert.assertEquals(400, ex.response().code());
         }
     }
 
@@ -53,7 +51,7 @@ public class LROSADsTests {
             client.lROSADs().putAsyncRelativeRetry400(product);
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(400, ex.getResponse().code());
+            Assert.assertEquals(400, ex.response().code());
         }
     }
 
@@ -63,7 +61,7 @@ public class LROSADsTests {
             client.lROSADs().deleteNonRetry400();
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(400, ex.getResponse().code());
+            Assert.assertEquals(400, ex.response().code());
         }
     }
 
@@ -73,7 +71,7 @@ public class LROSADsTests {
             client.lROSADs().delete202NonRetry400();
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(400, ex.getResponse().code());
+            Assert.assertEquals(400, ex.response().code());
         }
     }
 
@@ -83,7 +81,7 @@ public class LROSADsTests {
             client.lROSADs().deleteAsyncRelativeRetry400();
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(400, ex.getResponse().code());
+            Assert.assertEquals(400, ex.response().code());
         }
     }
 
@@ -95,7 +93,7 @@ public class LROSADsTests {
             client.lROSADs().postNonRetry400(product);
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(400, ex.getResponse().code());
+            Assert.assertEquals(400, ex.response().code());
         }
     }
 
@@ -107,7 +105,7 @@ public class LROSADsTests {
             client.lROSADs().post202NonRetry400(product);
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(400, ex.getResponse().code());
+            Assert.assertEquals(400, ex.response().code());
         }
     }
 
@@ -119,7 +117,7 @@ public class LROSADsTests {
             client.lROSADs().postAsyncRelativeRetry400(product);
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(400, ex.getResponse().code());
+            Assert.assertEquals(400, ex.response().code());
         }
     }
 
@@ -131,7 +129,7 @@ public class LROSADsTests {
             client.lROSADs().putError201NoProvisioningStatePayload(product);
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(200, ex.getResponse().code());
+            Assert.assertEquals(200, ex.response().code());
             Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
         }
     }
@@ -144,7 +142,7 @@ public class LROSADsTests {
             client.lROSADs().putAsyncRelativeRetryNoStatus(product);
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(200, ex.getResponse().code());
+            Assert.assertEquals(200, ex.response().code());
             Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
         }
     }
@@ -157,7 +155,7 @@ public class LROSADsTests {
             client.lROSADs().putAsyncRelativeRetryNoStatusPayload(product);
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(200, ex.getResponse().code());
+            Assert.assertEquals(200, ex.response().code());
             Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
         }
     }
@@ -173,7 +171,7 @@ public class LROSADsTests {
             client.lROSADs().deleteAsyncRelativeRetryNoStatus();
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(200, ex.getResponse().code());
+            Assert.assertEquals(200, ex.response().code());
             Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
         }
     }
@@ -186,7 +184,7 @@ public class LROSADsTests {
             client.lROSADs().post202NoLocation(product);
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(202, ex.getResponse().code());
+            Assert.assertEquals(202, ex.response().code());
             Assert.assertTrue(ex.getMessage().contains("Response does not contain an Azure"));
         }
     }
@@ -199,7 +197,7 @@ public class LROSADsTests {
             client.lROSADs().postAsyncRelativeRetryNoPayload(product);
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(200, ex.getResponse().code());
+            Assert.assertEquals(200, ex.response().code());
             Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
         }
     }

@@ -13,9 +13,9 @@ package fixtures.http.implementation;
 import retrofit2.Retrofit;
 import fixtures.http.HttpFailures;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
@@ -179,8 +179,8 @@ public final class HttpFailuresImpl implements HttpFailures {
             });
     }
 
-    private ServiceResponse<Boolean> getNoModelErrorDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Boolean, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Boolean> getNoModelErrorDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Boolean, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .build(response);
     }
@@ -238,8 +238,8 @@ public final class HttpFailuresImpl implements HttpFailures {
             });
     }
 
-    private ServiceResponse<Boolean> getNoModelEmptyDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Boolean, ServiceException>newInstance(this.client.serializerAdapter())
+    private ServiceResponse<Boolean> getNoModelEmptyDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Boolean, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .build(response);
     }
