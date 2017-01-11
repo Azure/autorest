@@ -40,14 +40,14 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -127,14 +127,14 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -214,14 +214,14 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -302,14 +302,14 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -531,8 +531,8 @@ class LROSADsOperations(object):
     def delete_async_relative_retry400(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request. Poll the endpoint indicated in the Azure-AsyncOperation
-        header for operation status.
+        request. Poll the endpoint indicated in the Azure-AsyncOperation header
+        for operation status.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -607,7 +607,7 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -688,7 +688,7 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -764,13 +764,13 @@ class LROSADsOperations(object):
 
     def post_async_relative_retry400(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running post request, service returns a 202 to the initial
-        request Poll the endpoint indicated in the Azure-AsyncOperation
-        header for operation status.
+        """Long running post request, service returns a 202 to the initial request
+        Poll the endpoint indicated in the Azure-AsyncOperation header for
+        operation status.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -852,14 +852,14 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -934,21 +934,21 @@ class LROSADsOperations(object):
 
     def put_async_relative_retry_no_status(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        Poll the endpoint indicated in the Azure-AsyncOperation header for
-        operation status.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’. Poll the
+        endpoint indicated in the Azure-AsyncOperation header for operation
+        status.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1028,21 +1028,21 @@ class LROSADsOperations(object):
 
     def put_async_relative_retry_no_status_payload(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        Poll the endpoint indicated in the Azure-AsyncOperation header for
-        operation status.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’. Poll the
+        endpoint indicated in the Azure-AsyncOperation header for operation
+        status.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1190,8 +1190,8 @@ class LROSADsOperations(object):
     def delete_async_relative_retry_no_status(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request. Poll the endpoint indicated in the Azure-AsyncOperation
-        header for operation status.
+        request. Poll the endpoint indicated in the Azure-AsyncOperation header
+        for operation status.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1267,7 +1267,7 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1350,7 +1350,7 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1427,19 +1427,19 @@ class LROSADsOperations(object):
 
     def put200_invalid_json(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that is not a valid json.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that is not a valid json.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1512,20 +1512,20 @@ class LROSADsOperations(object):
 
     def put_async_relative_retry_invalid_header(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        The endpoint indicated in the Azure-AsyncOperation header is invalid.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’. The endpoint
+        indicated in the Azure-AsyncOperation header is invalid.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1605,21 +1605,21 @@ class LROSADsOperations(object):
 
     def put_async_relative_retry_invalid_json_polling(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """Long running put request, service returns a 200 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        Poll the endpoint indicated in the Azure-AsyncOperation header for
-        operation status.
+        """Long running put request, service returns a 200 to the initial request,
+        with an entity that contains ProvisioningState=’Creating’. Poll the
+        endpoint indicated in the Azure-AsyncOperation header for operation
+        status.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -1700,8 +1700,8 @@ class LROSADsOperations(object):
     def delete202_retry_invalid_header(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request receing a reponse with an invalid 'Location' and
-        'Retry-After' headers.
+        request receing a reponse with an invalid 'Location' and 'Retry-After'
+        headers.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1845,8 +1845,8 @@ class LROSADsOperations(object):
     def delete_async_relative_retry_invalid_json_polling(
             self, custom_headers=None, raw=False, **operation_config):
         """Long running delete request, service returns a 202 to the initial
-        request. Poll the endpoint indicated in the Azure-AsyncOperation
-        header for operation status.
+        request. Poll the endpoint indicated in the Azure-AsyncOperation header
+        for operation status.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1922,7 +1922,7 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1999,12 +1999,12 @@ class LROSADsOperations(object):
     def post_async_relative_retry_invalid_header(
             self, product=None, custom_headers=None, raw=False, **operation_config):
         """Long running post request, service returns a 202 to the initial
-        request, with an entity that contains ProvisioningState=’Creating’.
-        The endpoint indicated in the Azure-AsyncOperation header is invalid.
+        request, with an entity that contains ProvisioningState=’Creating’. The
+        endpoint indicated in the Azure-AsyncOperation header is invalid.
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -2088,7 +2088,7 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <Fixtures.AcceptanceTestsLro.models.Product>`
+         <fixtures.acceptancetestslro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response

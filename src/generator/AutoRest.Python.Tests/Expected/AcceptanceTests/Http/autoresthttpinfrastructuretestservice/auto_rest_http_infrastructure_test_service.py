@@ -12,6 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
+from msrest.exceptions import HttpOperationError
 from .operations.http_failure_operations import HttpFailureOperations
 from .operations.http_success_operations import HttpSuccessOperations
 from .operations.http_redirects_operations import HttpRedirectsOperations

@@ -11,16 +11,16 @@ class Usage(Model):
     :param unit: Gets the unit of measurement. Possible values include:
      'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
      'BytesPerSecond'
-    :type unit: str or :class:`UsageUnit <Petstore.models.UsageUnit>`
-    :param current_value: Gets the current count of the allocated resources
-     in the subscription.
+    :type unit: str or :class:`UsageUnit <petstore.models.UsageUnit>`
+    :param current_value: Gets the current count of the allocated resources in
+     the subscription.
     :type current_value: int
     :param limit: Gets the maximum count of the resources that can be
      allocated in the subscription.
     :type limit: int
     :param name: Gets the name of the type of usage.
-    :type name: :class:`UsageName <Petstore.models.UsageName>`
-    """ 
+    :type name: :class:`UsageName <petstore.models.UsageName>`
+    """
 
     _validation = {
         'unit': {'required': True},

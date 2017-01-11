@@ -17,8 +17,8 @@ class StorageAccountRegenerateKeyParameters(Model):
 
     :param key_name: Possible values include: 'key1', 'key2'
     :type key_name: str or :class:`KeyName
-     <Fixtures.AcceptanceTestsStorageManagementClient.models.KeyName>`
-    """ 
+     <fixtures.acceptancetestsstoragemanagementclient.models.KeyName>`
+    """
 
     _attribute_map = {
         'key_name': {'key': 'keyName', 'type': 'KeyName'},

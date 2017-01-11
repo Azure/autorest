@@ -1,8 +1,8 @@
 ﻿@using System.Linq
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
 @using AutoRest.NodeJS.Templates
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.ServiceClientTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Model.CodeModelJs>
 /*
 @Header(" * ")
  */
@@ -31,7 +31,7 @@ var ServiceClient = msRest.ServiceClient;
 {
 @:var models = require('./models');
 }
-@if (Model.MethodGroups.Any())
+@if (Model.MethodGroupModels.Any())
 {
 @:var operations = require('./operations');
 }
@@ -45,7 +45,7 @@ var ServiceClient = msRest.ServiceClient;
  *
 @foreach (var param in requiredParameters)
 {
-@: * @@param {@param.Type.Name.ToCamelCase()} @param.Name - @param.Documentation
+@: * @@param {@param.ModelType.Name.ToCamelCase()} @param.Name - @param.Documentation
 @: *
 }
 
@@ -66,7 +66,7 @@ var ServiceClient = msRest.ServiceClient;
  *
 @foreach (var param in optionalParameters)
 {
-@: * @@param {@param.Type.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
+@: * @@param {@param.ModelType.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
 @: *
 }
  */
@@ -85,7 +85,7 @@ function @(Model.Name)(@(!string.IsNullOrEmpty(Model.RequiredConstructorParamete
   @EmptyLine
   if (!options) options = {};
   @EmptyLine
-  @(Model.Name)['super_'].call(this, @(requiredParameters.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)) ? "credentials" : "null"), options);
+  @(Model.Name)['super_'].call(this, @(requiredParameters.Any(p => p.ModelType.IsPrimaryType(KnownPrimaryType.Credentials)) ? "credentials" : "null"), options);
   
 @if(!Model.IsCustomBaseUri)
 {
@@ -116,7 +116,7 @@ else
 
   @foreach (var methodGroup in Model.MethodGroupModels)
   {
-  @:this.@(methodGroup.MethodGroupName) = new operations.@(methodGroup.MethodGroupType)(this);
+  @:this.@(methodGroup.NameForProperty) = new operations.@(methodGroup.TypeName)(this);
   }
   
   @if (Model.ModelTypes.Any())

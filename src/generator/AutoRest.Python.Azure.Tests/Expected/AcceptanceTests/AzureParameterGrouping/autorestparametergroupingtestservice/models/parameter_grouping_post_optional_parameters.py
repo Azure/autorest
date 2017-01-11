@@ -13,13 +13,13 @@ from msrest.serialization import Model
 
 
 class ParameterGroupingPostOptionalParameters(Model):
-    """Additional parameters for the parameterGrouping_postOptional operation.
+    """Additional parameters for the ParameterGrouping_post_optional operation.
 
     :param custom_header:
     :type custom_header: str
     :param query: Query parameter with default. Default value: 30 .
     :type query: int
-    """ 
+    """
 
     def __init__(self, custom_header=None, query=30):
         self.custom_header = custom_header

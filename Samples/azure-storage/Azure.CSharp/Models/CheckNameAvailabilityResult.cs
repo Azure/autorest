@@ -1,6 +1,7 @@
 
 namespace Petstore.Models
 {
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -19,9 +20,9 @@ namespace Petstore.Models
         /// class.
         /// </summary>
         /// <param name="nameAvailable">Gets a boolean value that indicates
-        /// whether the name is available for you to use. If true, the name
-        /// is available. If false, the name has already been taken or
-        /// invalid and cannot be used.</param>
+        /// whether the name is available for you to use. If true, the name is
+        /// available. If false, the name has already been taken or invalid and
+        /// cannot be used.</param>
         /// <param name="reason">Gets the reason that a storage account name
         /// could not be used. The Reason element is only returned if
         /// NameAvailable is false. Possible values include:
@@ -37,25 +38,26 @@ namespace Petstore.Models
 
         /// <summary>
         /// Gets a boolean value that indicates whether the name is available
-        /// for you to use. If true, the name is available. If false, the
-        /// name has already been taken or invalid and cannot be used.
+        /// for you to use. If true, the name is available. If false, the name
+        /// has already been taken or invalid and cannot be used.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "nameAvailable")]
+        [JsonProperty(PropertyName = "nameAvailable")]
         public bool? NameAvailable { get; set; }
 
         /// <summary>
         /// Gets the reason that a storage account name could not be used. The
-        /// Reason element is only returned if NameAvailable is false.
-        /// Possible values include: 'AccountNameInvalid', 'AlreadyExists'
+        /// Reason element is only returned if NameAvailable is false. Possible
+        /// values include: 'AccountNameInvalid', 'AlreadyExists'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "reason")]
+        [JsonProperty(PropertyName = "reason")]
         public Reason? Reason { get; set; }
 
         /// <summary>
         /// Gets an error message explaining the Reason value in more detail.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
+        [JsonProperty(PropertyName = "message")]
         public string Message { get; set; }
 
     }
 }
+

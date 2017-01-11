@@ -2,7 +2,8 @@
 @using AutoRest.Java.Templates
 @using System.Linq;
 @using AutoRest.Java
-@inherits AutoRest.Core.Template<AutoRest.Java.TemplateModels.MethodGroupTemplateModel>
+@using AutoRest.Java.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Model.MethodGroupJv>
 /**
 @Header(" * ").TrimMultilineHeader()
  */
@@ -18,10 +19,10 @@ package @(Settings.Namespace.ToLower());
 
 /**
  * An instance of this class provides access to all the operations defined
- * in @(Model.MethodGroupType).
+ * in @(Model.TypeName).
  */
-public interface @Model.MethodGroupType {
-    @foreach (var method in Model.MethodTemplateModels)
+public interface @Model.TypeName {
+    @foreach (MethodJv method in Model.Methods)
     {
     @:@Include(new MethodInterfaceTemplate(), method)
     @EmptyLine

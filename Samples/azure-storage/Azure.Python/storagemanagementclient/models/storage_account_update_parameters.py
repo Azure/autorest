@@ -12,8 +12,8 @@ class StorageAccountUpdateParameters(Model):
     :type tags: dict
     :param properties:
     :type properties: :class:`StorageAccountPropertiesUpdateParameters
-     <Petstore.models.StorageAccountPropertiesUpdateParameters>`
-    """ 
+     <petstore.models.StorageAccountPropertiesUpdateParameters>`
+    """
 
     _attribute_map = {
         'tags': {'key': 'tags', 'type': '{str}'},

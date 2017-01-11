@@ -32,11 +32,19 @@ function GetAutoRestFolder() {
   if (isWindows) {
     return "src/core/AutoRest/bin/Debug/net451/win7-x64/";
   }
-  if( isMac ) {
-	return "src/core/AutoRest/bin/Debug/net451/osx.10.11-x64/";
+  if (isMac) {
+    var mac_os_10_11 = "src/core/AutoRest/bin/Debug/net451/osx.10.11-x64/";
+    var mac_os_10_12 = "src/core/AutoRest/bin/Debug/net451/osx.10.12-x64/";
+    if (fs.existsSync(mac_os_10_11)) {
+      return mac_os_10_11;
+    }
+    if (fs.existsSync(mac_os_10_12)) {
+      return mac_os_10_12;
+    }
+    throw new Error("Unknown Mac Darwin OS version.");
   }
-  if( isLinux ) {
-	return "src/core/AutoRest/bin/Debug/net451/ubuntu.14.04-x64/"
+  if (isLinux) {
+    return "src/core/AutoRest/bin/Debug/net451/ubuntu.14.04-x64/"
   }
    throw new Error("Unknown platform?");
 }
@@ -135,6 +143,7 @@ var goMappings = {
   'azurereport':['../../dev/TestServer/swagger/azure-report.json', 'azurereport']
 };
 
+
 var defaultAzureMappings = {
   'AcceptanceTests/Lro': '../../dev/TestServer/swagger/lro.json',
   'AcceptanceTests/Paging': '../../dev/TestServer/swagger/paging.json',
@@ -186,12 +195,12 @@ gulp.task('regenerate:expected', function(cb){
       'regenerate:expected:nodeazure',
       'regenerate:expected:ruby',
       'regenerate:expected:rubyazure',
-      'regenerate:expected:java',
-      'regenerate:expected:javaazure',
-      'regenerate:expected:javaazurefluent',
       'regenerate:expected:python',
       'regenerate:expected:pythonazure',
       'regenerate:expected:samples',
+      'regenerate:expected:java',
+      'regenerate:expected:javaazure',
+      'regenerate:expected:javaazurefluent',
       'regenerate:expected:go'
     ],
     cb);
@@ -203,11 +212,11 @@ gulp.task('regenerate:delete', function(cb){
     'src/generator/AutoRest.CSharp.Tests/Expected',
     'src/generator/AutoRest.NodeJS.Tests/Expected',
     'src/generator/AutoRest.NodeJS.Azure.Tests/Expected',
+    'src/generator/AutoRest.Python.Tests/Expected',
+    'src/generator/AutoRest.Python.Azure.Tests/Expected',
     'src/generator/AutoRest.Java.Tests/src/main/java',
     'src/generator/AutoRest.Java.Azure.Tests/src/main/java',
     'src/generator/AutoRest.Java.Azure.Fluent.Tests/src/main/java',
-    'src/generator/AutoRest.Python.Tests/Expected',
-    'src/generator/AutoRest.Python.Azure.Tests/Expected',
     'src/generator/AutoRest.Go.Tests/src/tests/generated'
   ],
   cb);
@@ -590,7 +599,6 @@ gulp.task('regenerate:expected:csazurecomposite', function (cb) {
   }, cb);
 });
 
-
 gulp.task('regenerate:expected:go', function(cb){
   regenExpected({
     'outputBaseDir': 'src/generator/AutoRest.Go.Tests',
@@ -622,8 +630,8 @@ gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], 
     content = content.slice(1);
   }
   var autorestConfig = JSON.parse(content);
-  for (var lang in autorestConfig.codeGenerators) {
-    if (!lang.match(/^Azure\..+/)) {
+  for (var lang in autorestConfig.plugins) {
+    if (!lang.match(/^Azure\..+/) && lang != 'Azure.CSharp.Fluent' ) {
       var generateCmd = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/petstore/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/petstore/petstore.json') + ' -Header NONE';
       exec(clrCmd(generateCmd), function(err, stdout, stderr) {
         console.log(stdout);
@@ -640,8 +648,8 @@ gulp.task('regenerate:expected:samples:azure', function(){
     content = content.slice(1);
   }
   var autorestConfig = JSON.parse(content);
-  for (var lang in autorestConfig.codeGenerators) {
-    if (lang.match(/^Azure\..+/)) {
+  for (var lang in autorestConfig.plugins) {
+    if (lang.match(/^Azure\..+/) && lang != 'Azure.CSharp.Fluent') {
       var generateCmd = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/azure-storage/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/azure-storage/azure-storage.json') + ' -Header NONE';
       exec(clrCmd(generateCmd), function(err, stdout, stderr) {
         console.log(stdout);
@@ -759,16 +767,32 @@ gulp.task('package', function(cb) {
 });
 */
 
+var runAsync = function(command, opts, cb){
+  if(!opts.args){
+    opts.args = [];
+  }
+  opts.stdio = [process.stdin, process.stdout, process.stderr];
+  cmd = spawn(command, opts.args, opts);
+  cmd.on('close', (code) => {
+    if(code != 0){
+      cb(code);
+    } else {
+      cb(null);
+    }
+  });
+};
+
 gulp.task('test:node', shell.task('npm test', {cwd: './src/generator/AutoRest.NodeJS.Tests/', verbosity: 3}));
 gulp.task('test:node:azure', shell.task('npm test', {cwd: './src/generator/AutoRest.NodeJS.Azure.Tests/', verbosity: 3}));
 
 gulp.task('test:ruby', ['regenerate:expected:ruby'], shell.task('ruby RspecTests/tests_runner.rb', { cwd: './src/generator/AutoRest.Ruby.Tests', verbosity: 3 }));
 gulp.task('test:ruby:azure', ['regenerate:expected:rubyazure'], shell.task('ruby RspecTests/tests_runner.rb', { cwd: './src/generator/AutoRest.Ruby.Azure.Tests', verbosity: 3 }));
+
+gulp.task('test:python', function(cb){ runAsync('tox', {cwd: './src/generator/AutoRest.Python.Tests/'}, cb) });
+gulp.task('test:python:azure', function(cb){ runAsync('tox', {cwd: './src/generator/AutoRest.Python.Azure.Tests/'}, cb) });
+
 gulp.task('test:java', ['test:java:init', 'test:clientruntime:java:init', 'test:clientruntime:javaazure:init'], shell.task(basePathOrThrow() + '/gradlew :codegen-tests:check', {cwd: './', verbosity: 3}));
 gulp.task('test:java:azure', shell.task(basePathOrThrow() + '/gradlew :azure-codegen-tests:check', {cwd: './', verbosity: 3}));
-
-gulp.task('test:python', shell.task('tox', {cwd: './src/generator/AutoRest.Python.Tests/', verbosity: 3}));
-gulp.task('test:python:azure', shell.task('tox', {cwd: './src/generator/AutoRest.Python.Azure.Tests/', verbosity: 3}));
 
 gulp.task('test:go', ['regenerate:expected:go'], shell.task([
     'glide up',
@@ -777,9 +801,10 @@ gulp.task('test:go', ['regenerate:expected:go'], shell.task([
     ], {cwd: './src/generator/AutoRest.Go.Tests/src/tests', verbosity: 3})
 );
 
+
 var xunitTestsDlls = [
 ];
-
+    
 var xunitNetCoreXproj = [
   'src/core/AutoRest.Core.Tests/project.json',
   'src/core/AutoRest.Extensions.Azure.Tests/project.json',
@@ -874,16 +899,14 @@ gulp.task('test', function(cb){
   if (isWindows) {
     runSequence(
       'test:xunit',
-// DISABLE      'test:nugetPackages:xunit',
       'test:node',
       'test:node:azure',
-// DISABLE     'test:nugetPackages:npm',
       'test:ruby',
       'test:ruby:azure',
-      'test:java',
-      'test:java:azure',
       'test:python',
       'test:python:azure',
+      'test:java',
+      'test:java:azure',
       'test:go',
       cb);
   } else {
@@ -893,10 +916,10 @@ gulp.task('test', function(cb){
       'test:node:azure',
       'test:ruby',
       'test:ruby:azure',
-      'test:java',
-      'test:java:azure',
       'test:python',
       'test:python:azure',
+      'test:java',
+      'test:java:azure',
       'test:go',
       cb);
   }

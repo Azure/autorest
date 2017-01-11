@@ -34,7 +34,7 @@ class FlattenedProduct(Resource):
     :type lsize: int
     :param provisioning_state:
     :type provisioning_state: str
-    """ 
+    """
 
     _validation = {
         'id': {'readonly': True},

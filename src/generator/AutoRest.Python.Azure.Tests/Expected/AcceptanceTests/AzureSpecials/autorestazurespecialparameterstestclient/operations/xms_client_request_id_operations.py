@@ -94,7 +94,7 @@ class XMsClientRequestIdOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsAzureSpecials.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
         """
         # Construct URL
         url = '/azurespecials/overwrite/x-ms-client-request-id/via-param/method/'

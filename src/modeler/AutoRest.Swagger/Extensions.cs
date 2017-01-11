@@ -3,11 +3,8 @@
 
 using System;
 using System.Globalization;
-using System.IO;
 using System.Net;
-using AutoRest.Core.ClientModel;
-using Newtonsoft.Json;
-using YamlDotNet.Serialization;
+using AutoRest.Core.Model;
 
 namespace AutoRest.Swagger
 {
@@ -79,25 +76,6 @@ namespace AutoRest.Swagger
             }
 
             return reference;
-        }
-
-        public static string EnsureYamlIsJson(this string text)
-        {
-            // is this something other than JSON?
-            if (!string.IsNullOrWhiteSpace(text) && text[0] != '{')
-            {
-                using (var y = new StringReader(text))
-                {
-                    using (var s = new StringWriter(CultureInfo.CurrentCulture))
-                    {
-                        var d = new Deserializer();
-                        d.NodeDeserializers.Insert( 0,new YamlBoolDeserializer() );
-                        new JsonSerializer().Serialize(s, d.Deserialize(y));
-                        return s.ToString();
-                    }
-                }
-            }
-            return text;
         }
     }
 }

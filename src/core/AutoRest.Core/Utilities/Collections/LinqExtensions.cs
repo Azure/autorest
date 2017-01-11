@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -84,7 +85,8 @@ namespace AutoRest.Core.Utilities.Collections
         /// <param name="enumerable"></param>
         /// <param name="item"></param>
         /// <returns></returns>
-        public static IEnumerable<T> ConcatSingleItem<T>(this IEnumerable<T> enumerable, T item) => enumerable.Concat(item.SingleItemAsEnumerable());
+        public static IEnumerable<T> ConcatSingleItem<T>(this IEnumerable<T> enumerable, T item) => (enumerable ?? Enumerable.Empty<T>()).Concat(item.SingleItemAsEnumerable());
+        public static IEnumerable<T> SingleItemConcat<T>(this T item, IEnumerable<T> enumerable) => item.SingleItemAsEnumerable() .Concat(enumerable ?? Enumerable.Empty<T>());
 
         public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> enumerable) => enumerable?.Where(each => each != null) ?? Enumerable.Empty<T>();
 
@@ -171,10 +173,7 @@ namespace AutoRest.Core.Utilities.Collections
             return s1.Concat(s2);
         }
 
-        public static IEnumerable<T> SingleItemAsEnumerable<T>(this T item)
-        {
-            return new[] { item };
-        }
+        public static IEnumerable<T> SingleItemAsEnumerable<T>(this T item) => new[] { item };
 
         /// <summary>
         ///     returns the index position where the predicate matches the value
@@ -330,6 +329,39 @@ namespace AutoRest.Core.Utilities.Collections
                 dictionary.AddOrSet(keySelector(element), elementSelector(element));
             }
             return dictionary;
+        }
+
+        public static IDictionary<TKey, TElement> AddRange<TKey, TElement>(this IDictionary<TKey, TElement> destination, IDictionary<TKey, TElement> source) 
+        {
+            foreach (var constraint in source)
+            {
+                destination.Add(constraint.Key, constraint.Value);
+            }
+            return destination;
+        }
+
+        public static HashSet<T> AddRange<T>(this HashSet<T> destination, IEnumerable<T> source)
+        {
+            if (source != null)
+            {
+                foreach (var element in source)
+                {
+                    destination.Add(element);
+                }
+            }
+            return destination;
+        }
+
+        public static IEnumerable<TSource> Distinct<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> selector)
+        {
+            var keys = new HashSet<TKey>();
+            foreach (var each in source)
+            {
+                if (keys.Add(selector(each)))
+                {
+                    yield return each;
+                }
+            }
         }
     }
 }

@@ -5,13 +5,14 @@ module Petstore
     #
     # Model object.
     #
+    #
     class StorageAccountProperties
 
       include MsRestAzure
 
       # @return [ProvisioningState] Gets the status of the storage account at
-      # the time the operation was called. Possible values include:
-      # 'Creating', 'ResolvingDNS', 'Succeeded'
+      # the time the operation was called. Possible values include: 'Creating',
+      # 'ResolvingDNS', 'Succeeded'
       attr_accessor :provisioning_state
 
       # @return [AccountType] Gets the type of the storage account. Possible
@@ -36,8 +37,8 @@ module Petstore
       # @return [DateTime] Gets the timestamp of the most recent instance of a
       # failover to the secondary location. Only the most recent timestamp is
       # retained. This element is not returned if there has never been a
-      # failover instance. Only available if the accountType is StandardGRS
-      # or StandardRAGRS.
+      # failover instance. Only available if the accountType is StandardGRS or
+      # StandardRAGRS.
       attr_accessor :last_geo_failover_time
 
       # @return [String] Gets the location of the geo replicated secondary for
@@ -46,22 +47,22 @@ module Petstore
       attr_accessor :secondary_location
 
       # @return [AccountStatus] Gets the status indicating whether the
-      # secondary location of the storage account is available or
-      # unavailable. Only available if the accountType is StandardGRS or
-      # StandardRAGRS. Possible values include: 'Available', 'Unavailable'
+      # secondary location of the storage account is available or unavailable.
+      # Only available if the accountType is StandardGRS or StandardRAGRS.
+      # Possible values include: 'Available', 'Unavailable'
       attr_accessor :status_of_secondary
 
       # @return [DateTime] Gets the creation date and time of the storage
       # account in UTC.
       attr_accessor :creation_time
 
-      # @return [CustomDomain] Gets the user assigned custom domain assigned
-      # to this storage account.
+      # @return [CustomDomain] Gets the user assigned custom domain assigned to
+      # this storage account.
       attr_accessor :custom_domain
 
       # @return [Endpoints] Gets the URLs that are used to perform a retrieval
-      # of a public blob, queue or table object from the secondary location
-      # of the storage account. Only available if the accountType is
+      # of a public blob, queue or table object from the secondary location of
+      # the storage account. Only available if the accountType is
       # StandardRAGRS.
       attr_accessor :secondary_endpoints
 

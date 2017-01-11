@@ -21,7 +21,7 @@ namespace AutoRest.Swagger.Validation
             var swaggerObject = (context.Parent?.Value as SwaggerObject);
             var knownFormat = swaggerObject?.KnownFormat;
 
-            if(knownFormat != null && knownFormat == Core.ClientModel.KnownFormat.unknown)
+            if(knownFormat != null && knownFormat == Core.Model.KnownFormat.unknown)
             {
                 formatParams = new string[] { swaggerObject?.Format };
                 return false;
@@ -42,6 +42,6 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         ///     The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override LogEntrySeverity Severity => LogEntrySeverity.Warning;
+        public override Category Severity => Category.Warning;
     }
 }

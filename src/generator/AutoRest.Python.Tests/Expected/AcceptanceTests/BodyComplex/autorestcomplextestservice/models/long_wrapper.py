@@ -19,7 +19,7 @@ class LongWrapper(Model):
     :type field1: long
     :param field2:
     :type field2: long
-    """ 
+    """
 
     _attribute_map = {
         'field1': {'key': 'field1', 'type': 'long'},

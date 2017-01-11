@@ -28,10 +28,10 @@ class Product(Model):
     :type image: str
     :param child:
     :type child: :class:`ChildProduct
-     <Fixtures.AcceptanceTestsValidation.models.ChildProduct>`
+     <fixtures.acceptancetestsvalidation.models.ChildProduct>`
     :ivar const_child:
     :vartype const_child: :class:`ConstantProduct
-     <Fixtures.AcceptanceTestsValidation.models.ConstantProduct>`
+     <fixtures.acceptancetestsvalidation.models.ConstantProduct>`
     :ivar const_int: Constant int. Default value: 0 .
     :vartype const_int: int
     :ivar const_string: Constant string. Default value: "constant" .
@@ -39,8 +39,8 @@ class Product(Model):
     :param const_string_as_enum: Constant string as Enum. Possible values
      include: 'constant_string_as_enum'
     :type const_string_as_enum: str or :class:`EnumConst
-     <Fixtures.AcceptanceTestsValidation.models.EnumConst>`
-    """ 
+     <fixtures.acceptancetestsvalidation.models.EnumConst>`
+    """
 
     _validation = {
         'display_names': {'max_items': 6, 'min_items': 0, 'unique': True},

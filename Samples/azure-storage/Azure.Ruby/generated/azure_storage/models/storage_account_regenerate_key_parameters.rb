@@ -5,6 +5,7 @@ module Petstore
     #
     # Model object.
     #
+    #
     class StorageAccountRegenerateKeyParameters
 
       include MsRestAzure

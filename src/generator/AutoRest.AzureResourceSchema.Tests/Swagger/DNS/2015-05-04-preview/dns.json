@@ -846,7 +846,7 @@
       },
       "allOf": [
         {
-          "$ref": "Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Describes a DNS RecordSet (a set of DNS records with the same name and type)."
@@ -895,7 +895,7 @@
       },
       "allOf": [
         {
-          "$ref": "Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Describes a DNS zone."

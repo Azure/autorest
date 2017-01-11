@@ -1,9 +1,10 @@
 ﻿@using AutoRest.Go
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
+@using AutoRest.Go.Model
 @using AutoRest.Go.Templates
 @using AutoRest.Core.Utilities
 
-@inherits AutoRest.Go.Template<AutoRest.Go.TemplateModels.ModelTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.Go.Model.CompositeTypeGo>
 
 @WrapComment("// ", string.Format("{0} is {1}", Model.Name, Model.Documentation.ToSentence()))
 type @Model.Name struct {
@@ -17,9 +18,9 @@ type @Model.Name struct {
 @if (!string.IsNullOrEmpty(Model.NextLink) && Model.PreparerNeeded)
 {
 @:@EmptyLine
-@:// @(Model.PreparerMethodName()) prepares a request to retrieve the next set of results. It returns
+@:// @(Model.PreparerMethodName) prepares a request to retrieve the next set of results. It returns
 @:// nil if no more results exist.
-@:func (client @(Model.Name)) @(Model.PreparerMethodName())() (*http.Request, error) {
+@:func (client @(Model.Name)) @(Model.PreparerMethodName)() (*http.Request, error) {
     @:if client.@(Model.NextLink) == nil || len(to.String(client.@(Model.NextLink))) <= 0 {
         @:return nil, nil
     @:}

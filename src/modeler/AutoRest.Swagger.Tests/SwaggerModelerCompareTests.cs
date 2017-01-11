@@ -11,6 +11,7 @@ using AutoRest.Core.Logging;
 using AutoRest.Core;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Validation;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger.Tests
 {
@@ -36,20 +37,23 @@ namespace AutoRest.Swagger.Tests
         /// <returns>A list of messages from the comparison logic.</returns>
         private IEnumerable<ComparisonMessage> CompareSwagger(string input)
         {
-            var settings = new Settings
+            using (NewContext)
             {
-                Namespace = "Test",
-                Input = Path.Combine("Swagger", "Comparison", "Modified", input),
-                Previous = Path.Combine("Swagger", "Comparison", "Original", input)
-            };
+                var settings = new Settings
+                {
+                    Namespace = "Test",
+                    Input = Path.Combine("Swagger", "Comparison", "Modified", input),
+                    Previous = Path.Combine("Swagger", "Comparison", "Original", input)
+                };
 
-            var modeler = new SwaggerModeler(settings);
-            IEnumerable<ComparisonMessage> messages = modeler.Compare();
+                var modeler = new SwaggerModeler();
+                IEnumerable<ComparisonMessage> messages = modeler.Compare();
 
-            // remove debug-level messages
-            messages = messages.Where(each => each.Severity > LogEntrySeverity.Debug);
+                // remove debug-level messages
+                messages = messages.Where(each => each.Severity > Category.Debug);
 
-            return messages;
+                return messages;
+            }
         }
 
         /// <summary>
@@ -59,16 +63,16 @@ namespace AutoRest.Swagger.Tests
         public void UpdatedMajorVersionNumberNotStrict()
         {
             var messages = CompareSwagger("version_check_01.json").ToArray();
-            Assert.NotEmpty(messages.Where(m => m.Id > 0 && m.Severity == LogEntrySeverity.Warning));
-            Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Error));
+            Assert.NotEmpty(messages.Where(m => m.Id > 0 && m.Severity == Category.Warning));
+            Assert.Empty(messages.Where(m => m.Severity >= Category.Error));
         }
 
         [Fact]
         public void UpdatedMinorVersionNumberNotStrict()
         {
             var messages = CompareSwagger("version_check_03.json").ToArray();
-            Assert.NotEmpty(messages.Where(m => m.Id > 0 && m.Severity == LogEntrySeverity.Warning));
-            Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Error));
+            Assert.NotEmpty(messages.Where(m => m.Id > 0 && m.Severity == Category.Warning));
+            Assert.Empty(messages.Where(m => m.Severity >= Category.Error));
         }
 
         /// <summary>
@@ -78,8 +82,8 @@ namespace AutoRest.Swagger.Tests
         public void SameMajorVersionNumberStrict()
         {
             var messages = CompareSwagger("version_check_02.json").ToArray();
-            Assert.Empty(messages.Where(m => m.Id > 0 && m.Severity == LogEntrySeverity.Warning));
-            Assert.NotEmpty(messages.Where(m => m.Severity >= LogEntrySeverity.Error));
+            Assert.Empty(messages.Where(m => m.Id > 0 && m.Severity == Category.Warning));
+            Assert.NotEmpty(messages.Where(m => m.Severity >= Category.Error));
         }
 
         /// <summary>
@@ -89,10 +93,10 @@ namespace AutoRest.Swagger.Tests
         public void ReversedVersionNumberChange()
         {
             var messages = CompareSwagger("version_check_04.json").ToArray();
-            Assert.NotEmpty(messages.Where(m => m.Id > 0 && m.Severity >= LogEntrySeverity.Error));
+            Assert.NotEmpty(messages.Where(m => m.Id > 0 && m.Severity >= Category.Error));
             var reversed = messages.Where(m => m.Id == ComparisonMessages.VersionsReversed.Id);
             Assert.NotEmpty(reversed);
-            Assert.Equal(LogEntrySeverity.Error, reversed.First().Severity);
+            Assert.Equal(Category.Error, reversed.First().Severity);
         }
 
         /// <summary>
@@ -104,7 +108,7 @@ namespace AutoRest.Swagger.Tests
             var messages = CompareSwagger("version_check_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.ProtocolNoLongerSupported.Id);
             Assert.NotEmpty(missing);
-            Assert.Equal(LogEntrySeverity.Warning, missing.First().Severity);
+            Assert.Equal(Category.Warning, missing.First().Severity);
         }
 
         /// <summary>
@@ -116,7 +120,7 @@ namespace AutoRest.Swagger.Tests
             var messages = CompareSwagger("misc_checks_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.RequestBodyFormatNoLongerSupported.Id);
             Assert.NotEmpty(missing);
-            Assert.Equal(LogEntrySeverity.Error, missing.First().Severity);
+            Assert.Equal(Category.Error, missing.First().Severity);
         }
 
         /// <summary>
@@ -128,7 +132,7 @@ namespace AutoRest.Swagger.Tests
             var messages = CompareSwagger("misc_checks_01.json").ToArray();
             var added = messages.Where(m => m.Id == ComparisonMessages.ResponseBodyFormatNowSupported.Id);
             Assert.NotEmpty(added);
-            Assert.Equal(LogEntrySeverity.Error, added.First().Severity);
+            Assert.Equal(Category.Error, added.First().Severity);
         }
 
         /// <summary>
@@ -140,7 +144,7 @@ namespace AutoRest.Swagger.Tests
             var messages = CompareSwagger("misc_checks_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.RemovedDefinition.Id);
             Assert.NotEmpty(missing);
-            Assert.Equal(LogEntrySeverity.Error, missing.First().Severity);
+            Assert.Equal(Category.Error, missing.First().Severity);
         }
 
         /// <summary>
@@ -152,10 +156,10 @@ namespace AutoRest.Swagger.Tests
             var messages = CompareSwagger("misc_checks_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id);
             Assert.NotEmpty(missing);
-            var error = missing.Where(err => err.Path.StartsWith("#/definitions/")).FirstOrDefault();
+            var error = missing.Where(err => err.Path.XPath.StartsWith("#/definitions/")).FirstOrDefault();
             Assert.NotNull(error);
-            Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/definitions/Database/properties/b", error.Path);
+            Assert.Equal(Category.Error, error.Severity);
+            Assert.Equal("#/definitions/Database/properties/b", error.Path.XPath);
         }
 
         /// <summary>
@@ -167,10 +171,10 @@ namespace AutoRest.Swagger.Tests
             var messages = CompareSwagger("misc_checks_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.TypeFormatChanged.Id);
             Assert.NotEmpty(missing);
-            var error = missing.Where(err => err.Path.StartsWith("#/definitions/")).FirstOrDefault();
+            var error = missing.Where(err => err.Path.XPath.StartsWith("#/definitions/")).FirstOrDefault();
             Assert.NotNull(error);
-            Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/definitions/Database/properties/c", error.Path);
+            Assert.Equal(Category.Error, error.Severity);
+            Assert.Equal("#/definitions/Database/properties/c", error.Path.XPath);
         }
 
         /// <summary>
@@ -180,7 +184,7 @@ namespace AutoRest.Swagger.Tests
         public void UnreferencedDefinitionRemoved()
         {
             var messages = CompareSwagger("misc_checks_02.json").ToArray();
-            var missing = messages.Where(m => m.Id > 0 && m.Path.StartsWith("#/definitions/Unreferenced"));
+            var missing = messages.Where(m => m.Id > 0 && m.Path.XPath.StartsWith("#/definitions/Unreferenced"));
             Assert.Empty(missing);
         }
 
@@ -191,7 +195,7 @@ namespace AutoRest.Swagger.Tests
         public void UnreferencedTypeChanged()
         {
             var messages = CompareSwagger("misc_checks_02.json").ToArray();
-            var missing = messages.Where(m => m.Id > 0 && m.Path.StartsWith("#/definitions/Database"));
+            var missing = messages.Where(m => m.Id > 0 && m.Path.XPath.StartsWith("#/definitions/Database"));
             Assert.Empty(missing);
         }
 
@@ -205,8 +209,8 @@ namespace AutoRest.Swagger.Tests
             var missing = messages.Where(m => m.Id == ComparisonMessages.RemovedPath.Id);
             Assert.NotEmpty(missing);
             var error = missing.First();
-            Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Paths", error.Path);
+            Assert.Equal(Category.Error, error.Severity);
+            Assert.Equal("#/paths/~1api~1Paths", error.Path.XPath);
         }
 
         /// <summary>
@@ -219,8 +223,8 @@ namespace AutoRest.Swagger.Tests
             var missing = messages.Where(m => m.Id == ComparisonMessages.RemovedOperation.Id);
             Assert.NotEmpty(missing);
             var error = missing.First();
-            Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Operations", error.Path);
+            Assert.Equal(Category.Error, error.Severity);
+            Assert.Equal("#/paths/~1api~1Operations", error.Path.XPath);
         }
 
         /// <summary>
@@ -233,8 +237,8 @@ namespace AutoRest.Swagger.Tests
             var missing = messages.Where(m => m.Id == ComparisonMessages.ModifiedOperationId.Id);
             Assert.NotEmpty(missing);
             var error = missing.First();
-            Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Operations/post", error.Path);
+            Assert.Equal(Category.Error, error.Severity);
+            Assert.Equal("#/paths/~1api~1Operations/post", error.Path.XPath);
         }
 
         /// <summary>
@@ -247,8 +251,8 @@ namespace AutoRest.Swagger.Tests
             var missing = messages.Where(m => m.Id == ComparisonMessages.RemovedRequiredParameter.Id);
             Assert.NotEmpty(missing);
             var error = missing.First();
-            Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Parameters/{a}/get/a", error.Path);
+            Assert.Equal(Category.Error, error.Severity);
+            Assert.Equal("#/paths/~1api~1Parameters~1{a}/get/a", error.Path.XPath);
         }
 
         /// <summary>
@@ -261,8 +265,8 @@ namespace AutoRest.Swagger.Tests
             var missing = messages.Where(m => m.Id == ComparisonMessages.RemovedRequiredParameter.Id);
             Assert.NotEmpty(missing);
             var error = missing.First();
-            Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Parameters/get/x-ar", error.Path);
+            Assert.Equal(Category.Error, error.Severity);
+            Assert.Equal("#/paths/~1api~1Parameters/get/x-ar", error.Path.XPath);
         }
 
 
@@ -276,8 +280,8 @@ namespace AutoRest.Swagger.Tests
             var missing = messages.Where(m => m.Id == ComparisonMessages.AddingRequiredParameter.Id);
             Assert.NotEmpty(missing);
             var error = missing.First();
-            Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Parameters/{a}/get/c", error.Path);
+            Assert.Equal(Category.Error, error.Severity);
+            Assert.Equal("#/paths/~1api~1Parameters~1{a}/get/c", error.Path.XPath);
         }
 
         /// <summary>
@@ -290,8 +294,8 @@ namespace AutoRest.Swagger.Tests
             var missing = messages.Where(m => m.Id == ComparisonMessages.AddingRequiredParameter.Id);
             Assert.NotEmpty(missing);
             var error = missing.First();
-            Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Parameters/get/x-cr", error.Path);
+            Assert.Equal(Category.Error, error.Severity);
+            Assert.Equal("#/paths/~1api~1Parameters/get/x-cr", error.Path.XPath);
         }
 
         /// <summary>
@@ -304,8 +308,8 @@ namespace AutoRest.Swagger.Tests
             var missing = messages.Where(m => m.Id == ComparisonMessages.ParameterInHasChanged.Id);
             Assert.NotEmpty(missing);
             var error = missing.First();
-            Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Parameters/{a}/get/b", error.Path);
+            Assert.Equal(Category.Error, error.Severity);
+            Assert.Equal("#/paths/~1api~1Parameters~1{a}/get/b", error.Path.XPath);
         }
 
         /// <summary>
@@ -318,8 +322,8 @@ namespace AutoRest.Swagger.Tests
             var missing = messages.Where(m => m.Id == ComparisonMessages.RequiredStatusChange.Id);
             Assert.NotEmpty(missing);
             var error = missing.First();
-            Assert.Equal(LogEntrySeverity.Info, error.Severity);
-            Assert.Equal("#/paths//api/Parameters/{a}/get/d", error.Path);
+            Assert.Equal(Category.Info, error.Severity);
+            Assert.Equal("#/paths/~1api~1Parameters~1{a}/get/d", error.Path.XPath);
         }
 
         /// <summary>
@@ -332,8 +336,8 @@ namespace AutoRest.Swagger.Tests
             var missing = messages.Where(m => m.Id == ComparisonMessages.RequiredStatusChange.Id);
             Assert.NotEmpty(missing);
             var error = missing.Skip(1).First();
-            Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Parameters/{a}/get/e", error.Path);
+            Assert.Equal(Category.Error, error.Severity);
+            Assert.Equal("#/paths/~1api~1Parameters~1{a}/get/e", error.Path.XPath);
         }
 
         /// <summary>
@@ -347,8 +351,8 @@ namespace AutoRest.Swagger.Tests
             var missing = messages.Where(m => m.Id == ComparisonMessages.ConstantStatusHasChanged.Id);
             Assert.NotEmpty(missing);
             var error = missing.First();
-            Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Parameters/{a}/get/f", error.Path);
+            Assert.Equal(Category.Error, error.Severity);
+            Assert.Equal("#/paths/~1api~1Parameters~1{a}/get/f", error.Path.XPath);
         }
 
         /// <summary>
@@ -374,8 +378,8 @@ namespace AutoRest.Swagger.Tests
             var changed = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id);
             Assert.NotEmpty(changed);
             var error = changed.First();
-            Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Parameters/post/registry/properties/b", error.Path);
+            Assert.Equal(Category.Error, error.Severity);
+            Assert.Equal("#/paths/~1api~1Parameters/post/registry/properties/b", error.Path.XPath);
         }
 
         /// <summary>
@@ -388,8 +392,8 @@ namespace AutoRest.Swagger.Tests
             var removed = messages.Where(m => m.Id == ComparisonMessages.RemovedResponseCode.Id);
             Assert.NotEmpty(removed);
             var error = removed.First();
-            Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Responses/get/200", error.Path);
+            Assert.Equal(Category.Error, error.Severity);
+            Assert.Equal("#/paths/~1api~1Responses/get/200", error.Path.XPath);
         }
 
         /// <summary>
@@ -402,8 +406,8 @@ namespace AutoRest.Swagger.Tests
             var removed = messages.Where(m => m.Id == ComparisonMessages.AddingResponseCode.Id);
             Assert.NotEmpty(removed);
             var error = removed.First();
-            Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Responses/get/202", error.Path);
+            Assert.Equal(Category.Error, error.Severity);
+            Assert.Equal("#/paths/~1api~1Responses/get/202", error.Path.XPath);
         }
 
         /// <summary>
@@ -416,11 +420,11 @@ namespace AutoRest.Swagger.Tests
             var removed = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id).ToArray();
             Assert.Equal(2, removed.Length);
 
-            Assert.Equal(LogEntrySeverity.Error, removed[0].Severity);
-            Assert.Equal("#/paths//api/Responses/get/201", removed[0].Path);
+            Assert.Equal(Category.Error, removed[0].Severity);
+            Assert.Equal("#/paths/~1api~1Responses/get/201", removed[0].Path.XPath);
 
-            Assert.Equal(LogEntrySeverity.Error, removed[1].Severity);
-            Assert.Equal("#/paths//api/Responses/get/400/properties/id", removed[1].Path);
+            Assert.Equal(Category.Error, removed[1].Severity);
+            Assert.Equal("#/paths/~1api~1Responses/get/400/properties/id", removed[1].Path.XPath);
         }
 
         /// <summary>
@@ -430,10 +434,10 @@ namespace AutoRest.Swagger.Tests
         public void ResponseSchemaChanged()
         {
             var messages = CompareSwagger("operation_check_02.json").ToArray();
-            var removed = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id && m.Path.Contains("Responses")).ToArray();
+            var removed = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id && m.Path.XPath.Contains("Responses")).ToArray();
             Assert.Equal(1, removed.Length);
-            Assert.Equal(LogEntrySeverity.Error, removed[0].Severity);
-            Assert.Equal("#/paths//api/Responses/get/400/properties/id", removed[0].Path);
+            Assert.Equal(Category.Error, removed[0].Severity);
+            Assert.Equal("#/paths/~1api~1Responses/get/400/properties/id", removed[0].Path.XPath);
         }
 
         /// <summary>
@@ -445,8 +449,8 @@ namespace AutoRest.Swagger.Tests
             var messages = CompareSwagger("operation_check_03.json").ToArray();
             var added = messages.Where(m => m.Id == ComparisonMessages.AddingHeader.Id).ToArray();
             Assert.Equal(1, added.Length);
-            Assert.Equal(LogEntrySeverity.Info, added[0].Severity);
-            Assert.Equal("#/paths//api/Responses/get/200/x-c", added[0].Path);
+            Assert.Equal(Category.Info, added[0].Severity);
+            Assert.Equal("#/paths/~1api~1Responses/get/200/x-c", added[0].Path.XPath);
         }
 
         /// <summary>
@@ -458,8 +462,8 @@ namespace AutoRest.Swagger.Tests
             var messages = CompareSwagger("operation_check_03.json").ToArray();
             var removed = messages.Where(m => m.Id == ComparisonMessages.RemovingHeader.Id).ToArray();
             Assert.Equal(1, removed.Length);
-            Assert.Equal(LogEntrySeverity.Error, removed[0].Severity);
-            Assert.Equal("#/paths//api/Responses/get/200/x-a", removed[0].Path);
+            Assert.Equal(Category.Error, removed[0].Severity);
+            Assert.Equal("#/paths/~1api~1Responses/get/200/x-a", removed[0].Path.XPath);
         }
 
         /// <summary>
@@ -469,10 +473,10 @@ namespace AutoRest.Swagger.Tests
         public void ResponseHeaderTypeChanged()
         {
             var messages = CompareSwagger("operation_check_03.json").ToArray();
-            var changed = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id && m.Path.Contains("Responses")).ToArray();
+            var changed = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id && m.Path.XPath.Contains("Responses")).ToArray();
             Assert.Equal(1, changed.Length);
-            Assert.Equal(LogEntrySeverity.Error, changed[0].Severity);
-            Assert.Equal("#/paths//api/Responses/get/200/x-b", changed[0].Path);
+            Assert.Equal(Category.Error, changed[0].Severity);
+            Assert.Equal("#/paths/~1api~1Responses/get/200/x-b", changed[0].Path.XPath);
         }
 
         /// <summary>
@@ -482,18 +486,18 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void RequestArrayFormatChanged()
         {
-            var messages = CompareSwagger("operation_check_04.json").Where(m => m.Path.Contains("Parameters")).ToArray();
+            var messages = CompareSwagger("operation_check_04.json").Where(m => m.Path.XPath.Contains("Parameters")).ToArray();
             var changed = messages.Where(m => m.Id == ComparisonMessages.ArrayCollectionFormatChanged.Id).ToArray();
 
             Assert.Equal(4, changed.Length);
-            Assert.Equal(LogEntrySeverity.Error, changed[0].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[1].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[2].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[3].Severity);
-            Assert.Equal("#/paths//api/Parameters/get/a", changed[0].Path);
-            Assert.Equal("#/paths//api/Parameters/get/b", changed[1].Path);
-            Assert.Equal("#/paths//api/Parameters/put/a/properties/a", changed[2].Path);
-            Assert.Equal("#/paths//api/Parameters/put/a/properties/b", changed[3].Path);
+            Assert.Equal(Category.Error, changed[0].Severity);
+            Assert.Equal(Category.Error, changed[1].Severity);
+            Assert.Equal(Category.Error, changed[2].Severity);
+            Assert.Equal(Category.Error, changed[3].Severity);
+            Assert.Equal("#/paths/~1api~1Parameters/get/a", changed[0].Path.XPath);
+            Assert.Equal("#/paths/~1api~1Parameters/get/b", changed[1].Path.XPath);
+            Assert.Equal("#/paths/~1api~1Parameters/put/a/properties/a", changed[2].Path.XPath);
+            Assert.Equal("#/paths/~1api~1Parameters/put/a/properties/b", changed[3].Path.XPath);
         }
 
         /// <summary>
@@ -503,10 +507,10 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void RequestTypeConstraintsChanged()
         {
-            var messages = CompareSwagger("operation_check_04.json").Where(m => m.Path.Contains("Parameters")).ToArray();
-            var stricter = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsStronger.Id && m.Severity == LogEntrySeverity.Error).ToArray();
-            var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == LogEntrySeverity.Error).ToArray();
-            var info = messages.Where(m => m.Id > 0 && m.Severity == LogEntrySeverity.Info).ToArray();
+            var messages = CompareSwagger("operation_check_04.json").Where(m => m.Path.XPath.Contains("Parameters")).ToArray();
+            var stricter = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsStronger.Id && m.Severity == Category.Error).ToArray();
+            var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == Category.Error).ToArray();
+            var info = messages.Where(m => m.Id > 0 && m.Severity == Category.Info).ToArray();
 
             Assert.Equal(11, stricter.Length);
             Assert.Equal(8, breaking.Length);
@@ -520,16 +524,16 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void ResponseArrayFormatChanged()
         {
-            var messages = CompareSwagger("operation_check_05.json").Where(m => m.Path.Contains("Responses")).ToArray();
+            var messages = CompareSwagger("operation_check_05.json").Where(m => m.Path.XPath.Contains("Responses")).ToArray();
             var changed = messages.Where(m => m.Id == ComparisonMessages.ArrayCollectionFormatChanged.Id).ToArray();
 
             Assert.Equal(4, changed.Length);
-            Assert.Equal(LogEntrySeverity.Error, changed[0].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[1].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[2].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[3].Severity);
-            Assert.Equal("#/paths//api/Responses/get/200/properties/a", changed[0].Path);
-            Assert.Equal("#/paths//api/Responses/get/200/properties/b", changed[1].Path);
+            Assert.Equal(Category.Error, changed[0].Severity);
+            Assert.Equal(Category.Error, changed[1].Severity);
+            Assert.Equal(Category.Error, changed[2].Severity);
+            Assert.Equal(Category.Error, changed[3].Severity);
+            Assert.Equal("#/paths/~1api~1Responses/get/200/properties/a", changed[0].Path.XPath);
+            Assert.Equal("#/paths/~1api~1Responses/get/200/properties/b", changed[1].Path.XPath);
         }
 
         /// <summary>
@@ -538,10 +542,10 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void ResponseTypeConstraintsChanged()
         {
-            var messages = CompareSwagger("operation_check_05.json").Where(m => m.Path.Contains("Responses")).ToArray();
-            var relaxed = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsWeaker.Id && m.Severity == LogEntrySeverity.Error).ToArray();
-            var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == LogEntrySeverity.Error).ToArray();
-            var info = messages.Where(m => m.Id > 0 && m.Severity == LogEntrySeverity.Info).ToArray();
+            var messages = CompareSwagger("operation_check_05.json").Where(m => m.Path.XPath.Contains("Responses")).ToArray();
+            var relaxed = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsWeaker.Id && m.Severity == Category.Error).ToArray();
+            var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == Category.Error).ToArray();
+            var info = messages.Where(m => m.Id > 0 && m.Severity == Category.Info).ToArray();
 
             Assert.Equal(13, relaxed.Length);
             Assert.Equal(8, breaking.Length);
@@ -559,18 +563,18 @@ namespace AutoRest.Swagger.Tests
             var changed = messages.Where(m => m.Id == ComparisonMessages.ArrayCollectionFormatChanged.Id).ToArray();
 
             Assert.Equal(6, changed.Length);
-            Assert.Equal(LogEntrySeverity.Error, changed[0].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[1].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[2].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[3].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[4].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[5].Severity);
-            Assert.Equal("#/parameters/a", changed[0].Path);
-            Assert.Equal("#/parameters/b", changed[1].Path);
-            Assert.Equal("#/parameters/e/properties/a", changed[2].Path);
-            Assert.Equal("#/parameters/e/properties/b", changed[3].Path);
-            Assert.Equal("#/definitions/A/properties/a", changed[4].Path);
-            Assert.Equal("#/definitions/A/properties/b", changed[5].Path);
+            Assert.Equal(Category.Error, changed[0].Severity);
+            Assert.Equal(Category.Error, changed[1].Severity);
+            Assert.Equal(Category.Error, changed[2].Severity);
+            Assert.Equal(Category.Error, changed[3].Severity);
+            Assert.Equal(Category.Error, changed[4].Severity);
+            Assert.Equal(Category.Error, changed[5].Severity);
+            Assert.Equal("#/parameters/a", changed[0].Path.XPath);
+            Assert.Equal("#/parameters/b", changed[1].Path.XPath);
+            Assert.Equal("#/parameters/e/properties/a", changed[2].Path.XPath);
+            Assert.Equal("#/parameters/e/properties/b", changed[3].Path.XPath);
+            Assert.Equal("#/definitions/A/properties/a", changed[4].Path.XPath);
+            Assert.Equal("#/definitions/A/properties/b", changed[5].Path.XPath);
         }
 
         /// <summary>
@@ -580,10 +584,10 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void GobalParamTypeConstraintsChanged()
         {
-            var messages = CompareSwagger("param_check_01.json").Where(m => m.Path.Contains("parameters")).ToArray();
-            var stricter = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsStronger.Id && m.Severity == LogEntrySeverity.Error).ToArray();
-            var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == LogEntrySeverity.Error).ToArray();
-            var info = messages.Where(m => m.Id > 0 && m.Severity == LogEntrySeverity.Info).ToArray();
+            var messages = CompareSwagger("param_check_01.json").Where(m => m.Path.XPath.Contains("parameters")).ToArray();
+            var stricter = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsStronger.Id && m.Severity == Category.Error).ToArray();
+            var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == Category.Error).ToArray();
+            var info = messages.Where(m => m.Id > 0 && m.Severity == Category.Info).ToArray();
 
             Assert.Equal(13, stricter.Length);
             Assert.Equal(8, breaking.Length);
@@ -601,18 +605,18 @@ namespace AutoRest.Swagger.Tests
             var changed = messages.Where(m => m.Id == ComparisonMessages.ArrayCollectionFormatChanged.Id).ToArray();
 
             Assert.Equal(6, changed.Length);
-            Assert.Equal(LogEntrySeverity.Error, changed[0].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[1].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[2].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[3].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[4].Severity);
-            Assert.Equal(LogEntrySeverity.Error, changed[5].Severity);
-            Assert.Equal("#/responses/200/properties/a", changed[0].Path);
-            Assert.Equal("#/responses/200/properties/b", changed[1].Path);
-            Assert.Equal("#/responses/201/properties/a", changed[2].Path);
-            Assert.Equal("#/responses/201/properties/b", changed[3].Path);
-            Assert.Equal("#/definitions/A/properties/a", changed[4].Path);
-            Assert.Equal("#/definitions/A/properties/b", changed[5].Path);
+            Assert.Equal(Category.Error, changed[0].Severity);
+            Assert.Equal(Category.Error, changed[1].Severity);
+            Assert.Equal(Category.Error, changed[2].Severity);
+            Assert.Equal(Category.Error, changed[3].Severity);
+            Assert.Equal(Category.Error, changed[4].Severity);
+            Assert.Equal(Category.Error, changed[5].Severity);
+            Assert.Equal("#/responses/200/properties/a", changed[0].Path.XPath);
+            Assert.Equal("#/responses/200/properties/b", changed[1].Path.XPath);
+            Assert.Equal("#/responses/201/properties/a", changed[2].Path.XPath);
+            Assert.Equal("#/responses/201/properties/b", changed[3].Path.XPath);
+            Assert.Equal("#/definitions/A/properties/a", changed[4].Path.XPath);
+            Assert.Equal("#/definitions/A/properties/b", changed[5].Path.XPath);
         }
 
         /// <summary>
@@ -621,10 +625,10 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void GlobalResponseTypeConstraintsChanged()
         {
-            var messages = CompareSwagger("response_check_01.json").Where(m => m.Path.Contains("responses")).ToArray();
-            var relaxed = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsWeaker.Id && m.Severity == LogEntrySeverity.Error).ToArray();
-            var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == LogEntrySeverity.Error).ToArray();
-            var info = messages.Where(m => m.Id > 0 && m.Severity == LogEntrySeverity.Info).ToArray();
+            var messages = CompareSwagger("response_check_01.json").Where(m => m.Path.XPath.Contains("responses")).ToArray();
+            var relaxed = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsWeaker.Id && m.Severity == Category.Error).ToArray();
+            var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == Category.Error).ToArray();
+            var info = messages.Where(m => m.Id > 0 && m.Severity == Category.Info).ToArray();
 
             Assert.Equal(15, relaxed.Length);
             Assert.Equal(8, breaking.Length);

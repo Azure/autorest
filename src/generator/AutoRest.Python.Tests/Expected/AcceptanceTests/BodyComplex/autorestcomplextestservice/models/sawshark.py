@@ -21,7 +21,7 @@ class Sawshark(Shark):
     :type length: float
     :param siblings:
     :type siblings: list of :class:`Fish
-     <Fixtures.AcceptanceTestsBodyComplex.models.Fish>`
+     <fixtures.acceptancetestsbodycomplex.models.Fish>`
     :param fishtype: Polymorphic Discriminator
     :type fishtype: str
     :param age:
@@ -30,7 +30,7 @@ class Sawshark(Shark):
     :type birthday: datetime
     :param picture:
     :type picture: bytearray
-    """ 
+    """
 
     _validation = {
         'length': {'required': True},

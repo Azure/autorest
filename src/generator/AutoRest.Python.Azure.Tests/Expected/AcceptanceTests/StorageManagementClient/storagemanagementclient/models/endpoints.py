@@ -24,11 +24,11 @@ class Endpoints(Model):
     :type table: str
     :param dummy_end_point: Dummy EndPoint
     :type dummy_end_point: :class:`Endpoints
-     <Fixtures.AcceptanceTestsStorageManagementClient.models.Endpoints>`
+     <fixtures.acceptancetestsstoragemanagementclient.models.Endpoints>`
     :param foo_point: Foo point
     :type foo_point: :class:`Foo
-     <Fixtures.AcceptanceTestsStorageManagementClient.models.Foo>`
-    """ 
+     <fixtures.acceptancetestsstoragemanagementclient.models.Foo>`
+    """
 
     _attribute_map = {
         'blob': {'key': 'blob', 'type': 'str'},

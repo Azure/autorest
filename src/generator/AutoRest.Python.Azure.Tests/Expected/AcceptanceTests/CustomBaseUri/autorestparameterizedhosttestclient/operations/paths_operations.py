@@ -47,7 +47,7 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsCustomBaseUri.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestscustombaseuri.models.ErrorException>`
         """
         # Construct URL
         url = '/customuri'

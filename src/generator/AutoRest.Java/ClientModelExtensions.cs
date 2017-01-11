@@ -5,8 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
-using AutoRest.Core.ClientModel;
-using AutoRest.Java.TypeModels;
+using AutoRest.Core.Model;
+using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
@@ -83,13 +83,13 @@ namespace AutoRest.Java
         /// </summary>
         /// <param name="type">an instance of IJavaType</param>
         /// <returns>a list of imports to append</returns>
-        public static IEnumerable<string> ImportSafe(this IType type)
+        public static IEnumerable<string> ImportSafe(this IModelType type)
         {
             if (type == null)
             {
                 return new List<string>();
             }
-            return ((ITypeModel) type).Imports;
+            return ((IModelTypeJv) type).Imports;
         }
 
         public static string ImportFrom(this HttpMethod httpMethod)

@@ -145,7 +145,7 @@
     <value>Error loading {0} assembly: {1}</value>
   </data>
   <data name="ErrorParsingConfig" xml:space="preserve">
-    <value>Error parsing AutoRest.json file</value>
+    <value>Error parsing AutoRest.json file: {0}</value>
   </data>
   <data name="ErrorSavingGeneratedCode" xml:space="preserve">
     <value>Error saving generated code: {0}</value>
@@ -269,5 +269,11 @@
   </data>
   <data name="UniqueResourcePathsWarning" xml:space="preserve">
     <value>More than one resource path is not allowed in a single spec</value>
+  </data>
+  <data name="PathCannotBeNullOrEmpty" xml:space="preserve">
+    <value>path cannot be null or an empty string or a string with white spaces while getting the parent directory</value>
+  </data>
+  <data name="OperationNameNotValid" xml:space="preserve">
+    <value>'GET' operation must use method name 'Get' or Method name start with 'List', 'PUT' operation must use method name 'Create', 'PATCH' operation must use method name 'Update' and 'DELETE' operation must use method name 'Delete'.</value>
   </data>
 </root>

@@ -66,16 +66,16 @@ function StorageManagementClient(credentials, subscriptionId, baseUri, options) 
   this.credentials = credentials;
   this.subscriptionId = subscriptionId;
 
-  if(options.apiVersion !== null && options.apiVersion !== undefined) { 
+  if(options.apiVersion !== null && options.apiVersion !== undefined) {
     this.apiVersion = options.apiVersion;
   }
-  if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) { 
+  if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) {
     this.acceptLanguage = options.acceptLanguage;
   }
-  if(options.longRunningOperationRetryTimeout !== null && options.longRunningOperationRetryTimeout !== undefined) { 
+  if(options.longRunningOperationRetryTimeout !== null && options.longRunningOperationRetryTimeout !== undefined) {
     this.longRunningOperationRetryTimeout = options.longRunningOperationRetryTimeout;
   }
-  if(options.generateClientRequestId !== null && options.generateClientRequestId !== undefined) { 
+  if(options.generateClientRequestId !== null && options.generateClientRequestId !== undefined) {
     this.generateClientRequestId = options.generateClientRequestId;
   }
   this.storageAccounts = new operations.StorageAccounts(this);

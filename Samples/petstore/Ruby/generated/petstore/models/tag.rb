@@ -5,6 +5,7 @@ module Petstore
     #
     # Model object.
     #
+    #
     class Tag
       # @return [Integer]
       attr_accessor :id

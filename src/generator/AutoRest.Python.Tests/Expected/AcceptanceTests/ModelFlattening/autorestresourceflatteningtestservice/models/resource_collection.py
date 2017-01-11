@@ -17,13 +17,13 @@ class ResourceCollection(Model):
 
     :param productresource:
     :type productresource: :class:`FlattenedProduct
-     <Fixtures.AcceptanceTestsModelFlattening.models.FlattenedProduct>`
+     <fixtures.acceptancetestsmodelflattening.models.FlattenedProduct>`
     :param arrayofresources:
     :type arrayofresources: list of :class:`FlattenedProduct
-     <Fixtures.AcceptanceTestsModelFlattening.models.FlattenedProduct>`
+     <fixtures.acceptancetestsmodelflattening.models.FlattenedProduct>`
     :param dictionaryofresources:
     :type dictionaryofresources: dict
-    """ 
+    """
 
     _attribute_map = {
         'productresource': {'key': 'productresource', 'type': 'FlattenedProduct'},

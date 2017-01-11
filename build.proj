@@ -95,7 +95,7 @@
     <VersionSuffix Condition=" $(NightlyBuild) == 'true' ">Nightly$([System.DateTime]::Now.ToString("yyyyMMdd"))</VersionSuffix>
 
     <!-- Otherwise, default Version Suffix if not codesigning-->
-    <VersionSuffix Condition="$(VersionSuffix) == '' AND '$(CodeSign)' != 'true'">preview-0.17</VersionSuffix>
+    <VersionSuffix Condition="$(VersionSuffix) == '' AND '$(CodeSign)' != 'true'">preview-$([System.DateTime]::Now.ToString("yyyyMMdd"))</VersionSuffix>
 
   </PropertyGroup>
 
@@ -113,7 +113,14 @@
   <Import Condition=" $(OnPremiseBuild) == 'true' " Project="$(CIToolsPath)\Microsoft.WindowsAzure.Build.OnPremise.msbuild" />
 
   <!-- Packaging is the same as building at this point -->
-  <Target Name="Package" DependsOnTargets="Clean;Build" Condition="'$(Configuration)' == 'Release'" />
+  <Target Name="Package"  DependsOnTargets="Clean;Build" Condition="'$(Configuration)' == 'Release'" >
+    <!-- need to clean out the lib folder of the autorest.nupkg file, because it's got ana autorest.exe without the dlls in it -->
+    <ItemGroup>
+      <AutoRestPackages Include="src\core\AutoRest\bin\Release\*.nupkg" Exclude="src\core\AutoRest\bin\Release\*.symbols.nupkg"/>
+      <AutoRestPackages Include="binaries\packages\AutoRest.0.*.nupkg" Exclude="binaries\packages\*.symbols.nupkg" />
+    </ItemGroup>
+    <Exec Command="$(MsBuildThisFileDirectory)tools\zip.exe -d &quot;%(AutoRestPackages.FullPath)&quot; lib\*" IgnoreExitCode="false" />
+  </Target>
 
   <!-- Publishing uploads the packages to the nuget server -->
   <Target Name="Publish"  DependsOnTargets="Package" Condition="'$(Configuration)' == 'Release'" >
@@ -264,7 +271,7 @@
     <Delete Files="@(PackagesToSign->'%(RootDir)%(Directory)\%(Filename)\[Content_Types].xml')" />
 
     <ItemGroup>
-      <_TempBinaries Include="$(PackageOutputDir)\**\*.dll"  Exclude="$(PackageOutputDir)\**\Newtonsoft.Json.dll;$(PackageOutputDir)\**\YamlDotNet.dll" />
+      <_TempBinaries Include="$(PackageOutputDir)\**\*.dll"  Exclude="$(PackageOutputDir)\**\Newtonsoft.Json.dll;$(PackageOutputDir)\**\YamlDotNet.dll;$(PackageOutputDir)\**\System.*.dll;$(PackageOutputDir)\**\Microsoft.CodeAnalysis*.dll;$(PackageOutputDir)\**\Microsoft.Rest.ClientRuntime.*" />
       <_TempBinaries Include="$(PackageOutputDir)\**\*.exe" />
       <_PackageBinaries Include="@(_TempBinaries)">
         <!-- Flattened file for signing -->

@@ -1,6 +1,7 @@
 
 namespace Petstore.Models
 {
+    using Newtonsoft.Json;
     using System.Linq;
 
     public partial class StorageAccountProperties
@@ -31,12 +32,12 @@ namespace Petstore.Models
         /// 'Unavailable'</param>
         /// <param name="lastGeoFailoverTime">Gets the timestamp of the most
         /// recent instance of a failover to the secondary location. Only the
-        /// most recent timestamp is retained. This element is not returned
-        /// if there has never been a failover instance. Only available if
-        /// the accountType is StandardGRS or StandardRAGRS.</param>
+        /// most recent timestamp is retained. This element is not returned if
+        /// there has never been a failover instance. Only available if the
+        /// accountType is StandardGRS or StandardRAGRS.</param>
         /// <param name="secondaryLocation">Gets the location of the geo
-        /// replicated secondary for the storage account. Only available if
-        /// the accountType is StandardGRS or StandardRAGRS.</param>
+        /// replicated secondary for the storage account. Only available if the
+        /// accountType is StandardGRS or StandardRAGRS.</param>
         /// <param name="statusOfSecondary">Gets the status indicating whether
         /// the secondary location of the storage account is available or
         /// unavailable. Only available if the accountType is StandardGRS or
@@ -70,7 +71,7 @@ namespace Petstore.Models
         /// was called. Possible values include: 'Creating', 'ResolvingDNS',
         /// 'Succeeded'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "provisioningState")]
+        [JsonProperty(PropertyName = "provisioningState")]
         public ProvisioningState? ProvisioningState { get; set; }
 
         /// <summary>
@@ -78,7 +79,7 @@ namespace Petstore.Models
         /// 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
         /// 'Premium_LRS'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "accountType")]
+        [JsonProperty(PropertyName = "accountType")]
         public AccountType? AccountType { get; set; }
 
         /// <summary>
@@ -86,13 +87,13 @@ namespace Petstore.Models
         /// blob, queue or table object.Note that StandardZRS and PremiumLRS
         /// accounts only return the blob endpoint.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "primaryEndpoints")]
+        [JsonProperty(PropertyName = "primaryEndpoints")]
         public Endpoints PrimaryEndpoints { get; set; }
 
         /// <summary>
         /// Gets the location of the primary for the storage account.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "primaryLocation")]
+        [JsonProperty(PropertyName = "primaryLocation")]
         public string PrimaryLocation { get; set; }
 
         /// <summary>
@@ -100,17 +101,17 @@ namespace Petstore.Models
         /// storage account is available or unavailable. Possible values
         /// include: 'Available', 'Unavailable'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "statusOfPrimary")]
+        [JsonProperty(PropertyName = "statusOfPrimary")]
         public AccountStatus? StatusOfPrimary { get; set; }
 
         /// <summary>
-        /// Gets the timestamp of the most recent instance of a failover to
-        /// the secondary location. Only the most recent timestamp is
-        /// retained. This element is not returned if there has never been a
-        /// failover instance. Only available if the accountType is
-        /// StandardGRS or StandardRAGRS.
+        /// Gets the timestamp of the most recent instance of a failover to the
+        /// secondary location. Only the most recent timestamp is retained.
+        /// This element is not returned if there has never been a failover
+        /// instance. Only available if the accountType is StandardGRS or
+        /// StandardRAGRS.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "lastGeoFailoverTime")]
+        [JsonProperty(PropertyName = "lastGeoFailoverTime")]
         public System.DateTime? LastGeoFailoverTime { get; set; }
 
         /// <summary>
@@ -118,29 +119,29 @@ namespace Petstore.Models
         /// account. Only available if the accountType is StandardGRS or
         /// StandardRAGRS.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "secondaryLocation")]
+        [JsonProperty(PropertyName = "secondaryLocation")]
         public string SecondaryLocation { get; set; }
 
         /// <summary>
         /// Gets the status indicating whether the secondary location of the
-        /// storage account is available or unavailable. Only available if
-        /// the accountType is StandardGRS or StandardRAGRS. Possible values
+        /// storage account is available or unavailable. Only available if the
+        /// accountType is StandardGRS or StandardRAGRS. Possible values
         /// include: 'Available', 'Unavailable'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "statusOfSecondary")]
+        [JsonProperty(PropertyName = "statusOfSecondary")]
         public AccountStatus? StatusOfSecondary { get; set; }
 
         /// <summary>
         /// Gets the creation date and time of the storage account in UTC.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "creationTime")]
+        [JsonProperty(PropertyName = "creationTime")]
         public System.DateTime? CreationTime { get; set; }
 
         /// <summary>
         /// Gets the user assigned custom domain assigned to this storage
         /// account.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "customDomain")]
+        [JsonProperty(PropertyName = "customDomain")]
         public CustomDomain CustomDomain { get; set; }
 
         /// <summary>
@@ -149,7 +150,7 @@ namespace Petstore.Models
         /// storage account. Only available if the accountType is
         /// StandardRAGRS.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "secondaryEndpoints")]
+        [JsonProperty(PropertyName = "secondaryEndpoints")]
         public Endpoints SecondaryEndpoints { get; set; }
 
         /// <summary>
@@ -160,10 +161,11 @@ namespace Petstore.Models
         /// </exception>
         public virtual void Validate()
         {
-            if (this.CustomDomain != null)
+            if (CustomDomain != null)
             {
-                this.CustomDomain.Validate();
+                CustomDomain.Validate();
             }
         }
     }
 }
+

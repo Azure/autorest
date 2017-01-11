@@ -1,6 +1,6 @@
 [![Repo Status](http://img.shields.io/travis/Azure/autorest/dev.svg?style=flat-square&label=build)](https://travis-ci.org/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/pr?style=flat-square)](http://issuestats.com/github/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/issue?style=flat-square)](http://issuestats.com/github/Azure/autorest)
 
-# <img align="center" src="https://raw.githubusercontent.com/Azure/autorest/master/Documentation/images/autorest-small-flat.png">  AutoRest
+# <img align="center" src="https://raw.githubusercontent.com/Azure/autorest/master/docs/images/autorest-small-flat.png">  AutoRest
 
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Open API Initiative](https://github.com/OAI/OpenAPI-Specification) format.
 
@@ -21,7 +21,7 @@ AutoRest can be run on OSX and Unix using Mono or by running Docker container:
 	docker pull azuresdk/autorest:latest
 
 ## Building AutoRest
-AutoRest is developed primarily in C# but generates code for multiple languages. See [this link](Documentation/building-code.md) to build and test AutoRest.
+AutoRest is developed primarily in C# but generates code for multiple languages. See [this link](docs/developer/guide/building-code.md) to build and test AutoRest.
 
 > Hint: There is a powershell script (`verify-settings.ps1`) in the `Tools` folder that can verify that you have the required compilers/tools/libraries installed on your development system before trying to build.
 
@@ -37,7 +37,7 @@ public class HelloWorldController : ApiController
     }
 }
 ```
-By convention, Swagger documents are exposed by web services with the name `swagger.json`.  The `title` property of the `info` object is used by **AutoRest**  as the name of the client object in the generated library. The `host` + `path` of the operation corresponds to the URL of the operation endpoint. The `operationId` is used as the method name. The spec declares that a `GET` request will return an HTTP 200 status code with content of mime-type `application/json` and the body will be a string. For a more in-depth overview of swagger processing, refer to [Defining Clients With Swagger](Documentation/defining-clients-swagger.md) section of the [documentation](Documentation).
+By convention, Swagger documents are exposed by web services with the name `swagger.json`.  The `title` property of the `info` object is used by **AutoRest**  as the name of the client object in the generated library. The `host` + `path` of the operation corresponds to the URL of the operation endpoint. The `operationId` is used as the method name. The spec declares that a `GET` request will return an HTTP 200 status code with content of mime-type `application/json` and the body will be a string. For a more in-depth overview of swagger processing, refer to [Defining Clients With Swagger](docs/developer/guide/defining-clients-swagger.md) section of the [documentation](docs).
 
 ```json
 {
@@ -67,7 +67,7 @@ By convention, Swagger documents are exposed by web services with the name `swag
   }
 }
 ```
-Next, we invoke **AutoRest.exe** with this swagger document to generate client library code (see [Command Line Interface documentation](Documentation/cli.md) for details).
+Next, we invoke **AutoRest.exe** with this swagger document to generate client library code (see [Command Line Interface documentation](docs/user/cli.md) for details).
 
 **AutoRest** is extensible and can support multiple types of input and output. *AutoRest.exe* comes with the *AutoRest.json* configuration file that defines the available inputs (*Modelers*) and outputs (*CodeGenerators*). When invoking *AutoRest.exe*, if you don't specify the `-Modeler` then Swagger is assumed and if you don't specify `-CodeGenerator` then CSharp is used.
 
@@ -90,7 +90,7 @@ Add the namespace that was given to AutoRest.
 ```C#
 using MyNamespace;
 ```
-Access the REST API with very little code (see [Client Initialization](Documentation/clients-init.md) and [Client Operations](Documentation/clients-ops.md) for details).
+Access the REST API with very little code (see [Client Initialization](docs/client/init.md) and [Client Operations](docs/client/ops.md) for details).
 ```C#
 var myClient = new MyClient();
 var salutation = myClient.GetGreeting();

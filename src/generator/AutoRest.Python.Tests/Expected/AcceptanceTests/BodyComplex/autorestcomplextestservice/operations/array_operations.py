@@ -41,11 +41,11 @@ class ArrayOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ArrayWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.ArrayWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.ArrayWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/array/valid'
@@ -92,7 +92,7 @@ class ArrayOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         complex_body = models.ArrayWrapper(array=array)
 
@@ -133,11 +133,11 @@ class ArrayOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ArrayWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.ArrayWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.ArrayWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/array/empty'
@@ -184,7 +184,7 @@ class ArrayOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         complex_body = models.ArrayWrapper(array=array)
 
@@ -226,11 +226,11 @@ class ArrayOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ArrayWrapper
-         <Fixtures.AcceptanceTestsBodyComplex.models.ArrayWrapper>`
+         <fixtures.acceptancetestsbodycomplex.models.ArrayWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyComplex.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
         """
         # Construct URL
         url = '/complex/array/notprovided'

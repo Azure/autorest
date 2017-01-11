@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Autorest by Azure</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Autorest</h1>
+      <h2 class="project-tagline">Swagger (OpenAPI) Specification code generator for C#, Ruby, Python, Node, Java, Go...</h2>
+      <a href="https://github.com/Azure/autorest" class="btn">View on GitHub</a>
+      <a href="https://github.com/Azure/autorest/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/Azure/autorest/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p><a href="https://travis-ci.org/Azure/autorest"><img src="http://img.shields.io/travis/Azure/autorest/dev.svg?style=flat-square&amp;label=build" alt="Repo Status"></a> <a href="http://issuestats.com/github/Azure/autorest"><img src="http://issuestats.com/github/Azure/autorest/badge/pr?style=flat-square" alt="Issue Stats"></a> <a href="http://issuestats.com/github/Azure/autorest"><img src="http://issuestats.com/github/Azure/autorest/badge/issue?style=flat-square" alt="Issue Stats"></a></p>
+
+<h1>
+<a id="--autorest" class="anchor" href="#--autorest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><img align="center" src="https://raw.githubusercontent.com/Azure/autorest/master/Documentation/images/autorest-small-flat.png">  AutoRest</h1>
+
+<p>The <strong>AutoRest</strong> tool generates client libraries for accessing RESTful web services. Input to <em>AutoRest</em> is a spec that describes the REST API using the <a href="https://github.com/OAI/OpenAPI-Specification">Open API Initiative</a> format.</p>
+
+<h2>
+<a id="getting-autorest" class="anchor" href="#getting-autorest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting AutoRest</h2>
+
+<p>The AutoRest tools can be installed with Nuget for use in a Visual Studio project:
+<a href="https://www.nuget.org/packages/autorest/"><img src="https://img.shields.io/nuget/v/autorest.svg?style=flat-square" alt="AutoRest NuGet"></a></p>
+
+<p>Alternatively it can be installed from <a href="https://chocolatey.org/">Chocolatey</a> by running:
+<a href="https://chocolatey.org/packages/AutoRest"><img src="https://img.shields.io/chocolatey/v/autorest.svg?style=flat-square" alt="AutoRest Chocolatey"></a></p>
+
+<pre><code>choco install autorest
+</code></pre>
+
+<p>Nightlies are available via MyGet:
+<a href="https://www.myget.org/gallery/autorest"><img src="https://img.shields.io/myget/autorest/vpre/autorest.svg?style=flat-square" alt="AutoRest MyGet"></a></p>
+
+<p>AutoRest can be run on OSX and Unix using Mono or by running Docker container:</p>
+
+<pre><code>docker pull azuresdk/autorest:latest
+</code></pre>
+
+<h2>
+<a id="building-autorest" class="anchor" href="#building-autorest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Building AutoRest</h2>
+
+<p>AutoRest is developed primarily in C# but generates code for multiple languages. See <a href="docs/developer/guide/building-code.md">this link</a> to build and test AutoRest.</p>
+
+<blockquote>
+<p>Hint: There is a powershell script (<code>verify-settings.ps1</code>) in the <code>Tools</code> folder that can verify that you have the required compilers/tools/libraries installed on your development system before trying to build.</p>
+</blockquote>
+
+<h2>
+<a id="hello-world" class="anchor" href="#hello-world" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Hello World</h2>
+
+<p>For this version  of Hello World, we will use <strong>AutoRest</strong> to generate a client library and use it to call a web service. The trivial web service that just returns a string is defined as follows:</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">HelloWorldController</span> : <span class="pl-k">ApiController</span>
+{
+    <span class="pl-c">// GET: api/HelloWorld</span>
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">Get</span>()
+    {
+        <span class="pl-k">return</span> <span class="pl-s"><span class="pl-pds">"</span>Hello via AutoRest.<span class="pl-pds">"</span></span>;
+    }
+}</pre></div>
+
+<p>By convention, Swagger documents are exposed by web services with the name <code>swagger.json</code>.  The <code>title</code> property of the <code>info</code> object is used by <strong>AutoRest</strong>  as the name of the client object in the generated library. The <code>host</code> + <code>path</code> of the operation corresponds to the URL of the operation endpoint. The <code>operationId</code> is used as the method name. The spec declares that a <code>GET</code> request will return an HTTP 200 status code with content of mime-type <code>application/json</code> and the body will be a string. For a more in-depth overview of swagger processing, refer to <a href="docs/developer/guide/defining-clients-swagger.md">Defining Clients With Swagger</a> section of the <a href="docs">documentation</a>.</p>
+
+<div class="highlight highlight-source-json"><pre>{
+  <span class="pl-s"><span class="pl-pds">"</span>swagger<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2.0<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>info<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>MyClient<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>version<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1.0.0<span class="pl-pds">"</span></span>
+  },
+  <span class="pl-s"><span class="pl-pds">"</span>host<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>swaggersample.azurewebsites.net<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>paths<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>/api/HelloWorld<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>get<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>operationId<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>GetGreeting<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>produces<span class="pl-pds">"</span></span>: [
+          <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>
+        ],
+        <span class="pl-s"><span class="pl-pds">"</span>responses<span class="pl-pds">"</span></span>: {
+          <span class="pl-s"><span class="pl-pds">"</span>200<span class="pl-pds">"</span></span>: {
+            <span class="pl-s"><span class="pl-pds">"</span>description<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>GETs a greeting.<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>schema<span class="pl-pds">"</span></span>: {
+              <span class="pl-s"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span>
+            }
+          }
+        }
+      }
+    }
+  }
+}</pre></div>
+
+<p>Next, we invoke <strong>AutoRest.exe</strong> with this swagger document to generate client library code (see <a href="docs/user/cli.md">Command Line Interface documentation</a> for details).</p>
+
+<p><strong>AutoRest</strong> is extensible and can support multiple types of input and output. <em>AutoRest.exe</em> comes with the <em>AutoRest.json</em> configuration file that defines the available inputs (<em>Modelers</em>) and outputs (<em>CodeGenerators</em>). When invoking <em>AutoRest.exe</em>, if you don't specify the <code>-Modeler</code> then Swagger is assumed and if you don't specify <code>-CodeGenerator</code> then CSharp is used.</p>
+
+<p>The Swagger schema is language agnostic and doesn't include the notion of namespace, but for generating code, AutoRest requires <code>-Namespace</code> be specified.  By default, the CodeGenerator will place output in a directory named <em>Generated</em>. This can be overridden by providing the <code>-OutputDirectory</code> parameter.</p>
+
+<pre><code>AutoRest.exe -CodeGenerator CSharp -Modeler Swagger -Input swagger.json -Namespace MyNamespace
+</code></pre>
+
+<p>Now, we will use the generated code to call the web service.</p>
+
+<p>Create a console application called <em>HelloWorld</em>. Add the generated files to it. They won't compile until you add the NuGet package the generated code depends on: <code>Microsoft.Rest.ClientRuntime</code>.</p>
+
+<p>You can add it to the Visual Studio project using the NuGet package manager or in the Package Manager Console with this command:</p>
+
+<div class="highlight highlight-source-powershell"><pre><span class="pl-c1">Install-Package</span> Microsoft.Rest.ClientRuntime</pre></div>
+
+<p>Add the namespace that was given to AutoRest.</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">using</span> <span class="pl-en">MyNamespace</span>;</pre></div>
+
+<p>Access the REST API with very little code (see <a href="docs/client/init.md">Client Initialization</a> and <a href="docs/client/ops.md">Client Operations</a> for details).</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">var</span> myClient = <span class="pl-k">new</span> MyClient();
+<span class="pl-k">var</span> salutation = myClient.GetGreeting();
+Console.WriteLine(salutation);</pre></div>
+
+<p>Running the console app shows the greeting retrieved from the service API.</p>
+
+<div class="highlight highlight-source-batchfile"><pre>C:\<span class="pl-k">&gt;</span>HelloWorld.exe
+Hello via AutoRest.</pre></div>
+
+<p>With that same basic pattern in place, you can now explore how different REST API operations and payloads are described in Swagger and exposed in the code generated by <strong>AutoRest</strong>.</p>
+
+<hr>
+
+<p>This project has adopted the <a href="https://opensource.microsoft.com/codeofconduct/">Microsoft Open Source Code of Conduct</a>. For more information see the <a href="https://opensource.microsoft.com/codeofconduct/faq/">Code of Conduct FAQ</a> or contact <a href="mailto:opencode@microsoft.com">opencode@microsoft.com</a> with any additional questions or comments.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/Azure/autorest">Autorest</a> is maintained by <a href="https://github.com/Azure">Azure</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>

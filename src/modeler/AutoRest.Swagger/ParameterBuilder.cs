@@ -3,9 +3,10 @@
 
 using System;
 using System.Linq;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Swagger.Model;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger
 {
@@ -43,47 +44,39 @@ namespace AutoRest.Swagger
                 parameterName = unwrappedParameter.Name;
             }
 
-            IType parameterType = BuildServiceType(parameterName);
-            var parameter = new Parameter
+            IModelType parameterType = BuildServiceType(parameterName);
+            var parameter = New<Parameter>(new
             {
                 Name = unwrappedParameter.Name,
                 SerializedName = unwrappedParameter.Name,
-                Type = parameterType,
-                Location = (Core.ClientModel.ParameterLocation)Enum.Parse(typeof(Core.ClientModel.ParameterLocation), unwrappedParameter.In.ToString())
-            };
-            parameter.IsRequired = parameter.IsRequired || parameter.Location == Core.ClientModel.ParameterLocation.Path;
+                ModelType = parameterType,
+                Location = (Core.Model.ParameterLocation)Enum.Parse(typeof(Core.Model.ParameterLocation), unwrappedParameter.In.ToString())
+            });
+            parameter.IsRequired = parameter.IsRequired || parameter.Location == Core.Model.ParameterLocation.Path;
             PopulateParameter(parameter, unwrappedParameter);
 
             if (_swaggerParameter.Reference != null)
             {
-                var clientProperty = Modeler.ServiceClient.Properties.FirstOrDefault(p => p.SerializedName == unwrappedParameter.Name);
+                var clientProperty = Modeler.CodeModel.Properties.FirstOrDefault(p => p.SerializedName.Value == unwrappedParameter.Name);
                 parameter.ClientProperty = clientProperty;
             }
 
             return parameter;
         }
 
-        public override IType BuildServiceType(string serviceTypeName)
+        public override IModelType BuildServiceType(string serviceTypeName)
         {
-            // Check if already generated
-            if (serviceTypeName != null && Modeler.GeneratedTypes.ContainsKey(serviceTypeName))
-            {
-                return Modeler.GeneratedTypes[serviceTypeName];
-            }
-
             var swaggerParameter = Modeler.Unwrap(_swaggerParameter);
-
-            // Generic type
-            if (swaggerParameter.In != ParameterLocation.Body)
-            {
-                return swaggerParameter.GetBuilder(Modeler).ParentBuildServiceType(serviceTypeName);
-            }
-
-            // Contains a complex type schema
-            return swaggerParameter.Schema.GetBuilder(Modeler).BuildServiceType(serviceTypeName);
+            
+            // create service type
+            var serviceType = swaggerParameter.In == ParameterLocation.Body ?
+                swaggerParameter.Schema.GetBuilder(Modeler).BuildServiceType(serviceTypeName) :
+                swaggerParameter.GetBuilder(Modeler).ParentBuildServiceType(serviceTypeName);
+            
+            return serviceType;
         }
 
-        public override IType ParentBuildServiceType(string serviceTypeName)
+        public override IModelType ParentBuildServiceType(string serviceTypeName)
         {
             return base.BuildServiceType(serviceTypeName);
         }

@@ -24,7 +24,13 @@ namespace AutoRest.Swagger.Model
         public string Description
         {
             get { return _description; }
-            set { _description = value.StripControlCharacters(); ; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(_description))
+                {
+                    _description = value.StripControlCharacters();
+                }
+            }
         }
 
         public string TermsOfService { get; set; }

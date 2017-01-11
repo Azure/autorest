@@ -14,19 +14,19 @@ var models = require('./index');
  * types, and other account types cannot be changed to StandardZRS or
  * PremiumLRS. Possible values include: 'Standard_LRS', 'Standard_ZRS',
  * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
- * 
- * @member {object} [customDomain] User domain assigned to the storage
- * account. Name is the CNAME source. Only one custom domain is supported per
- * storage account at this time. To clear the existing custom domain, use an
- * empty string for the custom domain name property.
- * 
+ *
+ * @member {object} [customDomain] User domain assigned to the storage account.
+ * Name is the CNAME source. Only one custom domain is supported per storage
+ * account at this time. To clear the existing custom domain, use an empty
+ * string for the custom domain name property.
+ *
  * @member {string} [customDomain.name] Gets or sets the custom domain name.
  * Name is the CNAME source.
- * 
+ *
  * @member {boolean} [customDomain.useSubDomain] Indicates whether indirect
- * CName validation is enabled. Default value is false. This should only be
- * set on updates
- * 
+ * CName validation is enabled. Default value is false. This should only be set
+ * on updates
+ *
  */
 function StorageAccountPropertiesUpdateParameters() {
 }

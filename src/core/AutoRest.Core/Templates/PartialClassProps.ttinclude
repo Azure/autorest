@@ -1,0 +1,109 @@
+﻿<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System.Linq" #>
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+// 
+// This file was generated from a template on: <#= DateTime.Now #>
+
+using System;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+using AutoRest.Core;
+using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
+using AutoRest.Core.Utilities.Collections;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using static AutoRest.Core.Utilities.DependencyInjection;
+
+namespace <#= model.Namespace #>
+{<# foreach(var Class in model.Classes ) {  #>
+
+    public partial class <#= Class.Class #> : IParent
+    {
+        [JsonExtensionData]
+#pragma warning disable 169
+        private IDictionary<string, JToken> _additionalData;
+#pragma warning restore 169
+
+<# foreach(var each in Class.Properties) { #>
+
+        [JsonProperty(Order = <#= each.Order#> )]
+        [JsonConverter(typeof(GeneratedCollectionConverter<<#= each.Type #>>))]
+        public virtual IEnumerableWithIndex<<#= each.Type #>> <#= each.Name #> => _<#= each.Name.ToLower() #>;
+        private readonly ListEx<<#= each.Type #>> _<#= each.Name.ToLower() #> = new ListEx<<#= each.Type #>>();
+<#     if ( string.IsNullOrWhiteSpace( each.Suffix) ) { #>
+        // IEnumerator<<#= each.Type #>> IEnumerable<<#= each.Type #>>.GetEnumerator() => <#= each.Name #>.GetEnumerator();
+<# } #>		
+        public virtual void Clear<#= each.Name #>()
+        {
+            Remove((<#= each.Type #> each) => true);
+        }
+
+        partial void BeforeAdd<#= each.Suffix #>(<#= each.Type #> item);
+        public virtual <#= each.Type #> Add<#= each.Suffix #>(<#= each.Type #> item)
+        {
+            if( !_<#= each.Name.ToLower() #>.Contains( item ) <# if(!string.IsNullOrEmpty( each.OrContains ) ) { #>&& !_<#= each.OrContains.ToLower() #>.Contains( item )<# } #> )
+            {
+                BeforeAdd<#= each.Suffix #>(item);
+                // disambiguation is performed when the item's parent reference is changed
+                item.<#= each.ParentReference #> = this;
+                _<#= each.Name.ToLower() #>.Add(item);
+            }
+            return item;
+        }
+        public virtual void AddRange<#= each.Suffix #>(IEnumerable<<#= each.Type #>> items)
+        {
+            foreach(var item in items) 
+            {
+                Add(item);
+            }
+        }
+        public virtual <#= each.Type #> Insert<#= each.Suffix #>(<#= each.Type #> item)
+        {
+            if( !_<#= each.Name.ToLower() #>.Contains(item))
+            {
+                // disambiguation is performed when the item's parent reference is changed
+                item.<#= each.ParentReference #> = this;
+                _<#= each.Name.ToLower() #>.Insert(0, item);
+            }
+            return item;
+        }
+        public virtual void InsertRange<#= each.Suffix #>(IEnumerable<<#= each.Type #>> items)
+        {
+            foreach(var item in items) 
+            {
+                Insert(item);
+            }
+        }
+        public virtual void Remove<#= each.Suffix #>(<#= each.Type #> item)
+        {
+            _<#= each.Name.ToLower() #>.Remove(item);
+        }
+        public virtual void Remove<#= each.Suffix #>(IEnumerable<<#= each.Type #>> items)
+        {
+            foreach(var item in items.ToArray())
+            {
+                Remove(item);
+            }
+        }
+        public int Remove<#= each.Suffix #>(Predicate<<#= each.Type #>> match) {
+            var i = 0;
+            foreach (var each in _<#= each.Name.ToLower() #>.Where(each => match(each)).ToArray())
+            {
+                Remove(each);
+                i++;
+            }
+            return i;			
+        }
+        
+<#	} #>
+        partial void InitializeCollections() 
+        {
+<#= Class.Properties.Select( each => $"            _{each.Name.ToLower()}.AddMethod = Add{each.Suffix};").Aggregate((str,next) => next + "\r\n" + str )  #>
+        }
+    }
+<#	} #>
+}

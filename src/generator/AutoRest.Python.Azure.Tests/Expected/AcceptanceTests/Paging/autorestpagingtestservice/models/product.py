@@ -17,8 +17,8 @@ class Product(Model):
 
     :param properties:
     :type properties: :class:`ProductProperties
-     <Fixtures.AcceptanceTestsPaging.models.ProductProperties>`
-    """ 
+     <fixtures.acceptancetestspaging.models.ProductProperties>`
+    """
 
     _attribute_map = {
         'properties': {'key': 'properties', 'type': 'ProductProperties'},

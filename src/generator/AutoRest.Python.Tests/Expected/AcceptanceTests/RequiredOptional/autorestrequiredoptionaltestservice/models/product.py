@@ -19,7 +19,7 @@ class Product(Model):
     :type id: int
     :param name:
     :type name: str
-    """ 
+    """
 
     _validation = {
         'id': {'required': True},

@@ -44,7 +44,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/null'
@@ -89,7 +89,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/empty'
@@ -136,7 +136,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/empty'
@@ -178,7 +178,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/nullvalue'
@@ -223,7 +223,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/nullkey'
@@ -268,7 +268,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/keyemptystring'
@@ -313,7 +313,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/invalid'
@@ -359,7 +359,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/boolean/tfft'
@@ -407,7 +407,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/boolean/tfft'
@@ -449,7 +449,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/boolean/true.null.false'
@@ -494,7 +494,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/boolean/true.boolean.false'
@@ -539,7 +539,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/integer/1.-1.3.300'
@@ -586,7 +586,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/integer/1.-1.3.300'
@@ -628,7 +628,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/integer/1.null.zero'
@@ -673,7 +673,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/integer/1.integer.0'
@@ -718,7 +718,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/long/1.-1.3.300'
@@ -765,7 +765,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/long/1.-1.3.300'
@@ -807,7 +807,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/long/1.null.zero'
@@ -852,7 +852,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/long/1.integer.0'
@@ -897,7 +897,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/float/0--0.01-1.2e20'
@@ -944,7 +944,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/float/0--0.01-1.2e20'
@@ -986,7 +986,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/float/0.0-null-1.2e20'
@@ -1031,7 +1031,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/float/1.number.0'
@@ -1076,7 +1076,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/double/0--0.01-1.2e20'
@@ -1123,7 +1123,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/double/0--0.01-1.2e20'
@@ -1165,7 +1165,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/double/0.0-null-1.2e20'
@@ -1210,7 +1210,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/double/1.number.0'
@@ -1255,7 +1255,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/string/foo1.foo2.foo3'
@@ -1302,7 +1302,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/string/foo1.foo2.foo3'
@@ -1344,7 +1344,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/string/foo.null.foo2'
@@ -1389,7 +1389,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/string/foo.123.foo2'
@@ -1435,7 +1435,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/date/valid'
@@ -1483,7 +1483,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/date/valid'
@@ -1526,7 +1526,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/date/invalidnull'
@@ -1571,7 +1571,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/date/invalidchars'
@@ -1617,7 +1617,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/date-time/valid'
@@ -1665,7 +1665,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/date-time/valid'
@@ -1707,7 +1707,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/date-time/invalidnull'
@@ -1753,7 +1753,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/date-time/invalidchars'
@@ -1787,9 +1787,9 @@ class DictionaryOperations(object):
 
     def get_date_time_rfc1123_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000
-        00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12
-        Oct 1492 10:15:01 GMT"}.
+        """Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01
+        GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492
+        10:15:01 GMT"}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1800,7 +1800,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/date-time-rfc1123/valid'
@@ -1835,8 +1835,7 @@ class DictionaryOperations(object):
     def put_date_time_rfc1123_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
         """Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1":
-        "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01
-        GMT"}.
+        "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
 
         :param array_body:
         :type array_body: dict
@@ -1849,7 +1848,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/date-time-rfc1123/valid'
@@ -1892,7 +1891,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/duration/valid'
@@ -1939,7 +1938,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/duration/valid'
@@ -1982,7 +1981,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/byte/valid'
@@ -2030,7 +2029,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/byte/valid'
@@ -2073,7 +2072,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/byte/invalidnull'
@@ -2119,7 +2118,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/prim/base64url/valid'
@@ -2164,7 +2163,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/complex/null'
@@ -2209,7 +2208,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/complex/empty'
@@ -2255,7 +2254,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/complex/itemnull'
@@ -2301,7 +2300,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/complex/itemempty'
@@ -2336,8 +2335,8 @@ class DictionaryOperations(object):
     def get_complex_valid(
             self, custom_headers=None, raw=False, **operation_config):
         """Get dictionary of complex type with {"0": {"integer": 1, "string":
-        "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
-        "string": "6"}}.
+        "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string":
+        "6"}}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2348,7 +2347,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/complex/valid'
@@ -2383,8 +2382,8 @@ class DictionaryOperations(object):
     def put_complex_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
         """Put an dictionary of complex type with values {"0": {"integer": 1,
-        "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer":
-        5, "string": "6"}}.
+        "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
+        "string": "6"}}.
 
         :param array_body:
         :type array_body: dict
@@ -2397,7 +2396,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/complex/valid'
@@ -2439,7 +2438,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/array/null'
@@ -2484,7 +2483,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/array/empty'
@@ -2518,8 +2517,8 @@ class DictionaryOperations(object):
 
     def get_array_item_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get an dictionary of array of strings {"0": ["1", "2", "3"], "1":
-        null, "2": ["7", "8", "9"]}.
+        """Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null,
+        "2": ["7", "8", "9"]}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2530,7 +2529,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/array/itemnull'
@@ -2576,7 +2575,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/array/itemempty'
@@ -2610,8 +2609,8 @@ class DictionaryOperations(object):
 
     def get_array_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4",
-        "5", "6"], "2": ["7", "8", "9"]}.
+        """Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
+        "6"], "2": ["7", "8", "9"]}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2622,7 +2621,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/array/valid'
@@ -2656,8 +2655,8 @@ class DictionaryOperations(object):
 
     def put_array_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4",
-        "5", "6"], "2": ["7", "8", "9"]}.
+        """Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
+        "6"], "2": ["7", "8", "9"]}.
 
         :param array_body:
         :type array_body: dict
@@ -2670,7 +2669,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/array/valid'
@@ -2712,7 +2711,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/dictionary/null'
@@ -2746,8 +2745,8 @@ class DictionaryOperations(object):
 
     def get_dictionary_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get an dictionaries of dictionaries of type <string, string> with
-        value {}.
+        """Get an dictionaries of dictionaries of type <string, string> with value
+        {}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2758,7 +2757,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/dictionary/empty'
@@ -2792,9 +2791,9 @@ class DictionaryOperations(object):
 
     def get_dictionary_item_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get an dictionaries of dictionaries of type <string, string> with
-        value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2":
-        {"7": "seven", "8": "eight", "9": "nine"}}.
+        """Get an dictionaries of dictionaries of type <string, string> with value
+        {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7":
+        "seven", "8": "eight", "9": "nine"}}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2805,7 +2804,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/dictionary/itemnull'
@@ -2839,9 +2838,9 @@ class DictionaryOperations(object):
 
     def get_dictionary_item_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get an dictionaries of dictionaries of type <string, string> with
-        value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2":
-        {"7": "seven", "8": "eight", "9": "nine"}}.
+        """Get an dictionaries of dictionaries of type <string, string> with value
+        {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7":
+        "seven", "8": "eight", "9": "nine"}}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2852,7 +2851,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/dictionary/itemempty'
@@ -2886,10 +2885,9 @@ class DictionaryOperations(object):
 
     def get_dictionary_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get an dictionaries of dictionaries of type <string, string> with
-        value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4":
-        "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight",
-        "9": "nine"}}.
+        """Get an dictionaries of dictionaries of type <string, string> with value
+        {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
+        "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2900,7 +2898,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/dictionary/valid'
@@ -2934,10 +2932,9 @@ class DictionaryOperations(object):
 
     def put_dictionary_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """Get an dictionaries of dictionaries of type <string, string> with
-        value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4":
-        "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight",
-        "9": "nine"}}.
+        """Get an dictionaries of dictionaries of type <string, string> with value
+        {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
+        "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
 
         :param array_body:
         :type array_body: dict
@@ -2950,7 +2947,7 @@ class DictionaryOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises:
-         :class:`ErrorException<Fixtures.AcceptanceTestsBodyDictionary.models.ErrorException>`
+         :class:`ErrorException<fixtures.acceptancetestsbodydictionary.models.ErrorException>`
         """
         # Construct URL
         url = '/dictionary/dictionary/valid'

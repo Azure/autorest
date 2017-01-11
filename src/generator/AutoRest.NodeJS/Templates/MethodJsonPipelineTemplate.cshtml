@@ -1,6 +1,6 @@
 ﻿@using System.Linq;
-@using AutoRest.NodeJS.TemplateModels
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.MethodTemplateModel>
+@using AutoRest.NodeJS.Model
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Model.MethodJs>
 // Send Request
 return client.pipeline(httpRequest, function (err, response, responseBody) {
   if (err) {
@@ -17,9 +17,7 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
     try {
       parsedErrorResponse = JSON.parse(responseBody);
       if (parsedErrorResponse) {
-        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-        if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-        if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+        @(Model.PopulateErrorCodeAndMessage())
       }
   @if (Model.DefaultResponse.Body != null)
   {
@@ -47,7 +45,7 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
   {
       <text>
   // Deserialize Response
-  if (statusCode === @MethodTemplateModel.GetStatusCodeReference(responsePair.Key)) {
+  if (statusCode === @MethodJs.GetStatusCodeReference(responsePair.Key)) {
     @(Model.DeserializeResponse(responsePair.Value.Body))
   }
       </text>

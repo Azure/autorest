@@ -8,18 +8,18 @@
  * Initializes a new instance of the Order class.
  * @constructor
  * @member {number} [id]
- * 
+ *
  * @member {number} [petId]
- * 
+ *
  * @member {number} [quantity]
- * 
+ *
  * @member {date} [shipDate]
- * 
+ *
  * @member {string} [status] Order Status. Possible values include: 'placed',
  * 'approved', 'delivered'
- * 
+ *
  * @member {boolean} [complete]
- * 
+ *
  */
 function Order() {
 }

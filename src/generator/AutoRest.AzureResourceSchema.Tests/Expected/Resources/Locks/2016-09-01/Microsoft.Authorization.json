@@ -1,4 +1,4 @@
-﻿{
+{
   "id": "http://schema.management.azure.com/schemas/2016-09-01/Microsoft.Authorization.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.Authorization",

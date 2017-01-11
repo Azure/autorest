@@ -1,46 +1,37 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Threading.Tasks;
 using AutoRest.Core;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Extensions.Azure.Tests
 {
     public class SampleAzureCodeGenerator : CodeGenerator
     {
-        public SampleAzureCodeGenerator(Settings settings) : base(settings)
+        public SampleAzureCodeGenerator() 
         {
         }
+        public override string UsageInstructions => null;
 
-        public override string Name
-        {
-            get { return null; }
-        }
+        public override string ImplementationFileExtension => null;
 
-        public override string Description
-        {
-            get { return null; }
-        }
+        public override Task Generate(CodeModel codeModel) => null;
+    }
 
-        public override string UsageInstructions
+    public class SampleAzureTransformer : CodeModelTransformer<CodeModel>
+    {
+        public override CodeModel TransformCodeModel(CodeModel codeModel)
         {
-            get { return null; }
-        }
+            // we're guaranteed to be in our language-specific context here.
+            Settings.Instance.AddCredentials = true;
 
-        public override string ImplementationFileExtension
-        {
-            get { return null; }
-        }
+            // todo: these should be turned into individual transformers
+            AzureExtensions.NormalizeAzureClientModel(codeModel);
 
-        public override Task Generate(ServiceClient serviceClient)
-        {
-            return null;
-        }
-
-        public override void NormalizeClientModel(ServiceClient serviceClient)
-        {
-            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings, new SampleAzureCodeNamer());
+            return codeModel;
         }
     }
 }

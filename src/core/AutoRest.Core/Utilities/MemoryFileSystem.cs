@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+
+using AutoRest.Core.Properties;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,6 +26,30 @@ namespace AutoRest.Core.Utilities
             get { return _virtualStore; }
         }
 
+        public bool IsCompletePath(string path)
+           => Uri.IsWellFormedUriString(path, UriKind.Relative);
+
+        public string MakePathRooted(Uri rootPath, string relativePath)
+        {
+            return (new Uri(Path.Combine(rootPath.ToString(), relativePath).ToString(), UriKind.Relative)).ToString();
+        }
+
+        public Uri GetParentDir(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                throw new Exception(Resources.PathCannotBeNullOrEmpty);
+            }
+            if (IsCompletePath(path))
+            {
+                return new Uri(new Uri(path), ".");
+            }
+            else
+            {
+                return new Uri(Path.GetDirectoryName(path), UriKind.Relative);
+            }
+        }
+        
         public void WriteFile(string path, string contents)
         {
             var directory = Path.GetDirectoryName(path);
@@ -31,8 +57,16 @@ namespace AutoRest.Core.Utilities
             {
                 throw new IOException(string.Format(CultureInfo.InvariantCulture, "Directory {0} does not exist.", directory));
             }
+            var result = new StringBuilder();
+            var lines = contents.Split(new[] {"\r\n", "\r", "\n"}, StringSplitOptions.None);
+            var eol = path.LineEnding();
 
-            VirtualStore[path] = new StringBuilder(contents);
+            foreach (var l in lines)
+            {
+                result.Append(l);
+                result.Append(eol);
+            }
+            VirtualStore[path] = result;
         }
 
         public string ReadFileAsText(string path)
@@ -189,6 +223,13 @@ namespace AutoRest.Core.Utilities
             if (disposing)
             {
                 _virtualStore?.Clear();
+            }
+        }
+        public string CurrentDirectory
+        {
+            get
+            {
+                return "";
             }
         }
     }

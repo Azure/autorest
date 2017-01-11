@@ -5,6 +5,7 @@ module Petstore
     #
     # Model object.
     #
+    #
     class StorageAccountPropertiesCreateParameters
 
       include MsRestAzure

@@ -17,7 +17,7 @@ class DictionaryWrapper(Model):
 
     :param default_program:
     :type default_program: dict
-    """ 
+    """
 
     _attribute_map = {
         'default_program': {'key': 'defaultProgram', 'type': '{str}'},

@@ -231,7 +231,7 @@
     "FlattenedProduct": {
       "allOf": [
         {
-          "$ref": "Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {

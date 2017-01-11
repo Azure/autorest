@@ -7,13 +7,15 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using AutoRest.Core;
-using AutoRest.Core.ClientModel;
+using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
 using AutoRest.Core.Validation;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger
 {
@@ -21,12 +23,13 @@ namespace AutoRest.Swagger
     {
         private const string BaseUriParameterName = "BaseUri";
 
-        internal Dictionary<string, string> ExtendedTypes = new Dictionary<string, string>();
+        internal Dictionary<string, string> ExtendedTypes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         internal Dictionary<string, CompositeType> GeneratedTypes = new Dictionary<string, CompositeType>();
+        internal Dictionary<Schema, CompositeType> GeneratingTypes = new Dictionary<Schema, CompositeType>();
 
-        public SwaggerModeler(Settings settings) : base(settings)
+        public SwaggerModeler() 
         {
-            if (settings == null)
+            if (Settings.Instance == null)
             {
                 throw new ArgumentNullException("settings");
             }
@@ -47,38 +50,43 @@ namespace AutoRest.Swagger
         /// <summary>
         /// Client model.
         /// </summary>
-        public ServiceClient ServiceClient { get; set; }
+        public CodeModel CodeModel { get; set; }
 
         /// <summary>
         /// Default protocol when no protocol is specified in the schema
         /// </summary>
         public TransferProtocolScheme DefaultProtocol { get; set; }
 
-        public override ServiceClient Build()
-        {
-            IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
-            return Build(out messages);
-        }
-
         /// <summary>
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override ServiceClient Build(out IEnumerable<ValidationMessage> messages)
+        public override CodeModel Build()
         {
-            Logger.LogInfo(Resources.ParsingSwagger);
+            Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input))
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
-            ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+            var serviceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+            return Build(serviceDefinition);
+        }
 
-            // Look for semantic errors and warnings in the document.
-            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            messages = validator.GetValidationExceptions(ServiceDefinition).ToList();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
+        public CodeModel Build(ServiceDefinition serviceDefinition)
+        {
+            ServiceDefinition = serviceDefinition;
+            if (!Settings.SkipValidation)
+            {
+                // Look for semantic errors and warnings in the document.
+                var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
+                {
+                    Logger.Instance.Log(validationEx);
+                }
+            }
 
-            Logger.LogInfo(Resources.GeneratingClient);
+            Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
             // Update settings
             UpdateSettings();
 
@@ -90,12 +98,13 @@ namespace AutoRest.Swagger
             {
                 var parameter = ((ParameterBuilder)swaggerParameter.GetBuilder(this)).Build();
 
-                var clientProperty = new Property();
+                var clientProperty = New<Property>();
                 clientProperty.LoadFrom(parameter);
 
-                ServiceClient.Properties.Add(clientProperty);
+                CodeModel.Add(clientProperty);
             }
 
+            var  methods = new List<Method>();
             // Build methods
             foreach (var path in ServiceDefinition.Paths.Concat(ServiceDefinition.CustomPaths))
             {
@@ -122,15 +131,16 @@ namespace AutoRest.Swagger
                         }
                         var method = BuildMethod(verb.ToHttpMethod(), url, methodName, operation);
                         method.Group = methodGroup;
-                        ServiceClient.Methods.Add(method);
+                        
+                        methods.Add(method);
                         if (method.DefaultResponse.Body is CompositeType)
                         {
-                            ServiceClient.ErrorTypes.Add((CompositeType)method.DefaultResponse.Body);
+                            CodeModel.AddError((CompositeType)method.DefaultResponse.Body);
                         }
                     }
                     else
                     {
-                        Logger.LogWarning(Resources.OptionsNotSupported);
+                        Logger.Instance.Log(Category.Warning, Resources.OptionsNotSupported);
                     }
                 }
             }
@@ -144,10 +154,12 @@ namespace AutoRest.Swagger
                     objectType.BaseModelType = GeneratedTypes[ExtendedTypes[typeName]];
                 }
 
-                ServiceClient.ModelTypes.Add(objectType);
+                CodeModel.Add(objectType);
             }
+            CodeModel.AddRange(methods);
+            
 
-            return ServiceClient;
+            return CodeModel;
         }
 
         /// <summary>
@@ -157,7 +169,7 @@ namespace AutoRest.Swagger
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public override IEnumerable<ComparisonMessage> Compare()
         {
-            Logger.LogInfo(Resources.ParsingSwagger);
+            Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input) || string.IsNullOrWhiteSpace(Settings.Previous))
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
@@ -170,17 +182,16 @@ namespace AutoRest.Swagger
 
             // Look for semantic errors and warnings in the new document.
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            var validationMessages = validator.GetValidationExceptions(newDefintion).ToList();
+            var LogMessages = validator.GetValidationExceptions(newDefintion).ToList();
 
             // Only compare versions if the new version is correct.
             var comparisonMessages = 
-                !validationMessages.Any(m => m.Severity > LogEntrySeverity.Error) ? 
+                !LogMessages.Any(m => m.Severity > Category.Error) ? 
                 newDefintion.Compare(context, oldDefintion) : 
                 Enumerable.Empty<ComparisonMessage>();
 
-            return validationMessages
-                .Select(msg => 
-                    new ComparisonMessage(new MessageTemplate { Id = 0, Message = msg.Message }, string.Join("/", msg.Path), msg.Severity))
+            return LogMessages
+                .Select(msg => new ComparisonMessage(new MessageTemplate { Id = 0, Message = msg.Message }, msg.Path, msg.Severity))
                 .Concat(comparisonMessages);
         }
 
@@ -204,7 +215,6 @@ namespace AutoRest.Swagger
         /// <returns>The base ServiceModel Service</returns>
         public virtual void InitializeClientModel()
         {
-            ServiceClient = new ServiceClient();
             if (string.IsNullOrEmpty(ServiceDefinition.Swagger))
             {
                 throw ErrorManager.CreateError(Resources.UnknownSwaggerVersion);
@@ -215,23 +225,19 @@ namespace AutoRest.Swagger
                 throw ErrorManager.CreateError(Resources.InfoSectionMissing);
             }
 
-            if (string.IsNullOrWhiteSpace(Settings.ClientName))
-            {
-                if (ServiceDefinition.Info.Title == null)
-                {
-                    throw ErrorManager.CreateError(Resources.TitleMissing);
-                }
+            CodeModel = New<CodeModel>();
 
-                ServiceClient.Name = ServiceDefinition.Info.Title.Replace(" ", "");
-            }
-            else
+            if (string.IsNullOrWhiteSpace(Settings.ClientName) && ServiceDefinition.Info.Title == null)
             {
-                ServiceClient.Name = Settings.ClientName;
+                throw ErrorManager.CreateError(Resources.TitleMissing);
             }
-            ServiceClient.Namespace = Settings.Namespace;
-            ServiceClient.ModelsName = Settings.ModelsName;
-            ServiceClient.ApiVersion = ServiceDefinition.Info.Version;
-            ServiceClient.Documentation = ServiceDefinition.Info.Description;
+
+            CodeModel.Name = ServiceDefinition.Info.Title?.Replace(" ", "");
+
+            CodeModel.Namespace = Settings.Namespace;
+            CodeModel.ModelsName = Settings.ModelsName;
+            CodeModel.ApiVersion = ServiceDefinition.Info.Version;
+            CodeModel.Documentation = ServiceDefinition.Info.Description;
             if (ServiceDefinition.Schemes == null || ServiceDefinition.Schemes.Count != 1)
             {
                 ServiceDefinition.Schemes = new List<TransferProtocolScheme> { DefaultProtocol };
@@ -240,12 +246,12 @@ namespace AutoRest.Swagger
             {
                 ServiceDefinition.Host = "localhost";
             }
-            ServiceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
+            CodeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
                 ServiceDefinition.Schemes[0].ToString().ToLower(CultureInfo.InvariantCulture),
                 ServiceDefinition.Host, ServiceDefinition.BasePath);
 
             // Copy extensions
-            ServiceDefinition.Extensions.ForEach(extention => ServiceClient.Extensions.Add(extention.Key, extention.Value));
+            ServiceDefinition.Extensions.ForEach(extention => CodeModel.Extensions.AddOrSet(extention.Key, extention.Value));
         }
 
         /// <summary>
@@ -253,23 +259,6 @@ namespace AutoRest.Swagger
         /// </summary>
         public virtual void BuildCompositeTypes()
         {
-            // Load any external references
-            foreach (var reference in ServiceDefinition.ExternalReferences)
-            {
-                string[] splitReference = reference.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
-                Debug.Assert(splitReference.Length == 2);
-                string filePath = splitReference[0];
-                // Make sure the filePath is either an absolute uri, or a rooted path
-                if (!FileSystem.IsCompletePath(filePath))
-                {
-                    // Otherwise, root it from the current path
-                    filePath = FileSystem.MakePathRooted(Settings.InputFolder, filePath);
-                }
-                string externalDefinition = Settings.FileSystem.ReadFileAsText(filePath);
-                ServiceDefinition external = SwaggerParser.Parse(externalDefinition);
-                external.Definitions.ForEach(d => ServiceDefinition.Definitions[d.Key] = d.Value);
-            }
-
             // Build service types and validate allOf
             if (ServiceDefinition.Definitions != null)
             {
@@ -284,7 +273,7 @@ namespace AutoRest.Swagger
                         : ServiceDefinition.Definitions[schema.Extends.StripDefinitionPath()];
 
                     if (parent != null &&
-                        !AncestorsHaveProperties(parent.Properties, parent.Extends.StripDefinitionPath()))
+                        !AncestorsHaveProperties(parent.Properties, parent.Extends))
                     {
                         throw ErrorManager.CreateError(Resources.InvalidAncestors, schemaName);
                     }
@@ -311,6 +300,7 @@ namespace AutoRest.Swagger
                 return true;
             }
 
+            extends = extends.StripDefinitionPath();
             Debug.Assert(!string.IsNullOrEmpty(extends) && ServiceDefinition.Definitions.ContainsKey(extends));
             return AncestorsHaveProperties(ServiceDefinition.Definitions[extends].Properties,
                 ServiceDefinition.Definitions[extends].Extends);

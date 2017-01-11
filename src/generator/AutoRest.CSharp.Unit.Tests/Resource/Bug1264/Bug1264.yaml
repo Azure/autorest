@@ -1,0 +1,34 @@
+#
+# Bug1264.ps1
+#
+---
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: API with collection format
+paths:
+  "/operation3/{arrayPath}":
+    put:
+      operationId: my_operation3
+      parameters:
+      - name: arrayPath
+        in: path
+        required: true
+        type: array
+        items:
+          type: string
+        collectionFormat: csv
+        description: array type path param
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ResultObject"
+      description: simple put op
+definitions:
+  ResultObject:
+    properties:
+      SomeProp:
+        type: string
+        description: simple prop
+    description: simple res obj

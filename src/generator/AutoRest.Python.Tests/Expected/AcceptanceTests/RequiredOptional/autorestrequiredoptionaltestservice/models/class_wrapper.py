@@ -17,8 +17,8 @@ class ClassWrapper(Model):
 
     :param value:
     :type value: :class:`Product
-     <Fixtures.AcceptanceTestsRequiredOptional.models.Product>`
-    """ 
+     <fixtures.acceptancetestsrequiredoptional.models.Product>`
+    """
 
     _validation = {
         'value': {'required': True},

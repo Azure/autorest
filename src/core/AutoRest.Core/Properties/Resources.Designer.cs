@@ -204,7 +204,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Error parsing AutoRest.json file.
+        ///    Looks up a localized string similar to Error parsing AutoRest.json file: {0}.
         /// </summary>
         public static string ErrorParsingConfig {
             get {
@@ -420,6 +420,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to &apos;GET&apos; operation must use method name &apos;Get&apos; or Method name start with &apos;List&apos;, &apos;PUT&apos; operation must use method name &apos;Create&apos;, &apos;PATCH&apos; operation must use method name &apos;Update&apos; and &apos;DELETE&apos; operation must use method name &apos;Delete&apos;..
+        /// </summary>
+        public static string OperationNameNotValid {
+            get {
+                return ResourceManager.GetString("OperationNameNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Parameters &quot;subscriptionId&quot; and &quot;api-version&quot; are not allowed in the operations section.
         /// </summary>
         public static string OperationParametersNotAllowedMessage {
@@ -452,6 +461,15 @@ namespace AutoRest.Core.Properties {
         public static string ParameterValueIsNotValid {
             get {
                 return ResourceManager.GetString("ParameterValueIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to path cannot be null or an empty string or a string with white spaces while getting the parent directory.
+        /// </summary>
+        public static string PathCannotBeNullOrEmpty {
+            get {
+                return ResourceManager.GetString("PathCannotBeNullOrEmpty", resourceCulture);
             }
         }
         

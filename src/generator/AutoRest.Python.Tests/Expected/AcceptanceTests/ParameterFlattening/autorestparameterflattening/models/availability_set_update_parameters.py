@@ -17,7 +17,7 @@ class AvailabilitySetUpdateParameters(Model):
 
     :param tags: A set of tags. A description about the set of tags.
     :type tags: dict
-    """ 
+    """
 
     _validation = {
         'tags': {'required': True},

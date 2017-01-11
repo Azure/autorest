@@ -1,5 +1,5 @@
 ﻿@using System.Linq;
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.MethodTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Model.MethodJs>
 // Send Request
 httpRequest.streamedResponse = true;
 return client.pipeline(httpRequest, function (err, response, responseBody) {
@@ -19,9 +19,7 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
     try {
       if (responseBody !== undefined) parsedErrorResponse = JSON.parse(responseBody);
       if (parsedErrorResponse) {
-        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-        if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-        if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+        @(Model.PopulateErrorCodeAndMessage())
       }
   @if (Model.DefaultResponse.Body != null)
   {

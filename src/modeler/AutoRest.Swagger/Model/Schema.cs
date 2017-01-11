@@ -153,7 +153,7 @@ namespace AutoRest.Swagger.Model
                 CompareAllOfs(context, priorSchema);
             }
 
-            context.Push("properties");
+            context.PushProperty("properties");
             CompareProperties(context, priorSchema);
             context.Pop();
 
@@ -200,7 +200,7 @@ namespace AutoRest.Swagger.Model
                     }
                     else
                     {
-                        context.Push(def.Key);
+                        context.PushProperty(def.Key);
                         model.Compare(context, def.Value);
                         context.Pop();
                     }

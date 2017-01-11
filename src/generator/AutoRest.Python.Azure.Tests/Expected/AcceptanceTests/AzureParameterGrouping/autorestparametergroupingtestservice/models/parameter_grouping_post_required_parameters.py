@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class ParameterGroupingPostRequiredParameters(Model):
-    """Additional parameters for the parameterGrouping_postRequired operation.
+    """Additional parameters for the ParameterGrouping_post_required operation.
 
     :param body:
     :type body: int
@@ -23,7 +23,7 @@ class ParameterGroupingPostRequiredParameters(Model):
     :type query: int
     :param path: Path parameter
     :type path: str
-    """ 
+    """
 
     _validation = {
         'body': {'required': True},

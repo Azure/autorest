@@ -9,4 +9,4 @@
 // You do not need to add suppressions to this file manually.
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", 
-    Scope = "member", Target = "AutoRest.Extensions.SwaggerExtensions#AddParameterGroups(AutoRest.Core.ClientModel.ServiceClient)")]
+    Scope = "member", Target = "AutoRest.Extensions.SwaggerExtensions#AddParameterGroups(AutoRest.Core.Model.ServiceClient)")]

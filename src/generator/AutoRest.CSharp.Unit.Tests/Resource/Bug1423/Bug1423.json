@@ -1,0 +1,20 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Simple API with empty object path"
+  },
+  "paths": {
+    "/operation0": {
+      "put": {
+        "operationId": "lru2",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/operation1/restricted": {}
+  }
+}

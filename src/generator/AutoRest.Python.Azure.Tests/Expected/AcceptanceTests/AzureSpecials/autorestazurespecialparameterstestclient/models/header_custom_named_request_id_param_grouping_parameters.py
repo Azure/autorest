@@ -13,12 +13,12 @@ from msrest.serialization import Model
 
 
 class HeaderCustomNamedRequestIdParamGroupingParameters(Model):
-    """Additional parameters for the header_customNamedRequestIdParamGrouping
+    """Additional parameters for the Header_custom_named_request_id_param_grouping
     operation.
 
     :param foo_client_request_id: The fooRequestId
     :type foo_client_request_id: str
-    """ 
+    """
 
     _validation = {
         'foo_client_request_id': {'required': True},

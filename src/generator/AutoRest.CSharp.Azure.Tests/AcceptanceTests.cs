@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-//using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -109,7 +108,7 @@ namespace AutoRest.CSharp.Azure.Tests
 
             using (
                 var client =
-                    new MicrosoftAzureTestUrl(Fixture.Uri,
+                    new MicrosoftAzureTestUrlClient(Fixture.Uri,
                         new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 client.SubscriptionId = Guid.NewGuid().ToString();
@@ -126,7 +125,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 SwaggerPath("head.json"), ExpectedPath("Head"), generator: "Azure.CSharp");
 
             using (
-                var client = new AutoRestHeadTestService(Fixture.Uri,
+                var client = new AutoRestHeadTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 Assert.True(client.HttpSuccess.Head200());
@@ -142,7 +141,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 SwaggerPath("head-exceptions.json"), ExpectedPath("HeadExceptions"), generator: "Azure.CSharp");
 
             using (
-                var client = new AutoRestHeadExceptionTestService(Fixture.Uri,
+                var client = new AutoRestHeadExceptionTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 client.HeadException.Head200();
@@ -157,7 +156,7 @@ namespace AutoRest.CSharp.Azure.Tests
             SwaggerSpecRunner.RunTests(
                 SwaggerPath("lro.json"), ExpectedPath("Lro"), generator: "Azure.CSharp");
             using (
-                var client = new AutoRestLongRunningOperationTestService(Fixture.Uri,
+                var client = new AutoRestLongRunningOperationTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 client.LongRunningOperationRetryTimeout = 0;
@@ -177,8 +176,8 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Contains("Long running operation failed", exception.Message, StringComparison.Ordinal);
                 Assert.Equal("Succeeded", client.LROs.PutNoHeaderInRetry(new Product { Location = "West US" }).ProvisioningState);
                 Assert.Equal("Succeeded", client.LROs.PutAsyncNoHeaderInRetry(new Product { Location = "West US" }).ProvisioningState);
-                Assert.Equal("Succeeded", client.LROs.PutSubResource(new SubProduct()).ProvisioningState);
-                Assert.Equal("Succeeded", client.LROs.PutAsyncSubResource(new SubProduct()).ProvisioningState);
+                Assert.Equal("Succeeded", client.LROs.PutSubResource(new SubProduct().ProvisioningState).ProvisioningState);
+                Assert.Equal("Succeeded", client.LROs.PutAsyncSubResource(new SubProduct().ProvisioningState).ProvisioningState);
                 Assert.Equal("100", client.LROs.PutNonResource(new Sku()).Id);
                 Assert.Equal("100", client.LROs.PutAsyncNonResource(new Sku()).Id);
                 client.LROs.Post202Retry200(new Product { Location = "West US" });
@@ -259,7 +258,7 @@ namespace AutoRest.CSharp.Azure.Tests
             SwaggerSpecRunner.RunTests(
                 SwaggerPath("lro.json"), ExpectedPath("Lro"), generator: "Azure.CSharp");
             using (
-                var client = new AutoRestLongRunningOperationTestService(Fixture.Uri,
+                var client = new AutoRestLongRunningOperationTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 client.LongRunningOperationRetryTimeout = 0;
@@ -287,17 +286,17 @@ namespace AutoRest.CSharp.Azure.Tests
         public void LroSadPathTests()
         {
             using (
-                var client = new AutoRestLongRunningOperationTestService(Fixture.Uri,
+                var client = new AutoRestLongRunningOperationTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 client.LongRunningOperationRetryTimeout = 0;
                 var exception =
                     Assert.Throws<CloudException>(
-                        () => client.LROSADs.PutNonRetry400(new Product {Location = "West US"}));
+                        () => client.LROSADs.PutNonRetry400(new Product { Location = "West US" }));
                 Assert.Contains("Expected", exception.Message, StringComparison.Ordinal);
                 exception =
                     Assert.Throws<CloudException>(
-                        () => client.LROSADs.PutNonRetry201Creating400(new Product {Location = "West US"}));
+                        () => client.LROSADs.PutNonRetry201Creating400(new Product { Location = "West US" }));
                 Assert.Equal("Error from the server", exception.Body.Message);
                 Assert.NotNull(exception.Request);
                 Assert.NotNull(exception.Response);
@@ -307,7 +306,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
                 exception =
                     Assert.Throws<CloudException>(
-                        () => client.LROSADs.PutAsyncRelativeRetry400(new Product {Location = "West US"}));
+                        () => client.LROSADs.PutAsyncRelativeRetry400(new Product { Location = "West US" }));
                 Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
                 exception = Assert.Throws<CloudException>(() => client.LROSADs.DeleteNonRetry400());
                 Assert.Contains("Expected", exception.Message, StringComparison.Ordinal);
@@ -317,51 +316,51 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
                 exception =
                     Assert.Throws<CloudException>(
-                        () => client.LROSADs.PostNonRetry400(new Product {Location = "West US"}));
+                        () => client.LROSADs.PostNonRetry400(new Product { Location = "West US" }));
                 Assert.Equal("Expected bad request message", exception.Message);
                 exception =
                     Assert.Throws<CloudException>(
-                        () => client.LROSADs.Post202NonRetry400(new Product {Location = "West US"}));
+                        () => client.LROSADs.Post202NonRetry400(new Product { Location = "West US" }));
                 Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
                 exception =
                     Assert.Throws<CloudException>(
-                        () => client.LROSADs.PostAsyncRelativeRetry400(new Product {Location = "West US"}));
+                        () => client.LROSADs.PostAsyncRelativeRetry400(new Product { Location = "West US" }));
                 Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
                 exception =
                     Assert.Throws<CloudException>(
-                        () => client.LROSADs.PutError201NoProvisioningStatePayload(new Product {Location = "West US"}));
+                        () => client.LROSADs.PutError201NoProvisioningStatePayload(new Product { Location = "West US" }));
                 Assert.Equal("The response from long running operation does not contain a body.", exception.Message);
                 exception =
                     Assert.Throws<CloudException>(
-                        () => client.LROSADs.PutAsyncRelativeRetryNoStatus(new Product {Location = "West US"}));
+                        () => client.LROSADs.PutAsyncRelativeRetryNoStatus(new Product { Location = "West US" }));
                 Assert.Equal("The response from long running operation does not contain a body.", exception.Message);
                 exception =
                     Assert.Throws<CloudException>(
-                        () => client.LROSADs.PutAsyncRelativeRetryNoStatusPayload(new Product {Location = "West US"}));
+                        () => client.LROSADs.PutAsyncRelativeRetryNoStatusPayload(new Product { Location = "West US" }));
                 Assert.Equal("The response from long running operation does not contain a body.", exception.Message);
 
-                Assert.Throws<CloudException>(() => client.LROSADs.Put200InvalidJson(new Product {Location = "West US"}));
+                Assert.Throws<CloudException>(() => client.LROSADs.Put200InvalidJson(new Product { Location = "West US" }));
 
                 Assert.Throws<CloudException>(
-                    () => client.LROSADs.PutAsyncRelativeRetryInvalidJsonPolling(new Product {Location = "West US"}));
-                
+                    () => client.LROSADs.PutAsyncRelativeRetryInvalidJsonPolling(new Product { Location = "West US" }));
+
 #if !PORTABLE
                 Assert.Throws<SerializationException>(
-                    () => client.LROSADs.PutAsyncRelativeRetryInvalidHeader(new Product {Location = "West US"}));
-                
+                    () => client.LROSADs.PutAsyncRelativeRetryInvalidHeader(new Product { Location = "West US" }));
+
                 // UriFormatException invalidHeader = null;
                 var invalidHeader = Assert.Throws<SerializationException>(() => client.LROSADs.Delete202RetryInvalidHeader());
                 Assert.NotNull(invalidHeader.Message);
 
-                
+
                 var invalidAsyncHeader =
                     Assert.Throws<SerializationException>(() => client.LROSADs.DeleteAsyncRelativeRetryInvalidHeader());
                 Assert.NotNull(invalidAsyncHeader.Message);
 
-                
+
                 invalidHeader = Assert.Throws<SerializationException>(() => client.LROSADs.Post202RetryInvalidHeader());
                 Assert.NotNull(invalidHeader.Message);
-                
+
                 invalidAsyncHeader =
                     Assert.Throws<SerializationException>(() => client.LROSADs.PostAsyncRelativeRetryInvalidHeader());
                 Assert.NotNull(invalidAsyncHeader.Message);
@@ -396,7 +395,7 @@ namespace AutoRest.CSharp.Azure.Tests
             SwaggerSpecRunner.RunTests(
                 SwaggerPath("paging.json"), ExpectedPath("Paging"), generator: "Azure.CSharp");
             using (
-                var client = new AutoRestPagingTestService(Fixture.Uri,
+                var client = new AutoRestPagingTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 Assert.Null(client.Paging.GetSinglePages().NextPageLink);
@@ -470,7 +469,7 @@ namespace AutoRest.CSharp.Azure.Tests
         public void PagingSadPathTests()
         {
             using (
-                var client = new AutoRestPagingTestService(Fixture.Uri,
+                var client = new AutoRestPagingTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 Assert.Throws<CloudException>(() => client.Paging.GetSinglePagesFailure());
@@ -489,7 +488,7 @@ namespace AutoRest.CSharp.Azure.Tests
             SwaggerSpecRunner.RunTests(
                 SwaggerPath("azure-report.json"), ExpectedPath("AzureReport"), generator: "Azure.CSharp");
             using (var client =
-                new AutoRestReportServiceForAzure(Fixture.Uri,
+                new AutoRestReportServiceForAzureClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 var report = client.GetReport();
@@ -510,7 +509,7 @@ namespace AutoRest.CSharp.Azure.Tests
                     _interceptor.Information(string.Format(CultureInfo.CurrentCulture,
                         "The test coverage for Azure is {0}/{1}",
                         executedTests, totalTests));
-                    Assert.Equal(totalTests,executedTests);
+                    Assert.Equal(totalTests, executedTests);
                 }
             }
         }
@@ -533,7 +532,7 @@ namespace AutoRest.CSharp.Azure.Tests
             using (
                 var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString()))
-                    { SubscriptionId = validSubscription })
+                { SubscriptionId = validSubscription })
             {
                 client.SubscriptionInCredentials.PostMethodGlobalNotProvidedValid();
                 client.SubscriptionInCredentials.PostMethodGlobalValid();
@@ -572,7 +571,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"), generator: "Azure.CSharp");
             using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString()))
-                { SubscriptionId = validSubscription })
+            { SubscriptionId = validSubscription })
             {
                 var filter = new ODataQuery<OdataFilter>(f => f.Id > 5 && f.Name == "foo")
                 {
@@ -591,7 +590,7 @@ namespace AutoRest.CSharp.Azure.Tests
             var validClientId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
             using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
                     new TokenCredentials(validSubscription, Guid.NewGuid().ToString()))
-                    { SubscriptionId = validSubscription })
+            { SubscriptionId = validSubscription })
             {
                 Dictionary<string, List<string>> customHeaders = new Dictionary<string, List<string>>();
                 customHeaders["x-ms-client-request-id"] = new List<string> { validClientId };
@@ -628,7 +627,7 @@ namespace AutoRest.CSharp.Azure.Tests
             {
                 Dictionary<string, List<string>> customHeaders = new Dictionary<string, List<string>>();
                 var exception = Assert.Throws<CloudException>(() => client.XMsClientRequestId.Get());
-                Assert.Equal("123", exception.RequestId);                
+                Assert.Equal("123", exception.RequestId);
             }
         }
 
@@ -637,7 +636,7 @@ namespace AutoRest.CSharp.Azure.Tests
         {
             SwaggerSpecRunner.RunTests(
                 SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"), generator: "Azure.CSharp");
-            
+
             const string validSubscription = "1234-5678-9012-3456";
             const string expectedRequestId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
 
@@ -663,9 +662,9 @@ namespace AutoRest.CSharp.Azure.Tests
                 new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
             {
                 var group = new HeaderCustomNamedRequestIdParamGroupingParameters()
-                    {
-                        FooClientRequestId = expectedRequestId
-                    };
+                {
+                    FooClientRequestId = expectedRequestId
+                };
                 IAzureOperationResponse response = client.Header.CustomNamedRequestIdParamGroupingWithHttpMessagesAsync(group).Result;
 
                 Assert.Equal("123", response.RequestId);
@@ -679,7 +678,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 SwaggerPath("body-duration.json"), ExpectedPath("AzureBodyDuration"), generator: "Azure.CSharp");
             const string validSubscription = "1234-5678-9012-3456";
 
-            using (var client = new AutoRestDurationTestService(Fixture.Uri,
+            using (var client = new AutoRestDurationTestServiceClient(Fixture.Uri,
                 new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
             {
                 Assert.Null(client.Duration.GetNull());
@@ -689,7 +688,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 client.Duration.PutPositiveDuration(new TimeSpan(123, 22, 14, 12, 11));
             }
         }
-        
+
         [Fact]
         public void ParameterGroupingTests()
         {
@@ -698,7 +697,7 @@ namespace AutoRest.CSharp.Azure.Tests
             const int queryParameter = 21;
             const string pathParameter = "path";
 
-            using (var client = new AutoRestParameterGroupingTestService(
+            using (var client = new AutoRestParameterGroupingTestServiceClient(
                 Fixture.Uri,
                 new TokenCredentials(Guid.NewGuid().ToString())))
             {

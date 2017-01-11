@@ -1,6 +1,6 @@
 ﻿@using System.Linq
 @using AutoRest.Python
-@inherits AutoRest.Core.Template<AutoRest.Python.TemplateModels.EnumTemplateModel>
+@inherits AutoRest.Core.Template<System.Collections.Generic.IEnumerable<AutoRest.Core.Model.EnumType>>
 # coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ").TrimMultilineHeader()
@@ -8,7 +8,7 @@
 @EmptyLine
 from enum import Enum
 @{
-  foreach (var enumType in @Model.EnumTypes)
+  foreach (var enumType in @Model)
   {
 @EmptyLine
 @EmptyLine
@@ -16,7 +16,7 @@ from enum import Enum
 @EmptyLine
     for (int i = 0; i < enumType.Values.Count; i++)
     {
-@:    @(enumType.Values[i].Name) = "@enumType.Values[i].SerializedName"
+@:    @(enumType.Values[i].MemberName) = "@enumType.Values[i].SerializedName"
     }
   }
 }

@@ -5,6 +5,7 @@ module Petstore
     #
     # Model object.
     #
+    #
     class Order
       # @return [Integer]
       attr_accessor :id
@@ -18,8 +19,8 @@ module Petstore
       # @return [DateTime]
       attr_accessor :ship_date
 
-      # @return Order Status. Possible values include: 'placed', 'approved',
-      # 'delivered'
+      # @return [Enum] Order Status. Possible values include: 'placed',
+      # 'approved', 'delivered'
       attr_accessor :status
 
       # @return [Boolean]
