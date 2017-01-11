@@ -76,7 +76,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("APIVersionFormatIsNotValid", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to AutoRest Core {0}.
         /// </summary>
@@ -166,7 +166,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("DeleteMustHaveEmptyBody", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The value provided for description is not descriptive enough..
         /// </summary>
@@ -265,7 +265,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("GuidUsageNotValid", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to Each header parameter should have an explicit client name defined for improved code generation output quality..
         /// </summary>
@@ -283,7 +283,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("HttpVerbIsNotValid", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to Initializing code generator..
         /// </summary>
@@ -465,6 +465,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Operations API must be implemented for the service..
+        /// </summary>
+        public static string OperationsAPINotImplemented {
+            get {
+                return ResourceManager.GetString("OperationsAPINotImplemented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Parameter &apos;{0}&apos; is not expected..
         /// </summary>
         public static string ParameterIsNotValid {
@@ -508,7 +517,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("PutGetPatchResponseInvalid", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to A &apos;Resource&apos; definition must have x-ms-azure-resource extension enabled and set to true..
         /// </summary>
@@ -517,7 +526,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("ResourceIsMsResourceNotValid", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to The id, name, type, location and tags properties of the Resource must be present with id, name and type as read-only.
         /// </summary>
@@ -526,7 +535,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("ResourceModelIsNotValid", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to Parameters &quot;subscriptionId&quot; or &quot;api-version&quot; are referenced but not defined in the parameters section of Service Definition.
         /// </summary>
@@ -589,7 +598,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("XmsClientNameInValid", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///    Looks up a localized string similar to Paths in x-ms-paths must overload a normal path in the paths section..
         /// </summary>

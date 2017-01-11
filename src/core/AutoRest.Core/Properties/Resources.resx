@@ -216,6 +216,9 @@
   <data name="PutGetPatchResponseInvalid" xml:space="preserve">
     <value>The PUT/GET/PATCH operations must have same schema response.</value>
   </data>
+  <data name="OperationsAPINotImplemented" xml:space="preserve">
+    <value>Operations API must be implemented for the service.</value>
+  </data>
   <data name="BodyMustHaveSchema" xml:space="preserve">
     <value>Each body parameter must have a schema</value>
   </data>

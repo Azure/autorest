@@ -80,6 +80,7 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         [Rule(typeof(UniqueResourcePaths))]
         [Rule(typeof(PutGetPatchResponseValidation))]
+        [Rule(typeof(OperationsAPIImplementationValidation))]
         [CollectionRule(typeof(HttpVerbValidation))]
         [CollectionRule(typeof(DeleteMustHaveEmptyBody))]
         public Dictionary<string, Dictionary<string, Operation>> Paths { get; set; }
