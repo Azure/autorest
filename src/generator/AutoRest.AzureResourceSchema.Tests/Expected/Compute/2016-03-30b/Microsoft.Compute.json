@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "http://schema.management.azure.com/schemas/2016-03-30/Microsoft.Compute.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.Compute",
@@ -294,7 +294,7 @@
         },
         "content": {
           "type": "string",
-          "description": "XML formatted content that is added to the unattend.xml file in the specified pass and component.The XML must be less than 4 KB and must include the root element for the setting or feature that is being inserted."
+          "description": "XML formatted content that is added to the unattend.xml file in the specified pass and component. The XML must be less than 4 KB and must include the root element for the setting or feature that is being inserted."
         }
       },
       "description": "additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is a applied."
@@ -424,7 +424,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
+          "description": "the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist."
         },
         "caching": {
           "oneOf": [
@@ -865,7 +865,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
+          "description": "the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist."
         },
         "caching": {
           "oneOf": [
@@ -1052,7 +1052,7 @@
         },
         "keyData": {
           "type": "string",
-          "description": "Certificate public key used to authenticate with VM through SSH.The certificate must be in Pem format with or without headers."
+          "description": "Certificate public key used to authenticate with VM through SSH. The certificate must be in Pem format with or without headers."
         }
       },
       "description": "Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed."
@@ -1184,70 +1184,80 @@
       },
       "description": "Describes the uri of a disk."
     },
-    "VirtualMachineExtensionInstanceView": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "the virtual machine extension name."
-        },
-        "type": {
-          "type": "string",
-          "description": "the full type of the extension handler which includes both publisher and type."
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "the type version of the extension handler."
-        },
-        "substatuses": {
-          "oneOf": [
-            {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/InstanceViewStatus"
-              }
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
-          "description": "the resource status information."
-        },
-        "statuses": {
-          "oneOf": [
-            {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/InstanceViewStatus"
-              }
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
-          "description": "the resource status information."
-        }
-      },
-      "description": "The instance view of a virtual machine extension."
-    },
     "VirtualMachineExtensionProperties": {
       "type": "object",
-      "properties": {
-        "forceUpdateTag": {
-          "type": "string",
-          "description": "how the extension handler should be forced to update even if the extension configuration has not changed."
+      "allOf": [
+        {
+          "properties": {
+            "extensionType": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "Generic",
+                    "IaasDiagnostics",
+                    "IaasAntimalware",
+                    "CustomScript"
+                  ]
+                },
+                {
+                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                }
+              ]
+            }
+          }
         },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineExtensionPropertiesForGenericExtension"
+            },
+            {
+              "$ref": "#/definitions/VirtualMachineExtensionPropertiesForIaasDiagnostics"
+            },
+            {
+              "$ref": "#/definitions/VirtualMachineExtensionPropertiesForIaasAntimalware"
+            },
+            {
+              "$ref": "#/definitions/VirtualMachineExtensionPropertiesForCustomScript"
+            }
+          ]
+        }
+      ],
+      "description": "Describes the properties of a Virtual Machine Extension."
+    },
+    "VirtualMachineExtensionPropertiesForCustomScript": {
+      "type": "object",
+      "properties": {
         "publisher": {
-          "type": "string",
-          "description": "the name of the extension handler publisher."
+          "oneOf": [
+            {
+              "type": "object",
+              "enum": [
+                "Microsoft.Compute"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         },
         "type": {
-          "type": "string",
-          "description": "the type of the extension handler."
+          "oneOf": [
+            {
+              "type": "object",
+              "enum": [
+                "CustomScriptExtension"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "the type version of the extension handler."
+          "minLength": 1
         },
         "autoUpgradeMinorVersion": {
           "oneOf": [
@@ -1257,28 +1267,285 @@
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
-          ],
-          "description": "whether the extension handler should be automatically upgraded across minor versions."
+          ]
         },
         "settings": {
-          "description": "Json formatted public settings for the extension."
-        },
-        "protectedSettings": {
-          "description": "Json formatted protected settings for the extension."
-        },
-        "instanceView": {
           "oneOf": [
             {
-              "$ref": "#/definitions/VirtualMachineExtensionInstanceView"
+              "$ref": "#/definitions/VirtualMachineExtensionPropertiesForCustomScript_settings"
             },
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
-          ],
-          "description": "the virtual machine extension instance view."
+          ]
         }
       },
-      "description": "Describes the properties of a Virtual Machine Extension."
+      "required": [
+        "publisher",
+        "type",
+        "typeHandlerVersion",
+        "autoUpgradeMinorVersion",
+        "settings"
+      ]
+    },
+    "VirtualMachineExtensionPropertiesForCustomScript_settings": {
+      "type": "object",
+      "properties": {
+        "fileUris": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "commandToExecute": {
+          "type": "string"
+        }
+      }
+    },
+    "VirtualMachineExtensionPropertiesForGenericExtension": {
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Microsoft.Compute/extensions - Publisher"
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Microsoft.Compute/extensions - Type"
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Microsoft.Compute/extensions - Type handler version"
+        },
+        "settings": {
+          "description": "Microsoft.Compute/extensions - Settings"
+        }
+      },
+      "required": [
+        "publisher",
+        "type",
+        "typeHandlerVersion",
+        "settings"
+      ]
+    },
+    "VirtualMachineExtensionPropertiesForIaasAntimalware": {
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "oneOf": [
+            {
+              "type": "object",
+              "enum": [
+                "Microsoft.Azure.Security"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "type": {
+          "oneOf": [
+            {
+              "type": "object",
+              "enum": [
+                "IaaSAntimalware"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "autoUpgradeMinorVersion": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "settings": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineExtensionPropertiesForIaasAntimalware_settings"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "publisher",
+        "type",
+        "typeHandlerVersion",
+        "autoUpgradeMinorVersion",
+        "settings"
+      ]
+    },
+    "VirtualMachineExtensionPropertiesForIaasAntimalware_settings": {
+      "type": "object",
+      "properties": {
+        "AntimalwareEnabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "Exclusions": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineExtensionPropertiesForIaasAntimalware_settings_Exclusions"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "RealtimeProtectionEnabled": {},
+        "ScheduledScanSettings": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineExtensionPropertiesForIaasAntimalware_settings_ScheduledScanSettings"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      }
+    },
+    "VirtualMachineExtensionPropertiesForIaasAntimalware_settings_Exclusions": {
+      "type": "object",
+      "properties": {
+        "Paths": {
+          "type": "string"
+        },
+        "Extensions": {
+          "type": "string"
+        },
+        "Processes": {
+          "type": "string"
+        }
+      }
+    },
+    "VirtualMachineExtensionPropertiesForIaasAntimalware_settings_ScheduledScanSettings": {
+      "type": "object",
+      "properties": {
+        "isEnabled": {},
+        "scanType": {
+          "type": "string"
+        },
+        "day": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        }
+      }
+    },
+    "VirtualMachineExtensionPropertiesForIaasDiagnostics": {
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "oneOf": [
+            {
+              "type": "object",
+              "enum": [
+                "Microsoft.Azure.Diagnostics"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "type": {
+          "oneOf": [
+            {
+              "type": "object",
+              "enum": [
+                "IaaSDiagnostics"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "settings": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineExtensionPropertiesForIaasDiagnostics_settings"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "protectedSettings": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineExtensionPropertiesForIaasDiagnostics_protectedSettings"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "publisher",
+        "type",
+        "settings",
+        "protectedSettings"
+      ]
+    },
+    "VirtualMachineExtensionPropertiesForIaasDiagnostics_protectedSettings": {
+      "type": "object",
+      "properties": {
+        "storageAccountName": {
+          "type": "string"
+        },
+        "storageAccountKey": {
+          "type": "string"
+        },
+        "storageAccountEndPoint": {
+          "type": "string"
+        }
+      }
+    },
+    "VirtualMachineExtensionPropertiesForIaasDiagnostics_settings": {
+      "type": "object",
+      "properties": {
+        "xmlCfg": {
+          "type": "string"
+        },
+        "StorageAccount": {
+          "type": "string"
+        }
+      }
     },
     "VirtualMachineProperties": {
       "type": "object",
@@ -1720,7 +1987,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
+          "description": "the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist."
         },
         "vhdContainers": {
           "oneOf": [
@@ -1826,7 +2093,7 @@
           ],
           "description": "the virtual machine profile."
         },
-        "overProvision": {
+        "overprovision": {
           "oneOf": [
             {
               "type": "boolean"

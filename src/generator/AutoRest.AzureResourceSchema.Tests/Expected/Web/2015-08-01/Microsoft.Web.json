@@ -936,14 +936,6 @@
           "description": "Azure resource manager plan"
         },
         "properties": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Resource specific properties"
         },
         "sku": {
@@ -1352,14 +1344,6 @@
           "description": "Azure resource manager plan"
         },
         "properties": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Resource specific properties"
         },
         "sku": {
@@ -3746,14 +3730,6 @@
           "description": "Azure resource manager plan"
         },
         "properties": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Resource specific properties"
         },
         "sku": {
@@ -4095,14 +4071,6 @@
           "description": "Azure resource manager plan"
         },
         "properties": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Resource specific properties"
         },
         "sku": {

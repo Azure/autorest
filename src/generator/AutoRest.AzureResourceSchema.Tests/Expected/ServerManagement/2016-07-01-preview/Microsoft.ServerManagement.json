@@ -24,14 +24,6 @@
           "description": "location of the resource"
         },
         "tags": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "resource tags"
         },
         "properties": {
@@ -73,14 +65,6 @@
           "description": "location of the resource?"
         },
         "tags": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "resource tags"
         },
         "properties": {
