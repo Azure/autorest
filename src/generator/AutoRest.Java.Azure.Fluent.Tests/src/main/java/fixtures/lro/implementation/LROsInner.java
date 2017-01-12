@@ -352,7 +352,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200Succeeded() {
-        return put200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return put200SucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -374,7 +374,7 @@ public final class LROsInner {
         return put200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -396,7 +396,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200Succeeded(ProductInner product) {
-        return put200SucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put200SucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -420,7 +420,7 @@ public final class LROsInner {
         return put200SucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -443,7 +443,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Succeeded() {
-        return beginPut200SucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200SucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -465,7 +465,7 @@ public final class LROsInner {
         return beginPut200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -498,7 +498,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Succeeded(ProductInner product) {
-        return beginPut200SucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut200SucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -522,7 +522,7 @@ public final class LROsInner {
         return beginPut200SucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -563,7 +563,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200SucceededNoState() {
-        return put200SucceededNoStateWithServiceResponseAsync().toBlocking().last().getBody();
+        return put200SucceededNoStateWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -585,7 +585,7 @@ public final class LROsInner {
         return put200SucceededNoStateWithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -607,7 +607,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200SucceededNoState(ProductInner product) {
-        return put200SucceededNoStateWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put200SucceededNoStateWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -631,7 +631,7 @@ public final class LROsInner {
         return put200SucceededNoStateWithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -654,7 +654,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200SucceededNoState() {
-        return beginPut200SucceededNoStateWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200SucceededNoStateWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -676,7 +676,7 @@ public final class LROsInner {
         return beginPut200SucceededNoStateWithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -709,7 +709,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200SucceededNoState(ProductInner product) {
-        return beginPut200SucceededNoStateWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut200SucceededNoStateWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -733,7 +733,7 @@ public final class LROsInner {
         return beginPut200SucceededNoStateWithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -773,7 +773,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put202Retry200() {
-        return put202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put202Retry200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -795,7 +795,7 @@ public final class LROsInner {
         return put202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -817,7 +817,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put202Retry200(ProductInner product) {
-        return put202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put202Retry200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -841,7 +841,7 @@ public final class LROsInner {
         return put202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -864,7 +864,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut202Retry200() {
-        return beginPut202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut202Retry200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -886,7 +886,7 @@ public final class LROsInner {
         return beginPut202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -919,7 +919,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut202Retry200(ProductInner product) {
-        return beginPut202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut202Retry200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -943,7 +943,7 @@ public final class LROsInner {
         return beginPut202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -983,7 +983,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200() {
-        return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1005,7 +1005,7 @@ public final class LROsInner {
         return put201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1027,7 +1027,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200(ProductInner product) {
-        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1051,7 +1051,7 @@ public final class LROsInner {
         return put201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1074,7 +1074,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1096,7 +1096,7 @@ public final class LROsInner {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1129,7 +1129,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200(ProductInner product) {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1153,7 +1153,7 @@ public final class LROsInner {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1194,7 +1194,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200UpdatingSucceeded204() {
-        return put200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().last().getBody();
+        return put200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1216,7 +1216,7 @@ public final class LROsInner {
         return put200UpdatingSucceeded204WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1238,7 +1238,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200UpdatingSucceeded204(ProductInner product) {
-        return put200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1262,7 +1262,7 @@ public final class LROsInner {
         return put200UpdatingSucceeded204WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1285,7 +1285,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200UpdatingSucceeded204() {
-        return beginPut200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1307,7 +1307,7 @@ public final class LROsInner {
         return beginPut200UpdatingSucceeded204WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1340,7 +1340,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200UpdatingSucceeded204(ProductInner product) {
-        return beginPut200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1364,7 +1364,7 @@ public final class LROsInner {
         return beginPut200UpdatingSucceeded204WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1404,7 +1404,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingFailed200() {
-        return put201CreatingFailed200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put201CreatingFailed200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1426,7 +1426,7 @@ public final class LROsInner {
         return put201CreatingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1448,7 +1448,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingFailed200(ProductInner product) {
-        return put201CreatingFailed200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put201CreatingFailed200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1472,7 +1472,7 @@ public final class LROsInner {
         return put201CreatingFailed200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1495,7 +1495,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingFailed200() {
-        return beginPut201CreatingFailed200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut201CreatingFailed200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1517,7 +1517,7 @@ public final class LROsInner {
         return beginPut201CreatingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1550,7 +1550,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingFailed200(ProductInner product) {
-        return beginPut201CreatingFailed200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut201CreatingFailed200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1574,7 +1574,7 @@ public final class LROsInner {
         return beginPut201CreatingFailed200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1615,7 +1615,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200Acceptedcanceled200() {
-        return put200Acceptedcanceled200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put200Acceptedcanceled200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1637,7 +1637,7 @@ public final class LROsInner {
         return put200Acceptedcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1659,7 +1659,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200Acceptedcanceled200(ProductInner product) {
-        return put200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1683,7 +1683,7 @@ public final class LROsInner {
         return put200Acceptedcanceled200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1706,7 +1706,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Acceptedcanceled200() {
-        return beginPut200Acceptedcanceled200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200Acceptedcanceled200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1728,7 +1728,7 @@ public final class LROsInner {
         return beginPut200Acceptedcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1761,7 +1761,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Acceptedcanceled200(ProductInner product) {
-        return beginPut200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1785,7 +1785,7 @@ public final class LROsInner {
         return beginPut200Acceptedcanceled200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1825,7 +1825,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putNoHeaderInRetry() {
-        return putNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        return putNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1847,7 +1847,7 @@ public final class LROsInner {
         return putNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1869,7 +1869,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putNoHeaderInRetry(ProductInner product) {
-        return putNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1893,7 +1893,7 @@ public final class LROsInner {
         return putNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1916,7 +1916,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNoHeaderInRetry() {
-        return beginPutNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1938,7 +1938,7 @@ public final class LROsInner {
         return beginPutNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1971,7 +1971,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNoHeaderInRetry(ProductInner product) {
-        return beginPutNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1995,7 +1995,7 @@ public final class LROsInner {
         return beginPutNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2035,7 +2035,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetrySucceeded() {
-        return putAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2057,7 +2057,7 @@ public final class LROsInner {
         return putAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2079,7 +2079,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetrySucceeded(ProductInner product) {
-        return putAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2103,7 +2103,7 @@ public final class LROsInner {
         return putAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2126,7 +2126,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded() {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2148,7 +2148,7 @@ public final class LROsInner {
         return beginPutAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2181,7 +2181,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded(ProductInner product) {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2205,7 +2205,7 @@ public final class LROsInner {
         return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2245,7 +2245,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrySucceeded() {
-        return putAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2267,7 +2267,7 @@ public final class LROsInner {
         return putAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2289,7 +2289,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrySucceeded(ProductInner product) {
-        return putAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2313,7 +2313,7 @@ public final class LROsInner {
         return putAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2336,7 +2336,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrySucceeded() {
-        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2358,7 +2358,7 @@ public final class LROsInner {
         return beginPutAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2391,7 +2391,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrySucceeded(ProductInner product) {
-        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2415,7 +2415,7 @@ public final class LROsInner {
         return beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2455,7 +2455,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetryFailed() {
-        return putAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2477,7 +2477,7 @@ public final class LROsInner {
         return putAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2499,7 +2499,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetryFailed(ProductInner product) {
-        return putAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2523,7 +2523,7 @@ public final class LROsInner {
         return putAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2546,7 +2546,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetryFailed() {
-        return beginPutAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2568,7 +2568,7 @@ public final class LROsInner {
         return beginPutAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2601,7 +2601,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetryFailed(ProductInner product) {
-        return beginPutAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2625,7 +2625,7 @@ public final class LROsInner {
         return beginPutAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2665,7 +2665,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrycanceled() {
-        return putAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2687,7 +2687,7 @@ public final class LROsInner {
         return putAsyncNoRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2709,7 +2709,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrycanceled(ProductInner product) {
-        return putAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2733,7 +2733,7 @@ public final class LROsInner {
         return putAsyncNoRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2756,7 +2756,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrycanceled() {
-        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2778,7 +2778,7 @@ public final class LROsInner {
         return beginPutAsyncNoRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2811,7 +2811,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrycanceled(ProductInner product) {
-        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2835,7 +2835,7 @@ public final class LROsInner {
         return beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2875,7 +2875,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoHeaderInRetry() {
-        return putAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2897,7 +2897,7 @@ public final class LROsInner {
         return putAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2919,7 +2919,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoHeaderInRetry(ProductInner product) {
-        return putAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2943,7 +2943,7 @@ public final class LROsInner {
         return putAsyncNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2966,7 +2966,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoHeaderInRetry() {
-        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2988,7 +2988,7 @@ public final class LROsInner {
         return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3021,7 +3021,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoHeaderInRetry(ProductInner product) {
-        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -3045,7 +3045,7 @@ public final class LROsInner {
         return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3085,7 +3085,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner putNonResource() {
-        return putNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putNonResourceWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3107,7 +3107,7 @@ public final class LROsInner {
         return putNonResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3129,7 +3129,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner putNonResource(SkuInner sku) {
-        return putNonResourceWithServiceResponseAsync(sku).toBlocking().last().getBody();
+        return putNonResourceWithServiceResponseAsync(sku).toBlocking().last().body();
     }
 
     /**
@@ -3153,7 +3153,7 @@ public final class LROsInner {
         return putNonResourceWithServiceResponseAsync(sku).map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3176,7 +3176,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutNonResource() {
-        return beginPutNonResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNonResourceWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3198,7 +3198,7 @@ public final class LROsInner {
         return beginPutNonResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3231,7 +3231,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutNonResource(SkuInner sku) {
-        return beginPutNonResourceWithServiceResponseAsync(sku).toBlocking().single().getBody();
+        return beginPutNonResourceWithServiceResponseAsync(sku).toBlocking().single().body();
     }
 
     /**
@@ -3255,7 +3255,7 @@ public final class LROsInner {
         return beginPutNonResourceWithServiceResponseAsync(sku).map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3295,7 +3295,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner putAsyncNonResource() {
-        return putAsyncNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNonResourceWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3317,7 +3317,7 @@ public final class LROsInner {
         return putAsyncNonResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3339,7 +3339,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner putAsyncNonResource(SkuInner sku) {
-        return putAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().last().getBody();
+        return putAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().last().body();
     }
 
     /**
@@ -3363,7 +3363,7 @@ public final class LROsInner {
         return putAsyncNonResourceWithServiceResponseAsync(sku).map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3386,7 +3386,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutAsyncNonResource() {
-        return beginPutAsyncNonResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNonResourceWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3408,7 +3408,7 @@ public final class LROsInner {
         return beginPutAsyncNonResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3441,7 +3441,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutAsyncNonResource(SkuInner sku) {
-        return beginPutAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().single().getBody();
+        return beginPutAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().single().body();
     }
 
     /**
@@ -3465,7 +3465,7 @@ public final class LROsInner {
         return beginPutAsyncNonResourceWithServiceResponseAsync(sku).map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3505,7 +3505,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner putSubResource() {
-        return putSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putSubResourceWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3527,7 +3527,7 @@ public final class LROsInner {
         return putSubResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3549,7 +3549,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner putSubResource(SubProductInner product) {
-        return putSubResourceWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putSubResourceWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -3573,7 +3573,7 @@ public final class LROsInner {
         return putSubResourceWithServiceResponseAsync(product).map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3596,7 +3596,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutSubResource() {
-        return beginPutSubResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutSubResourceWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3618,7 +3618,7 @@ public final class LROsInner {
         return beginPutSubResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3651,7 +3651,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutSubResource(SubProductInner product) {
-        return beginPutSubResourceWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutSubResourceWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -3675,7 +3675,7 @@ public final class LROsInner {
         return beginPutSubResourceWithServiceResponseAsync(product).map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3715,7 +3715,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner putAsyncSubResource() {
-        return putAsyncSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncSubResourceWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3737,7 +3737,7 @@ public final class LROsInner {
         return putAsyncSubResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3759,7 +3759,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner putAsyncSubResource(SubProductInner product) {
-        return putAsyncSubResourceWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncSubResourceWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -3783,7 +3783,7 @@ public final class LROsInner {
         return putAsyncSubResourceWithServiceResponseAsync(product).map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3806,7 +3806,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutAsyncSubResource() {
-        return beginPutAsyncSubResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncSubResourceWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3828,7 +3828,7 @@ public final class LROsInner {
         return beginPutAsyncSubResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3861,7 +3861,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutAsyncSubResource(SubProductInner product) {
-        return beginPutAsyncSubResourceWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncSubResourceWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -3885,7 +3885,7 @@ public final class LROsInner {
         return beginPutAsyncSubResourceWithServiceResponseAsync(product).map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3925,7 +3925,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner deleteProvisioning202Accepted200Succeeded() {
-        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3947,7 +3947,7 @@ public final class LROsInner {
         return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3968,7 +3968,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3990,7 +3990,7 @@ public final class LROsInner {
         return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4029,7 +4029,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner deleteProvisioning202DeletingFailed200() {
-        return deleteProvisioning202DeletingFailed200WithServiceResponseAsync().toBlocking().last().getBody();
+        return deleteProvisioning202DeletingFailed200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4051,7 +4051,7 @@ public final class LROsInner {
         return deleteProvisioning202DeletingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4072,7 +4072,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202DeletingFailed200() {
-        return beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4094,7 +4094,7 @@ public final class LROsInner {
         return beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4133,7 +4133,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner deleteProvisioning202Deletingcanceled200() {
-        return deleteProvisioning202Deletingcanceled200WithServiceResponseAsync().toBlocking().last().getBody();
+        return deleteProvisioning202Deletingcanceled200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4155,7 +4155,7 @@ public final class LROsInner {
         return deleteProvisioning202Deletingcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4176,7 +4176,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202Deletingcanceled200() {
-        return beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4198,7 +4198,7 @@ public final class LROsInner {
         return beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4236,7 +4236,7 @@ public final class LROsInner {
      *
      */
     public void delete204Succeeded() {
-        delete204SucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        delete204SucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4258,7 +4258,7 @@ public final class LROsInner {
         return delete204SucceededWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4278,7 +4278,7 @@ public final class LROsInner {
      *
      */
     public void beginDelete204Succeeded() {
-        beginDelete204SucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDelete204SucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4300,7 +4300,7 @@ public final class LROsInner {
         return beginDelete204SucceededWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4338,7 +4338,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner delete202Retry200() {
-        return delete202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        return delete202Retry200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4360,7 +4360,7 @@ public final class LROsInner {
         return delete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4381,7 +4381,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDelete202Retry200() {
-        return beginDelete202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDelete202Retry200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4403,7 +4403,7 @@ public final class LROsInner {
         return beginDelete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4442,7 +4442,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner delete202NoRetry204() {
-        return delete202NoRetry204WithServiceResponseAsync().toBlocking().last().getBody();
+        return delete202NoRetry204WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4464,7 +4464,7 @@ public final class LROsInner {
         return delete202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4485,7 +4485,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDelete202NoRetry204() {
-        return beginDelete202NoRetry204WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDelete202NoRetry204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4507,7 +4507,7 @@ public final class LROsInner {
         return beginDelete202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4545,7 +4545,7 @@ public final class LROsInner {
      *
      */
     public void deleteNoHeaderInRetry() {
-        deleteNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4567,7 +4567,7 @@ public final class LROsInner {
         return deleteNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4587,7 +4587,7 @@ public final class LROsInner {
      *
      */
     public void beginDeleteNoHeaderInRetry() {
-        beginDeleteNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4609,7 +4609,7 @@ public final class LROsInner {
         return beginDeleteNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4647,7 +4647,7 @@ public final class LROsInner {
      *
      */
     public void deleteAsyncNoHeaderInRetry() {
-        deleteAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4669,7 +4669,7 @@ public final class LROsInner {
         return deleteAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4689,7 +4689,7 @@ public final class LROsInner {
      *
      */
     public void beginDeleteAsyncNoHeaderInRetry() {
-        beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4711,7 +4711,7 @@ public final class LROsInner {
         return beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4749,7 +4749,7 @@ public final class LROsInner {
      *
      */
     public void deleteAsyncRetrySucceeded() {
-        deleteAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4771,7 +4771,7 @@ public final class LROsInner {
         return deleteAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4791,7 +4791,7 @@ public final class LROsInner {
      *
      */
     public void beginDeleteAsyncRetrySucceeded() {
-        beginDeleteAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4813,7 +4813,7 @@ public final class LROsInner {
         return beginDeleteAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4850,7 +4850,7 @@ public final class LROsInner {
      *
      */
     public void deleteAsyncNoRetrySucceeded() {
-        deleteAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4872,7 +4872,7 @@ public final class LROsInner {
         return deleteAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4892,7 +4892,7 @@ public final class LROsInner {
      *
      */
     public void beginDeleteAsyncNoRetrySucceeded() {
-        beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4914,7 +4914,7 @@ public final class LROsInner {
         return beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4951,7 +4951,7 @@ public final class LROsInner {
      *
      */
     public void deleteAsyncRetryFailed() {
-        deleteAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4973,7 +4973,7 @@ public final class LROsInner {
         return deleteAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4993,7 +4993,7 @@ public final class LROsInner {
      *
      */
     public void beginDeleteAsyncRetryFailed() {
-        beginDeleteAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5015,7 +5015,7 @@ public final class LROsInner {
         return beginDeleteAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5052,7 +5052,7 @@ public final class LROsInner {
      *
      */
     public void deleteAsyncRetrycanceled() {
-        deleteAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5074,7 +5074,7 @@ public final class LROsInner {
         return deleteAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5094,7 +5094,7 @@ public final class LROsInner {
      *
      */
     public void beginDeleteAsyncRetrycanceled() {
-        beginDeleteAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5116,7 +5116,7 @@ public final class LROsInner {
         return beginDeleteAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5154,7 +5154,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner post200WithPayload() {
-        return post200WithPayloadWithServiceResponseAsync().toBlocking().last().getBody();
+        return post200WithPayloadWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5176,7 +5176,7 @@ public final class LROsInner {
         return post200WithPayloadWithServiceResponseAsync().map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5197,7 +5197,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPost200WithPayload() {
-        return beginPost200WithPayloadWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPost200WithPayloadWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5219,7 +5219,7 @@ public final class LROsInner {
         return beginPost200WithPayloadWithServiceResponseAsync().map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5257,7 +5257,7 @@ public final class LROsInner {
      *
      */
     public void post202Retry200() {
-        post202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        post202Retry200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5279,7 +5279,7 @@ public final class LROsInner {
         return post202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5300,7 +5300,7 @@ public final class LROsInner {
      * @param product Product to put
      */
     public void post202Retry200(ProductInner product) {
-        post202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        post202Retry200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -5324,7 +5324,7 @@ public final class LROsInner {
         return post202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5346,7 +5346,7 @@ public final class LROsInner {
      *
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5368,7 +5368,7 @@ public final class LROsInner {
         return beginPost202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5400,7 +5400,7 @@ public final class LROsInner {
      * @param product Product to put
      */
     public void beginPost202Retry200(ProductInner product) {
-        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -5424,7 +5424,7 @@ public final class LROsInner {
         return beginPost202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5464,7 +5464,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner post202NoRetry204() {
-        return post202NoRetry204WithServiceResponseAsync().toBlocking().last().getBody();
+        return post202NoRetry204WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5486,7 +5486,7 @@ public final class LROsInner {
         return post202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5508,7 +5508,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner post202NoRetry204(ProductInner product) {
-        return post202NoRetry204WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return post202NoRetry204WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -5532,7 +5532,7 @@ public final class LROsInner {
         return post202NoRetry204WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5555,7 +5555,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPost202NoRetry204() {
-        return beginPost202NoRetry204WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPost202NoRetry204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5577,7 +5577,7 @@ public final class LROsInner {
         return beginPost202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5610,7 +5610,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPost202NoRetry204(ProductInner product) {
-        return beginPost202NoRetry204WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPost202NoRetry204WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -5634,7 +5634,7 @@ public final class LROsInner {
         return beginPost202NoRetry204WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5674,7 +5674,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncRetrySucceeded() {
-        return postAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return postAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5696,7 +5696,7 @@ public final class LROsInner {
         return postAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5718,7 +5718,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncRetrySucceeded(ProductInner product) {
-        return postAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return postAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -5742,7 +5742,7 @@ public final class LROsInner {
         return postAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5765,7 +5765,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncRetrySucceeded() {
-        return beginPostAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPostAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5787,7 +5787,7 @@ public final class LROsInner {
         return beginPostAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5820,7 +5820,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncRetrySucceeded(ProductInner product) {
-        return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -5844,7 +5844,7 @@ public final class LROsInner {
         return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5885,7 +5885,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncNoRetrySucceeded() {
-        return postAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return postAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5907,7 +5907,7 @@ public final class LROsInner {
         return postAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5929,7 +5929,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncNoRetrySucceeded(ProductInner product) {
-        return postAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return postAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -5953,7 +5953,7 @@ public final class LROsInner {
         return postAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5976,7 +5976,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncNoRetrySucceeded() {
-        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5998,7 +5998,7 @@ public final class LROsInner {
         return beginPostAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6031,7 +6031,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncNoRetrySucceeded(ProductInner product) {
-        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -6055,7 +6055,7 @@ public final class LROsInner {
         return beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6095,7 +6095,7 @@ public final class LROsInner {
      *
      */
     public void postAsyncRetryFailed() {
-        postAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -6117,7 +6117,7 @@ public final class LROsInner {
         return postAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6138,7 +6138,7 @@ public final class LROsInner {
      * @param product Product to put
      */
     public void postAsyncRetryFailed(ProductInner product) {
-        postAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().getBody();
+        postAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -6162,7 +6162,7 @@ public final class LROsInner {
         return postAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6184,7 +6184,7 @@ public final class LROsInner {
      *
      */
     public void beginPostAsyncRetryFailed() {
-        beginPostAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -6206,7 +6206,7 @@ public final class LROsInner {
         return beginPostAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6238,7 +6238,7 @@ public final class LROsInner {
      * @param product Product to put
      */
     public void beginPostAsyncRetryFailed(ProductInner product) {
-        beginPostAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPostAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -6262,7 +6262,7 @@ public final class LROsInner {
         return beginPostAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6301,7 +6301,7 @@ public final class LROsInner {
      *
      */
     public void postAsyncRetrycanceled() {
-        postAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -6323,7 +6323,7 @@ public final class LROsInner {
         return postAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6344,7 +6344,7 @@ public final class LROsInner {
      * @param product Product to put
      */
     public void postAsyncRetrycanceled(ProductInner product) {
-        postAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().last().getBody();
+        postAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -6368,7 +6368,7 @@ public final class LROsInner {
         return postAsyncRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6390,7 +6390,7 @@ public final class LROsInner {
      *
      */
     public void beginPostAsyncRetrycanceled() {
-        beginPostAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -6412,7 +6412,7 @@ public final class LROsInner {
         return beginPostAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6444,7 +6444,7 @@ public final class LROsInner {
      * @param product Product to put
      */
     public void beginPostAsyncRetrycanceled(ProductInner product) {
-        beginPostAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPostAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -6468,7 +6468,7 @@ public final class LROsInner {
         return beginPostAsyncRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

@@ -71,7 +71,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the ReadonlyObj object if successful.
      */
     public ReadonlyObj getValid() {
-        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -93,7 +93,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
         return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<ReadonlyObj>, ReadonlyObj>() {
             @Override
             public ReadonlyObj call(ServiceResponse<ReadonlyObj> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -131,7 +131,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @param complexBody the ReadonlyObj value
      */
     public void putValid(ReadonlyObj complexBody) {
-        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -155,7 +155,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
         return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

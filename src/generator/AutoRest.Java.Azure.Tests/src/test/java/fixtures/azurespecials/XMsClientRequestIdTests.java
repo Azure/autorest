@@ -24,13 +24,13 @@ public class XMsClientRequestIdTests {
         client.restClient().headers().addHeader("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
         ServiceResponse<Void> response = client.xMsClientRequestIds().getWithServiceResponseAsync().toBlocking().last();
         client.restClient().headers().removeHeader("x-ms-client-request-id");
-        Assert.assertEquals(200, response.getResponse().code());
+        Assert.assertEquals(200, response.response().code());
     }
 
     @Test
     public void paramGet() throws Exception {
         client.restClient().headers().removeHeader("x-ms-client-request-id");
         ServiceResponse<Void> response = client.xMsClientRequestIds().paramGetWithServiceResponseAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").toBlocking().last();
-        Assert.assertEquals(200, response.getResponse().code());
+        Assert.assertEquals(200, response.response().code());
     }
 }

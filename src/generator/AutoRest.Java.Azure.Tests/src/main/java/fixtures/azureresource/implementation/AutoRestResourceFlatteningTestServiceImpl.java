@@ -214,7 +214,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      */
     public void putArray() {
-        putArrayWithServiceResponseAsync().toBlocking().single().getBody();
+        putArrayWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -236,7 +236,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return putArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -268,7 +268,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param resourceArray External Resource as an Array to put
      */
     public void putArray(List<Resource> resourceArray) {
-        putArrayWithServiceResponseAsync(resourceArray).toBlocking().single().getBody();
+        putArrayWithServiceResponseAsync(resourceArray).toBlocking().single().body();
     }
 
     /**
@@ -292,7 +292,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return putArrayWithServiceResponseAsync(resourceArray).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -332,7 +332,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
     public List<FlattenedProduct> getArray() {
-        return getArrayWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -354,7 +354,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return getArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<List<FlattenedProduct>>, List<FlattenedProduct>>() {
             @Override
             public List<FlattenedProduct> call(ServiceResponse<List<FlattenedProduct>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -391,7 +391,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      */
     public void putDictionary() {
-        putDictionaryWithServiceResponseAsync().toBlocking().single().getBody();
+        putDictionaryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -413,7 +413,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return putDictionaryWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -445,7 +445,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param resourceDictionary External Resource as a Dictionary to put
      */
     public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) {
-        putDictionaryWithServiceResponseAsync(resourceDictionary).toBlocking().single().getBody();
+        putDictionaryWithServiceResponseAsync(resourceDictionary).toBlocking().single().body();
     }
 
     /**
@@ -469,7 +469,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return putDictionaryWithServiceResponseAsync(resourceDictionary).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -509,7 +509,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
     public Map<String, FlattenedProduct> getDictionary() {
-        return getDictionaryWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -531,7 +531,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return getDictionaryWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, FlattenedProduct>>, Map<String, FlattenedProduct>>() {
             @Override
             public Map<String, FlattenedProduct> call(ServiceResponse<Map<String, FlattenedProduct>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -568,7 +568,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      */
     public void putResourceCollection() {
-        putResourceCollectionWithServiceResponseAsync().toBlocking().single().getBody();
+        putResourceCollectionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -590,7 +590,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return putResourceCollectionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -622,7 +622,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      */
     public void putResourceCollection(ResourceCollection resourceComplexObject) {
-        putResourceCollectionWithServiceResponseAsync(resourceComplexObject).toBlocking().single().getBody();
+        putResourceCollectionWithServiceResponseAsync(resourceComplexObject).toBlocking().single().body();
     }
 
     /**
@@ -646,7 +646,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return putResourceCollectionWithServiceResponseAsync(resourceComplexObject).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -686,7 +686,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the ResourceCollection object if successful.
      */
     public ResourceCollection getResourceCollection() {
-        return getResourceCollectionWithServiceResponseAsync().toBlocking().single().getBody();
+        return getResourceCollectionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -708,7 +708,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return getResourceCollectionWithServiceResponseAsync().map(new Func1<ServiceResponse<ResourceCollection>, ResourceCollection>() {
             @Override
             public ResourceCollection call(ServiceResponse<ResourceCollection> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

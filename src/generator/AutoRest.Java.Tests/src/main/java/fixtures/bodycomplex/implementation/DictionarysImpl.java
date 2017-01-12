@@ -87,7 +87,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getValid() {
-        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -109,7 +109,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
             @Override
             public DictionaryWrapper call(ServiceResponse<DictionaryWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -147,7 +147,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
      */
     public void putValid(DictionaryWrapper complexBody) {
-        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -171,7 +171,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -214,7 +214,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getEmpty() {
-        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -236,7 +236,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
             @Override
             public DictionaryWrapper call(ServiceResponse<DictionaryWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -274,7 +274,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param complexBody Please put an empty dictionary
      */
     public void putEmpty(DictionaryWrapper complexBody) {
-        putEmptyWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putEmptyWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -298,7 +298,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putEmptyWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -341,7 +341,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -363,7 +363,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
             @Override
             public DictionaryWrapper call(ServiceResponse<DictionaryWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -401,7 +401,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getNotProvided() {
-        return getNotProvidedWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNotProvidedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -423,7 +423,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getNotProvidedWithServiceResponseAsync().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
             @Override
             public DictionaryWrapper call(ServiceResponse<DictionaryWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

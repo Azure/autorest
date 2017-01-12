@@ -180,7 +180,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object if successful.
      */
     public Product validationOfMethodParameters(String resourceGroupName, int id) {
-        return validationOfMethodParametersWithServiceResponseAsync(resourceGroupName, id).toBlocking().single().getBody();
+        return validationOfMethodParametersWithServiceResponseAsync(resourceGroupName, id).toBlocking().single().body();
     }
 
     /**
@@ -206,7 +206,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return validationOfMethodParametersWithServiceResponseAsync(resourceGroupName, id).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -257,7 +257,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object if successful.
      */
     public Product validationOfBody(String resourceGroupName, int id) {
-        return validationOfBodyWithServiceResponseAsync(resourceGroupName, id).toBlocking().single().getBody();
+        return validationOfBodyWithServiceResponseAsync(resourceGroupName, id).toBlocking().single().body();
     }
 
     /**
@@ -283,7 +283,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return validationOfBodyWithServiceResponseAsync(resourceGroupName, id).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -329,7 +329,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object if successful.
      */
     public Product validationOfBody(String resourceGroupName, int id, Product body) {
-        return validationOfBodyWithServiceResponseAsync(resourceGroupName, id, body).toBlocking().single().getBody();
+        return validationOfBodyWithServiceResponseAsync(resourceGroupName, id, body).toBlocking().single().body();
     }
 
     /**
@@ -357,7 +357,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return validationOfBodyWithServiceResponseAsync(resourceGroupName, id, body).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -406,7 +406,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      *
      */
     public void getWithConstantInPath() {
-        getWithConstantInPathWithServiceResponseAsync().toBlocking().single().getBody();
+        getWithConstantInPathWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -426,7 +426,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return getWithConstantInPathWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -462,7 +462,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object if successful.
      */
     public Product postWithConstantInBody() {
-        return postWithConstantInBodyWithServiceResponseAsync().toBlocking().single().getBody();
+        return postWithConstantInBodyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -482,7 +482,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return postWithConstantInBodyWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -514,7 +514,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object if successful.
      */
     public Product postWithConstantInBody(Product body) {
-        return postWithConstantInBodyWithServiceResponseAsync(body).toBlocking().single().getBody();
+        return postWithConstantInBodyWithServiceResponseAsync(body).toBlocking().single().body();
     }
 
     /**
@@ -536,7 +536,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return postWithConstantInBodyWithServiceResponseAsync(body).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

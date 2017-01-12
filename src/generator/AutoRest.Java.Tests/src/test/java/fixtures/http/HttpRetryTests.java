@@ -27,7 +27,7 @@ public class HttpRetryTests {
             .subscribe(new Action1<ServiceResponse<Void>>() {
                 @Override
                 public void call(ServiceResponse<Void> response) {
-                    Assert.assertEquals(200, response.getHeadResponse().code());
+                    Assert.assertEquals(200, response.headResponse().code());
                     lock.countDown();
                 }
             });
@@ -40,7 +40,7 @@ public class HttpRetryTests {
             .subscribe(new Action1<ServiceResponse<Void>>() {
                 @Override
                 public void call(ServiceResponse<Void> response) {
-                    Assert.assertEquals(200, response.getResponse().code());
+                    Assert.assertEquals(200, response.response().code());
                     lock.countDown();
                 }
             });
@@ -53,7 +53,7 @@ public class HttpRetryTests {
             .subscribe(new Action1<ServiceResponse<Void>>() {
                 @Override
                 public void call(ServiceResponse<Void> response) {
-                    Assert.assertEquals(200, response.getResponse().code());
+                    Assert.assertEquals(200, response.response().code());
                     lock.countDown();
                 }
             });
@@ -66,7 +66,7 @@ public class HttpRetryTests {
             .subscribe(new Action1<ServiceResponse<Void>>() {
                 @Override
                 public void call(ServiceResponse<Void> response) {
-                    Assert.assertEquals(200, response.getResponse().code());
+                    Assert.assertEquals(200, response.response().code());
                     lock.countDown();
                 }
             });
@@ -79,7 +79,7 @@ public class HttpRetryTests {
             .subscribe(new Action1<ServiceResponse<Void>>() {
                 @Override
                 public void call(ServiceResponse<Void> response) {
-                    Assert.assertEquals(200, response.getResponse().code());
+                    Assert.assertEquals(200, response.response().code());
                     lock.countDown();
                 }
             });
@@ -92,7 +92,7 @@ public class HttpRetryTests {
             .subscribe(new Action1<ServiceResponse<Void>>() {
                 @Override
                 public void call(ServiceResponse<Void> response) {
-                    Assert.assertEquals(200, response.getResponse().code());
+                    Assert.assertEquals(200, response.response().code());
                     lock.countDown();
                 }
             });
@@ -105,7 +105,7 @@ public class HttpRetryTests {
             .subscribe(new Action1<ServiceResponse<Void>>() {
                 @Override
                 public void call(ServiceResponse<Void> response) {
-                    Assert.assertEquals(200, response.getResponse().code());
+                    Assert.assertEquals(200, response.response().code());
                     lock.countDown();
                 }
             });
@@ -118,7 +118,7 @@ public class HttpRetryTests {
             .subscribe(new Action1<ServiceResponse<Void>>() {
                 @Override
                 public void call(ServiceResponse<Void> response) {
-                    Assert.assertEquals(200, response.getResponse().code());
+                    Assert.assertEquals(200, response.response().code());
                     lock.countDown();
                 }
             });

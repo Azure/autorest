@@ -44,7 +44,7 @@ public class HttpRedirectsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HttpRedirectsHead300Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HttpRedirectsHead300Headers> response) {
-                    Assert.assertEquals(200, response.getHeadResponse().code());
+                    Assert.assertEquals(200, response.headResponse().code());
                     lock.countDown();
                 }
             });
@@ -57,7 +57,7 @@ public class HttpRedirectsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<List<String>, HttpRedirectsGet300Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<List<String>, HttpRedirectsGet300Headers> response) {
-                    Assert.assertEquals(200, response.getResponse().code());
+                    Assert.assertEquals(200, response.response().code());
                     lock.countDown();
                 }
             });
@@ -70,7 +70,7 @@ public class HttpRedirectsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HttpRedirectsHead301Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HttpRedirectsHead301Headers> response) {
-                    Assert.assertEquals(200, response.getHeadResponse().code());
+                    Assert.assertEquals(200, response.headResponse().code());
                     lock.countDown();
                 }
             });
@@ -83,7 +83,7 @@ public class HttpRedirectsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HttpRedirectsGet301Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HttpRedirectsGet301Headers> response) {
-                    Assert.assertEquals(200, response.getResponse().code());
+                    Assert.assertEquals(200, response.response().code());
                     lock.countDown();
                 }
             });
@@ -97,7 +97,7 @@ public class HttpRedirectsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers> response) {
-                    Assert.assertEquals(301, response.getResponse().code());
+                    Assert.assertEquals(301, response.response().code());
                     lock.countDown();
                 }
             });
@@ -110,7 +110,7 @@ public class HttpRedirectsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HttpRedirectsHead302Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HttpRedirectsHead302Headers> response) {
-                    Assert.assertEquals(200, response.getHeadResponse().code());
+                    Assert.assertEquals(200, response.headResponse().code());
                     lock.countDown();
                 }
             });
@@ -123,7 +123,7 @@ public class HttpRedirectsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HttpRedirectsGet302Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HttpRedirectsGet302Headers> response) {
-                    Assert.assertEquals(200, response.getResponse().code());
+                    Assert.assertEquals(200, response.response().code());
                     lock.countDown();
                 }
             });
@@ -137,7 +137,7 @@ public class HttpRedirectsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers> response) {
-                    Assert.assertEquals(302, response.getResponse().code());
+                    Assert.assertEquals(302, response.response().code());
                     lock.countDown();
                 }
             });
@@ -150,7 +150,7 @@ public class HttpRedirectsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers> response) {
-                    Assert.assertEquals(200, response.getResponse().code());
+                    Assert.assertEquals(200, response.response().code());
                     lock.countDown();
                 }
             });
@@ -163,7 +163,7 @@ public class HttpRedirectsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HttpRedirectsHead307Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HttpRedirectsHead307Headers> response) {
-                    Assert.assertEquals(200, response.getHeadResponse().code());
+                    Assert.assertEquals(200, response.headResponse().code());
                     lock.countDown();
                 }
             });
@@ -176,7 +176,7 @@ public class HttpRedirectsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HttpRedirectsGet307Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HttpRedirectsGet307Headers> response) {
-                    Assert.assertEquals(200, response.getResponse().code());
+                    Assert.assertEquals(200, response.response().code());
                     lock.countDown();
                 }
             });
@@ -189,7 +189,7 @@ public class HttpRedirectsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers> response) {
-                    Assert.assertEquals(307, response.getResponse().code());
+                    Assert.assertEquals(307, response.response().code());
                     lock.countDown();
                 }
             });
@@ -202,7 +202,7 @@ public class HttpRedirectsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers> response) {
-                    Assert.assertEquals(307, response.getResponse().code());
+                    Assert.assertEquals(307, response.response().code());
                     lock.countDown();
                 }
             });
@@ -215,7 +215,7 @@ public class HttpRedirectsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers> response) {
-                    Assert.assertEquals(307, response.getResponse().code());
+                    Assert.assertEquals(307, response.response().code());
                     lock.countDown();
                 }
             });
@@ -228,7 +228,7 @@ public class HttpRedirectsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers> response) {
-                    Assert.assertEquals(307, response.getResponse().code());
+                    Assert.assertEquals(307, response.response().code());
                     lock.countDown();
                 }
             });

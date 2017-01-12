@@ -161,7 +161,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the IntWrapper object if successful.
      */
     public IntWrapper getInt() {
-        return getIntWithServiceResponseAsync().toBlocking().single().getBody();
+        return getIntWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -183,7 +183,7 @@ public final class PrimitivesImpl implements Primitives {
         return getIntWithServiceResponseAsync().map(new Func1<ServiceResponse<IntWrapper>, IntWrapper>() {
             @Override
             public IntWrapper call(ServiceResponse<IntWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -221,7 +221,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put -1 and 2
      */
     public void putInt(IntWrapper complexBody) {
-        putIntWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putIntWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -245,7 +245,7 @@ public final class PrimitivesImpl implements Primitives {
         return putIntWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -288,7 +288,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the LongWrapper object if successful.
      */
     public LongWrapper getLong() {
-        return getLongWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLongWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -310,7 +310,7 @@ public final class PrimitivesImpl implements Primitives {
         return getLongWithServiceResponseAsync().map(new Func1<ServiceResponse<LongWrapper>, LongWrapper>() {
             @Override
             public LongWrapper call(ServiceResponse<LongWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -348,7 +348,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put 1099511627775 and -999511627788
      */
     public void putLong(LongWrapper complexBody) {
-        putLongWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putLongWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -372,7 +372,7 @@ public final class PrimitivesImpl implements Primitives {
         return putLongWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -415,7 +415,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the FloatWrapper object if successful.
      */
     public FloatWrapper getFloat() {
-        return getFloatWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFloatWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -437,7 +437,7 @@ public final class PrimitivesImpl implements Primitives {
         return getFloatWithServiceResponseAsync().map(new Func1<ServiceResponse<FloatWrapper>, FloatWrapper>() {
             @Override
             public FloatWrapper call(ServiceResponse<FloatWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -475,7 +475,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put 1.05 and -0.003
      */
     public void putFloat(FloatWrapper complexBody) {
-        putFloatWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putFloatWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -499,7 +499,7 @@ public final class PrimitivesImpl implements Primitives {
         return putFloatWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -542,7 +542,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the DoubleWrapper object if successful.
      */
     public DoubleWrapper getDouble() {
-        return getDoubleWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDoubleWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -564,7 +564,7 @@ public final class PrimitivesImpl implements Primitives {
         return getDoubleWithServiceResponseAsync().map(new Func1<ServiceResponse<DoubleWrapper>, DoubleWrapper>() {
             @Override
             public DoubleWrapper call(ServiceResponse<DoubleWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -602,7 +602,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      */
     public void putDouble(DoubleWrapper complexBody) {
-        putDoubleWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putDoubleWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -626,7 +626,7 @@ public final class PrimitivesImpl implements Primitives {
         return putDoubleWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -669,7 +669,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the BooleanWrapper object if successful.
      */
     public BooleanWrapper getBool() {
-        return getBoolWithServiceResponseAsync().toBlocking().single().getBody();
+        return getBoolWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -691,7 +691,7 @@ public final class PrimitivesImpl implements Primitives {
         return getBoolWithServiceResponseAsync().map(new Func1<ServiceResponse<BooleanWrapper>, BooleanWrapper>() {
             @Override
             public BooleanWrapper call(ServiceResponse<BooleanWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -729,7 +729,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put true and false
      */
     public void putBool(BooleanWrapper complexBody) {
-        putBoolWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putBoolWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -753,7 +753,7 @@ public final class PrimitivesImpl implements Primitives {
         return putBoolWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -796,7 +796,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the StringWrapper object if successful.
      */
     public StringWrapper getString() {
-        return getStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -818,7 +818,7 @@ public final class PrimitivesImpl implements Primitives {
         return getStringWithServiceResponseAsync().map(new Func1<ServiceResponse<StringWrapper>, StringWrapper>() {
             @Override
             public StringWrapper call(ServiceResponse<StringWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -856,7 +856,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put 'goodrequest', '', and null
      */
     public void putString(StringWrapper complexBody) {
-        putStringWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putStringWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -880,7 +880,7 @@ public final class PrimitivesImpl implements Primitives {
         return putStringWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -923,7 +923,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the DateWrapper object if successful.
      */
     public DateWrapper getDate() {
-        return getDateWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -945,7 +945,7 @@ public final class PrimitivesImpl implements Primitives {
         return getDateWithServiceResponseAsync().map(new Func1<ServiceResponse<DateWrapper>, DateWrapper>() {
             @Override
             public DateWrapper call(ServiceResponse<DateWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -983,7 +983,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      */
     public void putDate(DateWrapper complexBody) {
-        putDateWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putDateWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -1007,7 +1007,7 @@ public final class PrimitivesImpl implements Primitives {
         return putDateWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1050,7 +1050,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the DatetimeWrapper object if successful.
      */
     public DatetimeWrapper getDateTime() {
-        return getDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1072,7 +1072,7 @@ public final class PrimitivesImpl implements Primitives {
         return getDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DatetimeWrapper>, DatetimeWrapper>() {
             @Override
             public DatetimeWrapper call(ServiceResponse<DatetimeWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1110,7 +1110,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      */
     public void putDateTime(DatetimeWrapper complexBody) {
-        putDateTimeWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putDateTimeWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -1134,7 +1134,7 @@ public final class PrimitivesImpl implements Primitives {
         return putDateTimeWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1177,7 +1177,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the Datetimerfc1123Wrapper object if successful.
      */
     public Datetimerfc1123Wrapper getDateTimeRfc1123() {
-        return getDateTimeRfc1123WithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateTimeRfc1123WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1199,7 +1199,7 @@ public final class PrimitivesImpl implements Primitives {
         return getDateTimeRfc1123WithServiceResponseAsync().map(new Func1<ServiceResponse<Datetimerfc1123Wrapper>, Datetimerfc1123Wrapper>() {
             @Override
             public Datetimerfc1123Wrapper call(ServiceResponse<Datetimerfc1123Wrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1237,7 +1237,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
      */
     public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
-        putDateTimeRfc1123WithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putDateTimeRfc1123WithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -1261,7 +1261,7 @@ public final class PrimitivesImpl implements Primitives {
         return putDateTimeRfc1123WithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1304,7 +1304,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the DurationWrapper object if successful.
      */
     public DurationWrapper getDuration() {
-        return getDurationWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDurationWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1326,7 +1326,7 @@ public final class PrimitivesImpl implements Primitives {
         return getDurationWithServiceResponseAsync().map(new Func1<ServiceResponse<DurationWrapper>, DurationWrapper>() {
             @Override
             public DurationWrapper call(ServiceResponse<DurationWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1364,7 +1364,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put 'P123DT22H14M12.011S'
      */
     public void putDuration(DurationWrapper complexBody) {
-        putDurationWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putDurationWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -1388,7 +1388,7 @@ public final class PrimitivesImpl implements Primitives {
         return putDurationWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1431,7 +1431,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the ByteWrapper object if successful.
      */
     public ByteWrapper getByte() {
-        return getByteWithServiceResponseAsync().toBlocking().single().getBody();
+        return getByteWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1453,7 +1453,7 @@ public final class PrimitivesImpl implements Primitives {
         return getByteWithServiceResponseAsync().map(new Func1<ServiceResponse<ByteWrapper>, ByteWrapper>() {
             @Override
             public ByteWrapper call(ServiceResponse<ByteWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1491,7 +1491,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      */
     public void putByte(ByteWrapper complexBody) {
-        putByteWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putByteWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -1515,7 +1515,7 @@ public final class PrimitivesImpl implements Primitives {
         return putByteWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

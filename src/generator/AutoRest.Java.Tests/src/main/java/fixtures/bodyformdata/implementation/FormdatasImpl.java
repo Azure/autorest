@@ -79,7 +79,7 @@ public final class FormdatasImpl implements Formdatas {
      * @return the InputStream object if successful.
      */
     public InputStream uploadFile(byte[] fileContent, String fileName) {
-        return uploadFileWithServiceResponseAsync(fileContent, fileName).toBlocking().single().getBody();
+        return uploadFileWithServiceResponseAsync(fileContent, fileName).toBlocking().single().body();
     }
 
     /**
@@ -105,7 +105,7 @@ public final class FormdatasImpl implements Formdatas {
         return uploadFileWithServiceResponseAsync(fileContent, fileName).map(new Func1<ServiceResponse<InputStream>, InputStream>() {
             @Override
             public InputStream call(ServiceResponse<InputStream> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -153,7 +153,7 @@ public final class FormdatasImpl implements Formdatas {
      * @return the InputStream object if successful.
      */
     public InputStream uploadFileViaBody(byte[] fileContent) {
-        return uploadFileViaBodyWithServiceResponseAsync(fileContent).toBlocking().single().getBody();
+        return uploadFileViaBodyWithServiceResponseAsync(fileContent).toBlocking().single().body();
     }
 
     /**
@@ -177,7 +177,7 @@ public final class FormdatasImpl implements Formdatas {
         return uploadFileViaBodyWithServiceResponseAsync(fileContent).map(new Func1<ServiceResponse<InputStream>, InputStream>() {
             @Override
             public InputStream call(ServiceResponse<InputStream> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

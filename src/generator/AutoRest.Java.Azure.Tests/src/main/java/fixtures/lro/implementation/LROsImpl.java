@@ -379,7 +379,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200Succeeded() {
-        return put200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return put200SucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -401,7 +401,7 @@ public final class LROsImpl implements LROs {
         return put200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -423,7 +423,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200Succeeded(Product product) {
-        return put200SucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put200SucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -447,7 +447,7 @@ public final class LROsImpl implements LROs {
         return put200SucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -470,7 +470,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200Succeeded() {
-        return beginPut200SucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200SucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -492,7 +492,7 @@ public final class LROsImpl implements LROs {
         return beginPut200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -525,7 +525,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200Succeeded(Product product) {
-        return beginPut200SucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut200SucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -549,7 +549,7 @@ public final class LROsImpl implements LROs {
         return beginPut200SucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -590,7 +590,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200SucceededNoState() {
-        return put200SucceededNoStateWithServiceResponseAsync().toBlocking().last().getBody();
+        return put200SucceededNoStateWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -612,7 +612,7 @@ public final class LROsImpl implements LROs {
         return put200SucceededNoStateWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -634,7 +634,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200SucceededNoState(Product product) {
-        return put200SucceededNoStateWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put200SucceededNoStateWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -658,7 +658,7 @@ public final class LROsImpl implements LROs {
         return put200SucceededNoStateWithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -681,7 +681,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200SucceededNoState() {
-        return beginPut200SucceededNoStateWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200SucceededNoStateWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -703,7 +703,7 @@ public final class LROsImpl implements LROs {
         return beginPut200SucceededNoStateWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -736,7 +736,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200SucceededNoState(Product product) {
-        return beginPut200SucceededNoStateWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut200SucceededNoStateWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -760,7 +760,7 @@ public final class LROsImpl implements LROs {
         return beginPut200SucceededNoStateWithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -800,7 +800,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put202Retry200() {
-        return put202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put202Retry200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -822,7 +822,7 @@ public final class LROsImpl implements LROs {
         return put202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -844,7 +844,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put202Retry200(Product product) {
-        return put202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put202Retry200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -868,7 +868,7 @@ public final class LROsImpl implements LROs {
         return put202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -891,7 +891,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut202Retry200() {
-        return beginPut202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut202Retry200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -913,7 +913,7 @@ public final class LROsImpl implements LROs {
         return beginPut202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -946,7 +946,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut202Retry200(Product product) {
-        return beginPut202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut202Retry200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -970,7 +970,7 @@ public final class LROsImpl implements LROs {
         return beginPut202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1010,7 +1010,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200() {
-        return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1032,7 +1032,7 @@ public final class LROsImpl implements LROs {
         return put201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1054,7 +1054,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200(Product product) {
-        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1078,7 +1078,7 @@ public final class LROsImpl implements LROs {
         return put201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1101,7 +1101,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1123,7 +1123,7 @@ public final class LROsImpl implements LROs {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1156,7 +1156,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200(Product product) {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1180,7 +1180,7 @@ public final class LROsImpl implements LROs {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1221,7 +1221,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200UpdatingSucceeded204() {
-        return put200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().last().getBody();
+        return put200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1243,7 +1243,7 @@ public final class LROsImpl implements LROs {
         return put200UpdatingSucceeded204WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1265,7 +1265,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200UpdatingSucceeded204(Product product) {
-        return put200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1289,7 +1289,7 @@ public final class LROsImpl implements LROs {
         return put200UpdatingSucceeded204WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1312,7 +1312,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200UpdatingSucceeded204() {
-        return beginPut200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1334,7 +1334,7 @@ public final class LROsImpl implements LROs {
         return beginPut200UpdatingSucceeded204WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1367,7 +1367,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200UpdatingSucceeded204(Product product) {
-        return beginPut200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1391,7 +1391,7 @@ public final class LROsImpl implements LROs {
         return beginPut200UpdatingSucceeded204WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1431,7 +1431,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put201CreatingFailed200() {
-        return put201CreatingFailed200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put201CreatingFailed200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1453,7 +1453,7 @@ public final class LROsImpl implements LROs {
         return put201CreatingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1475,7 +1475,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put201CreatingFailed200(Product product) {
-        return put201CreatingFailed200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put201CreatingFailed200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1499,7 +1499,7 @@ public final class LROsImpl implements LROs {
         return put201CreatingFailed200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1522,7 +1522,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingFailed200() {
-        return beginPut201CreatingFailed200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut201CreatingFailed200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1544,7 +1544,7 @@ public final class LROsImpl implements LROs {
         return beginPut201CreatingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1577,7 +1577,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingFailed200(Product product) {
-        return beginPut201CreatingFailed200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut201CreatingFailed200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1601,7 +1601,7 @@ public final class LROsImpl implements LROs {
         return beginPut201CreatingFailed200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1642,7 +1642,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200Acceptedcanceled200() {
-        return put200Acceptedcanceled200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put200Acceptedcanceled200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1664,7 +1664,7 @@ public final class LROsImpl implements LROs {
         return put200Acceptedcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1686,7 +1686,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200Acceptedcanceled200(Product product) {
-        return put200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1710,7 +1710,7 @@ public final class LROsImpl implements LROs {
         return put200Acceptedcanceled200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1733,7 +1733,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200Acceptedcanceled200() {
-        return beginPut200Acceptedcanceled200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200Acceptedcanceled200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1755,7 +1755,7 @@ public final class LROsImpl implements LROs {
         return beginPut200Acceptedcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1788,7 +1788,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200Acceptedcanceled200(Product product) {
-        return beginPut200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1812,7 +1812,7 @@ public final class LROsImpl implements LROs {
         return beginPut200Acceptedcanceled200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1852,7 +1852,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putNoHeaderInRetry() {
-        return putNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        return putNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1874,7 +1874,7 @@ public final class LROsImpl implements LROs {
         return putNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1896,7 +1896,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putNoHeaderInRetry(Product product) {
-        return putNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1920,7 +1920,7 @@ public final class LROsImpl implements LROs {
         return putNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1943,7 +1943,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutNoHeaderInRetry() {
-        return beginPutNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1965,7 +1965,7 @@ public final class LROsImpl implements LROs {
         return beginPutNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1998,7 +1998,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutNoHeaderInRetry(Product product) {
-        return beginPutNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2022,7 +2022,7 @@ public final class LROsImpl implements LROs {
         return beginPutNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2062,7 +2062,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncRetrySucceeded() {
-        return putAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2084,7 +2084,7 @@ public final class LROsImpl implements LROs {
         return putAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2106,7 +2106,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncRetrySucceeded(Product product) {
-        return putAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2130,7 +2130,7 @@ public final class LROsImpl implements LROs {
         return putAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2153,7 +2153,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetrySucceeded() {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2175,7 +2175,7 @@ public final class LROsImpl implements LROs {
         return beginPutAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2208,7 +2208,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetrySucceeded(Product product) {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2232,7 +2232,7 @@ public final class LROsImpl implements LROs {
         return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2272,7 +2272,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncNoRetrySucceeded() {
-        return putAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2294,7 +2294,7 @@ public final class LROsImpl implements LROs {
         return putAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2316,7 +2316,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncNoRetrySucceeded(Product product) {
-        return putAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2340,7 +2340,7 @@ public final class LROsImpl implements LROs {
         return putAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2363,7 +2363,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoRetrySucceeded() {
-        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2385,7 +2385,7 @@ public final class LROsImpl implements LROs {
         return beginPutAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2418,7 +2418,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoRetrySucceeded(Product product) {
-        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2442,7 +2442,7 @@ public final class LROsImpl implements LROs {
         return beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2482,7 +2482,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncRetryFailed() {
-        return putAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2504,7 +2504,7 @@ public final class LROsImpl implements LROs {
         return putAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2526,7 +2526,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncRetryFailed(Product product) {
-        return putAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2550,7 +2550,7 @@ public final class LROsImpl implements LROs {
         return putAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2573,7 +2573,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetryFailed() {
-        return beginPutAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2595,7 +2595,7 @@ public final class LROsImpl implements LROs {
         return beginPutAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2628,7 +2628,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetryFailed(Product product) {
-        return beginPutAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2652,7 +2652,7 @@ public final class LROsImpl implements LROs {
         return beginPutAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2692,7 +2692,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncNoRetrycanceled() {
-        return putAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2714,7 +2714,7 @@ public final class LROsImpl implements LROs {
         return putAsyncNoRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2736,7 +2736,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncNoRetrycanceled(Product product) {
-        return putAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2760,7 +2760,7 @@ public final class LROsImpl implements LROs {
         return putAsyncNoRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2783,7 +2783,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoRetrycanceled() {
-        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2805,7 +2805,7 @@ public final class LROsImpl implements LROs {
         return beginPutAsyncNoRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2838,7 +2838,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoRetrycanceled(Product product) {
-        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2862,7 +2862,7 @@ public final class LROsImpl implements LROs {
         return beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2902,7 +2902,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncNoHeaderInRetry() {
-        return putAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2924,7 +2924,7 @@ public final class LROsImpl implements LROs {
         return putAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2946,7 +2946,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncNoHeaderInRetry(Product product) {
-        return putAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2970,7 +2970,7 @@ public final class LROsImpl implements LROs {
         return putAsyncNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2993,7 +2993,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoHeaderInRetry() {
-        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3015,7 +3015,7 @@ public final class LROsImpl implements LROs {
         return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3048,7 +3048,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoHeaderInRetry(Product product) {
-        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -3072,7 +3072,7 @@ public final class LROsImpl implements LROs {
         return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3112,7 +3112,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku putNonResource() {
-        return putNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putNonResourceWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3134,7 +3134,7 @@ public final class LROsImpl implements LROs {
         return putNonResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<Sku>, Sku>() {
             @Override
             public Sku call(ServiceResponse<Sku> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3156,7 +3156,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku putNonResource(Sku sku) {
-        return putNonResourceWithServiceResponseAsync(sku).toBlocking().last().getBody();
+        return putNonResourceWithServiceResponseAsync(sku).toBlocking().last().body();
     }
 
     /**
@@ -3180,7 +3180,7 @@ public final class LROsImpl implements LROs {
         return putNonResourceWithServiceResponseAsync(sku).map(new Func1<ServiceResponse<Sku>, Sku>() {
             @Override
             public Sku call(ServiceResponse<Sku> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3203,7 +3203,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPutNonResource() {
-        return beginPutNonResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNonResourceWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3225,7 +3225,7 @@ public final class LROsImpl implements LROs {
         return beginPutNonResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<Sku>, Sku>() {
             @Override
             public Sku call(ServiceResponse<Sku> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3258,7 +3258,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPutNonResource(Sku sku) {
-        return beginPutNonResourceWithServiceResponseAsync(sku).toBlocking().single().getBody();
+        return beginPutNonResourceWithServiceResponseAsync(sku).toBlocking().single().body();
     }
 
     /**
@@ -3282,7 +3282,7 @@ public final class LROsImpl implements LROs {
         return beginPutNonResourceWithServiceResponseAsync(sku).map(new Func1<ServiceResponse<Sku>, Sku>() {
             @Override
             public Sku call(ServiceResponse<Sku> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3322,7 +3322,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku putAsyncNonResource() {
-        return putAsyncNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNonResourceWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3344,7 +3344,7 @@ public final class LROsImpl implements LROs {
         return putAsyncNonResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<Sku>, Sku>() {
             @Override
             public Sku call(ServiceResponse<Sku> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3366,7 +3366,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku putAsyncNonResource(Sku sku) {
-        return putAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().last().getBody();
+        return putAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().last().body();
     }
 
     /**
@@ -3390,7 +3390,7 @@ public final class LROsImpl implements LROs {
         return putAsyncNonResourceWithServiceResponseAsync(sku).map(new Func1<ServiceResponse<Sku>, Sku>() {
             @Override
             public Sku call(ServiceResponse<Sku> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3413,7 +3413,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPutAsyncNonResource() {
-        return beginPutAsyncNonResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNonResourceWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3435,7 +3435,7 @@ public final class LROsImpl implements LROs {
         return beginPutAsyncNonResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<Sku>, Sku>() {
             @Override
             public Sku call(ServiceResponse<Sku> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3468,7 +3468,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPutAsyncNonResource(Sku sku) {
-        return beginPutAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().single().getBody();
+        return beginPutAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().single().body();
     }
 
     /**
@@ -3492,7 +3492,7 @@ public final class LROsImpl implements LROs {
         return beginPutAsyncNonResourceWithServiceResponseAsync(sku).map(new Func1<ServiceResponse<Sku>, Sku>() {
             @Override
             public Sku call(ServiceResponse<Sku> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3532,7 +3532,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct putSubResource() {
-        return putSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putSubResourceWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3554,7 +3554,7 @@ public final class LROsImpl implements LROs {
         return putSubResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SubProduct>, SubProduct>() {
             @Override
             public SubProduct call(ServiceResponse<SubProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3576,7 +3576,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct putSubResource(SubProduct product) {
-        return putSubResourceWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putSubResourceWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -3600,7 +3600,7 @@ public final class LROsImpl implements LROs {
         return putSubResourceWithServiceResponseAsync(product).map(new Func1<ServiceResponse<SubProduct>, SubProduct>() {
             @Override
             public SubProduct call(ServiceResponse<SubProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3623,7 +3623,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct beginPutSubResource() {
-        return beginPutSubResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutSubResourceWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3645,7 +3645,7 @@ public final class LROsImpl implements LROs {
         return beginPutSubResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SubProduct>, SubProduct>() {
             @Override
             public SubProduct call(ServiceResponse<SubProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3678,7 +3678,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct beginPutSubResource(SubProduct product) {
-        return beginPutSubResourceWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutSubResourceWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -3702,7 +3702,7 @@ public final class LROsImpl implements LROs {
         return beginPutSubResourceWithServiceResponseAsync(product).map(new Func1<ServiceResponse<SubProduct>, SubProduct>() {
             @Override
             public SubProduct call(ServiceResponse<SubProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3742,7 +3742,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct putAsyncSubResource() {
-        return putAsyncSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncSubResourceWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3764,7 +3764,7 @@ public final class LROsImpl implements LROs {
         return putAsyncSubResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SubProduct>, SubProduct>() {
             @Override
             public SubProduct call(ServiceResponse<SubProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3786,7 +3786,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct putAsyncSubResource(SubProduct product) {
-        return putAsyncSubResourceWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncSubResourceWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -3810,7 +3810,7 @@ public final class LROsImpl implements LROs {
         return putAsyncSubResourceWithServiceResponseAsync(product).map(new Func1<ServiceResponse<SubProduct>, SubProduct>() {
             @Override
             public SubProduct call(ServiceResponse<SubProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3833,7 +3833,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct beginPutAsyncSubResource() {
-        return beginPutAsyncSubResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncSubResourceWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3855,7 +3855,7 @@ public final class LROsImpl implements LROs {
         return beginPutAsyncSubResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SubProduct>, SubProduct>() {
             @Override
             public SubProduct call(ServiceResponse<SubProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3888,7 +3888,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct beginPutAsyncSubResource(SubProduct product) {
-        return beginPutAsyncSubResourceWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncSubResourceWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -3912,7 +3912,7 @@ public final class LROsImpl implements LROs {
         return beginPutAsyncSubResourceWithServiceResponseAsync(product).map(new Func1<ServiceResponse<SubProduct>, SubProduct>() {
             @Override
             public SubProduct call(ServiceResponse<SubProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3952,7 +3952,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product deleteProvisioning202Accepted200Succeeded() {
-        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3974,7 +3974,7 @@ public final class LROsImpl implements LROs {
         return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3995,7 +3995,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4017,7 +4017,7 @@ public final class LROsImpl implements LROs {
         return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4056,7 +4056,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product deleteProvisioning202DeletingFailed200() {
-        return deleteProvisioning202DeletingFailed200WithServiceResponseAsync().toBlocking().last().getBody();
+        return deleteProvisioning202DeletingFailed200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4078,7 +4078,7 @@ public final class LROsImpl implements LROs {
         return deleteProvisioning202DeletingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4099,7 +4099,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginDeleteProvisioning202DeletingFailed200() {
-        return beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4121,7 +4121,7 @@ public final class LROsImpl implements LROs {
         return beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4160,7 +4160,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product deleteProvisioning202Deletingcanceled200() {
-        return deleteProvisioning202Deletingcanceled200WithServiceResponseAsync().toBlocking().last().getBody();
+        return deleteProvisioning202Deletingcanceled200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4182,7 +4182,7 @@ public final class LROsImpl implements LROs {
         return deleteProvisioning202Deletingcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4203,7 +4203,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginDeleteProvisioning202Deletingcanceled200() {
-        return beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4225,7 +4225,7 @@ public final class LROsImpl implements LROs {
         return beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4263,7 +4263,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void delete204Succeeded() {
-        delete204SucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        delete204SucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4285,7 +4285,7 @@ public final class LROsImpl implements LROs {
         return delete204SucceededWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4305,7 +4305,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void beginDelete204Succeeded() {
-        beginDelete204SucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDelete204SucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4327,7 +4327,7 @@ public final class LROsImpl implements LROs {
         return beginDelete204SucceededWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4365,7 +4365,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product delete202Retry200() {
-        return delete202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        return delete202Retry200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4387,7 +4387,7 @@ public final class LROsImpl implements LROs {
         return delete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4408,7 +4408,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginDelete202Retry200() {
-        return beginDelete202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDelete202Retry200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4430,7 +4430,7 @@ public final class LROsImpl implements LROs {
         return beginDelete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4469,7 +4469,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product delete202NoRetry204() {
-        return delete202NoRetry204WithServiceResponseAsync().toBlocking().last().getBody();
+        return delete202NoRetry204WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4491,7 +4491,7 @@ public final class LROsImpl implements LROs {
         return delete202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4512,7 +4512,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginDelete202NoRetry204() {
-        return beginDelete202NoRetry204WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDelete202NoRetry204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4534,7 +4534,7 @@ public final class LROsImpl implements LROs {
         return beginDelete202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4572,7 +4572,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void deleteNoHeaderInRetry() {
-        deleteNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4594,7 +4594,7 @@ public final class LROsImpl implements LROs {
         return deleteNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4614,7 +4614,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void beginDeleteNoHeaderInRetry() {
-        beginDeleteNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4636,7 +4636,7 @@ public final class LROsImpl implements LROs {
         return beginDeleteNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4674,7 +4674,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void deleteAsyncNoHeaderInRetry() {
-        deleteAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4696,7 +4696,7 @@ public final class LROsImpl implements LROs {
         return deleteAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4716,7 +4716,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void beginDeleteAsyncNoHeaderInRetry() {
-        beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4738,7 +4738,7 @@ public final class LROsImpl implements LROs {
         return beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4776,7 +4776,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void deleteAsyncRetrySucceeded() {
-        deleteAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4798,7 +4798,7 @@ public final class LROsImpl implements LROs {
         return deleteAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4818,7 +4818,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void beginDeleteAsyncRetrySucceeded() {
-        beginDeleteAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4840,7 +4840,7 @@ public final class LROsImpl implements LROs {
         return beginDeleteAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4877,7 +4877,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void deleteAsyncNoRetrySucceeded() {
-        deleteAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4899,7 +4899,7 @@ public final class LROsImpl implements LROs {
         return deleteAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4919,7 +4919,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void beginDeleteAsyncNoRetrySucceeded() {
-        beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4941,7 +4941,7 @@ public final class LROsImpl implements LROs {
         return beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4978,7 +4978,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void deleteAsyncRetryFailed() {
-        deleteAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5000,7 +5000,7 @@ public final class LROsImpl implements LROs {
         return deleteAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5020,7 +5020,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void beginDeleteAsyncRetryFailed() {
-        beginDeleteAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5042,7 +5042,7 @@ public final class LROsImpl implements LROs {
         return beginDeleteAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5079,7 +5079,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void deleteAsyncRetrycanceled() {
-        deleteAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5101,7 +5101,7 @@ public final class LROsImpl implements LROs {
         return deleteAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5121,7 +5121,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void beginDeleteAsyncRetrycanceled() {
-        beginDeleteAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5143,7 +5143,7 @@ public final class LROsImpl implements LROs {
         return beginDeleteAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5181,7 +5181,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku post200WithPayload() {
-        return post200WithPayloadWithServiceResponseAsync().toBlocking().last().getBody();
+        return post200WithPayloadWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5203,7 +5203,7 @@ public final class LROsImpl implements LROs {
         return post200WithPayloadWithServiceResponseAsync().map(new Func1<ServiceResponse<Sku>, Sku>() {
             @Override
             public Sku call(ServiceResponse<Sku> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5224,7 +5224,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPost200WithPayload() {
-        return beginPost200WithPayloadWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPost200WithPayloadWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5246,7 +5246,7 @@ public final class LROsImpl implements LROs {
         return beginPost200WithPayloadWithServiceResponseAsync().map(new Func1<ServiceResponse<Sku>, Sku>() {
             @Override
             public Sku call(ServiceResponse<Sku> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5284,7 +5284,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void post202Retry200() {
-        post202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        post202Retry200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5306,7 +5306,7 @@ public final class LROsImpl implements LROs {
         return post202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5327,7 +5327,7 @@ public final class LROsImpl implements LROs {
      * @param product Product to put
      */
     public void post202Retry200(Product product) {
-        post202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        post202Retry200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -5351,7 +5351,7 @@ public final class LROsImpl implements LROs {
         return post202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5373,7 +5373,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5395,7 +5395,7 @@ public final class LROsImpl implements LROs {
         return beginPost202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5427,7 +5427,7 @@ public final class LROsImpl implements LROs {
      * @param product Product to put
      */
     public void beginPost202Retry200(Product product) {
-        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -5451,7 +5451,7 @@ public final class LROsImpl implements LROs {
         return beginPost202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5491,7 +5491,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product post202NoRetry204() {
-        return post202NoRetry204WithServiceResponseAsync().toBlocking().last().getBody();
+        return post202NoRetry204WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5513,7 +5513,7 @@ public final class LROsImpl implements LROs {
         return post202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5535,7 +5535,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product post202NoRetry204(Product product) {
-        return post202NoRetry204WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return post202NoRetry204WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -5559,7 +5559,7 @@ public final class LROsImpl implements LROs {
         return post202NoRetry204WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5582,7 +5582,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPost202NoRetry204() {
-        return beginPost202NoRetry204WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPost202NoRetry204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5604,7 +5604,7 @@ public final class LROsImpl implements LROs {
         return beginPost202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5637,7 +5637,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPost202NoRetry204(Product product) {
-        return beginPost202NoRetry204WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPost202NoRetry204WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -5661,7 +5661,7 @@ public final class LROsImpl implements LROs {
         return beginPost202NoRetry204WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5701,7 +5701,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product postAsyncRetrySucceeded() {
-        return postAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return postAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5723,7 +5723,7 @@ public final class LROsImpl implements LROs {
         return postAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5745,7 +5745,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product postAsyncRetrySucceeded(Product product) {
-        return postAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return postAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -5769,7 +5769,7 @@ public final class LROsImpl implements LROs {
         return postAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5792,7 +5792,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPostAsyncRetrySucceeded() {
-        return beginPostAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPostAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5814,7 +5814,7 @@ public final class LROsImpl implements LROs {
         return beginPostAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5847,7 +5847,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPostAsyncRetrySucceeded(Product product) {
-        return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -5871,7 +5871,7 @@ public final class LROsImpl implements LROs {
         return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5912,7 +5912,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product postAsyncNoRetrySucceeded() {
-        return postAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return postAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5934,7 +5934,7 @@ public final class LROsImpl implements LROs {
         return postAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5956,7 +5956,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product postAsyncNoRetrySucceeded(Product product) {
-        return postAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return postAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -5980,7 +5980,7 @@ public final class LROsImpl implements LROs {
         return postAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6003,7 +6003,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPostAsyncNoRetrySucceeded() {
-        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -6025,7 +6025,7 @@ public final class LROsImpl implements LROs {
         return beginPostAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6058,7 +6058,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPostAsyncNoRetrySucceeded(Product product) {
-        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -6082,7 +6082,7 @@ public final class LROsImpl implements LROs {
         return beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6122,7 +6122,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void postAsyncRetryFailed() {
-        postAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -6144,7 +6144,7 @@ public final class LROsImpl implements LROs {
         return postAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6165,7 +6165,7 @@ public final class LROsImpl implements LROs {
      * @param product Product to put
      */
     public void postAsyncRetryFailed(Product product) {
-        postAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().getBody();
+        postAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -6189,7 +6189,7 @@ public final class LROsImpl implements LROs {
         return postAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6211,7 +6211,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void beginPostAsyncRetryFailed() {
-        beginPostAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -6233,7 +6233,7 @@ public final class LROsImpl implements LROs {
         return beginPostAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6265,7 +6265,7 @@ public final class LROsImpl implements LROs {
      * @param product Product to put
      */
     public void beginPostAsyncRetryFailed(Product product) {
-        beginPostAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPostAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -6289,7 +6289,7 @@ public final class LROsImpl implements LROs {
         return beginPostAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6328,7 +6328,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void postAsyncRetrycanceled() {
-        postAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -6350,7 +6350,7 @@ public final class LROsImpl implements LROs {
         return postAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6371,7 +6371,7 @@ public final class LROsImpl implements LROs {
      * @param product Product to put
      */
     public void postAsyncRetrycanceled(Product product) {
-        postAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().last().getBody();
+        postAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -6395,7 +6395,7 @@ public final class LROsImpl implements LROs {
         return postAsyncRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6417,7 +6417,7 @@ public final class LROsImpl implements LROs {
      *
      */
     public void beginPostAsyncRetrycanceled() {
-        beginPostAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -6439,7 +6439,7 @@ public final class LROsImpl implements LROs {
         return beginPostAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6471,7 +6471,7 @@ public final class LROsImpl implements LROs {
      * @param product Product to put
      */
     public void beginPostAsyncRetrycanceled(Product product) {
-        beginPostAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPostAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -6495,7 +6495,7 @@ public final class LROsImpl implements LROs {
         return beginPostAsyncRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

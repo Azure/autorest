@@ -81,7 +81,7 @@ public final class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -103,7 +103,7 @@ public final class BytesImpl implements Bytes {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
             @Override
             public byte[] call(ServiceResponse<byte[]> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -141,7 +141,7 @@ public final class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getEmpty() {
-        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -163,7 +163,7 @@ public final class BytesImpl implements Bytes {
         return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
             @Override
             public byte[] call(ServiceResponse<byte[]> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -201,7 +201,7 @@ public final class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getNonAscii() {
-        return getNonAsciiWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNonAsciiWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -223,7 +223,7 @@ public final class BytesImpl implements Bytes {
         return getNonAsciiWithServiceResponseAsync().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
             @Override
             public byte[] call(ServiceResponse<byte[]> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -261,7 +261,7 @@ public final class BytesImpl implements Bytes {
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      */
     public void putNonAscii(byte[] byteBody) {
-        putNonAsciiWithServiceResponseAsync(byteBody).toBlocking().single().getBody();
+        putNonAsciiWithServiceResponseAsync(byteBody).toBlocking().single().body();
     }
 
     /**
@@ -285,7 +285,7 @@ public final class BytesImpl implements Bytes {
         return putNonAsciiWithServiceResponseAsync(byteBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -327,7 +327,7 @@ public final class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -349,7 +349,7 @@ public final class BytesImpl implements Bytes {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
             @Override
             public byte[] call(ServiceResponse<byte[]> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

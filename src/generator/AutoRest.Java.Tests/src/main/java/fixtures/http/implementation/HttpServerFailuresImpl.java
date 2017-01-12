@@ -79,7 +79,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error head501() {
-        return head501WithServiceResponseAsync().toBlocking().single().getBody();
+        return head501WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -101,7 +101,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
         return head501WithServiceResponseAsync().map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -138,7 +138,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error get501() {
-        return get501WithServiceResponseAsync().toBlocking().single().getBody();
+        return get501WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -160,7 +160,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
         return get501WithServiceResponseAsync().map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -197,7 +197,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error post505() {
-        return post505WithServiceResponseAsync().toBlocking().single().getBody();
+        return post505WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -219,7 +219,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
         return post505WithServiceResponseAsync().map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -252,7 +252,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error post505(Boolean booleanValue) {
-        return post505WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        return post505WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -276,7 +276,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
         return post505WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -314,7 +314,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error delete505() {
-        return delete505WithServiceResponseAsync().toBlocking().single().getBody();
+        return delete505WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -336,7 +336,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
         return delete505WithServiceResponseAsync().map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -369,7 +369,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error delete505(Boolean booleanValue) {
-        return delete505WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        return delete505WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -393,7 +393,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
         return delete505WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

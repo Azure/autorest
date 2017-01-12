@@ -136,7 +136,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void head200() {
-        head200WithServiceResponseAsync().toBlocking().single().getBody();
+        head200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -158,7 +158,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return head200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -196,7 +196,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the boolean object if successful.
      */
     public boolean get200() {
-        return get200WithServiceResponseAsync().toBlocking().single().getBody();
+        return get200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -218,7 +218,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return get200WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -255,7 +255,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void put200() {
-        put200WithServiceResponseAsync().toBlocking().single().getBody();
+        put200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -277,7 +277,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -309,7 +309,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void put200(Boolean booleanValue) {
-        put200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        put200WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -333,7 +333,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -371,7 +371,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void patch200() {
-        patch200WithServiceResponseAsync().toBlocking().single().getBody();
+        patch200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -393,7 +393,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return patch200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -425,7 +425,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void patch200(Boolean booleanValue) {
-        patch200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        patch200WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -449,7 +449,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return patch200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -487,7 +487,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void post200() {
-        post200WithServiceResponseAsync().toBlocking().single().getBody();
+        post200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -509,7 +509,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -541,7 +541,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void post200(Boolean booleanValue) {
-        post200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        post200WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -565,7 +565,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -603,7 +603,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void delete200() {
-        delete200WithServiceResponseAsync().toBlocking().single().getBody();
+        delete200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -625,7 +625,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return delete200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -657,7 +657,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void delete200(Boolean booleanValue) {
-        delete200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        delete200WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -681,7 +681,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return delete200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -719,7 +719,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void put201() {
-        put201WithServiceResponseAsync().toBlocking().single().getBody();
+        put201WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -741,7 +741,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put201WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -773,7 +773,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void put201(Boolean booleanValue) {
-        put201WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        put201WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -797,7 +797,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put201WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -835,7 +835,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void post201() {
-        post201WithServiceResponseAsync().toBlocking().single().getBody();
+        post201WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -857,7 +857,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post201WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -889,7 +889,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void post201(Boolean booleanValue) {
-        post201WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        post201WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -913,7 +913,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post201WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -951,7 +951,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void put202() {
-        put202WithServiceResponseAsync().toBlocking().single().getBody();
+        put202WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -973,7 +973,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1005,7 +1005,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void put202(Boolean booleanValue) {
-        put202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        put202WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1029,7 +1029,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1067,7 +1067,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void patch202() {
-        patch202WithServiceResponseAsync().toBlocking().single().getBody();
+        patch202WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1089,7 +1089,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return patch202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1121,7 +1121,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void patch202(Boolean booleanValue) {
-        patch202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        patch202WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1145,7 +1145,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return patch202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1183,7 +1183,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void post202() {
-        post202WithServiceResponseAsync().toBlocking().single().getBody();
+        post202WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1205,7 +1205,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1237,7 +1237,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void post202(Boolean booleanValue) {
-        post202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        post202WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1261,7 +1261,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1299,7 +1299,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void delete202() {
-        delete202WithServiceResponseAsync().toBlocking().single().getBody();
+        delete202WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1321,7 +1321,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return delete202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1353,7 +1353,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void delete202(Boolean booleanValue) {
-        delete202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        delete202WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1377,7 +1377,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return delete202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1415,7 +1415,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void head204() {
-        head204WithServiceResponseAsync().toBlocking().single().getBody();
+        head204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1437,7 +1437,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return head204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1474,7 +1474,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void put204() {
-        put204WithServiceResponseAsync().toBlocking().single().getBody();
+        put204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1496,7 +1496,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1528,7 +1528,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void put204(Boolean booleanValue) {
-        put204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        put204WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1552,7 +1552,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1590,7 +1590,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void patch204() {
-        patch204WithServiceResponseAsync().toBlocking().single().getBody();
+        patch204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1612,7 +1612,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return patch204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1644,7 +1644,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void patch204(Boolean booleanValue) {
-        patch204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        patch204WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1668,7 +1668,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return patch204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1706,7 +1706,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void post204() {
-        post204WithServiceResponseAsync().toBlocking().single().getBody();
+        post204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1728,7 +1728,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1760,7 +1760,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void post204(Boolean booleanValue) {
-        post204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        post204WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1784,7 +1784,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1822,7 +1822,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void delete204() {
-        delete204WithServiceResponseAsync().toBlocking().single().getBody();
+        delete204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1844,7 +1844,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return delete204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1876,7 +1876,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void delete204(Boolean booleanValue) {
-        delete204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        delete204WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1900,7 +1900,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return delete204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1938,7 +1938,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void head404() {
-        head404WithServiceResponseAsync().toBlocking().single().getBody();
+        head404WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1960,7 +1960,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return head404WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

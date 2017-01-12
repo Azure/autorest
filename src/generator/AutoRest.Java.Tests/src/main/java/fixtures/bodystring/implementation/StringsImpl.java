@@ -114,7 +114,7 @@ public final class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -136,7 +136,7 @@ public final class StringsImpl implements Strings {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<String>, String>() {
             @Override
             public String call(ServiceResponse<String> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -173,7 +173,7 @@ public final class StringsImpl implements Strings {
      *
      */
     public void putNull() {
-        putNullWithServiceResponseAsync().toBlocking().single().getBody();
+        putNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -195,7 +195,7 @@ public final class StringsImpl implements Strings {
         return putNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -227,7 +227,7 @@ public final class StringsImpl implements Strings {
      * @param stringBody Possible values include: ''
      */
     public void putNull(String stringBody) {
-        putNullWithServiceResponseAsync(stringBody).toBlocking().single().getBody();
+        putNullWithServiceResponseAsync(stringBody).toBlocking().single().body();
     }
 
     /**
@@ -251,7 +251,7 @@ public final class StringsImpl implements Strings {
         return putNullWithServiceResponseAsync(stringBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -290,7 +290,7 @@ public final class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getEmpty() {
-        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -312,7 +312,7 @@ public final class StringsImpl implements Strings {
         return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<String>, String>() {
             @Override
             public String call(ServiceResponse<String> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -350,7 +350,7 @@ public final class StringsImpl implements Strings {
      * @param stringBody Possible values include: ''
      */
     public void putEmpty(String stringBody) {
-        putEmptyWithServiceResponseAsync(stringBody).toBlocking().single().getBody();
+        putEmptyWithServiceResponseAsync(stringBody).toBlocking().single().body();
     }
 
     /**
@@ -374,7 +374,7 @@ public final class StringsImpl implements Strings {
         return putEmptyWithServiceResponseAsync(stringBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -416,7 +416,7 @@ public final class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getMbcs() {
-        return getMbcsWithServiceResponseAsync().toBlocking().single().getBody();
+        return getMbcsWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -438,7 +438,7 @@ public final class StringsImpl implements Strings {
         return getMbcsWithServiceResponseAsync().map(new Func1<ServiceResponse<String>, String>() {
             @Override
             public String call(ServiceResponse<String> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -476,7 +476,7 @@ public final class StringsImpl implements Strings {
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      */
     public void putMbcs(String stringBody) {
-        putMbcsWithServiceResponseAsync(stringBody).toBlocking().single().getBody();
+        putMbcsWithServiceResponseAsync(stringBody).toBlocking().single().body();
     }
 
     /**
@@ -500,7 +500,7 @@ public final class StringsImpl implements Strings {
         return putMbcsWithServiceResponseAsync(stringBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -542,7 +542,7 @@ public final class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getWhitespace() {
-        return getWhitespaceWithServiceResponseAsync().toBlocking().single().getBody();
+        return getWhitespaceWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -564,7 +564,7 @@ public final class StringsImpl implements Strings {
         return getWhitespaceWithServiceResponseAsync().map(new Func1<ServiceResponse<String>, String>() {
             @Override
             public String call(ServiceResponse<String> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -602,7 +602,7 @@ public final class StringsImpl implements Strings {
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
      */
     public void putWhitespace(String stringBody) {
-        putWhitespaceWithServiceResponseAsync(stringBody).toBlocking().single().getBody();
+        putWhitespaceWithServiceResponseAsync(stringBody).toBlocking().single().body();
     }
 
     /**
@@ -626,7 +626,7 @@ public final class StringsImpl implements Strings {
         return putWhitespaceWithServiceResponseAsync(stringBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -668,7 +668,7 @@ public final class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getNotProvided() {
-        return getNotProvidedWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNotProvidedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -690,7 +690,7 @@ public final class StringsImpl implements Strings {
         return getNotProvidedWithServiceResponseAsync().map(new Func1<ServiceResponse<String>, String>() {
             @Override
             public String call(ServiceResponse<String> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -728,7 +728,7 @@ public final class StringsImpl implements Strings {
      * @return the byte[] object if successful.
      */
     public byte[] getBase64Encoded() {
-        return getBase64EncodedWithServiceResponseAsync().toBlocking().single().getBody();
+        return getBase64EncodedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -750,7 +750,7 @@ public final class StringsImpl implements Strings {
         return getBase64EncodedWithServiceResponseAsync().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
             @Override
             public byte[] call(ServiceResponse<byte[]> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -768,10 +768,10 @@ public final class StringsImpl implements Strings {
                     try {
                         ServiceResponse<Base64Url> result = getBase64EncodedDelegate(response);
                         byte[] body = null;
-                        if (result.getBody() != null) {
-                            body = result.getBody().getDecodedBytes();
+                        if (result.body() != null) {
+                            body = result.body().decodedBytes();
                         }
-                        ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.getResponse());
+                        ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -793,7 +793,7 @@ public final class StringsImpl implements Strings {
      * @return the byte[] object if successful.
      */
     public byte[] getBase64UrlEncoded() {
-        return getBase64UrlEncodedWithServiceResponseAsync().toBlocking().single().getBody();
+        return getBase64UrlEncodedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -815,7 +815,7 @@ public final class StringsImpl implements Strings {
         return getBase64UrlEncodedWithServiceResponseAsync().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
             @Override
             public byte[] call(ServiceResponse<byte[]> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -833,10 +833,10 @@ public final class StringsImpl implements Strings {
                     try {
                         ServiceResponse<Base64Url> result = getBase64UrlEncodedDelegate(response);
                         byte[] body = null;
-                        if (result.getBody() != null) {
-                            body = result.getBody().getDecodedBytes();
+                        if (result.body() != null) {
+                            body = result.body().decodedBytes();
                         }
-                        ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.getResponse());
+                        ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -858,7 +858,7 @@ public final class StringsImpl implements Strings {
      * @param stringBody the Base64Url value
      */
     public void putBase64UrlEncoded(byte[] stringBody) {
-        putBase64UrlEncodedWithServiceResponseAsync(stringBody).toBlocking().single().getBody();
+        putBase64UrlEncodedWithServiceResponseAsync(stringBody).toBlocking().single().body();
     }
 
     /**
@@ -882,7 +882,7 @@ public final class StringsImpl implements Strings {
         return putBase64UrlEncodedWithServiceResponseAsync(stringBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -925,7 +925,7 @@ public final class StringsImpl implements Strings {
      * @return the byte[] object if successful.
      */
     public byte[] getNullBase64UrlEncoded() {
-        return getNullBase64UrlEncodedWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullBase64UrlEncodedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -947,7 +947,7 @@ public final class StringsImpl implements Strings {
         return getNullBase64UrlEncodedWithServiceResponseAsync().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
             @Override
             public byte[] call(ServiceResponse<byte[]> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -965,10 +965,10 @@ public final class StringsImpl implements Strings {
                     try {
                         ServiceResponse<Base64Url> result = getNullBase64UrlEncodedDelegate(response);
                         byte[] body = null;
-                        if (result.getBody() != null) {
-                            body = result.getBody().getDecodedBytes();
+                        if (result.body() != null) {
+                            body = result.body().decodedBytes();
                         }
-                        ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.getResponse());
+                        ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);

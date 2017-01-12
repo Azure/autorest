@@ -165,10 +165,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getSinglePages() {
         ServiceResponse<Page<Product>> response = getSinglePagesSinglePageAsync().toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getSinglePagesNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
+                return getSinglePagesNextSinglePageAsync(nextPageLink).toBlocking().single().body();
             }
         };
     }
@@ -201,7 +201,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -216,7 +216,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -237,7 +237,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getSinglePagesDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -259,10 +259,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePages() {
         ServiceResponse<Page<Product>> response = getMultiplePagesSinglePageAsync().toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
+                return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().body();
             }
         };
     }
@@ -295,7 +295,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -310,7 +310,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -335,7 +335,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -352,10 +352,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePages(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         ServiceResponse<Page<Product>> response = getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single().getBody();
+                return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single().body();
             }
         };
     }
@@ -392,7 +392,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -409,7 +409,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -441,7 +441,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -463,10 +463,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getOdataMultiplePages() {
         ServiceResponse<Page<Product>> response = getOdataMultiplePagesSinglePageAsync().toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
+                return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().body();
             }
         };
     }
@@ -499,7 +499,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -514,7 +514,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -539,7 +539,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl1<Product>> result = getOdataMultiplePagesDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -556,10 +556,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getOdataMultiplePages(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
         ServiceResponse<Page<Product>> response = getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single().getBody();
+                return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single().body();
             }
         };
     }
@@ -596,7 +596,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -613,7 +613,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -645,7 +645,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl1<Product>> result = getOdataMultiplePagesDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -668,13 +668,13 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions) {
         ServiceResponse<Page<Product>> response = getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
                 PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
                 pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
                 pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
-                return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single().getBody();
+                return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single().body();
             }
         };
     }
@@ -712,7 +712,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -728,7 +728,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -761,7 +761,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesWithOffsetDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -778,13 +778,13 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) {
         ServiceResponse<Page<Product>> response = getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
                 PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
                 pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
                 pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
-                return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single().getBody();
+                return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single().body();
             }
         };
     }
@@ -824,7 +824,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -841,7 +841,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -874,7 +874,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesWithOffsetDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -896,10 +896,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesRetryFirst() {
         ServiceResponse<Page<Product>> response = getMultiplePagesRetryFirstSinglePageAsync().toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
+                return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).toBlocking().single().body();
             }
         };
     }
@@ -932,7 +932,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -947,7 +947,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -968,7 +968,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesRetryFirstDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -990,10 +990,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesRetrySecond() {
         ServiceResponse<Page<Product>> response = getMultiplePagesRetrySecondSinglePageAsync().toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
+                return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).toBlocking().single().body();
             }
         };
     }
@@ -1026,7 +1026,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -1041,7 +1041,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -1062,7 +1062,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesRetrySecondDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -1084,10 +1084,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getSinglePagesFailure() {
         ServiceResponse<Page<Product>> response = getSinglePagesFailureSinglePageAsync().toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getSinglePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
+                return getSinglePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().body();
             }
         };
     }
@@ -1120,7 +1120,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -1135,7 +1135,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -1156,7 +1156,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getSinglePagesFailureDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -1178,10 +1178,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesFailure() {
         ServiceResponse<Page<Product>> response = getMultiplePagesFailureSinglePageAsync().toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getMultiplePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
+                return getMultiplePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().body();
             }
         };
     }
@@ -1214,7 +1214,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -1229,7 +1229,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -1250,7 +1250,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesFailureDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -1272,10 +1272,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesFailureUri() {
         ServiceResponse<Page<Product>> response = getMultiplePagesFailureUriSinglePageAsync().toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
+                return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).toBlocking().single().body();
             }
         };
     }
@@ -1308,7 +1308,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -1323,7 +1323,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -1344,7 +1344,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesFailureUriDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -1368,10 +1368,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesFragmentNextLink(final String tenant, final String apiVersion) {
         ServiceResponse<Page<Product>> response = getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, apiVersion).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextLink) {
-                return nextFragmentSinglePageAsync(tenant, nextLink, apiVersion).toBlocking().single().getBody();
+                return nextFragmentSinglePageAsync(tenant, nextLink, apiVersion).toBlocking().single().body();
             }
         };
     }
@@ -1408,7 +1408,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -1425,7 +1425,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextLink = page.getBody().getNextPageLink();
+                    String nextLink = page.body().nextPageLink();
                     if (nextLink == null) {
                         return Observable.just(page);
                     }
@@ -1454,7 +1454,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl1<Product>> result = getMultiplePagesFragmentNextLinkDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -1477,10 +1477,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesFragmentWithGroupingNextLink(final CustomParameterGroup customParameterGroup) {
         ServiceResponse<Page<Product>> response = getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(customParameterGroup).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextLink) {
-                return nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup).toBlocking().single().getBody();
+                return nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup).toBlocking().single().body();
             }
         };
     }
@@ -1515,7 +1515,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -1531,7 +1531,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextLink = page.getBody().getNextPageLink();
+                    String nextLink = page.body().nextPageLink();
                     if (nextLink == null) {
                         return Observable.just(page);
                     }
@@ -1559,7 +1559,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl1<Product>> result = getMultiplePagesFragmentWithGroupingNextLinkDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -1584,10 +1584,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> nextFragment(final String tenant, final String nextLink, final String apiVersion) {
         ServiceResponse<Page<Product>> response = nextFragmentSinglePageAsync(tenant, nextLink, apiVersion).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextLink) {
-                return nextFragmentSinglePageAsync(tenant, nextLink, apiVersion).toBlocking().single().getBody();
+                return nextFragmentSinglePageAsync(tenant, nextLink, apiVersion).toBlocking().single().body();
             }
         };
     }
@@ -1627,7 +1627,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -1645,7 +1645,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextLink = page.getBody().getNextPageLink();
+                    String nextLink = page.body().nextPageLink();
                     if (nextLink == null) {
                         return Observable.just(page);
                     }
@@ -1679,7 +1679,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl1<Product>> result = nextFragmentDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -1703,10 +1703,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> nextFragmentWithGrouping(final String nextLink, final CustomParameterGroup customParameterGroup) {
         ServiceResponse<Page<Product>> response = nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextLink) {
-                return nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup).toBlocking().single().getBody();
+                return nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup).toBlocking().single().body();
             }
         };
     }
@@ -1744,7 +1744,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -1761,7 +1761,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextLink = page.getBody().getNextPageLink();
+                    String nextLink = page.body().nextPageLink();
                     if (nextLink == null) {
                         return Observable.just(page);
                     }
@@ -1794,7 +1794,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl1<Product>> result = nextFragmentWithGroupingDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -1817,10 +1817,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getSinglePagesNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getSinglePagesNextSinglePageAsync(nextPageLink).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getSinglePagesNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
+                return getSinglePagesNextSinglePageAsync(nextPageLink).toBlocking().single().body();
             }
         };
     }
@@ -1856,7 +1856,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -1872,7 +1872,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -1898,7 +1898,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getSinglePagesNextDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -1921,10 +1921,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getMultiplePagesNextSinglePageAsync(nextPageLink).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
+                return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().body();
             }
         };
     }
@@ -1960,7 +1960,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -1976,7 +1976,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -2006,7 +2006,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesNextDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -2024,10 +2024,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         ServiceResponse<Page<Product>> response = getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single().getBody();
+                return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single().body();
             }
         };
     }
@@ -2067,7 +2067,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -2085,7 +2085,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -2122,7 +2122,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesNextDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -2145,10 +2145,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getOdataMultiplePagesNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getOdataMultiplePagesNextSinglePageAsync(nextPageLink).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
+                return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().body();
             }
         };
     }
@@ -2184,7 +2184,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -2200,7 +2200,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -2230,7 +2230,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl1<Product>> result = getOdataMultiplePagesNextDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -2248,10 +2248,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getOdataMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
         ServiceResponse<Page<Product>> response = getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single().getBody();
+                return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single().body();
             }
         };
     }
@@ -2291,7 +2291,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -2309,7 +2309,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -2346,7 +2346,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl1<Product>> result = getOdataMultiplePagesNextDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -2369,10 +2369,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesWithOffsetNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
+                return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().body();
             }
         };
     }
@@ -2408,7 +2408,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -2424,7 +2424,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -2454,7 +2454,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesWithOffsetNextDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -2472,10 +2472,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesWithOffsetNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions) {
         ServiceResponse<Page<Product>> response = getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single().getBody();
+                return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single().body();
             }
         };
     }
@@ -2515,7 +2515,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -2533,7 +2533,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -2570,7 +2570,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesWithOffsetNextDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -2593,10 +2593,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesRetryFirstNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
+                return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).toBlocking().single().body();
             }
         };
     }
@@ -2632,7 +2632,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -2648,7 +2648,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -2674,7 +2674,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesRetryFirstNextDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -2697,10 +2697,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesRetrySecondNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
+                return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).toBlocking().single().body();
             }
         };
     }
@@ -2736,7 +2736,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -2752,7 +2752,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -2778,7 +2778,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesRetrySecondNextDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -2801,10 +2801,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getSinglePagesFailureNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getSinglePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getSinglePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
+                return getSinglePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().body();
             }
         };
     }
@@ -2840,7 +2840,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -2856,7 +2856,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -2882,7 +2882,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getSinglePagesFailureNextDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -2905,10 +2905,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesFailureNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getMultiplePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getMultiplePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
+                return getMultiplePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().body();
             }
         };
     }
@@ -2944,7 +2944,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -2960,7 +2960,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -2986,7 +2986,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesFailureNextDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }
@@ -3009,10 +3009,10 @@ public final class PagingsImpl implements Pagings {
      */
     public PagedList<Product> getMultiplePagesFailureUriNext(final String nextPageLink) {
         ServiceResponse<Page<Product>> response = getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).toBlocking().single();
-        return new PagedList<Product>(response.getBody()) {
+        return new PagedList<Product>(response.body()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) {
-                return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
+                return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).toBlocking().single().body();
             }
         };
     }
@@ -3048,7 +3048,7 @@ public final class PagingsImpl implements Pagings {
             .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
                 @Override
                 public Page<Product> call(ServiceResponse<Page<Product>> response) {
-                    return response.getBody();
+                    return response.body();
                 }
             });
     }
@@ -3064,7 +3064,7 @@ public final class PagingsImpl implements Pagings {
             .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
-                    String nextPageLink = page.getBody().getNextPageLink();
+                    String nextPageLink = page.body().nextPageLink();
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
@@ -3090,7 +3090,7 @@ public final class PagingsImpl implements Pagings {
                 public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Product>> result = getMultiplePagesFailureUriNextDelegate(response);
-                        return Observable.just(new ServiceResponse<Page<Product>>(result.getBody(), result.getResponse()));
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
                     } catch (Throwable t) {
                         return Observable.error(t);
                     }

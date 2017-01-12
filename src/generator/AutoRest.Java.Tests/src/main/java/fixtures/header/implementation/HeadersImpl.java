@@ -196,7 +196,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
      */
     public void paramExistingKey(String userAgent) {
-        paramExistingKeyWithServiceResponseAsync(userAgent).toBlocking().single().getBody();
+        paramExistingKeyWithServiceResponseAsync(userAgent).toBlocking().single().body();
     }
 
     /**
@@ -220,7 +220,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramExistingKeyWithServiceResponseAsync(userAgent).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -261,7 +261,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      */
     public void responseExistingKey() {
-        responseExistingKeyWithServiceResponseAsync().toBlocking().single().getBody();
+        responseExistingKeyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -283,7 +283,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseExistingKeyWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -321,7 +321,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param contentType Send a post request with header value "Content-Type": "text/html"
      */
     public void paramProtectedKey(String contentType) {
-        paramProtectedKeyWithServiceResponseAsync(contentType).toBlocking().single().getBody();
+        paramProtectedKeyWithServiceResponseAsync(contentType).toBlocking().single().body();
     }
 
     /**
@@ -345,7 +345,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramProtectedKeyWithServiceResponseAsync(contentType).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -386,7 +386,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      */
     public void responseProtectedKey() {
-        responseProtectedKeyWithServiceResponseAsync().toBlocking().single().getBody();
+        responseProtectedKeyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -408,7 +408,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseProtectedKeyWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -447,7 +447,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values 1 or -2
      */
     public void paramInteger(String scenario, int value) {
-        paramIntegerWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramIntegerWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -473,7 +473,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramIntegerWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -516,7 +516,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      */
     public void responseInteger(String scenario) {
-        responseIntegerWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseIntegerWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -540,7 +540,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseIntegerWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -583,7 +583,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values 105 or -2
      */
     public void paramLong(String scenario, long value) {
-        paramLongWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramLongWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -609,7 +609,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramLongWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -652,7 +652,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      */
     public void responseLong(String scenario) {
-        responseLongWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseLongWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -676,7 +676,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseLongWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -719,7 +719,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values 0.07 or -3.0
      */
     public void paramFloat(String scenario, double value) {
-        paramFloatWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramFloatWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -745,7 +745,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramFloatWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -788,7 +788,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      */
     public void responseFloat(String scenario) {
-        responseFloatWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseFloatWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -812,7 +812,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseFloatWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -855,7 +855,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values 7e120 or -3.0
      */
     public void paramDouble(String scenario, double value) {
-        paramDoubleWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramDoubleWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -881,7 +881,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramDoubleWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -924,7 +924,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      */
     public void responseDouble(String scenario) {
-        responseDoubleWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseDoubleWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -948,7 +948,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseDoubleWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -991,7 +991,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values true or false
      */
     public void paramBool(String scenario, boolean value) {
-        paramBoolWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramBoolWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -1017,7 +1017,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramBoolWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1060,7 +1060,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      */
     public void responseBool(String scenario) {
-        responseBoolWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseBoolWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1084,7 +1084,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseBoolWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1126,7 +1126,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      */
     public void paramString(String scenario) {
-        paramStringWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        paramStringWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1150,7 +1150,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramStringWithServiceResponseAsync(scenario).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1187,7 +1187,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
      */
     public void paramString(String scenario, String value) {
-        paramStringWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramStringWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -1213,7 +1213,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramStringWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1256,7 +1256,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      */
     public void responseString(String scenario) {
-        responseStringWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseStringWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1280,7 +1280,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseStringWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1323,7 +1323,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      */
     public void paramDate(String scenario, LocalDate value) {
-        paramDateWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramDateWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -1349,7 +1349,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramDateWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1395,7 +1395,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      */
     public void responseDate(String scenario) {
-        responseDateWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseDateWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1419,7 +1419,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseDateWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1462,7 +1462,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      */
     public void paramDatetime(String scenario, DateTime value) {
-        paramDatetimeWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramDatetimeWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -1488,7 +1488,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramDatetimeWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1534,7 +1534,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      */
     public void responseDatetime(String scenario) {
-        responseDatetimeWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseDatetimeWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1558,7 +1558,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseDatetimeWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1600,7 +1600,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      */
     public void paramDatetimeRfc1123(String scenario) {
-        paramDatetimeRfc1123WithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        paramDatetimeRfc1123WithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1624,7 +1624,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramDatetimeRfc1123WithServiceResponseAsync(scenario).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1665,7 +1665,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
      */
     public void paramDatetimeRfc1123(String scenario, DateTime value) {
-        paramDatetimeRfc1123WithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramDatetimeRfc1123WithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -1691,7 +1691,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramDatetimeRfc1123WithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1738,7 +1738,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      */
     public void responseDatetimeRfc1123(String scenario) {
-        responseDatetimeRfc1123WithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseDatetimeRfc1123WithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1762,7 +1762,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseDatetimeRfc1123WithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1805,7 +1805,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "P123DT22H14M12.011S"
      */
     public void paramDuration(String scenario, Period value) {
-        paramDurationWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramDurationWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -1831,7 +1831,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramDurationWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1877,7 +1877,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      */
     public void responseDuration(String scenario) {
-        responseDurationWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseDurationWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1901,7 +1901,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseDurationWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1944,7 +1944,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
      */
     public void paramByte(String scenario, byte[] value) {
-        paramByteWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramByteWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -1970,7 +1970,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramByteWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2017,7 +2017,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      */
     public void responseByte(String scenario) {
-        responseByteWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseByteWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -2041,7 +2041,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseByteWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2083,7 +2083,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      */
     public void paramEnum(String scenario) {
-        paramEnumWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        paramEnumWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -2107,7 +2107,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramEnumWithServiceResponseAsync(scenario).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2144,7 +2144,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'
      */
     public void paramEnum(String scenario, GreyscaleColors value) {
-        paramEnumWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramEnumWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -2170,7 +2170,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramEnumWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2213,7 +2213,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      */
     public void responseEnum(String scenario) {
-        responseEnumWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseEnumWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -2237,7 +2237,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseEnumWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2278,7 +2278,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      */
     public void customRequestId() {
-        customRequestIdWithServiceResponseAsync().toBlocking().single().getBody();
+        customRequestIdWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2300,7 +2300,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return customRequestIdWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

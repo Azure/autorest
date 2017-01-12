@@ -64,7 +64,7 @@ public final class PathsInner {
      * @param accountName Account Name
      */
     public void getEmpty(String accountName) {
-        getEmptyWithServiceResponseAsync(accountName).toBlocking().single().getBody();
+        getEmptyWithServiceResponseAsync(accountName).toBlocking().single().body();
     }
 
     /**
@@ -88,7 +88,7 @@ public final class PathsInner {
         return getEmptyWithServiceResponseAsync(accountName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

@@ -120,7 +120,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200() {
-        return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -142,7 +142,7 @@ public final class LRORetrysInner {
         return put201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -164,7 +164,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200(ProductInner product) {
-        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -188,7 +188,7 @@ public final class LRORetrysInner {
         return put201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -211,7 +211,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -233,7 +233,7 @@ public final class LRORetrysInner {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -266,7 +266,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200(ProductInner product) {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -290,7 +290,7 @@ public final class LRORetrysInner {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -331,7 +331,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRelativeRetrySucceeded() {
-        return putAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -353,7 +353,7 @@ public final class LRORetrysInner {
         return putAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -375,7 +375,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRelativeRetrySucceeded(ProductInner product) {
-        return putAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -399,7 +399,7 @@ public final class LRORetrysInner {
         return putAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -422,7 +422,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetrySucceeded() {
-        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -444,7 +444,7 @@ public final class LRORetrysInner {
         return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -477,7 +477,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetrySucceeded(ProductInner product) {
-        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -501,7 +501,7 @@ public final class LRORetrysInner {
         return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -541,7 +541,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner deleteProvisioning202Accepted200Succeeded() {
-        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -563,7 +563,7 @@ public final class LRORetrysInner {
         return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -584,7 +584,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -606,7 +606,7 @@ public final class LRORetrysInner {
         return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -644,7 +644,7 @@ public final class LRORetrysInner {
      *
      */
     public void delete202Retry200() {
-        delete202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        delete202Retry200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -666,7 +666,7 @@ public final class LRORetrysInner {
         return delete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -686,7 +686,7 @@ public final class LRORetrysInner {
      *
      */
     public void beginDelete202Retry200() {
-        beginDelete202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        beginDelete202Retry200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -708,7 +708,7 @@ public final class LRORetrysInner {
         return beginDelete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -745,7 +745,7 @@ public final class LRORetrysInner {
      *
      */
     public void deleteAsyncRelativeRetrySucceeded() {
-        deleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -767,7 +767,7 @@ public final class LRORetrysInner {
         return deleteAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -787,7 +787,7 @@ public final class LRORetrysInner {
      *
      */
     public void beginDeleteAsyncRelativeRetrySucceeded() {
-        beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -809,7 +809,7 @@ public final class LRORetrysInner {
         return beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -846,7 +846,7 @@ public final class LRORetrysInner {
      *
      */
     public void post202Retry200() {
-        post202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        post202Retry200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -868,7 +868,7 @@ public final class LRORetrysInner {
         return post202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -889,7 +889,7 @@ public final class LRORetrysInner {
      * @param product Product to put
      */
     public void post202Retry200(ProductInner product) {
-        post202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        post202Retry200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -913,7 +913,7 @@ public final class LRORetrysInner {
         return post202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -935,7 +935,7 @@ public final class LRORetrysInner {
      *
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -957,7 +957,7 @@ public final class LRORetrysInner {
         return beginPost202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -989,7 +989,7 @@ public final class LRORetrysInner {
      * @param product Product to put
      */
     public void beginPost202Retry200(ProductInner product) {
-        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1013,7 +1013,7 @@ public final class LRORetrysInner {
         return beginPost202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1052,7 +1052,7 @@ public final class LRORetrysInner {
      *
      */
     public void postAsyncRelativeRetrySucceeded() {
-        postAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1074,7 +1074,7 @@ public final class LRORetrysInner {
         return postAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1095,7 +1095,7 @@ public final class LRORetrysInner {
      * @param product Product to put
      */
     public void postAsyncRelativeRetrySucceeded(ProductInner product) {
-        postAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        postAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1119,7 +1119,7 @@ public final class LRORetrysInner {
         return postAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1141,7 +1141,7 @@ public final class LRORetrysInner {
      *
      */
     public void beginPostAsyncRelativeRetrySucceeded() {
-        beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1163,7 +1163,7 @@ public final class LRORetrysInner {
         return beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1195,7 +1195,7 @@ public final class LRORetrysInner {
      * @param product Product to put
      */
     public void beginPostAsyncRelativeRetrySucceeded(ProductInner product) {
-        beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1219,7 +1219,7 @@ public final class LRORetrysInner {
         return beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

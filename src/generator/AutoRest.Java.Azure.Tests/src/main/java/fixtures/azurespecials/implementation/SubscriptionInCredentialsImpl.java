@@ -81,7 +81,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      *
      */
     public void postMethodGlobalValid() {
-        postMethodGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        postMethodGlobalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -103,7 +103,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
         return postMethodGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -143,7 +143,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      *
      */
     public void postMethodGlobalNull() {
-        postMethodGlobalNullWithServiceResponseAsync().toBlocking().single().getBody();
+        postMethodGlobalNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -165,7 +165,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
         return postMethodGlobalNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -205,7 +205,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      *
      */
     public void postMethodGlobalNotProvidedValid() {
-        postMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().getBody();
+        postMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -227,7 +227,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
         return postMethodGlobalNotProvidedValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -270,7 +270,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      *
      */
     public void postPathGlobalValid() {
-        postPathGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        postPathGlobalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -292,7 +292,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
         return postPathGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -332,7 +332,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      *
      */
     public void postSwaggerGlobalValid() {
-        postSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        postSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -354,7 +354,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
         return postSwaggerGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

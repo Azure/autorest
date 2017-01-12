@@ -71,7 +71,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @return the Fish object if successful.
      */
     public Fish getValid() {
-        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -93,7 +93,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
         return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Fish>, Fish>() {
             @Override
             public Fish call(ServiceResponse<Fish> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -183,7 +183,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      }
      */
     public void putValid(Fish complexBody) {
-        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -311,7 +311,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
         return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

@@ -68,7 +68,7 @@ public final class HeadersInner {
      * @param fooClientRequestId The fooRequestId
      */
     public void customNamedRequestId(String fooClientRequestId) {
-        customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).toBlocking().single().getBody();
+        customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).toBlocking().single().body();
     }
 
     /**
@@ -92,7 +92,7 @@ public final class HeadersInner {
         return customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).map(new Func1<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -134,7 +134,7 @@ public final class HeadersInner {
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
      */
     public void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
-        customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).toBlocking().single().getBody();
+        customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).toBlocking().single().body();
     }
 
     /**
@@ -158,7 +158,7 @@ public final class HeadersInner {
         return customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).map(new Func1<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

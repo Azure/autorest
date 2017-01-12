@@ -32,7 +32,7 @@ public class HeaderResponseDatetimeRfc1123Headers {
         if (this.value == null) {
             return null;
         }
-        return this.value.getDateTime();
+        return this.value.dateTime();
     }
 
     /**

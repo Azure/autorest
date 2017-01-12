@@ -140,7 +140,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void head300() {
-        head300WithServiceResponseAsync().toBlocking().single().getBody();
+        head300WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -162,7 +162,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return head300WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsHead300Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsHead300Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -201,7 +201,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> get300() {
-        return get300WithServiceResponseAsync().toBlocking().single().getBody();
+        return get300WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -223,7 +223,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return get300WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<List<String>, HttpRedirectsGet300Headers>, List<String>>() {
             @Override
             public List<String> call(ServiceResponseWithHeaders<List<String>, HttpRedirectsGet300Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -261,7 +261,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void head301() {
-        head301WithServiceResponseAsync().toBlocking().single().getBody();
+        head301WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -283,7 +283,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return head301WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsHead301Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsHead301Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -321,7 +321,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void get301() {
-        get301WithServiceResponseAsync().toBlocking().single().getBody();
+        get301WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -343,7 +343,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return get301WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsGet301Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsGet301Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -381,7 +381,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void put301() {
-        put301WithServiceResponseAsync().toBlocking().single().getBody();
+        put301WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -403,7 +403,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return put301WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -435,7 +435,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      */
     public void put301(Boolean booleanValue) {
-        put301WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        put301WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -459,7 +459,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return put301WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -497,7 +497,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void head302() {
-        head302WithServiceResponseAsync().toBlocking().single().getBody();
+        head302WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -519,7 +519,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return head302WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsHead302Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsHead302Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -557,7 +557,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void get302() {
-        get302WithServiceResponseAsync().toBlocking().single().getBody();
+        get302WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -579,7 +579,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return get302WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsGet302Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsGet302Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -617,7 +617,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void patch302() {
-        patch302WithServiceResponseAsync().toBlocking().single().getBody();
+        patch302WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -639,7 +639,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return patch302WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -671,7 +671,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      */
     public void patch302(Boolean booleanValue) {
-        patch302WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        patch302WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -695,7 +695,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return patch302WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -733,7 +733,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void post303() {
-        post303WithServiceResponseAsync().toBlocking().single().getBody();
+        post303WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -755,7 +755,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return post303WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -787,7 +787,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      */
     public void post303(Boolean booleanValue) {
-        post303WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        post303WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -811,7 +811,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return post303WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -850,7 +850,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void head307() {
-        head307WithServiceResponseAsync().toBlocking().single().getBody();
+        head307WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -872,7 +872,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return head307WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsHead307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsHead307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -910,7 +910,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void get307() {
-        get307WithServiceResponseAsync().toBlocking().single().getBody();
+        get307WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -932,7 +932,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return get307WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsGet307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsGet307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -970,7 +970,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void put307() {
-        put307WithServiceResponseAsync().toBlocking().single().getBody();
+        put307WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -992,7 +992,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return put307WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1024,7 +1024,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      */
     public void put307(Boolean booleanValue) {
-        put307WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        put307WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1048,7 +1048,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return put307WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1087,7 +1087,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void patch307() {
-        patch307WithServiceResponseAsync().toBlocking().single().getBody();
+        patch307WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1109,7 +1109,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return patch307WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1141,7 +1141,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      */
     public void patch307(Boolean booleanValue) {
-        patch307WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        patch307WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1165,7 +1165,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return patch307WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1204,7 +1204,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void post307() {
-        post307WithServiceResponseAsync().toBlocking().single().getBody();
+        post307WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1226,7 +1226,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return post307WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1258,7 +1258,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      */
     public void post307(Boolean booleanValue) {
-        post307WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        post307WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1282,7 +1282,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return post307WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1321,7 +1321,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void delete307() {
-        delete307WithServiceResponseAsync().toBlocking().single().getBody();
+        delete307WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1343,7 +1343,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return delete307WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1375,7 +1375,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      */
     public void delete307(Boolean booleanValue) {
-        delete307WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        delete307WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1399,7 +1399,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return delete307WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

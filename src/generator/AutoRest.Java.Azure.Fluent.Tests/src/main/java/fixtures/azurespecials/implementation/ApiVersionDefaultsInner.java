@@ -75,7 +75,7 @@ public final class ApiVersionDefaultsInner {
      *
      */
     public void getMethodGlobalValid() {
-        getMethodGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getMethodGlobalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -97,7 +97,7 @@ public final class ApiVersionDefaultsInner {
         return getMethodGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -137,7 +137,7 @@ public final class ApiVersionDefaultsInner {
      *
      */
     public void getMethodGlobalNotProvidedValid() {
-        getMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -159,7 +159,7 @@ public final class ApiVersionDefaultsInner {
         return getMethodGlobalNotProvidedValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -199,7 +199,7 @@ public final class ApiVersionDefaultsInner {
      *
      */
     public void getPathGlobalValid() {
-        getPathGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getPathGlobalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -221,7 +221,7 @@ public final class ApiVersionDefaultsInner {
         return getPathGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -261,7 +261,7 @@ public final class ApiVersionDefaultsInner {
      *
      */
     public void getSwaggerGlobalValid() {
-        getSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -283,7 +283,7 @@ public final class ApiVersionDefaultsInner {
         return getSwaggerGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

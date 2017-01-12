@@ -13,7 +13,7 @@ package fixtures.requiredoptional.implementation;
 import retrofit2.Retrofit;
 import fixtures.requiredoptional.Explicits;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.protocol.CollectionFormat;
+import com.microsoft.rest.CollectionFormat;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -163,7 +163,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerParameter(int bodyParameter) {
-        return postRequiredIntegerParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredIntegerParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -187,7 +187,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredIntegerParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -224,7 +224,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalIntegerParameter() {
-        postOptionalIntegerParameterWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalIntegerParameterWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -246,7 +246,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalIntegerParameterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -278,7 +278,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the Integer value
      */
     public void postOptionalIntegerParameter(Integer bodyParameter) {
-        postOptionalIntegerParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalIntegerParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -302,7 +302,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalIntegerParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -342,7 +342,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerProperty(IntWrapper bodyParameter) {
-        return postRequiredIntegerPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredIntegerPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -366,7 +366,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredIntegerPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -407,7 +407,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalIntegerProperty() {
-        postOptionalIntegerPropertyWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalIntegerPropertyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -429,7 +429,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalIntegerPropertyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -461,7 +461,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the IntOptionalWrapper value
      */
     public void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) {
-        postOptionalIntegerPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalIntegerPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -485,7 +485,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalIntegerPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -526,7 +526,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerHeader(int headerParameter) {
-        return postRequiredIntegerHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().getBody();
+        return postRequiredIntegerHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().body();
     }
 
     /**
@@ -550,7 +550,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredIntegerHeaderWithServiceResponseAsync(headerParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -587,7 +587,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalIntegerHeader() {
-        postOptionalIntegerHeaderWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalIntegerHeaderWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -609,7 +609,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalIntegerHeaderWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -641,7 +641,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param headerParameter the Integer value
      */
     public void postOptionalIntegerHeader(Integer headerParameter) {
-        postOptionalIntegerHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().getBody();
+        postOptionalIntegerHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().body();
     }
 
     /**
@@ -665,7 +665,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalIntegerHeaderWithServiceResponseAsync(headerParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -705,7 +705,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringParameter(String bodyParameter) {
-        return postRequiredStringParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredStringParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -729,7 +729,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredStringParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -769,7 +769,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalStringParameter() {
-        postOptionalStringParameterWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalStringParameterWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -791,7 +791,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalStringParameterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -823,7 +823,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the String value
      */
     public void postOptionalStringParameter(String bodyParameter) {
-        postOptionalStringParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalStringParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -847,7 +847,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalStringParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -887,7 +887,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringProperty(StringWrapper bodyParameter) {
-        return postRequiredStringPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredStringPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -911,7 +911,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredStringPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -952,7 +952,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalStringProperty() {
-        postOptionalStringPropertyWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalStringPropertyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -974,7 +974,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalStringPropertyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1006,7 +1006,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the StringOptionalWrapper value
      */
     public void postOptionalStringProperty(StringOptionalWrapper bodyParameter) {
-        postOptionalStringPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalStringPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1030,7 +1030,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalStringPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1071,7 +1071,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringHeader(String headerParameter) {
-        return postRequiredStringHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().getBody();
+        return postRequiredStringHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().body();
     }
 
     /**
@@ -1095,7 +1095,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredStringHeaderWithServiceResponseAsync(headerParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1135,7 +1135,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalStringHeader() {
-        postOptionalStringHeaderWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalStringHeaderWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1157,7 +1157,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalStringHeaderWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1189,7 +1189,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the String value
      */
     public void postOptionalStringHeader(String bodyParameter) {
-        postOptionalStringHeaderWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalStringHeaderWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1213,7 +1213,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalStringHeaderWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1253,7 +1253,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredClassParameter(Product bodyParameter) {
-        return postRequiredClassParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredClassParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1277,7 +1277,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredClassParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1318,7 +1318,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalClassParameter() {
-        postOptionalClassParameterWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalClassParameterWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1340,7 +1340,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalClassParameterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1372,7 +1372,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the Product value
      */
     public void postOptionalClassParameter(Product bodyParameter) {
-        postOptionalClassParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalClassParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1396,7 +1396,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalClassParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1437,7 +1437,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredClassProperty(ClassWrapper bodyParameter) {
-        return postRequiredClassPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredClassPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1461,7 +1461,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredClassPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1502,7 +1502,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalClassProperty() {
-        postOptionalClassPropertyWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalClassPropertyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1524,7 +1524,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalClassPropertyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1556,7 +1556,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the ClassOptionalWrapper value
      */
     public void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) {
-        postOptionalClassPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalClassPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1580,7 +1580,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalClassPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1621,7 +1621,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayParameter(List<String> bodyParameter) {
-        return postRequiredArrayParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredArrayParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1645,7 +1645,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredArrayParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1686,7 +1686,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalArrayParameter() {
-        postOptionalArrayParameterWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalArrayParameterWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1708,7 +1708,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalArrayParameterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1740,7 +1740,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the List&lt;String&gt; value
      */
     public void postOptionalArrayParameter(List<String> bodyParameter) {
-        postOptionalArrayParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalArrayParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1764,7 +1764,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalArrayParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1805,7 +1805,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayProperty(ArrayWrapper bodyParameter) {
-        return postRequiredArrayPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredArrayPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1829,7 +1829,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredArrayPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1870,7 +1870,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalArrayProperty() {
-        postOptionalArrayPropertyWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalArrayPropertyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1892,7 +1892,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalArrayPropertyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1924,7 +1924,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the ArrayOptionalWrapper value
      */
     public void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) {
-        postOptionalArrayPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalArrayPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1948,7 +1948,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalArrayPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1989,7 +1989,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayHeader(List<String> headerParameter) {
-        return postRequiredArrayHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().getBody();
+        return postRequiredArrayHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().body();
     }
 
     /**
@@ -2013,7 +2013,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredArrayHeaderWithServiceResponseAsync(headerParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2055,7 +2055,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalArrayHeader() {
-        postOptionalArrayHeaderWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalArrayHeaderWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2077,7 +2077,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalArrayHeaderWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2110,7 +2110,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param headerParameter the List&lt;String&gt; value
      */
     public void postOptionalArrayHeader(List<String> headerParameter) {
-        postOptionalArrayHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().getBody();
+        postOptionalArrayHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().body();
     }
 
     /**
@@ -2134,7 +2134,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalArrayHeaderWithServiceResponseAsync(headerParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

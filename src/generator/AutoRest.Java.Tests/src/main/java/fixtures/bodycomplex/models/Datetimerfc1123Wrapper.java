@@ -36,7 +36,7 @@ public class Datetimerfc1123Wrapper {
         if (this.field == null) {
             return null;
         }
-        return this.field.getDateTime();
+        return this.field.dateTime();
     }
 
     /**
@@ -63,7 +63,7 @@ public class Datetimerfc1123Wrapper {
         if (this.now == null) {
             return null;
         }
-        return this.now.getDateTime();
+        return this.now.dateTime();
     }
 
     /**

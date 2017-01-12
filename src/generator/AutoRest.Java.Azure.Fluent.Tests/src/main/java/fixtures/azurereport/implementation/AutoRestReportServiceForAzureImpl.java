@@ -187,7 +187,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getReport() {
-        return getReportWithServiceResponseAsync().toBlocking().single().getBody();
+        return getReportWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -209,7 +209,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         return getReportWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
             @Override
             public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

@@ -80,7 +80,7 @@ public final class SubscriptionInCredentialsInner {
      *
      */
     public void postMethodGlobalValid() {
-        postMethodGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        postMethodGlobalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -102,7 +102,7 @@ public final class SubscriptionInCredentialsInner {
         return postMethodGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -142,7 +142,7 @@ public final class SubscriptionInCredentialsInner {
      *
      */
     public void postMethodGlobalNull() {
-        postMethodGlobalNullWithServiceResponseAsync().toBlocking().single().getBody();
+        postMethodGlobalNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -164,7 +164,7 @@ public final class SubscriptionInCredentialsInner {
         return postMethodGlobalNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -204,7 +204,7 @@ public final class SubscriptionInCredentialsInner {
      *
      */
     public void postMethodGlobalNotProvidedValid() {
-        postMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().getBody();
+        postMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -226,7 +226,7 @@ public final class SubscriptionInCredentialsInner {
         return postMethodGlobalNotProvidedValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -269,7 +269,7 @@ public final class SubscriptionInCredentialsInner {
      *
      */
     public void postPathGlobalValid() {
-        postPathGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        postPathGlobalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -291,7 +291,7 @@ public final class SubscriptionInCredentialsInner {
         return postPathGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -331,7 +331,7 @@ public final class SubscriptionInCredentialsInner {
      *
      */
     public void postSwaggerGlobalValid() {
-        postSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        postSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -353,7 +353,7 @@ public final class SubscriptionInCredentialsInner {
         return postSwaggerGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

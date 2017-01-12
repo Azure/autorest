@@ -70,7 +70,7 @@ public final class HttpSuccessInner {
      * @return the boolean object if successful.
      */
     public boolean head200() {
-        return head200WithServiceResponseAsync().toBlocking().single().getBody();
+        return head200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -92,7 +92,7 @@ public final class HttpSuccessInner {
         return head200WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -131,7 +131,7 @@ public final class HttpSuccessInner {
      * @return the boolean object if successful.
      */
     public boolean head204() {
-        return head204WithServiceResponseAsync().toBlocking().single().getBody();
+        return head204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -153,7 +153,7 @@ public final class HttpSuccessInner {
         return head204WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -192,7 +192,7 @@ public final class HttpSuccessInner {
      * @return the boolean object if successful.
      */
     public boolean head404() {
-        return head404WithServiceResponseAsync().toBlocking().single().getBody();
+        return head404WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -214,7 +214,7 @@ public final class HttpSuccessInner {
         return head404WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

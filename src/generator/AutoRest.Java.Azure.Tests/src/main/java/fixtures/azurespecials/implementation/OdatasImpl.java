@@ -64,7 +64,7 @@ public final class OdatasImpl implements Odatas {
      *
      */
     public void getWithFilter() {
-        getWithFilterWithServiceResponseAsync().toBlocking().single().getBody();
+        getWithFilterWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -86,7 +86,7 @@ public final class OdatasImpl implements Odatas {
         return getWithFilterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -122,7 +122,7 @@ public final class OdatasImpl implements Odatas {
      * @param orderby The orderby parameter with value id.
      */
     public void getWithFilter(String filter, Integer top, String orderby) {
-        getWithFilterWithServiceResponseAsync(filter, top, orderby).toBlocking().single().getBody();
+        getWithFilterWithServiceResponseAsync(filter, top, orderby).toBlocking().single().body();
     }
 
     /**
@@ -150,7 +150,7 @@ public final class OdatasImpl implements Odatas {
         return getWithFilterWithServiceResponseAsync(filter, top, orderby).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

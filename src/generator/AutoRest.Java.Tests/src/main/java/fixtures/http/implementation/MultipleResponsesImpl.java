@@ -201,7 +201,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError200Valid() {
-        return get200Model204NoModelDefaultError200ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model204NoModelDefaultError200ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -223,7 +223,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model204NoModelDefaultError200ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -262,7 +262,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError204Valid() {
-        return get200Model204NoModelDefaultError204ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model204NoModelDefaultError204ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -284,7 +284,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model204NoModelDefaultError204ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -323,7 +323,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError201Invalid() {
-        return get200Model204NoModelDefaultError201InvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model204NoModelDefaultError201InvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -345,7 +345,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model204NoModelDefaultError201InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -384,7 +384,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError202None() {
-        return get200Model204NoModelDefaultError202NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model204NoModelDefaultError202NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -406,7 +406,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model204NoModelDefaultError202NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -445,7 +445,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError400Valid() {
-        return get200Model204NoModelDefaultError400ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model204NoModelDefaultError400ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -467,7 +467,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model204NoModelDefaultError400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -506,7 +506,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError200Valid() {
-        return get200Model201ModelDefaultError200ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model201ModelDefaultError200ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -528,7 +528,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model201ModelDefaultError200ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -567,7 +567,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError201Valid() {
-        return get200Model201ModelDefaultError201ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model201ModelDefaultError201ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -589,7 +589,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model201ModelDefaultError201ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -628,7 +628,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError400Valid() {
-        return get200Model201ModelDefaultError400ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model201ModelDefaultError400ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -650,7 +650,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model201ModelDefaultError400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -689,7 +689,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError200Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError200ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA201ModelC404ModelDDefaultError200ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -711,7 +711,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
             public Object call(ServiceResponse<Object> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -751,7 +751,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError201Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError201ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA201ModelC404ModelDDefaultError201ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -773,7 +773,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
             public Object call(ServiceResponse<Object> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -813,7 +813,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError404Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError404ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA201ModelC404ModelDDefaultError404ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -835,7 +835,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
             public Object call(ServiceResponse<Object> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -875,7 +875,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError400Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError400ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA201ModelC404ModelDDefaultError400ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -897,7 +897,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
             public Object call(ServiceResponse<Object> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -936,7 +936,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void get202None204NoneDefaultError202None() {
-        get202None204NoneDefaultError202NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        get202None204NoneDefaultError202NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -958,7 +958,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultError202NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -996,7 +996,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void get202None204NoneDefaultError204None() {
-        get202None204NoneDefaultError204NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        get202None204NoneDefaultError204NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1018,7 +1018,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultError204NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1056,7 +1056,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void get202None204NoneDefaultError400Valid() {
-        get202None204NoneDefaultError400ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        get202None204NoneDefaultError400ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1078,7 +1078,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultError400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1116,7 +1116,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void get202None204NoneDefaultNone202Invalid() {
-        get202None204NoneDefaultNone202InvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        get202None204NoneDefaultNone202InvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1138,7 +1138,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultNone202InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1175,7 +1175,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void get202None204NoneDefaultNone204None() {
-        get202None204NoneDefaultNone204NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        get202None204NoneDefaultNone204NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1197,7 +1197,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultNone204NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1234,7 +1234,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void get202None204NoneDefaultNone400None() {
-        get202None204NoneDefaultNone400NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        get202None204NoneDefaultNone400NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1256,7 +1256,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultNone400NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1293,7 +1293,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void get202None204NoneDefaultNone400Invalid() {
-        get202None204NoneDefaultNone400InvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        get202None204NoneDefaultNone400InvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1315,7 +1315,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultNone400InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1353,7 +1353,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA200Valid() {
-        return getDefaultModelA200ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDefaultModelA200ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1375,7 +1375,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultModelA200ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1412,7 +1412,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA200None() {
-        return getDefaultModelA200NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDefaultModelA200NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1434,7 +1434,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultModelA200NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1471,7 +1471,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA400Valid() {
-        return getDefaultModelA400ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDefaultModelA400ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1493,7 +1493,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultModelA400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1530,7 +1530,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA400None() {
-        return getDefaultModelA400NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDefaultModelA400NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1552,7 +1552,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultModelA400NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1588,7 +1588,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void getDefaultNone200Invalid() {
-        getDefaultNone200InvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        getDefaultNone200InvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1610,7 +1610,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultNone200InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1645,7 +1645,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void getDefaultNone200None() {
-        getDefaultNone200NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        getDefaultNone200NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1667,7 +1667,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultNone200NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1702,7 +1702,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void getDefaultNone400Invalid() {
-        getDefaultNone400InvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        getDefaultNone400InvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1724,7 +1724,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultNone400InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1759,7 +1759,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void getDefaultNone400None() {
-        getDefaultNone400NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        getDefaultNone400NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1781,7 +1781,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultNone400NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1817,7 +1817,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA200None() {
-        return get200ModelA200NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA200NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1839,7 +1839,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA200NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1876,7 +1876,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA200Valid() {
-        return get200ModelA200ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA200ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1898,7 +1898,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA200ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1935,7 +1935,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA200Invalid() {
-        return get200ModelA200InvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA200InvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1957,7 +1957,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA200InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1994,7 +1994,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA400None() {
-        return get200ModelA400NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA400NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2016,7 +2016,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA400NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2053,7 +2053,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA400Valid() {
-        return get200ModelA400ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA400ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2075,7 +2075,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2112,7 +2112,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA400Invalid() {
-        return get200ModelA400InvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA400InvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2134,7 +2134,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA400InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2171,7 +2171,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA202Valid() {
-        return get200ModelA202ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA202ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2193,7 +2193,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA202ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

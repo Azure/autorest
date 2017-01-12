@@ -85,7 +85,7 @@ public final class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getTrue() {
-        return getTrueWithServiceResponseAsync().toBlocking().single().getBody();
+        return getTrueWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -107,7 +107,7 @@ public final class BoolsImpl implements Bools {
         return getTrueWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -145,7 +145,7 @@ public final class BoolsImpl implements Bools {
      * @param boolBody the boolean value
      */
     public void putTrue(boolean boolBody) {
-        putTrueWithServiceResponseAsync(boolBody).toBlocking().single().getBody();
+        putTrueWithServiceResponseAsync(boolBody).toBlocking().single().body();
     }
 
     /**
@@ -169,7 +169,7 @@ public final class BoolsImpl implements Bools {
         return putTrueWithServiceResponseAsync(boolBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -208,7 +208,7 @@ public final class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getFalse() {
-        return getFalseWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFalseWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -230,7 +230,7 @@ public final class BoolsImpl implements Bools {
         return getFalseWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -268,7 +268,7 @@ public final class BoolsImpl implements Bools {
      * @param boolBody the boolean value
      */
     public void putFalse(boolean boolBody) {
-        putFalseWithServiceResponseAsync(boolBody).toBlocking().single().getBody();
+        putFalseWithServiceResponseAsync(boolBody).toBlocking().single().body();
     }
 
     /**
@@ -292,7 +292,7 @@ public final class BoolsImpl implements Bools {
         return putFalseWithServiceResponseAsync(boolBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -331,7 +331,7 @@ public final class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -353,7 +353,7 @@ public final class BoolsImpl implements Bools {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -391,7 +391,7 @@ public final class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -413,7 +413,7 @@ public final class BoolsImpl implements Bools {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

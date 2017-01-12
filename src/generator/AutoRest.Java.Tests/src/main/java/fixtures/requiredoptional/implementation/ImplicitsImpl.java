@@ -94,7 +94,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getRequiredPath(String pathParameter) {
-        return getRequiredPathWithServiceResponseAsync(pathParameter).toBlocking().single().getBody();
+        return getRequiredPathWithServiceResponseAsync(pathParameter).toBlocking().single().body();
     }
 
     /**
@@ -118,7 +118,7 @@ public final class ImplicitsImpl implements Implicits {
         return getRequiredPathWithServiceResponseAsync(pathParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -158,7 +158,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      */
     public void putOptionalQuery() {
-        putOptionalQueryWithServiceResponseAsync().toBlocking().single().getBody();
+        putOptionalQueryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -180,7 +180,7 @@ public final class ImplicitsImpl implements Implicits {
         return putOptionalQueryWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -212,7 +212,7 @@ public final class ImplicitsImpl implements Implicits {
      * @param queryParameter the String value
      */
     public void putOptionalQuery(String queryParameter) {
-        putOptionalQueryWithServiceResponseAsync(queryParameter).toBlocking().single().getBody();
+        putOptionalQueryWithServiceResponseAsync(queryParameter).toBlocking().single().body();
     }
 
     /**
@@ -236,7 +236,7 @@ public final class ImplicitsImpl implements Implicits {
         return putOptionalQueryWithServiceResponseAsync(queryParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -274,7 +274,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      */
     public void putOptionalHeader() {
-        putOptionalHeaderWithServiceResponseAsync().toBlocking().single().getBody();
+        putOptionalHeaderWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -296,7 +296,7 @@ public final class ImplicitsImpl implements Implicits {
         return putOptionalHeaderWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -328,7 +328,7 @@ public final class ImplicitsImpl implements Implicits {
      * @param queryParameter the String value
      */
     public void putOptionalHeader(String queryParameter) {
-        putOptionalHeaderWithServiceResponseAsync(queryParameter).toBlocking().single().getBody();
+        putOptionalHeaderWithServiceResponseAsync(queryParameter).toBlocking().single().body();
     }
 
     /**
@@ -352,7 +352,7 @@ public final class ImplicitsImpl implements Implicits {
         return putOptionalHeaderWithServiceResponseAsync(queryParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -390,7 +390,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      */
     public void putOptionalBody() {
-        putOptionalBodyWithServiceResponseAsync().toBlocking().single().getBody();
+        putOptionalBodyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -412,7 +412,7 @@ public final class ImplicitsImpl implements Implicits {
         return putOptionalBodyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -444,7 +444,7 @@ public final class ImplicitsImpl implements Implicits {
      * @param bodyParameter the String value
      */
     public void putOptionalBody(String bodyParameter) {
-        putOptionalBodyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        putOptionalBodyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -468,7 +468,7 @@ public final class ImplicitsImpl implements Implicits {
         return putOptionalBodyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -507,7 +507,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getRequiredGlobalPath() {
-        return getRequiredGlobalPathWithServiceResponseAsync().toBlocking().single().getBody();
+        return getRequiredGlobalPathWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -529,7 +529,7 @@ public final class ImplicitsImpl implements Implicits {
         return getRequiredGlobalPathWithServiceResponseAsync().map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -569,7 +569,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getRequiredGlobalQuery() {
-        return getRequiredGlobalQueryWithServiceResponseAsync().toBlocking().single().getBody();
+        return getRequiredGlobalQueryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -591,7 +591,7 @@ public final class ImplicitsImpl implements Implicits {
         return getRequiredGlobalQueryWithServiceResponseAsync().map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -631,7 +631,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getOptionalGlobalQuery() {
-        return getOptionalGlobalQueryWithServiceResponseAsync().toBlocking().single().getBody();
+        return getOptionalGlobalQueryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -653,7 +653,7 @@ public final class ImplicitsImpl implements Implicits {
         return getOptionalGlobalQueryWithServiceResponseAsync().map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

@@ -72,7 +72,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object if successful.
      */
     public boolean getEmptyError() {
-        return getEmptyErrorWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyErrorWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -94,7 +94,7 @@ public final class HttpFailuresImpl implements HttpFailures {
         return getEmptyErrorWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -132,7 +132,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object if successful.
      */
     public boolean getNoModelError() {
-        return getNoModelErrorWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNoModelErrorWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -154,7 +154,7 @@ public final class HttpFailuresImpl implements HttpFailures {
         return getNoModelErrorWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -191,7 +191,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object if successful.
      */
     public boolean getNoModelEmpty() {
-        return getNoModelEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNoModelEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -213,7 +213,7 @@ public final class HttpFailuresImpl implements HttpFailures {
         return getNoModelEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

@@ -83,7 +83,7 @@ public final class ArraysImpl implements Arrays {
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getValid() {
-        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -105,7 +105,7 @@ public final class ArraysImpl implements Arrays {
         return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<ArrayWrapper>, ArrayWrapper>() {
             @Override
             public ArrayWrapper call(ServiceResponse<ArrayWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -143,7 +143,7 @@ public final class ArraysImpl implements Arrays {
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      */
     public void putValid(ArrayWrapper complexBody) {
-        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -167,7 +167,7 @@ public final class ArraysImpl implements Arrays {
         return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -210,7 +210,7 @@ public final class ArraysImpl implements Arrays {
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getEmpty() {
-        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -232,7 +232,7 @@ public final class ArraysImpl implements Arrays {
         return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<ArrayWrapper>, ArrayWrapper>() {
             @Override
             public ArrayWrapper call(ServiceResponse<ArrayWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -270,7 +270,7 @@ public final class ArraysImpl implements Arrays {
      * @param complexBody Please put an empty array
      */
     public void putEmpty(ArrayWrapper complexBody) {
-        putEmptyWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putEmptyWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -294,7 +294,7 @@ public final class ArraysImpl implements Arrays {
         return putEmptyWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -337,7 +337,7 @@ public final class ArraysImpl implements Arrays {
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getNotProvided() {
-        return getNotProvidedWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNotProvidedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -359,7 +359,7 @@ public final class ArraysImpl implements Arrays {
         return getNotProvidedWithServiceResponseAsync().map(new Func1<ServiceResponse<ArrayWrapper>, ArrayWrapper>() {
             @Override
             public ArrayWrapper call(ServiceResponse<ArrayWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

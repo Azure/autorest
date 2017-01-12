@@ -332,7 +332,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -354,7 +354,7 @@ public final class ArraysImpl implements Arrays {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
             @Override
             public List<Integer> call(ServiceResponse<List<Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -392,7 +392,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -414,7 +414,7 @@ public final class ArraysImpl implements Arrays {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
             @Override
             public List<Integer> call(ServiceResponse<List<Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -452,7 +452,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getEmpty() {
-        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -474,7 +474,7 @@ public final class ArraysImpl implements Arrays {
         return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
             @Override
             public List<Integer> call(ServiceResponse<List<Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -512,7 +512,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;String&gt; value
      */
     public void putEmpty(List<String> arrayBody) {
-        putEmptyWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putEmptyWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -536,7 +536,7 @@ public final class ArraysImpl implements Arrays {
         return putEmptyWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -579,7 +579,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Boolean&gt; object if successful.
      */
     public List<Boolean> getBooleanTfft() {
-        return getBooleanTfftWithServiceResponseAsync().toBlocking().single().getBody();
+        return getBooleanTfftWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -601,7 +601,7 @@ public final class ArraysImpl implements Arrays {
         return getBooleanTfftWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Boolean>>, List<Boolean>>() {
             @Override
             public List<Boolean> call(ServiceResponse<List<Boolean>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -639,7 +639,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Boolean&gt; value
      */
     public void putBooleanTfft(List<Boolean> arrayBody) {
-        putBooleanTfftWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putBooleanTfftWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -663,7 +663,7 @@ public final class ArraysImpl implements Arrays {
         return putBooleanTfftWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -706,7 +706,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Boolean&gt; object if successful.
      */
     public List<Boolean> getBooleanInvalidNull() {
-        return getBooleanInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getBooleanInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -728,7 +728,7 @@ public final class ArraysImpl implements Arrays {
         return getBooleanInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Boolean>>, List<Boolean>>() {
             @Override
             public List<Boolean> call(ServiceResponse<List<Boolean>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -766,7 +766,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Boolean&gt; object if successful.
      */
     public List<Boolean> getBooleanInvalidString() {
-        return getBooleanInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getBooleanInvalidStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -788,7 +788,7 @@ public final class ArraysImpl implements Arrays {
         return getBooleanInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Boolean>>, List<Boolean>>() {
             @Override
             public List<Boolean> call(ServiceResponse<List<Boolean>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -826,7 +826,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getIntegerValid() {
-        return getIntegerValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getIntegerValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -848,7 +848,7 @@ public final class ArraysImpl implements Arrays {
         return getIntegerValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
             @Override
             public List<Integer> call(ServiceResponse<List<Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -886,7 +886,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Integer&gt; value
      */
     public void putIntegerValid(List<Integer> arrayBody) {
-        putIntegerValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putIntegerValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -910,7 +910,7 @@ public final class ArraysImpl implements Arrays {
         return putIntegerValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -953,7 +953,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getIntInvalidNull() {
-        return getIntInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getIntInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -975,7 +975,7 @@ public final class ArraysImpl implements Arrays {
         return getIntInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
             @Override
             public List<Integer> call(ServiceResponse<List<Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1013,7 +1013,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getIntInvalidString() {
-        return getIntInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getIntInvalidStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1035,7 +1035,7 @@ public final class ArraysImpl implements Arrays {
         return getIntInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
             @Override
             public List<Integer> call(ServiceResponse<List<Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1073,7 +1073,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Long&gt; object if successful.
      */
     public List<Long> getLongValid() {
-        return getLongValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLongValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1095,7 +1095,7 @@ public final class ArraysImpl implements Arrays {
         return getLongValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Long>>, List<Long>>() {
             @Override
             public List<Long> call(ServiceResponse<List<Long>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1133,7 +1133,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Long&gt; value
      */
     public void putLongValid(List<Long> arrayBody) {
-        putLongValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putLongValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -1157,7 +1157,7 @@ public final class ArraysImpl implements Arrays {
         return putLongValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1200,7 +1200,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Long&gt; object if successful.
      */
     public List<Long> getLongInvalidNull() {
-        return getLongInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLongInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1222,7 +1222,7 @@ public final class ArraysImpl implements Arrays {
         return getLongInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Long>>, List<Long>>() {
             @Override
             public List<Long> call(ServiceResponse<List<Long>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1260,7 +1260,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Long&gt; object if successful.
      */
     public List<Long> getLongInvalidString() {
-        return getLongInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLongInvalidStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1282,7 +1282,7 @@ public final class ArraysImpl implements Arrays {
         return getLongInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Long>>, List<Long>>() {
             @Override
             public List<Long> call(ServiceResponse<List<Long>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1320,7 +1320,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getFloatValid() {
-        return getFloatValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFloatValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1342,7 +1342,7 @@ public final class ArraysImpl implements Arrays {
         return getFloatValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
             @Override
             public List<Double> call(ServiceResponse<List<Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1380,7 +1380,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Double&gt; value
      */
     public void putFloatValid(List<Double> arrayBody) {
-        putFloatValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putFloatValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -1404,7 +1404,7 @@ public final class ArraysImpl implements Arrays {
         return putFloatValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1447,7 +1447,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getFloatInvalidNull() {
-        return getFloatInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFloatInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1469,7 +1469,7 @@ public final class ArraysImpl implements Arrays {
         return getFloatInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
             @Override
             public List<Double> call(ServiceResponse<List<Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1507,7 +1507,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getFloatInvalidString() {
-        return getFloatInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFloatInvalidStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1529,7 +1529,7 @@ public final class ArraysImpl implements Arrays {
         return getFloatInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
             @Override
             public List<Double> call(ServiceResponse<List<Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1567,7 +1567,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getDoubleValid() {
-        return getDoubleValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDoubleValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1589,7 +1589,7 @@ public final class ArraysImpl implements Arrays {
         return getDoubleValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
             @Override
             public List<Double> call(ServiceResponse<List<Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1627,7 +1627,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Double&gt; value
      */
     public void putDoubleValid(List<Double> arrayBody) {
-        putDoubleValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDoubleValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -1651,7 +1651,7 @@ public final class ArraysImpl implements Arrays {
         return putDoubleValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1694,7 +1694,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getDoubleInvalidNull() {
-        return getDoubleInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDoubleInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1716,7 +1716,7 @@ public final class ArraysImpl implements Arrays {
         return getDoubleInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
             @Override
             public List<Double> call(ServiceResponse<List<Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1754,7 +1754,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getDoubleInvalidString() {
-        return getDoubleInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDoubleInvalidStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1776,7 +1776,7 @@ public final class ArraysImpl implements Arrays {
         return getDoubleInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
             @Override
             public List<Double> call(ServiceResponse<List<Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1814,7 +1814,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> getStringValid() {
-        return getStringValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getStringValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1836,7 +1836,7 @@ public final class ArraysImpl implements Arrays {
         return getStringValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<String>>, List<String>>() {
             @Override
             public List<String> call(ServiceResponse<List<String>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1874,7 +1874,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;String&gt; value
      */
     public void putStringValid(List<String> arrayBody) {
-        putStringValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putStringValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -1898,7 +1898,7 @@ public final class ArraysImpl implements Arrays {
         return putStringValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1941,7 +1941,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> getStringWithNull() {
-        return getStringWithNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getStringWithNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1963,7 +1963,7 @@ public final class ArraysImpl implements Arrays {
         return getStringWithNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<String>>, List<String>>() {
             @Override
             public List<String> call(ServiceResponse<List<String>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2001,7 +2001,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> getStringWithInvalid() {
-        return getStringWithInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getStringWithInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2023,7 +2023,7 @@ public final class ArraysImpl implements Arrays {
         return getStringWithInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<String>>, List<String>>() {
             @Override
             public List<String> call(ServiceResponse<List<String>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2061,7 +2061,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;UUID&gt; object if successful.
      */
     public List<UUID> getUuidValid() {
-        return getUuidValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getUuidValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2083,7 +2083,7 @@ public final class ArraysImpl implements Arrays {
         return getUuidValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<UUID>>, List<UUID>>() {
             @Override
             public List<UUID> call(ServiceResponse<List<UUID>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2121,7 +2121,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;UUID&gt; value
      */
     public void putUuidValid(List<UUID> arrayBody) {
-        putUuidValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putUuidValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -2145,7 +2145,7 @@ public final class ArraysImpl implements Arrays {
         return putUuidValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2188,7 +2188,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;UUID&gt; object if successful.
      */
     public List<UUID> getUuidInvalidChars() {
-        return getUuidInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
+        return getUuidInvalidCharsWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2210,7 +2210,7 @@ public final class ArraysImpl implements Arrays {
         return getUuidInvalidCharsWithServiceResponseAsync().map(new Func1<ServiceResponse<List<UUID>>, List<UUID>>() {
             @Override
             public List<UUID> call(ServiceResponse<List<UUID>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2248,7 +2248,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;LocalDate&gt; object if successful.
      */
     public List<LocalDate> getDateValid() {
-        return getDateValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2270,7 +2270,7 @@ public final class ArraysImpl implements Arrays {
         return getDateValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<LocalDate>>, List<LocalDate>>() {
             @Override
             public List<LocalDate> call(ServiceResponse<List<LocalDate>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2308,7 +2308,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;LocalDate&gt; value
      */
     public void putDateValid(List<LocalDate> arrayBody) {
-        putDateValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDateValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -2332,7 +2332,7 @@ public final class ArraysImpl implements Arrays {
         return putDateValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2375,7 +2375,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;LocalDate&gt; object if successful.
      */
     public List<LocalDate> getDateInvalidNull() {
-        return getDateInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2397,7 +2397,7 @@ public final class ArraysImpl implements Arrays {
         return getDateInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<LocalDate>>, List<LocalDate>>() {
             @Override
             public List<LocalDate> call(ServiceResponse<List<LocalDate>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2435,7 +2435,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;LocalDate&gt; object if successful.
      */
     public List<LocalDate> getDateInvalidChars() {
-        return getDateInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateInvalidCharsWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2457,7 +2457,7 @@ public final class ArraysImpl implements Arrays {
         return getDateInvalidCharsWithServiceResponseAsync().map(new Func1<ServiceResponse<List<LocalDate>>, List<LocalDate>>() {
             @Override
             public List<LocalDate> call(ServiceResponse<List<LocalDate>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2495,7 +2495,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeValid() {
-        return getDateTimeValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateTimeValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2517,7 +2517,7 @@ public final class ArraysImpl implements Arrays {
         return getDateTimeValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<DateTime>>, List<DateTime>>() {
             @Override
             public List<DateTime> call(ServiceResponse<List<DateTime>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2555,7 +2555,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;DateTime&gt; value
      */
     public void putDateTimeValid(List<DateTime> arrayBody) {
-        putDateTimeValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDateTimeValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -2579,7 +2579,7 @@ public final class ArraysImpl implements Arrays {
         return putDateTimeValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2622,7 +2622,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeInvalidNull() {
-        return getDateTimeInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateTimeInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2644,7 +2644,7 @@ public final class ArraysImpl implements Arrays {
         return getDateTimeInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<DateTime>>, List<DateTime>>() {
             @Override
             public List<DateTime> call(ServiceResponse<List<DateTime>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2682,7 +2682,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeInvalidChars() {
-        return getDateTimeInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateTimeInvalidCharsWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2704,7 +2704,7 @@ public final class ArraysImpl implements Arrays {
         return getDateTimeInvalidCharsWithServiceResponseAsync().map(new Func1<ServiceResponse<List<DateTime>>, List<DateTime>>() {
             @Override
             public List<DateTime> call(ServiceResponse<List<DateTime>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2742,7 +2742,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeRfc1123Valid() {
-        return getDateTimeRfc1123ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateTimeRfc1123ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2764,7 +2764,7 @@ public final class ArraysImpl implements Arrays {
         return getDateTimeRfc1123ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<DateTime>>, List<DateTime>>() {
             @Override
             public List<DateTime> call(ServiceResponse<List<DateTime>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2782,15 +2782,15 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<DateTimeRfc1123>> result = getDateTimeRfc1123ValidDelegate(response);
                         List<DateTime> body = null;
-                        if (result.getBody() != null) {
+                        if (result.body() != null) {
                             body = new ArrayList<DateTime>();
-                            for (DateTimeRfc1123 item : result.getBody()) {
+                            for (DateTimeRfc1123 item : result.body()) {
                                 DateTime value;
-                                value = item.getDateTime();
+                                value = item.dateTime();
                                 body.add(value);
                             }
                         }
-                        ServiceResponse<List<DateTime>> clientResponse = new ServiceResponse<List<DateTime>>(body, result.getResponse());
+                        ServiceResponse<List<DateTime>> clientResponse = new ServiceResponse<List<DateTime>>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -2812,7 +2812,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
      */
     public void putDateTimeRfc1123Valid(List<DateTime> arrayBody) {
-        putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -2836,7 +2836,7 @@ public final class ArraysImpl implements Arrays {
         return putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2884,7 +2884,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Period&gt; object if successful.
      */
     public List<Period> getDurationValid() {
-        return getDurationValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDurationValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2906,7 +2906,7 @@ public final class ArraysImpl implements Arrays {
         return getDurationValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Period>>, List<Period>>() {
             @Override
             public List<Period> call(ServiceResponse<List<Period>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2944,7 +2944,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Period&gt; value
      */
     public void putDurationValid(List<Period> arrayBody) {
-        putDurationValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDurationValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -2968,7 +2968,7 @@ public final class ArraysImpl implements Arrays {
         return putDurationValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3011,7 +3011,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;byte[]&gt; object if successful.
      */
     public List<byte[]> getByteValid() {
-        return getByteValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getByteValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3033,7 +3033,7 @@ public final class ArraysImpl implements Arrays {
         return getByteValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<byte[]>>, List<byte[]>>() {
             @Override
             public List<byte[]> call(ServiceResponse<List<byte[]>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3071,7 +3071,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;byte[]&gt; value
      */
     public void putByteValid(List<byte[]> arrayBody) {
-        putByteValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putByteValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -3095,7 +3095,7 @@ public final class ArraysImpl implements Arrays {
         return putByteValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3138,7 +3138,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;byte[]&gt; object if successful.
      */
     public List<byte[]> getByteInvalidNull() {
-        return getByteInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getByteInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3160,7 +3160,7 @@ public final class ArraysImpl implements Arrays {
         return getByteInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<byte[]>>, List<byte[]>>() {
             @Override
             public List<byte[]> call(ServiceResponse<List<byte[]>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3198,7 +3198,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;byte[]&gt; object if successful.
      */
     public List<byte[]> getBase64Url() {
-        return getBase64UrlWithServiceResponseAsync().toBlocking().single().getBody();
+        return getBase64UrlWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3220,7 +3220,7 @@ public final class ArraysImpl implements Arrays {
         return getBase64UrlWithServiceResponseAsync().map(new Func1<ServiceResponse<List<byte[]>>, List<byte[]>>() {
             @Override
             public List<byte[]> call(ServiceResponse<List<byte[]>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3238,15 +3238,15 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Base64Url>> result = getBase64UrlDelegate(response);
                         List<byte[]> body = null;
-                        if (result.getBody() != null) {
+                        if (result.body() != null) {
                             body = new ArrayList<byte[]>();
-                            for (Base64Url item : result.getBody()) {
+                            for (Base64Url item : result.body()) {
                                 byte[] value;
-                                value = item.getDecodedBytes();
+                                value = item.decodedBytes();
                                 body.add(value);
                             }
                         }
-                        ServiceResponse<List<byte[]>> clientResponse = new ServiceResponse<List<byte[]>>(body, result.getResponse());
+                        ServiceResponse<List<byte[]>> clientResponse = new ServiceResponse<List<byte[]>>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -3268,7 +3268,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexNull() {
-        return getComplexNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getComplexNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3290,7 +3290,7 @@ public final class ArraysImpl implements Arrays {
         return getComplexNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Product>>, List<Product>>() {
             @Override
             public List<Product> call(ServiceResponse<List<Product>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3328,7 +3328,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexEmpty() {
-        return getComplexEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getComplexEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3350,7 +3350,7 @@ public final class ArraysImpl implements Arrays {
         return getComplexEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Product>>, List<Product>>() {
             @Override
             public List<Product> call(ServiceResponse<List<Product>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3388,7 +3388,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexItemNull() {
-        return getComplexItemNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getComplexItemNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3410,7 +3410,7 @@ public final class ArraysImpl implements Arrays {
         return getComplexItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Product>>, List<Product>>() {
             @Override
             public List<Product> call(ServiceResponse<List<Product>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3448,7 +3448,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexItemEmpty() {
-        return getComplexItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getComplexItemEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3470,7 +3470,7 @@ public final class ArraysImpl implements Arrays {
         return getComplexItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Product>>, List<Product>>() {
             @Override
             public List<Product> call(ServiceResponse<List<Product>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3508,7 +3508,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexValid() {
-        return getComplexValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getComplexValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3530,7 +3530,7 @@ public final class ArraysImpl implements Arrays {
         return getComplexValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Product>>, List<Product>>() {
             @Override
             public List<Product> call(ServiceResponse<List<Product>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3568,7 +3568,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Product&gt; value
      */
     public void putComplexValid(List<Product> arrayBody) {
-        putComplexValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putComplexValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -3592,7 +3592,7 @@ public final class ArraysImpl implements Arrays {
         return putComplexValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3635,7 +3635,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayNull() {
-        return getArrayNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3657,7 +3657,7 @@ public final class ArraysImpl implements Arrays {
         return getArrayNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<List<String>>>, List<List<String>>>() {
             @Override
             public List<List<String>> call(ServiceResponse<List<List<String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3695,7 +3695,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayEmpty() {
-        return getArrayEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3717,7 +3717,7 @@ public final class ArraysImpl implements Arrays {
         return getArrayEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<List<String>>>, List<List<String>>>() {
             @Override
             public List<List<String>> call(ServiceResponse<List<List<String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3755,7 +3755,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayItemNull() {
-        return getArrayItemNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayItemNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3777,7 +3777,7 @@ public final class ArraysImpl implements Arrays {
         return getArrayItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<List<String>>>, List<List<String>>>() {
             @Override
             public List<List<String>> call(ServiceResponse<List<List<String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3815,7 +3815,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayItemEmpty() {
-        return getArrayItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayItemEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3837,7 +3837,7 @@ public final class ArraysImpl implements Arrays {
         return getArrayItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<List<String>>>, List<List<String>>>() {
             @Override
             public List<List<String>> call(ServiceResponse<List<List<String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3875,7 +3875,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayValid() {
-        return getArrayValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3897,7 +3897,7 @@ public final class ArraysImpl implements Arrays {
         return getArrayValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<List<String>>>, List<List<String>>>() {
             @Override
             public List<List<String>> call(ServiceResponse<List<List<String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3935,7 +3935,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      */
     public void putArrayValid(List<List<String>> arrayBody) {
-        putArrayValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putArrayValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -3959,7 +3959,7 @@ public final class ArraysImpl implements Arrays {
         return putArrayValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4002,7 +4002,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryNull() {
-        return getDictionaryNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4024,7 +4024,7 @@ public final class ArraysImpl implements Arrays {
         return getDictionaryNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Map<String, String>>>, List<Map<String, String>>>() {
             @Override
             public List<Map<String, String>> call(ServiceResponse<List<Map<String, String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4062,7 +4062,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryEmpty() {
-        return getDictionaryEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4084,7 +4084,7 @@ public final class ArraysImpl implements Arrays {
         return getDictionaryEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Map<String, String>>>, List<Map<String, String>>>() {
             @Override
             public List<Map<String, String>> call(ServiceResponse<List<Map<String, String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4122,7 +4122,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryItemNull() {
-        return getDictionaryItemNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryItemNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4144,7 +4144,7 @@ public final class ArraysImpl implements Arrays {
         return getDictionaryItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Map<String, String>>>, List<Map<String, String>>>() {
             @Override
             public List<Map<String, String>> call(ServiceResponse<List<Map<String, String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4182,7 +4182,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryItemEmpty() {
-        return getDictionaryItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryItemEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4204,7 +4204,7 @@ public final class ArraysImpl implements Arrays {
         return getDictionaryItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Map<String, String>>>, List<Map<String, String>>>() {
             @Override
             public List<Map<String, String>> call(ServiceResponse<List<Map<String, String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4242,7 +4242,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryValid() {
-        return getDictionaryValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4264,7 +4264,7 @@ public final class ArraysImpl implements Arrays {
         return getDictionaryValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Map<String, String>>>, List<Map<String, String>>>() {
             @Override
             public List<Map<String, String>> call(ServiceResponse<List<Map<String, String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4302,7 +4302,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      */
     public void putDictionaryValid(List<Map<String, String>> arrayBody) {
-        putDictionaryValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDictionaryValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -4326,7 +4326,7 @@ public final class ArraysImpl implements Arrays {
         return putDictionaryValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

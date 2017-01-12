@@ -294,7 +294,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry400() {
-        return putNonRetry400WithServiceResponseAsync().toBlocking().last().getBody();
+        return putNonRetry400WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -316,7 +316,7 @@ public final class LROSADsImpl implements LROSADs {
         return putNonRetry400WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -338,7 +338,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry400(Product product) {
-        return putNonRetry400WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putNonRetry400WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -362,7 +362,7 @@ public final class LROSADsImpl implements LROSADs {
         return putNonRetry400WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -385,7 +385,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry400() {
-        return beginPutNonRetry400WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNonRetry400WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -407,7 +407,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutNonRetry400WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -440,7 +440,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry400(Product product) {
-        return beginPutNonRetry400WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutNonRetry400WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -464,7 +464,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutNonRetry400WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -505,7 +505,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry201Creating400() {
-        return putNonRetry201Creating400WithServiceResponseAsync().toBlocking().last().getBody();
+        return putNonRetry201Creating400WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -527,7 +527,7 @@ public final class LROSADsImpl implements LROSADs {
         return putNonRetry201Creating400WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -549,7 +549,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry201Creating400(Product product) {
-        return putNonRetry201Creating400WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putNonRetry201Creating400WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -573,7 +573,7 @@ public final class LROSADsImpl implements LROSADs {
         return putNonRetry201Creating400WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -596,7 +596,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400() {
-        return beginPutNonRetry201Creating400WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNonRetry201Creating400WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -618,7 +618,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutNonRetry201Creating400WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -651,7 +651,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400(Product product) {
-        return beginPutNonRetry201Creating400WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutNonRetry201Creating400WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -675,7 +675,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutNonRetry201Creating400WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -716,7 +716,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry201Creating400InvalidJson() {
-        return putNonRetry201Creating400InvalidJsonWithServiceResponseAsync().toBlocking().last().getBody();
+        return putNonRetry201Creating400InvalidJsonWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -738,7 +738,7 @@ public final class LROSADsImpl implements LROSADs {
         return putNonRetry201Creating400InvalidJsonWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -760,7 +760,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry201Creating400InvalidJson(Product product) {
-        return putNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -784,7 +784,7 @@ public final class LROSADsImpl implements LROSADs {
         return putNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -807,7 +807,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400InvalidJson() {
-        return beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -829,7 +829,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -862,7 +862,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400InvalidJson(Product product) {
-        return beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -886,7 +886,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -927,7 +927,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetry400() {
-        return putAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -949,7 +949,7 @@ public final class LROSADsImpl implements LROSADs {
         return putAsyncRelativeRetry400WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -971,7 +971,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetry400(Product product) {
-        return putAsyncRelativeRetry400WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncRelativeRetry400WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -995,7 +995,7 @@ public final class LROSADsImpl implements LROSADs {
         return putAsyncRelativeRetry400WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1018,7 +1018,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetry400() {
-        return beginPutAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1040,7 +1040,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutAsyncRelativeRetry400WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1073,7 +1073,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetry400(Product product) {
-        return beginPutAsyncRelativeRetry400WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetry400WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1097,7 +1097,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutAsyncRelativeRetry400WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1136,7 +1136,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void deleteNonRetry400() {
-        deleteNonRetry400WithServiceResponseAsync().toBlocking().last().getBody();
+        deleteNonRetry400WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1158,7 +1158,7 @@ public final class LROSADsImpl implements LROSADs {
         return deleteNonRetry400WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1178,7 +1178,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginDeleteNonRetry400() {
-        beginDeleteNonRetry400WithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteNonRetry400WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1200,7 +1200,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginDeleteNonRetry400WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1237,7 +1237,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void delete202NonRetry400() {
-        delete202NonRetry400WithServiceResponseAsync().toBlocking().last().getBody();
+        delete202NonRetry400WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1259,7 +1259,7 @@ public final class LROSADsImpl implements LROSADs {
         return delete202NonRetry400WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1279,7 +1279,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginDelete202NonRetry400() {
-        beginDelete202NonRetry400WithServiceResponseAsync().toBlocking().single().getBody();
+        beginDelete202NonRetry400WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1301,7 +1301,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginDelete202NonRetry400WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1338,7 +1338,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void deleteAsyncRelativeRetry400() {
-        deleteAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1360,7 +1360,7 @@ public final class LROSADsImpl implements LROSADs {
         return deleteAsyncRelativeRetry400WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1380,7 +1380,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginDeleteAsyncRelativeRetry400() {
-        beginDeleteAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1402,7 +1402,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginDeleteAsyncRelativeRetry400WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1439,7 +1439,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void postNonRetry400() {
-        postNonRetry400WithServiceResponseAsync().toBlocking().last().getBody();
+        postNonRetry400WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1461,7 +1461,7 @@ public final class LROSADsImpl implements LROSADs {
         return postNonRetry400WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1482,7 +1482,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void postNonRetry400(Product product) {
-        postNonRetry400WithServiceResponseAsync(product).toBlocking().last().getBody();
+        postNonRetry400WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1506,7 +1506,7 @@ public final class LROSADsImpl implements LROSADs {
         return postNonRetry400WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1528,7 +1528,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginPostNonRetry400() {
-        beginPostNonRetry400WithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostNonRetry400WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1550,7 +1550,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPostNonRetry400WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1582,7 +1582,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void beginPostNonRetry400(Product product) {
-        beginPostNonRetry400WithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPostNonRetry400WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1606,7 +1606,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPostNonRetry400WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1645,7 +1645,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void post202NonRetry400() {
-        post202NonRetry400WithServiceResponseAsync().toBlocking().last().getBody();
+        post202NonRetry400WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1667,7 +1667,7 @@ public final class LROSADsImpl implements LROSADs {
         return post202NonRetry400WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1688,7 +1688,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void post202NonRetry400(Product product) {
-        post202NonRetry400WithServiceResponseAsync(product).toBlocking().last().getBody();
+        post202NonRetry400WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1712,7 +1712,7 @@ public final class LROSADsImpl implements LROSADs {
         return post202NonRetry400WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1734,7 +1734,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginPost202NonRetry400() {
-        beginPost202NonRetry400WithServiceResponseAsync().toBlocking().single().getBody();
+        beginPost202NonRetry400WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1756,7 +1756,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPost202NonRetry400WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1788,7 +1788,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void beginPost202NonRetry400(Product product) {
-        beginPost202NonRetry400WithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPost202NonRetry400WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1812,7 +1812,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPost202NonRetry400WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1851,7 +1851,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void postAsyncRelativeRetry400() {
-        postAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1873,7 +1873,7 @@ public final class LROSADsImpl implements LROSADs {
         return postAsyncRelativeRetry400WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1894,7 +1894,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void postAsyncRelativeRetry400(Product product) {
-        postAsyncRelativeRetry400WithServiceResponseAsync(product).toBlocking().last().getBody();
+        postAsyncRelativeRetry400WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1918,7 +1918,7 @@ public final class LROSADsImpl implements LROSADs {
         return postAsyncRelativeRetry400WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1940,7 +1940,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginPostAsyncRelativeRetry400() {
-        beginPostAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1962,7 +1962,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPostAsyncRelativeRetry400WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1994,7 +1994,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void beginPostAsyncRelativeRetry400(Product product) {
-        beginPostAsyncRelativeRetry400WithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPostAsyncRelativeRetry400WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2018,7 +2018,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPostAsyncRelativeRetry400WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2058,7 +2058,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putError201NoProvisioningStatePayload() {
-        return putError201NoProvisioningStatePayloadWithServiceResponseAsync().toBlocking().last().getBody();
+        return putError201NoProvisioningStatePayloadWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2080,7 +2080,7 @@ public final class LROSADsImpl implements LROSADs {
         return putError201NoProvisioningStatePayloadWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2102,7 +2102,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putError201NoProvisioningStatePayload(Product product) {
-        return putError201NoProvisioningStatePayloadWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putError201NoProvisioningStatePayloadWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2126,7 +2126,7 @@ public final class LROSADsImpl implements LROSADs {
         return putError201NoProvisioningStatePayloadWithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2149,7 +2149,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutError201NoProvisioningStatePayload() {
-        return beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2171,7 +2171,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2204,7 +2204,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutError201NoProvisioningStatePayload(Product product) {
-        return beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2228,7 +2228,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2269,7 +2269,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryNoStatus() {
-        return putAsyncRelativeRetryNoStatusWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRelativeRetryNoStatusWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2291,7 +2291,7 @@ public final class LROSADsImpl implements LROSADs {
         return putAsyncRelativeRetryNoStatusWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2313,7 +2313,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryNoStatus(Product product) {
-        return putAsyncRelativeRetryNoStatusWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncRelativeRetryNoStatusWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2337,7 +2337,7 @@ public final class LROSADsImpl implements LROSADs {
         return putAsyncRelativeRetryNoStatusWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2360,7 +2360,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatus() {
-        return beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2382,7 +2382,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2415,7 +2415,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatus(Product product) {
-        return beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2439,7 +2439,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2479,7 +2479,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryNoStatusPayload() {
-        return putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2501,7 +2501,7 @@ public final class LROSADsImpl implements LROSADs {
         return putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2523,7 +2523,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryNoStatusPayload(Product product) {
-        return putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2547,7 +2547,7 @@ public final class LROSADsImpl implements LROSADs {
         return putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2570,7 +2570,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatusPayload() {
-        return beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2592,7 +2592,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2625,7 +2625,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatusPayload(Product product) {
-        return beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2649,7 +2649,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2688,7 +2688,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void delete204Succeeded() {
-        delete204SucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        delete204SucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2710,7 +2710,7 @@ public final class LROSADsImpl implements LROSADs {
         return delete204SucceededWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2730,7 +2730,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginDelete204Succeeded() {
-        beginDelete204SucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDelete204SucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2752,7 +2752,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginDelete204SucceededWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2789,7 +2789,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void deleteAsyncRelativeRetryNoStatus() {
-        deleteAsyncRelativeRetryNoStatusWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncRelativeRetryNoStatusWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2811,7 +2811,7 @@ public final class LROSADsImpl implements LROSADs {
         return deleteAsyncRelativeRetryNoStatusWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2831,7 +2831,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginDeleteAsyncRelativeRetryNoStatus() {
-        beginDeleteAsyncRelativeRetryNoStatusWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncRelativeRetryNoStatusWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2853,7 +2853,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginDeleteAsyncRelativeRetryNoStatusWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2890,7 +2890,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void post202NoLocation() {
-        post202NoLocationWithServiceResponseAsync().toBlocking().last().getBody();
+        post202NoLocationWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2912,7 +2912,7 @@ public final class LROSADsImpl implements LROSADs {
         return post202NoLocationWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2933,7 +2933,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void post202NoLocation(Product product) {
-        post202NoLocationWithServiceResponseAsync(product).toBlocking().last().getBody();
+        post202NoLocationWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2957,7 +2957,7 @@ public final class LROSADsImpl implements LROSADs {
         return post202NoLocationWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2979,7 +2979,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginPost202NoLocation() {
-        beginPost202NoLocationWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPost202NoLocationWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3001,7 +3001,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPost202NoLocationWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3033,7 +3033,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void beginPost202NoLocation(Product product) {
-        beginPost202NoLocationWithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPost202NoLocationWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -3057,7 +3057,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPost202NoLocationWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3096,7 +3096,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void postAsyncRelativeRetryNoPayload() {
-        postAsyncRelativeRetryNoPayloadWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRelativeRetryNoPayloadWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3118,7 +3118,7 @@ public final class LROSADsImpl implements LROSADs {
         return postAsyncRelativeRetryNoPayloadWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3139,7 +3139,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void postAsyncRelativeRetryNoPayload(Product product) {
-        postAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product).toBlocking().last().getBody();
+        postAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -3163,7 +3163,7 @@ public final class LROSADsImpl implements LROSADs {
         return postAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3185,7 +3185,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginPostAsyncRelativeRetryNoPayload() {
-        beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3207,7 +3207,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3239,7 +3239,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void beginPostAsyncRelativeRetryNoPayload(Product product) {
-        beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -3263,7 +3263,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3303,7 +3303,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product put200InvalidJson() {
-        return put200InvalidJsonWithServiceResponseAsync().toBlocking().last().getBody();
+        return put200InvalidJsonWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3325,7 +3325,7 @@ public final class LROSADsImpl implements LROSADs {
         return put200InvalidJsonWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3347,7 +3347,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product put200InvalidJson(Product product) {
-        return put200InvalidJsonWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put200InvalidJsonWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -3371,7 +3371,7 @@ public final class LROSADsImpl implements LROSADs {
         return put200InvalidJsonWithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3394,7 +3394,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPut200InvalidJson() {
-        return beginPut200InvalidJsonWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200InvalidJsonWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3416,7 +3416,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPut200InvalidJsonWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3449,7 +3449,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPut200InvalidJson(Product product) {
-        return beginPut200InvalidJsonWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut200InvalidJsonWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -3473,7 +3473,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPut200InvalidJsonWithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3514,7 +3514,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryInvalidHeader() {
-        return putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3536,7 +3536,7 @@ public final class LROSADsImpl implements LROSADs {
         return putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3558,7 +3558,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryInvalidHeader(Product product) {
-        return putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -3582,7 +3582,7 @@ public final class LROSADsImpl implements LROSADs {
         return putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3605,7 +3605,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidHeader() {
-        return beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3627,7 +3627,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3660,7 +3660,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidHeader(Product product) {
-        return beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -3684,7 +3684,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3724,7 +3724,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryInvalidJsonPolling() {
-        return putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3746,7 +3746,7 @@ public final class LROSADsImpl implements LROSADs {
         return putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3768,7 +3768,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryInvalidJsonPolling(Product product) {
-        return putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -3792,7 +3792,7 @@ public final class LROSADsImpl implements LROSADs {
         return putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3815,7 +3815,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidJsonPolling() {
-        return beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3837,7 +3837,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3870,7 +3870,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidJsonPolling(Product product) {
-        return beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -3894,7 +3894,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3933,7 +3933,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void delete202RetryInvalidHeader() {
-        delete202RetryInvalidHeaderWithServiceResponseAsync().toBlocking().last().getBody();
+        delete202RetryInvalidHeaderWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3955,7 +3955,7 @@ public final class LROSADsImpl implements LROSADs {
         return delete202RetryInvalidHeaderWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3975,7 +3975,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginDelete202RetryInvalidHeader() {
-        beginDelete202RetryInvalidHeaderWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDelete202RetryInvalidHeaderWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3997,7 +3997,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginDelete202RetryInvalidHeaderWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4034,7 +4034,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void deleteAsyncRelativeRetryInvalidHeader() {
-        deleteAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4056,7 +4056,7 @@ public final class LROSADsImpl implements LROSADs {
         return deleteAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4076,7 +4076,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginDeleteAsyncRelativeRetryInvalidHeader() {
-        beginDeleteAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4098,7 +4098,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginDeleteAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4135,7 +4135,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void deleteAsyncRelativeRetryInvalidJsonPolling() {
-        deleteAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4157,7 +4157,7 @@ public final class LROSADsImpl implements LROSADs {
         return deleteAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4177,7 +4177,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginDeleteAsyncRelativeRetryInvalidJsonPolling() {
-        beginDeleteAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4199,7 +4199,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginDeleteAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4236,7 +4236,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void post202RetryInvalidHeader() {
-        post202RetryInvalidHeaderWithServiceResponseAsync().toBlocking().last().getBody();
+        post202RetryInvalidHeaderWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4258,7 +4258,7 @@ public final class LROSADsImpl implements LROSADs {
         return post202RetryInvalidHeaderWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4279,7 +4279,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void post202RetryInvalidHeader(Product product) {
-        post202RetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().last().getBody();
+        post202RetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -4303,7 +4303,7 @@ public final class LROSADsImpl implements LROSADs {
         return post202RetryInvalidHeaderWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4325,7 +4325,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginPost202RetryInvalidHeader() {
-        beginPost202RetryInvalidHeaderWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPost202RetryInvalidHeaderWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4347,7 +4347,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPost202RetryInvalidHeaderWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4379,7 +4379,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void beginPost202RetryInvalidHeader(Product product) {
-        beginPost202RetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPost202RetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -4403,7 +4403,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPost202RetryInvalidHeaderWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4442,7 +4442,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void postAsyncRelativeRetryInvalidHeader() {
-        postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4464,7 +4464,7 @@ public final class LROSADsImpl implements LROSADs {
         return postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4485,7 +4485,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void postAsyncRelativeRetryInvalidHeader(Product product) {
-        postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().last().getBody();
+        postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -4509,7 +4509,7 @@ public final class LROSADsImpl implements LROSADs {
         return postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4531,7 +4531,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginPostAsyncRelativeRetryInvalidHeader() {
-        beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4553,7 +4553,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4585,7 +4585,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void beginPostAsyncRelativeRetryInvalidHeader(Product product) {
-        beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -4609,7 +4609,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4648,7 +4648,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void postAsyncRelativeRetryInvalidJsonPolling() {
-        postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4670,7 +4670,7 @@ public final class LROSADsImpl implements LROSADs {
         return postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4691,7 +4691,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void postAsyncRelativeRetryInvalidJsonPolling(Product product) {
-        postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).toBlocking().last().getBody();
+        postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -4715,7 +4715,7 @@ public final class LROSADsImpl implements LROSADs {
         return postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4737,7 +4737,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      */
     public void beginPostAsyncRelativeRetryInvalidJsonPolling() {
-        beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4759,7 +4759,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4791,7 +4791,7 @@ public final class LROSADsImpl implements LROSADs {
      * @param product Product to put
      */
     public void beginPostAsyncRelativeRetryInvalidJsonPolling(Product product) {
-        beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -4815,7 +4815,7 @@ public final class LROSADsImpl implements LROSADs {
         return beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

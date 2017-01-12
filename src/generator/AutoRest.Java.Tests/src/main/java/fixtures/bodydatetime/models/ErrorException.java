@@ -24,7 +24,7 @@ public class ErrorException extends RestException {
      * @param message the exception message or the response content if a message is not available
      * @param response the HTTP response
      */
-    public ErrorException(final String message, Response<ResponseBody> response) {
+    public ErrorException(final String message, final Response<ResponseBody> response) {
         super(message, response);
     }
 
@@ -35,7 +35,7 @@ public class ErrorException extends RestException {
      * @param response the HTTP response
      * @param body the deserialized response body
      */
-    public ErrorException(final String message, Response<ResponseBody> response, Error body) {
+    public ErrorException(final String message, final Response<ResponseBody> response, final Error body) {
         super(message, response, body);
     }
 

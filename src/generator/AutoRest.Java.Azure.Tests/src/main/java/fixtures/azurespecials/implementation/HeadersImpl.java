@@ -71,7 +71,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * @param fooClientRequestId The fooRequestId
      */
     public void customNamedRequestId(String fooClientRequestId) {
-        customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).toBlocking().single().getBody();
+        customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).toBlocking().single().body();
     }
 
     /**
@@ -95,7 +95,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
         return customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).map(new Func1<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -137,7 +137,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
      */
     public void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
-        customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).toBlocking().single().getBody();
+        customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).toBlocking().single().body();
     }
 
     /**
@@ -161,7 +161,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
         return customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).map(new Func1<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

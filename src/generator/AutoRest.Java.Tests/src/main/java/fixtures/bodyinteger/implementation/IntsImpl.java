@@ -119,7 +119,7 @@ public final class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -141,7 +141,7 @@ public final class IntsImpl implements Ints {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Integer>, Integer>() {
             @Override
             public Integer call(ServiceResponse<Integer> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -179,7 +179,7 @@ public final class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -201,7 +201,7 @@ public final class IntsImpl implements Ints {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Integer>, Integer>() {
             @Override
             public Integer call(ServiceResponse<Integer> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -239,7 +239,7 @@ public final class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getOverflowInt32() {
-        return getOverflowInt32WithServiceResponseAsync().toBlocking().single().getBody();
+        return getOverflowInt32WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -261,7 +261,7 @@ public final class IntsImpl implements Ints {
         return getOverflowInt32WithServiceResponseAsync().map(new Func1<ServiceResponse<Integer>, Integer>() {
             @Override
             public Integer call(ServiceResponse<Integer> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -299,7 +299,7 @@ public final class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getUnderflowInt32() {
-        return getUnderflowInt32WithServiceResponseAsync().toBlocking().single().getBody();
+        return getUnderflowInt32WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -321,7 +321,7 @@ public final class IntsImpl implements Ints {
         return getUnderflowInt32WithServiceResponseAsync().map(new Func1<ServiceResponse<Integer>, Integer>() {
             @Override
             public Integer call(ServiceResponse<Integer> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -359,7 +359,7 @@ public final class IntsImpl implements Ints {
      * @return the long object if successful.
      */
     public long getOverflowInt64() {
-        return getOverflowInt64WithServiceResponseAsync().toBlocking().single().getBody();
+        return getOverflowInt64WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -381,7 +381,7 @@ public final class IntsImpl implements Ints {
         return getOverflowInt64WithServiceResponseAsync().map(new Func1<ServiceResponse<Long>, Long>() {
             @Override
             public Long call(ServiceResponse<Long> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -419,7 +419,7 @@ public final class IntsImpl implements Ints {
      * @return the long object if successful.
      */
     public long getUnderflowInt64() {
-        return getUnderflowInt64WithServiceResponseAsync().toBlocking().single().getBody();
+        return getUnderflowInt64WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -441,7 +441,7 @@ public final class IntsImpl implements Ints {
         return getUnderflowInt64WithServiceResponseAsync().map(new Func1<ServiceResponse<Long>, Long>() {
             @Override
             public Long call(ServiceResponse<Long> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -479,7 +479,7 @@ public final class IntsImpl implements Ints {
      * @param intBody the int value
      */
     public void putMax32(int intBody) {
-        putMax32WithServiceResponseAsync(intBody).toBlocking().single().getBody();
+        putMax32WithServiceResponseAsync(intBody).toBlocking().single().body();
     }
 
     /**
@@ -503,7 +503,7 @@ public final class IntsImpl implements Ints {
         return putMax32WithServiceResponseAsync(intBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -542,7 +542,7 @@ public final class IntsImpl implements Ints {
      * @param intBody the long value
      */
     public void putMax64(long intBody) {
-        putMax64WithServiceResponseAsync(intBody).toBlocking().single().getBody();
+        putMax64WithServiceResponseAsync(intBody).toBlocking().single().body();
     }
 
     /**
@@ -566,7 +566,7 @@ public final class IntsImpl implements Ints {
         return putMax64WithServiceResponseAsync(intBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -605,7 +605,7 @@ public final class IntsImpl implements Ints {
      * @param intBody the int value
      */
     public void putMin32(int intBody) {
-        putMin32WithServiceResponseAsync(intBody).toBlocking().single().getBody();
+        putMin32WithServiceResponseAsync(intBody).toBlocking().single().body();
     }
 
     /**
@@ -629,7 +629,7 @@ public final class IntsImpl implements Ints {
         return putMin32WithServiceResponseAsync(intBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -668,7 +668,7 @@ public final class IntsImpl implements Ints {
      * @param intBody the long value
      */
     public void putMin64(long intBody) {
-        putMin64WithServiceResponseAsync(intBody).toBlocking().single().getBody();
+        putMin64WithServiceResponseAsync(intBody).toBlocking().single().body();
     }
 
     /**
@@ -692,7 +692,7 @@ public final class IntsImpl implements Ints {
         return putMin64WithServiceResponseAsync(intBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -731,7 +731,7 @@ public final class IntsImpl implements Ints {
      * @return the DateTime object if successful.
      */
     public DateTime getUnixTime() {
-        return getUnixTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getUnixTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -753,7 +753,7 @@ public final class IntsImpl implements Ints {
         return getUnixTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -771,10 +771,10 @@ public final class IntsImpl implements Ints {
                     try {
                         ServiceResponse<Long> result = getUnixTimeDelegate(response);
                         DateTime body = null;
-                        if (result.getBody() != null) {
-                            body = new DateTime(result.getBody() * 1000L, DateTimeZone.UTC);
+                        if (result.body() != null) {
+                            body = new DateTime(result.body() * 1000L, DateTimeZone.UTC);
                         }
-                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -796,7 +796,7 @@ public final class IntsImpl implements Ints {
      * @param intBody the long value
      */
     public void putUnixTimeDate(DateTime intBody) {
-        putUnixTimeDateWithServiceResponseAsync(intBody).toBlocking().single().getBody();
+        putUnixTimeDateWithServiceResponseAsync(intBody).toBlocking().single().body();
     }
 
     /**
@@ -820,7 +820,7 @@ public final class IntsImpl implements Ints {
         return putUnixTimeDateWithServiceResponseAsync(intBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -860,7 +860,7 @@ public final class IntsImpl implements Ints {
      * @return the DateTime object if successful.
      */
     public DateTime getInvalidUnixTime() {
-        return getInvalidUnixTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidUnixTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -882,7 +882,7 @@ public final class IntsImpl implements Ints {
         return getInvalidUnixTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -900,10 +900,10 @@ public final class IntsImpl implements Ints {
                     try {
                         ServiceResponse<Long> result = getInvalidUnixTimeDelegate(response);
                         DateTime body = null;
-                        if (result.getBody() != null) {
-                            body = new DateTime(result.getBody() * 1000L, DateTimeZone.UTC);
+                        if (result.body() != null) {
+                            body = new DateTime(result.body() * 1000L, DateTimeZone.UTC);
                         }
-                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -925,7 +925,7 @@ public final class IntsImpl implements Ints {
      * @return the DateTime object if successful.
      */
     public DateTime getNullUnixTime() {
-        return getNullUnixTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullUnixTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -947,7 +947,7 @@ public final class IntsImpl implements Ints {
         return getNullUnixTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -965,10 +965,10 @@ public final class IntsImpl implements Ints {
                     try {
                         ServiceResponse<Long> result = getNullUnixTimeDelegate(response);
                         DateTime body = null;
-                        if (result.getBody() != null) {
-                            body = new DateTime(result.getBody() * 1000L, DateTimeZone.UTC);
+                        if (result.body() != null) {
+                            body = new DateTime(result.body() * 1000L, DateTimeZone.UTC);
                         }
-                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);

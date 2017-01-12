@@ -68,7 +68,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      *
      */
     public void get() {
-        getWithServiceResponseAsync().toBlocking().single().getBody();
+        getWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -90,7 +90,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
         return getWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -127,7 +127,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      */
     public void paramGet(String xMsClientRequestId) {
-        paramGetWithServiceResponseAsync(xMsClientRequestId).toBlocking().single().getBody();
+        paramGetWithServiceResponseAsync(xMsClientRequestId).toBlocking().single().body();
     }
 
     /**
@@ -151,7 +151,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
         return paramGetWithServiceResponseAsync(xMsClientRequestId).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

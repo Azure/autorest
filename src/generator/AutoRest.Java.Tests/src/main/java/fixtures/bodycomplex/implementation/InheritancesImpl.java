@@ -71,7 +71,7 @@ public final class InheritancesImpl implements Inheritances {
      * @return the Siamese object if successful.
      */
     public Siamese getValid() {
-        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -93,7 +93,7 @@ public final class InheritancesImpl implements Inheritances {
         return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Siamese>, Siamese>() {
             @Override
             public Siamese call(ServiceResponse<Siamese> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -131,7 +131,7 @@ public final class InheritancesImpl implements Inheritances {
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      */
     public void putValid(Siamese complexBody) {
-        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -155,7 +155,7 @@ public final class InheritancesImpl implements Inheritances {
         return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

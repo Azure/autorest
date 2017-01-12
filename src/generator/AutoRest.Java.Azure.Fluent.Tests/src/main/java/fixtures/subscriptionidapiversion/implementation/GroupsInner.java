@@ -66,7 +66,7 @@ public final class GroupsInner {
      * @return the SampleResourceGroupInner object if successful.
      */
     public SampleResourceGroupInner getSampleResourceGroup(String resourceGroupName) {
-        return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).toBlocking().single().getBody();
+        return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).toBlocking().single().body();
     }
 
     /**
@@ -90,7 +90,7 @@ public final class GroupsInner {
         return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).map(new Func1<ServiceResponse<SampleResourceGroupInner>, SampleResourceGroupInner>() {
             @Override
             public SampleResourceGroupInner call(ServiceResponse<SampleResourceGroupInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

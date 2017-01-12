@@ -69,7 +69,7 @@ public final class HeadExceptionsInner {
      *
      */
     public void head200() {
-        head200WithServiceResponseAsync().toBlocking().single().getBody();
+        head200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -91,7 +91,7 @@ public final class HeadExceptionsInner {
         return head200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -127,7 +127,7 @@ public final class HeadExceptionsInner {
      *
      */
     public void head204() {
-        head204WithServiceResponseAsync().toBlocking().single().getBody();
+        head204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -149,7 +149,7 @@ public final class HeadExceptionsInner {
         return head204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -185,7 +185,7 @@ public final class HeadExceptionsInner {
      *
      */
     public void head404() {
-        head404WithServiceResponseAsync().toBlocking().single().getBody();
+        head404WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -207,7 +207,7 @@ public final class HeadExceptionsInner {
         return head404WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

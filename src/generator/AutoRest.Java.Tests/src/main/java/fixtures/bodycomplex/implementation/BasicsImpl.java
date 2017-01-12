@@ -88,7 +88,7 @@ public final class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getValid() {
-        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -110,7 +110,7 @@ public final class BasicsImpl implements Basics {
         return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Basic>, Basic>() {
             @Override
             public Basic call(ServiceResponse<Basic> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -148,7 +148,7 @@ public final class BasicsImpl implements Basics {
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      */
     public void putValid(Basic complexBody) {
-        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -172,7 +172,7 @@ public final class BasicsImpl implements Basics {
         return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -215,7 +215,7 @@ public final class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -237,7 +237,7 @@ public final class BasicsImpl implements Basics {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Basic>, Basic>() {
             @Override
             public Basic call(ServiceResponse<Basic> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -275,7 +275,7 @@ public final class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getEmpty() {
-        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -297,7 +297,7 @@ public final class BasicsImpl implements Basics {
         return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Basic>, Basic>() {
             @Override
             public Basic call(ServiceResponse<Basic> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -335,7 +335,7 @@ public final class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -357,7 +357,7 @@ public final class BasicsImpl implements Basics {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Basic>, Basic>() {
             @Override
             public Basic call(ServiceResponse<Basic> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -395,7 +395,7 @@ public final class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getNotProvided() {
-        return getNotProvidedWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNotProvidedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -417,7 +417,7 @@ public final class BasicsImpl implements Basics {
         return getNotProvidedWithServiceResponseAsync().map(new Func1<ServiceResponse<Basic>, Basic>() {
             @Override
             public Basic call(ServiceResponse<Basic> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

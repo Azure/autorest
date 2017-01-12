@@ -84,7 +84,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
      */
     public void postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
-        postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters).toBlocking().single().getBody();
+        postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters).toBlocking().single().body();
     }
 
     /**
@@ -108,7 +108,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
         return postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -154,7 +154,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      *
      */
     public void postOptional() {
-        postOptionalWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -176,7 +176,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
         return postOptionalWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -210,7 +210,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      */
     public void postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
-        postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters).toBlocking().single().getBody();
+        postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters).toBlocking().single().body();
     }
 
     /**
@@ -234,7 +234,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
         return postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -281,7 +281,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      *
      */
     public void postMultiParamGroups() {
-        postMultiParamGroupsWithServiceResponseAsync().toBlocking().single().getBody();
+        postMultiParamGroupsWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -303,7 +303,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
         return postMultiParamGroupsWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -341,7 +341,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      */
     public void postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
-        postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).toBlocking().single().getBody();
+        postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).toBlocking().single().body();
     }
 
     /**
@@ -367,7 +367,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
         return postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -424,7 +424,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      *
      */
     public void postSharedParameterGroupObject() {
-        postSharedParameterGroupObjectWithServiceResponseAsync().toBlocking().single().getBody();
+        postSharedParameterGroupObjectWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -446,7 +446,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
         return postSharedParameterGroupObjectWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -480,7 +480,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param firstParameterGroup Additional parameters for the operation
      */
     public void postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) {
-        postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup).toBlocking().single().getBody();
+        postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup).toBlocking().single().body();
     }
 
     /**
@@ -504,7 +504,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
         return postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

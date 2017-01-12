@@ -76,7 +76,7 @@ public final class FilesImpl implements Files {
      * @return the InputStream object if successful.
      */
     public InputStream getFile() {
-        return getFileWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFileWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -98,7 +98,7 @@ public final class FilesImpl implements Files {
         return getFileWithServiceResponseAsync().map(new Func1<ServiceResponse<InputStream>, InputStream>() {
             @Override
             public InputStream call(ServiceResponse<InputStream> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -136,7 +136,7 @@ public final class FilesImpl implements Files {
      * @return the InputStream object if successful.
      */
     public InputStream getFileLarge() {
-        return getFileLargeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFileLargeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -158,7 +158,7 @@ public final class FilesImpl implements Files {
         return getFileLargeWithServiceResponseAsync().map(new Func1<ServiceResponse<InputStream>, InputStream>() {
             @Override
             public InputStream call(ServiceResponse<InputStream> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -196,7 +196,7 @@ public final class FilesImpl implements Files {
      * @return the InputStream object if successful.
      */
     public InputStream getEmptyFile() {
-        return getEmptyFileWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyFileWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -218,7 +218,7 @@ public final class FilesImpl implements Files {
         return getEmptyFileWithServiceResponseAsync().map(new Func1<ServiceResponse<InputStream>, InputStream>() {
             @Override
             public InputStream call(ServiceResponse<InputStream> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

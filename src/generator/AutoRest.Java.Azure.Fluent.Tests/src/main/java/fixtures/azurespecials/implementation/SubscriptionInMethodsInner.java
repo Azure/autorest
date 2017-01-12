@@ -76,7 +76,7 @@ public final class SubscriptionInMethodsInner {
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      */
     public void postMethodLocalValid(String subscriptionId) {
-        postMethodLocalValidWithServiceResponseAsync(subscriptionId).toBlocking().single().getBody();
+        postMethodLocalValidWithServiceResponseAsync(subscriptionId).toBlocking().single().body();
     }
 
     /**
@@ -100,7 +100,7 @@ public final class SubscriptionInMethodsInner {
         return postMethodLocalValidWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -142,7 +142,7 @@ public final class SubscriptionInMethodsInner {
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      */
     public void postMethodLocalNull(String subscriptionId) {
-        postMethodLocalNullWithServiceResponseAsync(subscriptionId).toBlocking().single().getBody();
+        postMethodLocalNullWithServiceResponseAsync(subscriptionId).toBlocking().single().body();
     }
 
     /**
@@ -166,7 +166,7 @@ public final class SubscriptionInMethodsInner {
         return postMethodLocalNullWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -208,7 +208,7 @@ public final class SubscriptionInMethodsInner {
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      */
     public void postPathLocalValid(String subscriptionId) {
-        postPathLocalValidWithServiceResponseAsync(subscriptionId).toBlocking().single().getBody();
+        postPathLocalValidWithServiceResponseAsync(subscriptionId).toBlocking().single().body();
     }
 
     /**
@@ -232,7 +232,7 @@ public final class SubscriptionInMethodsInner {
         return postPathLocalValidWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -274,7 +274,7 @@ public final class SubscriptionInMethodsInner {
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      */
     public void postSwaggerLocalValid(String subscriptionId) {
-        postSwaggerLocalValidWithServiceResponseAsync(subscriptionId).toBlocking().single().getBody();
+        postSwaggerLocalValidWithServiceResponseAsync(subscriptionId).toBlocking().single().body();
     }
 
     /**
@@ -298,7 +298,7 @@ public final class SubscriptionInMethodsInner {
         return postSwaggerLocalValidWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

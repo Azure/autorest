@@ -88,7 +88,7 @@ public final class EnumsImpl implements Enums {
      * @return the Colors object if successful.
      */
     public Colors getNotExpandable() {
-        return getNotExpandableWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNotExpandableWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -110,7 +110,7 @@ public final class EnumsImpl implements Enums {
         return getNotExpandableWithServiceResponseAsync().map(new Func1<ServiceResponse<Colors>, Colors>() {
             @Override
             public Colors call(ServiceResponse<Colors> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -148,7 +148,7 @@ public final class EnumsImpl implements Enums {
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
      */
     public void putNotExpandable(Colors stringBody) {
-        putNotExpandableWithServiceResponseAsync(stringBody).toBlocking().single().getBody();
+        putNotExpandableWithServiceResponseAsync(stringBody).toBlocking().single().body();
     }
 
     /**
@@ -172,7 +172,7 @@ public final class EnumsImpl implements Enums {
         return putNotExpandableWithServiceResponseAsync(stringBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -214,7 +214,7 @@ public final class EnumsImpl implements Enums {
      * @return the Colors object if successful.
      */
     public Colors getReferenced() {
-        return getReferencedWithServiceResponseAsync().toBlocking().single().getBody();
+        return getReferencedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -236,7 +236,7 @@ public final class EnumsImpl implements Enums {
         return getReferencedWithServiceResponseAsync().map(new Func1<ServiceResponse<Colors>, Colors>() {
             @Override
             public Colors call(ServiceResponse<Colors> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -274,7 +274,7 @@ public final class EnumsImpl implements Enums {
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
      */
     public void putReferenced(Colors enumStringBody) {
-        putReferencedWithServiceResponseAsync(enumStringBody).toBlocking().single().getBody();
+        putReferencedWithServiceResponseAsync(enumStringBody).toBlocking().single().body();
     }
 
     /**
@@ -298,7 +298,7 @@ public final class EnumsImpl implements Enums {
         return putReferencedWithServiceResponseAsync(enumStringBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -340,7 +340,7 @@ public final class EnumsImpl implements Enums {
      * @return the RefColorConstant object if successful.
      */
     public RefColorConstant getReferencedConstant() {
-        return getReferencedConstantWithServiceResponseAsync().toBlocking().single().getBody();
+        return getReferencedConstantWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -362,7 +362,7 @@ public final class EnumsImpl implements Enums {
         return getReferencedConstantWithServiceResponseAsync().map(new Func1<ServiceResponse<RefColorConstant>, RefColorConstant>() {
             @Override
             public RefColorConstant call(ServiceResponse<RefColorConstant> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -400,7 +400,7 @@ public final class EnumsImpl implements Enums {
      * @param enumStringBody the RefColorConstant value
      */
     public void putReferencedConstant(RefColorConstant enumStringBody) {
-        putReferencedConstantWithServiceResponseAsync(enumStringBody).toBlocking().single().getBody();
+        putReferencedConstantWithServiceResponseAsync(enumStringBody).toBlocking().single().body();
     }
 
     /**
@@ -424,7 +424,7 @@ public final class EnumsImpl implements Enums {
         return putReferencedConstantWithServiceResponseAsync(enumStringBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

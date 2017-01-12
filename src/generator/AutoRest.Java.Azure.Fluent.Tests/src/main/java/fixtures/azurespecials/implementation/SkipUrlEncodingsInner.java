@@ -89,7 +89,7 @@ public final class SkipUrlEncodingsInner {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      */
     public void getMethodPathValid(String unencodedPathParam) {
-        getMethodPathValidWithServiceResponseAsync(unencodedPathParam).toBlocking().single().getBody();
+        getMethodPathValidWithServiceResponseAsync(unencodedPathParam).toBlocking().single().body();
     }
 
     /**
@@ -113,7 +113,7 @@ public final class SkipUrlEncodingsInner {
         return getMethodPathValidWithServiceResponseAsync(unencodedPathParam).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -155,7 +155,7 @@ public final class SkipUrlEncodingsInner {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      */
     public void getPathPathValid(String unencodedPathParam) {
-        getPathPathValidWithServiceResponseAsync(unencodedPathParam).toBlocking().single().getBody();
+        getPathPathValidWithServiceResponseAsync(unencodedPathParam).toBlocking().single().body();
     }
 
     /**
@@ -179,7 +179,7 @@ public final class SkipUrlEncodingsInner {
         return getPathPathValidWithServiceResponseAsync(unencodedPathParam).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -220,7 +220,7 @@ public final class SkipUrlEncodingsInner {
      *
      */
     public void getSwaggerPathValid() {
-        getSwaggerPathValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getSwaggerPathValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -242,7 +242,7 @@ public final class SkipUrlEncodingsInner {
         return getSwaggerPathValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -281,7 +281,7 @@ public final class SkipUrlEncodingsInner {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      */
     public void getMethodQueryValid(String q1) {
-        getMethodQueryValidWithServiceResponseAsync(q1).toBlocking().single().getBody();
+        getMethodQueryValidWithServiceResponseAsync(q1).toBlocking().single().body();
     }
 
     /**
@@ -305,7 +305,7 @@ public final class SkipUrlEncodingsInner {
         return getMethodQueryValidWithServiceResponseAsync(q1).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -346,7 +346,7 @@ public final class SkipUrlEncodingsInner {
      *
      */
     public void getMethodQueryNull() {
-        getMethodQueryNullWithServiceResponseAsync().toBlocking().single().getBody();
+        getMethodQueryNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -368,7 +368,7 @@ public final class SkipUrlEncodingsInner {
         return getMethodQueryNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -400,7 +400,7 @@ public final class SkipUrlEncodingsInner {
      * @param q1 Unencoded query parameter with value null
      */
     public void getMethodQueryNull(String q1) {
-        getMethodQueryNullWithServiceResponseAsync(q1).toBlocking().single().getBody();
+        getMethodQueryNullWithServiceResponseAsync(q1).toBlocking().single().body();
     }
 
     /**
@@ -424,7 +424,7 @@ public final class SkipUrlEncodingsInner {
         return getMethodQueryNullWithServiceResponseAsync(q1).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -463,7 +463,7 @@ public final class SkipUrlEncodingsInner {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      */
     public void getPathQueryValid(String q1) {
-        getPathQueryValidWithServiceResponseAsync(q1).toBlocking().single().getBody();
+        getPathQueryValidWithServiceResponseAsync(q1).toBlocking().single().body();
     }
 
     /**
@@ -487,7 +487,7 @@ public final class SkipUrlEncodingsInner {
         return getPathQueryValidWithServiceResponseAsync(q1).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -528,7 +528,7 @@ public final class SkipUrlEncodingsInner {
      *
      */
     public void getSwaggerQueryValid() {
-        getSwaggerQueryValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getSwaggerQueryValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -550,7 +550,7 @@ public final class SkipUrlEncodingsInner {
         return getSwaggerQueryValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

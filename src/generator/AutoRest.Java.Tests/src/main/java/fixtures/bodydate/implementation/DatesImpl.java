@@ -94,7 +94,7 @@ public final class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -116,7 +116,7 @@ public final class DatesImpl implements Dates {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
             @Override
             public LocalDate call(ServiceResponse<LocalDate> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -154,7 +154,7 @@ public final class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getInvalidDate() {
-        return getInvalidDateWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidDateWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -176,7 +176,7 @@ public final class DatesImpl implements Dates {
         return getInvalidDateWithServiceResponseAsync().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
             @Override
             public LocalDate call(ServiceResponse<LocalDate> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -214,7 +214,7 @@ public final class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getOverflowDate() {
-        return getOverflowDateWithServiceResponseAsync().toBlocking().single().getBody();
+        return getOverflowDateWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -236,7 +236,7 @@ public final class DatesImpl implements Dates {
         return getOverflowDateWithServiceResponseAsync().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
             @Override
             public LocalDate call(ServiceResponse<LocalDate> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -274,7 +274,7 @@ public final class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getUnderflowDate() {
-        return getUnderflowDateWithServiceResponseAsync().toBlocking().single().getBody();
+        return getUnderflowDateWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -296,7 +296,7 @@ public final class DatesImpl implements Dates {
         return getUnderflowDateWithServiceResponseAsync().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
             @Override
             public LocalDate call(ServiceResponse<LocalDate> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -334,7 +334,7 @@ public final class DatesImpl implements Dates {
      * @param dateBody the LocalDate value
      */
     public void putMaxDate(LocalDate dateBody) {
-        putMaxDateWithServiceResponseAsync(dateBody).toBlocking().single().getBody();
+        putMaxDateWithServiceResponseAsync(dateBody).toBlocking().single().body();
     }
 
     /**
@@ -358,7 +358,7 @@ public final class DatesImpl implements Dates {
         return putMaxDateWithServiceResponseAsync(dateBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -400,7 +400,7 @@ public final class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getMaxDate() {
-        return getMaxDateWithServiceResponseAsync().toBlocking().single().getBody();
+        return getMaxDateWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -422,7 +422,7 @@ public final class DatesImpl implements Dates {
         return getMaxDateWithServiceResponseAsync().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
             @Override
             public LocalDate call(ServiceResponse<LocalDate> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -460,7 +460,7 @@ public final class DatesImpl implements Dates {
      * @param dateBody the LocalDate value
      */
     public void putMinDate(LocalDate dateBody) {
-        putMinDateWithServiceResponseAsync(dateBody).toBlocking().single().getBody();
+        putMinDateWithServiceResponseAsync(dateBody).toBlocking().single().body();
     }
 
     /**
@@ -484,7 +484,7 @@ public final class DatesImpl implements Dates {
         return putMinDateWithServiceResponseAsync(dateBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -526,7 +526,7 @@ public final class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getMinDate() {
-        return getMinDateWithServiceResponseAsync().toBlocking().single().getBody();
+        return getMinDateWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -548,7 +548,7 @@ public final class DatesImpl implements Dates {
         return getMinDateWithServiceResponseAsync().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
             @Override
             public LocalDate call(ServiceResponse<LocalDate> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

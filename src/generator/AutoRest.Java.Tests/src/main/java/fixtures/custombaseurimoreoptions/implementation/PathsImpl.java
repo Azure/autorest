@@ -69,7 +69,7 @@ public final class PathsImpl implements Paths {
      * @param keyName The key name with value 'key1'.
      */
     public void getEmpty(String vault, String secret, String keyName) {
-        getEmptyWithServiceResponseAsync(vault, secret, keyName).toBlocking().single().getBody();
+        getEmptyWithServiceResponseAsync(vault, secret, keyName).toBlocking().single().body();
     }
 
     /**
@@ -97,7 +97,7 @@ public final class PathsImpl implements Paths {
         return getEmptyWithServiceResponseAsync(vault, secret, keyName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -151,7 +151,7 @@ public final class PathsImpl implements Paths {
      * @param keyVersion The key version. Default value 'v1'.
      */
     public void getEmpty(String vault, String secret, String keyName, String keyVersion) {
-        getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion).toBlocking().single().getBody();
+        getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion).toBlocking().single().body();
     }
 
     /**
@@ -181,7 +181,7 @@ public final class PathsImpl implements Paths {
         return getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

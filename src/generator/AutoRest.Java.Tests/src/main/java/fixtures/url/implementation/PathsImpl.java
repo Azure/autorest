@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
 import fixtures.url.Paths;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.Base64Url;
-import com.microsoft.rest.protocol.CollectionFormat;
+import com.microsoft.rest.CollectionFormat;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -172,7 +172,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void getBooleanTrue() {
-        getBooleanTrueWithServiceResponseAsync().toBlocking().single().getBody();
+        getBooleanTrueWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -194,7 +194,7 @@ public final class PathsImpl implements Paths {
         return getBooleanTrueWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -232,7 +232,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void getBooleanFalse() {
-        getBooleanFalseWithServiceResponseAsync().toBlocking().single().getBody();
+        getBooleanFalseWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -254,7 +254,7 @@ public final class PathsImpl implements Paths {
         return getBooleanFalseWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -292,7 +292,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void getIntOneMillion() {
-        getIntOneMillionWithServiceResponseAsync().toBlocking().single().getBody();
+        getIntOneMillionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -314,7 +314,7 @@ public final class PathsImpl implements Paths {
         return getIntOneMillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -352,7 +352,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void getIntNegativeOneMillion() {
-        getIntNegativeOneMillionWithServiceResponseAsync().toBlocking().single().getBody();
+        getIntNegativeOneMillionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -374,7 +374,7 @@ public final class PathsImpl implements Paths {
         return getIntNegativeOneMillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -412,7 +412,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void getTenBillion() {
-        getTenBillionWithServiceResponseAsync().toBlocking().single().getBody();
+        getTenBillionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -434,7 +434,7 @@ public final class PathsImpl implements Paths {
         return getTenBillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -472,7 +472,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void getNegativeTenBillion() {
-        getNegativeTenBillionWithServiceResponseAsync().toBlocking().single().getBody();
+        getNegativeTenBillionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -494,7 +494,7 @@ public final class PathsImpl implements Paths {
         return getNegativeTenBillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -532,7 +532,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void floatScientificPositive() {
-        floatScientificPositiveWithServiceResponseAsync().toBlocking().single().getBody();
+        floatScientificPositiveWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -554,7 +554,7 @@ public final class PathsImpl implements Paths {
         return floatScientificPositiveWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -592,7 +592,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void floatScientificNegative() {
-        floatScientificNegativeWithServiceResponseAsync().toBlocking().single().getBody();
+        floatScientificNegativeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -614,7 +614,7 @@ public final class PathsImpl implements Paths {
         return floatScientificNegativeWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -652,7 +652,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void doubleDecimalPositive() {
-        doubleDecimalPositiveWithServiceResponseAsync().toBlocking().single().getBody();
+        doubleDecimalPositiveWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -674,7 +674,7 @@ public final class PathsImpl implements Paths {
         return doubleDecimalPositiveWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -712,7 +712,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void doubleDecimalNegative() {
-        doubleDecimalNegativeWithServiceResponseAsync().toBlocking().single().getBody();
+        doubleDecimalNegativeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -734,7 +734,7 @@ public final class PathsImpl implements Paths {
         return doubleDecimalNegativeWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -772,7 +772,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void stringUnicode() {
-        stringUnicodeWithServiceResponseAsync().toBlocking().single().getBody();
+        stringUnicodeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -794,7 +794,7 @@ public final class PathsImpl implements Paths {
         return stringUnicodeWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -832,7 +832,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void stringUrlEncoded() {
-        stringUrlEncodedWithServiceResponseAsync().toBlocking().single().getBody();
+        stringUrlEncodedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -854,7 +854,7 @@ public final class PathsImpl implements Paths {
         return stringUrlEncodedWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -892,7 +892,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void stringEmpty() {
-        stringEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        stringEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -914,7 +914,7 @@ public final class PathsImpl implements Paths {
         return stringEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -953,7 +953,7 @@ public final class PathsImpl implements Paths {
      * @param stringPath null string value
      */
     public void stringNull(String stringPath) {
-        stringNullWithServiceResponseAsync(stringPath).toBlocking().single().getBody();
+        stringNullWithServiceResponseAsync(stringPath).toBlocking().single().body();
     }
 
     /**
@@ -977,7 +977,7 @@ public final class PathsImpl implements Paths {
         return stringNullWithServiceResponseAsync(stringPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1019,7 +1019,7 @@ public final class PathsImpl implements Paths {
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      */
     public void enumValid(UriColor enumPath) {
-        enumValidWithServiceResponseAsync(enumPath).toBlocking().single().getBody();
+        enumValidWithServiceResponseAsync(enumPath).toBlocking().single().body();
     }
 
     /**
@@ -1043,7 +1043,7 @@ public final class PathsImpl implements Paths {
         return enumValidWithServiceResponseAsync(enumPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1085,7 +1085,7 @@ public final class PathsImpl implements Paths {
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      */
     public void enumNull(UriColor enumPath) {
-        enumNullWithServiceResponseAsync(enumPath).toBlocking().single().getBody();
+        enumNullWithServiceResponseAsync(enumPath).toBlocking().single().body();
     }
 
     /**
@@ -1109,7 +1109,7 @@ public final class PathsImpl implements Paths {
         return enumNullWithServiceResponseAsync(enumPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1151,7 +1151,7 @@ public final class PathsImpl implements Paths {
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      */
     public void byteMultiByte(byte[] bytePath) {
-        byteMultiByteWithServiceResponseAsync(bytePath).toBlocking().single().getBody();
+        byteMultiByteWithServiceResponseAsync(bytePath).toBlocking().single().body();
     }
 
     /**
@@ -1175,7 +1175,7 @@ public final class PathsImpl implements Paths {
         return byteMultiByteWithServiceResponseAsync(bytePath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1217,7 +1217,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void byteEmpty() {
-        byteEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        byteEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1239,7 +1239,7 @@ public final class PathsImpl implements Paths {
         return byteEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1279,7 +1279,7 @@ public final class PathsImpl implements Paths {
      * @param bytePath null as byte array (should throw)
      */
     public void byteNull(byte[] bytePath) {
-        byteNullWithServiceResponseAsync(bytePath).toBlocking().single().getBody();
+        byteNullWithServiceResponseAsync(bytePath).toBlocking().single().body();
     }
 
     /**
@@ -1303,7 +1303,7 @@ public final class PathsImpl implements Paths {
         return byteNullWithServiceResponseAsync(bytePath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1345,7 +1345,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void dateValid() {
-        dateValidWithServiceResponseAsync().toBlocking().single().getBody();
+        dateValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1367,7 +1367,7 @@ public final class PathsImpl implements Paths {
         return dateValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1406,7 +1406,7 @@ public final class PathsImpl implements Paths {
      * @param datePath null as date (should throw)
      */
     public void dateNull(LocalDate datePath) {
-        dateNullWithServiceResponseAsync(datePath).toBlocking().single().getBody();
+        dateNullWithServiceResponseAsync(datePath).toBlocking().single().body();
     }
 
     /**
@@ -1430,7 +1430,7 @@ public final class PathsImpl implements Paths {
         return dateNullWithServiceResponseAsync(datePath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1471,7 +1471,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void dateTimeValid() {
-        dateTimeValidWithServiceResponseAsync().toBlocking().single().getBody();
+        dateTimeValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1493,7 +1493,7 @@ public final class PathsImpl implements Paths {
         return dateTimeValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1532,7 +1532,7 @@ public final class PathsImpl implements Paths {
      * @param dateTimePath null as date-time
      */
     public void dateTimeNull(DateTime dateTimePath) {
-        dateTimeNullWithServiceResponseAsync(dateTimePath).toBlocking().single().getBody();
+        dateTimeNullWithServiceResponseAsync(dateTimePath).toBlocking().single().body();
     }
 
     /**
@@ -1556,7 +1556,7 @@ public final class PathsImpl implements Paths {
         return dateTimeNullWithServiceResponseAsync(dateTimePath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1598,7 +1598,7 @@ public final class PathsImpl implements Paths {
      * @param base64UrlPath base64url encoded value
      */
     public void base64Url(byte[] base64UrlPath) {
-        base64UrlWithServiceResponseAsync(base64UrlPath).toBlocking().single().getBody();
+        base64UrlWithServiceResponseAsync(base64UrlPath).toBlocking().single().body();
     }
 
     /**
@@ -1622,7 +1622,7 @@ public final class PathsImpl implements Paths {
         return base64UrlWithServiceResponseAsync(base64UrlPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1665,7 +1665,7 @@ public final class PathsImpl implements Paths {
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      */
     public void arrayCsvInPath(List<String> arrayPath) {
-        arrayCsvInPathWithServiceResponseAsync(arrayPath).toBlocking().single().getBody();
+        arrayCsvInPathWithServiceResponseAsync(arrayPath).toBlocking().single().body();
     }
 
     /**
@@ -1689,7 +1689,7 @@ public final class PathsImpl implements Paths {
         return arrayCsvInPathWithServiceResponseAsync(arrayPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1733,7 +1733,7 @@ public final class PathsImpl implements Paths {
      * @param unixTimeUrlPath Unix time encoded value
      */
     public void unixTimeUrl(DateTime unixTimeUrlPath) {
-        unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath).toBlocking().single().getBody();
+        unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath).toBlocking().single().body();
     }
 
     /**
@@ -1757,7 +1757,7 @@ public final class PathsImpl implements Paths {
         return unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

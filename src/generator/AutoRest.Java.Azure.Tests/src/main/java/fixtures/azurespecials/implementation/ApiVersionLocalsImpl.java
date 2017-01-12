@@ -76,7 +76,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      */
     public void getMethodLocalValid() {
-        getMethodLocalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getMethodLocalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -98,7 +98,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
         return getMethodLocalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -136,7 +136,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      */
     public void getMethodLocalNull() {
-        getMethodLocalNullWithServiceResponseAsync().toBlocking().single().getBody();
+        getMethodLocalNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -158,7 +158,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
         return getMethodLocalNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -190,7 +190,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      */
     public void getMethodLocalNull(String apiVersion) {
-        getMethodLocalNullWithServiceResponseAsync(apiVersion).toBlocking().single().getBody();
+        getMethodLocalNullWithServiceResponseAsync(apiVersion).toBlocking().single().body();
     }
 
     /**
@@ -214,7 +214,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
         return getMethodLocalNullWithServiceResponseAsync(apiVersion).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -252,7 +252,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      */
     public void getPathLocalValid() {
-        getPathLocalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getPathLocalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -274,7 +274,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
         return getPathLocalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -312,7 +312,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      */
     public void getSwaggerLocalValid() {
-        getSwaggerLocalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getSwaggerLocalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -334,7 +334,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
         return getSwaggerLocalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

@@ -78,7 +78,7 @@ public final class DurationsImpl implements Durations {
      * @return the Period object if successful.
      */
     public Period getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -100,7 +100,7 @@ public final class DurationsImpl implements Durations {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Period>, Period>() {
             @Override
             public Period call(ServiceResponse<Period> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -138,7 +138,7 @@ public final class DurationsImpl implements Durations {
      * @param durationBody the Period value
      */
     public void putPositiveDuration(Period durationBody) {
-        putPositiveDurationWithServiceResponseAsync(durationBody).toBlocking().single().getBody();
+        putPositiveDurationWithServiceResponseAsync(durationBody).toBlocking().single().body();
     }
 
     /**
@@ -162,7 +162,7 @@ public final class DurationsImpl implements Durations {
         return putPositiveDurationWithServiceResponseAsync(durationBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -204,7 +204,7 @@ public final class DurationsImpl implements Durations {
      * @return the Period object if successful.
      */
     public Period getPositiveDuration() {
-        return getPositiveDurationWithServiceResponseAsync().toBlocking().single().getBody();
+        return getPositiveDurationWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -226,7 +226,7 @@ public final class DurationsImpl implements Durations {
         return getPositiveDurationWithServiceResponseAsync().map(new Func1<ServiceResponse<Period>, Period>() {
             @Override
             public Period call(ServiceResponse<Period> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -264,7 +264,7 @@ public final class DurationsImpl implements Durations {
      * @return the Period object if successful.
      */
     public Period getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -286,7 +286,7 @@ public final class DurationsImpl implements Durations {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Period>, Period>() {
             @Override
             public Period call(ServiceResponse<Period> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

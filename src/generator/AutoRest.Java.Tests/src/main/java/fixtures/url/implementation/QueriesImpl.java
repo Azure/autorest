@@ -13,7 +13,7 @@ package fixtures.url.implementation;
 import retrofit2.Retrofit;
 import fixtures.url.Queries;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.protocol.CollectionFormat;
+import com.microsoft.rest.CollectionFormat;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -202,7 +202,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void getBooleanTrue() {
-        getBooleanTrueWithServiceResponseAsync().toBlocking().single().getBody();
+        getBooleanTrueWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -224,7 +224,7 @@ public final class QueriesImpl implements Queries {
         return getBooleanTrueWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -262,7 +262,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void getBooleanFalse() {
-        getBooleanFalseWithServiceResponseAsync().toBlocking().single().getBody();
+        getBooleanFalseWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -284,7 +284,7 @@ public final class QueriesImpl implements Queries {
         return getBooleanFalseWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -322,7 +322,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void getBooleanNull() {
-        getBooleanNullWithServiceResponseAsync().toBlocking().single().getBody();
+        getBooleanNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -344,7 +344,7 @@ public final class QueriesImpl implements Queries {
         return getBooleanNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -376,7 +376,7 @@ public final class QueriesImpl implements Queries {
      * @param boolQuery null boolean value
      */
     public void getBooleanNull(Boolean boolQuery) {
-        getBooleanNullWithServiceResponseAsync(boolQuery).toBlocking().single().getBody();
+        getBooleanNullWithServiceResponseAsync(boolQuery).toBlocking().single().body();
     }
 
     /**
@@ -400,7 +400,7 @@ public final class QueriesImpl implements Queries {
         return getBooleanNullWithServiceResponseAsync(boolQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -438,7 +438,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void getIntOneMillion() {
-        getIntOneMillionWithServiceResponseAsync().toBlocking().single().getBody();
+        getIntOneMillionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -460,7 +460,7 @@ public final class QueriesImpl implements Queries {
         return getIntOneMillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -498,7 +498,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void getIntNegativeOneMillion() {
-        getIntNegativeOneMillionWithServiceResponseAsync().toBlocking().single().getBody();
+        getIntNegativeOneMillionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -520,7 +520,7 @@ public final class QueriesImpl implements Queries {
         return getIntNegativeOneMillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -558,7 +558,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void getIntNull() {
-        getIntNullWithServiceResponseAsync().toBlocking().single().getBody();
+        getIntNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -580,7 +580,7 @@ public final class QueriesImpl implements Queries {
         return getIntNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -612,7 +612,7 @@ public final class QueriesImpl implements Queries {
      * @param intQuery null integer value
      */
     public void getIntNull(Integer intQuery) {
-        getIntNullWithServiceResponseAsync(intQuery).toBlocking().single().getBody();
+        getIntNullWithServiceResponseAsync(intQuery).toBlocking().single().body();
     }
 
     /**
@@ -636,7 +636,7 @@ public final class QueriesImpl implements Queries {
         return getIntNullWithServiceResponseAsync(intQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -674,7 +674,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void getTenBillion() {
-        getTenBillionWithServiceResponseAsync().toBlocking().single().getBody();
+        getTenBillionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -696,7 +696,7 @@ public final class QueriesImpl implements Queries {
         return getTenBillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -734,7 +734,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void getNegativeTenBillion() {
-        getNegativeTenBillionWithServiceResponseAsync().toBlocking().single().getBody();
+        getNegativeTenBillionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -756,7 +756,7 @@ public final class QueriesImpl implements Queries {
         return getNegativeTenBillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -794,7 +794,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void getLongNull() {
-        getLongNullWithServiceResponseAsync().toBlocking().single().getBody();
+        getLongNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -816,7 +816,7 @@ public final class QueriesImpl implements Queries {
         return getLongNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -848,7 +848,7 @@ public final class QueriesImpl implements Queries {
      * @param longQuery null 64 bit integer value
      */
     public void getLongNull(Long longQuery) {
-        getLongNullWithServiceResponseAsync(longQuery).toBlocking().single().getBody();
+        getLongNullWithServiceResponseAsync(longQuery).toBlocking().single().body();
     }
 
     /**
@@ -872,7 +872,7 @@ public final class QueriesImpl implements Queries {
         return getLongNullWithServiceResponseAsync(longQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -910,7 +910,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void floatScientificPositive() {
-        floatScientificPositiveWithServiceResponseAsync().toBlocking().single().getBody();
+        floatScientificPositiveWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -932,7 +932,7 @@ public final class QueriesImpl implements Queries {
         return floatScientificPositiveWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -970,7 +970,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void floatScientificNegative() {
-        floatScientificNegativeWithServiceResponseAsync().toBlocking().single().getBody();
+        floatScientificNegativeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -992,7 +992,7 @@ public final class QueriesImpl implements Queries {
         return floatScientificNegativeWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1030,7 +1030,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void floatNull() {
-        floatNullWithServiceResponseAsync().toBlocking().single().getBody();
+        floatNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1052,7 +1052,7 @@ public final class QueriesImpl implements Queries {
         return floatNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1084,7 +1084,7 @@ public final class QueriesImpl implements Queries {
      * @param floatQuery null numeric value
      */
     public void floatNull(Double floatQuery) {
-        floatNullWithServiceResponseAsync(floatQuery).toBlocking().single().getBody();
+        floatNullWithServiceResponseAsync(floatQuery).toBlocking().single().body();
     }
 
     /**
@@ -1108,7 +1108,7 @@ public final class QueriesImpl implements Queries {
         return floatNullWithServiceResponseAsync(floatQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1146,7 +1146,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void doubleDecimalPositive() {
-        doubleDecimalPositiveWithServiceResponseAsync().toBlocking().single().getBody();
+        doubleDecimalPositiveWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1168,7 +1168,7 @@ public final class QueriesImpl implements Queries {
         return doubleDecimalPositiveWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1206,7 +1206,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void doubleDecimalNegative() {
-        doubleDecimalNegativeWithServiceResponseAsync().toBlocking().single().getBody();
+        doubleDecimalNegativeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1228,7 +1228,7 @@ public final class QueriesImpl implements Queries {
         return doubleDecimalNegativeWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1266,7 +1266,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void doubleNull() {
-        doubleNullWithServiceResponseAsync().toBlocking().single().getBody();
+        doubleNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1288,7 +1288,7 @@ public final class QueriesImpl implements Queries {
         return doubleNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1320,7 +1320,7 @@ public final class QueriesImpl implements Queries {
      * @param doubleQuery null numeric value
      */
     public void doubleNull(Double doubleQuery) {
-        doubleNullWithServiceResponseAsync(doubleQuery).toBlocking().single().getBody();
+        doubleNullWithServiceResponseAsync(doubleQuery).toBlocking().single().body();
     }
 
     /**
@@ -1344,7 +1344,7 @@ public final class QueriesImpl implements Queries {
         return doubleNullWithServiceResponseAsync(doubleQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1382,7 +1382,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void stringUnicode() {
-        stringUnicodeWithServiceResponseAsync().toBlocking().single().getBody();
+        stringUnicodeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1404,7 +1404,7 @@ public final class QueriesImpl implements Queries {
         return stringUnicodeWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1442,7 +1442,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void stringUrlEncoded() {
-        stringUrlEncodedWithServiceResponseAsync().toBlocking().single().getBody();
+        stringUrlEncodedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1464,7 +1464,7 @@ public final class QueriesImpl implements Queries {
         return stringUrlEncodedWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1502,7 +1502,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void stringEmpty() {
-        stringEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        stringEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1524,7 +1524,7 @@ public final class QueriesImpl implements Queries {
         return stringEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1562,7 +1562,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void stringNull() {
-        stringNullWithServiceResponseAsync().toBlocking().single().getBody();
+        stringNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1584,7 +1584,7 @@ public final class QueriesImpl implements Queries {
         return stringNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1616,7 +1616,7 @@ public final class QueriesImpl implements Queries {
      * @param stringQuery null string value
      */
     public void stringNull(String stringQuery) {
-        stringNullWithServiceResponseAsync(stringQuery).toBlocking().single().getBody();
+        stringNullWithServiceResponseAsync(stringQuery).toBlocking().single().body();
     }
 
     /**
@@ -1640,7 +1640,7 @@ public final class QueriesImpl implements Queries {
         return stringNullWithServiceResponseAsync(stringQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1678,7 +1678,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void enumValid() {
-        enumValidWithServiceResponseAsync().toBlocking().single().getBody();
+        enumValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1700,7 +1700,7 @@ public final class QueriesImpl implements Queries {
         return enumValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1732,7 +1732,7 @@ public final class QueriesImpl implements Queries {
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
      */
     public void enumValid(UriColor enumQuery) {
-        enumValidWithServiceResponseAsync(enumQuery).toBlocking().single().getBody();
+        enumValidWithServiceResponseAsync(enumQuery).toBlocking().single().body();
     }
 
     /**
@@ -1756,7 +1756,7 @@ public final class QueriesImpl implements Queries {
         return enumValidWithServiceResponseAsync(enumQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1794,7 +1794,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void enumNull() {
-        enumNullWithServiceResponseAsync().toBlocking().single().getBody();
+        enumNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1816,7 +1816,7 @@ public final class QueriesImpl implements Queries {
         return enumNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1848,7 +1848,7 @@ public final class QueriesImpl implements Queries {
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
      */
     public void enumNull(UriColor enumQuery) {
-        enumNullWithServiceResponseAsync(enumQuery).toBlocking().single().getBody();
+        enumNullWithServiceResponseAsync(enumQuery).toBlocking().single().body();
     }
 
     /**
@@ -1872,7 +1872,7 @@ public final class QueriesImpl implements Queries {
         return enumNullWithServiceResponseAsync(enumQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1910,7 +1910,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void byteMultiByte() {
-        byteMultiByteWithServiceResponseAsync().toBlocking().single().getBody();
+        byteMultiByteWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1932,7 +1932,7 @@ public final class QueriesImpl implements Queries {
         return byteMultiByteWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1965,7 +1965,7 @@ public final class QueriesImpl implements Queries {
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      */
     public void byteMultiByte(byte[] byteQuery) {
-        byteMultiByteWithServiceResponseAsync(byteQuery).toBlocking().single().getBody();
+        byteMultiByteWithServiceResponseAsync(byteQuery).toBlocking().single().body();
     }
 
     /**
@@ -1989,7 +1989,7 @@ public final class QueriesImpl implements Queries {
         return byteMultiByteWithServiceResponseAsync(byteQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2028,7 +2028,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void byteEmpty() {
-        byteEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        byteEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2050,7 +2050,7 @@ public final class QueriesImpl implements Queries {
         return byteEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2089,7 +2089,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void byteNull() {
-        byteNullWithServiceResponseAsync().toBlocking().single().getBody();
+        byteNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2111,7 +2111,7 @@ public final class QueriesImpl implements Queries {
         return byteNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2144,7 +2144,7 @@ public final class QueriesImpl implements Queries {
      * @param byteQuery null as byte array (no query parameters in uri)
      */
     public void byteNull(byte[] byteQuery) {
-        byteNullWithServiceResponseAsync(byteQuery).toBlocking().single().getBody();
+        byteNullWithServiceResponseAsync(byteQuery).toBlocking().single().body();
     }
 
     /**
@@ -2168,7 +2168,7 @@ public final class QueriesImpl implements Queries {
         return byteNullWithServiceResponseAsync(byteQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2207,7 +2207,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void dateValid() {
-        dateValidWithServiceResponseAsync().toBlocking().single().getBody();
+        dateValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2229,7 +2229,7 @@ public final class QueriesImpl implements Queries {
         return dateValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2267,7 +2267,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void dateNull() {
-        dateNullWithServiceResponseAsync().toBlocking().single().getBody();
+        dateNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2289,7 +2289,7 @@ public final class QueriesImpl implements Queries {
         return dateNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2321,7 +2321,7 @@ public final class QueriesImpl implements Queries {
      * @param dateQuery null as date (no query parameters in uri)
      */
     public void dateNull(LocalDate dateQuery) {
-        dateNullWithServiceResponseAsync(dateQuery).toBlocking().single().getBody();
+        dateNullWithServiceResponseAsync(dateQuery).toBlocking().single().body();
     }
 
     /**
@@ -2345,7 +2345,7 @@ public final class QueriesImpl implements Queries {
         return dateNullWithServiceResponseAsync(dateQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2383,7 +2383,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void dateTimeValid() {
-        dateTimeValidWithServiceResponseAsync().toBlocking().single().getBody();
+        dateTimeValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2405,7 +2405,7 @@ public final class QueriesImpl implements Queries {
         return dateTimeValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2443,7 +2443,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void dateTimeNull() {
-        dateTimeNullWithServiceResponseAsync().toBlocking().single().getBody();
+        dateTimeNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2465,7 +2465,7 @@ public final class QueriesImpl implements Queries {
         return dateTimeNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2497,7 +2497,7 @@ public final class QueriesImpl implements Queries {
      * @param dateTimeQuery null as date-time (no query parameters)
      */
     public void dateTimeNull(DateTime dateTimeQuery) {
-        dateTimeNullWithServiceResponseAsync(dateTimeQuery).toBlocking().single().getBody();
+        dateTimeNullWithServiceResponseAsync(dateTimeQuery).toBlocking().single().body();
     }
 
     /**
@@ -2521,7 +2521,7 @@ public final class QueriesImpl implements Queries {
         return dateTimeNullWithServiceResponseAsync(dateTimeQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2559,7 +2559,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void arrayStringCsvValid() {
-        arrayStringCsvValidWithServiceResponseAsync().toBlocking().single().getBody();
+        arrayStringCsvValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2581,7 +2581,7 @@ public final class QueriesImpl implements Queries {
         return arrayStringCsvValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2614,7 +2614,7 @@ public final class QueriesImpl implements Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      */
     public void arrayStringCsvValid(List<String> arrayQuery) {
-        arrayStringCsvValidWithServiceResponseAsync(arrayQuery).toBlocking().single().getBody();
+        arrayStringCsvValidWithServiceResponseAsync(arrayQuery).toBlocking().single().body();
     }
 
     /**
@@ -2638,7 +2638,7 @@ public final class QueriesImpl implements Queries {
         return arrayStringCsvValidWithServiceResponseAsync(arrayQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2678,7 +2678,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void arrayStringCsvNull() {
-        arrayStringCsvNullWithServiceResponseAsync().toBlocking().single().getBody();
+        arrayStringCsvNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2700,7 +2700,7 @@ public final class QueriesImpl implements Queries {
         return arrayStringCsvNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2733,7 +2733,7 @@ public final class QueriesImpl implements Queries {
      * @param arrayQuery a null array of string using the csv-array format
      */
     public void arrayStringCsvNull(List<String> arrayQuery) {
-        arrayStringCsvNullWithServiceResponseAsync(arrayQuery).toBlocking().single().getBody();
+        arrayStringCsvNullWithServiceResponseAsync(arrayQuery).toBlocking().single().body();
     }
 
     /**
@@ -2757,7 +2757,7 @@ public final class QueriesImpl implements Queries {
         return arrayStringCsvNullWithServiceResponseAsync(arrayQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2797,7 +2797,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void arrayStringCsvEmpty() {
-        arrayStringCsvEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        arrayStringCsvEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2819,7 +2819,7 @@ public final class QueriesImpl implements Queries {
         return arrayStringCsvEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2852,7 +2852,7 @@ public final class QueriesImpl implements Queries {
      * @param arrayQuery an empty array [] of string using the csv-array format
      */
     public void arrayStringCsvEmpty(List<String> arrayQuery) {
-        arrayStringCsvEmptyWithServiceResponseAsync(arrayQuery).toBlocking().single().getBody();
+        arrayStringCsvEmptyWithServiceResponseAsync(arrayQuery).toBlocking().single().body();
     }
 
     /**
@@ -2876,7 +2876,7 @@ public final class QueriesImpl implements Queries {
         return arrayStringCsvEmptyWithServiceResponseAsync(arrayQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2916,7 +2916,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void arrayStringSsvValid() {
-        arrayStringSsvValidWithServiceResponseAsync().toBlocking().single().getBody();
+        arrayStringSsvValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2938,7 +2938,7 @@ public final class QueriesImpl implements Queries {
         return arrayStringSsvValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2971,7 +2971,7 @@ public final class QueriesImpl implements Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      */
     public void arrayStringSsvValid(List<String> arrayQuery) {
-        arrayStringSsvValidWithServiceResponseAsync(arrayQuery).toBlocking().single().getBody();
+        arrayStringSsvValidWithServiceResponseAsync(arrayQuery).toBlocking().single().body();
     }
 
     /**
@@ -2995,7 +2995,7 @@ public final class QueriesImpl implements Queries {
         return arrayStringSsvValidWithServiceResponseAsync(arrayQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3035,7 +3035,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void arrayStringTsvValid() {
-        arrayStringTsvValidWithServiceResponseAsync().toBlocking().single().getBody();
+        arrayStringTsvValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3057,7 +3057,7 @@ public final class QueriesImpl implements Queries {
         return arrayStringTsvValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3090,7 +3090,7 @@ public final class QueriesImpl implements Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      */
     public void arrayStringTsvValid(List<String> arrayQuery) {
-        arrayStringTsvValidWithServiceResponseAsync(arrayQuery).toBlocking().single().getBody();
+        arrayStringTsvValidWithServiceResponseAsync(arrayQuery).toBlocking().single().body();
     }
 
     /**
@@ -3114,7 +3114,7 @@ public final class QueriesImpl implements Queries {
         return arrayStringTsvValidWithServiceResponseAsync(arrayQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3154,7 +3154,7 @@ public final class QueriesImpl implements Queries {
      *
      */
     public void arrayStringPipesValid() {
-        arrayStringPipesValidWithServiceResponseAsync().toBlocking().single().getBody();
+        arrayStringPipesValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3176,7 +3176,7 @@ public final class QueriesImpl implements Queries {
         return arrayStringPipesValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3209,7 +3209,7 @@ public final class QueriesImpl implements Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      */
     public void arrayStringPipesValid(List<String> arrayQuery) {
-        arrayStringPipesValidWithServiceResponseAsync(arrayQuery).toBlocking().single().getBody();
+        arrayStringPipesValidWithServiceResponseAsync(arrayQuery).toBlocking().single().body();
     }
 
     /**
@@ -3233,7 +3233,7 @@ public final class QueriesImpl implements Queries {
         return arrayStringPipesValidWithServiceResponseAsync(arrayQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

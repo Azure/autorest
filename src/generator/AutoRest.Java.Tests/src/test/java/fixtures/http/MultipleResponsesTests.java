@@ -134,7 +134,7 @@ public class MultipleResponsesTests {
             .subscribe(new Action1<ServiceResponse<Void>>() {
                 @Override
                 public void call(ServiceResponse<Void> response) {
-                    Assert.assertEquals(202, response.getResponse().code());
+                    Assert.assertEquals(202, response.response().code());
                     lock.countDown();
                 }
             });
@@ -147,7 +147,7 @@ public class MultipleResponsesTests {
             .subscribe(new Action1<ServiceResponse<Void>>() {
                 @Override
                 public void call(ServiceResponse<Void> response) {
-                    Assert.assertEquals(204, response.getResponse().code());
+                    Assert.assertEquals(204, response.response().code());
                     lock.countDown();
                 }
             });

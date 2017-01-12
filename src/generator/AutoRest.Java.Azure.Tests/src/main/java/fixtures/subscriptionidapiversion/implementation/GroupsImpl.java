@@ -68,7 +68,7 @@ public final class GroupsImpl implements Groups {
      * @return the SampleResourceGroup object if successful.
      */
     public SampleResourceGroup getSampleResourceGroup(String resourceGroupName) {
-        return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).toBlocking().single().getBody();
+        return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).toBlocking().single().body();
     }
 
     /**
@@ -92,7 +92,7 @@ public final class GroupsImpl implements Groups {
         return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).map(new Func1<ServiceResponse<SampleResourceGroup>, SampleResourceGroup>() {
             @Override
             public SampleResourceGroup call(ServiceResponse<SampleResourceGroup> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

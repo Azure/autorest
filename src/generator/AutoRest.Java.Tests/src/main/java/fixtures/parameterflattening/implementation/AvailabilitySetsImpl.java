@@ -70,7 +70,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @param tags A set of tags. A description about the set of tags.
      */
     public void update(String resourceGroupName, String avset, Map<String, String> tags) {
-        updateWithServiceResponseAsync(resourceGroupName, avset, tags).toBlocking().single().getBody();
+        updateWithServiceResponseAsync(resourceGroupName, avset, tags).toBlocking().single().body();
     }
 
     /**
@@ -98,7 +98,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
         return updateWithServiceResponseAsync(resourceGroupName, avset, tags).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }

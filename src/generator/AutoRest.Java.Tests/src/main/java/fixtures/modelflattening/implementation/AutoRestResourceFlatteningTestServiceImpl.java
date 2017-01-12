@@ -155,7 +155,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      */
     public void putArray() {
-        putArrayWithServiceResponseAsync().toBlocking().single().getBody();
+        putArrayWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -177,7 +177,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -209,7 +209,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceArray External Resource as an Array to put
      */
     public void putArray(List<Resource> resourceArray) {
-        putArrayWithServiceResponseAsync(resourceArray).toBlocking().single().getBody();
+        putArrayWithServiceResponseAsync(resourceArray).toBlocking().single().body();
     }
 
     /**
@@ -233,7 +233,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putArrayWithServiceResponseAsync(resourceArray).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -273,7 +273,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
     public List<FlattenedProduct> getArray() {
-        return getArrayWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -295,7 +295,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return getArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<List<FlattenedProduct>>, List<FlattenedProduct>>() {
             @Override
             public List<FlattenedProduct> call(ServiceResponse<List<FlattenedProduct>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -332,7 +332,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      */
     public void putDictionary() {
-        putDictionaryWithServiceResponseAsync().toBlocking().single().getBody();
+        putDictionaryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -354,7 +354,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putDictionaryWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -386,7 +386,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceDictionary External Resource as a Dictionary to put
      */
     public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) {
-        putDictionaryWithServiceResponseAsync(resourceDictionary).toBlocking().single().getBody();
+        putDictionaryWithServiceResponseAsync(resourceDictionary).toBlocking().single().body();
     }
 
     /**
@@ -410,7 +410,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putDictionaryWithServiceResponseAsync(resourceDictionary).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -450,7 +450,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
     public Map<String, FlattenedProduct> getDictionary() {
-        return getDictionaryWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -472,7 +472,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return getDictionaryWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, FlattenedProduct>>, Map<String, FlattenedProduct>>() {
             @Override
             public Map<String, FlattenedProduct> call(ServiceResponse<Map<String, FlattenedProduct>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -509,7 +509,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      */
     public void putResourceCollection() {
-        putResourceCollectionWithServiceResponseAsync().toBlocking().single().getBody();
+        putResourceCollectionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -531,7 +531,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putResourceCollectionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -563,7 +563,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      */
     public void putResourceCollection(ResourceCollection resourceComplexObject) {
-        putResourceCollectionWithServiceResponseAsync(resourceComplexObject).toBlocking().single().getBody();
+        putResourceCollectionWithServiceResponseAsync(resourceComplexObject).toBlocking().single().body();
     }
 
     /**
@@ -587,7 +587,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putResourceCollectionWithServiceResponseAsync(resourceComplexObject).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -627,7 +627,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the ResourceCollection object if successful.
      */
     public ResourceCollection getResourceCollection() {
-        return getResourceCollectionWithServiceResponseAsync().toBlocking().single().getBody();
+        return getResourceCollectionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -649,7 +649,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return getResourceCollectionWithServiceResponseAsync().map(new Func1<ServiceResponse<ResourceCollection>, ResourceCollection>() {
             @Override
             public ResourceCollection call(ServiceResponse<ResourceCollection> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -687,7 +687,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct putSimpleProduct() {
-        return putSimpleProductWithServiceResponseAsync().toBlocking().single().getBody();
+        return putSimpleProductWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -709,7 +709,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putSimpleProductWithServiceResponseAsync().map(new Func1<ServiceResponse<SimpleProduct>, SimpleProduct>() {
             @Override
             public SimpleProduct call(ServiceResponse<SimpleProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -742,7 +742,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct putSimpleProduct(SimpleProduct simpleBodyProduct) {
-        return putSimpleProductWithServiceResponseAsync(simpleBodyProduct).toBlocking().single().getBody();
+        return putSimpleProductWithServiceResponseAsync(simpleBodyProduct).toBlocking().single().body();
     }
 
     /**
@@ -766,7 +766,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putSimpleProductWithServiceResponseAsync(simpleBodyProduct).map(new Func1<ServiceResponse<SimpleProduct>, SimpleProduct>() {
             @Override
             public SimpleProduct call(ServiceResponse<SimpleProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -808,7 +808,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName) {
-        return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName).toBlocking().single().getBody();
+        return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName).toBlocking().single().body();
     }
 
     /**
@@ -834,7 +834,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName).map(new Func1<ServiceResponse<SimpleProduct>, SimpleProduct>() {
             @Override
             public SimpleProduct call(ServiceResponse<SimpleProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -887,7 +887,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
-        return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue).toBlocking().single().getBody();
+        return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue).toBlocking().single().body();
     }
 
     /**
@@ -919,7 +919,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue).map(new Func1<ServiceResponse<SimpleProduct>, SimpleProduct>() {
             @Override
             public SimpleProduct call(ServiceResponse<SimpleProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -978,7 +978,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup) {
-        return putSimpleProductWithGroupingWithServiceResponseAsync(flattenParameterGroup).toBlocking().single().getBody();
+        return putSimpleProductWithGroupingWithServiceResponseAsync(flattenParameterGroup).toBlocking().single().body();
     }
 
     /**
@@ -1002,7 +1002,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putSimpleProductWithGroupingWithServiceResponseAsync(flattenParameterGroup).map(new Func1<ServiceResponse<SimpleProduct>, SimpleProduct>() {
             @Override
             public SimpleProduct call(ServiceResponse<SimpleProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
