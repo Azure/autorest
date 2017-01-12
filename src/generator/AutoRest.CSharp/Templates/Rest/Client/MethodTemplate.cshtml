@@ -190,7 +190,7 @@ else
     @:}
             }
         <text>
-    if (@(Model.RequestBody.Name) != null && @(Model.RequestBody.Name) != Stream.Null)
+    if (@(Model.RequestBody.Name) != null && @(Model.RequestBody.Name) != System.IO.Stream.Null)
     {
       _httpRequest.Content = new System.Net.Http.StreamContent(@(Model.RequestBody.Name));
       _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
