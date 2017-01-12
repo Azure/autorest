@@ -81,7 +81,7 @@ namespace AutoRest.Swagger.Tests
             string[] expectedLines = expectedFileContent.Split('\n').Select(p => p.TrimEnd(wsChars)).ToArray();
             string[] actualLines = actualFileContent.Split('\n').Select(p => p.TrimEnd(wsChars)).ToArray();
 
-             Assert.Equal(expectedLines.Length, actualLines.Length);
+            Assert.Equal(expectedLines.Length, actualLines.Length);
 
             for (int i = 0; i < expectedLines.Length; i++)
             {
