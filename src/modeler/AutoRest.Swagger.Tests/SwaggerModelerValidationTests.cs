@@ -243,7 +243,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-<<<<<<< 4ba43929de05245bff3b39037de802bc1dd3c3b0
         public void OperationNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operation-name-not-valid.json"));
