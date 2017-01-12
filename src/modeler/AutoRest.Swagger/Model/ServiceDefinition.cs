@@ -96,6 +96,7 @@ namespace AutoRest.Swagger.Model
         /// Key is the object serviceTypeName and the value is swagger definition.
         /// </summary>
         [Rule(typeof(ResourceModelValidation))]
+        [Rule(typeof(TrackedResourceValidation))]
         [Rule(typeof(ResourceIsMsResourceValidation))]
         [Rule(typeof(GuidValidation))]
         public Dictionary<string, Schema> Definitions { get; set; }

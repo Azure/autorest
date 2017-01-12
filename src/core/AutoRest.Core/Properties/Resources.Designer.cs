@@ -564,6 +564,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to A Tracked Resource must have 1. A Get Operation 2. A ListByResourceGroup operation with x-ms-pageable extension and 3. A ListBySubscriptionId operation with x-ms-pageable extension..
+        /// </summary>
+        public static string TrackedResourceIsNotValid {
+            get {
+                return ResourceManager.GetString("TrackedResourceIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Type &apos;{0}&apos; name should be assembly qualified. For example &apos;ClassName, AssemblyName&apos;.
         /// </summary>
         public static string TypeShouldBeAssemblyQualified {

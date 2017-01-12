@@ -219,6 +219,9 @@
   <data name="OperationsAPINotImplemented" xml:space="preserve">
     <value>Operations API must be implemented for the service.</value>
   </data>
+  <data name="TrackedResourceIsNotValid" xml:space="preserve">
+    <value>A Tracked Resource must have 1. A Get Operation 2. A ListByResourceGroup operation with x-ms-pageable extension and 3. A ListBySubscriptionId operation with x-ms-pageable extension.</value>
+  </data>
   <data name="BodyMustHaveSchema" xml:space="preserve">
     <value>Each body parameter must have a schema</value>
   </data>
