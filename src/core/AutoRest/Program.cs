@@ -173,7 +173,8 @@ namespace AutoRest
                 var uri = path.ToString();
                 var methodGroup = paths.Get(uri) as YamlMappingNode;
                 // for every operation
-                foreach (var operation in methodGroup.Children.Select(x => x.Value).OfType<YamlMappingNode>())
+                //foreach (var operation in methodGroup.Children.Select(x => x.Value).OfType<YamlMappingNode>())
+                var operation = methodGroup;
                 {
                     var parameters = operation.Get("parameters") as YamlSequenceNode ?? new YamlSequenceNode();
 
@@ -247,8 +248,22 @@ namespace AutoRest
             yaml.Remove("headers");
             yaml.Remove("stuff");
 
-            // TODO: resolve method params
-            // TODO: cleanup unused defs & params
+            // cleanup unused (probably enum) defs & params
+            var refs = yaml.AllNodes.OfType<YamlScalarNode>().Select(x => x.Value).Where(x => x.StartsWith("#/")).Distinct();
+            var refsDef = refs.Where(x => getSectionFromRefPath(x) == "definitions").Select(getNameFromRefPath).ToList();
+            var refsPar = refs.Where(x => getSectionFromRefPath(x) == "parameters").Select(getNameFromRefPath).ToList();
+
+            var nodeDef = yaml.Get("definitions") as YamlMappingNode;
+            var nodePar = yaml.Get("parameters") as YamlMappingNode;
+
+            foreach (var key in nodeDef.Children.Keys.Select(x => x.ToString()).Where(x => !refsDef.Contains(x)).ToList())
+            {
+                nodeDef.Remove(key);
+            }
+            foreach (var key in nodePar.Children.Keys.Select(x => x.ToString()).Where(x => !refsPar.Contains(x)).ToList())
+            {
+                nodePar.Remove(key);
+            }
 
             return yaml.Serialize();
         }
