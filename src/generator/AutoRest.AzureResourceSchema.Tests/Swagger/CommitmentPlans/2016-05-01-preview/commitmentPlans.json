@@ -1,0 +1,740 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure ML Commitment Plans Management Client",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Commitment Plans resources and their child Commitment Association resources. They support CRUD operations for commitment plans, get and list operations for commitment associations, moving commitment associations between commitment plans, and retrieving commitment plan usage history.",
+    "version": "2016-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{commitmentPlanName}/commitmentAssociations/{commitmentAssociationName}": {
+      "get": {
+        "tags": [
+          "CommitmentAssociations"
+        ],
+        "operationId": "CommitmentAssociations_Get",
+        "description": "Gets a commitment association.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CommitmentPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CommitmentAssociationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommitmentAssociation"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{commitmentPlanName}/commitmentAssociations": {
+      "get": {
+        "tags": [
+          "CommitmentAssociations"
+        ],
+        "operationId": "CommitmentAssociations_List",
+        "description": "Get all commitment associations for a parent commitment plan.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CommitmentPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommitmentAssociationListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{commitmentPlanName}/commitmentAssociations/{commitmentAssociationName}/move": {
+      "post": {
+        "tags": [
+          "CommitmentAssociations"
+        ],
+        "operationId": "CommitmentAssociations_Move",
+        "description": "Re-parents a commitment association from one commitment plan to another.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CommitmentPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CommitmentAssociationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "name": "movePayload",
+            "description": "The move request payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveCommitmentAssociationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommitmentAssociation"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{commitmentPlanName}": {
+      "get": {
+        "tags": [
+          "CommitmentPlans"
+        ],
+        "operationId": "CommitmentPlans_Get",
+        "description": "Retrieve an Azure ML commitment plan by its subscription, resource group and name.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CommitmentPlans"
+        ],
+        "operationId": "CommitmentPlans_CreateOrUpdate",
+        "description": "Creates a new Azure ML commitment plan resource or updates an existing one.",
+        "parameters": [
+          {
+            "name": "createOrUpdatePayload",
+            "description": "The payload to create or update the Azure ML commitment plan.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CommitmentPlans"
+        ],
+        "operationId": "CommitmentPlans_Remove",
+        "description": "Remove an existing Azure ML commitment plan.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "CommitmentPlans"
+        ],
+        "operationId": "CommitmentPlans_Patch",
+        "description": "Patch an existing Azure ML commitment plan resource.",
+        "parameters": [
+          {
+            "name": "patchPayload",
+            "description": "The payload to patch the Azure ML commitment plan with. Only tags and SKU may be modified on an existing commitment plan.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlanPatchPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlan"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CommitmentPlanNameParameter"
+        },
+        {
+          "$ref": "#/parameters/APIVersionParameter"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/commitmentPlans": {
+      "get": {
+        "tags": [
+          "CommitmentPlans"
+        ],
+        "operationId": "CommitmentPlans_List",
+        "description": "Retrieve all Azure ML commitment plans in a subscription.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+           "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$skipToken",
+            "description": "Continuation token for pagination.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlanListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans": {
+      "get": {
+        "tags": [
+          "CommitmentPlans"
+        ],
+        "operationId": "CommitmentPlans_ListInResourceGroup",
+        "description": "Retrieve all Azure ML commitment plans in a resource group.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommitmentPlanListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/commitmentPlans/{commitmentPlanName}/usageHistory": {
+      "get": {
+        "tags": [
+          "CommitmentPlans"
+        ],
+        "operationId": "UsageHistory_List",
+        "description": "Retrieves the usage history for an Azure ML commitment plan.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+           "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CommitmentPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlanUsageHistoryListResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "description": "Azure Subscription ID.",
+      "type": "string",
+      "in": "path",
+      "required": true
+    },
+    "APIVersionParameter": {
+      "name": "api-version",
+      "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
+      "type": "string",
+      "in": "query",
+      "required": true
+    },
+    "ResourceGroupNameParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "resourceGroupName",
+      "description": "The resource group name.",
+      "type": "string",
+      "in": "path",
+      "required": true
+    },
+    "CommitmentPlanNameParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "commitmentPlanName",
+      "description": "The Azure ML commitment plan name.",
+      "type": "string",
+      "in": "path",
+      "required": true
+    },
+    "CommitmentAssociationNameParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "commitmentAssociationName",
+      "description": "The commitment association name.",
+      "type": "string",
+      "in": "path",
+      "required": true
+    },
+    "SkipTokenParameter": {
+      "x-ms-parameter-location": "method",
+      "name": "$skipToken",
+      "description": "Continuation token for pagination.",
+      "type": "string",
+      "in": "query",
+      "required": false
+    }
+  },
+  "definitions": {
+    "Tags": {
+      "type": "object",
+      "description": "Resource tags",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "Resource": {
+      "x-ms-azure-resource": true,
+      "description": "Common properties of an ARM resource.",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Resource location.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "User-defined tags for the resource.",
+          "$ref": "#/definitions/Tags"
+        }
+      }
+    },
+    "CommitmentAssociation": {
+      "type": "object",
+      "description": "Represents the association between a commitment plan and some other resource, such as a Machine Learning web service.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "An entity tag used to enforce optimistic concurrency."
+        },
+        "properties": {
+          "description": "The properties of the commitment association resource.",
+          "$ref": "#/definitions/CommitmentAssociationProperties"
+        }
+      }
+    },
+    "CommitmentAssociationProperties": {
+      "type": "object",
+      "description": "Properties of an Azure ML commitment association.",
+      "properties": {
+        "associatedResourceId": {
+          "type": "string",
+          "description": "The ID of the resource this association points to, such as the ARM ID of an Azure ML web service.",
+          "readOnly": true
+        },
+        "commitmentPlanId": {
+          "type": "string",
+          "description": "The ARM ID of the parent Azure ML commitment plan.",
+          "readOnly": true
+        },
+        "creationDate": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The date at which this commitment association was created, in ISO 8601 format.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceSku": {
+      "type": "object",
+      "description": "The SKU of a resource.",
+      "properties": {
+        "capacity": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The scale-out capacity of the resource. 1 is 1x, 2 is 2x, etc. This impacts the quantities and cost of any commitment plan resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The SKU name. Along with tier, uniquely identifies the SKU."
+        },
+        "tier": {
+          "type": "string",
+          "description": "The SKU tier. Along with name, uniquely identifies the SKU."
+        }
+      }
+    },
+    "CommitmentAssociationListResult": {
+      "type": "object",
+      "description": "A page of commitment association resources.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "A URI to retrieve the next page of results."
+        },
+        "value": {
+          "type": "array",
+          "description": "The set of results for this page.",
+          "items": {
+            "$ref": "#/definitions/CommitmentAssociation"
+          }
+        }
+      }
+    },
+    "MoveCommitmentAssociationRequest": {
+      "type": "object",
+      "description": "Specifies the destination Azure ML commitment plan for a move operation.",
+      "properties": {
+        "destinationPlanId": {
+          "type": "string",
+          "description": "The ARM ID of the commitment plan to re-parent the commitment association to."
+        }
+      }
+    },
+    "CommitmentPlanPatchPayload": {
+      "type": "object",
+      "description": "The properties of a commitment plan which may be updated via PATCH.",
+      "properties": {
+        "tags": {
+          "description": "User-defined tags for the commitment plan.",
+          "$ref": "#/definitions/Tags"
+        },
+        "sku": {
+          "description": "The commitment plan SKU.",
+          "$ref": "#/definitions/ResourceSku"
+        }
+      }
+    },
+    "CommitmentPlan": {
+      "type": "object",
+      "description": "An Azure ML commitment plan resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "An entity tag used to enforce optimistic concurrency."
+        },
+        "properties": {
+          "description": "The commitment plan properties.",
+          "$ref": "#/definitions/CommitmentPlanProperties",
+          "readOnly": true
+        },
+        "sku": {
+          "description": "The commitment plan SKU.",
+          "$ref": "#/definitions/ResourceSku"
+        }
+      }
+    },
+    "CommitmentPlanProperties": {
+      "type": "object",
+      "description": "Properties of an Azure ML commitment plan.",
+      "properties": {
+        "chargeForOverage": {
+          "type": "boolean",
+          "description": "Indicates whether usage beyond the commitment plan's included quantities will be charged.",
+          "readOnly": true
+        },
+        "chargeForPlan": {
+          "type": "boolean",
+          "description": "Indicates whether the commitment plan will incur a charge.",
+          "readOnly": true
+        },
+        "creationDate": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The date at which this commitment plan was created, in ISO 8601 format.",
+          "readOnly": true
+        },
+        "includedQuantities": {
+          "type": "object",
+          "description": "The included resource quantities this plan gives you.",
+          "additionalProperties": {
+            "$ref": "#/definitions/PlanQuantity"
+          },
+          "readOnly": true
+        },
+        "maxAssociationLimit": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The maximum number of commitment associations that can be children of this commitment plan.",
+          "readOnly": true
+        },
+        "maxCapacityLimit": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The maximum scale-out capacity for this commitment plan.",
+          "readOnly": true
+        },
+        "minCapacityLimit": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The minimum scale-out capacity for this commitment plan.",
+          "readOnly": true
+        },
+        "planMeter": {
+          "type": "string",
+          "description": "The Azure meter which will be used to charge for this commitment plan.",
+          "readOnly": true
+        },
+        "refillFrequencyInDays": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The frequency at which this commitment plan's included quantities are refilled.",
+          "readOnly": true
+        },
+        "suspendPlanOnOverage": {
+          "type": "boolean",
+          "description": "Indicates whether this commitment plan will be moved into a suspended state if usage beyond the commitment plan's included quantities is incurred.",
+          "readOnly": true
+        }
+      }
+    },
+    "PlanQuantity": {
+      "type": "object",
+      "description": "Represents the quantity a commitment plan provides of a metered resource.",
+      "properties": {
+        "allowance": {
+          "format": "double",
+          "type": "number",
+          "description": "The quantity added to the commitment plan at an interval specified by its allowance frequency.",
+          "readOnly": true
+        },
+        "amount": {
+          "format": "double",
+          "type": "number",
+          "description": "The quantity available to the plan the last time usage was calculated.",
+          "readOnly": true
+        },
+        "includedQuantityMeter": {
+          "type": "string",
+          "description": "The Azure meter for usage against included quantities.",
+          "readOnly": true
+        },
+        "overageMeter": {
+          "type": "string",
+          "description": "The Azure meter for usage which exceeds included quantities.",
+          "readOnly": true
+        }
+      }
+    },
+    "CommitmentPlanListResult": {
+      "type": "object",
+      "description": "A page of commitment plan resources.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "A URI to retrieve the next page of results."
+        },
+        "value": {
+          "type": "array",
+          "description": "The set of results for this page.",
+          "items": {
+            "$ref": "#/definitions/CommitmentPlan"
+          }
+        }
+      }
+    },
+    "PlanUsageHistoryListResult": {
+      "type": "object",
+      "description": "A page of usage history.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "A URI to retrieve the next page of results."
+        },
+        "value": {
+          "type": "array",
+          "description": "The set of results for this page.",
+          "items": {
+            "$ref": "#/definitions/PlanUsageHistory"
+          }
+        }
+      }
+    },
+    "PlanUsageHistory": {
+      "type": "object",
+      "description": "Represents historical information about usage of the Azure resources associated with a commitment plan.",
+      "properties": {
+        "planDeletionOverage": {
+          "type": "object",
+          "description": "Overage incurred as a result of deleting a commitment plan.",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "planMigrationOverage": {
+          "type": "object",
+          "description": "Overage incurred as a result of migrating a commitment plan from one SKU to another.",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "planQuantitiesAfterUsage": {
+          "type": "object",
+          "description": "Included quantities remaining after usage against the commitment plan's associated resources was calculated.",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "planQuantitiesBeforeUsage": {
+          "type": "object",
+          "description": "Included quantities remaining before usage against the commitment plan's associated resources was calculated.",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "planUsageOverage": {
+          "type": "object",
+          "description": "Usage against the commitment plan's associated resources which was not covered by included quantities and is therefore overage.",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "usage": {
+          "type": "object",
+          "description": "Usage against the commitment plan's associated resources.",
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "usageDate": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The date of usage, in ISO 8601 format."
+        }
+      }
+    }
+  }
+}

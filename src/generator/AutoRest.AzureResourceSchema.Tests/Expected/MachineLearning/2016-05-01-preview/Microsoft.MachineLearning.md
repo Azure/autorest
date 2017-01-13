@@ -11,64 +11,7 @@ To create a Microsoft.MachineLearning, add the following schema to the resources
   "type": "Microsoft.MachineLearning/webServices",
   "apiVersion": "2016-05-01-preview",
   "location": "string",
-  "properties": {
-    "title": "string",
-    "description": "string",
-    "keys": {
-      "primary": "string",
-      "secondary": "string"
-    },
-    "readOnly": "boolean",
-    "exposeSampleData": "boolean",
-    "realtimeConfiguration": {
-      "maxConcurrentCalls": "integer"
-    },
-    "diagnostics": {
-      "level": "string",
-      "expiry": "string"
-    },
-    "storageAccount": {
-      "name": "string",
-      "key": "string"
-    },
-    "machineLearningWorkspace": {
-      "id": "string"
-    },
-    "commitmentPlan": {
-      "id": "string"
-    },
-    "input": {
-      "title": "string",
-      "description": "string",
-      "type": "object",
-      "properties": {}
-    },
-    "output": {
-      "title": "string",
-      "description": "string",
-      "type": "object",
-      "properties": {}
-    },
-    "exampleRequest": {
-      "inputs": {},
-      "globalParameters": {}
-    },
-    "assets": {},
-    "parameters": {},
-    "package": {
-      "nodes": {},
-      "edges": [
-        {
-          "sourceNodeId": "string",
-          "sourcePortId": "string",
-          "targetNodeId": "string",
-          "targetPortId": "string"
-        }
-      ],
-      "graphParameters": {}
-    },
-    "packageType": "Graph"
-  }
+  "properties": {}
 }
 ```
 ## Values
@@ -87,27 +30,57 @@ The following tables describe the values you need to set in the schema.
 |  properties | Yes | object<br />[WebServiceProperties object](#WebServiceProperties)<br /><br />Web service resource properties. |
 
 
-<a id="WebServiceProperties" />
-## WebServiceProperties object
+<a id="WebServicePropertiesForGraph" />
+## WebServicePropertiesForGraph object
 |  Name | Required | Value |
 |  ---- | ---- | ---- |
-|  title | No | string<br /><br />The title of the Azure ML web service. |
-|  description | No | string<br /><br />The description of the Azure ML web service. |
-|  keys | No | object<br />[WebServiceKeys object](#WebServiceKeys)<br /><br />The set of access keys for the web service. If not specified at creation time (PUT), they will be generated automatically by the resource provider. |
-|  readOnly | No | boolean<br /><br />If true, the web service can no longer be updated / patched, only removed. Otherwise, the service resource supports changes. |
-|  exposeSampleData | No | boolean<br /><br />Flag that controls whether to expose sample data or not in the web service's swagger definition. |
-|  realtimeConfiguration | No | object<br />[RealtimeConfiguration object](#RealtimeConfiguration)<br /><br />Configuration for the service's realtime endpoint. |
-|  diagnostics | No | object<br />[DiagnosticsConfiguration object](#DiagnosticsConfiguration)<br /><br />Settings controlling the diagnostics traces collection for the web service. |
-|  storageAccount | No | object<br />[StorageAccount object](#StorageAccount)<br /><br />The storage account associated with the service. This is used to store both datasets and diagnostic traces. This information is required at creation time (PUT) and only the key is updateable after that. The account credentials are hidden on a GET web service call. |
-|  machineLearningWorkspace | No | object<br />[MachineLearningWorkspace object](#MachineLearningWorkspace)<br /><br />This is only populated at creation time (PUT) for web services originating from an AzureML Studio experiment. |
-|  commitmentPlan | No | object<br />[CommitmentPlan object](#CommitmentPlan)<br /><br />The commitment plan associated with this web service. This is required to be specified at creation time (PUT) and is not updateable afterwards. |
-|  input | No | object<br />[ServiceInputOutputSpecification object](#ServiceInputOutputSpecification)<br /><br />Swagger schema for the service's input(s), as applicable. |
-|  output | No | object<br />[ServiceInputOutputSpecification object](#ServiceInputOutputSpecification)<br /><br />Swagger schema for the service's output(s), as applicable. |
-|  exampleRequest | No | object<br />[ExampleRequest object](#ExampleRequest)<br /><br />Sample request data for each of the service's inputs, as applicable. |
-|  assets | No | object<br /><br />Set of assets associated with the web service. |
-|  parameters | No | object<br /><br />The set of global parameters values defined for the web service, given as a global parameter name to default value map. If no default value is specified, the parameter is considered to be required. |
 |  package | No | object<br />[GraphPackage object](#GraphPackage)<br /><br />The definition of the graph package making up this web service. |
-|  packageType | No | enum<br />**Graph**<br /> |
+
+
+<a id="GraphPackage" />
+## GraphPackage object
+|  Name | Required | Value |
+|  ---- | ---- | ---- |
+|  nodes | No | object<br /><br />The set of nodes making up the graph, provided as a nodeId to GraphNode map |
+|  edges | No | array<br />[GraphEdge object](#GraphEdge)<br /><br />The list of edges making up the graph. |
+|  graphParameters | No | object<br /><br />The collection of global parameters for the graph, given as a global parameter name to GraphParameter map. Each parameter here has a 1:1 match with the global parameters values map declared at the WebServiceProperties level. |
+
+
+<a id="GraphNode" />
+## GraphNode object
+|  Name | Required | Value |
+|  ---- | ---- | ---- |
+|  assetId | No | string<br /><br />The id of the asset represented by this node. |
+|  inputId | No | string<br /><br />The id of the input element represented by this node. |
+|  outputId | No | string<br /><br />The id of the output element represented by this node. |
+|  parameters | No | object<br /><br />If applicable, parameters of the node. Global graph parameters map into these, with values set at runtime. |
+
+
+<a id="GraphEdge" />
+## GraphEdge object
+|  Name | Required | Value |
+|  ---- | ---- | ---- |
+|  sourceNodeId | No | string<br /><br />The source graph node's identifier. |
+|  sourcePortId | No | string<br /><br />The identifier of the source node's port that the edge connects from. |
+|  targetNodeId | No | string<br /><br />The destination graph node's identifier. |
+|  targetPortId | No | string<br /><br />The identifier of the destination node's port that the edge connects into. |
+
+
+<a id="GraphParameter" />
+## GraphParameter object
+|  Name | Required | Value |
+|  ---- | ---- | ---- |
+|  description | No | string<br /><br />Description of this graph parameter. |
+|  type | Yes | enum<br />**String**, **Int**, **Float**, **Enumerated**, **Script**, **Mode**, **Credential**, **Boolean**, **Double**, **ColumnPicker**, **ParameterRange**, **DataGatewayName**<br /><br />Graph parameter's type. |
+|  links | Yes | array<br />[GraphParameterLink object](#GraphParameterLink)<br /><br />Association links for this parameter to nodes in the graph. |
+
+
+<a id="GraphParameterLink" />
+## GraphParameterLink object
+|  Name | Required | Value |
+|  ---- | ---- | ---- |
+|  nodeId | Yes | string<br /><br />The graph node's identifier |
+|  parameterKey | Yes | string<br /><br />The identifier of the node parameter that the global parameter maps to. |
 
 
 <a id="WebServiceKeys" />
@@ -246,50 +219,4 @@ The following tables describe the values you need to set in the schema.
 |  ---- | ---- | ---- |
 |  interfaceString | No | string<br /><br />The interface string name for the nested parameter. |
 |  parameters | No | array<br />[ModuleAssetParameter object](#ModuleAssetParameter)<br /><br />The definition of the parameter. |
-
-
-<a id="GraphPackage" />
-## GraphPackage object
-|  Name | Required | Value |
-|  ---- | ---- | ---- |
-|  nodes | No | object<br /><br />The set of nodes making up the graph, provided as a nodeId to GraphNode map |
-|  edges | No | array<br />[GraphEdge object](#GraphEdge)<br /><br />The list of edges making up the graph. |
-|  graphParameters | No | object<br /><br />The collection of global parameters for the graph, given as a global parameter name to GraphParameter map. Each parameter here has a 1:1 match with the global parameters values map declared at the WebServiceProperties level. |
-
-
-<a id="GraphNode" />
-## GraphNode object
-|  Name | Required | Value |
-|  ---- | ---- | ---- |
-|  assetId | No | string<br /><br />The id of the asset represented by this node. |
-|  inputId | No | string<br /><br />The id of the input element represented by this node. |
-|  outputId | No | string<br /><br />The id of the output element represented by this node. |
-|  parameters | No | object<br /><br />If applicable, parameters of the node. Global graph parameters map into these, with values set at runtime. |
-
-
-<a id="GraphEdge" />
-## GraphEdge object
-|  Name | Required | Value |
-|  ---- | ---- | ---- |
-|  sourceNodeId | No | string<br /><br />The source graph node's identifier. |
-|  sourcePortId | No | string<br /><br />The identifier of the source node's port that the edge connects from. |
-|  targetNodeId | No | string<br /><br />The destination graph node's identifier. |
-|  targetPortId | No | string<br /><br />The identifier of the destination node's port that the edge connects into. |
-
-
-<a id="GraphParameter" />
-## GraphParameter object
-|  Name | Required | Value |
-|  ---- | ---- | ---- |
-|  description | No | string<br /><br />Description of this graph parameter. |
-|  type | Yes | enum<br />**String**, **Int**, **Float**, **Enumerated**, **Script**, **Mode**, **Credential**, **Boolean**, **Double**, **ColumnPicker**, **ParameterRange**, **DataGatewayName**<br /><br />Graph parameter's type. |
-|  links | Yes | array<br />[GraphParameterLink object](#GraphParameterLink)<br /><br />Association links for this parameter to nodes in the graph. |
-
-
-<a id="GraphParameterLink" />
-## GraphParameterLink object
-|  Name | Required | Value |
-|  ---- | ---- | ---- |
-|  nodeId | Yes | string<br /><br />The graph node's identifier |
-|  parameterKey | Yes | string<br /><br />The identifier of the node parameter that the global parameter maps to. |
 

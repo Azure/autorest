@@ -24,6 +24,9 @@
         "Azure.Python": {
             "type": "PluginPya, AutoRest.Python.Azure"
         },
+        "Go": {
+            "type": "PluginGo, AutoRest.Go"
+        },
         "AzureResourceSchema": {
             "type": "PluginArs, AutoRest.AzureResourceSchema"
         }

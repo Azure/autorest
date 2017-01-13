@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using AutoRest.Core.Validation;
 using AutoRest.Core.Logging;
 using AutoRest.Core;
-using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Validation;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -242,6 +241,34 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "pageable-no-200-response.json"));
             messages.Any(m => m.Type == typeof(PageableRequires200Response));
         }
+
+        [Fact]
+        public void OperationNameValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operation-name-not-valid.json"));
+            messages.AssertOnlyValidationMessage(typeof(OperationNameValidation), 3);
+        }
+
+        [Fact]
+        public void LongRunningResponseForPutValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "long-running-invalid-response-put.json"));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
+        }
+
+        [Fact]
+        public void LongRunningResponseForPostValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "long-running-invalid-response-post.json"));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
+        }
+
+        [Fact]
+        public void LongRunningResponseForDeleteValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "long-running-invalid-response-delete.json"));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
+        }
     }
 
     #region Positive tests
@@ -276,6 +303,16 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "pageable-nextlink-defined-allof.json"));
             Assert.Empty(messages.Where(m => m.Severity >= Category.Warning));
+        }
+
+        /// <summary>
+        /// Verifies that a x-ms-long-running extension response modeled correctly
+        /// </summary>
+        [Fact]
+        public void LongRunningResponseDefined()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "long-running-valid-response.json"));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation), 0);
         }
     }
 

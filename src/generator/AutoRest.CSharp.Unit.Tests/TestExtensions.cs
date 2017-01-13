@@ -80,7 +80,8 @@ namespace AutoRest.CSharp.Unit.Tests
                     CodeGenerator = codeGenerator,
                     FileSystem = fileSystem,
                     OutputDirectory = "GeneratedCode",
-                    Namespace = "Test"
+                    Namespace = "Test",
+                    CodeGenerationMode = "rest-client"
                 };
 
                 return inputDir.GenerateCodeInto(fileSystem, settings);

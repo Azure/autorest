@@ -1,0 +1,65 @@
+@using System.Globalization
+@using System.Linq;
+@using System
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp
+@using AutoRest.CSharp.Model
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodCs>
+
+@if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrEmpty(Model.Summary))
+{
+@:/// <summary>
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+    if (!string.IsNullOrEmpty(Model.ExternalDocsUrl))
+    {
+@:/// <see href="@Model.ExternalDocsUrl" />
+    }
+@:/// </summary>
+}
+
+@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+{
+    @:/// <remarks>
+        @:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+        @:///
+    @:///</remarks>
+}
+
+[@("Http" + @Model.HttpMethod)("@Model.Url")]
+@{ var methodSignature = "public " + Model.ReturnTypeString + " " + @Model.HttpMethod + "("; }
+
+@foreach (var param in @Model.LocalParameters)
+{
+    @if (param.Location != ParameterLocation.None)
+    {
+        methodSignature += "[" + ControllerToModelBinderMapping.GetModelBinder(param.Location) + "]";
+
+    }
+    methodSignature += param.ModelTypeName + " ";
+    methodSignature += param.Name;
+}
+@{ methodSignature += ")"; }
+@methodSignature
+{
+@foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
+{
+    if (parameter.IsRequired && parameter.IsNullable())
+    {
+    @:if (@(parameter.Name) == null)
+    @:{
+        @:throw new System.ArgumentNullException();
+    @:}
+    @:
+}
+    if (parameter.CanBeValidated && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
+    {
+    @:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
+}
+}
+@if (Model.HttpMethod == HttpMethod.Get)
+{
+    @:return new @{@Model.ReturnTypeString}();
+}
+
+}

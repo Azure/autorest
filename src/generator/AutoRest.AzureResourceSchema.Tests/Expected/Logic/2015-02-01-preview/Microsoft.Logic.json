@@ -161,14 +161,6 @@
           "description": "Gets or sets the content hash."
         },
         "metadata": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Gets or sets the metadata."
         }
       }
@@ -251,25 +243,9 @@
           "description": "Gets or sets the type."
         },
         "value": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Gets or sets the value."
         },
         "metadata": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Gets or sets the metadata."
         }
       }
@@ -318,14 +294,6 @@
           "description": "Gets or sets the link to definition."
         },
         "definition": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Gets or sets the definition."
         },
         "parametersLink": {
