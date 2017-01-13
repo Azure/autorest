@@ -41,9 +41,38 @@
 <p>Nightlies are available via MyGet:
 <a href="https://www.myget.org/gallery/autorest"><img src="https://img.shields.io/myget/autorest/vpre/autorest.svg?style=flat-square" alt="AutoRest MyGet"></a></p>
 
-<p>AutoRest can be run on OSX and Unix using Mono or by running Docker container:</p>
+<p>AutoRest can be run on macOS and *nix using <a href="http://www.mono-project.com/download">Mono</a>:</p>
 
-<pre><code>docker pull azuresdk/autorest:latest
+<pre>
+<code># Download & Unpack Autorest
+curl -LO https://github.com/Azure/autorest/releases/download/AutoRest-0.16.0/autorest.0.16.0.zip && \
+unzip autorest.0.16.0.zip -d autorest/ && \
+cd autorest && \
+
+# Download Swagger.json example
+curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json && \
+
+# Run AutoRest using mono
+mono AutoRest.exe \
+  -CodeGenerator CSharp \
+  -Input petstore.json \
+  -OutputDirectory CSharp_PetStore -Namespace PetStore
+</code></pre>
+
+<p>Or using <a href="https://docs.docker.com/engine/installation">Docker</a>:</p>
+
+<pre>
+<code># Download Swagger.json example
+curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json
+
+# Download latest AutoRest Docker image
+docker pull azuresdk/autorest:latest
+
+# Run AutoRest using Docker, mounting the current folder (pwd) into /home inside the container
+docker run -it --rm -v $(pwd):/home azuresdk/autorest:latest autorest \
+  -CodeGenerator CSharp \
+  -Input /home/petstore.json \
+  -OutputDirectory /home/CSharp_PetStore -Namespace PetStore
 </code></pre>
 
 <h2>
