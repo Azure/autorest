@@ -17,6 +17,7 @@ namespace AutoRest.Swagger.Validation
         private readonly Regex exemptedNames = new Regex(@"^(RESOURCE|TRACKEDRESOURCE)$", RegexOptions.IgnoreCase);
         private readonly Regex listByRgRegEx = new Regex(@".+_ListByResourceGroup$", RegexOptions.IgnoreCase);
         private readonly Regex listBySidRegEx = new Regex(@".+_(List|ListBySubscriptionId|ListBySubscription|ListBySubscriptions)$", RegexOptions.IgnoreCase);
+        private readonly Regex propertiesRegEx = new Regex(@"^(TYPE|LOCATION|TAGS)$", RegexOptions.IgnoreCase);
 
         /// <summary>
         /// The template message for this Rule. 
@@ -44,7 +45,7 @@ namespace AutoRest.Swagger.Validation
             {
                 if (!exemptedNames.IsMatch(definition.Key) && this.IsTrackedResource(definition.Value, definitions))
                 {
-                    bool getCheck = getOperations.Any(operation =>
+                    /*bool getCheck = getOperations.Any(operation =>
                         operation.Responses.Any(response => 
                             response.Key.Equals("200") && 
                             response.Value.Schema != null && 
@@ -66,7 +67,56 @@ namespace AutoRest.Swagger.Validation
                     if (!listBySubscriptionIdCheck)
                     {
                         return false;
+                    }*/
+
+                    bool schemaResult = this.HandleSchema(definition.Value, definitions);
+                    if(!schemaResult)
+                    {
+                        return false;
                     }
+                }
+            }
+
+            return true;
+        }
+
+        private bool HandleProperties(Dictionary<string, Schema> properties, Dictionary<string, Schema> definitions)
+        {
+            foreach(KeyValuePair<string, Schema> property in properties)
+            {
+                if (propertiesRegEx.IsMatch(property.Key))
+                {
+                    return false;
+                }
+
+                bool schemaResult = this.HandleSchema(property.Value, definitions);
+                if (!schemaResult)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool HandleSchema(Schema schema, Dictionary<string, Schema> definitions)
+        {
+            if (schema.Reference != null)
+            {
+                Schema resultSchema = Schema.FindReferencedSchema(schema.Reference, definitions);
+                bool schemaResult = this.HandleSchema(resultSchema, definitions);
+                if(!schemaResult)
+                {
+                    return false;
+                }
+            }
+
+            if(schema.Properties != null)
+            {
+                bool propertiesResult = this.HandleProperties(schema.Properties, definitions);
+                if (!propertiesResult)
+                {
+                    return false;
                 }
             }
 
