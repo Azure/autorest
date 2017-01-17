@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Unit.Tests
     public class BugTest
     {
         private ITestOutputHelper _output;
-        internal static string[] SuppressWarnings = {"CS1701", "CS1591" };
+        internal static string[] SuppressWarnings = {"CS1701", "CS1591" , "CS1573"};
         //Todo: Remove CS1591 when issue https://github.com/Azure/autorest/issues/1387 is fixed
 
 
@@ -47,7 +47,8 @@ namespace AutoRest.CSharp.Unit.Tests
                     startInfo =
                         new ProcessStartInfo(exe,
                             args.Aggregate(
-                                $@"""{Path.Combine(exe, @"..\resources\app\out\cli.js")}""",
+                                // $@"""{Path.Combine(exe, @"..\resources\app\out\cli.js")}""",
+                                "",
                                 (s, o) => $"{s} {Q}{o}{Q}"));
                     startInfo.EnvironmentVariables.Add("ATOM_SHELL_INTERNAL_RUN_AS_NODE", "1");
                     startInfo.UseShellExecute = false;
@@ -98,7 +99,7 @@ namespace AutoRest.CSharp.Unit.Tests
         protected virtual MemoryFileSystem CreateMockFilesystem()
         {
             var fs = new MemoryFileSystem();
-            fs.Copy(Path.Combine("Resource", "AutoRest.json"));
+            fs.CopyFile(Path.Combine("Resource", "AutoRest.json"), "AutoRest.json");
             return fs;
         }
 
@@ -184,6 +185,7 @@ namespace AutoRest.CSharp.Unit.Tests
                                 "Microsoft.Rest.ClientRuntime.Azure.dll")
                         })
                     ));
+            
             var result = await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);
             
             // if it failed compiling and we're in an interactive session

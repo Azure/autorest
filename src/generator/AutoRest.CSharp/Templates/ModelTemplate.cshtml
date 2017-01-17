@@ -230,6 +230,24 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 }
 
         /// <summary>
+        /// Deserialize a string payload into a sequence of the class 
+        /// </summary>
+        internal static bool TryDeserializePayload( string mediaType, string payload, out System.Collections.Generic.IList<@Model.Name> result )
+        {
+            result = null;
+            return false;
+        }
+    
+        /// <summary>
+        /// Deserialize a string payload into a dictionary of the class 
+        /// </summary>
+        internal static bool TryDeserializePayload( string mediaType, string payload, out System.Collections.Generic.IDictionary<string,@Model.Name> result )
+        {
+            result = null;
+            return false;
+        }
+
+        /// <summary>
         /// Deserialize a string payload into a instance of the class 
         /// </summary>
         internal static bool TryDeserializePayload( string mediaType, string payload, out @Model.Name result )
@@ -287,7 +305,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             if( mediaType.StartsWith("application/xml") ) 
             {
                 var xml = XmlSerialize( new System.Xml.Linq.XElement("@Model.XmlName") );
-                result = xml.ToString();
+                result = $"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n{xml}";
                 return true;
             }</text>}
 
@@ -311,7 +329,6 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         internal System.Xml.Linq.XElement XmlSerialize(System.Xml.Linq.XElement result)
         {</text>
         foreach(var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened())) {<text>
-            // serialize the property '@property.Name'
         @if (property.IsNullable()) {<text>
             if( null != @(property.Name) ) 
             {</text>}
@@ -386,11 +403,14 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         internal static @Model.Name XmlDeserialize(System.Xml.Linq.XElement payload) 
         {
             var result = new @(Model.Name)();
-            System.Xml.Linq.XAttribute attribute;
-            System.Xml.Linq.XElement element;
+        @if (Model.Properties.Any(p => !p.IsConstant && !p.WasFlattened() && p.XmlIsAttribute)) {<text>
+            System.Xml.Linq.XAttribute attribute;</text>
+        }
+        @if (Model.Properties.Any(p => !p.IsConstant && !p.WasFlattened() && !p.XmlIsAttribute)) {<text>
+            System.Xml.Linq.XElement element;</text>
+        }
 
         @foreach(var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened())) {<text>
-            // deserialize the property '@property.Name'
             @if (property.XmlIsAttribute) {<text>
             if( null != (attribute = payload.Attribute("@property.XmlName")))
             {
@@ -408,7 +428,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 continue;
             }
             
-            if( null != (element = payload.Element("@Model.XmlName"))) 
+            if( null != (element = payload.Element("@property.XmlName"))) 
             {
                 @if (property.ModelType is CompositeType) {<text>
                 result.@(property.Name) = @(property.ModelTypeName).XmlDeserialize(element);
@@ -452,6 +472,13 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 @if (Model.ShouldGenerateXmlSerialize) {<text>
     public static class @(Model.Name)Extensions  
     {
+        internal static bool TrySerializePayload( this System.Collections.Generic.IDictionary<string,@(Model.Name)> dictionary , string mediaType, out string result ) 
+        {
+            result = null;
+            return false;
+        }
+
+
         internal static bool TrySerializePayload( this System.Collections.Generic.IEnumerable<@(Model.Name)> sequence , string mediaType, out string result ) 
         {
             result = null;

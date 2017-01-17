@@ -23,7 +23,7 @@ ${rawBody}
 };
 
 var sendXmlBody = function (res, body) {
-  res.status(200).header('Content-Type', 'text/xml').end(body);
+  res.status(200).header('Content-Type', 'application/xml').end(body);
 };
 
 // sample XML bodies
@@ -217,16 +217,6 @@ var body_properties_service =
             <Days>7</Days>  
         </RetentionPolicy>  
     </MinuteMetrics>  
-    <Cors>  
-        <CorsRule>  
-      <AllowedOrigins> http://www.fabrikam.com,http://www.contoso.com</AllowedOrigins>  
-      <AllowedMethods>GET,PUT</AllowedMethods>  
-      <MaxAgeInSeconds>500</MaxAgeInSeconds>  
-      <ExposedHeaders>x-ms-meta-data*,x-ms-meta-customheader</ExposedHeaders>  
-      <AllowedHeaders>x-ms-meta-target*,x-ms-meta-customheader</AllowedHeaders>  
-  </CorsRule>  
-    </Cors>  
-    <DefaultServiceVersion>2013-08-15</DefaultServiceVersion>  
 </StorageServiceProperties>`;
 
 var reqopt = function () {

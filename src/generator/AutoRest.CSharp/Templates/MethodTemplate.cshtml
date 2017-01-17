@@ -356,7 +356,15 @@ else
         @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
         @:try
         @:{
-            @:_result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
+            @:@responsePair.Value.Body.AsNullableType() _tmp_ = null;
+            <text>
+            if(@(responsePair.Value.Body.GetDeserializtionClassName()).TryDeserializePayload( _httpResponse.Content.Headers.ContentType.MediaType, _responseContent, out  _tmp_) )
+            {
+                _result.Body = _tmp_;
+            } else            
+            {
+                _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
+            }</text>
         @:}
         @:catch (Newtonsoft.Json.JsonException ex)
         @:{
@@ -383,7 +391,14 @@ else
     @:string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
     @:try
     @:{
-        @:_result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+        @: @Model.DefaultResponse.Body.AsNullableType() _tmp_ = null;
+        @:if( @(Model.DefaultResponse.Body.GetDeserializtionClassName()).TryDeserializePayload( _httpResponse.Content.Headers.ContentType.MediaType,_defaultResponseContent,  out _tmp_) )
+        @:{ 
+        @:   _result.Body = _tmp_;
+        @:} else 
+        @:{
+        @:    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+        @:}
     @:}
     @:catch (Newtonsoft.Json.JsonException ex)
     @:{

@@ -383,6 +383,9 @@ namespace AutoRest.CSharp
             return null;
         }
 
+        internal static string GetDeserializtionClassName(this IModelType modelType) {
+            return ((modelType as DictionaryType)?.ValueType.Name) ?? ((modelType as SequenceType)?.ElementType.Name) ?? modelType.Name;
+        }
 
         private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb, KnownFormat format)
         {
