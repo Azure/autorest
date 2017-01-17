@@ -412,6 +412,7 @@ namespace AutoRest.Extensions
                 {
                     var bodyParameterType = bodyParameter.ModelType as CompositeType;
                     if (bodyParameterType != null && 
+                        !bodyParameterType.BaseIsPolymorphic &&
                         (bodyParameterType.ComposedProperties.Count(p => !p.IsConstant && !p.IsReadOnly) <= Settings.Instance.PayloadFlatteningThreshold ||
                          bodyParameter.ShouldBeFlattened()))
                     {
