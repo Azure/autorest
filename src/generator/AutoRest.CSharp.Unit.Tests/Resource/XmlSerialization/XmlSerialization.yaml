@@ -1,0 +1,594 @@
+﻿swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+produces: 
+    - application/xml
+consumes:
+    - application/xml
+paths:
+  "/?comp=list":
+    get:
+      tags:
+      - service
+      operationId: Service_ListContainers
+      parameters:
+      - name: comp
+        in: query
+        required: true
+        type: string
+        enum:
+        - list
+      - name: prefix
+        in: query
+        required: false
+        type: string
+        description: Filters the results to return only containers whose name begins
+          with the specified prefix.
+      - name: marker
+        in: query
+        required: false
+        type: string
+        description: A string value that identifies the portion of the list to be
+          returned with the next list operation.
+      - name: maxresults
+        in: query
+        required: false
+        type: integer
+        description: Specifies the maximum number of containers to return.
+      - "$ref": "#/parameters/ApiVersionParameter"
+      - "$ref": "#/parameters/ClientRequestId"
+      responses:
+        '200':
+          description: Success.
+          headers:
+            x-ms-request-id:
+              type: string
+              description: This header uniquely identifies the request that was made
+                and can be used for troubleshooting the request.
+            x-ms-version:
+              type: string
+              description: Indicates the version of the Blob service used to execute
+                the request. This header is returned for requests made against version
+                2009-09-19 and above.
+          schema:
+            "$ref": "#/definitions/ContainerEnumerationResults"
+        default:
+          "$ref": "#/responses/Default"
+  "/?restype=service&comp=properties":
+    get:
+      tags:
+      - service
+      operationId: Service_GetServiceProperties
+      parameters:
+      - name: restype
+        in: query
+        required: true
+        type: string
+        enum:
+        - service
+      - name: comp
+        in: query
+        required: true
+        type: string
+        enum:
+        - properties
+      - "$ref": "#/parameters/ApiVersionParameter"
+      - "$ref": "#/parameters/ClientRequestId"
+      responses:
+        '200':
+          description: Success.
+          headers:
+            x-ms-request-id:
+              type: string
+              description: This header uniquely identifies the request that was made
+                and can be used for troubleshooting the request.
+            x-ms-version:
+              type: string
+              description: Indicates the version of the Blob service used to execute
+                the request. This header is returned for requests made against version
+                2009-09-19 and above.
+          schema:
+            "$ref": "#/definitions/StorageServiceProperties"
+        default:
+          "$ref": "#/responses/Default"
+    put:
+      tags:
+      - service
+      operationId: Service_SetServiceProperties
+      parameters:
+      - name: restype
+        in: query
+        required: true
+        type: string
+        enum:
+        - service
+      - name: comp
+        in: query
+        required: true
+        type: string
+        enum:
+        - properties
+      - "$ref": "#/parameters/ApiVersionParameter"
+      - "$ref": "#/parameters/ClientRequestId"
+      - name: body
+        in: body
+        required: true
+        schema: 
+          "$ref": "#/definitions/StorageServiceProperties"
+      responses:
+        '200':
+          description: Success.
+          headers:
+            x-ms-request-id:
+              type: string
+              description: This header uniquely identifies the request that was made
+                and can be used for troubleshooting the request.
+            x-ms-version:
+              type: string
+              description: Indicates the version of the Blob service used to execute
+                the request. This header is returned for requests made against version
+                2009-09-19 and above.
+        default:
+          "$ref": "#/responses/Default"
+  "/{container}?restype=container&comp=list":
+    get:
+      tags:
+      - containers
+      operationId: Containers_ListBlobs
+      parameters:
+      - name: restype
+        in: query
+        required: true
+        type: string
+        enum:
+        - container
+      - name: comp
+        in: query
+        required: true
+        type: string
+        enum:
+        - list
+      - "$ref": "#/parameters/Container"
+      - name: prefix
+        in: query
+        required: false
+        type: string
+        description: Filters the results to return only containers whose name begins
+          with the specified prefix.
+      - name: delimiter
+        in: query
+        required: false
+        type: string
+        description: Optional. When the request includes this parameter, the operation
+          returns a BlobPrefix element in the response body that acts as a placeholder
+          for all blobs whose names begin with the same substring up to the appearance
+          of the delimiter character. The delimiter may be a single character or a
+          string.
+      - name: marker
+        in: query
+        required: false
+        type: string
+        description: A string value that identifies the portion of the list to be
+          returned with the next list operation.
+      - name: maxresults
+        in: query
+        required: false
+        type: integer
+        description: Specifies the maximum number of containers to return.
+      - name: include
+        in: query
+        required: false
+        type: string
+        enum:
+        - snapshots
+        - metadata
+        - uncommittedblobs
+        - copy
+        description: > 
+          Optional. Specifies one or more datasets to include in the response:
+          - snapshots: Specifies that snapshots should be included in the enumeration.
+          Snapshots are listed from oldest to newest in the response. - metadata:
+          Specifies that blob metadata be returned in the response. - uncommittedblobs:
+          Specifies that blobs for which blocks have been uploaded, but which have
+          not been committed using Put Block List, be included in the response. -
+          copy: Version 2012-02-12 and newer. Specifies that metadata related to any
+          current or previous Copy Blob operation should be included in the response.
+      - "$ref": "#/parameters/ApiVersionParameter"
+      - "$ref": "#/parameters/ClientRequestId"
+      responses:
+        '201':
+          description: Success.
+          headers:
+            x-ms-request-id:
+              type: string
+              description: This header uniquely identifies the request that was made
+                and can be used for troubleshooting the request.
+            x-ms-version:
+              type: string
+              description: Indicates the version of the Blob service used to execute
+                the request. This header is returned for requests made against version
+                2009-09-19 and above.
+          schema:
+            "$ref": "#/definitions/BlobEnumerationResults"
+        default:
+          "$ref": "#/responses/Default"
+  "/{container}?restype=container&comp=acl":
+    get:
+      tags:
+      - service
+      operationId: Containers_GetACL
+      parameters:
+      - name: restype
+        in: query
+        required: true
+        type: string
+        enum:
+        - container
+      - name: comp
+        in: query
+        required: true
+        type: string
+        enum:
+        - acl
+      - "$ref": "#/parameters/Container"
+      - "$ref": "#/parameters/ApiVersionParameter"
+      - "$ref": "#/parameters/ClientRequestId"
+      responses:
+        '200':
+          description: Success.
+          headers:
+            x-ms-request-id:
+              type: string
+              description: This header uniquely identifies the request that was made
+                and can be used for troubleshooting the request.
+            x-ms-version:
+              type: string
+              description: Indicates the version of the Blob service used to execute
+                the request. This header is returned for requests made against version
+                2009-09-19 and above.
+          schema:
+            "$ref": "#/definitions/SignedIdentifiers"
+        default:
+          "$ref": "#/responses/Default"
+    put:
+      tags:
+      - service
+      operationId: Container_SetACL
+      parameters:
+      - name: restype
+        in: query
+        required: true
+        type: string
+        enum:
+        - container
+      - name: comp
+        in: query
+        required: true
+        type: string
+        enum:
+        - acl
+      - "$ref": "#/parameters/Container"
+      - "$ref": "#/parameters/ApiVersionParameter"
+      - "$ref": "#/parameters/ClientRequestId"
+      - name: body
+        in: body
+        required: true
+        schema: 
+          "$ref": "#/definitions/SignedIdentifiers"
+      responses:
+        '200':
+          description: Success.
+          headers:
+            x-ms-request-id:
+              type: string
+              description: This header uniquely identifies the request that was made
+                and can be used for troubleshooting the request.
+            x-ms-version:
+              type: string
+              description: Indicates the version of the Blob service used to execute
+                the request. This header is returned for requests made against version
+                2009-09-19 and above.
+        default:
+          "$ref": "#/responses/Default"
+
+definitions:
+  Blob:
+    type: object
+    properties:
+      Name:
+        type: string
+      Snapshot:
+        type: string
+      Properties:
+        "$ref": "#/definitions/BlobProperties"
+      Metadata:
+        type: object
+        additionalProperties: {}
+  BlobEnumerationResults:
+    type: object
+    properties:
+      ServiceEndpoint:
+        type: string
+        xml:
+          attribute: true
+      ContainerName:
+        type: string
+        xml:
+          attribute: true
+      Prefix:
+        type: string
+      Marker:
+        type: string
+      Delimiter:
+        type: string
+      MaxResults:
+        type: integer
+      Blobs:
+        type: array
+        items:
+          "$ref": "#/definitions/Blob"
+      BlobPrefix:
+        type: object
+        schema:
+          properties:
+            Name:
+              type: string
+      NextMarker:
+        type: string
+  BlobProperties:
+    type: object
+    properties:
+      Etag:
+        type: string
+      Last-Modified:
+        type: string
+        format: date-time
+      Content-Length:
+        type: integer
+      Content-Type:
+        type: string
+      Content-Encoding:
+        type: string
+      Content-Language:
+        type: string
+      Content-MD5:
+        type: string
+      Cache-Control:
+        type: string
+      x-ms-blob-sequence-number:
+        type: integer
+        x-ms-client-name: sequenceNumber
+      BlobType:
+        type: string
+        enum:
+        - BlockBlob
+        - PageBlob
+        - AppendBlob
+      LeaseStatus:
+        "$ref": "#/definitions/LeaseStatus"
+      LeaseState:
+        "$ref": "#/definitions/LeaseState"
+      LeaseDuration:
+        "$ref": "#/definitions/LeaseDuration"
+      CopyId:
+        type: integer
+      CopyStatus:
+        type: string
+        enum:
+        - pending
+        - success
+        - aborted
+        - failed
+      CopySource:
+        type: string
+      CopyProgress:
+        type: integer
+      CopyCompletionTime:
+        type: string
+        format: date-time
+      CopyStatusDescription:
+        type: string
+      ServerEncrypted:
+        type: boolean
+  Container:
+    type: object
+    properties:
+      Name:
+        type: string
+      Properties:
+        "$ref": "#/definitions/ContainerProperties"
+      Metadata:
+        type: object
+        additionalProperties: {}
+  ContainerEnumerationResults:
+    type: object
+    properties:
+      ServiceEndpoint:
+        type: string
+        xml:
+          attribute: true
+      Prefix:
+        type: string
+      Marker:
+        type: string
+      MaxResults:
+        type: integer
+      Containers:
+        type: array
+        items:
+          "$ref": "#/definitions/Container"
+      NextMarker:
+        type: string
+  ContainerProperties:
+    type: object
+    properties:
+      Etag:
+        type: string
+      Last-Modified:
+        type: string
+        format: date-time
+      LeaseStatus:
+        "$ref": "#/definitions/LeaseStatus"
+      LeaseState:
+        "$ref": "#/definitions/LeaseState"
+      LeaseDuration:
+        "$ref": "#/definitions/LeaseDuration"
+  LeaseStatus:
+    type: string
+    enum:
+    - locked
+    - unlocked
+    x-ms-enum:
+      name: LeaseStatus
+      modelAsString: false
+  LeaseState:
+    type: string
+    enum:
+    - available
+    - leased
+    - expired
+    - breaking
+    - broken
+    x-ms-enum:
+      name: LeaseState
+      modelAsString: false
+  LeaseDuration:
+    type: string
+    enum:
+    - pending
+    - success
+    - aborted
+    - failed
+    x-ms-enum:
+      name: LeaseDuration
+      modelAsString: false
+  Metrics:
+    properties:
+      Version:
+        type: string
+        xml:
+          name: Version
+      Enabled:
+        type: boolean
+        xml:
+          name: Enabled
+      IncludeAPIs:
+        type: boolean
+        xml:
+          name: IncludeAPIs
+      RetentionPolicy:
+        type: object
+        "$ref": "#/definitions/RetentionPolicy"
+        xml:
+          name: RetentionPolicy
+  RetentionPolicy:
+    type: object
+    xml:
+      name: RetentionPolicy
+    properties:
+      Enabled:
+        type: boolean
+        xml:
+          name: Enabled
+      Days:
+        type: integer
+        xml:
+          name: Days
+  StorageServiceProperties:
+    type: object
+    properties:
+      Logging:
+        type: object
+        xml:
+          name: Logging
+        properties:
+          Version:
+            type: string
+            xml:
+              name: Version
+          Delete:
+            type: boolean
+            xml:
+              name: Delete
+          Read:
+            type: boolean
+            xml:
+              name: Read
+          Write:
+            type: boolean
+            xml:
+              name: Write
+          RetentionPolicy:
+            "$ref": "#/definitions/RetentionPolicy"
+      HourMetrics:
+        "$ref": "#/definitions/Metrics"
+        xml:
+          name: HourMetrics
+      MinuteMetrics:
+        "$ref": "#/definitions/Metrics"
+        xml:
+          name: MinuteMetrics
+  SignedIdentifiers:
+    type: array
+    items:
+      "$ref": "#/definitions/SignedIdentifier"
+  SignedIdentifier:
+    type: object
+    properties:
+      Id:
+        type: string
+        minLength: "64"
+        maxLength: "64"
+      AccessPolicy:
+        type: object
+        properties:
+          Start:
+            type: string
+            format: date-time
+          Expiry:
+            type: string
+            format: date-time
+          Permission:
+            type: string
+
+parameters:
+  ApiVersionParameter:
+    name: x-ms-version
+    x-ms-client-name: version
+    in: header
+    required: false
+    type: string
+    x-ms-global: true
+    #enum:
+    #- '2015-04-05'
+    #- '2014-02-14'
+    #- '2013-08-15'
+    #- '2012-02-12'
+    #- '2011-08-18'
+    #- '2009-09-19'
+    #- '2009-07-17'
+    #- '2009-04-14'
+    default: '2015-04-05'
+    description: Specifies the version of the operation to use for this request.
+  ClientRequestId:
+    name: x-ms-client-request-id
+    x-ms-client-name: requestId
+    in: header
+    required: false
+    type: string
+    x-ms-parameter-location: method
+    description: Provides a client-generated, opaque value with a 1 KB character limit
+      that is recorded in the analytics logs when storage analytics logging is enabled.
+  Container:
+    name: container
+    in: path
+    required: true
+    type: string
+    x-ms-parameter-location: method
+    description: The container name.
+      
+responses:
+  Default:
+    description: Error.
+    
