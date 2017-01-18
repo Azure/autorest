@@ -373,6 +373,13 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                     seq.Add(new System.Xml.Linq.XElement( "@property.XmlName", value ) );
                 }
                 result.Add(seq);</text>}
+                } else if (property.ModelType is EnumType && !((EnumType)property.ModelType).ModelAsString) {
+                    // serialize it as a enum type.
+                    if (property.XmlIsAttribute) {<text>
+                result.Add(new System.Xml.Linq.XAttribute("@property.XmlName", @(property.Name).ToSerializedValue()) );</text>
+                    } else {<text>
+                result.Add(new System.Xml.Linq.XElement("@property.XmlName", @(property.Name).ToSerializedValue()) );</text>
+                    }
                 } else { 
                     // serialize it as a primitive/value type.
                     if (property.XmlIsAttribute) {<text>
@@ -415,11 +422,9 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             if( null != (attribute = payload.Attribute("@property.XmlName")))
             {
                 @if (property.ModelType is EnumType && !((EnumType)property.ModelType).ModelAsString) {<text>
-                @property.ModelType.Name enumValue;
-                if (System.Enum.TryParse(attribute.Value, true, out enumValue)) 
-                {
-                    result.@(property.Name) = enumValue;
-                }
+                
+                result.@(property.Name) =attribute.Value.Parse@(property.ModelType.Name)();
+                
                 </text>} else {<text> 
                 result.@(property.Name) = (@property.ModelTypeName)attribute;
                 </text>}
@@ -453,11 +458,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                     result.@property.Name = element.Elements().Select( each => (@et.Name)each ).ToList() 
                     </text>}
                 } else if (property.ModelType is EnumType && !((EnumType)property.ModelType).ModelAsString) {<text>
-                @property.ModelType.Name enumValue;
-                if (System.Enum.TryParse(element.Value, true, out enumValue)) 
-                {
-                    result.@(property.Name) = enumValue;
-                }
+                result.@(property.Name) =element.Value.Parse@(property.ModelType.Name)();
                 </text>} else {<text> 
                 try { result.@(property.Name) = (@property.ModelTypeName)element; } catch { } // TODO: fix this, future Garrett! Cheers, Garrett
                 </text>}
