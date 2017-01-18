@@ -42,7 +42,10 @@ namespace AutoRest.Ruby.Azure.Model
                 if (this.BaseModelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) ||
                     this.BaseModelType.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension))
                 {
-                    typeName = "MsRestAzure::" + typeName;
+                    if (!typeName.Equals("SubResource"))
+                    {
+                        typeName = "MsRestAzure::" + typeName;
+                    }
                 }
 
                 return " < " + typeName;

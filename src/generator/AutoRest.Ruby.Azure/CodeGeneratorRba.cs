@@ -62,7 +62,7 @@ namespace AutoRest.Ruby.Azure
             {
                 if ((model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
                     (bool)model.Extensions[AzureExtensions.ExternalExtension])
-                    || model.Name == "Resource" || model.Name == "SubResource")
+                    || model.Name == "Resource")
                 {
                     continue;
                 }
