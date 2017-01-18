@@ -459,7 +459,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                     result.@(property.Name) = enumValue;
                 }
                 </text>} else {<text> 
-                result.@(property.Name) = (@property.ModelTypeName)element;
+                try { result.@(property.Name) = (@property.ModelTypeName)element; } catch { } // TODO: fix this, future Garrett! Cheers, Garrett
                 </text>}
 
             }</text> 

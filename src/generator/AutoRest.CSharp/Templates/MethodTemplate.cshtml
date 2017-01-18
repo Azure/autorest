@@ -358,10 +358,14 @@ else
         @:{
             @:@responsePair.Value.Body.AsNullableType() _tmp_ = null;
             <text>
-            if(@(responsePair.Value.Body.GetDeserializtionClassName()).TryDeserializePayload( _httpResponse.Content.Headers.ContentType.MediaType, _responseContent, out  _tmp_) )
+            @if (!(responsePair.Value.Body is PrimaryType))
+            {
+            <text>
+            if (@(responsePair.Value.Body.GetDeserializtionClassName()).TryDeserializePayload(_httpResponse.Content.Headers.ContentType.MediaType, _responseContent, out _tmp_) )
             {
                 _result.Body = _tmp_;
-            } else            
+            } else</text>
+            }
             {
                 _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
             }</text>
