@@ -29,12 +29,35 @@ namespace AutoRest.AzureResourceSchema
             {
                 StringWriter stringWriter = new StringWriter();
                 ResourceSchemaWriter.Write(stringWriter, resourceSchemas[resourceProvider]);
-                await Write(stringWriter.ToString(), resourceProvider + ".json", true);
+                await Write(stringWriter.ToString(), resourceProvider + Path.DirectorySeparatorChar + resourceProvider + ".json", true);
 
                 stringWriter = new StringWriter();
-                ResourceMarkdownWriter.Write(stringWriter, resourceSchemas[resourceProvider]);
-                await Write(stringWriter.ToString(), resourceProvider + ".md", false);
+                var md = ResourceMarkdownGenerator.Generate(resourceSchemas[resourceProvider]);
+
+                foreach (var m in md)
+                {
+                    var content = m.Content.Replace("\"boolean\"", "boolean");
+                    await Write(content, EnsureUniqueFileName(resourceProvider, m.Type + ".md"), false);
+                }
             }
+        }
+
+        private string EnsureUniqueFileName(string subdir, string fileName)
+        {
+            int i = 0;
+            var filePath = Path.Combine(Settings.Instance.OutputDirectory, subdir, fileName);
+            while (File.Exists(filePath))
+            {
+                var name = Path.GetFileNameWithoutExtension(fileName);
+                var ext = Path.GetExtension(fileName);
+
+                fileName = string.Format("{0}{1}{2}{3}{4}", subdir, Path.DirectorySeparatorChar, name, i, ext);
+                filePath = Path.Combine(Settings.Instance.OutputDirectory, subdir, fileName);
+
+                ++i;
+            }
+
+            return string.Format("{0}{1}{2}", subdir, Path.DirectorySeparatorChar, fileName);
         }
     }
 }

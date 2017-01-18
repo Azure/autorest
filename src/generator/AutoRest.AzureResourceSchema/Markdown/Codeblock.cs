@@ -7,19 +7,33 @@ namespace AutoRest.AzureResourceSchema.Markdown
 {
     public class Codeblock : MarkdownElement
     {
-        private string _s;
+        private string _lang;
+        private string _code;
 
         public Codeblock(string content)
         {
             if (string.IsNullOrEmpty(content))
                 throw new ArgumentException(nameof(content));
 
-            _s = content;
+            _code = content;
+        }
+
+        public Codeblock(string language, string content) : this(content)
+        {
+            if (string.IsNullOrEmpty(language))
+                throw new ArgumentException(nameof(language));
+
+            _lang = language;
         }
 
         public override string ToMarkdown()
         {
-            return string.Format("```{0}{1}{2}```", Environment.NewLine, _s, Environment.NewLine);
+            if (!string.IsNullOrEmpty(_lang))
+            {
+                return string.Format("```{0}{1}{2}{3}```", _lang, Environment.NewLine, _code, Environment.NewLine);
+            }
+
+            return string.Format("```{0}{1}{2}```", Environment.NewLine, _code, Environment.NewLine);
         }
     }
 }
