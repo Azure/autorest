@@ -584,7 +584,7 @@ namespace AutoRest.Swagger.Tests
                     new[] {new EnumValue {Name = "red"}, new EnumValue {Name = "green"}, new EnumValue {Name = "blue"}}
                         .ToList());
                 Assert.True(refEnum.ModelAsString);
-                Assert.Equal("refColors", refEnum.Name);
+                Assert.Equal("RefColors", refEnum.Name);
 
 
                 Assert.Equal(2, codeModel.EnumTypes.Count);
