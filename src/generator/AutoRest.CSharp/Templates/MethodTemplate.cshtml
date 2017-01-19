@@ -142,7 +142,7 @@ else
     _httpRequest.RequestUri = new System.Uri(_url);
     // Set Headers
     @(Model.SetDefaultHeaders)
-    @foreach (ParameterCs parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.Header && !p.IsHeaderCollection()))
+    @foreach (var parameter in Model.LogicalParameters.OfType<ParameterCs>().Where(p => p.Location == ParameterLocation.Header && !p.IsHeaderCollection))
     {
         if (!parameter.IsNullable())
         {
@@ -165,13 +165,13 @@ else
         }
     }
     @EmptyLine
-    @foreach (ParameterCs parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.Header && p.IsHeaderCollection()))
+    @foreach (var parameter in Model.LogicalParameters.OfType<ParameterCs>().Where(p => p.Location == ParameterLocation.Header && p.IsHeaderCollection))
     {
     @:if (@(parameter.Name) != null)
     @:{
     @:    foreach (var _header in @(parameter.Name))
     @:    {
-    @:        var key = "@(parameter.GetHeaderCollectionPrefix())" + _header.Key;
+    @:        var key = "@(parameter.HeaderCollectionPrefix)" + _header.Key;
     @:        if (_httpRequest.Headers.Contains(key))
     @:        {
     @:            _httpRequest.Headers.Remove(key);
@@ -453,9 +453,9 @@ else
     @:try
     @:{
         @:_result.Headers = _httpResponse.GetHeadersAsJson().ToObject<@(Model.ReturnType.Headers.Name)>(Newtonsoft.Json.JsonSerializer.Create(@(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body))));
-        foreach (Property property in (Model.ReturnType.Headers as CompositeType).Properties.Where(p => p.IsHeaderCollection()))
+        foreach (var property in (Model.ReturnType.Headers as CompositeType).Properties.OfType<PropertyCs>().Where(p => p.IsHeaderCollection))
         {
-        @:var prefix = "@(property.GetHeaderCollectionPrefix())";
+        @:var prefix = "@(property.HeaderCollectionPrefix)";
         @:_result.Headers.@(property.Name) = new @(property.ModelTypeName)();
         @:_httpResponse.Headers.Keys.Where(key => key.StartsWith(prefix)).ForEach(k => {_results.Headers.@(property.Name)[k.Replace(prefix,"")] = _httpResponse.Headers[k] as @((property.ModelType as DictionaryType).ValueType.Name);});
         }

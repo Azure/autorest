@@ -21,6 +21,9 @@ namespace AutoRest.CSharp.Model
 
         public override string ModelTypeName => ModelType.AsNullableType(this.IsNullable());
 
+        public string HeaderCollectionPrefix => Extensions.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);
+        public bool IsHeaderCollection => !string.IsNullOrEmpty(HeaderCollectionPrefix);
+
         /// <summary>
         /// Gets or sets the model type.
         /// </summary>
@@ -28,7 +31,7 @@ namespace AutoRest.CSharp.Model
         {
             get
             {
-                if (base.ModelType == null || !this.IsHeaderCollection())
+                if (base.ModelType == null || !this.IsHeaderCollection)
                 {
                     return base.ModelType;
                 }
