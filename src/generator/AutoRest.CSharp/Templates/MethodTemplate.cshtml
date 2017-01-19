@@ -200,10 +200,17 @@ else
         else
         {
             if (!Model.RequestBody.IsNullable() || Model.RequestBody.Name != null) {
+                if (Model.RequestBody.ModelType is SequenceType)
+                { // for primitive sequences for now
+    @:_requestContent = new XElement("@Model.RequestBody.ModelType.XmlName", @(Model.RequestBody.Name).Select(x => new XElement("@((Model.RequestBody.ModelType as SequenceType).ElementXmlName)", x))).ToString();
+                }
+                else
+                {
     @:if(! @(Model.RequestBody.Name).TrySerializePayload( "@Model.RequestContentType", out _requestContent ) ) 
     @:{
         @:_requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.ModelType)));
     @:}
+                }
     @:_httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
     @:_httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
             }
@@ -358,14 +365,20 @@ else
         @:{
             @:@responsePair.Value.Body.AsNullableType() _tmp_ = null;
             <text>
-            @if (!(responsePair.Value.Body is PrimaryType))
+            @if (responsePair.Value.Body is CompositeType)
             {
             <text>
             if (@(responsePair.Value.Body.GetDeserializtionClassName()).TryDeserializePayload(_httpResponse.Content.Headers.ContentType.MediaType, _responseContent, out _tmp_) )
-            {
+            {  // now, only has an effect for content type != json and != xml...
                 _result.Body = _tmp_;
             } else</text>
             }
+            if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
+                @(Model.CodeModel.Name)Extensions.CallWithSingle(@(XmlDeserializerGenerator.Generate(Model.CodeModel, responsePair.Value.Body)), System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+            {
+                _result.Body = _tmp_;
+            }
+            else
             {
                 _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
             }</text>

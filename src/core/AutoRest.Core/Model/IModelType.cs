@@ -201,7 +201,7 @@ namespace AutoRest.Core.Model
         public XmlProperties XmlProperties { get; set; }
 
         [JsonIgnore]
-        public string XmlName => XmlProperties?.Name ?? Name.RawValue;
+        public virtual string XmlName => XmlProperties?.Name ?? Name.RawValue;
         [JsonIgnore]
         public string XmlNamespace => XmlProperties?.Namespace;
         [JsonIgnore]

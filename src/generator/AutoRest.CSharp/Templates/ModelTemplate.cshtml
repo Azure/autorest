@@ -230,24 +230,6 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 }
 
         /// <summary>
-        /// Deserialize a string payload into a sequence of the class 
-        /// </summary>
-        internal static bool TryDeserializePayload( string mediaType, string payload, out System.Collections.Generic.IList<@Model.Name> result )
-        {
-            result = null;
-            return false;
-        }
-    
-        /// <summary>
-        /// Deserialize a string payload into a dictionary of the class 
-        /// </summary>
-        internal static bool TryDeserializePayload( string mediaType, string payload, out System.Collections.Generic.IDictionary<string,@Model.Name> result )
-        {
-            result = null;
-            return false;
-        }
-
-        /// <summary>
         /// Deserialize a string payload into a instance of the class 
         /// </summary>
         internal static bool TryDeserializePayload( string mediaType, string payload, out @Model.Name result )
@@ -406,11 +388,11 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @if (Model.Properties.Any(p => !p.IsConstant && !p.WasFlattened() && p.XmlIsAttribute)) {<text>
             System.Xml.Linq.XAttribute attribute;</text>
         }
-        @if (Model.Properties.Any(p => !p.IsConstant && !p.WasFlattened() && !p.XmlIsAttribute)) {<text>
+        @*@if (Model.Properties.Any(p => !p.IsConstant && !p.WasFlattened() && !p.XmlIsAttribute)) {<text>
             System.Xml.Linq.XElement element;</text>
-        }
+        }*@
 
-        @foreach(var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened())) {<text>
+        @foreach(var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened())) {
             @if (property.XmlIsAttribute) {<text>
             if( null != (attribute = payload.Attribute("@property.XmlName")))
             {
@@ -428,41 +410,16 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 continue;
             }
             
-            if( null != (element = payload.Element("@property.XmlName"))) 
-            {
-                @if (property.ModelType is CompositeType) {<text>
-                result.@(property.Name) = @(property.ModelTypeName).XmlDeserialize(element);
-                </text>} else if (property.ModelType is DictionaryType) {
-                    var vt = ((DictionaryType)property.ModelType).ValueType;
-                    if (vt is DictionaryType || vt is SequenceType) {<text>
-                    // todo: nothing right now. (not handling dictionaries of sequences)
-                    </text>} else if (vt is CompositeType) {<text>
-                    result.@property.Name = element.Elements().ToDictionary( each => each.Name.ToString(), each => @(vt.Name).XmlDeserialize(each));
-                    </text>} else {<text>
-                    result.@property.Name = element.Elements().ToDictionary( each => each.Name.ToString(), each => (@vt.Name)each);
-                    </text>}
-                } else if (property.ModelType is SequenceType) {
-                    var et = ((SequenceType)property.ModelType).ElementType;
-                    if (et is DictionaryType || et is SequenceType) {<text>
-                    // todo: nothing right now. (not handling sequences of dictionaries)
-                    </text>} else if (et is CompositeType) {<text>
-                    // todo: handle iswrapped
-                    result.@property.Name = element.Elements().Select( each => @(et.Name).XmlDeserialize(each) ).ToList();
-                    </text>} else {<text>
-                    // todo: handle iswrapped
-                    result.@property.Name = element.Elements().Select( each => (@et.Name)each ).ToList() 
-                    </text>}
-                } else if (property.ModelType is EnumType && !((EnumType)property.ModelType).ModelAsString) {<text>
-                @property.ModelType.Name enumValue;
-                if (System.Enum.TryParse(element.Value, true, out enumValue)) 
-                {
-                    result.@(property.Name) = enumValue;
-                }
-                </text>} else {<text> 
-                try { result.@(property.Name) = (@property.ModelTypeName)element; } catch { } // TODO: fix this, future Garrett! Cheers, Garrett
-                </text>}
+            var deserializerName = $"deserialize{property.Name}";
+            var resultName = $"result{property.Name}";
 
-            }</text> 
+            <text>
+            @(Model.CodeModel.Name)Extensions.XmlDeserializer<@property.ModelTypeName> @(deserializerName) = @(XmlDeserializerGenerator.Generate(Model.CodeModel, property.ModelType, property.ModelTypeName));
+            @property.ModelTypeName @(resultName);
+            if (@(deserializerName)(payload, "@property.XmlName", out @(resultName)))
+            {
+                result.@(property.Name) = @(resultName);
+            }</text>
         }
             return result;
         } 

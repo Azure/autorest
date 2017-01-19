@@ -1,0 +1,86 @@
+﻿@using System
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.Model
+@using AutoRest.CSharp.Templates
+@inherits AutoRest.Core.Template<string>
+
+internal static class @(Model)Extensions
+{
+    internal delegate bool Deserializer<T>( string payload, out T result );
+    internal delegate bool XmlDeserializer<T>( System.Xml.Linq.XElement parent, string propertyName, out T result );
+    
+    internal static bool CallWithSingle<T>( XmlDeserializer<T> deserializer, System.Xml.Linq.XElement element, out T result )
+    {
+        return deserializer(Wrap(element), element.Name.LocalName, out result);
+    }
+
+    internal static bool TryDeserialize<T>( string mediaType, string payload, out T result, System.Collections.Generic.Dictionary<string, Deserializer<T>> mediaTypeDeserializers )
+    {
+        result = default(T);
+        if (!mediaTypeDeserializers.ContainsKey(mediaType))
+        {
+            return false;
+        }
+        return mediaTypeDeserializers[mediaType](payload, out result);
+    }
+
+    internal static bool TryXmlDeserializeString( System.Xml.Linq.XElement parent, string propertyName, out string result )
+    {
+        var element = parent.Element(propertyName);
+        result = element?.Value;
+        return element != null;
+    }
+
+    internal static System.Xml.Linq.XElement Wrap(this System.Xml.Linq.XElement e) => new System.Xml.Linq.XElement("artificialRoot", e);
+    
+    internal static XmlDeserializer<System.Collections.Generic.IList<T>> CreateListXmlDeserializer<T>( XmlDeserializer<T> elementDeserializer, string elementTagName = null /*if isWrapped = false*/ )
+    {
+        if (elementTagName != null)
+        {
+            // create non-wrapped deserializer and forward
+            var slave = CreateListXmlDeserializer<T>( elementDeserializer );
+            return (System.Xml.Linq.XElement parent, string propertyName, out System.Collections.Generic.IList<T> result) => {
+                result = null;
+                var wrapper = parent.Element(propertyName);
+                return wrapper != null && slave(wrapper, elementTagName, out result);
+            };
+        }
+        return (System.Xml.Linq.XElement parent, string propertyName, out System.Collections.Generic.IList<T> result) => {
+            result = new System.Collections.Generic.List<T>();
+            foreach (var element in parent.Elements(propertyName))
+            {
+                T elementResult;
+                if (!elementDeserializer(element.Wrap(), propertyName, out elementResult))
+                {
+                    return false;
+                }
+                result.Add(elementResult);
+            }
+            return true;
+        };
+    }
+    
+    internal static XmlDeserializer<System.Collections.Generic.IDictionary<string, T>> CreateDictionaryXmlDeserializer<T>( XmlDeserializer<T> elementDeserializer )
+    {
+        return (System.Xml.Linq.XElement parent, string propertyName, out System.Collections.Generic.IDictionary<string, T> result) => {
+            result = null;
+            var childElement = parent.Element(propertyName);
+            if (childElement == null)
+            {
+                return false;
+            }
+            result = new System.Collections.Generic.Dictionary<string, T>();
+            foreach (var element in childElement.Elements())
+            {
+                T elementResult;
+                if (!elementDeserializer(childElement, element.Name.LocalName, out elementResult))
+                {
+                    return false;
+                }
+                result.Add(element.Name.LocalName, elementResult);
+            }
+            return true;
+        };
+    }
+}

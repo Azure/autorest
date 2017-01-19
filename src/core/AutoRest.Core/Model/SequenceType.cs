@@ -3,6 +3,7 @@
 
 using System.Globalization;
 using Newtonsoft.Json;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Core.Model
 {
@@ -33,6 +34,9 @@ namespace AutoRest.Core.Model
         ///  Xml Properties...
         /// </summary>
         public XmlProperties ElementXmlProperties { get; set; }
+
+        [JsonIgnore]
+        public override string XmlName => base.XmlName.Else(ElementType.XmlName);
 
         [JsonIgnore]
         public string ElementXmlName => ElementXmlProperties?.Name ?? XmlName;
