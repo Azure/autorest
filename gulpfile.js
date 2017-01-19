@@ -774,8 +774,8 @@ gulp.task('test:ruby:azure', ['regenerate:expected:rubyazure'], shell.task('ruby
 gulp.task('test:python', function(cb){ runAsync('tox', {cwd: './src/generator/AutoRest.Python.Tests/'}, cb) });
 gulp.task('test:python:azure', function(cb){ runAsync('tox', {cwd: './src/generator/AutoRest.Python.Azure.Tests/'}, cb) });
 
-gulp.task('test:java', shell.task('mvn test', {cwd: './src/generator/AutoRest.Java.Tests', verbosity: 3}));
-gulp.task('test:java:azure', shell.task('mvn test', {cwd: './src/generator/AutoRest.Java.Azure.Tests', verbosity: 3}));
+gulp.task('test:java', shell.task('mvn test -pl src/generator/AutoRest.Java.Tests', {verbosity: 3}));
+gulp.task('test:java:azure', shell.task('mvn test -pl src/generator/AutoRest.Java.Azure.Tests', {verbosity: 3}));
 
 gulp.task('test:go', ['regenerate:expected:go'], shell.task([
     'glide up',

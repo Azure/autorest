@@ -11,9 +11,9 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>AutoRest Client Runtimes for Java</name>
-  <description>This package contains the runtimes for AutoRest generated Java clients.</description>
-  <url>https://github.com/Azure/autorest-clientruntime-for-java</url>
+  <name>AutoRest Code Generator Tests</name>
+  <description>This package contains the test for AutoRest generated Java clients.</description>
+  <url>https://github.com/Azure/autorest</url>
 
   <licenses>
     <license>
@@ -32,6 +32,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <legal><![CDATA[[INFO] Any downloads listed may be third party software.  Microsoft grants you no rights for third party software.]]></legal>
+    <project.parentdir>${project.basedir}</project.parentdir>
   </properties>
 
   <developers>
@@ -159,6 +160,28 @@
 <br />*/</code>]]></bottom>
         </configuration>
       </plugin>
+      <plugin>
+        <artifactId>exec-maven-plugin</artifactId>
+        <groupId>org.codehaus.mojo</groupId>
+        <version>1.5.0</version>
+        <executions>
+          <execution>
+            <id>run-server</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>node</executable>
+              <workingDirectory>${session.executionRootDirectory}/src/dev/TestServer/server</workingDirectory>
+              <arguments>
+                <argument>startup/www</argument>
+              </arguments>
+              <async>true</async>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>
@@ -167,7 +190,6 @@
           <artifactId>maven-resources-plugin</artifactId>
           <version>2.4.3</version>
         </plugin>
-
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
