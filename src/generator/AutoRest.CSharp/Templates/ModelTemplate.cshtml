@@ -342,19 +342,25 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                     if (et is DictionaryType || et is SequenceType)
                     {
                         // todo: nothing right now.
-                    } else if (et is CompositeType) {<text>
-                // todo: handle iswrapped
+                    } else if (et is CompositeType) {if ((property.ModelType as SequenceType).XmlIsWrapped) {<text>
                 var seq = new System.Xml.Linq.XElement("@property.XmlName");
                 foreach( var value in @(property.Name) ){
-                    seq.Add(value.XmlSerialize( new System.Xml.Linq.XElement( "@property.XmlName") ) );
+                    seq.Add(value.XmlSerialize( new System.Xml.Linq.XElement( "@((property.ModelType as SequenceType).ElementXmlName)") ) );
                 }
-                result.Add(seq);</text>} else {<text>
-                // todo: handle iswrapped
+                result.Add(seq);</text>} 
+                else {<text>
+                foreach( var value in @(property.Name) ){
+                    result.Add(value.XmlSerialize( new System.Xml.Linq.XElement( "@property.XmlName") ) );
+                }</text>}} else {if ((property.ModelType as SequenceType).XmlIsWrapped) {<text>
                 var seq = new System.Xml.Linq.XElement("@property.XmlName");
                 foreach( var value in @(property.Name) ){
-                    seq.Add(new System.Xml.Linq.XElement( "@property.XmlName", value ) );
+                    seq.Add(new System.Xml.Linq.XElement( "@((property.ModelType as SequenceType).ElementXmlName)", value ) );
                 }
-                result.Add(seq);</text>}
+                result.Add(seq);</text>} 
+                else {<text>
+                foreach( var value in @(property.Name) ){
+                    result.Add(new System.Xml.Linq.XElement( "@property.XmlName", value ) );
+                }</text>}}
                 } else { 
                     // serialize it as a primitive/value type.
                     if (property.XmlIsAttribute) {<text>
