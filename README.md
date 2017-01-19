@@ -16,9 +16,35 @@ Alternatively it can be installed from [Chocolatey](https://chocolatey.org/) by 
 Nightlies are available via MyGet:
 [![AutoRest MyGet](https://img.shields.io/myget/autorest/vpre/autorest.svg?style=flat-square)](https://www.myget.org/gallery/autorest)
 
-AutoRest can be run on OSX and Unix using Mono or by running Docker container:
-	
-	docker pull azuresdk/autorest:latest
+AutoRest can be run on macOS and *nix using [Mono](http://www.mono-project.com/download):
+
+  # Download & Unpack Autorest
+  curl -LO https://github.com/Azure/autorest/releases/download/AutoRest-0.16.0/autorest.0.16.0.zip && \
+  unzip autorest.0.16.0.zip -d autorest/ && \
+  cd autorest && \
+
+  # Download Swagger.json example
+  curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json && \
+
+  # Run AutoRest using mono
+  mono AutoRest.exe \
+    -CodeGenerator CSharp \
+    -Input petstore.json \
+    -OutputDirectory CSharp_PetStore -Namespace PetStore
+
+Or [Docker](https://docs.docker.com/engine/installation):
+
+  # Download Swagger.json example
+  curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json
+
+  # Download latest AutoRest Docker image
+  docker pull azuresdk/autorest:latest
+
+  # Run AutoRest using Docker, mounting the current folder (pwd) into /home inside the container
+  docker run -it --rm -v $(pwd):/home azuresdk/autorest:latest autorest \
+    -CodeGenerator CSharp \
+    -Input /home/petstore.json \
+    -OutputDirectory /home/CSharp_PetStore -Namespace PetStore
 
 ## Building AutoRest
 AutoRest is developed primarily in C# but generates code for multiple languages. See [this link](docs/developer/guide/building-code.md) to build and test AutoRest.

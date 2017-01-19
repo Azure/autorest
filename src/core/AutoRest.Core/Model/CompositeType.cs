@@ -178,8 +178,15 @@ namespace AutoRest.Core.Model
         [JsonIgnore]
         public override string DefaultValue => IsConstant ? "{}" : null;
 
+
+        /// <summary>
+        /// Determines if the CompositeType is Constant (ie, the value is known at compile time)
+        /// 
+        /// Note: Added a check to ensure that it's not polymorphic. 
+        /// If it's polymorphic, it can't possibly be known at compile time.
+        /// </summary>
         [JsonIgnore]
-        public override bool IsConstant => ComposedProperties.Any() && ComposedProperties.All(p => p.IsConstant);
+        public override bool IsConstant => !BaseIsPolymorphic && ComposedProperties.Any() && ComposedProperties.All(p => p.IsConstant);
         
         [JsonIgnore]
         public override IEnumerable<IChild> Children => Properties;

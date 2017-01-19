@@ -294,6 +294,24 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to When property is modeled as &quot;readOnly&quot;: true then x-ms-mutability extension can only have &quot;read&quot; value. When property is modeled as &quot;readOnly&quot;: false then applying x-ms-mutability extension with only &quot;read&quot; value is not allowed. Extension contains invalid values: &apos;{0}&apos;..
+        /// </summary>
+        public static string InvalidMutabilityValueForReadOnly {
+            get {
+                return ResourceManager.GetString("InvalidMutabilityValueForReadOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Valid values for an x-ms-mutability extension are &apos;create&apos;, &apos;read&apos; and &apos;update&apos;. Applied extension contains invalid value(s): &apos;{0}&apos;..
+        /// </summary>
+        public static string InvalidMutabilityValues {
+            get {
+                return ResourceManager.GetString("InvalidMutabilityValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Only body parameters can have a schema defined..
         /// </summary>
         public static string InvalidSchemaParameter {

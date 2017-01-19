@@ -144,12 +144,6 @@ namespace AutoRest.Core.Parsing
                 return new YamlSequenceNode(aSequence.Children.Concat(bSequence.Children).Distinct()) as T;
             }
 
-            // TEMPORARILY unblocking arm-recoveryservicesbackup (artificially let merging succeed)
-            if (path.XPath == "#/info/x-ms-code-generation-settings/internalConstructors")
-                return a;
-            if (path.XPath == "#/parameters/ApiVersion/description")
-                return a;
-
             // nothing worked
             throw new Exception($"{path.XPath} has incomaptible values ({a}, {b}).");
         }

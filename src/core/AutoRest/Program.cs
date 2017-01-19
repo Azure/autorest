@@ -145,56 +145,124 @@ namespace AutoRest
         {
             var yaml = preSwagger.ParseYaml() as YamlMappingNode;
 
-            Func<string, string> getHeaderNameFromRefPath = refPath =>
+            Func<string, string> getNameFromRefPath = refPath =>
             {
-                var match = Regex.Match(refPath, @"\#\/headers/(?<name>.*)");
+                var match = Regex.Match(refPath, $@"\#\/[^/]*/(?<name>.*)");
                 return match.Success
                     ? match.Groups["name"].Value
                     : null;
             };
+            Func<string, string> getSectionFromRefPath = refPath =>
+            {
+                var match = Regex.Match(refPath, $@"\#\/(?<section>[^/]*)/.*");
+                return match.Success
+                    ? match.Groups["section"].Value
+                    : null;
+            };
 
-            // resolve headers
+            // 
+            var paths = yaml.Get("x-ms-paths") as YamlMappingNode;
+            var methodGroups = paths.Children.Select(x => x.Value).OfType<YamlMappingNode>();
+            var operations = methodGroups.SelectMany(x => x.Children).Select(x => x.Value).OfType<YamlMappingNode>();
+            var responses = operations.Select(x => x.Get("responses")).OfType<YamlMappingNode>();
+            var statusCodes = responses.SelectMany(x => x.Children).Select(x => x.Value).OfType<YamlMappingNode>();
+
+            // hard code query parameters
+            foreach (var path in paths.Children.Keys.ToList())
+            {
+                var uri = path.ToString();
+                var methodGroup = paths.Get(uri) as YamlMappingNode;
+                // for every operation
+                //foreach (var operation in methodGroup.Children.Select(x => x.Value).OfType<YamlMappingNode>())
+                var operation = methodGroup;
+                {
+                    var parameters = operation.Get("parameters") as YamlSequenceNode ?? new YamlSequenceNode();
+
+                    // populate params
+                    foreach (Match match in Regex.Matches(uri, @"[?&](?<key>[^=]*)=(?<value>[^&#]*)"))
+                    {
+                        var param = new YamlMappingNode();
+                        param.Set("name", new YamlScalarNode(match.Groups["key"].Value));
+                        param.Set("in", new YamlScalarNode("query"));
+                        param.Set("required", new YamlScalarNode("true"));
+                        param.Set("type", new YamlScalarNode("string"));
+                        param.Set("enum", new YamlSequenceNode(new YamlScalarNode(match.Groups["value"].Value)));
+                        parameters.Add(param);
+                    }
+
+                    operation.Set("parameters", parameters);
+                }
+
+                paths.Remove(uri);
+                paths.Children.Add(new YamlScalarNode(uri.Replace('#', uri.Contains('?') ? '&' : '?')), methodGroup);
+            }
+
+            string incKey = "$inc";
+
+            // resolve sequence-style headers (special case, you don't want to end up with a sequence of resolved stuff here)
             var headersSection = yaml?.Get("headers") as YamlMappingNode;
             if (headersSection != null)
             {
-                var paths1 = (yaml.Get("paths") as YamlMappingNode)?.Select(x => x.Value) ?? new YamlNode[0];
-                var paths2 = (yaml.Get("x-paths") as YamlMappingNode)?.Select(x => x.Value) ?? new YamlNode[0];
-                var operations = paths1.Concat(paths2).OfType<YamlMappingNode>().SelectMany(x => x.Children).Select(x => x.Value).OfType<YamlMappingNode>();
-                var responses = operations.Select(x => x.Get("responses")).OfType<YamlMappingNode>();
-                var statusCodes = responses.SelectMany(x => x.Children).Select(x => x.Value).OfType<YamlMappingNode>();
                 foreach (var statusCode in statusCodes.ToList())
                 {
-                    var headersNode = statusCode.Get("headers");
-                    var headersNodeMapping = headersNode as YamlMappingNode;
-                    var headersNodeSequence = headersNode as YamlSequenceNode;
-                    if (headersNodeMapping != null)
-                    {
-                        foreach (var header in headersNodeMapping.Children.ToList())
-                        {
-                            var headerValue = header.Value as YamlMappingNode;
-                            var refPath = (headerValue?.Get("$ref") as YamlScalarNode)?.Value;
-                            if (refPath != null)
-                            {
-                                var refName = getHeaderNameFromRefPath(refPath);
-                                headerValue = headerValue.MergeWith(headersSection.Get(refName) as YamlMappingNode);
-                                headerValue.Remove("$ref");
-                            }
-                            headersNodeMapping.Children[header.Key] = headerValue;
-                        }
-                    }
+                    var headersNodeSequence = statusCode.Get("headers") as YamlSequenceNode;
                     if (headersNodeSequence != null)
                     {
-                        var headersNodeNew = new YamlMappingNode();
-                        foreach (var refPath in headersNodeSequence.Children.OfType<YamlMappingNode>().Select(x => x.Get("$ref")).OfType<YamlScalarNode>().Select(x => x.Value))
+                        var headersNodeMapping = new YamlMappingNode();
+                        foreach (var refPath in headersNodeSequence.Children.OfType<YamlMappingNode>().Select(x => x.Get(incKey)).OfType<YamlScalarNode>().Select(x => x.Value))
                         {
-                            var refName = getHeaderNameFromRefPath(refPath);
-                            headersNodeNew.Add(refName, headersSection.Get(refName));
+                            var refName = getNameFromRefPath(refPath);
+                            var refedNode = headersSection.Get(refName);
+                            if (refedNode == null)
+                            {
+                                throw new Exception($"Cannot include {refPath} because it does not exist (also, must be path to `headers` section).");
+                            }
+                            headersNodeMapping.Add(refName, refedNode);
                         }
-                        statusCode.Set("headers", headersNodeNew);
+                        statusCode.Set("headers", headersNodeMapping);
                     }
                 }
+            }
 
-                yaml.Remove("headers");
+            // handle all includes
+            YamlMappingNode incable;
+            while (null != (incable = yaml.AllNodes.OfType<YamlMappingNode>().FirstOrDefault(x => x.Get(incKey) != null)))
+            {
+                var refPath = (incable.Get(incKey) as YamlScalarNode)?.Value;
+                incable.Remove(incKey);
+                var refName = getNameFromRefPath(refPath);
+                var refSection = getSectionFromRefPath(refPath);
+                var refedNode = (yaml.Get(refSection) as YamlMappingNode).Get(refName) as YamlMappingNode;
+                if (refedNode == null)
+                {
+                    throw new Exception($"Cannot include {refPath} because it does not exist.");
+                }
+                var incableNew = incable.MergeWith(refedNode);
+                incable.Children.Clear();
+                foreach (var child in incableNew.Children)
+                {
+                    incable.Children.Add(child.Key, child.Value);
+                }
+            }
+
+            yaml.Remove("headers");
+            yaml.Remove("stuff");
+
+            // cleanup unused (probably enum) defs & params
+            var refs = yaml.AllNodes.OfType<YamlScalarNode>().Select(x => x.Value).Where(x => x.StartsWith("#/")).Distinct();
+            var refsDef = refs.Where(x => getSectionFromRefPath(x) == "definitions").Select(getNameFromRefPath).ToList();
+            var refsPar = refs.Where(x => getSectionFromRefPath(x) == "parameters").Select(getNameFromRefPath).ToList();
+
+            var nodeDef = yaml.Get("definitions") as YamlMappingNode;
+            var nodePar = yaml.Get("parameters") as YamlMappingNode;
+
+            foreach (var key in nodeDef.Children.Keys.Select(x => x.ToString()).Where(x => !refsDef.Contains(x)).ToList())
+            {
+                nodeDef.Remove(key);
+            }
+            foreach (var key in nodePar.Children.Keys.Select(x => x.ToString()).Where(x => !refsPar.Contains(x)).ToList())
+            {
+                nodePar.Remove(key);
             }
 
             return yaml.Serialize();
