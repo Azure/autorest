@@ -368,12 +368,20 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                     } else {<text>
                 result.Add(new System.Xml.Linq.XElement("@property.XmlName", @(property.Name).ToSerializedValue()) );</text>
                     }
-                } else { 
+                } else {
                     // serialize it as a primitive/value type.
+                    var primitiveExpression = property.Name;
+                    var knownType = (property.ModelType as PrimaryType)?.KnownPrimaryType;
+                    if (knownType == KnownPrimaryType.DateTimeRfc1123)
+                    {
+                        primitiveExpression = property.IsNullable()
+                            ? $"{primitiveExpression}?.ToUniversalTime().ToString(\"R\")"
+                            : $"{primitiveExpression}.ToUniversalTime().ToString(\"R\")";
+                    }
                     if (property.XmlIsAttribute) {<text>
-                result.Add(new System.Xml.Linq.XAttribute("@property.XmlName", @(property.Name)) );</text>
+                result.Add(new System.Xml.Linq.XAttribute("@property.XmlName", @(primitiveExpression)) );</text>
                     } else {<text>
-                result.Add(new System.Xml.Linq.XElement("@property.XmlName", @(property.Name)) );</text>
+                result.Add(new System.Xml.Linq.XElement("@property.XmlName", @(primitiveExpression)) );</text>
                     }
                 }
         @if (property.IsNullable()) {<text>
