@@ -115,15 +115,33 @@ namespace AutoRest.Swagger
             });
             responseHeaders.ForEach(h =>
             {
-                var property = New<Property>(new
+                if (h.Value.Extensions != null && h.Value.Extensions.ContainsKey("x-ms-header-collection-prefix"))
                 {
-                    Name = h.Key,
-                    SerializedName = h.Key,
-                    RealPath = new string[] { h.Key },
-                    ModelType = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key),
-                    Documentation = h.Value.Description
-                });
-                headerType.Add(property);
+                    var property = New<Property>(new
+                    {
+                        Name = h.Key,
+                        SerializedName = h.Key,
+                        RealPath = new string[] { h.Key },
+                        Extensions = h.Value.Extensions,
+                        ModelType = New<DictionaryType>(new
+                        {
+                            ValueType = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key)
+                        })
+                    });
+                    headerType.Add(property);
+                }
+                else
+                {
+                    var property = New<Property>(new
+                    {
+                        Name = h.Key,
+                        SerializedName = h.Key,
+                        RealPath = new string[] { h.Key },
+                        ModelType = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key),
+                        Documentation = h.Value.Description
+                    });
+                    headerType.Add(property);
+                }
             });
 
             if (!headerType.Properties.Any())
