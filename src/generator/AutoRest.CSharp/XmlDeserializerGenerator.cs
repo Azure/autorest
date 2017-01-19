@@ -29,8 +29,7 @@ namespace AutoRest.CSharp
             if (modelType is SequenceType)
                 return $"{cm.Name}Extensions.CreateListXmlDeserializer({Generate(cm, (modelType as SequenceType).ElementType)}, \"{((modelType as SequenceType).XmlIsWrapped ? (modelType as SequenceType).ElementXmlName : "null")}\")";
             if ((modelType as EnumType)?.ModelAsString == false)
-                return $"(System.Xml.Linq.XElement parent, string propertyName, out {name} sresult) => {{ sresult = default({name}); var element = parent.Element(propertyName); {modelType.Name} tmpNonNull; if (element == null || !System.Enum.TryParse(element.Value, true, out tmpNonNull)) return false; sresult = tmpNonNull; return true; }}";
-
+                return $"(System.Xml.Linq.XElement parent, string propertyName, out {name} sresult) => {{ sresult = default({name}); var element = parent.Element(propertyName); try {{ sresult = ({name})element.Value.Parse{modelType.Name}(); return true; }} catch {{ return false; }} }}";
             return $"(System.Xml.Linq.XElement parent, string propertyName, out {name} sresult) => {{ sresult = default({name}); var element = parent.Element(propertyName); if (element == null) return false; try {{ sresult = ({name})element; }} catch {{}} return true; }}";
         }
     }

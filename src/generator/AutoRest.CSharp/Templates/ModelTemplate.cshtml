@@ -361,6 +361,13 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 foreach( var value in @(property.Name) ){
                     result.Add(new System.Xml.Linq.XElement( "@property.XmlName", value ) );
                 }</text>}}
+                } else if (property.ModelType is EnumType && !((EnumType)property.ModelType).ModelAsString) {
+                    // serialize it as a enum type.
+                    if (property.XmlIsAttribute) {<text>
+                result.Add(new System.Xml.Linq.XAttribute("@property.XmlName", @(property.Name).ToSerializedValue()) );</text>
+                    } else {<text>
+                result.Add(new System.Xml.Linq.XElement("@property.XmlName", @(property.Name).ToSerializedValue()) );</text>
+                    }
                 } else { 
                     // serialize it as a primitive/value type.
                     if (property.XmlIsAttribute) {<text>
@@ -403,11 +410,9 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             if( null != (attribute = payload.Attribute("@property.XmlName")))
             {
                 @if (property.ModelType is EnumType && !((EnumType)property.ModelType).ModelAsString) {<text>
-                @property.ModelType.Name enumValue;
-                if (System.Enum.TryParse(attribute.Value, true, out enumValue)) 
-                {
-                    result.@(property.Name) = enumValue;
-                }
+                
+                result.@(property.Name) =attribute.Value.Parse@(property.ModelType.Name)();
+                
                 </text>} else {<text> 
                 result.@(property.Name) = (@property.ModelTypeName)attribute;
                 </text>}
