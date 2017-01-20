@@ -1,39 +1,48 @@
 ﻿@using System
 @using System.Linq
 @using AutoRest.Core.Utilities
+@using AutoRest.CSharp
 @using AutoRest.CSharp.Model
 @using AutoRest.CSharp.Templates
 @inherits AutoRest.Core.Template<string>
 
-internal static class @(Model)Extensions
+internal static class @(XmlSerialization.XmlDeserializationClass)
 {
-    internal delegate bool Deserializer<T>( string payload, out T result );
+    internal delegate bool XmlRootDeserializer<T>( System.Xml.Linq.XElement root, out T result );
     internal delegate bool XmlDeserializer<T>( System.Xml.Linq.XElement parent, string propertyName, out T result );
+
+    internal static XmlRootDeserializer<T> Root<T>( XmlDeserializer<T> deserializer ) =>
+        (System.Xml.Linq.XElement root, out T result) => deserializer(new System.Xml.Linq.XElement("artificialRoot", root), root.Name.LocalName, out result);
+
+    private static XmlDeserializer<T> Unroot<T>( XmlRootDeserializer<T> deserializer )
+    {
+        return (System.Xml.Linq.XElement parent, string propertyName, out T result) => {
+            result = default(T);
+            var element = parent.Element(propertyName);
+            if (element == null)
+            {
+                return false;
+            }
+            return deserializer(element, out result);
+        };
+    }
     
-    internal static bool CallWithSingle<T>( XmlDeserializer<T> deserializer, System.Xml.Linq.XElement element, out T result )
-    {
-        return deserializer(Wrap(element), element.Name.LocalName, out result);
-    }
+    private static XmlRootDeserializer<T> ToRootDeserializer<T>( System.Func<System.Xml.Linq.XElement, T> unsafeDeserializer )
+        => (System.Xml.Linq.XElement root, out T result) => {
+            try 
+            {
+                result = unsafeDeserializer(root);
+                return true;
+            }
+            catch 
+            {
+                result = default(T);
+                return false;
+            }};
 
-    internal static bool TryDeserialize<T>( string mediaType, string payload, out T result, System.Collections.Generic.Dictionary<string, Deserializer<T>> mediaTypeDeserializers )
-    {
-        result = default(T);
-        if (!mediaTypeDeserializers.ContainsKey(mediaType))
-        {
-            return false;
-        }
-        return mediaTypeDeserializers[mediaType](payload, out result);
-    }
+    internal static XmlDeserializer<T> ToDeserializer<T>( System.Func<System.Xml.Linq.XElement, T> unsafeDeserializer )
+        => Unroot(ToRootDeserializer(unsafeDeserializer));
 
-    internal static bool TryXmlDeserializeString( System.Xml.Linq.XElement parent, string propertyName, out string result )
-    {
-        var element = parent.Element(propertyName);
-        result = element?.Value;
-        return element != null;
-    }
-
-    internal static System.Xml.Linq.XElement Wrap(this System.Xml.Linq.XElement e) => new System.Xml.Linq.XElement("artificialRoot", e);
-    
     internal static XmlDeserializer<System.Collections.Generic.IList<T>> CreateListXmlDeserializer<T>( XmlDeserializer<T> elementDeserializer, string elementTagName = null /*if isWrapped = false*/ )
     {
         if (elementTagName != null)
@@ -46,12 +55,13 @@ internal static class @(Model)Extensions
                 return wrapper != null && slave(wrapper, elementTagName, out result);
             };
         }
+        var rootElementDeserializer = Root(elementDeserializer);
         return (System.Xml.Linq.XElement parent, string propertyName, out System.Collections.Generic.IList<T> result) => {
             result = new System.Collections.Generic.List<T>();
             foreach (var element in parent.Elements(propertyName))
             {
                 T elementResult;
-                if (!elementDeserializer(element.Wrap(), propertyName, out elementResult))
+                if (!rootElementDeserializer(element, out elementResult))
                 {
                     return false;
                 }

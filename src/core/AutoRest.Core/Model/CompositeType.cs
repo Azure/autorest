@@ -209,11 +209,5 @@ namespace AutoRest.Core.Model
         }
 
         public static CompositeTypeComparer Comparer => new CompositeTypeComparer();
-
-        public override bool ShouldGenerateXmlSerialize => true;
-            //CodeModel.Methods.Any(method => method.RequestContentType== "application/xml" && method.Parameters.Any(parameter => parameter.ModelType == this));
-
-        public override bool ShouldGenerateXmlDeserialize => true;
-            //CodeModel.Methods.Any(method => method.ResponseContentTypes.Any( each => each.StartsWith("application/xml") ) && method.Responses.Any(response => response.Value.Body == this));
     }
 }

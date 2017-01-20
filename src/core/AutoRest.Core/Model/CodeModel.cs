@@ -182,5 +182,8 @@ namespace AutoRest.Core.Model
         }
 
         public virtual HashSet<string> LocallyUsedNames => null;
+
+        public bool ShouldGenerateXmlSerialization =>
+            Methods.Any(method => method.RequestContentType == "application/xml" || method.ResponseContentTypes.Any(rct => rct.StartsWith("application/xml")));
     }
 }

@@ -242,15 +242,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 return false;
             }
 
-            // first, call see if the deserialization is being pre-empted.
-            bool isHandled = false;
-            TryDeserialize(mediaType, payload, ref result, ref isHandled );
-            if( isHandled ) 
-            {
-                return true;
-            }
-
-            @if (Model.ShouldGenerateXmlDeserialize) {<text>
+            @if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
             // special case: handle xml deserialization 
             if( mediaType.StartsWith("application/xml") ) 
             {
@@ -273,16 +265,8 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             {
                 return false;
             }
-        
-            // first, call see if the serialization is being pre-empted.
-            bool isHandled = false;
-            TrySerialize(mediaType, ref result, ref isHandled );
-            if( isHandled ) 
-            {
-                return true;
-            }
 
-            @if (Model.ShouldGenerateXmlSerialize) {<text>
+            @if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
             // special case: handle xml serialization 
             if( mediaType.StartsWith("application/xml") ) 
             {
@@ -294,17 +278,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             return false;
         }
 
-        /// <summary>
-        /// Extensibility point for customizing deserialization of payload based on mediaType.
-        /// </summary>
-        static partial void TryDeserialize(string mediaType, string payload, ref @Model.Name result, ref bool isHandled );
-
-        /// <summary>
-        /// Extensibility point for customizing serialization of payload based on mediaType.
-        /// </summary>
-        partial void TrySerialize(string mediaType, ref string result, ref bool isHandled );
-
-    @if (Model.ShouldGenerateXmlSerialize) {<text>
+    @if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
         /// <summary>
         /// Serializes the object to an XML node
         /// </summary>
@@ -393,7 +367,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         }
     </text>}
 
-    @if (Model.ShouldGenerateXmlDeserialize) {<text>
+    @if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
         /// <summary>
         /// Deserializes an XML node to an instance of @Model.Name
         /// </summary>
@@ -433,7 +407,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             var resultName = $"result{property.Name}";
 
             <text>
-            @(Model.CodeModel.Name)Extensions.XmlDeserializer<@property.ModelTypeName> @(deserializerName) = @(XmlDeserializerGenerator.Generate(Model.CodeModel, property.ModelType, property.ModelTypeName));
+            var @(deserializerName) = @(XmlSerialization.Generate(Model.CodeModel, property.ModelType, property.ModelTypeName));
             @property.ModelTypeName @(resultName);
             if (@(deserializerName)(payload, "@property.XmlName", out @(resultName)))
             {
@@ -445,7 +419,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     </text>}
     
     }
-@if (Model.ShouldGenerateXmlSerialize) {<text>
+@if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
     public static class @(Model.Name)Extensions  
     {
         internal static bool TrySerializePayload( this System.Collections.Generic.IDictionary<string,@(Model.Name)> dictionary , string mediaType, out string result ) 

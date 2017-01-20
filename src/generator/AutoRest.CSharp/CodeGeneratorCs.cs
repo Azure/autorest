@@ -92,6 +92,13 @@ namespace AutoRest.CSharp
                 var exceptionTemplate = new ExceptionTemplate { Model = exceptionType, };
                 await Write(exceptionTemplate, Path.Combine(Settings.Instance.ModelsName, $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
             }
+
+            // Xml Serialization
+            if (codeModel.ShouldGenerateXmlSerialization)
+            {
+                var xmlSerializationTemplate = new XmlSerializationTemplate { Model = null };
+                await Write(xmlSerializationTemplate, Path.Combine(Settings.Instance.ModelsName, $"{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}"));
+            }
         }
     }
 }
