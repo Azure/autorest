@@ -134,7 +134,7 @@ class @(Model.Name)(object):
             self, @(Model.RequiredConstructorParameters)@(Model.IsCustomBaseUri ? "" : "base_url=None, ")filepath=None):
 @EmptyLine
         self.config = @(Model.Name)Configuration(@(Model.ConfigConstructorParameters)@(Model.IsCustomBaseUri ? "" : "base_url, ")filepath)
-        self._client = ServiceClient(@(Model.Properties.Any(p => p.ModelType.IsPrimaryType(KnownPrimaryType.Credentials)) ? "self.config.credentials" : PythonConstants.None), self.config)
+        self._client = ServiceClient(@(Settings.AddCredentials ? "self.config.credentials" : PythonConstants.None), self.config)
 @EmptyLine
 @if (Model.ModelTemplateModels.Any(each => !each.Extensions.ContainsKey(AzureExtensions.ExternalExtension)))
 {
