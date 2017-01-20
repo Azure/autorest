@@ -455,9 +455,14 @@ else
         @:_result.Headers = _httpResponse.GetHeadersAsJson().ToObject<@(Model.ReturnType.Headers.Name)>(Newtonsoft.Json.JsonSerializer.Create(@(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body))));
         foreach (var property in (Model.ReturnType.Headers as CompositeType).Properties.OfType<PropertyCs>().Where(p => p.IsHeaderCollection))
         {
-        @:var prefix = "@(property.HeaderCollectionPrefix)";
-        @:_result.Headers.@(property.Name) = new @(property.ModelTypeName)();
-        @:_httpResponse.Headers.Keys.Where(key => key.StartsWith(prefix)).ForEach(k => {_results.Headers.@(property.Name)[k.Replace(prefix,"")] = _httpResponse.Headers[k] as @((property.ModelType as DictionaryType).ValueType.Name);});
+        @:_result.Headers.@(property.Name) = new @(property.ModelTypeName.Replace("IDictionary", "Dictionary"))();
+        @:foreach (var header in _httpResponse.Headers)
+        @:{
+        @:    if (header.Key.StartsWith("@(property.HeaderCollectionPrefix)"))
+        @:    {
+        @:        _result.Headers.@(property.Name)[header.Key.Replace("@(property.HeaderCollectionPrefix)", "")] = header.Value.FirstOrDefault() as @((property.ModelType as DictionaryType).ValueType.Name);
+        @:    }
+        @:}
         }
     @:}
     @:catch (Newtonsoft.Json.JsonException ex)
