@@ -17,7 +17,7 @@ namespace Fixtures.AcceptanceTestsUrl.Models
     /// <summary>
     /// Defines values for UriColor.
     /// </summary>
-    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum UriColor
     {
         [EnumMember(Value = "red color")]
@@ -26,6 +26,39 @@ namespace Fixtures.AcceptanceTestsUrl.Models
         Greencolor,
         [EnumMember(Value = "blue color")]
         Bluecolor
+    }
+    internal static class UriColorEnumExtension
+    {
+        internal static string ToSerializedValue(this UriColor? value )  =>
+            value == null ? null : (( UriColor )value).ToSerializedValue();
+
+        internal static string ToSerializedValue(this UriColor value )
+        {
+            switch( value )
+            {
+                case UriColor.Redcolor:
+                    return "red color";
+                case UriColor.Greencolor:
+                    return "green color";
+                case UriColor.Bluecolor:
+                    return "blue color";
+            }
+            return null;
+        }
+
+        internal static UriColor? ParseUriColor( this string value )
+        {
+            switch( value )
+            {
+                case "red color":
+                    return UriColor.Redcolor;
+                case "green color":
+                    return UriColor.Greencolor;
+                case "blue color":
+                    return UriColor.Bluecolor;
+            }
+            return null;
+        }
     }
 }
 

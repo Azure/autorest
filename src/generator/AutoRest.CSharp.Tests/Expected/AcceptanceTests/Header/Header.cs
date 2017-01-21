@@ -106,6 +106,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("User-Agent", userAgent);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -146,7 +148,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -210,6 +212,8 @@ namespace Fixtures.AcceptanceTestsHeader
             _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -250,7 +254,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -273,9 +277,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseExistingKeyHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseExistingKeyHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -349,6 +353,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("Content-Type", contentType);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -389,7 +395,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -453,6 +459,8 @@ namespace Fixtures.AcceptanceTestsHeader
             _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -493,7 +501,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -516,9 +524,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseProtectedKeyHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseProtectedKeyHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -602,6 +610,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -642,7 +652,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -728,6 +738,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -768,7 +780,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -791,9 +803,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseIntegerHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseIntegerHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -877,6 +889,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -917,7 +931,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1003,6 +1017,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1043,7 +1059,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1066,9 +1082,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseLongHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseLongHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1152,6 +1168,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1192,7 +1210,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1278,6 +1296,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1318,7 +1338,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1341,9 +1361,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseFloatHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseFloatHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1427,6 +1447,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1467,7 +1489,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1553,6 +1575,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1593,7 +1617,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1616,9 +1640,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDoubleHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDoubleHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1702,6 +1726,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1742,7 +1768,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1828,6 +1854,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1868,7 +1896,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1891,9 +1919,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseBoolHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseBoolHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1983,6 +2011,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("value", value);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2023,7 +2053,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2111,6 +2141,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2151,7 +2183,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2174,9 +2206,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseStringHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseStringHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2260,6 +2292,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, new DateJsonConverter()).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2300,7 +2334,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2386,6 +2420,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2426,7 +2462,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2449,9 +2485,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDateHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDateHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2537,6 +2573,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2577,7 +2615,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2664,6 +2702,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2704,7 +2744,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2727,9 +2767,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDatetimeHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDatetimeHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2818,6 +2858,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, new DateTimeRfc1123JsonConverter()).Trim('"'));
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2858,7 +2900,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2945,6 +2987,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2985,7 +3029,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3008,9 +3052,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDatetimeRfc1123Headers>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDatetimeRfc1123Headers>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3094,6 +3138,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3134,7 +3180,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3220,6 +3266,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3260,7 +3308,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3283,9 +3331,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDurationHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDurationHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3376,6 +3424,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3416,7 +3466,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3502,6 +3552,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3542,7 +3594,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3565,9 +3617,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseByteHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseByteHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3656,6 +3708,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3696,7 +3750,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3783,6 +3837,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3823,7 +3879,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3846,9 +3902,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseEnumHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseEnumHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3901,6 +3957,8 @@ namespace Fixtures.AcceptanceTestsHeader
             _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3941,7 +3999,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
