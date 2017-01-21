@@ -21,11 +21,13 @@ namespace AutoRest.CSharp
             if (modelType is CompositeType)
                 return $"{XmlDeserializationClass}.ToDeserializer(e => {name}.XmlDeserialize(e))";
             if (modelType is DictionaryType)
-                return $"{XmlDeserializationClass}.CreateDictionaryXmlDeserializer({GenerateDeserializer(cm, (modelType as DictionaryType).ValueType)})";
+                return $"{XmlDeserializationClass}.CreateDictionaryXmlDeserializer({GenerateDeserializer(cm, (modelType as DictionaryType).ValueType, (modelType as DictionaryType).ValueType.AsNullableType((modelType as DictionaryTypeCs).IsNullable))})";
             if (modelType is SequenceType)
                 return $"{XmlDeserializationClass}.CreateListXmlDeserializer({GenerateDeserializer(cm, (modelType as SequenceType).ElementType)}, \"{((modelType as SequenceType).XmlIsWrapped ? (modelType as SequenceType).ElementXmlName : "null")}\")";
             if ((modelType as EnumType)?.ModelAsString == false)
                 return $"{XmlDeserializationClass}.ToDeserializer(e => ({name})e.Value.Parse{modelType.Name}())";
+            if ((modelType as PrimaryType)?.KnownPrimaryType == KnownPrimaryType.ByteArray)
+                return $"{XmlDeserializationClass}.ToDeserializer(e => System.Convert.FromBase64String(e.Value))";
             return $"{XmlDeserializationClass}.ToDeserializer(e => ({name})e)";
         }
     }

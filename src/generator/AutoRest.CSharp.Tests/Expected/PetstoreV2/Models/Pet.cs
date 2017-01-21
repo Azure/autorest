@@ -202,7 +202,7 @@ namespace Fixtures.PetstoreV2.Models
             {
                 result.Tags = resultTags;
             }
-            var deserializeSByteProperty = XmlSerialization.ToDeserializer(e => (byte[])e);
+            var deserializeSByteProperty = XmlSerialization.ToDeserializer(e => System.Convert.FromBase64String(e.Value));
             byte[] resultSByteProperty;
             if (deserializeSByteProperty(payload, "sByte", out resultSByteProperty))
             {

@@ -21,9 +21,9 @@ namespace AutoRest.CSharp.Model
     {
         public DictionaryTypeCs()
         {
-            Name.OnGet += v => $"System.Collections.Generic.IDictionary<string, {ValueType.AsNullableType(!ValueType.IsValueType() || (this.IsXNullable ?? true))}>";
+            Name.OnGet += v => $"System.Collections.Generic.IDictionary<string, {ValueType.AsNullableType(!ValueType.IsValueType() || IsNullable)}>";
         }
 
-        public virtual bool? IsXNullable => Extensions.Get<bool>("x-nullable");
+        public virtual bool IsNullable => Extensions.Get<bool>("x-nullable") ?? true;
     }
 }

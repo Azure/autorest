@@ -1245,7 +1245,7 @@ namespace Fixtures.PetstoreV2AllSync
                 {
                     IDictionary<string, int?> _tmp_ = null;
                     if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                        XmlSerialization.Root(XmlSerialization.CreateDictionaryXmlDeserializer(XmlSerialization.ToDeserializer(e => (int)e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                        XmlSerialization.Root(XmlSerialization.CreateDictionaryXmlDeserializer(XmlSerialization.ToDeserializer(e => (int?)e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
                     }else
