@@ -111,7 +111,7 @@ namespace AutoRest.Core.Model
                 }
 
                 // special case: inline property (like additional properties and such)
-                if (!RealPath.Any())
+                if (RealPath?.Any() != true)
                 {
                     yield break;
                 }

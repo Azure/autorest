@@ -11,10 +11,10 @@ namespace AutoRest.CSharp.Model
     {
         public SequenceTypeCs()
         {
-            Name.OnGet += v => $"System.Collections.Generic.IList<{ElementType.AsNullableType(!ElementType.IsValueType() || (this.IsXNullable ?? true))}>";
+            Name.OnGet += v => $"System.Collections.Generic.IList<{ElementType.AsNullableType(!ElementType.IsValueType() || IsNullable)}>";
         }
 
-        public virtual bool? IsXNullable => Extensions.Get<bool>("x-nullable");
+        public virtual bool IsNullable => Extensions.Get<bool>("x-nullable") ?? true;
     }
 
     public class DictionaryTypeCs : DictionaryType
