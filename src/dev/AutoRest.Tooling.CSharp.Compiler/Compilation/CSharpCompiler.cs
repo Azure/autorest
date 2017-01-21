@@ -33,7 +33,7 @@ namespace Microsoft.Rest.CSharp.Compiler.Compilation
                 syntaxTrees,
                 References,
                 GetCompilationOptions(outputKind));
-            
+
             return compilation;
         }
 
