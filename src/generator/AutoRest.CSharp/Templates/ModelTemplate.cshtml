@@ -159,7 +159,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             {
         @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
             }
-        @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "protected internal" : "")set; }
+        @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "protected " : "")set; }
         @EmptyLine
         }
 
@@ -228,55 +228,6 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             }
         @:}
 }
-
-        /// <summary>
-        /// Deserialize a string payload into a instance of the class 
-        /// </summary>
-        internal static bool TryDeserializePayload( string mediaType, string payload, out @Model.Name result )
-        {
-            result = null;
-
-            // check for a mediaType first
-            if( string.IsNullOrWhiteSpace(mediaType)) 
-            {
-                return false;
-            }
-
-            @if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
-            // special case: handle xml deserialization 
-            if( mediaType.StartsWith("application/xml") ) 
-            {
-                result = @(Model.Name).XmlDeserialize( payload );
-                return true;
-            }</text>}
-
-            return false;
-        }
-
-        /// <summary>
-        /// Serialize the @Model.Name into a string for passing across the wire.
-        /// </summary>
-        internal bool TrySerializePayload( string mediaType, out string result )
-        {
-            result = null;
-        
-            // check for a mediaType first
-            if( string.IsNullOrWhiteSpace(mediaType)) 
-            {
-                return false;
-            }
-
-            @if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
-            // special case: handle xml serialization 
-            if( mediaType.StartsWith("application/xml") ) 
-            {
-                var xml = XmlSerialize( new System.Xml.Linq.XElement("@Model.XmlName") );
-                result = $"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n{xml}";
-                return true;
-            }</text>}
-
-            return false;
-        }
 
     @if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
         /// <summary>
@@ -365,9 +316,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     <text>
             return result;
         }
-    </text>}
 
-    @if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
         /// <summary>
         /// Deserializes an XML node to an instance of @Model.Name
         /// </summary>
@@ -419,40 +368,4 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     </text>}
     
     }
-@if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
-    public static class @(Model.Name)Extensions  
-    {
-        internal static bool TrySerializePayload( this System.Collections.Generic.IDictionary<string,@(Model.Name)> dictionary , string mediaType, out string result ) 
-        {
-            result = null;
-            return false;
-        }
-
-
-        internal static bool TrySerializePayload( this System.Collections.Generic.IEnumerable<@(Model.Name)> sequence , string mediaType, out string result ) 
-        {
-            result = null;
-        
-            // check for a mediaType first
-            if( string.IsNullOrWhiteSpace(mediaType)) 
-            {
-                return false;
-            }
-        
-            result = string.Empty;
-
-            foreach( var item in sequence ) 
-            {
-                // special case: handle xml serialization 
-                if( mediaType.StartsWith("application/xml") ) 
-                {
-                    var xml = item.XmlSerialize( new System.Xml.Linq.XElement("@Model.XmlName") );
-                    result += xml.ToString() + "\n";
-                }
-                return true;
-            }
-            return false;
-        }
-    }
-</text>}
 }

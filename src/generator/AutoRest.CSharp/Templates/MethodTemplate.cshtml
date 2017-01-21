@@ -217,22 +217,54 @@ else
         }
         else
         {
-            if (!Model.RequestBody.IsNullable() || Model.RequestBody.Name != null) {
-                if (Model.RequestBody.ModelType is SequenceType)
-                { // for primitive sequences for now
+            if (Model.RequestContentType.StartsWith("application/xml"))
+            {
+                if (!Model.RequestBody.IsNullable()) {
+                    if (Model.RequestBody.ModelType is SequenceType)
+                    { // for primitive sequences for now
     @:_requestContent = new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName", @(Model.RequestBody.Name).Select(x => new System.Xml.Linq.XElement("@((Model.RequestBody.ModelType as SequenceType).ElementXmlName)", x))).ToString();
-                }
-                else
-                {
-    @:if(! @(Model.RequestBody.Name).TrySerializePayload( "@Model.RequestContentType", out _requestContent ) ) 
-    @:{
-        @:_requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.ModelType)));
-    @:}
-                }
+                    }
+                    else
+                    {
+    @:_requestContent = @(Model.RequestBody.Name).XmlSerialize( new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName") ); 
+    @:_requestContent = $"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n{_requestContent}";
+                    }
     @:_httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
     @:_httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
+                }
+                else {
+    @:if(@(Model.RequestBody.Name) != null)
+    @:{
+                    if (Model.RequestBody.ModelType is SequenceType)
+                    { // for primitive sequences for now
+        @:_requestContent = new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName", @(Model.RequestBody.Name).Select(x => new System.Xml.Linq.XElement("@((Model.RequestBody.ModelType as SequenceType).ElementXmlName)", x))).ToString();
+                    }
+                    else
+                    {
+        @:_requestContent = @(Model.RequestBody.Name).XmlSerialize( new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName") ); 
+        @:_requestContent = $"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n{_requestContent}";
+                    }
+        @:_httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
+        @:_httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
+    @:}
+                }
             }
-            
+            else
+            {
+                if (!Model.RequestBody.IsNullable()) {<text>
+    _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.ModelType)));
+    _httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
+    _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");</text>
+                }
+                else {<text>
+    if(@(Model.RequestBody.Name) != null)
+    {
+        _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.ModelType)));
+        _httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
+        _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
+    }</text>
+                }
+            }
         }
     }
     else if (Model.LogicalParameters.Any(p => p.Location == ParameterLocation.FormData))
@@ -381,25 +413,22 @@ else
         @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
         @:try
         @:{
-            @:@responsePair.Value.Body.AsNullableType() _tmp_ = null;
-            <text>
-            @if (responsePair.Value.Body is CompositeType)
-            {
-            <text>
-            if (@(responsePair.Value.Body.GetDeserializtionClassName()).TryDeserializePayload(_httpResponse.Content.Headers.ContentType.MediaType, _responseContent, out _tmp_) )
-            {  // now, only has an effect for content type != json and != xml...
-                _result.Body = _tmp_;
-            } else</text>
-            }
+            @if (Model.CodeModel.ShouldGenerateXmlSerialization)
+            {<text>
+            @responsePair.Value.Body.AsNullableType() _tmp_ = null;
             if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
                 @(XmlSerialization.XmlDeserializationClass).Root(@(XmlSerialization.GenerateDeserializer(Model.CodeModel, responsePair.Value.Body)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
             {
                 _result.Body = _tmp_;
-            }
-            else
+            }else
             {
                 _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
             }</text>
+            }
+            else
+            {<text>
+            _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));</text>
+            }
         @:}
         @:catch (Newtonsoft.Json.JsonException ex)
         @:{
@@ -426,14 +455,22 @@ else
     @:string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
     @:try
     @:{
+        if (Model.CodeModel.ShouldGenerateXmlSerialization)
+        {
         @: @Model.DefaultResponse.Body.AsNullableType() _tmp_ = null;
-        @:if( @(Model.DefaultResponse.Body.GetDeserializtionClassName()).TryDeserializePayload( _httpResponse.Content.Headers.ContentType.MediaType,_defaultResponseContent,  out _tmp_) )
-        @:{ 
+        @: if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
+        @:     @(XmlSerialization.XmlDeserializationClass).Root(@(XmlSerialization.GenerateDeserializer(Model.CodeModel, Model.DefaultResponse.Body)))(System.Xml.Linq.XElement.Parse(_defaultResponseContent), out _tmp_))
+        @:{
         @:   _result.Body = _tmp_;
         @:} else 
         @:{
         @:    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
         @:}
+        }
+        else
+        {
+        @:_result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+        }
     @:}
     @:catch (Newtonsoft.Json.JsonException ex)
     @:{
