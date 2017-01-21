@@ -15,15 +15,15 @@ namespace AutoRest.CSharp
         /// <summary>
         /// Generates code for an expression of type XmlDeserializer&ltT&gt.
         /// </summary>
-        public static string Generate(CodeModel cm, IModelType modelType, string typeName = null)
+        public static string GenerateDeserializer(CodeModel cm, IModelType modelType, string typeName = null)
         {
             var name = typeName ?? modelType.Name;
             if (modelType is CompositeType)
                 return $"{XmlDeserializationClass}.ToDeserializer(e => {name}.XmlDeserialize(e))";
             if (modelType is DictionaryType)
-                return $"{XmlDeserializationClass}.CreateDictionaryXmlDeserializer({Generate(cm, (modelType as DictionaryType).ValueType)})";
+                return $"{XmlDeserializationClass}.CreateDictionaryXmlDeserializer({GenerateDeserializer(cm, (modelType as DictionaryType).ValueType)})";
             if (modelType is SequenceType)
-                return $"{XmlDeserializationClass}.CreateListXmlDeserializer({Generate(cm, (modelType as SequenceType).ElementType)}, \"{((modelType as SequenceType).XmlIsWrapped ? (modelType as SequenceType).ElementXmlName : "null")}\")";
+                return $"{XmlDeserializationClass}.CreateListXmlDeserializer({GenerateDeserializer(cm, (modelType as SequenceType).ElementType)}, \"{((modelType as SequenceType).XmlIsWrapped ? (modelType as SequenceType).ElementXmlName : "null")}\")";
             if ((modelType as EnumType)?.ModelAsString == false)
                 return $"{XmlDeserializationClass}.ToDeserializer(e => ({name})e.Value.Parse{modelType.Name}())";
             return $"{XmlDeserializationClass}.ToDeserializer(e => ({name})e)";

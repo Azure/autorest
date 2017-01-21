@@ -392,7 +392,7 @@ else
             } else</text>
             }
             if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                @(XmlSerialization.XmlDeserializationClass).Root(@(XmlSerialization.Generate(Model.CodeModel, responsePair.Value.Body)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                @(XmlSerialization.XmlDeserializationClass).Root(@(XmlSerialization.GenerateDeserializer(Model.CodeModel, responsePair.Value.Body)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
             {
                 _result.Body = _tmp_;
             }
