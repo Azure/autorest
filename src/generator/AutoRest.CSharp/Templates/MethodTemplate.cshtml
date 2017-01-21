@@ -226,7 +226,7 @@ else
                     }
                     else
                     {
-    @:_requestContent = @(Model.RequestBody.Name).XmlSerialize( new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName") ); 
+    @:_requestContent = @(Model.RequestBody.Name).XmlSerialize( new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName") ).ToString(); 
     @:_requestContent = $"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n{_requestContent}";
                     }
     @:_httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
@@ -241,7 +241,7 @@ else
                     }
                     else
                     {
-        @:_requestContent = @(Model.RequestBody.Name).XmlSerialize( new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName") ); 
+        @:_requestContent = @(Model.RequestBody.Name).XmlSerialize( new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName") ).ToString(); 
         @:_requestContent = $"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n{_requestContent}";
                     }
         @:_httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
